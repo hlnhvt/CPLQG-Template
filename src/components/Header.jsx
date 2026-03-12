@@ -1,12 +1,58 @@
-import React from 'react';
-import { Search, ChevronDown, User } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import { Search, ChevronDown, User, LogOut } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+
+// --- Live Clock ---
+const LiveClock = () => {
+    const [now, setNow] = useState(new Date());
+    useEffect(() => {
+        const t = setInterval(() => setNow(new Date()), 1000);
+        return () => clearInterval(t);
+    }, []);
+    const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+    const pad = n => String(n).padStart(2, '0');
+    return (
+        <span className="whitespace-nowrap hidden lg:inline-block">
+            {days[now.getDay()]}, {pad(now.getDate())}/{pad(now.getMonth()+1)}/{now.getFullYear()}, {pad(now.getHours())}:{pad(now.getMinutes())}:{pad(now.getSeconds())}
+        </span>
+    );
+};
+
+// --- User Initials Avatar ---
+const getInitials = (name) => {
+    if (!name) return 'N';
+    const parts = name.trim().split(' ');
+    return parts[parts.length - 1].charAt(0).toUpperCase();
+};
 
 const Header = () => {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handler = (e) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+                setDropdownOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
+    }, []);
+
+    const handleLogout = () => {
+        logout();
+        setDropdownOpen(false);
+        navigate('/');
+    };
+
     return (
         <header className="flex flex-col font-sans">
             {/* Top Bar - Light Blue */}
-            <div className="bg-[#3b82f6] text-white py-2 relative overflow-hidden">
+            <div className="bg-[#3b82f6] text-white py-2 relative z-[100]">
                 {/* Decorative background swirls (simplified) */}
                 <div className="absolute top-0 right-0 bottom-0 left-0 pointer-events-none opacity-20">
                     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +76,7 @@ const Header = () => {
                             <Search size={16} />
                         </button>
 
-                        <span className="whitespace-nowrap hidden lg:inline-block">Thứ Ba 24/02/2026, 10:28:24</span>
+                        <LiveClock />
 
                         <div className="flex items-center gap-1.5 whitespace-nowrap">
                             <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
@@ -42,11 +88,48 @@ const Header = () => {
                             <ChevronDown size={14} />
                         </div>
 
-                        <div className="pl-4 border-l border-white/30 hidden sm:block">
-                            <button className="flex items-center gap-1.5 hover:text-yellow-300 transition-colors bg-white/10 px-3 py-1.5 rounded-full">
-                                <User size={14} />
-                                <span>Đăng nhập</span>
-                            </button>
+                        {/* Auth Button / Avatar */}
+                        <div className="pl-4 border-l border-white/30 hidden sm:block relative z-[200]" ref={dropdownRef}>
+                            {user ? (
+                                // Logged in: Avatar button
+                                <div className="relative">
+                                    <button
+                                        onClick={() => setDropdownOpen(o => !o)}
+                                        className="flex items-center justify-center w-9 h-9 rounded-full bg-blue-800 hover:bg-blue-900 text-white font-bold text-[16px] border-2 border-white/50 transition-colors shadow"
+                                        title={user.name}
+                                    >
+                                        {getInitials(user.name)}
+                                    </button>
+
+                                    {/* Dropdown */}
+                                    {dropdownOpen && (
+                                        <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 z-[100] overflow-hidden animate-fadeIn">
+                                            {/* User info */}
+                                            <div className="px-4 py-4 border-b border-gray-100">
+                                                <p className="font-bold text-gray-800 text-[15px] truncate">{user.name}</p>
+                                                <p className="text-gray-500 text-[12px] mt-0.5">Xin chào {user.name.split(' ').pop()}</p>
+                                            </div>
+                                            {/* Logout */}
+                                            <button
+                                                onClick={handleLogout}
+                                                className="w-full flex items-center gap-3 px-4 py-3.5 text-red-600 hover:bg-red-50 transition-colors text-[14px] font-medium"
+                                            >
+                                                <LogOut size={16} />
+                                                Đăng xuất
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                // Not logged in: Login button
+                                <Link
+                                    to="/dang-nhap"
+                                    className="flex items-center gap-1.5 hover:text-yellow-300 transition-colors bg-white/10 px-3 py-1.5 rounded-full"
+                                >
+                                    <User size={14} />
+                                    <span>Đăng nhập</span>
+                                </Link>
+                            )}
                         </div>
                     </div>
                 </div>
