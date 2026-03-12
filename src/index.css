@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased text-gray-800 bg-gray-50;
+    font-family: 'Inter', 'Roboto', sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-header {
+    background: linear-gradient(135deg, #0f4c81 0%, #1b64aa 100%);
+  }
+}
