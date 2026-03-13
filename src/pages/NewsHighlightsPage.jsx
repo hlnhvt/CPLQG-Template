@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom';
 const NEWS_CATEGORIES = [
     { label: 'Tin hoạt động', path: '/tin-tuc/noi-bat' },
     { label: 'Đưa Nghị quyết Đại hội XIV của Đảng vào cuộc sống', path: '/tin-tuc/noi-bat' },
-    { label: 'Multimedia', path: '/tin-tuc/noi-bat' },
+    { label: 'Ảnh', path: '/anh' },
+    { label: 'Video', path: '/video' },
+    { label: 'Infographic', path: '/infographic' },
     { label: 'Chính sách mới', path: '/tin-tuc/noi-bat' },
     { label: 'Thời sự pháp luật', path: '/tin-tuc/noi-bat' },
     { label: 'Radio pháp luật', path: '/tin-tuc/noi-bat' },
