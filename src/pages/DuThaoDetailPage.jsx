@@ -59,6 +59,11 @@ const DOC_DATA = {
     ]
 };
 
+const MOCK_BAO_CAO_TIEP_THU = [
+    { id: 1, title: 'Báo cáo tiếp thu, giải trình ý kiến góp ý Dự thảo Luật Dữ liệu (sửa đổi)', org: 'Bộ Công an', date: '15/03/2026', type: 'PDF' },
+    { id: 2, title: 'Báo cáo giải trình bổ sung về các quy định bảo mật', org: 'Bộ Công an', date: '20/03/2026', type: 'DOCX' }
+];
+
 const DRAFTS_KHAC = [
     { id: 101, title: 'Dự thảo Nghị định quy định chi tiết Luật An ninh mạng', date: '05/03/2026' },
     { id: 102, title: 'Dự thảo Thông tư hướng dẫn quản lý tài khoản định danh điện tử', date: '28/02/2026' },
@@ -337,6 +342,37 @@ const DuThaoDetailPage = () => {
                                             </div>
                                         ))
                                     )}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Danh sách báo cáo tiếp thu, giải trình (UC61) */}
+                        <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm mb-6">
+                            <h3 className="text-[18px] font-bold text-gray-800 border-b border-gray-100 pb-3 mb-4">Báo cáo tiếp thu, giải trình</h3>
+                            {MOCK_BAO_CAO_TIEP_THU.length === 0 ? (
+                                <p className="text-gray-500 text-[14px] text-center py-8">Chưa có báo cáo tiếp thu, giải trình.</p>
+                            ) : (
+                                <div className="space-y-4">
+                                    {MOCK_BAO_CAO_TIEP_THU.map(report => (
+                                        <div key={report.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors">
+                                            <div className="flex items-center gap-3">
+                                                {report.type === 'PDF' ? <File size={32} className="text-red-500 shrink-0" /> : <FileCode2 size={32} className="text-blue-500 shrink-0" />}
+                                                <div className="min-w-0">
+                                                    <Link to={`/bao-cao-tiep-thu/${report.id}`} className="text-[14px] font-bold text-[#1a3b8b] hover:underline block mb-1">
+                                                        {report.title}
+                                                    </Link>
+                                                    <div className="flex flex-wrap items-center gap-3 text-[12px] text-gray-500 font-medium">
+                                                        <span className="flex items-center gap-1.5"><Building2 size={12} className="text-gray-400"/> {report.org}</span>
+                                                        <span className="flex items-center gap-1.5"><Calendar size={12} className="text-gray-400"/> {report.date}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="flex gap-2 shrink-0">
+                                                <Link to={`/bao-cao-tiep-thu/${report.id}`} className="flex items-center justify-center gap-1.5 px-4 py-2 border border-gray-300 rounded-lg hover:text-blue-600 hover:border-blue-400 font-bold transition-colors text-[13px] text-gray-700 shadow-sm bg-white"><Eye size={15}/> Xem</Link>
+                                                <button className="flex items-center justify-center gap-1.5 px-4 py-2 bg-[#e4f0fc] text-[#1a3b8b] hover:bg-[#cbe0f5] rounded-lg font-bold transition-colors text-[13px] shadow-sm"><Download size={15}/> Tải xuống</button>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             )}
                         </div>

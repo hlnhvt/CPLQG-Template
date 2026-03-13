@@ -72,7 +72,7 @@ const BaoCaoTiepThuDetailPage = () => {
             {/* Top Breadcrumb & Back */}
             <div className="bg-white border-b border-gray-200 shadow-sm py-3 mb-6 sticky top-0 z-50">
                 <div className="container mx-auto px-4 max-w-[1280px] flex gap-4 items-center flex-wrap">
-                    <Link to="/bao-cao-tiep-thu" className="flex items-center gap-1 text-[13px] font-semibold text-gray-600 hover:text-blue-700 transition-colors">
+                    <Link to="/du-thao/1" className="flex items-center gap-1 text-[13px] font-semibold text-gray-600 hover:text-blue-700 transition-colors">
                         <ArrowLeft size={16} /> Quay lại
                     </Link>
                     <div className="w-px h-4 bg-gray-300"></div>
@@ -81,9 +81,9 @@ const BaoCaoTiepThuDetailPage = () => {
                         <ChevronRight size={12} />
                         <Link to="/du-thao" className="hover:text-blue-600">Dự thảo VBQPPL</Link>
                         <ChevronRight size={12} />
-                        <Link to="/bao-cao-tiep-thu" className="hover:text-blue-600">Báo cáo tiếp thu, giải trình</Link>
+                        <Link to="/du-thao/1" className="hover:text-blue-600">Dự thảo Luật Dữ liệu (sửa đổi)</Link>
                         <ChevronRight size={12} />
-                        <span className="text-gray-800 font-medium line-clamp-1 max-w-[200px] sm:max-w-none">Chi tiết báo cáo</span>
+                        <span className="text-gray-800 font-medium line-clamp-1 max-w-[200px] sm:max-w-none">Báo cáo tiếp thu, giải trình</span>
                     </nav>
                 </div>
             </div>

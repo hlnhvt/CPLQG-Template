@@ -9,11 +9,11 @@ const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    
+
     const { login } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    
+
     // Navigate back to where user came from, or to home
     const from = location.state?.from?.pathname || '/';
 
@@ -39,15 +39,15 @@ const LoginPage = () => {
     return (
         <div className="min-h-screen flex flex-col font-sans">
             {/* Main Login Area - Red background */}
-            <div 
+            <div
                 className="flex-1 flex items-center justify-center py-12 px-4 relative overflow-hidden"
                 style={{ background: 'linear-gradient(135deg, #8b1a1a 0%, #c0392b 40%, #8b1a1a 100%)' }}
             >
                 {/* Decorative Trống đồng circles */}
                 <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-15">
                     {[800, 640, 480, 320, 160].map((size, i) => (
-                        <div 
-                            key={i} 
+                        <div
+                            key={i}
                             className="absolute rounded-full border border-white/30"
                             style={{ width: size, height: size }}
                         />
@@ -59,7 +59,7 @@ const LoginPage = () => {
                     <div className="flex flex-col items-center mb-8">
                         <img src="/logo.png" alt="VNeID Logo" className="w-24 h-24 object-contain drop-shadow-xl mb-3" />
                         <div className="text-white text-center">
-                            <h1 className="text-2xl font-black uppercase tracking-widest text-yellow-400 drop-shadow">BỘ CÔNG AN</h1>
+                            <h1 className="text-2xl uppercase tracking-widest text-yellow-400 drop-shadow">BỘ CÔNG AN</h1>
                             <p className="text-[14px] text-white/80 mt-1">Trung tâm dữ liệu Quốc gia về dân cư</p>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ const LoginPage = () => {
                         {/* Left: Form */}
                         <div className="flex-1 md:pr-8">
                             <h2 className="text-[18px] font-bold text-gray-800 mb-5">Đăng nhập VNeID</h2>
-                            
+
                             {error && (
                                 <div className="flex items-start gap-2 p-3 mb-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-[13px]">
                                     <AlertCircle size={16} className="shrink-0 mt-0.5" />
@@ -137,9 +137,9 @@ const LoginPage = () => {
 
                         {/* Right: QR Code */}
                         <div className="flex-1 md:pl-8 flex flex-col items-center justify-center">
-                            <img 
-                                src="/qr-login.png" 
-                                alt="QR Code VNeID" 
+                            <img
+                                src="/qr-login.png"
+                                alt="QR Code VNeID"
                                 className="w-40 h-40 object-contain border border-gray-200 rounded-lg"
                             />
                             <p className="text-[13px] text-blue-600 mt-4 text-center leading-relaxed">
