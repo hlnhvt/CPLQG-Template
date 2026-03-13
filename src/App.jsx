@@ -30,6 +30,8 @@ import VanBanQPPLPage from './pages/VanBanQPPLPage';
 import VanBanDetailPage from './pages/VanBanDetailPage';
 import DuThaoPage from './pages/DuThaoPage';
 import DuThaoDetailPage from './pages/DuThaoDetailPage';
+import BaoCaoTiepThuPage from './pages/BaoCaoTiepThuPage';
+import BaoCaoTiepThuDetailPage from './pages/BaoCaoTiepThuDetailPage';
 
 function App() {
     return (
@@ -67,6 +69,8 @@ function App() {
                             <Route path="/van-ban/:id" element={<VanBanDetailPage />} />
                             <Route path="/du-thao" element={<DuThaoPage />} />
                             <Route path="/du-thao/:id" element={<DuThaoDetailPage />} />
+                            <Route path="/bao-cao-tiep-thu" element={<BaoCaoTiepThuPage />} />
+                            <Route path="/bao-cao-tiep-thu/:id" element={<BaoCaoTiepThuDetailPage />} />
                         </Routes>
                     </main>
                     <Footer />

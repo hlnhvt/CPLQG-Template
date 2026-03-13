@@ -1,0 +1,228 @@
+---61---
+A.I.3.2_Chuyên mục dự thảo văn bản QPPL
+A.I.3.2.CPLQG-VI-061 - Xem danh sách báo cáo tiếp thu giải trình
+Mục đích
+Cho phép NSD là người dân và doanh nghiệp xem danh sách tất cả các báo cáo tiếp thu, giải trình ý kiến góp ý dự thảo VBQPPL được công khai trên trang Chi tiết dự thảo VBQPPL. Mỗi mục trong danh sách cung cấp thông tin cơ bản về báo cáo (tên, ngày ban hành, cơ quan ban hành) cùng các tùy chọn xem chi tiết và tải xuống, giúp NSD theo dõi quá trình tiếp thu ý kiến góp ý của cơ quan soạn thảo.
+
+a. Phân quyền
+Hệ thống thực hiện phân quyền chức năng Xem danh sách báo cáo tiếp thu giải trình theo nguyên tắc sau:
+
+Chức năng hoàn toàn công khai, không yêu cầu đăng nhập.
+Tất cả người dùng truy cập hệ thống (người dân, doanh nghiệp, khách vãng lai) đều có quyền xem danh sách và tải tài liệu báo cáo.
+Không có sự phân biệt nội dung hiển thị giữa các nhóm người dùng.
+b. Điều kiện thực hiện
+Người dùng truy cập Cổng Pháp luật Quốc gia qua trình duyệt web.
+Người dùng đã điều hướng vào trang Chi tiết dự thảo VBQPPL của một dự thảo cụ thể.
+Quản trị viên đã đăng tải ít nhất một báo cáo tiếp thu, giải trình cho dự thảo trên hệ thống CMS (điều kiện để hiển thị danh sách; nếu không có báo cáo, hệ thống hiển thị thông báo tương ứng).
+CPLQG-VI-061.MH01 – Section "Báo cáo tiếp thu, giải trình"
+Màn hình
+Trang Chi tiết dự thảo VBQPPL – Section "Báo cáo tiếp thu, giải trình"
+
+Mô tả thông tin trên màn hình
+Trường thông tin
+Kiểu dữ liệu
+Bắt buộc
+Mặc định
+Mô tả
+Tiêu đề section
+text
+Có
+Có
+Nhãn cố định "Báo cáo tiếp thu, giải trình" hiển thị làm tiêu đề khu vực, dạng chữ đậm, phân tách bằng đường kẻ ngang với các section khác trên trang Chi tiết dự thảo.
+Icon định dạng file
+icon
+Có
+Có
+Biểu tượng định dạng file hiển thị bên trái mỗi dòng báo cáo. Quy tắc màu: PDF – màu đỏ, DOCX/Word – màu xanh dương, các định dạng khác – màu xám.
+Tên báo cáo
+link
+Có
+Có
+Tên đầy đủ của báo cáo tiếp thu, giải trình, hiển thị dạng text link bấm được. Ví dụ: "Báo cáo tiếp thu, giải trình ý kiến góp ý Dự thảo Luật X". Bấm vào tên báo cáo điều hướng đến trang chi tiết báo cáo (UC62). Độ dài tên có thể bị cắt ngắn (truncate) nếu vượt quá chiều rộng cột, kèm tooltip hiển thị tên đầy đủ khi hover.
+Ngày ban hành
+date
+Có
+Có
+Ngày ban hành báo cáo, hiển thị định dạng DD/MM/YYYY. Ví dụ: "15/03/2025". Hiển thị màu xám nhỏ, căn theo dòng với các metadata khác.
+Cơ quan ban hành
+text
+Có
+Có
+Tên cơ quan hoặc đơn vị đã ban hành báo cáo tiếp thu, giải trình. Ví dụ: "Bộ Tư pháp". Hiển thị dạng text, màu xám nhỏ.
+Nút Xem
+button
+Có
+Có
+Nút có nhãn "Xem" kèm icon mắt, hiển thị bên phải mỗi dòng báo cáo. Cho phép NSD điều hướng đến trang chi tiết báo cáo (UC62) hoặc mở modal xem nội dung báo cáo mà không cần tải về.
+Nút Tải xuống
+button
+Có
+Có
+Nút có nhãn "Tải xuống" kèm icon download, hiển thị ngay sau nút "Xem". Cho phép NSD tải file báo cáo gốc về thiết bị.
+Thông báo không có báo cáo
+text
+Không
+Không
+Thông báo "Chưa có báo cáo tiếp thu, giải trình." hiển thị khi dự thảo chưa có bất kỳ báo cáo nào được đăng tải. Hiển thị dạng text màu xám nhạt, căn giữa trong khu vực section.
+Chức năng trên màn hình
+STT
+Tên chức năng
+Định dạng
+Mô tả
+1
+Xem danh sách báo cáo tiếp thu, giải trình
+list
+Hệ thống tự động tải và hiển thị toàn bộ danh sách báo cáo tiếp thu, giải trình đã được công khai của dự thảo khi NSD truy cập trang Chi tiết dự thảo. Danh sách sắp xếp theo thứ tự ngày ban hành mới nhất lên trên. Mỗi dòng hiển thị: icon định dạng file, tên báo cáo (link), ngày ban hành, cơ quan ban hành, nút Xem, nút Tải xuống. Xảy ra các trường hợp: Trường hợp 1: Có ít nhất một báo cáo, hệ thống hiển thị đầy đủ danh sách. Trường hợp 2: Không có báo cáo nào, hệ thống hiển thị thông báo "Chưa có báo cáo tiếp thu, giải trình."
+2
+Xem chi tiết báo cáo
+button
+NSD bấm nút "Xem" (icon mắt) hoặc bấm vào tên báo cáo trên dòng bất kỳ, hệ thống điều hướng NSD đến trang chi tiết báo cáo tiếp thu, giải trình (UC62) để xem đầy đủ thông tin và nội dung báo cáo. Xảy ra các trường hợp: Trường hợp 1: Dữ liệu chi tiết báo cáo khả dụng, hệ thống tải và hiển thị trang chi tiết. Trường hợp 2: Dữ liệu không khả dụng hoặc lỗi mạng, hệ thống hiển thị thông báo lỗi và giữ nguyên trang hiện tại.
+3
+Tải báo cáo về thiết bị
+button
+NSD bấm nút "Tải xuống" (icon download) trên dòng báo cáo bất kỳ, hệ thống khởi tạo tải file báo cáo về thiết bị người dùng qua cơ chế download của trình duyệt với tên file gốc được giữ nguyên. Xảy ra các trường hợp: Trường hợp 1: File khả dụng và đường dẫn hợp lệ, trình duyệt tải file về thành công. Trường hợp 2: File không còn tồn tại hoặc lỗi mạng, hiển thị thông báo lỗi "Không thể tải file. Vui lòng thử lại sau."
+Tài liệu được tạo tự động bởi AI Gen – Ngày: 2026-03-13
+---62---
+A.I.3.2_Chuyên mục dự thảo văn bản QPPL
+A.I.3.2.CPLQG-VI-062 - Xem thông tin chi tiết báo cáo tiếp thu giải trình
+Mục đích
+Cho phép NSD là người dân và doanh nghiệp xem đầy đủ thông tin chi tiết và nội dung của một báo cáo tiếp thu, giải trình ý kiến góp ý dự thảo VBQPPL, bao gồm metadata (tên báo cáo, cơ quan ban hành, ngày ban hành, loại văn bản), trình xem tài liệu nhúng với khả năng zoom và tìm kiếm trong văn bản, nút tải về file gốc, và sidebar điều hướng nhanh đến các báo cáo khác cùng dự thảo.
+
+a. Phân quyền
+Hệ thống thực hiện phân quyền chức năng Xem thông tin chi tiết báo cáo tiếp thu giải trình theo nguyên tắc sau:
+
+Chức năng hoàn toàn công khai, không yêu cầu đăng nhập.
+Tất cả người dùng truy cập hệ thống (người dân, doanh nghiệp, khách vãng lai) đều có quyền xem và tải báo cáo.
+Không có sự phân biệt nội dung hiển thị giữa các nhóm người dùng.
+b. Điều kiện thực hiện
+Người dùng truy cập Cổng Pháp luật Quốc gia qua trình duyệt web.
+Người dùng đã bấm nút "Xem" hoặc tên báo cáo trên section danh sách báo cáo tiếp thu, giải trình (UC61) của trang Chi tiết dự thảo VBQPPL.
+Quản trị viên đã đăng tải và công khai thông tin báo cáo trên hệ thống CMS.
+Thiết bị người dùng có kết nối Internet để tải nội dung báo cáo.
+CPLQG-VI-062.MH01 – Trang chi tiết báo cáo tiếp thu, giải trình
+Màn hình
+Trang Chi tiết báo cáo tiếp thu, giải trình – Khu vực header (breadcrumb, tiêu đề, metadata) và khu vực nội dung (trình xem tài liệu, sidebar)
+
+Mô tả thông tin trên màn hình
+Trường thông tin
+Kiểu dữ liệu
+Bắt buộc
+Mặc định
+Mô tả
+Breadcrumb điều hướng
+navigation
+Có
+Có
+Chuỗi điều hướng phân cấp hiển thị vị trí trang hiện tại, ví dụ: "Trang chủ > Dự thảo VBQPPL > [Tên dự thảo] > Báo cáo tiếp thu, giải trình". Mỗi mục là link bấm được để quay lại trang tương ứng.
+Nút Quay lại
+button
+Có
+Có
+Nút "← Quay lại" hiển thị phía trên tiêu đề, cho phép NSD điều hướng về trang Chi tiết dự thảo VBQPPL (section danh sách báo cáo).
+Tiêu đề báo cáo
+text
+Có
+Có
+Tên đầy đủ của báo cáo tiếp thu, giải trình, hiển thị dạng heading lớn, nổi bật. Ví dụ: "Báo cáo tiếp thu, giải trình ý kiến góp ý Dự thảo Luật Dữ liệu (sửa đổi)".
+Metadata – Cơ quan ban hành
+text
+Có
+Có
+Tên cơ quan hoặc đơn vị đã ban hành báo cáo. Ví dụ: "Bộ Tư pháp". Hiển thị trong khối metadata phía dưới tiêu đề.
+Metadata – Ngày ban hành
+date
+Có
+Có
+Ngày ban hành báo cáo, định dạng DD/MM/YYYY. Hiển thị trong khối metadata phía dưới tiêu đề.
+Metadata – Loại văn bản
+text
+Có
+Có
+Nhãn cố định "Báo cáo tiếp thu, giải trình" xác định loại văn bản. Hiển thị dạng badge hoặc text trong khối metadata.
+Trình xem tài liệu nhúng
+modal
+Có
+Có
+Khung trình xem tài liệu nhúng (embedded document viewer) hiển thị nội dung báo cáo dạng PDF hoặc DOCX trực tiếp trong trang. Kèm toolbar gồm: nút tua trang trước/sau, ô nhập số trang, nút zoom in, nút zoom out, ô tìm kiếm trong văn bản, nút tải về. Trường hợp nội dung chưa được cập nhật: ẩn trình xem, hiển thị thông báo "Nội dung đang được cập nhật."
+Toolbar – Nút tua trang
+button
+Không
+Có
+Nút điều hướng đến trang trước (◀) và trang tiếp theo (▶) trong trình xem tài liệu. Nút bị vô hiệu hóa (disabled) khi đang ở trang đầu tiên hoặc trang cuối cùng tương ứng. Chỉ hiển thị khi tài liệu có từ 2 trang trở lên.
+Toolbar – Ô nhập số trang
+text
+Không
+"1"
+Ô nhập số trang hiển thị trang hiện tại trong trình xem. NSD có thể nhập trực tiếp số trang cần đến và nhấn Enter để điều hướng.
+Toolbar – Nút Zoom In
+button
+Không
+Có
+Nút tăng kích thước hiển thị nội dung trong trình xem. Bị vô hiệu hóa khi đạt mức zoom tối đa. Chỉ hiển thị khi có nội dung tài liệu.
+Toolbar – Nút Zoom Out
+button
+Không
+Có
+Nút giảm kích thước hiển thị nội dung trong trình xem. Bị vô hiệu hóa khi đạt mức zoom tối thiểu. Chỉ hiển thị khi có nội dung tài liệu.
+Toolbar – Ô tìm kiếm trong văn bản
+text
+Không
+Không
+Ô nhập từ khoá để tìm kiếm và highlight nội dung khớp trong phạm vi trình xem tài liệu. Hiển thị số lượng kết quả và nút điều hướng đến kết quả trước/tiếp theo. Chỉ hiển thị khi có nội dung tài liệu.
+Nút Tải về (ngoài viewer)
+button
+Có
+Có
+Nút "Tải về" độc lập hiển thị bên ngoài trình xem, kèm icon download. Cho phép NSD tải file gốc (PDF hoặc DOCX) của báo cáo về thiết bị mà không cần thao tác trong trình xem.
+Sidebar – Tiêu đề "Báo cáo khác"
+text
+Không
+Có
+Tiêu đề cố định "Báo cáo khác của dự thảo này" hiển thị đầu sidebar, phân biệt khu vực này với nội dung chính. Chỉ hiển thị khi có ít nhất một báo cáo khác cùng dự thảo.
+Sidebar – Danh sách báo cáo khác
+link
+Không
+Có
+Danh sách các báo cáo tiếp thu, giải trình khác thuộc cùng dự thảo để hỗ trợ NSD điều hướng nhanh. Mỗi mục gồm: tên báo cáo (text link bấm được), ngày ban hành (date). Trường hợp không có báo cáo khác: ẩn sidebar hoặc hiển thị thông báo "Không có báo cáo nào khác."
+Chức năng trên màn hình
+STT
+Tên chức năng
+Định dạng
+Mô tả
+1
+Quay lại trang chi tiết dự thảo
+button
+NSD bấm nút "← Quay lại", hệ thống điều hướng NSD trở về trang Chi tiết dự thảo VBQPPL tương ứng (cụ thể là section Báo cáo tiếp thu, giải trình – UC61). Xảy ra các trường hợp: Trường hợp 1: Có lịch sử điều hướng trước đó, hệ thống quay lại đúng trang Chi tiết dự thảo. Trường hợp 2: Không có lịch sử (truy cập trực tiếp qua URL), hệ thống điều hướng về trang danh sách dự thảo mặc định.
+2
+Điều hướng qua breadcrumb
+navigation
+NSD bấm vào một mục bất kỳ trong breadcrumb, hệ thống điều hướng NSD đến trang tương ứng (trang chủ, trang chuyên mục dự thảo, hoặc trang Chi tiết dự thảo cụ thể).
+3
+Xem nội dung báo cáo trong trình xem
+modal
+Hệ thống tự động tải và hiển thị nội dung báo cáo trong trình xem tài liệu nhúng ngay khi NSD truy cập trang. Xảy ra các trường hợp: Trường hợp 1: File báo cáo khả dụng và định dạng được hỗ trợ, trình xem hiển thị đầy đủ nội dung kèm toolbar điều khiển. Trường hợp 2: Nội dung chưa được cập nhật trên hệ thống, hiển thị thông báo "Nội dung đang được cập nhật." thay cho trình xem.
+4
+Điều hướng trang tài liệu
+button
+NSD bấm nút tua trang (◀/▶) hoặc nhập trực tiếp số trang vào ô số trang rồi nhấn Enter, hệ thống cuộn trình xem đến trang tương ứng. Xảy ra các trường hợp: Trường hợp 1: Số trang hợp lệ, trình xem điều hướng đến đúng trang. Trường hợp 2: Số trang ngoài phạm vi (nhỏ hơn 1 hoặc lớn hơn tổng số trang), hệ thống giữ trang hiện tại và hiển thị cảnh báo nhỏ.
+5
+Phóng to nội dung
+button
+NSD bấm nút Zoom In, hệ thống tăng kích thước hiển thị nội dung trong trình xem mỗi lần một bước cố định (ví dụ 10%). Xảy ra các trường hợp: Trường hợp 1: Chưa đạt mức tối đa, hệ thống tăng kích thước hiển thị. Trường hợp 2: Đã đạt mức zoom tối đa, nút Zoom In bị vô hiệu hóa (disabled).
+6
+Thu nhỏ nội dung
+button
+NSD bấm nút Zoom Out, hệ thống giảm kích thước hiển thị nội dung trong trình xem mỗi lần một bước cố định. Xảy ra các trường hợp: Trường hợp 1: Chưa đạt mức tối thiểu, hệ thống giảm kích thước hiển thị. Trường hợp 2: Đã đạt mức zoom tối thiểu, nút Zoom Out bị vô hiệu hóa (disabled).
+7
+Tìm kiếm trong văn bản báo cáo
+text
+NSD nhập từ khoá vào ô tìm kiếm trong toolbar, hệ thống tìm và highlight tất cả đoạn văn bản khớp trong nội dung trình xem, đồng thời hiển thị số lượng kết quả và cho phép điều hướng đến kết quả tiếp theo/trước đó bằng các nút mũi tên. Xảy ra các trường hợp: Trường hợp 1: Có kết quả khớp, hệ thống highlight và điều hướng đến kết quả đầu tiên. Trường hợp 2: Không có kết quả khớp, hiển thị thông báo "Không tìm thấy kết quả."
+8
+Tải về file báo cáo
+button
+NSD bấm nút "Tải về" bên ngoài trình xem, hệ thống khởi tạo tải file gốc của báo cáo (PDF hoặc DOCX) về thiết bị người dùng qua cơ chế download của trình duyệt với tên file gốc được giữ nguyên. Xảy ra các trường hợp: Trường hợp 1: File khả dụng và đường dẫn hợp lệ, trình duyệt tải file về thành công. Trường hợp 2: File không còn tồn tại hoặc lỗi mạng, hiển thị thông báo lỗi "Không thể tải file. Vui lòng thử lại sau."
+9
+Điều hướng nhanh đến báo cáo khác
+link
+NSD bấm vào tên một báo cáo trong sidebar "Báo cáo khác của dự thảo này", hệ thống tải và hiển thị trang chi tiết của báo cáo được chọn, thay thế nội dung trang hiện tại. Xảy ra các trường hợp: Trường hợp 1: Dữ liệu báo cáo được chọn khả dụng, hệ thống tải và hiển thị trang chi tiết báo cáo đó. Trường hợp 2: Không có báo cáo khác cùng dự thảo, sidebar ẩn hoặc hiển thị thông báo "Không có báo cáo nào khác."
+Tài liệu được tạo tự động bởi AI Gen – Ngày: 2026-03-13
