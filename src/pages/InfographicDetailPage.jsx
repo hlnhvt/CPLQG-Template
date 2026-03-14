@@ -7,34 +7,82 @@ import {
 import { INFOGRAPHIC_LIST } from './InfographicPage';
 
 // ── Lightbox (zoom) ───────────────────────────────────────────────────────────
-const Lightbox = ({ item, onClose }) => {
+const Lightbox = ({ item, initialIndex = 0, onClose }) => {
+    const [currentIndex, setCurrentIndex] = useState(initialIndex);
+    const images = item.images || [];
+
     useEffect(() => {
-        const handler = (e) => { if (e.key === 'Escape') onClose(); };
+        const handler = (e) => {
+            if (e.key === 'Escape') onClose();
+            if (e.key === 'ArrowLeft' && currentIndex > 0) setCurrentIndex(p => p - 1);
+            if (e.key === 'ArrowRight' && currentIndex < images.length - 1) setCurrentIndex(p => p + 1);
+        };
         window.addEventListener('keydown', handler);
         document.body.style.overflow = 'hidden';
         return () => {
             window.removeEventListener('keydown', handler);
             document.body.style.overflow = '';
         };
-    }, [onClose]);
+    }, [currentIndex, images.length, onClose]);
+
+    const handleFullscreen = () => {
+        const el = document.getElementById('lightbox-image');
+        if (!el) return;
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else if (el.requestFullscreen) {
+            el.requestFullscreen();
+        }
+    };
 
     return (
-        <div className="fixed inset-0 z-[999] bg-black/95 flex items-center justify-center"
+        <div className="fixed inset-0 z-[999] bg-black/95 flex items-center justify-center p-4"
             onClick={onClose}>
-            <div className="relative max-w-4xl w-full mx-4" onClick={e => e.stopPropagation()}>
-                <button onClick={onClose}
-                    className="absolute -top-10 right-0 text-white/80 hover:text-white transition-colors">
-                    <X size={28} />
-                </button>
-                <div className={`bg-gradient-to-br ${item.color} rounded-xl aspect-[4/3] flex items-center justify-center`}>
-                    <div className="text-center text-white px-10">
-                        <Image size={72} className="mx-auto mb-4 opacity-30" />
-                        <p className="font-bold text-xl leading-snug">{item.title}</p>
-                        <p className="text-sm text-white/60 mt-2">Nguồn: {item.source}</p>
+            {/* Nav Left */}
+            <button onClick={(e) => { e.stopPropagation(); setCurrentIndex(p => p - 1); }}
+                disabled={currentIndex === 0}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white disabled:opacity-0 transition-all p-2">
+                <ChevronRight size={40} className="rotate-180" />
+            </button>
+
+            {/* Main Content */}
+            <div className="relative max-w-5xl w-full h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
+                {/* Top bar */}
+                <div className="flex justify-between items-center text-white/80 mb-4 shrink-0">
+                    <div className="text-sm font-medium">
+                        {currentIndex + 1} / {images.length}
+                    </div>
+                    <div className="flex gap-4">
+                        <button onClick={handleFullscreen} className="hover:text-white transition-colors" title="Toàn màn hình">
+                            <Maximize2 size={24} />
+                        </button>
+                        <a href={images[currentIndex]} download
+                            className="hover:text-white transition-colors" title="Tải về">
+                            <Download size={24} />
+                        </a>
+                        <button onClick={onClose} className="hover:text-white transition-colors">
+                            <X size={28} />
+                        </button>
                     </div>
                 </div>
-                <p className="text-white/50 text-center text-xs mt-2">Nhấn ESC hoặc bấm bên ngoài để đóng</p>
+
+                {/* Image Wrapper */}
+                <div className="flex-1 min-h-0 bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center">
+                    <img id="lightbox-image"
+                        src={images[currentIndex]}
+                        alt={`${item.title} - ${currentIndex + 1}`}
+                        className="max-w-full max-h-full object-contain" />
+                </div>
+                
+                <p className="text-white/50 text-center text-xs mt-3 shrink-0">Nhấn ESC để đóng, Mũi tên để chuyển ảnh</p>
             </div>
+
+            {/* Nav Right */}
+            <button onClick={(e) => { e.stopPropagation(); setCurrentIndex(p => p + 1); }}
+                disabled={currentIndex === images.length - 1}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white disabled:opacity-0 transition-all p-2">
+                <ChevronRight size={40} />
+            </button>
         </div>
     );
 };
@@ -43,7 +91,7 @@ const Lightbox = ({ item, onClose }) => {
 const InfographicDetailPage = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
-    const [showLightbox, setShowLightbox] = useState(false);
+    const [lightboxIndex, setLightboxIndex] = useState(null);
     const [copied, setCopied] = useState(false);
 
     const item = INFOGRAPHIC_LIST.find(x => x.slug === slug);
@@ -52,16 +100,6 @@ const InfographicDetailPage = () => {
     useEffect(() => {
         if (!item) navigate('/infographic', { replace: true });
     }, [item, navigate]);
-
-    const handleFullscreen = useCallback(() => {
-        const el = document.getElementById('infographic-image-area');
-        if (!el) return;
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-        } else if (el.requestFullscreen) {
-            el.requestFullscreen();
-        }
-    }, []);
 
     const handleCopyLink = () => {
         navigator.clipboard.writeText(window.location.href).then(() => {
@@ -76,7 +114,7 @@ const InfographicDetailPage = () => {
 
     return (
         <div className="bg-[#f4f7fb] min-h-screen pb-16">
-            {showLightbox && <Lightbox item={item} onClose={() => setShowLightbox(false)} />}
+            {lightboxIndex !== null && <Lightbox item={item} initialIndex={lightboxIndex} onClose={() => setLightboxIndex(null)} />}
 
             <div className="container mx-auto px-4 max-w-[1280px] pt-5">
                 {/* Breadcrumb */}
@@ -112,32 +150,35 @@ const InfographicDetailPage = () => {
 
                         {/* Action buttons (above image) */}
                         <div className="flex flex-wrap gap-2 mb-4">
-                            <button onClick={() => setShowLightbox(true)}
+                            <button onClick={() => setLightboxIndex(0)}
                                 className="flex items-center gap-1.5 px-3 py-2 bg-[#1a3b8b] hover:bg-blue-800 text-white rounded-lg text-[12px] font-medium transition-colors">
-                                <ZoomIn size={14} /> Phóng to
+                                <ZoomIn size={14} /> Xem ảnh lớn
                             </button>
-                            <button onClick={handleFullscreen}
-                                className="flex items-center gap-1.5 px-3 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-lg text-[12px] font-medium transition-colors">
-                                <Maximize2 size={14} /> Toàn màn hình
-                            </button>
-                            <a href="#" download
+                            <a href={item.images?.[0]} download
                                 className="flex items-center gap-1.5 px-3 py-2 border border-gray-300 hover:border-blue-400 hover:text-blue-600 text-gray-600 rounded-lg text-[12px] font-medium transition-colors">
-                                <Download size={14} /> Tải về
+                                <Download size={14} /> Tải tất cả ảnh
                             </a>
-                        </div>
-
-                        {/* Infographic image area */}
-                        <div id="infographic-image-area"
-                            className={`bg-gradient-to-br ${item.color} rounded-xl aspect-[4/3] flex items-center justify-center mb-5 cursor-pointer`}
-                            onClick={() => setShowLightbox(true)}>
-                            <div className="text-center text-white px-8">
-                                <Image size={80} className="mx-auto mb-4 opacity-25" />
-                                <p className="font-bold text-lg leading-snug opacity-50 max-w-md">{item.title}</p>
-                            </div>
                         </div>
 
                         {/* Description */}
                         <p className="text-[14px] text-gray-600 leading-relaxed mb-6">{item.desc}</p>
+
+                        {/* Infographic image area (Multi-image vertical list) */}
+                        <div className="space-y-6 mb-8">
+                            {item.images?.map((imgSrc, idx) => (
+                                <div key={idx} className="flex flex-col items-center">
+                                    <div className="w-full bg-gray-50 rounded-xl overflow-hidden border border-gray-200 cursor-pointer hover:shadow-md transition-shadow"
+                                        onClick={() => setLightboxIndex(idx)}>
+                                        <img src={imgSrc} alt={`${item.title} - Ảnh ${idx + 1}`} className="w-full h-auto object-cover" />
+                                    </div>
+                                    {item.images.length > 1 && (
+                                        <div className="text-gray-400 text-sm mt-3 font-medium bg-gray-100 px-3 py-1 rounded-full">
+                                            {idx + 1} / {item.images.length}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
 
                         {/* Share row */}
                         <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-gray-100">
@@ -165,8 +206,12 @@ const InfographicDetailPage = () => {
                                     <div key={rel.id}
                                         className="flex gap-2 cursor-pointer group"
                                         onClick={() => navigate(`/infographic/${rel.slug}`)}>
-                                        <div className={`w-16 h-12 rounded-lg shrink-0 bg-gradient-to-br ${rel.color} flex items-center justify-center`}>
-                                            <Image size={18} className="text-white/25" />
+                                        <div className="w-16 h-12 rounded-lg shrink-0 bg-gray-100 overflow-hidden flex items-center justify-center">
+                                            {rel.thumbnail ? (
+                                                <img src={rel.thumbnail} alt={rel.title} className="w-full h-full object-cover" />
+                                            ) : (
+                                                <Image size={18} className="text-gray-300" />
+                                            )}
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <p className="text-[12px] font-semibold text-gray-700 group-hover:text-blue-700 transition-colors line-clamp-2 leading-snug">

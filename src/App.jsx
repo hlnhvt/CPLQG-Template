@@ -10,7 +10,8 @@ import VisionPage from './pages/VisionPage';
 import NewsHighlightsPage from './pages/NewsHighlightsPage';
 import ContactPage from './pages/ContactPage';
 import SurveyTopicsPage from './pages/SurveyTopicsPage';
-import SurveyListPage from './pages/SurveyListPage';
+import SurveyGlobalPage from './pages/SurveyGlobalPage';
+import SurveyTopicDetailPage from './pages/SurveyTopicDetailPage';
 import SurveyDetailPage from './pages/SurveyDetailPage';
 import SurveyFormPage from './pages/SurveyFormPage';
 import LoginPage from './pages/LoginPage';
@@ -47,7 +48,8 @@ function App() {
                             <Route path="/tin-tuc/noi-bat" element={<NewsHighlightsPage />} />
                             <Route path="/lien-he" element={<ContactPage />} />
                             <Route path="/chu-de-khao-sat" element={<SurveyTopicsPage />} />
-                            <Route path="/chu-de-khao-sat/:id" element={<SurveyListPage />} />
+                            <Route path="/chu-de-khao-sat/:id" element={<SurveyTopicDetailPage />} />
+                            <Route path="/khao-sat" element={<SurveyGlobalPage />} />
                             <Route path="/khao-sat/:surveyId" element={<SurveyDetailPage />} />
                             <Route path="/khao-sat/:surveyId/tham-gia" element={<SurveyFormPage />} />
                             {/* Login page - no Header/Footer */}

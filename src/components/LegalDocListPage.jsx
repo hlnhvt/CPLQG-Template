@@ -409,9 +409,6 @@ const LegalDocListPage = ({
                                                     <Link to={`/van-ban/${doc.id}`} className="text-[14px] font-bold text-blue-700 hover:underline leading-snug flex-1">
                                                         {doc.title}
                                                     </Link>
-                                                    {showSemanticBadge && idx % 3 === 0 && (
-                                                        <span className="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded font-semibold shrink-0 mt-0.5">Ngữ nghĩa</span>
-                                                    )}
                                                 </div>
 
                                                 {/* Engagement row */}

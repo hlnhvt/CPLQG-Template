@@ -3,17 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Calendar, Image, ChevronRight, Phone, MessageSquare } from 'lucide-react';
 
 // ── Mock data (shared with detail page via URL param) ────────────────────────
-const COLORS = [
-    'from-blue-600 to-indigo-700',
-    'from-green-600 to-teal-700',
-    'from-orange-500 to-red-600',
-    'from-purple-600 to-pink-600',
-    'from-cyan-500 to-blue-600',
-    'from-amber-500 to-orange-600',
-    'from-rose-500 to-pink-600',
-    'from-emerald-500 to-green-700',
-    'from-violet-600 to-purple-700',
-    'from-sky-500 to-cyan-600',
+const THUMBNAILS = [
+    '/images/infographic/thumb_1.png',
+    '/images/infographic/thumb_2.png',
+    '/images/infographic/thumb_3.png',
+];
+
+const DETAIL_IMAGES = [
+    '/images/infographic/detail_1.png',
 ];
 
 export const INFOGRAPHIC_LIST = Array.from({ length: 22 }, (_, i) => ({
@@ -46,15 +43,19 @@ export const INFOGRAPHIC_LIST = Array.from({ length: 22 }, (_, i) => ({
     desc: 'Infographic tổng hợp các quy định pháp luật mới nhất, trình bày trực quan giúp người dân và doanh nghiệp dễ dàng nắm bắt.',
     date: `${String((i % 28) + 1).padStart(2, '0')}/0${(i % 3) + 1}/2026`,
     source: ['Bộ Tư pháp', 'Bộ Tài chính', 'Cổng PLQG', 'Bộ Lao động – TB&XH', 'Chính phủ'][i % 5],
-    color: COLORS[i % COLORS.length],
+    thumbnail: THUMBNAILS[i % THUMBNAILS.length],
+    images: Array.from({ length: (i % 3) + 1 }, (_, imgIdx) => DETAIL_IMAGES[imgIdx % DETAIL_IMAGES.length]),
 }));
 
-// ── Gradient card (replaces real image) ──────────────────────────────────────
-const GradCard = ({ color, size = 'md', className = '' }) => {
-    const iconSize = size === 'sm' ? 18 : size === 'lg' ? 64 : 36;
+// ── Image placeholder wrapper ────────────────────────────────────────────────
+const ImageContainer = ({ src, alt, className = '' }) => {
     return (
-        <div className={`bg-gradient-to-br ${color} flex items-center justify-center ${className}`}>
-            <Image size={iconSize} className="text-white/25" />
+        <div className={`overflow-hidden bg-gray-100 flex items-center justify-center ${className}`}>
+            {src ? (
+                <img src={src} alt={alt} className="w-full h-full object-cover" />
+            ) : (
+                <Image size={24} className="text-gray-300" />
+            )}
         </div>
     );
 };
@@ -130,9 +131,8 @@ const InfographicPage = () => {
                             {/* Hero – click → detail */}
                             <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 mb-4 cursor-pointer group"
                                 onClick={() => goDetail(featured[0])}>
-                                <GradCard color={featured[0].color}
-                                    className="aspect-[16/7] relative"
-                                    size="lg" />
+                                <ImageContainer src={featured[0].thumbnail} alt={featured[0].title}
+                                    className="aspect-[16/7] relative" />
                                 <div className="p-4">
                                     <h3 className="text-[16px] font-bold text-gray-800 group-hover:text-blue-700 transition-colors line-clamp-2 mb-1">
                                         {featured[0].title}
@@ -150,7 +150,7 @@ const InfographicPage = () => {
                                     <div key={item.id}
                                         className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 cursor-pointer group"
                                         onClick={() => goDetail(item)}>
-                                        <GradCard color={item.color} className="aspect-[4/3]" size="md" />
+                                        <ImageContainer src={item.thumbnail} alt={item.title} className="aspect-[4/3]" />
                                         <div className="p-3">
                                             <p className="text-[13px] font-semibold text-gray-800 group-hover:text-blue-700 transition-colors line-clamp-2 leading-snug">
                                                 {item.title}
@@ -177,9 +177,8 @@ const InfographicPage = () => {
                                         className="flex gap-4 p-4 hover:bg-gray-50 transition-colors cursor-pointer group"
                                         onClick={() => goDetail(item)}>
                                         {/* Thumbnail */}
-                                        <GradCard color={item.color}
-                                            className="w-32 h-24 rounded-lg shrink-0"
-                                            size="sm" />
+                                        <ImageContainer src={item.thumbnail} alt={item.title}
+                                            className="w-32 h-24 rounded-lg shrink-0" />
                                         {/* Info */}
                                         <div className="flex-1 min-w-0">
                                             <h3 className="text-[14px] font-bold text-gray-800 group-hover:text-blue-700 transition-colors line-clamp-2 leading-snug mb-1">
@@ -211,9 +210,8 @@ const InfographicPage = () => {
                                     <div key={item.id}
                                         className="flex gap-2 cursor-pointer group"
                                         onClick={() => goDetail(item)}>
-                                        <GradCard color={item.color}
-                                            className="w-16 h-12 rounded-lg shrink-0"
-                                            size="sm" />
+                                        <ImageContainer src={item.thumbnail} alt={item.title}
+                                            className="w-16 h-12 rounded-lg shrink-0" />
                                         <div className="flex-1 min-w-0">
                                             <p className="text-[12px] font-semibold text-gray-700 group-hover:text-blue-700 transition-colors line-clamp-2 leading-snug">
                                                 {item.title}

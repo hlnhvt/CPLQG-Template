@@ -92,7 +92,7 @@ const SurveyDetailPage = () => {
                 <div key={idx} className="flex items-center gap-3">
                     <div className="w-36 md:w-48 text-right text-[13px] text-gray-600 shrink-0 font-medium leading-tight">{opt.label}</div>
                     <div className="flex-1 h-8 bg-gray-100 rounded-lg overflow-hidden">
-                        <div 
+                        <div
                             className="h-full rounded-lg transition-all duration-700"
                             style={{ width: `${opt.percent}%`, backgroundColor: CHART_COLORS[idx % CHART_COLORS.length] }}
                         />
@@ -115,7 +115,7 @@ const SurveyDetailPage = () => {
                                 <Star size={13} className="fill-yellow-400 text-yellow-400 ml-0.5" />
                             </div>
                             <div className="flex-1 h-7 bg-gray-100 rounded overflow-hidden">
-                                <div 
+                                <div
                                     className="h-full bg-yellow-400 rounded transition-all duration-700"
                                     style={{ width: `${(d.count / maxCount) * 100}%` }}
                                 />
@@ -127,7 +127,7 @@ const SurveyDetailPage = () => {
                 <div className="flex flex-col items-center justify-center w-40 shrink-0">
                     <div className="text-5xl font-black text-[#0f4c81]">{question.avgScore}</div>
                     <div className="flex gap-0.5 mt-1">
-                        {[1,2,3,4,5].map(s => (
+                        {[1, 2, 3, 4, 5].map(s => (
                             <Star key={s} size={18} className={s <= Math.round(question.avgScore) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"} />
                         ))}
                     </div>
@@ -141,7 +141,7 @@ const SurveyDetailPage = () => {
         <div className="bg-[#f4f7fb] min-h-screen font-sans pb-20">
             {/* Header with Breadcrumbs, Title, Tabs */}
             <div className="bg-white border-b border-gray-200 pt-6 pb-0">
-                <div className="container mx-auto px-4 max-w-[1000px]">
+                <div className="container mx-auto px-4 max-w-[1200px]">
                     {/* Breadcrumbs */}
                     <div className="flex items-center flex-wrap text-[13px] text-gray-500 mb-4 gap-1">
                         <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
@@ -188,7 +188,7 @@ const SurveyDetailPage = () => {
             </div>
 
             {/* Content */}
-            <div className="container mx-auto px-4 max-w-[1000px] mt-8">
+            <div className="container mx-auto px-4 max-w-[1200px] mt-8">
 
                 {/* TAB 1: STATISTICS (UC82) */}
                 {activeTab === 'stats' && (
