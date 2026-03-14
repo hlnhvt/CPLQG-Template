@@ -4,6 +4,15 @@ import { AuthProvider } from './contexts/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
+import UserDashboardLayout from './layouts/UserDashboardLayout';
+import ProfilePage from './pages/dashboard/ProfilePage';
+import CollectionsPage from './pages/dashboard/CollectionsPage';
+import CollectionDetailPage from './pages/dashboard/CollectionDetailPage';
+import NotificationCenterPage from './pages/dashboard/NotificationCenterPage';
+import NotificationDetailPage from './pages/dashboard/NotificationDetailPage';
+import NotificationSettingsPage from './pages/dashboard/NotificationSettingsPage';
+import CollaboratorRegistrationPage from './pages/collaborator/CollaboratorRegistrationPage';
+import NewsletterRegistrationPage from './pages/NewsletterRegistrationPage';
 import NewsDetailPage from './pages/NewsDetailPage';
 import AboutPage from './pages/AboutPage';
 import VisionPage from './pages/VisionPage';
@@ -32,6 +41,11 @@ import VanBanDetailPage from './pages/VanBanDetailPage';
 import DuThaoPage from './pages/DuThaoPage';
 import DuThaoDetailPage from './pages/DuThaoDetailPage';
 import BaoCaoTiepThuDetailPage from './pages/BaoCaoTiepThuDetailPage';
+import UserSettingsPage from './pages/dashboard/UserSettingsPage';
+import UserHistoryPage from './pages/dashboard/UserHistoryPage';
+import CollaboratorArticlesPage from './pages/collaborator/CollaboratorArticlesPage';
+import CollaboratorArticleEditor from './pages/collaborator/CollaboratorArticleEditor';
+import RecommendedPage from './pages/RecommendedPage';
 
 function App() {
     return (
@@ -49,9 +63,11 @@ function App() {
                             <Route path="/lien-he" element={<ContactPage />} />
                             <Route path="/chu-de-khao-sat" element={<SurveyTopicsPage />} />
                             <Route path="/chu-de-khao-sat/:id" element={<SurveyTopicDetailPage />} />
+                            <Route path="/ban-tin/dang-ky" element={<NewsletterRegistrationPage />} />
                             <Route path="/khao-sat" element={<SurveyGlobalPage />} />
                             <Route path="/khao-sat/:surveyId" element={<SurveyDetailPage />} />
                             <Route path="/khao-sat/:surveyId/tham-gia" element={<SurveyFormPage />} />
+                            <Route path="/danh-cho-ban" element={<RecommendedPage />} />
                             {/* Login page - no Header/Footer */}
                             <Route path="/dang-nhap" element={<LoginPage />} />
                             <Route path="/cau-chuyen-thanh-cong" element={<SuccessStoriesPage />} />
@@ -71,6 +87,24 @@ function App() {
                             <Route path="/du-thao" element={<DuThaoPage />} />
                             <Route path="/du-thao/:id" element={<DuThaoDetailPage />} />
                             <Route path="/bao-cao-tiep-thu/:id" element={<BaoCaoTiepThuDetailPage />} />
+
+                            {/* Dashboard Portal Routes */}
+                            <Route path="/ca-nhan" element={<UserDashboardLayout />}>
+                                <Route path="ho-so" element={<ProfilePage />} />
+                                <Route path="cai-dat" element={<UserSettingsPage />} />
+                                <Route path="lich-su" element={<UserHistoryPage />} />
+                                <Route path="bo-suu-tap" element={<CollectionsPage />} />
+                                <Route path="bo-suu-tap/:id" element={<CollectionDetailPage />} />
+                                <Route path="thong-bao" element={<NotificationCenterPage />} />
+                                <Route path="thong-bao/:id" element={<NotificationDetailPage />} />
+                                <Route path="cai-dat-thong-bao" element={<NotificationSettingsPage />} />
+                                <Route path="dang-ky-cong-tac-vien" element={<CollaboratorRegistrationPage />} />
+                                <Route path="tin-bai" element={<CollaboratorArticlesPage />} />
+                            </Route>
+
+                            {/* Full-screen Editor Routes */}
+                            <Route path="/ca-nhan/tin-bai/tao-moi" element={<CollaboratorArticleEditor />} />
+                            <Route path="/ca-nhan/tin-bai/:id/sua" element={<CollaboratorArticleEditor />} />
                         </Routes>
                     </main>
                     <Footer />

@@ -130,7 +130,7 @@ const LoginPage = () => {
                                 </p>
                                 <div className="mt-3 pt-3 border-t border-gray-100">
                                     <p className="text-[13px] text-gray-400 font-medium mb-1">Tài khoản thử nghiệm:</p>
-                                    <p className="text-[12px] text-gray-500">CCCD: <code className="bg-gray-100 px-1 rounded">001234567890</code> / Mật khẩu: <code className="bg-gray-100 px-1 rounded">123456</code></p>
+                                    <p className="text-[12px] text-gray-500">CCCD: <code className="bg-gray-100 px-1 rounded">012345678901</code> / Mật khẩu: <code className="bg-gray-100 px-1 rounded">password</code></p>
                                 </div>
                             </div>
                         </div>

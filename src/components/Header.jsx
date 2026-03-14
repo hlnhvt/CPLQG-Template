@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Search, ChevronDown, User, LogOut } from 'lucide-react';
+import { Search, ChevronDown, User, LogOut, Bookmark, Bell, LayoutDashboard, Settings, FileText, HelpCircle, Edit } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import NotificationDropdown from './NotificationDropdown';
 
 // --- Live Clock ---
 const LiveClock = () => {
@@ -14,7 +15,7 @@ const LiveClock = () => {
     const pad = n => String(n).padStart(2, '0');
     return (
         <span className="whitespace-nowrap hidden lg:inline-block">
-            {days[now.getDay()]}, {pad(now.getDate())}/{pad(now.getMonth()+1)}/{now.getFullYear()}, {pad(now.getHours())}:{pad(now.getMinutes())}:{pad(now.getSeconds())}
+            {days[now.getDay()]}, {pad(now.getDate())}/{pad(now.getMonth() + 1)}/{now.getFullYear()}, {pad(now.getHours())}:{pad(now.getMinutes())}:{pad(now.getSeconds())}
         </span>
     );
 };
@@ -28,15 +29,22 @@ const getInitials = (name) => {
 
 const Header = () => {
     const { user, logout } = useAuth();
+    const displayUser = user;
+
     const navigate = useNavigate();
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [notifOpen, setNotifOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const notificationRef = useRef(null);
 
     // Close dropdown when clicking outside
     useEffect(() => {
         const handler = (e) => {
             if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
                 setDropdownOpen(false);
+            }
+            if (notificationRef.current && !notificationRef.current.contains(e.target)) {
+                setNotifOpen(false);
             }
         };
         document.addEventListener('mousedown', handler);
@@ -88,17 +96,35 @@ const Header = () => {
                             <ChevronDown size={14} />
                         </div>
 
+                        {/* Notification Bell (Logged In Only) */}
+                        {displayUser && (
+                            <div className="relative z-[200]" ref={notificationRef}>
+                                <button 
+                                    onClick={() => setNotifOpen(o => !o)}
+                                    className={`relative p-2 rounded-full transition-colors flex items-center justify-center ${notifOpen ? 'bg-white/20' : 'hover:bg-white/10'}`}
+                                >
+                                    <Bell size={18} />
+                                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-[#3b82f6]"></span>
+                                </button>
+                                
+                                {/* Notification Dropdown */}
+                                {notifOpen && (
+                                    <NotificationDropdown setNotifOpen={setNotifOpen} />
+                                )}
+                            </div>
+                        )}
+
                         {/* Auth Button / Avatar */}
                         <div className="pl-4 border-l border-white/30 hidden sm:block relative z-[200]" ref={dropdownRef}>
-                            {user ? (
+                            {displayUser ? (
                                 // Logged in: Avatar button
                                 <div className="relative">
                                     <button
                                         onClick={() => setDropdownOpen(o => !o)}
                                         className="flex items-center justify-center w-9 h-9 rounded-full bg-blue-800 hover:bg-blue-900 text-white font-bold text-[16px] border-2 border-white/50 transition-colors shadow"
-                                        title={user.name}
+                                        title={displayUser.name}
                                     >
-                                        {getInitials(user.name)}
+                                        {getInitials(displayUser.name)}
                                     </button>
 
                                     {/* Dropdown */}
@@ -106,13 +132,38 @@ const Header = () => {
                                         <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 z-[100] overflow-hidden animate-fadeIn">
                                             {/* User info */}
                                             <div className="px-4 py-4 border-b border-gray-100">
-                                                <p className="font-bold text-gray-800 text-[15px] truncate">{user.name}</p>
-                                                <p className="text-gray-500 text-[12px] mt-0.5">Xin chào {user.name.split(' ').pop()}</p>
+                                                <p className="font-bold text-gray-800 text-[15px] truncate">{displayUser.name}</p>
+                                                <p className="text-gray-500 text-[12px] mt-0.5">Xin chào {displayUser.name.split(' ').pop()}</p>
                                             </div>
+                                            {/* Dashboard Links */}
+                                            <div className="py-2">
+                                                <Link 
+                                                    to="/ca-nhan/ho-so" 
+                                                    className="w-full flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors text-[14px] font-medium"
+                                                    onClick={() => setDropdownOpen(false)}
+                                                >
+                                                    <LayoutDashboard size={16} /> Khu vực cá nhân
+                                                </Link>
+                                                <Link 
+                                                    to="/ca-nhan/bo-suu-tap" 
+                                                    className="w-full flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors text-[14px] font-medium"
+                                                    onClick={() => setDropdownOpen(false)}
+                                                >
+                                                    <Bookmark size={16} /> Bộ sưu tập
+                                                </Link>
+                                                <Link 
+                                                    to="/ca-nhan/thong-bao" 
+                                                    className="w-full flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors text-[14px] font-medium"
+                                                    onClick={() => setDropdownOpen(false)}
+                                                >
+                                                    <Bell size={16} /> Thông báo
+                                                </Link>
+                                            </div>
+                                            
                                             {/* Logout */}
                                             <button
                                                 onClick={handleLogout}
-                                                className="w-full flex items-center gap-3 px-4 py-3.5 text-red-600 hover:bg-red-50 transition-colors text-[14px] font-medium"
+                                                className="w-full flex items-center gap-3 px-4 py-3 border-t border-gray-100 text-red-600 hover:bg-red-50 transition-colors text-[14px] font-medium"
                                             >
                                                 <LogOut size={16} />
                                                 Đăng xuất
@@ -202,11 +253,6 @@ const Header = () => {
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
                                 <a href="#" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
-                                    Tìm hiểu pháp luật <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
-                                </a>
-                            </li>
-                            <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <a href="#" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
                                     Văn bản pháp luật <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
                                 {/* Dropdown – Văn bản pháp luật */}
@@ -244,11 +290,6 @@ const Header = () => {
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
-                            <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <a href="#" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
-                                    Cơ sở pháp lý <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
-                                </a>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
                                 <Link to="/khao-sat" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
