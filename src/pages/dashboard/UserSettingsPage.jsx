@@ -1,65 +1,84 @@
 import React, { useState } from 'react';
-import { Settings, Save, RefreshCw, LayoutGrid, List, Sun, Moon, Monitor, ArrowUp, ArrowDown, Type, CheckCircle } from 'lucide-react';
+import { Settings, Save, RefreshCw, LayoutGrid, List, Sun, Moon, Monitor, ArrowUp, ArrowDown, CheckCircle, ChevronDown, ChevronUp, Settings2, Type } from 'lucide-react';
 
-const TOPICS_DATA = [
-    { id: 'dat-dai', icon: '🏠', title: 'Đất đai & Nhà ở' },
-    { id: 'doanh-nghiep', icon: '🏢', title: 'Doanh nghiệp & Đầu tư' },
-    { id: 'lao-dong', icon: '👷', title: 'Lao động & Việc làm' },
-    { id: 'thue', icon: '💰', title: 'Thuế & Tài chính' },
-    { id: 'dan-su', icon: '⚖️', title: 'Dân sự' },
-    { id: 'hinh-su', icon: '🔨', title: 'Hình sự' },
-    { id: 'hanh-chinh', icon: '🏛️', title: 'Hành chính' },
-    { id: 'gia-dinh', icon: '👨‍👩‍👧', title: 'Gia đình & Hôn nhân' },
-    { id: 'so-huu-tri-tue', icon: '💡', title: 'Sở hữu trí tuệ' }
+const LEGAL_FIELDS = [
+    { id: 'dat-dai', title: 'Đất đai & Nhà ở', thumbnail: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=300' },
+    { id: 'doanh-nghiep', title: 'Doanh nghiệp & Đầu tư', thumbnail: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=300' },
+    { id: 'lao-dong', title: 'Lao động & Việc làm', thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=300' },
+    { id: 'thue', title: 'Thuế & Tài chính', thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=300' },
+    { id: 'dan-su', title: 'Dân sự', thumbnail: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=300' },
+    { id: 'hinh-su', title: 'Hình sự', thumbnail: 'https://images.unsplash.com/photo-1505664125541-dfca8b1dd3e6?auto=format&fit=crop&q=80&w=300' }
 ];
+
+const NEWS_CATEGORIES = [
+    { id: 'news-tin-nong', title: 'Tin nóng pháp luật', thumbnail: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=300' },
+    { id: 'news-chinh-sach', title: 'Chính sách mới', thumbnail: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=300' },
+    { id: 'news-phan-tich', title: 'Phân tích & Bình luận', thumbnail: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=300' },
+];
+
+const FORUMS = [
+    { id: 'forum-luat-su', title: 'Cộng đồng Luật sư', thumbnail: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=300' },
+    { id: 'forum-doanh-nghiep', title: 'Hỏi đáp Doanh nghiệp', thumbnail: 'https://images.unsplash.com/photo-1556761175-5973e6aa210f?auto=format&fit=crop&q=80&w=300' },
+];
+
+const STATISTICS = [
+    { id: 'stat-an-le', title: 'Thống kê Án lệ', thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=300' },
+    { id: 'stat-van-ban', title: 'Biểu đồ Ban hành Văn bản', thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=300' },
+];
+
+const ALL_ITEMS = [...LEGAL_FIELDS, ...NEWS_CATEGORIES, ...FORUMS, ...STATISTICS];
 
 const UserSettingsPage = () => {
     const [activeTab, setActiveTab] = useState('topics');
-    
-    // Topics State
-    const [selectedTopics, setSelectedTopics] = useState(['dat-dai', 'doanh-nghiep', 'lao-dong']);
-    
-    // Ordered Topics State
-    const [orderedTopics, setOrderedTopics] = useState(
-        TOPICS_DATA.filter(t => ['dat-dai', 'doanh-nghiep', 'lao-dong'].includes(t.id))
-    );
 
-    // UI State
+    // Currently selected IDs
+    const [selectedTopics, setSelectedTopics] = useState(['dat-dai', 'news-tin-nong', 'forum-luat-su']);
+
+    // Ordered list of block configs
+    const [orderedBlocks, setOrderedBlocks] = useState([
+        { id: 'dat-dai', viewMode: 'card', width: '100', recordCount: 5, sortOrder: 'newest' },
+        { id: 'news-tin-nong', viewMode: 'list', width: '50', recordCount: 10, sortOrder: 'most_viewed' },
+        { id: 'forum-luat-su', viewMode: 'card', width: '50', recordCount: 5, sortOrder: 'most_commented' },
+    ]);
+
+    // UI state
     const [uiSettings, setUiSettings] = useState({
-        viewMode: 'card', 
         fontSize: '100%',
         theme: 'system'
     });
 
     const [isSaved, setIsSaved] = useState(false);
+    const [expandedBlock, setExpandedBlock] = useState(null);
 
     const handleTopicToggle = (id) => {
         setIsSaved(false);
-        const newSelected = selectedTopics.includes(id) 
-            ? selectedTopics.filter(t => t !== id)
-            : [...selectedTopics, id];
+        const isSelected = selectedTopics.includes(id);
         
-        setSelectedTopics(newSelected);
-        
-        // Update ordered topics
-        if (newSelected.includes(id) && !orderedTopics.find(t => t.id === id)) {
-            setOrderedTopics([...orderedTopics, TOPICS_DATA.find(t => t.id === id)]);
+        if (isSelected) {
+            setSelectedTopics(prev => prev.filter(t => t !== id));
+            setOrderedBlocks(prev => prev.filter(b => b.id !== id));
+            if (expandedBlock === id) setExpandedBlock(null);
         } else {
-            setOrderedTopics(orderedTopics.filter(t => t.id !== id));
+            setSelectedTopics(prev => [...prev, id]);
+            // Automatically add to the end of the order list with default config
+            setOrderedBlocks(prev => [...prev, { id, viewMode: 'card', width: '100', recordCount: 5, sortOrder: 'newest' }]);
         }
     };
 
-    const moveTopic = (index, direction) => {
+    const moveBlock = (index, direction) => {
         setIsSaved(false);
+        const newOrder = [...orderedBlocks];
         if (direction === 'up' && index > 0) {
-            const newOrder = [...orderedTopics];
             [newOrder[index - 1], newOrder[index]] = [newOrder[index], newOrder[index - 1]];
-            setOrderedTopics(newOrder);
-        } else if (direction === 'down' && index < orderedTopics.length - 1) {
-            const newOrder = [...orderedTopics];
+        } else if (direction === 'down' && index < newOrder.length - 1) {
             [newOrder[index], newOrder[index + 1]] = [newOrder[index + 1], newOrder[index]];
-            setOrderedTopics(newOrder);
         }
+        setOrderedBlocks(newOrder);
+    };
+
+    const updateBlockConfig = (id, newConfig) => {
+        setIsSaved(false);
+        setOrderedBlocks(prev => prev.map(b => b.id === id ? { ...b, ...newConfig } : b));
     };
 
     const handleSave = () => {
@@ -67,256 +86,402 @@ const UserSettingsPage = () => {
         setTimeout(() => setIsSaved(false), 3000);
     };
 
+    const renderTopicGrid = (title, description, items) => (
+        <div className="mb-10 animate-fadeIn">
+            <h3 className="text-lg font-bold text-gray-800 mb-1 border-b pb-2">{title}</h3>
+            {description && <p className="text-gray-500 text-sm mb-4 mt-2">{description}</p>}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3">
+                {items.map(topic => {
+                    const isSelected = selectedTopics.includes(topic.id);
+                    return (
+                        <button
+                            key={topic.id}
+                            onClick={() => handleTopicToggle(topic.id)}
+                            className={`flex items-center gap-4 p-3 rounded-xl border transition-all duration-300 w-full text-left ${isSelected
+                                ? 'border-blue-500 bg-blue-50/50 shadow-sm'
+                                : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-sm'
+                                }`}
+                        >
+                            <div className="w-24 h-16 shrink-0 rounded-lg overflow-hidden relative shadow-sm">
+                                <img src={topic.thumbnail} alt={topic.title} className="w-full h-full object-cover" />
+                                <div className={`absolute inset-0 transition-opacity duration-300 ${isSelected ? 'bg-blue-900/10' : 'bg-black/5 hover:bg-black/10'}`}></div>
+                            </div>
+                            
+                            <div className="flex-1 flex items-center justify-between min-w-0 pr-2">
+                                <h3 className={`font-bold text-[15px] truncate ${isSelected ? 'text-blue-700' : 'text-gray-800'}`}>
+                                    {topic.title}
+                                </h3>
+                                
+                                <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 border transition-all ${isSelected ? 'bg-blue-500 border-blue-500' : 'bg-white border-gray-300'}`}>
+                                    {isSelected && <CheckCircle size={14} className="text-white" />}
+                                </div>
+                            </div>
+                        </button>
+                    );
+                })}
+            </div>
+        </div>
+    );
+
     return (
         <div className="animate-fadeIn pb-12">
             <div className="mb-6">
                 <h1 className="text-2xl font-bold text-[#0f4c81]">Cấu hình cá nhân hóa</h1>
-                <p className="text-gray-500 text-sm mt-1">Điều chỉnh trải nghiệm của Cổng Pháp luật theo sở thích của bạn.</p>
+                <p className="text-gray-500 text-sm mt-1">Nâng cao trải nghiệm bằng cách lựa chọn và sắp xếp các nội dung bạn đặc biệt quan tâm.</p>
             </div>
 
             {/* Quick action bar */}
             <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 sticky top-4 z-10 transition-all">
                 {/* Tabs */}
                 <div className="flex bg-gray-50 p-1 rounded-lg w-full sm:w-auto overflow-x-auto hide-scrollbar">
-                    <button 
+                    <button
                         onClick={() => setActiveTab('topics')}
                         className={`px-4 py-2 text-sm font-medium rounded-md whitespace-nowrap transition-all ${activeTab === 'topics' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600 hover:text-gray-900 duration-200'}`}
                     >
-                        Lĩnh vực quan tâm
+                        Nội dung quan tâm
                     </button>
-                    <button 
+                    <button
                         onClick={() => setActiveTab('order')}
                         className={`px-4 py-2 text-sm font-medium rounded-md whitespace-nowrap transition-all ${activeTab === 'order' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600 hover:text-gray-900 duration-200'}`}
                     >
                         Sắp xếp ưu tiên
                     </button>
-                    <button 
+                    <button
                         onClick={() => setActiveTab('ui')}
                         className={`px-4 py-2 text-sm font-medium rounded-md whitespace-nowrap transition-all ${activeTab === 'ui' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600 hover:text-gray-900 duration-200'}`}
                     >
                         Tùy chỉnh giao diện
                     </button>
                 </div>
-                
+
                 <div className="flex items-center gap-3 w-full sm:w-auto justify-end shrink-0">
                     <button className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
-                        <RefreshCw size={16}/> Khôi phục
+                        <RefreshCw size={16} /> Khôi phục
                     </button>
-                    <button 
+                    <button
                         onClick={handleSave}
-                        className={`flex items-center justify-center gap-1.5 px-5 py-2 text-sm font-medium rounded-lg transition-all shadow-sm ${
-                            isSaved ? 'bg-green-500 text-white' : 'bg-[#0f4c81] hover:bg-blue-800 text-white'
-                        }`}
+                        className={`flex items-center justify-center gap-1.5 px-5 py-2 text-sm font-medium rounded-lg transition-all shadow-sm ${isSaved ? 'bg-green-500 text-white' : 'bg-[#0f4c81] hover:bg-blue-800 text-white'
+                            }`}
                     >
-                        {isSaved ? <><CheckCircle size={16} /> Đã lưu</> : <><Save size={16}/> Lưu cài đặt</>}
+                        {isSaved ? <><CheckCircle size={16} /> Đã lưu</> : <><Save size={16} /> Lưu cài đặt</>}
                     </button>
                 </div>
             </div>
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden min-h-[500px]">
-                
                 {/* TOPICS TAB */}
                 {activeTab === 'topics' && (
-                    <div className="p-6 md:p-8 animate-fadeIn">
-                        <div className="mb-6">
-                            <h2 className="text-lg font-bold text-gray-800 mb-1">Chọn lĩnh vực pháp lý</h2>
-                            <p className="text-gray-500 text-sm">Hệ thống sẽ ưu tiên hiển thị văn bản và tin tức thuộc các lĩnh vực bạn chọn. Bắt buộc chọn ít nhất 1 lĩnh vực.</p>
-                            <div className="mt-3 flex items-center justify-between">
-                                <span className="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-                                    Đã chọn: {selectedTopics.length}/{TOPICS_DATA.length}
-                                </span>
-                            </div>
+                    <div className="p-6 md:p-8">
+                        <div className="mb-4 flex items-center justify-between">
+                            <h2 className="text-xl font-bold text-gray-800">Lựa chọn Nội dung Quan tâm</h2>
+                            <span className="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
+                                Đã chọn: {selectedTopics.length} mục
+                            </span>
                         </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                            {TOPICS_DATA.map(topic => {
-                                const isSelected = selectedTopics.includes(topic.id);
-                                return (
-                                    <button 
-                                        key={topic.id}
-                                        onClick={() => handleTopicToggle(topic.id)}
-                                        className={`flex items-center text-left p-4 rounded-xl border-2 transition-all duration-300 group ${
-                                            isSelected 
-                                            ? 'border-blue-500 bg-blue-50/50 shadow-sm transform scale-[1.02]' 
-                                            : 'border-gray-100 hover:border-gray-200 hover:bg-gray-50'
-                                        }`}
-                                    >
-                                        <div className="text-3xl mr-4 group-hover:scale-110 transition-transform origin-center">
-                                            {topic.icon}
-                                        </div>
-                                        <div className="flex-1">
-                                            <h3 className={`font-semibold text-[15px] ${isSelected ? 'text-blue-800' : 'text-gray-800'}`}>
-                                                {topic.title}
-                                            </h3>
-                                        </div>
-                                        {isSelected && (
-                                            <div className="text-blue-500 animate-fadeIn">
-                                                <CheckCircle size={20} className="fill-blue-100" />
-                                            </div>
-                                        )}
-                                    </button>
-                                );
-                            })}
-                        </div>
+                        
+                        {renderTopicGrid('Lĩnh vực Pháp lý', 'Hệ thống sẽ ưu tiên hiển thị văn bản thuộc các lĩnh vực pháp luật mà bạn chọn.', LEGAL_FIELDS)}
+                        {renderTopicGrid('Chuyên mục Tin tức', 'Các mục tin tức, bài viết, chính sách mà bạn muốn theo dõi thường xuyên.', NEWS_CATEGORIES)}
+                        {renderTopicGrid('Diễn đàn & Cộng đồng', 'Các diễn đàn trao đổi, thảo luận phổ biến dành cho thành viên.', FORUMS)}
+                        {renderTopicGrid('Chỉ tiêu Thống kê', 'Biểu đồ và số liệu bạn muốn theo dõi trực quan.', STATISTICS)}
                     </div>
                 )}
 
                 {/* ORDER TAB */}
                 {activeTab === 'order' && (
-                    <div className="p-6 md:p-8 flex flex-col md:flex-row gap-8 animate-fadeIn">
-                        <div className="flex-1">
-                            <h2 className="text-lg font-bold text-gray-800 mb-1">Sắp xếp mức độ ưu tiên</h2>
-                            <p className="text-gray-500 text-sm mb-6">Trang chủ sẽ được thiết kế bố cục theo thứ tự ưu tiên của bạn dưới đây.</p>
-                            
-                            {orderedTopics.length === 0 ? (
-                                <div className="text-center py-10 border-2 border-dashed border-gray-200 rounded-xl">
-                                    <p className="text-gray-500">Bạn chưa chọn lĩnh vực nào. Hãy quay lại tab "Lĩnh vực quan tâm".</p>
-                                </div>
-                            ) : (
-                                <div className="space-y-3">
-                                    {orderedTopics.map((topic, index) => (
-                                        <div key={topic.id} className="flex items-center justify-between p-4 bg-white border border-gray-200 shadow-sm rounded-xl group hover:border-blue-300 transition-colors">
-                                            <div className="flex items-center gap-4">
-                                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                                                    index === 0 ? 'bg-orange-100 text-orange-600' : 
-                                                    index === 1 ? 'bg-blue-100 text-blue-600' : 'bg-gray-100 text-gray-600'
-                                                }`}>
-                                                    #{index + 1}
-                                                </div>
-                                                <span className="text-2xl">{topic.icon}</span>
-                                                <span className="font-semibold text-gray-800">{topic.title}</span>
-                                                {index === 0 && <span className="hidden sm:inline-block ml-2 px-2 py-0.5 bg-orange-50 text-orange-600 text-xs font-bold rounded">Ưu tiên cao nhất</span>}
-                                            </div>
-                                            <div className="flex bg-gray-50 rounded-lg p-0.5 border border-gray-100">
-                                                <button 
-                                                    onClick={() => moveTopic(index, 'up')}
-                                                    disabled={index === 0}
-                                                    className={`p-1.5 rounded-md ${index === 0 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-white hover:text-blue-600 hover:shadow-sm'}`}
-                                                >
-                                                    <ArrowUp size={18} />
-                                                </button>
-                                                <button 
-                                                    onClick={() => moveTopic(index, 'down')}
-                                                    disabled={index === orderedTopics.length - 1}
-                                                    className={`p-1.5 rounded-md ${index === orderedTopics.length - 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-white hover:text-blue-600 hover:shadow-sm'}`}
-                                                >
-                                                    <ArrowDown size={18} />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
+                    <div className="p-6 md:p-8 animate-fadeIn flex flex-col">
+                        <div className="mb-8">
+                            <h2 className="text-xl font-bold text-gray-800 mb-2">Sắp xếp mức độ ưu tiên & Tùy chỉnh hiển thị</h2>
+                            <p className="text-gray-500 text-sm max-w-3xl">Danh sách dưới đây tương ứng với các nội dung bạn đã chọn ở tab "Nội dung quan tâm". Hãy kéo thả hoặc dùng mũi tên để thay đổi thứ tự ưu tiên. Bấm vào nút "Cập nhật" trên từng dòng để thiết lập giao diện hiển thị cho cụm đó trên Trang chủ.</p>
                         </div>
-                        
-                        {/* Live Preview Panel */}
-                        <div className="w-full md:w-80 lg:w-96 shrink-0">
-                            <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden sticky top-24">
-                                <div className="bg-gray-800 text-white text-center py-2 text-xs font-semibold uppercase tracking-wider">
-                                    Bản xem trước Trang Chủ
-                                </div>
-                                <div className="p-4 space-y-4 max-h-[500px] overflow-y-auto hide-scrollbar">
-                                    <div className="h-16 bg-white rounded shadow-sm border border-gray-100 mb-6 flex items-center px-4">
-                                        <div className="w-8 h-8 rounded-full bg-blue-100"></div>
-                                        <div className="ml-3 h-3 w-24 bg-gray-200 rounded"></div>
-                                    </div>
-                                    
-                                    {orderedTopics.map((topic, idx) => (
-                                        <div key={`preview-${topic.id}`} className="space-y-2">
-                                            <div className="flex items-center justify-between">
-                                                <h4 className="text-[13px] font-bold text-gray-800 flex items-center gap-1.5">
-                                                    {topic.icon} {topic.title}
-                                                </h4>
-                                                <span className="text-[10px] text-blue-500">Xem thêm</span>
+
+                        {orderedBlocks.length === 0 ? (
+                            <div className="text-center py-12 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50">
+                                <p className="text-gray-500">Bạn chưa chọn nội dung nào. Hãy quay lại phần "Nội dung quan tâm" để chọn.</p>
+                            </div>
+                        ) : (
+                            <div className="space-y-4 mb-12 max-w-4xl mx-auto w-full">
+                                {orderedBlocks.map((block, index) => {
+                                    const itemDef = ALL_ITEMS.find(i => i.id === block.id);
+                                    if (!itemDef) return null;
+                                    const isExpanded = expandedBlock === block.id;
+
+                                    return (
+                                        <div key={block.id} className={`bg-white border rounded-xl shadow-sm overflow-hidden transition-all duration-300 ${isExpanded ? 'border-blue-300 ring-2 ring-blue-50' : 'border-gray-200 hover:border-blue-200'}`}>
+                                            {/* Header */}
+                                            <div className="flex items-center justify-between p-3 sm:p-4 bg-white relative z-10 transition-colors">
+                                                <div className="flex items-center gap-3 sm:gap-5 flex-1 cursor-pointer" onClick={() => setExpandedBlock(isExpanded ? null : block.id)}>
+                                                    <div className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-sm font-bold border-2 ${index === 0 ? 'bg-orange-50 text-orange-600 border-orange-200' :
+                                                        index < 3 ? 'bg-blue-50 text-blue-600 border-blue-200' : 'bg-gray-50 text-gray-600 border-gray-200'
+                                                        }`}>
+                                                        #{index + 1}
+                                                    </div>
+                                                    <div className="w-16 h-12 shrink-0 rounded-md overflow-hidden border border-gray-200 shadow-sm hidden sm:block relative">
+                                                        <img src={itemDef.thumbnail} className="w-full h-full object-cover" alt="" />
+                                                    </div>
+                                                    <div>
+                                                        <span className="font-bold text-gray-800 text-base">{itemDef.title}</span>
+                                                        <div className="text-xs text-gray-500 mt-1 flex flex-wrap items-center gap-3">
+                                                            <span className="flex items-center gap-1 bg-gray-100 px-2 py-0.5 rounded text-gray-600">
+                                                                {block.viewMode === 'card' ? <LayoutGrid size={12}/> : <List size={12}/>}
+                                                                {block.viewMode === 'card' ? 'Dạng thẻ' : 'Dạng danh sách'}
+                                                            </span>
+                                                            <span className="hidden sm:inline">•</span>
+                                                            <span>{block.width === '100' ? '100% (Cả hàng)' : '50% (Nửa hàng)'}</span>
+                                                            <span className="hidden sm:inline">•</span>
+                                                            <span>{block.recordCount} bài</span>
+                                                            <span className="hidden sm:inline">•</span>
+                                                            <span className="italic text-blue-600 font-medium">{
+                                                                block.sortOrder === 'newest' ? 'Mới nhất' : 
+                                                                block.sortOrder === 'most_viewed' ? 'Được xem nhiều nhất' :
+                                                                block.sortOrder === 'most_commented' ? 'Bình luận cao nhất' :
+                                                                block.sortOrder === 'most_shared' ? 'Chia sẻ cao nhất' :
+                                                                block.sortOrder === 'most_feedback' ? 'Góp ý nhiều nhất' :
+                                                                'Yêu thích nhất'
+                                                            }</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div className="flex items-center gap-2 pl-4 border-l border-gray-100 ml-2 shrink-0">
+                                                    <button
+                                                        onClick={(e) => { e.stopPropagation(); setExpandedBlock(isExpanded ? null : block.id); }}
+                                                        className={`flex items-center justify-center min-w-[100px] gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${isExpanded ? 'bg-blue-600 text-white shadow-md' : 'bg-blue-50 text-blue-700 hover:bg-blue-100'}`}
+                                                    >
+                                                        <Settings2 size={16} /> 
+                                                        <span className="hidden md:inline">{isExpanded ? 'Đóng' : 'Cập nhật'}</span>
+                                                        {isExpanded ? <ChevronUp size={16} className="ml-1"/> : <ChevronDown size={16} className="ml-1"/>}
+                                                    </button>
+
+                                                    <div className="flex flex-col bg-gray-50 rounded-lg p-0.5 border border-gray-200 ml-1">
+                                                        <button
+                                                            onClick={(e) => { e.stopPropagation(); moveBlock(index, 'up'); }}
+                                                            disabled={index === 0}
+                                                            className={`p-1 rounded-sm ${index === 0 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:bg-white hover:text-blue-600 hover:shadow-sm'}`}
+                                                        >
+                                                            <ArrowUp size={16} />
+                                                        </button>
+                                                        <button
+                                                            onClick={(e) => { e.stopPropagation(); moveBlock(index, 'down'); }}
+                                                            disabled={index === orderedBlocks.length - 1}
+                                                            className={`p-1 rounded-sm ${index === orderedBlocks.length - 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:bg-white hover:text-blue-600 hover:shadow-sm'}`}
+                                                        >
+                                                            <ArrowDown size={16} />
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="flex gap-2">
-                                                <div className="h-20 bg-white border border-gray-100 shadow-sm rounded flex-1"></div>
-                                                {idx === 0 && <div className="h-20 bg-white border border-gray-100 shadow-sm rounded flex-1"></div>}
-                                            </div>
+
+                                            {/* Config Panel (Accordion Body) */}
+                                            {isExpanded && (
+                                                <div className="p-5 sm:p-6 bg-gray-50/80 border-t border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 animate-fadeIn">
+                                                    <div>
+                                                        <label className="block text-sm font-bold text-gray-800 mb-2">Chế độ xem mặc định</label>
+                                                        <div className="grid grid-cols-2 gap-3">
+                                                            <button
+                                                                onClick={() => updateBlockConfig(block.id, { viewMode: 'card' })}
+                                                                className={`flex items-center justify-center gap-2 p-3 border-2 rounded-xl transition-all ${block.viewMode === 'card' ? 'border-blue-500 bg-blue-50/50 text-blue-700 shadow-sm' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600'}`}
+                                                            >
+                                                                <LayoutGrid size={18} /> Dạng thẻ
+                                                            </button>
+                                                            <button
+                                                                onClick={() => updateBlockConfig(block.id, { viewMode: 'list' })}
+                                                                className={`flex items-center justify-center gap-2 p-3 border-2 rounded-xl transition-all ${block.viewMode === 'list' ? 'border-blue-500 bg-blue-50/50 text-blue-700 shadow-sm' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600'}`}
+                                                            >
+                                                                <List size={18} /> Danh sách
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <label className="block text-sm font-bold text-gray-800 mb-2">Khối hiển thị (Chiều ngang trang)</label>
+                                                        <div className="grid grid-cols-2 gap-3">
+                                                            <button
+                                                                onClick={() => updateBlockConfig(block.id, { width: '100' })}
+                                                                className={`p-3 border-2 rounded-xl transition-all text-center font-medium ${block.width === '100' ? 'border-blue-500 bg-blue-50/50 text-blue-700 shadow-sm' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600'}`}
+                                                            >
+                                                                100% (Cả màn hình)
+                                                            </button>
+                                                            <button
+                                                                onClick={() => updateBlockConfig(block.id, { width: '50' })}
+                                                                className={`p-3 border-2 rounded-xl transition-all text-center font-medium ${block.width === '50' ? 'border-blue-500 bg-blue-50/50 text-blue-700 shadow-sm' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600'}`}
+                                                            >
+                                                                50% (Nửa màn hình)
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <label className="block text-sm font-bold text-gray-800 mb-2">Số lượng bản ghi</label>
+                                                        <select 
+                                                            value={block.recordCount}
+                                                            onChange={(e) => updateBlockConfig(block.id, { recordCount: Number(e.target.value) })}
+                                                            className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 outline-none bg-white font-medium text-gray-700 transition-colors"
+                                                        >
+                                                            <option value={5}>5 bản ghi (Mặc định)</option>
+                                                            <option value={10}>10 bản ghi</option>
+                                                            <option value={15}>15 bản ghi</option>
+                                                            <option value={20}>20 bản ghi</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div>
+                                                        <label className="block text-sm font-bold text-gray-800 mb-2">Ưu tiên các bản ghi</label>
+                                                        <select 
+                                                            value={block.sortOrder}
+                                                            onChange={(e) => updateBlockConfig(block.id, { sortOrder: e.target.value })}
+                                                            className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 outline-none bg-white font-medium text-gray-700 transition-colors"
+                                                        >
+                                                            <option value="newest">Mới nhất (Mặc định)</option>
+                                                            <option value="most_viewed">Được xem nhiều nhất</option>
+                                                            <option value="most_commented">Được bình luận nhiều nhất</option>
+                                                            <option value="most_shared">Được chia sẻ nhiều nhất</option>
+                                                            <option value="most_feedback">Được góp ý nhiều nhất</option>
+                                                            <option value="most_liked">Được yêu thích nhất</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
-                                    ))}
+                                    );
+                                })}
+                            </div>
+                        )}
+
+                        {/* Live Preview below Ordering - Takes full width now */}
+                        {orderedBlocks.length > 0 && (
+                            <div className="mt-8 border border-gray-200 rounded-xl overflow-hidden shadow-lg bg-gray-50 scale-100 transform origin-top w-full">
+                                <div className="bg-[#0f4c81] text-white px-6 py-4 flex items-center justify-between">
+                                    <h3 className="font-bold uppercase tracking-wider text-sm flex items-center gap-2">
+                                        <Monitor size={18}/> Bản xem trước Màn hình Trang Chủ
+                                    </h3>
+                                    <span className="text-xs text-blue-200 bg-blue-900/40 px-3 py-1 rounded-full border border-blue-400/30">Mô phỏng bố cục</span>
+                                </div>
+                                <div className="p-6 md:p-8 space-y-6 max-h-[700px] overflow-y-auto custom-scrollbar">
+                                    {/* Mock Top Banner */}
+                                    <div className="h-20 bg-white rounded-lg shadow-sm border border-gray-200 flex items-center px-6">
+                                        <div className="w-12 h-12 rounded-full bg-blue-100"></div>
+                                        <div className="ml-4 space-y-2">
+                                            <div className="h-3 w-32 bg-gray-200 rounded"></div>
+                                            <div className="h-2 w-24 bg-gray-100 rounded"></div>
+                                        </div>
+                                        <div className="ml-auto w-1/4 h-10 bg-gray-50 rounded-lg border border-gray-100"></div>
+                                    </div>
+
+                                    {/* Mock the blocks based on config */}
+                                    <div className="flex flex-wrap -mx-4">
+                                        {orderedBlocks.map((block) => {
+                                            const itemDef = ALL_ITEMS.find(i => i.id === block.id);
+                                            if (!itemDef) return null;
+                                            
+                                            const isFifty = block.width === '50';
+                                            const wClass = isFifty ? 'w-full lg:w-1/2' : 'w-full';
+                                            
+                                            return (
+                                                <div key={`preview-render-${block.id}`} className={`${wClass} px-4 mb-8`}>
+                                                    <div className="bg-white p-5 sm:p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col relative overflow-hidden group">
+                                                        <div className="absolute top-0 right-0 py-1.5 px-3 bg-blue-50 text-blue-700 text-[10px] font-bold uppercase rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5">
+                                                            {block.viewMode === 'card' ? <LayoutGrid size={10}/> : <List size={10}/>}
+                                                            <span>• {isFifty ? '50%' : '100%'} ngang • {block.sortOrder} • {block.recordCount} records</span>
+                                                        </div>
+                                                        <div className="flex justify-between items-center mb-5 pb-3 border-b-2 border-gray-50">
+                                                            <h4 className="font-bold text-lg text-gray-800 flex items-center gap-3">
+                                                                <span className="w-1.5 h-6 bg-blue-600 rounded-full block"></span>
+                                                                {itemDef.title}
+                                                            </h4>
+                                                            <span className="text-sm font-semibold text-blue-600">Xem tất cả →</span>
+                                                        </div>
+                                                        
+                                                        <div className="flex-1 mt-2">
+                                                            {block.viewMode === 'card' ? (
+                                                                <div className={`grid gap-4 ${isFifty ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'}`}>
+                                                                    {[...Array(isFifty ? 2 : 4)].map((_, i) => (
+                                                                        <div key={i} className="flex flex-col bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
+                                                                            <div className="h-32 sm:h-40 bg-gray-200 relative">
+                                                                                <img src={itemDef.thumbnail} className="w-full h-full object-cover opacity-60 grayscale" alt=""/>
+                                                                            </div>
+                                                                            <div className="p-4 flex-1 flex flex-col justify-center">
+                                                                                <div className="h-4 bg-gray-300 rounded-md w-full mb-3"></div>
+                                                                                <div className="h-4 bg-gray-300 rounded-md w-3/4 mb-4"></div>
+                                                                                <div className="h-2 bg-gray-200 rounded-sm w-1/3 mt-auto"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            ) : (
+                                                                <div className={`grid gap-5 ${isFifty ? 'grid-cols-1' : 'grid-cols-1 lg:grid-cols-2 gap-x-8'}`}>
+                                                                    {[...Array(isFifty ? 3 : 6)].map((_, i) => (
+                                                                        <div key={i} className="flex gap-4 p-3 bg-gray-50 rounded-xl border border-gray-100 hover:border-gray-200 hover:bg-white transition-all items-center">
+                                                                            <div className="w-24 h-24 sm:w-32 sm:h-24 shrink-0 bg-gray-200 rounded-lg overflow-hidden hidden sm:block">
+                                                                                 <img src={itemDef.thumbnail} className="w-full h-full object-cover opacity-50 grayscale" alt=""/>
+                                                                            </div>
+                                                                            <div className="flex-1 py-1">
+                                                                                <div className="h-4 bg-gray-300 rounded-md w-[90%] mb-3"></div>
+                                                                                <div className="h-4 bg-gray-300 rounded-md w-[60%] mb-4"></div>
+                                                                                <div className="flex gap-3">
+                                                                                    <div className="h-3 bg-gray-200 rounded w-16"></div>
+                                                                                    <div className="h-3 bg-gray-200 rounded w-16"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 )}
 
                 {/* UI CUSTOMIZATION TAB */}
                 {activeTab === 'ui' && (
                     <div className="p-6 md:p-8 animate-fadeIn">
-                        <h2 className="text-lg font-bold text-gray-800 mb-6">Tùy chỉnh giao diện hiển thị</h2>
+                        <div className="mb-8">
+                            <h2 className="text-xl font-bold text-gray-800">Tùy chỉnh hệ thống</h2>
+                            <p className="text-gray-500 text-sm mt-1">Giao diện thẻ/danh sách đã được chuyển vào phần "Cập nhật" của từng khối bên tab "Sắp xếp ưu tiên". Tại đây, bạn có thể thiết lập cỡ chữ và giao diện Sáng/Tối cho toàn Cổng.</p>
+                        </div>
 
-                        <div className="space-y-8">
-                            {/* View Mode */}
-                            <div>
-                                <h3 className="text-[15px] font-semibold text-gray-700 mb-3 block">Chế độ xem</h3>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
-                                    <button 
-                                        onClick={() => {setUiSettings({...uiSettings, viewMode: 'card'}); setIsSaved(false);}}
-                                        className={`relative border-2 p-4 rounded-xl text-left transition-all ${uiSettings.viewMode === 'card' ? 'border-blue-500 bg-blue-50/20' : 'border-gray-200 hover:border-blue-300'}`}
-                                    >
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <LayoutGrid size={18} className={uiSettings.viewMode === 'card' ? 'text-blue-600' : 'text-gray-500'} />
-                                            <span className={`font-semibold ${uiSettings.viewMode === 'card' ? 'text-blue-800' : 'text-gray-800'}`}>Dạng thẻ</span>
-                                        </div>
-                                        <div className="grid grid-cols-2 gap-2 opacity-60">
-                                            <div className="h-10 bg-gray-200 rounded"></div>
-                                            <div className="h-10 bg-gray-200 rounded"></div>
-                                        </div>
-                                        {uiSettings.viewMode === 'card' && <div className="absolute top-4 right-4 text-blue-500"><CheckCircle size={18}/></div>}
-                                    </button>
-                                    
-                                    <button 
-                                        onClick={() => {setUiSettings({...uiSettings, viewMode: 'list'}); setIsSaved(false);}}
-                                        className={`relative border-2 p-4 rounded-xl text-left transition-all ${uiSettings.viewMode === 'list' ? 'border-blue-500 bg-blue-50/20' : 'border-gray-200 hover:border-blue-300'}`}
-                                    >
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <List size={18} className={uiSettings.viewMode === 'list' ? 'text-blue-600' : 'text-gray-500'} />
-                                            <span className={`font-semibold ${uiSettings.viewMode === 'list' ? 'text-blue-800' : 'text-gray-800'}`}>Dạng danh sách</span>
-                                        </div>
-                                        <div className="space-y-2 opacity-60">
-                                            <div className="h-4 bg-gray-200 rounded w-full"></div>
-                                            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                                        </div>
-                                        {uiSettings.viewMode === 'list' && <div className="absolute top-4 right-4 text-blue-500"><CheckCircle size={18}/></div>}
-                                    </button>
-                                </div>
-                            </div>
-
+                        <div className="space-y-10 max-w-3xl">
                             {/* Theme */}
-                            <div>
-                                <h3 className="text-[15px] font-semibold text-gray-700 mb-3 block">Chủ đề màu sắc</h3>
+                            <div className="bg-gray-50 border border-gray-100 p-6 rounded-2xl">
+                                <h3 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2"><Sun size={20} className="text-orange-500"/> Chủ đề màu sắc</h3>
                                 <div className="flex flex-wrap gap-4">
-                                    <button onClick={() => {setUiSettings({...uiSettings, theme: 'light'}); setIsSaved(false);}} className={`flex items-center gap-2 px-5 py-3 border-2 rounded-xl transition-all ${uiSettings.theme === 'light' ? 'border-blue-500 text-blue-700 bg-blue-50/50' : 'border-gray-200 hover:bg-gray-50'}`}>
-                                        <Sun size={18} /> Sáng
+                                    <button onClick={() => { setUiSettings({ ...uiSettings, theme: 'light' }); setIsSaved(false); }} className={`flex items-center gap-2 px-6 py-3.5 border-2 rounded-xl font-medium transition-all ${uiSettings.theme === 'light' ? 'border-blue-500 text-blue-700 bg-white shadow-md' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600 hover:text-gray-800'}`}>
+                                        <Sun size={20} /> Sáng
                                     </button>
-                                    <button onClick={() => {setUiSettings({...uiSettings, theme: 'dark'}); setIsSaved(false);}} className={`flex items-center gap-2 px-5 py-3 border-2 rounded-xl transition-all ${uiSettings.theme === 'dark' ? 'border-blue-500 text-blue-700 bg-blue-50/50' : 'border-gray-200 hover:bg-gray-50'}`}>
-                                        <Moon size={18} /> Tối
+                                    <button onClick={() => { setUiSettings({ ...uiSettings, theme: 'dark' }); setIsSaved(false); }} className={`flex items-center gap-2 px-6 py-3.5 border-2 rounded-xl font-medium transition-all ${uiSettings.theme === 'dark' ? 'border-blue-500 text-blue-700 bg-white shadow-md' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600 hover:text-gray-800'}`}>
+                                        <Moon size={20} /> Tối
                                     </button>
-                                    <button onClick={() => {setUiSettings({...uiSettings, theme: 'system'}); setIsSaved(false);}} className={`flex items-center gap-2 px-5 py-3 border-2 rounded-xl transition-all ${uiSettings.theme === 'system' ? 'border-blue-500 text-blue-700 bg-blue-50/50' : 'border-gray-200 hover:bg-gray-50'}`}>
-                                        <Monitor size={18} /> Theo hệ thống
+                                    <button onClick={() => { setUiSettings({ ...uiSettings, theme: 'system' }); setIsSaved(false); }} className={`flex items-center gap-2 px-6 py-3.5 border-2 rounded-xl font-medium transition-all ${uiSettings.theme === 'system' ? 'border-blue-500 text-blue-700 bg-white shadow-md' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600 hover:text-gray-800'}`}>
+                                        <Monitor size={20} /> Theo hệ thống
                                     </button>
                                 </div>
                             </div>
 
                             {/* Font Size */}
-                            <div>
-                                <h3 className="text-[15px] font-semibold text-gray-700 mb-3 block">Cỡ chữ hệ thống</h3>
-                                <div className="max-w-md bg-gray-50 p-6 rounded-xl border border-gray-100">
+                            <div className="bg-gray-50 border border-gray-100 p-6 rounded-2xl">
+                                <h3 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2"><Type size={20} className="text-blue-500"/> Cỡ chữ hệ thống</h3>
+                                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
                                     <div className="flex justify-between text-gray-500 font-medium mb-4">
                                         <span className="text-sm">Nhỏ</span>
                                         <span className="text-base">Tiêu chuẩn</span>
                                         <span className="text-lg text-blue-600 font-bold">Lớn</span>
                                     </div>
-                                    <input 
-                                        type="range" 
-                                        min="90" max="115" step="5" 
-                                        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                                    <input
+                                        type="range"
+                                        min="90" max="115" step="5"
+                                        className="w-full h-2.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600 my-2"
                                         defaultValue="100"
-                                        onChange={(e) => {setUiSettings({...uiSettings, fontSize: e.target.value + '%'}); setIsSaved(false);}}
+                                        onChange={(e) => { setUiSettings({ ...uiSettings, fontSize: e.target.value + '%' }); setIsSaved(false); }}
                                     />
-                                    <div className="mt-6 border border-gray-200 rounded-lg p-4 bg-white shadow-sm" style={{fontSize: uiSettings.fontSize}}>
-                                        Đoạn văn này minh họa cho kích thước chữ bạn đã chọn. Nếu bạn thấy chữ quá nhỏ hoặc quá to, bạn có thể tự điều chỉnh thanh trượt. {uiSettings.fontSize}
+                                    <div className="mt-8 border border-blue-100 rounded-lg p-5 bg-blue-50/30 text-gray-800 shadow-sm" style={{ fontSize: uiSettings.fontSize }}>
+                                        <h4 className="font-bold mb-2">Đoạn văn thực tế minh họa</h4>
+                                        <p>Đoạn văn này minh họa cho kích thước chữ bạn đã chọn. Nếu bạn thấy chữ quá nhỏ hoặc quá to so với màn hình máy tính của bạn, hãy tiếp tục kéo thanh trượt ở trên để thay đổi. Kích thước hiện tại: <strong>{uiSettings.fontSize}</strong>.</p>
                                     </div>
                                 </div>
                             </div>
