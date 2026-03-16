@@ -41,6 +41,7 @@ import VanBanDetailPage from './pages/VanBanDetailPage';
 import DuThaoPage from './pages/DuThaoPage';
 import DuThaoDetailPage from './pages/DuThaoDetailPage';
 import BaoCaoTiepThuDetailPage from './pages/BaoCaoTiepThuDetailPage';
+import UserHomePage from './pages/dashboard/UserHomePage';
 import UserSettingsPage from './pages/dashboard/UserSettingsPage';
 import UserHistoryPage from './pages/dashboard/UserHistoryPage';
 import CollaboratorArticlesPage from './pages/collaborator/CollaboratorArticlesPage';
@@ -90,6 +91,7 @@ function App() {
 
                             {/* Dashboard Portal Routes */}
                             <Route path="/ca-nhan" element={<UserDashboardLayout />}>
+                                <Route path="trang-chu" element={<UserHomePage />} />
                                 <Route path="ho-so" element={<ProfilePage />} />
                                 <Route path="cai-dat" element={<UserSettingsPage />} />
                                 <Route path="lich-su" element={<UserHistoryPage />} />

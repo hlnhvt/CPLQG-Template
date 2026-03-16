@@ -24,13 +24,16 @@ const LoginPage = () => {
             setError('Vui lòng nhập đầy đủ số định danh cá nhân và mật khẩu.');
             return;
         }
+        const isHome = from === '/';
+        const redirectPath = isHome ? '/ca-nhan/trang-chu' : from;
+
         setLoading(true);
         // Simulate network delay
         await new Promise(r => setTimeout(r, 500));
         const result = login(cccd, password);
         setLoading(false);
         if (result.success) {
-            navigate(from, { replace: true });
+            navigate(redirectPath, { replace: true });
         } else {
             setError(result.message);
         }

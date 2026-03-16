@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink, useLocation, Link } from 'react-router-dom';
-import { User, Settings, Bookmark, Bell, PenTool, LayoutDashboard, ChevronRight, History, ChevronLeft, Menu, Camera, ShieldCheck, Edit3, Share2, Building2, MapPin, MoreHorizontal } from 'lucide-react';
+import { User, Settings, Bookmark, Bell, PenTool, LayoutDashboard, ChevronRight, History, ChevronLeft, Menu, Camera, ShieldCheck, Edit3, Share2, Building2, MapPin, MoreHorizontal, Home } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const UserDashboardLayout = () => {
@@ -44,7 +44,11 @@ const UserDashboardLayout = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const locationToUse = useLocation();
+    const isHomePage = locationToUse.pathname === '/ca-nhan/trang-chu';
+
     const menuItems = [
+        { path: '/ca-nhan/trang-chu', icon: Home, label: 'Trang chủ của tôi' },
         { path: '/ca-nhan/ho-so', icon: User, label: 'Hồ sơ cá nhân' },
         { path: '/ca-nhan/cai-dat', icon: Settings, label: 'Cấu hình cá nhân hóa' },
         { path: '/ca-nhan/lich-su', icon: History, label: 'Lịch sử hoạt động' },
@@ -76,17 +80,20 @@ const UserDashboardLayout = () => {
             </div>
 
             {/* Breadcrumb Header */}
-            <div className="bg-white border-b border-gray-200 pt-4 pb-4 shadow-sm z-10 relative">
-                <div className="container mx-auto px-4 max-w-[1500px]">
-                    <div className="flex items-center text-[13px] text-gray-500 whitespace-nowrap overflow-x-auto">
-                        <Link to="/" className="hover:text-blue-600 transition-colors">Trang chủ</Link>
-                        <ChevronRight size={14} className="mx-2 shrink-0" />
-                        <span className="text-gray-800 font-medium">Khu vực cá nhân</span>
+            {!isHomePage && (
+                <div className="bg-white border-b border-gray-200 pt-4 pb-4 shadow-sm z-10 relative">
+                    <div className="container mx-auto px-4 max-w-[1500px]">
+                        <div className="flex items-center text-[13px] text-gray-500 whitespace-nowrap overflow-x-auto">
+                            <Link to="/" className="hover:text-blue-600 transition-colors">Trang chủ</Link>
+                            <ChevronRight size={14} className="mx-2 shrink-0" />
+                            <span className="text-gray-800 font-medium">Khu vực cá nhân</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
 
             {/* LinkedIn-style Profile Header Banner (Compact) */}
+            {!isHomePage && (
             <div className="container mx-auto px-4 max-w-[1500px] mt-4 relative z-0">
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden relative">
                     {/* Cover Photo */}
@@ -159,6 +166,7 @@ const UserDashboardLayout = () => {
                     </div>
                 </div>
             </div>
+            )}
 
             <div className="container mx-auto px-4 max-w-[1500px] mt-8 flex flex-col md:flex-row gap-8">
                 {/* Sidebar Navigation */}

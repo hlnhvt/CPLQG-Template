@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, Save, RefreshCw, LayoutGrid, List, Sun, Moon, Monitor, ArrowUp, ArrowDown, CheckCircle, ChevronDown, ChevronUp, Settings2, Type } from 'lucide-react';
+import { Settings, Save, RefreshCw, LayoutGrid, List, Sun, Moon, Monitor, ArrowUp, ArrowDown, CheckCircle, ChevronDown, ChevronUp, Settings2, Type, BarChart2 } from 'lucide-react';
 
 const LEGAL_FIELDS = [
     { id: 'dat-dai', title: 'Đất đai & Nhà ở', thumbnail: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=300' },
@@ -22,8 +22,9 @@ const FORUMS = [
 ];
 
 const STATISTICS = [
-    { id: 'stat-an-le', title: 'Thống kê Án lệ', thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=300' },
-    { id: 'stat-van-ban', title: 'Biểu đồ Ban hành Văn bản', thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=300' },
+    { id: 'stat-comments-count', title: 'Số lượt bình luận', thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=300' },
+    { id: 'stat-comments-bar', title: 'Lượt bình luận qua các tháng', thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=300' },
+    { id: 'stat-topics-pie', title: 'Tỷ lệ chuyên mục quan tâm', thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=300' },
 ];
 
 const ALL_ITEMS = [...LEGAL_FIELDS, ...NEWS_CATEGORIES, ...FORUMS, ...STATISTICS];
@@ -32,14 +33,20 @@ const UserSettingsPage = () => {
     const [activeTab, setActiveTab] = useState('topics');
 
     // Currently selected IDs
-    const [selectedTopics, setSelectedTopics] = useState(['dat-dai', 'news-tin-nong', 'forum-luat-su']);
+    const [selectedTopics, setSelectedTopics] = useState(() => {
+        const saved = localStorage.getItem('userSelectedTopics');
+        return saved ? JSON.parse(saved) : ['dat-dai', 'news-tin-nong', 'forum-luat-su'];
+    });
 
     // Ordered list of block configs
-    const [orderedBlocks, setOrderedBlocks] = useState([
-        { id: 'dat-dai', viewMode: 'card', width: '100', recordCount: 5, sortOrder: 'newest' },
-        { id: 'news-tin-nong', viewMode: 'list', width: '50', recordCount: 10, sortOrder: 'most_viewed' },
-        { id: 'forum-luat-su', viewMode: 'card', width: '50', recordCount: 5, sortOrder: 'most_commented' },
-    ]);
+    const [orderedBlocks, setOrderedBlocks] = useState(() => {
+        const saved = localStorage.getItem('userOrderedBlocks');
+        return saved ? JSON.parse(saved) : [
+            { id: 'dat-dai', viewMode: 'card', width: '100', recordCount: 5, sortOrder: 'newest' },
+            { id: 'news-tin-nong', viewMode: 'list', width: '50', recordCount: 10, sortOrder: 'most_viewed' },
+            { id: 'forum-luat-su', viewMode: 'card', width: '50', recordCount: 5, sortOrder: 'most_commented' },
+        ];
+    });
 
     // UI state
     const [uiSettings, setUiSettings] = useState({
@@ -83,6 +90,8 @@ const UserSettingsPage = () => {
 
     const handleSave = () => {
         setIsSaved(true);
+        localStorage.setItem('userSelectedTopics', JSON.stringify(selectedTopics));
+        localStorage.setItem('userOrderedBlocks', JSON.stringify(orderedBlocks));
         setTimeout(() => setIsSaved(false), 3000);
     };
 
@@ -122,6 +131,14 @@ const UserSettingsPage = () => {
             </div>
         </div>
     );
+
+    const getCategoryInfo = (id) => {
+        if (LEGAL_FIELDS.some(item => item.id === id)) return { name: 'Lĩnh vực Pháp lý', color: 'bg-indigo-100 text-indigo-700 border-indigo-200' };
+        if (NEWS_CATEGORIES.some(item => item.id === id)) return { name: 'Tin tức', color: 'bg-emerald-100 text-emerald-700 border-emerald-200' };
+        if (FORUMS.some(item => item.id === id)) return { name: 'Cộng đồng', color: 'bg-amber-100 text-amber-700 border-amber-200' };
+        if (STATISTICS.some(item => item.id === id)) return { name: 'Thống kê', color: 'bg-rose-100 text-rose-700 border-rose-200' };
+        return { name: 'Khác', color: 'bg-gray-100 text-gray-700 border-gray-200' };
+    };
 
     return (
         <div className="animate-fadeIn pb-12">
@@ -204,6 +221,7 @@ const UserSettingsPage = () => {
                                     const itemDef = ALL_ITEMS.find(i => i.id === block.id);
                                     if (!itemDef) return null;
                                     const isExpanded = expandedBlock === block.id;
+                                    const isStatistic = block.id.startsWith('stat-');
 
                                     return (
                                         <div key={block.id} className={`bg-white border rounded-xl shadow-sm overflow-hidden transition-all duration-300 ${isExpanded ? 'border-blue-300 ring-2 ring-blue-50' : 'border-gray-200 hover:border-blue-200'}`}>
@@ -215,29 +233,35 @@ const UserSettingsPage = () => {
                                                         }`}>
                                                         #{index + 1}
                                                     </div>
-                                                    <div className="w-16 h-12 shrink-0 rounded-md overflow-hidden border border-gray-200 shadow-sm hidden sm:block relative">
-                                                        <img src={itemDef.thumbnail} className="w-full h-full object-cover" alt="" />
-                                                    </div>
-                                                    <div>
-                                                        <span className="font-bold text-gray-800 text-base">{itemDef.title}</span>
-                                                        <div className="text-xs text-gray-500 mt-1 flex flex-wrap items-center gap-3">
+                                                    <div className="flex flex-col flex-1">
+                                                        <div className="flex items-center gap-3 mb-1.5">
+                                                            <span className="font-bold text-gray-800 text-base">{itemDef.title}</span>
+                                                            <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded border ${getCategoryInfo(block.id).color}`}>
+                                                                {getCategoryInfo(block.id).name}
+                                                            </span>
+                                                        </div>
+                                                        <div className="text-xs text-gray-500 flex flex-wrap items-center gap-3">
                                                             <span className="flex items-center gap-1 bg-gray-100 px-2 py-0.5 rounded text-gray-600">
-                                                                {block.viewMode === 'card' ? <LayoutGrid size={12}/> : <List size={12}/>}
-                                                                {block.viewMode === 'card' ? 'Dạng thẻ' : 'Dạng danh sách'}
+                                                                {isStatistic ? <BarChart2 size={12}/> : block.viewMode === 'card' ? <LayoutGrid size={12}/> : <List size={12}/>}
+                                                                {isStatistic ? 'Biểu đồ' : block.viewMode === 'card' ? 'Dạng thẻ' : 'Dạng danh sách'}
                                                             </span>
                                                             <span className="hidden sm:inline">•</span>
-                                                            <span>{block.width === '100' ? '100% (Cả hàng)' : '50% (Nửa hàng)'}</span>
-                                                            <span className="hidden sm:inline">•</span>
-                                                            <span>{block.recordCount} bài</span>
-                                                            <span className="hidden sm:inline">•</span>
-                                                            <span className="italic text-blue-600 font-medium">{
-                                                                block.sortOrder === 'newest' ? 'Mới nhất' : 
-                                                                block.sortOrder === 'most_viewed' ? 'Được xem nhiều nhất' :
-                                                                block.sortOrder === 'most_commented' ? 'Bình luận cao nhất' :
-                                                                block.sortOrder === 'most_shared' ? 'Chia sẻ cao nhất' :
-                                                                block.sortOrder === 'most_feedback' ? 'Góp ý nhiều nhất' :
-                                                                'Yêu thích nhất'
-                                                            }</span>
+                                                            <span>Rộng {block.width}%</span>
+                                                            {!isStatistic && (
+                                                                <>
+                                                                    <span className="hidden sm:inline">•</span>
+                                                                    <span>{block.recordCount} bài</span>
+                                                                    <span className="hidden sm:inline">•</span>
+                                                                    <span className="italic text-blue-600 font-medium">{
+                                                                        block.sortOrder === 'newest' ? 'Mới nhất' : 
+                                                                        block.sortOrder === 'most_viewed' ? 'Được xem nhiều nhất' :
+                                                                        block.sortOrder === 'most_commented' ? 'Bình luận cao nhất' :
+                                                                        block.sortOrder === 'most_shared' ? 'Chia sẻ cao nhất' :
+                                                                        block.sortOrder === 'most_feedback' ? 'Góp ý nhiều nhất' : 
+                                                                        'Yêu thích nhất'
+                                                                    }</span>
+                                                                </>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -274,6 +298,7 @@ const UserSettingsPage = () => {
                                             {/* Config Panel (Accordion Body) */}
                                             {isExpanded && (
                                                 <div className="p-5 sm:p-6 bg-gray-50/80 border-t border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 animate-fadeIn">
+                                                    {!isStatistic && (
                                                     <div>
                                                         <label className="block text-sm font-bold text-gray-800 mb-2">Chế độ xem mặc định</label>
                                                         <div className="grid grid-cols-2 gap-3">
@@ -291,54 +316,75 @@ const UserSettingsPage = () => {
                                                             </button>
                                                         </div>
                                                     </div>
+                                                    )}
 
-                                                    <div>
+                                                    <div className={isStatistic ? "col-span-1 md:col-span-2" : ""}>
                                                         <label className="block text-sm font-bold text-gray-800 mb-2">Khối hiển thị (Chiều ngang trang)</label>
-                                                        <div className="grid grid-cols-2 gap-3">
+                                                        <div className={`grid gap-3 ${isStatistic ? 'grid-cols-2 lg:grid-cols-4' : 'grid-cols-2'}`}>
                                                             <button
                                                                 onClick={() => updateBlockConfig(block.id, { width: '100' })}
                                                                 className={`p-3 border-2 rounded-xl transition-all text-center font-medium ${block.width === '100' ? 'border-blue-500 bg-blue-50/50 text-blue-700 shadow-sm' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600'}`}
                                                             >
-                                                                100% (Cả màn hình)
+                                                                100% {isStatistic ? '' : '(Cả màn hình)'}
                                                             </button>
                                                             <button
                                                                 onClick={() => updateBlockConfig(block.id, { width: '50' })}
                                                                 className={`p-3 border-2 rounded-xl transition-all text-center font-medium ${block.width === '50' ? 'border-blue-500 bg-blue-50/50 text-blue-700 shadow-sm' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600'}`}
                                                             >
-                                                                50% (Nửa màn hình)
+                                                                50% {isStatistic ? '' : '(Nửa màn hình)'}
                                                             </button>
+                                                            {isStatistic && (
+                                                                <button
+                                                                    onClick={() => updateBlockConfig(block.id, { width: '33' })}
+                                                                    className={`p-3 border-2 rounded-xl transition-all text-center font-medium ${block.width === '33' ? 'border-blue-500 bg-blue-50/50 text-blue-700 shadow-sm' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600'}`}
+                                                                >
+                                                                    33%
+                                                                </button>
+                                                            )}
+                                                            {isStatistic && (
+                                                                <button
+                                                                    onClick={() => updateBlockConfig(block.id, { width: '25' })}
+                                                                    className={`p-3 border-2 rounded-xl transition-all text-center font-medium ${block.width === '25' ? 'border-blue-500 bg-blue-50/50 text-blue-700 shadow-sm' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600'}`}
+                                                                >
+                                                                    25%
+                                                                </button>
+                                                            )}
                                                         </div>
                                                     </div>
 
-                                                    <div>
-                                                        <label className="block text-sm font-bold text-gray-800 mb-2">Số lượng bản ghi</label>
-                                                        <select 
-                                                            value={block.recordCount}
-                                                            onChange={(e) => updateBlockConfig(block.id, { recordCount: Number(e.target.value) })}
-                                                            className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 outline-none bg-white font-medium text-gray-700 transition-colors"
-                                                        >
-                                                            <option value={5}>5 bản ghi (Mặc định)</option>
-                                                            <option value={10}>10 bản ghi</option>
-                                                            <option value={15}>15 bản ghi</option>
-                                                            <option value={20}>20 bản ghi</option>
-                                                        </select>
-                                                    </div>
+                                                    {!isStatistic && (
+                                                    <>
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-gray-800 mb-2">Số lượng bản ghi</label>
+                                                            <select 
+                                                                value={block.recordCount}
+                                                                onChange={(e) => updateBlockConfig(block.id, { recordCount: Number(e.target.value) })}
+                                                                className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 outline-none bg-white font-medium text-gray-700 transition-colors"
+                                                            >
+                                                                <option value={5}>5 bản ghi (Mặc định)</option>
+                                                                <option value={10}>10 bản ghi</option>
+                                                                <option value={15}>15 bản ghi</option>
+                                                                <option value={20}>20 bản ghi</option>
+                                                            </select>
+                                                        </div>
 
-                                                    <div>
-                                                        <label className="block text-sm font-bold text-gray-800 mb-2">Ưu tiên các bản ghi</label>
-                                                        <select 
-                                                            value={block.sortOrder}
-                                                            onChange={(e) => updateBlockConfig(block.id, { sortOrder: e.target.value })}
-                                                            className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 outline-none bg-white font-medium text-gray-700 transition-colors"
-                                                        >
-                                                            <option value="newest">Mới nhất (Mặc định)</option>
-                                                            <option value="most_viewed">Được xem nhiều nhất</option>
-                                                            <option value="most_commented">Được bình luận nhiều nhất</option>
-                                                            <option value="most_shared">Được chia sẻ nhiều nhất</option>
-                                                            <option value="most_feedback">Được góp ý nhiều nhất</option>
-                                                            <option value="most_liked">Được yêu thích nhất</option>
-                                                        </select>
-                                                    </div>
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-gray-800 mb-2">Ưu tiên các bản ghi</label>
+                                                            <select 
+                                                                value={block.sortOrder}
+                                                                onChange={(e) => updateBlockConfig(block.id, { sortOrder: e.target.value })}
+                                                                className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 outline-none bg-white font-medium text-gray-700 transition-colors"
+                                                            >
+                                                                <option value="newest">Mới nhất (Mặc định)</option>
+                                                                <option value="most_viewed">Được xem nhiều nhất</option>
+                                                                <option value="most_commented">Được bình luận nhiều nhất</option>
+                                                                <option value="most_shared">Được chia sẻ nhiều nhất</option>
+                                                                <option value="most_feedback">Được góp ý nhiều nhất</option>
+                                                                <option value="most_liked">Được yêu thích nhất</option>
+                                                            </select>
+                                                        </div>
+                                                    </>
+                                                    )}
                                                 </div>
                                             )}
                                         </div>
@@ -373,26 +419,36 @@ const UserSettingsPage = () => {
                                             const itemDef = ALL_ITEMS.find(i => i.id === block.id);
                                             if (!itemDef) return null;
                                             
+                                            const isStatistic = block.id.startsWith('stat-');
                                             const isFifty = block.width === '50';
-                                            const wClass = isFifty ? 'w-full lg:w-1/2' : 'w-full';
+                                            
+                                            let wClass = 'w-full';
+                                            if (block.width === '50') wClass = 'w-full lg:w-1/2';
+                                            if (block.width === '33') wClass = 'w-full lg:w-1/3 md:w-1/2';
+                                            if (block.width === '25') wClass = 'w-full lg:w-1/4 md:w-1/2';
                                             
                                             return (
                                                 <div key={`preview-render-${block.id}`} className={`${wClass} px-4 mb-8`}>
                                                     <div className="bg-white p-5 sm:p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col relative overflow-hidden group">
-                                                        <div className="absolute top-0 right-0 py-1.5 px-3 bg-blue-50 text-blue-700 text-[10px] font-bold uppercase rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5">
-                                                            {block.viewMode === 'card' ? <LayoutGrid size={10}/> : <List size={10}/>}
-                                                            <span>• {isFifty ? '50%' : '100%'} ngang • {block.sortOrder} • {block.recordCount} records</span>
+                                                        <div className="absolute top-0 right-0 py-1.5 px-3 bg-blue-50 text-blue-700 text-[10px] font-bold uppercase rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 z-10">
+                                                            {isStatistic ? <BarChart2 size={10}/> : block.viewMode === 'card' ? <LayoutGrid size={10}/> : <List size={10}/>}
+                                                            <span>• {block.width}% ngang {!isStatistic && `• ${block.sortOrder} • ${block.recordCount} records`}</span>
                                                         </div>
                                                         <div className="flex justify-between items-center mb-5 pb-3 border-b-2 border-gray-50">
                                                             <h4 className="font-bold text-lg text-gray-800 flex items-center gap-3">
                                                                 <span className="w-1.5 h-6 bg-blue-600 rounded-full block"></span>
-                                                                {itemDef.title}
+                                                                <span className="truncate">{itemDef.title}</span>
                                                             </h4>
-                                                            <span className="text-sm font-semibold text-blue-600">Xem tất cả →</span>
+                                                            <span className="text-sm font-semibold text-blue-600 shrink-0">Xem tất cả →</span>
                                                         </div>
                                                         
-                                                        <div className="flex-1 mt-2">
-                                                            {block.viewMode === 'card' ? (
+                                                        <div className={`flex-1 mt-2 flex flex-col ${isStatistic ? 'h-full justify-center min-h-[160px]' : ''}`}>
+                                                            {isStatistic ? (
+                                                                 <div className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50">
+                                                                     <BarChart2 className="text-gray-400 mb-2" size={32}/>
+                                                                     <span className="text-sm font-semibold text-gray-500">Mô phỏng biểu đồ</span>
+                                                                 </div>
+                                                            ) : block.viewMode === 'card' ? (
                                                                 <div className={`grid gap-4 ${isFifty ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'}`}>
                                                                     {[...Array(isFifty ? 2 : 4)].map((_, i) => (
                                                                         <div key={i} className="flex flex-col bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
