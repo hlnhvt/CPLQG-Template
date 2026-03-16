@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import {
     Home, ChevronRight, Search, Filter, Plus,
     MessageSquare, Eye, ChevronDown, CheckCircle,
-    Clock, Tag, ArrowUpCircle
+    Clock, Tag, ArrowUpCircle, Users, FileText, ClipboardList, Award
 } from 'lucide-react';
 import { MOCK_FORUMS, MOCK_TOPICS } from '../../data/mockForumData';
 import { useAuth } from '../../contexts/AuthContext';
@@ -20,7 +20,7 @@ const ForumTopicListPage = () => {
     const [isFollowing, setIsFollowing] = useState(false);
     const [showUnfollowConfirm, setShowUnfollowConfirm] = useState(false);
     const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
-    
+
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
@@ -49,7 +49,7 @@ const ForumTopicListPage = () => {
 
     const filteredAndSortedTopics = useMemo(() => {
         let result = [...moreMockTopics];
-        
+
         // Filter
         if (statusFilter !== 'all') {
             if (statusFilter === 'no-comment') result = result.filter(t => t.comments === 0);
@@ -57,9 +57,9 @@ const ForumTopicListPage = () => {
         }
 
         // Sort
-        if (sortOrder === 'newest') result.sort((a,b) => (b.timestamp || 0) - (a.timestamp || 0));
-        else if (sortOrder === 'votes') result.sort((a,b) => b.votes - a.votes);
-        else if (sortOrder === 'comments') result.sort((a,b) => b.comments - a.comments);
+        if (sortOrder === 'newest') result.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+        else if (sortOrder === 'votes') result.sort((a, b) => b.votes - a.votes);
+        else if (sortOrder === 'comments') result.sort((a, b) => b.comments - a.comments);
 
         return result;
     }, [moreMockTopics, statusFilter, sortOrder]);
@@ -84,12 +84,12 @@ const ForumTopicListPage = () => {
             {/* Header / Hero for specific forum */}
             <div className="bg-[#1e293b] pt-8 pb-12 relative overflow-hidden border-b border-gray-700">
                 {/* Decorative background pattern */}
-                <div 
-                    className="absolute inset-0 opacity-40 mix-blend-overlay" 
-                    style={{ 
-                        backgroundImage: "url('/trong_dong_bg.png')", 
+                <div
+                    className="absolute inset-0 opacity-40 mix-blend-overlay"
+                    style={{
+                        backgroundImage: "url('/trong_dong_bg.png')",
                         backgroundSize: 'cover',
-                        backgroundPosition: 'center 80%' 
+                        backgroundPosition: 'center 80%'
                     }}
                 ></div>
 
@@ -110,14 +110,14 @@ const ForumTopicListPage = () => {
 
                             <div className="flex flex-wrap items-center gap-3 relative">
                                 {!user ? (
-                                    <button 
+                                    <button
                                         onClick={() => navigate('/dang-nhap')}
                                         className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-sm transition-colors text-sm"
                                     >
                                         Đăng nhập để theo dõi
                                     </button>
                                 ) : !isFollowing ? (
-                                    <button 
+                                    <button
                                         onClick={handleFollowClick}
                                         className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-sm transition-colors flex items-center gap-2 text-sm"
                                     >
@@ -126,19 +126,19 @@ const ForumTopicListPage = () => {
                                 ) : (
                                     <div className="relative">
                                         <div className="flex items-center">
-                                            <button 
+                                            <button
                                                 className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 px-4 rounded-l-lg shadow-sm transition-colors flex items-center gap-2 text-sm border-r border-emerald-600"
                                             >
                                                 <CheckCircle size={18} /> Đang theo dõi
                                             </button>
-                                            <button 
+                                            <button
                                                 onClick={() => setShowUnfollowConfirm(!showUnfollowConfirm)}
                                                 className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 px-3 rounded-r-lg shadow-sm transition-colors text-sm"
                                             >
                                                 <ChevronDown size={18} />
                                             </button>
                                         </div>
-                                        
+
                                         {showUnfollowConfirm && (
                                             <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-xl shadow-xl border border-gray-100 p-4 z-50">
                                                 <p className="text-sm text-gray-700 font-medium mb-4">Bạn có chắc chắn muốn hủy theo dõi diễn đàn này không?</p>
@@ -157,7 +157,7 @@ const ForumTopicListPage = () => {
             </div>
 
             {/* Main Content Area */}
-            <div className="container mx-auto px-4 lg:px-8 mt-8 max-w-7xl relative z-20">
+            <div className="container mx-auto px-4 lg:px-8 mt-8 max-w-8xl relative z-20">
                 <div className="flex flex-col xl:flex-row gap-8">
                     {/* Left Sidebar (Filters) */}
                     <div className="w-full xl:w-1/4 shrink-0 space-y-6">
@@ -173,8 +173,8 @@ const ForumTopicListPage = () => {
                                 <div className="space-y-4">
                                     {[
                                         { id: 'all', label: 'Tất cả chủ đề', count: moreMockTopics.length },
-                                        { id: 'no-comment', label: 'Chưa có bình luận', count: moreMockTopics.filter(t=>t.comments===0).length },
-                                        { id: 'has-comment', label: 'Có bình luận', count: moreMockTopics.filter(t=>t.comments>0).length },
+                                        { id: 'no-comment', label: 'Chưa có bình luận', count: moreMockTopics.filter(t => t.comments === 0).length },
+                                        { id: 'has-comment', label: 'Có bình luận', count: moreMockTopics.filter(t => t.comments > 0).length },
                                         { id: 'no-contrib', label: 'Chưa có góp ý', count: '14' },
                                         { id: 'helpful-comment', label: 'Có bình luận hữu ích', count: '42' },
                                         { id: 'helpful-contrib', label: 'Có góp ý hữu ích', count: '72' },
@@ -194,6 +194,83 @@ const ForumTopicListPage = () => {
                                 </div>
                             </div>
                         </div>
+
+                        {/* Thống kê cộng đồng Box */}
+                        <div className="bg-[#0f62fe] rounded-xl shadow-md p-5 text-white">
+                            <h3 className="font-bold text-[17px] mb-5">Thống kê cộng đồng</h3>
+                            <div className="space-y-4">
+                                <div className="flex justify-between items-center text-[15px] font-medium border-b border-white/10 pb-3">
+                                    <div className="flex items-center gap-3">
+                                        <Users size={18} className="opacity-90" />
+                                        <span>Thành viên</span>
+                                    </div>
+                                    <span>24,567</span>
+                                </div>
+                                <div className="flex justify-between items-center text-[15px] font-medium border-b border-white/10 pb-3">
+                                    <div className="flex items-center gap-3">
+                                        <FileText size={18} className="opacity-90" />
+                                        <span>Chủ đề</span>
+                                    </div>
+                                    <span>12,345</span>
+                                </div>
+                                <div className="flex justify-between items-center text-[15px] font-medium border-b border-white/10 pb-3">
+                                    <div className="flex items-center gap-3">
+                                        <MessageSquare size={18} className="opacity-90" />
+                                        <span>Bình luận</span>
+                                    </div>
+                                    <span>45,678</span>
+                                </div>
+                                <div className="flex justify-between items-center text-[15px] font-medium">
+                                    <div className="flex items-center gap-3">
+                                        <ClipboardList size={18} className="opacity-90" />
+                                        <span>Góp ý, phản biện</span>
+                                    </div>
+                                    <span>9,676</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Top người dùng đóng góp */}
+                        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+                            <div className="flex items-center justify-between mb-5">
+                                <h3 className="font-bold text-gray-900 text-lg flex items-center gap-2">
+                                    <Award className="text-amber-500" size={20} />
+                                    Top đóng góp
+                                </h3>
+                            </div>
+                            <div className="space-y-5">
+                                {[
+                                    { name: 'Nguyễn Văn An', points: 1250, role: 'Cơ quan Đăng ký', avatarBg: 'bg-emerald-100 text-emerald-700' },
+                                    { name: 'Trần Thị Bích', points: 980, role: 'Cơ quan Đăng ký', avatarBg: 'bg-rose-100 text-rose-700' },
+                                    { name: 'Lê Hoàng Phong', points: 845, role: 'Thành viên', avatarBg: 'bg-indigo-100 text-indigo-700' },
+                                    { name: 'Phạm Thanh Sơn', points: 720, role: 'Thành viên', avatarBg: 'bg-amber-100 text-amber-700' },
+                                    { name: 'Vũ Minh Tuấn', points: 610, role: 'Thành viên', avatarBg: 'bg-cyan-100 text-cyan-700' }
+                                ].map((u, idx) => (
+                                    <div key={idx} className="flex items-center gap-3 group">
+                                        <div className="relative shrink-0">
+                                            <div className={`w-[42px] h-[42px] rounded-full flex items-center justify-center font-bold border border-white shadow-sm ${u.avatarBg}`}>
+                                                {u.name.split(' ').pop().charAt(0)}
+                                            </div>
+                                            {idx < 3 && (
+                                                <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center text-[10px] text-white font-bold shadow-sm">
+                                                    {idx + 1}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="flex-grow min-w-0">
+                                            <p className="text-[14px] font-bold text-gray-900 truncate group-hover:text-blue-600 cursor-pointer transition-colors">{u.name}</p>
+                                            <p className="text-[12px] text-gray-500 truncate mt-0.5">{u.role}</p>
+                                        </div>
+                                        <div className="text-right shrink-0">
+                                            <span className="text-[12px] font-bold text-gray-700 bg-gray-50 border border-gray-200 px-2 py-1 rounded">
+                                                {u.points}
+                                            </span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
                     </div>
 
                     {/* Right Content */}
@@ -206,7 +283,7 @@ const ForumTopicListPage = () => {
                             <div className="flex items-center gap-2 shrink-0">
                                 <span className="text-sm text-gray-500">Sắp xếp theo:</span>
                                 <div className="relative z-30">
-                                    <button 
+                                    <button
                                         onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
                                         className="flex items-center gap-2 bg-white border border-gray-200 px-3 py-1.5 rounded-lg text-sm font-medium text-gray-700 hover:border-gray-300 transition-colors"
                                     >
@@ -313,18 +390,18 @@ const ForumTopicListPage = () => {
                             <div className="flex flex-col sm:flex-row items-center justify-between mt-8 pt-6 border-t border-gray-200 gap-4">
                                 <span className="text-sm text-gray-500 font-medium">Trang {currentPage} / {totalPages}</span>
                                 <div className="flex items-center gap-2 flex-wrap">
-                                    <button 
+                                    <button
                                         onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                                         disabled={currentPage === 1}
                                         className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                                     >Trước</button>
-                                    
+
                                     {Array.from({ length: totalPages }).map((_, idx) => {
                                         const page = idx + 1;
                                         // Simple pagination displaying up to 5 surrounding pages
                                         if (page === 1 || page === totalPages || (page >= currentPage - 1 && page <= currentPage + 1)) {
                                             return (
-                                                <button 
+                                                <button
                                                     key={page}
                                                     onClick={() => setCurrentPage(page)}
                                                     className={`w-8 h-8 rounded-lg font-bold text-sm flex items-center justify-center transition-colors ${currentPage === page ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'}`}
@@ -338,7 +415,7 @@ const ForumTopicListPage = () => {
                                         return null;
                                     })}
 
-                                    <button 
+                                    <button
                                         onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                                         disabled={currentPage === totalPages}
                                         className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"

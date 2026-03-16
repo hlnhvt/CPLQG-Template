@@ -55,6 +55,7 @@ import ForumTopicListPage from './pages/forum/ForumTopicListPage';
 import TopicDetailPage from './pages/forum/TopicDetailPage';
 import CreateTopicPage from './pages/forum/CreateTopicPage';
 import LivestreamEventPage from './pages/forum/LivestreamEventPage';
+import ForumTopicManagementPage from './pages/forum/ForumTopicManagementPage';
 
 function App() {
     return (
@@ -118,6 +119,7 @@ function App() {
                                 <Route path="cai-dat-thong-bao" element={<NotificationSettingsPage />} />
                                 <Route path="dang-ky-cong-tac-vien" element={<CollaboratorRegistrationPage />} />
                                 <Route path="tin-bai" element={<CollaboratorArticlesPage />} />
+                                <Route path="chu-de-dien-dan" element={<ForumTopicManagementPage />} />
                             </Route>
 
                             {/* Full-screen Editor Routes */}
