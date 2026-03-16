@@ -9,9 +9,9 @@ const ForumListPage = () => {
     const [forums, setForums] = useState(MOCK_FORUMS);
 
     const tabs = [
-        { id: 'all', label: 'Tất cả diễn đàn', icon: <Hash size={18} /> },
+        { id: 'all', label: 'Tất cả diễn đàn', icon: '' },
         { id: 'latest', label: 'Mới cập nhật', icon: <Clock size={18} /> },
-        { id: 'hot', label: 'Sôi nổi nhất', icon: <TrendingUp size={18} /> },
+        { id: 'hot', label: 'Xu hướng', icon: <TrendingUp size={18} /> },
         { id: 'following', label: 'Đang theo dõi', icon: <Star size={18} /> },
     ];
 
@@ -36,10 +36,19 @@ const ForumListPage = () => {
         <div className="bg-[#f4f7fb] min-h-screen pb-12">
             {/* Header Banner */}
             <div className="bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white pt-12 pb-20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-10"></div>
+                {/* Decorative background pattern */}
+                <div
+                    className="absolute inset-0 opacity-40 mix-blend-overlay"
+                    style={{
+                        backgroundImage: "url('/trong_dong_bg.png')",
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center 80%'
+                    }}
+                ></div>
                 <div className="container mx-auto px-4 relative z-10 text-center">
+                    <img src="/logo.png" alt="Quốc huy" className="w-20 h-20 md:w-24 md:h-24 object-contain mb-4 drop-shadow-lg mx-auto" />
                     <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-md">Diễn đàn pháp luật</h1>
-                    <p className="text-lg text-blue-100 max-w-2xl mx-auto mb-8 font-medium">Nơi chia sẻ, thảo luận và giải đáp các vấn đề pháp lý cùng đội ngũ chuyên gia, luật sư và cộng đồng.</p>
+                    <p className="text-lg text-blue-100 max-w-6xl mx-auto mb-5 font-medium">Nơi chia sẻ, thảo luận và giải đáp các vấn đề pháp lý cùng đội ngũ chuyên gia, luật sư và cộng đồng.</p>
 
                     {/* Search Bar */}
                     <div className="max-w-3xl mx-auto relative flex shadow-2xl rounded-full bg-white/10 backdrop-blur-md p-1 border border-white/20">
@@ -86,10 +95,10 @@ const ForumListPage = () => {
                                     <div className="bg-white/20 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
                                         <MessageSquare size={24} className="text-white" />
                                     </div>
-                                    <h4 className="font-bold text-lg mb-2">Bạn có câu hỏi?</h4>
-                                    <p className="text-sm text-blue-100 mb-4">Hãy tạo một chủ đề mới để cộng đồng giải đáp giúp bạn.</p>
+                                    <h4 className="font-bold text-lg mb-2">Bạn có thắc mắc?</h4>
+                                    <p className="text-sm text-blue-100 mb-4">Hãy tạo một chủ đề mới để cộng đồng cùng tham gia bình luân và góp ý nhé.</p>
                                     <Link to="/dien-dan/tao-moi" className="block w-full py-2 bg-white text-blue-600 font-bold rounded-lg hover:bg-blue-50 transition-colors">
-                                        Đăng bài ngay
+                                        Tạo chủ đề
                                     </Link>
                                 </div>
                             </div>

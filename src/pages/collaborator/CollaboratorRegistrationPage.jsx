@@ -512,7 +512,7 @@ const CollaboratorRegistrationPage = () => {
             <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6 shadow-xl shadow-green-100">
                 <CheckCircle2 className="w-12 h-12 text-green-500" />
             </div>
-            <h2 className="text-3xl font-extrabold text-gray-900 mb-3">Gửi hồ sơ thành công!</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">Gửi hồ sơ thành công!</h2>
             <p className="text-gray-600 max-w-lg mx-auto mb-8 text-[15px] leading-relaxed">
                 Cảm ơn bạn đã đăng ký trở thành cộng tác viên của Cổng Pháp luật Quốc gia.
                 Hồ sơ mã <strong className="text-gray-900">CTV-{new Date().getFullYear()}-00{Math.floor(Math.random() * 10000)}</strong> đã được ghi nhận.

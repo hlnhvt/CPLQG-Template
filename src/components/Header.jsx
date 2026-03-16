@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Search, ChevronDown, User, LogOut, Bookmark, Bell, LayoutDashboard, Settings, FileText, HelpCircle, Edit } from 'lucide-react';
+import { Search, ChevronDown, User, LogOut, Bookmark, Bell, LayoutDashboard, Settings, FileText, HelpCircle, Edit, Menu, X } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import NotificationDropdown from './NotificationDropdown';
@@ -34,6 +34,9 @@ const Header = () => {
     const navigate = useNavigate();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [notifOpen, setNotifOpen] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [mobileNavExpanded, setMobileNavExpanded] = useState({}); // Track expanded groups in mobile menu
+    
     const dropdownRef = useRef(null);
     const notificationRef = useRef(null);
 
@@ -57,8 +60,12 @@ const Header = () => {
         navigate('/');
     };
 
+    const toggleMobileNavGroup = (key) => {
+        setMobileNavExpanded(prev => ({...prev, [key]: !prev[key]}));
+    };
+
     return (
-        <header className="flex flex-col font-sans">
+        <header className="flex flex-col font-sans relative">
             {/* Top Bar - Light Blue */}
             <div className="bg-[#3b82f6] text-white py-2 relative z-[100]">
                 {/* Decorative background swirls (simplified) */}
@@ -80,18 +87,18 @@ const Header = () => {
 
                     {/* Right Utilities */}
                     <div className="flex justify-end items-center gap-4 text-xs xl:text-sm font-medium">
-                        <button className="hover:text-yellow-300 transition-colors">
+                        <button className="hover:text-yellow-300 transition-colors hidden sm:block">
                             <Search size={16} />
                         </button>
 
                         <LiveClock />
 
-                        <div className="flex items-center gap-1.5 whitespace-nowrap">
+                        <div className="hidden xl:flex items-center gap-1.5 whitespace-nowrap">
                             <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
                             <span className="font-semibold hidden lg:inline-block">Mới nhất</span>
                         </div>
 
-                        <div className="flex items-center gap-1 cursor-pointer hover:text-yellow-300 transition-colors whitespace-nowrap">
+                        <div className="hidden xl:flex items-center gap-1 cursor-pointer hover:text-yellow-300 transition-colors whitespace-nowrap">
                             <span>International</span>
                             <ChevronDown size={14} />
                         </div>
@@ -182,12 +189,20 @@ const Header = () => {
                                 </Link>
                             )}
                         </div>
+
+                        {/* Hamburger menu for mobile */}
+                        <button 
+                            className="xl:hidden p-1.5 text-white hover:bg-white/10 rounded-lg transition-colors ml-2"
+                            onClick={() => setMobileMenuOpen(true)}
+                        >
+                            <Menu size={24} />
+                        </button>
                     </div>
                 </div>
             </div>
 
-            {/* Bottom Bar - Dark Blue Navigation */}
-            <div className="bg-[#1e3a8a] text-white">
+            {/* Bottom Bar - Dark Blue Navigation (Desktop) */}
+            <div className="hidden xl:block bg-[#1e3a8a] text-white">
                 <div className="container mx-auto px-4">
                     <nav className="flex justify-center xl:justify-between items-center h-[46px] text-xs xl:text-sm font-medium relative z-50">
                         <ul className="flex items-center min-w-max h-full">
@@ -368,6 +383,120 @@ const Header = () => {
                             </li>
                         </ul>
                     </nav>
+                </div>
+            </div>
+
+            {/* Mobile Sidebar Navigation */}
+            {/* Overlay */}
+            {mobileMenuOpen && (
+                <div 
+                    className="fixed inset-0 bg-black/50 z-[250] xl:hidden transition-opacity" 
+                    onClick={() => setMobileMenuOpen(false)}
+                ></div>
+            )}
+            
+            {/* Drawer */}
+            <div className={`fixed top-0 right-0 bottom-0 w-[300px] sm:w-[350px] bg-[#1a3673] z-[300] transform transition-transform duration-300 ease-in-out xl:hidden flex flex-col ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                {/* Header in sidebar */}
+                <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#3b82f6]">
+                    <div className="flex items-center gap-2">
+                        <img src="/logo.png" alt="Quốc huy" className="w-8 h-8 object-contain" />
+                        <span className="text-white font-bold uppercase tracking-wider text-sm">CổNG PHÁP LUẬT QUỐC GIA</span>
+                    </div>
+                    <button onClick={() => setMobileMenuOpen(false)} className="text-white/80 hover:text-white p-1">
+                        <X size={20} />
+                    </button>
+                </div>
+
+                <div className="overflow-y-auto flex-grow pb-8">
+                    {/* Navigation Links */}
+                    <div className="flex flex-col text-white">
+                        <Link to="/" onClick={() => setMobileMenuOpen(false)} className="px-5 py-4 border-b border-white/5 font-bold hover:bg-white/5 transition-colors">Trang chủ</Link>
+                        
+                        <div className="border-b border-white/5">
+                            <button onClick={() => toggleMobileNavGroup('tienIch')} className="w-full flex items-center justify-between px-5 py-4 font-bold hover:bg-white/5 transition-colors">
+                                Tiêu điểm chính sách
+                                <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.tienIch ? 'rotate-180' : ''}`} />
+                            </button>
+                            <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.tienIch ? 'max-h-96' : 'max-h-0'}`}>
+                                <Link to="/tin-tuc/noi-bat" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tin tức nổi bật</Link>
+                                <a href="#" className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tọa đàm - Sự kiện</a>
+                            </div>
+                        </div>
+
+                        <div className="border-b border-white/5">
+                            <button onClick={() => toggleMobileNavGroup('vanBan')} className="w-full flex items-center justify-between px-5 py-4 font-bold hover:bg-white/5 transition-colors">
+                                Văn bản pháp luật
+                                <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.vanBan ? 'rotate-180' : ''}`} />
+                            </button>
+                            <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.vanBan ? 'max-h-[500px]' : 'max-h-0'}`}>
+                                <Link to="/van-ban/tim-kiem" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Danh sách Văn bản QPPL</Link>
+                                <Link to="/van-ban/hieu-luc" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Văn bản có hiệu lực trong tháng</Link>
+                                <Link to="/van-ban/het-hieu-luc" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Văn bản hết hiệu lực trong tháng</Link>
+                                <Link to="/van-ban/moi-ban-hanh" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Văn bản mới ban hành / Hợp nhất</Link>
+                            </div>
+                        </div>
+
+                        <div className="border-b border-white/5">
+                            <button onClick={() => toggleMobileNavGroup('hoTro')} className="w-full flex items-center justify-between px-5 py-4 font-bold hover:bg-white/5 transition-colors">
+                                Hỗ trợ pháp lý
+                                <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.hoTro ? 'rotate-180' : ''}`} />
+                            </button>
+                            <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.hoTro ? 'max-h-96' : 'max-h-0'}`}>
+                                <Link to="/dien-dan" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Trang chủ Diễn đàn</Link>
+                            </div>
+                        </div>
+
+                        <div className="border-b border-white/5">
+                            <button onClick={() => toggleMobileNavGroup('phanAnh')} className="w-full flex items-center justify-between px-5 py-4 font-bold hover:bg-white/5 transition-colors">
+                                Phản ánh chính sách
+                                <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.phanAnh ? 'rotate-180' : ''}`} />
+                            </button>
+                        </div>
+                        
+                        <div className="border-b border-white/5">
+                            <Link to="/du-thao" onClick={() => setMobileMenuOpen(false)} className="block px-5 py-4 font-bold hover:bg-white/5 transition-colors">Dự thảo VBQPPL</Link>
+                        </div>
+
+                        <div className="border-b border-white/5">
+                            <button onClick={() => toggleMobileNavGroup('ai')} className="w-full flex items-center justify-between px-5 py-4 font-bold hover:bg-white/5 transition-colors">
+                                AI pháp luật
+                                <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.ai ? 'rotate-180' : ''}`} />
+                            </button>
+                        </div>
+
+                        {/* Additional utilities */}
+                        <div className="mt-4 pt-4 border-t border-white/10 px-5 space-y-4 font-bold">
+                            <a href="#" className="flex items-center gap-2 text-white hover:text-cyan-400">
+                                International <span className="text-[10px] ml-1">↗</span>
+                            </a>
+                            
+                            {!displayUser ? (
+                                <Link to="/dang-nhap" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-white hover:text-cyan-400">
+                                    <User size={18} /> Đăng nhập
+                                </Link>
+                            ) : (
+                                <div className="space-y-4">
+                                    <Link to="/ca-nhan/ho-so" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-white hover:text-cyan-400">
+                                        <LayoutDashboard size={18} /> Khu vực cá nhân
+                                    </Link>
+                                    <button onClick={handleLogout} className="flex items-center gap-2 text-red-400 hover:text-red-300">
+                                        <LogOut size={18} /> Đăng xuất
+                                    </button>
+                                </div>
+                            )}
+
+                            {/* Search */}
+                            <div className="relative mt-6 pt-4">
+                                <Search size={18} className="absolute left-3 top-[30px] text-gray-400" />
+                                <input 
+                                    type="text" 
+                                    placeholder="Tìm kiếm..." 
+                                    className="w-full py-2.5 pl-10 pr-4 bg-white/10 border border-white/20 rounded-full text-sm text-white placeholder-gray-400 outline-none focus:border-cyan-400 transition-colors"
+                                />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>

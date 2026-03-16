@@ -41,7 +41,7 @@ const NumberWidget = () => (
                 <MessageSquare size={32} />
             </div>
             <div className="flex-1">
-                <h3 className="text-4xl font-extrabold text-gray-900 tracking-tight">1,492</h3>
+                <h3 className="text-4xl font-bold text-gray-900 tracking-tight">1,492</h3>
                 <p className="text-sm font-semibold text-gray-500 mt-1 uppercase tracking-wide">Tổng lượt bình luận</p>
             </div>
         </div>
@@ -68,7 +68,7 @@ const SimpleBarChart = () => {
 
                 {data.map((val, idx) => (
                     <div key={idx} className="flex flex-col items-center flex-1 h-full justify-end group z-10 relative">
-                        <div 
+                        <div
                             className="bg-blue-500 group-hover:bg-orange-500 rounded-t-md w-full max-w-[40px] transition-colors duration-300 relative"
                             style={{ height: `${(val / max) * 100}%` }}
                         >
@@ -91,14 +91,14 @@ const SimpleBarChart = () => {
 const SimplePieChart = () => {
     return (
         <div className="flex flex-col items-center justify-center p-2 flex-1 w-full">
-            <div 
+            <div
                 className="w-36 h-36 rounded-full shadow-inner transform hover:scale-105 transition-transform duration-500 relative"
                 style={{
                     background: 'conic-gradient(#3b82f6 0% 40%, #10b981 40% 70%, #f59e0b 70% 90%, #6366f1 90% 100%)'
                 }}
             >
                 <div className="absolute inset-0 m-auto w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm">
-                    <span className="text-gray-400 font-bold"><PieChart size={24}/></span>
+                    <span className="text-gray-400 font-bold"><PieChart size={24} /></span>
                 </div>
             </div>
             <div className="grid grid-cols-2 gap-x-4 gap-y-3 mt-8 w-full">
@@ -132,7 +132,7 @@ const getSortOrderLabel = (key) => {
 
 const UserHomePage = () => {
     const { user } = useAuth();
-    
+
     // Read user configuration from localStorage
     const [orderedBlocks, setOrderedBlocks] = React.useState(() => {
         const saved = localStorage.getItem('userOrderedBlocks');
@@ -200,7 +200,7 @@ const UserHomePage = () => {
 
                     const isFifty = block.width === '50';
                     const isStatistic = block.id.startsWith('stat-');
-                    
+
                     let wClass = 'w-full';
                     if (block.width === '50') wClass = 'w-full lg:w-1/2';
                     if (block.width === '33') wClass = 'w-full lg:w-1/3 md:w-1/2';
