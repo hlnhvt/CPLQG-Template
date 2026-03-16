@@ -57,6 +57,9 @@ import CreateTopicPage from './pages/forum/CreateTopicPage';
 import LivestreamEventPage from './pages/forum/LivestreamEventPage';
 import ForumTopicManagementPage from './pages/forum/ForumTopicManagementPage';
 
+// Onboarding import
+import OnboardingPage from './pages/onboarding/OnboardingPage';
+
 function App() {
     return (
         <Router>
@@ -78,8 +81,10 @@ function App() {
                             <Route path="/khao-sat/:surveyId" element={<SurveyDetailPage />} />
                             <Route path="/khao-sat/:surveyId/tham-gia" element={<SurveyFormPage />} />
                             <Route path="/danh-cho-ban" element={<RecommendedPage />} />
-                            {/* Login page - no Header/Footer */}
+                            {/* Login page / Onboarding - no Header/Footer */}
                             <Route path="/dang-nhap" element={<LoginPage />} />
+                            <Route path="/onboarding" element={<OnboardingPage />} />
+                            
                             <Route path="/cau-chuyen-thanh-cong" element={<SuccessStoriesPage />} />
                             <Route path="/cau-chuyen-thanh-cong/:id" element={<SuccessStoryDetailPage />} />
                             <Route path="/anh" element={<PhotoGalleryPage />} />

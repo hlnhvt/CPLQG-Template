@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-    Home, ChevronRight, BarChart2, Filter, Download, 
-    FileText, MessageSquare, Edit3, Eye, Users, 
+import {
+    Home, ChevronRight, BarChart2, Filter, Download,
+    FileText, MessageSquare, Edit3, Eye, Users,
     TrendingUp, TrendingDown, Calendar, Search
 } from 'lucide-react';
 import { MOCK_TOPICS } from '../../data/mockForumData';
@@ -21,9 +21,9 @@ const KpiCard = ({ title, value, delta, deltaType, icon: Icon, colorClass }) => 
         </div>
         <div className="flex items-center gap-1.5 relative z-10 text-sm font-medium">
             {deltaType === 'up' ? (
-                <span className="flex items-center text-green-600 bg-green-50 px-2 py-0.5 rounded-full"><TrendingUp size={14} className="mr-1"/> {delta}</span>
+                <span className="flex items-center text-green-600 bg-green-50 px-2 py-0.5 rounded-full"><TrendingUp size={14} className="mr-1" /> {delta}</span>
             ) : (
-                <span className="flex items-center text-red-600 bg-red-50 px-2 py-0.5 rounded-full"><TrendingDown size={14} className="mr-1"/> {delta}</span>
+                <span className="flex items-center text-red-600 bg-red-50 px-2 py-0.5 rounded-full"><TrendingDown size={14} className="mr-1" /> {delta}</span>
             )}
             <span className="text-gray-400">so với kỳ trước</span>
         </div>
@@ -72,7 +72,7 @@ const ForumDashboardPage = () => {
                             {/* Filters */}
                             <div className="flex items-center gap-2 bg-gray-50 rounded-lg p-1 border border-gray-200">
                                 <Filter size={16} className="text-gray-400 ml-2" />
-                                <select 
+                                <select
                                     className="bg-transparent border-none outline-none text-sm font-medium text-gray-700 py-1.5 pr-2"
                                     value={selectedForum}
                                     onChange={(e) => setSelectedForum(e.target.value)}
@@ -82,10 +82,10 @@ const ForumDashboardPage = () => {
                                     <option value="2">Luật Đất đai</option>
                                 </select>
                             </div>
-                            
+
                             <div className="flex items-center gap-2 bg-gray-50 rounded-lg p-1 border border-gray-200">
                                 <Calendar size={16} className="text-gray-400 ml-2" />
-                                <select 
+                                <select
                                     className="bg-transparent border-none outline-none text-sm font-medium text-gray-700 py-1.5 pr-2"
                                     value={dateRange}
                                     onChange={(e) => setDateRange(e.target.value)}
@@ -99,7 +99,7 @@ const ForumDashboardPage = () => {
                             <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm">
                                 Áp dụng
                             </button>
-                            
+
                             <button className="flex items-center gap-2 bg-white text-gray-700 font-medium border border-gray-300 hover:bg-gray-50 px-4 py-2 rounded-lg transition-colors">
                                 <Download size={16} /> Xuất báo cáo
                             </button>
@@ -128,7 +128,7 @@ const ForumDashboardPage = () => {
                                 <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-full bg-green-500"></div> Bình luận</div>
                             </div>
                         </div>
-                        
+
                         <div className="h-64 flex items-end justify-between gap-2 pt-6 border-b border-gray-200">
                             {chartData.map((d, i) => (
                                 <div key={i} className="flex flex-col items-center justify-end w-full group relative">
@@ -136,12 +136,12 @@ const ForumDashboardPage = () => {
                                         {d.topics} Chủ đề | {d.comments} Bình luận
                                     </div>
                                     <div className="flex items-end gap-1 w-full justify-center">
-                                        <div 
-                                            className="w-1/3 bg-blue-500 rounded-t-sm hover:brightness-110 transition-all" 
+                                        <div
+                                            className="w-1/3 bg-blue-500 rounded-t-sm hover:brightness-110 transition-all"
                                             style={{ height: `${(d.topics / maxComments) * 100}%` }}
                                         ></div>
-                                        <div 
-                                            className="w-1/3 bg-green-500 rounded-t-sm hover:brightness-110 transition-all" 
+                                        <div
+                                            className="w-1/3 bg-green-500 rounded-t-sm hover:brightness-110 transition-all"
                                             style={{ height: `${(d.comments / maxComments) * 100}%` }}
                                         ></div>
                                     </div>
@@ -154,7 +154,7 @@ const ForumDashboardPage = () => {
                     {/* Top Contributors */}
                     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col">
                         <div className="flex justify-between items-center mb-6">
-                            <h2 className="font-bold text-lg text-gray-800">Top Đóng góp</h2>
+                            <h2 className="font-bold text-lg text-gray-800">Top người dùng Đóng góp</h2>
                             <select className="text-sm font-medium text-blue-600 bg-blue-50 rounded-md outline-none px-2 py-1">
                                 <option>Tháng này</option>
                                 <option>Tuần này</option>
@@ -196,7 +196,7 @@ const ForumDashboardPage = () => {
                             <input type="text" placeholder="Tìm kiếm chủ đề..." className="pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm outline-none focus:border-blue-400 focus:bg-white transition-colors" />
                         </div>
                     </div>
-                    
+
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
@@ -214,9 +214,9 @@ const ForumDashboardPage = () => {
                                     <tr key={topic.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors group">
                                         <td className="py-4 px-4">
                                             <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs
-                                                ${idx === 0 ? 'bg-yellow-100 text-yellow-600' : 
-                                                  idx === 1 ? 'bg-gray-200 text-gray-600' : 
-                                                  idx === 2 ? 'bg-orange-100 text-orange-600' : 'text-gray-400'}`}>
+                                                ${idx === 0 ? 'bg-yellow-100 text-yellow-600' :
+                                                    idx === 1 ? 'bg-gray-200 text-gray-600' :
+                                                        idx === 2 ? 'bg-orange-100 text-orange-600' : 'text-gray-400'}`}>
                                                 {idx + 1}
                                             </div>
                                         </td>
@@ -234,12 +234,12 @@ const ForumDashboardPage = () => {
                                     </tr>
                                 ))}
                                 {/* Mocking a few more rows since MOCK_TOPICS only has 2 */}
-                                {[3,4,5].map(id => (
+                                {[3, 4, 5].map(id => (
                                     <tr key={id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                                         <td className="py-4 px-4"><div className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs text-gray-400">{id}</div></td>
                                         <td className="py-4 font-semibold text-gray-800 pr-4"><Link to="#" className="hover:text-blue-600">Thủ tục kê khai thuế thu nhập cá nhân {2024 - id}</Link></td>
                                         <td className="py-4 text-gray-500"><span className="bg-gray-100 px-2 py-1 rounded text-xs">Thuế</span></td>
-                                        <td className="py-4 text-right font-medium text-gray-700">{(1200 - id*100).toLocaleString()}</td>
+                                        <td className="py-4 text-right font-medium text-gray-700">{(1200 - id * 100).toLocaleString()}</td>
                                         <td className="py-4 text-right font-medium text-gray-700">{30 - id}</td>
                                         <td className="py-4 text-right text-gray-500">10/03/2024</td>
                                     </tr>

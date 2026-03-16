@@ -235,7 +235,7 @@ const ForumTopicListPage = () => {
                             <div className="flex items-center justify-between mb-5">
                                 <h3 className="font-bold text-gray-900 text-lg flex items-center gap-2">
                                     <Award className="text-amber-500" size={20} />
-                                    Top đóng góp
+                                    Top người dùng đóng góp
                                 </h3>
                             </div>
                             <div className="space-y-5">

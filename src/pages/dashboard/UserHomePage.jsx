@@ -5,33 +5,7 @@ import { useAuth } from '../../contexts/AuthContext';
 
 // --- MOCK DATA FOR HOMEPAGE PREVIEW ---
 // Matches the structure in UserSettingsPage
-const LEGAL_FIELDS = [
-    { id: 'dat-dai', title: 'Đất đai & Nhà ở', thumbnail: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=300' },
-    { id: 'doanh-nghiep', title: 'Doanh nghiệp & Đầu tư', thumbnail: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=300' },
-    { id: 'lao-dong', title: 'Lao động & Việc làm', thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=300' },
-    { id: 'thue', title: 'Thuế & Tài chính', thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=300' },
-    { id: 'dan-su', title: 'Dân sự', thumbnail: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=300' },
-    { id: 'hinh-su', title: 'Hình sự', thumbnail: 'https://images.unsplash.com/photo-1505664125541-dfca8b1dd3e6?auto=format&fit=crop&q=80&w=300' }
-];
-
-const NEWS_CATEGORIES = [
-    { id: 'news-tin-nong', title: 'Tin nóng pháp luật', thumbnail: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=300' },
-    { id: 'news-chinh-sach', title: 'Chính sách mới', thumbnail: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=300' },
-    { id: 'news-phan-tich', title: 'Phân tích & Bình luận', thumbnail: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=300' },
-];
-
-const FORUMS = [
-    { id: 'forum-luat-su', title: 'Cộng đồng Luật sư', thumbnail: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=300' },
-    { id: 'forum-doanh-nghiep', title: 'Hỏi đáp Doanh nghiệp', thumbnail: 'https://images.unsplash.com/photo-1556761175-5973e6aa210f?auto=format&fit=crop&q=80&w=300' },
-];
-
-const STATISTICS = [
-    { id: 'stat-comments-count', title: 'Số lượt bình luận', thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=300' },
-    { id: 'stat-comments-bar', title: 'Lượt bình luận qua các tháng', thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=300' },
-    { id: 'stat-topics-pie', title: 'Tỷ lệ chuyên mục quan tâm', thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=300' },
-];
-
-const ALL_ITEMS = [...LEGAL_FIELDS, ...NEWS_CATEGORIES, ...FORUMS, ...STATISTICS];
+import { LEGAL_FIELDS, NEWS_CATEGORIES, FORUMS, STATISTICS, ALL_ITEMS } from '../../data/personalizationData';
 
 // ---- Custom Custom Static Chart Components ----
 const NumberWidget = () => (
@@ -148,7 +122,7 @@ const UserHomePage = () => {
         <div className="pb-12 animate-fadeIn space-y-6">
 
             {/* Top Weather & Greeting Section */}
-            <div className="bg-gradient-to-br from-indigo-50/80 via-white to-cyan-50/80 rounded-xl shadow-sm border border-indigo-100/60 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-indigo-50/80 via-white to-cyan-50/80 rounded-xl shadow-sm border border-indigo-100/60 p-4 md:p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden animate-slideUpFade">
                 {/* Decorative background blur */}
                 <div className="absolute top-[-20%] right-[-10%] w-96 h-96 bg-cyan-300/20 rounded-full blur-3xl pointer-events-none"></div>
                 <div className="absolute bottom-[-20%] left-[-10%] w-80 h-80 bg-indigo-300/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -194,7 +168,7 @@ const UserHomePage = () => {
 
             {/* Configured Layout Preview */}
             <div className="flex flex-wrap -mx-3 md:-mx-4 lg:-mx-5">
-                {orderedBlocks.map((block) => {
+                {orderedBlocks.map((block, idx) => {
                     const itemDef = ALL_ITEMS.find(i => i.id === block.id);
                     if (!itemDef) return null;
 
@@ -207,7 +181,11 @@ const UserHomePage = () => {
                     if (block.width === '25') wClass = 'w-full xl:w-1/4 md:w-1/2';
 
                     return (
-                        <div key={`user-home-${block.id}`} className={`${wClass} px-3 md:px-4 lg:px-5 mb-6 md:mb-8 lg:mb-10`}>
+                        <div 
+                            key={`user-home-${block.id}`} 
+                            className={`${wClass} px-3 md:px-4 lg:px-5 mb-6 md:mb-8 lg:mb-10 animate-slideUpFade`}
+                            style={{ animationDelay: `${(idx + 1) * 150}ms`, opacity: 0 }}
+                        >
                             <div className="bg-white p-5 sm:p-6 lg:p-7 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col relative overflow-hidden group">
                                 <div className="flex justify-between items-center mb-5 pb-3 border-b-2 border-gray-50">
                                     <h4 className="font-bold text-xl text-gray-800 flex items-center gap-3">
