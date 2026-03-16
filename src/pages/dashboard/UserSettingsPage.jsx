@@ -7,7 +7,7 @@ const LEGAL_FIELDS = [
     { id: 'lao-dong', title: 'Lao động & Việc làm', thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=300' },
     { id: 'thue', title: 'Thuế & Tài chính', thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=300' },
     { id: 'dan-su', title: 'Dân sự', thumbnail: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=300' },
-    { id: 'hinh-su', title: 'Hình sự', thumbnail: 'https://images.unsplash.com/photo-1505664125541-dfca8b1dd3e6?auto=format&fit=crop&q=80&w=300' }
+    { id: 'hinh-su', title: 'Hình sự', thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=300' }
 ];
 
 const NEWS_CATEGORIES = [
@@ -18,7 +18,7 @@ const NEWS_CATEGORIES = [
 
 const FORUMS = [
     { id: 'forum-luat-su', title: 'Cộng đồng Luật sư', thumbnail: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=300' },
-    { id: 'forum-doanh-nghiep', title: 'Hỏi đáp Doanh nghiệp', thumbnail: 'https://images.unsplash.com/photo-1556761175-5973e6aa210f?auto=format&fit=crop&q=80&w=300' },
+    { id: 'forum-doanh-nghiep', title: 'Hỏi đáp Doanh nghiệp', thumbnail: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=300' },
 ];
 
 const STATISTICS = [
@@ -60,7 +60,7 @@ const UserSettingsPage = () => {
     const handleTopicToggle = (id) => {
         setIsSaved(false);
         const isSelected = selectedTopics.includes(id);
-        
+
         if (isSelected) {
             setSelectedTopics(prev => prev.filter(t => t !== id));
             setOrderedBlocks(prev => prev.filter(b => b.id !== id));
@@ -115,12 +115,12 @@ const UserSettingsPage = () => {
                                 <img src={topic.thumbnail} alt={topic.title} className="w-full h-full object-cover" />
                                 <div className={`absolute inset-0 transition-opacity duration-300 ${isSelected ? 'bg-blue-900/10' : 'bg-black/5 hover:bg-black/10'}`}></div>
                             </div>
-                            
+
                             <div className="flex-1 flex items-center justify-between min-w-0 pr-2">
                                 <h3 className={`font-bold text-[15px] truncate ${isSelected ? 'text-blue-700' : 'text-gray-800'}`}>
                                     {topic.title}
                                 </h3>
-                                
+
                                 <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 border transition-all ${isSelected ? 'bg-blue-500 border-blue-500' : 'bg-white border-gray-300'}`}>
                                     {isSelected && <CheckCircle size={14} className="text-white" />}
                                 </div>
@@ -195,7 +195,7 @@ const UserSettingsPage = () => {
                                 Đã chọn: {selectedTopics.length} mục
                             </span>
                         </div>
-                        
+
                         {renderTopicGrid('Lĩnh vực Pháp lý', 'Hệ thống sẽ ưu tiên hiển thị văn bản thuộc các lĩnh vực pháp luật mà bạn chọn.', LEGAL_FIELDS)}
                         {renderTopicGrid('Chuyên mục Tin tức', 'Các mục tin tức, bài viết, chính sách mà bạn muốn theo dõi thường xuyên.', NEWS_CATEGORIES)}
                         {renderTopicGrid('Diễn đàn & Cộng đồng', 'Các diễn đàn trao đổi, thảo luận phổ biến dành cho thành viên.', FORUMS)}
@@ -242,7 +242,7 @@ const UserSettingsPage = () => {
                                                         </div>
                                                         <div className="text-xs text-gray-500 flex flex-wrap items-center gap-3">
                                                             <span className="flex items-center gap-1 bg-gray-100 px-2 py-0.5 rounded text-gray-600">
-                                                                {isStatistic ? <BarChart2 size={12}/> : block.viewMode === 'card' ? <LayoutGrid size={12}/> : <List size={12}/>}
+                                                                {isStatistic ? <BarChart2 size={12} /> : block.viewMode === 'card' ? <LayoutGrid size={12} /> : <List size={12} />}
                                                                 {isStatistic ? 'Biểu đồ' : block.viewMode === 'card' ? 'Dạng thẻ' : 'Dạng danh sách'}
                                                             </span>
                                                             <span className="hidden sm:inline">•</span>
@@ -253,27 +253,27 @@ const UserSettingsPage = () => {
                                                                     <span>{block.recordCount} bài</span>
                                                                     <span className="hidden sm:inline">•</span>
                                                                     <span className="italic text-blue-600 font-medium">{
-                                                                        block.sortOrder === 'newest' ? 'Mới nhất' : 
-                                                                        block.sortOrder === 'most_viewed' ? 'Được xem nhiều nhất' :
-                                                                        block.sortOrder === 'most_commented' ? 'Bình luận cao nhất' :
-                                                                        block.sortOrder === 'most_shared' ? 'Chia sẻ cao nhất' :
-                                                                        block.sortOrder === 'most_feedback' ? 'Góp ý nhiều nhất' : 
-                                                                        'Yêu thích nhất'
+                                                                        block.sortOrder === 'newest' ? 'Mới nhất' :
+                                                                            block.sortOrder === 'most_viewed' ? 'Được xem nhiều nhất' :
+                                                                                block.sortOrder === 'most_commented' ? 'Bình luận cao nhất' :
+                                                                                    block.sortOrder === 'most_shared' ? 'Chia sẻ cao nhất' :
+                                                                                        block.sortOrder === 'most_feedback' ? 'Góp ý nhiều nhất' :
+                                                                                            'Yêu thích nhất'
                                                                     }</span>
                                                                 </>
                                                             )}
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div className="flex items-center gap-2 pl-4 border-l border-gray-100 ml-2 shrink-0">
                                                     <button
                                                         onClick={(e) => { e.stopPropagation(); setExpandedBlock(isExpanded ? null : block.id); }}
                                                         className={`flex items-center justify-center min-w-[100px] gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${isExpanded ? 'bg-blue-600 text-white shadow-md' : 'bg-blue-50 text-blue-700 hover:bg-blue-100'}`}
                                                     >
-                                                        <Settings2 size={16} /> 
+                                                        <Settings2 size={16} />
                                                         <span className="hidden md:inline">{isExpanded ? 'Đóng' : 'Cập nhật'}</span>
-                                                        {isExpanded ? <ChevronUp size={16} className="ml-1"/> : <ChevronDown size={16} className="ml-1"/>}
+                                                        {isExpanded ? <ChevronUp size={16} className="ml-1" /> : <ChevronDown size={16} className="ml-1" />}
                                                     </button>
 
                                                     <div className="flex flex-col bg-gray-50 rounded-lg p-0.5 border border-gray-200 ml-1">
@@ -299,23 +299,23 @@ const UserSettingsPage = () => {
                                             {isExpanded && (
                                                 <div className="p-5 sm:p-6 bg-gray-50/80 border-t border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 animate-fadeIn">
                                                     {!isStatistic && (
-                                                    <div>
-                                                        <label className="block text-sm font-bold text-gray-800 mb-2">Chế độ xem mặc định</label>
-                                                        <div className="grid grid-cols-2 gap-3">
-                                                            <button
-                                                                onClick={() => updateBlockConfig(block.id, { viewMode: 'card' })}
-                                                                className={`flex items-center justify-center gap-2 p-3 border-2 rounded-xl transition-all ${block.viewMode === 'card' ? 'border-blue-500 bg-blue-50/50 text-blue-700 shadow-sm' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600'}`}
-                                                            >
-                                                                <LayoutGrid size={18} /> Dạng thẻ
-                                                            </button>
-                                                            <button
-                                                                onClick={() => updateBlockConfig(block.id, { viewMode: 'list' })}
-                                                                className={`flex items-center justify-center gap-2 p-3 border-2 rounded-xl transition-all ${block.viewMode === 'list' ? 'border-blue-500 bg-blue-50/50 text-blue-700 shadow-sm' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600'}`}
-                                                            >
-                                                                <List size={18} /> Danh sách
-                                                            </button>
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-gray-800 mb-2">Chế độ xem mặc định</label>
+                                                            <div className="grid grid-cols-2 gap-3">
+                                                                <button
+                                                                    onClick={() => updateBlockConfig(block.id, { viewMode: 'card' })}
+                                                                    className={`flex items-center justify-center gap-2 p-3 border-2 rounded-xl transition-all ${block.viewMode === 'card' ? 'border-blue-500 bg-blue-50/50 text-blue-700 shadow-sm' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600'}`}
+                                                                >
+                                                                    <LayoutGrid size={18} /> Dạng thẻ
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => updateBlockConfig(block.id, { viewMode: 'list' })}
+                                                                    className={`flex items-center justify-center gap-2 p-3 border-2 rounded-xl transition-all ${block.viewMode === 'list' ? 'border-blue-500 bg-blue-50/50 text-blue-700 shadow-sm' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600'}`}
+                                                                >
+                                                                    <List size={18} /> Danh sách
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                     )}
 
                                                     <div className={isStatistic ? "col-span-1 md:col-span-2" : ""}>
@@ -353,37 +353,37 @@ const UserSettingsPage = () => {
                                                     </div>
 
                                                     {!isStatistic && (
-                                                    <>
-                                                        <div>
-                                                            <label className="block text-sm font-bold text-gray-800 mb-2">Số lượng bản ghi</label>
-                                                            <select 
-                                                                value={block.recordCount}
-                                                                onChange={(e) => updateBlockConfig(block.id, { recordCount: Number(e.target.value) })}
-                                                                className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 outline-none bg-white font-medium text-gray-700 transition-colors"
-                                                            >
-                                                                <option value={5}>5 bản ghi (Mặc định)</option>
-                                                                <option value={10}>10 bản ghi</option>
-                                                                <option value={15}>15 bản ghi</option>
-                                                                <option value={20}>20 bản ghi</option>
-                                                            </select>
-                                                        </div>
+                                                        <>
+                                                            <div>
+                                                                <label className="block text-sm font-bold text-gray-800 mb-2">Số lượng bản ghi</label>
+                                                                <select
+                                                                    value={block.recordCount}
+                                                                    onChange={(e) => updateBlockConfig(block.id, { recordCount: Number(e.target.value) })}
+                                                                    className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 outline-none bg-white font-medium text-gray-700 transition-colors"
+                                                                >
+                                                                    <option value={5}>5 bản ghi (Mặc định)</option>
+                                                                    <option value={10}>10 bản ghi</option>
+                                                                    <option value={15}>15 bản ghi</option>
+                                                                    <option value={20}>20 bản ghi</option>
+                                                                </select>
+                                                            </div>
 
-                                                        <div>
-                                                            <label className="block text-sm font-bold text-gray-800 mb-2">Ưu tiên các bản ghi</label>
-                                                            <select 
-                                                                value={block.sortOrder}
-                                                                onChange={(e) => updateBlockConfig(block.id, { sortOrder: e.target.value })}
-                                                                className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 outline-none bg-white font-medium text-gray-700 transition-colors"
-                                                            >
-                                                                <option value="newest">Mới nhất (Mặc định)</option>
-                                                                <option value="most_viewed">Được xem nhiều nhất</option>
-                                                                <option value="most_commented">Được bình luận nhiều nhất</option>
-                                                                <option value="most_shared">Được chia sẻ nhiều nhất</option>
-                                                                <option value="most_feedback">Được góp ý nhiều nhất</option>
-                                                                <option value="most_liked">Được yêu thích nhất</option>
-                                                            </select>
-                                                        </div>
-                                                    </>
+                                                            <div>
+                                                                <label className="block text-sm font-bold text-gray-800 mb-2">Ưu tiên các bản ghi</label>
+                                                                <select
+                                                                    value={block.sortOrder}
+                                                                    onChange={(e) => updateBlockConfig(block.id, { sortOrder: e.target.value })}
+                                                                    className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 outline-none bg-white font-medium text-gray-700 transition-colors"
+                                                                >
+                                                                    <option value="newest">Mới nhất (Mặc định)</option>
+                                                                    <option value="most_viewed">Được xem nhiều nhất</option>
+                                                                    <option value="most_commented">Được bình luận nhiều nhất</option>
+                                                                    <option value="most_shared">Được chia sẻ nhiều nhất</option>
+                                                                    <option value="most_feedback">Được góp ý nhiều nhất</option>
+                                                                    <option value="most_liked">Được yêu thích nhất</option>
+                                                                </select>
+                                                            </div>
+                                                        </>
                                                     )}
                                                 </div>
                                             )}
@@ -398,7 +398,7 @@ const UserSettingsPage = () => {
                             <div className="mt-8 border border-gray-200 rounded-xl overflow-hidden shadow-lg bg-gray-50 scale-100 transform origin-top w-full">
                                 <div className="bg-[#0f4c81] text-white px-6 py-4 flex items-center justify-between">
                                     <h3 className="font-bold uppercase tracking-wider text-sm flex items-center gap-2">
-                                        <Monitor size={18}/> Bản xem trước Màn hình Trang Chủ
+                                        <Monitor size={18} /> Bản xem trước Màn hình Trang Chủ
                                     </h3>
                                     <span className="text-xs text-blue-200 bg-blue-900/40 px-3 py-1 rounded-full border border-blue-400/30">Mô phỏng bố cục</span>
                                 </div>
@@ -418,20 +418,20 @@ const UserSettingsPage = () => {
                                         {orderedBlocks.map((block) => {
                                             const itemDef = ALL_ITEMS.find(i => i.id === block.id);
                                             if (!itemDef) return null;
-                                            
+
                                             const isStatistic = block.id.startsWith('stat-');
                                             const isFifty = block.width === '50';
-                                            
+
                                             let wClass = 'w-full';
                                             if (block.width === '50') wClass = 'w-full lg:w-1/2';
                                             if (block.width === '33') wClass = 'w-full lg:w-1/3 md:w-1/2';
                                             if (block.width === '25') wClass = 'w-full lg:w-1/4 md:w-1/2';
-                                            
+
                                             return (
                                                 <div key={`preview-render-${block.id}`} className={`${wClass} px-4 mb-8`}>
                                                     <div className="bg-white p-5 sm:p-6 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col relative overflow-hidden group">
                                                         <div className="absolute top-0 right-0 py-1.5 px-3 bg-blue-50 text-blue-700 text-[10px] font-bold uppercase rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 z-10">
-                                                            {isStatistic ? <BarChart2 size={10}/> : block.viewMode === 'card' ? <LayoutGrid size={10}/> : <List size={10}/>}
+                                                            {isStatistic ? <BarChart2 size={10} /> : block.viewMode === 'card' ? <LayoutGrid size={10} /> : <List size={10} />}
                                                             <span>• {block.width}% ngang {!isStatistic && `• ${block.sortOrder} • ${block.recordCount} records`}</span>
                                                         </div>
                                                         <div className="flex justify-between items-center mb-5 pb-3 border-b-2 border-gray-50">
@@ -441,19 +441,19 @@ const UserSettingsPage = () => {
                                                             </h4>
                                                             <span className="text-sm font-semibold text-blue-600 shrink-0">Xem tất cả →</span>
                                                         </div>
-                                                        
+
                                                         <div className={`flex-1 mt-2 flex flex-col ${isStatistic ? 'h-full justify-center min-h-[160px]' : ''}`}>
                                                             {isStatistic ? (
-                                                                 <div className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50">
-                                                                     <BarChart2 className="text-gray-400 mb-2" size={32}/>
-                                                                     <span className="text-sm font-semibold text-gray-500">Mô phỏng biểu đồ</span>
-                                                                 </div>
+                                                                <div className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50">
+                                                                    <BarChart2 className="text-gray-400 mb-2" size={32} />
+                                                                    <span className="text-sm font-semibold text-gray-500">Mô phỏng biểu đồ</span>
+                                                                </div>
                                                             ) : block.viewMode === 'card' ? (
                                                                 <div className={`grid gap-4 ${isFifty ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'}`}>
                                                                     {[...Array(isFifty ? 2 : 4)].map((_, i) => (
                                                                         <div key={i} className="flex flex-col bg-gray-50 rounded-xl overflow-hidden border border-gray-200">
                                                                             <div className="h-32 sm:h-40 bg-gray-200 relative">
-                                                                                <img src={itemDef.thumbnail} className="w-full h-full object-cover opacity-60 grayscale" alt=""/>
+                                                                                <img src={itemDef.thumbnail} className="w-full h-full object-cover opacity-60 grayscale" alt="" />
                                                                             </div>
                                                                             <div className="p-4 flex-1 flex flex-col justify-center">
                                                                                 <div className="h-4 bg-gray-300 rounded-md w-full mb-3"></div>
@@ -468,7 +468,7 @@ const UserSettingsPage = () => {
                                                                     {[...Array(isFifty ? 3 : 6)].map((_, i) => (
                                                                         <div key={i} className="flex gap-4 p-3 bg-gray-50 rounded-xl border border-gray-100 hover:border-gray-200 hover:bg-white transition-all items-center">
                                                                             <div className="w-24 h-24 sm:w-32 sm:h-24 shrink-0 bg-gray-200 rounded-lg overflow-hidden hidden sm:block">
-                                                                                 <img src={itemDef.thumbnail} className="w-full h-full object-cover opacity-50 grayscale" alt=""/>
+                                                                                <img src={itemDef.thumbnail} className="w-full h-full object-cover opacity-50 grayscale" alt="" />
                                                                             </div>
                                                                             <div className="flex-1 py-1">
                                                                                 <div className="h-4 bg-gray-300 rounded-md w-[90%] mb-3"></div>
@@ -505,7 +505,7 @@ const UserSettingsPage = () => {
                         <div className="space-y-10 max-w-3xl">
                             {/* Theme */}
                             <div className="bg-gray-50 border border-gray-100 p-6 rounded-2xl">
-                                <h3 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2"><Sun size={20} className="text-orange-500"/> Chủ đề màu sắc</h3>
+                                <h3 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2"><Sun size={20} className="text-orange-500" /> Chủ đề màu sắc</h3>
                                 <div className="flex flex-wrap gap-4">
                                     <button onClick={() => { setUiSettings({ ...uiSettings, theme: 'light' }); setIsSaved(false); }} className={`flex items-center gap-2 px-6 py-3.5 border-2 rounded-xl font-medium transition-all ${uiSettings.theme === 'light' ? 'border-blue-500 text-blue-700 bg-white shadow-md' : 'border-gray-200 bg-white hover:border-blue-300 text-gray-600 hover:text-gray-800'}`}>
                                         <Sun size={20} /> Sáng
@@ -521,7 +521,7 @@ const UserSettingsPage = () => {
 
                             {/* Font Size */}
                             <div className="bg-gray-50 border border-gray-100 p-6 rounded-2xl">
-                                <h3 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2"><Type size={20} className="text-blue-500"/> Cỡ chữ hệ thống</h3>
+                                <h3 className="text-base font-bold text-gray-800 mb-4 flex items-center gap-2"><Type size={20} className="text-blue-500" /> Cỡ chữ hệ thống</h3>
                                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
                                     <div className="flex justify-between text-gray-500 font-medium mb-4">
                                         <span className="text-sm">Nhỏ</span>

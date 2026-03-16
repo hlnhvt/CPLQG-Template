@@ -48,6 +48,14 @@ import CollaboratorArticlesPage from './pages/collaborator/CollaboratorArticlesP
 import CollaboratorArticleEditor from './pages/collaborator/CollaboratorArticleEditor';
 import RecommendedPage from './pages/RecommendedPage';
 
+// Forum imports
+import ForumListPage from './pages/forum/ForumListPage';
+import ForumDashboardPage from './pages/forum/ForumDashboardPage';
+import ForumTopicListPage from './pages/forum/ForumTopicListPage';
+import TopicDetailPage from './pages/forum/TopicDetailPage';
+import CreateTopicPage from './pages/forum/CreateTopicPage';
+import LivestreamEventPage from './pages/forum/LivestreamEventPage';
+
 function App() {
     return (
         <Router>
@@ -88,6 +96,14 @@ function App() {
                             <Route path="/du-thao" element={<DuThaoPage />} />
                             <Route path="/du-thao/:id" element={<DuThaoDetailPage />} />
                             <Route path="/bao-cao-tiep-thu/:id" element={<BaoCaoTiepThuDetailPage />} />
+
+                            {/* Forum Routes */}
+                            <Route path="/dien-dan" element={<ForumListPage />} />
+                            <Route path="/dien-dan/thong-ke" element={<ForumDashboardPage />} />
+                            <Route path="/dien-dan/chu-de/:id" element={<ForumTopicListPage />} />
+                            <Route path="/dien-dan/bai-viet/:id" element={<TopicDetailPage />} />
+                            <Route path="/dien-dan/tao-moi" element={<CreateTopicPage />} />
+                            <Route path="/dien-dan/su-kien/:slug" element={<LivestreamEventPage />} />
 
                             {/* Dashboard Portal Routes */}
                             <Route path="/ca-nhan" element={<UserDashboardLayout />}>

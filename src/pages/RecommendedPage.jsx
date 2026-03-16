@@ -7,7 +7,7 @@ const MOCK_RECOMMENDATIONS = [
     { id: 2, type: 'tinbai', title: 'Những điểm mới nổi bật về bồi thường, hỗ trợ tái định cư', reason: 'Luật Đất đai', date: '12/03/2026', snippet: 'Bài viết phân tích các điểm thay đổi cốt lõi nhằm bảo đảm quyền lợi tốt hơn cho người có đất bị thu hồi.', thumbnail: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=300', groupName: 'Chuyên mục tin tức' },
     { id: 3, type: 'vanban', title: 'Thông tư 15/2025/TT-BXD về cấp giấy phép xây dựng', reason: 'Doanh nghiệp & Đầu tư', date: '20/02/2026', snippet: 'Rút gọn thủ tục hành chính trong việc xin giấy phép xây dựng đối với các công trình công nghiệp.', thumbnail: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=300', groupName: 'Lĩnh vực pháp lý' },
     { id: 4, type: 'tinbai', title: 'Người lao động được hưởng quyền lợi gì theo Luật BHXH (sửa đổi)?', reason: 'Lao động & Việc làm', date: '15/03/2026', snippet: 'Chi tiết mức đóng và mức hưởng mới áp dụng từ năm 2026.', thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=300', groupName: 'Chuyên mục tin tức' },
-    { id: 5, type: 'vanban', title: 'Luật Doanh nghiệp 2020 (Bản hợp nhất)', reason: 'Doanh nghiệp & Đầu tư', date: '01/01/2021', snippet: 'Văn bản hợp nhất các quy định điều chỉnh hoạt động của doanh nghiệp.', thumbnail: 'https://images.unsplash.com/photo-1556761175-5973e6aa210f?auto=format&fit=crop&q=80&w=300', groupName: 'Lĩnh vực pháp lý' },
+    { id: 5, type: 'vanban', title: 'Luật Doanh nghiệp 2020 (Bản hợp nhất)', reason: 'Doanh nghiệp & Đầu tư', date: '01/01/2021', snippet: 'Văn bản hợp nhất các quy định điều chỉnh hoạt động của doanh nghiệp.', thumbnail: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=300', groupName: 'Lĩnh vực pháp lý' },
 ];
 
 const CATEGORY_MAP = {
@@ -27,7 +27,7 @@ const CATEGORY_MAP = {
     'stat-topics-pie': 'Chỉ tiêu thống kê'
 };
 
-const DEFAULT_TOPICS = ['Đất đai & Nhà ở', 'Doanh nghiệp & Đầu tư', 'Lao động & Việc làm', 'Dân sự', 'Hành chính'];
+const DEFAULT_TOPICS = ['Đất đai & Nhà ở', 'Tin nóng pháp luật', 'Cộng đồng Luật sư'];
 
 const RecommendedPage = () => {
     const [hiddenIds, setHiddenIds] = useState([]);
@@ -45,7 +45,7 @@ const RecommendedPage = () => {
                         .filter(id => !id.startsWith('stat-'))
                         .map(id => CATEGORY_MAP[id])
                         .filter(Boolean))];
-                    
+
                     if (mappedTitles.length > 0) {
                         setUserTopics(mappedTitles);
                     }
@@ -93,7 +93,7 @@ const RecommendedPage = () => {
                     </p>
 
                     <div className="mt-6 flex flex-wrap gap-2">
-                        {userTopics.slice(0, 3).map(topic => (
+                        {userTopics.map(topic => (
                             <span key={topic} className="px-3 py-1 bg-white/10 hover:bg-white/20 transition-colors backdrop-blur-sm rounded-full text-sm border border-white/20 cursor-pointer">
                                 {topic}
                             </span>

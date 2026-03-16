@@ -1,0 +1,1370 @@
+﻿## A.I.7_Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t
+
+### A.I.7.CPLQG-VI-085 - Xem danh sÃ¡ch diá»…n Ä‘Ã n má»›i
+
+#### Má»¥c Ä‘Ã­ch
+
+Cho phÃ©p ngÆ°á»i dÃ¹ng xem danh sÃ¡ch cÃ¡c diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t Ä‘Æ°á»£c táº¡o gáº§n nháº¥t hoáº·c cÃ³ hoáº¡t Ä‘á»™ng má»›i nháº¥t. Chá»©c nÄƒng nÃ y Ä‘Æ°á»£c thá»ƒ hiá»‡n dÆ°á»›i dáº¡ng Tab "Má»›i nháº¥t" trong trang Danh sÃ¡ch Diá»…n Ä‘Ã n (UC87) vÃ /hoáº·c má»™t section ná»•i báº­t trÃªn trang chá»§ khu vá»±c Diá»…n Ä‘Ã n. Má»¥c tiÃªu lÃ  giÃºp ngÆ°á»i dÃ¹ng nhanh chÃ³ng khÃ¡m phÃ¡ nhá»¯ng diá»…n Ä‘Ã n Ä‘ang cÃ³ tranh luáº­n chÃ­nh sÃ¡ch sÃ´i ná»•i gáº§n Ä‘Ã¢y, tá»« Ä‘Ã³ theo dÃµi hoáº·c tham gia tháº£o luáº­n.
+
+##### a. PhÃ¢n quyá»n
+
+- Chá»©c nÄƒng hoÃ n toÃ n cÃ´ng khai, khÃ´ng yÃªu cáº§u Ä‘Äƒng nháº­p.
+- Táº¥t cáº£ ngÆ°á»i dÃ¹ng (cÃ¡ nhÃ¢n, tá»• chá»©c, khÃ¡ch vÃ£ng lai) Ä‘á»u cÃ³ thá»ƒ xem danh sÃ¡ch diá»…n Ä‘Ã n má»›i.
+- NÃºt "Theo dÃµi" trÃªn má»—i card chá»‰ hoáº¡t Ä‘á»™ng khi ngÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p; náº¿u chÆ°a Ä‘Äƒng nháº­p, nháº¥n nÃºt sáº½ hiá»ƒn thá»‹ há»™p thoáº¡i yÃªu cáº§u Ä‘Äƒng nháº­p.
+
+##### b. Äiá»u kiá»‡n thá»±c hiá»‡n
+
+- NgÆ°á»i dÃ¹ng truy cáº­p trang Danh sÃ¡ch Diá»…n Ä‘Ã n (UC87) vÃ  chá»n tab "Má»›i nháº¥t".
+- Há»‡ thá»‘ng CMS/Admin Ä‘Ã£ táº¡o Ã­t nháº¥t má»™t diá»…n Ä‘Ã n Ä‘Æ°á»£c xuáº¥t báº£n.
+
+---
+
+#### CPLQG-VI-085.MH01 â€“ Trang Danh sÃ¡ch Diá»…n Ä‘Ã n â€“ Tab "Má»›i nháº¥t"
+
+##### MÃ n hÃ¬nh
+
+Trang Danh sÃ¡ch Diá»…n Ä‘Ã n â€“ Tab "Má»›i nháº¥t": Hiá»ƒn thá»‹ danh sÃ¡ch cÃ¡c diá»…n Ä‘Ã n vá»«a táº¡o hoáº·c vá»«a cÃ³ hoáº¡t Ä‘á»™ng má»›i, sáº¯p xáº¿p theo thá»i gian hoáº¡t Ä‘á»™ng gáº§n nháº¥t
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Tab bar | Tab bar | CÃ³ | Tab "Má»›i nháº¥t" Ä‘Æ°á»£c kÃ­ch hoáº¡t | Thanh tab ngang chá»©a cÃ¡c tab: "Táº¥t cáº£", "Má»›i nháº¥t" (Ä‘ang kÃ­ch hoáº¡t), "Ná»•i báº­t", "Äang theo dÃµi" (chá»‰ hiá»‡n khi Ä‘Ã£ Ä‘Äƒng nháº­p). Tab Ä‘ang kÃ­ch hoáº¡t cÃ³ gáº¡ch chÃ¢n hoáº·c ná»n ná»•i báº­t. |
+| TiÃªu Ä‘á» section | KÃ½ tá»± | CÃ³ | CÃ³ | NhÃ£n "Diá»…n Ä‘Ã n má»›i nháº¥t" hoáº·c "Má»›i nháº¥t" Ä‘áº·t phÃ­a trÃªn danh sÃ¡ch, kÃ¨m sá»‘ lÆ°á»£ng káº¿t quáº£ (vÃ­ dá»¥: "45 diá»…n Ä‘Ã n"). |
+| LÆ°á»›i tháº» diá»…n Ä‘Ã n | Card grid | CÃ³ | CÃ³ | Danh sÃ¡ch cÃ¡c tháº» diá»…n Ä‘Ã n hiá»ƒn thá»‹ dáº¡ng lÆ°á»›i 3 cá»™t trÃªn desktop, 2 cá»™t trÃªn tablet, 1 cá»™t trÃªn mobile. Sáº¯p xáº¿p theo thá»i gian hoáº¡t Ä‘á»™ng gáº§n nháº¥t (diá»…n Ä‘Ã n cÃ³ bÃ i má»›i nháº¥t hoáº·c Ä‘Æ°á»£c táº¡o gáº§n nháº¥t lÃªn trÃªn Ä‘áº§u). |
+| Tháº» diá»…n Ä‘Ã n | Card | CÃ³ | CÃ³ | Má»—i tháº» gá»“m cÃ¡c thÃ nh pháº§n: icon chá»¯ cÃ¡i (avatar tá»± sinh tá»« 1â€“2 chá»¯ cÃ¡i Ä‘áº§u tÃªn diá»…n Ä‘Ã n, ná»n mÃ u tá»± Ä‘á»™ng theo tÃªn), tÃªn diá»…n Ä‘Ã n (chá»¯ Ä‘áº­m, link xanh dáº«n sang UC90), badge lÄ©nh vá»±c (vÃ­ dá»¥: "DÃ¢n sá»±", "Äáº¥t Ä‘ai", "HÃ¬nh sá»±"), mÃ´ táº£ ngáº¯n (tá»‘i Ä‘a 2 dÃ²ng, cáº¯t bá»›t náº¿u dÃ i hÆ¡n), khá»‘i stats vÃ  nÃºt hÃ nh Ä‘á»™ng. |
+| Icon chá»¯ cÃ¡i | Avatar | CÃ³ | CÃ³ | HÃ¬nh vuÃ´ng bo gÃ³c hoáº·c hÃ¬nh trÃ²n hiá»ƒn thá»‹ 1â€“2 chá»¯ cÃ¡i Ä‘áº§u cá»§a tÃªn diá»…n Ä‘Ã n (vÃ­ dá»¥: diá»…n Ä‘Ã n "Luáº­t DÃ¢n sá»±" hiá»ƒn thá»‹ "LD" trÃªn ná»n xanh). MÃ u ná»n Ä‘Æ°á»£c sinh tá»± Ä‘á»™ng vÃ  nháº¥t quÃ¡n theo tÃªn diá»…n Ä‘Ã n. |
+| TÃªn diá»…n Ä‘Ã n | KÃ½ tá»± | CÃ³ | CÃ³ | TÃªn Ä‘áº§y Ä‘á»§ cá»§a diá»…n Ä‘Ã n, chá»¯ Ä‘áº­m, link mÃ u xanh. Khi nháº¥n Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang Danh sÃ¡ch Chá»§ Ä‘á» trong Diá»…n Ä‘Ã n (UC90). |
+| Badge lÄ©nh vá»±c | Badge | KhÃ´ng | CÃ³ (náº¿u cÃ³ dá»¯ liá»‡u) | NhÃ£n mÃ u thá»ƒ hiá»‡n lÄ©nh vá»±c phÃ¡p luáº­t cá»§a diá»…n Ä‘Ã n (vÃ­ dá»¥: "DÃ¢n sá»±" mÃ u xanh dÆ°Æ¡ng, "HÃ¬nh sá»±" mÃ u Ä‘á» nháº¡t, "Äáº¥t Ä‘ai" mÃ u cam). áº¨n náº¿u chÆ°a phÃ¢n lÄ©nh vá»±c. |
+| MÃ´ táº£ ngáº¯n | KÃ½ tá»± | KhÃ´ng | CÃ³ (náº¿u cÃ³ dá»¯ liá»‡u) | MÃ´ táº£ tÃ³m táº¯t má»¥c Ä‘Ã­ch vÃ  pháº¡m vi tranh luáº­n cá»§a diá»…n Ä‘Ã n, tá»‘i Ä‘a 2 dÃ²ng (khoáº£ng 120 kÃ½ tá»±). Cáº¯t bá»›t vÃ  thÃªm "..." náº¿u dÃ i hÆ¡n. áº¨n náº¿u CMS chÆ°a nháº­p. |
+| Sá»‘ chá»§ Ä‘á» | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Tá»•ng sá»‘ chá»§ Ä‘á» trong diá»…n Ä‘Ã n, hiá»ƒn thá»‹ kÃ¨m icon (vÃ­ dá»¥: icon bong bÃ³ng há»™i thoáº¡i + "1.2K chá»§ Ä‘á»"). DÃ¹ng Ä‘á»‹nh dáº¡ng rÃºt gá»n K/M náº¿u trÃªn 1000. |
+| Sá»‘ thÃ nh viÃªn theo dÃµi | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Tá»•ng sá»‘ ngÆ°á»i dÃ¹ng Ä‘ang theo dÃµi diá»…n Ä‘Ã n, kÃ¨m icon (vÃ­ dá»¥: icon ngÆ°á»i + "324 thÃ nh viÃªn"). |
+| Sá»‘ bÃ¬nh luáº­n | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Tá»•ng sá»‘ bÃ¬nh luáº­n trong diá»…n Ä‘Ã n, kÃ¨m icon comment. |
+| Badge "Má»šI" | Badge | KhÃ´ng | KhÃ´ng | NhÃ£n ná»•i báº­t mÃ u xanh lÃ¡ "Má»šI" hoáº·c "NEW" hiá»ƒn thá»‹ gÃ³c trÃªn pháº£i tháº», chá»‰ xuáº¥t hiá»‡n náº¿u diá»…n Ä‘Ã n Ä‘Æ°á»£c táº¡o trong vÃ²ng 7 ngÃ y gáº§n nháº¥t. Tá»± Ä‘á»™ng áº©n sau 7 ngÃ y. |
+| Thá»i gian hoáº¡t Ä‘á»™ng gáº§n nháº¥t | KÃ½ tá»± | CÃ³ | CÃ³ | Thá»i gian cÃ³ hoáº¡t Ä‘á»™ng má»›i nháº¥t trong diá»…n Ä‘Ã n (bÃ i viáº¿t má»›i, bÃ¬nh luáº­n má»›i), hiá»ƒn thá»‹ dáº¡ng tÆ°Æ¡ng Ä‘á»‘i (vÃ­ dá»¥: "2 giá» trÆ°á»›c", "HÃ´m qua", "3 ngÃ y trÆ°á»›c"). |
+| NÃºt "Theo dÃµi" / "Äang theo dÃµi" | Button | CÃ³ | "Theo dÃµi" | NÃºt hÃ nh Ä‘á»™ng á»Ÿ cuá»‘i tháº». Khi chÆ°a theo dÃµi: nÃºt outline "Theo dÃµi". Khi Ä‘Ã£ theo dÃµi: nÃºt fill xanh "Äang theo dÃµi" vá»›i icon tick. HÃ nh vi chi tiáº¿t Ä‘Æ°á»£c mÃ´ táº£ trong UC88. |
+| ThÃ´ng bÃ¡o danh sÃ¡ch rá»—ng | ThÃ´ng bÃ¡o | KhÃ´ng | KhÃ´ng | Khi chÆ°a cÃ³ diá»…n Ä‘Ã n nÃ o: hiá»ƒn thá»‹ thÃ´ng bÃ¡o "Hiá»‡n chÆ°a cÃ³ diá»…n Ä‘Ã n nÃ o Ä‘Æ°á»£c táº¡o." á»Ÿ giá»¯a vÃ¹ng ná»™i dung. |
+| PhÃ¢n trang | Pagination | KhÃ´ng | CÃ³ | Thanh phÃ¢n trang cuá»‘i danh sÃ¡ch khi sá»‘ diá»…n Ä‘Ã n vÆ°á»£t ngÆ°á»¡ng hiá»ƒn thá»‹ máº·c Ä‘á»‹nh (vÃ­ dá»¥: 12 tháº»/trang trÃªn desktop). Gá»“m nÃºt trang trÆ°á»›c, sá»‘ trang hiá»‡n táº¡i, nÃºt trang sau vÃ  nÃºt nháº£y trang. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Xem danh sÃ¡ch diá»…n Ä‘Ã n má»›i nháº¥t | Card grid | Khi ngÆ°á»i dÃ¹ng chá»n tab "Má»›i nháº¥t", há»‡ thá»‘ng táº£i danh sÃ¡ch táº¥t cáº£ diá»…n Ä‘Ã n Ä‘Ã£ xuáº¥t báº£n, sáº¯p xáº¿p giáº£m dáº§n theo thá»i gian cÃ³ hoáº¡t Ä‘á»™ng gáº§n nháº¥t (thá»i Ä‘iá»ƒm cÃ³ chá»§ Ä‘á» hoáº·c bÃ¬nh luáº­n má»›i nháº¥t, hoáº·c thá»i Ä‘iá»ƒm táº¡o náº¿u chÆ°a cÃ³ hoáº¡t Ä‘á»™ng). TrÆ°á»ng há»£p 1: CÃ³ dá»¯ liá»‡u, hiá»ƒn thá»‹ lÆ°á»›i tháº» Ä‘áº§y Ä‘á»§. TrÆ°á»ng há»£p 2: ChÆ°a cÃ³ diá»…n Ä‘Ã n nÃ o, hiá»ƒn thá»‹ thÃ´ng bÃ¡o "Hiá»‡n chÆ°a cÃ³ diá»…n Ä‘Ã n nÃ o." TrÆ°á»ng há»£p 3: Lá»—i táº£i, hiá»ƒn thá»‹ thÃ´ng bÃ¡o lá»—i vÃ  nÃºt "Thá»­ láº¡i". |
+| 2 | Nháº­n dáº¡ng diá»…n Ä‘Ã n má»›i táº¡o | Badge "Má»šI" | Há»‡ thá»‘ng tá»± Ä‘á»™ng Ä‘áº·t badge "Má»šI" lÃªn cÃ¡c tháº» diá»…n Ä‘Ã n Ä‘Æ°á»£c táº¡o trong vÃ²ng 7 ngÃ y tÃ­nh tá»« ngÃ y hiá»‡n táº¡i. Badge biáº¿n máº¥t tá»± Ä‘á»™ng sau khi quÃ¡ 7 ngÃ y ká»ƒ tá»« ngÃ y táº¡o. |
+| 3 | Äiá»u hÆ°á»›ng vÃ o diá»…n Ä‘Ã n | Nháº¥n vÃ o tÃªn/tháº» diá»…n Ä‘Ã n | NgÆ°á»i dÃ¹ng nháº¥n vÃ o tÃªn diá»…n Ä‘Ã n hoáº·c tháº» diá»…n Ä‘Ã n, há»‡ thá»‘ng Ä‘iá»u hÆ°á»›ng sang trang Danh sÃ¡ch Chá»§ Ä‘á» cá»§a diá»…n Ä‘Ã n Ä‘Ã³ (UC90). |
+| 4 | Theo dÃµi diá»…n Ä‘Ã n tá»« tháº» | NÃºt "Theo dÃµi" | NgÆ°á»i dÃ¹ng nháº¥n nÃºt "Theo dÃµi" trÃªn tháº» diá»…n Ä‘Ã n. Náº¿u chÆ°a Ä‘Äƒng nháº­p: hiá»ƒn thá»‹ há»™p thoáº¡i yÃªu cáº§u Ä‘Äƒng nháº­p. Náº¿u Ä‘Ã£ Ä‘Äƒng nháº­p: thá»±c hiá»‡n hÃ nh Ä‘á»™ng theo dÃµi theo luá»“ng UC88; nÃºt chuyá»ƒn sang "Äang theo dÃµi". |
+| 5 | PhÃ¢n trang | Thanh phÃ¢n trang | NgÆ°á»i dÃ¹ng nháº¥n sá»‘ trang hoáº·c nÃºt Ä‘iá»u hÆ°á»›ng trang, há»‡ thá»‘ng táº£i trang tÆ°Æ¡ng á»©ng trong danh sÃ¡ch diá»…n Ä‘Ã n má»›i nháº¥t. |
+| 6 | Chuyá»ƒn tab | Tab bar | NgÆ°á»i dÃ¹ng nháº¥n vÃ o tab khÃ¡c ("Táº¥t cáº£", "Ná»•i báº­t", "Äang theo dÃµi"), há»‡ thá»‘ng chuyá»ƒn sang ná»™i dung tÆ°Æ¡ng á»©ng cá»§a UC87. |
+
+---
+
+*TÃ i liá»‡u Ä‘Æ°á»£c táº¡o tá»± Ä‘á»™ng bá»Ÿi AI Gen â€“ NgÃ y: 2026-03-16*
+## A.I.7_Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t
+
+### A.I.7.CPLQG-VI-086 - Xem danh sÃ¡ch diá»…n Ä‘Ã n nhiá»u ngÆ°á»i tham gia
+
+#### Má»¥c Ä‘Ã­ch
+
+Cho phÃ©p ngÆ°á»i dÃ¹ng xem danh sÃ¡ch cÃ¡c diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t thu hÃºt nhiá»u ngÆ°á»i tham gia vÃ  cÃ³ má»©c Ä‘á»™ hoáº¡t Ä‘á»™ng cao nháº¥t. Chá»©c nÄƒng nÃ y Ä‘Æ°á»£c thá»ƒ hiá»‡n dÆ°á»›i dáº¡ng Tab "Ná»•i báº­t" trong trang Danh sÃ¡ch Diá»…n Ä‘Ã n (UC87). Danh sÃ¡ch Ä‘Æ°á»£c xáº¿p háº¡ng theo sá»‘ thÃ nh viÃªn theo dÃµi, sá»‘ chá»§ Ä‘á» hoáº¡t Ä‘á»™ng vÃ  sá»‘ bÃ¬nh luáº­n, giÃºp ngÆ°á»i dÃ¹ng nhanh chÃ³ng xÃ¡c Ä‘á»‹nh cÃ¡c diá»…n Ä‘Ã n cÃ³ cá»™ng Ä‘á»“ng sÃ´i ná»•i nháº¥t Ä‘á»ƒ tham gia tranh luáº­n chÃ­nh sÃ¡ch.
+
+##### a. PhÃ¢n quyá»n
+
+- Chá»©c nÄƒng hoÃ n toÃ n cÃ´ng khai, khÃ´ng yÃªu cáº§u Ä‘Äƒng nháº­p.
+- Táº¥t cáº£ ngÆ°á»i dÃ¹ng (cÃ¡ nhÃ¢n, tá»• chá»©c, khÃ¡ch vÃ£ng lai) Ä‘á»u cÃ³ thá»ƒ xem danh sÃ¡ch diá»…n Ä‘Ã n ná»•i báº­t.
+- NÃºt "Theo dÃµi" chá»‰ hoáº¡t Ä‘á»™ng khi Ä‘Ã£ Ä‘Äƒng nháº­p; náº¿u chÆ°a Ä‘Äƒng nháº­p, nháº¥n nÃºt sáº½ hiá»ƒn thá»‹ há»™p thoáº¡i yÃªu cáº§u Ä‘Äƒng nháº­p.
+
+##### b. Äiá»u kiá»‡n thá»±c hiá»‡n
+
+- NgÆ°á»i dÃ¹ng truy cáº­p trang Danh sÃ¡ch Diá»…n Ä‘Ã n (UC87) vÃ  chá»n tab "Ná»•i báº­t".
+- Há»‡ thá»‘ng Ä‘Ã£ cÃ³ Ã­t nháº¥t má»™t diá»…n Ä‘Ã n Ä‘Æ°á»£c xuáº¥t báº£n vá»›i dá»¯ liá»‡u thá»‘ng kÃª (thÃ nh viÃªn, chá»§ Ä‘á», bÃ¬nh luáº­n).
+
+---
+
+#### CPLQG-VI-086.MH01 â€“ Trang Danh sÃ¡ch Diá»…n Ä‘Ã n â€“ Tab "Ná»•i báº­t"
+
+##### MÃ n hÃ¬nh
+
+Trang Danh sÃ¡ch Diá»…n Ä‘Ã n â€“ Tab "Ná»•i báº­t": Hiá»ƒn thá»‹ danh sÃ¡ch xáº¿p háº¡ng cÃ¡c diá»…n Ä‘Ã n cÃ³ nhiá»u ngÆ°á»i tham gia nháº¥t, kÃ¨m sá»‘ liá»‡u thá»‘ng kÃª ná»•i báº­t vÃ  thá»© háº¡ng
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Tab bar | Tab bar | CÃ³ | Tab "Ná»•i báº­t" Ä‘Æ°á»£c kÃ­ch hoáº¡t | Thanh tab ngang: "Táº¥t cáº£", "Má»›i nháº¥t", "Ná»•i báº­t" (Ä‘ang kÃ­ch hoáº¡t), "Äang theo dÃµi". Tab Ä‘ang kÃ­ch hoáº¡t cÃ³ gáº¡ch chÃ¢n hoáº·c ná»n ná»•i báº­t. |
+| Dropdown sáº¯p xáº¿p | Dropdown | CÃ³ | "Nhiá»u thÃ nh viÃªn nháº¥t" | Dropdown chá»n tiÃªu chÃ­ xáº¿p háº¡ng vá»›i cÃ¡c lá»±a chá»n: "Nhiá»u thÃ nh viÃªn nháº¥t", "Nhiá»u bÃ¬nh luáº­n nháº¥t", "Nhiá»u chá»§ Ä‘á» nháº¥t". Khi thay Ä‘á»•i lá»±a chá»n, danh sÃ¡ch Ä‘Æ°á»£c táº£i láº¡i vÃ  xáº¿p háº¡ng láº¡i theo tiÃªu chÃ­ má»›i. |
+| TiÃªu Ä‘á» section | KÃ½ tá»± | CÃ³ | CÃ³ | NhÃ£n "Diá»…n Ä‘Ã n ná»•i báº­t" hoáº·c "Top diá»…n Ä‘Ã n" Ä‘áº·t phÃ­a trÃªn danh sÃ¡ch, kÃ¨m tiÃªu chÃ­ xáº¿p háº¡ng hiá»‡n táº¡i (vÃ­ dá»¥: "Xáº¿p háº¡ng theo sá»‘ thÃ nh viÃªn"). |
+| Danh sÃ¡ch tháº» diá»…n Ä‘Ã n cÃ³ xáº¿p háº¡ng | Card list | CÃ³ | CÃ³ | Danh sÃ¡ch tháº» diá»…n Ä‘Ã n theo thá»© tá»± xáº¿p háº¡ng. Bá»‘ cá»¥c dáº¡ng list (1 cá»™t) thay vÃ¬ grid Ä‘á»ƒ dá»… Ä‘á»c sá»‘ thá»© háº¡ng. Má»—i tháº» chiáº¿m toÃ n bá»™ chiá»u rá»™ng vÃ¹ng ná»™i dung chÃ­nh. |
+| Sá»‘ thá»© háº¡ng | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Sá»‘ thá»© háº¡ng (#1, #2, #3, ...) hiá»ƒn thá»‹ ná»•i báº­t bÃªn trÃ¡i tháº» diá»…n Ä‘Ã n. Háº¡ng #1, #2, #3 sá»­ dá»¥ng mÃ u vÃ ng/báº¡c/Ä‘á»“ng tÆ°Æ¡ng á»©ng Ä‘á»ƒ nháº¥n máº¡nh. CÃ¡c háº¡ng cÃ²n láº¡i dÃ¹ng mÃ u xÃ¡m. |
+| Icon chá»¯ cÃ¡i | Avatar | CÃ³ | CÃ³ | HÃ¬nh vuÃ´ng bo gÃ³c hiá»ƒn thá»‹ 1â€“2 chá»¯ cÃ¡i Ä‘áº§u cá»§a tÃªn diá»…n Ä‘Ã n, mÃ u ná»n tá»± sinh nháº¥t quÃ¡n theo tÃªn. KÃ­ch thÆ°á»›c lá»›n hÆ¡n so vá»›i tab "Má»›i nháº¥t" Ä‘á»ƒ phÃ¹ há»£p bá»‘ cá»¥c list. |
+| TÃªn diá»…n Ä‘Ã n | KÃ½ tá»± | CÃ³ | CÃ³ | TÃªn Ä‘áº§y Ä‘á»§ diá»…n Ä‘Ã n, chá»¯ Ä‘áº­m, link xanh. Nháº¥n Ä‘iá»u hÆ°á»›ng Ä‘áº¿n UC90. |
+| Badge lÄ©nh vá»±c | Badge | KhÃ´ng | CÃ³ (náº¿u cÃ³ dá»¯ liá»‡u) | NhÃ£n mÃ u thá»ƒ hiá»‡n lÄ©nh vá»±c phÃ¡p luáº­t cá»§a diá»…n Ä‘Ã n. |
+| MÃ´ táº£ ngáº¯n | KÃ½ tá»± | KhÃ´ng | CÃ³ (náº¿u cÃ³ dá»¯ liá»‡u) | MÃ´ táº£ tÃ³m táº¯t má»¥c Ä‘Ã­ch diá»…n Ä‘Ã n, tá»‘i Ä‘a 2 dÃ²ng. |
+| Chá»‰ sá»‘ thÃ nh viÃªn | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Sá»‘ thÃ nh viÃªn Ä‘ang theo dÃµi diá»…n Ä‘Ã n, hiá»ƒn thá»‹ ná»•i báº­t kÃ¨m icon ngÆ°á»i. Khi tiÃªu chÃ­ xáº¿p háº¡ng lÃ  "Nhiá»u thÃ nh viÃªn nháº¥t", chá»‰ sá»‘ nÃ y Ä‘Æ°á»£c highlight (chá»¯ Ä‘áº­m, mÃ u xanh). DÃ¹ng Ä‘á»‹nh dáº¡ng K/M náº¿u trÃªn 1000. |
+| Chá»‰ sá»‘ chá»§ Ä‘á» trong 30 ngÃ y | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Sá»‘ chá»§ Ä‘á» Ä‘Æ°á»£c táº¡o trong 30 ngÃ y gáº§n nháº¥t, hiá»ƒn thá»‹ kÃ¨m icon vÃ  nhÃ£n "X chá»§ Ä‘á» / 30 ngÃ y". Khi xáº¿p háº¡ng theo "Nhiá»u chá»§ Ä‘á» nháº¥t", chá»‰ sá»‘ nÃ y Ä‘Æ°á»£c highlight. |
+| Chá»‰ sá»‘ bÃ¬nh luáº­n | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Tá»•ng sá»‘ bÃ¬nh luáº­n trong diá»…n Ä‘Ã n hoáº·c sá»‘ bÃ¬nh luáº­n trong 30 ngÃ y, kÃ¨m icon comment. Khi xáº¿p háº¡ng theo "Nhiá»u bÃ¬nh luáº­n nháº¥t", chá»‰ sá»‘ nÃ y Ä‘Æ°á»£c highlight. |
+| Thanh tiáº¿n trÃ¬nh tÆ°Æ¡ng Ä‘á»‘i | Progress bar | KhÃ´ng | CÃ³ | Thanh progress bar hiá»ƒn thá»‹ bÃªn dÆ°á»›i cÃ¡c chá»‰ sá»‘, thá»ƒ hiá»‡n tá»· lá»‡ tÆ°Æ¡ng Ä‘á»‘i so vá»›i diá»…n Ä‘Ã n Ä‘á»©ng Ä‘áº§u (#1). VÃ­ dá»¥: diá»…n Ä‘Ã n #1 cÃ³ thanh Ä‘áº§y 100%, diá»…n Ä‘Ã n #2 cÃ³ thanh á»Ÿ má»©c tá»· lá»‡ tÆ°Æ¡ng á»©ng. GiÃºp ngÆ°á»i dÃ¹ng trá»±c quan hÃ³a khoáº£ng cÃ¡ch giá»¯a cÃ¡c diá»…n Ä‘Ã n. |
+| NÃºt "Theo dÃµi" / "Äang theo dÃµi" | Button | CÃ³ | "Theo dÃµi" | NÃºt hÃ nh Ä‘á»™ng outline "Theo dÃµi" hoáº·c fill xanh "Äang theo dÃµi". HÃ nh vi theo UC88. |
+| ThÃ´ng bÃ¡o danh sÃ¡ch rá»—ng | ThÃ´ng bÃ¡o | KhÃ´ng | KhÃ´ng | Khi khÃ´ng cÃ³ dá»¯ liá»‡u: hiá»ƒn thá»‹ "ChÆ°a cÃ³ diá»…n Ä‘Ã n nÃ o cÃ³ thá»‘ng kÃª hoáº¡t Ä‘á»™ng." |
+| PhÃ¢n trang | Pagination | KhÃ´ng | CÃ³ | Hiá»ƒn thá»‹ khi sá»‘ diá»…n Ä‘Ã n vÆ°á»£t ngÆ°á»¡ng trang (vÃ­ dá»¥: 20 diá»…n Ä‘Ã n/trang). |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Xem danh sÃ¡ch diá»…n Ä‘Ã n xáº¿p háº¡ng theo má»©c Ä‘á»™ tham gia | Card list | Khi ngÆ°á»i dÃ¹ng chá»n tab "Ná»•i báº­t", há»‡ thá»‘ng táº£i danh sÃ¡ch táº¥t cáº£ diá»…n Ä‘Ã n Ä‘Ã£ xuáº¥t báº£n vÃ  xáº¿p háº¡ng theo tiÃªu chÃ­ máº·c Ä‘á»‹nh "Nhiá»u thÃ nh viÃªn nháº¥t". TrÆ°á»ng há»£p 1: CÃ³ dá»¯ liá»‡u, hiá»ƒn thá»‹ danh sÃ¡ch cÃ³ sá»‘ thá»© háº¡ng, chá»‰ sá»‘ ná»•i báº­t vÃ  thanh tiáº¿n trÃ¬nh. TrÆ°á»ng há»£p 2: ChÆ°a cÃ³ diá»…n Ä‘Ã n, hiá»ƒn thá»‹ thÃ´ng bÃ¡o phÃ¹ há»£p. TrÆ°á»ng há»£p 3: Lá»—i táº£i, hiá»ƒn thá»‹ thÃ´ng bÃ¡o lá»—i vÃ  nÃºt "Thá»­ láº¡i". |
+| 2 | Thay Ä‘á»•i tiÃªu chÃ­ xáº¿p háº¡ng | Dropdown | NgÆ°á»i dÃ¹ng chá»n tiÃªu chÃ­ xáº¿p háº¡ng tá»« dropdown ("Nhiá»u thÃ nh viÃªn nháº¥t" / "Nhiá»u bÃ¬nh luáº­n nháº¥t" / "Nhiá»u chá»§ Ä‘á» nháº¥t"). Há»‡ thá»‘ng táº£i láº¡i danh sÃ¡ch vÃ  hiá»ƒn thá»‹ thá»© háº¡ng má»›i theo tiÃªu chÃ­ Ä‘Æ°á»£c chá»n. Chá»‰ sá»‘ tÆ°Æ¡ng á»©ng vá»›i tiÃªu chÃ­ Ä‘Æ°á»£c chá»n sáº½ Ä‘Æ°á»£c highlight trÃªn má»—i tháº». |
+| 3 | Äiá»u hÆ°á»›ng vÃ o diá»…n Ä‘Ã n | Nháº¥n vÃ o tÃªn/tháº» | NgÆ°á»i dÃ¹ng nháº¥n vÃ o tÃªn hoáº·c tháº» diá»…n Ä‘Ã n, há»‡ thá»‘ng Ä‘iá»u hÆ°á»›ng sang trang Danh sÃ¡ch Chá»§ Ä‘á» cá»§a diá»…n Ä‘Ã n Ä‘Ã³ (UC90). |
+| 4 | Theo dÃµi diá»…n Ä‘Ã n tá»« tháº» | NÃºt "Theo dÃµi" | NgÆ°á»i dÃ¹ng nháº¥n nÃºt "Theo dÃµi". Náº¿u chÆ°a Ä‘Äƒng nháº­p: hiá»ƒn thá»‹ há»™p thoáº¡i yÃªu cáº§u Ä‘Äƒng nháº­p. Náº¿u Ä‘Ã£ Ä‘Äƒng nháº­p: thá»±c hiá»‡n hÃ nh Ä‘á»™ng theo dÃµi theo luá»“ng UC88; nÃºt chuyá»ƒn sang "Äang theo dÃµi". |
+| 5 | PhÃ¢n trang | Thanh phÃ¢n trang | NgÆ°á»i dÃ¹ng chuyá»ƒn trang, há»‡ thá»‘ng táº£i trang tiáº¿p theo giá»¯ nguyÃªn tiÃªu chÃ­ xáº¿p háº¡ng Ä‘ang chá»n. |
+| 6 | Chuyá»ƒn tab | Tab bar | NgÆ°á»i dÃ¹ng nháº¥n tab khÃ¡c, há»‡ thá»‘ng chuyá»ƒn ná»™i dung tÆ°Æ¡ng á»©ng theo UC87. |
+
+---
+
+*TÃ i liá»‡u Ä‘Æ°á»£c táº¡o tá»± Ä‘á»™ng bá»Ÿi AI Gen â€“ NgÃ y: 2026-03-16*
+## A.I.7_Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t
+
+### A.I.7.CPLQG-VI-087 - Xem danh sÃ¡ch diá»…n Ä‘Ã n
+
+#### Má»¥c Ä‘Ã­ch
+
+Cho phÃ©p ngÆ°á»i dÃ¹ng xem toÃ n bá»™ danh sÃ¡ch cÃ¡c diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t trÃªn Cá»•ng PhÃ¡p luáº­t Quá»‘c gia, vá»›i kháº£ nÄƒng lá»c theo lÄ©nh vá»±c vÃ  cÆ¡ quan ban hÃ nh, tÃ¬m kiáº¿m theo tá»« khÃ³a, vÃ  chuyá»ƒn Ä‘á»•i giá»¯a cÃ¡c cháº¿ Ä‘á»™ xem: Táº¥t cáº£, Má»›i nháº¥t (UC85), Ná»•i báº­t (UC86), vÃ  Äang theo dÃµi. ÄÃ¢y lÃ  trang trung tÃ¢m cá»§a khu vá»±c Diá»…n Ä‘Ã n â€” nÆ¡i ngÆ°á»i dÃ¹ng khÃ¡m phÃ¡, theo dÃµi vÃ  Ä‘iá»u hÆ°á»›ng vÃ o cÃ¡c diá»…n Ä‘Ã n chÃ­nh sÃ¡ch cá»¥ thá»ƒ Ä‘á»ƒ Ä‘á»c hoáº·c tham gia tranh luáº­n.
+
+##### a. PhÃ¢n quyá»n
+
+- Xem danh sÃ¡ch táº¥t cáº£ diá»…n Ä‘Ã n: CÃ´ng khai, khÃ´ng yÃªu cáº§u Ä‘Äƒng nháº­p.
+- Tab "Äang theo dÃµi": Chá»‰ hiá»ƒn thá»‹ khi ngÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p; hiá»ƒn thá»‹ danh sÃ¡ch cÃ¡c diá»…n Ä‘Ã n ngÆ°á»i dÃ¹ng Ä‘ang theo dÃµi.
+- NÃºt "Táº¡o chá»§ Ä‘á»": YÃªu cáº§u Ä‘Äƒng nháº­p; khi chÆ°a Ä‘Äƒng nháº­p nháº¥n vÃ o sáº½ hiá»ƒn thá»‹ há»™p thoáº¡i Ä‘Äƒng nháº­p.
+- NÃºt "Theo dÃµi" trÃªn má»—i tháº» diá»…n Ä‘Ã n: YÃªu cáº§u Ä‘Äƒng nháº­p.
+
+##### b. Äiá»u kiá»‡n thá»±c hiá»‡n
+
+- NgÆ°á»i dÃ¹ng truy cáº­p trang Diá»…n Ä‘Ã n ChÃ­nh sÃ¡ch PhÃ¡p luáº­t trÃªn Cá»•ng.
+- Há»‡ thá»‘ng CMS Ä‘Ã£ cÃ³ dá»¯ liá»‡u diá»…n Ä‘Ã n Ä‘Æ°á»£c xuáº¥t báº£n.
+
+---
+
+#### CPLQG-VI-087.MH01 â€“ Trang Danh sÃ¡ch Diá»…n Ä‘Ã n â€“ Tab "Táº¥t cáº£"
+
+##### MÃ n hÃ¬nh
+
+Trang Danh sÃ¡ch Diá»…n Ä‘Ã n â€“ Tab "Táº¥t cáº£": Giao diá»‡n chÃ­nh cá»§a khu vá»±c Diá»…n Ä‘Ã n, bao gá»“m header, thanh tÃ¬m kiáº¿m, bá»™ lá»c sidebar trÃ¡i, thanh tab Ä‘iá»u hÆ°á»›ng vÃ  lÆ°á»›i tháº» diá»…n Ä‘Ã n
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Header trang | Section | CÃ³ | CÃ³ | Khu vá»±c tiÃªu Ä‘á» trang gá»“m: TiÃªu Ä‘á» H1 "Diá»…n Ä‘Ã n ChÃ­nh sÃ¡ch PhÃ¡p luáº­t", mÃ´ táº£ ngáº¯n giá»›i thiá»‡u má»¥c Ä‘Ã­ch khu vá»±c diá»…n Ä‘Ã n (vÃ­ dá»¥: "NÆ¡i tranh luáº­n vÃ  gÃ³p Ã½ vá» chÃ­nh sÃ¡ch phÃ¡p luáº­t Viá»‡t Nam"), Ã´ tÃ¬m kiáº¿m diá»…n Ä‘Ã n, vÃ  nÃºt "Táº¡o chá»§ Ä‘á»" (mÃ u xanh, gÃ³c pháº£i). |
+| Ã” tÃ¬m kiáº¿m diá»…n Ä‘Ã n | Text input | KhÃ´ng | KhÃ´ng | Ã” nháº­p tá»« khÃ³a tÃ¬m kiáº¿m diá»…n Ä‘Ã n, placeholder "TÃ¬m kiáº¿m diá»…n Ä‘Ã n...", kÃ¨m icon kÃ­nh lÃºp. TÃ¬m kiáº¿m thá»±c hiá»‡n khi báº¥m Enter hoáº·c icon kÃ­nh lÃºp, lá»c danh sÃ¡ch hiá»ƒn thá»‹ theo tÃªn vÃ  mÃ´ táº£ diá»…n Ä‘Ã n. |
+| NÃºt "Táº¡o chá»§ Ä‘á»" | Button | KhÃ´ng | KhÃ´ng | NÃºt mÃ u xanh Ä‘áº­m "Táº¡o chá»§ Ä‘á»" Ä‘áº·t gÃ³c pháº£i header. Khi nháº¥n vÃ  Ä‘Ã£ Ä‘Äƒng nháº­p: Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang Táº¡o chá»§ Ä‘á» (UC89). Khi chÆ°a Ä‘Äƒng nháº­p: hiá»ƒn thá»‹ há»™p thoáº¡i yÃªu cáº§u Ä‘Äƒng nháº­p. |
+| Tab bar | Tab bar | CÃ³ | Tab "Táº¥t cáº£" | Thanh tab ngang Ä‘áº·t bÃªn dÆ°á»›i header: "Táº¥t cáº£" (Ä‘ang kÃ­ch hoáº¡t), "Má»›i nháº¥t" (UC85), "Ná»•i báº­t" (UC86), "Äang theo dÃµi" (chá»‰ hiá»‡n khi Ä‘Ã£ Ä‘Äƒng nháº­p). |
+| Sidebar bá»™ lá»c trÃ¡i | Filter panel | KhÃ´ng | CÃ³ | Panel cá»‘ Ä‘á»‹nh bÃªn trÃ¡i vÃ¹ng ná»™i dung chÃ­nh (chiá»u rá»™ng khoáº£ng 240px, áº©n/thu gá»n trÃªn mobile). Gá»“m cÃ¡c section lá»c: Lá»c theo LÄ©nh vá»±c vÃ  Lá»c theo CÆ¡ quan ban hÃ nh vÃ  Lá»c theo Tráº¡ng thÃ¡i. |
+| Section lá»c LÄ©nh vá»±c | Checkbox list | KhÃ´ng | Táº¥t cáº£ lÄ©nh vá»±c | Danh sÃ¡ch checkbox cÃ¡c lÄ©nh vá»±c phÃ¡p luáº­t: "DÃ¢n sá»±", "HÃ¬nh sá»±", "Äáº¥t Ä‘ai â€“ NhÃ  á»Ÿ", "Doanh nghiá»‡p â€“ Äáº§u tÆ°", "HÃ nh chÃ­nh", "Lao Ä‘á»™ng", "HÃ´n nhÃ¢n & Gia Ä‘Ã¬nh", "MÃ´i trÆ°á»ng", "Thuáº¿ â€“ TÃ i chÃ­nh", "KhÃ¡c". Má»—i lÄ©nh vá»±c kÃ¨m sá»‘ lÆ°á»£ng diá»…n Ä‘Ã n trong ngoáº·c. Cho phÃ©p chá»n nhiá»u lÄ©nh vá»±c cÃ¹ng lÃºc. |
+| Section lá»c CÆ¡ quan | Checkbox list | KhÃ´ng | Táº¥t cáº£ cÆ¡ quan | Danh sÃ¡ch checkbox cÃ¡c cÆ¡ quan ban hÃ nh/chá»§ trÃ¬ diá»…n Ä‘Ã n: "Bá»™ TÆ° phÃ¡p", "Quá»‘c há»™i", "ChÃ­nh phá»§", "Bá»™ TÃ i nguyÃªn MÃ´i trÆ°á»ng", "Bá»™ Lao Ä‘á»™ng", "TÃ²a Ã¡n NhÃ¢n dÃ¢n Tá»‘i cao", vÃ  cÃ¡c cÆ¡ quan khÃ¡c. Má»—i cÆ¡ quan kÃ¨m sá»‘ lÆ°á»£ng diá»…n Ä‘Ã n. Cho phÃ©p chá»n nhiá»u cÆ¡ quan. |
+| Section lá»c Tráº¡ng thÃ¡i | Radio button group | KhÃ´ng | "Äang hoáº¡t Ä‘á»™ng" | Radio buttons: "Äang hoáº¡t Ä‘á»™ng" (chá»‰ hiá»ƒn thá»‹ diá»…n Ä‘Ã n Ä‘ang má»Ÿ), "Táº¥t cáº£" (gá»“m cáº£ diá»…n Ä‘Ã n Ä‘Ã£ Ä‘Ã³ng/lÆ°u trá»¯). Máº·c Ä‘á»‹nh chá»n "Äang hoáº¡t Ä‘á»™ng". |
+| NÃºt "Äáº·t láº¡i bá»™ lá»c" | Button | KhÃ´ng | áº¨n khi khÃ´ng cÃ³ bá»™ lá»c | NÃºt text nhá» "Äáº·t láº¡i bá»™ lá»c" xuáº¥t hiá»‡n trong sidebar khi ngÆ°á»i dÃ¹ng Ä‘Ã£ chá»n Ã­t nháº¥t má»™t bá»™ lá»c. Nháº¥n Ä‘á»ƒ reset táº¥t cáº£ bá»™ lá»c vá» máº·c Ä‘á»‹nh. |
+| NhÃ£n sá»‘ káº¿t quáº£ lá»c | KÃ½ tá»± | CÃ³ | CÃ³ | Hiá»ƒn thá»‹ phÃ­a trÃªn lÆ°á»›i tháº»: "Hiá»ƒn thá»‹ X diá»…n Ä‘Ã n" (vÃ­ dá»¥: "Hiá»ƒn thá»‹ 48 diá»…n Ä‘Ã n"). Cáº­p nháº­t real-time khi thay Ä‘á»•i bá»™ lá»c. |
+| LÆ°á»›i tháº» diá»…n Ä‘Ã n | Card grid | CÃ³ | CÃ³ | VÃ¹ng ná»™i dung chÃ­nh bÃªn pháº£i sidebar. Hiá»ƒn thá»‹ danh sÃ¡ch tháº» diá»…n Ä‘Ã n theo lÆ°á»›i 3 cá»™t (desktop â‰¥1200px), 2 cá»™t (tablet 768â€“1199px), 1 cá»™t (mobile <768px). Máº·c Ä‘á»‹nh sáº¯p xáº¿p theo má»©c Ä‘á»™ hoáº¡t Ä‘á»™ng gáº§n nháº¥t. |
+| Tháº» diá»…n Ä‘Ã n | Card | CÃ³ | CÃ³ | Má»—i tháº» gá»“m: icon chá»¯ cÃ¡i (avatar tá»± sinh mÃ u), tÃªn diá»…n Ä‘Ã n (link xanh Ä‘áº­m), badge lÄ©nh vá»±c, mÃ´ táº£ ngáº¯n (2 dÃ²ng), khá»‘i stats (Chá»§ Ä‘á» / ThÃ nh viÃªn / BÃ¬nh luáº­n), nÃºt "Theo dÃµi"/"Äang theo dÃµi". Khi hover: viá»n tháº» Ä‘á»•i mÃ u xanh nháº¡t, cÃ³ shadow. |
+| Icon chá»¯ cÃ¡i | Avatar | CÃ³ | CÃ³ | HÃ¬nh vuÃ´ng bo gÃ³c (40Ã—40px) hiá»ƒn thá»‹ 1â€“2 chá»¯ cÃ¡i Ä‘áº§u tÃªn diá»…n Ä‘Ã n (vÃ­ dá»¥ "LD" cho "Luáº­t DÃ¢n sá»±"). MÃ u ná»n Ä‘Æ°á»£c sinh tá»± Ä‘á»™ng vÃ  nháº¥t quÃ¡n dá»±a trÃªn hash tÃªn diá»…n Ä‘Ã n (xanh, tÃ­m, cam, Ä‘á», xanh lÃ¡...). |
+| TÃªn diá»…n Ä‘Ã n | KÃ½ tá»± | CÃ³ | CÃ³ | TÃªn Ä‘áº§y Ä‘á»§ diá»…n Ä‘Ã n, font Ä‘áº­m, mÃ u xanh Ä‘áº­m, lÃ  link nháº¥n Ä‘Æ°á»£c. Nháº¥n Ä‘iá»u hÆ°á»›ng Ä‘áº¿n UC90. |
+| Badge lÄ©nh vá»±c | Badge | KhÃ´ng | CÃ³ (náº¿u cÃ³ dá»¯ liá»‡u) | NhÃ£n chip mÃ u thá»ƒ hiá»‡n lÄ©nh vá»±c phÃ¡p luáº­t chÃ­nh cá»§a diá»…n Ä‘Ã n (vÃ­ dá»¥: chip "DÃ¢n sá»±" mÃ u xanh dÆ°Æ¡ng nháº¡t). áº¨n náº¿u chÆ°a phÃ¢n lÄ©nh vá»±c. |
+| MÃ´ táº£ ngáº¯n diá»…n Ä‘Ã n | KÃ½ tá»± | KhÃ´ng | CÃ³ (náº¿u cÃ³ dá»¯ liá»‡u) | MÃ´ táº£ tÃ³m táº¯t má»¥c Ä‘Ã­ch vÃ  pháº¡m vi diá»…n Ä‘Ã n, hiá»ƒn thá»‹ tá»‘i Ä‘a 2 dÃ²ng. Cáº¯t bá»›t thÃªm "..." náº¿u vÆ°á»£t. |
+| Sá»‘ chá»§ Ä‘á» | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Tá»•ng sá»‘ chá»§ Ä‘á» trong diá»…n Ä‘Ã n. Äá»‹nh dáº¡ng rÃºt gá»n: "1.2K" náº¿u trÃªn 1000. KÃ¨m icon bong bÃ³ng há»™i thoáº¡i vÃ  nhÃ£n "Chá»§ Ä‘á»". |
+| Sá»‘ thÃ nh viÃªn | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Sá»‘ ngÆ°á»i dÃ¹ng Ä‘ang theo dÃµi diá»…n Ä‘Ã n. Äá»‹nh dáº¡ng rÃºt gá»n. KÃ¨m icon ngÆ°á»i vÃ  nhÃ£n "ThÃ nh viÃªn". |
+| Sá»‘ bÃ¬nh luáº­n | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Tá»•ng sá»‘ bÃ¬nh luáº­n trong diá»…n Ä‘Ã n. Äá»‹nh dáº¡ng rÃºt gá»n. KÃ¨m icon comment vÃ  nhÃ£n "BÃ¬nh luáº­n". |
+| NÃºt "Theo dÃµi" / "Äang theo dÃµi" | Button | CÃ³ | "Theo dÃµi" | NÃºt outline nhá» "Theo dÃµi" Ä‘áº·t cuá»‘i tháº». Khi ngÆ°á»i dÃ¹ng Ä‘Ã£ theo dÃµi: nÃºt fill xanh "Äang theo dÃµi" kÃ¨m icon tick. HÃ nh vi chi tiáº¿t mÃ´ táº£ trong UC88. |
+| Tráº¡ng thÃ¡i empty state | ThÃ´ng bÃ¡o | KhÃ´ng | KhÃ´ng | Khi khÃ´ng cÃ³ diá»…n Ä‘Ã n nÃ o phÃ¹ há»£p vá»›i bá»™ lá»c/tÃ¬m kiáº¿m: hiá»ƒn thá»‹ thÃ´ng bÃ¡o "KhÃ´ng tÃ¬m tháº¥y diá»…n Ä‘Ã n phÃ¹ há»£p. Thá»­ thay Ä‘á»•i bá»™ lá»c hoáº·c tá»« khÃ³a tÃ¬m kiáº¿m." kÃ¨m icon minh há»a á»Ÿ giá»¯a vÃ¹ng ná»™i dung. |
+| PhÃ¢n trang | Pagination | KhÃ´ng | CÃ³ | Thanh phÃ¢n trang cuá»‘i danh sÃ¡ch. Hiá»ƒn thá»‹ khi sá»‘ diá»…n Ä‘Ã n vÆ°á»£t ngÆ°á»¡ng trang (12 tháº»/trang). Gá»“m: nÃºt "TrÆ°á»›c", danh sÃ¡ch sá»‘ trang, nÃºt "Sau". Giá»¯ nguyÃªn bá»™ lá»c khi chuyá»ƒn trang. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Xem toÃ n bá»™ danh sÃ¡ch diá»…n Ä‘Ã n | Card grid | Khi ngÆ°á»i dÃ¹ng truy cáº­p trang, há»‡ thá»‘ng táº£i vÃ  hiá»ƒn thá»‹ toÃ n bá»™ diá»…n Ä‘Ã n Ä‘ang hoáº¡t Ä‘á»™ng sáº¯p xáº¿p máº·c Ä‘á»‹nh theo má»©c Ä‘á»™ hoáº¡t Ä‘á»™ng. TrÆ°á»ng há»£p 1: CÃ³ dá»¯ liá»‡u, hiá»ƒn thá»‹ lÆ°á»›i tháº». TrÆ°á»ng há»£p 2: ChÆ°a cÃ³ diá»…n Ä‘Ã n nÃ o, hiá»ƒn thá»‹ thÃ´ng bÃ¡o phÃ¹ há»£p. TrÆ°á»ng há»£p 3: Lá»—i táº£i, hiá»ƒn thá»‹ thÃ´ng bÃ¡o lá»—i vÃ  nÃºt "Thá»­ láº¡i". |
+| 2 | TÃ¬m kiáº¿m diá»…n Ä‘Ã n | Text input + Enter | NgÆ°á»i dÃ¹ng nháº­p tá»« khÃ³a vÃ  báº¥m Enter hoáº·c icon kÃ­nh lÃºp. Há»‡ thá»‘ng lá»c vÃ  hiá»ƒn thá»‹ láº¡i danh sÃ¡ch diá»…n Ä‘Ã n cÃ³ tÃªn hoáº·c mÃ´ táº£ chá»©a tá»« khÃ³a. Káº¿t quáº£ tÃ¬m kiáº¿m cÃ³ thá»ƒ káº¿t há»£p vá»›i bá»™ lá»c sidebar Ä‘ang Ã¡p dá»¥ng. TrÆ°á»ng há»£p khÃ´ng cÃ³ káº¿t quáº£: hiá»ƒn thá»‹ empty state. |
+| 3 | Lá»c theo lÄ©nh vá»±c | Checkbox list | NgÆ°á»i dÃ¹ng chá»n/bá» chá»n má»™t hoáº·c nhiá»u lÄ©nh vá»±c trong sidebar. Há»‡ thá»‘ng cáº­p nháº­t ngay danh sÃ¡ch vÃ  nhÃ£n sá»‘ káº¿t quáº£. Khi chá»n nhiá»u lÄ©nh vá»±c: hiá»ƒn thá»‹ diá»…n Ä‘Ã n thuá»™c báº¥t ká»³ lÄ©nh vá»±c nÃ o Ä‘Ã£ chá»n (OR logic). |
+| 4 | Lá»c theo cÆ¡ quan | Checkbox list | NgÆ°á»i dÃ¹ng chá»n/bá» chá»n má»™t hoáº·c nhiá»u cÆ¡ quan trong sidebar. Há»‡ thá»‘ng cáº­p nháº­t danh sÃ¡ch. Khi káº¿t há»£p vá»›i lá»c lÄ©nh vá»±c: Ã¡p dá»¥ng AND logic giá»¯a hai nhÃ³m bá»™ lá»c. |
+| 5 | Lá»c theo tráº¡ng thÃ¡i | Radio button | NgÆ°á»i dÃ¹ng chá»n "Äang hoáº¡t Ä‘á»™ng" hoáº·c "Táº¥t cáº£". Há»‡ thá»‘ng lá»c vÃ  cáº­p nháº­t danh sÃ¡ch tÆ°Æ¡ng á»©ng. |
+| 6 | Äáº·t láº¡i bá»™ lá»c | NÃºt text | NgÆ°á»i dÃ¹ng nháº¥n "Äáº·t láº¡i bá»™ lá»c", há»‡ thá»‘ng reset táº¥t cáº£ checkbox vÃ  radio button vá» máº·c Ä‘á»‹nh, táº£i láº¡i danh sÃ¡ch Ä‘áº§y Ä‘á»§. |
+| 7 | Theo dÃµi diá»…n Ä‘Ã n tá»« tháº» | NÃºt "Theo dÃµi" | NgÆ°á»i dÃ¹ng nháº¥n "Theo dÃµi" trÃªn tháº». Náº¿u chÆ°a Ä‘Äƒng nháº­p: hiá»ƒn thá»‹ há»™p thoáº¡i yÃªu cáº§u Ä‘Äƒng nháº­p. Náº¿u Ä‘Ã£ Ä‘Äƒng nháº­p: thá»±c hiá»‡n luá»“ng UC88; nÃºt chuyá»ƒn sang "Äang theo dÃµi", hiá»ƒn thá»‹ toast xÃ¡c nháº­n. |
+| 8 | Äiá»u hÆ°á»›ng vÃ o diá»…n Ä‘Ã n | Nháº¥n tÃªn/tháº» | Nháº¥n tÃªn hoáº·c vÃ¹ng ná»™i dung tháº» (trá»« nÃºt "Theo dÃµi"): Ä‘iá»u hÆ°á»›ng sang UC90 â€“ Danh sÃ¡ch Chá»§ Ä‘á» trong diá»…n Ä‘Ã n. |
+| 9 | Chuyá»ƒn sang táº¡o chá»§ Ä‘á» | NÃºt "Táº¡o chá»§ Ä‘á»" | Nháº¥n nÃºt "Táº¡o chá»§ Ä‘á»" á»Ÿ header. Náº¿u Ä‘Ã£ Ä‘Äƒng nháº­p: Ä‘iá»u hÆ°á»›ng Ä‘áº¿n UC89. Náº¿u chÆ°a Ä‘Äƒng nháº­p: hiá»ƒn thá»‹ há»™p thoáº¡i Ä‘Äƒng nháº­p. |
+| 10 | Chuyá»ƒn tab | Tab bar | Nháº¥n tab "Má»›i nháº¥t" â†’ hiá»ƒn thá»‹ ná»™i dung UC85. Nháº¥n tab "Ná»•i báº­t" â†’ hiá»ƒn thá»‹ ná»™i dung UC86. Nháº¥n tab "Äang theo dÃµi" â†’ hiá»ƒn thá»‹ danh sÃ¡ch diá»…n Ä‘Ã n ngÆ°á»i dÃ¹ng Ä‘ang theo dÃµi (yÃªu cáº§u Ä‘Äƒng nháº­p). |
+| 11 | PhÃ¢n trang | Pagination | NgÆ°á»i dÃ¹ng chuyá»ƒn trang, há»‡ thá»‘ng táº£i trang tÆ°Æ¡ng á»©ng vÃ  giá»¯ nguyÃªn bá»™ lá»c Ä‘ang Ã¡p dá»¥ng. |
+
+---
+
+#### CPLQG-VI-087.MH02 â€“ Trang Danh sÃ¡ch Diá»…n Ä‘Ã n â€“ Tab "Äang theo dÃµi"
+
+##### MÃ n hÃ¬nh
+
+Trang Danh sÃ¡ch Diá»…n Ä‘Ã n â€“ Tab "Äang theo dÃµi": Hiá»ƒn thá»‹ riÃªng danh sÃ¡ch cÃ¡c diá»…n Ä‘Ã n mÃ  ngÆ°á»i dÃ¹ng Ä‘Ã£ theo dÃµi, chá»‰ truy cáº­p Ä‘Æ°á»£c khi Ä‘Ã£ Ä‘Äƒng nháº­p
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Tab bar | Tab bar | CÃ³ | Tab "Äang theo dÃµi" Ä‘Æ°á»£c kÃ­ch hoáº¡t | Thanh tab nhÆ° MH01, tab "Äang theo dÃµi" Ä‘ang Ä‘Æ°á»£c kÃ­ch hoáº¡t. Tab nÃ y chá»‰ hiá»ƒn thá»‹ vá»›i ngÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p. |
+| LÆ°á»›i tháº» diá»…n Ä‘Ã n Ä‘ang theo dÃµi | Card grid | CÃ³ | CÃ³ | Danh sÃ¡ch tháº» diá»…n Ä‘Ã n mÃ  ngÆ°á»i dÃ¹ng Ä‘ang theo dÃµi, bá»‘ cá»¥c lÆ°á»›i nhÆ° MH01. Sáº¯p xáº¿p theo thá»© tá»± ngÆ°á»i dÃ¹ng theo dÃµi gáº§n nháº¥t. Má»—i tháº» hiá»ƒn thá»‹ thÃªm má»©c Ä‘á»™ theo dÃµi hiá»‡n táº¡i (biá»ƒu tÆ°á»£ng chuÃ´ng vá»›i má»©c: thÃ´ng thÆ°á»ng / cháº·t / bá» qua). |
+| Má»©c Ä‘á»™ theo dÃµi | Badge/Icon | CÃ³ | CÃ³ | Icon chuÃ´ng bÃªn cáº¡nh nÃºt "Äang theo dÃµi" thá»ƒ hiá»‡n má»©c Ä‘á»™ theo dÃµi hiá»‡n táº¡i: chuÃ´ng Ä‘áº§y (Theo dÃµi cháº·t), chuÃ´ng outline (ThÃ´ng thÆ°á»ng), chuÃ´ng gáº¡ch chÃ©o (Bá» qua). Chi tiáº¿t hÃ nh vi theo UC88. |
+| ThÃ´ng bÃ¡o chÆ°a theo dÃµi diá»…n Ä‘Ã n nÃ o | ThÃ´ng bÃ¡o | KhÃ´ng | KhÃ´ng | Khi ngÆ°á»i dÃ¹ng chÆ°a theo dÃµi diá»…n Ä‘Ã n nÃ o: hiá»ƒn thá»‹ thÃ´ng bÃ¡o "Báº¡n chÆ°a theo dÃµi diá»…n Ä‘Ã n nÃ o. KhÃ¡m phÃ¡ cÃ¡c diá»…n Ä‘Ã n vÃ  nháº¥n 'Theo dÃµi' Ä‘á»ƒ báº¯t Ä‘áº§u." kÃ¨m nÃºt "KhÃ¡m phÃ¡ diá»…n Ä‘Ã n" Ä‘iá»u hÆ°á»›ng sang tab "Táº¥t cáº£". |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Xem danh sÃ¡ch diá»…n Ä‘Ã n Ä‘ang theo dÃµi | Card grid | Há»‡ thá»‘ng táº£i vÃ  hiá»ƒn thá»‹ danh sÃ¡ch diá»…n Ä‘Ã n ngÆ°á»i dÃ¹ng Ä‘ang theo dÃµi. TrÆ°á»ng há»£p 1: CÃ³ dá»¯ liá»‡u, hiá»ƒn thá»‹ lÆ°á»›i tháº» vá»›i má»©c Ä‘á»™ theo dÃµi. TrÆ°á»ng há»£p 2: ChÆ°a theo dÃµi diá»…n Ä‘Ã n nÃ o, hiá»ƒn thá»‹ thÃ´ng bÃ¡o khuyáº¿n khÃ­ch. |
+| 2 | Thay Ä‘á»•i má»©c Ä‘á»™ theo dÃµi tá»« tháº» | Dropdown nhá» | NgÆ°á»i dÃ¹ng nháº¥n vÃ o icon chuÃ´ng / nÃºt "Äang theo dÃµi" trÃªn tháº», há»‡ thá»‘ng hiá»ƒn thá»‹ dropdown nhá» vá»›i 3 lá»±a chá»n má»©c Ä‘á»™ theo dÃµi (Cháº·t / ThÃ´ng thÆ°á»ng / Bá» qua). Chi tiáº¿t theo UC88. |
+| 3 | Bá» theo dÃµi diá»…n Ä‘Ã n | Dropdown nhá» | Trong dropdown má»©c Ä‘á»™ theo dÃµi, ngÆ°á»i dÃ¹ng chá»n "Bá» theo dÃµi". Há»‡ thá»‘ng xá»­ lÃ½ bá» theo dÃµi theo UC88, tháº» diá»…n Ä‘Ã n biáº¿n máº¥t khá»i tab "Äang theo dÃµi" sau khi xÃ¡c nháº­n. |
+
+---
+
+*TÃ i liá»‡u Ä‘Æ°á»£c táº¡o tá»± Ä‘á»™ng bá»Ÿi AI Gen â€“ NgÃ y: 2026-03-16*
+## A.I.7_Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t
+
+### A.I.7.CPLQG-VI-088 - ÄÄƒng kÃ½ tham gia chá»§ Ä‘á»/diá»…n Ä‘Ã n
+
+#### Má»¥c Ä‘Ã­ch
+
+Cho phÃ©p ngÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p Ä‘Äƒng kÃ½ theo dÃµi má»™t diá»…n Ä‘Ã n hoáº·c má»™t chá»§ Ä‘á» cá»¥ thá»ƒ trong diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t, nháº±m nháº­n thÃ´ng bÃ¡o vá» hoáº¡t Ä‘á»™ng má»›i vÃ  dá»… dÃ ng quay láº¡i tham gia trao Ä‘á»•i. Há»‡ thá»‘ng cung cáº¥p ba má»©c Ä‘á»™ theo dÃµi khÃ¡c nhau Ä‘á»ƒ ngÆ°á»i dÃ¹ng kiá»ƒm soÃ¡t táº§n suáº¥t thÃ´ng bÃ¡o. Chá»©c nÄƒng Ä‘Æ°á»£c kÃ­ch hoáº¡t tá»« nhiá»u Ä‘iá»ƒm: tháº» diá»…n Ä‘Ã n (UC87), header diá»…n Ä‘Ã n (UC90), vÃ  sidebar chá»§ Ä‘á» (UC91).
+
+##### a. PhÃ¢n quyá»n
+
+- YÃªu cáº§u Ä‘Äƒng nháº­p. NgÆ°á»i dÃ¹ng chÆ°a Ä‘Äƒng nháº­p khi nháº¥n cÃ¡c nÃºt theo dÃµi sáº½ Ä‘Æ°á»£c chuyá»ƒn hÆ°á»›ng Ä‘áº¿n mÃ n hÃ¬nh Ä‘Äƒng nháº­p hoáº·c hiá»ƒn thá»‹ há»™p thoáº¡i Ä‘Äƒng nháº­p.
+- Táº¥t cáº£ ngÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p (cÃ¡ nhÃ¢n vÃ  tá»• chá»©c) Ä‘á»u cÃ³ thá»ƒ theo dÃµi diá»…n Ä‘Ã n vÃ  chá»§ Ä‘á».
+- NgÆ°á»i dÃ¹ng chá»‰ cÃ³ thá»ƒ theo dÃµi/bá» theo dÃµi cho tÃ i khoáº£n cá»§a chÃ­nh mÃ¬nh.
+
+##### b. Äiá»u kiá»‡n thá»±c hiá»‡n
+
+- NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p thÃ nh cÃ´ng.
+- Diá»…n Ä‘Ã n hoáº·c chá»§ Ä‘á» má»¥c tiÃªu Ä‘ang á»Ÿ tráº¡ng thÃ¡i "Äang hoáº¡t Ä‘á»™ng" (Ä‘Ã£ xuáº¥t báº£n, chÆ°a bá»‹ Ä‘Ã³ng/lÆ°u trá»¯).
+
+---
+
+#### CPLQG-VI-088.MH01 â€“ Theo dÃµi Diá»…n Ä‘Ã n tá»« Trang Danh sÃ¡ch Diá»…n Ä‘Ã n (UC87)
+
+##### MÃ n hÃ¬nh
+
+Tháº» diá»…n Ä‘Ã n trong trang Danh sÃ¡ch Diá»…n Ä‘Ã n (UC87) â€“ Tráº¡ng thÃ¡i nÃºt "Theo dÃµi" / "Äang theo dÃµi" vÃ  dropdown má»©c Ä‘á»™ theo dÃµi
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| NÃºt "Theo dÃµi" | Button | CÃ³ | Hiá»ƒn thá»‹ khi chÆ°a theo dÃµi | NÃºt outline nhá» "Theo dÃµi" Ä‘áº·t á»Ÿ cuá»‘i tháº» diá»…n Ä‘Ã n. Chá»‰ hiá»ƒn thá»‹ khi ngÆ°á»i dÃ¹ng chÆ°a theo dÃµi diá»…n Ä‘Ã n nÃ y. Nháº¥n nÃºt: náº¿u chÆ°a Ä‘Äƒng nháº­p â†’ hiá»ƒn thá»‹ há»™p thoáº¡i Ä‘Äƒng nháº­p; náº¿u Ä‘Ã£ Ä‘Äƒng nháº­p â†’ thá»±c hiá»‡n theo dÃµi má»©c "ThÃ´ng thÆ°á»ng" ngay láº­p tá»©c. |
+| NÃºt "Äang theo dÃµi" + icon chuÃ´ng | Button + Icon | CÃ³ | Hiá»ƒn thá»‹ khi Ä‘Ã£ theo dÃµi | NÃºt fill xanh "Äang theo dÃµi" kÃ¨m icon chuÃ´ng, thay tháº¿ nÃºt "Theo dÃµi" sau khi ngÆ°á»i dÃ¹ng Ä‘Äƒng kÃ½. Icon chuÃ´ng thay Ä‘á»•i theo má»©c Ä‘á»™ theo dÃµi: chuÃ´ng Ä‘áº§y (Cháº·t), chuÃ´ng outline (ThÃ´ng thÆ°á»ng), chuÃ´ng gáº¡ch chÃ©o (Bá» qua). |
+| Dropdown má»©c Ä‘á»™ theo dÃµi | Dropdown | CÃ³ | áº¨n, chá»‰ hiá»‡n khi nháº¥n nÃºt "Äang theo dÃµi" | Dropdown xuáº¥t hiá»‡n khi ngÆ°á»i dÃ¹ng nháº¥n vÃ o nÃºt "Äang theo dÃµi". Gá»“m cÃ¡c lá»±a chá»n: "Theo dÃµi cháº·t" (nháº­n má»i thÃ´ng bÃ¡o vá» má»i chá»§ Ä‘á» vÃ  bÃ¬nh luáº­n má»›i), "ThÃ´ng thÆ°á»ng" (nháº­n thÃ´ng bÃ¡o tÃ³m táº¯t hÃ ng tuáº§n), "Bá» qua" (khÃ´ng nháº­n thÃ´ng bÃ¡o nhÆ°ng váº«n Ä‘Æ°á»£c tÃ­nh lÃ  thÃ nh viÃªn), "Bá» theo dÃµi" (xÃ³a khá»i danh sÃ¡ch theo dÃµi hoÃ n toÃ n). Lá»±a chá»n Ä‘ang Ã¡p dá»¥ng Ä‘Æ°á»£c Ä‘Ã¡nh dáº¥u tick. |
+| Toast xÃ¡c nháº­n | Toast notification | KhÃ´ng | KhÃ´ng | ThÃ´ng bÃ¡o ngáº¯n xuáº¥t hiá»‡n gÃ³c mÃ n hÃ¬nh sau khi thá»±c hiá»‡n hÃ nh Ä‘á»™ng: "ÄÃ£ theo dÃµi diá»…n Ä‘Ã n [TÃªn diá»…n Ä‘Ã n]" (xanh lÃ¡) hoáº·c "ÄÃ£ bá» theo dÃµi diá»…n Ä‘Ã n [TÃªn diá»…n Ä‘Ã n]" (xÃ¡m). Tá»± Ä‘á»™ng biáº¿n máº¥t sau 3 giÃ¢y. KÃ¨m nÃºt "HoÃ n tÃ¡c" Ä‘á»ƒ Ä‘áº£o ngÆ°á»£c hÃ nh Ä‘á»™ng trong vÃ²ng 5 giÃ¢y. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Theo dÃµi diá»…n Ä‘Ã n (láº§n Ä‘áº§u) | NÃºt "Theo dÃµi" | NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p nháº¥n nÃºt "Theo dÃµi" trÃªn tháº» diá»…n Ä‘Ã n. Há»‡ thá»‘ng ghi nháº­n theo dÃµi á»Ÿ má»©c "ThÃ´ng thÆ°á»ng", cáº­p nháº­t nÃºt thÃ nh "Äang theo dÃµi" (fill xanh + icon chuÃ´ng), tÄƒng sá»‘ thÃ nh viÃªn cá»§a diá»…n Ä‘Ã n lÃªn 1, hiá»ƒn thá»‹ toast xÃ¡c nháº­n. |
+| 2 | Thay Ä‘á»•i má»©c Ä‘á»™ theo dÃµi | Dropdown | NgÆ°á»i dÃ¹ng nháº¥n nÃºt "Äang theo dÃµi" â†’ dropdown xuáº¥t hiá»‡n â†’ chá»n má»©c mong muá»‘n. Há»‡ thá»‘ng cáº­p nháº­t má»©c Ä‘á»™ theo dÃµi, thay Ä‘á»•i icon chuÃ´ng tÆ°Æ¡ng á»©ng, Ä‘Ã³ng dropdown, hiá»ƒn thá»‹ toast xÃ¡c nháº­n "ÄÃ£ cáº­p nháº­t má»©c Ä‘á»™ theo dÃµi". |
+| 3 | Bá» theo dÃµi diá»…n Ä‘Ã n | Dropdown â†’ "Bá» theo dÃµi" | NgÆ°á»i dÃ¹ng chá»n "Bá» theo dÃµi" trong dropdown. Há»‡ thá»‘ng hiá»ƒn thá»‹ há»™p thoáº¡i xÃ¡c nháº­n "Báº¡n cÃ³ cháº¯c muá»‘n bá» theo dÃµi diá»…n Ä‘Ã n nÃ y?". Khi xÃ¡c nháº­n: xÃ³a quan há»‡ theo dÃµi, giáº£m sá»‘ thÃ nh viÃªn 1, Ä‘á»•i nÃºt vá» "Theo dÃµi", hiá»ƒn thá»‹ toast xÃ¡m "ÄÃ£ bá» theo dÃµi" kÃ¨m nÃºt "HoÃ n tÃ¡c". |
+| 4 | HoÃ n tÃ¡c bá» theo dÃµi | Toast "HoÃ n tÃ¡c" | Trong 5 giÃ¢y sau khi bá» theo dÃµi, ngÆ°á»i dÃ¹ng nháº¥n "HoÃ n tÃ¡c" trong toast. Há»‡ thá»‘ng khÃ´i phá»¥c tráº¡ng thÃ¡i theo dÃµi vá» má»©c trÆ°á»›c Ä‘Ã³, cáº­p nháº­t UI. |
+
+---
+
+#### CPLQG-VI-088.MH02 â€“ Theo dÃµi Diá»…n Ä‘Ã n tá»« Header Trang Danh sÃ¡ch Chá»§ Ä‘á» (UC90)
+
+##### MÃ n hÃ¬nh
+
+Header diá»…n Ä‘Ã n trÃªn trang Danh sÃ¡ch Chá»§ Ä‘á» (UC90) â€“ NÃºt "Theo dÃµi diá»…n Ä‘Ã n" dáº¡ng lá»›n trong pháº§n giá»›i thiá»‡u diá»…n Ä‘Ã n
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| NÃºt "Theo dÃµi diá»…n Ä‘Ã n" (outline) | Button | CÃ³ | Hiá»ƒn thá»‹ khi chÆ°a theo dÃµi | NÃºt outline "Theo dÃµi diá»…n Ä‘Ã n" trong header UC90. Khi nháº¥n vÃ  Ä‘Ã£ Ä‘Äƒng nháº­p: thá»±c hiá»‡n theo dÃµi má»©c "ThÃ´ng thÆ°á»ng", nÃºt chuyá»ƒn sang tráº¡ng thÃ¡i "Äang theo dÃµi" vá»›i dropdown. Khi chÆ°a Ä‘Äƒng nháº­p: hiá»ƒn thá»‹ há»™p thoáº¡i yÃªu cáº§u Ä‘Äƒng nháº­p. |
+| NÃºt "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi" (fill xanh) | Button | CÃ³ | Hiá»ƒn thá»‹ khi chÆ°a Ä‘Äƒng nháº­p | NÃºt fill mÃ u xanh "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi" hiá»ƒn thá»‹ bÃªn cáº¡nh nÃºt outline khi ngÆ°á»i dÃ¹ng chÆ°a Ä‘Äƒng nháº­p. Nháº¥n nÃºt Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang Ä‘Äƒng nháº­p, sau khi Ä‘Äƒng nháº­p thÃ nh cÃ´ng quay láº¡i trang UC90 vÃ  tá»± Ä‘á»™ng thá»±c hiá»‡n theo dÃµi diá»…n Ä‘Ã n. |
+| NÃºt "Äang theo dÃµi" + icon chuÃ´ng | Button + Icon | CÃ³ | Hiá»ƒn thá»‹ sau khi Ä‘Ã£ theo dÃµi | NÃºt fill xanh "Äang theo dÃµi" kÃ¨m icon chuÃ´ng, thay tháº¿ cáº£ hai nÃºt trÃªn sau khi theo dÃµi thÃ nh cÃ´ng. Nháº¥n vÃ o má»Ÿ dropdown chá»n má»©c Ä‘á»™ theo dÃµi. |
+| Sá»‘ thÃ nh viÃªn (cáº­p nháº­t real-time) | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Con sá»‘ thÃ nh viÃªn trong header tá»± Ä‘á»™ng tÄƒng/giáº£m khi ngÆ°á»i dÃ¹ng theo dÃµi/bá» theo dÃµi, pháº£n Ã¡nh sá»‘ lÆ°á»£ng chÃ­nh xÃ¡c. |
+| Dropdown má»©c Ä‘á»™ theo dÃµi | Dropdown | CÃ³ | áº¨n | CÃ¹ng cáº¥u trÃºc dropdown nhÆ° MH01: Theo dÃµi cháº·t / ThÃ´ng thÆ°á»ng / Bá» qua / Bá» theo dÃµi. |
+| Toast xÃ¡c nháº­n | Toast notification | KhÃ´ng | KhÃ´ng | Toast xÃ¡c nháº­n cÃ¹ng cáº¥u trÃºc MH01. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Theo dÃµi diá»…n Ä‘Ã n tá»« header UC90 | NÃºt "Theo dÃµi diá»…n Ä‘Ã n" | NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p nháº¥n nÃºt "Theo dÃµi diá»…n Ä‘Ã n". Há»‡ thá»‘ng ghi nháº­n theo dÃµi má»©c ThÃ´ng thÆ°á»ng, cáº­p nháº­t nÃºt, tÄƒng sá»‘ thÃ nh viÃªn, hiá»ƒn thá»‹ toast. |
+| 2 | ÄÄƒng nháº­p vÃ  theo dÃµi | NÃºt "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi" | NgÆ°á»i dÃ¹ng chÆ°a Ä‘Äƒng nháº­p nháº¥n nÃºt nÃ y. Há»‡ thá»‘ng Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang Ä‘Äƒng nháº­p. Sau khi Ä‘Äƒng nháº­p thÃ nh cÃ´ng, quay láº¡i trang UC90 vÃ  tá»± Ä‘á»™ng kÃ­ch hoáº¡t hÃ nh Ä‘á»™ng theo dÃµi diá»…n Ä‘Ã n Ä‘ang xem. |
+| 3 | Thay Ä‘á»•i má»©c Ä‘á»™ / Bá» theo dÃµi | Dropdown | CÃ¹ng luá»“ng xá»­ lÃ½ nhÆ° MH01 cÃ¡c chá»©c nÄƒng 2, 3, 4. |
+
+---
+
+#### CPLQG-VI-088.MH03 â€“ Theo dÃµi Chá»§ Ä‘á» tá»« Sidebar Chi tiáº¿t Chá»§ Ä‘á» (UC91)
+
+##### MÃ n hÃ¬nh
+
+Sidebar pháº£i cá»§a trang Chi tiáº¿t Chá»§ Ä‘á» (UC91) â€“ Khu vá»±c "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi chá»§ Ä‘á»" / "Äang theo dÃµi chá»§ Ä‘á»"
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| NÃºt "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi chá»§ Ä‘á»" | Button | CÃ³ | Hiá»ƒn thá»‹ khi chÆ°a Ä‘Äƒng nháº­p | NÃºt fill xanh "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi chá»§ Ä‘á»" trong sidebar UC91. Nháº¥n: Ä‘iá»u hÆ°á»›ng Ä‘áº¿n Ä‘Äƒng nháº­p, sau Ä‘Ã³ quay láº¡i vÃ  tá»± Ä‘á»™ng theo dÃµi chá»§ Ä‘á». |
+| NÃºt "Theo dÃµi chá»§ Ä‘á»" | Button | CÃ³ | Hiá»ƒn thá»‹ khi Ä‘Ã£ Ä‘Äƒng nháº­p nhÆ°ng chÆ°a theo dÃµi | NÃºt outline "Theo dÃµi chá»§ Ä‘á»" hiá»ƒn thá»‹ khi Ä‘Ã£ Ä‘Äƒng nháº­p nhÆ°ng chÆ°a theo dÃµi chá»§ Ä‘á» nÃ y. Nháº¥n: thá»±c hiá»‡n theo dÃµi má»©c ThÃ´ng thÆ°á»ng ngay láº­p tá»©c. |
+| NÃºt "Äang theo dÃµi chá»§ Ä‘á»" + dropdown | Button + Dropdown | CÃ³ | Hiá»ƒn thá»‹ sau khi Ä‘Ã£ theo dÃµi | NÃºt fill xanh "Äang theo dÃµi chá»§ Ä‘á»" kÃ¨m icon chuÃ´ng, thay tháº¿ cÃ¡c nÃºt trÃªn sau khi theo dÃµi. Nháº¥n vÃ o má»Ÿ dropdown 3 má»©c + "Bá» theo dÃµi". |
+| Section "Hoáº¡t Ä‘á»™ng chá»§ Ä‘á»" | Section | CÃ³ | CÃ³ | Khu vá»±c trong sidebar hiá»ƒn thá»‹: Sá»‘ lÆ°á»£t xem ("ÄÃ£ xem: X láº§n"), thá»i Ä‘iá»ƒm "BÃ¬nh luáº­n cuá»‘i" (tÃªn ngÆ°á»i + thá»i gian tÆ°Æ¡ng Ä‘á»‘i). ThÃ´ng tin nÃ y luÃ´n hiá»ƒn thá»‹ báº¥t ká»ƒ tráº¡ng thÃ¡i theo dÃµi. |
+| Toast xÃ¡c nháº­n | Toast notification | KhÃ´ng | KhÃ´ng | Toast xÃ¡c nháº­n cÃ¹ng cáº¥u trÃºc MH01 nhÆ°ng thÃ´ng bÃ¡o vá» chá»§ Ä‘á»: "ÄÃ£ theo dÃµi chá»§ Ä‘á» [TÃªn chá»§ Ä‘á»]". |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | ÄÄƒng nháº­p vÃ  theo dÃµi chá»§ Ä‘á» | NÃºt "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi chá»§ Ä‘á»" | NgÆ°á»i dÃ¹ng chÆ°a Ä‘Äƒng nháº­p nháº¥n nÃºt. Há»‡ thá»‘ng lÆ°u intent theo dÃµi chá»§ Ä‘á» hiá»‡n táº¡i, Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang Ä‘Äƒng nháº­p. Sau khi Ä‘Äƒng nháº­p xong: quay láº¡i trang chá»§ Ä‘á», tá»± Ä‘á»™ng ghi nháº­n theo dÃµi chá»§ Ä‘á» má»©c ThÃ´ng thÆ°á»ng, cáº­p nháº­t nÃºt sang "Äang theo dÃµi chá»§ Ä‘á»". |
+| 2 | Theo dÃµi chá»§ Ä‘á» (Ä‘Ã£ Ä‘Äƒng nháº­p) | NÃºt "Theo dÃµi chá»§ Ä‘á»" | NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p nháº¥n nÃºt "Theo dÃµi chá»§ Ä‘á»". Há»‡ thá»‘ng ghi nháº­n theo dÃµi má»©c ThÃ´ng thÆ°á»ng, cáº­p nháº­t nÃºt, hiá»ƒn thá»‹ toast. |
+| 3 | Thay Ä‘á»•i má»©c Ä‘á»™ theo dÃµi chá»§ Ä‘á» | Dropdown | NgÆ°á»i dÃ¹ng nháº¥n "Äang theo dÃµi chá»§ Ä‘á»" â†’ chá»n má»©c trong dropdown. Há»‡ thá»‘ng cáº­p nháº­t má»©c Ä‘á»™, icon chuÃ´ng thay Ä‘á»•i tÆ°Æ¡ng á»©ng, hiá»ƒn thá»‹ toast xÃ¡c nháº­n. |
+| 4 | Bá» theo dÃµi chá»§ Ä‘á» | Dropdown â†’ "Bá» theo dÃµi" | NgÆ°á»i dÃ¹ng chá»n "Bá» theo dÃµi" trong dropdown. Há»™p thoáº¡i xÃ¡c nháº­n xuáº¥t hiá»‡n. Sau khi xÃ¡c nháº­n: xÃ³a theo dÃµi, nÃºt trá»Ÿ vá» "Theo dÃµi chá»§ Ä‘á»", hiá»ƒn thá»‹ toast kÃ¨m "HoÃ n tÃ¡c". |
+
+---
+
+#### CPLQG-VI-088.MH04 â€“ Quy táº¯c nghiá»‡p vá»¥ má»©c Ä‘á»™ theo dÃµi vÃ  thÃ´ng bÃ¡o
+
+##### MÃ n hÃ¬nh
+
+KhÃ´ng cÃ³ mÃ n hÃ¬nh riÃªng â€” tÃ i liá»‡u hÃ³a logic nghiá»‡p vá»¥ cá»§a cÃ¡c má»©c Ä‘á»™ theo dÃµi vÃ  hÃ nh vi thÃ´ng bÃ¡o há»‡ thá»‘ng
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Má»©c "Theo dÃµi cháº·t" | Enum value | CÃ³ | KhÃ´ng pháº£i máº·c Ä‘á»‹nh | NgÆ°á»i dÃ¹ng nháº­n thÃ´ng bÃ¡o real-time (push notification vÃ  email) vá» má»i hoáº¡t Ä‘á»™ng trong diá»…n Ä‘Ã n/chá»§ Ä‘á»: chá»§ Ä‘á» má»›i, bÃ¬nh luáº­n má»›i, gÃ³p Ã½ má»›i, pháº£n biá»‡n má»›i, thay Ä‘á»•i tráº¡ng thÃ¡i. PhÃ¹ há»£p vá»›i ngÆ°á»i dÃ¹ng muá»‘n tham gia tÃ­ch cá»±c. |
+| Má»©c "ThÃ´ng thÆ°á»ng" | Enum value | CÃ³ | Máº·c Ä‘á»‹nh khi má»›i theo dÃµi | NgÆ°á»i dÃ¹ng nháº­n thÃ´ng bÃ¡o tÃ³m táº¯t hÃ ng tuáº§n (email digest) vá» cÃ¡c hoáº¡t Ä‘á»™ng ná»•i báº­t trong diá»…n Ä‘Ã n/chá»§ Ä‘á». KhÃ´ng nháº­n thÃ´ng bÃ¡o real-time. PhÃ¹ há»£p vá»›i ngÆ°á»i dÃ¹ng muá»‘n theo dÃµi nháº¹ nhÃ ng. |
+| Má»©c "Bá» qua" | Enum value | CÃ³ | KhÃ´ng pháº£i máº·c Ä‘á»‹nh | NgÆ°á»i dÃ¹ng khÃ´ng nháº­n báº¥t ká»³ thÃ´ng bÃ¡o nÃ o. Diá»…n Ä‘Ã n/chá»§ Ä‘á» váº«n xuáº¥t hiá»‡n trong tab "Äang theo dÃµi" nhÆ°ng khÃ´ng táº¡o ra thÃ´ng bÃ¡o. PhÃ¹ há»£p khi muá»‘n bookmark nhÆ°ng khÃ´ng bá»‹ lÃ m phiá»n. |
+| Tráº¡ng thÃ¡i "Bá» theo dÃµi" | Enum value | CÃ³ | KhÃ´ng Ã¡p dá»¥ng | XÃ³a hoÃ n toÃ n quan há»‡ theo dÃµi. Diá»…n Ä‘Ã n/chá»§ Ä‘á» khÃ´ng cÃ²n xuáº¥t hiá»‡n trong tab "Äang theo dÃµi". Sá»‘ thÃ nh viÃªn giáº£m 1. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | PhÃ¢n biá»‡t theo dÃµi Diá»…n Ä‘Ã n vÃ  theo dÃµi Chá»§ Ä‘á» | Quy táº¯c nghiá»‡p vá»¥ | Theo dÃµi Diá»…n Ä‘Ã n vÃ  theo dÃµi Chá»§ Ä‘á» lÃ  hai quan há»‡ Ä‘á»™c láº­p. NgÆ°á»i dÃ¹ng cÃ³ thá»ƒ theo dÃµi má»™t chá»§ Ä‘á» mÃ  khÃ´ng theo dÃµi diá»…n Ä‘Ã n chá»©a chá»§ Ä‘á» Ä‘Ã³, vÃ  ngÆ°á»£c láº¡i. Khi theo dÃµi diá»…n Ä‘Ã n: nháº­n thÃ´ng bÃ¡o vá» táº¥t cáº£ chá»§ Ä‘á» má»›i trong diá»…n Ä‘Ã n. Khi theo dÃµi chá»§ Ä‘á»: chá»‰ nháº­n thÃ´ng bÃ¡o vá» hoáº¡t Ä‘á»™ng trong chá»§ Ä‘á» Ä‘Ã³. |
+| 2 | TÃ­ch lÅ©y thÃ´ng bÃ¡o vÃ  gá»­i digest | Quy táº¯c nghiá»‡p vá»¥ | Vá»›i má»©c "ThÃ´ng thÆ°á»ng": há»‡ thá»‘ng tÃ­ch lÅ©y cÃ¡c sá»± kiá»‡n trong tuáº§n vÃ  gá»­i email tá»•ng há»£p vÃ o thá»© Hai hÃ ng tuáº§n (thá»i gian cÃ³ thá»ƒ cáº¥u hÃ¬nh). Email gá»“m: danh sÃ¡ch chá»§ Ä‘á» má»›i, bÃ¬nh luáº­n ná»•i báº­t (nhiá»u upvote nháº¥t), gÃ³p Ã½ pháº£n biá»‡n má»›i. |
+| 3 | NgÆ°á»¡ng hiá»ƒn thá»‹ sá»‘ thÃ nh viÃªn | Quy táº¯c nghiá»‡p vá»¥ | Sá»‘ thÃ nh viÃªn hiá»ƒn thá»‹ trÃªn tháº» diá»…n Ä‘Ã n vÃ  header UC90 Ä‘áº¿m táº¥t cáº£ ngÆ°á»i dÃ¹ng Ä‘ang á»Ÿ má»©c "Theo dÃµi cháº·t", "ThÃ´ng thÆ°á»ng" vÃ  "Bá» qua". NgÆ°á»i Ä‘Ã£ "Bá» theo dÃµi" khÃ´ng Ä‘Æ°á»£c tÃ­nh. |
+
+---
+
+*TÃ i liá»‡u Ä‘Æ°á»£c táº¡o tá»± Ä‘á»™ng bá»Ÿi AI Gen â€“ NgÃ y: 2026-03-16*
+## A.I.7_Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t
+
+### A.I.7.CPLQG-VI-089 - Táº¡o chá»§ Ä‘á»
+
+#### Má»¥c Ä‘Ã­ch
+
+Cho phÃ©p ngÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p soáº¡n tháº£o vÃ  gá»­i má»™t chá»§ Ä‘á» tháº£o luáº­n má»›i vÃ o má»™t diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t. Chá»§ Ä‘á» sau khi gá»­i sáº½ chá» phÃª duyá»‡t tá»« quáº£n trá»‹ viÃªn/moderator (vá»›i ngÆ°á»i dÃ¹ng thÃ´ng thÆ°á»ng) hoáº·c Ä‘Æ°á»£c Ä‘Äƒng trá»±c tiáº¿p (vá»›i moderator vÃ  quáº£n trá»‹ viÃªn). Há»‡ thá»‘ng há»— trá»£ soáº¡n tháº£o phong phÃº vá»›i rich text editor, Ä‘Ã­nh kÃ¨m tÃ i liá»‡u, gáº¯n tags, lÆ°u nhÃ¡p tá»± Ä‘á»™ng vÃ  xem trÆ°á»›c ná»™i dung trÆ°á»›c khi gá»­i.
+
+##### a. PhÃ¢n quyá»n
+
+- YÃªu cáº§u Ä‘Äƒng nháº­p. NgÆ°á»i dÃ¹ng chÆ°a Ä‘Äƒng nháº­p khi truy cáº­p trang Táº¡o chá»§ Ä‘á» sáº½ bá»‹ chuyá»ƒn hÆ°á»›ng Ä‘áº¿n trang Ä‘Äƒng nháº­p.
+- NgÆ°á»i dÃ¹ng cÃ¡ nhÃ¢n (cÃ´ng dÃ¢n, chuyÃªn gia, luáº­t sÆ°) vÃ  Tá»• chá»©c (doanh nghiá»‡p, cÆ¡ quan) Ä‘á»u cÃ³ thá»ƒ táº¡o chá»§ Ä‘á».
+- Chá»§ Ä‘á» do ngÆ°á»i dÃ¹ng thÃ´ng thÆ°á»ng táº¡o cÃ³ tráº¡ng thÃ¡i "Chá» phÃª duyá»‡t" sau khi gá»­i.
+- Chá»§ Ä‘á» do Moderator/Quáº£n trá»‹ viÃªn táº¡o cÃ³ thá»ƒ chá»n "ÄÄƒng ngay" bá» qua bÆ°á»›c phÃª duyá»‡t.
+- NgÆ°á»i dÃ¹ng bá»‹ khÃ³a quyá»n Ä‘Äƒng bÃ i khÃ´ng thá»ƒ truy cáº­p chá»©c nÄƒng nÃ y.
+
+##### b. Äiá»u kiá»‡n thá»±c hiá»‡n
+
+- NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p thÃ nh cÃ´ng.
+- CÃ³ Ã­t nháº¥t má»™t diá»…n Ä‘Ã n Ä‘ang hoáº¡t Ä‘á»™ng Ä‘á»ƒ chá»n.
+- NgÆ°á»i dÃ¹ng khÃ´ng trong tráº¡ng thÃ¡i bá»‹ khÃ³a quyá»n Ä‘Äƒng bÃ i.
+
+---
+
+#### CPLQG-VI-089.MH01 â€“ Trang Táº¡o chá»§ Ä‘á» má»›i â€“ BÆ°á»›c 1: Chá»n diá»…n Ä‘Ã n
+
+##### MÃ n hÃ¬nh
+
+Trang Táº¡o chá»§ Ä‘á» má»›i â€“ BÆ°á»›c 1: NgÆ°á»i dÃ¹ng chá»n diá»…n Ä‘Ã n má»¥c tiÃªu trÆ°á»›c khi soáº¡n ná»™i dung chá»§ Ä‘á»
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Breadcrumb Ä‘iá»u hÆ°á»›ng | Danh sÃ¡ch liÃªn káº¿t | CÃ³ | CÃ³ | Thanh breadcrumb: "Trang chá»§ > Diá»…n Ä‘Ã n > Táº¡o chá»§ Ä‘á» má»›i". LiÃªn káº¿t quay láº¡i trang trÆ°á»›c. |
+| TiÃªu Ä‘á» trang | KÃ½ tá»± | CÃ³ | CÃ³ | H1 "Táº¡o chá»§ Ä‘á» má»›i" Ä‘áº·t Ä‘áº§u trang, mÃ´ táº£ ngáº¯n: "Chia sáº» quan Ä‘iá»ƒm, phÃ¢n tÃ­ch chÃ­nh sÃ¡ch vÃ  thÃºc Ä‘áº©y tranh luáº­n phÃ¡p luáº­t cháº¥t lÆ°á»£ng." |
+| Thanh chá»‰ bÃ¡o bÆ°á»›c | Step indicator | CÃ³ | BÆ°á»›c 1 Ä‘ang kÃ­ch hoáº¡t | Thanh hiá»ƒn thá»‹ 2 bÆ°á»›c: "BÆ°á»›c 1: Chá»n diá»…n Ä‘Ã n" (Ä‘ang kÃ­ch hoáº¡t, mÃ u xanh), "BÆ°á»›c 2: Soáº¡n ná»™i dung" (chÆ°a kÃ­ch hoáº¡t, mÃ u xÃ¡m). |
+| Dropdown chá»n diá»…n Ä‘Ã n | Dropdown + Autocomplete | CÃ³ | Rá»—ng | Ã” chá»n diá»…n Ä‘Ã n vá»›i tÃ­nh nÄƒng tÃ¬m kiáº¿m autocomplete. Placeholder "TÃ¬m vÃ  chá»n diá»…n Ä‘Ã n...". Khi nháº­p tá»« khÃ³a: gá»£i Ã½ danh sÃ¡ch diá»…n Ä‘Ã n phÃ¹ há»£p cÃ³ tÃªn + badge lÄ©nh vá»±c. Náº¿u ngÆ°á»i dÃ¹ng vÃ o trang tá»« má»™t diá»…n Ä‘Ã n cá»¥ thá»ƒ (nháº¥n "Táº¡o chá»§ Ä‘á»" trong UC90): trÆ°á»ng nÃ y Ä‘Æ°á»£c Ä‘iá»n sáºµn diá»…n Ä‘Ã n Ä‘Ã³. |
+| Preview thÃ´ng tin diá»…n Ä‘Ã n Ä‘Ã£ chá»n | Card | KhÃ´ng | áº¨n khi chÆ°a chá»n | Sau khi chá»n diá»…n Ä‘Ã n, hiá»ƒn thá»‹ card nhá» vá»›i: icon chá»¯ cÃ¡i, tÃªn diá»…n Ä‘Ã n, badge lÄ©nh vá»±c, mÃ´ táº£ ngáº¯n, sá»‘ thÃ nh viÃªn vÃ  sá»‘ chá»§ Ä‘á». Má»¥c Ä‘Ã­ch giÃºp ngÆ°á»i dÃ¹ng xÃ¡c nháº­n Ä‘Ãºng diá»…n Ä‘Ã n. |
+| HÆ°á»›ng dáº«n chá»n diá»…n Ä‘Ã n | ThÃ´ng bÃ¡o hÆ°á»›ng dáº«n | CÃ³ | CÃ³ | Ná»™i dung hÆ°á»›ng dáº«n ngáº¯n: "Chá»n diá»…n Ä‘Ã n phÃ¹ há»£p vá»›i ná»™i dung báº¡n muá»‘n tháº£o luáº­n. Chá»§ Ä‘á» sai diá»…n Ä‘Ã n cÃ³ thá»ƒ bá»‹ di chuyá»ƒn bá»Ÿi quáº£n trá»‹ viÃªn." |
+| NÃºt "Tiáº¿p theo" | Button | CÃ³ | Disabled khi chÆ°a chá»n diá»…n Ä‘Ã n | NÃºt mÃ u xanh "Tiáº¿p theo â†’" á»Ÿ cuá»‘i trang. Disabled (xÃ¡m) khi chÆ°a chá»n diá»…n Ä‘Ã n. Khi nháº¥n: chuyá»ƒn sang MH02 (BÆ°á»›c 2). |
+| NÃºt "Há»§y" | Button | CÃ³ | CÃ³ | NÃºt outline "Há»§y" cáº¡nh nÃºt "Tiáº¿p theo". Nháº¥n: hiá»ƒn thá»‹ há»™p thoáº¡i xÃ¡c nháº­n "Bá» qua táº¡o chá»§ Ä‘á»? Dá»¯ liá»‡u sáº½ khÃ´ng Ä‘Æ°á»£c lÆ°u." XÃ¡c nháº­n â†’ quay vá» trang trÆ°á»›c. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | TÃ¬m kiáº¿m vÃ  chá»n diá»…n Ä‘Ã n | Dropdown + Autocomplete | NgÆ°á»i dÃ¹ng nháº­p tá»« khÃ³a vÃ o Ã´ chá»n diá»…n Ä‘Ã n, há»‡ thá»‘ng gá»£i Ã½ danh sÃ¡ch diá»…n Ä‘Ã n phÃ¹ há»£p theo tÃªn vÃ  lÄ©nh vá»±c. Danh sÃ¡ch gá»£i Ã½ Æ°u tiÃªn hiá»ƒn thá»‹ cÃ¡c diá»…n Ä‘Ã n ngÆ°á»i dÃ¹ng Ä‘Ã£ theo dÃµi lÃªn Ä‘áº§u, sau Ä‘Ã³ Ä‘áº¿n diá»…n Ä‘Ã n phá»• biáº¿n. NgÆ°á»i dÃ¹ng nháº¥n chá»n má»™t diá»…n Ä‘Ã n tá»« gá»£i Ã½: Ã´ Ä‘iá»n tÃªn diá»…n Ä‘Ã n, card preview xuáº¥t hiá»‡n. |
+| 2 | Äiá»n sáºµn diá»…n Ä‘Ã n tá»« context | Tá»± Ä‘á»™ng | Náº¿u ngÆ°á»i dÃ¹ng nháº¥n "Táº¡o chá»§ Ä‘á»" tá»« trang UC90 (Ä‘ang xem danh sÃ¡ch chá»§ Ä‘á» cá»§a má»™t diá»…n Ä‘Ã n cá»¥ thá»ƒ), trÆ°á»ng chá»n diá»…n Ä‘Ã n Ä‘Æ°á»£c Ä‘iá»n sáºµn diá»…n Ä‘Ã n Ä‘Ã³. NgÆ°á»i dÃ¹ng váº«n cÃ³ thá»ƒ thay Ä‘á»•i. |
+| 3 | Chuyá»ƒn sang BÆ°á»›c 2 | NÃºt "Tiáº¿p theo" | NgÆ°á»i dÃ¹ng nháº¥n "Tiáº¿p theo" sau khi Ä‘Ã£ chá»n diá»…n Ä‘Ã n. Há»‡ thá»‘ng lÆ°u lá»±a chá»n vÃ  chuyá»ƒn sang MH02. |
+
+---
+
+#### CPLQG-VI-089.MH02 â€“ Trang Táº¡o chá»§ Ä‘á» má»›i â€“ BÆ°á»›c 2: Soáº¡n ná»™i dung
+
+##### MÃ n hÃ¬nh
+
+Trang Táº¡o chá»§ Ä‘á» má»›i â€“ BÆ°á»›c 2: Giao diá»‡n soáº¡n tháº£o ná»™i dung chá»§ Ä‘á» vá»›i rich text editor, trÆ°á»ng metadata, sidebar hÆ°á»›ng dáº«n vÃ  preview
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Thanh chá»‰ bÃ¡o bÆ°á»›c | Step indicator | CÃ³ | BÆ°á»›c 2 Ä‘ang kÃ­ch hoáº¡t | "BÆ°á»›c 1: Chá»n diá»…n Ä‘Ã n" (Ä‘Ã£ hoÃ n thÃ nh, icon tick), "BÆ°á»›c 2: Soáº¡n ná»™i dung" (Ä‘ang kÃ­ch hoáº¡t). Nháº¥n BÆ°á»›c 1 cho phÃ©p quay láº¡i Ä‘á»•i diá»…n Ä‘Ã n. |
+| Diá»…n Ä‘Ã n Ä‘Ã£ chá»n | Card mini | CÃ³ | CÃ³ | Hiá»ƒn thá»‹ thÃ´ng tin diá»…n Ä‘Ã n Ä‘Ã£ chá»n á»Ÿ bÆ°á»›c 1: icon + tÃªn + lÄ©nh vá»±c, kÃ¨m link "Thay Ä‘á»•i" Ä‘á»ƒ quay láº¡i BÆ°á»›c 1. |
+| TrÆ°á»ng "TiÃªu Ä‘á» chá»§ Ä‘á»" | Text input | CÃ³ | Rá»—ng | Ã” nháº­p tiÃªu Ä‘á», placeholder "Nháº­p tiÃªu Ä‘á» chá»§ Ä‘á»...", giá»›i háº¡n tá»‘i Ä‘a 200 kÃ½ tá»±. Bá»™ Ä‘áº¿m kÃ½ tá»± "X/200" hiá»ƒn thá»‹ gÃ³c pháº£i Ã´ nháº­p. Khi vÆ°á»£t giá»›i háº¡n: Ä‘áº¿m Ä‘á», khÃ´ng cho nháº­p thÃªm. TiÃªu Ä‘á» pháº£i cÃ³ Ã­t nháº¥t 10 kÃ½ tá»± (validation khi blur). |
+| TrÆ°á»ng "Ná»™i dung bÃ i viáº¿t" | Rich text editor | CÃ³ | Rá»—ng | Editor phong phÃº vá»›i thanh cÃ´ng cá»¥ (toolbar): B (Bold), I (Italic), U (Underline), H2, H3 (Heading), danh sÃ¡ch gáº¡ch Ä‘áº§u dÃ²ng, danh sÃ¡ch sá»‘ thá»© tá»±, Blockquote (trÃ­ch dáº«n), Hyperlink (chÃ¨n liÃªn káº¿t), HÃ¬nh áº£nh (upload hoáº·c URL), Code block, Undo/Redo. Placeholder trong editor: "TrÃ¬nh bÃ y quan Ä‘iá»ƒm, phÃ¢n tÃ­ch chÃ­nh sÃ¡ch, dáº«n chiáº¿u vÄƒn báº£n phÃ¡p luáº­t liÃªn quan...". Ná»™i dung tá»‘i thiá»ƒu 50 kÃ½ tá»±. Editor há»— trá»£ kÃ©o tháº£ hÃ¬nh áº£nh. |
+| TrÆ°á»ng "Tags" | Tag input (multi-select) | KhÃ´ng | Rá»—ng | Ã” nháº­p tags vá»›i autocomplete, tá»‘i Ä‘a 5 tags. Khi nháº­p: gá»£i Ã½ tags Ä‘Ã£ cÃ³ trong há»‡ thá»‘ng. NgÆ°á»i dÃ¹ng cÅ©ng cÃ³ thá»ƒ táº¡o tag má»›i (báº±ng cÃ¡ch nháº­p vÃ  nháº¥n Enter). Má»—i tag hiá»ƒn thá»‹ dáº¡ng chip vá»›i nÃºt "x" Ä‘á»ƒ xÃ³a. Khi Ä‘Ã£ Ä‘á»§ 5 tags: áº©n Ã´ nháº­p, hiá»ƒn thá»‹ thÃ´ng bÃ¡o "ÄÃ£ Ä‘áº¡t giá»›i háº¡n 5 tags". |
+| TrÆ°á»ng "ÄÃ­nh kÃ¨m tÃ i liá»‡u" | File upload | KhÃ´ng | KhÃ´ng | VÃ¹ng kÃ©o tháº£ (drag & drop) hoáº·c nÃºt "Chá»n file". Cháº¥p nháº­n Ä‘á»‹nh dáº¡ng: PDF, DOCX, XLSX, PPTX. Giá»›i háº¡n má»—i file: 10MB. Giá»›i háº¡n tá»•ng: 3 files. Sau khi táº£i lÃªn: hiá»ƒn thá»‹ danh sÃ¡ch file vá»›i tÃªn, kÃ­ch thÆ°á»›c, icon loáº¡i file vÃ  nÃºt xÃ³a. Hiá»ƒn thá»‹ thanh tiáº¿n trÃ¬nh trong lÃºc upload. |
+| Tráº¡ng thÃ¡i lÆ°u nhÃ¡p tá»± Ä‘á»™ng | ThÃ´ng bÃ¡o tráº¡ng thÃ¡i | KhÃ´ng | KhÃ´ng | DÃ²ng chá»¯ nhá» mÃ u xÃ¡m cuá»‘i form: "ÄÃ£ lÆ°u nhÃ¡p lÃºc HH:MM" hoáº·c "Äang lÆ°u..." cáº­p nháº­t sau má»—i 30 giÃ¢y khi cÃ³ thay Ä‘á»•i ná»™i dung. |
+| Sidebar pháº£i â€“ HÆ°á»›ng dáº«n | Panel | CÃ³ | CÃ³ | Panel cá»‘ Ä‘á»‹nh bÃªn pháº£i (width ~280px) gá»“m section "HÆ°á»›ng dáº«n cá»™ng Ä‘á»“ng" vá»›i danh sÃ¡ch cÃ¡c tiÃªu chuáº©n bÃ i viáº¿t cháº¥t lÆ°á»£ng: "Ná»™i dung rÃµ rÃ ng, cÃ³ láº­p luáº­n cá»¥ thá»ƒ", "Dáº«n chiáº¿u vÄƒn báº£n phÃ¡p luáº­t liÃªn quan khi cáº§n", "KhÃ´ng Ä‘Äƒng ná»™i dung vi pháº¡m phÃ¡p luáº­t, phÃ¢n biá»‡t Ä‘á»‘i xá»­", "Äáº·t cÃ¢u há»i/luáº­n Ä‘iá»ƒm cá»¥ thá»ƒ Ä‘á»ƒ thÃºc Ä‘áº©y tranh luáº­n", "TrÃ¡nh ngÃ´n tá»« xÃºc pháº¡m cÃ¡ nhÃ¢n". |
+| Sidebar pháº£i â€“ Preview | Card preview | KhÃ´ng | áº¨n | Section "Xem trÆ°á»›c tháº» chá»§ Ä‘á»" trong sidebar: Hiá»ƒn thá»‹ card preview chá»§ Ä‘á» nhÆ° nÃ³ sáº½ xuáº¥t hiá»‡n trong danh sÃ¡ch (UC90) vá»›i tiÃªu Ä‘á» + 2 dÃ²ng ná»™i dung + tags. Cáº­p nháº­t real-time khi ngÆ°á»i dÃ¹ng nháº­p tiÃªu Ä‘á» vÃ  ná»™i dung. |
+| NÃºt "Xem trÆ°á»›c Ä‘áº§y Ä‘á»§" | Button | KhÃ´ng | CÃ³ | NÃºt text "Xem trÆ°á»›c Ä‘áº§y Ä‘á»§" bÃªn dÆ°á»›i sidebar preview. Nháº¥n: má»Ÿ modal/overlay hiá»ƒn thá»‹ toÃ n bá»™ ná»™i dung chá»§ Ä‘á» Ä‘Ãºng nhÆ° giao diá»‡n UC91 sau khi Ä‘Æ°á»£c Ä‘Äƒng. |
+| NÃºt "LÆ°u nhÃ¡p" | Button | CÃ³ | CÃ³ | NÃºt outline "LÆ°u nhÃ¡p" trong thanh hÃ nh Ä‘á»™ng cuá»‘i trang. Nháº¥n: lÆ°u báº£n nhÃ¡p ngay láº­p tá»©c, hiá»ƒn thá»‹ toast "ÄÃ£ lÆ°u nhÃ¡p". NgÆ°á»i dÃ¹ng cÃ³ thá»ƒ tiáº¿p tá»¥c chá»‰nh sá»­a sau. |
+| NÃºt "Gá»­i phÃª duyá»‡t" | Button | CÃ³ | Hiá»ƒn thá»‹ vá»›i ngÆ°á»i dÃ¹ng thÃ´ng thÆ°á»ng | NÃºt fill xanh Ä‘áº­m "Gá»­i phÃª duyá»‡t" trong thanh hÃ nh Ä‘á»™ng. Nháº¥n: validate toÃ n bá»™ form, náº¿u há»£p lá»‡ â†’ gá»­i chá»§ Ä‘á» vÃ o hÃ ng Ä‘á»£i phÃª duyá»‡t, chuyá»ƒn sang MH03. |
+| NÃºt "ÄÄƒng ngay" | Button | CÃ³ | Chá»‰ hiá»ƒn thá»‹ vá»›i Moderator/Admin | NÃºt fill xanh "ÄÄƒng ngay" thay tháº¿ nÃºt "Gá»­i phÃª duyá»‡t" cho Moderator vÃ  Quáº£n trá»‹ viÃªn. Nháº¥n: validate form, Ä‘Äƒng chá»§ Ä‘á» trá»±c tiáº¿p khÃ´ng qua phÃª duyá»‡t, Ä‘iá»u hÆ°á»›ng sang trang Chi tiáº¿t chá»§ Ä‘á» (UC91). |
+| NÃºt "Quay láº¡i" | Button | CÃ³ | CÃ³ | NÃºt outline "â† Quay láº¡i" Ä‘áº·t bÃªn cáº¡nh nÃºt lÆ°u nhÃ¡p. Nháº¥n: hiá»ƒn thá»‹ há»™p thoáº¡i "Báº¡n cÃ³ muá»‘n lÆ°u nhÃ¡p trÆ°á»›c khi quay láº¡i khÃ´ng?" vá»›i 3 lá»±a chá»n: "LÆ°u nhÃ¡p vÃ  quay láº¡i", "Quay láº¡i khÃ´ng lÆ°u", "Há»§y". |
+| ThÃ´ng bÃ¡o lá»—i validation | Inline error | KhÃ´ng | KhÃ´ng | ThÃ´ng bÃ¡o lá»—i hiá»ƒn thá»‹ ngay dÆ°á»›i trÆ°á»ng bá»‹ lá»—i khi nháº¥n gá»­i: "TiÃªu Ä‘á» khÃ´ng Ä‘Æ°á»£c Ä‘á»ƒ trá»‘ng", "TiÃªu Ä‘á» cáº§n Ã­t nháº¥t 10 kÃ½ tá»±", "Ná»™i dung cáº§n Ã­t nháº¥t 50 kÃ½ tá»±", v.v. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Nháº­p tiÃªu Ä‘á» chá»§ Ä‘á» | Text input | NgÆ°á»i dÃ¹ng nháº­p tiÃªu Ä‘á» vÃ o trÆ°á»ng tÆ°Æ¡ng á»©ng. Bá»™ Ä‘áº¿m kÃ½ tá»± cáº­p nháº­t real-time. Khi blur khá»i trÆ°á»ng: validate Ä‘iá»u kiá»‡n tá»‘i thiá»ƒu 10 kÃ½ tá»±. |
+| 2 | Soáº¡n tháº£o ná»™i dung rich text | Rich text editor | NgÆ°á»i dÃ¹ng soáº¡n tháº£o ná»™i dung bÃ i viáº¿t vá»›i cÃ¡c cÃ´ng cá»¥ Ä‘á»‹nh dáº¡ng. Há»— trá»£: in Ä‘áº­m/nghiÃªng/gáº¡ch chÃ¢n, tiÃªu Ä‘á» H2/H3, danh sÃ¡ch, trÃ­ch dáº«n blockquote, chÃ¨n link, upload/kÃ©o tháº£ hÃ¬nh áº£nh (tá»‘i Ä‘a 5MB/áº£nh), code block. |
+| 3 | ThÃªm vÃ  quáº£n lÃ½ tags | Tag input | NgÆ°á»i dÃ¹ng nháº­p tá»« khÃ³a â†’ há»‡ thá»‘ng gá»£i Ã½ tags Ä‘Ã£ cÃ³ â†’ nháº¥n chá»n hoáº·c nháº¥n Enter Ä‘á»ƒ táº¡o tag má»›i. Tá»‘i Ä‘a 5 tags. Nháº¥n "x" trÃªn chip tag Ä‘á»ƒ xÃ³a tag Ä‘Ã³. |
+| 4 | ÄÃ­nh kÃ¨m tÃ i liá»‡u | File upload | NgÆ°á»i dÃ¹ng kÃ©o tháº£ hoáº·c nháº¥n "Chá»n file" Ä‘á»ƒ táº£i lÃªn file Ä‘Ã­nh kÃ¨m. Há»‡ thá»‘ng validate Ä‘á»‹nh dáº¡ng (chá»‰ PDF/DOCX/XLSX/PPTX) vÃ  kÃ­ch thÆ°á»›c (tá»‘i Ä‘a 10MB/file, tá»‘i Ä‘a 3 files). Sau upload thÃ nh cÃ´ng: hiá»ƒn thá»‹ trong danh sÃ¡ch. TrÆ°á»ng há»£p lá»—i: "File vÆ°á»£t quÃ¡ 10MB" hoáº·c "Äá»‹nh dáº¡ng khÃ´ng Ä‘Æ°á»£c há»— trá»£". |
+| 5 | LÆ°u nhÃ¡p tá»± Ä‘á»™ng | Background task | Há»‡ thá»‘ng tá»± Ä‘á»™ng lÆ°u nhÃ¡p sau má»—i 30 giÃ¢y ká»ƒ tá»« láº§n thay Ä‘á»•i cuá»‘i. DÃ²ng tráº¡ng thÃ¡i "ÄÃ£ lÆ°u nhÃ¡p lÃºc HH:MM" cáº­p nháº­t sau má»—i láº§n lÆ°u thÃ nh cÃ´ng. NhÃ¡p Ä‘Æ°á»£c lÆ°u vÃ o tÃ i khoáº£n ngÆ°á»i dÃ¹ng vÃ  cÃ³ thá»ƒ tiáº¿p tá»¥c chá»‰nh sá»­a tá»« trang "Báº£n nhÃ¡p cá»§a tÃ´i". |
+| 6 | Xem trÆ°á»›c tháº» chá»§ Ä‘á» | Sidebar preview | Card preview trong sidebar cáº­p nháº­t real-time khi ngÆ°á»i dÃ¹ng nháº­p tiÃªu Ä‘á» vÃ  ná»™i dung. |
+| 7 | Xem trÆ°á»›c Ä‘áº§y Ä‘á»§ | Modal overlay | NgÆ°á»i dÃ¹ng nháº¥n "Xem trÆ°á»›c Ä‘áº§y Ä‘á»§", há»‡ thá»‘ng má»Ÿ modal hiá»ƒn thá»‹ toÃ n bá»™ ná»™i dung chá»§ Ä‘á» Ä‘Ãºng nhÆ° giao diá»‡n UC91. Modal cÃ³ nÃºt "ÄÃ³ng" vÃ  nÃºt "Gá»­i phÃª duyá»‡t" Ä‘á»ƒ gá»­i trá»±c tiáº¿p tá»« mÃ n hÃ¬nh xem trÆ°á»›c. |
+| 8 | Gá»­i chá»§ Ä‘á» phÃª duyá»‡t | NÃºt "Gá»­i phÃª duyá»‡t" | NgÆ°á»i dÃ¹ng nháº¥n "Gá»­i phÃª duyá»‡t". Há»‡ thá»‘ng validate toÃ n bá»™ form (tiÃªu Ä‘á» tá»‘i thiá»ƒu 10 kÃ½ tá»±, ná»™i dung tá»‘i thiá»ƒu 50 kÃ½ tá»±, Ä‘Ã£ chá»n diá»…n Ä‘Ã n). Náº¿u cÃ³ lá»—i: hiá»ƒn thá»‹ inline error táº¡i trÆ°á»ng lá»—i, scroll Ä‘áº¿n lá»—i Ä‘áº§u tiÃªn. Náº¿u há»£p lá»‡: lÆ°u chá»§ Ä‘á» tráº¡ng thÃ¡i "Chá» phÃª duyá»‡t", Ä‘iá»u hÆ°á»›ng sang MH03. |
+| 9 | ÄÄƒng ngay (Moderator/Admin) | NÃºt "ÄÄƒng ngay" | Moderator/Admin nháº¥n "ÄÄƒng ngay". Há»‡ thá»‘ng validate form. Náº¿u há»£p lá»‡: Ä‘Äƒng chá»§ Ä‘á» tráº¡ng thÃ¡i "ÄÃ£ Ä‘Äƒng", Ä‘iá»u hÆ°á»›ng sang trang UC91 cá»§a chá»§ Ä‘á» vá»«a táº¡o. |
+| 10 | Quay láº¡i BÆ°á»›c 1 | NÃºt "Quay láº¡i" | Há»™p thoáº¡i xÃ¡c nháº­n vá»›i 3 lá»±a chá»n. Náº¿u chá»n "LÆ°u nhÃ¡p vÃ  quay láº¡i": lÆ°u nhÃ¡p rá»“i quay vá» MH01. Náº¿u chá»n "Quay láº¡i khÃ´ng lÆ°u": quay vá» MH01 máº¥t dá»¯ liá»‡u BÆ°á»›c 2. |
+
+---
+
+#### CPLQG-VI-089.MH03 â€“ Trang XÃ¡c nháº­n Ä‘Ã£ gá»­i chá»§ Ä‘á»
+
+##### MÃ n hÃ¬nh
+
+Trang XÃ¡c nháº­n â€“ Hiá»ƒn thá»‹ sau khi ngÆ°á»i dÃ¹ng gá»­i chá»§ Ä‘á» thÃ nh cÃ´ng, thÃ´ng bÃ¡o tráº¡ng thÃ¡i vÃ  hÆ°á»›ng dáº«n bÆ°á»›c tiáº¿p theo
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Icon tráº¡ng thÃ¡i thÃ nh cÃ´ng | Icon | CÃ³ | CÃ³ | Icon hÃ¬nh Ä‘á»“ng há»“ mÃ u cam hoáº·c icon check mÃ u xanh lÃ¡ (tÃ¹y vai trÃ²). NgÆ°á»i dÃ¹ng thÆ°á»ng: icon Ä‘á»“ng há»“ + nhÃ£n "Äang chá» phÃª duyá»‡t". Moderator/Admin: icon check xanh + nhÃ£n "ÄÃ£ Ä‘Äƒng thÃ nh cÃ´ng". |
+| ThÃ´ng bÃ¡o tráº¡ng thÃ¡i | KÃ½ tá»± | CÃ³ | CÃ³ | NgÆ°á»i dÃ¹ng thÆ°á»ng: "Chá»§ Ä‘á» cá»§a báº¡n Ä‘Ã£ Ä‘Æ°á»£c gá»­i vÃ  Ä‘ang chá» phÃª duyá»‡t. Quáº£n trá»‹ viÃªn sáº½ xem xÃ©t trong vÃ²ng 24â€“48 giá». Báº¡n sáº½ nháº­n thÃ´ng bÃ¡o khi chá»§ Ä‘á» Ä‘Æ°á»£c duyá»‡t." Moderator/Admin: "Chá»§ Ä‘á» Ä‘Ã£ Ä‘Æ°á»£c Ä‘Äƒng thÃ nh cÃ´ng!" |
+| TÃªn chá»§ Ä‘á» vá»«a táº¡o | KÃ½ tá»± | CÃ³ | CÃ³ | Hiá»ƒn thá»‹ tiÃªu Ä‘á» chá»§ Ä‘á» vá»«a gá»­i trong khung ná»•i báº­t Ä‘á»ƒ ngÆ°á»i dÃ¹ng xÃ¡c nháº­n Ä‘Ãºng ná»™i dung. |
+| NÃºt "Xem chá»§ Ä‘á»" | Button | KhÃ´ng | Hiá»ƒn thá»‹ vá»›i Moderator/Admin | NÃºt xanh "Xem chá»§ Ä‘á»" dáº«n Ä‘áº¿n trang UC91 cá»§a chá»§ Ä‘á» vá»«a Ä‘Äƒng. Chá»‰ hiá»ƒn thá»‹ khi chá»§ Ä‘á» Ä‘Ã£ á»Ÿ tráº¡ng thÃ¡i "ÄÃ£ Ä‘Äƒng". |
+| NÃºt "Vá» trang Diá»…n Ä‘Ã n" | Button | CÃ³ | CÃ³ | NÃºt outline "Vá» trang Diá»…n Ä‘Ã n" Ä‘iá»u hÆ°á»›ng vá» trang UC90 cá»§a diá»…n Ä‘Ã n vá»«a gá»­i chá»§ Ä‘á». |
+| NÃºt "Táº¡o chá»§ Ä‘á» má»›i" | Button | CÃ³ | CÃ³ | NÃºt text "Táº¡o chá»§ Ä‘á» má»›i" Ä‘á»ƒ báº¯t Ä‘áº§u quy trÃ¬nh táº¡o chá»§ Ä‘á» khÃ¡c. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Xem tráº¡ng thÃ¡i chá»§ Ä‘á» vá»«a gá»­i | VÃ¹ng ná»™i dung | Há»‡ thá»‘ng hiá»ƒn thá»‹ thÃ´ng tin xÃ¡c nháº­n vá»›i tráº¡ng thÃ¡i phÃ¹ há»£p theo vai trÃ² ngÆ°á»i dÃ¹ng (Chá» phÃª duyá»‡t hoáº·c ÄÃ£ Ä‘Äƒng). |
+| 2 | Äiá»u hÆ°á»›ng sau gá»­i | CÃ¡c nÃºt hÃ nh Ä‘á»™ng | NgÆ°á»i dÃ¹ng chá»n bÆ°á»›c tiáº¿p theo: xem chá»§ Ä‘á» (náº¿u Ä‘Ã£ Ä‘Äƒng), vá» trang diá»…n Ä‘Ã n, hoáº·c táº¡o chá»§ Ä‘á» má»›i. |
+
+---
+
+*TÃ i liá»‡u Ä‘Æ°á»£c táº¡o tá»± Ä‘á»™ng bá»Ÿi AI Gen â€“ NgÃ y: 2026-03-16*
+## A.I.7_Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t
+
+### A.I.7.CPLQG-VI-090 - Xem danh sÃ¡ch chá»§ Ä‘á»
+
+#### Má»¥c Ä‘Ã­ch
+
+Cho phÃ©p ngÆ°á»i dÃ¹ng xem toÃ n bá»™ danh sÃ¡ch chá»§ Ä‘á» tháº£o luáº­n trong má»™t diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t cá»¥ thá»ƒ. Trang hiá»ƒn thá»‹ header giá»›i thiá»‡u diá»…n Ä‘Ã n, bá»™ lá»c sidebar theo Ä‘áº·c tÃ­nh bÃ¬nh luáº­n vÃ  gÃ³p Ã½, vÃ¹ng chÃ­nh liá»‡t kÃª tá»«ng chá»§ Ä‘á» kÃ¨m hai chá»‰ sá»‘ riÃªng biá»‡t (sá»‘ bÃ¬nh luáº­n vÃ  sá»‘ gÃ³p Ã½/pháº£n biá»‡n), cÃ¹ng cÃ¡c tÃ¹y chá»n sáº¯p xáº¿p vÃ  phÃ¢n trang. ÄÃ¢y lÃ  trang trung gian giá»¯a trang Danh sÃ¡ch Diá»…n Ä‘Ã n (UC87) vÃ  trang Chi tiáº¿t Chá»§ Ä‘á» (UC91).
+
+##### a. PhÃ¢n quyá»n
+
+- Xem danh sÃ¡ch chá»§ Ä‘á»: CÃ´ng khai, khÃ´ng yÃªu cáº§u Ä‘Äƒng nháº­p.
+- NÃºt "Táº¡o chá»§ Ä‘á»": YÃªu cáº§u Ä‘Äƒng nháº­p; chÆ°a Ä‘Äƒng nháº­p sáº½ hiá»ƒn thá»‹ há»™p thoáº¡i Ä‘Äƒng nháº­p.
+- NÃºt "Theo dÃµi diá»…n Ä‘Ã n" vÃ  "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi": Theo phÃ¢n quyá»n UC88.
+
+##### b. Äiá»u kiá»‡n thá»±c hiá»‡n
+
+- NgÆ°á»i dÃ¹ng Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang tá»« tháº» diá»…n Ä‘Ã n trong UC87, UC85, UC86 hoáº·c tá»« link trá»±c tiáº¿p.
+- Diá»…n Ä‘Ã n tÆ°Æ¡ng á»©ng pháº£i á»Ÿ tráº¡ng thÃ¡i "Äang hoáº¡t Ä‘á»™ng" vÃ  Ä‘Ã£ Ä‘Æ°á»£c xuáº¥t báº£n.
+
+---
+
+#### CPLQG-VI-090.MH01 â€“ Trang Danh sÃ¡ch Chá»§ Ä‘á» trong Diá»…n Ä‘Ã n
+
+##### MÃ n hÃ¬nh
+
+Trang Danh sÃ¡ch Chá»§ Ä‘á» trong Diá»…n Ä‘Ã n: Bao gá»“m header diá»…n Ä‘Ã n, sidebar bá»™ lá»c trÃ¡i, vÃ¹ng danh sÃ¡ch chá»§ Ä‘á» vá»›i sort vÃ  pagination
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Breadcrumb Ä‘iá»u hÆ°á»›ng | Danh sÃ¡ch liÃªn káº¿t | CÃ³ | CÃ³ | Thanh breadcrumb: "Trang chá»§ > Diá»…n Ä‘Ã n > [TÃªn diá»…n Ä‘Ã n]". Má»—i má»¥c lÃ  link quay láº¡i trang tÆ°Æ¡ng á»©ng. |
+| **HEADER DIá»„N ÄÃ€N** | | | | |
+| Icon chá»¯ cÃ¡i diá»…n Ä‘Ã n | Avatar | CÃ³ | CÃ³ | HÃ¬nh vuÃ´ng bo gÃ³c lá»›n (vÃ­ dá»¥ 64Ã—64px) hiá»ƒn thá»‹ 1â€“2 chá»¯ cÃ¡i Ä‘áº§u tÃªn diá»…n Ä‘Ã n (vÃ­ dá»¥ "LD" ná»n xanh dÆ°Æ¡ng cho "Luáº­t DÃ¢n sá»±"). MÃ u ná»n Ä‘Æ°á»£c sinh tá»± Ä‘á»™ng nháº¥t quÃ¡n theo tÃªn diá»…n Ä‘Ã n. |
+| TÃªn diá»…n Ä‘Ã n | KÃ½ tá»± | CÃ³ | CÃ³ | TÃªn Ä‘áº§y Ä‘á»§ diá»…n Ä‘Ã n, font chá»¯ lá»›n (H1), chá»¯ Ä‘áº­m, mÃ u Ä‘áº­m. |
+| Sá»‘ chá»§ Ä‘á» trong diá»…n Ä‘Ã n | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | NhÃ£n nhá» bÃªn dÆ°á»›i tÃªn: "X chá»§ Ä‘á»" (vÃ­ dá»¥ "136K chá»§ Ä‘á»"). DÃ¹ng Ä‘á»‹nh dáº¡ng rÃºt gá»n K/M náº¿u trÃªn 1000. Cáº­p nháº­t khi cÃ³ chá»§ Ä‘á» má»›i. |
+| MÃ´ táº£ diá»…n Ä‘Ã n | KÃ½ tá»± | KhÃ´ng | CÃ³ (náº¿u cÃ³ dá»¯ liá»‡u) | MÃ´ táº£ tÃ³m táº¯t má»¥c Ä‘Ã­ch vÃ  pháº¡m vi tranh luáº­n cá»§a diá»…n Ä‘Ã n, Ä‘áº·t bÃªn dÆ°á»›i sá»‘ chá»§ Ä‘á». Hiá»ƒn thá»‹ tá»‘i Ä‘a 3 dÃ²ng. |
+| NÃºt "Theo dÃµi diá»…n Ä‘Ã n" | Button | CÃ³ | Hiá»ƒn thá»‹ khi Ä‘Ã£ Ä‘Äƒng nháº­p vÃ  chÆ°a theo dÃµi | NÃºt outline "Theo dÃµi diá»…n Ä‘Ã n" Ä‘áº·t gÃ³c pháº£i header. Nháº¥n â†’ thá»±c hiá»‡n theo dÃµi theo luá»“ng UC88. |
+| NÃºt "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi" | Button | CÃ³ | Hiá»ƒn thá»‹ khi chÆ°a Ä‘Äƒng nháº­p | NÃºt fill xanh "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi" Ä‘áº·t cáº¡nh nÃºt outline khi chÆ°a Ä‘Äƒng nháº­p. Nháº¥n â†’ Ä‘iá»u hÆ°á»›ng Ä‘áº¿n Ä‘Äƒng nháº­p, sau Ä‘Ã³ quay láº¡i vÃ  tá»± Ä‘á»™ng theo dÃµi. |
+| NÃºt "Äang theo dÃµi" | Button | CÃ³ | Hiá»ƒn thá»‹ khi Ä‘Ã£ theo dÃµi | Thay tháº¿ nÃºt "Theo dÃµi diá»…n Ä‘Ã n" sau khi ngÆ°á»i dÃ¹ng theo dÃµi thÃ nh cÃ´ng. Fill xanh + icon chuÃ´ng. Nháº¥n â†’ dropdown má»©c Ä‘á»™ theo dÃµi (UC88). |
+| **SIDEBAR Bá»˜ Lá»ŒC TRÃI** | | | | |
+| NhÃ£n "Bá»™ lá»c" | KÃ½ tá»± | CÃ³ | CÃ³ | TiÃªu Ä‘á» sidebar lá»c, chá»¯ Ä‘áº­m, mÃ u xÃ¡m Ä‘áº­m. |
+| Section "Ná»™i dung" | Radio button group | CÃ³ | "Táº¥t cáº£ chá»§ Ä‘á»" | Section vá»›i tiÃªu Ä‘á» "Ná»™i dung" vÃ  danh sÃ¡ch radio buttons lá»c chá»§ Ä‘á». Má»—i option hiá»ƒn thá»‹ nhÃ£n + sá»‘ lÆ°á»£ng tÆ°Æ¡ng á»©ng trong ngoáº·c. Chá»‰ cho phÃ©p chá»n má»™t option táº¡i má»™t thá»i Ä‘iá»ƒm. |
+| Radio "Táº¥t cáº£ chá»§ Ä‘á»" | Radio button | CÃ³ | ÄÆ°á»£c chá»n máº·c Ä‘á»‹nh | Hiá»ƒn thá»‹ táº¥t cáº£ chá»§ Ä‘á» trong diá»…n Ä‘Ã n. Sá»‘ lÆ°á»£ng hiá»ƒn thá»‹ tá»•ng: vÃ­ dá»¥ "Táº¥t cáº£ chá»§ Ä‘á» (136K)". |
+| Radio "ChÆ°a cÃ³ bÃ¬nh luáº­n" | Radio button | CÃ³ | KhÃ´ng Ä‘Æ°á»£c chá»n | Chá»‰ hiá»ƒn thá»‹ cÃ¡c chá»§ Ä‘á» chÆ°a cÃ³ báº¥t ká»³ bÃ¬nh luáº­n nÃ o. VÃ­ dá»¥: "ChÆ°a cÃ³ bÃ¬nh luáº­n (17.2K)". |
+| Radio "CÃ³ bÃ¬nh luáº­n" | Radio button | CÃ³ | KhÃ´ng Ä‘Æ°á»£c chá»n | Chá»‰ hiá»ƒn thá»‹ cÃ¡c chá»§ Ä‘á» Ä‘Ã£ cÃ³ Ã­t nháº¥t má»™t bÃ¬nh luáº­n. VÃ­ dá»¥: "CÃ³ bÃ¬nh luáº­n (119K)". |
+| Radio "ChÆ°a cÃ³ gÃ³p Ã½" | Radio button | CÃ³ | KhÃ´ng Ä‘Æ°á»£c chá»n | Chá»‰ hiá»ƒn thá»‹ cÃ¡c chá»§ Ä‘á» chÆ°a cÃ³ gÃ³p Ã½/pháº£n biá»‡n nÃ o. VÃ­ dá»¥: "ChÆ°a cÃ³ gÃ³p Ã½ (14K)". |
+| Radio "CÃ³ bÃ¬nh luáº­n há»¯u Ã­ch" | Radio button | CÃ³ | KhÃ´ng Ä‘Æ°á»£c chá»n | Chá»‰ hiá»ƒn thá»‹ chá»§ Ä‘á» cÃ³ Ã­t nháº¥t má»™t bÃ¬nh luáº­n Ä‘Æ°á»£c Ä‘Ã¡nh dáº¥u há»¯u Ã­ch (Ä‘Æ°á»£c upvote vÆ°á»£t ngÆ°á»¡ng). VÃ­ dá»¥: "CÃ³ bÃ¬nh luáº­n há»¯u Ã­ch (42.8K)". |
+| Radio "CÃ³ gÃ³p Ã½ há»¯u Ã­ch" | Radio button | CÃ³ | KhÃ´ng Ä‘Æ°á»£c chá»n | Chá»‰ hiá»ƒn thá»‹ chá»§ Ä‘á» cÃ³ Ã­t nháº¥t má»™t gÃ³p Ã½/pháº£n biá»‡n Ä‘Æ°á»£c Ä‘Ã¡nh dáº¥u há»¯u Ã­ch. VÃ­ dá»¥: "CÃ³ gÃ³p Ã½ há»¯u Ã­ch (72)". |
+| **VÃ™NG DANH SÃCH CHÃNH** | | | | |
+| NhÃ£n tá»•ng sá»‘ káº¿t quáº£ | KÃ½ tá»± | CÃ³ | CÃ³ | DÃ²ng text "X chá»§ Ä‘á» vá»›i tháº» [TÃªn diá»…n Ä‘Ã n]" (vÃ­ dá»¥ "136.492 chá»§ Ä‘á» vá»›i tháº» Luáº­t DÃ¢n sá»±") Ä‘áº·t trÃªn Ä‘áº§u danh sÃ¡ch, bÃªn trÃ¡i dropdown sort. Cáº­p nháº­t theo bá»™ lá»c Ä‘ang Ã¡p dá»¥ng. |
+| Dropdown sáº¯p xáº¿p | Dropdown | CÃ³ | "Cáº­p nháº­t" | Dropdown sáº¯p xáº¿p danh sÃ¡ch vá»›i cÃ¡c lá»±a chá»n: "Cáº­p nháº­t" (sáº¯p xáº¿p theo thá»i gian cÃ³ hoáº¡t Ä‘á»™ng má»›i nháº¥t â€” bÃ¬nh luáº­n hoáº·c gÃ³p Ã½ gáº§n nháº¥t), "Má»›i nháº¥t" (theo thá»i gian táº¡o chá»§ Ä‘á»), "Nhiá»u vote" (theo sá»‘ upvote), "Nhiá»u tráº£ lá»i" (theo tá»•ng bÃ¬nh luáº­n + gÃ³p Ã½). |
+| NÃºt "Táº¡o chá»§ Ä‘á»" | Button | CÃ³ | CÃ³ | NÃºt fill xanh "Táº¡o chá»§ Ä‘á»" Ä‘áº·t gÃ³c pháº£i, cÃ¹ng dÃ²ng vá»›i dropdown sort. Nháº¥n vÃ  Ä‘Ã£ Ä‘Äƒng nháº­p: Ä‘iá»u hÆ°á»›ng sang UC89 vá»›i diá»…n Ä‘Ã n nÃ y Ä‘Æ°á»£c Ä‘iá»n sáºµn. ChÆ°a Ä‘Äƒng nháº­p: hiá»ƒn thá»‹ há»™p thoáº¡i Ä‘Äƒng nháº­p. |
+| Danh sÃ¡ch hÃ ng chá»§ Ä‘á» | List rows | CÃ³ | CÃ³ | Khu vá»±c chÃ­nh hiá»ƒn thá»‹ cÃ¡c hÃ ng chá»§ Ä‘á». Má»—i hÃ ng chiáº¿m toÃ n bá»™ chiá»u rá»™ng vÃ¹ng chÃ­nh, Ä‘Æ°á»£c phÃ¢n tÃ¡ch bá»Ÿi Ä‘Æ°á»ng káº» má»ng. Bá»‘ cá»¥c má»—i hÃ ng gá»“m 4 khu vá»±c chÃ­nh theo chiá»u ngang (mÃ´ táº£ chi tiáº¿t bÃªn dÆ°á»›i). |
+| **THÃ€NH PHáº¦N Má»–I HÃ€NG CHá»¦ Äá»€** | | | | |
+| Cá»™t thá»‘ng kÃª (trÃ¡i) | Column | CÃ³ | CÃ³ | Cá»™t bÃªn trÃ¡i tháº», chiá»u rá»™ng cá»‘ Ä‘á»‹nh (~80px), hiá»ƒn thá»‹ hai chá»‰ sá»‘ chÃ­nh theo chiá»u dá»c: (1) Sá»‘ bÃ¬nh luáº­n (icon bong bÃ³ng há»™i thoáº¡i + sá»‘); (2) Sá»‘ gÃ³p Ã½/pháº£n biá»‡n (icon bÃºt hoáº·c icon Ä‘áº·c trÆ°ng khÃ¡c biá»‡t vá»›i icon bÃ¬nh luáº­n + sá»‘). Hai chá»‰ sá»‘ nÃ y tÃ¡ch biá»‡t nhau, khÃ´ng gá»™p chung. Khi sá»‘ = 0: hiá»ƒn thá»‹ "0" mÃ u xÃ¡m nháº¡t. Khi cÃ³ sá»‘ má»›i chÆ°a Ä‘á»c (vá»›i ngÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p vÃ  theo dÃµi chá»§ Ä‘á»): sá»‘ hiá»ƒn thá»‹ in Ä‘áº­m vÃ  cÃ³ badge cháº¥m xanh. |
+| Sá»‘ bÃ¬nh luáº­n | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Tá»•ng sá»‘ bÃ¬nh luáº­n (Comment) trong chá»§ Ä‘á». Hiá»ƒn thá»‹ kÃ¨m icon bong bÃ³ng comment. DÃ¹ng Ä‘á»‹nh dáº¡ng rÃºt gá»n K náº¿u trÃªn 1000. |
+| Sá»‘ gÃ³p Ã½/pháº£n biá»‡n | Sá»‘ nguyÃªn | CÃ³ | CÃ³ | Tá»•ng sá»‘ bÃ i gÃ³p Ã½/pháº£n biá»‡n (Contribution) Ä‘Æ°á»£c liÃªn káº¿t vá»›i chá»§ Ä‘á». Hiá»ƒn thá»‹ kÃ¨m icon riÃªng biá»‡t (vÃ­ dá»¥: icon bÃºt nghiÃªng hoáº·c icon trao Ä‘á»•i 2 chiá»u) Ä‘á»ƒ phÃ¢n biá»‡t vá»›i bÃ¬nh luáº­n. ÄÃ¢y lÃ  chá»‰ sá»‘ Ä‘áº·c trÆ°ng cá»§a cáº¥u trÃºc Linked Nodes cá»§a diá»…n Ä‘Ã n nÃ y. |
+| Cá»™t ná»™i dung chÃ­nh (giá»¯a) | Column | CÃ³ | CÃ³ | Cá»™t chiáº¿m pháº§n lá»›n chiá»u rá»™ng (flex grow), gá»“m: badges tráº¡ng thÃ¡i (náº¿u cÃ³), tiÃªu Ä‘á» chá»§ Ä‘á» (link xanh), tÃ³m táº¯t Ä‘áº§u ná»™i dung (2 dÃ²ng), vÃ  tags. |
+| Badge tráº¡ng thÃ¡i Ä‘áº·c biá»‡t | Badge | KhÃ´ng | KhÃ´ng | Badges hiá»ƒn thá»‹ phÃ­a trÆ°á»›c tiÃªu Ä‘á» chá»§ Ä‘á» khi cÃ³: "ðŸ“Œ Ghim" (mÃ u xanh lam, chá»§ Ä‘á» Ä‘Æ°á»£c ghim lÃªn Ä‘áº§u bá»Ÿi moderator), "ðŸ”¥ Ná»•i báº­t" (mÃ u cam, chá»§ Ä‘á» Ä‘Æ°á»£c Ä‘Ã¡nh dáº¥u ná»•i báº­t), "âœ“ ÄÃ£ giáº£i Ä‘Ã¡p" (mÃ u xanh lÃ¡, chá»§ Ä‘á» cÃ³ gÃ³p Ã½/bÃ¬nh luáº­n Ä‘Æ°á»£c Ä‘Ã¡nh dáº¥u lÃ  giáº£i Ä‘Ã¡p chÃ­nh thá»©c). áº¨n náº¿u khÃ´ng cÃ³ nhÃ£n nÃ o. |
+| TiÃªu Ä‘á» chá»§ Ä‘á» | Hyperlink | CÃ³ | CÃ³ | TiÃªu Ä‘á» chá»§ Ä‘á», chá»¯ Ä‘áº­m, mÃ u xanh Ä‘áº­m, lÃ  link nháº¥n Ä‘Æ°á»£c. Nháº¥n â†’ Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang Chi tiáº¿t Chá»§ Ä‘á» (UC91). TiÃªu Ä‘á» hiá»ƒn thá»‹ tá»‘i Ä‘a 1â€“2 dÃ²ng; cáº¯t bá»›t náº¿u quÃ¡ dÃ i. |
+| TÃ³m táº¯t ná»™i dung | KÃ½ tá»± | KhÃ´ng | CÃ³ (náº¿u cÃ³ ná»™i dung) | 2 dÃ²ng Ä‘áº§u cá»§a ná»™i dung bÃ i viáº¿t (dáº¡ng plain text, Ä‘Ã£ loáº¡i bá» markdown/HTML). Cáº¯t bá»›t thÃªm "...". áº¨n náº¿u ná»™i dung trÃ¹ng vá»›i tiÃªu Ä‘á». |
+| Tags | Tag chips | KhÃ´ng | CÃ³ (náº¿u cÃ³ tags) | Danh sÃ¡ch chip tags gáº¯n vá»›i chá»§ Ä‘á». Má»—i chip lÃ  link nháº¥n Ä‘Æ°á»£c, nháº¥n vÃ o tag Ä‘iá»u hÆ°á»›ng sang trang tÃ¬m kiáº¿m lá»c theo tag Ä‘Ã³. Hiá»ƒn thá»‹ tá»‘i Ä‘a 3 tags; náº¿u cÃ³ nhiá»u hÆ¡n hiá»ƒn thá»‹ "+X" Ä‘á»ƒ chá»‰ ra sá»‘ tags áº©n. |
+| Cá»™t tÃ¡c giáº£ (pháº£i) | Column | CÃ³ | CÃ³ | Cá»™t bÃªn pháº£i gá»“m 2 nhÃ³m thÃ´ng tin xáº¿p dá»c: (1) ThÃ´ng tin tÃ¡c giáº£ táº¡o chá»§ Ä‘á»; (2) ThÃ´ng tin ngÆ°á»i tráº£ lá»i/tÆ°Æ¡ng tÃ¡c cuá»‘i. |
+| ThÃ´ng tin tÃ¡c giáº£ chá»§ Ä‘á» | User info | CÃ³ | CÃ³ | Avatar nhá» (24Ã—24px) cá»§a tÃ¡c giáº£ + tÃªn hiá»ƒn thá»‹ (link profile) + thá»i gian táº¡o chá»§ Ä‘á» (tÆ°Æ¡ng Ä‘á»‘i: "2 giá» trÆ°á»›c", "HÃ´m qua", "12/03/2026"). NhÃ£n nhá» "bá»Ÿi" trÆ°á»›c tÃªn. |
+| ThÃ´ng tin ngÆ°á»i tÆ°Æ¡ng tÃ¡c cuá»‘i | User info | KhÃ´ng | CÃ³ (náº¿u Ä‘Ã£ cÃ³ tÆ°Æ¡ng tÃ¡c) | Avatar nhá» cá»§a ngÆ°á»i bÃ¬nh luáº­n/gÃ³p Ã½ gáº§n nháº¥t + tÃªn + thá»i gian. NhÃ£n nhá» "tráº£ lá»i" trÆ°á»›c tÃªn. áº¨n náº¿u chá»§ Ä‘á» chÆ°a cÃ³ bÃ¬nh luáº­n hoáº·c gÃ³p Ã½ nÃ o. |
+| ThÃ´ng bÃ¡o danh sÃ¡ch rá»—ng | ThÃ´ng bÃ¡o | KhÃ´ng | KhÃ´ng | Khi khÃ´ng cÃ³ chá»§ Ä‘á» nÃ o phÃ¹ há»£p vá»›i bá»™ lá»c: "KhÃ´ng cÃ³ chá»§ Ä‘á» nÃ o phÃ¹ há»£p vá»›i bá»™ lá»c Ä‘ang chá»n." kÃ¨m gá»£i Ã½ "Thá»­ chá»n bá»™ lá»c khÃ¡c hoáº·c táº¡o chá»§ Ä‘á» má»›i." |
+| ThÃ´ng bÃ¡o diá»…n Ä‘Ã n trá»‘ng | ThÃ´ng bÃ¡o | KhÃ´ng | KhÃ´ng | Khi diá»…n Ä‘Ã n chÆ°a cÃ³ chá»§ Ä‘á» nÃ o: "Diá»…n Ä‘Ã n nÃ y chÆ°a cÃ³ chá»§ Ä‘á» nÃ o. HÃ£y lÃ  ngÆ°á»i Ä‘áº§u tiÃªn táº¡o chá»§ Ä‘á»!" kÃ¨m nÃºt "Táº¡o chá»§ Ä‘á» Ä‘áº§u tiÃªn". |
+| Thanh phÃ¢n trang | Pagination | KhÃ´ng | CÃ³ | Thanh phÃ¢n trang cuá»‘i danh sÃ¡ch. Hiá»ƒn thá»‹ khi sá»‘ chá»§ Ä‘á» vÆ°á»£t ngÆ°á»¡ng trang máº·c Ä‘á»‹nh (vÃ­ dá»¥: 20 chá»§ Ä‘á»/trang). Gá»“m nÃºt "TrÆ°á»›c", danh sÃ¡ch sá»‘ trang (hiá»ƒn thá»‹ tá»‘i Ä‘a 5â€“7 sá»‘, dÃ¹ng "..." cho khoáº£ng bá»‹ áº©n), nÃºt "Sau". Giá»¯ nguyÃªn bá»™ lá»c vÃ  sort khi chuyá»ƒn trang. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Táº£i vÃ  hiá»ƒn thá»‹ danh sÃ¡ch chá»§ Ä‘á» | List rows | Khi ngÆ°á»i dÃ¹ng truy cáº­p trang, há»‡ thá»‘ng táº£i danh sÃ¡ch chá»§ Ä‘á» cá»§a diá»…n Ä‘Ã n tÆ°Æ¡ng á»©ng vá»›i bá»™ lá»c máº·c Ä‘á»‹nh "Táº¥t cáº£ chá»§ Ä‘á»", sáº¯p xáº¿p theo "Cáº­p nháº­t" (hoáº¡t Ä‘á»™ng gáº§n nháº¥t). Chá»§ Ä‘á» Ä‘Æ°á»£c ghim (badge ðŸ“Œ) luÃ´n hiá»ƒn thá»‹ trÃªn cÃ¹ng báº¥t ká»ƒ thá»© tá»± sort. TrÆ°á»ng há»£p 1: CÃ³ dá»¯ liá»‡u, hiá»ƒn thá»‹ danh sÃ¡ch. TrÆ°á»ng há»£p 2: Diá»…n Ä‘Ã n trá»‘ng, hiá»ƒn thá»‹ empty state khuyáº¿n khÃ­ch táº¡o chá»§ Ä‘á». TrÆ°á»ng há»£p 3: Lá»—i táº£i, hiá»ƒn thá»‹ thÃ´ng bÃ¡o lá»—i vÃ  nÃºt "Thá»­ láº¡i". |
+| 2 | Lá»c chá»§ Ä‘á» theo ná»™i dung | Radio button group | NgÆ°á»i dÃ¹ng nháº¥n má»™t radio button trong sidebar. Há»‡ thá»‘ng cáº­p nháº­t danh sÃ¡ch ngay láº­p tá»©c, chá»‰ hiá»ƒn thá»‹ cÃ¡c chá»§ Ä‘á» thá»a mÃ£n Ä‘iá»u kiá»‡n lá»c Ä‘Æ°á»£c chá»n. NhÃ£n tá»•ng sá»‘ káº¿t quáº£ cáº­p nháº­t tÆ°Æ¡ng á»©ng. Khi khÃ´ng cÃ³ káº¿t quáº£: hiá»ƒn thá»‹ thÃ´ng bÃ¡o "KhÃ´ng cÃ³ chá»§ Ä‘á» nÃ o phÃ¹ há»£p." |
+| 3 | Sáº¯p xáº¿p danh sÃ¡ch chá»§ Ä‘á» | Dropdown | NgÆ°á»i dÃ¹ng chá»n tiÃªu chÃ­ sort tá»« dropdown. Há»‡ thá»‘ng táº£i láº¡i danh sÃ¡ch theo thá»© tá»± má»›i giá»¯ nguyÃªn bá»™ lá»c Ä‘ang Ã¡p dá»¥ng. Chá»§ Ä‘á» ghim váº«n á»Ÿ trÃªn Ä‘áº§u báº¥t ká»ƒ sort. |
+| 4 | Xem chi tiáº¿t chá»§ Ä‘á» | Nháº¥n vÃ o tiÃªu Ä‘á» | NgÆ°á»i dÃ¹ng nháº¥n vÃ o tiÃªu Ä‘á» chá»§ Ä‘á», há»‡ thá»‘ng Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang Chi tiáº¿t Chá»§ Ä‘á» (UC91) cá»§a chá»§ Ä‘á» Ä‘Ã³. |
+| 5 | Táº¡o chá»§ Ä‘á» má»›i | NÃºt "Táº¡o chá»§ Ä‘á»" | NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p nháº¥n nÃºt "Táº¡o chá»§ Ä‘á»". Há»‡ thá»‘ng Ä‘iá»u hÆ°á»›ng Ä‘áº¿n UC89 vá»›i diá»…n Ä‘Ã n hiá»‡n táº¡i Ä‘Æ°á»£c Ä‘iá»n sáºµn á»Ÿ BÆ°á»›c 1. Náº¿u chÆ°a Ä‘Äƒng nháº­p: hiá»ƒn thá»‹ há»™p thoáº¡i Ä‘Äƒng nháº­p. |
+| 6 | Theo dÃµi/Bá» theo dÃµi diá»…n Ä‘Ã n | NÃºt header | NgÆ°á»i dÃ¹ng nháº¥n nÃºt "Theo dÃµi diá»…n Ä‘Ã n", "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi" hoáº·c "Äang theo dÃµi" trong header. Há»‡ thá»‘ng thá»±c hiá»‡n theo luá»“ng UC88 tÆ°Æ¡ng á»©ng. |
+| 7 | Lá»c theo tag | Nháº¥n chip tag | NgÆ°á»i dÃ¹ng nháº¥n vÃ o má»™t chip tag trong hÃ ng chá»§ Ä‘á». Há»‡ thá»‘ng Ä‘iá»u hÆ°á»›ng sang trang tÃ¬m kiáº¿m vá»›i bá»™ lá»c tag Ä‘Ã³ Ä‘Æ°á»£c Ã¡p dá»¥ng sáºµn, hoáº·c lá»c ngay trong danh sÃ¡ch chá»§ Ä‘á» hiá»‡n táº¡i (tÃ¹y thiáº¿t káº¿). |
+| 8 | PhÃ¢n trang | Pagination | NgÆ°á»i dÃ¹ng nháº¥n sá»‘ trang hoáº·c nÃºt TrÆ°á»›c/Sau. Há»‡ thá»‘ng táº£i trang tÆ°Æ¡ng á»©ng giá»¯ nguyÃªn bá»™ lá»c vÃ  sort. Trang má»›i Ä‘Æ°á»£c hiá»ƒn thá»‹ tá»« Ä‘áº§u vÃ¹ng danh sÃ¡ch (scroll lÃªn Ä‘áº§u). |
+
+---
+
+*TÃ i liá»‡u Ä‘Æ°á»£c táº¡o tá»± Ä‘á»™ng bá»Ÿi AI Gen â€“ NgÃ y: 2026-03-16*
+## A.I.7_Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t
+
+### A.I.7.CPLQG-VI-091 - Xem chi tiáº¿t chá»§ Ä‘á»
+
+#### Má»¥c Ä‘Ã­ch
+
+Cho phÃ©p ngÆ°á»i dÃ¹ng (cÃ¡ nhÃ¢n, chuyÃªn gia, tá»• chá»©c) xem toÃ n bá»™ ná»™i dung cá»§a má»™t chá»§ Ä‘á» tháº£o luáº­n trong Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t: bÃ i viáº¿t Ä‘áº§y Ä‘á»§, danh sÃ¡ch bÃ¬nh luáº­n, danh sÃ¡ch gÃ³p Ã½/pháº£n biá»‡n, cÃ¡c thÃ´ng tin tÆ°Æ¡ng tÃ¡c (lÆ°á»£t thÃ­ch, lÆ°á»£t xem, theo dÃµi), cÃ¹ng sidebar thá»‘ng kÃª cá»™ng Ä‘á»“ng vÃ  cÃ¡c chá»§ Ä‘á» liÃªn quan. ÄÃ¢y lÃ  trang trung tÃ¢m cá»§a diá»…n Ä‘Ã n, tá»« Ä‘Ã³ ngÆ°á»i dÃ¹ng cÃ³ thá»ƒ Ä‘iá»u hÆ°á»›ng sang UC92 (Tháº£o luáº­n, gÃ³p Ã½ chÃ­nh sÃ¡ch) Ä‘á»ƒ tham gia Ä‘Ã³ng gÃ³p.
+
+##### a. PhÃ¢n quyá»n
+
+- Xem ná»™i dung bÃ i viáº¿t, bÃ¬nh luáº­n, gÃ³p Ã½: cÃ´ng khai, khÃ´ng yÃªu cáº§u Ä‘Äƒng nháº­p.
+- Thá»±c hiá»‡n tÆ°Æ¡ng tÃ¡c (thÃ­ch, theo dÃµi, "CÅ©ng cÃ¢u há»i nÃ y", bÃ¬nh luáº­n, táº¡o gÃ³p Ã½): yÃªu cáº§u Ä‘Äƒng nháº­p.
+- Táº¥t cáº£ vai trÃ² Ä‘Äƒng nháº­p (CÃ´ng dÃ¢n, Luáº­t sÆ°, ChuyÃªn gia, Tá»• chá»©c, Moderator, Admin) Ä‘á»u cÃ³ thá»ƒ xem vÃ  tÆ°Æ¡ng tÃ¡c.
+- NÃºt "Táº¡o chá»§ Ä‘á»" trong sidebar: yÃªu cáº§u Ä‘Äƒng nháº­p.
+
+##### b. Äiá»u kiá»‡n thá»±c hiá»‡n
+
+- Chá»§ Ä‘á» Ä‘Ã£ Ä‘Æ°á»£c táº¡o vÃ  á»Ÿ tráº¡ng thÃ¡i "ÄÃ£ duyá»‡t" (Published) trong há»‡ thá»‘ng diá»…n Ä‘Ã n.
+- NgÆ°á»i dÃ¹ng Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang báº±ng cÃ¡ch nháº¥n vÃ o tháº»/tiÃªu Ä‘á» chá»§ Ä‘á» tá»« danh sÃ¡ch diá»…n Ä‘Ã n (UC88, UC89, UC90).
+- URL dáº¡ng: `/dien-dan/{slug-chu-de}` hoáº·c `/dien-dan/{id}`.
+
+---
+
+#### CPLQG-VI-091.MH01 â€“ Trang Chi tiáº¿t chá»§ Ä‘á» â€“ Layout tá»•ng thá»ƒ
+
+##### MÃ n hÃ¬nh
+
+Trang Chi tiáº¿t chá»§ Ä‘á», bá»‘ cá»¥c 2 cá»™t: cá»™t chÃ­nh (main ~70% chiá»u rá»™ng) bÃªn trÃ¡i vÃ  sidebar (~30%) bÃªn pháº£i. Breadcrumb Ä‘iá»u hÆ°á»›ng á»Ÿ Ä‘áº§u trang.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Breadcrumb Ä‘iá»u hÆ°á»›ng | Danh sÃ¡ch liÃªn káº¿t | CÃ³ | CÃ³ | Chuá»—i: "Trang chá»§ > Diá»…n Ä‘Ã n > [TÃªn nhÃ³m chá»§ Ä‘á»] > [TÃªn chá»§ Ä‘á»]". Má»—i cáº¥p lÃ  liÃªn káº¿t Ä‘iá»u hÆ°á»›ng, cáº¥p hiá»‡n táº¡i (chá»§ Ä‘á») khÃ´ng pháº£i liÃªn káº¿t. |
+| Cá»™t chÃ­nh (main column) | Container | CÃ³ | CÃ³ | Chiáº¿m ~70% chiá»u rá»™ng, chá»©a MH01a (header + ná»™i dung), MH01b (bÃ¬nh luáº­n), MH01c (gÃ³p Ã½). |
+| Right sidebar | Container | CÃ³ | CÃ³ | Chiáº¿m ~30% chiá»u rá»™ng, chá»©a MH01d (cÃ¡c card phá»¥ trá»£). áº¨n trÃªn mÃ n hÃ¬nh mobile, chuyá»ƒn thÃ nh accordion khi responsive. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Táº£i trang chi tiáº¿t chá»§ Ä‘á» | Tá»± Ä‘á»™ng khi vÃ o trang | Há»‡ thá»‘ng táº£i song song: ná»™i dung bÃ i viáº¿t, 10 bÃ¬nh luáº­n Ä‘áº§u tiÃªn, 4 gÃ³p Ã½ Ä‘áº§u tiÃªn, dá»¯ liá»‡u sidebar. TrÆ°á»ng há»£p 1: Táº£i thÃ nh cÃ´ng, hiá»ƒn thá»‹ Ä‘áº§y Ä‘á»§. TrÆ°á»ng há»£p 2: Chá»§ Ä‘á» khÃ´ng tá»“n táº¡i hoáº·c Ä‘Ã£ bá»‹ xÃ³a, hiá»ƒn thá»‹ trang lá»—i 404 vá»›i liÃªn káº¿t quay vá» diá»…n Ä‘Ã n. TrÆ°á»ng há»£p 3: Lá»—i server, hiá»ƒn thá»‹ thÃ´ng bÃ¡o vÃ  nÃºt "Thá»­ láº¡i". |
+| 2 | Äiá»u hÆ°á»›ng breadcrumb | LiÃªn káº¿t | Nháº¥n vÃ o báº¥t ká»³ cáº¥p breadcrumb nÃ o, há»‡ thá»‘ng Ä‘iá»u hÆ°á»›ng vá» trang tÆ°Æ¡ng á»©ng (Trang chá»§ / trang Diá»…n Ä‘Ã n / trang nhÃ³m chá»§ Ä‘á»). |
+
+---
+
+#### CPLQG-VI-091.MH01a â€“ Trang Chi tiáº¿t chá»§ Ä‘á» â€“ Header, ná»™i dung bÃ i viáº¿t vÃ  thanh tÆ°Æ¡ng tÃ¡c
+
+##### MÃ n hÃ¬nh
+
+Pháº§n trÃªn cÃ¹ng cá»§a cá»™t chÃ­nh: badge loáº¡i, tiÃªu Ä‘á» chá»§ Ä‘á», thÃ´ng tin tÃ¡c giáº£, ná»™i dung bÃ i viáº¿t Ä‘áº§y Ä‘á»§, danh sÃ¡ch tag, thanh tÆ°Æ¡ng tÃ¡c (interaction bar), vÃ  hai nÃºt hÃ nh Ä‘á»™ng chÃ­nh.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Badge loáº¡i bÃ i viáº¿t | String (enum) | CÃ³ | "Chá»§ Ä‘á»" | Badge nhá» hiá»ƒn thá»‹ loáº¡i bÃ i viáº¿t. CÃ¡c giÃ¡ trá»‹: "Chá»§ Ä‘á»" (mÃ u tÃ­m nháº¡t), "CÃ¢u há»i" (mÃ u xanh lam nháº¡t), "Tháº£o luáº­n" (mÃ u cam nháº¡t). |
+| TiÃªu Ä‘á» chá»§ Ä‘á» | String | CÃ³ | KhÃ´ng | TiÃªu Ä‘á» Ä‘áº§y Ä‘á»§ cá»§a chá»§ Ä‘á», hiá»ƒn thá»‹ dáº¡ng H1, chá»¯ Ä‘áº­m, mÃ u Ä‘en/xÃ¡m Ä‘áº­m. VÃ­ dá»¥: "LÃ m tháº¿ nÃ o Ä‘á»ƒ xin cáº¥p phÃ©p kinh doanh theo Luáº­t Doanh nghiá»‡p má»›i?". Tá»‘i Ä‘a 300 kÃ½ tá»±. |
+| Avatar tÃ¡c giáº£ | Image | CÃ³ | áº¢nh máº·c Ä‘á»‹nh | áº¢nh Ä‘áº¡i diá»‡n tÃ¡c giáº£, hÃ¬nh trÃ²n, kÃ­ch thÆ°á»›c 40Ã—40px. Hiá»ƒn thá»‹ chá»¯ viáº¿t táº¯t tÃªn (vÃ­ dá»¥: "NT") náº¿u khÃ´ng cÃ³ áº£nh, ná»n mÃ u tá»± Ä‘á»™ng theo hash tÃªn. |
+| TÃªn tÃ¡c giáº£ | String | CÃ³ | CÃ³ | TÃªn hiá»ƒn thá»‹ cá»§a tÃ¡c giáº£ (cÃ¡ nhÃ¢n hoáº·c tá»• chá»©c). LÃ  liÃªn káº¿t Ä‘áº¿n trang há»“ sÆ¡ tÃ¡c giáº£. |
+| Badge vai trÃ² tÃ¡c giáº£ | String (enum) | KhÃ´ng | KhÃ´ng | Hiá»ƒn thá»‹ bÃªn cáº¡nh tÃªn náº¿u tÃ¡c giáº£ cÃ³ vai trÃ² Ä‘áº·c biá»‡t: "Luáº­t sÆ°" (xanh lÃ¡ Ä‘áº­m), "ChuyÃªn gia" (xanh dÆ°Æ¡ng), "CÆ¡ quan nhÃ  nÆ°á»›c" (Ä‘á»). |
+| NgÃ y Ä‘Äƒng | Datetime | CÃ³ | CÃ³ | Äá»‹nh dáº¡ng: "NgÃ y dd/mm/yyyy, h:mm SA/CH". Tooltip hiá»ƒn thá»‹ thá»i gian tuyá»‡t Ä‘á»‘i Ä‘áº§y Ä‘á»§ khi hover. |
+| Ná»™i dung bÃ i viáº¿t | Rich text (HTML) | CÃ³ | CÃ³ | Ná»™i dung Ä‘áº§y Ä‘á»§ Ä‘Ã£ Ä‘á»‹nh dáº¡ng: Ä‘oáº¡n vÄƒn, tiÃªu Ä‘á» H2/H3, danh sÃ¡ch cÃ³ thá»© tá»±/khÃ´ng thá»© tá»±, liÃªn káº¿t, báº£ng, hÃ¬nh áº£nh inline, blockquote, code block. Há»‡ thá»‘ng sanitize HTML Ä‘á»ƒ trÃ¡nh XSS. |
+| Danh sÃ¡ch tÃ i liá»‡u Ä‘Ã­nh kÃ¨m | Danh sÃ¡ch file | KhÃ´ng | KhÃ´ng | Hiá»ƒn thá»‹ bÃªn dÆ°á»›i ná»™i dung náº¿u cÃ³ file Ä‘Ã­nh kÃ¨m. Má»—i item: icon loáº¡i file (PDF/DOCX/...) + tÃªn file + kÃ­ch thÆ°á»›c + nÃºt táº£i xuá»‘ng. áº¨n náº¿u khÃ´ng cÃ³ Ä‘Ã­nh kÃ¨m. |
+| Tags | Danh sÃ¡ch String | KhÃ´ng | KhÃ´ng | Chip tags hiá»ƒn thá»‹ bÃªn dÆ°á»›i ná»™i dung. VÃ­ dá»¥: "Luáº­t Doanh nghiá»‡p", "ÄÄƒng kÃ½ kinh doanh", "Thá»§ tá»¥c hÃ nh chÃ­nh". Má»—i tag lÃ  liÃªn káº¿t dáº«n Ä‘áº¿n trang tÃ¬m kiáº¿m theo tag. |
+| Sá»‘ lÆ°á»£t thÃ­ch | Integer | CÃ³ | 0 | Sá»‘ lÆ°á»£t ngÆ°á»i dÃ¹ng nháº¥n "ThÃ­ch" bÃ i viáº¿t. |
+| Sá»‘ bÃ¬nh luáº­n | Integer | CÃ³ | 0 | Tá»•ng sá»‘ bÃ¬nh luáº­n trá»±c tiáº¿p (khÃ´ng tÃ­nh reply lá»“ng nhau) cá»§a chá»§ Ä‘á». |
+| Sá»‘ gÃ³p Ã½ | Integer | CÃ³ | 0 | Tá»•ng sá»‘ bÃ i gÃ³p Ã½/pháº£n biá»‡n (Contribution) cá»§a chá»§ Ä‘á». |
+| NÃºt BÃ¡o cÃ¡o vi pháº¡m | Button | CÃ³ | CÃ³ | Icon cá» + chá»¯ "BÃ¡o cÃ¡o vi pháº¡m". Hiá»ƒn thá»‹ cho ngÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p. áº¨n vá»›i tÃ¡c giáº£ cá»§a chÃ­nh bÃ i viáº¿t Ä‘Ã³. Nháº¥n â†’ má»Ÿ modal bÃ¡o cÃ¡o (xem UC92). |
+| NÃºt "CÅ©ng cÃ¢u há»i nÃ y" | Button (toggle) | CÃ³ | ChÆ°a theo dÃµi | NÃºt kiá»ƒu Quora "Same question" â€” ngÆ°á»i dÃ¹ng nháº¥n Ä‘á»ƒ theo dÃµi chá»§ Ä‘á». Tráº¡ng thÃ¡i: "ðŸ‘† CÅ©ng cÃ¢u há»i nÃ y" (chÆ°a theo dÃµi) / "âœ“ Äang theo dÃµi" (Ä‘Ã£ theo dÃµi, mÃ u xanh). Khi chÆ°a Ä‘Äƒng nháº­p, nháº¥n â†’ redirect Ä‘áº¿n trang Ä‘Äƒng nháº­p. |
+| NÃºt ThÃ­ch (Thumbs up) | Button (toggle) | CÃ³ | ChÆ°a thÃ­ch | Icon thumbs up, hiá»ƒn thá»‹ sá»‘ lÆ°á»£t thÃ­ch. Tráº¡ng thÃ¡i: chÆ°a thÃ­ch (outline) / Ä‘Ã£ thÃ­ch (filled, mÃ u xanh). YÃªu cáº§u Ä‘Äƒng nháº­p. |
+| NÃºt "Táº¡o gÃ³p Ã½" | Button | CÃ³ | CÃ³ | NÃºt ná»n xanh Ä‘áº­m, chá»¯ tráº¯ng, icon ðŸ“. Äiá»u hÆ°á»›ng Ä‘áº¿n giao diá»‡n soáº¡n tháº£o gÃ³p Ã½/pháº£n biá»‡n (UC92.MH_ContributionEditor). YÃªu cáº§u Ä‘Äƒng nháº­p; náº¿u chÆ°a Ä‘Äƒng nháº­p, redirect login. |
+| NÃºt "Táº¡o bÃ¬nh luáº­n" | Button | CÃ³ | CÃ³ | NÃºt outline xanh, icon ðŸ’¬. Cuá»™n trang xuá»‘ng Ã´ soáº¡n tháº£o bÃ¬nh luáº­n (MH01b) vÃ  focus vÃ o textarea. YÃªu cáº§u Ä‘Äƒng nháº­p. |
+| Ã” Ä‘Äƒng nháº­p Ä‘á»ƒ bÃ¬nh luáº­n | Input placeholder | CÃ³ | CÃ³ | Ã” input hiá»ƒn thá»‹ khi ngÆ°á»i dÃ¹ng chÆ°a Ä‘Äƒng nháº­p, text "ÄÄƒng nháº­p Ä‘á»ƒ bÃ¬nh luáº­n, gÃ³p Ã½". Khi click â†’ redirect trang Ä‘Äƒng nháº­p. áº¨n khi Ä‘Ã£ Ä‘Äƒng nháº­p (thay báº±ng form soáº¡n tháº£o thá»±c). |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | ThÃ­ch bÃ i viáº¿t | NÃºt toggle thumbs up | NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p nháº¥n nÃºt ThÃ­ch. TrÆ°á»ng há»£p 1: ChÆ°a thÃ­ch â†’ tÄƒng sá»‘ Ä‘áº¿m 1, Ä‘á»•i tráº¡ng thÃ¡i sang Ä‘Ã£ thÃ­ch. TrÆ°á»ng há»£p 2: ÄÃ£ thÃ­ch â†’ giáº£m sá»‘ Ä‘áº¿m 1, Ä‘á»•i vá» chÆ°a thÃ­ch (bá» thÃ­ch). Thao tÃ¡c láº¡c quan (optimistic update) trÃªn UI trÆ°á»›c khi chá» API. |
+| 2 | Theo dÃµi chá»§ Ä‘á» ("CÅ©ng cÃ¢u há»i nÃ y") | NÃºt toggle | NgÆ°á»i dÃ¹ng nháº¥n nÃºt Ä‘á»ƒ theo dÃµi/bá» theo dÃµi chá»§ Ä‘á». Khi theo dÃµi: ngÆ°á»i dÃ¹ng nháº­n thÃ´ng bÃ¡o khi cÃ³ bÃ¬nh luáº­n hoáº·c gÃ³p Ã½ má»›i trÃªn chá»§ Ä‘á». Tráº¡ng thÃ¡i Ä‘Æ°á»£c lÆ°u vÃ o há»“ sÆ¡ cÃ¡ nhÃ¢n. |
+| 3 | Äiá»u hÆ°á»›ng táº¡o gÃ³p Ã½ | NÃºt "Táº¡o gÃ³p Ã½" | Nháº¥n nÃºt â†’ kiá»ƒm tra Ä‘Äƒng nháº­p â†’ má»Ÿ trang/modal soáº¡n tháº£o gÃ³p Ã½ UC92.MH_ContributionEditor cÃ³ sáºµn liÃªn káº¿t Ä‘áº¿n chá»§ Ä‘á» hiá»‡n táº¡i. |
+| 4 | Cuá»™n Ä‘áº¿n Ã´ bÃ¬nh luáº­n | NÃºt "Táº¡o bÃ¬nh luáº­n" | Nháº¥n nÃºt â†’ trang cuá»™n smooth-scroll xuá»‘ng pháº§n bÃ¬nh luáº­n, focus vÃ o textarea soáº¡n tháº£o (náº¿u Ä‘Ã£ Ä‘Äƒng nháº­p) hoáº·c hiá»ƒn thá»‹ gá»£i Ã½ Ä‘Äƒng nháº­p. |
+| 5 | Lá»c theo tag | Nháº¥n chip tag | Nháº¥n má»™t chip tag â†’ Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang tÃ¬m kiáº¿m diá»…n Ä‘Ã n vá»›i filter tag tÆ°Æ¡ng á»©ng. |
+| 6 | Táº£i tÃ i liá»‡u Ä‘Ã­nh kÃ¨m | NÃºt táº£i xuá»‘ng | Nháº¥n nÃºt táº£i xuá»‘ng file Ä‘Ã­nh kÃ¨m â†’ trÃ¬nh duyá»‡t táº£i file. KhÃ´ng yÃªu cáº§u Ä‘Äƒng nháº­p. |
+
+---
+
+#### CPLQG-VI-091.MH01b â€“ Trang Chi tiáº¿t chá»§ Ä‘á» â€“ Tab BÃ¬nh luáº­n
+
+##### MÃ n hÃ¬nh
+
+Pháº§n bÃ¬nh luáº­n bÃªn dÆ°á»›i bÃ i viáº¿t trong cá»™t chÃ­nh. CÃ³ tab chuyá»ƒn Ä‘á»•i giá»¯a "BÃ¬nh luáº­n" vÃ  "GÃ³p Ã½". Khi á»Ÿ tab BÃ¬nh luáº­n: hiá»ƒn thá»‹ form soáº¡n tháº£o bÃ¬nh luáº­n (náº¿u Ä‘Ã£ Ä‘Äƒng nháº­p) vÃ  danh sÃ¡ch bÃ¬nh luáº­n cÃ³ thá»ƒ sáº¯p xáº¿p.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Tab bar chuyá»ƒn Ä‘á»•i | Tab (2 tab) | CÃ³ | Tab "BÃ¬nh luáº­n" | Hai tab: "BÃ¬nh luáº­n (n)" vÃ  "GÃ³p Ã½ (m)" vá»›i n, m lÃ  sá»‘ lÆ°á»£ng tÆ°Æ¡ng á»©ng. Tab Ä‘ang kÃ­ch hoáº¡t Ä‘Æ°á»£c gáº¡ch chÃ¢n/tÃ´ Ä‘áº­m. |
+| Tá»•ng sá»‘ bÃ¬nh luáº­n | Integer (label) | CÃ³ | CÃ³ | Hiá»ƒn thá»‹ dáº¡ng "n bÃ¬nh luáº­n" á»Ÿ Ä‘áº§u section. |
+| Dropdown sáº¯p xáº¿p | Select | CÃ³ | "Há»¯u Ã­ch" | CÃ¡c lá»±a chá»n: "Há»¯u Ã­ch nháº¥t" (máº·c Ä‘á»‹nh), "Má»›i nháº¥t", "CÅ© nháº¥t", "Nhiá»u lÆ°á»£t thÃ­ch". Khi thay Ä‘á»•i â†’ táº£i láº¡i danh sÃ¡ch theo thá»© tá»± má»›i. |
+| Danh sÃ¡ch bÃ¬nh luáº­n | Danh sÃ¡ch | CÃ³ | CÃ³ | Hiá»ƒn thá»‹ tá»‘i Ä‘a 10 bÃ¬nh luáº­n má»—i trang. Má»—i item lÃ  má»™t card bÃ¬nh luáº­n (xem chi tiáº¿t cÃ¡c trÆ°á»ng bÃªn dÆ°á»›i). |
+| Avatar tÃ¡c giáº£ bÃ¬nh luáº­n | Image | CÃ³ | áº¢nh máº·c Ä‘á»‹nh | áº¢nh Ä‘áº¡i diá»‡n, hÃ¬nh trÃ²n 36Ã—36px. |
+| TÃªn tÃ¡c giáº£ bÃ¬nh luáº­n | String | CÃ³ | CÃ³ | TÃªn hiá»ƒn thá»‹ tÃ¡c giáº£ bÃ¬nh luáº­n. LiÃªn káº¿t Ä‘áº¿n há»“ sÆ¡. |
+| Badge vai trÃ² tÃ¡c giáº£ bÃ¬nh luáº­n | String (enum) | KhÃ´ng | KhÃ´ng | Badge nhá» bÃªn cáº¡nh tÃªn: "âœ“ ChuyÃªn gia", "Luáº­t sÆ°", "Cá»™ng Ä‘á»“ng". MÃ u tÆ°Æ¡ng á»©ng: xanh dÆ°Æ¡ng, xanh lÃ¡, xÃ¡m. |
+| NgÃ y giá» bÃ¬nh luáº­n | Datetime | CÃ³ | CÃ³ | Äá»‹nh dáº¡ng: "dd/mm/yyyy, h:mm SA/CH". Hiá»ƒn thá»‹ dáº¡ng tÆ°Æ¡ng Ä‘á»‘i (vÃ­ dá»¥: "2 giá» trÆ°á»›c") vá»›i tooltip lÃ  ngÃ y giá» tuyá»‡t Ä‘á»‘i. |
+| Badge "BÃ¬nh luáº­n há»¯u Ã­ch" | Badge | KhÃ´ng | KhÃ´ng | Badge "âœ“ BÃ¬nh luáº­n há»¯u Ã­ch" mÃ u xanh lÃ¡, chá»‰ hiá»ƒn thá»‹ khi moderator/admin Ä‘Ã£ Ä‘Ã¡nh dáº¥u bÃ¬nh luáº­n nÃ y lÃ  há»¯u Ã­ch. |
+| Ná»™i dung bÃ¬nh luáº­n | Rich text | CÃ³ | CÃ³ | Ná»™i dung Ä‘Ã£ Ä‘á»‹nh dáº¡ng (bold, italic, link, blockquote, mention @user). Tá»‘i Ä‘a 2000 kÃ½ tá»±. |
+| File Ä‘Ã­nh kÃ¨m bÃ¬nh luáº­n | Danh sÃ¡ch file | KhÃ´ng | KhÃ´ng | Icon + tÃªn file + kÃ­ch thÆ°á»›c + nÃºt táº£i xuá»‘ng. áº¨n náº¿u khÃ´ng cÃ³. |
+| Sá»‘ upvote bÃ¬nh luáº­n | Integer | CÃ³ | 0 | Sá»‘ lÆ°á»£t upvote cá»§a bÃ¬nh luáº­n cá»¥ thá»ƒ. |
+| Nested replies | Danh sÃ¡ch | KhÃ´ng | KhÃ´ng | CÃ¡c cÃ¢u tráº£ lá»i lá»“ng 1 cáº¥p, hiá»ƒn thá»‹ thá»¥t vÃ o 16px bÃªn dÆ°á»›i bÃ¬nh luáº­n cha. NÃºt "Xem thÃªm n tráº£ lá»i" náº¿u > 3. |
+| PhÃ¢n trang bÃ¬nh luáº­n | Pagination | CÃ³ | CÃ³ | Hiá»ƒn thá»‹ "Táº£i thÃªm bÃ¬nh luáº­n" (load more) hoáº·c phÃ¢n trang sá»‘. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Chuyá»ƒn tab | Tab bar | Nháº¥n tab "BÃ¬nh luáº­n" hoáº·c "GÃ³p Ã½" â†’ hiá»ƒn thá»‹ ná»™i dung tab tÆ°Æ¡ng á»©ng (khÃ´ng reload trang, chá»‰ Ä‘á»•i ná»™i dung trong section). URL cÃ³ thá»ƒ cáº­p nháº­t fragment: `#binh-luan` / `#gop-y`. |
+| 2 | Sáº¯p xáº¿p bÃ¬nh luáº­n | Dropdown | Chá»n tiÃªu chÃ­ sáº¯p xáº¿p â†’ gá»i API vá»›i tham sá»‘ sort tÆ°Æ¡ng á»©ng â†’ hiá»ƒn thá»‹ láº¡i danh sÃ¡ch. |
+| 3 | Upvote bÃ¬nh luáº­n | NÃºt â†‘ | NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p nháº¥n upvote: toggle upvote/bá» upvote. Cáº­p nháº­t sá»‘ Ä‘áº¿m ngay láº­p tá»©c (optimistic update). |
+| 4 | Reply bÃ¬nh luáº­n | NÃºt "Tráº£ lá»i" | Nháº¥n "Tráº£ lá»i" â†’ hiá»ƒn thá»‹ Ã´ soáº¡n tháº£o inline bÃªn dÆ°á»›i bÃ¬nh luáº­n vá»›i prefix "@TÃªnTÃ¡cGiáº£". Giao diá»‡n thu gá»n khi nháº¥n "Há»§y". Cho phÃ©p tá»‘i Ä‘a 1 cáº¥p lá»“ng nhau. |
+| 5 | Xem thÃªm replies | NÃºt "Xem thÃªm n tráº£ lá»i" | Nháº¥n â†’ táº£i vÃ  hiá»ƒn thá»‹ cÃ¡c reply tiáº¿p theo cá»§a bÃ¬nh luáº­n Ä‘Ã³. |
+| 6 | Táº£i thÃªm bÃ¬nh luáº­n | NÃºt "Táº£i thÃªm bÃ¬nh luáº­n" / phÃ¢n trang | Táº£i 10 bÃ¬nh luáº­n tiáº¿p theo, append vÃ o danh sÃ¡ch hiá»‡n cÃ³ (khÃ´ng thay tháº¿). |
+
+---
+
+#### CPLQG-VI-091.MH01c â€“ Trang Chi tiáº¿t chá»§ Ä‘á» â€“ Tab GÃ³p Ã½
+
+##### MÃ n hÃ¬nh
+
+Pháº§n tab "GÃ³p Ã½" trong cá»™t chÃ­nh, hiá»ƒn thá»‹ danh sÃ¡ch cÃ¡c bÃ i gÃ³p Ã½/pháº£n biá»‡n (Contribution) dáº¡ng card Ä‘áº§y Ä‘á»§ hÆ¡n so vá»›i bÃ¬nh luáº­n thÃ´ng thÆ°á»ng.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Tá»•ng sá»‘ gÃ³p Ã½ | Integer (label) | CÃ³ | CÃ³ | Hiá»ƒn thá»‹ "m gÃ³p Ã½, pháº£n biá»‡n" á»Ÿ Ä‘áº§u section. |
+| Dropdown sáº¯p xáº¿p gÃ³p Ã½ | Select | CÃ³ | "Nhiá»u vote nháº¥t" | CÃ¡c lá»±a chá»n: "Nhiá»u vote nháº¥t", "Má»›i nháº¥t", "CÅ© nháº¥t". |
+| TiÃªu Ä‘á» gÃ³p Ã½ | String | CÃ³ | CÃ³ | TiÃªu Ä‘á» cá»§a bÃ i gÃ³p Ã½, chá»¯ Ä‘áº­m, lÃ  liÃªn káº¿t Ä‘áº¿n trang chi tiáº¿t gÃ³p Ã½ Ä‘áº§y Ä‘á»§. |
+| Badge quan Ä‘iá»ƒm | String (enum) | CÃ³ | CÃ³ | Badge mÃ u hiá»ƒn thá»‹ quan Ä‘iá»ƒm: "á»¦ng há»™" (xanh lÃ¡), "Pháº£n biá»‡n" (Ä‘á» nháº¡t), "Bá»• sung" (cam). |
+| TÃ¡c giáº£ gÃ³p Ã½ | String | CÃ³ | CÃ³ | TÃªn tÃ¡c giáº£ kÃ¨m badge vai trÃ² + ngÃ y Ä‘Äƒng. |
+| TÃ³m táº¯t ná»™i dung gÃ³p Ã½ | String | CÃ³ | CÃ³ | 3â€“4 dÃ²ng Ä‘áº§u cá»§a ná»™i dung gÃ³p Ã½ (truncated vá»›i "..."). |
+| Sá»‘ votes gÃ³p Ã½ | Integer | CÃ³ | 0 | "â†‘ n votes" hiá»ƒn thá»‹ bÃªn dÆ°á»›i card. |
+| Sá»‘ bÃ¬nh luáº­n cá»§a gÃ³p Ã½ | Integer | CÃ³ | 0 | "ðŸ’¬ m cÃ¢u tráº£ lá»i" â€” sá»‘ bÃ¬nh luáº­n trá»±c tiáº¿p trÃªn bÃ i gÃ³p Ã½. |
+| Link "Xem gÃ³p Ã½ Ä‘áº§y Ä‘á»§" | Hyperlink | CÃ³ | CÃ³ | LiÃªn káº¿t dáº«n Ä‘áº¿n trang chi tiáº¿t cá»§a bÃ i gÃ³p Ã½ Ä‘á»™c láº­p. |
+| Tráº¡ng thÃ¡i phÃª duyá»‡t | Badge | KhÃ´ng | KhÃ´ng | Vá»›i tÃ¡c giáº£ cá»§a gÃ³p Ã½: hiá»ƒn thá»‹ badge "Chá» phÃª duyá»‡t" (vÃ ng) náº¿u bÃ i chÆ°a Ä‘Æ°á»£c duyá»‡t. áº¨n vá»›i ngÆ°á»i xem thÃ´ng thÆ°á»ng. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Sáº¯p xáº¿p gÃ³p Ã½ | Dropdown | Chá»n tiÃªu chÃ­ sáº¯p xáº¿p â†’ gá»i API â†’ hiá»ƒn thá»‹ láº¡i danh sÃ¡ch gÃ³p Ã½. |
+| 2 | Xem chi tiáº¿t gÃ³p Ã½ | Link "Xem gÃ³p Ã½ Ä‘áº§y Ä‘á»§" | Nháº¥n link â†’ Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang chi tiáº¿t bÃ i gÃ³p Ã½ Ä‘á»™c láº­p (lÃ  má»™t entity riÃªng trong há»‡ thá»‘ng). |
+| 3 | Táº£i thÃªm gÃ³p Ã½ | NÃºt "Táº£i thÃªm" / phÃ¢n trang | Táº£i 10 gÃ³p Ã½ tiáº¿p theo, append vÃ o danh sÃ¡ch. |
+
+---
+
+#### CPLQG-VI-091.MH01d â€“ Trang Chi tiáº¿t chá»§ Ä‘á» â€“ Right Sidebar
+
+##### MÃ n hÃ¬nh
+
+Cá»™t sidebar bÃªn pháº£i (~30% chiá»u rá»™ng) cá»§a trang Chi tiáº¿t chá»§ Ä‘á», bao gá»“m nhiá»u card thÃ´ng tin phá»¥ trá»£ xáº¿p theo chiá»u dá»c.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| NÃºt "Táº¡o chá»§ Ä‘á»" | Button | CÃ³ | CÃ³ | NÃºt ná»n xanh Ä‘áº­m, full width, icon "+". Hiá»ƒn thá»‹ luÃ´n. Khi nháº¥n: náº¿u chÆ°a Ä‘Äƒng nháº­p â†’ redirect login; náº¿u Ä‘Ã£ Ä‘Äƒng nháº­p â†’ má»Ÿ trang táº¡o chá»§ Ä‘á» má»›i (UC89 hoáº·c form táº¡o). |
+| Card "Hoáº¡t Ä‘á»™ng chá»§ Ä‘á»" â€“ LÆ°á»£t xem | Integer | CÃ³ | CÃ³ | "ÄÃ£ xem: n lÆ°á»£t". Cáº­p nháº­t má»—i láº§n ngÆ°á»i dÃ¹ng truy cáº­p (debounce 30 giÃ¢y/session Ä‘á»ƒ trÃ¡nh spam). |
+| Card "Hoáº¡t Ä‘á»™ng chá»§ Ä‘á»" â€“ BÃ¬nh luáº­n cuá»‘i | Datetime (relative) | CÃ³ | CÃ³ | "BÃ¬nh luáº­n cuá»‘i: x phÃºt/giá»/ngÃ y trÆ°á»›c". |
+| NÃºt "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi chá»§ Ä‘á»" / "Äang theo dÃµi" | Button (toggle) | CÃ³ | CÃ³ | Khi chÆ°a Ä‘Äƒng nháº­p: hiá»ƒn thá»‹ "ÄÄƒng nháº­p Ä‘á»ƒ theo dÃµi chá»§ Ä‘á»" â†’ redirect login. Khi Ä‘Ã£ Ä‘Äƒng nháº­p, chÆ°a theo dÃµi: "Theo dÃµi chá»§ Ä‘á»" (outline). Khi Ä‘Ã£ theo dÃµi: "âœ“ Äang theo dÃµi" (ná»n xanh). |
+| Card "GÃ³p Ã½, pháº£n biá»‡n liÃªn quan" â€“ TiÃªu Ä‘á» | String | CÃ³ | CÃ³ | "GÃ³p Ã½, pháº£n biá»‡n liÃªn quan" lÃ  tiÃªu Ä‘á» card. Hiá»ƒn thá»‹ tá»‘i Ä‘a 4 bÃ i gÃ³p Ã½ cÃ³ votes cao nháº¥t cá»§a chá»§ Ä‘á». Má»—i item: "â€” [TiÃªu Ä‘á» gÃ³p Ã½]" + "â†‘ n votes \| ðŸ’¬ m cÃ¢u tráº£ lá»i". LÃ  liÃªn káº¿t Ä‘áº¿n gÃ³p Ã½ chi tiáº¿t. |
+| Card "GÃ³p Ã½, pháº£n biá»‡n liÃªn quan" â€“ Link Xem thÃªm | Hyperlink | KhÃ´ng | CÃ³ | "Xem thÃªm gÃ³p Ã½ pháº£n biá»‡n khÃ¡c" â†’ chuyá»ƒn sang tab GÃ³p Ã½ cá»§a trang (MH01c). |
+| Card "Chá»§ Ä‘á» liÃªn quan" | Danh sÃ¡ch | CÃ³ | CÃ³ | 4 chá»§ Ä‘á» liÃªn quan (cÃ¹ng tag hoáº·c cÃ¹ng nhÃ³m). Má»—i item: tiÃªu Ä‘á» + "â†‘ n votes \| ðŸ’¬ m replies". LÃ  liÃªn káº¿t Ä‘áº¿n trang chi tiáº¿t chá»§ Ä‘á» Ä‘Ã³. |
+| Card "NhÃ³m chá»§ Ä‘á» ná»•i báº­t" | Danh sÃ¡ch chip | CÃ³ | CÃ³ | CÃ¡c chip tag phá»• biáº¿n cá»§a diá»…n Ä‘Ã n: "Luáº­t Doanh nghiá»‡p", "Thuáº¿", "Lao Ä‘á»™ng", "Há»£p Ä‘á»“ng", "Báº£o hiá»ƒm xÃ£ há»™i", "Äáº¥t Ä‘ai", v.v. Má»—i chip lÃ  liÃªn káº¿t lá»c theo tag. |
+| Card "Thá»‘ng kÃª cá»™ng Ä‘á»“ng" â€“ ThÃ nh viÃªn | Integer | CÃ³ | CÃ³ | Tá»•ng sá»‘ thÃ nh viÃªn Ä‘Ã£ Ä‘Äƒng kÃ½ cá»§a diá»…n Ä‘Ã n. Äá»‹nh dáº¡ng sá»‘ cÃ³ phÃ¢n cÃ¡ch hÃ ng nghÃ¬n. VÃ­ dá»¥: "24,567". |
+| Card "Thá»‘ng kÃª cá»™ng Ä‘á»“ng" â€“ Chá»§ Ä‘á» | Integer | CÃ³ | CÃ³ | Tá»•ng sá»‘ chá»§ Ä‘á» cá»§a diá»…n Ä‘Ã n. |
+| Card "Thá»‘ng kÃª cá»™ng Ä‘á»“ng" â€“ BÃ¬nh luáº­n | Integer | CÃ³ | CÃ³ | Tá»•ng sá»‘ bÃ¬nh luáº­n cá»§a toÃ n diá»…n Ä‘Ã n. |
+| Card "Thá»‘ng kÃª cá»™ng Ä‘á»“ng" â€“ GÃ³p Ã½, pháº£n biá»‡n | Integer | CÃ³ | CÃ³ | Tá»•ng sá»‘ bÃ i gÃ³p Ã½/pháº£n biá»‡n cá»§a toÃ n diá»…n Ä‘Ã n. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Táº¡o chá»§ Ä‘á» tá»« sidebar | NÃºt "Táº¡o chá»§ Ä‘á»" | Nháº¥n â†’ kiá»ƒm tra Ä‘Äƒng nháº­p â†’ Ä‘iá»u hÆ°á»›ng Ä‘áº¿n form táº¡o chá»§ Ä‘á» má»›i trong diá»…n Ä‘Ã n. |
+| 2 | Theo dÃµi chá»§ Ä‘á» tá»« sidebar | NÃºt toggle | Chá»©c nÄƒng giá»‘ng vá»›i nÃºt "CÅ©ng cÃ¢u há»i nÃ y" á»Ÿ MH01a â€” cÃ¹ng tráº¡ng thÃ¡i, Ä‘á»“ng bá»™ nhau. Nháº¥n má»™t nÃºt, nÃºt cÃ²n láº¡i cÅ©ng Ä‘á»•i tráº¡ng thÃ¡i. |
+| 3 | Äiá»u hÆ°á»›ng gÃ³p Ã½ liÃªn quan | Danh sÃ¡ch liÃªn káº¿t | Nháº¥n vÃ o tiÃªu Ä‘á» gÃ³p Ã½ trong card â†’ Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang chi tiáº¿t gÃ³p Ã½. |
+| 4 | Xem thÃªm gÃ³p Ã½ pháº£n biá»‡n | Hyperlink | Nháº¥n "Xem thÃªm gÃ³p Ã½ pháº£n biá»‡n khÃ¡c" â†’ cuá»™n trang lÃªn vÃ  chuyá»ƒn sang tab "GÃ³p Ã½" (MH01c). |
+| 5 | Äiá»u hÆ°á»›ng chá»§ Ä‘á» liÃªn quan | Danh sÃ¡ch liÃªn káº¿t | Nháº¥n vÃ o chá»§ Ä‘á» liÃªn quan â†’ má»Ÿ trang Chi tiáº¿t chá»§ Ä‘á» tÆ°Æ¡ng á»©ng (trang má»›i hoáº·c cÃ¹ng tab, tuá»³ cáº¥u hÃ¬nh). |
+| 6 | Lá»c theo tag ná»•i báº­t | Chip tag | Nháº¥n chip tag â†’ Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang danh sÃ¡ch diá»…n Ä‘Ã n vá»›i filter tag. |
+
+---
+
+*TÃ i liá»‡u Ä‘Æ°á»£c táº¡o tá»± Ä‘á»™ng bá»Ÿi AI Gen â€“ NgÃ y: 2026-03-16*
+## A.I.7_Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t
+
+### A.I.7.CPLQG-VI-092 - Tháº£o luáº­n, gÃ³p Ã½ chÃ­nh sÃ¡ch
+
+#### Má»¥c Ä‘Ã­ch
+
+Cho phÃ©p ngÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p (cÃ¡ nhÃ¢n: luáº­t sÆ°, chuyÃªn gia, cÃ´ng dÃ¢n; hoáº·c tá»• chá»©c: bá»™ ban ngÃ nh, doanh nghiá»‡p) tham gia tháº£o luáº­n vá» má»™t chá»§ Ä‘á» trong diá»…n Ä‘Ã n thÃ´ng qua hai hÃ¬nh thá»©c pháº£n há»“i khÃ¡c biá»‡t: (1) **BÃ¬nh luáº­n** (Comment) â€” pháº£n há»“i ngáº¯n tá»©c thá»i ngay trong trang; (2) **GÃ³p Ã½/Pháº£n biá»‡n** (Contribution) â€” bÃ i viáº¿t cháº¥t lÆ°á»£ng cÃ³ tiÃªu Ä‘á», ná»™i dung rich text, phÃ¢n loáº¡i quan Ä‘iá»ƒm, lÃ  thá»±c thá»ƒ Ä‘á»™c láº­p cÃ³ thá»ƒ chia sáº». NgoÃ i ra, UC cÃ²n bao gá»“m tÃ­nh nÄƒng inline comment (gÃ³p Ã½ theo Ä‘oáº¡n), bá» phiáº¿u (vote), vÃ  bÃ¡o cÃ¡o vi pháº¡m.
+
+##### a. PhÃ¢n quyá»n
+
+- Gá»­i bÃ¬nh luáº­n: yÃªu cáº§u Ä‘Äƒng nháº­p, táº¥t cáº£ vai trÃ².
+- Gá»­i gÃ³p Ã½/pháº£n biá»‡n: yÃªu cáº§u Ä‘Äƒng nháº­p, táº¥t cáº£ vai trÃ².
+  - Vai trÃ² thÆ°á»ng (CÃ´ng dÃ¢n, Tá»• chá»©c): bÃ i gÃ³p Ã½ cáº§n qua phÃª duyá»‡t cá»§a Moderator trÆ°á»›c khi hiá»ƒn thá»‹ cÃ´ng khai.
+  - Vai trÃ² Moderator, Admin, ChuyÃªn gia Ä‘Æ°á»£c duyá»‡t: Ä‘Äƒng ngay, khÃ´ng cáº§n phÃª duyá»‡t.
+- Chá»‰nh sá»­a bÃ¬nh luáº­n/gÃ³p Ã½: chá»‰ tÃ¡c giáº£ cá»§a bÃ¬nh luáº­n/gÃ³p Ã½, trong vÃ²ng 30 phÃºt sau khi Ä‘Äƒng. Moderator/Admin cÃ³ thá»ƒ chá»‰nh sá»­a khÃ´ng giá»›i háº¡n thá»i gian.
+- XÃ³a bÃ¬nh luáº­n/gÃ³p Ã½: chá»‰ tÃ¡c giáº£ (xÃ³a má»m), Moderator/Admin cÃ³ thá»ƒ xÃ³a báº¥t ká»³.
+- Vote (upvote/downvote): yÃªu cáº§u Ä‘Äƒng nháº­p, khÃ´ng thá»ƒ vote ná»™i dung cá»§a chÃ­nh mÃ¬nh.
+- BÃ¡o cÃ¡o vi pháº¡m: yÃªu cáº§u Ä‘Äƒng nháº­p.
+- Inline comment (gÃ³p Ã½ theo Ä‘oáº¡n): yÃªu cáº§u Ä‘Äƒng nháº­p.
+- ÄÃ­nh kÃ¨m tÃ i liá»‡u vÃ o bÃ¬nh luáº­n: tá»‘i Ä‘a 3 file, má»—i file tá»‘i Ä‘a 5MB, Ä‘á»‹nh dáº¡ng PDF, DOCX, XLSX, JPG, PNG.
+- ÄÃ­nh kÃ¨m tÃ i liá»‡u vÃ o gÃ³p Ã½: tá»‘i Ä‘a 5 file, má»—i file tá»‘i Ä‘a 10MB, Ä‘á»‹nh dáº¡ng PDF, DOCX.
+
+##### b. Äiá»u kiá»‡n thá»±c hiá»‡n
+
+- NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p thÃ nh cÃ´ng.
+- Chá»§ Ä‘á» Ä‘ang á»Ÿ tráº¡ng thÃ¡i "Äang má»Ÿ" (Open) â€” khÃ´ng pháº£i "ÄÃ£ khÃ³a" hoáº·c "ÄÃ£ Ä‘Ã³ng".
+- NgÆ°á»i dÃ¹ng Ä‘ang á»Ÿ trang Chi tiáº¿t chá»§ Ä‘á» (UC91).
+- Há»‡ thá»‘ng khÃ´ng trong tráº¡ng thÃ¡i báº£o trÃ¬.
+
+---
+
+#### CPLQG-VI-092.MH_CommentEditor â€“ Ã” soáº¡n tháº£o bÃ¬nh luáº­n (inline)
+
+##### MÃ n hÃ¬nh
+
+Ã” soáº¡n tháº£o bÃ¬nh luáº­n tÃ­ch há»£p trá»±c tiáº¿p trong trang Chi tiáº¿t chá»§ Ä‘á» (UC91.MH01b), hiá»ƒn thá»‹ phÃ­a trÃªn danh sÃ¡ch bÃ¬nh luáº­n. KhÃ´ng sá»­ dá»¥ng modal riÃªng.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Avatar ngÆ°á»i dÃ¹ng hiá»‡n táº¡i | Image | CÃ³ | áº¢nh máº·c Ä‘á»‹nh | áº¢nh Ä‘áº¡i diá»‡n cá»§a ngÆ°á»i dÃ¹ng Ä‘ang Ä‘Äƒng nháº­p, hÃ¬nh trÃ²n 36Ã—36px, hiá»ƒn thá»‹ bÃªn trÃ¡i Ã´ soáº¡n tháº£o. |
+| Toolbar Ä‘á»‹nh dáº¡ng | Toolbar | CÃ³ | CÃ³ | Thanh cÃ´ng cá»¥ gá»“m cÃ¡c nÃºt: **B** (Bold), *I* (Italic), Link (chÃ¨n hyperlink), Quote (blockquote), @Mention (gá»£i Ã½ tÃªn ngÆ°á»i dÃ¹ng). Hiá»ƒn thá»‹ phÃ­a trÃªn textarea. |
+| Textarea ná»™i dung bÃ¬nh luáº­n | Text | CÃ³ | KhÃ´ng | Ã” nháº­p vÄƒn báº£n nhiá»u dÃ²ng. Placeholder: "Chia sáº» Ã½ kiáº¿n cá»§a báº¡n vá» chá»§ Ä‘á» nÃ y...". Tá»± Ä‘á»™ng tÄƒng chiá»u cao theo ná»™i dung (auto-resize). Tá»‘i Ä‘a 2000 kÃ½ tá»±. |
+| Bá»™ Ä‘áº¿m kÃ½ tá»± | Integer (display) | CÃ³ | "0/2000" | Hiá»ƒn thá»‹ gÃ³c dÆ°á»›i pháº£i Ã´ soáº¡n tháº£o. Äá»‹nh dáº¡ng "n/2000". Chuyá»ƒn mÃ u Ä‘á» khi > 1800 kÃ½ tá»±. |
+| Khu vá»±c Ä‘Ã­nh kÃ¨m tá»‡p | Upload zone | KhÃ´ng | KhÃ´ng | NÃºt "ðŸ“Ž ÄÃ­nh kÃ¨m tá»‡p" + drop zone (kÃ©o tháº£). Hiá»ƒn thá»‹ danh sÃ¡ch file Ä‘Ã£ chá»n vá»›i nÃºt xÃ³a tá»«ng file. Giá»›i háº¡n: 3 file, 5MB/file, PDF/DOCX/XLSX/JPG/PNG. |
+| NÃºt "ÄÄƒng bÃ¬nh luáº­n" | Button | CÃ³ | CÃ³ | NÃºt ná»n xanh Ä‘áº­m. áº¨n / disabled khi textarea trá»‘ng hoáº·c Ä‘ang gá»­i. |
+| NÃºt "Há»§y" | Button | CÃ³ | CÃ³ | NÃºt outline xÃ¡m, lÃ m rá»—ng textarea vÃ  thu gá»n Ã´ soáº¡n tháº£o vá» tráº¡ng thÃ¡i placeholder náº¿u ngÆ°á»i dÃ¹ng chÆ°a nháº­p gÃ¬. Náº¿u Ä‘Ã£ cÃ³ ná»™i dung â†’ hiá»ƒn thá»‹ confirm "Báº¡n cÃ³ cháº¯c muá»‘n há»§y? Ná»™i dung sáº½ bá»‹ máº¥t." |
+| ThÃ´ng bÃ¡o lá»—i validation | String | KhÃ´ng | KhÃ´ng | Hiá»ƒn thá»‹ bÃªn dÆ°á»›i textarea náº¿u cÃ³ lá»—i: "Ná»™i dung quÃ¡ ngáº¯n (tá»‘i thiá»ƒu 10 kÃ½ tá»±)", "File vÆ°á»£t quÃ¡ dung lÆ°á»£ng cho phÃ©p", "Äá»‹nh dáº¡ng file khÃ´ng Ä‘Æ°á»£c há»— trá»£", v.v. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Soáº¡n tháº£o bÃ¬nh luáº­n | Textarea vá»›i toolbar | NgÆ°á»i dÃ¹ng nháº­p ná»™i dung, sá»­ dá»¥ng toolbar Ä‘á»ƒ Ä‘á»‹nh dáº¡ng vÄƒn báº£n. Há»‡ thá»‘ng parse Markdown Ä‘Æ¡n giáº£n hoáº·c sá»­ dá»¥ng rich text editor nháº¹ (khÃ´ng cáº§n Ä‘áº§y Ä‘á»§ nhÆ° gÃ³p Ã½). |
+| 2 | Mention ngÆ°á»i dÃ¹ng | GÃµ "@" | Khi gÃµ "@" trong textarea â†’ há»‡ thá»‘ng hiá»ƒn thá»‹ dropdown gá»£i Ã½ tÃªn ngÆ°á»i dÃ¹ng trong diá»…n Ä‘Ã n theo kÃ½ tá»± Ä‘ang nháº­p. Chá»n tÃªn â†’ chÃ¨n "@TÃªnNgÆ°á»iDÃ¹ng" vÃ o ná»™i dung. |
+| 3 | ÄÃ­nh kÃ¨m tá»‡p | Upload button / drag-drop | Nháº¥n nÃºt hoáº·c kÃ©o tháº£ file vÃ o zone: validate Ä‘á»‹nh dáº¡ng vÃ  kÃ­ch thÆ°á»›c ngay láº­p tá»©c. Hiá»ƒn thá»‹ thumbnail (áº£nh) hoáº·c icon (PDF/DOCX) + tÃªn file + kÃ­ch thÆ°á»›c. NÃºt "Ã—" Ä‘á»ƒ xÃ³a tá»«ng file. |
+| 4 | ÄÄƒng bÃ¬nh luáº­n | NÃºt "ÄÄƒng bÃ¬nh luáº­n" | Nháº¥n â†’ validate: ná»™i dung khÃ´ng rá»—ng, tá»‘i thiá»ƒu 10 kÃ½ tá»±, khÃ´ng quÃ¡ 2000 kÃ½ tá»±. Upload file Ä‘Ã­nh kÃ¨m trÆ°á»›c â†’ sau Ä‘Ã³ gá»­i POST API. TrÆ°á»ng há»£p 1: ThÃ nh cÃ´ng â†’ hiá»ƒn thá»‹ bÃ¬nh luáº­n má»›i Ä‘áº§u danh sÃ¡ch (náº¿u sort = Má»›i nháº¥t) hoáº·c cuá»‘i danh sÃ¡ch, xÃ³a ná»™i dung form. TrÆ°á»ng há»£p 2: Lá»—i máº¡ng â†’ giá»¯ ná»™i dung form, hiá»ƒn thá»‹ thÃ´ng bÃ¡o lá»—i vÃ  nÃºt "Thá»­ láº¡i". TrÆ°á»ng há»£p 3: Lá»—i dung lÆ°á»£ng file server â†’ thÃ´ng bÃ¡o cá»¥ thá»ƒ. |
+| 5 | Há»§y soáº¡n tháº£o | NÃºt "Há»§y" | Khi ná»™i dung trá»‘ng: thu gá»n form. Khi cÃ³ ná»™i dung: confirm dialog â†’ xÃ¡c nháº­n xÃ³a. |
+
+---
+
+#### CPLQG-VI-092.MH_CommentItem â€“ Card bÃ¬nh luáº­n
+
+##### MÃ n hÃ¬nh
+
+Card hiá»ƒn thá»‹ má»™t bÃ¬nh luáº­n trong danh sÃ¡ch tab "BÃ¬nh luáº­n" cá»§a trang Chi tiáº¿t chá»§ Ä‘á» (UC91.MH01b). Bao gá»“m cáº£ nested reply (1 cáº¥p).
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Avatar | Image | CÃ³ | áº¢nh máº·c Ä‘á»‹nh | HÃ¬nh trÃ²n 36Ã—36px. Viáº¿t táº¯t tÃªn náº¿u khÃ´ng cÃ³ áº£nh. |
+| TÃªn tÃ¡c giáº£ | String | CÃ³ | CÃ³ | LiÃªn káº¿t Ä‘áº¿n há»“ sÆ¡. |
+| Badge vai trÃ² | String (enum) | KhÃ´ng | KhÃ´ng | "Luáº­t sÆ°", "ChuyÃªn gia", "Cá»™ng Ä‘á»“ng", "CÆ¡ quan nhÃ  nÆ°á»›c". MÃ u tÆ°Æ¡ng á»©ng. |
+| NgÃ y giá» | Datetime | CÃ³ | CÃ³ | Dáº¡ng tÆ°Æ¡ng Ä‘á»‘i (vÃ­ dá»¥: "2 giá» trÆ°á»›c") + tooltip ngÃ y giá» tuyá»‡t Ä‘á»‘i. |
+| Badge "BÃ¬nh luáº­n há»¯u Ã­ch" | Badge | KhÃ´ng | KhÃ´ng | "âœ“ BÃ¬nh luáº­n há»¯u Ã­ch" mÃ u xanh lÃ¡, do Moderator/Admin Ä‘Ã¡nh dáº¥u. Hiá»ƒn thá»‹ ngay bÃªn cáº¡nh tÃªn tÃ¡c giáº£. |
+| Ná»™i dung bÃ¬nh luáº­n | Rich text | CÃ³ | CÃ³ | VÄƒn báº£n Ä‘Ã£ Ä‘á»‹nh dáº¡ng. CÃ¡c mention "@TÃªn" lÃ  liÃªn káº¿t Ä‘áº¿n há»“ sÆ¡. |
+| File Ä‘Ã­nh kÃ¨m | Danh sÃ¡ch file | KhÃ´ng | KhÃ´ng | Icon loáº¡i file + tÃªn + kÃ­ch thÆ°á»›c + nÃºt táº£i xuá»‘ng. |
+| Sá»‘ upvote | Integer | CÃ³ | 0 | "â†‘ n" hiá»ƒn thá»‹ bÃªn cáº¡nh nÃºt upvote. |
+| Tráº¡ng thÃ¡i Ä‘Ã£ chá»‰nh sá»­a | Boolean (label) | KhÃ´ng | KhÃ´ng | Hiá»ƒn thá»‹ "(Ä‘Ã£ chá»‰nh sá»­a)" bÃªn cáº¡nh ngÃ y giá» náº¿u bÃ¬nh luáº­n Ä‘Ã£ Ä‘Æ°á»£c chá»‰nh sá»­a sau khi Ä‘Äƒng. |
+| Nested replies | Danh sÃ¡ch | KhÃ´ng | KhÃ´ng | CÃ¡c reply lá»“ng, thá»¥t lá» 16px. Hiá»ƒn thá»‹ tá»‘i Ä‘a 3, cÃ³ nÃºt "Xem thÃªm n tráº£ lá»i" náº¿u nhiá»u hÆ¡n. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Upvote bÃ¬nh luáº­n | NÃºt "â†‘" | Toggle upvote/bá» upvote. YÃªu cáº§u Ä‘Äƒng nháº­p. KhÃ´ng thá»ƒ vote bÃ¬nh luáº­n cá»§a chÃ­nh mÃ¬nh (nÃºt disabled vá»›i tooltip "KhÃ´ng thá»ƒ vote bÃ¬nh luáº­n cá»§a mÃ¬nh"). Optimistic update UI. |
+| 2 | Tráº£ lá»i bÃ¬nh luáº­n (Reply) | NÃºt "Tráº£ lá»i" | Hiá»ƒn thá»‹ inline form soáº¡n tháº£o reply ngay bÃªn dÆ°á»›i bÃ¬nh luáº­n, vá»›i prefix "@TÃªnTÃ¡cGiáº£". CÃ³ toolbar tá»‘i giáº£n, bá»™ Ä‘áº¿m kÃ½ tá»± (tá»‘i Ä‘a 1000 kÃ½ tá»± cho reply). NÃºt "ÄÄƒng" + "Há»§y". Tá»‘i Ä‘a 1 cáº¥p lá»“ng. |
+| 3 | Chá»‰nh sá»­a bÃ¬nh luáº­n | NÃºt "Sá»­a" (chá»‰ hiá»‡n vá»›i tÃ¡c giáº£) | Nháº¥n â†’ chuyá»ƒn card sang cháº¿ Ä‘á»™ edit inline vá»›i ná»™i dung hiá»‡n táº¡i, bá»™ Ä‘áº¿m kÃ½ tá»±. Hiá»ƒn thá»‹ cáº£nh bÃ¡o thá»i gian cÃ²n láº¡i Ä‘á»ƒ sá»­a (vÃ­ dá»¥: "CÃ²n 18 phÃºt Ä‘á»ƒ chá»‰nh sá»­a"). LÆ°u â†’ PUT API â†’ cáº­p nháº­t ná»™i dung. |
+| 4 | XÃ³a bÃ¬nh luáº­n | NÃºt "XÃ³a" (chá»‰ hiá»‡n vá»›i tÃ¡c giáº£ / Mod) | Nháº¥n â†’ confirm dialog "XÃ³a bÃ¬nh luáº­n nÃ y? HÃ nh Ä‘á»™ng khÃ´ng thá»ƒ hoÃ n tÃ¡c." â†’ XÃ¡c nháº­n â†’ DELETE API â†’ áº©n card hoáº·c thay báº±ng "[BÃ¬nh luáº­n Ä‘Ã£ bá»‹ xÃ³a]" náº¿u cÃ³ reply bÃªn dÆ°á»›i. |
+| 5 | BÃ¡o cÃ¡o vi pháº¡m | NÃºt "BÃ¡o cÃ¡o" | Nháº¥n â†’ má»Ÿ modal bÃ¡o cÃ¡o (xem MH_ReportModal). KhÃ´ng hiá»ƒn thá»‹ vá»›i tÃ¡c giáº£ cá»§a bÃ¬nh luáº­n Ä‘Ã³. |
+| 6 | Xem thÃªm replies | NÃºt "Xem thÃªm n tráº£ lá»i" | Táº£i thÃªm replies cá»§a bÃ¬nh luáº­n Ä‘Ã³ (khÃ´ng áº£nh hÆ°á»Ÿng pháº§n cÃ²n láº¡i cá»§a trang). |
+
+---
+
+#### CPLQG-VI-092.MH_ContributionEditor â€“ Trang/Modal soáº¡n tháº£o gÃ³p Ã½, pháº£n biá»‡n
+
+##### MÃ n hÃ¬nh
+
+Trang soáº¡n tháº£o gÃ³p Ã½/pháº£n biá»‡n Ä‘áº§y Ä‘á»§, má»Ÿ dÆ°á»›i dáº¡ng modal full-screen (overlay) hoáº·c trang riÃªng `/dien-dan/{slug}/gop-y/tao`. NgÆ°á»i dÃ¹ng Ä‘áº¿n Ä‘Ã¢y sau khi nháº¥n nÃºt "Táº¡o gÃ³p Ã½" tá»« UC91.MH01a.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| TiÃªu Ä‘á» trang soáº¡n tháº£o | String (display) | CÃ³ | CÃ³ | "Táº¡o gÃ³p Ã½, pháº£n biá»‡n cho: [TiÃªu Ä‘á» chá»§ Ä‘á»]" â€” hiá»ƒn thá»‹ á»Ÿ header cá»§a trang/modal Ä‘á»ƒ ngÆ°á»i dÃ¹ng biáº¿t mÃ¬nh Ä‘ang gÃ³p Ã½ cho chá»§ Ä‘á» nÃ o. |
+| TrÆ°á»ng tiÃªu Ä‘á» gÃ³p Ã½ | String | CÃ³ | KhÃ´ng | Input text, placeholder "Nháº­p tiÃªu Ä‘á» gÃ³p Ã½ cá»§a báº¡n (báº¯t buá»™c)". Tá»‘i Ä‘a 300 kÃ½ tá»±. Bá»™ Ä‘áº¿m kÃ½ tá»± hiá»ƒn thá»‹ gÃ³c pháº£i. |
+| Dropdown phÃ¢n loáº¡i quan Ä‘iá»ƒm | Enum | CÃ³ | KhÃ´ng | Radio button hoáº·c segmented button: **á»¦ng há»™** (icon âœ“ mÃ u xanh lÃ¡) / **Pháº£n biá»‡n** (icon âœ— mÃ u Ä‘á») / **Bá»• sung** (icon + mÃ u cam). Báº¯t buá»™c chá»n trÆ°á»›c khi submit. |
+| Rich text editor ná»™i dung | HTML | CÃ³ | KhÃ´ng | Editor Ä‘áº§y Ä‘á»§ tÃ­nh nÄƒng vá»›i toolbar: B (Bold), I (Italic), U (Underline), H2, H3, Blockquote, Danh sÃ¡ch (cÃ³ thá»© tá»± / khÃ´ng thá»© tá»±), ChÃ¨n liÃªn káº¿t, ChÃ¨n hÃ¬nh áº£nh (upload hoáº·c URL), Code block, Undo/Redo. Tá»‘i thiá»ƒu 50 kÃ½ tá»±, khÃ´ng giá»›i háº¡n tá»‘i Ä‘a (há»‡ thá»‘ng giá»›i háº¡n kÃ­ch thÆ°á»›c HTML tá»‘i Ä‘a 100KB). |
+| Khu vá»±c Ä‘Ã­nh kÃ¨m tÃ i liá»‡u | Upload zone | KhÃ´ng | KhÃ´ng | NÃºt "ðŸ“Ž ÄÃ­nh kÃ¨m tÃ i liá»‡u". Há»— trá»£ kÃ©o tháº£. Tá»‘i Ä‘a 5 file, 10MB/file, PDF/DOCX. Hiá»ƒn thá»‹ tÃªn file + kÃ­ch thÆ°á»›c + nÃºt xÃ³a. |
+| NÃºt "Xem trÆ°á»›c (Preview)" | Button | CÃ³ | CÃ³ | Chuyá»ƒn sang cháº¿ Ä‘á»™ preview hiá»ƒn thá»‹ bÃ i gÃ³p Ã½ nhÆ° khi Ä‘Äƒng. CÃ³ nÃºt "Quay láº¡i soáº¡n tháº£o" Ä‘á»ƒ thoÃ¡t preview. |
+| NÃºt "Gá»­i gÃ³p Ã½" | Button | CÃ³ | CÃ³ | NÃºt ná»n xanh Ä‘áº­m. Disabled náº¿u chÆ°a Ä‘iá»n Ä‘á»§ tiÃªu Ä‘á», quan Ä‘iá»ƒm, ná»™i dung (tá»‘i thiá»ƒu 50 kÃ½ tá»±). |
+| NÃºt "LÆ°u nhÃ¡p" | Button | CÃ³ | CÃ³ | LÆ°u báº£n nhÃ¡p vÃ o local storage hoáº·c server (náº¿u Ä‘Ã£ Ä‘Äƒng nháº­p). Cho phÃ©p tiáº¿p tá»¥c soáº¡n sau. |
+| NÃºt "Há»§y" | Button | CÃ³ | CÃ³ | Confirm náº¿u cÃ³ ná»™i dung â†’ thoÃ¡t vá» trang chi tiáº¿t chá»§ Ä‘á». |
+| ThÃ´ng bÃ¡o tráº¡ng thÃ¡i phÃª duyá»‡t | String (info) | CÃ³ | CÃ³ | Hiá»ƒn thá»‹ dÃ²ng thÃ´ng tin bÃªn dÆ°á»›i nÃºt Gá»­i: "GÃ³p Ã½ cá»§a báº¡n sáº½ Ä‘Æ°á»£c hiá»ƒn thá»‹ sau khi Moderator phÃª duyá»‡t." (vá»›i vai trÃ² thÆ°á»ng) hoáº·c "GÃ³p Ã½ sáº½ Ä‘Æ°á»£c Ä‘Äƒng ngay láº­p tá»©c." (vá»›i Moderator/Admin/ChuyÃªn gia Ä‘Æ°á»£c duyá»‡t). |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Soáº¡n tháº£o ná»™i dung rich text | Rich text editor | NgÆ°á»i dÃ¹ng soáº¡n tháº£o ná»™i dung Ä‘áº§y Ä‘á»§. Há»‡ thá»‘ng tá»± lÆ°u nhÃ¡p má»—i 30 giÃ¢y vÃ o local storage (auto-save). |
+| 2 | ChÃ¨n hÃ¬nh áº£nh | NÃºt trong toolbar | Má»Ÿ dialog: chá»n tab "Upload file" (upload áº£nh lÃªn server, nháº­n URL) hoáº·c "URL áº£nh" (nháº­p trá»±c tiáº¿p). áº¢nh Ä‘Æ°á»£c chÃ¨n vÃ o vá»‹ trÃ­ con trá» trong editor. |
+| 3 | Xem trÆ°á»›c gÃ³p Ã½ | NÃºt "Xem trÆ°á»›c" | Render HTML ná»™i dung trong khung preview giá»‘ng giao diá»‡n hiá»ƒn thá»‹ thá»±c. KhÃ´ng gá»­i dá»¯ liá»‡u lÃªn server. |
+| 4 | LÆ°u nhÃ¡p | NÃºt "LÆ°u nhÃ¡p" | Gá»i API lÆ°u nhÃ¡p (POST/PUT draft). Hiá»ƒn thá»‹ thÃ´ng bÃ¡o "ÄÃ£ lÆ°u nhÃ¡p" + timestamp. NhÃ¡p cÃ³ thá»ƒ tiáº¿p tá»¥c tá»« trang "GÃ³p Ã½ cá»§a tÃ´i" trong há»“ sÆ¡ ngÆ°á»i dÃ¹ng. |
+| 5 | Gá»­i gÃ³p Ã½ | NÃºt "Gá»­i gÃ³p Ã½" | Validate â†’ upload file Ä‘Ã­nh kÃ¨m â†’ POST API táº¡o Contribution. TrÆ°á»ng há»£p 1 (vai trÃ² thÆ°á»ng): hiá»ƒn thá»‹ thÃ´ng bÃ¡o "Cáº£m Æ¡n! GÃ³p Ã½ cá»§a báº¡n Ä‘ang chá» phÃª duyá»‡t." â†’ Ä‘Ã³ng modal/chuyá»ƒn trang. TrÆ°á»ng há»£p 2 (Moderator/Admin): thÃ´ng bÃ¡o "GÃ³p Ã½ Ä‘Ã£ Ä‘Æ°á»£c Ä‘Äƒng." â†’ hiá»ƒn thá»‹ ngay trong tab GÃ³p Ã½ cá»§a trang chi tiáº¿t chá»§ Ä‘á». TrÆ°á»ng há»£p 3: Lá»—i â†’ giá»¯ form, hiá»ƒn thá»‹ lá»—i cá»¥ thá»ƒ. |
+
+---
+
+#### CPLQG-VI-092.MH_ContributionItem â€“ Card gÃ³p Ã½ trong danh sÃ¡ch
+
+##### MÃ n hÃ¬nh
+
+Card hiá»ƒn thá»‹ má»™t bÃ i gÃ³p Ã½/pháº£n biá»‡n trong tab "GÃ³p Ã½" cá»§a trang Chi tiáº¿t chá»§ Ä‘á» (UC91.MH01c) vÃ  trong sidebar "GÃ³p Ã½, pháº£n biá»‡n liÃªn quan" (UC91.MH01d). ÄÃ¢y lÃ  entity Ä‘á»™c láº­p, cÃ³ thá»ƒ chia sáº» riÃªng.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| TiÃªu Ä‘á» gÃ³p Ã½ | String | CÃ³ | CÃ³ | Chá»¯ Ä‘áº­m, liÃªn káº¿t Ä‘áº¿n trang chi tiáº¿t gÃ³p Ã½. |
+| Badge quan Ä‘iá»ƒm | String (enum) | CÃ³ | CÃ³ | "á»¦ng há»™" (xanh lÃ¡), "Pháº£n biá»‡n" (Ä‘á»), "Bá»• sung" (cam). Hiá»ƒn thá»‹ cáº¡nh tiÃªu Ä‘á». |
+| Avatar + TÃªn tÃ¡c giáº£ | Image + String | CÃ³ | CÃ³ | áº¢nh Ä‘áº¡i diá»‡n 28Ã—28px + tÃªn tÃ¡c giáº£ + badge vai trÃ² + ngÃ y Ä‘Äƒng. |
+| TÃ³m táº¯t ná»™i dung | String | CÃ³ | CÃ³ | 3â€“4 dÃ²ng Ä‘áº§u ná»™i dung (truncated, "..."). |
+| Sá»‘ votes | Integer | CÃ³ | 0 | "â†‘ n votes". NÃºt upvote/downvote vá»›i giÃ¡ trá»‹. |
+| Sá»‘ bÃ¬nh luáº­n | Integer | CÃ³ | 0 | "ðŸ’¬ m cÃ¢u tráº£ lá»i" â€” sá»‘ comment trá»±c tiáº¿p trÃªn bÃ i gÃ³p Ã½ nÃ y. |
+| Link "Xem gÃ³p Ã½ Ä‘áº§y Ä‘á»§" | Hyperlink | CÃ³ | CÃ³ | Dáº«n Ä‘áº¿n trang chi tiáº¿t bÃ i gÃ³p Ã½ Ä‘á»™c láº­p. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Vote gÃ³p Ã½ | NÃºt â†‘ / â†“ | Upvote hoáº·c downvote bÃ i gÃ³p Ã½. YÃªu cáº§u Ä‘Äƒng nháº­p. KhÃ´ng vote ná»™i dung cá»§a chÃ­nh mÃ¬nh. Toggle: vote láº¡i â†’ bá» vote. |
+| 2 | Xem chi tiáº¿t gÃ³p Ã½ | Link | Nháº¥n tiÃªu Ä‘á» hoáº·c link "Xem gÃ³p Ã½ Ä‘áº§y Ä‘á»§" â†’ Ä‘iá»u hÆ°á»›ng Ä‘áº¿n trang chi tiáº¿t bÃ i gÃ³p Ã½ Ä‘á»™c láº­p. |
+
+---
+
+#### CPLQG-VI-092.MH_InlineComment â€“ GÃ³p Ã½ theo Ä‘oáº¡n (Inline Comment)
+
+##### MÃ n hÃ¬nh
+
+Chá»©c nÄƒng cho phÃ©p ngÆ°á»i dÃ¹ng bÃ´i Ä‘en má»™t Ä‘oáº¡n vÄƒn báº£n trong bÃ i viáº¿t gá»‘c (ná»™i dung chá»§ Ä‘á» á»Ÿ MH01a) vÃ  gÃ³p Ã½ trá»±c tiáº¿p vá» Ä‘oáº¡n Ä‘Ã³, tÆ°Æ¡ng tá»± cÆ¡ cháº¿ highlight comment cá»§a Medium.com. ÄÃ¢y lÃ  má»™t dáº¡ng gÃ³p Ã½ Ä‘áº·c biá»‡t, liÃªn káº¿t Ä‘áº¿n vá»‹ trÃ­ cá»¥ thá»ƒ trong bÃ i viáº¿t.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Popup kÃ­ch hoáº¡t | Tooltip/Popup | CÃ³ | CÃ³ | Khi ngÆ°á»i dÃ¹ng bÃ´i Ä‘en (select) vÄƒn báº£n trong ná»™i dung bÃ i viáº¿t, hiá»ƒn thá»‹ popup nhá» vá»›i nÃºt "ðŸ’¬ GÃ³p Ã½ vá» Ä‘oáº¡n nÃ y". |
+| Äoáº¡n vÄƒn báº£n Ä‘Æ°á»£c chá»n | String (quoted) | CÃ³ | CÃ³ | Hiá»ƒn thá»‹ láº¡i trong form vá»›i ná»n mÃ u vÃ ng nháº¡t, dáº¡ng blockquote: "Báº¡n Ä‘ang gÃ³p Ã½ vá»: '...Ä‘oáº¡n Ä‘Æ°á»£c chá»n...'". |
+| Form gÃ³p Ã½ inline | Textarea | CÃ³ | KhÃ´ng | Textarea 3â€“5 dÃ²ng, placeholder "Nháº­p gÃ³p Ã½ cá»§a báº¡n vá» Ä‘oáº¡n nÃ y...". Tá»‘i Ä‘a 1000 kÃ½ tá»±. Bá»™ Ä‘áº¿m kÃ½ tá»±. |
+| NÃºt "Gá»­i gÃ³p Ã½" inline | Button | CÃ³ | CÃ³ | NÃºt xanh, disabled khi trá»‘ng. |
+| NÃºt "ÄÃ³ng" | Button | CÃ³ | CÃ³ | ÄÃ³ng form, bá» selection. |
+| Chá»‰ bÃ¡o trÃªn bÃ i viáº¿t | Visual indicator | CÃ³ | CÃ³ | Äoáº¡n vÄƒn Ä‘Æ°á»£c bÃ´i Ä‘en dáº¡ng highlight mÃ u vÃ ng nháº¡t sau khi Ä‘Ã£ cÃ³ inline comment. Icon ðŸ’¬ nhá» bÃªn lá» pháº£i. Hover/click â†’ hiá»ƒn thá»‹ danh sÃ¡ch inline comments vá» Ä‘oáº¡n Ä‘Ã³. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | KÃ­ch hoáº¡t gÃ³p Ã½ inline | BÃ´i Ä‘en vÄƒn báº£n | NgÆ°á»i dÃ¹ng Ä‘Ã£ Ä‘Äƒng nháº­p bÃ´i Ä‘en Ä‘oáº¡n vÄƒn trong bÃ i viáº¿t â†’ popup "GÃ³p Ã½ vá» Ä‘oáº¡n nÃ y" xuáº¥t hiá»‡n. Náº¿u chÆ°a Ä‘Äƒng nháº­p, popup hiá»ƒn thá»‹ "ÄÄƒng nháº­p Ä‘á»ƒ gÃ³p Ã½ theo Ä‘oáº¡n". |
+| 2 | Gá»­i gÃ³p Ã½ inline | NÃºt trong popup | Validate ná»™i dung (tá»‘i thiá»ƒu 5 kÃ½ tá»±) â†’ POST API vá»›i payload: {contributionId hoáº·c topicId, selectedText, startOffset, endOffset, content}. Há»‡ thá»‘ng lÆ°u vá»‹ trÃ­ Ä‘oáº¡n text theo character offset. Sau khi gá»­i: Ä‘oáº¡n text Ä‘Æ°á»£c highlight, icon ðŸ’¬ xuáº¥t hiá»‡n bÃªn lá». |
+| 3 | Xem gÃ³p Ã½ inline Ä‘Ã£ cÃ³ | Nháº¥n icon ðŸ’¬ hoáº·c hover Ä‘oáº¡n highlight | Hiá»ƒn thá»‹ panel bÃªn lá» pháº£i liá»‡t kÃª danh sÃ¡ch gÃ³p Ã½ vá» Ä‘oáº¡n Ä‘Ã³ (tÃªn tÃ¡c giáº£ + ná»™i dung + ngÃ y). |
+
+---
+
+#### CPLQG-VI-092.MH_ReportModal â€“ Modal bÃ¡o cÃ¡o vi pháº¡m
+
+##### MÃ n hÃ¬nh
+
+Modal hiá»ƒn thá»‹ khi ngÆ°á»i dÃ¹ng nháº¥n "BÃ¡o cÃ¡o vi pháº¡m" trÃªn má»™t bÃ¬nh luáº­n, gÃ³p Ã½, hoáº·c bÃ i viáº¿t. DÃ¹ng chung cho cáº£ 3 loáº¡i ná»™i dung.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| TiÃªu Ä‘á» modal | String | CÃ³ | "BÃ¡o cÃ¡o vi pháº¡m" | TiÃªu Ä‘á» modal. |
+| Loáº¡i ná»™i dung bÃ¡o cÃ¡o | String (display) | CÃ³ | CÃ³ | Hiá»ƒn thá»‹: "Báº¡n Ä‘ang bÃ¡o cÃ¡o [BÃ¬nh luáº­n / GÃ³p Ã½ / Chá»§ Ä‘á»] cá»§a [TÃªn tÃ¡c giáº£]". |
+| Radio chá»n lÃ½ do | Enum (radio) | CÃ³ | KhÃ´ng | CÃ¡c lá»±a chá»n: "Spam hoáº·c quáº£ng cÃ¡o", "Ná»™i dung sai lá»‡ch / thÃ´ng tin giáº£", "NgÃ´n ngá»¯ khÃ´ng phÃ¹ há»£p / xÃºc pháº¡m", "Vi pháº¡m phÃ¡p luáº­t", "KhÃ¡c". Báº¯t buá»™c chá»n 1 lÃ½ do. |
+| Textarea mÃ´ táº£ bá»• sung | Text | KhÃ´ng | KhÃ´ng | Placeholder: "MÃ´ táº£ thÃªm vá» vi pháº¡m (khÃ´ng báº¯t buá»™c)". Tá»‘i Ä‘a 500 kÃ½ tá»±. Báº¯t buá»™c náº¿u chá»n "KhÃ¡c". |
+| NÃºt "Gá»­i bÃ¡o cÃ¡o" | Button | CÃ³ | CÃ³ | Disabled náº¿u chÆ°a chá»n lÃ½ do (hoáº·c chÆ°a nháº­p mÃ´ táº£ khi chá»n "KhÃ¡c"). |
+| NÃºt "Há»§y" | Button | CÃ³ | CÃ³ | ÄÃ³ng modal, khÃ´ng gá»­i bÃ¡o cÃ¡o. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Gá»­i bÃ¡o cÃ¡o vi pháº¡m | NÃºt "Gá»­i bÃ¡o cÃ¡o" | Validate â†’ POST API bÃ¡o cÃ¡o vá»›i: {reportedContentType, reportedContentId, reason, description, reporterId}. TrÆ°á»ng há»£p 1: ThÃ nh cÃ´ng â†’ Ä‘Ã³ng modal, hiá»ƒn thá»‹ toast "Cáº£m Æ¡n! BÃ¡o cÃ¡o cá»§a báº¡n Ä‘Ã£ Ä‘Æ°á»£c ghi nháº­n." TrÆ°á»ng há»£p 2: NgÆ°á»i dÃ¹ng Ä‘Ã£ bÃ¡o cÃ¡o ná»™i dung nÃ y trÆ°á»›c Ä‘Ã³ â†’ thÃ´ng bÃ¡o "Báº¡n Ä‘Ã£ bÃ¡o cÃ¡o ná»™i dung nÃ y rá»“i." TrÆ°á»ng há»£p 3: Lá»—i â†’ thÃ´ng bÃ¡o lá»—i, giá»¯ modal. |
+
+---
+
+*TÃ i liá»‡u Ä‘Æ°á»£c táº¡o tá»± Ä‘á»™ng bá»Ÿi AI Gen â€“ NgÃ y: 2026-03-16*
+## A.I.7_Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t
+
+### A.I.7.CPLQG-VI-093 - BÃ¬nh chá»n Ã½ kiáº¿n trong buá»•i phÃ¡t trá»±c tuyáº¿n
+
+#### Má»¥c Ä‘Ã­ch
+
+Cho phÃ©p ngÆ°á»i dÃ¹ng tham gia tÆ°Æ¡ng tÃ¡c realtime trong cÃ¡c buá»•i phÃ¡t trá»±c tuyáº¿n (livestream) cá»§a diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t. Ná»n táº£ng phÃ¡t sÃ³ng sá»­ dá»¥ng **Zoom SDK** â€” Admin táº¡o cuá»™c há»p/há»™i tháº£o trÃªn Zoom vÃ  nháº­p thÃ´ng tin vÃ o CMS; phÃ­a front-end sá»­ dá»¥ng Zoom Web SDK Ä‘á»ƒ nhÃºng (embed) trá»±c tiáº¿p vÃ o trang sá»± kiá»‡n mÃ  khÃ´ng cáº§n má»Ÿ cá»­a sá»• Zoom riÃªng. BÃªn cáº¡nh tráº£i nghiá»‡m Zoom, há»‡ thá»‘ng cá»•ng bá»• sung ba cÆ¡ cháº¿ tÆ°Æ¡ng tÃ¡c riÃªng: gá»­i vÃ  vote CÃ¢u há»i, tham gia Kháº£o sÃ¡t tá»©c thá»i (Poll), vÃ  BÃ¬nh chá»n Ã½ kiáº¿n/quan Ä‘iá»ƒm. Káº¿t quáº£ bÃ¬nh chá»n vÃ  cÃ¢u há»i Ä‘Æ°á»£c hiá»ƒn thá»‹ realtime cho toÃ n bá»™ ngÆ°á»i tham dá»±. Sau sá»± kiá»‡n, há»‡ thá»‘ng lÆ°u láº¡i toÃ n bá»™ káº¿t quáº£ Ä‘á»ƒ xem láº¡i.
+
+##### a. PhÃ¢n quyá»n
+
+- Xem video livestream: cÃ´ng khai, khÃ´ng yÃªu cáº§u Ä‘Äƒng nháº­p.
+- Xem danh sÃ¡ch cÃ¢u há»i, káº¿t quáº£ bÃ¬nh chá»n, káº¿t quáº£ Poll: cÃ´ng khai, khÃ´ng yÃªu cáº§u Ä‘Äƒng nháº­p.
+- Gá»­i tin nháº¯n Live Chat: yÃªu cáº§u Ä‘Äƒng nháº­p (cÃ³ thá»ƒ cáº¥u hÃ¬nh cho phÃ©p chat áº©n danh theo tá»«ng sá»± kiá»‡n).
+- Gá»­i cÃ¢u há»i: yÃªu cáº§u Ä‘Äƒng nháº­p.
+- Vote cÃ¢u há»i cá»§a ngÆ°á»i khÃ¡c: yÃªu cáº§u Ä‘Äƒng nháº­p.
+- Tham gia Poll / BÃ¬nh chá»n Ã½ kiáº¿n: yÃªu cáº§u Ä‘Äƒng nháº­p (má»—i tÃ i khoáº£n chá»‰ Ä‘Æ°á»£c vote 1 láº§n cho má»—i Poll/bÃ¬nh chá»n).
+- Táº¡o vÃ  quáº£n lÃ½ Poll/BÃ¬nh chá»n: vai trÃ² Moderator, Admin.
+- Káº¿t thÃºc / áº¨n Poll: vai trÃ² Moderator, Admin.
+
+##### b. Äiá»u kiá»‡n thá»±c hiá»‡n
+
+- Buá»•i phÃ¡t trá»±c tuyáº¿n tá»“n táº¡i trong há»‡ thá»‘ng (Ä‘Æ°á»£c táº¡o bá»Ÿi Admin/Moderator trÃªn CMS).
+- **Quy trÃ¬nh phÃ­a Admin (CMS)**:
+  1. Admin táº¡o cuá»™c há»p hoáº·c webinar trÃªn ná»n táº£ng Zoom, láº¥y thÃ´ng tin: Meeting ID, Passcode.
+  2. Admin vÃ o CMS â†’ Quáº£n lÃ½ Sá»± kiá»‡n â†’ Táº¡o/chá»‰nh sá»­a sá»± kiá»‡n â†’ nháº­p Zoom Meeting ID vÃ  Passcode vÃ o cÃ¡c trÆ°á»ng tÆ°Æ¡ng á»©ng.
+  3. Há»‡ thá»‘ng CMS lÆ°u thÃ´ng tin Zoom, táº¡o **Zoom SDK Signature** (JWT) thÃ´ng qua Zoom SDK Key + SDK Secret Ä‘Æ°á»£c cáº¥u hÃ¬nh á»Ÿ backend.
+- **Quy trÃ¬nh phÃ­a Front-end**:
+  1. Khi ngÆ°á»i dÃ¹ng vÃ o trang sá»± kiá»‡n, front-end gá»i API Ä‘á»ƒ láº¥y Zoom SDK Signature (khÃ´ng tráº£ vá» SDK Secret ra client).
+  2. Front-end khá»Ÿi táº¡o Zoom Web SDK (`@zoom/meetingsdk`) vá»›i: `meetingNumber`, `signature`, `sdkKey`, `userName`, `userEmail`, `passWord`.
+  3. Zoom Web SDK render giao diá»‡n cuá»™c há»p/webinar nhÃºng trong container HTML trÃªn trang (`#zoom-sdk-container`).
+- URL trang sá»± kiá»‡n dáº¡ng: `/dien-dan/su-kien/{slug-su-kien}`.
+- CÃ¡c tÃ­nh nÄƒng tÆ°Æ¡ng tÃ¡c cá»§a cá»•ng (Poll, BÃ¬nh chá»n, CÃ¢u há»i) chá»‰ hoáº¡t Ä‘á»™ng khi sá»± kiá»‡n Ä‘ang á»Ÿ tráº¡ng thÃ¡i "Äang phÃ¡t".
+- Khi tráº¡ng thÃ¡i "ÄÃ£ káº¿t thÃºc": áº©n Zoom embed, hiá»ƒn thá»‹ video replay (náº¿u Zoom Cloud Recording Ä‘Æ°á»£c báº­t) vÃ  káº¿t quáº£ lÆ°u láº¡i á»Ÿ cháº¿ Ä‘á»™ chá»‰ Ä‘á»c.
+- Khi tráº¡ng thÃ¡i "ChÆ°a báº¯t Ä‘áº§u": hiá»ƒn thá»‹ trang Ä‘áº¿m ngÆ°á»£c vÃ  thÃ´ng tin sá»± kiá»‡n, chÆ°a khá»Ÿi táº¡o Zoom SDK.
+
+---
+
+#### CPLQG-VI-093.MH01 â€“ Trang sá»± kiá»‡n phÃ¡t trá»±c tuyáº¿n â€“ Layout tá»•ng thá»ƒ
+
+##### MÃ n hÃ¬nh
+
+Trang sá»± kiá»‡n phÃ¡t trá»±c tuyáº¿n, bá»‘ cá»¥c 2 cá»™t: cá»™t trÃ¡i (~65â€“70%) chá»©a Zoom embed (Zoom Web SDK) vÃ  thÃ´ng tin sá»± kiá»‡n; cá»™t pháº£i (~30â€“35%) chá»©a khu vá»±c tÆ°Æ¡ng tÃ¡c bá»• sung cá»§a cá»•ng (Poll, BÃ¬nh chá»n, CÃ¢u há»i). TrÃªn mobile: Zoom embed hiá»ƒn thá»‹ trÃªn cÃ¹ng, khu vá»±c tÆ°Æ¡ng tÃ¡c chuyá»ƒn xuá»‘ng dÆ°á»›i.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Breadcrumb | Danh sÃ¡ch liÃªn káº¿t | CÃ³ | CÃ³ | "Trang chá»§ > Diá»…n Ä‘Ã n > Sá»± kiá»‡n trá»±c tuyáº¿n > [TÃªn sá»± kiá»‡n]". |
+| TiÃªu Ä‘á» sá»± kiá»‡n | String | CÃ³ | CÃ³ | H1, chá»¯ Ä‘áº­m. VÃ­ dá»¥: "Há»™i tháº£o trá»±c tuyáº¿n: GÃ³p Ã½ Dá»± tháº£o Luáº­t Doanh nghiá»‡p sá»­a Ä‘á»•i". |
+| Badge tráº¡ng thÃ¡i sá»± kiá»‡n | String (enum) | CÃ³ | CÃ³ | "ðŸ”´ Äang phÃ¡t" (Ä‘á», nháº¥p nhÃ¡y), "â° ChÆ°a báº¯t Ä‘áº§u" (cam), "âœ… ÄÃ£ káº¿t thÃºc" (xÃ¡m). |
+| NgÃ y giá» sá»± kiá»‡n | Datetime | CÃ³ | CÃ³ | NgÃ y giá» báº¯t Ä‘áº§u vÃ  káº¿t thÃºc. Äá»‹nh dáº¡ng: "dd/mm/yyyy HH:mm â€“ HH:mm". Khi "ChÆ°a báº¯t Ä‘áº§u": hiá»ƒn thá»‹ Ä‘á»“ng há»“ Ä‘áº¿m ngÆ°á»£c. |
+| ThÃ´ng tin tá»• chá»©c sá»± kiá»‡n | String | CÃ³ | CÃ³ | TÃªn Ä‘Æ¡n vá»‹ tá»• chá»©c, logo. |
+| Sá»‘ ngÆ°á»i Ä‘ang xem (realtime) | Integer | KhÃ´ng | KhÃ´ng | "ðŸ‘ n ngÆ°á»i Ä‘ang xem" â€” cáº­p nháº­t realtime qua WebSocket. Chá»‰ hiá»ƒn thá»‹ khi Ä‘ang phÃ¡t. |
+| Zoom SDK container | Embed (Zoom Web SDK) | CÃ³ | CÃ³ | VÃ¹ng nhÃºng Zoom cuá»™c há»p/webinar sá»­ dá»¥ng Zoom Web SDK (`@zoom/meetingsdk`). Front-end khá»Ÿi táº¡o SDK vá»›i Meeting Number, Signature (JWT do backend cáº¥p), SDK Key, tÃªn vÃ  email ngÆ°á»i dÃ¹ng. Zoom SDK render Ä‘áº§y Ä‘á»§ giao diá»‡n cuá»™c há»p trong tháº» `div#zoom-sdk-container` bao gá»“m: video, screen share, Zoom chat ná»™i bá»™, danh sÃ¡ch ngÆ°á»i tham dá»± (theo quyá»n). Tá»· lá»‡ container tá»‘i thiá»ƒu 16:9. NgÆ°á»i dÃ¹ng chÆ°a Ä‘Äƒng nháº­p vÃ o cá»•ng cÃ³ thá»ƒ tham dá»± vá»›i tÃªn khÃ¡ch (guest). |
+| ThÃ´ng bÃ¡o lá»—i Zoom SDK | Alert | KhÃ´ng | KhÃ´ng | Khi Zoom SDK khá»Ÿi táº¡o tháº¥t báº¡i (signature háº¿t háº¡n, Meeting ID sai, Meeting Ä‘Ã£ káº¿t thÃºc): hiá»ƒn thá»‹ thÃ´ng bÃ¡o lá»—i rÃµ rÃ ng vÃ  hÆ°á»›ng dáº«n liÃªn há»‡ ban tá»• chá»©c. |
+| MÃ´ táº£ sá»± kiá»‡n | Rich text | KhÃ´ng | KhÃ´ng | Ná»™i dung mÃ´ táº£ vá» sá»± kiá»‡n, chÆ°Æ¡ng trÃ¬nh, khÃ¡ch má»i. Hiá»ƒn thá»‹ bÃªn dÆ°á»›i video player. |
+| Khu vá»±c tÆ°Æ¡ng tÃ¡c (cá»™t pháº£i) | Container | CÃ³ | CÃ³ | Chá»©a MH02 (khu vá»±c tÆ°Æ¡ng tÃ¡c realtime vá»›i tab bar). |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Khá»Ÿi táº¡o vÃ  hiá»ƒn thá»‹ Zoom SDK | Zoom Web SDK | Khi trang táº£i: front-end gá»i API `/api/events/{id}/zoom-signature` Ä‘á»ƒ láº¥y JWT Signature (backend táº¡o tá»« SDK Key + SDK Secret, thá»i háº¡n 2 giá», khÃ´ng tráº£ vá» SDK Secret). Front-end gá»i `ZoomMtg.init()` â†’ `ZoomMtg.join()` vá»›i thÃ´ng tin nháº­n Ä‘Æ°á»£c. Zoom SDK render giao diá»‡n cuá»™c há»p trong container. Khi tráº¡ng thÃ¡i "ChÆ°a báº¯t Ä‘áº§u": chÆ°a khá»Ÿi táº¡o SDK, hiá»ƒn thá»‹ thumbnail + countdown. Khi "ÄÃ£ káº¿t thÃºc": áº©n SDK container, hiá»ƒn thá»‹ Zoom Cloud Recording replay náº¿u cÃ³. |
+| 2 | Xem Ä‘á»“ng há»“ Ä‘áº¿m ngÆ°á»£c | Countdown timer (realtime) | Khi sá»± kiá»‡n chÆ°a báº¯t Ä‘áº§u, hiá»ƒn thá»‹ Ä‘áº¿m ngÆ°á»£c Ä‘áº¿n thá»i Ä‘iá»ƒm báº¯t Ä‘áº§u. Khi háº¿t giá»: tá»± Ä‘á»™ng lÃ m má»›i trang Ä‘á»ƒ táº£i livestream. |
+| 3 | Nháº­n cáº­p nháº­t tráº¡ng thÃ¡i sá»± kiá»‡n | WebSocket / SSE | Há»‡ thá»‘ng láº¯ng nghe sá»± kiá»‡n tráº¡ng thÃ¡i qua WebSocket. Khi Moderator chuyá»ƒn tráº¡ng thÃ¡i "Äang phÃ¡t": toÃ n bá»™ client nháº­n thÃ´ng bÃ¡o, badge tráº¡ng thÃ¡i cáº­p nháº­t, video player táº£i stream. |
+
+---
+
+#### CPLQG-VI-093.MH02 â€“ Khu vá»±c tÆ°Æ¡ng tÃ¡c realtime
+
+##### MÃ n hÃ¬nh
+
+Cá»™t pháº£i cá»§a trang sá»± kiá»‡n, chá»©a tab bar vá»›i 4 tab tÆ°Æ¡ng tÃ¡c: "Live Chat", "CÃ¢u há»i", "BÃ¬nh chá»n", "Káº¿t quáº£". Má»—i tab cÃ³ ná»™i dung vÃ  chá»©c nÄƒng riÃªng.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Tab bar | Tab (4 tab) | CÃ³ | Tab "Live Chat" | CÃ¡c tab: "ðŸ’¬ Live Chat", "â“ CÃ¢u há»i (n)", "ðŸ“Š BÃ¬nh chá»n", "ðŸ“ˆ Káº¿t quáº£". n lÃ  sá»‘ cÃ¢u há»i hiá»‡n cÃ³. |
+| Chá»‰ bÃ¡o káº¿t ná»‘i realtime | Status indicator | CÃ³ | CÃ³ | Cháº¥m xanh nhá» + "Äang káº¿t ná»‘i..." / "ÄÃ£ káº¿t ná»‘i" / "Máº¥t káº¿t ná»‘i â€“ Äang thá»­ láº¡i" bÃªn gÃ³c trÃªn tab bar. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Chuyá»ƒn tab tÆ°Æ¡ng tÃ¡c | Tab bar | Nháº¥n tab â†’ hiá»ƒn thá»‹ ná»™i dung tÆ°Æ¡ng á»©ng. Khi Moderator kÃ­ch hoáº¡t Poll má»›i: tab "BÃ¬nh chá»n" hiá»ƒn thá»‹ badge Ä‘á» "Má»›i" Ä‘á»ƒ thu hÃºt sá»± chÃº Ã½. |
+| 2 | Káº¿t ná»‘i WebSocket | Tá»± Ä‘á»™ng | Khi trang táº£i, client thiáº¿t láº­p káº¿t ná»‘i WebSocket Ä‘áº¿n server realtime. Tá»± Ä‘á»™ng reconnect khi máº¥t káº¿t ná»‘i (exponential backoff, tá»‘i Ä‘a 5 láº§n thá»­). |
+
+---
+
+#### CPLQG-VI-093.MH02a â€“ Tab Live Chat
+
+##### MÃ n hÃ¬nh
+
+Tab Chat trá»±c tiáº¿p trong khu vá»±c tÆ°Æ¡ng tÃ¡c, cho phÃ©p ngÆ°á»i tham dá»± nháº¯n tin realtime vá»›i nhau vÃ  vá»›i ban tá»• chá»©c.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Danh sÃ¡ch tin nháº¯n | Danh sÃ¡ch | CÃ³ | CÃ³ | Hiá»ƒn thá»‹ tá»‘i Ä‘a 200 tin nháº¯n gáº§n nháº¥t, cuá»™n ngÆ°á»£c (má»›i nháº¥t á»Ÿ dÆ°á»›i). Má»—i item: avatar nhá» 20Ã—20px + tÃªn ngÆ°á»i dÃ¹ng + badge vai trÃ² (náº¿u cÃ³) + ná»™i dung tin nháº¯n. Tin nháº¯n cá»§a Moderator/Admin: ná»•i báº­t ná»n mÃ u xanh nháº¡t + badge "Ban tá»• chá»©c". |
+| NÃºt cuá»™n xuá»‘ng dÆ°á»›i | Button | KhÃ´ng | KhÃ´ng | Hiá»ƒn thá»‹ khi ngÆ°á»i dÃ¹ng cuá»™n lÃªn xem tin nháº¯n cÅ©: nÃºt "â†“ n tin nháº¯n má»›i" â†’ nháº¥n Ä‘á»ƒ cuá»™n vá» cuá»‘i. |
+| Ã” nháº­p tin nháº¯n | Input text | CÃ³ | KhÃ´ng | Single-line input, placeholder "Nháº­p tin nháº¯n...". Tá»‘i Ä‘a 300 kÃ½ tá»±. Gá»­i báº±ng Enter hoáº·c nÃºt gá»­i (â–º). |
+| ThÃ´ng bÃ¡o khi chÆ°a Ä‘Äƒng nháº­p | String | KhÃ´ng | CÃ³ | "ÄÄƒng nháº­p Ä‘á»ƒ tham gia chat" thay tháº¿ Ã´ nháº­p tin nháº¯n. |
+| ThÃ´ng bÃ¡o chat bá»‹ táº¡m dá»«ng | String | KhÃ´ng | KhÃ´ng | "Chat táº¡m thá»i bá»‹ táº¯t" khi Moderator táº¯t tÃ­nh nÄƒng chat. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Gá»­i tin nháº¯n chat | Input + Enter/NÃºt gá»­i | Validate khÃ´ng rá»—ng, khÃ´ng vÆ°á»£t 300 kÃ½ tá»± â†’ gá»­i qua WebSocket. Tin nháº¯n xuáº¥t hiá»‡n ngay trong danh sÃ¡ch cá»§a ngÆ°á»i gá»­i (optimistic), sau Ä‘Ã³ broadcast Ä‘áº¿n táº¥t cáº£ client. Rate limit: tá»‘i Ä‘a 5 tin/phÃºt/ngÆ°á»i dÃ¹ng Ä‘á»ƒ trÃ¡nh spam. |
+| 2 | Nháº­n tin nháº¯n realtime | WebSocket event | Khi cÃ³ tin nháº¯n má»›i tá»« server: append vÃ o cuá»‘i danh sÃ¡ch. Náº¿u ngÆ°á»i dÃ¹ng Ä‘ang cuá»™n xem tin cÅ©: hiá»ƒn thá»‹ nÃºt "â†“ n tin nháº¯n má»›i" thay vÃ¬ tá»± cuá»™n. |
+| 3 | XÃ³a tin nháº¯n (Moderator) | Right-click / nÃºt "Ã—" | Moderator/Admin cÃ³ thá»ƒ xÃ³a báº¥t ká»³ tin nháº¯n vi pháº¡m. Tin nháº¯n bá»‹ thay báº±ng "[ÄÃ£ bá»‹ xÃ³a]". |
+
+---
+
+#### CPLQG-VI-093.MH02b â€“ Tab CÃ¢u há»i
+
+##### MÃ n hÃ¬nh
+
+Tab quáº£n lÃ½ cÃ¢u há»i trong buá»•i phÃ¡t, cho phÃ©p ngÆ°á»i tham dá»± gá»­i cÃ¢u há»i vÃ  vote cÃ¢u há»i cá»§a ngÆ°á»i khÃ¡c. CÃ¢u há»i nhiá»u vote nháº¥t Ä‘Æ°á»£c Æ°u tiÃªn tráº£ lá»i.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Form gá»­i cÃ¢u há»i | Textarea | CÃ³ | CÃ³ | Placeholder "Nháº­p cÃ¢u há»i cá»§a báº¡n...". Tá»‘i Ä‘a 500 kÃ½ tá»±. Bá»™ Ä‘áº¿m kÃ½ tá»±. NÃºt "Gá»­i cÃ¢u há»i". |
+| Danh sÃ¡ch cÃ¢u há»i | Danh sÃ¡ch | CÃ³ | CÃ³ | Sáº¯p xáº¿p máº·c Ä‘á»‹nh theo votes giáº£m dáº§n. Má»—i item: ná»™i dung cÃ¢u há»i + tÃªn ngÆ°á»i há»i (hoáº·c "áº¨n danh" náº¿u cáº¥u hÃ¬nh) + "â†‘ n votes" + nÃºt vote + badge tráº¡ng thÃ¡i. |
+| Badge tráº¡ng thÃ¡i cÃ¢u há»i | String (enum) | CÃ³ | "Chá»" | "Chá» tráº£ lá»i" (xÃ¡m), "Äang tráº£ lá»i" (xanh lÃ¡ nháº¥p nhÃ¡y â€” Moderator Ä‘Ã¡nh dáº¥u), "ÄÃ£ tráº£ lá»i" (xanh dÆ°Æ¡ng). |
+| NÃºt vote cÃ¢u há»i | Button (toggle) | CÃ³ | CÃ³ | "â†‘ Vote" bÃªn cáº¡nh má»—i cÃ¢u há»i. ÄÃ£ vote: filled mÃ u xanh. Sá»‘ vote cáº­p nháº­t realtime. |
+| Checkbox "Há»i áº©n danh" | Boolean | KhÃ´ng | false | Cho phÃ©p gá»­i cÃ¢u há»i mÃ  khÃ´ng hiá»ƒn thá»‹ tÃªn. Hiá»ƒn thá»‹ "áº¨n danh" thay tÃªn trong danh sÃ¡ch. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Gá»­i cÃ¢u há»i | NÃºt "Gá»­i cÃ¢u há»i" | Validate ná»™i dung (tá»‘i thiá»ƒu 10 kÃ½ tá»±) â†’ POST API. CÃ¢u há»i xuáº¥t hiá»‡n ngay trong danh sÃ¡ch vá»›i 0 votes. Giá»›i háº¡n: má»—i ngÆ°á»i dÃ¹ng tá»‘i Ä‘a 3 cÃ¢u há»i/sá»± kiá»‡n. |
+| 2 | Vote cÃ¢u há»i | NÃºt â†‘ toggle | Toggle vote/bá» vote cÃ¢u há»i cá»§a ngÆ°á»i khÃ¡c (khÃ´ng vote cÃ¢u há»i cá»§a chÃ­nh mÃ¬nh). Gá»­i PATCH API, sá»‘ vote cáº­p nháº­t realtime cho táº¥t cáº£ ngÆ°á»i xem qua WebSocket. |
+| 3 | ÄÃ¡nh dáº¥u tráº¡ng thÃ¡i cÃ¢u há»i (Moderator) | NÃºt trong dropdown | Moderator nháº¥n vÃ o cÃ¢u há»i â†’ chá»n "Äang tráº£ lá»i" / "ÄÃ£ tráº£ lá»i". Cáº­p nháº­t badge realtime cho táº¥t cáº£. |
+| 4 | Cáº­p nháº­t votes realtime | WebSocket event | Khi báº¥t ká»³ ngÆ°á»i dÃ¹ng nÃ o vote cÃ¢u há»i, táº¥t cáº£ client nháº­n cáº­p nháº­t sá»‘ vote vÃ  reorder danh sÃ¡ch náº¿u cáº§n. |
+
+---
+
+#### CPLQG-VI-093.MH02c â€“ Tab BÃ¬nh chá»n (Poll + BÃ¬nh chá»n Ã½ kiáº¿n)
+
+##### MÃ n hÃ¬nh
+
+Tab tÆ°Æ¡ng tÃ¡c chÃ­nh cá»§a UC93, tÃ­ch há»£p hai cÆ¡ cháº¿: (1) Kháº£o sÃ¡t tá»©c thá»i (Poll Ä‘Æ¡n giáº£n vá»›i multiple choice); (2) BÃ¬nh chá»n Ã½ kiáº¿n/quan Ä‘iá»ƒm (vote thumbs up/down cho cÃ¡c luáº­n Ä‘iá»ƒm). Moderator táº¡o vÃ  kÃ­ch hoáº¡t; participant bÃ¬nh chá»n realtime.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Tráº¡ng thÃ¡i tab khi khÃ´ng cÃ³ ná»™i dung | String | CÃ³ | CÃ³ | "ChÆ°a cÃ³ kháº£o sÃ¡t hoáº·c bÃ¬nh chá»n nÃ o Ä‘Æ°á»£c má»Ÿ. HÃ£y theo dÃµi trong buá»•i phÃ¡t." Hiá»ƒn thá»‹ khi Moderator chÆ°a táº¡o/kÃ­ch hoáº¡t poll hoáº·c bÃ¬nh chá»n nÃ o. |
+| **Khá»‘i Poll â€“ TiÃªu Ä‘á» poll** | String | CÃ³ | CÃ³ | CÃ¢u há»i poll in Ä‘áº­m. VÃ­ dá»¥: "Báº¡n Ä‘Ã¡nh giÃ¡ tháº¿ nÃ o vá» ná»™i dung Äiá»u 15 trong dá»± tháº£o?". |
+| **Khá»‘i Poll â€“ Danh sÃ¡ch lá»±a chá»n** | Danh sÃ¡ch | CÃ³ | CÃ³ | CÃ¡c option poll hiá»ƒn thá»‹ dáº¡ng radio button (single choice) hoáº·c checkbox (multiple choice). Má»—i option: nhÃ£n + thanh tiáº¿n trÃ¬nh (progress bar) hiá»ƒn thá»‹ % realtime + sá»‘ lÆ°á»£t chá»n. Thanh tiáº¿n trÃ¬nh chá»‰ hiá»ƒn thá»‹ sau khi Ä‘Ã£ vote. |
+| **Khá»‘i Poll â€“ NÃºt bÃ¬nh chá»n** | Button | CÃ³ | CÃ³ | "Gá»­i Ã½ kiáº¿n" â€” disabled náº¿u chÆ°a chá»n option. Sau khi vote: nÃºt Ä‘á»•i thÃ nh "ÄÃ£ tham gia" (disabled, mÃ u xanh). |
+| **Khá»‘i Poll â€“ Tá»•ng sá»‘ ngÆ°á»i tham gia** | Integer | CÃ³ | CÃ³ | "n ngÆ°á»i Ä‘Ã£ tham gia" â€” cáº­p nháº­t realtime. |
+| **Khá»‘i Poll â€“ Thá»i gian cÃ²n láº¡i** | Integer (countdown) | KhÃ´ng | KhÃ´ng | Äáº¿m ngÆ°á»£c "CÃ²n n giÃ¢y" náº¿u Moderator Ä‘áº·t thá»i háº¡n cho poll. Khi háº¿t giá»: poll tá»± Ä‘Ã³ng. |
+| **Khá»‘i BÃ¬nh chá»n Ã½ kiáº¿n â€“ TiÃªu Ä‘á»** | String | CÃ³ | CÃ³ | TiÃªu Ä‘á» cá»§a phiÃªn bÃ¬nh chá»n. VÃ­ dá»¥: "BÃ¬nh chá»n Ã½ kiáº¿n vá» Ä‘á» xuáº¥t miá»…n thuáº¿ cho doanh nghiá»‡p vá»«a vÃ  nhá»". |
+| **Khá»‘i BÃ¬nh chá»n Ã½ kiáº¿n â€“ Danh sÃ¡ch luáº­n Ä‘iá»ƒm** | Danh sÃ¡ch | CÃ³ | CÃ³ | Má»—i luáº­n Ä‘iá»ƒm lÃ  má»™t card: ná»™i dung Ã½ kiáº¿n + nÃºt ðŸ‘ (sá»‘ á»§ng há»™) + nÃºt ðŸ‘Ž (sá»‘ pháº£n Ä‘á»‘i). Thanh biá»ƒu Ä‘á»“ ngang hiá»ƒn thá»‹ tá»· lá»‡ á»§ng há»™/pháº£n Ä‘á»‘i theo %. |
+| **Khá»‘i BÃ¬nh chá»n Ã½ kiáº¿n â€“ Tráº¡ng thÃ¡i Ä‘Ã£ vote** | Badge | KhÃ´ng | KhÃ´ng | Sau khi vote má»™t luáº­n Ä‘iá»ƒm: badge "âœ“ Báº¡n Ä‘Ã£ á»§ng há»™" hoáº·c "âœ“ Báº¡n Ä‘Ã£ pháº£n Ä‘á»‘i" hiá»ƒn thá»‹ trÃªn luáº­n Ä‘iá»ƒm Ä‘Ã³. |
+| Lá»‹ch sá»­ poll/bÃ¬nh chá»n | Accordion | KhÃ´ng | KhÃ´ng | Danh sÃ¡ch thu gá»n cÃ¡c poll/bÃ¬nh chá»n Ä‘Ã£ káº¿t thÃºc trong cÃ¹ng buá»•i phÃ¡t, cÃ³ thá»ƒ má»Ÿ xem káº¿t quáº£ cuá»‘i. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Nháº­n thÃ´ng bÃ¡o poll má»›i Ä‘Æ°á»£c kÃ­ch hoáº¡t | WebSocket event | Khi Moderator kÃ­ch hoáº¡t poll/bÃ¬nh chá»n má»›i: táº¥t cáº£ client nháº­n sá»± kiá»‡n â†’ tab "BÃ¬nh chá»n" hiá»ƒn thá»‹ badge "Má»›i" Ä‘á» â†’ ná»™i dung poll/bÃ¬nh chá»n hiá»‡n ra ngay láº­p tá»©c trong tab. |
+| 2 | Tham gia Poll | Radio/Checkbox + NÃºt "Gá»­i Ã½ kiáº¿n" | Chá»n option â†’ nháº¥n "Gá»­i Ã½ kiáº¿n" â†’ POST API vá»›i {pollId, selectedOptions, userId}. Server validate: má»—i user chá»‰ vote 1 láº§n/poll. Sau khi vote: hiá»ƒn thá»‹ káº¿t quáº£ realtime (progress bars % + sá»‘ lÆ°á»£t). |
+| 3 | BÃ¬nh chá»n Ã½ kiáº¿n (Thumbs up/down) | NÃºt ðŸ‘/ðŸ‘Ž trÃªn tá»«ng luáº­n Ä‘iá»ƒm | NgÆ°á»i dÃ¹ng nháº¥n ðŸ‘ hoáº·c ðŸ‘Ž cho tá»«ng luáº­n Ä‘iá»ƒm. POST API vá»›i {opinionId, voteType: 'up'|'down', userId}. Validate: 1 user chá»‰ vote 1 chiá»u/luáº­n Ä‘iá»ƒm (vote ðŸ‘ thÃ¬ ðŸ‘Ž disabled vÃ  ngÆ°á»£c láº¡i). Cáº­p nháº­t realtime sá»‘ Ä‘áº¿m + tá»· lá»‡ % cho táº¥t cáº£ participant. |
+| 4 | Cáº­p nháº­t káº¿t quáº£ realtime | WebSocket broadcast | Má»—i láº§n cÃ³ vote má»›i (poll hoáº·c bÃ¬nh chá»n): server broadcast sá»± kiá»‡n cáº­p nháº­t sá»‘ liá»‡u â†’ táº¥t cáº£ client cáº­p nháº­t thanh tiáº¿n trÃ¬nh, tá»· lá»‡ %, sá»‘ lÆ°á»£t mÃ  khÃ´ng reload trang. |
+| 5 | Äáº¿m ngÆ°á»£c thá»i gian poll | Countdown (client-side) | Äáº¿m ngÆ°á»£c tá»« thá»i gian server cung cáº¥p. Khi vá» 0: poll tá»± khoÃ¡ trÃªn UI (nÃºt "Gá»­i Ã½ kiáº¿n" disabled), hiá»ƒn thá»‹ "ÄÃ£ káº¿t thÃºc". |
+| 6 | KÃ­ch hoáº¡t poll/bÃ¬nh chá»n (Moderator) | Giao diá»‡n quáº£n lÃ½ | Moderator cÃ³ thÃªm section "Quáº£n lÃ½ Poll" (chá»‰ hiá»‡n vá»›i Moderator/Admin): táº¡o poll má»›i (tiÃªu Ä‘á» + danh sÃ¡ch option + thá»i gian), kÃ­ch hoáº¡t/dá»«ng poll. Khi nháº¥n "KÃ­ch hoáº¡t": broadcast WebSocket Ä‘áº¿n táº¥t cáº£ participant. |
+
+---
+
+#### CPLQG-VI-093.MH02d â€“ Tab Káº¿t quáº£
+
+##### MÃ n hÃ¬nh
+
+Tab hiá»ƒn thá»‹ káº¿t quáº£ tá»•ng há»£p cá»§a táº¥t cáº£ poll vÃ  bÃ¬nh chá»n Ã½ kiáº¿n trong buá»•i phÃ¡t, ká»ƒ cáº£ cÃ¡c poll Ä‘Ã£ káº¿t thÃºc. DÃ¹ng Ä‘á»ƒ xem láº¡i trong lÃºc phÃ¡t vÃ  sau khi sá»± kiá»‡n káº¿t thÃºc.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Danh sÃ¡ch káº¿t quáº£ poll | Danh sÃ¡ch | CÃ³ | CÃ³ | Má»—i poll: tiÃªu Ä‘á» + tráº¡ng thÃ¡i ("Äang má»Ÿ"/"ÄÃ£ káº¿t thÃºc") + danh sÃ¡ch option vá»›i bar chart ngang (% + sá»‘ lÆ°á»£t tuyá»‡t Ä‘á»‘i) + tá»•ng sá»‘ ngÆ°á»i tham gia. |
+| Danh sÃ¡ch káº¿t quáº£ bÃ¬nh chá»n Ã½ kiáº¿n | Danh sÃ¡ch | CÃ³ | CÃ³ | Má»—i phiÃªn bÃ¬nh chá»n: tiÃªu Ä‘á» + danh sÃ¡ch luáº­n Ä‘iá»ƒm vá»›i bar chart ngang (ðŸ‘ n% â€“ ðŸ‘Ž n%) + tá»•ng sá»‘ vote. |
+| Biá»ƒu Ä‘á»“ káº¿t quáº£ | Bar chart | CÃ³ | CÃ³ | Biá»ƒu Ä‘á»“ cá»™t/ngang trá»±c quan cho tá»«ng poll vÃ  bÃ¬nh chá»n. MÃ u: xanh lÃ¡ cho á»§ng há»™, Ä‘á» cho pháº£n Ä‘á»‘i, cÃ¡c mÃ u phÃ¢n biá»‡t cho poll multiple choice. |
+| ThÃ´ng bÃ¡o khi chÆ°a cÃ³ káº¿t quáº£ | String | KhÃ´ng | CÃ³ | "ChÆ°a cÃ³ cuá»™c bÃ¬nh chá»n nÃ o Ä‘Æ°á»£c thá»±c hiá»‡n trong buá»•i phÃ¡t nÃ y." |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Xem káº¿t quáº£ tá»•ng há»£p | Danh sÃ¡ch + biá»ƒu Ä‘á»“ | Khi vÃ o tab: táº£i táº¥t cáº£ káº¿t quáº£ poll vÃ  bÃ¬nh chá»n cá»§a sá»± kiá»‡n. Vá»›i poll Ä‘ang má»Ÿ: dá»¯ liá»‡u cáº­p nháº­t realtime. Vá»›i poll Ä‘Ã£ káº¿t thÃºc: dá»¯ liá»‡u tÄ©nh. |
+| 2 | LÆ°u káº¿t quáº£ sau sá»± kiá»‡n | Tá»± Ä‘á»™ng | Khi sá»± kiá»‡n chuyá»ƒn sang "ÄÃ£ káº¿t thÃºc": server snapshot toÃ n bá»™ káº¿t quáº£. Tab "Káº¿t quáº£" váº«n truy cáº­p Ä‘Æ°á»£c vá»›i dá»¯ liá»‡u tÄ©nh lÆ°u láº¡i. NgÆ°á»i dÃ¹ng cÃ³ thá»ƒ xem láº¡i báº¥t ká»³ lÃºc nÃ o. |
+
+---
+
+*TÃ i liá»‡u Ä‘Æ°á»£c táº¡o tá»± Ä‘á»™ng bá»Ÿi AI Gen â€“ NgÃ y: 2026-03-16*
+## A.I.7_Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t
+
+### A.I.7.CPLQG-VI-094 - Thá»‘ng kÃª chá»§ Ä‘á»
+
+#### Má»¥c Ä‘Ã­ch
+
+Cho phÃ©p ngÆ°á»i dÃ¹ng xem tá»•ng quan thá»‘ng kÃª hoáº¡t Ä‘á»™ng cá»§a Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t: cÃ¡c chá»‰ sá»‘ KPI tá»•ng thá»ƒ (tá»•ng chá»§ Ä‘á», bÃ¬nh luáº­n, gÃ³p Ã½, lÆ°á»£t xem, thÃ nh viÃªn), biá»ƒu Ä‘á»“ hoáº¡t Ä‘á»™ng theo thá»i gian, báº£ng top chá»§ Ä‘á» ná»•i báº­t, phÃ¢n bá»‘ theo lÄ©nh vá»±c phÃ¡p luáº­t, vÃ  danh sÃ¡ch ngÆ°á»i Ä‘Ã³ng gÃ³p tÃ­ch cá»±c nháº¥t. Admin vÃ  Moderator cÃ³ thÃªm chá»©c nÄƒng xuáº¥t bÃ¡o cÃ¡o dÆ°á»›i dáº¡ng PDF/Excel.
+
+##### a. PhÃ¢n quyá»n
+
+- Xem dashboard thá»‘ng kÃª: cÃ´ng khai, khÃ´ng yÃªu cáº§u Ä‘Äƒng nháº­p (cÃ¡c sá»‘ liá»‡u tá»•ng há»£p).
+- Filter theo diá»…n Ä‘Ã n cá»¥ thá»ƒ, theo khoáº£ng thá»i gian tÃ¹y chá»‰nh: yÃªu cáº§u Ä‘Äƒng nháº­p.
+- Xuáº¥t bÃ¡o cÃ¡o (PDF/Excel): chá»‰ Admin vÃ  Moderator.
+- Xem thÃ´ng tin chi tiáº¿t ngÆ°á»i Ä‘Ã³ng gÃ³p (liÃªn káº¿t Ä‘áº¿n há»“ sÆ¡): cÃ´ng khai.
+
+##### b. Äiá»u kiá»‡n thá»±c hiá»‡n
+
+- NgÆ°á»i dÃ¹ng truy cáº­p trang Thá»‘ng kÃª tá»«: link "Thá»‘ng kÃª" trÃªn trang danh sÃ¡ch diá»…n Ä‘Ã n, hoáº·c tab "Thá»‘ng kÃª" trong menu Ä‘iá»u hÆ°á»›ng cá»§a diá»…n Ä‘Ã n.
+- URL: `/dien-dan/thong-ke` hoáº·c `/dien-dan/{slug}/thong-ke`.
+- Há»‡ thá»‘ng cÃ³ dá»¯ liá»‡u hoáº¡t Ä‘á»™ng tá»« Ã­t nháº¥t 1 chá»§ Ä‘á» Ä‘Ã£ Ä‘Æ°á»£c Ä‘Äƒng.
+
+---
+
+#### CPLQG-VI-094.MH01 â€“ Dashboard Thá»‘ng kÃª Diá»…n Ä‘Ã n
+
+##### MÃ n hÃ¬nh
+
+Trang dashboard thá»‘ng kÃª Ä‘Æ¡n trang, bá»‘ cá»¥c theo chiá»u dá»c, gá»“m: thanh filter phÃ­a trÃªn, cÃ¡c KPI card, biá»ƒu Ä‘á»“ hoáº¡t Ä‘á»™ng, báº£ng top chá»§ Ä‘á», biá»ƒu Ä‘á»“ phÃ¢n bá»‘, vÃ  danh sÃ¡ch top ngÆ°á»i Ä‘Ã³ng gÃ³p.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Breadcrumb | Danh sÃ¡ch liÃªn káº¿t | CÃ³ | CÃ³ | "Trang chá»§ > Diá»…n Ä‘Ã n > Thá»‘ng kÃª". |
+| TiÃªu Ä‘á» trang | String | CÃ³ | "Thá»‘ng kÃª Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t" | H1, hiá»ƒn thá»‹ kÃ¨m icon biá»ƒu Ä‘á»“. |
+| **Thanh Filter â€“ Dropdown diá»…n Ä‘Ã n** | Select | CÃ³ | "Táº¥t cáº£ diá»…n Ä‘Ã n" | Dropdown chá»n má»™t diá»…n Ä‘Ã n cá»¥ thá»ƒ hoáº·c "Táº¥t cáº£ diá»…n Ä‘Ã n". Danh sÃ¡ch cÃ¡c nhÃ³m diá»…n Ä‘Ã n láº¥y tá»« API. |
+| **Thanh Filter â€“ Bá»™ chá»n khoáº£ng thá»i gian** | Date range | CÃ³ | "30 ngÃ y qua" | Quick select buttons: "7 ngÃ y", "30 ngÃ y" (máº·c Ä‘á»‹nh), "3 thÃ¡ng", "6 thÃ¡ng", "1 nÄƒm", "TÃ¹y chá»‰nh". Khi chá»n "TÃ¹y chá»‰nh": hiá»ƒn thá»‹ date range picker vá»›i lá»‹ch tá»«-Ä‘áº¿n. |
+| NÃºt "Ãp dá»¥ng bá»™ lá»c" | Button | CÃ³ | CÃ³ | NÃºt xanh Ä‘áº­m. Khi nháº¥n: táº£i láº¡i toÃ n bá»™ dá»¯ liá»‡u dashboard theo filter Ä‘Ã£ chá»n. Hiá»ƒn thá»‹ loading skeleton trÃªn cÃ¡c block trong khi táº£i. |
+| NÃºt "Xuáº¥t bÃ¡o cÃ¡o" | Button | KhÃ´ng | KhÃ´ng | Chá»‰ hiá»ƒn thá»‹ vá»›i Admin/Moderator. NÃºt outline xanh, icon táº£i xuá»‘ng. Khi nháº¥n: má»Ÿ dropdown chá»n Ä‘á»‹nh dáº¡ng (PDF / Excel .xlsx). |
+
+---
+
+#### CPLQG-VI-094.MH01a â€“ Khá»‘i KPI Cards
+
+##### MÃ n hÃ¬nh
+
+HÃ ng KPI card ngang (responsive: 2 cá»™t trÃªn tablet, 1 cá»™t trÃªn mobile) hiá»ƒn thá»‹ 5 chá»‰ sá»‘ tá»•ng há»£p chÃ­nh cá»§a diá»…n Ä‘Ã n theo khoáº£ng thá»i gian Ä‘Ã£ filter.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| KPI: Tá»•ng chá»§ Ä‘á» | Integer | CÃ³ | CÃ³ | Card hiá»ƒn thá»‹: icon ðŸ“„ + label "Tá»•ng chá»§ Ä‘á»" + sá»‘ liá»‡u lá»›n (vÃ­ dá»¥: "12,345") + delta so vá»›i ká»³ trÆ°á»›c (vÃ­ dá»¥: "â–² +234 so vá»›i ká»³ trÆ°á»›c" mÃ u xanh, hoáº·c "â–¼ -12" mÃ u Ä‘á»). |
+| KPI: Tá»•ng bÃ¬nh luáº­n | Integer | CÃ³ | CÃ³ | Card: icon ðŸ’¬ + "Tá»•ng bÃ¬nh luáº­n" + sá»‘ liá»‡u + delta. |
+| KPI: Tá»•ng gÃ³p Ã½, pháº£n biá»‡n | Integer | CÃ³ | CÃ³ | Card: icon ðŸ“ + "Tá»•ng gÃ³p Ã½, pháº£n biá»‡n" + sá»‘ liá»‡u + delta. |
+| KPI: Tá»•ng lÆ°á»£t xem | Integer | CÃ³ | CÃ³ | Card: icon ðŸ‘ + "Tá»•ng lÆ°á»£t xem" + sá»‘ liá»‡u + delta. Äá»‹nh dáº¡ng rÃºt gá»n: "1.2M" khi > 1 triá»‡u. |
+| KPI: ThÃ nh viÃªn tham gia | Integer | CÃ³ | CÃ³ | Card: icon ðŸ‘¥ + "ThÃ nh viÃªn tham gia" + sá»‘ liá»‡u (sá»‘ tÃ i khoáº£n Ä‘Ã£ Ä‘Äƒng Ã­t nháº¥t 1 bÃ¬nh luáº­n/gÃ³p Ã½ trong ká»³) + delta. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Hiá»ƒn thá»‹ KPI theo filter | Tá»± Ä‘á»™ng khi Ã¡p dá»¥ng filter | Khi filter thay Ä‘á»•i vÃ  nháº¥n "Ãp dá»¥ng": tá»«ng KPI card hiá»ƒn thá»‹ skeleton loading â†’ nháº­n dá»¯ liá»‡u má»›i tá»« API â†’ cáº­p nháº­t sá»‘ liá»‡u vÃ  delta. Delta tÃ­nh báº±ng cÃ¡ch so sÃ¡nh ká»³ hiá»‡n táº¡i vá»›i ká»³ liá»n trÆ°á»›c cÃ³ cÃ¹ng Ä‘á»™ dÃ i (vÃ­ dá»¥: 30 ngÃ y qua so vá»›i 30 ngÃ y trÆ°á»›c Ä‘Ã³). |
+| 2 | Tooltip chi tiáº¿t | Hover KPI card | Hover vÃ o card â†’ tooltip hiá»ƒn thá»‹ thÃªm chi tiáº¿t: "Trong ká»³ hiá»‡n táº¡i: n | Ká»³ trÆ°á»›c: m | TÄƒng trÆ°á»Ÿng: x%". |
+
+---
+
+#### CPLQG-VI-094.MH01b â€“ Biá»ƒu Ä‘á»“ hoáº¡t Ä‘á»™ng theo thá»i gian
+
+##### MÃ n hÃ¬nh
+
+Block biá»ƒu Ä‘á»“ Ä‘Æ°á»ng (line chart) hiá»ƒn thá»‹ xu hÆ°á»›ng hoáº¡t Ä‘á»™ng diá»…n Ä‘Ã n theo ngÃ y/tuáº§n/thÃ¡ng trong khoáº£ng thá»i gian Ä‘Ã£ chá»n.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| TiÃªu Ä‘á» block | String | CÃ³ | "Hoáº¡t Ä‘á»™ng theo thá»i gian" | TiÃªu Ä‘á» section, kÃ¨m icon biá»ƒu Ä‘á»“. |
+| Bá»™ chá»n Ä‘á»™ phÃ¢n giáº£i thá»i gian | Enum (buttons) | CÃ³ | Tá»± Ä‘á»™ng theo khoáº£ng | Toggle buttons: "NgÃ y" / "Tuáº§n" / "ThÃ¡ng". Máº·c Ä‘á»‹nh: "NgÃ y" náº¿u khoáº£ng â‰¤ 30 ngÃ y, "Tuáº§n" náº¿u â‰¤ 3 thÃ¡ng, "ThÃ¡ng" náº¿u > 3 thÃ¡ng. |
+| Checkbox chá»n series | Boolean (per series) | CÃ³ | Táº¥t cáº£ báº­t | Bá»™ legend checkbox: â˜‘ "Chá»§ Ä‘á» má»›i" (mÃ u xanh lam) | â˜‘ "BÃ¬nh luáº­n" (mÃ u xanh lÃ¡) | â˜‘ "GÃ³p Ã½" (mÃ u cam) | â˜‘ "LÆ°á»£t xem" (mÃ u tÃ­m, trá»¥c Y phá»¥). Táº¯t checkbox â†’ áº©n series tÆ°Æ¡ng á»©ng trÃªn biá»ƒu Ä‘á»“. |
+| Line chart | Chart | CÃ³ | CÃ³ | Biá»ƒu Ä‘á»“ Ä‘Æ°á»ng Ä‘a series. Trá»¥c X: ngÃ y/tuáº§n/thÃ¡ng. Trá»¥c Y trÃ¡i: sá»‘ lÆ°á»£ng (chá»§ Ä‘á», bÃ¬nh luáº­n, gÃ³p Ã½). Trá»¥c Y pháº£i: lÆ°á»£t xem. Äiá»ƒm dá»¯ liá»‡u: hover â†’ tooltip hiá»ƒn thá»‹ giÃ¡ trá»‹ chÃ­nh xÃ¡c cá»§a tá»«ng series táº¡i Ä‘iá»ƒm Ä‘Ã³. Biá»ƒu Ä‘á»“ responsive, cÃ³ thá»ƒ cuá»™n ngang náº¿u dá»¯ liá»‡u nhiá»u. |
+| ThÃ´ng bÃ¡o khÃ´ng cÃ³ dá»¯ liá»‡u | String | KhÃ´ng | CÃ³ | "ChÆ°a cÃ³ dá»¯ liá»‡u hoáº¡t Ä‘á»™ng trong khoáº£ng thá»i gian nÃ y." Hiá»ƒn thá»‹ thay biá»ƒu Ä‘á»“ khi khÃ´ng cÃ³ dá»¯ liá»‡u. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Thay Ä‘á»•i Ä‘á»™ phÃ¢n giáº£i | Toggle buttons | Nháº¥n "NgÃ y"/"Tuáº§n"/"ThÃ¡ng" â†’ gá»i API vá»›i granularity tÆ°Æ¡ng á»©ng â†’ cáº­p nháº­t biá»ƒu Ä‘á»“. |
+| 2 | áº¨n/hiá»‡n series | Checkbox legend | Nháº¥n checkbox â†’ toggle series trÃªn biá»ƒu Ä‘á»“ (client-side, khÃ´ng gá»i API). |
+| 3 | Tooltip Ä‘iá»ƒm dá»¯ liá»‡u | Hover Ä‘iá»ƒm trÃªn biá»ƒu Ä‘á»“ | Hiá»ƒn thá»‹ tooltip: ngÃ y + giÃ¡ trá»‹ tá»«ng series Ä‘ang báº­t. |
+
+---
+
+#### CPLQG-VI-094.MH01c â€“ Báº£ng Top chá»§ Ä‘á» ná»•i báº­t
+
+##### MÃ n hÃ¬nh
+
+Báº£ng dáº¡ng table hiá»ƒn thá»‹ top 10 chá»§ Ä‘á» cÃ³ hoáº¡t Ä‘á»™ng ná»•i báº­t nháº¥t trong khoáº£ng thá»i gian filter.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| TiÃªu Ä‘á» block | String | CÃ³ | "Top chá»§ Ä‘á» ná»•i báº­t" | KÃ¨m dropdown chá»n tiÃªu chÃ­ xáº¿p háº¡ng. |
+| Dropdown tiÃªu chÃ­ xáº¿p háº¡ng | Select | CÃ³ | "Nhiá»u lÆ°á»£t xem nháº¥t" | CÃ¡c lá»±a chá»n: "Nhiá»u lÆ°á»£t xem nháº¥t", "Nhiá»u bÃ¬nh luáº­n nháº¥t", "Nhiá»u gÃ³p Ã½ nháº¥t", "Nhiá»u lÆ°á»£t thÃ­ch nháº¥t", "Tá»•ng há»£p". |
+| Cá»™t Háº¡ng | Integer | CÃ³ | CÃ³ | Sá»‘ thá»© tá»± 1â€“10. Háº¡ng 1â€“3 hiá»ƒn thá»‹ icon huy chÆ°Æ¡ng ðŸ¥‡ðŸ¥ˆðŸ¥‰. |
+| Cá»™t TiÃªu Ä‘á» chá»§ Ä‘á» | String | CÃ³ | CÃ³ | TiÃªu Ä‘á» chá»§ Ä‘á», lÃ  liÃªn káº¿t Ä‘áº¿n trang chi tiáº¿t (UC91). Truncate náº¿u quÃ¡ dÃ i (tá»‘i Ä‘a 2 dÃ²ng). |
+| Cá»™t LÄ©nh vá»±c | String | CÃ³ | CÃ³ | Tag lÄ©nh vá»±c phÃ¡p luáº­t cá»§a chá»§ Ä‘á» (vÃ­ dá»¥: "Luáº­t Doanh nghiá»‡p"). |
+| Cá»™t LÆ°á»£t xem | Integer | CÃ³ | CÃ³ | Sá»‘ lÆ°á»£t xem, Ä‘á»‹nh dáº¡ng cÃ³ phÃ¢n cÃ¡ch hÃ ng nghÃ¬n. |
+| Cá»™t BÃ¬nh luáº­n | Integer | CÃ³ | CÃ³ | Tá»•ng sá»‘ bÃ¬nh luáº­n. |
+| Cá»™t GÃ³p Ã½ | Integer | CÃ³ | CÃ³ | Tá»•ng sá»‘ gÃ³p Ã½, pháº£n biá»‡n. |
+| Cá»™t NgÃ y Ä‘Äƒng | Date | CÃ³ | CÃ³ | Äá»‹nh dáº¡ng dd/mm/yyyy. |
+| PhÃ¢n trang báº£ng | Pagination | KhÃ´ng | CÃ³ | Hiá»ƒn thá»‹ tá»‘i Ä‘a 10 hÃ ng máº·c Ä‘á»‹nh. NÃºt "Xem thÃªm" Ä‘á»ƒ load thÃªm 10 hÃ ng. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Thay Ä‘á»•i tiÃªu chÃ­ xáº¿p háº¡ng | Dropdown | Chá»n tiÃªu chÃ­ â†’ gá»i API vá»›i sort parameter tÆ°Æ¡ng á»©ng â†’ cáº­p nháº­t báº£ng. |
+| 2 | Sáº¯p xáº¿p theo cá»™t | Nháº¥n header cá»™t | Nháº¥n tiÃªu Ä‘á» cá»™t (LÆ°á»£t xem / BÃ¬nh luáº­n / GÃ³p Ã½ / NgÃ y Ä‘Äƒng) â†’ sort ASC â†’ sort DESC â†’ bá» sort. Icon mÅ©i tÃªn chá»‰ chiá»u sort. |
+| 3 | Äiá»u hÆ°á»›ng Ä‘áº¿n chá»§ Ä‘á» | LiÃªn káº¿t tiÃªu Ä‘á» | Nháº¥n tiÃªu Ä‘á» chá»§ Ä‘á» â†’ má»Ÿ trang Chi tiáº¿t chá»§ Ä‘á» (UC91) trong tab má»›i. |
+| 4 | Xem thÃªm | NÃºt "Xem thÃªm" | Load thÃªm 10 hÃ ng tiáº¿p theo, append vÃ o báº£ng. |
+
+---
+
+#### CPLQG-VI-094.MH01d â€“ Biá»ƒu Ä‘á»“ phÃ¢n bá»‘ theo lÄ©nh vá»±c
+
+##### MÃ n hÃ¬nh
+
+Block biá»ƒu Ä‘á»“ trÃ²n (donut chart) hoáº·c biá»ƒu Ä‘á»“ cá»™t (bar chart) hiá»ƒn thá»‹ phÃ¢n bá»‘ sá»‘ lÆ°á»£ng chá»§ Ä‘á», bÃ¬nh luáº­n theo cÃ¡c lÄ©nh vá»±c phÃ¡p luáº­t.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| TiÃªu Ä‘á» block | String | CÃ³ | "PhÃ¢n bá»‘ theo lÄ©nh vá»±c phÃ¡p luáº­t" | |
+| Toggle loáº¡i biá»ƒu Ä‘á»“ | Enum (buttons) | CÃ³ | "Donut" | Buttons: "Donut" / "Cá»™t ngang". Chuyá»ƒn Ä‘á»•i kiá»ƒu hiá»ƒn thá»‹ client-side. |
+| Dropdown chá»‰ sá»‘ hiá»ƒn thá»‹ | Select | CÃ³ | "Chá»§ Ä‘á»" | CÃ¡c lá»±a chá»n: "Sá»‘ chá»§ Ä‘á»", "Sá»‘ bÃ¬nh luáº­n", "Sá»‘ lÆ°á»£t xem". |
+| Donut chart / Bar chart | Chart | CÃ³ | CÃ³ | Donut: má»—i pháº§n lÃ  má»™t lÄ©nh vá»±c phÃ¡p luáº­t (mÃ u phÃ¢n biá»‡t), pháº§n trung tÃ¢m hiá»ƒn thá»‹ tá»•ng sá»‘. Bar chart ngang: trá»¥c Y lÃ  tÃªn lÄ©nh vá»±c, trá»¥c X lÃ  giÃ¡ trá»‹. Tá»‘i Ä‘a hiá»ƒn thá»‹ 10 lÄ©nh vá»±c; pháº§n cÃ²n láº¡i gá»™p thÃ nh "KhÃ¡c". |
+| Legend | Danh sÃ¡ch | CÃ³ | CÃ³ | Danh sÃ¡ch tÃªn lÄ©nh vá»±c + mÃ u + sá»‘ liá»‡u tuyá»‡t Ä‘á»‘i + %. Nháº¥n vÃ o legend item â†’ áº©n/hiá»‡n segment tÆ°Æ¡ng á»©ng. |
+| Tooltip | String | CÃ³ | CÃ³ | Hover vÃ o segment/bar: tooltip hiá»ƒn thá»‹ "LÄ©nh vá»±c: [TÃªn] | Sá»‘ lÆ°á»£ng: n | Tá»· lá»‡: x%". |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Chuyá»ƒn Ä‘á»•i loáº¡i biá»ƒu Ä‘á»“ | Toggle buttons | Client-side, khÃ´ng gá»i API. Dá»¯ liá»‡u giá»¯ nguyÃªn, chá»‰ Ä‘á»•i kiá»ƒu render. |
+| 2 | Thay Ä‘á»•i chá»‰ sá»‘ | Dropdown | Gá»i API â†’ cáº­p nháº­t dá»¯ liá»‡u biá»ƒu Ä‘á»“. |
+| 3 | Lá»c theo lÄ©nh vá»±c | Nháº¥n legend / segment | Nháº¥n vÃ o má»™t lÄ©nh vá»±c â†’ báº£ng top chá»§ Ä‘á» (MH01c) tá»± Ä‘á»™ng filter theo lÄ©nh vá»±c Ä‘Ã³. Má»™t láº§n nháº¥n ná»¯a â†’ bá» filter. |
+
+---
+
+#### CPLQG-VI-094.MH01e â€“ Danh sÃ¡ch Top ngÆ°á»i Ä‘Ã³ng gÃ³p
+
+##### MÃ n hÃ¬nh
+
+Block hiá»ƒn thá»‹ top ngÆ°á»i dÃ¹ng Ä‘Ã³ng gÃ³p tÃ­ch cá»±c nháº¥t trong diá»…n Ä‘Ã n theo khoáº£ng thá»i gian filter.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| TiÃªu Ä‘á» block | String | CÃ³ | "Top ngÆ°á»i Ä‘Ã³ng gÃ³p" | |
+| Dropdown tiÃªu chÃ­ | Select | CÃ³ | "Tá»•ng há»£p" | CÃ¡c lá»±a chá»n: "Tá»•ng há»£p (Ä‘iá»ƒm Ä‘Ã³ng gÃ³p)", "Nhiá»u bÃ¬nh luáº­n nháº¥t", "Nhiá»u gÃ³p Ã½ há»¯u Ã­ch nháº¥t". |
+| Danh sÃ¡ch ngÆ°á»i Ä‘Ã³ng gÃ³p | Danh sÃ¡ch | CÃ³ | CÃ³ | Hiá»ƒn thá»‹ top 10. Má»—i item: sá»‘ thá»© tá»± + avatar (40Ã—40px) + tÃªn tÃ¡c giáº£ (liÃªn káº¿t há»“ sÆ¡) + badge vai trÃ² + sá»‘ bÃ¬nh luáº­n Ä‘Ã£ Ä‘Äƒng + sá»‘ gÃ³p Ã½ Ä‘Ã£ Ä‘Äƒng + sá»‘ gÃ³p Ã½ há»¯u Ã­ch (Ä‘Æ°á»£c Moderator Ä‘Ã¡nh dáº¥u) + Ä‘iá»ƒm Ä‘Ã³ng gÃ³p tá»•ng há»£p. |
+| Avatar | Image | CÃ³ | áº¢nh máº·c Ä‘á»‹nh | HÃ¬nh trÃ²n 40Ã—40px. |
+| TÃªn ngÆ°á»i dÃ¹ng | String | CÃ³ | CÃ³ | LiÃªn káº¿t Ä‘áº¿n trang há»“ sÆ¡ cÃ´ng khai. |
+| Badge vai trÃ² | String (enum) | KhÃ´ng | KhÃ´ng | "Luáº­t sÆ°", "ChuyÃªn gia", "CÆ¡ quan nhÃ  nÆ°á»›c", "Cá»™ng Ä‘á»“ng". |
+| Sá»‘ bÃ¬nh luáº­n | Integer | CÃ³ | CÃ³ | Tá»•ng bÃ¬nh luáº­n trong ká»³. |
+| Sá»‘ gÃ³p Ã½ | Integer | CÃ³ | CÃ³ | Tá»•ng gÃ³p Ã½/pháº£n biá»‡n trong ká»³. |
+| Sá»‘ gÃ³p Ã½ há»¯u Ã­ch | Integer | CÃ³ | CÃ³ | Sá»‘ bÃ¬nh luáº­n/gÃ³p Ã½ Ä‘Æ°á»£c Moderator Ä‘Ã¡nh dáº¥u "Há»¯u Ã­ch". |
+| Äiá»ƒm Ä‘Ã³ng gÃ³p | Integer | KhÃ´ng | CÃ³ | Äiá»ƒm tá»•ng há»£p theo cÃ´ng thá»©c: gÃ³p Ã½ Ã— 5 + bÃ¬nh luáº­n Ã— 1 + gÃ³p Ã½ há»¯u Ã­ch Ã— 10. Hiá»ƒn thá»‹ cho Admin/Moderator, áº©n vá»›i ngÆ°á»i dÃ¹ng thÆ°á»ng. |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Thay Ä‘á»•i tiÃªu chÃ­ top | Dropdown | Gá»i API â†’ cáº­p nháº­t danh sÃ¡ch. |
+| 2 | Xem há»“ sÆ¡ ngÆ°á»i Ä‘Ã³ng gÃ³p | LiÃªn káº¿t tÃªn | Nháº¥n tÃªn â†’ má»Ÿ trang há»“ sÆ¡ cÃ´ng khai cá»§a ngÆ°á»i dÃ¹ng trong tab má»›i. |
+
+---
+
+#### CPLQG-VI-094.MH02 â€“ Xuáº¥t bÃ¡o cÃ¡o (Admin / Moderator)
+
+##### MÃ n hÃ¬nh
+
+Chá»©c nÄƒng xuáº¥t bÃ¡o cÃ¡o thá»‘ng kÃª, chá»‰ hiá»ƒn thá»‹ vá»›i ngÆ°á»i dÃ¹ng cÃ³ vai trÃ² Admin hoáº·c Moderator. KÃ­ch hoáº¡t tá»« nÃºt "Xuáº¥t bÃ¡o cÃ¡o" á»Ÿ MH01.
+
+##### MÃ´ táº£ thÃ´ng tin trÃªn mÃ n hÃ¬nh
+
+| TrÆ°á»ng thÃ´ng tin | Kiá»ƒu dá»¯ liá»‡u | Báº¯t buá»™c | Máº·c Ä‘á»‹nh | MÃ´ táº£ |
+| --- | --- | --- | --- | --- |
+| Dropdown Ä‘á»‹nh dáº¡ng | Enum | CÃ³ | CÃ³ | "Xuáº¥t PDF" / "Xuáº¥t Excel (.xlsx)". |
+| Ná»™i dung bÃ¡o cÃ¡o PDF | Document | CÃ³ | CÃ³ | Bao gá»“m: tiÃªu Ä‘á» "BÃ¡o cÃ¡o thá»‘ng kÃª Diá»…n Ä‘Ã n chÃ­nh sÃ¡ch phÃ¡p luáº­t", khoáº£ng thá»i gian, ngÃ y xuáº¥t, tÃªn Admin xuáº¥t, cÃ¡c KPI card, biá»ƒu Ä‘á»“ (áº£nh tÄ©nh snapshot), báº£ng top chá»§ Ä‘á», báº£ng top ngÆ°á»i Ä‘Ã³ng gÃ³p. Logo Cá»•ng PhÃ¡p luáº­t Quá»‘c gia á»Ÿ header. |
+| Ná»™i dung bÃ¡o cÃ¡o Excel | Spreadsheet | CÃ³ | CÃ³ | Nhiá»u sheet: Sheet 1 "Tá»•ng quan KPI", Sheet 2 "Top chá»§ Ä‘á»", Sheet 3 "Hoáº¡t Ä‘á»™ng theo ngÃ y" (dá»¯ liá»‡u thÃ´ cho biá»ƒu Ä‘á»“), Sheet 4 "Top ngÆ°á»i Ä‘Ã³ng gÃ³p". |
+
+##### Chá»©c nÄƒng trÃªn mÃ n hÃ¬nh
+
+| STT | TÃªn chá»©c nÄƒng | Äá»‹nh dáº¡ng | MÃ´ táº£ |
+| --- | --- | --- | --- |
+| 1 | Xuáº¥t bÃ¡o cÃ¡o PDF | NÃºt "Xuáº¥t PDF" | Nháº¥n â†’ hiá»ƒn thá»‹ loading "Äang táº¡o bÃ¡o cÃ¡o..." â†’ server táº¡o file PDF bao gá»“m snapshot biá»ƒu Ä‘á»“ â†’ gá»­i file táº£i xuá»‘ng. TÃªn file: "BaoCao_DienDan_[ddmmyyyy]-[ddmmyyyy].pdf". TrÆ°á»ng há»£p lá»—i: toast "Xuáº¥t bÃ¡o cÃ¡o tháº¥t báº¡i. Vui lÃ²ng thá»­ láº¡i." |
+| 2 | Xuáº¥t bÃ¡o cÃ¡o Excel | NÃºt "Xuáº¥t Excel" | Nháº¥n â†’ server generate file .xlsx vá»›i nhiá»u sheet â†’ táº£i xuá»‘ng. TÃªn file: "BaoCao_DienDan_[ddmmyyyy]-[ddmmyyyy].xlsx". |
+
+---
+
+*TÃ i liá»‡u Ä‘Æ°á»£c táº¡o tá»± Ä‘á»™ng bá»Ÿi AI Gen â€“ NgÃ y: 2026-03-16*
