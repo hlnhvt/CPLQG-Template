@@ -36,7 +36,7 @@ const Header = () => {
     const [notifOpen, setNotifOpen] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [mobileNavExpanded, setMobileNavExpanded] = useState({}); // Track expanded groups in mobile menu
-    
+
     const dropdownRef = useRef(null);
     const notificationRef = useRef(null);
 
@@ -61,7 +61,7 @@ const Header = () => {
     };
 
     const toggleMobileNavGroup = (key) => {
-        setMobileNavExpanded(prev => ({...prev, [key]: !prev[key]}));
+        setMobileNavExpanded(prev => ({ ...prev, [key]: !prev[key] }));
     };
 
     return (
@@ -106,14 +106,14 @@ const Header = () => {
                         {/* Notification Bell (Logged In Only) */}
                         {displayUser && (
                             <div className="relative z-[200]" ref={notificationRef}>
-                                <button 
+                                <button
                                     onClick={() => setNotifOpen(o => !o)}
                                     className={`relative p-2 rounded-full transition-colors flex items-center justify-center ${notifOpen ? 'bg-white/20' : 'hover:bg-white/10'}`}
                                 >
                                     <Bell size={18} />
                                     <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-[#3b82f6]"></span>
                                 </button>
-                                
+
                                 {/* Notification Dropdown */}
                                 {notifOpen && (
                                     <NotificationDropdown setNotifOpen={setNotifOpen} />
@@ -144,29 +144,29 @@ const Header = () => {
                                             </div>
                                             {/* Dashboard Links */}
                                             <div className="py-2">
-                                                <Link 
-                                                    to="/ca-nhan/ho-so" 
+                                                <Link
+                                                    to="/ca-nhan/ho-so"
                                                     className="w-full flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors text-[14px] font-medium"
                                                     onClick={() => setDropdownOpen(false)}
                                                 >
                                                     <LayoutDashboard size={16} /> Khu vực cá nhân
                                                 </Link>
-                                                <Link 
-                                                    to="/ca-nhan/bo-suu-tap" 
+                                                <Link
+                                                    to="/ca-nhan/bo-suu-tap"
                                                     className="w-full flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors text-[14px] font-medium"
                                                     onClick={() => setDropdownOpen(false)}
                                                 >
                                                     <Bookmark size={16} /> Bộ sưu tập
                                                 </Link>
-                                                <Link 
-                                                    to="/ca-nhan/thong-bao" 
+                                                <Link
+                                                    to="/ca-nhan/thong-bao"
                                                     className="w-full flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors text-[14px] font-medium"
                                                     onClick={() => setDropdownOpen(false)}
                                                 >
                                                     <Bell size={16} /> Thông báo
                                                 </Link>
                                             </div>
-                                            
+
                                             {/* Logout */}
                                             <button
                                                 onClick={handleLogout}
@@ -191,7 +191,7 @@ const Header = () => {
                         </div>
 
                         {/* Hamburger menu for mobile */}
-                        <button 
+                        <button
                             className="xl:hidden p-1.5 text-white hover:bg-white/10 rounded-lg transition-colors ml-2"
                             onClick={() => setMobileMenuOpen(true)}
                         >
@@ -316,13 +316,19 @@ const Header = () => {
                                         <li>
                                             <Link to="/dien-dan" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
                                                 <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
-                                                Trang chủ Diễn đàn
+                                                Diễn đàn
                                             </Link>
                                         </li>
                                         <li>
                                             <Link to="/dien-dan/thong-ke" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
                                                 <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
-                                                Thống kê Diễn đàn
+                                                Thống kê
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/dien-dan/su-kien" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
+                                                Buổi phát trực tuyến
                                             </Link>
                                         </li>
                                     </ul>
@@ -389,12 +395,12 @@ const Header = () => {
             {/* Mobile Sidebar Navigation */}
             {/* Overlay */}
             {mobileMenuOpen && (
-                <div 
-                    className="fixed inset-0 bg-black/50 z-[250] xl:hidden transition-opacity" 
+                <div
+                    className="fixed inset-0 bg-black/50 z-[250] xl:hidden transition-opacity"
                     onClick={() => setMobileMenuOpen(false)}
                 ></div>
             )}
-            
+
             {/* Drawer */}
             <div className={`fixed top-0 right-0 bottom-0 w-[300px] sm:w-[350px] bg-[#1a3673] z-[300] transform transition-transform duration-300 ease-in-out xl:hidden flex flex-col ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                 {/* Header in sidebar */}
@@ -412,7 +418,7 @@ const Header = () => {
                     {/* Navigation Links */}
                     <div className="flex flex-col text-white">
                         <Link to="/" onClick={() => setMobileMenuOpen(false)} className="px-5 py-4 border-b border-white/5 font-bold hover:bg-white/5 transition-colors">Trang chủ</Link>
-                        
+
                         <div className="border-b border-white/5">
                             <button onClick={() => toggleMobileNavGroup('tienIch')} className="w-full flex items-center justify-between px-5 py-4 font-bold hover:bg-white/5 transition-colors">
                                 Tiêu điểm chính sách
@@ -444,6 +450,7 @@ const Header = () => {
                             </button>
                             <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.hoTro ? 'max-h-96' : 'max-h-0'}`}>
                                 <Link to="/dien-dan" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Trang chủ Diễn đàn</Link>
+                                <Link to="/dien-dan/su-kien" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Buổi phát trực tuyến</Link>
                             </div>
                         </div>
 
@@ -453,7 +460,7 @@ const Header = () => {
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.phanAnh ? 'rotate-180' : ''}`} />
                             </button>
                         </div>
-                        
+
                         <div className="border-b border-white/5">
                             <Link to="/du-thao" onClick={() => setMobileMenuOpen(false)} className="block px-5 py-4 font-bold hover:bg-white/5 transition-colors">Dự thảo VBQPPL</Link>
                         </div>
@@ -470,7 +477,7 @@ const Header = () => {
                             <a href="#" className="flex items-center gap-2 text-white hover:text-cyan-400">
                                 International <span className="text-[10px] ml-1">↗</span>
                             </a>
-                            
+
                             {!displayUser ? (
                                 <Link to="/dang-nhap" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-white hover:text-cyan-400">
                                     <User size={18} /> Đăng nhập
@@ -489,9 +496,9 @@ const Header = () => {
                             {/* Search */}
                             <div className="relative mt-6 pt-4">
                                 <Search size={18} className="absolute left-3 top-[30px] text-gray-400" />
-                                <input 
-                                    type="text" 
-                                    placeholder="Tìm kiếm..." 
+                                <input
+                                    type="text"
+                                    placeholder="Tìm kiếm..."
                                     className="w-full py-2.5 pl-10 pr-4 bg-white/10 border border-white/20 rounded-full text-sm text-white placeholder-gray-400 outline-none focus:border-cyan-400 transition-colors"
                                 />
                             </div>

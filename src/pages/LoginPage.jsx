@@ -33,7 +33,11 @@ const LoginPage = () => {
         const result = login(cccd, password);
         setLoading(false);
         if (result.success) {
-            navigate(redirectPath, { replace: true });
+            if (result.user.isNewUser) {
+                navigate('/onboarding', { replace: true });
+            } else {
+                navigate(redirectPath, { replace: true });
+            }
         } else {
             setError(result.message);
         }
@@ -68,7 +72,7 @@ const LoginPage = () => {
                     </div>
 
                     {/* Login Card */}
-                    <div className="bg-white rounded-xl shadow-2xl w-full max-w-[680px] p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-0 md:divide-x divide-gray-100">
+                    <div className="bg-white rounded-xl shadow-2xl w-full max-w-[760px] p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-0 md:divide-x divide-gray-100">
                         {/* Left: Form */}
                         <div className="flex-1 md:pr-8">
                             <h2 className="text-[18px] font-bold text-gray-800 mb-5">Đăng nhập VNeID</h2>
@@ -131,9 +135,10 @@ const LoginPage = () => {
                                     Trường hợp không đăng nhập được, vui lòng{' '}
                                     <a href="#" className="text-blue-600 underline hover:text-blue-700">xem hướng dẫn</a>.
                                 </p>
-                                <div className="mt-3 pt-3 border-t border-gray-100">
+                                <div className="mt-3 pt-3 border-t border-gray-100 space-y-1">
                                     <p className="text-[13px] text-gray-400 font-medium mb-1">Tài khoản thử nghiệm:</p>
-                                    <p className="text-[12px] text-gray-500">CCCD: <code className="bg-gray-100 px-1 rounded">012345678901</code> / Mật khẩu: <code className="bg-gray-100 px-1 rounded">password</code></p>
+                                    <p className="text-[12px] text-gray-500">Bình thường: CCCD <code className="bg-gray-100 px-1 rounded">012345678901</code> / Pass: <code className="bg-gray-100 px-1 rounded">password</code></p>
+                                    <p className="text-[12px] text-gray-500">Người mới: CCCD <code className="bg-gray-100 px-1 rounded">098765432109</code> / Pass: <code className="bg-gray-100 px-1 rounded">password</code></p>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +160,7 @@ const LoginPage = () => {
 
             {/* Bottom Section - White */}
             <div className="bg-white py-8 px-4">
-                <div className="max-w-[680px] mx-auto flex flex-col md:flex-row items-center gap-8">
+                <div className="max-w-[760px] mx-auto flex flex-col md:flex-row items-center gap-8">
                     <div className="w-48 shrink-0">
                         <img src="/logo.png" alt="Phone mockup" className="w-full object-contain opacity-70" />
                     </div>

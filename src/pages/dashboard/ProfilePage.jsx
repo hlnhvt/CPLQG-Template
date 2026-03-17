@@ -57,7 +57,7 @@ const EditableSection = ({ title, children, isEditing, onEdit, onSave, onCancel 
     );
 };
 
-const Field = ({ label, value, isEditing, type = "text", placeholder, options }) => {
+const Field = ({ label, value, isEditing, type = "text", placeholder, options, onChange }) => {
     return (
         <div className="mb-4">
             <label className="block text-[13px] font-semibold text-gray-600 mb-1.5">{label}</label>
@@ -67,21 +67,27 @@ const Field = ({ label, value, isEditing, type = "text", placeholder, options })
                 </div>
             ) : (
                 type === 'select' ? (
-                    <select className="w-full text-[15px] border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all shadow-sm">
+                    <select 
+                        className="w-full text-[15px] border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all shadow-sm"
+                        value={value}
+                        onChange={(e) => onChange && onChange(e.target.value)}
+                    >
                         <option value="">Chọn {label.toLowerCase()}</option>
-                        {options?.map(opt => <option key={opt} value={opt} selected={opt === value}>{opt}</option>)}
+                        {options?.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                     </select>
                 ) : type === 'textarea' ? (
                     <textarea
                         className="w-full text-[15px] border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all shadow-sm min-h-[100px]"
-                        defaultValue={value}
+                        value={value}
+                        onChange={(e) => onChange && onChange(e.target.value)}
                         placeholder={placeholder}
                     />
                 ) : (
                     <input
                         type={type}
                         className="w-full text-[15px] border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all shadow-sm"
-                        defaultValue={value}
+                        value={value}
+                        onChange={(e) => onChange && onChange(e.target.value)}
                         placeholder={placeholder}
                     />
                 )
@@ -91,7 +97,28 @@ const Field = ({ label, value, isEditing, type = "text", placeholder, options })
 };
 
 const ProfilePage = () => {
-    const { user } = useAuth();
+    const { user, updateUser } = useAuth();
+
+    // Form data copies for editing
+    const [formData, setFormData] = useState({
+        name: user?.name || "Nguyễn Văn A",
+        dob: user?.dob || "1990-08-15",
+        gender: user?.gender || "Nam",
+        address: user?.address || "Tòa nhà AP, số 12 đường Trần Phú, Phường Điện Biên, Quận Ba Đình, TP. Hà Nội",
+        phone: user?.phone || "0912 345 678",
+        altEmail: user?.altEmail || "",
+        socialLink: user?.socialLink || "",
+        job: user?.job || "",
+        workplace: user?.workplace || "",
+        expertise: user?.expertise || "",
+        description: user?.description || ""
+    });
+
+    const [originalData, setOriginalData] = useState({ ...formData });
+
+    const handleChange = (field, value) => {
+        setFormData(prev => ({ ...prev, [field]: value }));
+    };
 
     // States for editing different sections
     const [editState, setEditState] = useState({
@@ -100,14 +127,31 @@ const ProfilePage = () => {
         career: false
     });
 
+    // Notify state
+    const [savedNotice, setSavedNotice] = useState('');
+
     const toggleEdit = (section) => {
+        if (editState[section]) {
+            // Cancel -> revert data
+            setFormData(originalData);
+        } else {
+            // Start editing -> reset base
+            setOriginalData({ ...formData, name: user?.name });
+        }
         setEditState(prev => ({ ...prev, [section]: !prev[section] }));
     };
 
     const handleSave = (section) => {
-        // Mock save action
-        toggleEdit(section);
-        // Show success toast (implied)
+        // Save to AuthContext if it's basic section explicitly
+        if (section === 'basic') {
+            updateUser({ name: formData.name });
+        }
+        
+        setOriginalData({ ...formData }); // Commit local
+        setEditState(prev => ({ ...prev, [section]: false }));
+        
+        setSavedNotice('Lưu thông tin thành công!');
+        setTimeout(() => setSavedNotice(''), 3000);
     };
 
     return (
@@ -115,6 +159,15 @@ const ProfilePage = () => {
             <h1 className="text-2xl font-bold text-[#0f4c81] mb-2">Hồ sơ cá nhân</h1>
 
 
+
+            {savedNotice && (
+                <div className="bg-green-50 text-green-700 border border-green-200 px-4 py-3 rounded-lg mb-4 flex items-center justify-between animate-fadeIn">
+                    <div className="flex items-center gap-2">
+                        <Check size={18} />
+                        <span className="font-medium text-sm">{savedNotice}</span>
+                    </div>
+                </div>
+            )}
 
             {/* Basic Info Section (MH02) */}
             <EditableSection
@@ -125,12 +178,12 @@ const ProfilePage = () => {
                 onCancel={() => toggleEdit('basic')}
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
-                    <Field label="Họ và tên" value={user?.name || "Nguyễn Văn A"} isEditing={editState.basic} />
-                    <Field label="Ngày sinh" value="15/08/1990" isEditing={editState.basic} type="date" />
-                    <Field label="Giới tính" value="Nam" isEditing={editState.basic} type="select" options={['Nam', 'Nữ', 'Khác']} />
+                    <Field label="Họ và tên" value={formData.name} onChange={(v) => handleChange('name', v)} isEditing={editState.basic} />
+                    <Field label="Ngày sinh" value={formData.dob} onChange={(v) => handleChange('dob', v)} isEditing={editState.basic} type="date" />
+                    <Field label="Giới tính" value={formData.gender} onChange={(v) => handleChange('gender', v)} isEditing={editState.basic} type="select" options={['Nam', 'Nữ', 'Khác']} />
 
                     <div className="md:col-span-2">
-                        <Field label="Địa chỉ thường trú" value="Tòa nhà AP, số 12 đường Trần Phú, Phường Điện Biên, Quận Ba Đình, TP. Hà Nội" isEditing={editState.basic} />
+                        <Field label="Địa chỉ thường trú" value={formData.address} onChange={(v) => handleChange('address', v)} isEditing={editState.basic} />
                     </div>
                 </div>
             </EditableSection>
@@ -163,18 +216,23 @@ const ProfilePage = () => {
                         {!editState.contact ? (
                             <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                                 <div className="text-[15px] font-medium text-gray-900 pb-1">
-                                    0912 345 678
+                                    {formData.phone}
                                 </div>
                                 <span className="px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-700">Đã xác thực</span>
                             </div>
                         ) : (
-                            <input type="tel" className="w-full text-[15px] border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none shadow-sm" defaultValue="0912 345 678" />
+                            <input 
+                                type="tel" 
+                                className="w-full text-[15px] border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none shadow-sm" 
+                                value={formData.phone}
+                                onChange={(e) => handleChange('phone', e.target.value)} 
+                            />
                         )}
                     </div>
 
                     <div className="md:col-span-2 pt-2 border-t border-gray-100">
-                        <Field label="Email liên hệ phụ" value="" placeholder="Ví dụ: b.nguyen@company.com" isEditing={editState.contact} type="email" />
-                        <Field label="Liên kết (Mạng xã hội, Website)" value="" placeholder="https://linkedin.com/in/nguyenvana" isEditing={editState.contact} type="url" />
+                        <Field label="Email liên hệ phụ" value={formData.altEmail} onChange={(v) => handleChange('altEmail', v)} placeholder="Ví dụ: b.nguyen@company.com" isEditing={editState.contact} type="email" />
+                        <Field label="Liên kết (Mạng xã hội, Website)" value={formData.socialLink} onChange={(v) => handleChange('socialLink', v)} placeholder="https://linkedin.com/in/nguyenvana" isEditing={editState.contact} type="url" />
                     </div>
                 </div>
             </EditableSection>
@@ -188,13 +246,13 @@ const ProfilePage = () => {
                 onCancel={() => toggleEdit('career')}
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
-                    <Field label="Ngành nghề" value="" isEditing={editState.career} type="select" options={['Luật sư', 'Công chức, viên chức', 'Doanh nhân', 'Sinh viên', 'Nghiên cứu viên', 'Khác']} />
-                    <Field label="Đơn vị công tác / Học tập" value="" isEditing={editState.career} placeholder="Nhập tên cơ quan, công ty hoặc trường học" />
+                    <Field label="Ngành nghề" value={formData.job} onChange={(v) => handleChange('job', v)} isEditing={editState.career} type="select" options={['Luật sư', 'Công chức, viên chức', 'Doanh nhân', 'Sinh viên', 'Nghiên cứu viên', 'Khác']} />
+                    <Field label="Đơn vị công tác / Học tập" value={formData.workplace} onChange={(v) => handleChange('workplace', v)} isEditing={editState.career} placeholder="Nhập tên cơ quan, công ty hoặc trường học" />
                     <div className="md:col-span-2">
-                        <Field label="Chuyên môn pháp lý quan tâm" value="" isEditing={editState.career} placeholder="Nhập lĩnh vực và nhấn Enter, ví dụ: Luật Doanh nghiệp, Dân sự..." />
+                        <Field label="Chuyên môn pháp lý quan tâm" value={formData.expertise} onChange={(v) => handleChange('expertise', v)} isEditing={editState.career} placeholder="Nhập lĩnh vực và nhấn Enter, ví dụ: Luật Doanh nghiệp, Dân sự..." />
                     </div>
                     <div className="md:col-span-2">
-                        <Field label="Mô tả công việc" value="" isEditing={editState.career} type="textarea" placeholder="Giới thiệu ngắn về bản thân..." />
+                        <Field label="Mô tả công việc" value={formData.description} onChange={(v) => handleChange('description', v)} isEditing={editState.career} type="textarea" placeholder="Giới thiệu ngắn về bản thân..." />
                     </div>
                 </div>
             </EditableSection>

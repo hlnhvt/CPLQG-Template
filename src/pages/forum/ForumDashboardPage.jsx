@@ -154,7 +154,7 @@ const ForumDashboardPage = () => {
                     {/* Top Contributors */}
                     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col">
                         <div className="flex justify-between items-center mb-6">
-                            <h2 className="font-bold text-lg text-gray-800">Top người dùng Đóng góp</h2>
+                            <h2 className="font-bold text-lg text-gray-800">Top người dùng đóng góp</h2>
                             <select className="text-sm font-medium text-blue-600 bg-blue-50 rounded-md outline-none px-2 py-1">
                                 <option>Tháng này</option>
                                 <option>Tuần này</option>

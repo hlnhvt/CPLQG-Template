@@ -76,6 +76,31 @@ const ForumListPage = () => {
                     {/* Left Sidebar - Navigation/Filters (Optional, could be used for categories) */}
                     <div className="w-full lg:w-1/4 hidden lg:block">
                         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 sticky top-6">
+
+                            {/* Livestream Event Portal Banner */}
+                            <Link to="/dien-dan/su-kien" className="group block mb-6">
+                                <div className="bg-gradient-to-br from-red-600 to-orange-500 rounded-2xl p-5 text-white shadow-lg relative overflow-hidden hover:shadow-xl transition-all flex flex-col justify-center">
+                                    {/* Decorative BG */}
+                                    <div className="absolute -right-6 -top-6 w-24 h-24 bg-white/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700 pointer-events-none"></div>
+                                    <div className="absolute right-4 bottom-4 w-12 h-12 bg-white/10 rounded-full blur-md group-hover:bg-white/20 transition-colors duration-500 pointer-events-none"></div>
+
+                                    <div className="flex items-start gap-4 relative z-10">
+                                        <div className="bg-white/20 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-inner">
+                                            <div className="relative">
+                                                <span className="w-6 h-6 border-2 border-white rounded-full flex items-center justify-center">
+                                                    <span className="w-2 h-2 bg-white rounded-sm ml-0.5"></span>
+                                                </span>
+                                                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-400 border-2 border-red-600 rounded-full animate-pulse"></span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-lg mb-1 group-hover:text-yellow-200 transition-colors">Buổi phát trực tuyến</h4>
+                                            <p className="text-sm text-red-100 font-medium">Khám phá các buổi hội thảo, tọa đàm pháp lý chuyên sâu.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+
                             <h3 className="font-bold text-gray-800 text-lg mb-4 flex items-center gap-2">
                                 <Filter size={20} className="text-blue-600" />
                                 Theo chủ đề
@@ -90,8 +115,9 @@ const ForumListPage = () => {
                                 ))}
                             </ul>
 
-                            <div className="mt-8">
-                                <div className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl p-6 text-white text-center shadow-lg">
+                            <div className="mt-6 flex flex-col gap-4">
+                                {/* Create Topic Box */}
+                                <div className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl p-6 text-white text-center shadow-lg w-full">
                                     <div className="bg-white/20 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
                                         <MessageSquare size={24} className="text-white" />
                                     </div>
