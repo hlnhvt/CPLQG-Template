@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Filter, MessageSquare, Users, Clock, Star, TrendingUp, Hash, ArrowRight, UserPlus, Check } from 'lucide-react';
+import { Search, Filter, MessageSquare, Users, Clock, Star, TrendingUp, Hash, ArrowRight, UserPlus, Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import { MOCK_FORUMS } from '../../data/mockForumData';
 
 const ForumListPage = () => {
     const [activeTab, setActiveTab] = useState('all'); // all, latest, hot, following
     const [searchQuery, setSearchQuery] = useState('');
     const [forums, setForums] = useState(MOCK_FORUMS);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
     const tabs = [
         { id: 'all', label: 'Tất cả diễn đàn', icon: '' },
@@ -25,12 +27,22 @@ const ForumListPage = () => {
         return true;
     });
 
+    // Reset pagination to page 1 when filters change
+    React.useEffect(() => {
+        setCurrentPage(1);
+    }, [activeTab, searchQuery, itemsPerPage]);
+
     // Mock sort just for UI demonstration
     if (activeTab === 'hot') {
         filteredForums.sort((a, b) => b.memberCount - a.memberCount);
     } else if (activeTab === 'latest') {
         // Assume default order is somewhat latest
     }
+
+    // Pagination Logic
+    const totalPages = Math.ceil(filteredForums.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedForums = filteredForums.slice(startIndex, startIndex + itemsPerPage);
 
     return (
         <div className="bg-[#f4f7fb] min-h-screen pb-12">
@@ -101,7 +113,7 @@ const ForumListPage = () => {
                                 </div>
                             </Link>
 
-                            <h3 className="font-bold text-gray-800 text-lg mb-4 flex items-center gap-2">
+                            {/* <h3 className="font-bold text-gray-800 text-lg mb-4 flex items-center gap-2">
                                 <Filter size={20} className="text-blue-600" />
                                 Theo chủ đề
                             </h3>
@@ -113,7 +125,7 @@ const ForumListPage = () => {
                                         </button>
                                     </li>
                                 ))}
-                            </ul>
+                            </ul> */}
 
                             <div className="mt-6 flex flex-col gap-4">
                                 {/* Create Topic Box */}
@@ -160,7 +172,7 @@ const ForumListPage = () => {
 
                         {/* Forum Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {filteredForums.map(forum => (
+                            {paginatedForums.map(forum => (
                                 <div key={forum.id} className="bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 group flex flex-col h-full overflow-hidden">
                                     <div className="p-6 flex-grow">
                                         <div className="flex justify-between items-start mb-4">
@@ -214,13 +226,56 @@ const ForumListPage = () => {
                                     </div>
                                 </div>
                             ))}
-                            {filteredForums.length === 0 && (
+                            {paginatedForums.length === 0 && (
                                 <div className="col-span-full py-16 text-center text-gray-500 bg-white rounded-2xl border border-gray-100">
                                     <Search size={48} className="mx-auto text-gray-300 mb-4" />
                                     <p className="text-lg font-medium">Không tìm thấy diễn đàn nào phù hợp.</p>
                                 </div>
                             )}
                         </div>
+
+                        {/* Pagination with items per page selector */}
+                        {filteredForums.length > 0 && (
+                            <div className="mt-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                                <div className="flex items-center gap-2 text-sm text-gray-600 font-medium">
+                                    <span>Hiển thị</span>
+                                    <select
+                                        value={itemsPerPage}
+                                        onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                                        className="border border-gray-300 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 hover:bg-white transition-colors cursor-pointer"
+                                    >
+                                        <option value={4}>4 bản ghi / trang</option>
+                                        <option value={6}>6 bản ghi / trang</option>
+                                        <option value={10}>10 bản ghi / trang</option>
+                                        <option value={20}>20 bản ghi / trang</option>
+                                        <option value={50}>50 bản ghi / trang</option>
+                                    </select>
+                                    <span>tổng số {filteredForums.length} bản ghi</span>
+                                </div>
+
+                                <div className="flex items-center gap-1">
+                                    <button
+                                        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                        disabled={currentPage === 1}
+                                        className="p-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                    >
+                                        <ChevronLeft size={18} />
+                                    </button>
+                                    <div className="flex items-center px-2">
+                                        <span className="text-sm font-medium text-gray-700">
+                                            Trang <span className="font-bold text-blue-600 mx-1">{currentPage}</span> / {totalPages}
+                                        </span>
+                                    </div>
+                                    <button
+                                        onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                        disabled={currentPage === totalPages || totalPages === 0}
+                                        className="p-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                    >
+                                        <ChevronRight size={18} />
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                 </div>

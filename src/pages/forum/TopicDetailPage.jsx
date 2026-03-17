@@ -4,7 +4,7 @@ import {
     Home, ChevronRight, MessageSquare, Eye, Clock,
     UserPlus, Heart, Share2, AlertTriangle, Paperclip,
     ArrowUpCircle, ArrowDownCircle, CheckCircle, Plus,
-    MoreHorizontal, Check, Tag
+    MoreHorizontal, Check, Tag, ChevronDown
 } from 'lucide-react';
 
 const MOCK_ARTICLE = {
@@ -134,6 +134,19 @@ const TopicDetailPage = () => {
     const { id } = useParams();
     const [activeTab, setActiveTab] = useState('comments');
     const [topic, setTopic] = useState(MOCK_ARTICLE);
+    
+    // Follow State
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [showUnfollowConfirm, setShowUnfollowConfirm] = useState(false);
+
+    const handleFollowClick = () => {
+        setIsFollowing(true);
+    };
+
+    const confirmUnfollow = () => {
+        setIsFollowing(false);
+        setShowUnfollowConfirm(false);
+    };
 
     return (
         <div className="bg-[#f4f7fb] min-h-screen pb-12">
@@ -259,9 +272,9 @@ const TopicDetailPage = () => {
                                     <CheckCircle size={20} className="text-indigo-600" />
                                     Góp ý, phản biện ({topic.contributions})
                                 </h2>
-                                <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm px-4 py-2 rounded-lg shadow-sm transition-colors flex items-center gap-1">
-                                    <Plus size={16} /> Thêm góp ý
-                                </button>
+                                <Link to={`/dien-dan/chu-de/${id}/tao-gop-y`} className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm px-4 py-2 rounded-lg shadow-sm transition-colors flex items-center gap-1">
+                                    <Plus size={16} /> Tạo góp ý
+                                </Link>
                             </div>
 
                             <div className="p-6">
@@ -272,7 +285,7 @@ const TopicDetailPage = () => {
                                             <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-500 to-blue-500"></div>
 
                                             <div className="flex justify-between items-start mb-3">
-                                                <Link to="#" className="text-lg font-bold text-gray-800 hover:text-blue-600 transition-colors leading-snug line-clamp-2 pr-4">{contrib.title}</Link>
+                                                <Link to={`/dien-dan/gop-y/${contrib.id}`} className="text-lg font-bold text-gray-800 hover:text-blue-600 transition-colors leading-snug line-clamp-2 pr-4">{contrib.title}</Link>
                                                 <span className={`text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap ${contrib.type === 'Góp ý' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                                                     {contrib.type}
                                                 </span>
@@ -401,10 +414,10 @@ const TopicDetailPage = () => {
 
                     {/* Right Sidebar (30%) */}
                     <div className="w-full lg:w-4/12 xl:w-3/12 space-y-6 hidden lg:block">
-                        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-600/20 transition-colors flex items-center justify-center gap-2">
+                        <Link to="/dien-dan/tao-moi" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-600/20 transition-colors flex items-center justify-center gap-2">
                             <Plus size={20} />
                             Tạo chủ đề mới
-                        </button>
+                        </Link>
 
                         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
                             <h3 className="font-bold text-gray-800 mb-4 pb-2 border-b border-gray-100">Thông tin chủ đề</h3>
@@ -421,9 +434,31 @@ const TopicDetailPage = () => {
                                     <span className="text-gray-500">Bình luận cuối</span>
                                     <span className="font-semibold text-gray-800">10 phút trước</span>
                                 </div>
-                                <button className="w-full mt-2 py-2 border-2 border-blue-600 text-blue-600 font-bold rounded-lg hover:bg-blue-50 transition-colors flex items-center justify-center gap-2">
-                                    <UserPlus size={18} /> Theo dõi chủ đề
-                                </button>
+                                {!isFollowing ? (
+                                    <button onClick={handleFollowClick} className="w-full mt-2 py-2 border-2 border-blue-600 text-blue-600 font-bold rounded-lg hover:bg-blue-50 transition-colors flex items-center justify-center gap-2">
+                                        <UserPlus size={18} /> Theo dõi chủ đề
+                                    </button>
+                                ) : (
+                                    <div className="relative w-full mt-2">
+                                        <div className="flex w-full">
+                                            <button className="flex-1 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-l-lg transition-colors flex items-center justify-center gap-2 border-r border-emerald-600">
+                                                <CheckCircle size={18} /> Đang theo dõi
+                                            </button>
+                                            <button onClick={() => setShowUnfollowConfirm(!showUnfollowConfirm)} className="px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-r-lg transition-colors flex items-center justify-center">
+                                                <ChevronDown size={18} />
+                                            </button>
+                                        </div>
+                                        {showUnfollowConfirm && (
+                                            <div className="absolute top-1/2 -translate-y-1/2 right-full mr-2 w-72 bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.1)] border border-gray-100 p-4 z-[60]">
+                                                <p className="text-sm text-gray-700 font-medium mb-4 text-left">Bạn có chắc chắn muốn hủy theo dõi chủ đề này không?</p>
+                                                <div className="flex gap-2 justify-end">
+                                                    <button onClick={() => setShowUnfollowConfirm(false)} className="px-3 py-1.5 text-xs font-bold text-gray-500 hover:bg-gray-100 rounded-lg">Không</button>
+                                                    <button onClick={confirmUnfollow} className="px-3 py-1.5 text-xs font-bold text-white bg-red-500 hover:bg-red-600 rounded-lg">Hủy theo dõi</button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         </div>
 
@@ -431,7 +466,7 @@ const TopicDetailPage = () => {
                             <h3 className="font-bold text-gray-800 mb-4 pb-2 border-b border-gray-100">Góp ý, phản biện liên quan</h3>
                             <div className="space-y-4">
                                 <div>
-                                    <Link to="#" className="font-semibold text-sm text-gray-800 hover:text-blue-600 line-clamp-2 mb-1">
+                                    <Link to={`/dien-dan/gop-y/1`} className="font-semibold text-sm text-gray-800 hover:text-blue-600 line-clamp-2 mb-1">
                                         Phân tích bất cập trong việc xử lý vốn cam kết nhưng chưa góp đủ
                                     </Link>
                                     <div className="flex items-center gap-2 text-xs text-gray-500">
@@ -441,7 +476,7 @@ const TopicDetailPage = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <Link to="#" className="font-semibold text-sm text-gray-800 hover:text-blue-600 line-clamp-2 mb-1">
+                                    <Link to={`/dien-dan/gop-y/2`} className="font-semibold text-sm text-gray-800 hover:text-blue-600 line-clamp-2 mb-1">
                                         Góc nhìn khác về trách nhiệm tài chính của cổ đông/thành viên sáng lập
                                     </Link>
                                     <div className="flex items-center gap-2 text-xs text-gray-500">
@@ -451,7 +486,7 @@ const TopicDetailPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <Link to="#" className="block text-center text-blue-600 text-sm font-bold mt-4 hover:underline">Xem thêm góp ý</Link>
+                            {/* <Link to="#" className="block text-center text-blue-600 text-sm font-bold mt-4 hover:underline">Xem thêm góp ý</Link> */}
                         </div>
 
                         <div className="bg-gradient-to-br from-[#1e3a8a] to-[#3b82f6] rounded-2xl shadow-lg p-5 text-white">

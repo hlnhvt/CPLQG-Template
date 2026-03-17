@@ -24,7 +24,7 @@ files.forEach(file => {
     let match = file.match(/^(\d+)\./);
     if (match) {
         let num = parseInt(match[1]);
-        if (num >= 187 && num <= 217 && file.endsWith('.md')) {
+        if (num >= 85 && num <= 94 && file.endsWith('.md')) {
             const inputPath = path.join(srsDir, file);
             const outFileName = file.replace(/\.md$/, '.docx');
             const outputPath = path.join(docxDir, outFileName);

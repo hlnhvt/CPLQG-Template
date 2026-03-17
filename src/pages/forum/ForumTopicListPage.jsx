@@ -23,7 +23,7 @@ const ForumTopicListPage = () => {
 
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
+    const [itemsPerPage, setItemsPerPage] = useState(5);
 
     // Generating some more mock topics to fill the list
     const moreMockTopics = useMemo(() => {
@@ -64,6 +64,11 @@ const ForumTopicListPage = () => {
         return result;
     }, [moreMockTopics, statusFilter, sortOrder]);
 
+    // Reset pagination to page 1 when filters change
+    React.useEffect(() => {
+        setCurrentPage(1);
+    }, [statusFilter, sortOrder, itemsPerPage]);
+
     const totalPages = Math.ceil(filteredAndSortedTopics.length / itemsPerPage) || 1;
     const paginatedTopics = filteredAndSortedTopics.slice(
         (currentPage - 1) * itemsPerPage,
@@ -82,10 +87,10 @@ const ForumTopicListPage = () => {
     return (
         <div className="bg-[#f4f7fb] min-h-screen pb-12">
             {/* Header / Hero for specific forum */}
-            <div className="bg-[#1e293b] pt-8 pb-12 relative overflow-hidden border-b border-gray-700">
+            <div className="bg-[#1e293b] pt-8 pb-12 relative border-b border-gray-700 z-30">
                 {/* Decorative background pattern */}
                 <div
-                    className="absolute inset-0 opacity-40 mix-blend-overlay"
+                    className="absolute inset-0 opacity-40 mix-blend-overlay overflow-hidden"
                     style={{
                         backgroundImage: "url('/trong_dong_bg.png')",
                         backgroundSize: 'cover',
@@ -124,7 +129,7 @@ const ForumTopicListPage = () => {
                                         <CheckCircle size={18} /> Theo dõi diễn đàn
                                     </button>
                                 ) : (
-                                    <div className="relative">
+                                    <div className="relative z-50">
                                         <div className="flex items-center">
                                             <button
                                                 className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 px-4 rounded-l-lg shadow-sm transition-colors flex items-center gap-2 text-sm border-r border-emerald-600"
@@ -386,15 +391,30 @@ const ForumTopicListPage = () => {
                         </div>
 
                         {/* Pagination Component */}
-                        {totalPages > 1 && (
+                        {filteredAndSortedTopics.length > 0 && (
                             <div className="flex flex-col sm:flex-row items-center justify-between mt-8 pt-6 border-t border-gray-200 gap-4">
-                                <span className="text-sm text-gray-500 font-medium">Trang {currentPage} / {totalPages}</span>
-                                <div className="flex items-center gap-2 flex-wrap">
-                                    <button
-                                        onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                                        disabled={currentPage === 1}
-                                        className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >Trước</button>
+                                <div className="flex items-center gap-2 text-sm text-gray-600 font-medium">
+                                    <span>Hiển thị</span>
+                                    <select
+                                        value={itemsPerPage}
+                                        onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                                        className="border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50 hover:bg-white transition-colors cursor-pointer"
+                                    >
+                                        <option value={5}>5 bản ghi / trang</option>
+                                        <option value={10}>10 bản ghi / trang</option>
+                                        <option value={20}>20 bản ghi / trang</option>
+                                        <option value={50}>50 bản ghi / trang</option>
+                                    </select>
+                                    <span>tổng số {filteredAndSortedTopics.length} bản ghi</span>
+                                </div>
+                                
+                                {totalPages > 1 && (
+                                    <div className="flex items-center gap-2 flex-wrap">
+                                        <button
+                                            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                                            disabled={currentPage === 1}
+                                            className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >Trước</button>
 
                                     {Array.from({ length: totalPages }).map((_, idx) => {
                                         const page = idx + 1;
@@ -415,12 +435,13 @@ const ForumTopicListPage = () => {
                                         return null;
                                     })}
 
-                                    <button
-                                        onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                                        disabled={currentPage === totalPages}
-                                        className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                                    >Sau</button>
-                                </div>
+                                        <button
+                                            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                                            disabled={currentPage === totalPages}
+                                            className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                                        >Sau</button>
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>

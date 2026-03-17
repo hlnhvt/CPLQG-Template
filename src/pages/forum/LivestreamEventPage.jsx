@@ -335,7 +335,7 @@ const LivestreamEventPage = () => {
 
                                             <div className="space-y-3">
                                                 {questions.map(q => (
-                                                    <div key={q.id} className={`rounded-xl p-4 border transition-colors ${highContrast ? 'bg-white border-gray-200' : 'bg-[#273345] border-gray-700/50'} ${q.status === 'answering' ? 'border-green-500/50 shadow-[0_0_15px_rgba(34,197,94,0.15)] bg-green-50' : q.user === 'Bạn' ? 'border-purple-500/50 shadow-[0_0_15px_rgba(168,85,247,0.15)] bg-purple-50/10' : ''
+                                                    <div key={q.id} className={`rounded-xl p-4 border transition-colors ${highContrast ? 'bg-white border-gray-200' : 'bg-[#273345] border-gray-700/50'} ${q.status === 'answering' ? `border-green-500/50 shadow-[0_0_15px_rgba(34,197,94,0.15)] ${highContrast ? 'bg-green-50' : 'bg-green-500/10'}` : q.user === 'Bạn' ? `border-purple-500/50 shadow-[0_0_15px_rgba(168,85,247,0.15)] ${highContrast ? 'bg-purple-50' : 'bg-purple-500/10'}` : ''
                                                         }`}>
                                                         <div className="flex items-start gap-3">
                                                             <button className={`flex flex-col items-center justify-center rounded-lg p-2 min-w-[50px] shrink-0 group border transition-colors ${highContrast ? 'bg-gray-50 border-gray-200 hover:border-gray-300' : 'bg-[#111827] border-gray-800 hover:border-gray-600'}`}>

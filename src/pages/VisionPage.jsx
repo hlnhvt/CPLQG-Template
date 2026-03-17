@@ -4,7 +4,7 @@ import { Target, Lightbulb, TrendingUp, ShieldCheck, Gem } from 'lucide-react';
 const VisionPage = () => {
     // Dữ liệu mẫu (theo yêu cầu thì sẽ được tải qua CMS nhưng chúng ta làm giao diện trước)
     const visionContent = "Trở thành nền tảng pháp luật số hàng đầu tại Việt Nam, ứng dụng công nghệ tiên tiến và trí tuệ nhân tạo để cung cấp dịch vụ pháp lý chất lượng cao, minh bạch, dễ tiếp cận cho mọi người dân và doanh nghiệp.";
-    
+
     const missionContent = "Xây dựng hệ sinh thái pháp lý toàn diện, kết nối người dân, doanh nghiệp với cơ quan nhà nước, thúc đẩy sự hiểu biết và tuân thủ pháp luật thông qua các giải pháp thông minh, tiện ích và đáng tin cậy.";
 
     const directions = [
@@ -35,10 +35,10 @@ const VisionPage = () => {
             {/* Minimal Background/Header */}
             <div className="bg-gradient-to-r from-[#0f4c81] to-[#1e3a8a] text-white pt-16 pb-24 px-4 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-                <div className="absolute top-0 left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{animationDelay: '2s'}}></div>
-                
+                <div className="absolute top-0 left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
+
                 <div className="container mx-auto relative z-10 text-center">
-                    <h1 className="text-3xl md:text-5xl font-bold uppercase tracking-widest mb-4 drop-shadow-md">Tầm nhìn & Định hướng</h1>
+                    <h1 className="text-3xl md:text-5xl font-bold uppercase mb-4 drop-shadow-md">Tầm nhìn & Định hướng</h1>
                     <p className="text-blue-100 max-w-2xl mx-auto text-lg">Khẳng định vị thế và con đường phát triển chiến lược của Cổng Pháp luật Quốc gia trong kỷ nguyên số.</p>
                 </div>
             </div>
@@ -49,7 +49,7 @@ const VisionPage = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2">
                         {/* Tầm nhìn */}
                         <div className="p-8 md:p-12 relative overflow-hidden group">
-                           <div className="relative z-10">
+                            <div className="relative z-10">
                                 <div className="flex items-center gap-3 mb-6">
                                     <div className="p-3 bg-blue-100 text-blue-800 rounded-xl shadow-sm">
                                         <Target size={28} />
@@ -59,15 +59,15 @@ const VisionPage = () => {
                                 <p className="text-gray-700 leading-relaxed text-lg italic border-l-4 border-[#0f4c81] pl-6 py-2">
                                     "{visionContent}"
                                 </p>
-                           </div>
-                           <div className="absolute -bottom-10 -right-10 opacity-5 group-hover:opacity-10 transition-opacity duration-500 transform group-hover:scale-110">
-                               <Target size={220} />
-                           </div>
+                            </div>
+                            <div className="absolute -bottom-10 -right-10 opacity-5 group-hover:opacity-10 transition-opacity duration-500 transform group-hover:scale-110">
+                                <Target size={220} />
+                            </div>
                         </div>
 
                         {/* Sứ mệnh */}
                         <div className="p-8 md:p-12 bg-gradient-to-br from-gray-50/50 to-gray-100/50 backdrop-blur-sm relative overflow-hidden group border-t md:border-t-0 md:border-l border-gray-200/50">
-                           <div className="relative z-10">
+                            <div className="relative z-10">
                                 <div className="flex items-center gap-3 mb-6">
                                     <div className="p-3 bg-red-100 text-red-800 rounded-xl shadow-sm">
                                         <ShieldCheck size={28} />
@@ -77,10 +77,10 @@ const VisionPage = () => {
                                 <p className="text-gray-700 leading-relaxed text-lg">
                                     {missionContent}
                                 </p>
-                           </div>
-                           <div className="absolute -top-10 -right-10 opacity-5 group-hover:opacity-10 transition-opacity duration-500 text-red-800 transform group-hover:rotate-12">
-                               <ShieldCheck size={220} />
-                           </div>
+                            </div>
+                            <div className="absolute -top-10 -right-10 opacity-5 group-hover:opacity-10 transition-opacity duration-500 text-red-800 transform group-hover:rotate-12">
+                                <ShieldCheck size={220} />
+                            </div>
                         </div>
                     </div>
                 </div>

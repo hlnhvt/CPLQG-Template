@@ -57,6 +57,9 @@ import CreateTopicPage from './pages/forum/CreateTopicPage';
 import LivestreamEventPage from './pages/forum/LivestreamEventPage';
 import ForumTopicManagementPage from './pages/forum/ForumTopicManagementPage';
 import LivestreamListPage from './pages/forum/LivestreamListPage';
+import CreateContributionPage from './pages/forum/CreateContributionPage';
+import ContributionDetailPage from './pages/forum/ContributionDetailPage';
+import FollowedForumsPage from './pages/dashboard/FollowedForumsPage';
 
 // Onboarding import
 import OnboardingPage from './pages/onboarding/OnboardingPage';
@@ -109,7 +112,9 @@ const AppLayout = () => {
                     <Route path="/dien-dan" element={<ForumListPage />} />
                     <Route path="/dien-dan/thong-ke" element={<ForumDashboardPage />} />
                     <Route path="/dien-dan/chu-de/:id" element={<ForumTopicListPage />} />
+                    <Route path="/dien-dan/chu-de/:id/tao-gop-y" element={<CreateContributionPage />} />
                     <Route path="/dien-dan/bai-viet/:id" element={<TopicDetailPage />} />
+                    <Route path="/dien-dan/gop-y/:id" element={<ContributionDetailPage />} />
                     <Route path="/dien-dan/tao-moi" element={<CreateTopicPage />} />
                     <Route path="/dien-dan/su-kien" element={<LivestreamListPage />} />
                     <Route path="/dien-dan/su-kien/:slug" element={<LivestreamEventPage />} />
@@ -128,6 +133,7 @@ const AppLayout = () => {
                         <Route path="dang-ky-cong-tac-vien" element={<CollaboratorRegistrationPage />} />
                         <Route path="tin-bai" element={<CollaboratorArticlesPage />} />
                         <Route path="chu-de-dien-dan" element={<ForumTopicManagementPage />} />
+                        <Route path="dien-dan-quan-tam" element={<FollowedForumsPage />} />
                     </Route>
 
                     {/* Full-screen Editor Routes */}
