@@ -25,7 +25,7 @@ const NewlyIssuedDocs = () => {
                         </div>
                         <ul>
                             {docs.map((doc, index) => (
-                                <Link to="/news/1" key={index} className="flex text-sm py-3 px-4 border-b hover:bg-gray-50 transition cursor-pointer">
+                                <Link to={`/van-ban/${index + 1}`} key={index} className="flex text-sm py-3 px-4 border-b hover:bg-gray-50 transition cursor-pointer">
                                     <div className="w-1/4 text-gray-500 font-medium">{doc.date}</div>
                                     <div className="w-3/4 text-gray-800 line-clamp-2 hover:text-[#0f4c81]">{doc.title}</div>
                                 </Link>

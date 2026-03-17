@@ -64,6 +64,12 @@ import FollowedForumsPage from './pages/dashboard/FollowedForumsPage';
 // Onboarding import
 import OnboardingPage from './pages/onboarding/OnboardingPage';
 
+// Phan Anh Kien Nghi imports
+import PhanAnhKienNghiPage from './pages/phan-anh-kien-nghi/PhanAnhKienNghiPage';
+import PhanAnhKienNghiGuidePage from './pages/phan-anh-kien-nghi/PhanAnhKienNghiGuidePage';
+import PhanAnhKienNghiDetailPage from './pages/phan-anh-kien-nghi/PhanAnhKienNghiDetailPage';
+import CreatePhanAnhKienNghiPage from './pages/phan-anh-kien-nghi/CreatePhanAnhKienNghiPage';
+
 const AppLayout = () => {
     const location = useLocation();
     const hideHeaderFooter = ['/dang-nhap', '/onboarding'].includes(location.pathname);
@@ -107,6 +113,12 @@ const AppLayout = () => {
                     <Route path="/du-thao" element={<DuThaoPage />} />
                     <Route path="/du-thao/:id" element={<DuThaoDetailPage />} />
                     <Route path="/bao-cao-tiep-thu/:id" element={<BaoCaoTiepThuDetailPage />} />
+
+                    {/* Feedback Routes */}
+                    <Route path="/phan-anh-kien-nghi" element={<PhanAnhKienNghiPage />} />
+                    <Route path="/phan-anh-kien-nghi/huong-dan" element={<PhanAnhKienNghiGuidePage />} />
+                    <Route path="/phan-anh-kien-nghi/tao-moi" element={<CreatePhanAnhKienNghiPage />} />
+                    <Route path="/phan-anh-kien-nghi/:id" element={<PhanAnhKienNghiDetailPage />} />
 
                     {/* Forum Routes */}
                     <Route path="/dien-dan" element={<ForumListPage />} />

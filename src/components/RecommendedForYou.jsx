@@ -42,7 +42,7 @@ const RecommendedForYou = () => {
                                 </span>
 
                                 <h3 className="font-bold text-[15px] text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-3 mb-3 leading-snug">
-                                    <Link to="#">{item.title}</Link>
+                                    <Link to={item.type === 'vanban' ? `/van-ban/${item.id}` : `/news/${item.id}`}>{item.title}</Link>
                                 </h3>
 
                                 <div className="mt-auto flex items-center justify-between text-[12px] font-medium text-gray-400">

@@ -15,17 +15,17 @@ const Footer = () => {
         <footer className="relative bg-gradient-to-r from-[#00b2e3] via-[#026bd5] to-[#011466] text-white overflow-hidden text-[14px]">
             {/* Background Pattern Overlay (Mimics Trống đồng drum pattern) */}
             <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden opacity-10">
-                 <div className="w-[1200px] h-[1200px] rounded-full border-[1px] border-white/30 absolute top-[30%] left-1/2 -translate-x-1/2"></div>
-                 <div className="w-[1000px] h-[1000px] rounded-full border-[1px] border-white/40 absolute top-[40%] left-1/2 -translate-x-1/2"></div>
-                 <div className="w-[800px] h-[800px] rounded-full border-[2px] border-white/50 absolute top-[50%] left-1/2 -translate-x-1/2"></div>
-                 <div className="w-[600px] h-[600px] rounded-full border-[1px] border-white/60 absolute top-[60%] left-1/2 -translate-x-1/2"></div>
-                 <div className="w-[400px] h-[400px] rounded-full border-[2px] border-white/70 absolute top-[70%] left-1/2 -translate-x-1/2"></div>
-                 <div className="w-[200px] h-[200px] rounded-full border-[1px] border-white/80 absolute top-[80%] left-1/2 -translate-x-1/2"></div>
-                 {/* Rays radiating extending outwards */}
-                 <div className="absolute top-[85%] left-1/2 -translate-x-1/2 w-[20px] h-[600px] bg-white/20 origin-top rotate-45"></div>
-                 <div className="absolute top-[85%] left-1/2 -translate-x-1/2 w-[20px] h-[600px] bg-white/20 origin-top -rotate-45"></div>
-                 <div className="absolute top-[85%] left-1/2 -translate-x-1/2 w-[20px] h-[600px] bg-white/20 origin-top rotate-90"></div>
-                 <div className="absolute top-[85%] left-1/2 -translate-x-1/2 w-[20px] h-[600px] bg-white/20 origin-top -rotate-90"></div>
+                <div className="w-[1200px] h-[1200px] rounded-full border-[1px] border-white/30 absolute top-[30%] left-1/2 -translate-x-1/2"></div>
+                <div className="w-[1000px] h-[1000px] rounded-full border-[1px] border-white/40 absolute top-[40%] left-1/2 -translate-x-1/2"></div>
+                <div className="w-[800px] h-[800px] rounded-full border-[2px] border-white/50 absolute top-[50%] left-1/2 -translate-x-1/2"></div>
+                <div className="w-[600px] h-[600px] rounded-full border-[1px] border-white/60 absolute top-[60%] left-1/2 -translate-x-1/2"></div>
+                <div className="w-[400px] h-[400px] rounded-full border-[2px] border-white/70 absolute top-[70%] left-1/2 -translate-x-1/2"></div>
+                <div className="w-[200px] h-[200px] rounded-full border-[1px] border-white/80 absolute top-[80%] left-1/2 -translate-x-1/2"></div>
+                {/* Rays radiating extending outwards */}
+                <div className="absolute top-[85%] left-1/2 -translate-x-1/2 w-[20px] h-[600px] bg-white/20 origin-top rotate-45"></div>
+                <div className="absolute top-[85%] left-1/2 -translate-x-1/2 w-[20px] h-[600px] bg-white/20 origin-top -rotate-45"></div>
+                <div className="absolute top-[85%] left-1/2 -translate-x-1/2 w-[20px] h-[600px] bg-white/20 origin-top rotate-90"></div>
+                <div className="absolute top-[85%] left-1/2 -translate-x-1/2 w-[20px] h-[600px] bg-white/20 origin-top -rotate-90"></div>
             </div>
 
             <div className="container mx-auto px-4 py-10 relative z-10 flex flex-col items-center justify-center text-center">
@@ -35,7 +35,7 @@ const Footer = () => {
                 </div>
 
                 {/* 2. Title */}
-                <h2 className="text-[24px] md:text-[28px] font-bold uppercase tracking-wider mb-2 drop-shadow-md">
+                <h2 className="text-[24px] md:text-[28px] font-bold uppercase mb-2 drop-shadow-md">
                     CỔNG PHÁP LUẬT QUỐC GIA
                 </h2>
 
@@ -59,14 +59,14 @@ const Footer = () => {
                         <Link to="/ban-tin/dang-ky" className="hover:text-yellow-300 transition-colors">Đăng ký nhận bản tin</Link>
                         <span className="hidden md:inline">|</span>
                     </div>
-                    
+
                     <div className="flex items-center gap-2">
                         <span>Theo dõi Cổng Pháp luật quốc gia trên</span>
                         <a href="#" className="hover:opacity-80 transition-opacity drop-shadow-sm" title="Facebook">
                             {/* Facebook SVG Logo - White circle with blue 'f' */}
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="12" fill="white"/>
-                                <path d="M14.9 12H13V19H10V12H8V9H10V7.5C10 5.2 11.2 4 14 4H16V7H14.5C13.5 7 13 7.5 13 8.5V9H16L14.9 12Z" fill="#026bd5"/>
+                                <circle cx="12" cy="12" r="12" fill="white" />
+                                <path d="M14.9 12H13V19H10V12H8V9H10V7.5C10 5.2 11.2 4 14 4H16V7H14.5C13.5 7 13 7.5 13 8.5V9H16L14.9 12Z" fill="#026bd5" />
                             </svg>
                         </a>
                     </div>
@@ -91,14 +91,14 @@ const Footer = () => {
             {/* Right fixed/absolute action buttons */}
             <div className="absolute right-4 bottom-10 md:right-8 flex flex-col items-end gap-3 z-30">
                 {/* Back to top button */}
-                <button 
+                <button
                     onClick={scrollToTop}
                     className="w-[44px] h-[44px] rounded-full border border-white/80 bg-white/10 flex items-center justify-center hover:bg-white/30 backdrop-blur-sm transition-all group shadow-sm mr-2"
                     title="Lên đầu trang"
                 >
                     <ArrowUp size={20} className="text-white group-hover:-translate-y-1 transition-transform" />
                 </button>
-                
+
                 {/* Live support button */}
                 <button className="bg-[#00b2e3] hover:bg-[#009acb] shadow-xl text-white font-semibold flex items-center gap-2 px-4 py-2.5 rounded-full transition-transform hover:scale-105 border border-white/20">
                     <MessageCircle size={18} />

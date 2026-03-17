@@ -80,7 +80,7 @@ const Header = () => {
                     {/* Left Logo */}
                     <div className="flex items-center gap-2">
                         <img src="/logo.png" alt="Quốc huy Việt Nam" className="w-11 h-11 object-contain shrink-0 drop-shadow-md" />
-                        <h1 className="text-base md:text-lg font-bold uppercase tracking-wider drop-shadow-sm whitespace-nowrap">
+                        <h1 className="text-base md:text-lg font-bold uppercase drop-shadow-sm whitespace-nowrap">
                             CỔNG PHÁP LUẬT QUỐC GIA
                         </h1>
                     </div>
@@ -356,9 +356,38 @@ const Header = () => {
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <a href="#" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
+                                <Link to="/phan-anh-kien-nghi" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
                                     Phản ánh, kiến nghị <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
-                                </a>
+                                </Link>
+                                {/* Dropdown – Phản ánh kiến nghị */}
+                                <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
+                                    <ul className="py-2 text-sm text-gray-200 font-normal">
+                                        <li>
+                                            <Link to="/phan-anh-kien-nghi" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
+                                                Phản ánh kiến nghị
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/phan-anh-kien-nghi/huong-dan" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
+                                                Hướng dẫn gửi phản ánh
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/phan-anh-kien-nghi/tao-moi" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
+                                                Gửi phản ánh mới
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/phan-anh-kien-nghi?tab=search" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-yellow-400 shrink-0"></span>
+                                                Tra cứu phản ánh
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
                                 <Link to="/du-thao" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
@@ -407,7 +436,7 @@ const Header = () => {
                 <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#3b82f6]">
                     <div className="flex items-center gap-2">
                         <img src="/logo.png" alt="Quốc huy" className="w-8 h-8 object-contain" />
-                        <span className="text-white font-bold uppercase tracking-wider text-sm">CổNG PHÁP LUẬT QUỐC GIA</span>
+                        <span className="text-white font-bold uppercase text-sm">CổNG PHÁP LUẬT QUỐC GIA</span>
                     </div>
                     <button onClick={() => setMobileMenuOpen(false)} className="text-white/80 hover:text-white p-1">
                         <X size={20} />
@@ -459,6 +488,12 @@ const Header = () => {
                                 Phản ánh chính sách
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.phanAnh ? 'rotate-180' : ''}`} />
                             </button>
+                            <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.phanAnh ? 'max-h-96' : 'max-h-0'}`}>
+                                <Link to="/phan-anh-kien-nghi" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Phản ánh kiến nghị</Link>
+                                <Link to="/phan-anh-kien-nghi/huong-dan" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Hướng dẫn gửi phản ánh</Link>
+                                <Link to="/phan-anh-kien-nghi/tao-moi" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Gửi phản ánh mới</Link>
+                                <Link to="/phan-anh-kien-nghi?tab=search" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tra cứu phản ánh</Link>
+                            </div>
                         </div>
 
                         <div className="border-b border-white/5">

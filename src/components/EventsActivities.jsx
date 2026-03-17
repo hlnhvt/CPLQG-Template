@@ -1,5 +1,6 @@
 import React from 'react';
 import { HelpCircle, GraduationCap, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const EventsActivities = () => {
     return (
@@ -45,9 +46,9 @@ const EventsActivities = () => {
                             </div>
                         </div>
 
-                        <button className="bg-blue-600 text-white rounded-full px-6 py-2 w-fit font-medium hover:bg-blue-700 transition">
+                        <Link to="/news/4" className="bg-blue-600 text-white rounded-full px-6 py-2 w-fit font-medium hover:bg-blue-700 transition">
                             Chi tiết
-                        </button>
+                        </Link>
                     </div>
 
                     {/* Graphic side of banner */}
@@ -72,9 +73,9 @@ const EventsActivities = () => {
                         <div className="text-center md:text-left">
                             <h4 className="font-bold text-lg text-[#0f4c81] mb-2">Hỏi đáp</h4>
                             <p className="text-sm text-gray-600 mb-4 line-clamp-2">Công dân có thể gửi câu hỏi để được cơ quan nhà nước trả lời, tư vấn trực tiếp về các vấn đề pháp luật.</p>
-                            <a href="#" className="text-blue-600 text-sm font-semibold flex items-center justify-center md:justify-start gap-1 hover:underline">
+                            <Link to="/news/5" className="text-blue-600 text-sm font-semibold flex items-center justify-center md:justify-start gap-1 hover:underline">
                                 Tham gia ngay <ChevronRight size={14} />
-                            </a>
+                            </Link>
                         </div>
                     </div>
 
@@ -85,9 +86,9 @@ const EventsActivities = () => {
                         <div className="text-center md:text-left">
                             <h4 className="font-bold text-lg text-[#0f4c81] mb-2">Kỹ năng pháp luật</h4>
                             <p className="text-sm text-gray-600 mb-4 line-clamp-2">Khóa học kỹ năng, kiến thức chuyên môn về pháp luật cho người dân, doanh nghiệp.</p>
-                            <a href="#" className="text-blue-600 text-sm font-semibold flex items-center justify-center md:justify-start gap-1 hover:underline">
+                            <Link to="/news/6" className="text-blue-600 text-sm font-semibold flex items-center justify-center md:justify-start gap-1 hover:underline">
                                 Tham gia ngay <ChevronRight size={14} />
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

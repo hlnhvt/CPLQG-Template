@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { 
-    Home, ChevronRight, Bold, Italic, Underline, 
+import {
+    Home, ChevronRight, Bold, Italic, Underline,
     List, Image as ImageIcon, Link as LinkIcon, Paperclip, Check,
     AlertCircle, CheckCircle2, Eye, EyeOff
 } from 'lucide-react';
@@ -14,7 +14,7 @@ const CreateContributionPage = () => {
     const [content, setContent] = useState('');
     const [type, setType] = useState('Góp ý');
     const [tags, setTags] = useState('');
-    
+
     const [isPreview, setIsPreview] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
@@ -50,7 +50,7 @@ const CreateContributionPage = () => {
                         <ChevronRight size={14} />
                         <span className="text-white">Tạo góp ý / phản biện</span>
                     </div>
-                    
+
                     <h1 className="text-3xl font-bold">Thêm Góp ý / Phản biện</h1>
                     <p className="text-blue-200 mt-2 text-lg">Chia sẻ ý kiến, quan điểm của bạn để làm rõ thêm hoặc phản biện lại chủ đề.</p>
                 </div>
@@ -58,7 +58,7 @@ const CreateContributionPage = () => {
 
             <div className="container mx-auto px-4 -mt-16 relative z-20 max-w-4xl">
                 <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
-                    
+
                     <div className="space-y-6">
                         {/* Related Topic (Read only) */}
                         <div>
@@ -83,11 +83,11 @@ const CreateContributionPage = () => {
                                 <div className="flex gap-4">
                                     <label className={`flex-1 flex items-center justify-center p-3 border-2 rounded-xl cursor-pointer transition-colors font-bold ${type === 'Góp ý' ? 'border-green-500 bg-green-50 text-green-700' : 'border-gray-200 text-gray-500 hover:bg-gray-50'}`}>
                                         <input type="radio" value="Góp ý" checked={type === 'Góp ý'} onChange={() => setType('Góp ý')} className="sr-only" />
-                                        Góp ý bổ sung
+                                        Góp ý
                                     </label>
                                     <label className={`flex-1 flex items-center justify-center p-3 border-2 rounded-xl cursor-pointer transition-colors font-bold ${type === 'Phản biện' ? 'border-red-500 bg-red-50 text-red-700' : 'border-gray-200 text-gray-500 hover:bg-gray-50'}`}>
                                         <input type="radio" value="Phản biện" checked={type === 'Phản biện'} onChange={() => setType('Phản biện')} className="sr-only" />
-                                        Phản biện lại
+                                        Phản biện
                                     </label>
                                 </div>
                             )}
@@ -104,9 +104,9 @@ const CreateContributionPage = () => {
                                 </div>
                             ) : (
                                 <>
-                                    <input 
-                                        type="text" 
-                                        placeholder="Nhập tiêu đề tóm tắt ý chính bài góp ý..." 
+                                    <input
+                                        type="text"
+                                        placeholder="Nhập tiêu đề tóm tắt ý chính bài góp ý..."
                                         className="w-full bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block p-3 outline-none transition-colors font-medium"
                                         value={title}
                                         onChange={(e) => setTitle(e.target.value)}
@@ -129,18 +129,18 @@ const CreateContributionPage = () => {
                                 <div className="border border-gray-200 rounded-xl overflow-hidden shadow-sm focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-all">
                                     {/* Toolbar */}
                                     <div className="bg-gray-50 border-b border-gray-200 px-3 py-2 flex flex-wrap gap-1 items-center">
-                                        <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600 transition-colors"><Bold size={16}/></button>
-                                        <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600 transition-colors"><Italic size={16}/></button>
-                                        <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600 transition-colors"><Underline size={16}/></button>
+                                        <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600 transition-colors"><Bold size={16} /></button>
+                                        <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600 transition-colors"><Italic size={16} /></button>
+                                        <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600 transition-colors"><Underline size={16} /></button>
                                         <div className="w-px h-5 bg-gray-300 mx-1"></div>
-                                        <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600 transition-colors"><List size={16}/></button>
+                                        <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600 transition-colors"><List size={16} /></button>
                                         <div className="w-px h-5 bg-gray-300 mx-1"></div>
-                                        <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600 transition-colors"><LinkIcon size={16}/></button>
-                                        <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600 transition-colors"><ImageIcon size={16}/></button>
+                                        <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600 transition-colors"><LinkIcon size={16} /></button>
+                                        <button className="p-1.5 hover:bg-gray-200 rounded text-gray-600 transition-colors"><ImageIcon size={16} /></button>
                                     </div>
                                     {/* Editor Area */}
-                                    <textarea 
-                                        placeholder="Trình bày quan điểm của bạn..." 
+                                    <textarea
+                                        placeholder="Trình bày quan điểm của bạn..."
                                         className="w-full p-4 min-h-[250px] outline-none resize-y text-gray-700"
                                         value={content}
                                         onChange={(e) => setContent(e.target.value)}
@@ -163,21 +163,21 @@ const CreateContributionPage = () => {
 
                         {/* Action Buttons */}
                         <div className="pt-6 border-t border-gray-100 flex flex-col-reverse sm:flex-row justify-end items-center gap-4">
-                            <button 
+                            <button
                                 onClick={handleSaveDraft}
                                 className="w-full sm:w-auto px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors"
                             >
                                 Lưu nháp
                             </button>
                             <div className="flex gap-4 w-full sm:w-auto">
-                                <button 
+                                <button
                                     onClick={() => setIsPreview(!isPreview)}
                                     className="w-full sm:w-auto px-6 py-2.5 border border-blue-600 text-blue-600 hover:bg-blue-50 font-bold rounded-xl transition-colors flex justify-center items-center gap-2"
                                 >
                                     {isPreview ? <EyeOff size={18} /> : <Eye size={18} />}
                                     {isPreview ? "Tiếp tục sửa" : "Xem trước"}
                                 </button>
-                                <button 
+                                <button
                                     onClick={() => setShowConfirm(true)}
                                     className="w-full sm:w-auto px-8 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2"
                                 >
@@ -202,13 +202,13 @@ const CreateContributionPage = () => {
                             <p className="text-gray-600">Bạn chắc chắn với nội dung soạn thảo chưa? Sau khi đăng, bài viết sẽ được gửi đi để cộng đồng tham khảo và thảo luận.</p>
                         </div>
                         <div className="flex gap-3 justify-center">
-                            <button 
+                            <button
                                 onClick={() => setShowConfirm(false)}
                                 className="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors w-full"
                             >
                                 Hủy, sửa lại
                             </button>
-                            <button 
+                            <button
                                 onClick={handleConfirmPost}
                                 className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-colors w-full"
                             >
@@ -230,7 +230,7 @@ const CreateContributionPage = () => {
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Cảm ơn bạn đã đóng góp!</h3>
                             <p className="text-gray-600">Góp ý/phản biện của bạn đã được đăng thành công và hiện đang hiển thị trong chủ đề này.</p>
                         </div>
-                        <button 
+                        <button
                             onClick={handleFinishSuccess}
                             className="w-full px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-colors"
                         >

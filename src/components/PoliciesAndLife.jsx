@@ -38,12 +38,16 @@ const PoliciesAndLife = () => {
                         {/* Secondary article */}
                         <div className="flex flex-col md:flex-row gap-4 bg-white p-3 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
                             <div className="md:w-2/5 overflow-hidden rounded">
-                                <img src="/thumb2.png" alt="Meeting" className="w-full h-full object-cover hover:scale-105 transition duration-500" />
+                                <Link to="/news/2">
+                                    <img src="/thumb2.png" alt="Meeting" className="w-full h-full object-cover hover:scale-105 transition duration-500" />
+                                </Link>
                             </div>
                             <div className="md:w-3/5 flex flex-col justify-center">
-                                <h4 className="font-bold text-gray-800 text-sm hover:text-[#0f4c81] cursor-pointer line-clamp-3">
-                                    Hội nghị phổ biến, quán triệt các đạo luật do Bộ Công an tham mưu xây dựng
-                                </h4>
+                                <Link to="/news/2">
+                                    <h4 className="font-bold text-gray-800 text-sm hover:text-[#0f4c81] cursor-pointer line-clamp-3">
+                                        Hội nghị phổ biến, quán triệt các đạo luật do Bộ Công an tham mưu xây dựng
+                                    </h4>
+                                </Link>
                                 <p className="text-xs text-gray-500 mt-1">Ngày 27/10/2025 | 08:00</p>
                             </div>
                         </div>
@@ -59,16 +63,18 @@ const PoliciesAndLife = () => {
                     <div className="grid grid-cols-1 gap-6">
                         {/* Video post */}
                         <div className="flex flex-col md:flex-row gap-4 bg-white p-3 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
-                            <div className="md:w-1/2 relative bg-black rounded aspect-video overflow-hidden group cursor-pointer">
+                            <Link to="/video/1" className="md:w-1/2 relative bg-black rounded aspect-video overflow-hidden group cursor-pointer block">
                                 <img src="/thumb1.png" alt="Speaker" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition" />
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <PlayCircle className="text-white w-12 h-12 opacity-80 group-hover:scale-110 transition" />
                                 </div>
-                            </div>
+                            </Link>
                             <div className="md:w-1/2 flex flex-col justify-center">
-                                <h4 className="font-bold text-[#0f4c81] text-base hover:text-blue-600 cursor-pointer line-clamp-3 leading-snug">
-                                    Sửa luật Đất đai: Đẩy nhanh quá trình phục hồi của thị trường bất động sản
-                                </h4>
+                                <Link to="/video/1">
+                                    <h4 className="font-bold text-[#0f4c81] text-base hover:text-blue-600 cursor-pointer line-clamp-3 leading-snug">
+                                        Sửa luật Đất đai: Đẩy nhanh quá trình phục hồi của thị trường bất động sản
+                                    </h4>
+                                </Link>
                                 <p className="text-xs text-gray-500 mt-2">Ngày 26/10/2025 | 14:15</p>
                             </div>
                         </div>
@@ -76,12 +82,16 @@ const PoliciesAndLife = () => {
                         {/* Text post */}
                         <div className="flex flex-col md:flex-row gap-4 bg-white p-3 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
                             <div className="md:w-2/5 overflow-hidden rounded">
-                                <img src="/thumb2.png" alt="Meeting" className="w-full h-full object-cover hover:scale-105 transition duration-500" />
+                                <Link to="/news/3">
+                                    <img src="/thumb2.png" alt="Meeting" className="w-full h-full object-cover hover:scale-105 transition duration-500" />
+                                </Link>
                             </div>
                             <div className="md:w-3/5 flex flex-col justify-center">
-                                <h4 className="font-bold text-gray-800 text-sm hover:text-[#0f4c81] cursor-pointer line-clamp-3">
-                                    Hoàn thiện thể chế xử lý tài sản kê biên, tài sản bảo đảm trong các vụ án
-                                </h4>
+                                <Link to="/news/3">
+                                    <h4 className="font-bold text-gray-800 text-sm hover:text-[#0f4c81] cursor-pointer line-clamp-3">
+                                        Hoàn thiện thể chế xử lý tài sản kê biên, tài sản bảo đảm trong các vụ án
+                                    </h4>
+                                </Link>
                                 <p className="text-xs text-gray-500 mt-1">Ngày 25/10/2025 | 09:30</p>
                             </div>
                         </div>
