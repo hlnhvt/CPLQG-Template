@@ -311,7 +311,7 @@ const LatestTab = () => {
 // ==============================
 const SearchTab = ({ codeParams }) => {
     const [searchCode, setSearchCode] = useState(codeParams || '');
-    const [hasSearched, setHasSearched] = useState(!!codeParams);
+    const [hasSearched, setHasSearched] = useState(true); // Default to true to show list initially
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -410,19 +410,55 @@ const SearchTab = ({ codeParams }) => {
                             </li>
                         </ul>
                     ) : (
-                        <div className="p-16 text-center text-gray-500">
-                            <Search size={48} className="mx-auto text-gray-300 mb-4" />
-                            <p className="text-lg">Không tìm thấy phản ánh phù hợp.</p>
-                            <p>Vui lòng kiểm tra lại mã hoặc thay đổi điều kiện lọc.</p>
+                        <div>
+                         <ul className="divide-y divide-gray-100">
+                            {MOCK_DATA.map(item => (
+                                <li key={item.id} className="p-6 hover:bg-blue-50/50 transition-colors group">
+                                    <Link to={`/phan-anh-kien-nghi/${item.id}`} className="flex flex-col sm:flex-row gap-6">
+                                        <div className="bg-gray-50 border border-gray-200 p-4 rounded-xl text-blue-600 sm:w-20 sm:h-20 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">
+                                            <FileText size={32} strokeWidth={1.5} />
+                                        </div>
+                                        <div className="flex-1">
+                                            <h3 className="font-bold text-[#0f4c81] text-lg hover:underline mb-2 leading-snug">
+                                                [{item.agency}] {item.title}
+                                            </h3>
+                                            <p className="text-gray-600 text-[15px] mb-4">"{item.content}"</p>
+                                            <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-sm">
+                                                <span className="flex items-center gap-1.5 text-gray-500 font-medium">
+                                                    <Clock size={16} /> {item.date}
+                                                </span>
+                                                <span className="flex items-center gap-1.5 text-[#0f4c81] font-medium bg-blue-50 px-2.5 py-1 rounded">
+                                                    <ExternalLink size={16} /> Gửi tới: {item.agency}
+                                                </span>
+                                                {item.status === 'Đã xử lý' ? 
+                                                    <span className="flex items-center gap-1 font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded">
+                                                        <CheckCircle2 size={14} /> Đã xử lý
+                                                    </span>
+                                                :
+                                                    <span className="flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded">
+                                                        <RotateCw size={14} /> Đang xử lý
+                                                    </span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                        <div className="p-6 border-t border-gray-100 flex justify-between items-center bg-gray-50/30">
+                            <span className="text-gray-500 text-sm font-medium">Tổng số: 4,024 bản ghi</span>
+                            <div className="flex gap-2">
+                                <button className="px-3 py-1.5 border rounded-lg text-gray-500 hover:bg-gray-100 bg-white font-medium cursor-not-allowed">Trang trước</button>
+                                <button className="px-3 py-1.5 border rounded-lg bg-[#0f4c81] text-white font-medium">1</button>
+                                <button className="px-3 py-1.5 border rounded-lg bg-white text-gray-700 hover:bg-gray-50 font-medium transition">2</button>
+                                <button className="px-3 py-1.5 border rounded-lg bg-white text-gray-700 hover:bg-gray-50 font-medium transition">3</button>
+                                <button className="px-3 py-1.5 border rounded-lg text-gray-700 hover:bg-gray-50 bg-white font-medium transition">Trang sau</button>
+                            </div>
+                        </div>
                         </div>
                     )}
                 </div>
-            ) : (
-                <div className="bg-gray-50 rounded-xl border-2 border-dashed border-gray-200 p-16 text-center text-gray-500">
-                    <Filter size={48} className="mx-auto text-gray-300 mb-4" />
-                    <p className="font-medium">Nhập mã phản ánh hoặc chọn điều kiện lọc và bấm Tìm kiếm</p>
-                </div>
-            )}
+            ) : null}
         </div>
     );
 };

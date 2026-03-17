@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Send, FileUp, X, CheckCircle, Copy, AlertCircle, ArrowLeft } from 'lucide-react';
+import { Send, FileUp, X, CheckCircle, Copy, AlertCircle, ArrowLeft, Search } from 'lucide-react';
 
 const MOCK_AGENCIES = {
     'Trung ương': ['Bộ Tài chính', 'Bộ Công an', 'Bộ Xây dựng', 'Bộ Tư pháp', 'Văn phòng Chính phủ'],
@@ -9,6 +9,15 @@ const MOCK_AGENCIES = {
 };
 
 const LTV_FIELDS = ['Dân sự', 'Hình sự', 'Đất đai', 'Doanh nghiệp', 'Đầu tư', 'Lao động & Việc làm'];
+
+const MOCK_LEGAL_DOCS = [
+    'Luật Đất đai 2024',
+    'Luật Nhà ở 2023',
+    'Nghị định 102/2024/NĐ-CP',
+    'Thông tư 04/2025/TT-BTC',
+    'Luật Bảo hiểm xã hội 2024',
+    'Luật Giao thông đường bộ 2008'
+];
 
 const CreatePhanAnhKienNghiPage = () => {
     const { user } = useAuth();
@@ -34,8 +43,21 @@ const CreatePhanAnhKienNghiPage = () => {
         termsAgreed: false
     });
     const [errors, setErrors] = useState({});
+    const [docSearchQuery, setDocSearchQuery] = useState('');
+    const [showDocDropdown, setShowDocDropdown] = useState(false);
 
     if (!user) return null;
+
+    const filteredDocs = MOCK_LEGAL_DOCS.filter(doc => 
+        doc.toLowerCase().includes(docSearchQuery.toLowerCase())
+    );
+
+    const handleSelectDoc = (doc) => {
+        setFormData({ ...formData, legalDocs: doc });
+        setDocSearchQuery(doc);
+        setShowDocDropdown(false);
+        setErrors({ ...errors, legalDocs: null });
+    };
 
     const handleFileChange = (e) => {
         if (e.target.files) {
@@ -66,6 +88,7 @@ const CreatePhanAnhKienNghiPage = () => {
 
     const validate = () => {
         const newErrors = {};
+        if (!formData.legalDocs) newErrors.legalDocs = 'Vui lòng chọn hoặc nhập văn bản pháp luật liên quan';
         if (!formData.agency) newErrors.agency = 'Vui lòng chọn cơ quan tiếp nhận';
         if (!formData.field) newErrors.field = 'Vui lòng chọn lĩnh vực';
         if (!formData.title) newErrors.title = 'Vui lòng nhập tiêu đề phản ánh';
@@ -199,6 +222,46 @@ const CreatePhanAnhKienNghiPage = () => {
                                 <span className="bg-blue-100 text-[#0f4c81] w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span>
                                 Nội dung phản ánh kiến nghị
                             </h3>
+
+                            {/* Legal Doc selection */}
+                            <div className="relative z-10">
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Văn bản pháp luật liên quan <span className="text-red-500">*</span>
+                                </label>
+                                <div className="relative">
+                                    <input 
+                                        type="text" 
+                                        placeholder="Tìm kiếm hoặc khai báo số hiệu, tên văn bản pháp luật..."
+                                        value={docSearchQuery}
+                                        onChange={e => {
+                                            setDocSearchQuery(e.target.value);
+                                            setFormData({...formData, legalDocs: e.target.value});
+                                            setShowDocDropdown(true);
+                                            setErrors({...errors, legalDocs: null});
+                                        }}
+                                        onFocus={() => setShowDocDropdown(true)}
+                                        onBlur={() => setTimeout(() => setShowDocDropdown(false), 200)}
+                                        className={`w-full border rounded-lg p-2.5 pl-10 ${errors.legalDocs ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`} 
+                                    />
+                                    <Search className="absolute left-3 top-3 text-gray-400" size={18} />
+                                </div>
+                                {errors.legalDocs && <p className="text-red-500 text-xs mt-1">{errors.legalDocs}</p>}
+                                
+                                {/* Dropdown */}
+                                {showDocDropdown && docSearchQuery && filteredDocs.length > 0 && (
+                                    <ul className="absolute z-20 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                                        {filteredDocs.map((doc, idx) => (
+                                            <li 
+                                                key={idx} 
+                                                className="px-4 py-2 hover:bg-blue-50 cursor-pointer text-sm text-gray-700"
+                                                onClick={() => handleSelectDoc(doc)}
+                                            >
+                                                {doc}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
                             
                             {/* Target selection */}
                             <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 space-y-4 mb-4">
@@ -275,17 +338,6 @@ const CreatePhanAnhKienNghiPage = () => {
                                     className={`w-full border rounded-lg p-3 resize-y ${errors.content ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
                                 ></textarea>
                                 {errors.content && <p className="text-red-500 text-xs mt-1">{errors.content}</p>}
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Văn bản pháp luật liên quan (Nếu có)</label>
-                                <input 
-                                    type="text" 
-                                    placeholder="Số hiệu, tên văn bản pháp luật liên quan..."
-                                    value={formData.legalDocs}
-                                    onChange={e => setFormData({...formData, legalDocs: e.target.value})}
-                                    className="w-full border border-gray-300 rounded-lg p-2.5 focus:ring-2 focus:ring-blue-200 focus:border-blue-500" 
-                                />
                             </div>
 
                             {/* File Upload */}
