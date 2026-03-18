@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ChevronDown, ChevronUp, Download, CheckCircle2, RotateCw, FileText, User as UserIcon, Calendar, ArrowLeft, Send, Hash, Building2, Check, Clock } from 'lucide-react';
+import { ChevronDown, ChevronUp, Download, CheckCircle2, RotateCw, FileText, User as UserIcon, Calendar, ArrowLeft, Send, Hash, Building2, Check, Clock, MessageSquare } from 'lucide-react';
 
 const MOCK_DETAIL = {
     id: "1771794882779",
@@ -65,8 +65,8 @@ const PhanAnhKienNghiDetailPage = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 mt-8 max-w-4xl text-gray-800 space-y-6">
-                
+            <div className="container mx-auto px-4 mt-8 max-w-6xl text-gray-800 space-y-6">
+
                 <Link to="/phan-anh-kien-nghi?tab=latest" className="inline-flex items-center gap-2 text-[#0f4c81] font-bold hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors -ml-3">
                     <ArrowLeft size={20} /> Quay lại danh sách
                 </Link>
@@ -74,11 +74,11 @@ const PhanAnhKienNghiDetailPage = () => {
                 {/* Main Card (Details) */}
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden relative">
                     <div className="absolute top-0 right-0 p-4">
-                        {MOCK_DETAIL.status === 'Đã xử lý' ? 
+                        {MOCK_DETAIL.status === 'Đã xử lý' ?
                             <span className="flex items-center gap-1.5 font-bold text-emerald-700 bg-emerald-100 border border-emerald-200 px-3 py-1.5 rounded-lg shadow-sm">
                                 <CheckCircle2 size={16} /> Đã xử lý
                             </span>
-                        :
+                            :
                             <span className="flex items-center gap-1.5 font-bold text-amber-700 bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-lg shadow-sm">
                                 <RotateCw size={16} /> Đang xử lý
                             </span>
@@ -90,20 +90,20 @@ const PhanAnhKienNghiDetailPage = () => {
 
                         <div className="space-y-6 text-[15px]">
                             <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
-                                <span className="font-bold w-36 text-gray-500 flex items-center gap-2 shrink-0"><UserIcon size={16}/> Họ tên:</span>
+                                <span className="font-bold w-36 text-gray-500 flex items-center gap-2 shrink-0"><UserIcon size={16} /> Họ tên:</span>
                                 <span className="font-bold text-gray-900">{MOCK_DETAIL.senderName}</span>
                             </div>
                             <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
-                                <span className="font-bold w-36 text-gray-500 flex items-center gap-2 shrink-0"><Hash size={16}/> Mã phản ánh:</span>
+                                <span className="font-bold w-36 text-gray-500 flex items-center gap-2 shrink-0"><Hash size={16} /> Mã phản ánh:</span>
                                 <span className="font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded tracking-wide border border-blue-100">{MOCK_DETAIL.id}</span>
                             </div>
                             <div className="flex flex-col sm:flex-row gap-2">
-                                <span className="font-bold w-36 text-gray-500 flex items-center gap-2 shrink-0 mt-0.5"><FileText size={16}/> Tiêu đề:</span>
+                                <span className="font-bold w-36 text-gray-500 flex items-center gap-2 shrink-0 mt-0.5"><FileText size={16} /> Tiêu đề:</span>
                                 <span className="font-bold text-gray-900 leading-snug">{MOCK_DETAIL.title}</span>
                             </div>
-                            
+
                             <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
-                                <span className="font-bold text-gray-500 flex items-center gap-2 mb-3"><Send size={16}/> Nội dung:</span>
+                                <span className="font-bold text-gray-500 flex items-center gap-2 mb-3"><Send size={16} /> Nội dung:</span>
                                 <div className="text-gray-700 whitespace-pre-wrap leading-relaxed">
                                     {MOCK_DETAIL.content}
                                 </div>
@@ -131,7 +131,7 @@ const PhanAnhKienNghiDetailPage = () => {
 
                 {/* Timeline */}
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-                    <button 
+                    <button
                         className="w-full flex justify-between items-center p-6 bg-gray-50 hover:bg-gray-100 transition focus:outline-none border-b border-gray-200"
                         onClick={() => setTimelineExpanded(!timelineExpanded)}
                     >
@@ -149,8 +149,8 @@ const PhanAnhKienNghiDetailPage = () => {
                                     <div className="bg-gray-50 rounded-xl p-4 border border-gray-100 shadow-sm">
                                         <h4 className="font-bold text-gray-800 text-lg mb-1">{step.title}</h4>
                                         <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-gray-500 mb-2">
-                                            <span className="flex items-center gap-1 bg-white px-2 py-0.5 rounded border shadow-sm"><Clock size={12}/> {step.time}</span>
-                                            <span className="flex items-center gap-1 font-medium"><Building2 size={12}/> {step.by}</span>
+                                            <span className="flex items-center gap-1 bg-white px-2 py-0.5 rounded border shadow-sm"><Clock size={12} /> {step.time}</span>
+                                            <span className="flex items-center gap-1 font-medium"><Building2 size={12} /> {step.by}</span>
                                         </div>
                                         <p className="text-gray-700 text-sm border-l-2 border-gray-300 pl-3 italic mt-3">{step.detail}</p>
                                     </div>
@@ -170,21 +170,21 @@ const PhanAnhKienNghiDetailPage = () => {
 
                         <div className="p-8 relative z-10">
                             <h3 className="text-xl font-bold text-emerald-800 mb-8 pb-3 border-b-2 border-emerald-200 flex items-center gap-2">
-                                <CheckCircle2 size={24}/> Kết quả xử lý
+                                <CheckCircle2 size={24} /> Kết quả xử lý
                             </h3>
 
                             <div className="space-y-6 text-[15px]">
                                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
-                                    <span className="font-bold w-36 text-emerald-700/80 flex items-center gap-2 shrink-0"><Building2 size={16}/> Đơn vị xử lý:</span>
+                                    <span className="font-bold w-36 text-emerald-700/80 flex items-center gap-2 shrink-0"><Building2 size={16} /> Đơn vị xử lý:</span>
                                     <span className="font-bold text-emerald-900 uppercase tracking-wide bg-white px-3 py-1 rounded-lg border border-emerald-200 shadow-sm">{MOCK_DETAIL.agency}</span>
                                 </div>
                                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-2">
-                                    <span className="font-bold w-36 text-emerald-700/80 flex items-center gap-2 shrink-0"><FileText size={16}/> Loại văn bản:</span>
+                                    <span className="font-bold w-36 text-emerald-700/80 flex items-center gap-2 shrink-0"><FileText size={16} /> Loại văn bản:</span>
                                     <span className="font-bold text-[#0f4c81] hover:underline cursor-pointer">{MOCK_DETAIL.docType}</span>
                                 </div>
-                                
+
                                 <div className="bg-white p-6 rounded-xl border border-emerald-200 shadow-sm">
-                                    <span className="font-bold text-emerald-700 flex items-center gap-2 mb-3"><MessageSquare size={16}/> Trả lời:</span>
+                                    <span className="font-bold text-emerald-700 flex items-center gap-2 mb-3"><MessageSquare size={16} /> Trả lời:</span>
                                     <div className="text-gray-800 whitespace-pre-wrap leading-relaxed text-justify">
                                         {MOCK_DETAIL.response}
                                     </div>

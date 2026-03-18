@@ -15,7 +15,7 @@ const PhanAnhKienNghiPage = () => {
     const { user } = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
-    
+
     // Tab logic
     const initialTab = searchParams.get('tab') || 'statistics';
     const [activeTab, setActiveTab] = useState(initialTab);
@@ -52,47 +52,57 @@ const PhanAnhKienNghiPage = () => {
                 </div>
             </div>
 
-            <div className="bg-[#0f4c81] text-white py-12">
-                <div className="container mx-auto px-4 flex flex-col md:flex-row shadow-lg-inner justify-between items-center gap-6">
-                    <div>
-                        <h1 className="text-3xl md:text-4xl font-bold mb-3 uppercase tracking-wide">Phản ánh, kiến nghị</h1>
-                        <p className="text-blue-100 text-lg max-w-2xl">
+            {/* Header Cấp 1 */}
+            <div className="bg-[#1a3b8b] py-6">
+                <div className="container mx-auto px-4 max-w-[1280px] flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div className="flex-1">
+                        <h1 className="text-[28px] font-bold text-white mb-2 relative inline-block">
+                            Phản ánh, kiến nghị
+                            <div className="absolute -bottom-2 left-0 w-16 h-1 bg-[#fdb714]"></div>
+                        </h1>
+                        <p className="text-blue-100 text-[14px] mt-4 opacity-90 max-w-2xl">
                             Thông tin thống kê, danh sách và tra cứu phản ánh, kiến nghị chính sách, văn bản pháp luật từ người dân, doanh nghiệp.
                         </p>
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto shrink-0">
-                        <Link to="/phan-anh-kien-nghi/huong-dan" className="border-2 border-white text-white font-bold py-3 px-6 rounded-lg hover:bg-white hover:text-[#0f4c81] transition flex items-center justify-center gap-2">
-                            <HelpCircle size={20} /> Hướng dẫn
+                    <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0 mt-4 md:mt-0">
+                        <Link to="/phan-anh-kien-nghi/huong-dan" className="border-2 border-white/60 text-white font-bold py-2.5 px-5 rounded-lg hover:bg-white hover:text-[#1a3b8b] transition flex items-center justify-center gap-2 text-[14px]">
+                            <HelpCircle size={18} /> Hướng dẫn
                         </Link>
-                        <button onClick={handleSendFeedbackClick} className="bg-white text-[#0f4c81] font-bold py-3 px-8 rounded-lg hover:bg-blue-50 transition shadow-lg hover:-translate-y-1 flex items-center justify-center gap-2">
-                            <Send size={20} /> Gửi phản ánh
+                        <button onClick={handleSendFeedbackClick} className="bg-white text-[#1a3b8b] font-bold py-2.5 px-6 rounded-lg hover:bg-blue-50 transition flex items-center justify-center gap-2 text-[14px] shadow-sm">
+                            <Send size={18} /> Gửi phản ánh
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 mt-8 pb-16">
-                {/* Tabs */}
-                <div className="flex flex-col sm:flex-row border-b border-gray-200 mb-8 bg-white rounded-t-xl overflow-hidden shadow-sm">
-                    <button 
+            {/* Navigation Tab Cấp 2 */}
+            <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-20 mb-8">
+                <div className="container mx-auto px-4 max-w-[1280px] flex gap-2 overflow-x-auto no-scrollbar">
+                    <button
                         onClick={() => handleTabChange('statistics')}
-                        className={`flex-1 py-4 px-6 text-center font-bold text-[15px] flex items-center justify-center gap-2 transition-all border-b-2 sm:border-b-4 ${activeTab === 'statistics' ? 'bg-[#0f4c81] text-white border-[#eab308]' : 'text-gray-600 hover:bg-gray-50 border-transparent hover:text-[#0f4c81]'}`}
+                        className={`px-5 py-3.5 text-[14px] font-bold transition-all border-b-[3px] whitespace-nowrap flex items-center gap-2 ${activeTab === 'statistics' ? 'border-[#fdb714] text-[#1a3b8b]' : 'border-transparent text-gray-500 hover:text-[#1a3b8b]'
+                            }`}
                     >
-                        <BarChart3 size={20} /> THỐNG KÊ
+                        <BarChart3 size={16} /> THỐNG KÊ
                     </button>
-                    <button 
+                    <button
                         onClick={() => handleTabChange('latest')}
-                        className={`flex-1 py-4 px-6 text-center font-bold text-[15px] flex items-center justify-center gap-2 transition-all border-b-2 sm:border-b-4 ${activeTab === 'latest' ? 'bg-[#0f4c81] text-white border-[#eab308]' : 'text-gray-600 hover:bg-gray-50 border-transparent hover:text-[#0f4c81]'}`}
+                        className={`px-5 py-3.5 text-[14px] font-bold transition-all border-b-[3px] whitespace-nowrap flex items-center gap-2 ${activeTab === 'latest' ? 'border-[#fdb714] text-[#1a3b8b]' : 'border-transparent text-gray-500 hover:text-[#1a3b8b]'
+                            }`}
                     >
-                        <Clock size={20} /> MỚI NHẤT
+                        <Clock size={16} /> MỚI NHẤT
                     </button>
-                    <button 
+                    <button
                         onClick={() => handleTabChange('search')}
-                        className={`flex-1 py-4 px-6 text-center font-bold text-[15px] flex items-center justify-center gap-2 transition-all border-b-2 sm:border-b-4 ${activeTab === 'search' ? 'bg-[#0f4c81] text-white border-[#eab308]' : 'text-gray-600 hover:bg-gray-50 border-transparent hover:text-[#0f4c81]'}`}
+                        className={`px-5 py-3.5 text-[14px] font-bold transition-all border-b-[3px] whitespace-nowrap flex items-center gap-2 ${activeTab === 'search' ? 'border-[#fdb714] text-[#1a3b8b]' : 'border-transparent text-gray-500 hover:text-[#1a3b8b]'
+                            }`}
                     >
-                        <Search size={20} /> TRA CỨU
+                        <Search size={16} /> TRA CỨU
                     </button>
                 </div>
+            </div>
+
+            <div className="container mx-auto px-4 max-w-[1280px] pb-16">
 
                 {/* Tab Contents */}
                 <div className="min-h-[500px]">
@@ -132,11 +142,11 @@ const StatisticsTab = () => {
                                             <span className="flex items-center gap-1 text-gray-500 font-medium">
                                                 <Clock size={14} /> {item.date}
                                             </span>
-                                            {item.status === 'Đã xử lý' ? 
+                                            {item.status === 'Đã xử lý' ?
                                                 <span className="flex items-center gap-1 font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
                                                     <CheckCircle2 size={12} /> Đã xử lý
                                                 </span>
-                                            :
+                                                :
                                                 <span className="flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">
                                                     <RotateCw size={12} /> Đang xử lý
                                                 </span>
@@ -148,7 +158,7 @@ const StatisticsTab = () => {
                         ))}
                     </ul>
                     <div className="text-center mt-6">
-                        <Link to="/phan-anh-kien-nghi?tab=latest" className="text-[#0f4c81] font-bold hover:underline flex items-center justify-center gap-1">
+                        <Link to="/phan-anh-kien-nghi?tab=search" className="text-[#0f4c81] font-bold hover:underline flex items-center justify-center gap-1">
                             Xem tất cả <ArrowRight size={16} />
                         </Link>
                     </div>
@@ -170,7 +180,7 @@ const StatisticsTab = () => {
                         </div>
                         <div className="flex justify-between items-center text-lg mt-2 pt-2">
                             <span className="font-bold text-gray-800">Tổng lượt truy cập</span>
-                            <span className="font-black text-[#0f4c81] text-2xl">1,024,800</span>
+                            <span className="font-bold text-[#0f4c81] text-xl">1,024,800</span>
                         </div>
                     </div>
                 </div>
@@ -180,17 +190,17 @@ const StatisticsTab = () => {
                     <div className="relative pt-4">
                         <div className="flex justify-between items-end mb-4">
                             <div className="text-center">
-                                <div className="text-3xl font-black text-[#0f4c81]">8,452</div>
+                                <div className="text-3xl font-bold text-[#0f4c81]">8,452</div>
                                 <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mt-1">Tổng PAKN</div>
                             </div>
                             <div className="w-px h-12 bg-gray-200"></div>
                             <div className="text-center">
-                                <div className="text-3xl font-black text-emerald-500">7,100</div>
+                                <div className="text-3xl font-bold text-emerald-500">7,100</div>
                                 <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mt-1">Đã xử lý</div>
                             </div>
                             <div className="w-px h-12 bg-gray-200"></div>
                             <div className="text-center">
-                                <div className="text-3xl font-black text-amber-500">1,352</div>
+                                <div className="text-3xl font-bold text-amber-500">1,352</div>
                                 <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mt-1">Đang xử lý</div>
                             </div>
                         </div>
@@ -222,7 +232,7 @@ const StatisticsTab = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="text-right">
                     <button className="text-sm font-bold text-[#0f4c81] border border-[#0f4c81] px-4 py-2 rounded-lg hover:bg-blue-50 transition shadow-sm">
                         Xuất báo cáo
@@ -276,11 +286,11 @@ const LatestTab = () => {
                                     <span className="flex items-center gap-1.5 text-[#0f4c81] font-medium bg-blue-50 px-2.5 py-1 rounded">
                                         <ExternalLink size={16} /> Gửi tới: {item.agency}
                                     </span>
-                                    {item.status === 'Đã xử lý' ? 
+                                    {item.status === 'Đã xử lý' ?
                                         <span className="flex items-center gap-1 font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded">
                                             <CheckCircle2 size={14} /> Đã xử lý
                                         </span>
-                                    :
+                                        :
                                         <span className="flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded">
                                             <RotateCw size={14} /> Đang xử lý
                                         </span>
@@ -330,13 +340,13 @@ const SearchTab = ({ codeParams }) => {
                 <h2 className="text-xl font-bold text-[#0f4c81] mb-6 flex items-center gap-2">
                     <Search className="text-blue-500" /> TRA CỨU PHẢN ÁNH, KIẾN NGHỊ
                 </h2>
-                
+
                 <form onSubmit={handleSearch} className="space-y-6 max-w-4xl">
                     <div>
                         <label className="block text-sm font-bold text-gray-700 mb-2">Tra cứu theo mã phản ánh</label>
                         <div className="relative">
-                            <input 
-                                type="text" 
+                            <input
+                                type="text"
                                 value={searchCode}
                                 onChange={(e) => setSearchCode(e.target.value)}
                                 placeholder="Nhập mã phản ánh để tra cứu (Ví dụ: 1771794882779)..."
@@ -411,50 +421,50 @@ const SearchTab = ({ codeParams }) => {
                         </ul>
                     ) : (
                         <div>
-                         <ul className="divide-y divide-gray-100">
-                            {MOCK_DATA.map(item => (
-                                <li key={item.id} className="p-6 hover:bg-blue-50/50 transition-colors group">
-                                    <Link to={`/phan-anh-kien-nghi/${item.id}`} className="flex flex-col sm:flex-row gap-6">
-                                        <div className="bg-gray-50 border border-gray-200 p-4 rounded-xl text-blue-600 sm:w-20 sm:h-20 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">
-                                            <FileText size={32} strokeWidth={1.5} />
-                                        </div>
-                                        <div className="flex-1">
-                                            <h3 className="font-bold text-[#0f4c81] text-lg hover:underline mb-2 leading-snug">
-                                                [{item.agency}] {item.title}
-                                            </h3>
-                                            <p className="text-gray-600 text-[15px] mb-4">"{item.content}"</p>
-                                            <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-sm">
-                                                <span className="flex items-center gap-1.5 text-gray-500 font-medium">
-                                                    <Clock size={16} /> {item.date}
-                                                </span>
-                                                <span className="flex items-center gap-1.5 text-[#0f4c81] font-medium bg-blue-50 px-2.5 py-1 rounded">
-                                                    <ExternalLink size={16} /> Gửi tới: {item.agency}
-                                                </span>
-                                                {item.status === 'Đã xử lý' ? 
-                                                    <span className="flex items-center gap-1 font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded">
-                                                        <CheckCircle2 size={14} /> Đã xử lý
-                                                    </span>
-                                                :
-                                                    <span className="flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded">
-                                                        <RotateCw size={14} /> Đang xử lý
-                                                    </span>
-                                                }
+                            <ul className="divide-y divide-gray-100">
+                                {MOCK_DATA.map(item => (
+                                    <li key={item.id} className="p-6 hover:bg-blue-50/50 transition-colors group">
+                                        <Link to={`/phan-anh-kien-nghi/${item.id}`} className="flex flex-col sm:flex-row gap-6">
+                                            <div className="bg-gray-50 border border-gray-200 p-4 rounded-xl text-blue-600 sm:w-20 sm:h-20 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm">
+                                                <FileText size={32} strokeWidth={1.5} />
                                             </div>
-                                        </div>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                        <div className="p-6 border-t border-gray-100 flex justify-between items-center bg-gray-50/30">
-                            <span className="text-gray-500 text-sm font-medium">Tổng số: 4,024 bản ghi</span>
-                            <div className="flex gap-2">
-                                <button className="px-3 py-1.5 border rounded-lg text-gray-500 hover:bg-gray-100 bg-white font-medium cursor-not-allowed">Trang trước</button>
-                                <button className="px-3 py-1.5 border rounded-lg bg-[#0f4c81] text-white font-medium">1</button>
-                                <button className="px-3 py-1.5 border rounded-lg bg-white text-gray-700 hover:bg-gray-50 font-medium transition">2</button>
-                                <button className="px-3 py-1.5 border rounded-lg bg-white text-gray-700 hover:bg-gray-50 font-medium transition">3</button>
-                                <button className="px-3 py-1.5 border rounded-lg text-gray-700 hover:bg-gray-50 bg-white font-medium transition">Trang sau</button>
+                                            <div className="flex-1">
+                                                <h3 className="font-bold text-[#0f4c81] text-lg hover:underline mb-2 leading-snug">
+                                                    [{item.agency}] {item.title}
+                                                </h3>
+                                                <p className="text-gray-600 text-[15px] mb-4">"{item.content}"</p>
+                                                <div className="flex flex-wrap items-center gap-y-2 gap-x-6 text-sm">
+                                                    <span className="flex items-center gap-1.5 text-gray-500 font-medium">
+                                                        <Clock size={16} /> {item.date}
+                                                    </span>
+                                                    <span className="flex items-center gap-1.5 text-[#0f4c81] font-medium bg-blue-50 px-2.5 py-1 rounded">
+                                                        <ExternalLink size={16} /> Gửi tới: {item.agency}
+                                                    </span>
+                                                    {item.status === 'Đã xử lý' ?
+                                                        <span className="flex items-center gap-1 font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded">
+                                                            <CheckCircle2 size={14} /> Đã xử lý
+                                                        </span>
+                                                        :
+                                                        <span className="flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded">
+                                                            <RotateCw size={14} /> Đang xử lý
+                                                        </span>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                            <div className="p-6 border-t border-gray-100 flex justify-between items-center bg-gray-50/30">
+                                <span className="text-gray-500 text-sm font-medium">Tổng số: 4,024 bản ghi</span>
+                                <div className="flex gap-2">
+                                    <button className="px-3 py-1.5 border rounded-lg text-gray-500 hover:bg-gray-100 bg-white font-medium cursor-not-allowed">Trang trước</button>
+                                    <button className="px-3 py-1.5 border rounded-lg bg-[#0f4c81] text-white font-medium">1</button>
+                                    <button className="px-3 py-1.5 border rounded-lg bg-white text-gray-700 hover:bg-gray-50 font-medium transition">2</button>
+                                    <button className="px-3 py-1.5 border rounded-lg bg-white text-gray-700 hover:bg-gray-50 font-medium transition">3</button>
+                                    <button className="px-3 py-1.5 border rounded-lg text-gray-700 hover:bg-gray-50 bg-white font-medium transition">Trang sau</button>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     )}
                 </div>

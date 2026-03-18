@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Bell, Mail, Smartphone, Save, RotateCcw, AlertTriangle, Clock, Moon, Check, X, Search, ChevronDown, ChevronUp, Calendar } from 'lucide-react';
 
 const NOTIFICATION_TYPES = [
-    { id: 'vanban', label: 'Văn bản QPPL mới', desc: 'Thông báo khi có văn bản pháp luật mới trong lĩnh vực bạn quan tâm', locked: false },
-    { id: 'duthao', label: 'Dự thảo đang lấy ý kiến', desc: 'Thông báo khi có dự thảo mới hoặc sắp hết hạn góp ý', locked: false },
-    { id: 'hoidap', label: 'Hỏi đáp được trả lời', desc: 'Thông báo khi câu hỏi của bạn có câu trả lời mới', locked: false },
-    { id: 'tinbai', label: 'Tin bài trong lĩnh vực quan tâm', desc: 'Tin tức pháp luật mới trong các lĩnh vực bạn theo dõi', locked: false },
-    { id: 'hethong', label: 'Thông báo hệ thống', desc: 'Thông báo bảo trì, yêu cầu xác thực, cảnh báo bảo mật', locked: true }, // Cannot be turned off completely
-    { id: 'khaosat', label: 'Thông báo khảo sát', desc: 'Lời mời tham gia khảo sát và phản hồi chất lượng dịch vụ', locked: false },
+    { id: 'vanban', label: 'Văn bản QPPL mới', desc: 'Thông báo khi có văn bản pháp luật mới trong lĩnh vực bạn quan tâm', locked: false, defaultFreq: 'immediate', recFreq: 'immediate' },
+    { id: 'duthao', label: 'Dự thảo đang lấy ý kiến', desc: 'Thông báo khi có dự thảo mới hoặc sắp hết hạn góp ý', locked: false, defaultFreq: 'daily', recFreq: 'daily' },
+    { id: 'hoidap', label: 'Hỏi đáp được trả lời', desc: 'Thông báo khi câu hỏi của bạn có câu trả lời mới', locked: false, defaultFreq: 'immediate', recFreq: 'immediate' },
+    { id: 'tinbai', label: 'Tin bài trong lĩnh vực quan tâm', desc: 'Tin tức pháp luật mới trong các lĩnh vực bạn theo dõi', locked: false, defaultFreq: 'daily', recFreq: 'daily' },
+    { id: 'hethong', label: 'Thông báo hệ thống', desc: 'Thông báo bảo trì, yêu cầu xác thực, cảnh báo bảo mật', locked: true, defaultFreq: 'immediate', recFreq: 'immediate' }, // Cannot be turned off completely
+    { id: 'khaosat', label: 'Thông báo khảo sát', desc: 'Lời mời tham gia khảo sát và phản hồi chất lượng dịch vụ', locked: false, defaultFreq: 'weekly', recFreq: 'weekly' },
 ];
 
 const CHANNELS = [
@@ -84,15 +84,22 @@ const ToggleSwitch = ({ checked, onChange, disabled = false }) => (
 );
 
 const NotificationSettingsPage = () => {
-    // 1. Settings state (Types & Channels)
+    // 1. Settings state (Types & Channels & Frequency)
     const [settings, setSettings] = useState({
-        vanban: { enabled: true, channels: ['inapp', 'email'] },
-        duthao: { enabled: true, channels: ['inapp'] },
-        hoidap: { enabled: true, channels: ['inapp', 'email', 'push'] },
-        tinbai: { enabled: false, channels: ['inapp'] },
-        hethong: { enabled: true, channels: ['inapp', 'email'] },
-        khaosat: { enabled: false, channels: ['inapp'] },
+        vanban: { enabled: true, channels: ['inapp', 'email'], freq: 'immediate' },
+        duthao: { enabled: true, channels: ['inapp'], freq: 'daily' },
+        hoidap: { enabled: true, channels: ['inapp', 'email', 'push'], freq: 'immediate' },
+        tinbai: { enabled: false, channels: ['inapp'], freq: 'daily' },
+        hethong: { enabled: true, channels: ['inapp', 'email'], freq: 'immediate' },
+        khaosat: { enabled: false, channels: ['inapp'], freq: 'weekly' },
     });
+
+    // 1.5 Frequency State (Global)
+    const [globalFrequency, setGlobalFrequency] = useState('immediate'); // 'immediate', 'daily', 'weekly'
+    const [globalFreqTime, setGlobalFreqTime] = useState('08:00');
+    const [globalFreqDay, setGlobalFreqDay] = useState('Thứ Hai');
+    const [useSpecificFreq, setUseSpecificFreq] = useState(false);
+    const [showPreviewModal, setShowPreviewModal] = useState(false);
 
     // 2. Quiet Hours State (Do Not Disturb)
     const [dndEnabled, setDndEnabled] = useState(false);
@@ -118,7 +125,7 @@ const NotificationSettingsPage = () => {
 
     // Filter topics based on search
     const filteredGroups = TOPIC_GROUPS.map(group => {
-        const filteredTopics = group.topics.filter(t => 
+        const filteredTopics = group.topics.filter(t =>
             t.label.toLowerCase().includes(topicSearch.toLowerCase())
         );
         return { ...group, topics: filteredTopics };
@@ -133,6 +140,13 @@ const NotificationSettingsPage = () => {
         });
     };
 
+    const handleTypeFreqChange = (typeId, newFreq) => {
+        setSettings({
+            ...settings,
+            [typeId]: { ...settings[typeId], freq: newFreq }
+        });
+    };
+
     const handleToggleChannel = (typeId, channelId) => {
         if (typeId === 'hethong' && channelId === 'inapp') return; // Cannot disable in-app for system
 
@@ -140,7 +154,7 @@ const NotificationSettingsPage = () => {
         const newChannels = currentChannels.includes(channelId)
             ? currentChannels.filter(c => c !== channelId)
             : [...currentChannels, channelId];
-        
+
         // Ensure at least one channel is selected if the type is enabled (except system which forces inapp)
         if (newChannels.length === 0 && typeId !== 'hethong') return;
 
@@ -151,13 +165,13 @@ const NotificationSettingsPage = () => {
     };
 
     const toggleGroupExpand = (groupId) => {
-        setExpandedGroups(prev => 
+        setExpandedGroups(prev =>
             prev.includes(groupId) ? prev.filter(id => id !== groupId) : [...prev, groupId]
         );
     };
 
     const handleTopicToggle = (topicId) => {
-        setSelectedTopics(prev => 
+        setSelectedTopics(prev =>
             prev.includes(topicId) ? prev.filter(id => id !== topicId) : [...prev, topicId]
         );
     };
@@ -165,7 +179,7 @@ const NotificationSettingsPage = () => {
     const handleSelectAllTopics = () => {
         const allVisibleIds = filteredGroups.flatMap(g => g.topics.map(t => t.id));
         const allSelected = allVisibleIds.every(id => selectedTopics.includes(id));
-        
+
         if (allSelected) {
             // Deselect visible
             setSelectedTopics(prev => prev.filter(id => !allVisibleIds.includes(id)));
@@ -209,13 +223,15 @@ const NotificationSettingsPage = () => {
 
     const handleReset = () => {
         setSettings({
-            vanban: { enabled: true, channels: ['inapp', 'email'] },
-            duthao: { enabled: true, channels: ['inapp'] },
-            hoidap: { enabled: true, channels: ['inapp', 'email'] },
-            tinbai: { enabled: false, channels: ['inapp'] },
-            hethong: { enabled: true, channels: ['inapp', 'email'] },
-            khaosat: { enabled: false, channels: ['inapp'] },
+            vanban: { enabled: true, channels: ['inapp', 'email'], freq: 'immediate' },
+            duthao: { enabled: true, channels: ['inapp'], freq: 'daily' },
+            hoidap: { enabled: true, channels: ['inapp', 'email'], freq: 'immediate' },
+            tinbai: { enabled: false, channels: ['inapp'], freq: 'daily' },
+            hethong: { enabled: true, channels: ['inapp', 'email'], freq: 'immediate' },
+            khaosat: { enabled: false, channels: ['inapp'], freq: 'weekly' },
         });
+        setGlobalFrequency('immediate');
+        setUseSpecificFreq(false);
         setDndEnabled(false);
         setIsPaused(false);
         setPauseUntil(null);
@@ -224,7 +240,10 @@ const NotificationSettingsPage = () => {
     };
 
     const handleSave = () => {
-        console.log('Saved data:', { settings, dndEnabled, dndTime, dndDays, dndCustomDays, dndAllowUrgent, selectedTopics, isPaused, pauseUntil });
+        console.log('Saved data:', {
+            settings, dndEnabled, dndTime, dndDays, dndCustomDays, dndAllowUrgent,
+            selectedTopics, isPaused, pauseUntil, globalFrequency, globalFreqTime, globalFreqDay, useSpecificFreq
+        });
         setShowSaveToast(true);
         setTimeout(() => setShowSaveToast(false), 3000);
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -232,7 +251,7 @@ const NotificationSettingsPage = () => {
 
     return (
         <div className="animate-fadeIn pb-24 max-w-[1000px] mx-auto">
-            
+
             {showSaveToast && (
                 <div className="fixed top-20 right-8 bg-green-600 text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-3 z-50 animate-fadeIn">
                     <Check size={20} />
@@ -246,7 +265,7 @@ const NotificationSettingsPage = () => {
             </div>
 
             <div className="space-y-8">
-                
+
                 {/* 1. Pause Notifications (Sticky Alert level) */}
                 <div className={`rounded-2xl shadow-sm border overflow-hidden transition-colors ${isPaused ? 'bg-orange-50 border-orange-200' : 'bg-white border-gray-100'}`}>
                     <div className="px-6 py-5 flex items-center gap-4">
@@ -258,8 +277,8 @@ const NotificationSettingsPage = () => {
                                 {isPaused ? 'Thông báo đang tạm dừng' : 'Tạm dừng thông báo (Snooze)'}
                             </h2>
                             <p className={`text-[14px] mt-0.5 ${isPaused ? 'text-orange-700' : 'text-gray-500'}`}>
-                                {isPaused 
-                                    ? `Các thông báo mới sẽ không đổ chuông hay đẩy thông báo cho đến ${pauseUntil === 'indefinite' ? 'khi bạn bật lại' : pauseUntil?.toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit'})}. Chúng vẫn được lưu trong hộp thư.` 
+                                {isPaused
+                                    ? `Các thông báo mới sẽ không đổ chuông hay đẩy thông báo cho đến ${pauseUntil === 'indefinite' ? 'khi bạn bật lại' : pauseUntil?.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}. Chúng vẫn được lưu trong hộp thư.`
                                     : 'Tắt tạm thời toàn bộ thông báo (push, in-app pop-up) trong khoảng thời gian bạn cần yên tĩnh.'}
                             </p>
                         </div>
@@ -285,10 +304,10 @@ const NotificationSettingsPage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    
+
                     {/* LEFT COLUMN: Types and channels (the complex matrix) */}
                     <div className="lg:col-span-7 space-y-8">
-                        
+
                         {/* Types & Channels */}
                         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                             <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/50 flex items-center gap-3">
@@ -300,7 +319,7 @@ const NotificationSettingsPage = () => {
                                     <p className="text-[13px] text-gray-500">Chọn nội dung bạn muốn nhận và phương thức gửi tương ứng</p>
                                 </div>
                             </div>
-                            
+
                             <div className="divide-y divide-gray-100">
                                 {NOTIFICATION_TYPES.map(type => {
                                     const isEnabled = settings[type.id]?.enabled;
@@ -315,9 +334,9 @@ const NotificationSettingsPage = () => {
                                                     <p className="text-[13px] text-gray-500 leading-relaxed">{type.desc}</p>
                                                 </div>
                                                 <div className="pt-1 shrink-0">
-                                                    <ToggleSwitch 
-                                                        checked={isEnabled} 
-                                                        onChange={() => handleToggleType(type.id, isEnabled)} 
+                                                    <ToggleSwitch
+                                                        checked={isEnabled}
+                                                        onChange={() => handleToggleType(type.id, isEnabled)}
                                                         disabled={type.locked}
                                                     />
                                                 </div>
@@ -336,11 +355,10 @@ const NotificationSettingsPage = () => {
                                                                 key={channel.id}
                                                                 onClick={() => handleToggleChannel(type.id, channel.id)}
                                                                 disabled={isChannelLocked}
-                                                                className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-[13px] font-medium border transition-colors ${
-                                                                    isChannelSelected 
-                                                                    ? 'border-blue-200 bg-blue-50 text-blue-700' 
+                                                                className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-[13px] font-medium border transition-colors ${isChannelSelected
+                                                                    ? 'border-blue-200 bg-blue-50 text-blue-700'
                                                                     : 'border-gray-200 bg-white text-gray-600 hover:border-blue-300 hover:bg-gray-50'
-                                                                } ${isChannelLocked ? 'opacity-60 cursor-not-allowed border-gray-200 bg-gray-50 text-gray-500' : ''}`}
+                                                                    } ${isChannelLocked ? 'opacity-60 cursor-not-allowed border-gray-200 bg-gray-50 text-gray-500' : ''}`}
                                                                 title={isChannelLocked ? "Kênh này là bắt buộc đối với loại thông báo hệ thống" : ""}
                                                             >
                                                                 <Icon size={14} className={isChannelSelected ? 'text-blue-600' : 'text-gray-400'} />
@@ -371,10 +389,10 @@ const NotificationSettingsPage = () => {
                                 </div>
                                 <ToggleSwitch checked={dndEnabled} onChange={setDndEnabled} />
                             </div>
-                            
+
                             {dndEnabled && (
                                 <div className="p-6 bg-white animate-fadeIn space-y-6">
-                                    
+
                                     {/* Time Config */}
                                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                                         <div className="flex-1">
@@ -382,18 +400,18 @@ const NotificationSettingsPage = () => {
                                         </div>
                                         <div className="flex items-center gap-2 bg-gray-50 px-3 py-2 rounded-xl border border-gray-200">
                                             <Clock size={16} className="text-gray-400" />
-                                            <input 
-                                                type="time" 
+                                            <input
+                                                type="time"
                                                 value={dndTime.start}
-                                                onChange={(e) => setDndTime({...dndTime, start: e.target.value})}
-                                                className="bg-transparent border-none text-[15px] font-medium outline-none cursor-pointer w-[60px]" 
+                                                onChange={(e) => setDndTime({ ...dndTime, start: e.target.value })}
+                                                className="bg-transparent border-none text-[15px] font-medium outline-none cursor-pointer w-[60px]"
                                             />
                                             <span className="text-gray-400 text-[13px] mx-1">đến</span>
-                                            <input 
-                                                type="time" 
+                                            <input
+                                                type="time"
                                                 value={dndTime.end}
-                                                onChange={(e) => setDndTime({...dndTime, end: e.target.value})}
-                                                className="bg-transparent border-none text-[15px] font-medium outline-none cursor-pointer w-[60px]" 
+                                                onChange={(e) => setDndTime({ ...dndTime, end: e.target.value })}
+                                                className="bg-transparent border-none text-[15px] font-medium outline-none cursor-pointer w-[60px]"
                                             />
                                         </div>
                                     </div>
@@ -406,11 +424,11 @@ const NotificationSettingsPage = () => {
                                             <button onClick={() => setDndDays('weekdays')} className={`px-4 py-1.5 text-[13px] font-medium rounded-full border ${dndDays === 'weekdays' ? 'bg-indigo-50 border-indigo-200 text-indigo-700' : 'bg-white border-gray-200 text-gray-600'}`}>Ngày làm việc (T2-T6)</button>
                                             <button onClick={() => setDndDays('custom')} className={`px-4 py-1.5 text-[13px] font-medium rounded-full border ${dndDays === 'custom' ? 'bg-indigo-50 border-indigo-200 text-indigo-700' : 'bg-white border-gray-200 text-gray-600'}`}>Tùy chỉnh</button>
                                         </div>
-                                        
+
                                         {dndDays === 'custom' && (
                                             <div className="flex gap-2 mt-2 animate-fadeIn">
                                                 {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((day, idx) => (
-                                                    <button 
+                                                    <button
                                                         key={day}
                                                         onClick={() => {
                                                             const newDays = [...dndCustomDays];
@@ -438,6 +456,175 @@ const NotificationSettingsPage = () => {
                             )}
                         </div>
 
+                        {/* 3. Notification Frequency (Tần suất) */}
+                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mt-8">
+                            <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/50 flex items-center justify-between gap-3">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-8 h-8 rounded-lg bg-teal-100 text-teal-600 flex items-center justify-center">
+                                        <Clock size={18} />
+                                    </div>
+                                    <div>
+                                        <h2 className="text-[17px] font-bold text-gray-900">Tần suất nhận thông báo</h2>
+                                        <p className="text-[13px] text-gray-500">Mức độ thường xuyên nhận thông báo (chủ yếu áp dụng cho Email)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="p-6">
+                                {/* Global Frequency Segmented Control */}
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+                                    <div
+                                        className={`cursor-pointer border rounded-xl p-4 transition-all ${globalFrequency === 'immediate' ? 'border-teal-500 bg-teal-50 ring-1 ring-teal-500' : 'border-gray-200 hover:border-teal-300'}`}
+                                        onClick={() => setGlobalFrequency('immediate')}
+                                    >
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${globalFrequency === 'immediate' ? 'border-teal-600' : 'border-gray-300'}`}>
+                                                {globalFrequency === 'immediate' && <div className="w-2 h-2 rounded-full bg-teal-600" />}
+                                            </div>
+                                            <span className="font-bold text-gray-900 text-[14px]">Ngay lập tức</span>
+                                        </div>
+                                        <p className="text-[12px] text-gray-500 leading-snug">Gửi riêng lẻ ngay khi phát sinh. Kịp thời nhất.</p>
+                                    </div>
+
+                                    <div
+                                        className={`cursor-pointer border rounded-xl p-4 transition-all ${globalFrequency === 'daily' ? 'border-teal-500 bg-teal-50 ring-1 ring-teal-500' : 'border-gray-200 hover:border-teal-300'}`}
+                                        onClick={() => setGlobalFrequency('daily')}
+                                    >
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${globalFrequency === 'daily' ? 'border-teal-600' : 'border-gray-300'}`}>
+                                                {globalFrequency === 'daily' && <div className="w-2 h-2 rounded-full bg-teal-600" />}
+                                            </div>
+                                            <span className="font-bold text-gray-900 text-[14px]">Hàng ngày</span>
+                                        </div>
+                                        <p className="text-[12px] text-gray-500 leading-snug">Gộp email tóm tắt 1 lần/ngày. Tránh làm phiền.</p>
+                                    </div>
+
+                                    <div
+                                        className={`cursor-pointer border rounded-xl p-4 transition-all ${globalFrequency === 'weekly' ? 'border-teal-500 bg-teal-50 ring-1 ring-teal-500' : 'border-gray-200 hover:border-teal-300'}`}
+                                        onClick={() => setGlobalFrequency('weekly')}
+                                    >
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${globalFrequency === 'weekly' ? 'border-teal-600' : 'border-gray-300'}`}>
+                                                {globalFrequency === 'weekly' && <div className="w-2 h-2 rounded-full bg-teal-600" />}
+                                            </div>
+                                            <span className="font-bold text-gray-900 text-[14px]">Hàng tuần</span>
+                                        </div>
+                                        <p className="text-[12px] text-gray-500 leading-snug">Gộp email 1 lần/tuần. Phù hợp đọc tin tức.</p>
+                                    </div>
+                                </div>
+
+                                {/* Digest Time Configuration */}
+                                {(globalFrequency === 'daily' || globalFrequency === 'weekly') && (
+                                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 bg-gray-50 p-4 rounded-xl border border-gray-100 mb-6 animate-fadeIn">
+                                        <div className="text-[14px] font-medium text-gray-700">Lịch gửi Email Tóm tắt:</div>
+
+                                        <div className="flex flex-wrap items-center gap-3">
+                                            {globalFrequency === 'weekly' && (
+                                                <select
+                                                    value={globalFreqDay}
+                                                    onChange={e => setGlobalFreqDay(e.target.value)}
+                                                    className="bg-white border border-gray-300 text-gray-700 text-[14px] rounded-lg focus:ring-teal-500 focus:border-teal-500 block px-3 py-1.5"
+                                                >
+                                                    {['Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ Nhật'].map(day => (
+                                                        <option key={day} value={day}>{day}</option>
+                                                    ))}
+                                                </select>
+                                            )}
+
+                                            <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-gray-300 focus-within:ring-1 focus-within:ring-teal-500 focus-within:border-teal-500">
+                                                <span className="text-gray-500 text-[13px]">Lúc</span>
+                                                <input
+                                                    type="time"
+                                                    value={globalFreqTime}
+                                                    onChange={(e) => setGlobalFreqTime(e.target.value)}
+                                                    className="bg-transparent border-none text-[14px] font-medium outline-none cursor-pointer p-0"
+                                                />
+                                            </div>
+
+                                            <button
+                                                onClick={() => setShowPreviewModal(true)}
+                                                className="text-[13px] text-teal-600 hover:text-teal-800 font-medium underline"
+                                            >
+                                                Xem mẫu email tóm tắt
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Specific Override section */}
+                                <div className="mt-8 pt-6 border-t border-gray-100">
+                                    <div className="flex items-center justify-between mb-4">
+                                        <div>
+                                            <h3 className="font-bold text-[15px] text-gray-900">Cài đặt nâng cao theo loại thông báo</h3>
+                                            <p className="text-[13px] text-gray-500">Ghi đè tần suất chung cho các loại thông báo quan trọng.</p>
+                                        </div>
+                                        <ToggleSwitch checked={useSpecificFreq} onChange={setUseSpecificFreq} />
+                                    </div>
+
+                                    {useSpecificFreq && (
+                                        <div className="overflow-x-auto border border-gray-200 rounded-xl mt-4 animate-fadeIn">
+                                            <table className="w-full text-left border-collapse min-w-[500px]">
+                                                <thead>
+                                                    <tr className="bg-gray-50 text-gray-500 text-[12px] uppercase">
+                                                        <th className="px-4 py-3 font-semibold w-1/2">Loại thông báo</th>
+                                                        <th className="px-4 py-3 font-semibold text-center w-1/6">Ngay lập tức</th>
+                                                        <th className="px-4 py-3 font-semibold text-center w-1/6">Hàng ngày</th>
+                                                        <th className="px-4 py-3 font-semibold text-center w-1/6">Hàng tuần</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody className="divide-y divide-gray-100 text-[14px]">
+                                                    {NOTIFICATION_TYPES.map(type => {
+                                                        if (!settings[type.id]?.enabled) return null;
+                                                        const currentFreq = settings[type.id]?.freq || globalFrequency;
+
+                                                        return (
+                                                            <tr key={type.id} className="hover:bg-gray-50/50">
+                                                                <td className="px-4 py-3">
+                                                                    <div className="font-medium text-gray-800">{type.label}</div>
+                                                                    {type.recFreq === 'immediate' && (
+                                                                        <div className="text-[10px] text-orange-600 font-bold bg-orange-50 inline-block px-1.5 py-0.5 rounded mt-0.5">
+                                                                            Khuyến nghị: Ngay lập tức
+                                                                        </div>
+                                                                    )}
+                                                                </td>
+                                                                <td className="px-4 py-3 text-center">
+                                                                    <input
+                                                                        type="radio"
+                                                                        name={`freq_${type.id}`}
+                                                                        checked={currentFreq === 'immediate'}
+                                                                        onChange={() => handleTypeFreqChange(type.id, 'immediate')}
+                                                                        className="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500"
+                                                                    />
+                                                                </td>
+                                                                <td className="px-4 py-3 text-center">
+                                                                    <input
+                                                                        type="radio"
+                                                                        name={`freq_${type.id}`}
+                                                                        checked={currentFreq === 'daily'}
+                                                                        onChange={() => handleTypeFreqChange(type.id, 'daily')}
+                                                                        className="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500"
+                                                                    />
+                                                                </td>
+                                                                <td className="px-4 py-3 text-center">
+                                                                    <input
+                                                                        type="radio"
+                                                                        name={`freq_${type.id}`}
+                                                                        checked={currentFreq === 'weekly'}
+                                                                        onChange={() => handleTypeFreqChange(type.id, 'weekly')}
+                                                                        className="w-4 h-4 text-teal-600 bg-gray-100 border-gray-300 focus:ring-teal-500"
+                                                                    />
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    })}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     {/* RIGHT COLUMN: Topic Interests */}
@@ -446,13 +633,13 @@ const NotificationSettingsPage = () => {
                             <div className="px-6 py-5 border-b border-gray-100 bg-gray-50/50">
                                 <h2 className="text-[17px] font-bold text-gray-900 mb-1">Lĩnh vực quan tâm</h2>
                                 <p className="text-[13px] text-gray-500 mb-4">Chọn lĩnh vực pháp luật để nhận thông báo Văn bản và Dự thảo phù hợp.</p>
-                                
+
                                 {/* Search Bar */}
                                 <div className="relative">
                                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-                                    <input 
-                                        type="text" 
-                                        placeholder="Tìm lĩnh vực..." 
+                                    <input
+                                        type="text"
+                                        placeholder="Tìm lĩnh vực..."
                                         value={topicSearch}
                                         onChange={(e) => {
                                             setTopicSearch(e.target.value);
@@ -463,7 +650,7 @@ const NotificationSettingsPage = () => {
                                     />
                                 </div>
                             </div>
-                            
+
                             <div className="bg-gray-50/50 px-6 py-3 border-b border-gray-100 flex justify-between items-center text-[13px]">
                                 <span className="font-medium text-gray-700">Đã chọn: <span className="text-blue-600 font-bold">{selectedTopics.length}</span></span>
                                 <button onClick={handleSelectAllTopics} className="text-blue-600 hover:text-blue-800 font-medium hover:underline">
@@ -482,10 +669,10 @@ const NotificationSettingsPage = () => {
                                             const isExpanded = expandedGroups.includes(group.id);
                                             // Count how many in this group are selected
                                             const selectedInGroup = group.topics.filter(t => selectedTopics.includes(t.id)).length;
-                                            
+
                                             return (
                                                 <div key={group.id} className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100">
-                                                    <button 
+                                                    <button
                                                         onClick={() => toggleGroupExpand(group.id)}
                                                         className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors"
                                                     >
@@ -499,14 +686,14 @@ const NotificationSettingsPage = () => {
                                                         </div>
                                                         {isExpanded ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
                                                     </button>
-                                                    
+
                                                     {isExpanded && (
                                                         <div className="px-4 pb-3 space-y-2 border-t border-gray-50 pt-3 bg-gray-50/30">
                                                             {group.topics.map(topic => (
                                                                 <label key={topic.id} className="flex items-start gap-3 cursor-pointer group p-1.5 rounded-lg hover:bg-white transition-colors">
                                                                     <div className="relative flex items-center mt-0.5 shrink-0">
-                                                                        <input 
-                                                                            type="checkbox" 
+                                                                        <input
+                                                                            type="checkbox"
                                                                             className="w-4 h-4 text-blue-600 bg-white border-gray-300 rounded focus:ring-blue-500 cursor-pointer"
                                                                             checked={selectedTopics.includes(topic.id)}
                                                                             onChange={() => handleTopicToggle(topic.id)}
@@ -531,13 +718,13 @@ const NotificationSettingsPage = () => {
 
                 {/* Bottom Actions */}
                 <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-gray-200 mt-8 gap-4 bg-gray-50 -mx-4 px-4 sm:mx-0 sm:bg-transparent -mb-8 sm:mb-0 pb-8 sm:pb-0">
-                    <button 
+                    <button
                         onClick={() => setIsResetModalOpen(true)}
                         className="flex items-center gap-2 px-4 py-2.5 text-gray-500 hover:text-red-600 font-medium transition-colors w-full sm:w-auto justify-center"
                     >
                         <RotateCcw size={18} /> Khôi phục mặc định
                     </button>
-                    <button 
+                    <button
                         onClick={handleSave}
                         className="flex items-center justify-center gap-2 bg-[#0f4c81] hover:bg-blue-800 text-white px-10 py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-900/20 w-full sm:w-auto hover:translate-y-[-2px]"
                     >
@@ -570,9 +757,98 @@ const NotificationSettingsPage = () => {
                     </div>
                 </div>
             )}
-            
+
+            {/* Preview Modal for Email Digest */}
+            {showPreviewModal && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+                    <div className="bg-gray-100 rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]" onClick={e => e.stopPropagation()}>
+                        <div className="p-4 bg-white border-b flex justify-between items-center shrink-0">
+                            <h3 className="font-bold text-gray-900">Mẫu Email Tóm Tắt (Bản xem trước)</h3>
+                            <button onClick={() => setShowPreviewModal(false)} className="text-gray-400 hover:text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-full p-1 transition-colors">
+                                <X size={20} />
+                            </button>
+                        </div>
+                        <div className="p-6 overflow-y-auto w-full flex-1 email-preview-container">
+                            {/* Mock Email Template */}
+                            <div className="bg-white mx-auto shadow-sm border border-gray-200 max-w-[450px]">
+                                {/* Email Header */}
+                                <div className="bg-[#1a3b8b] p-4 text-center">
+                                    <div className="flex items-center justify-center gap-2 text-white font-bold text-lg">
+                                        CỘNG ĐỒNG PHÁP LUẬT
+                                    </div>
+                                    <div className="text-blue-200 text-xs mt-1">
+                                        Bản tin pháp luật hệ thống • {globalFreqDay}, 14/08/2026
+                                    </div>
+                                </div>
+
+                                {/* Email Body */}
+                                <div className="p-6">
+                                    <h2 className="text-[16px] font-bold text-gray-800 mb-4">Chào {localStorage.getItem('user_name') || 'Nguyễn Nam Khánh'},</h2>
+                                    <p className="text-[13px] text-gray-600 mb-6 leading-relaxed">
+                                        Dưới đây là tóm tắt các hoạt động, thông báo mới nhất liên quan đến các lĩnh vực bạn đang theo dõi trên Cổng Pháp luật Quốc Gia.
+                                    </p>
+
+                                    {/* Mock Block: Văn bản QPPL */}
+                                    <div className="mb-6">
+                                        <div className="text-[12px] uppercase font-bold text-blue-800 pb-1 border-b border-gray-200 mb-3">VĂN BẢN QUY PHẠM PHÁP LUẬT MỚI (2)</div>
+                                        <div className="space-y-4">
+                                            <div>
+                                                <a href="#" className="font-semibold text-[14px] text-[#1a0dab] hover:underline leading-tight block mb-1">
+                                                    Nghị định 45/2026/NĐ-CP Sửa đổi bổ sung một số điều của Luật Đất đai
+                                                </a>
+                                                <div className="text-[12px] text-gray-500">Lĩnh vực: Đất đai • Hiệu lực: 01/01/2027</div>
+                                            </div>
+                                            <div>
+                                                <a href="#" className="font-semibold text-[14px] text-[#1a0dab] hover:underline leading-tight block mb-1">
+                                                    Thông tư 12/2026/TT-BTC Hướng dẫn quyết toán thuế doanh nghiệp số hóa
+                                                </a>
+                                                <div className="text-[12px] text-gray-500">Lĩnh vực: Thuế • Hiệu lực: 15/09/2026</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Mock Block: Hỏi đáp */}
+                                    <div className="mb-6">
+                                        <div className="text-[12px] uppercase font-bold text-green-700 pb-1 border-b border-gray-200 mb-3">HỎI ĐÁP PHÁP LUẬT (1)</div>
+                                        <div>
+                                            <p className="text-[13px] text-gray-800 mb-1">
+                                                <span className="font-bold">Luật sư Lê Hoài Nam</span> đã trả lời câu hỏi của bạn:
+                                            </p>
+                                            <a href="#" className="font-semibold text-[14px] text-[#1a0dab] hover:underline leading-tight italic block">
+                                                "Quy định mới về miễn giảm thuế đối với startup công nghệ như thế nào?"
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    {/* Mock CTA */}
+                                    <div className="text-center mt-8 mb-4">
+                                        <a href="#" className="inline-block bg-[#0f4c81] text-white font-bold text-[13px] px-6 py-2.5 rounded shadow no-underline uppercase tracking-wide">
+                                            Xem chi tiết trên hệ thống
+                                        </a>
+                                    </div>
+                                </div>
+
+                                {/* Email Footer */}
+                                <div className="bg-gray-50 p-4 text-center text-[11px] text-gray-400 border-t border-gray-200">
+                                    <p>Email này được gửi tự động. Vui lòng không trả lời.</p>
+                                    <p className="mt-1">
+                                        Bạn nhận được email này theo cài đặt tần suất <strong>{globalFrequency === 'weekly' ? 'Hàng tuần' : 'Hàng ngày'}</strong>.
+                                    </p>
+                                    <div className="mt-2 space-x-3">
+                                        <a href="#" className="text-gray-500 underline">Thay đổi cài đặt</a>
+                                        <span>|</span>
+                                        <a href="#" className="text-gray-500 underline">Hủy đăng ký (Unsubscribe)</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Custom Scrollbar Styles embedded for this complex component */}
-            <style dangerouslySetInnerHTML={{__html: `
+            <style dangerouslySetInnerHTML={{
+                __html: `
                 .custom-scrollbar::-webkit-scrollbar {
                     width: 6px;
                 }

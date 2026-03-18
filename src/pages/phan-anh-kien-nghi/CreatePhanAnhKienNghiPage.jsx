@@ -22,7 +22,7 @@ const MOCK_LEGAL_DOCS = [
 const CreatePhanAnhKienNghiPage = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
-    
+
     // Redirect if not logged in
     useEffect(() => {
         if (!user) {
@@ -48,7 +48,7 @@ const CreatePhanAnhKienNghiPage = () => {
 
     if (!user) return null;
 
-    const filteredDocs = MOCK_LEGAL_DOCS.filter(doc => 
+    const filteredDocs = MOCK_LEGAL_DOCS.filter(doc =>
         doc.toLowerCase().includes(docSearchQuery.toLowerCase())
     );
 
@@ -94,7 +94,7 @@ const CreatePhanAnhKienNghiPage = () => {
         if (!formData.title) newErrors.title = 'Vui lòng nhập tiêu đề phản ánh';
         if (!formData.content) newErrors.content = 'Vui lòng nhập nội dung chi tiết';
         if (!formData.termsAgreed) newErrors.termsAgreed = 'Bạn phải đồng ý với cam kết';
-        
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -135,7 +135,7 @@ const CreatePhanAnhKienNghiPage = () => {
                     </div>
                     <h1 className="text-3xl font-bold text-gray-800 mb-2">Gửi phản ánh thành công!</h1>
                     <p className="text-gray-600 mb-8">Lưu mã này để tra cứu kết quả xử lý. Bạn cũng sẽ nhận thông báo qua email khi có kết quả.</p>
-                    
+
                     <div className="bg-blue-50 p-6 rounded-xl border border-blue-100 mb-8">
                         <p className="text-sm font-medium text-blue-800 mb-2 uppercase tracking-wide">Mã theo dõi của bạn</p>
                         <div className="text-3xl font-black text-[#0f4c81] tracking-widest bg-white py-3 rounded-lg border border-blue-200 shadow-sm flex items-center justify-center gap-3">
@@ -157,7 +157,7 @@ const CreatePhanAnhKienNghiPage = () => {
                             Tra cứu phản ánh
                         </Link>
                         <div className="flex gap-3">
-                            <button onClick={() => { setIsSubmitted(false); setFormData({...formData, title: '', content: ''}); }} className="flex-1 bg-white border-2 border-gray-200 text-gray-700 py-2.5 rounded-xl font-medium hover:bg-gray-50 transition">
+                            <button onClick={() => { setIsSubmitted(false); setFormData({ ...formData, title: '', content: '' }); }} className="flex-1 bg-white border-2 border-gray-200 text-gray-700 py-2.5 rounded-xl font-medium hover:bg-gray-50 transition">
                                 Gửi mới
                             </button>
                             <Link to="/" className="flex-1 bg-white border-2 border-gray-200 text-gray-700 py-2.5 rounded-xl font-medium hover:bg-gray-50 transition block">
@@ -188,7 +188,7 @@ const CreatePhanAnhKienNghiPage = () => {
             <div className="container mx-auto px-4 mt-8 max-w-4xl">
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                     {/* Header */}
-                    <div className="bg-[#0f4c81] text-white p-6 sm:p-8">
+                    <div className="bg-[#1a3b8b] text-white p-6 sm:p-8">
                         <h1 className="text-2xl sm:text-3xl font-bold mb-2">Gửi phản ánh, kiến nghị</h1>
                         <p className="text-blue-100">Gửi phản ánh, kiến nghị của bạn về chính sách, văn bản pháp luật tới cơ quan có thẩm quyền.</p>
                     </div>
@@ -229,30 +229,30 @@ const CreatePhanAnhKienNghiPage = () => {
                                     Văn bản pháp luật liên quan <span className="text-red-500">*</span>
                                 </label>
                                 <div className="relative">
-                                    <input 
-                                        type="text" 
+                                    <input
+                                        type="text"
                                         placeholder="Tìm kiếm hoặc khai báo số hiệu, tên văn bản pháp luật..."
                                         value={docSearchQuery}
                                         onChange={e => {
                                             setDocSearchQuery(e.target.value);
-                                            setFormData({...formData, legalDocs: e.target.value});
+                                            setFormData({ ...formData, legalDocs: e.target.value });
                                             setShowDocDropdown(true);
-                                            setErrors({...errors, legalDocs: null});
+                                            setErrors({ ...errors, legalDocs: null });
                                         }}
                                         onFocus={() => setShowDocDropdown(true)}
                                         onBlur={() => setTimeout(() => setShowDocDropdown(false), 200)}
-                                        className={`w-full border rounded-lg p-2.5 pl-10 ${errors.legalDocs ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`} 
+                                        className={`w-full border rounded-lg p-2.5 pl-10 ${errors.legalDocs ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
                                     />
                                     <Search className="absolute left-3 top-3 text-gray-400" size={18} />
                                 </div>
                                 {errors.legalDocs && <p className="text-red-500 text-xs mt-1">{errors.legalDocs}</p>}
-                                
+
                                 {/* Dropdown */}
                                 {showDocDropdown && docSearchQuery && filteredDocs.length > 0 && (
                                     <ul className="absolute z-20 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
                                         {filteredDocs.map((doc, idx) => (
-                                            <li 
-                                                key={idx} 
+                                            <li
+                                                key={idx}
                                                 className="px-4 py-2 hover:bg-blue-50 cursor-pointer text-sm text-gray-700"
                                                 onClick={() => handleSelectDoc(doc)}
                                             >
@@ -262,18 +262,18 @@ const CreatePhanAnhKienNghiPage = () => {
                                     </ul>
                                 )}
                             </div>
-                            
+
                             {/* Target selection */}
                             <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 space-y-4 mb-4">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">Cấp xử lý <span className="text-red-500">*</span></label>
                                     <div className="flex gap-4">
                                         <label className="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="level" value="Trung ương" checked={formData.level === 'Trung ương'} onChange={e => { setFormData({...formData, level: e.target.value, agency: ''}); setErrors({...errors, agency: null}); }} className="w-4 h-4 text-[#0f4c81]" />
+                                            <input type="radio" name="level" value="Trung ương" checked={formData.level === 'Trung ương'} onChange={e => { setFormData({ ...formData, level: e.target.value, agency: '' }); setErrors({ ...errors, agency: null }); }} className="w-4 h-4 text-[#0f4c81]" />
                                             <span>Cấp trung ương</span>
                                         </label>
                                         <label className="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="level" value="Địa phương" checked={formData.level === 'Địa phương'} onChange={e => { setFormData({...formData, level: e.target.value, agency: ''}); setErrors({...errors, agency: null}); }} className="w-4 h-4 text-[#0f4c81]" />
+                                            <input type="radio" name="level" value="Địa phương" checked={formData.level === 'Địa phương'} onChange={e => { setFormData({ ...formData, level: e.target.value, agency: '' }); setErrors({ ...errors, agency: null }); }} className="w-4 h-4 text-[#0f4c81]" />
                                             <span>Cấp địa phương</span>
                                         </label>
                                     </div>
@@ -282,9 +282,9 @@ const CreatePhanAnhKienNghiPage = () => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-1">Cơ quan tiếp nhận <span className="text-red-500">*</span></label>
-                                        <select 
-                                            value={formData.agency} 
-                                            onChange={e => { setFormData({...formData, agency: e.target.value}); setErrors({...errors, agency: null}); }}
+                                        <select
+                                            value={formData.agency}
+                                            onChange={e => { setFormData({ ...formData, agency: e.target.value }); setErrors({ ...errors, agency: null }); }}
                                             className={`w-full border rounded-lg p-2.5 bg-white ${errors.agency ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
                                         >
                                             <option value="">-- Chọn cơ quan tiếp nhận --</option>
@@ -296,9 +296,9 @@ const CreatePhanAnhKienNghiPage = () => {
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-1">Lĩnh vực <span className="text-red-500">*</span></label>
-                                        <select 
-                                            value={formData.field} 
-                                            onChange={e => { setFormData({...formData, field: e.target.value}); setErrors({...errors, field: null}); }}
+                                        <select
+                                            value={formData.field}
+                                            onChange={e => { setFormData({ ...formData, field: e.target.value }); setErrors({ ...errors, field: null }); }}
                                             className={`w-full border rounded-lg p-2.5 bg-white ${errors.field ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
                                         >
                                             <option value="">-- Chọn lĩnh vực --</option>
@@ -314,13 +314,13 @@ const CreatePhanAnhKienNghiPage = () => {
                             {/* Content inputs */}
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Tiêu đề phản ánh <span className="text-red-500">*</span></label>
-                                <input 
-                                    type="text" 
+                                <input
+                                    type="text"
                                     placeholder="Tóm tắt nội dung phản ánh, kiến nghị..."
                                     maxLength={500}
                                     value={formData.title}
-                                    onChange={e => { setFormData({...formData, title: e.target.value}); setErrors({...errors, title: null}); }}
-                                    className={`w-full border rounded-lg p-2.5 ${errors.title ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`} 
+                                    onChange={e => { setFormData({ ...formData, title: e.target.value }); setErrors({ ...errors, title: null }); }}
+                                    className={`w-full border rounded-lg p-2.5 ${errors.title ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
                                 />
                                 <div className="flex justify-between mt-1">
                                     {errors.title ? <p className="text-red-500 text-xs">{errors.title}</p> : <span></span>}
@@ -330,11 +330,11 @@ const CreatePhanAnhKienNghiPage = () => {
 
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Nội dung chi tiết <span className="text-red-500">*</span></label>
-                                <textarea 
+                                <textarea
                                     rows={6}
                                     placeholder="Mô tả chi tiết nội dung phản ánh, kiến nghị của bạn..."
                                     value={formData.content}
-                                    onChange={e => { setFormData({...formData, content: e.target.value}); setErrors({...errors, content: null}); }}
+                                    onChange={e => { setFormData({ ...formData, content: e.target.value }); setErrors({ ...errors, content: null }); }}
                                     className={`w-full border rounded-lg p-3 resize-y ${errors.content ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
                                 ></textarea>
                                 {errors.content && <p className="text-red-500 text-xs mt-1">{errors.content}</p>}
@@ -344,9 +344,9 @@ const CreatePhanAnhKienNghiPage = () => {
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Tệp đính kèm</label>
                                 <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center bg-gray-50 hover:bg-gray-100 transition relative">
-                                    <input 
-                                        type="file" 
-                                        multiple 
+                                    <input
+                                        type="file"
+                                        multiple
                                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                                         onChange={handleFileChange}
                                         accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
@@ -355,7 +355,7 @@ const CreatePhanAnhKienNghiPage = () => {
                                     <p className="text-gray-700 font-medium mb-1">Kéo thả hoặc bấm để chọn file</p>
                                     <p className="text-xs text-gray-500">Định dạng hỗ trợ: PDF, DOCX, JPG, PNG. Tối đa 10MB/file. Đính kèm tối đa 3 file.</p>
                                 </div>
-                                
+
                                 {files.length > 0 && (
                                     <ul className="mt-4 flex flex-col gap-2">
                                         {files.map((file, idx) => (
@@ -378,15 +378,15 @@ const CreatePhanAnhKienNghiPage = () => {
                         {/* Confirmation and Actions */}
                         <div className="pt-6 border-t border-gray-200">
                             <label className="flex items-start gap-3 cursor-pointer mb-6">
-                                <input 
-                                    type="checkbox" 
+                                <input
+                                    type="checkbox"
                                     checked={formData.termsAgreed}
-                                    onChange={e => { setFormData({...formData, termsAgreed: e.target.checked}); setErrors({...errors, termsAgreed: null}); }}
-                                    className="mt-1 w-5 h-5 rounded border-gray-300 text-[#0f4c81] focus:ring-[#0f4c81]" 
+                                    onChange={e => { setFormData({ ...formData, termsAgreed: e.target.checked }); setErrors({ ...errors, termsAgreed: null }); }}
+                                    className="mt-1 w-5 h-5 rounded border-gray-300 text-[#0f4c81] focus:ring-[#0f4c81]"
                                 />
                                 <div>
                                     <span className="text-sm font-medium text-gray-800">Tôi xác nhận thông tin phản ánh là trung thực và chịu trách nhiệm về nội dung đã gửi.</span>
-                                    {errors.termsAgreed && <p className="text-red-500 text-xs mt-1 flex items-center gap-1"><AlertCircle size={12}/> {errors.termsAgreed}</p>}
+                                    {errors.termsAgreed && <p className="text-red-500 text-xs mt-1 flex items-center gap-1"><AlertCircle size={12} /> {errors.termsAgreed}</p>}
                                 </div>
                             </label>
 

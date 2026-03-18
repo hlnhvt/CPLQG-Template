@@ -61,6 +61,17 @@ import CreateContributionPage from './pages/forum/CreateContributionPage';
 import ContributionDetailPage from './pages/forum/ContributionDetailPage';
 import FollowedForumsPage from './pages/dashboard/FollowedForumsPage';
 
+// Legal Questions imports
+import DanhSachCauHoiPage from './pages/cau-hoi-phap-luat/DanhSachCauHoiPage';
+import CauHoiDetailPage from './pages/cau-hoi-phap-luat/CauHoiDetailPage';
+import ChuyenGiaListPage from './pages/cau-hoi-phap-luat/ChuyenGiaListPage';
+import ChuyenGiaDetailPage from './pages/cau-hoi-phap-luat/ChuyenGiaDetailPage';
+import DatLichTuVanPage from './pages/cau-hoi-phap-luat/DatLichTuVanPage';
+
+// Legal Questions Dashboard imports
+import DanhSachCauHoiCaNhanPage from './pages/dashboard/DanhSachCauHoiCaNhanPage';
+import CauHoiCaNhanDetailPage from './pages/dashboard/CauHoiCaNhanDetailPage';
+
 // Onboarding import
 import OnboardingPage from './pages/onboarding/OnboardingPage';
 
@@ -69,6 +80,9 @@ import PhanAnhKienNghiPage from './pages/phan-anh-kien-nghi/PhanAnhKienNghiPage'
 import PhanAnhKienNghiGuidePage from './pages/phan-anh-kien-nghi/PhanAnhKienNghiGuidePage';
 import PhanAnhKienNghiDetailPage from './pages/phan-anh-kien-nghi/PhanAnhKienNghiDetailPage';
 import CreatePhanAnhKienNghiPage from './pages/phan-anh-kien-nghi/CreatePhanAnhKienNghiPage';
+
+// Tong Ra Soat import
+import TongRaSoatPage from './pages/TongRaSoatPage';
 
 const AppLayout = () => {
     const location = useLocation();
@@ -120,6 +134,9 @@ const AppLayout = () => {
                     <Route path="/phan-anh-kien-nghi/tao-moi" element={<CreatePhanAnhKienNghiPage />} />
                     <Route path="/phan-anh-kien-nghi/:id" element={<PhanAnhKienNghiDetailPage />} />
 
+                    {/* Tong Ra Soat Route */}
+                    <Route path="/tong-ra-soat" element={<TongRaSoatPage />} />
+
                     {/* Forum Routes */}
                     <Route path="/dien-dan" element={<ForumListPage />} />
                     <Route path="/dien-dan/thong-ke" element={<ForumDashboardPage />} />
@@ -130,6 +147,13 @@ const AppLayout = () => {
                     <Route path="/dien-dan/tao-moi" element={<CreateTopicPage />} />
                     <Route path="/dien-dan/su-kien" element={<LivestreamListPage />} />
                     <Route path="/dien-dan/su-kien/:slug" element={<LivestreamEventPage />} />
+
+                    {/* Legal Questions Routes */}
+                    <Route path="/cau-hoi-phap-luat" element={<DanhSachCauHoiPage />} />
+                    <Route path="/cau-hoi-phap-luat/:id" element={<CauHoiDetailPage />} />
+                    <Route path="/cau-hoi-phap-luat/chuyen-gia" element={<ChuyenGiaListPage />} />
+                    <Route path="/cau-hoi-phap-luat/chuyen-gia/:id" element={<ChuyenGiaDetailPage />} />
+                    <Route path="/cau-hoi-phap-luat/chuyen-gia/:id/dat-lich" element={<DatLichTuVanPage />} />
 
                     {/* Dashboard Portal Routes */}
                     <Route path="/ca-nhan" element={<UserDashboardLayout />}>
@@ -146,6 +170,8 @@ const AppLayout = () => {
                         <Route path="tin-bai" element={<CollaboratorArticlesPage />} />
                         <Route path="chu-de-dien-dan" element={<ForumTopicManagementPage />} />
                         <Route path="dien-dan-quan-tam" element={<FollowedForumsPage />} />
+                        <Route path="cau-hoi-ca-nhan" element={<DanhSachCauHoiCaNhanPage />} />
+                        <Route path="cau-hoi-ca-nhan/:id" element={<CauHoiCaNhanDetailPage />} />
                     </Route>
 
                     {/* Full-screen Editor Routes */}
