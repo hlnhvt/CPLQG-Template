@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const PoliciesAndLife = () => {
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 pt-4 pb-8">
             <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-[#0f4c81] pb-2 inline-block mb-6 uppercase tracking-wide">
                 Chính sách & Cuộc sống
             </h2>

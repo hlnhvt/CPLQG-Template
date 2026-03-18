@@ -262,6 +262,11 @@ const Header = () => {
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
+                                <Link to="/tong-ra-soat" className="h-full flex items-center px-4 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap">
+                                    Tổng rà soát VBQPPL
+                                </Link>
+                            </li>
+                            <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
                                 <a href="#" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
                                     Văn bản pháp luật <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
@@ -349,11 +354,6 @@ const Header = () => {
                                         </li>
                                     </ul>
                                 </div>
-                            </li>
-                            <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <Link to="/tong-ra-soat" className="h-full flex items-center px-4 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap">
-                                    Tổng rà soát VBQPPL
-                                </Link>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
                                 <Link to="/khao-sat" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
