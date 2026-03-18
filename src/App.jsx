@@ -83,6 +83,8 @@ import CreatePhanAnhKienNghiPage from './pages/phan-anh-kien-nghi/CreatePhanAnhK
 
 // Tong Ra Soat import
 import TongRaSoatPage from './pages/TongRaSoatPage';
+import TongRaSoatDocDetailPage from './pages/tong-ra-soat/TongRaSoatDocDetailPage';
+import TongRaSoatNewsDetailPage from './pages/tong-ra-soat/TongRaSoatNewsDetailPage';
 
 const AppLayout = () => {
     const location = useLocation();
@@ -136,6 +138,8 @@ const AppLayout = () => {
 
                     {/* Tong Ra Soat Route */}
                     <Route path="/tong-ra-soat" element={<TongRaSoatPage />} />
+                    <Route path="/tong-ra-soat/van-ban/:id" element={<TongRaSoatDocDetailPage />} />
+                    <Route path="/tong-ra-soat/tin-tuc/:id" element={<TongRaSoatNewsDetailPage />} />
 
                     {/* Forum Routes */}
                     <Route path="/dien-dan" element={<ForumListPage />} />

@@ -15,7 +15,7 @@ const AboutPage = () => {
             >
                 <div className="relative z-10 flex flex-col items-center max-w-4xl px-4">
                     <img src="/logo.png" alt="Quốc huy" className="w-20 h-20 md:w-24 md:h-24 object-contain mb-4 drop-shadow-lg" />
-                    <h1 className="text-3xl md:text-5xl font-bold uppercase tracking-widest drop-shadow-md mb-4">
+                    <h1 className="text-3xl md:text-5xl font-bold uppercase drop-shadow-md mb-4">
                         CỔNG PHÁP LUẬT QUỐC GIA
                     </h1>
                     <p className="text-lg md:text-2xl font-medium drop-shadow-sm text-blue-100 italic">
