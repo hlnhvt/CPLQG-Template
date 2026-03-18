@@ -16,7 +16,7 @@ const ThuNgoPage = () => {
             {/* Header Banner - Elegant Minimalist */}
             <div className="pt-20 pb-20 px-4 relative flex flex-col items-center text-center">
 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0f4c81] uppercase drop-shadow-sm mb-4 relative z-10">
+                <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold text-[#0f4c81] uppercase drop-shadow-sm mb-4 relative z-10">
                     THƯ NGỎ
                 </h1>
                 <div className="w-24 h-1 bg-gradient-to-r from-[#0f4c81] to-yellow-500 mx-auto rounded-full"></div>

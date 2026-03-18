@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
     Users, BookOpen, Newspaper, FileText, Database, ChevronRight,
@@ -150,8 +150,31 @@ const TongRaSoatPage = () => {
         }
     };
 
-    // Scrolling marquee text
-    const marqueeText = "Tin mới nhận: Báo cáo kết quả rà soát quý I/2026 phải được gửi trước ngày 15/04/2026. | Trọng tâm công tác rà soát năm nay tập trung vào các văn bản liên quan đến đất đai và đầu tư công.";
+    // Vertical news ticker
+    const tickerItems = [
+        { id: 1, text: 'Báo cáo kết quả rà soát quý I/2026 phải được gửi trước ngày 15/04/2026.' },
+        { id: 2, text: 'Phát biểu Khai mạc Hội nghị Trung ương 14 của Tổng Bí thư Tô Lâm.' },
+        { id: 3, text: 'Trọng tâm công tác rà soát năm nay tập trung vào các văn bản liên quan đến đất đai và đầu tư công.' },
+        { id: 4, text: 'Hội nghị trực tuyến toàn quốc: Đẩy nhanh tiến độ rà soát các Luật chuyên ngành.' },
+        { id: 5, text: 'Bộ Tư pháp phối hợp cùng các Bộ, ngành đánh giá quy định về thủ tục hành chính.' },
+    ];
+    const [tickerIndex, setTickerIndex] = useState(0);
+    const [tickerVisible, setTickerVisible] = useState(true);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTickerVisible(false);
+            setTimeout(() => {
+                setTickerIndex(prev => (prev + 1) % tickerItems.length);
+                setTickerVisible(true);
+            }, 350);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [tickerItems.length]);
+
+    // Full Vietnamese weekday names
+    const weekdays = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'];
+    const now = new Date();
+    const fullDateStr = `${weekdays[now.getDay()]}, Ngày ${now.toLocaleDateString('vi-VN', { day: '2-digit', month: 'numeric', year: 'numeric' })}`;;
 
     const tabs = [
         { id: 'ban-chi-dao', label: 'Ban Chỉ đạo' },
@@ -285,16 +308,32 @@ const TongRaSoatPage = () => {
                             </button>
                         </div>
 
-                        {/* Marquee Tin nổi bật (Global) */}
+                        {/* Vertical News Ticker */}
                         <div className="max-w-7xl mx-auto px-0 md:px-10 mb-6">
-                            <div className="bg-red-50 text-red-800 border-l-4 border-red-600 font-medium text-sm py-2 px-3 md:py-3 md:px-4 overflow-hidden flex items-center shadow-sm relative rounded-r-lg">
-                                <span className="shrink-0 font-bold bg-red-600 text-white px-2 py-1 md:px-3 md:py-1 rounded mr-3 md:mr-4 uppercase text-[10px] md:text-[11px] flex items-center shadow-sm z-20">
-                                    Thông tin nổi bật
+                            <div className="bg-white border border-gray-200 text-gray-800 font-medium text-sm overflow-hidden flex items-stretch shadow-sm relative rounded-lg h-10">
+                                {/* Date - skewed to match label */}
+                                <span className="shrink-0 font-semibold text-gray-700 border-r border-gray-200 px-4 flex items-center text-[11px] md:text-[12px] bg-gray-50 whitespace-nowrap skew-x-[-10deg]">
+                                    <span className="skew-x-[10deg]">{fullDateStr}</span>
                                 </span>
-                                <div className="marquee-container flex-1 overflow-hidden relative text-[13px] md:text-sm">
-                                    <div className="whitespace-nowrap animate-marquee">
-                                        {marqueeText} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {marqueeText}
-                                    </div>
+                                {/* Label Tag */}
+                                <span className="shrink-0 font-bold bg-[#e65c00] text-white px-3 flex items-center uppercase text-[10px] md:text-[11px] shadow-sm z-20 skew-x-[-10deg] mx-1.5">
+                                    <span className="skew-x-[10deg]">Tin tức nổi bật</span>
+                                </span>
+                                {/* Vertical ticker */}
+                                <div className="flex-1 overflow-hidden relative flex items-center">
+                                    <button
+                                        onClick={() => navigate(`/tong-ra-soat/tin-tuc/${tickerItems[tickerIndex].id}`)}
+                                        className="w-full text-left"
+                                    >
+                                        <span
+                                            className={`block text-[13px] md:text-sm text-[#0a1e3f] font-bold truncate transition-all duration-350 ${
+                                                tickerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
+                                            }`}
+                                            style={{ transition: 'opacity 0.35s ease, transform 0.35s ease' }}
+                                        >
+                                            {tickerItems[tickerIndex].text}
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -319,7 +358,7 @@ const TongRaSoatPage = () => {
                         {activeTab === 'ban-chi-dao' && (
                             <div className="space-y-10 animate-fadeIn bg-white rounded-2xl p-8 shadow-sm border border-gray-100 mt-2">
                                 {/* Giới thiệu chung (Thân thiện hơn) */}
-                                <div className="bg-[#f8fbff] rounded-2xl p-6 md:p-8 mb-10 border border-blue-100 shadow-sm relative overflow-hidden">
+                                {/* <div className="bg-[#f8fbff] rounded-2xl p-6 md:p-8 mb-10 border border-blue-100 shadow-sm relative overflow-hidden">
                                     <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100/50 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl pointer-events-none"></div>
                                     <div className="relative z-10">
 
@@ -346,14 +385,14 @@ const TongRaSoatPage = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Divider */}
-                                <div className="border-t border-gray-100 relative mt-12 mb-8">
+                                {/* <div className="border-t border-gray-100 relative mt-12 mb-8">
                                     <span className="absolute left-1/2 -top-3 -translate-x-1/2 bg-white px-4 text-[#1a3b8b] font-bold text-lg uppercase">
                                         Thành viên ban chỉ đạo
                                     </span>
-                                </div>
+                                </div> */}
 
                                 {/* Trưởng ban */}
                                 <div className="flex justify-center">
@@ -423,9 +462,9 @@ const TongRaSoatPage = () => {
                                         </h3>
                                         <div className="grid grid-cols-1 gap-4 mb-4">
                                             {currentVanBan.map((doc, idx) => (
-                                                <div 
-                                                    onClick={() => navigate(`/tong-ra-soat/van-ban/${doc.id || idx + 1}`)} 
-                                                    key={idx} 
+                                                <div
+                                                    onClick={() => navigate(`/tong-ra-soat/van-ban/${doc.id || idx + 1}`)}
+                                                    key={idx}
                                                     className="border border-gray-200 bg-white rounded-xl p-4 md:p-5 hover:shadow-md hover:border-blue-300 transition-all flex flex-col md:flex-row gap-4 justify-between md:items-center group cursor-pointer"
                                                 >
                                                     <div className="flex-1">
@@ -459,9 +498,9 @@ const TongRaSoatPage = () => {
                                         </h3>
                                         <div className="grid grid-cols-1 gap-4 mb-4">
                                             {currentHuongDan.map((doc, idx) => (
-                                                <div 
-                                                    onClick={() => navigate(`/tong-ra-soat/van-ban/${doc.id || idx + 101}`)} 
-                                                    key={idx} 
+                                                <div
+                                                    onClick={() => navigate(`/tong-ra-soat/van-ban/${doc.id || idx + 101}`)}
+                                                    key={idx}
                                                     className="border border-gray-200 bg-white rounded-xl p-4 md:p-5 hover:shadow-md hover:border-amber-300 transition-all flex flex-col md:flex-row gap-4 justify-between md:items-center group cursor-pointer"
                                                 >
                                                     <div className="flex-1">
@@ -502,8 +541,8 @@ const TongRaSoatPage = () => {
                                     <div className="space-y-8 animate-fadeIn">
                                         {/* Top News */}
                                         {topNews && (
-                                            <div 
-                                                onClick={() => navigate(`/tong-ra-soat/tin-tuc/${topNews.id || 0}`)} 
+                                            <div
+                                                onClick={() => navigate(`/tong-ra-soat/tin-tuc/${topNews.id || 0}`)}
                                                 className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-lg transition-all flex flex-col md:flex-row group cursor-pointer"
                                             >
                                                 <div className="md:w-[55%] aspect-[16/9] md:aspect-auto overflow-hidden">
@@ -528,9 +567,9 @@ const TongRaSoatPage = () => {
                                         {gridNews.length > 0 && (
                                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                                 {gridNews.map(news => (
-                                                    <div 
-                                                        onClick={() => navigate(`/tong-ra-soat/tin-tuc/${news.id || 1}`)} 
-                                                        key={news.id || Math.random()} 
+                                                    <div
+                                                        onClick={() => navigate(`/tong-ra-soat/tin-tuc/${news.id || 1}`)}
+                                                        key={news.id || Math.random()}
                                                         className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:shadow-md transition-all group cursor-pointer flex flex-col"
                                                     >
                                                         <div className="aspect-[16/10] overflow-hidden">
@@ -554,9 +593,9 @@ const TongRaSoatPage = () => {
                                         {listNews.length > 0 && (
                                             <div className="space-y-5">
                                                 {listNews.map(news => (
-                                                    <div 
-                                                        onClick={() => navigate(`/tong-ra-soat/tin-tuc/${news.id || 2}`)} 
-                                                        key={news.id || Math.random()} 
+                                                    <div
+                                                        onClick={() => navigate(`/tong-ra-soat/tin-tuc/${news.id || 2}`)}
+                                                        key={news.id || Math.random()}
                                                         className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:shadow-md transition-all group cursor-pointer p-4 md:p-5 flex flex-col sm:flex-row gap-5 md:gap-6 items-start sm:items-center"
                                                     >
                                                         <div className="w-full sm:w-[240px] md:w-[280px] aspect-[16/10] shrink-0 overflow-hidden rounded-lg">

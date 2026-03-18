@@ -122,7 +122,7 @@ const UserManualArticlePage = () => {
     return (
         <div className="bg-[#f4f7fb] min-h-screen font-sans pb-20">
             {/* Header Area */}
-            <div className="bg-[#0f4c81] text-white pt-8 pb-12 px-4 shadow-sm">
+            <div className="bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white pt-8 pb-12 px-4 shadow-sm">
                 <div className="container mx-auto max-w-[1400px]">
                     <h1 className="text-2xl md:text-3xl font-bold mb-2">HƯỚNG DẪN SỬ DỤNG</h1>
                 </div>
@@ -243,7 +243,7 @@ const UserManualArticlePage = () => {
                         </div>
 
                         {/* Article Navigation */}
-                        <div className="mt-6 flex flex-col sm:flex-row justify-between gap-4">
+                        {/* <div className="mt-6 flex flex-col sm:flex-row justify-between gap-4">
                             {prevArticle ? (
                                 <Link to={`/huong-dan-su-dung/bai-viet/${prevArticle.id}`} className="flex-1 flex flex-col items-start p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-300 transition group">
                                     <span className="text-xs text-gray-500 mb-1 flex items-center gap-1"><ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" /> Bài trước</span>
@@ -257,35 +257,11 @@ const UserManualArticlePage = () => {
                                     <span className="font-bold text-[#0f4c81] line-clamp-1">{nextArticle.title}</span>
                                 </Link>
                             ) : <div className="flex-1"></div>}
-                        </div>
+                        </div> */}
 
                     </div>
 
                     {/* Right TOC (20% / 240px min) */}
-                    <div className="hidden xl:block lg:w-1/4 lg:max-w-[280px] shrink-0">
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 sticky top-24">
-                            <h3 className="font-bold text-gray-900 mb-4 uppercase text-sm tracking-wide border-l-4 border-yellow-400 pl-3">
-                                Nội dung bài viết
-                            </h3>
-                            <ul className="space-y-3 text-[14px]">
-                                {[
-                                    { id: 'muc-1', label: '1. Giới thiệu chức năng' },
-                                    { id: 'muc-2', label: '2. Các bước thực hiện' },
-                                    { id: 'muc-3', label: '3. Câu hỏi thường gặp' }
-                                ].map((item) => (
-                                    <li key={item.id}>
-                                        <a
-                                            href={`#${item.id}`}
-                                            onClick={(e) => scrollToSection(e, item.id)}
-                                            className={`block transition-colors border-l-2 pl-3 py-1 ${activeSection === item.id ? 'border-[#0f4c81] text-[#0f4c81] font-bold bg-blue-50/50' : 'border-transparent text-gray-600 hover:text-[#0f4c81]'}`}
-                                        >
-                                            {item.label}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
