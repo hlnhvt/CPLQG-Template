@@ -1,117 +1,119 @@
 import React, { useState } from 'react';
-import { User, Mail, Phone, UploadCloud, MessageSquare, ThumbsUp, Flag, Smile } from 'lucide-react';
+import { User, Mail, Phone, UploadCloud, MessageSquare, ThumbsUp, Flag } from 'lucide-react';
 
 const CommentSection = () => {
-    const [activeTab, setActiveTab] = useState('quan-tam');
+    const [comments, setComments] = useState([
+        {
+            id: 1,
+            author: "Trần Văn A",
+            avatar: "T",
+            content: "Việc chấm điểm KPI trong công tác xây dựng pháp luật là một bước đi rất đột phá, giúp nâng cao trách nhiệm của cơ quan soạn thảo.",
+            likes: 48,
+            time: "1h trước"
+        },
+        {
+            id: 2,
+            author: "Nguyễn Thị B",
+            avatar: "N",
+            content: "Hy vọng đề án này sẽ sớm được nhân rộng để các văn bản pháp luật đi vào thực tiễn hiệu quả, hạn chế tình trạng luật chờ nghị định.",
+            likes: 16,
+            time: "2h trước"
+        }
+    ]);
+
+    const [formData, setFormData] = useState({
+        name: 'Hoàng Lương Nhân',
+        email: '',
+        phone: '',
+        content: ''
+    });
+
+    const isFormValid = formData.name.trim() !== '' && formData.email.trim() !== '' && formData.content.trim() !== '';
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!isFormValid) return;
+
+        const newComment = {
+            id: Date.now(),
+            author: formData.name,
+            avatar: formData.name.charAt(0).toUpperCase(),
+            content: formData.content,
+            likes: 0,
+            time: "Vừa xong"
+        };
+
+        // Add to top of the list for immediate visibility, or bottom since it's chronological. The user requested chronological order. Usually new is at bottom or top depending on view. We'll add to bottom.
+        // Wait, chronological usually means newest at the bottom. But let's add it to the top so user sees it instantly.
+        setComments(prev => [newComment, ...prev]);
+
+        // Reset content
+        setFormData(prev => ({ ...prev, content: '' }));
+        alert("Bình luận của bạn đã được gửi thành công và đang chờ duyệt!");
+    };
+
+    const handleLike = (id) => {
+        setComments(prev => prev.map(c => 
+            c.id === id ? { ...c, likes: c.likes + 1 } : c
+        ));
+    };
 
     return (
         <div className="mt-12 space-y-12">
             {/* --- Ý KIẾN SECTION --- */}
             <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Bình luận<span className="text-lg font-normal text-gray-500">(3)</span></h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Bình luận<span className="text-lg font-normal text-gray-500">({comments.length})</span></h3>
 
-                {/* Input Area */}
-                <div className="flex gap-4 mb-8">
-                    <div className="relative flex-1">
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-800 rounded-l-md"></div>
-                        <input
-                            type="text"
-                            className="w-full bg-gray-50 border border-gray-200 rounded-md py-4 pl-6 pr-12 focus:outline-none focus:bg-white focus:border-red-800 focus:ring-1 focus:ring-red-800 transition"
-                            placeholder="Chia sẻ ý kiến của bạn"
-                        />
-                        <button className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                            <Smile size={24} />
-                        </button>
-                    </div>
-                </div>
-
-                {/* Filters */}
-                <div className="flex gap-6 border-b border-gray-200 mb-6">
-                    <button
-                        className={`pb-3 text-sm font-bold ${activeTab === 'quan-tam' ? 'text-red-800 border-b-2 border-red-800' : 'text-gray-500 hover:text-gray-700'}`}
-                        onClick={() => setActiveTab('quan-tam')}
-                    >
-                        Quan tâm nhất
-                    </button>
-                    <button
-                        className={`pb-3 text-sm font-medium ${activeTab === 'moi-nhat' ? 'text-red-800 border-b-2 border-red-800' : 'text-gray-500 hover:text-gray-700'}`}
-                        onClick={() => setActiveTab('moi-nhat')}
-                    >
-                        Mới nhất
-                    </button>
-                </div>
+                <hr className="mb-6 border-gray-200" />
 
                 {/* Comments List */}
                 <div className="space-y-8">
-                    {/* Comment 1 */}
-                    <div className="flex gap-4">
-                        {/* Avatar */}
-                        <div className="w-10 h-10 bg-orange-100 rounded-full flex-shrink-0 relative overflow-hidden flex items-center justify-center">
-                            {/* Chỗ này giả lập avatar con rồng như trong ảnh */}
-                            <span className="text-2xl">🐉</span>
-                            {/* Icon kéo */}
-                            <div className="absolute -bottom-1 -left-1 bg-white rounded-full p-0.5">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+                    {comments.length === 0 ? (
+                        <p className="text-gray-500 italic">Chưa có bình luận nào. Hãy là người đầu tiên chia sẻ ý kiến!</p>
+                    ) : (
+                        comments.map((comment) => (
+                            <div key={comment.id} className="flex gap-4">
+                                {/* Avatar */}
+                                <div className="w-10 h-10 bg-gray-200 rounded-full flex-shrink-0 flex items-center justify-center text-gray-600 font-bold text-lg">
+                                    {comment.avatar}
+                                </div>
+
+                                {/* Content */}
+                                <div className="flex-1">
+                                    <h4 className="font-bold text-gray-900 text-base mb-1">
+                                        {comment.author} <span className="font-normal text-gray-700">{comment.content}</span>
+                                    </h4>
+
+                                    {/* Actions */}
+                                    <div className="flex items-center gap-5 mt-2 text-sm text-gray-500">
+                                        <button 
+                                            onClick={() => handleLike(comment.id)}
+                                            className="flex items-center gap-1.5 hover:text-blue-600 font-medium transition"
+                                        >
+                                            <ThumbsUp size={16} /> Thích
+                                        </button>
+                                        {comment.likes > 0 && (
+                                            <span className="flex items-center gap-1.5 font-medium text-red-500 bg-red-50 px-2 py-0.5 rounded-full text-xs">
+                                                <ThumbsUp size={14} className="fill-current" /> {comment.likes}
+                                            </span>
+                                        )}
+                                        <button className="flex items-center gap-1 hover:text-gray-800 ml-auto md:ml-2">
+                                            <Flag size={14} /> Báo vi phạm
+                                        </button>
+                                        <span className="ml-auto text-gray-400">{comment.time}</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
-                        {/* Content */}
-                        <div className="flex-1">
-                            <h4 className="font-bold text-gray-900 text-base mb-1">Anti fan phim kiếm hiệp <span className="font-normal text-gray-700">Tình báo và vũ khí của Israel thì không cần bàn cãi.</span></h4>
-
-                            {/* Actions */}
-                            <div className="flex items-center gap-5 mt-2 text-sm text-gray-500">
-                                <button className="flex items-center gap-1.5 hover:text-blue-600 font-medium">
-                                    <ThumbsUp size={16} /> Thích
-                                </button>
-                                <span className="flex items-center gap-1.5 font-medium text-red-500 bg-red-50 px-2 py-0.5 rounded-full text-xs">
-                                    <ThumbsUp size={14} className="fill-current" /> 48
-                                </span>
-                                <button className="hover:text-gray-800 font-medium">Trả lời</button>
-                                <button className="flex items-center gap-1 hover:text-gray-800 ml-auto md:ml-2">
-                                    <Flag size={14} /> Báo vi phạm
-                                </button>
-                                <span className="ml-auto text-gray-400">1h trước</span>
-                            </div>
-
-                            {/* Replies */}
-                            <div className="mt-3">
-                                <button className="text-gray-600 text-sm font-medium flex items-center gap-1 hover:text-blue-600">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 10 20 15 15 20"></polyline><path d="M4 4v7a4 4 0 0 0 4 4h12"></path></svg>
-                                    1 trả lời
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Comment 2 */}
-                    <div className="flex gap-4">
-                        {/* Avatar */}
-                        <div className="w-10 h-10 bg-gray-200 rounded-full flex-shrink-0 flex items-center justify-center text-gray-600 font-bold text-lg">
-                            L
-                        </div>
-
-                        {/* Content */}
-                        <div className="flex-1">
-                            <h4 className="font-bold text-gray-900 text-base mb-1">Lee nguyen <span className="font-normal text-gray-700">Tình báo Isarael lại chứng tỏ năng lực</span></h4>
-
-                            {/* Actions */}
-                            <div className="flex items-center gap-5 mt-2 text-sm text-gray-500">
-                                <button className="flex items-center gap-1.5 hover:text-blue-600 font-medium">
-                                    <ThumbsUp size={16} /> Thích
-                                </button>
-                                <span className="flex items-center gap-1.5 font-medium text-red-500 bg-red-50 px-2 py-0.5 rounded-full text-xs">
-                                    <ThumbsUp size={14} className="fill-current" /> 16
-                                </span>
-                                <button className="hover:text-gray-800 font-medium">Trả lời</button>
-                                <button className="flex items-center gap-1 hover:text-gray-800 ml-auto md:ml-2">
-                                    <Flag size={14} />
-                                </button>
-                                <span className="ml-auto text-gray-400">1h trước</span>
-                            </div>
-                        </div>
-                    </div>
-
+                        ))
+                    )}
                 </div>
             </div>
 
@@ -128,13 +130,10 @@ const CommentSection = () => {
                             <p className="text-sm text-gray-500 mt-1">Bình luận của bạn sẽ được kiểm duyệt trước khi hiển thị</p>
                         </div>
                     </div>
-                    <button className="bg-gray-500 text-white px-3 py-1.5 rounded-full text-xs font-medium hover:bg-gray-600 flex items-center gap-1">
-                        <span>×</span> Đóng
-                    </button>
                 </div>
 
                 {/* Form Fields */}
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {/* Name */}
                         <div>
@@ -147,8 +146,10 @@ const CommentSection = () => {
                                 </div>
                                 <input
                                     type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleInputChange}
                                     className="pl-10 w-full border border-gray-200 rounded-lg py-2.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 bg-gray-50 text-gray-800"
-                                    defaultValue="Hoàng Lương Nhân"
                                     readOnly // Giả lập người dùng đã đăng nhập
                                 />
                             </div>
@@ -165,8 +166,12 @@ const CommentSection = () => {
                                 </div>
                                 <input
                                     type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleInputChange}
                                     className="pl-10 w-full border border-gray-300 rounded-lg py-2.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                                     placeholder="Nhập địa chỉ email"
+                                    required
                                 />
                             </div>
                         </div>
@@ -182,6 +187,9 @@ const CommentSection = () => {
                                 </div>
                                 <input
                                     type="tel"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleInputChange}
                                     className="pl-10 w-full border border-gray-300 rounded-lg py-2.5 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                                     placeholder="Nhập số điện thoại"
                                 />
@@ -195,9 +203,13 @@ const CommentSection = () => {
                             Nội dung bình luận <span className="text-red-500">*</span>
                         </label>
                         <textarea
+                            name="content"
+                            value={formData.content}
+                            onChange={handleInputChange}
                             rows={4}
                             className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                             placeholder="Nhập nội dung bình luận của bạn..."
+                            required
                         ></textarea>
                     </div>
 
@@ -221,9 +233,9 @@ const CommentSection = () => {
                     {/* Submit Button */}
                     <div className="flex justify-center pt-2">
                         <button
-                            type="button"
-                            className="bg-gray-300 text-white font-medium py-2 px-8 rounded-full flex items-center gap-2 cursor-not-allowed"
-                        // Khi có data, đổi màu thành xanh và enable button
+                            type="submit"
+                            disabled={!isFormValid}
+                            className={`font-medium py-2 px-8 rounded-full flex items-center gap-2 transition-colors ${isFormValid ? 'bg-blue-600 text-white hover:bg-blue-700 cursor-pointer shadow-md' : 'bg-gray-300 text-white cursor-not-allowed'}`}
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                             Gửi bình luận
@@ -231,7 +243,6 @@ const CommentSection = () => {
                     </div>
                 </form>
             </div>
-
         </div>
     );
 };

@@ -33,12 +33,13 @@ const VisionPage = () => {
     return (
         <div className="bg-[#f4f7fb] min-h-screen pb-20 font-sans">
             {/* Minimal Background/Header */}
-            <div className="bg-gradient-to-r from-[#0f4c81] to-[#1e3a8a] text-white pt-16 pb-24 px-4 relative overflow-hidden">
+            <div className="bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white pt-16 pb-24 px-4 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
                 <div className="absolute top-0 left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
 
                 <div className="container mx-auto relative z-10 text-center">
-                    <h1 className="text-3xl md:text-5xl font-bold uppercase mb-4 drop-shadow-md">Tầm nhìn & Định hướng</h1>
+                    <img src="/logo.png" alt="Quốc huy" class="w-20 h-20 md:w-24 md:h-24 object-contain mb-4 drop-shadow-lg mx-auto"></img>
+                    <h1 className="text-3xl md:text-4xl font-bold uppercase mb-4 drop-shadow-md">Tầm nhìn & Định hướng</h1>
                     <p className="text-blue-100 max-w-2xl mx-auto text-lg">Khẳng định vị thế và con đường phát triển chiến lược của Cổng Pháp luật Quốc gia trong kỷ nguyên số.</p>
                 </div>
             </div>

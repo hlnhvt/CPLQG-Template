@@ -14,6 +14,7 @@ const NEWS_CATEGORIES = [
     { label: 'Radio pháp luật', path: '/tin-tuc/noi-bat' },
     { label: 'Kỳ họp thứ 10, Quốc hội khóa XV', path: '/tin-tuc/noi-bat' },
     { label: 'Câu chuyện thành công', path: '/cau-chuyen-thanh-cong' },
+    { label: 'Nghiên cứu & Trao đổi', path: '/tin-tuc/nghien-cuu-trao-doi' },
     { label: 'Trung tâm trợ lý pháp luật', path: '/tin-tuc/noi-bat' },
 ];
 

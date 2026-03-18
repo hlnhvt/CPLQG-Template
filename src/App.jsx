@@ -16,6 +16,9 @@ import NewsletterRegistrationPage from './pages/NewsletterRegistrationPage';
 import NewsDetailPage from './pages/NewsDetailPage';
 import AboutPage from './pages/AboutPage';
 import VisionPage from './pages/VisionPage';
+import ChucNangNhiemVuPage from './pages/gioi-thieu/ChucNangNhiemVuPage';
+import ThuNgoPage from './pages/gioi-thieu/ThuNgoPage';
+import UserManualArticlePage from './pages/huong-dan-su-dung/UserManualArticlePage';
 import NewsHighlightsPage from './pages/NewsHighlightsPage';
 import ContactPage from './pages/ContactPage';
 import SurveyTopicsPage from './pages/SurveyTopicsPage';
@@ -47,6 +50,8 @@ import UserHistoryPage from './pages/dashboard/UserHistoryPage';
 import CollaboratorArticlesPage from './pages/collaborator/CollaboratorArticlesPage';
 import CollaboratorArticleEditor from './pages/collaborator/CollaboratorArticleEditor';
 import RecommendedPage from './pages/RecommendedPage';
+import NghienCuuTraoDoiPage from './pages/tin-tuc/NghienCuuTraoDoiPage';
+import NghienCuuTraoDoiDetailPage from './pages/tin-tuc/NghienCuuTraoDoiDetailPage';
 
 // Forum imports
 import ForumListPage from './pages/forum/ForumListPage';
@@ -98,8 +103,13 @@ const AppLayout = () => {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/news/:id" element={<NewsDetailPage />} />
                     <Route path="/gioi-thieu" element={<AboutPage />} />
+                    <Route path="/gioi-thieu/chuc-nang-nhiem-vu" element={<ChucNangNhiemVuPage />} />
                     <Route path="/tam-nhin" element={<VisionPage />} />
+                    <Route path="/gioi-thieu/thu-ngo" element={<ThuNgoPage />} />
+                    <Route path="/huong-dan-su-dung/bai-viet/:id" element={<UserManualArticlePage />} />
                     <Route path="/tin-tuc/noi-bat" element={<NewsHighlightsPage />} />
+                    <Route path="/tin-tuc/nghien-cuu-trao-doi" element={<NghienCuuTraoDoiPage />} />
+                    <Route path="/tin-tuc/nghien-cuu-trao-doi/:id" element={<NghienCuuTraoDoiDetailPage />} />
                     <Route path="/lien-he" element={<ContactPage />} />
                     <Route path="/chu-de-khao-sat" element={<SurveyTopicsPage />} />
                     <Route path="/chu-de-khao-sat/:id" element={<SurveyTopicDetailPage />} />
