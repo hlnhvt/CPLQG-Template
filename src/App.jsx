@@ -19,6 +19,7 @@ import VisionPage from './pages/VisionPage';
 import ChucNangNhiemVuPage from './pages/gioi-thieu/ChucNangNhiemVuPage';
 import ThuNgoPage from './pages/gioi-thieu/ThuNgoPage';
 import UserManualArticlePage from './pages/huong-dan-su-dung/UserManualArticlePage';
+import UserManualDocListPage from './pages/huong-dan-su-dung/UserManualDocListPage';
 import NewsHighlightsPage from './pages/NewsHighlightsPage';
 import ContactPage from './pages/ContactPage';
 import SurveyTopicsPage from './pages/SurveyTopicsPage';
@@ -106,6 +107,7 @@ const AppLayout = () => {
                     <Route path="/gioi-thieu/chuc-nang-nhiem-vu" element={<ChucNangNhiemVuPage />} />
                     <Route path="/tam-nhin" element={<VisionPage />} />
                     <Route path="/gioi-thieu/thu-ngo" element={<ThuNgoPage />} />
+                    <Route path="/huong-dan-su-dung" element={<UserManualDocListPage />} />
                     <Route path="/huong-dan-su-dung/bai-viet/:id" element={<UserManualArticlePage />} />
                     <Route path="/tin-tuc/noi-bat" element={<NewsHighlightsPage />} />
                     <Route path="/tin-tuc/nghien-cuu-trao-doi" element={<NghienCuuTraoDoiPage />} />

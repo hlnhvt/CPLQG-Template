@@ -243,7 +243,7 @@ const Header = () => {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/huong-dan-su-dung/bai-viet/1" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                            <Link to="/huong-dan-su-dung" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
                                                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
                                                 Hướng dẫn sử dụng
                                             </Link>
