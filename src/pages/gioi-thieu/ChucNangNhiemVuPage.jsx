@@ -17,7 +17,7 @@ const ChucNangNhiemVuPage = () => {
                 <div className="container mx-auto px-4 max-w-[1200px] relative z-10">
 
                     <div className="max-w-4xl">
-                        <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight tracking-tight">Chức năng & Nhiệm vụ</h1>
+                        <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight tracking-tight">CHỨC NĂNG & NHIỆM VỤ</h1>
                         <p className="text-blue-100 text-lg leading-relaxed max-w-3xl opacity-90 border-l-4 border-yellow-400 pl-4 py-1">
                             Quy định chi tiết về vị trí, vai trò, chức năng và các nhiệm vụ trọng tâm của Cổng Thông tin pháp luật quốc gia trong việc cung cấp thông tin, hỗ trợ pháp lý và thúc đẩy chuyển đổi số ngành Tư pháp.
                         </p>
