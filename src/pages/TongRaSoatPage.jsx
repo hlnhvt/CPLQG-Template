@@ -443,6 +443,19 @@ const TongRaSoatPage = () => {
                                         </div>
                                     ))}
                                 </div>
+
+                                {/* Legal Document Link */}
+                                <div className="mt-12 text-center pb-4 border-t border-gray-100 pt-8">
+                                    <p className="text-gray-600 text-sm md:text-base font-medium leading-relaxed max-w-4xl mx-auto italic">
+                                        Văn bản đính kèm: 
+                                        <a 
+                                            href="#" 
+                                            className="text-[#0a3a73] hover:text-blue-800 hover:underline font-bold ml-1 transition-colors"
+                                        >
+                                            Quyết định số 603/QĐ-TTg của Thủ tướng Chính phủ: Về việc thành lập Ban Chỉ đạo rà soát, xử lý vướng mắc trong hệ thống văn bản quy phạm pháp luật
+                                        </a>
+                                    </p>
+                                </div>
                             </div>
                         )}
 

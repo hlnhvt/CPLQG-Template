@@ -34,8 +34,7 @@ const FILE_CONFIG = {
 const ALL_CHU_DE    = [...new Set(MOCK_DOCUMENTS.map(d => d.chuDe))].sort();
 const ALL_NGHIEP_VU = [...new Set(MOCK_DOCUMENTS.map(d => d.nghiepVu))].sort();
 
-// Initial value, can be changed by user
-const DEFAULT_ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 10;
 
 /* ─────────────────────────── PREVIEW MODAL ─────────────────────────── */
 const DocPreviewModal = ({ doc, onClose }) => {
@@ -233,7 +232,6 @@ const UserManualDocListPage = () => {
     const [selChuDe, setSelChuDe]       = useState([]);
     const [selNghiepVu, setSelNghiepVu] = useState([]);
     const [showFilters, setShowFilters] = useState(false);
-    const [itemsPerPage, setItemsPerPage] = useState(DEFAULT_ITEMS_PER_PAGE);
     const [previewDoc, setPreviewDoc]       = useState(null);
 
     const toggle = (arr, setArr, val) =>
@@ -248,8 +246,8 @@ const UserManualDocListPage = () => {
         });
     }, [searchTerm, selChuDe, selNghiepVu]);
 
-    const totalPages = Math.ceil(filtered.length / itemsPerPage);
-    const paginated  = filtered.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+    const paginated  = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
     const handleSearch = e => { e.preventDefault(); setSearchTerm(keyword); setCurrentPage(1); };
     const handleClear  = () => { setKeyword(''); setSearchTerm(''); setCurrentPage(1); };
@@ -378,58 +376,68 @@ const UserManualDocListPage = () => {
                         </div>
 
                         {/* Pagination */}
-                        {filtered.length > 0 && (
-                            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 bg-white p-4 rounded-xl border border-gray-100">
-                                {/* Items per page selector */}
-                                <div className="flex items-center gap-2 text-[13px] text-gray-500">
-                                    <span>Hiển thị</span>
-                                    <select
-                                        value={itemsPerPage}
-                                        onChange={e => {
-                                            setItemsPerPage(Number(e.target.value));
-                                            setCurrentPage(1);
-                                        }}
-                                        className="bg-gray-50 border border-gray-300 rounded px-2 py-1 focus:ring-1 focus:ring-blue-400 outline-none text-[#0f4c81] font-bold"
-                                    >
-                                        <option value={5}>5</option>
-                                        <option value={10}>10</option>
-                                        <option value={20}>20</option>
-                                        <option value={50}>50</option>
-                                    </select>
-                                    <span>bản ghi / trang</span>
-                                </div>
+                        {totalPages > 1 && (
+                            <div className="flex items-center justify-center gap-2 mt-10">
+                                <button
+                                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                                    disabled={currentPage === 1}
+                                    className="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 bg-[#f8f9fb] text-gray-400 hover:bg-gray-100 disabled:opacity-50 transition-colors"
+                                >
+                                    <ChevronLeft size={18} />
+                                </button>
+                                
+                                {(() => {
+                                    const pages = [];
+                                    const showEllipsis = totalPages > 7;
+                                    
+                                    if (!showEllipsis) {
+                                        for (let i = 1; i <= totalPages; i++) pages.push(i);
+                                    } else {
+                                        if (currentPage <= 4) {
+                                            for (let i = 1; i <= 5; i++) pages.push(i);
+                                            pages.push('...');
+                                            pages.push(totalPages);
+                                        } else if (currentPage >= totalPages - 3) {
+                                            pages.push(1);
+                                            pages.push('...');
+                                            for (let i = totalPages - 4; i <= totalPages; i++) pages.push(i);
+                                        } else {
+                                            pages.push(1);
+                                            pages.push('...');
+                                            pages.push(currentPage - 1);
+                                            pages.push(currentPage);
+                                            pages.push(currentPage + 1);
+                                            pages.push('...');
+                                            pages.push(totalPages);
+                                        }
+                                    }
 
-                                {/* Page numbers */}
-                                {totalPages > 1 && (
-                                    <div className="flex items-center gap-2">
-                                        <button
-                                            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                                            disabled={currentPage === 1}
-                                            className="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-500 hover:bg-blue-50 hover:text-blue-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-sm"
-                                        >
-                                            <ChevronLeft size={16} />
-                                        </button>
-                                        {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+                                    return pages.map((p, idx) => (
+                                        p === '...' ? (
+                                            <span key={`dots-${idx}`} className="w-10 h-10 flex items-center justify-center text-gray-400">...</span>
+                                        ) : (
                                             <button
                                                 key={p}
                                                 onClick={() => setCurrentPage(p)}
-                                                className={`w-9 h-9 flex items-center justify-center rounded-full text-sm font-semibold border transition-colors shadow-sm ${currentPage === p
-                                                    ? 'bg-[#0f4c81] text-white border-blue-800 shadow-md'
-                                                    : 'bg-white border-gray-200 text-gray-600 hover:bg-blue-50 hover:text-blue-700'
+                                                className={`w-10 h-10 flex items-center justify-center rounded-lg border text-[15px] font-medium transition-all ${
+                                                    currentPage === p 
+                                                    ? 'bg-[#1e3a8a] text-white border-[#1e3a8a] shadow-md' 
+                                                    : 'bg-white border-gray-200 text-gray-600 hover:border-blue-400 hover:text-blue-600'
                                                 }`}
                                             >
                                                 {p}
                                             </button>
-                                        ))}
-                                        <button
-                                            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                                            disabled={currentPage === totalPages}
-                                            className="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-500 hover:bg-blue-50 hover:text-blue-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors shadow-sm"
-                                        >
-                                            <ChevronRightIcon size={16} />
-                                        </button>
-                                    </div>
-                                )}
+                                        )
+                                    ));
+                                })()}
+
+                                <button
+                                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                                    disabled={currentPage === totalPages}
+                                    className="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 disabled:opacity-50 transition-colors"
+                                >
+                                    <ChevronRightIcon size={18} />
+                                </button>
                             </div>
                         )}
                     </div>

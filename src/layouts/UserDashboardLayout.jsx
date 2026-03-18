@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink, useLocation, Link } from 'react-router-dom';
-import { User, Settings, Bookmark, Bell, PenTool, LayoutDashboard, ChevronRight, History, ChevronLeft, Menu, Camera, ShieldCheck, Edit3, Share2, Building2, MapPin, MoreHorizontal, Home, MessageSquare, Hash } from 'lucide-react';
+import { User, Settings, Bookmark, Bell, PenTool, LayoutDashboard, ChevronRight, History, ChevronLeft, Menu, Camera, ShieldCheck, Edit3, Share2, Building2, MapPin, MoreHorizontal, Home, MessageSquare, Hash, HelpCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const UserDashboardLayout = () => {
@@ -58,6 +58,7 @@ const UserDashboardLayout = () => {
         { path: '/ca-nhan/chu-de-dien-dan', icon: MessageSquare, label: 'Trạm quản lý chủ đề diễn đàn' },
         { path: '/ca-nhan/tin-bai', icon: LayoutDashboard, label: 'Tin bài cộng tác viên' },
         { path: '/ca-nhan/dang-ky-cong-tac-vien', icon: PenTool, label: 'Đăng ký cộng tác viên' },
+        { path: '/ca-nhan/cau-hoi-ca-nhan', icon: HelpCircle, label: 'Quản lý câu hỏi pháp luật' },
     ];
 
     return (
@@ -201,8 +202,8 @@ const UserDashboardLayout = () => {
                                         to={item.path}
                                         title={isCollapsed ? item.label : undefined}
                                         className={`flex items-center rounded-lg font-medium text-[14px] transition-all duration-200 group relative ${isCollapsed
-                                                ? 'justify-center p-3'
-                                                : 'px-4 py-3 gap-3'
+                                            ? 'justify-center p-3'
+                                            : 'px-4 py-3 gap-3'
                                             } ${isActive
                                                 ? 'bg-blue-50 text-blue-700 bg-opacity-70'
                                                 : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
@@ -211,8 +212,8 @@ const UserDashboardLayout = () => {
                                         <Icon size={isCollapsed ? 22 : 18} className={`shrink-0 transition-colors ${isActive ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-500'}`} />
 
                                         <span className={`transition-all duration-300 whitespace-nowrap overflow-hidden ${isCollapsed
-                                                ? 'w-0 opacity-0 hidden'
-                                                : 'w-auto opacity-100'
+                                            ? 'w-0 opacity-0 hidden'
+                                            : 'w-auto opacity-100'
                                             }`}>
                                             {item.label}
                                         </span>

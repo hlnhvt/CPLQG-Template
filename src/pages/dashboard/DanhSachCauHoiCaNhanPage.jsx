@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { MessageSquare, Clock, CheckCircle2, AlertCircle, PlusCircle, Search, Eye, Filter, Settings, FileText, ChevronRight } from 'lucide-react';
+import { MessageSquare, Clock, CheckCircle2, AlertCircle, PlusCircle, Search, Eye, Filter, Settings, FileText, ChevronRight, User, Calendar } from 'lucide-react';
 
 const MOCK_PERSONAL_QUESTIONS = [
     { id: '1', code: 'CH-2026-00123', title: 'Quy định bồi thường giải phóng mặt bằng khi thu hồi đất ở nông thôn', status: 'Đã trả lời', domain: 'Đất đai', submittedDate: '17/03/2026', answeredDate: '19/03/2026', hasUnreadReply: true, summary: 'Gia đình tôi có mảnh đất ở nông thôn diện tích 500m2 đang bị thu hồi để làm đường...', answerSummary: 'Căn cứ khoản 2 Điều 74 Luật Đất đai 2013, việc bồi thường được thực hiện bằng...' },
@@ -35,49 +35,28 @@ const DanhSachCauHoiCaNhanPage = () => {
                     <div className="flex flex-wrap items-center text-sm font-medium text-gray-500 gap-2">
                         <Link to="/" className="hover:text-[#0f4c81]">Trang chủ</Link>
                         <span>/</span>
-                        <Link to="/dashboard" className="hover:text-[#0f4c81]">Trang cá nhân</Link>
+                        <Link to="/ca-nhan/trang-chu" className="hover:text-[#0f4c81]">Trang cá nhân</Link>
                         <span>/</span>
-                        <span className="text-[#0f4c81] font-bold line-clamp-1 flex-1">Câu hỏi của tôi</span>
+                        <span className="text-[#0f4c81] font-bold line-clamp-1 flex-1">Quản lý câu hỏi pháp luật</span>
                     </div>
                 </div>
             </div>
 
             <div className="container mx-auto px-4 mt-8 flex flex-col lg:flex-row gap-8">
-                {/* Sidebar (Mocking dashboard sidebar) */}
-                <div className="lg:w-1/4 hidden lg:block">
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                        <div className="bg-[#0f4c81] p-6 text-center text-white">
-                            <div className="w-20 h-20 bg-white/20 rounded-full mx-auto flex items-center justify-center mb-3">
-                                <User size={40} className="text-white" />
-                            </div>
-                            <h3 className="font-bold text-lg">{user?.name || 'Nguyễn Văn A'}</h3>
-                            <p className="text-blue-200 text-sm">Cá nhân</p>
-                        </div>
-                        <ul className="divide-y divide-gray-100 font-medium">
-                            <li><Link to="#" className="block px-6 py-4 hover:bg-gray-50 flex items-center gap-3 text-gray-600"><User size={20} /> Hồ sơ cá nhân</Link></li>
-                            <li><Link to="#" className="block px-6 py-4 hover:bg-gray-50 flex items-center gap-3 text-gray-600"><FileText size={20} /> Hồ sơ trực tuyến</Link></li>
-                            <li>
-                                <Link to="/dashboard/cau-hoi-ca-nhan" className="block px-6 py-4 bg-blue-50 text-[#0f4c81] border-l-4 border-[#0f4c81] flex items-center justify-between">
-                                    <div className="flex items-center gap-3"><MessageSquare size={20} /> Câu hỏi của tôi</div>
-                                    {unread > 0 && <span className="bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">{unread}</span>}
-                                </Link>
-                            </li>
-                            <li><Link to="#" className="block px-6 py-4 hover:bg-gray-50 flex items-center gap-3 text-gray-600"><Calendar size={20} /> Lịch hẹn tư vấn</Link></li>
-                        </ul>
-                    </div>
-                </div>
+                {/* Sidebar removed as it's now handled by UserDashboardLayout */}
+
 
                 {/* Main Content */}
-                <div className="lg:w-3/4 space-y-6">
+                <div className="w-full space-y-6">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                        <h1 className="text-3xl font-black text-[#0f4c81]">Quản lý Câu hỏi pháp luật</h1>
+                        <h1 className="text-3xl font-bold text-[#0f4c81]">Quản lý Câu hỏi pháp luật</h1>
                         <Link to="/cau-hoi-phap-luat" className="bg-[#0f4c81] text-white px-6 py-2.5 rounded-lg hover:bg-blue-800 transition font-bold shadow-md flex items-center gap-2">
                             <PlusCircle size={20} /> Đặt câu hỏi mới
                         </Link>
                     </div>
 
                     {/* Stats */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-center gap-4">
                             <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
                                 <MessageSquare size={24} />
@@ -117,7 +96,7 @@ const DanhSachCauHoiCaNhanPage = () => {
                                 <p className="text-2xl font-black text-red-600">{unread}</p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* Filter & List */}
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
@@ -149,31 +128,30 @@ const DanhSachCauHoiCaNhanPage = () => {
                                         {item.hasUnreadReply && (
                                             <div className="absolute top-6 left-2 w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
                                         )}
-                                        <Link to={`/dashboard/cau-hoi-ca-nhan/${item.id}`} className="block pl-4">
+                                        <Link to={`/cau-hoi-phap-luat/${item.id}`} className="block pl-4">
                                             <div className="flex flex-wrap gap-2 items-center mb-3">
                                                 <span className="text-gray-500 font-mono text-xs font-bold bg-gray-100 px-2 py-1 rounded border border-gray-200">{item.code}</span>
                                                 <span className="text-blue-700 font-bold text-xs bg-blue-50 px-2.5 py-1 flex items-center gap-1 rounded border border-blue-100">{item.domain}</span>
-                                                {item.status === 'Đã trả lời' ? 
-                                                    <span className="text-emerald-700 font-bold text-xs bg-emerald-50 px-2 py-1 rounded border border-emerald-100 flex items-center gap-1"><CheckCircle2 size={12}/> Đã trả lời</span>
-                                                : item.status === 'Chờ trả lời' ?
-                                                    <span className="text-amber-700 font-bold text-xs bg-amber-50 px-2 py-1 rounded border border-amber-100 flex items-center gap-1"><Clock size={12}/> Chờ trả lời</span>
-                                                :
-                                                    <span className="text-gray-600 font-bold text-xs bg-gray-100 px-2 py-1 rounded border border-gray-200">Đã đóng</span>
+                                                {item.status === 'Đã trả lời' ?
+                                                    <span className="text-emerald-700 font-bold text-xs bg-emerald-50 px-2 py-1 rounded border border-emerald-100 flex items-center gap-1"><CheckCircle2 size={12} /> Đã trả lời</span>
+                                                    : item.status === 'Chờ trả lời' ?
+                                                        <span className="text-amber-700 font-bold text-xs bg-amber-50 px-2 py-1 rounded border border-amber-100 flex items-center gap-1"><Clock size={12} /> Chờ trả lời</span>
+                                                        :
+                                                        <span className="text-gray-600 font-bold text-xs bg-gray-100 px-2 py-1 rounded border border-gray-200">Đã đóng</span>
                                                 }
-                                                {item.hasUnreadReply && <span className="text-red-600 font-bold text-xs bg-red-50 px-2 py-1 rounded border border-red-100 flex items-center gap-1">CÓ CÂU TRẢ LỜI MỚI</span>}
                                             </div>
-                                            
+
                                             <h3 className="text-lg font-bold text-[#0f4c81] mb-2 group-hover:text-blue-600 transition truncate">{item.title}</h3>
-                                            
+
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                                 <div className="bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                                    <p className="text-xs uppercase font-bold text-gray-400 mb-1 flex items-center gap-1"><PlusCircle size={12}/> Câu hỏi của bạn ({item.submittedDate})</p>
+                                                    <p className="text-xs uppercase font-bold text-gray-400 mb-1 flex items-center gap-1"><PlusCircle size={12} /> Câu hỏi của bạn ({item.submittedDate})</p>
                                                     <p className="text-sm text-gray-600 truncate">"{item.summary}"</p>
                                                 </div>
                                                 {item.answerSummary && (
                                                     <div className={`p-3 rounded-lg border ${item.hasUnreadReply ? 'bg-blue-50 border-blue-200 shadow-sm' : 'bg-green-50/50 border-green-100'}`}>
                                                         <p className="text-xs flex items-center justify-between mb-1">
-                                                            <span className="uppercase font-bold text-gray-500 flex items-center gap-1"><CheckCircle2 size={12} className={item.hasUnreadReply ? 'text-blue-500' : 'text-green-500'}/> Phản hồi từ chuyên gia</span>
+                                                            <span className="uppercase font-bold text-gray-500 flex items-center gap-1"><CheckCircle2 size={12} className={item.hasUnreadReply ? 'text-blue-500' : 'text-green-500'} /> Phản hồi từ chuyên gia</span>
                                                             <span className="text-gray-400">{item.answeredDate}</span>
                                                         </p>
                                                         <p className={`text-sm ${item.hasUnreadReply ? 'text-blue-900 font-medium' : 'text-gray-600'} truncate`}>"{item.answerSummary}"</p>
@@ -202,7 +180,7 @@ const DanhSachCauHoiCaNhanPage = () => {
                                 </Link>
                             </div>
                         )}
-                        
+
                         {/* Pagination */}
                         <div className="border-t border-gray-100 p-4 bg-gray-50 flex justify-between items-center text-sm font-medium text-gray-500">
                             Hiển thị {filteredQuestions.length} câu hỏi

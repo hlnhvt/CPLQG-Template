@@ -45,13 +45,13 @@ const CauHoiCaNhanDetailPage = () => {
     const handleSendReply = (e) => {
         e.preventDefault();
         if (!replyText.trim()) return;
-        
+
         const newResponse = {
             type: 'user',
-            date: new Date().toLocaleString('vi-VN', { hour: '2-digit', minute:'2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }),
+            date: new Date().toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }),
             content: replyText
         };
-        
+
         setResponses([...responses, newResponse]);
         setReplyText('');
     };
@@ -60,7 +60,7 @@ const CauHoiCaNhanDetailPage = () => {
         if (window.confirm('Bạn có chắc chắn muốn Đóng câu hỏi này? Sau khi đóng bạn sẽ không thể hỏi thêm.')) {
             // Mock closing
             alert('Câu hỏi đã được đánh dấu giải quyết và Đóng.');
-            navigate('/dashboard/cau-hoi-ca-nhan');
+            navigate('/ca-nhan/cau-hoi-ca-nhan');
         }
     };
 
@@ -68,8 +68,8 @@ const CauHoiCaNhanDetailPage = () => {
         <div className="bg-[#f4f7fb] min-h-screen pb-16">
             <div className="bg-white border-b shadow-sm sticky top-0 z-10">
                 <div className="container mx-auto px-4 py-3">
-                    <button onClick={() => navigate('/dashboard/cau-hoi-ca-nhan')} className="flex items-center text-[#0f4c81] font-bold hover:underline transition">
-                        <ChevronLeft size={20} /> Quay lại Danh sách Câu hỏi của tôi
+                    <button onClick={() => navigate('/ca-nhan/cau-hoi-ca-nhan')} className="flex items-center text-[#0f4c81] font-bold hover:underline transition">
+                        <ChevronLeft size={20} /> Quay lại Danh sách Quản lý câu hỏi pháp luật
                     </button>
                 </div>
             </div>
@@ -93,13 +93,13 @@ const CauHoiCaNhanDetailPage = () => {
                 {/* Original Question */}
                 <div className="bg-white shadow-sm border border-gray-100 p-6 md:p-8 relative">
                     <div className="absolute top-0 right-0 p-4 opacity-10"><FileText size={100} /></div>
-                    
+
                     <div className="flex items-center gap-2 text-sm text-gray-500 font-bold mb-4 uppercase tracking-wider">
                         <User size={16} /> NỘI DUNG BẠN ĐÃ GỬI
                         <span className="mx-2 font-normal text-gray-300">|</span>
                         <Clock size={16} /> {threadData.originalQuestion.date}
                     </div>
-                    
+
                     <div className="prose max-w-none text-gray-700 whitespace-pre-line relative z-10 font-medium leading-relaxed">
                         {threadData.originalQuestion.content}
                     </div>
@@ -131,10 +131,9 @@ const CauHoiCaNhanDetailPage = () => {
                                         <span className="font-bold text-gray-800">{isExpert ? threadData.expert.name : 'Bạn'}</span>
                                         <span className="text-xs text-gray-500">{res.date}</span>
                                     </div>
-                                    <div className={`p-4 rounded-2xl shadow-sm border font-medium leading-relaxed whitespace-pre-line text-[15px] ${
-                                        isExpert ? 'bg-white border-blue-100 text-gray-800 rounded-tl-sm' : 'bg-emerald-50 border-emerald-100 text-emerald-900 rounded-tr-sm'
-                                    }`}>
-                                        <div dangerouslySetInnerHTML={{__html: res.content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}} />
+                                    <div className={`p-4 rounded-2xl shadow-sm border font-medium leading-relaxed whitespace-pre-line text-[15px] ${isExpert ? 'bg-white border-blue-100 text-gray-800 rounded-tl-sm' : 'bg-emerald-50 border-emerald-100 text-emerald-900 rounded-tr-sm'
+                                        }`}>
+                                        <div dangerouslySetInnerHTML={{ __html: res.content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +147,7 @@ const CauHoiCaNhanDetailPage = () => {
                         <AlertCircle size={18} /> Bạn có thể tiếp tục trao đổi để làm rõ vấn đề (tối đa 5 lượt hỏi thêm).
                     </div>
                     <form onSubmit={handleSendReply} className="p-6">
-                        <textarea 
+                        <textarea
                             required
                             value={replyText}
                             onChange={(e) => setReplyText(e.target.value)}
