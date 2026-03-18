@@ -124,7 +124,7 @@ const UserManualArticlePage = () => {
             {/* Header Area */}
             <div className="bg-[#0f4c81] text-white pt-8 pb-12 px-4 shadow-sm">
                 <div className="container mx-auto max-w-[1400px]">
-                    <h1 className="text-2xl md:text-3xl font-bold mb-2">Hướng dẫn sử dụng</h1>
+                    <h1 className="text-2xl md:text-3xl font-bold mb-2">HƯỚNG DẪN SỬ DỤNG</h1>
                 </div>
             </div>
 

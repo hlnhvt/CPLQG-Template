@@ -81,7 +81,7 @@ const UserManualCategoryPage = () => {
                 <div className="container mx-auto max-w-6xl">
                     <div className="flex flex-col items-center text-center">
                         <h1 className="text-3xl md:text-5xl font-bold mb-4 drop-shadow-md">
-                            Hướng dẫn sử dụng
+                            HƯỚNG DẪN SỬ DỤNG
                         </h1>
                         <p className="text-blue-100 text-lg md:text-xl max-w-2xl mb-8">
                             Tìm kiếm hướng dẫn cài đặt, sử dụng các tính năng của Cổng Thông tin pháp luật quốc gia.
@@ -168,7 +168,7 @@ const UserManualCategoryPage = () => {
                         <div className="flex items-center text-sm mb-6 text-gray-500 bg-white px-4 py-2 rounded-lg border border-gray-100 shadow-sm">
                             <Link to="/" className="hover:text-[#0f4c81] transition-colors font-medium">Trang chủ</Link>
                             <ChevronRight className="w-4 h-4 mx-2" />
-                            <span className="text-gray-900 font-bold">Hướng dẫn sử dụng</span>
+                            <span className="text-gray-900 font-bold">HƯỚNG DẪN SỬ DỤNG</span>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
