@@ -12,7 +12,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="relative bg-gradient-header text-white overflow-hidden text-[14px]">
+        <footer className="relative bg-[#0a1e3f] bg-gradient-to-br from-[#1e3a8a] to-[#0a1e3f] text-white overflow-hidden text-[14px] border-t-4 border-cyan-500">
             {/* Background Pattern Overlay (Mimics Trống đồng drum pattern) */}
             <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden opacity-10">
                 <div className="w-[1200px] h-[1200px] rounded-full border-[1px] border-white/30 absolute top-[30%] left-1/2 -translate-x-1/2"></div>

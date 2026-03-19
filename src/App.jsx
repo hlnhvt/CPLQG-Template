@@ -93,6 +93,26 @@ import TongRaSoatPage from './pages/TongRaSoatPage';
 import TongRaSoatDocDetailPage from './pages/tong-ra-soat/TongRaSoatDocDetailPage';
 import TongRaSoatNewsDetailPage from './pages/tong-ra-soat/TongRaSoatNewsDetailPage';
 
+// Legal Aid imports
+import GioiThieuTGPLPage from './pages/tro-giup-phap-ly/GioiThieuTGPLPage';
+import LichSuPhatTrienTGPLPage from './pages/tro-giup-phap-ly/LichSuPhatTrienTGPLPage';
+import ChucNangNhiemVuTGPLPage from './pages/tro-giup-phap-ly/ChucNangNhiemVuTGPLPage';
+import CoCauToChucTGPLPage from './pages/tro-giup-phap-ly/CoCauToChucTGPLPage';
+import DanhBaDienTuTGPLPage from './pages/tro-giup-phap-ly/DanhBaDienTuTGPLPage';
+import VideoPhongSuTGPLPage from './pages/tro-giup-phap-ly/VideoPhongSuTGPLPage';
+import TinTucHoatDongTGPLPage from './pages/tro-giup-phap-ly/TinTucHoatDongTGPLPage';
+import AnPhamTGPLPage from './pages/tro-giup-phap-ly/AnPhamTGPLPage';
+import ThongTinDieuHanhTGPLPage from './pages/tro-giup-phap-ly/ThongTinDieuHanhTGPLPage';
+import HuongDanNghiepVuTGPLPage from './pages/tro-giup-phap-ly/HuongDanNghiepVuTGPLPage';
+import NghienCuuTraoDoiTGPLPage from './pages/tro-giup-phap-ly/NghienCuuTraoDoiTGPLPage';
+import DanhSachToChucTGPLPage from './pages/tro-giup-phap-ly/DanhSachToChucTGPLPage';
+import ToChucTGPLDetailPage from './pages/tro-giup-phap-ly/ToChucTGPLDetailPage';
+import DanhSachNguoiThucHienTGPLPage from './pages/tro-giup-phap-ly/DanhSachNguoiThucHienTGPLPage';
+import NguoiThucHienTGPLDetailPage from './pages/tro-giup-phap-ly/NguoiThucHienTGPLDetailPage';
+import BaoCaoCongTacTGPLPage from './pages/tro-giup-phap-ly/BaoCaoCongTacTGPLPage';
+import VuViecDienHinhTGPLPage from './pages/tro-giup-phap-ly/VuViecDienHinhTGPLPage';
+
+
 const AppLayout = () => {
     const location = useLocation();
     const hideHeaderFooter = ['/dang-nhap', '/onboarding'].includes(location.pathname);
@@ -153,6 +173,25 @@ const AppLayout = () => {
                     <Route path="/tong-ra-soat" element={<TongRaSoatPage />} />
                     <Route path="/tong-ra-soat/van-ban/:id" element={<TongRaSoatDocDetailPage />} />
                     <Route path="/tong-ra-soat/tin-tuc/:id" element={<TongRaSoatNewsDetailPage />} />
+
+                    {/* Legal Aid Routes */}
+                    <Route path="/tro-giup-phap-ly" element={<GioiThieuTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/lich-su-phat-trien" element={<LichSuPhatTrienTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/chuc-nang-nhiem-vu" element={<ChucNangNhiemVuTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/co-cau-to-chuc" element={<CoCauToChucTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/danh-ba" element={<DanhBaDienTuTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/video" element={<VideoPhongSuTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/tin-tuc" element={<TinTucHoatDongTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/an-pham" element={<AnPhamTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/chi-dao-dieu-hanh" element={<ThongTinDieuHanhTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/huong-dan-nghiep-vu" element={<HuongDanNghiepVuTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/nghien-cuu-trao-doi" element={<NghienCuuTraoDoiTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/to-chuc" element={<DanhSachToChucTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/to-chuc/:id" element={<ToChucTGPLDetailPage />} />
+                    <Route path="/tro-giup-phap-ly/nguoi-thuc-hien" element={<DanhSachNguoiThucHienTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/nguoi-thuc-hien/:id" element={<NguoiThucHienTGPLDetailPage />} />
+                    <Route path="/tro-giup-phap-ly/bao-cao-cong-tac" element={<BaoCaoCongTacTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/vu-viec-dien-hinh" element={<VuViecDienHinhTGPLPage />} />
 
                     {/* Forum Routes */}
                     <Route path="/dien-dan" element={<ForumListPage />} />
