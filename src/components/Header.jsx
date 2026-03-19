@@ -292,39 +292,54 @@ const Header = () => {
                                     Trợ giúp pháp lý <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
                                 {/* Dropdown – Trợ giúp pháp lý */}
-                                <div className="absolute top-full left-0 mt-0 w-[280px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-2 text-sm text-gray-200 font-normal">
-                                        <li>
-                                            <Link to="/tro-giup-phap-ly" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
-                                                Giới thiệu Trợ giúp pháp lý
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/tro-giup-phap-ly/to-chuc" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
-                                                Danh sách Tổ chức TGPL
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/tro-giup-phap-ly/nguoi-thuc-hien" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
-                                                Người thực hiện TGPL
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/tro-giup-phap-ly/tin-tuc" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-yellow-400 shrink-0"></span>
-                                                Tin tức hoạt động
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/tro-giup-phap-ly/danh-ba" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-red-400 shrink-0"></span>
-                                                Danh bạ điện tử
-                                            </Link>
-                                        </li>
-                                    </ul>
+                                <div className="absolute top-full left-0 mt-0 w-[560px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400 p-2">
+                                    <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-gray-200 font-normal">
+                                        <Link to="/tro-giup-phap-ly" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>Giới thiệu chung
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/lich-su-phat-trien" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>Lịch sử phát triển
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/chuc-nang-nhiem-vu" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>Chức năng, nhiệm vụ
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/co-cau-to-chuc" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>Cơ cấu tổ chức
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/chi-dao-dieu-hanh" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></span>Thông tin chỉ đạo, điều hành
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/huong-dan-nghiep-vu" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></span>Hướng dẫn nghiệp vụ
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/an-pham" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 shrink-0"></span>Sách, báo, ấn phẩm
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/tin-tuc" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 shrink-0"></span>Tin tức hoạt động
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/video" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-red-400 shrink-0"></span>Video, Phóng sự
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/nghien-cuu-trao-doi" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0"></span>Nghiên cứu trao đổi
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/bao-cao-cong-tac" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 shrink-0"></span>Báo cáo công tác
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/vu-viec-dien-hinh" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 shrink-0"></span>Vụ việc điển hình
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/danh-ba" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0"></span>Danh bạ điện tử
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/to-chuc" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0"></span>Danh sách tổ chức TGPL
+                                        </Link>
+                                        <Link to="/tro-giup-phap-ly/nguoi-thuc-hien" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0"></span>Người thực hiện TGPL
+                                        </Link>
+                                    </div>
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
@@ -554,11 +569,22 @@ const Header = () => {
                                 Trợ giúp pháp lý
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.tgpl ? 'rotate-180' : ''}`} />
                             </button>
-                            <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.tgpl ? 'max-h-96' : 'max-h-0'}`}>
-                                <Link to="/tro-giup-phap-ly" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Giới thiệu TGPL</Link>
-                                <Link to="/tro-giup-phap-ly/to-chuc" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tổ chức TGPL</Link>
-                                <Link to="/tro-giup-phap-ly/nguoi-thuc-hien" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Người thực hiện TGPL</Link>
+                            <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.tgpl ? 'max-h-[1000px]' : 'max-h-0'}`}>
+                                <Link to="/tro-giup-phap-ly" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Giới thiệu chung</Link>
+                                <Link to="/tro-giup-phap-ly/lich-su-phat-trien" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Lịch sử phát triển</Link>
+                                <Link to="/tro-giup-phap-ly/chuc-nang-nhiem-vu" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Chức năng, nhiệm vụ</Link>
+                                <Link to="/tro-giup-phap-ly/co-cau-to-chuc" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Cơ cấu tổ chức</Link>
+                                <Link to="/tro-giup-phap-ly/chi-dao-dieu-hanh" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Thông tin chỉ đạo, điều hành</Link>
+                                <Link to="/tro-giup-phap-ly/huong-dan-nghiep-vu" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Hướng dẫn nghiệp vụ</Link>
+                                <Link to="/tro-giup-phap-ly/an-pham" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Sách, báo, ấn phẩm</Link>
                                 <Link to="/tro-giup-phap-ly/tin-tuc" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tin tức hoạt động</Link>
+                                <Link to="/tro-giup-phap-ly/video" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Video, Phóng sự</Link>
+                                <Link to="/tro-giup-phap-ly/nghien-cuu-trao-doi" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Nghiên cứu trao đổi</Link>
+                                <Link to="/tro-giup-phap-ly/bao-cao-cong-tac" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Báo cáo công tác</Link>
+                                <Link to="/tro-giup-phap-ly/vu-viec-dien-hinh" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Vụ việc điển hình</Link>
+                                <Link to="/tro-giup-phap-ly/danh-ba" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Danh bạ điện tử</Link>
+                                <Link to="/tro-giup-phap-ly/to-chuc" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Danh sách tổ chức TGPL</Link>
+                                <Link to="/tro-giup-phap-ly/nguoi-thuc-hien" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Người thực hiện TGPL</Link>
                             </div>
                         </div>
 

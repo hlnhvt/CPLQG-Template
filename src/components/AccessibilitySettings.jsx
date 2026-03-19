@@ -31,7 +31,7 @@ const AccessibilitySettings = () => {
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-white text-xs font-medium"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/30 hover:bg-white/20 transition-colors text-white text-xs font-medium"
                 title="Chế độ hiển thị"
             >
                 <Eye size={16} />
