@@ -40,7 +40,7 @@ const NghienCuuTraoDoiPage = () => {
     const [domainFilter, setDomainFilter] = useState("Tất cả lĩnh vực");
     const [authorFilter, setAuthorFilter] = useState("Tất cả tác giả");
     const [yearFilter, setYearFilter] = useState("Tất cả năm");
-    
+
     const [currentPage, setCurrentPage] = useState(1);
     const [filteredArticles, setFilteredArticles] = useState(INIT_ARTICLES);
 
@@ -107,7 +107,7 @@ const NghienCuuTraoDoiPage = () => {
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* === MAIN CONTENT === */}
                     <div className="flex-1 min-w-0">
-                        
+
                         {/* --- Featured Section (Only show if not heavily filtered) --- */}
                         {!isFiltered && (
                             <div className="mb-10">
@@ -166,7 +166,7 @@ const NghienCuuTraoDoiPage = () => {
                                 {/* Lĩnh vực */}
                                 <div>
                                     <label className="block text-[12px] font-semibold text-gray-600 uppercase mb-1.5 tracking-wider">Lĩnh vực pháp luật</label>
-                                    <select 
+                                    <select
                                         className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-[14px] focus:outline-none focus:ring-1 focus:ring-blue-500 bg-gray-50/50"
                                         value={domainFilter}
                                         onChange={(e) => setDomainFilter(e.target.value)}
@@ -177,7 +177,7 @@ const NghienCuuTraoDoiPage = () => {
                                 {/* Tác giả */}
                                 <div>
                                     <label className="block text-[12px] font-semibold text-gray-600 uppercase mb-1.5 tracking-wider">Tác giả</label>
-                                    <select 
+                                    <select
                                         className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-[14px] focus:outline-none focus:ring-1 focus:ring-blue-500 bg-gray-50/50"
                                         value={authorFilter}
                                         onChange={(e) => setAuthorFilter(e.target.value)}
@@ -188,7 +188,7 @@ const NghienCuuTraoDoiPage = () => {
                                 {/* Năm xuất bản */}
                                 <div>
                                     <label className="block text-[12px] font-semibold text-gray-600 uppercase mb-1.5 tracking-wider">Năm xuất bản</label>
-                                    <select 
+                                    <select
                                         className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-[14px] focus:outline-none focus:ring-1 focus:ring-blue-500 bg-gray-50/50"
                                         value={yearFilter}
                                         onChange={(e) => setYearFilter(e.target.value)}
@@ -298,7 +298,7 @@ const NghienCuuTraoDoiPage = () => {
                         {/* Contact Widget */}
                         <div className="bg-white rounded-xl border border-gray-100 shadow-md p-6 relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500 rounded-full blur-3xl opacity-10 -mr-10 -mt-10"></div>
-                            <h3 className="font-extrabold text-[#0f4c81] text-[16px] mb-2 uppercase tracking-wide">Nhận gửi đăng bài</h3>
+                            <h3 className="font-bold text-[#0f4c81] text-[16px] mb-2 uppercase">Nhận gửi đăng bài</h3>
                             <p className="text-[13px] text-gray-600 leading-relaxed mb-5">Ban biên tập luôn hoan nghênh và tiếp nhận các bài viết phân tích, nghiên cứu chuyên sâu từ các chuyên gia, luật sư và nhà nghiên cứu.</p>
                             <div className="space-y-3">
                                 <a href="mailto:banbientap@cplqg.vn" className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-[#0f4c81] hover:bg-blue-800 text-white font-bold rounded-lg transition-colors text-[13px] shadow-sm">

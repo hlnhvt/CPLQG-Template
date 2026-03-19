@@ -58,7 +58,7 @@ const UserDashboardLayout = () => {
         { path: '/ca-nhan/chu-de-dien-dan', icon: MessageSquare, label: 'Trạm quản lý chủ đề diễn đàn' },
         { path: '/ca-nhan/tin-bai', icon: LayoutDashboard, label: 'Tin bài cộng tác viên' },
         { path: '/ca-nhan/dang-ky-cong-tac-vien', icon: PenTool, label: 'Đăng ký cộng tác viên' },
-        { path: '/ca-nhan/cau-hoi-ca-nhan', icon: HelpCircle, label: 'Quản lý câu hỏi pháp luật' },
+        { path: '/ca-nhan/cau-hoi-ca-nhan', icon: HelpCircle, label: 'Quản lý câu hỏi của tôi' },
     ];
 
     return (

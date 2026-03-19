@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Heart, MessageSquare, Trash2, Edit3, MoreVertical, FileText, CheckCircle, Clock } from 'lucide-react';
+import { Search, Heart, MessageSquare, Trash2, Edit3, MoreVertical, FileText, CheckCircle, Clock, Activity, Globe, Laptop, Smartphone, Monitor, Info, ChevronDown, ChevronUp, XCircle, AlertCircle, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const MOCK_FAVORITES = [
@@ -15,11 +15,47 @@ const MOCK_COMMENTS = [
     { id: 103, articleTitle: 'Báo cáo tiếp thu Luật Đất đai mới', content: 'Cảm ơn cơ quan soạn thảo đã lắng nghe và giải trình rất cặn kẽ các ý kiến của người dân ở kỳ trước.', status: 'published', date: '05/03/2026 09:12', url: '#' }
 ];
 
+const MOCK_ACTIVITY_LOGS = [
+    { id: 1001, time: '14:30:45', date: '19/03/2026', timezone: 'GMT+7', action: 'Đăng nhập hệ thống (Thành công)', status: 'success', link: '/dang-nhap', linkTitle: 'Trang Đăng nhập', deviceName: 'MacBook Pro 16"', ip: '113.160.225.124', userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36...', deviceType: 'desktop', os: 'macOS Sonoma', browser: 'Chrome 122' },
+    { id: 1002, time: '14:35:12', date: '19/03/2026', timezone: 'GMT+7', action: 'Xem bài viết: "Quy định mới về bảo hiểm thất nghiệp từ 2026"', status: 'success', link: '/tin-tuc/quy-dinh-moi-bao-hiem-that-nghiep', linkTitle: 'Bài viết Tin tức', deviceName: 'MacBook Pro 16"', ip: '113.160.225.124', userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36...', deviceType: 'desktop', os: 'macOS Sonoma', browser: 'Chrome 122' },
+    { id: 1003, time: '09:15:20', date: '18/03/2026', timezone: 'GMT+7', action: 'Bình luận tại bài viết: "Dự thảo Nghị định thu phí đường bộ cao tốc"', status: 'success', link: '#', linkTitle: 'Nhấn để xem bình luận', deviceName: 'iPhone 15 Pro Max', ip: '42.113.125.44', userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15...', deviceType: 'mobile', os: 'iOS 17.4', browser: 'Safari Mobile' },
+    { id: 1004, time: '21:40:05', date: '17/03/2026', timezone: 'GMT+7', action: 'Tạo chủ đề diễn đàn: "Hỏi đáp về thủ tục thừa kế đất đai"', status: 'warning', link: '/ca-nhan/chu-de-dien-dan', linkTitle: 'Quản lý chủ đề (Đang chờ duyệt)', deviceName: 'iPad Air 5', ip: '14.161.45.221', userAgent: 'Mozilla/5.0 (iPad; CPU OS 17_2 like Mac OS X) AppleWebKit/605.1.15...', deviceType: 'tablet', os: 'iPadOS 17.2', browser: 'Safari' },
+    { id: 1005, time: '21:10:30', date: '17/03/2026', timezone: 'GMT+7', action: 'Đăng nhập hệ thống (Thất bại do sai mật khẩu)', status: 'danger', link: '/dang-nhap', linkTitle: 'Trang Đăng nhập', deviceName: 'iPad Air 5', ip: '14.161.45.221', userAgent: 'Mozilla/5.0 (iPad; CPU OS 17_2 like Mac OS X) AppleWebKit/605.1.15...', deviceType: 'tablet', os: 'iPadOS 17.2', browser: 'Safari' },
+    { id: 1006, time: '10:05:11', date: '15/03/2026', timezone: 'GMT+7', action: 'Lưu văn bản "Luật Đất đai số 31/2024/QH15" vào danh sách yêu thích', status: 'success', link: '#', linkTitle: 'Văn bản Đất đai (Đã lưu)', deviceName: 'PC Windows 11', ip: '115.79.144.12', userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36...', deviceType: 'desktop', os: 'Windows 11', browser: 'Edge 121' },
+];
+
 const UserHistoryPage = () => {
     const [activeTab, setActiveTab] = useState('favorites');
     const [searchTerm, setSearchTerm] = useState('');
     const [favorites, setFavorites] = useState(MOCK_FAVORITES);
     const [comments, setComments] = useState(MOCK_COMMENTS);
+    const [activityLogs, setActivityLogs] = useState(MOCK_ACTIVITY_LOGS);
+    const [expandedLogs, setExpandedLogs] = useState([]);
+
+    const toggleExpandLog = (id) => {
+        setExpandedLogs(prev => 
+            prev.includes(id) ? prev.filter(logId => logId !== id) : [...prev, id]
+        );
+    };
+
+    const getDeviceIcon = (type) => {
+        if (type === 'mobile') return <Smartphone size={16} className="text-gray-500" />;
+        if (type === 'tablet') return <Laptop size={16} className="text-gray-500" />;
+        return <Monitor size={16} className="text-gray-500" />;
+    };
+
+    const getStatusStyle = (status) => {
+        switch (status) {
+            case 'success':
+                return { bg: 'bg-green-50/80 border-green-200', text: 'text-green-700', icon: <CheckCircle size={14} className="text-green-600" />, label: 'Thành công' };
+            case 'danger':
+                return { bg: 'bg-red-50/80 border-red-200', text: 'text-red-700', icon: <XCircle size={14} className="text-red-600" />, label: 'Thất bại' };
+            case 'warning':
+                return { bg: 'bg-yellow-50/80 border-yellow-200', text: 'text-yellow-700', icon: <AlertCircle size={14} className="text-yellow-600" />, label: 'Chờ duyệt / Cảnh báo' };
+            default:
+                return { bg: 'bg-gray-50/80 border-gray-200', text: 'text-gray-700', icon: <Info size={14} className="text-gray-500" />, label: 'Hoàn tất' };
+        }
+    };
 
     const handleRemoveFavorite = (id) => {
         setFavorites(favorites.filter(f => f.id !== id));
@@ -37,21 +73,28 @@ const UserHistoryPage = () => {
             </div>
 
             {/* Tabs */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-2 mb-6">
-                <div className="flex bg-gray-50 p-1 rounded-lg">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-2 mb-6 overflow-x-auto scrollbar-hide">
+                <div className="flex bg-gray-50 p-1 rounded-lg min-w-max">
                     <button 
                         onClick={() => setActiveTab('favorites')}
-                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-medium rounded-md transition-all ${activeTab === 'favorites' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600 hover:text-gray-900 duration-200'}`}
+                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-md transition-all ${activeTab === 'favorites' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600 hover:text-gray-900 duration-200'}`}
                     >
                         <Heart size={16} className={activeTab === 'favorites' ? 'fill-blue-100' : ''} /> 
-                        Nội dung đã Yêu thích <span className="hidden sm:inline-block ml-1 bg-gray-100 px-2 py-0.5 rounded-full text-xs text-gray-500">{favorites.length}</span>
+                        Đã Yêu thích <span className="hidden sm:inline-block ml-1 bg-gray-100 px-2 py-0.5 rounded-full text-xs text-gray-500">{favorites.length}</span>
                     </button>
                     <button 
                         onClick={() => setActiveTab('comments')}
-                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-medium rounded-md transition-all ${activeTab === 'comments' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600 hover:text-gray-900 duration-200'}`}
+                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-md transition-all ${activeTab === 'comments' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600 hover:text-gray-900 duration-200'}`}
                     >
                         <MessageSquare size={16} className={activeTab === 'comments' ? 'fill-blue-100' : ''} /> 
-                        Bình luận của tôi <span className="hidden sm:inline-block ml-1 bg-gray-100 px-2 py-0.5 rounded-full text-xs text-gray-500">{comments.length}</span>
+                        Bình luận <span className="hidden sm:inline-block ml-1 bg-gray-100 px-2 py-0.5 rounded-full text-xs text-gray-500">{comments.length}</span>
+                    </button>
+                    <button 
+                        onClick={() => setActiveTab('activities')}
+                        className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-md transition-all ${activeTab === 'activities' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600 hover:text-gray-900 duration-200'}`}
+                    >
+                        <Activity size={16} /> 
+                        Lịch sử hoạt động
                     </button>
                 </div>
             </div>
@@ -181,6 +224,109 @@ const UserHistoryPage = () => {
                                     <p>Bạn chưa có bình luận nào.</p>
                                 </div>
                             )}
+                        </div>
+                    </div>
+                )}
+                
+                {/* ACTIVITIES TAB */}
+                {activeTab === 'activities' && (
+                    <div className="animate-fadeIn p-6">
+                        <div className="mb-6 bg-blue-50/50 p-4 border border-blue-100 rounded-lg flex items-start gap-3 text-blue-800 text-sm">
+                            <Info size={18} className="shrink-0 mt-0.5" />
+                            <p>Hệ thống ghi nhận chi tiết lịch sử hoạt động của bạn trên Cổng thông tin nhằm tăng cường bảo mật và hỗ trợ cá nhân hóa trải nghiệm. Dữ liệu này được đối chiếu chính xác theo múi giờ bạn đang sử dụng.</p>
+                        </div>
+                        
+                        <div className="relative border-l-2 border-gray-100 ml-4 pl-6 space-y-6">
+                            {activityLogs.map((log) => {
+                                const isExpanded = expandedLogs.includes(log.id);
+                                const statusTheme = getStatusStyle(log.status);
+                                
+                                return (
+                                    <div key={log.id} className="relative">
+                                        {/* Timeline dot */}
+                                        <div className="absolute -left-[31px] top-4 w-4 h-4 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center shadow-sm z-10">
+                                            <div className={`w-2 h-2 rounded-full ${
+                                                log.status === 'danger' ? 'bg-red-500' :
+                                                log.status === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'
+                                            }`}></div>
+                                        </div>
+                                        
+                                        <div className={`bg-white border text-gray-800 border-gray-200 rounded-xl transition-all duration-300 shadow-sm hover:shadow-md ${isExpanded ? 'pb-5' : ''}`}>
+                                            {/* Header (Always Visible, Clickable) */}
+                                            <div 
+                                                className={`flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 p-5 cursor-pointer select-none hover:bg-gray-50/50 transition-colors ${isExpanded ? 'border-b border-gray-100' : 'rounded-xl'}`}
+                                                onClick={() => toggleExpandLog(log.id)}
+                                            >
+                                                <div className="flex-1 pr-4">
+                                                    <div className="flex items-center gap-2 mb-1">
+                                                        <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-bold border ${statusTheme.bg} ${statusTheme.text} uppercase tracking-wide`}>
+                                                            {statusTheme.icon} {statusTheme.label}
+                                                        </span>
+                                                    </div>
+                                                    <h3 className="font-bold text-[15px] text-gray-900 group-hover:text-blue-600 transition-colors">{log.action}</h3>
+                                                </div>
+                                                <div className="flex items-center gap-3 w-full sm:w-auto mt-2 sm:mt-0">
+                                                    <div className="flex items-center gap-1.5 text-sm font-semibold text-blue-600 bg-blue-50 px-3 py-1.5 rounded-md shadow-sm border border-blue-100/50">
+                                                        <Clock size={14} />
+                                                        <span>{log.time} - {log.date} ({log.timezone})</span>
+                                                    </div>
+                                                    <div className="shrink-0 text-gray-400 hover:text-blue-600 transition-colors p-1 bg-gray-50 rounded-md border border-transparent group-hover:border-gray-200">
+                                                        {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            {/* Expandable Details Grid */}
+                                            {isExpanded && (
+                                                <div className="px-5 pt-4 animate-fadeIn">
+                                                    <div className="flex flex-col gap-4">
+                                                        {/* Link Information */}
+                                                        {log.link && (
+                                                            <div className="bg-white border text-[13px] border-blue-100 rounded-lg p-3 flex items-center gap-2">
+                                                                <span className="text-gray-500 font-semibold uppercase text-[11px] tracking-wider shrink-0 w-24">Link chức năng:</span>
+                                                                <Link to={log.link} className="flex-1 font-semibold text-blue-600 hover:underline hover:text-blue-800 flex items-center gap-1.5 truncate" title={log.link}>
+                                                                    <ExternalLink size={14} className="shrink-0" />
+                                                                    {log.linkTitle || log.link}
+                                                                </Link>
+                                                            </div>
+                                                        )}
+                                                        
+                                                        {/* Device Info */}
+                                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-[13px] bg-gray-50/50 p-4 rounded-lg border border-gray-100">
+                                                            <div className="space-y-1.5">
+                                                                <span className="text-gray-500 font-medium block uppercase text-[11px] tracking-wider">Thông tin thiết bị</span>
+                                                                <div className="font-semibold text-gray-900 flex items-center gap-1.5">
+                                                                    {getDeviceIcon(log.deviceType)} {log.deviceName}
+                                                                </div>
+                                                            </div>
+                                                            <div className="space-y-1.5">
+                                                                <span className="text-gray-500 font-medium block uppercase text-[11px] tracking-wider">Địa chỉ IP</span>
+                                                                <div className="font-semibold text-gray-900 flex items-center gap-1.5">
+                                                                    <Globe size={14} className="text-[#0f4c81]"/> {log.ip}
+                                                                </div>
+                                                            </div>
+                                                            <div className="space-y-1.5">
+                                                                <span className="text-gray-500 font-medium block uppercase text-[11px] tracking-wider">Hệ điều hành</span>
+                                                                <div className="font-semibold text-gray-900">{log.os}</div>
+                                                            </div>
+                                                            <div className="space-y-1.5">
+                                                                <span className="text-gray-500 font-medium block uppercase text-[11px] tracking-wider">Trình duyệt & Ứng dụng</span>
+                                                                <div className="font-semibold text-gray-900">{log.browser}</div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        {/* User Agent */}
+                                                        <div className="bg-gray-100/80 rounded-lg p-3 text-[11px] text-gray-600 font-mono break-all leading-relaxed shadow-inner" title="Chuỗi User-Agent đầy đủ">
+                                                            <span className="font-bold text-gray-700 mr-2 uppercase tracking-wide">User-Agent:</span> 
+                                                            {log.userAgent}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 )}

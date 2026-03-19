@@ -69,7 +69,7 @@ const CauHoiCaNhanDetailPage = () => {
             <div className="bg-white border-b shadow-sm sticky top-0 z-10">
                 <div className="container mx-auto px-4 py-3">
                     <button onClick={() => navigate('/ca-nhan/cau-hoi-ca-nhan')} className="flex items-center text-[#0f4c81] font-bold hover:underline transition">
-                        <ChevronLeft size={20} /> Quay lại Danh sách Quản lý câu hỏi pháp luật
+                        <ChevronLeft size={20} /> Quay lại Danh sách của tôi
                     </button>
                 </div>
             </div>

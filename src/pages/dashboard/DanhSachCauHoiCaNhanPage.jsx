@@ -37,7 +37,7 @@ const DanhSachCauHoiCaNhanPage = () => {
                         <span>/</span>
                         <Link to="/ca-nhan/trang-chu" className="hover:text-[#0f4c81]">Trang cá nhân</Link>
                         <span>/</span>
-                        <span className="text-[#0f4c81] font-bold line-clamp-1 flex-1">Quản lý câu hỏi pháp luật</span>
+                        <span className="text-[#0f4c81] font-bold line-clamp-1 flex-1">Quản lý câu hỏi của tôi</span>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@ const DanhSachCauHoiCaNhanPage = () => {
                 {/* Main Content */}
                 <div className="w-full space-y-6">
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                        <h1 className="text-3xl font-bold text-[#0f4c81]">Quản lý Câu hỏi pháp luật</h1>
+                        <h1 className="text-3xl font-bold text-[#0f4c81]">Quản lý Câu hỏi của tôi</h1>
                         <Link to="/cau-hoi-phap-luat" className="bg-[#0f4c81] text-white px-6 py-2.5 rounded-lg hover:bg-blue-800 transition font-bold shadow-md flex items-center gap-2">
                             <PlusCircle size={20} /> Đặt câu hỏi mới
                         </Link>
