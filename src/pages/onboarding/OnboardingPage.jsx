@@ -271,7 +271,7 @@ const OnboardingPage = () => {
     );
 
     return (
-        <div className="min-h-screen relative overflow-hidden flex items-center justify-center w-full bg-[#061b36]">
+        <div className="onboarding-theme-isolated min-h-screen relative overflow-hidden flex items-center justify-center w-full bg-[#061b36]">
             {/* Background elements */}
             <div className="absolute inset-0 z-0">
                 <div

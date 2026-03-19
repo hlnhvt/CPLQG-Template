@@ -34,7 +34,7 @@
   --tw-yellow-300: 253 224 71;
 }
 
-html.theme-dark {
+html.theme-dark:not(:has(.onboarding-theme-isolated)) {
   --bg-page: #1a1a1a;
   --bg-card: #2d2d2d;
   --text-main: #e0e0e0;
@@ -52,7 +52,7 @@ html.theme-dark {
   --tw-white: 224 224 224;
 }
 
-html.theme-high-contrast-light {
+html.theme-high-contrast-light:not(:has(.onboarding-theme-isolated)) {
   --bg-page: #ffffff;
   --bg-card: #ffffff;
   --text-main: #000000;
@@ -71,7 +71,7 @@ html.theme-high-contrast-light {
   --tw-blue-900: 0 0 0;
 }
 
-html.theme-high-contrast-dark {
+html.theme-high-contrast-dark:not(:has(.onboarding-theme-isolated)) {
   --bg-page: #000000;
   --bg-card: #000000;
   --text-main: #ffff00;
@@ -102,12 +102,12 @@ html.theme-high-contrast-dark {
   }
 
   /* Force backgrounds in non-default themes */
-  html:not(.theme-default) .relative.bg-cover,
-  html:not(.theme-default) .relative.bg-center,
-  html:not(.theme-default) [style*="backgroundImage"],
-  html:not(.theme-default) .bg-gray-50,
-  html:not(.theme-default) .bg-blue-50,
-  html:not(.theme-default) .bg-white {
+  html:not(.theme-default):not(:has(.onboarding-theme-isolated)) .relative.bg-cover,
+  html:not(.theme-default):not(:has(.onboarding-theme-isolated)) .relative.bg-center,
+  html:not(.theme-default):not(:has(.onboarding-theme-isolated)) [style*="backgroundImage"],
+  html:not(.theme-default):not(:has(.onboarding-theme-isolated)) .bg-gray-50,
+  html:not(.theme-default):not(:has(.onboarding-theme-isolated)) .bg-blue-50,
+  html:not(.theme-default):not(:has(.onboarding-theme-isolated)) .bg-white {
     background-image: none !important;
     background-color: var(--bg-page) !important;
   }
@@ -136,8 +136,8 @@ html.theme-high-contrast-dark {
   }
 
   /* Extreme High Contrast Overrides */
-  html.theme-high-contrast-dark *,
-  html.theme-high-contrast-light * {
+  html.theme-high-contrast-dark:not(:has(.onboarding-theme-isolated)) *,
+  html.theme-high-contrast-light:not(:has(.onboarding-theme-isolated)) * {
     background-image: none !important;
     box-shadow: none !important;
     filter: none !important;
@@ -151,16 +151,16 @@ html.theme-high-contrast-dark {
   }
 
   /* HC Dark Visibility Overrides */
-  html.theme-high-contrast-dark * {
+  html.theme-high-contrast-dark:not(:has(.onboarding-theme-isolated)) * {
     color: #ffff00 !important;
     border-color: #ffffff !important;
     background-color: #000000 !important;
   }
 
-  html.theme-high-contrast-dark .text-white,
-  html.theme-high-contrast-dark .text-gray-400,
-  html.theme-high-contrast-dark h1,
-  html.theme-high-contrast-dark h2 {
+  html.theme-high-contrast-dark:not(:has(.onboarding-theme-isolated)) .text-white,
+  html.theme-high-contrast-dark:not(:has(.onboarding-theme-isolated)) .text-gray-400,
+  html.theme-high-contrast-dark:not(:has(.onboarding-theme-isolated)) h1,
+  html.theme-high-contrast-dark:not(:has(.onboarding-theme-isolated)) h2 {
     color: #ffffff !important;
   }
 
@@ -173,7 +173,7 @@ html.theme-high-contrast-dark {
   }
 
   /* HC Light Visibility Overrides */
-  html.theme-high-contrast-light * {
+  html.theme-high-contrast-light:not(:has(.onboarding-theme-isolated)) * {
     color: #000000 !important;
     border-color: #000000 !important;
     background-color: #ffffff !important;
@@ -187,21 +187,21 @@ html.theme-high-contrast-dark {
     border: none !important;
   }
 
-  html.theme-high-contrast-light a,
-  html.theme-high-contrast-light .text-primary,
-  html.theme-high-contrast-light .text-blue-600 {
+  html.theme-high-contrast-light:not(:has(.onboarding-theme-isolated)) a,
+  html.theme-high-contrast-light:not(:has(.onboarding-theme-isolated)) .text-primary,
+  html.theme-high-contrast-light:not(:has(.onboarding-theme-isolated)) .text-blue-600 {
     color: #0000ff !important;
     text-decoration: underline;
   }
 
   /* Neutralize transparency */
-  html.theme-high-contrast-dark .text-transparent,
-  html.theme-high-contrast-light .text-transparent {
+  html.theme-high-contrast-dark:not(:has(.onboarding-theme-isolated)) .text-transparent,
+  html.theme-high-contrast-light:not(:has(.onboarding-theme-isolated)) .text-transparent {
     color: inherit !important;
   }
 }
 
-html.theme-grayscale {
+html.theme-grayscale:not(:has(.onboarding-theme-isolated)) {
   filter: grayscale(100%);
 }
 
