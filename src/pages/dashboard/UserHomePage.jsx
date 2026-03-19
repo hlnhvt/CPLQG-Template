@@ -184,7 +184,7 @@ const UserHomePage = () => {
                         <div 
                             key={`user-home-${block.id}`} 
                             className={`${wClass} px-3 md:px-4 lg:px-5 mb-6 md:mb-8 lg:mb-10 animate-slideUpFade`}
-                            style={{ animationDelay: `${(idx + 1) * 150}ms`, opacity: 0 }}
+                            style={{ animationDelay: `${(idx + 1) * 150}ms` }}
                         >
                             <div className="bg-white p-5 sm:p-6 lg:p-7 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col relative overflow-hidden group">
                                 <div className="flex justify-between items-center mb-5 pb-3 border-b-2 border-gray-50">

@@ -179,7 +179,7 @@ const UserDashboardLayout = () => {
                         <div className={`bg-[#0f4c81] p-4 flex items-center transition-all duration-300 ${isCollapsed ? 'flex-col justify-center py-5' : 'justify-between'}`}>
                             <div className={`transition-all duration-300 overflow-hidden whitespace-nowrap ${isCollapsed ? 'w-0 opacity-0 h-0 hidden' : 'w-auto opacity-100'}`}>
                                 <h2 className="text-white font-bold text-lg mb-0.5 leading-tight">Khu vực cá nhân</h2>
-                                <p className="text-blue-200 text-[12px]">Quản lý tài khoản & Dịch vụ</p>
+                                <p className="text-white/80 text-[12px]">Quản lý tài khoản & Dịch vụ</p>
                             </div>
 
                             <button

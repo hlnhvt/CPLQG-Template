@@ -48,6 +48,25 @@ export default {
       backgroundImage: {
         'gradient-header': 'linear-gradient(135deg, var(--bg-header-top) 0%, var(--bg-header-bottom) 100%)',
       },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUpFade: {
+          '0%': { opacity: '0', transform: 'translateY(25px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideInRight: {
+          '0%': { opacity: '0', transform: 'translateX(25px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        }
+      },
+      animation: {
+        fadeIn: 'fadeIn 0.6s ease-out both',
+        slideUpFade: 'slideUpFade 0.7s cubic-bezier(0.16, 1, 0.3, 1) both',
+        slideInRight: 'slideInRight 0.6s ease-out both',
+      },
     },
   },
   plugins: [],
