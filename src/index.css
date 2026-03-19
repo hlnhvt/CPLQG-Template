@@ -65,8 +65,6 @@ html.theme-high-contrast-light {
   --hero-gradient-from: #000000;
   --hero-gradient-to: #000000;
 
-  --tw-white: 255 255 255;
-  --tw-black: 0 0 0;
   --tw-gray-50: 255 255 255;
   --tw-blue-600: 0 0 255;
   --tw-blue-800: 0 0 0;
@@ -86,8 +84,6 @@ html.theme-high-contrast-dark {
   --hero-gradient-from: #ffff00;
   --hero-gradient-to: #ffff00;
 
-  --tw-white: 0 0 0;
-  --tw-black: 255 255 255;
   --tw-gray-50: 0 0 0;
   --tw-blue-600: 255 255 0;
   --tw-blue-800: 255 255 0;

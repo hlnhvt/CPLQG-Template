@@ -67,7 +67,7 @@ const OnboardingPage = () => {
                     <img src="/logo.png" alt="Logo" className="w-16 h-16 object-contain" />
                 </div>
 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight mix-blend-overlay">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
                     Xin chào,<br /> <span className="text-blue-100">{user?.name || 'Nguyễn Anh Quân'}</span>
                 </h1>
 
