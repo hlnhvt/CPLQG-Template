@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Scale, ChevronRight, Tags } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Scale, ChevronRight, ChevronLeft, Calendar, Building2, Eye } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const VuViecDienHinhTGPLPage = () => {
@@ -7,12 +7,74 @@ const VuViecDienHinhTGPLPage = () => {
         window.scrollTo(0, 0);
     }, []);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
+
     const cases = [
-        { id: 1, title: 'Bảo vệ thành công quyền thừa kế cho trẻ em mồ côi tại tỉnh Hà Giang', tag: 'Dân sự - Thừa kế', author: 'Trung tâm TGPL tỉnh Hà Giang', views: 1205 },
-        { id: 2, title: 'Trợ giúp viên pháp lý bảo vệ miễn trách nhiệm hình sự cho người chưa thành niên', tag: 'Hình sự', author: 'Trung tâm TGPL TP. Hà Nội', views: 3450 },
-        { id: 3, title: 'Hỗ trợ pháp lý đòi lại sổ đỏ cho cụ giáo già neo đơn bị lừa đảo', tag: 'Đất đai', author: 'VPLS Công Lý', views: 2100 },
-        { id: 4, title: 'Bảo vệ quyền lợi hợp pháp cho nhóm công nhân bị sa thải trái pháp luật', tag: 'Lao động', author: 'Trung tâm TGPL tỉnh Đồng Nai', views: 890 },
+        {
+            id: 1,
+            title: 'Bảo vệ thành công quyền thừa kế cho trẻ em mồ côi tại tỉnh Hà Giang',
+            field: 'Dân sự - Thừa kế',
+            organization: 'Trung tâm TGPL tỉnh Hà Giang',
+            views: 1205,
+            date: '15/10/2023',
+            summary: 'Được Trợ giúp viên pháp lý tham gia tố tụng bảo vệ miễn phí, 3 anh em mồ côi cả cha lẫn mẹ tại huyện Xín Mần đã được Tòa án bảo vệ quyền thừa kế hợp pháp đối với mảnh đất của gia đình bị chú ruột chiếm đoạt từ nhiều năm trước.',
+            thumbnail: 'https://picsum.photos/400/300?random=11'
+        },
+        {
+            id: 2,
+            title: 'Trợ giúp viên pháp lý bảo vệ miễn trách nhiệm hình sự cho người chưa thành niên',
+            field: 'Hình sự',
+            organization: 'Trung tâm TGPL TP. Hà Nội',
+            views: 3450,
+            date: '02/09/2023',
+            summary: 'Với lập luận sắc bén và bằng chứng thuyết phục về hoàn cảnh gia đình, Trợ giúp viên pháp lý đã giúp một vị thành niên trộm cắp tài sản giá trị nhỏ do hoàn cảnh túng quẫn được miễn truy cứu trách nhiệm hình sự, mở ra cơ hội làm lại cuộc đời.',
+            thumbnail: 'https://picsum.photos/400/300?random=12'
+        },
+        {
+            id: 3,
+            title: 'Hỗ trợ pháp lý đòi lại sổ đỏ cho cụ giáo già neo đơn bị lừa đảo',
+            field: 'Đất đai - Dân sự',
+            organization: 'VPLS Công Lý',
+            views: 2100,
+            date: '28/08/2023',
+            summary: 'Một cụ bà 82 tuổi (cựu giáo chức) bị hàng xóm lừa ký giấy chuyển nhượng quyền sử dụng đất. Nhờ sự vào cuộc kịp thời của các Luật sư thực hiện TGPL, bản hợp đồng vô hiệu đã bị Tòa án hủy bỏ, trả lại tài sản duy nhất cho cụ.',
+            thumbnail: 'https://picsum.photos/400/300?random=13'
+        },
+        {
+            id: 4,
+            title: 'Bảo vệ quyền lợi hợp pháp cho nhóm công nhân bị sa thải trái pháp luật',
+            field: 'Lao động - Việc làm',
+            organization: 'Trung tâm TGPL tỉnh Đồng Nai',
+            views: 890,
+            date: '10/05/2023',
+            summary: 'Đại diện bảo vệ cho 15 công nhân bị công ty giày da sa thải trái quy định mà không bồi thường. Kết quả, Tòa án buộc công ty phải nhận lại người lao động làm việc và bồi thường tổng cộng hơn 800 triệu đồng tiền lương những ngày không được làm việc.',
+            thumbnail: 'https://picsum.photos/400/300?random=14'
+        },
+        {
+            id: 5,
+            title: 'Hòa giải thành công vụ việc tranh chấp nuôi con sau ly hôn',
+            field: 'Hôn nhân & Gia đình',
+            organization: 'Trung tâm TGPL tỉnh Thanh Hóa',
+            views: 1560,
+            date: '12/04/2023',
+            summary: 'Thông qua công tác tham gia hòa giải cơ sở tận tình, Trợ giúp viên đã giúp một cặp vợ chồng đạt được thỏa thuận về quyền nuôi con và cấp dưỡng, tránh đưa vụ việc ra xét xử căng thẳng, đảm bảo lợi ích tốt nhất cho đứa trẻ.',
+            thumbnail: 'https://picsum.photos/400/300?random=15'
+        },
+        {
+            id: 6,
+            title: 'Trợ giúp pháp lý lưu động, giúp đồng bào dân tộc thiểu số làm Giấy khai sinh',
+            field: 'Hành chính',
+            organization: 'Trung tâm TGPL tỉnh Lai Châu',
+            views: 742,
+            date: '05/03/2023',
+            summary: 'Tổ chức các chuyến TGPL lưu động đến các bản vùng sâu vùng xa, hỗ trợ trực tiếp hơn 40 hộ gia đình đồng bào dân tộc thiểu số hoàn thiện hồ sơ đăng ký khai sinh quá hạn cho trẻ em để các em được đến trường.',
+            thumbnail: 'https://picsum.photos/400/300?random=16'
+        }
     ];
+
+    const totalPages = Math.ceil(cases.length / itemsPerPage);
+    const paginatedCases = cases.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     return (
         <div className="bg-[#f4f7fb] min-h-screen pb-20 font-sans">
@@ -30,46 +92,78 @@ const VuViecDienHinhTGPLPage = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 max-w-[1200px] mt-8 flex flex-col lg:flex-row gap-8">
-                
-                <div className="flex-1">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {cases.map((item) => (
-                            <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:-translate-y-1 hover:shadow-md transition-all group flex flex-col h-full cursor-pointer">
-                                <div className="flex items-center gap-2 mb-4">
-                                    <span className="bg-blue-50 text-blue-700 text-[11px] font-bold px-2 py-1 rounded uppercase flex items-center gap-1 border border-blue-100">
-                                        <Tags size={12}/> {item.tag}
-                                    </span>
+            <div className="container mx-auto px-4 max-w-[1200px] mt-8">
+
+                <div className="w-full">
+                    <div className="flex flex-col gap-6">
+                        {paginatedCases.map((item) => (
+                            <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-all group flex flex-col md:flex-row gap-6 items-start cursor-pointer">
+                                {/* Thumbnail */}
+                                <div className="w-full md:w-[260px] shrink-0 overflow-hidden rounded-lg aspect-video md:aspect-[4/3] relative bg-gray-100 border border-gray-100">
+                                    <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <div className="absolute top-2 left-2 bg-blue-600/90 backdrop-blur text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider shadow-sm border border-blue-400/30">
+                                        {item.field}
+                                    </div>
                                 </div>
-                                <h2 className="text-[17px] font-bold text-gray-900 leading-snug mb-4 group-hover:text-blue-700 line-clamp-3">
-                                    {item.title}
-                                </h2>
-                                <div className="mt-auto flex items-center justify-between border-t border-gray-100 pt-4 text-sm text-gray-500 font-medium">
-                                    <span>Thực hiện: {item.author}</span>
-                                    <span>{item.views} lượt đọc</span>
+
+                                {/* Content */}
+                                <div className="flex-1 min-w-0 flex flex-col h-full justify-between">
+                                    <div>
+                                        <h2 className="text-[18px] font-bold text-gray-900 leading-snug mb-3 group-hover:text-blue-700 transition-colors line-clamp-2" title={item.title}>
+                                            {item.title}
+                                        </h2>
+                                        <p className="text-gray-600 text-[14px] leading-relaxed line-clamp-3 mb-4">
+                                            {item.summary}
+                                        </p>
+                                    </div>
+                                    <div className="flex flex-wrap items-center gap-y-2 gap-x-5 text-[13px] font-medium text-gray-500 mt-2">
+                                        <span className="flex items-center gap-1.5" title="Tổ chức thực hiện"><Building2 size={14} className="text-gray-400" /> {item.organization}</span>
+                                        <span className="flex items-center gap-1.5" title="Ngày đăng"><Calendar size={14} className="text-gray-400" /> {item.date}</span>
+                                        <span className="flex items-center gap-1.5 text-gray-400 ml-auto hidden sm:flex"><Eye size={14} /> {item.views}</span>
+                                    </div>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <div className="mt-8 text-center">
-                        <button className="px-6 py-2.5 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 font-bold rounded-lg shadow-sm">Xem tất cả</button>
-                    </div>
-                </div>
 
-                <aside className="w-full lg:w-[320px] shrink-0 space-y-6">
-                    <div className="bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-xl shadow-md text-white p-6 relative overflow-hidden">
-                        <div className="absolute -right-4 -bottom-4 opacity-20">
-                            <Scale size={150} />
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                        <div className="mt-10 mb-6 flex justify-center">
+                            <nav className="flex items-center gap-1 bg-white px-2 py-2 rounded-xl shadow-sm border border-gray-200" aria-label="Pagination">
+                                <button
+                                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                    disabled={currentPage === 1}
+                                    className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-blue-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-500"
+                                >
+                                    <span className="sr-only">Trang trước</span>
+                                    <ChevronLeft size={20} />
+                                </button>
+
+                                {Array.from({ length: totalPages }).map((_, i) => (
+                                    <button
+                                        key={i}
+                                        onClick={() => setCurrentPage(i + 1)}
+                                        className={`w-10 h-10 flex items-center justify-center text-sm font-bold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 ${currentPage === i + 1
+                                                ? 'bg-blue-600 text-white shadow-md shadow-blue-500/30'
+                                                : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                                            }`}
+                                    >
+                                        {i + 1}
+                                    </button>
+                                ))}
+
+                                <button
+                                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                    disabled={currentPage === totalPages}
+                                    className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-blue-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-500"
+                                >
+                                    <span className="sr-only">Trang sau</span>
+                                    <ChevronRight size={20} />
+                                </button>
+                            </nav>
                         </div>
-                        <div className="relative z-10">
-                            <h3 className="font-bold text-lg mb-2">Chia sẻ vụ việc nổi bật</h3>
-                            <p className="text-emerald-100 text-sm mb-4 leading-relaxed">Lan tỏa những câu chuyện pháp lý ý nghĩa, kinh nghiệm tranh tụng từ thực tiễn để tham khảo, học tập.</p>
-                            <button className="bg-white text-emerald-700 font-bold px-4 py-2 rounded-lg text-sm shadow-sm hover:bg-emerald-50 transition-colors">
-                                Đóng góp bài viết
-                            </button>
-                        </div>
-                    </div>
-                </aside>
+                    )}
+                </div>
 
             </div>
         </div>
