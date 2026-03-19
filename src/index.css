@@ -1,47 +1,194 @@
+:root {
+  /* Core UI Tokens - HEX for base rules */
+  --bg-page: #f4f7fb;
+  --bg-card: #ffffff;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --text-on-blue: #ffffff;
+  --bg-header-top: #3b82f6;
+  --bg-header-bottom: #1e3a8a;
+  --link-color: #2563eb;
+  --border-color: #e5e7eb;
+  --hero-gradient-from: #dbeafe;
+  --hero-gradient-to: #ffffff;
+
+  /* Tailwind Palette - RGB format */
+  --tw-white: 255 255 255;
+  --tw-black: 0 0 0;
+  --tw-gray-50: 249 250 251;
+  --tw-gray-100: 243 244 246;
+  --tw-gray-200: 229 231 235;
+  --tw-gray-300: 209 213 219;
+  --tw-gray-400: 156 163 175;
+  --tw-gray-500: 107 114 128;
+  --tw-gray-600: 75 85 99;
+  --tw-gray-700: 55 65 81;
+  --tw-gray-800: 31 41 55;
+  --tw-gray-900: 17 24 39;
+  
+  --tw-blue-600: 37 99 235;
+  --tw-blue-800: 30 64 175;
+  --tw-blue-900: 30 58 138;
+
+  --tw-red-500: 239 68 68;
+  --tw-yellow-300: 253 224 71;
+}
+
+html.theme-dark {
+  --bg-page: #1a1a1a;
+  --bg-card: #2d2d2d;
+  --text-main: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --text-on-blue: #ffffff;
+  --bg-header-top: #151515;
+  --bg-header-bottom: #000000;
+  --link-color: #60a5fa;
+  --border-color: #404040;
+  --hero-gradient-from: #60a5fa;
+  --hero-gradient-to: #ffffff;
+
+  --tw-gray-50: 26 26 26;
+  --tw-blue-800: 45 45 45;
+  --tw-white: 224 224 224;
+}
+
+html.theme-high-contrast-light {
+  --bg-page: #ffffff;
+  --bg-card: #ffffff;
+  --text-main: #000000;
+  --text-muted: #000000;
+  --text-on-blue: #000000;
+  --bg-header-top: #ffffff;
+  --bg-header-bottom: #ffffff;
+  --link-color: #0000ff;
+  --border-color: #000000;
+  --hero-gradient-from: #000000;
+  --hero-gradient-to: #000000;
+
+  --tw-white: 255 255 255;
+  --tw-black: 0 0 0;
+  --tw-gray-50: 255 255 255;
+  --tw-blue-600: 0 0 255;
+  --tw-blue-800: 0 0 0;
+  --tw-blue-900: 0 0 0;
+}
+
+html.theme-high-contrast-dark {
+  --bg-page: #000000;
+  --bg-card: #000000;
+  --text-main: #ffff00;
+  --text-muted: #ffffff;
+  --text-on-blue: #ffff00;
+  --bg-header-top: #000000;
+  --bg-header-bottom: #000000;
+  --link-color: #00ffff;
+  --border-color: #ffffff;
+  --hero-gradient-from: #ffff00;
+  --hero-gradient-to: #ffff00;
+
+  --tw-white: 0 0 0;
+  --tw-black: 255 255 255;
+  --tw-gray-50: 0 0 0;
+  --tw-blue-600: 255 255 0;
+  --tw-blue-800: 255 255 0;
+  --tw-blue-900: 0 0 0;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply antialiased text-gray-800 bg-gray-50;
-    font-family: 'Inter', 'Roboto', sans-serif;
+    @apply antialiased transition-colors duration-200;
+    background-color: var(--bg-page);
+    color: var(--text-main);
   }
 
-  .animate-fadeInLoading {
-    animation: fadeInLoading 0.5s ease-out;
+  /* Force backgrounds in non-default themes */
+  html:not(.theme-default) .relative.bg-cover,
+  html:not(.theme-default) .relative.bg-center,
+  html:not(.theme-default) [style*="backgroundImage"],
+  html:not(.theme-default) .bg-gray-50,
+  html:not(.theme-default) .bg-blue-50,
+  html:not(.theme-default) .bg-white {
+    background-image: none !important;
+    background-color: var(--bg-page) !important;
   }
-  
-  @keyframes pulse-slow {
-    0%, 100% { opacity: 0.1; transform: scale(1); }
-    50% { opacity: 0.3; transform: scale(1.05); }
+
+  /* Improve text readability in Dark Mode (Theme Dark) */
+  html.theme-dark .text-\[\#0f4c81\],
+  html.theme-dark .text-\[\#00529c\],
+  html.theme-dark .text-\[\#064d8a\],
+  html.theme-dark .text-primary,
+  html.theme-dark .text-blue-600,
+  html.theme-dark .text-blue-700,
+  html.theme-dark .text-blue-800,
+  html.theme-dark .text-blue-900 {
+    color: #93c5fd !important; /* Tailwind blue-300 for good contrast */
   }
-  
-  @keyframes scaleIn {
-    from { transform: scale(0); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+
+  html.theme-dark .text-gray-600,
+  html.theme-dark .text-gray-700,
+  html.theme-dark .text-gray-800,
+  html.theme-dark .text-gray-900 {
+    color: #d1d5db !important; /* Tailwind gray-300 for good contrast */
   }
-  
-  @keyframes slideUpFade {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+
+  html.theme-dark .bg-\[\#0f4c81\] {
+    background-color: #1e3a8a !important; /* Darker blue for backgrounds to not blind users */
   }
-  
-  .animate-pulse-slow {
-    animation: pulse-slow 8s infinite ease-in-out alternate;
+
+  /* Extreme High Contrast Overrides */
+  html.theme-high-contrast-dark *,
+  html.theme-high-contrast-light * {
+    background-image: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    text-shadow: none !important;
+    
+    /* DEFINITIVE FIX for Hero Subtitle and invisible text */
+    -webkit-text-fill-color: initial !important;
+    background-clip: initial !important;
+    -webkit-background-clip: initial !important;
+    text-fill-color: initial !important;
   }
-  
-  .animate-scaleIn {
-    animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* HC Dark Visibility Overrides */
+  html.theme-high-contrast-dark * {
+    color: #ffff00 !important;
+    border-color: #ffffff !important;
+    background-color: #000000 !important;
   }
-  
-  .animate-slideUpFade {
-    animation: slideUpFade 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+
+  html.theme-high-contrast-dark .text-white,
+  html.theme-high-contrast-dark .text-gray-400,
+  html.theme-high-contrast-dark h1,
+  html.theme-high-contrast-dark h2 {
+    color: #ffffff !important;
+  }
+
+  /* HC Light Visibility Overrides */
+  html.theme-high-contrast-light * {
+    color: #000000 !important;
+    border-color: #000000 !important;
+    background-color: #ffffff !important;
+  }
+
+  html.theme-high-contrast-light a,
+  html.theme-high-contrast-light .text-primary,
+  html.theme-high-contrast-light .text-blue-600 {
+    color: #0000ff !important;
+    text-decoration: underline;
+  }
+
+  /* Neutralize transparency */
+  html.theme-high-contrast-dark .text-transparent,
+  html.theme-high-contrast-light .text-transparent {
+    color: inherit !important;
   }
 }
 
-@layer utilities {
-  .bg-gradient-header {
-    background: linear-gradient(135deg, #0f4c81 0%, #1b64aa 100%);
-  }
+html.theme-grayscale {
+  filter: grayscale(100%);
 }

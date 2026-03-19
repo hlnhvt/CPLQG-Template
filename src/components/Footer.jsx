@@ -12,7 +12,7 @@ const Footer = () => {
     };
 
     return (
-        <footer className="relative bg-gradient-to-r from-[#00b2e3] via-[#026bd5] to-[#011466] text-white overflow-hidden text-[14px]">
+        <footer className="relative bg-gradient-header text-white overflow-hidden text-[14px]">
             {/* Background Pattern Overlay (Mimics Trống đồng drum pattern) */}
             <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden opacity-10">
                 <div className="w-[1200px] h-[1200px] rounded-full border-[1px] border-white/30 absolute top-[30%] left-1/2 -translate-x-1/2"></div>
@@ -66,7 +66,7 @@ const Footer = () => {
                             {/* Facebook SVG Logo - White circle with blue 'f' */}
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="12" cy="12" r="12" fill="white" />
-                                <path d="M14.9 12H13V19H10V12H8V9H10V7.5C10 5.2 11.2 4 14 4H16V7H14.5C13.5 7 13 7.5 13 8.5V9H16L14.9 12Z" fill="#026bd5" />
+                                <path d="M14.9 12H13V19H10V12H8V9H10V7.5C10 5.2 11.2 4 14 4H16V7H14.5C13.5 7 13 7.5 13 8.5V9H16L14.9 12Z" fill="var(--link-color)" />
                             </svg>
                         </a>
                     </div>
@@ -84,7 +84,7 @@ const Footer = () => {
             </div>
 
             {/* Bottom Absolute Center Button (Toggle up) */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60px] h-[24px] bg-[#1d4ed8] hover:bg-[#2563eb] cursor-pointer rounded-t-xl flex items-center justify-center transition-colors shadow-lg z-20" title="Collapse Footer">
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60px] h-[24px] bg-primary hover:bg-primary-light cursor-pointer rounded-t-xl flex items-center justify-center transition-colors shadow-lg z-20" title="Collapse Footer">
                 <ChevronUp size={20} className="text-white" />
             </div>
 
@@ -100,7 +100,7 @@ const Footer = () => {
                 </button>
 
                 {/* Live support button */}
-                <button className="bg-[#00b2e3] hover:bg-[#009acb] shadow-xl text-white font-semibold flex items-center gap-2 px-4 py-2.5 rounded-full transition-transform hover:scale-105 border border-white/20">
+                <button className="bg-primary hover:bg-primary-light shadow-xl text-white font-semibold flex items-center gap-2 px-4 py-2.5 rounded-full transition-transform hover:scale-105 border border-white/20">
                     <MessageCircle size={18} />
                     <span className="text-[14px]">Hỗ trợ trực tuyến</span>
                 </button>

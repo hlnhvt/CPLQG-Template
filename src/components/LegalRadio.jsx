@@ -25,7 +25,7 @@ const LegalRadio = () => {
 
     return (
         <div className="container mx-auto px-4 py-12">
-            <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-[#0f4c81] pb-2 inline-block mb-8 uppercase tracking-wide">
+            <h2 className="text-2xl font-bold text-primary border-b-2 border-primary pb-2 inline-block mb-8 uppercase tracking-wide">
                 Radio pháp luật
             </h2>
 
@@ -40,7 +40,7 @@ const LegalRadio = () => {
                         </div>
                         <div className="p-4 flex flex-col justify-between h-[180px]">
                             <div>
-                                <h4 className="font-bold text-[#0f4c81] hover:text-blue-600 cursor-pointer line-clamp-2 leading-snug mb-2">
+                                <h4 className="font-bold text-primary hover:text-blue-600 cursor-pointer line-clamp-2 leading-snug mb-2">
                                     {item.title}
                                 </h4>
                                 <p className="text-sm text-gray-600 line-clamp-3 mb-2">{item.desc}</p>
@@ -57,7 +57,7 @@ const LegalRadio = () => {
             </div>
 
             <div className="text-center mt-8">
-                <button className="border border-[#0f4c81] text-[#0f4c81] rounded-full px-8 py-2 hover:bg-[#0f4c81] hover:text-white transition font-medium">
+                <button className="border border-primary text-primary rounded-full px-8 py-2 hover:bg-primary hover:text-white transition font-medium">
                     Xem tất cả video / radio
                 </button>
             </div>

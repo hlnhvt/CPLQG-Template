@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const PoliciesAndLife = () => {
     return (
         <div className="container mx-auto px-4 pt-4 pb-8">
-            <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-[#0f4c81] pb-2 inline-block mb-6 uppercase tracking-wide">
+            <h2 className="text-2xl font-bold text-primary border-b-2 border-primary pb-2 inline-block mb-6 uppercase tracking-wide">
                 Chính sách & Cuộc sống
             </h2>
 
@@ -14,7 +14,7 @@ const PoliciesAndLife = () => {
                 {/* Left - Ban chỉ đạo */}
                 <div>
                     <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-lg font-bold text-[#0f4c81]">Ban Chỉ đạo Nghị quyết số 06-NQ/TW</h3>
+                        <h3 className="text-lg font-bold text-primary">Ban Chỉ đạo Nghị quyết số 06-NQ/TW</h3>
                     </div>
 
                     <div className="grid grid-cols-1 gap-6">
@@ -27,7 +27,7 @@ const PoliciesAndLife = () => {
                             </div>
                             <div className="md:w-1/2 flex flex-col justify-center">
                                 <Link to="/news/1">
-                                    <h4 className="font-bold text-[#0f4c81] text-base hover:text-blue-600 cursor-pointer line-clamp-3 leading-snug">
+                                    <h4 className="font-bold text-primary text-base hover:text-blue-600 cursor-pointer line-clamp-3 leading-snug">
                                         Tổ chức Diễn đàn Thưởng đỉnh về Pháp luật và Phát triển nhân dịp Kỷ niệm Ngày Pháp luật Việt Nam
                                     </h4>
                                 </Link>
@@ -44,7 +44,7 @@ const PoliciesAndLife = () => {
                             </div>
                             <div className="md:w-3/5 flex flex-col justify-center">
                                 <Link to="/news/2">
-                                    <h4 className="font-bold text-gray-800 text-sm hover:text-[#0f4c81] cursor-pointer line-clamp-3">
+                                    <h4 className="font-bold text-gray-800 text-sm hover:text-primary cursor-pointer line-clamp-3">
                                         Hội nghị phổ biến, quán triệt các đạo luật do Bộ Công an tham mưu xây dựng
                                     </h4>
                                 </Link>
@@ -57,7 +57,7 @@ const PoliciesAndLife = () => {
                 {/* Right - Theo dòng pháp luật */}
                 <div>
                     <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-lg font-bold text-[#0f4c81]">Theo dòng pháp luật</h3>
+                        <h3 className="text-lg font-bold text-primary">Theo dòng pháp luật</h3>
                     </div>
 
                     <div className="grid grid-cols-1 gap-6">
@@ -71,7 +71,7 @@ const PoliciesAndLife = () => {
                             </Link>
                             <div className="md:w-1/2 flex flex-col justify-center">
                                 <Link to="/video/1">
-                                    <h4 className="font-bold text-[#0f4c81] text-base hover:text-blue-600 cursor-pointer line-clamp-3 leading-snug">
+                                    <h4 className="font-bold text-primary text-base hover:text-blue-600 cursor-pointer line-clamp-3 leading-snug">
                                         Sửa luật Đất đai: Đẩy nhanh quá trình phục hồi của thị trường bất động sản
                                     </h4>
                                 </Link>
@@ -88,7 +88,7 @@ const PoliciesAndLife = () => {
                             </div>
                             <div className="md:w-3/5 flex flex-col justify-center">
                                 <Link to="/news/3">
-                                    <h4 className="font-bold text-gray-800 text-sm hover:text-[#0f4c81] cursor-pointer line-clamp-3">
+                                    <h4 className="font-bold text-gray-800 text-sm hover:text-primary cursor-pointer line-clamp-3">
                                         Hoàn thiện thể chế xử lý tài sản kê biên, tài sản bảo đảm trong các vụ án
                                     </h4>
                                 </Link>

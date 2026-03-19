@@ -14,12 +14,12 @@ const NewlyIssuedDocs = () => {
             <div className="flex flex-col lg:flex-row gap-6">
                 {/* Left Column - Documents List */}
                 <div className="flex-1 flex flex-col h-full min-w-0">
-                    <div className="flex justify-between items-center bg-[#07244c] text-white px-4 py-2 rounded-t-lg shrink-0">
+                    <div className="flex justify-between items-center bg-[var(--bg-header-bottom)] text-[var(--text-on-blue)] px-4 py-2 rounded-t-lg shrink-0">
                         <h3 className="font-bold text-lg">Văn bản mới ban hành</h3>
                         <a href="#" className="text-sm hover:underline hover:text-yellow-300">Xem tất cả</a>
                     </div>
                     <div className="bg-white border rounded-b-lg shadow-sm flex-1 flex flex-col">
-                        <div className="flex font-bold bg-gray-100 text-[#0f4c81] text-sm py-2 px-4 border-b shrink-0">
+                        <div className="flex font-bold bg-gray-200 text-primary text-sm py-2 px-4 border-b shrink-0">
                             <div className="w-1/4">Ngày ban hành</div>
                             <div className="w-3/4">Trích yếu</div>
                         </div>
@@ -27,7 +27,7 @@ const NewlyIssuedDocs = () => {
                             {docs.map((doc, index) => (
                                 <Link to={`/van-ban/${index + 1}`} key={index} className="flex text-sm py-4 px-4 border-b last:border-0 hover:bg-gray-50 transition cursor-pointer flex-1 items-center">
                                     <div className="w-1/4 text-gray-500 font-medium">{doc.date}</div>
-                                    <div className="w-3/4 text-gray-800 line-clamp-3 hover:text-[#0f4c81]">{doc.title}</div>
+                                    <div className="w-3/4 text-gray-800 line-clamp-3 hover:text-primary">{doc.title}</div>
                                 </Link>
                             ))}
                         </ul>

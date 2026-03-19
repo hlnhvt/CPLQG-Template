@@ -3,6 +3,7 @@ import { Search, ChevronDown, User, LogOut, Bookmark, Bell, LayoutDashboard, Set
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import NotificationDropdown from './NotificationDropdown';
+import AccessibilitySettings from './AccessibilitySettings';
 
 // --- Live Clock ---
 const LiveClock = () => {
@@ -67,7 +68,7 @@ const Header = () => {
     return (
         <header className="flex flex-col font-sans relative">
             {/* Top Bar - Light Blue */}
-            <div className="bg-[#3b82f6] text-white py-2 relative z-[100]">
+            <div className="bg-[var(--bg-header-top)] text-[var(--text-on-blue)] py-2 relative z-[100] transition-colors duration-200">
                 {/* Decorative background swirls (simplified) */}
                 <div className="absolute top-0 right-0 bottom-0 left-0 pointer-events-none opacity-20">
                     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -91,6 +92,8 @@ const Header = () => {
                             <Search size={16} />
                         </button>
 
+                        <AccessibilitySettings />
+
                         <LiveClock />
 
                         <div className="hidden xl:flex items-center gap-1.5 whitespace-nowrap">
@@ -111,7 +114,7 @@ const Header = () => {
                                     className={`relative p-2 rounded-full transition-colors flex items-center justify-center ${notifOpen ? 'bg-white/20' : 'hover:bg-white/10'}`}
                                 >
                                     <Bell size={18} />
-                                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-[#3b82f6]"></span>
+                                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-primary"></span>
                                 </button>
 
                                 {/* Notification Dropdown */}
@@ -128,7 +131,7 @@ const Header = () => {
                                 <div className="relative">
                                     <button
                                         onClick={() => setDropdownOpen(o => !o)}
-                                        className="flex items-center justify-center w-9 h-9 rounded-full bg-blue-800 hover:bg-blue-900 text-white font-bold text-[16px] border-2 border-white/50 transition-colors shadow"
+                                        className="flex items-center justify-center w-9 h-9 rounded-full bg-primary hover:bg-primary-dark text-white font-bold text-[16px] border-2 border-white/50 transition-colors shadow"
                                         title={displayUser.name}
                                     >
                                         {getInitials(displayUser.name)}
@@ -170,7 +173,7 @@ const Header = () => {
                                             {/* Logout */}
                                             <button
                                                 onClick={handleLogout}
-                                                className="w-full flex items-center gap-3 px-4 py-3 border-t border-gray-100 text-red-600 hover:bg-red-50 transition-colors text-[14px] font-medium"
+                                                className="w-full flex items-center gap-3 px-4 py-3 border-t border-gray-100 text-red-600 hover:bg-red-100 transition-colors text-[14px] font-medium"
                                             >
                                                 <LogOut size={16} />
                                                 Đăng xuất
@@ -202,7 +205,7 @@ const Header = () => {
             </div>
 
             {/* Bottom Bar - Dark Blue Navigation (Desktop) */}
-            <div className="hidden xl:block bg-[#1e3a8a] text-white">
+            <div className="hidden xl:block bg-[var(--bg-header-bottom)] text-[var(--text-on-blue)] transition-colors duration-200">
                 <div className="container mx-auto px-4">
                     <nav className="flex justify-center xl:justify-between items-center h-[46px] text-xs xl:text-sm font-medium relative z-50">
                         <ul className="flex items-center min-w-max h-full">

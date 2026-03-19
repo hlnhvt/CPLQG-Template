@@ -11,12 +11,12 @@ const MOCK_RECOMMENDATIONS = [
 
 const RecommendedForYou = () => {
     return (
-        <section className="bg-gradient-to-br from-blue-50/50 to-indigo-50/50 border-b border-blue-100/50 py-10">
+        <section className="bg-gray-50 border-b border-gray-200 py-10 transition-colors duration-200">
             <div className="container mx-auto px-4">
                 <div className="flex items-end justify-between mb-6">
                     <div>
                         <div className="flex items-center gap-2 mb-1">
-                            <h2 className="text-2xl font-bold text-[#0f4c81]">Dành riêng cho bạn</h2>
+                            <h2 className="text-2xl font-bold text-primary">Dành riêng cho bạn</h2>
                         </div>
                         <p className="text-gray-600 text-[15px]">Đề xuất dựa trên các lĩnh vực bạn đang quan tâm.</p>
                     </div>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const EventsActivities = () => {
     return (
-        <div className="bg-[#1b64aa] text-white py-12 mt-8">
+        <div className="bg-[var(--bg-header-top)] text-white py-12 mt-8 transition-colors">
             <div className="container mx-auto px-4">
                 <h2 className="text-2xl font-bold border-b-2 border-white/30 pb-2 inline-block mb-6 uppercase tracking-wide">
                     Sự kiện & Hoạt động
@@ -17,7 +17,7 @@ const EventsActivities = () => {
                             <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
                             Hoạt động nổi bật
                         </span>
-                        <h3 className="text-2xl md:text-3xl text-[#0f4c81] uppercase leading-tight mb-6">
+                        <h3 className="text-2xl md:text-3xl text-primary-dark uppercase leading-tight mb-6">
                             CHÀO MỪNG ĐẠI HỘI ĐẠI BIỂU TOÀN QUỐC LẦN THỨ XIV CỦA ĐẢNG
                         </h3>
 
@@ -94,7 +94,7 @@ const EventsActivities = () => {
                 </div>
 
                 <div className="text-center mt-8">
-                    <button className="border border-white/50 text-white rounded-full px-8 py-2 hover:bg-white hover:text-[#1b64aa] transition font-medium">
+                    <button className="border border-white/50 text-white rounded-full px-8 py-2 hover:bg-white hover:text-primary transition font-medium">
                         Xem thêm sự kiện
                     </button>
                 </div>

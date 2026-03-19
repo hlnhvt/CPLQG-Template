@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -97,7 +98,7 @@ const AppLayout = () => {
     const hideHeaderFooter = ['/dang-nhap', '/onboarding'].includes(location.pathname);
 
     return (
-        <div className="min-h-screen flex flex-col font-sans bg-[#f4f7fb]">
+        <div className="min-h-screen flex flex-col font-sans transition-colors duration-200">
             {!hideHeaderFooter && <Header />}
             <main className="flex-grow">
                 <Routes>
@@ -203,9 +204,11 @@ const AppLayout = () => {
 function App() {
     return (
         <Router>
-            <AuthProvider>
-                <AppLayout />
-            </AuthProvider>
+            <ThemeProvider>
+                <AuthProvider>
+                    <AppLayout />
+                </AuthProvider>
+            </ThemeProvider>
         </Router>
     );
 }
