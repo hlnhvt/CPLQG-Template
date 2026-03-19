@@ -168,11 +168,27 @@ html.theme-high-contrast-dark {
     color: #ffffff !important;
   }
 
+  html.theme-high-contrast-dark .accessibility-btn {
+    border: 2px solid #ffffff !important;
+  }
+  html.theme-high-contrast-dark .accessibility-btn * {
+    color: #ffffff !important;
+    border: none !important;
+  }
+
   /* HC Light Visibility Overrides */
   html.theme-high-contrast-light * {
     color: #000000 !important;
     border-color: #000000 !important;
     background-color: #ffffff !important;
+  }
+
+  html.theme-high-contrast-light .accessibility-btn {
+    border: 2px solid #000000 !important;
+  }
+  html.theme-high-contrast-light .accessibility-btn * {
+    color: #000000 !important;
+    border: none !important;
   }
 
   html.theme-high-contrast-light a,

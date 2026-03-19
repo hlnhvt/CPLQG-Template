@@ -143,7 +143,7 @@ const Header = () => {
                                             {/* User info */}
                                             <div className="px-4 py-4 border-b border-gray-100">
                                                 <p className="font-bold text-gray-800 text-[15px] truncate">{displayUser.name}</p>
-                                                <p className="text-gray-500 text-[12px] mt-0.5">Xin chào {displayUser.name.split(' ').pop()}</p>
+                                                <p className="text-gray-500 text-[12px] mt-0.5">Xin chào {displayUser.name}</p>
                                             </div>
                                             {/* Dashboard Links */}
                                             <div className="py-2">
