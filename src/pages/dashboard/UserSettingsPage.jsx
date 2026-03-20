@@ -31,6 +31,10 @@ const UserSettingsPage = () => {
     const [isSaved, setIsSaved] = useState(false);
     const [expandedBlock, setExpandedBlock] = useState(null);
 
+    // DnD State
+    const [draggedIndex, setDraggedIndex] = useState(null);
+    const [dragOverIndex, setDragOverIndex] = useState(null);
+
     const handleTopicToggle = (id) => {
         setIsSaved(false);
         const isSelected = selectedTopics.includes(id);
@@ -60,6 +64,43 @@ const UserSettingsPage = () => {
     const updateBlockConfig = (id, newConfig) => {
         setIsSaved(false);
         setOrderedBlocks(prev => prev.map(b => b.id === id ? { ...b, ...newConfig } : b));
+    };
+
+    const handleDragStart = (e, index) => {
+        setDraggedIndex(index);
+        e.dataTransfer.effectAllowed = 'move';
+        // Reduce opacity to show it's being dragged (need slight delay for browser to clone original style first)
+        setTimeout(() => {
+            if (e.target && e.target.classList) e.target.classList.add('opacity-40');
+        }, 0);
+    };
+
+    const handleDragEnter = (e, index) => {
+        e.preventDefault();
+        setDragOverIndex(index);
+    };
+
+    const handleDragEnd = (e) => {
+        if (e.target && e.target.classList) e.target.classList.remove('opacity-40');
+        setDraggedIndex(null);
+        setDragOverIndex(null);
+    };
+
+    const handleDrop = (e, dropIndex) => {
+        e.preventDefault();
+        if (draggedIndex === null || draggedIndex === dropIndex) return;
+
+        setIsSaved(false);
+        const newOrder = [...orderedBlocks];
+        const draggedItem = newOrder[draggedIndex];
+        
+        // Move item
+        newOrder.splice(draggedIndex, 1);
+        newOrder.splice(dropIndex, 0, draggedItem);
+        
+        setOrderedBlocks(newOrder);
+        setDraggedIndex(null);
+        setDragOverIndex(null);
     };
 
     const handleSave = () => {
@@ -198,7 +239,16 @@ const UserSettingsPage = () => {
                                     const isStatistic = block.id.startsWith('stat-');
 
                                     return (
-                                        <div key={block.id} className={`bg-white border rounded-xl shadow-sm overflow-hidden transition-all duration-300 ${isExpanded ? 'border-blue-300 ring-2 ring-blue-50' : 'border-gray-200 hover:border-blue-200'}`}>
+                                        <div 
+                                            key={block.id} 
+                                            draggable={!isExpanded}
+                                            onDragStart={(e) => handleDragStart(e, index)}
+                                            onDragEnter={(e) => handleDragEnter(e, index)}
+                                            onDragOver={(e) => e.preventDefault()}
+                                            onDragEnd={handleDragEnd}
+                                            onDrop={(e) => handleDrop(e, index)}
+                                            className={`bg-white border rounded-xl shadow-sm overflow-hidden transition-all duration-300 ${isExpanded ? 'border-blue-300 ring-2 ring-blue-50' : 'border-gray-200 hover:border-blue-200'} ${!isExpanded ? 'cursor-grab active:cursor-grabbing' : ''} ${dragOverIndex === index && draggedIndex !== index ? 'border-2 border-dashed border-blue-500 scale-[1.01] shadow-lg box-border relative after:absolute after:inset-0 after:bg-blue-50/50 after:pointer-events-none after:z-50' : ''}`}
+                                        >
                                             {/* Header */}
                                             <div className="flex items-center justify-between p-3 sm:p-4 bg-white relative z-10 transition-colors">
                                                 <div className="flex items-center gap-3 sm:gap-5 flex-1 cursor-pointer" onClick={() => setExpandedBlock(isExpanded ? null : block.id)}>

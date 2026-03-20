@@ -13,7 +13,7 @@ const CAROUSEL_ITEMS = [
     {
         id: 2,
         type: 'html',
-        link: '/tin-tuc/2',
+        link: '/news/2',
         content: (
             <div className="w-full h-full bg-gradient-to-r from-[#25D0FF] to-[#1E00C8] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] border border-white p-3 sm:p-5 flex gap-4 overflow-hidden relative">
                 {/* Left Image Thumbnail */}
@@ -36,7 +36,7 @@ const CAROUSEL_ITEMS = [
     {
         id: 3,
         type: 'html',
-        link: '/tin-tuc/3',
+        link: '/news/3',
         content: (
             <div className="w-full h-full bg-gradient-to-r from-[#25D0FF] to-[#1E00C8] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] border border-white p-3 sm:p-5 flex gap-4 overflow-hidden relative">
                 <div className="w-[45%] h-full rounded-lg overflow-hidden shrink-0 bg-white shadow-sm border border-white/20">
@@ -56,7 +56,7 @@ const CAROUSEL_ITEMS = [
     {
         id: 4,
         type: 'html',
-        link: '/tin-tuc/4',
+        link: '/news/4',
         content: (
             <div className="w-full h-full bg-gradient-to-r from-[#25D0FF] to-[#1E00C8] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] border border-white p-3 sm:p-5 flex gap-4 overflow-hidden relative">
                 <div className="w-[45%] h-full rounded-lg overflow-hidden shrink-0 bg-white shadow-sm border border-white/20">
@@ -76,7 +76,7 @@ const CAROUSEL_ITEMS = [
     {
         id: 5,
         type: 'html',
-        link: '/tin-tuc/5',
+        link: '/news/5',
         content: (
             <div className="w-full h-full bg-gradient-to-r from-[#25D0FF] to-[#1E00C8] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] border border-white p-3 sm:p-5 flex gap-4 overflow-hidden relative">
                 <div className="w-[45%] h-full rounded-lg overflow-hidden shrink-0 bg-white shadow-sm border border-white/20">
