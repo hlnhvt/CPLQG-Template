@@ -545,7 +545,7 @@ const TongRaSoatPage = () => {
                                         {/* Top News */}
                                         {topNews && (
                                             <div
-                                                onClick={() => navigate(`/tong-ra-soat/tin-tuc/${topNews.id || 0}`)}
+                                                onClick={() => navigate(`/news/${topNews.id || 0}`)}
                                                 className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-lg transition-all flex flex-col md:flex-row group cursor-pointer"
                                             >
                                                 <div className="md:w-[55%] aspect-[16/9] md:aspect-auto overflow-hidden">
@@ -571,7 +571,7 @@ const TongRaSoatPage = () => {
                                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                 {gridNews.map(news => (
                                                     <div
-                                                        onClick={() => navigate(`/tong-ra-soat/tin-tuc/${news.id || 1}`)}
+                                                        onClick={() => navigate(`/news/${news.id || 1}`)}
                                                         key={news.id || Math.random()}
                                                         className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:shadow-md transition-all group cursor-pointer flex flex-col"
                                                     >
@@ -611,7 +611,7 @@ const TongRaSoatPage = () => {
                                             <div className="space-y-4">
                                                 {listNews.map(news => (
                                                     <div
-                                                        onClick={() => navigate(`/tong-ra-soat/tin-tuc/${news.id || 2}`)}
+                                                        onClick={() => navigate(`/news/${news.id || 2}`)}
                                                         key={news.id || Math.random()}
                                                         className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:shadow-md transition-all group cursor-pointer p-4 md:p-5 flex flex-col sm:flex-row gap-5 md:gap-6 items-start sm:items-center"
                                                     >
