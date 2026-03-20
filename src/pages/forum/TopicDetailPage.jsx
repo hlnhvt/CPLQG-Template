@@ -6,6 +6,7 @@ import {
     ArrowUpCircle, ArrowDownCircle, CheckCircle, Plus,
     MoreHorizontal, Check, Tag, ChevronDown
 } from 'lucide-react';
+import LivestreamRegistrationModal from '../../components/LivestreamRegistrationModal';
 
 const MOCK_ARTICLE = {
     title: "Quy định mới về vốn điều lệ công ty TNHH năm 2024",
@@ -138,6 +139,13 @@ const TopicDetailPage = () => {
     // Follow State
     const [isFollowing, setIsFollowing] = useState(false);
     const [showUnfollowConfirm, setShowUnfollowConfirm] = useState(false);
+
+    // Registration State
+    const [isRegistered, setIsRegistered] = useState(false);
+    const [registrationModalState, setRegistrationModalState] = useState({ 
+        isOpen: false, 
+        eventTitle: 'Đăng ký tham gia chủ đề: Quy định mới về vốn điều lệ...' 
+    });
 
     const handleFollowClick = () => {
         setIsFollowing(true);
@@ -459,6 +467,20 @@ const TopicDetailPage = () => {
                                         )}
                                     </div>
                                 )}
+
+                                {/* Topic Registration Button */}
+                                {!isRegistered ? (
+                                    <button 
+                                        onClick={() => setRegistrationModalState(prev => ({ ...prev, isOpen: true }))} 
+                                        className="w-full mt-2 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm"
+                                    >
+                                        <UserPlus size={18} /> Đăng ký tham gia
+                                    </button>
+                                ) : (
+                                    <div className="w-full mt-2 py-2 bg-green-50 text-green-700 font-bold rounded-lg border border-green-200 flex items-center justify-center gap-2 shadow-sm">
+                                        <CheckCircle size={18} /> Đã đăng ký tham gia
+                                    </div>
+                                )}
                             </div>
                         </div>
 
@@ -506,6 +528,14 @@ const TopicDetailPage = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Registration Modal */}
+            <LivestreamRegistrationModal 
+                isOpen={registrationModalState.isOpen}
+                onClose={() => setRegistrationModalState(prev => ({ ...prev, isOpen: false }))}
+                onRegister={() => setIsRegistered(true)}
+                eventTitle={registrationModalState.eventTitle}
+            />
         </div>
     );
 };

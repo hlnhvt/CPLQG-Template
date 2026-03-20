@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Plus, Filter, MoreVertical, FileEdit, Trash2, Eye, Clock, CheckCircle, XCircle, FileText, Send } from 'lucide-react';
+import { Search, Plus, Filter, MoreVertical, FileEdit, Trash2, Eye, Clock, CheckCircle, XCircle, FileText, Send, AlertTriangle, AlertCircle } from 'lucide-react';
 
-const MOCK_ARTICLES = [
+const INITIAL_ARTICLES = [
     { id: 1, title: 'Bình luận những điểm mới của Luật Đất đai 2024 đối với kiều bào', category: 'Phân tích & Bình luận', date: 'Vừa xong', status: 'draft', views: 0 },
     { id: 2, title: 'Quy trình xử lý kỷ luật lao động mới nhất', category: 'Tư vấn pháp luật', date: '14/03/2026', status: 'pending', views: 0 },
     { id: 3, title: 'Doanh nghiệp FDI và những lưu ý khi áp dụng mức thuế tối thiểu toàn cầu', category: 'Nghiên cứu khoa học', date: '10/03/2026', status: 'published', views: 1245 },
@@ -18,11 +18,44 @@ const STATUS_CONFIG = {
 };
 
 const CollaboratorArticlesPage = () => {
+    const [articles, setArticles] = useState(INITIAL_ARTICLES);
     const [activeTab, setActiveTab] = useState('all');
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
-    const filteredArticles = MOCK_ARTICLES.filter(article => {
+    // Modal States
+    const [deleteModal, setDeleteModal] = useState({ isOpen: false, article: null });
+    const [sendModal, setSendModal] = useState({ isOpen: false, article: null });
+    const [errorModal, setErrorModal] = useState({ isOpen: false, message: '' });
+
+    const handleDeleteClick = (article) => {
+        if (article.status !== 'draft' && article.status !== 'published') {
+            setErrorModal({ 
+                isOpen: true, 
+                message: 'Chỉ được phép xóa các bài viết ở trạng thái "Bản nháp" hoặc "Đang xuất bản". Các trạng thái khác không được phép xóa.' 
+            });
+        } else {
+            setDeleteModal({ isOpen: true, article });
+        }
+    };
+
+    const confirmDelete = () => {
+        if (deleteModal.article) {
+            setArticles(articles.filter(a => a.id !== deleteModal.article.id));
+        }
+        setDeleteModal({ isOpen: false, article: null });
+    };
+
+    const confirmSend = () => {
+        if (sendModal.article) {
+            setArticles(articles.map(a => 
+                a.id === sendModal.article.id ? { ...a, status: 'pending' } : a
+            ));
+        }
+        setSendModal({ isOpen: false, article: null });
+    };
+
+    const filteredArticles = articles.filter(article => {
         if (activeTab !== 'all' && article.status !== activeTab) return false;
         if (searchTerm && !article.title.toLowerCase().includes(searchTerm.toLowerCase())) return false;
         return true;
@@ -142,7 +175,7 @@ const CollaboratorArticlesPage = () => {
                                         <td className="px-6 py-5 text-right whitespace-nowrap">
                                             <div className="flex items-center justify-end gap-2 text-gray-400">
                                                 {article.status === 'draft' && (
-                                                    <button className="p-1.5 hover:text-green-600 hover:bg-green-50 rounded" title="Gửi duyệt">
+                                                    <button onClick={() => setSendModal({ isOpen: true, article })} className="p-1.5 hover:text-green-600 hover:bg-green-50 rounded" title="Gửi duyệt">
                                                         <Send size={18} />
                                                     </button>
                                                 )}
@@ -161,7 +194,7 @@ const CollaboratorArticlesPage = () => {
                                                     </button>
                                                 )}
                                                 <div className="w-px h-5 bg-gray-200 mx-1"></div>
-                                                <button className="p-1.5 hover:text-red-600 hover:bg-red-50 rounded transition-colors" title="Xóa">
+                                                <button onClick={() => handleDeleteClick(article)} className="p-1.5 hover:text-red-600 hover:bg-red-50 rounded transition-colors" title="Xóa">
                                                     <Trash2 size={18} />
                                                 </button>
                                             </div>
@@ -180,6 +213,63 @@ const CollaboratorArticlesPage = () => {
                     </div>
                 )}
             </div>
+            
+            {/* Delete Confirmation Modal */}
+            {deleteModal.isOpen && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setDeleteModal({ isOpen: false, article: null })}></div>
+                    <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 overflow-hidden animate-fadeIn">
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-14 h-14 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                                <AlertTriangle size={28} className="text-red-600" />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">Xác nhận xóa</h3>
+                            <p className="text-gray-500 text-sm mb-6">Bạn có chắc chắn muốn xóa bài viết <span className="font-bold text-gray-700">"{deleteModal.article?.title}"</span> không? Hành động này không thể hoàn tác.</p>
+                            <div className="flex w-full gap-3">
+                                <button onClick={() => setDeleteModal({ isOpen: false, article: null })} className="flex-1 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-colors">Hủy bỏ</button>
+                                <button onClick={confirmDelete} className="flex-1 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-xl transition-colors">Xóa ngay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Send for Approval Confirmation Modal */}
+            {sendModal.isOpen && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setSendModal({ isOpen: false, article: null })}></div>
+                    <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 overflow-hidden animate-fadeIn">
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                                <Send size={28} className="text-blue-600" />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">Xác nhận Gửi duyệt</h3>
+                            <p className="text-gray-500 text-sm mb-6">Bài viết <span className="font-bold text-gray-700">"{sendModal.article?.title}"</span> sẽ được chuyển đến Ban biên tập để kiểm duyệt. Bạn có muốn tiếp tục?</p>
+                            <div className="flex w-full gap-3">
+                                <button onClick={() => setSendModal({ isOpen: false, article: null })} className="flex-1 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-colors">Hủy</button>
+                                <button onClick={confirmSend} className="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-colors">Gửi duyệt</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Error Notification Modal */}
+            {errorModal.isOpen && (
+                <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setErrorModal({ isOpen: false, message: '' })}></div>
+                    <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 overflow-hidden animate-fadeIn">
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-14 h-14 bg-red-50 border border-red-100 rounded-full flex items-center justify-center mb-4">
+                                <AlertCircle size={28} className="text-red-500" />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-2">Thao tác không hợp lệ</h3>
+                            <p className="text-gray-600 text-sm mb-6 leading-relaxed">{errorModal.message}</p>
+                            <button onClick={() => setErrorModal({ isOpen: false, message: '' })} className="w-full py-2.5 bg-gray-800 hover:bg-gray-900 text-white font-medium rounded-xl transition-colors">Đã hiểu</button>
+                        </div>
+                    </div>
+                </div>
+            )}
             
         </div>
     );

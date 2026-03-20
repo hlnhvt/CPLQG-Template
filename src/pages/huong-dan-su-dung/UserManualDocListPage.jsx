@@ -24,14 +24,14 @@ const MOCK_DOCUMENTS = [
 ];
 
 const FILE_CONFIG = {
-    pdf:  { color: 'bg-red-600',    label: 'PDF',   icon: FileText },
-    docx: { color: 'bg-blue-600',   label: 'DOCX',  icon: FileText },
-    xlsx: { color: 'bg-green-600',  label: 'XLSX',  icon: FileSpreadsheet },
-    mp4:  { color: 'bg-purple-600', label: 'VIDEO', icon: Film },
-    png:  { color: 'bg-orange-500', label: 'ẢNH',  icon: FileImage },
+    pdf: { color: 'bg-red-600', label: 'PDF', icon: FileText },
+    docx: { color: 'bg-blue-600', label: 'DOCX', icon: FileText },
+    xlsx: { color: 'bg-green-600', label: 'XLSX', icon: FileSpreadsheet },
+    mp4: { color: 'bg-purple-600', label: 'VIDEO', icon: Film },
+    png: { color: 'bg-orange-500', label: 'ẢNH', icon: FileImage },
 };
 
-const ALL_CHU_DE    = [...new Set(MOCK_DOCUMENTS.map(d => d.chuDe))].sort();
+const ALL_CHU_DE = [...new Set(MOCK_DOCUMENTS.map(d => d.chuDe))].sort();
 const ALL_NGHIEP_VU = [...new Set(MOCK_DOCUMENTS.map(d => d.nghiepVu))].sort();
 
 const ITEMS_PER_PAGE = 10;
@@ -226,31 +226,31 @@ const CheckboxGroup = ({ title, options, selected, onChange }) => (
 );
 
 const UserManualDocListPage = () => {
-    const [keyword, setKeyword]         = useState('');
-    const [searchTerm, setSearchTerm]   = useState('');
+    const [keyword, setKeyword] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [selChuDe, setSelChuDe]       = useState([]);
+    const [selChuDe, setSelChuDe] = useState([]);
     const [selNghiepVu, setSelNghiepVu] = useState([]);
     const [showFilters, setShowFilters] = useState(false);
-    const [previewDoc, setPreviewDoc]       = useState(null);
+    const [previewDoc, setPreviewDoc] = useState(null);
 
     const toggle = (arr, setArr, val) =>
         setArr(prev => prev.includes(val) ? prev.filter(v => v !== val) : [...prev, val]);
 
     const filtered = useMemo(() => {
         return MOCK_DOCUMENTS.filter(doc => {
-            const matchSearch  = !searchTerm.trim() || doc.name.toLowerCase().includes(searchTerm.toLowerCase().trim());
-            const matchChuDe   = selChuDe.length === 0 || selChuDe.includes(doc.chuDe);
+            const matchSearch = !searchTerm.trim() || doc.name.toLowerCase().includes(searchTerm.toLowerCase().trim());
+            const matchChuDe = selChuDe.length === 0 || selChuDe.includes(doc.chuDe);
             const matchNghiepVu = selNghiepVu.length === 0 || selNghiepVu.includes(doc.nghiepVu);
             return matchSearch && matchChuDe && matchNghiepVu;
         });
     }, [searchTerm, selChuDe, selNghiepVu]);
 
     const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
-    const paginated  = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+    const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
     const handleSearch = e => { e.preventDefault(); setSearchTerm(keyword); setCurrentPage(1); };
-    const handleClear  = () => { setKeyword(''); setSearchTerm(''); setCurrentPage(1); };
+    const handleClear = () => { setKeyword(''); setSearchTerm(''); setCurrentPage(1); };
 
     const activeFilterCount = selChuDe.length + selNghiepVu.length;
     const resetFilters = () => { setSelChuDe([]); setSelNghiepVu([]); };
@@ -263,7 +263,7 @@ const UserManualDocListPage = () => {
                     <div className="flex items-center gap-2 text-[13px] text-blue-200 mb-4">
                         <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
                         <ChevronRightIcon size={14} />
-                        <span className="text-white font-semibold">HƯỚNG DẪN SỬ DỤNG</span>
+                        <span className="text-white font-semibold">Hướng dẫn sử dụng</span>
                     </div>
                     <h1 className="text-3xl md:text-4xl font-bold uppercase mb-3 drop-shadow-md">Hướng dẫn sử dụng</h1>
                     <p className="text-blue-100 max-w-2xl text-[15px] leading-relaxed">
@@ -385,11 +385,11 @@ const UserManualDocListPage = () => {
                                 >
                                     <ChevronLeft size={18} />
                                 </button>
-                                
+
                                 {(() => {
                                     const pages = [];
                                     const showEllipsis = totalPages > 7;
-                                    
+
                                     if (!showEllipsis) {
                                         for (let i = 1; i <= totalPages; i++) pages.push(i);
                                     } else {
@@ -419,11 +419,10 @@ const UserManualDocListPage = () => {
                                             <button
                                                 key={p}
                                                 onClick={() => setCurrentPage(p)}
-                                                className={`w-10 h-10 flex items-center justify-center rounded-lg border text-[15px] font-medium transition-all ${
-                                                    currentPage === p 
-                                                    ? 'bg-[#1e3a8a] text-white border-[#1e3a8a] shadow-md' 
-                                                    : 'bg-white border-gray-200 text-gray-600 hover:border-blue-400 hover:text-blue-600'
-                                                }`}
+                                                className={`w-10 h-10 flex items-center justify-center rounded-lg border text-[15px] font-medium transition-all ${currentPage === p
+                                                        ? 'bg-[#1e3a8a] text-white border-[#1e3a8a] shadow-md'
+                                                        : 'bg-white border-gray-200 text-gray-600 hover:border-blue-400 hover:text-blue-600'
+                                                    }`}
                                             >
                                                 {p}
                                             </button>

@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Search, Bell, FileText, Edit, HelpCircle, BookOpen, Settings, Star, MoreVertical, CheckSquare, Square, Trash2, CheckCircle2, ChevronDown, Filter } from 'lucide-react';
 
 const MOCK_NOTIFICATIONS = [
+    { id: 99, type: 'tinbai', source: 'Ban biên tập', title: 'Tin bài của bạn đã được duyệt', desc: 'Tin bài "Bình luận những điểm mới của Luật Đất đai 2024 đối với kiều bào" đã được Ban biên tập phê duyệt và xuất bản.', time: 'Vừa xong', isRead: false, isImportant: true },
     { id: 1, type: 'vanban', source: 'Bộ Tư pháp', title: 'Ban hành Luật Đất đai mới (Số 31/2024/QH15)', desc: 'Quốc hội đã chính thức ban hành Luật Đất đai mới, có hiệu lực từ 01/01/2025. Vui lòng xem chi tiết.', time: '10 phút trước', isRead: false, isImportant: true },
     { id: 2, type: 'duthao', source: 'Cổng thông tin', title: 'Dự thảo Nghị định quy định chi tiết Luật Đất đai', desc: 'Mời bạn tham gia đóng góp ý kiến cho Dự thảo Nghị định hướng dẫn thi hành Luật Đất đai 2024.', time: '2 giờ trước', isRead: false, isImportant: false },
     { id: 3, type: 'hoidap', source: 'Chuyên gia pháp lý', title: 'Câu hỏi của bạn đã được trả lời', desc: 'Luật sư Nguyễn Văn B đã trả lời câu hỏi của bạn về thủ tục sang tên sổ đỏ.', time: 'Hôm qua', isRead: true, isImportant: true },

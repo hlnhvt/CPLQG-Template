@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import {
     Home, ChevronRight, BarChart2, Filter, Download,
     FileText, MessageSquare, Edit3, Eye, Users,
-    TrendingUp, TrendingDown, Calendar, Search
+    TrendingUp, TrendingDown, Calendar, Search, UserPlus, CheckCircle
 } from 'lucide-react';
 import { MOCK_TOPICS } from '../../data/mockForumData';
+import LivestreamRegistrationModal from '../../components/LivestreamRegistrationModal';
 
 const KpiCard = ({ title, value, delta, deltaType, icon: Icon, colorClass }) => (
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow relative overflow-hidden group">
@@ -44,6 +45,13 @@ const chartData = [
 const ForumDashboardPage = () => {
     const [dateRange, setDateRange] = useState('30days');
     const [selectedForum, setSelectedForum] = useState('all');
+
+    // Registration State
+    const [isRegistered, setIsRegistered] = useState(false);
+    const [registrationModalState, setRegistrationModalState] = useState({ 
+        isOpen: false, 
+        eventTitle: 'Đăng ký tham gia chuyên mục: Diễn đàn Pháp luật' 
+    });
 
     // Simple manual chart rendering
     const maxComments = Math.max(...chartData.map(d => d.comments));
@@ -103,6 +111,20 @@ const ForumDashboardPage = () => {
                             <button className="flex items-center gap-2 bg-white text-gray-700 font-medium border border-gray-300 hover:bg-gray-50 px-4 py-2 rounded-lg transition-colors">
                                 <Download size={16} /> Xuất báo cáo
                             </button>
+
+                            {/* Registration Button */}
+                            {!isRegistered ? (
+                                <button 
+                                    onClick={() => setRegistrationModalState(prev => ({ ...prev, isOpen: true }))} 
+                                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-4 py-2 rounded-lg transition-colors shadow-sm flex items-center gap-2"
+                                >
+                                    <UserPlus size={16} /> Đăng ký tham gia
+                                </button>
+                            ) : (
+                                <button className="bg-green-50 border border-green-200 text-green-700 font-medium px-4 py-2 rounded-lg transition-colors shadow-sm flex items-center gap-2 cursor-default">
+                                    <CheckCircle size={16} /> Đã tham gia
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -249,6 +271,14 @@ const ForumDashboardPage = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Registration Modal */}
+            <LivestreamRegistrationModal 
+                isOpen={registrationModalState.isOpen}
+                onClose={() => setRegistrationModalState(prev => ({ ...prev, isOpen: false }))}
+                onRegister={() => setIsRegistered(true)}
+                eventTitle={registrationModalState.eventTitle}
+            />
         </div>
     );
 };

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Bell, Settings, FileText, HelpCircle, Edit } from 'lucide-react';
 
 const MOCK_DROPDOWN_NOTIFICATIONS = [
+    { id: 99, type: 'tinbai', icon: FileText, title: 'Tin bài "Bình luận những điểm mới của Luật Đất đai..." của bạn đã được duyệt', time: 'Vừa xong', isRead: false },
     { id: 1, type: 'vanban', icon: FileText, title: 'Ban hành Luật Đất đai mới (Số 31/2024/QH15)', time: '10 phút trước', isRead: false },
     { id: 2, type: 'hoidap', icon: HelpCircle, title: 'Câu hỏi của bạn đã được trả lời bởi Chuyên gia', time: 'Hôm qua', isRead: true },
     { id: 3, type: 'duthao', icon: Edit, title: 'Mời tham gia đóng góp: Dự thảo Nghị định hướng dẫn Luật Đất đai', time: '2 ngày trước', isRead: true },

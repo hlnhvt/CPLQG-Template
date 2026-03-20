@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Home, ChevronRight, PlayCircle, Users, Send,
     ArrowUpCircle, BarChart2, CheckCircle, Clock, Info,
-    FileText, Download, Contrast, PanelRightClose, PanelRightOpen
+    FileText, Download, Contrast, PanelRightClose, PanelRightOpen,
+    Volume2, VolumeX, Maximize, Minimize
 } from 'lucide-react';
 import LivestreamRegistrationModal from '../../components/LivestreamRegistrationModal';
 import { useAuth } from '../../contexts/AuthContext';
@@ -17,6 +18,12 @@ const LivestreamEventPage = () => {
     const [highContrast, setHighContrast] = useState(false);
     const [isInteractionCollapsed, setIsInteractionCollapsed] = useState(false);
     const [registrationModalState, setRegistrationModalState] = useState({ isOpen: false, eventTitle: 'Hội thảo trực tuyến: Góp ý Dự thảo Luật Doanh nghiệp sửa đổi' });
+
+    // Video Player State & Refs
+    const videoRef = useRef(null);
+    const videoWrapperRef = useRef(null);
+    const [isMuted, setIsMuted] = useState(true);
+    const [isFullscreen, setIsFullscreen] = useState(false);
 
     const handleConfirmRegistration = () => {
         // Set registered to true for demo bypass after modal success
@@ -74,6 +81,51 @@ const LivestreamEventPage = () => {
         setPollOption(option);
         setPollVoted(true);
     };
+
+    const toggleMute = () => {
+        if (videoRef.current) {
+            videoRef.current.muted = !videoRef.current.muted;
+            setIsMuted(videoRef.current.muted);
+        }
+    };
+
+    const toggleFullscreen = () => {
+        if (!document.fullscreenElement) {
+            if (videoWrapperRef.current.requestFullscreen) {
+                videoWrapperRef.current.requestFullscreen();
+            } else if (videoWrapperRef.current.webkitRequestFullscreen) {
+                videoWrapperRef.current.webkitRequestFullscreen(); // Safari
+            } else if (videoWrapperRef.current.msRequestFullscreen) {
+                videoWrapperRef.current.msRequestFullscreen(); // IE11
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen(); // Safari
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen(); // IE11
+            }
+        }
+    };
+
+    useEffect(() => {
+        const handleFullscreenChange = () => {
+            setIsFullscreen(!!document.fullscreenElement);
+        };
+        
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+        document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+        
+        return () => {
+            document.removeEventListener('fullscreenchange', handleFullscreenChange);
+            document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+            document.removeEventListener('mozfullscreenchange', handleFullscreenChange);
+            document.removeEventListener('MSFullscreenChange', handleFullscreenChange);
+        };
+    }, []);
 
     return (
         <div className={`${highContrast ? 'bg-gray-50 text-gray-900' : 'bg-[#111827] text-gray-200'} min-h-screen pb-12 transition-colors duration-300`}>
@@ -137,21 +189,49 @@ const LivestreamEventPage = () => {
                         <div className={`w-full transition-all duration-300 ease-in-out flex flex-col gap-6 ${isInteractionCollapsed ? 'xl:w-full' : 'xl:w-8/12 lg:w-7/12'}`}>
 
                             {/* Block 1: Video Area */}
-                            <div className={`w-full aspect-video rounded-2xl overflow-hidden border shadow-2xl bg-black relative flex flex-col items-center justify-center transition-colors duration-300 ${highContrast ? 'border-gray-200' : 'border-gray-800'}`}>
+                            <div 
+                                ref={videoWrapperRef}
+                                className={`w-full aspect-video rounded-2xl overflow-hidden border shadow-2xl bg-black relative flex flex-col items-center justify-center transition-colors duration-300 group ${highContrast ? 'border-gray-200' : 'border-gray-800'}`}
+                            >
                                 {/* Overlay UI elements */}
-                                <div className="absolute top-4 left-4 z-10 flex gap-3">
-                                    <span className="flex items-center gap-2 bg-red-600 text-white px-3 py-1 rounded shadow-lg text-sm font-bold uppercase tracking-wider animate-pulse">
+                                <div className="absolute top-4 left-4 z-20 flex gap-3 pointer-events-none">
+                                    <span className="flex items-center gap-2 bg-red-600/90 backdrop-blur-sm text-white px-3 py-1 rounded shadow-lg text-sm font-bold uppercase tracking-wider animate-pulse">
                                         <span className="w-2 h-2 bg-white rounded-full"></span> Trực tiếp
                                     </span>
                                     <span className="flex items-center gap-2 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded shadow-lg text-sm font-medium">
                                         <Users size={16} /> 1,245
                                     </span>
                                 </div>
-
-                                {/* Center placeholder */}
-                                <PlayCircle size={64} className="text-white/20 mb-4" />
-                                <p className="text-gray-400">Zoom Web SDK Container Overlay</p>
-                                <p className="text-xs text-gray-500 mt-2">Đang kết nối đến phiên livestream...</p>
+                                
+                                {/* Streaming Video Element - Using stable MP4 to bypass YouTube X-Frame blocks */}
+                                <video 
+                                    ref={videoRef}
+                                    className="absolute inset-0 w-full h-full object-cover z-0"
+                                    src="https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4"
+                                    autoPlay 
+                                    loop 
+                                    muted={isMuted} 
+                                    playsInline
+                                    poster="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                ></video>
+                                
+                                {/* Optional: Control Overlay (Mute / Fullscreen) */}
+                                <div className="absolute bottom-4 right-4 z-20 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button 
+                                        onClick={toggleMute}
+                                        className="bg-black/50 hover:bg-black/80 backdrop-blur-md text-white p-2 rounded-full transition-colors border border-white/10" 
+                                        title={isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
+                                    >
+                                        {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                                    </button>
+                                    <button 
+                                        onClick={toggleFullscreen}
+                                        className="bg-black/50 hover:bg-black/80 backdrop-blur-md text-white p-2 rounded-full transition-colors border border-white/10" 
+                                        title={isFullscreen ? "Thu nhỏ màn hình" : "Toàn màn hình"}
+                                    >
+                                        {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
+                                    </button>
+                                </div>
                             </div>
 
                             {/* Block 2: Event Info Tabs & Content */}
