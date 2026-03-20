@@ -135,16 +135,16 @@ const TopicDetailPage = () => {
     const { id } = useParams();
     const [activeTab, setActiveTab] = useState('comments');
     const [topic, setTopic] = useState(MOCK_ARTICLE);
-    
+
     // Follow State
     const [isFollowing, setIsFollowing] = useState(false);
     const [showUnfollowConfirm, setShowUnfollowConfirm] = useState(false);
 
     // Registration State
     const [isRegistered, setIsRegistered] = useState(false);
-    const [registrationModalState, setRegistrationModalState] = useState({ 
-        isOpen: false, 
-        eventTitle: 'Đăng ký tham gia chủ đề: Quy định mới về vốn điều lệ...' 
+    const [registrationModalState, setRegistrationModalState] = useState({
+        isOpen: false,
+        eventTitle: 'Đăng ký tham gia chủ đề: Quy định mới về vốn điều lệ...'
     });
 
     const handleFollowClick = () => {
@@ -442,7 +442,7 @@ const TopicDetailPage = () => {
                                     <span className="text-gray-500">Bình luận cuối</span>
                                     <span className="font-semibold text-gray-800">10 phút trước</span>
                                 </div>
-                                {!isFollowing ? (
+                                {/* {!isFollowing ? (
                                     <button onClick={handleFollowClick} className="w-full mt-2 py-2 border-2 border-blue-600 text-blue-600 font-bold rounded-lg hover:bg-blue-50 transition-colors flex items-center justify-center gap-2">
                                         <UserPlus size={18} /> Theo dõi chủ đề
                                     </button>
@@ -466,12 +466,12 @@ const TopicDetailPage = () => {
                                             </div>
                                         )}
                                     </div>
-                                )}
+                                )} */}
 
                                 {/* Topic Registration Button */}
                                 {!isRegistered ? (
-                                    <button 
-                                        onClick={() => setRegistrationModalState(prev => ({ ...prev, isOpen: true }))} 
+                                    <button
+                                        onClick={() => setRegistrationModalState(prev => ({ ...prev, isOpen: true }))}
                                         className="w-full mt-2 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-colors flex items-center justify-center gap-2 shadow-sm"
                                     >
                                         <UserPlus size={18} /> Đăng ký tham gia
@@ -530,7 +530,7 @@ const TopicDetailPage = () => {
             </div>
 
             {/* Registration Modal */}
-            <LivestreamRegistrationModal 
+            <LivestreamRegistrationModal
                 isOpen={registrationModalState.isOpen}
                 onClose={() => setRegistrationModalState(prev => ({ ...prev, isOpen: false }))}
                 onRegister={() => setIsRegistered(true)}

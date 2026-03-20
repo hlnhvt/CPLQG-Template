@@ -3,10 +3,11 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import {
     Home, ChevronRight, Search, Filter, Plus,
     MessageSquare, Eye, ChevronDown, CheckCircle,
-    Clock, Tag, ArrowUpCircle, Users, FileText, ClipboardList, Award
+    Clock, Tag, ArrowUpCircle, Users, FileText, ClipboardList, Award, UserPlus
 } from 'lucide-react';
 import { MOCK_FORUMS, MOCK_TOPICS } from '../../data/mockForumData';
 import { useAuth } from '../../contexts/AuthContext';
+import LivestreamRegistrationModal from '../../components/LivestreamRegistrationModal';
 
 const ForumTopicListPage = () => {
     const { id } = useParams();
@@ -20,6 +21,13 @@ const ForumTopicListPage = () => {
     const [isFollowing, setIsFollowing] = useState(false);
     const [showUnfollowConfirm, setShowUnfollowConfirm] = useState(false);
     const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
+
+    // Registration State
+    const [isRegistered, setIsRegistered] = useState(false);
+    const [registrationModalState, setRegistrationModalState] = useState({
+        isOpen: false,
+        eventTitle: `Đăng ký tham gia diễn đàn: ${forum.title}`
+    });
 
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -114,7 +122,7 @@ const ForumTopicListPage = () => {
                             </p>
 
                             <div className="flex flex-wrap items-center gap-3 relative">
-                                {!user ? (
+                                {/* {!user ? (
                                     <button
                                         onClick={() => navigate('/dang-nhap')}
                                         className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-sm transition-colors text-sm"
@@ -154,6 +162,22 @@ const ForumTopicListPage = () => {
                                             </div>
                                         )}
                                     </div>
+                                )} */}
+
+                                {/* Registration Button */}
+                                {user && (
+                                    !isRegistered ? (
+                                        <button
+                                            onClick={() => setRegistrationModalState(prev => ({ ...prev, isOpen: true }))}
+                                            className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-lg shadow-sm transition-colors flex items-center gap-2 text-sm"
+                                        >
+                                            <UserPlus size={18} /> Đăng ký tham gia
+                                        </button>
+                                    ) : (
+                                        <button className="bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold py-2.5 px-4 rounded-lg shadow-sm transition-colors flex items-center gap-2 text-sm cursor-default">
+                                            <CheckCircle size={18} /> Đã đăng ký tham gia
+                                        </button>
+                                    )
                                 )}
                             </div>
                         </div>
@@ -407,7 +431,7 @@ const ForumTopicListPage = () => {
                                     </select>
                                     <span>tổng số {filteredAndSortedTopics.length} bản ghi</span>
                                 </div>
-                                
+
                                 {totalPages > 1 && (
                                     <div className="flex items-center gap-2 flex-wrap">
                                         <button
@@ -416,24 +440,24 @@ const ForumTopicListPage = () => {
                                             className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                                         >Trước</button>
 
-                                    {Array.from({ length: totalPages }).map((_, idx) => {
-                                        const page = idx + 1;
-                                        // Simple pagination displaying up to 5 surrounding pages
-                                        if (page === 1 || page === totalPages || (page >= currentPage - 1 && page <= currentPage + 1)) {
-                                            return (
-                                                <button
-                                                    key={page}
-                                                    onClick={() => setCurrentPage(page)}
-                                                    className={`w-8 h-8 rounded-lg font-bold text-sm flex items-center justify-center transition-colors ${currentPage === page ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'}`}
-                                                >
-                                                    {page}
-                                                </button>
-                                            );
-                                        } else if (page === currentPage - 2 || page === currentPage + 2) {
-                                            return <span key={page} className="text-gray-400">...</span>;
-                                        }
-                                        return null;
-                                    })}
+                                        {Array.from({ length: totalPages }).map((_, idx) => {
+                                            const page = idx + 1;
+                                            // Simple pagination displaying up to 5 surrounding pages
+                                            if (page === 1 || page === totalPages || (page >= currentPage - 1 && page <= currentPage + 1)) {
+                                                return (
+                                                    <button
+                                                        key={page}
+                                                        onClick={() => setCurrentPage(page)}
+                                                        className={`w-8 h-8 rounded-lg font-bold text-sm flex items-center justify-center transition-colors ${currentPage === page ? 'bg-blue-600 text-white shadow-sm' : 'text-gray-600 hover:bg-gray-100'}`}
+                                                    >
+                                                        {page}
+                                                    </button>
+                                                );
+                                            } else if (page === currentPage - 2 || page === currentPage + 2) {
+                                                return <span key={page} className="text-gray-400">...</span>;
+                                            }
+                                            return null;
+                                        })}
 
                                         <button
                                             onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
@@ -447,6 +471,14 @@ const ForumTopicListPage = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Registration Modal */}
+            <LivestreamRegistrationModal
+                isOpen={registrationModalState.isOpen}
+                onClose={() => setRegistrationModalState(prev => ({ ...prev, isOpen: false }))}
+                onRegister={() => setIsRegistered(true)}
+                eventTitle={registrationModalState.eventTitle}
+            />
         </div>
     );
 };
