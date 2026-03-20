@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronDown, ChevronUp, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const CAROUSEL_ITEMS = [
     {
-        id: 2,
+        id: 1,
         type: 'image',
         src: '/BO NHAN DIEN TONG RA SOAT/800x150.Banner chay.jpg',
-        alt: 'Đưa Nghị Quyết Đại Hội XIV Vào Cuộc Sống'
+        alt: 'Tổng rà soát hệ thống văn bản quy phạm pháp luật',
+        link: '/tong-ra-soat'
     },
     {
-        id: 3,
+        id: 2,
         type: 'html',
+        link: '/tin-tuc/2',
         content: (
-            <div className="w-full h-full overflow-hidden border border-white bg-gradient-to-r from-[#25D0FF] to-[#1E00C8] flex flex-row items-stretch p-1.5 rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] relative select-none pointer-events-none">
+            <div className="w-full h-full bg-gradient-to-r from-[#25D0FF] to-[#1E00C8] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] border border-white p-3 sm:p-5 flex gap-4 overflow-hidden relative">
                 {/* Left Image Thumbnail */}
                 <div className="w-[45%] h-full rounded-lg overflow-hidden shrink-0 bg-white shadow-sm border border-white/20">
                     <img src="https://picsum.photos/400/250" alt="Thumbnail" className="w-full h-full object-cover" />
@@ -31,10 +34,11 @@ const CAROUSEL_ITEMS = [
         )
     },
     {
-        id: 4,
+        id: 3,
         type: 'html',
+        link: '/tin-tuc/3',
         content: (
-            <div className="w-full h-full overflow-hidden border border-white bg-gradient-to-r from-[#25D0FF] to-[#1E00C8] flex flex-row items-stretch p-1.5 rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] relative group select-none pointer-events-none">
+            <div className="w-full h-full bg-gradient-to-r from-[#25D0FF] to-[#1E00C8] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] border border-white p-3 sm:p-5 flex gap-4 overflow-hidden relative">
                 <div className="w-[45%] h-full rounded-lg overflow-hidden shrink-0 bg-white shadow-sm border border-white/20">
                     <img src="https://picsum.photos/400/250?random=1" alt="Thumbnail" className="w-full h-full object-cover" />
                 </div>
@@ -50,10 +54,11 @@ const CAROUSEL_ITEMS = [
         )
     },
     {
-        id: 5,
+        id: 4,
         type: 'html',
+        link: '/tin-tuc/4',
         content: (
-            <div className="w-full h-full overflow-hidden border border-white bg-gradient-to-r from-[#25D0FF] to-[#1E00C8] flex flex-row items-stretch p-1.5 rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] relative group select-none pointer-events-none">
+            <div className="w-full h-full bg-gradient-to-r from-[#25D0FF] to-[#1E00C8] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] border border-white p-3 sm:p-5 flex gap-4 overflow-hidden relative">
                 <div className="w-[45%] h-full rounded-lg overflow-hidden shrink-0 bg-white shadow-sm border border-white/20">
                     <img src="https://picsum.photos/400/250?random=2" alt="Thumbnail" className="w-full h-full object-cover" />
                 </div>
@@ -69,10 +74,11 @@ const CAROUSEL_ITEMS = [
         )
     },
     {
-        id: 6,
+        id: 5,
         type: 'html',
+        link: '/tin-tuc/5',
         content: (
-            <div className="w-full h-full overflow-hidden border border-white bg-gradient-to-r from-[#25D0FF] to-[#1E00C8] flex flex-row items-stretch p-1.5 rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] relative group select-none pointer-events-none">
+            <div className="w-full h-full bg-gradient-to-r from-[#25D0FF] to-[#1E00C8] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] border border-white p-3 sm:p-5 flex gap-4 overflow-hidden relative">
                 <div className="w-[45%] h-full rounded-lg overflow-hidden shrink-0 bg-white shadow-sm border border-white/20">
                     <img src="https://picsum.photos/400/250?random=3" alt="Thumbnail" className="w-full h-full object-cover" />
                 </div>
@@ -90,6 +96,7 @@ const CAROUSEL_ITEMS = [
 ];
 
 const FixedBottomCarousel = () => {
+    const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -211,8 +218,13 @@ const FixedBottomCarousel = () => {
                                 className={className} 
                                 style={{...style, zIndex}}
                                 onClick={() => {
-                                    if (offset === -1) handlePrev();
-                                    if (offset === 1) handleNext();
+                                    if (offset === 0 && item.link) {
+                                        navigate(item.link);
+                                    } else if (offset === -1) {
+                                        handlePrev();
+                                    } else if (offset === 1) {
+                                        handleNext();
+                                    }
                                 }}
                             >
                                 {renderItemContent(item)}
