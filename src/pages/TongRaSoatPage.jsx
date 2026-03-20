@@ -770,9 +770,9 @@ const TongRaSoatPage = () => {
                                 </h2>
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div className="border border-blue-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-blue-50/50 text-center flex flex-col items-center">
-                                        <div className="mb-4 flex items-center justify-center">
-                                            <img src="/BO NHAN DIEN TONG RA SOAT/intro_logo.webp" alt="Icon VBQPPL" className="w-12 h-12 object-contain" />
+                                    <div className="border border-blue-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-blue-50/50 text-center flex flex-col items-center group">
+                                        <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
+                                            <img src="/BO NHAN DIEN TONG RA SOAT/intro_logo.webp" alt="Icon VBQPPL" className="h-14 w-auto object-contain group-hover:scale-110 transition-transform duration-300" />
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Hệ thống VBQPPL</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết đến Cơ sở dữ liệu quốc gia về pháp luật</p>
@@ -781,9 +781,9 @@ const TongRaSoatPage = () => {
                                         </a>
                                     </div>
 
-                                    <div className="border border-red-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-red-50/50 text-center flex flex-col items-center">
-                                        <div className="mb-4 flex items-center justify-center">
-                                            <img src="/BO NHAN DIEN TONG RA SOAT/bg-li.png" alt="Icon Đảng" className="w-12 h-12 object-contain" />
+                                    <div className="border border-red-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-red-50/50 text-center flex flex-col items-center group">
+                                        <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
+                                            <img src="/BO NHAN DIEN TONG RA SOAT/bg-li.png" alt="Icon Đảng" className="h-10 w-auto object-contain group-hover:scale-110 transition-transform duration-300" />
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Văn bản, tài liệu của Đảng</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết chuyên mục, Trang của các Ban Đảng Trung ương</p>
@@ -792,9 +792,9 @@ const TongRaSoatPage = () => {
                                         </Link>
                                     </div>
 
-                                    <div className="border border-teal-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-teal-50/50 text-center flex flex-col items-center">
-                                        <div className="mb-4 flex items-center justify-center text-teal-600">
-                                            <img src="/BO NHAN DIEN TONG RA SOAT/international_treaty_icon.png" alt="Icon Điều ước quốc tế" className="w-12 h-12 object-contain" />
+                                    <div className="border border-teal-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-teal-50/50 text-center flex flex-col items-center group">
+                                        <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
+                                            <img src="/BO NHAN DIEN TONG RA SOAT/international_treaty_icon.png" alt="Icon Điều ước quốc tế" className="h-14 w-auto object-contain group-hover:scale-110 transition-transform duration-300" />
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Điều ước quốc tế</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết danh sách Điều ước quốc tế cập nhật từ Bộ Ngoại giao</p>
@@ -880,18 +880,20 @@ const TongRaSoatPage = () => {
                             </div>
                         )}
                     </div>
-                    {/* Right Banners Sidebar */}
-                    <div className="hidden lg:flex flex-col gap-6 order-1 lg:order-2 mt-2 shrink-0" style={{ width: '412.66px' }}>
-                        <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white group relative">
-                            {/* Attached Image Banner */}
-                            <img src="/banner-nghi-quyet.png" alt="Đưa nghị quyết Đại hội XIV" className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
-                        </div>
-                        <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white group relative">
-                            {/* Attached Image Banner */}
-                            <img src="/banner-dai-hoi.png" alt="Đưa nghị quyết Đại hội XIV vào cuộc sống" className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
-                        </div>
+                    {/* Right Banners Sidebar (Only show on Tin tức hoạt động tab) */}
+                    {activeTab === 'tin-tuc-hoat-dong' && (
+                        <div className="hidden lg:flex flex-col gap-6 order-1 lg:order-2 mt-2 shrink-0" style={{ width: '412.66px' }}>
+                            <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white group relative">
+                                {/* Attached Image Banner */}
+                                <img src="/banner-nghi-quyet.png" alt="Đưa nghị quyết Đại hội XIV" className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
+                            <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white group relative">
+                                {/* Attached Image Banner */}
+                                <img src="/banner-dai-hoi.png" alt="Đưa nghị quyết Đại hội XIV vào cuộc sống" className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
+                            </div>
 
-                    </div>
+                        </div>
+                    )}
                 </div>
             </div>
 
