@@ -421,7 +421,7 @@ const TongRaSoatPage = () => {
                                                             </div>
                                                             <div className="bg-gray-50 p-3 rounded-lg text-[11px] font-bold text-gray-700 leading-tight flex items-center gap-2">
                                                                 <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
-                                                                Phó Chủ tịch - TTK Ủy ban Trung ương MTTQ Việt Nam
+                                                                Phó Chủ tịch - Tổng Thư ký Ủy ban Trung ương Mặt trận Tổ quốc Việt Nam
                                                             </div>
                                                         </div>
                                                     </div>
@@ -460,11 +460,11 @@ const TongRaSoatPage = () => {
                                                 </div>
                                             </div>
 
-                                            {/* COLUMN 1: Khối các ủy viên thường trực */}
+                                            {/* COLUMN 1: Các ủy viên thường trực */}
                                             <div className="flex flex-col items-center relative pt-10">
 
                                                 <div className="bg-[#f0fff4] border border-green-200 rounded-xl px-6 py-2.5 shadow-md mb-6 w-full text-center">
-                                                    <h4 className="text-green-800 font-bold uppercase text-xs">Khối các Ủy viên thường trực</h4>
+                                                    <h4 className="text-green-800 font-bold uppercase text-xs">Các Ủy viên thường trực</h4>
                                                 </div>
 
                                                 <div className="w-full space-y-3">
@@ -483,23 +483,23 @@ const TongRaSoatPage = () => {
                                                 </div>
                                             </div>
 
-                                            {/* COLUMN 2: Khối các ủy viên Ban Chỉ đạo */}
+                                            {/* COLUMN 2: Các ủy viên Ban Chỉ đạo */}
                                             <div className="flex flex-col items-center relative pt-10">
 
                                                 <div className="bg-[#fff9e6] border border-amber-200 rounded-xl px-6 py-2.5 shadow-md mb-6 w-full text-center">
-                                                    <h4 className="text-amber-700 font-bold uppercase text-xs">Khối các Ủy viên Ban Chỉ đạo</h4>
+                                                    <h4 className="text-amber-700 font-bold uppercase text-xs">Các Ủy viên Ban Chỉ đạo</h4>
                                                 </div>
 
                                                 <div className="w-full">
                                                     <div className="bg-white border-t-2 border-amber-400 p-4 rounded-lg shadow-sm">
                                                         <div className="grid grid-cols-2 gap-x-3 gap-y-2 max-h-[350px] overflow-y-auto no-scrollbar pt-1">
                                                             {[
-                                                                'Văn phòng TW Đảng', 'MTTQ Việt Nam', 'Tòa án nhân dân tối cao',
-                                                                'Viện kiểm sát ND tối cao', 'Kiểm toán nhà nước', 'Văn phòng Chủ tịch nước',
+                                                                'Văn phòng Trung ương Đảng', 'Mặt trận Tổ quốc Việt Nam', 'Tòa án nhân dân tối cao',
+                                                                'Viện kiểm sát Nhân dân tối cao', 'Kiểm toán nhà nước', 'Văn phòng Chủ tịch nước',
                                                                 'Văn phòng Quốc hội', 'Các cơ quan của Quốc hội', 'Bộ Tư pháp',
-                                                                'Văn phòng Chính phủ', 'Các Bộ, cơ quan ngang Bộ', 'UBND Hà Nội',
-                                                                'UBND TP. HCM', 'UBND Đà Nẵng', 'UBND Bắc Ninh', 'UBND Quảng Ninh',
-                                                                'VCCI', 'Hiệp hội Doanh nghiệp NVV', 'Liên đoàn Luật sư', 'Hội Luật gia'
+                                                                'Văn phòng Chính phủ', 'Các Bộ, cơ quan ngang Bộ', 'Ủy ban nhân dân Thành phố Hà Nội',
+                                                                'Ủy ban nhân dân Thành phố Hồ Chí Minh', 'Ủy ban nhân dân Thành phố Đà Nẵng', 'Ủy ban nhân dân Tỉnh Bắc Ninh', 'Ủy ban nhân dân Tỉnh Quảng Ninh',
+                                                                'VCCI', 'Hiệp hội Doanh nghiệp Việt Nam', 'Liên đoàn Luật sư', 'Hội Luật gia'
                                                             ].map((item, idx) => (
                                                                 <div key={idx} className={`p-2 rounded text-[11px] font-bold leading-tight flex items-center gap-2 ${idx % 2 === 0 ? 'bg-gray-50 text-gray-700' : 'bg-transparent text-[#0a3a73]'}`}>
                                                                     <div className="w-1 h-1 rounded-full bg-amber-400 shrink-0"></div>
