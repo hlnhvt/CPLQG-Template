@@ -185,7 +185,7 @@ const TongRaSoatPage = () => {
         { id: 'ban-chi-dao', label: 'Ban Chỉ đạo' },
         { id: 'chi-dao-huong-dan', label: 'Hướng dẫn nghiệp vụ ' },
         { id: 'tin-tuc-hoat-dong', label: 'Tin tức hoạt động' },
-        { id: 'van-ban-tai-lieu', label: 'Tài liệu phục vụ tổng rà soát hệ thống VBQPPL' },
+        { id: 'van-ban-tai-lieu', label: 'Văn bản, tài liệu phục vụ tổng rà soát hệ thống VBQPPL' },
         { id: 'he-thong-thong-tin', label: 'Hệ thống thông tin, báo cáo' }
     ];
 
@@ -683,8 +683,8 @@ const TongRaSoatPage = () => {
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     <div className="border border-blue-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-blue-50/50 text-center flex flex-col items-center">
-                                        <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
-                                            <Database size={28} />
+                                        <div className="mb-4 flex items-center justify-center">
+                                            <img src="/BO NHAN DIEN TONG RA SOAT/intro_logo.webp" alt="Icon VBQPPL" className="w-12 h-12 object-contain" />
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Hệ thống VBQPPL</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết đến Cơ sở dữ liệu quốc gia về pháp luật</p>
@@ -694,8 +694,8 @@ const TongRaSoatPage = () => {
                                     </div>
 
                                     <div className="border border-red-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-red-50/50 text-center flex flex-col items-center">
-                                        <div className="w-14 h-14 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4">
-                                            <BookOpen size={28} />
+                                        <div className="mb-4 flex items-center justify-center">
+                                            <img src="/BO NHAN DIEN TONG RA SOAT/bg-li.png" alt="Icon Đảng" className="w-12 h-12 object-contain" />
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Văn bản, tài liệu của Đảng</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết chuyên mục, Trang của các Ban Đảng Trung ương</p>
@@ -705,8 +705,8 @@ const TongRaSoatPage = () => {
                                     </div>
 
                                     <div className="border border-teal-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-teal-50/50 text-center flex flex-col items-center">
-                                        <div className="w-14 h-14 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center mb-4">
-                                            <Globe size={28} />
+                                        <div className="mb-4 flex items-center justify-center text-teal-600">
+                                            <img src="/BO NHAN DIEN TONG RA SOAT/international_treaty_icon.png" alt="Icon Điều ước quốc tế" className="w-12 h-12 object-contain" />
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Điều ước quốc tế</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết danh sách Điều ước quốc tế cập nhật từ Bộ Ngoại giao</p>
