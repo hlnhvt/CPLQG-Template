@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
     Users, BookOpen, Newspaper, FileText, Database, ChevronRight,
-    ArrowRight, Globe, MonitorPlay, CheckCircle2, Clock, ChevronLeft
+    ArrowRight, Globe, MonitorPlay, CheckCircle2, Clock, ChevronLeft, ChevronUp, ChevronDown
 } from 'lucide-react';
 
 const MOCK_NEWS_HOAT_DONG = [
@@ -183,9 +183,9 @@ const TongRaSoatPage = () => {
 
     const tabs = [
         { id: 'ban-chi-dao', label: 'Ban Chỉ đạo' },
-        { id: 'chi-dao-huong-dan', label: 'Chỉ đạo, hướng dẫn nghiệp vụ' },
+        { id: 'chi-dao-huong-dan', label: 'Hướng dẫn nghiệp vụ ' },
         { id: 'tin-tuc-hoat-dong', label: 'Tin tức hoạt động' },
-        { id: 'van-ban-tai-lieu', label: 'Văn bản, tài liệu phục vụ tổng rà soát hệ thống VBQPPL' },
+        { id: 'van-ban-tai-lieu', label: 'Tài liệu phục vụ tổng rà soát hệ thống VBQPPL' },
         { id: 'he-thong-thong-tin', label: 'Hệ thống thông tin, báo cáo' }
     ];
 
@@ -265,70 +265,58 @@ const TongRaSoatPage = () => {
 
                     <div className="container mx-auto max-w-[1400px] px-4 pt-4 lg:pt-4">
 
-                        <div className="relative flex items-center mb-6 w-full mx-auto px-10">
-                            <button
-                                onClick={() => scrollTabs('left')}
-                                className="absolute left-0 z-10 w-8 h-8 md:w-10 md:h-10 bg-white/90 shadow-md border border-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:text-blue-600 focus:outline-none"
-                            >
-                                <ChevronLeft size={20} />
-                            </button>
+                        <div className="w-full lg:w-fit mx-auto flex flex-col items-center">
+                            <div className="relative flex justify-center mb-6 w-full px-2">
+                                <ul
+                                    ref={scrollContainerRef}
+                                    className="flex flex-wrap md:flex-nowrap overflow-x-auto items-center justify-center gap-2 md:gap-4 py-4 px-2 no-scrollbar border-b border-gray-100 mx-auto w-full scroll-smooth"
+                                >
+                                    {tabs.map((tab) => {
+                                        const isActive = activeTab === tab.id;
+                                        return (
+                                            <li key={tab.id} className="shrink-0 text-center">
+                                                <button
+                                                    onClick={() => setActiveTab(tab.id)}
+                                                    className={`py-2 px-6 rounded-full font-bold transition-all text-base whitespace-nowrap
+                                                        ${isActive
+                                                            ? 'bg-[#007bff] text-white shadow-md'
+                                                            : 'text-gray-600 hover:text-[#007bff] hover:bg-gray-50'
+                                                        }`}
+                                                >
+                                                    {tab.label}
+                                                </button>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </div>
 
-                            <ul
-                                ref={scrollContainerRef}
-                                className="flex flex-nowrap overflow-x-auto items-center justify-start gap-2 md:gap-4 py-4 px-2 no-scrollbar border-b border-gray-100 mx-auto w-full scroll-smooth"
-                            >
-                                {tabs.map((tab) => {
-                                    const isActive = activeTab === tab.id;
-                                    return (
-                                        <li key={tab.id} className="shrink-0 text-center">
-                                            <button
-                                                onClick={() => setActiveTab(tab.id)}
-                                                className={`py-2 px-6 rounded-full font-bold transition-all text-sm whitespace-nowrap
-                                                    ${isActive
-                                                        ? 'bg-[#007bff] text-white shadow-md'
-                                                        : 'text-gray-600 hover:text-[#007bff] hover:bg-gray-50'
-                                                    }`}
-                                            >
-                                                {tab.label}
-                                            </button>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-
-                            <button
-                                onClick={() => scrollTabs('right')}
-                                className="absolute right-0 z-10 w-8 h-8 md:w-10 md:h-10 bg-white/90 shadow-md border border-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:text-blue-600 focus:outline-none"
-                            >
-                                <ChevronRight size={20} />
-                            </button>
-                        </div>
-
-                        {/* Vertical News Ticker */}
-                        <div className="w-full mx-auto px-0 md:px-10 mb-6">
-                            <div className="bg-white border border-gray-200 text-gray-800 font-medium text-sm overflow-hidden flex items-stretch shadow-sm relative rounded-lg h-10">
-                                {/* Date - skewed to match label */}
-                                <span className="shrink-0 font-semibold text-gray-700 border-r border-gray-200 px-4 flex items-center text-[11px] md:text-[12px] bg-gray-50 whitespace-nowrap skew-x-[-10deg]">
-                                    <span className="skew-x-[10deg]">{fullDateStr}</span>
-                                </span>
-                                {/* Label Tag */}
-                                <span className="shrink-0 font-bold bg-[#e65c00] text-white px-3 flex items-center uppercase text-[10px] md:text-[11px] shadow-sm z-20 skew-x-[-10deg] mx-1.5">
-                                    <span className="skew-x-[10deg]">Tin tức nổi bật</span>
-                                </span>
-                                {/* Vertical ticker */}
-                                <div className="flex-1 overflow-hidden relative flex items-center">
-                                    <button
-                                        onClick={() => navigate(`/tong-ra-soat/tin-tuc/${tickerItems[tickerIndex].id}`)}
-                                        className="w-full text-left"
-                                    >
-                                        <span
-                                            className={`block text-[13px] md:text-sm text-[#0a1e3f] font-bold truncate transition-all duration-350 ${tickerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
-                                                }`}
-                                            style={{ transition: 'opacity 0.35s ease, transform 0.35s ease' }}
+                            {/* Vertical News Ticker */}
+                            <div className="w-full px-2 mb-6">
+                                <div className="bg-white border border-gray-200 text-gray-800 font-medium text-sm overflow-hidden flex items-stretch shadow-sm relative rounded-lg h-10 w-full">
+                                    {/* Date - skewed to match label */}
+                                    <span className="shrink-0 font-semibold text-gray-700 border-r border-gray-200 px-4 flex items-center text-[11px] md:text-[12px] bg-gray-50 whitespace-nowrap skew-x-[-10deg]">
+                                        <span className="skew-x-[10deg]">{fullDateStr}</span>
+                                    </span>
+                                    {/* Label Tag */}
+                                    <span className="shrink-0 font-bold bg-[#e65c00] text-white px-3 flex items-center uppercase text-[10px] md:text-[11px] shadow-sm z-20 skew-x-[-10deg] mx-1.5">
+                                        <span className="skew-x-[10deg]">Tin tức nổi bật</span>
+                                    </span>
+                                    {/* Vertical ticker - Add pl-4 for spacing */}
+                                    <div className="flex-1 overflow-hidden relative flex items-center pl-4 md:pl-5">
+                                        <button
+                                            onClick={() => navigate(`/tong-ra-soat/tin-tuc/${tickerItems[tickerIndex].id}`)}
+                                            className="w-full text-left"
                                         >
-                                            {tickerItems[tickerIndex].text}
-                                        </span>
-                                    </button>
+                                            <span
+                                                className={`block text-[13px] md:text-sm text-[#0a1e3f] font-bold truncate transition-all duration-350 ${tickerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
+                                                    }`}
+                                                style={{ transition: 'opacity 0.35s ease, transform 0.35s ease' }}
+                                            >
+                                                {tickerItems[tickerIndex].text}
+                                            </span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -599,14 +587,14 @@ const TongRaSoatPage = () => {
 
                                         {/* Banner separator */}
                                         <div className="w-full flex justify-center pt-2 pb-3 mb-1 animate-fadeIn">
-                                            <div 
+                                            <div
                                                 className="rounded-xl overflow-hidden shadow-sm border border-gray-100 group cursor-pointer hover:shadow-md transition-all shrink-0"
                                                 style={{ width: '849.31px', height: '159.19px' }}
                                             >
-                                                <img 
-                                                    src="/800-150-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg" 
-                                                    alt="Nghị Quyết Đại Hội XIV" 
-                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                                <img
+                                                    src="/800-150-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg"
+                                                    alt="Nghị Quyết Đại Hội XIV"
+                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                 />
                                             </div>
                                         </div>
@@ -709,7 +697,7 @@ const TongRaSoatPage = () => {
                                         <div className="w-14 h-14 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4">
                                             <BookOpen size={28} />
                                         </div>
-                                        <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Văn kiện Đảng</h3>
+                                        <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Văn bản, tài liệu của Đảng</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết chuyên mục, Trang của các Ban Đảng Trung ương</p>
                                         <Link to="#" className="mt-auto bg-white border border-red-600 text-red-600 font-bold py-2 px-6 rounded-full hover:bg-red-600 hover:text-white transition w-full">
                                             Truy cập
@@ -721,7 +709,7 @@ const TongRaSoatPage = () => {
                                             <Globe size={28} />
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Điều ước quốc tế</h3>
-                                        <p className="text-xs text-gray-500 mb-4 px-2">Liên kết danh sách Điều ước cập nhật từ Bộ Ngoại giao</p>
+                                        <p className="text-xs text-gray-500 mb-4 px-2">Liên kết danh sách Điều ước quốc tế cập nhật từ Bộ Ngoại giao</p>
                                         <Link to="#" className="mt-auto bg-white border border-teal-600 text-teal-600 font-bold py-2 px-6 rounded-full hover:bg-teal-600 hover:text-white transition w-full">
                                             Truy cập
                                         </Link>
@@ -764,16 +752,11 @@ const TongRaSoatPage = () => {
                                                         <div className="flex items-center gap-3 shrink-0">
                                                             <button
                                                                 onClick={() => toggleSystemExpansion(system.id)}
-                                                                className="text-sm font-medium text-[#1a3b8b] hover:text-blue-800 transition-colors bg-blue-50 px-3 py-1.5 rounded-md border border-blue-100"
+                                                                className="p-1.5 rounded-full hover:bg-gray-100 transition-colors text-gray-500 hover:text-blue-600 focus:outline-none"
+                                                                aria-label={isExpanded ? 'Thu gọn' : 'Mở rộng'}
                                                             >
-                                                                {isExpanded ? 'Thu gọn' : 'Thông tin thêm'}
+                                                                {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                                                             </button>
-                                                            <a
-                                                                href={system.link}
-                                                                className="bg-[#fdb714] text-[#1a3b8b] text-sm font-bold px-5 py-1.5 rounded-md hover:bg-yellow-400 transition-colors shadow-sm"
-                                                            >
-                                                                Truy cập
-                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
