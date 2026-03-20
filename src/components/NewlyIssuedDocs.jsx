@@ -11,7 +11,7 @@ const NewlyIssuedDocs = () => {
 
     return (
         <div className="container mx-auto px-4 pt-6 pb-4">
-            <h2 className="text-[28px] font-bold text-[#1e3a8a] mb-6">Văn bản mới ban hành</h2>
+            <h2 className="text-[28px] font-bold text-[#1e3a8a] mb-4">Văn bản mới ban hành</h2>
             <div className="flex flex-col lg:flex-row gap-6">
                 {/* Left Column - Documents List */}
                 <div className="flex-1 lg:max-w-none">
@@ -36,17 +36,17 @@ const NewlyIssuedDocs = () => {
                 {/* Right Column - Highlight Banners */}
                 <div className="flex flex-col gap-4 w-full lg:w-[412.66px] shrink-0 h-[412.66px]">
                     <Link to="/tong-ra-soat" className="rounded-xl overflow-hidden shadow-sm relative group block w-full flex-[2] bg-red-800 outline-none focus:ring-2 focus:ring-blue-400">
-                        <img 
-                            src="/BO NHAN DIEN TONG RA SOAT/đại hội 1200 800 jpg.jpg" 
-                            alt="Đại hội Đảng" 
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                        <img
+                            src="/BO NHAN DIEN TONG RA SOAT/đại hội 1200 800 jpg.jpg"
+                            alt="Đại hội Đảng"
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         />
                     </Link>
                     <Link to="/tong-ra-soat" className="rounded-xl overflow-hidden shadow-sm relative group block w-full flex-[1] bg-red-800 outline-none focus:ring-2 focus:ring-blue-400">
-                        <img 
-                            src="/BO NHAN DIEN TONG RA SOAT/1200x400 Banner Trang chu.jpg" 
-                            alt="Tổng rà soát văn bản quy phạm pháp luật" 
-                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                        <img
+                            src="/BO NHAN DIEN TONG RA SOAT/1200x400 Banner Trang chu.jpg"
+                            alt="Tổng rà soát văn bản quy phạm pháp luật"
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         />
                     </Link>
                 </div>
