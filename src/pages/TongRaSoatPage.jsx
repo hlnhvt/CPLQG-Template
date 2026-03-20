@@ -137,6 +137,11 @@ const TongRaSoatPage = () => {
     const scrollContainerRef = useRef(null);
     const [expandedSystemIds, setExpandedSystemIds] = useState([]);
 
+    // Scroll to top on mount
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const toggleSystemExpansion = (id) => {
         setExpandedSystemIds(prev =>
             prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
