@@ -247,29 +247,20 @@ const TongRaSoatPage = () => {
 
                 {/* Banner & Horizontal Navigation Tabs */}
                 <div className="bg-white border-b border-gray-200 shadow-sm text-black w-full">
-                    {/* Banner Tiêu đề giống thiết kế */}
-                    <div className="relative w-full flex justify-center overflow-hidden bg-[#021673]">
-
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10 pointer-events-none text-white bg-blue-900/40">
-                            <h1 className="text-[24px] md:text-[32px] lg:text-[40px] font-bold drop-shadow-lg uppercase tracking-wide">
-                                Khảo sát theo chủ đề
-                            </h1>
-                            <p className="mt-2 text-sm md:text-base text-blue-50 drop-shadow-md max-w-2xl font-medium">
-                                Tìm kiếm và lựa chọn các chủ đề khảo sát để đóng góp ý kiến xây dựng chính sách, pháp luật
-                            </p>
+                    {/* Banner Header mới theo yêu cầu */}
+                    <div className="container mx-auto max-w-[1400px] px-4 pt-6">
+                        <div className="relative w-full flex justify-center overflow-hidden bg-white rounded-lg shadow-md border border-gray-100 group cursor-pointer">
+                            <img
+                                src="/BO NHAN DIEN TONG RA SOAT/1870x210 Bia trang chinh.jpg"
+                                alt="Đưa Nghị quyết đại hội XIV của Đảng vào cuộc sống"
+                                className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
                         </div>
                     </div>
 
                     <div className="container mx-auto max-w-[1400px] px-4 pt-4 lg:pt-4">
-                        {/* Top banner across all tabs - Moved above tabs */}
-                        <div className="max-w-7xl mx-auto mb-1 rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white relative group">
-                            <img src="/images/dong_son_cover.png" alt="Banner Top Tab" className="w-full h-[100px] md:h-[110px] object-cover group-hover:scale-105 transition-transform duration-700" />
-                            <div className="absolute inset-0 bg-blue-900/30 flex items-center justify-center pointer-events-none">
-                                <h2 className="text-white text-2xl md:text-3xl font-bold uppercase tracking-wider drop-shadow-md">Rà soát hệ thống VBQPPL</h2>
-                            </div>
-                        </div>
 
-                        <div className="relative flex items-center mb-6 max-w-7xl mx-auto px-10">
+                        <div className="relative flex items-center mb-6 w-full mx-auto px-10">
                             <button
                                 onClick={() => scrollTabs('left')}
                                 className="absolute left-0 z-10 w-8 h-8 md:w-10 md:h-10 bg-white/90 shadow-md border border-gray-100 rounded-full flex items-center justify-center text-gray-500 hover:text-blue-600 focus:outline-none"
@@ -309,7 +300,7 @@ const TongRaSoatPage = () => {
                         </div>
 
                         {/* Vertical News Ticker */}
-                        <div className="max-w-7xl mx-auto px-0 md:px-10 mb-6">
+                        <div className="w-full mx-auto px-0 md:px-10 mb-6">
                             <div className="bg-white border border-gray-200 text-gray-800 font-medium text-sm overflow-hidden flex items-stretch shadow-sm relative rounded-lg h-10">
                                 {/* Date - skewed to match label */}
                                 <span className="shrink-0 font-semibold text-gray-700 border-r border-gray-200 px-4 flex items-center text-[11px] md:text-[12px] bg-gray-50 whitespace-nowrap skew-x-[-10deg]">
@@ -326,9 +317,8 @@ const TongRaSoatPage = () => {
                                         className="w-full text-left"
                                     >
                                         <span
-                                            className={`block text-[13px] md:text-sm text-[#0a1e3f] font-bold truncate transition-all duration-350 ${
-                                                tickerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
-                                            }`}
+                                            className={`block text-[13px] md:text-sm text-[#0a1e3f] font-bold truncate transition-all duration-350 ${tickerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
+                                                }`}
                                             style={{ transition: 'opacity 0.35s ease, transform 0.35s ease' }}
                                         >
                                             {tickerItems[tickerIndex].text}
@@ -341,7 +331,7 @@ const TongRaSoatPage = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 max-w-[1280px] mt-6">
+            <div className="container mx-auto px-4 max-w-[1400px] mt-6">
                 {/* Breadcrumb */}
                 {/* <nav className="flex items-center flex-wrap gap-1 text-[12px] text-gray-500 mb-6">
                     <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
@@ -351,9 +341,9 @@ const TongRaSoatPage = () => {
                     <span className="text-[#1a3b8b] font-bold">{tabs.find(t => t.id === activeTab)?.label}</span>
                 </nav> */}
 
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <div className="flex flex-col lg:flex-row gap-8">
                     {/* Main Content Area */}
-                    <div className="lg:col-span-3 order-2 lg:order-1">
+                    <div className="flex-1 order-2 lg:order-1 min-w-0">
                         {/* Tab 1: Ban Chỉ đạo */}
                         {activeTab === 'ban-chi-dao' && (
                             <div className="space-y-10 animate-fadeIn bg-white rounded-2xl p-8 shadow-sm border border-gray-100 mt-2">
@@ -447,9 +437,9 @@ const TongRaSoatPage = () => {
                                 {/* Legal Document Link */}
                                 <div className="mt-12 text-center pb-4 border-t border-gray-100 pt-8">
                                     <p className="text-gray-600 text-sm md:text-base font-medium leading-relaxed max-w-4xl mx-auto italic">
-                                        Văn bản đính kèm: 
-                                        <a 
-                                            href="#" 
+                                        Văn bản đính kèm:
+                                        <a
+                                            href="#"
                                             className="text-[#0a3a73] hover:text-blue-800 hover:underline font-bold ml-1 transition-colors"
                                         >
                                             Quyết định số 603/QĐ-TTg của Thủ tướng Chính phủ: Về việc thành lập Ban Chỉ đạo rà soát, xử lý vướng mắc trong hệ thống văn bản quy phạm pháp luật
@@ -551,7 +541,7 @@ const TongRaSoatPage = () => {
                                 const listNews = newsItems.slice(4);
 
                                 return (
-                                    <div className="space-y-8 animate-fadeIn">
+                                    <div className="space-y-5 animate-fadeIn">
                                         {/* Top News */}
                                         {topNews && (
                                             <div
@@ -578,7 +568,7 @@ const TongRaSoatPage = () => {
 
                                         {/* Grid News (Next 3) */}
                                         {gridNews.length > 0 && (
-                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                 {gridNews.map(news => (
                                                     <div
                                                         onClick={() => navigate(`/tong-ra-soat/tin-tuc/${news.id || 1}`)}
@@ -602,9 +592,23 @@ const TongRaSoatPage = () => {
                                             </div>
                                         )}
 
+                                        {/* Banner separator */}
+                                        <div className="w-full flex justify-center pt-2 pb-3 mb-1 animate-fadeIn">
+                                            <div 
+                                                className="rounded-xl overflow-hidden shadow-sm border border-gray-100 group cursor-pointer hover:shadow-md transition-all shrink-0"
+                                                style={{ width: '849.31px', height: '159.19px' }}
+                                            >
+                                                <img 
+                                                    src="/800-150-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg" 
+                                                    alt="Nghị Quyết Đại Hội XIV" 
+                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                                />
+                                            </div>
+                                        </div>
+
                                         {/* List News (Remaining) */}
                                         {listNews.length > 0 && (
-                                            <div className="space-y-5">
+                                            <div className="space-y-4">
                                                 {listNews.map(news => (
                                                     <div
                                                         onClick={() => navigate(`/tong-ra-soat/tin-tuc/${news.id || 2}`)}
@@ -801,7 +805,7 @@ const TongRaSoatPage = () => {
                         )}
                     </div>
                     {/* Right Banners Sidebar */}
-                    <div className="hidden lg:flex flex-col gap-6 order-1 lg:order-2 mt-2">
+                    <div className="hidden lg:flex flex-col gap-6 order-1 lg:order-2 mt-2 shrink-0" style={{ width: '412.66px' }}>
                         <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white group relative">
                             {/* Attached Image Banner */}
                             <img src="/banner-nghi-quyet.png" alt="Đưa nghị quyết Đại hội XIV" className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />

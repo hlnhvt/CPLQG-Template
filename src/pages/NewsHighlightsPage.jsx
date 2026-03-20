@@ -75,16 +75,12 @@ const NewsHighlightsPage = () => {
             <div className="container mx-auto px-4 py-8 max-w-[1400px]">
                 
                 {/* 1. Top Banner */}
-                <div className="mb-8 rounded-lg overflow-hidden relative shadow-md bg-red-700 h-28 md:h-36 flex items-center justify-center border-b-4 border-yellow-400">
-                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30"></div>
-                    <div className="relative text-center z-10">
-                        <div className="flex justify-center mb-1">
-                            <Star className="text-yellow-400 fill-yellow-400" size={24} />
-                        </div>
-                        <h2 className="text-white text-xl md:text-3xl font-bold tracking-wider uppercase drop-shadow-lg" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
-                            Đưa nghị quyết đại hội XIV của Đảng vào cuộc sống
-                        </h2>
-                    </div>
+                <div className="mb-8 rounded-lg overflow-hidden relative shadow-md group cursor-pointer border border-gray-100">
+                    <img 
+                        src="/1870-210-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg" 
+                        alt="Đưa Nghị quyết đại hội XIV của Đảng vào cuộc sống"
+                        className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                 </div>
 
                 {/* 2. Tin tức nổi bật */}

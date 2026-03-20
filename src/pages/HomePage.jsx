@@ -6,6 +6,7 @@ import EventsActivities from '../components/EventsActivities';
 import LegalRadio from '../components/LegalRadio';
 import LinkedPortals from '../components/LinkedPortals';
 import RecommendedForYou from '../components/RecommendedForYou';
+import FixedBottomCarousel from '../components/FixedBottomCarousel';
 import { useAuth } from '../contexts/AuthContext';
 
 function HomePage() {
@@ -24,6 +25,7 @@ function HomePage() {
                 <LegalRadio />
                 <LinkedPortals />
             </div>
+            <FixedBottomCarousel />
         </>
     );
 }

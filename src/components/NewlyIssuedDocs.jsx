@@ -3,44 +3,51 @@ import { Link } from 'react-router-dom';
 
 const NewlyIssuedDocs = () => {
     const docs = [
-        { date: '10/11/2025', title: 'Thông tư số 12/2025/TT-BTP quy định về tiêu chuẩn nghiệp vụ các ngạch công chức chuyên ngành hành chính...' },
-        { date: '05/11/2025', title: 'Nghị định 40/2025/NĐ-CP hướng dẫn chi tiết thi hành một số điều của Luật Đất đai năm 2024' },
-        { date: '01/11/2025', title: 'Quyết định 15/2025/QĐ-TTg của Thủ tướng Chính phủ về việc ban hành kế hoạch hành động quốc gia...' },
-        { date: '28/10/2025', title: 'Thông tư 08/2025/TT-BCA quy định chi tiết xử phạt vi phạm hành chính trong lĩnh vực giao thông...' }
+        { date: '19/03/2026', title: 'Quyết định 369/QĐ-BXD của Bộ Xây dựng ban hành Kế hoạch của Bộ Xây dựng triển khai Đề án chuyển đổi số trong hoạt động xây dựng, quản lý, khai thác kết cấu hạ tầng xây dựng' },
+        { date: '18/03/2026', title: 'Quyết định 618/QĐ-BGDĐT của Bộ Giáo dục và Đào tạo về việc công bố thủ tục hành chính được thay thế lĩnh vực thi, tuyển sinh thuộc phạm vi chức năng quản lý của Bộ Giáo dục và Đào tạo' },
+        { date: '18/03/2026', title: 'Quyết định 363/QĐ-BXD của Ban Chỉ đạo của Bộ Xây dựng về phát triển khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số và Đề án 06 ban hành Kế hoạch hoạt động năm 2026 của Ban Chỉ đạo của Bộ Xây dựng về phát triển khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số và Đề...' },
+        { date: '18/03/2026', title: 'Thông tư 14/2026/TT-BGDĐT của Bộ Giáo dục và Đào tạo ban hành Chương trình giáo dục phổ thông môn Tiếng Raglai cấp Tiểu học' }
     ];
 
     return (
-        <div className="container mx-auto px-4 pt-12 pb-4">
+        <div className="container mx-auto px-4 pt-6 pb-4">
+            <h2 className="text-[28px] font-bold text-[#1e3a8a] mb-6">Văn bản mới ban hành</h2>
             <div className="flex flex-col lg:flex-row gap-6">
                 {/* Left Column - Documents List */}
-                <div className="flex-1 flex flex-col h-full min-w-0">
-                    <div className="flex justify-between items-center bg-[var(--bg-header-bottom)] text-[var(--text-on-blue)] px-4 py-2 rounded-t-lg shrink-0">
-                        <h3 className="font-bold text-lg">Văn bản mới ban hành</h3>
-                        <a href="#" className="text-sm hover:underline hover:text-yellow-300">Xem tất cả</a>
-                    </div>
-                    <div className="bg-white border rounded-b-lg shadow-sm flex-1 flex flex-col">
-                        <div className="flex font-bold bg-gray-200 text-primary text-sm py-2 px-4 border-b shrink-0">
-                            <div className="w-1/4">Ngày ban hành</div>
-                            <div className="w-3/4">Trích yếu</div>
+                <div className="flex-1 lg:max-w-none">
+                    <div className="bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-gray-100 overflow-hidden flex flex-col h-[413px]">
+                        {/* Table Header */}
+                        <div className="flex bg-[#1e3a8a] text-white text-[15px] font-bold py-3.5 px-6 shrink-0">
+                            <div className="w-[180px] shrink-0">Ngày ban hành</div>
+                            <div className="flex-1">Nội dung</div>
                         </div>
-                        <ul className="flex flex-col flex-1 pb-1">
+                        {/* Table Body */}
+                        <ul className="flex flex-col flex-1 overflow-y-auto bg-white">
                             {docs.map((doc, index) => (
-                                <Link to={`/van-ban/${index + 1}`} key={index} className="flex text-sm py-4 px-4 border-b last:border-0 hover:bg-gray-50 transition cursor-pointer flex-1 items-center">
-                                    <div className="w-1/4 text-gray-500 font-medium">{doc.date}</div>
-                                    <div className="w-3/4 text-gray-800 line-clamp-3 hover:text-primary">{doc.title}</div>
+                                <Link to={`/van-ban/${index + 1}`} key={index} className="flex text-[14px] py-4 px-6 border-b border-gray-100 last:border-0 hover:bg-blue-50/50 transition cursor-pointer group items-center flex-1">
+                                    <div className="w-[180px] shrink-0 font-semibold text-gray-800">{doc.date}</div>
+                                    <div className="flex-1 text-gray-600 line-clamp-3 group-hover:text-blue-700 leading-relaxed font-medium">{doc.title}</div>
                                 </Link>
                             ))}
                         </ul>
                     </div>
                 </div>
 
-                {/* Right Column - Highlight Banner */}
-                <div className="flex flex-col gap-4 w-full lg:w-[320px] shrink-0">
-                    <Link to="/tong-ra-soat" className="rounded-lg overflow-hidden shadow-md relative group block w-full bg-red-800" style={{ flex: 3 }}>
-                        <img src="/banner-nghi-quyet.png" alt="Đại hội Đảng" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                {/* Right Column - Highlight Banners */}
+                <div className="flex flex-col gap-4 w-full lg:w-[412.66px] shrink-0 h-[412.66px]">
+                    <Link to="/tong-ra-soat" className="rounded-xl overflow-hidden shadow-sm relative group block w-full flex-[2] bg-red-800 outline-none focus:ring-2 focus:ring-blue-400">
+                        <img 
+                            src="/BO NHAN DIEN TONG RA SOAT/đại hội 1200 800 jpg.jpg" 
+                            alt="Đại hội Đảng" 
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                        />
                     </Link>
-                    <Link to="/tong-ra-soat" className="rounded-lg overflow-hidden shadow-md relative group block w-full bg-red-800" style={{ flex: 1 }}>
-                        <img src="/banner-tong-ra-soat-v2.png" alt="Tổng rà soát văn bản quy phạm pháp luật" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                    <Link to="/tong-ra-soat" className="rounded-xl overflow-hidden shadow-sm relative group block w-full flex-[1] bg-red-800 outline-none focus:ring-2 focus:ring-blue-400">
+                        <img 
+                            src="/BO NHAN DIEN TONG RA SOAT/1200x400 Banner Trang chu.jpg" 
+                            alt="Tổng rà soát văn bản quy phạm pháp luật" 
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                        />
                     </Link>
                 </div>
             </div>
