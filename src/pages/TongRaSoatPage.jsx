@@ -442,18 +442,20 @@ const TongRaSoatPage = () => {
                                                 <div className="relative flex flex-col items-center">
                                                     {/* Horizontal line from center to right (+ half-gap) */}
                                                     <div className="absolute top-0 left-1/2 w-[calc(50%+24px)] h-[2px] bg-[#0a3a73]/60"></div>
-                                                    {/* Vertical segment with arrowhead */}
-                                                    <div className="absolute top-0 left-1/2 w-[2px] h-10 bg-[#0a3a73]/60 flex items-end justify-center">
-                                                        <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-[#0a3a73]/60 translate-y-[2px]"></div>
+                                                    {/* Vertical segment with arrowhead (Stop line at base of triangle) */}
+                                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center h-10">
+                                                        <div className="w-[2px] h-8 bg-[#0a3a73]/60"></div>
+                                                        <div className="w-0 h-0 border-l-[7px] border-r-[7px] border-t-[10px] border-l-transparent border-r-transparent border-t-[#0a3a73]/60"></div>
                                                     </div>
                                                 </div>
                                                 {/* Column 2 Connector Part */}
                                                 <div className="relative flex flex-col items-center">
                                                     {/* Horizontal line from center to left (+ half-gap) */}
                                                     <div className="absolute top-0 right-1/2 w-[calc(50%+24px)] h-[2px] bg-[#0a3a73]/60"></div>
-                                                    {/* Vertical segment with arrowhead */}
-                                                    <div className="absolute top-0 left-1/2 w-[2px] h-10 bg-[#0a3a73]/60 flex items-end justify-center">
-                                                        <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-[#0a3a73]/60 translate-y-[2px]"></div>
+                                                    {/* Vertical segment with arrowhead (Stop line at base of triangle) */}
+                                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center h-10">
+                                                        <div className="w-[2px] h-8 bg-[#0a3a73]/60"></div>
+                                                        <div className="w-0 h-0 border-l-[7px] border-r-[7px] border-t-[10px] border-l-transparent border-r-transparent border-t-[#0a3a73]/60"></div>
                                                     </div>
                                                 </div>
                                             </div>
