@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Search, Heart, MessageSquare, Trash2, Edit3, MoreVertical, FileText, CheckCircle, Clock, Activity, Globe, Laptop, Smartphone, Monitor, Info, ChevronDown, ChevronUp, XCircle, AlertCircle, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, Heart, MessageSquare, Trash2, Edit3, MoreVertical, FileText, CheckCircle, Clock, Activity, Globe, Laptop, Smartphone, Monitor, Info, ChevronDown, ChevronUp, XCircle, AlertCircle, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const MOCK_FAVORITES = [
@@ -31,6 +31,21 @@ const UserHistoryPage = () => {
     const [comments, setComments] = useState(MOCK_COMMENTS);
     const [activityLogs, setActivityLogs] = useState(MOCK_ACTIVITY_LOGS);
     const [expandedLogs, setExpandedLogs] = useState([]);
+    
+    // Pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
+
+    // Reset page whenever tab changes
+    const changeTab = (tab) => {
+        setActiveTab(tab);
+        setCurrentPage(1);
+    };
+
+    const handleItemsPerPageChange = (e) => {
+        setItemsPerPage(Number(e.target.value));
+        setCurrentPage(1);
+    };
 
     const toggleExpandLog = (id) => {
         setExpandedLogs(prev => 
@@ -65,6 +80,77 @@ const UserHistoryPage = () => {
         setComments(comments.filter(c => c.id !== id));
     };
 
+    // Derived States for Pagination
+    const filteredFavorites = favorites.filter(f => f.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    const paginatedFavorites = filteredFavorites.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const totalFavoritePages = Math.ceil(filteredFavorites.length / itemsPerPage);
+
+    const paginatedComments = comments.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const totalCommentPages = Math.ceil(comments.length / itemsPerPage);
+
+    const paginatedActivities = activityLogs.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+    const totalActivityPages = Math.ceil(activityLogs.length / itemsPerPage);
+
+    const renderPagination = (totalPages, totalItems) => {
+        if (totalItems === 0) return null;
+        
+        return (
+            <div className="flex flex-col sm:flex-row justify-between items-center mt-8 gap-4 border-t border-gray-100 pt-6">
+                <div className="flex items-center gap-2 text-[13px] text-gray-500 font-medium">
+                    <span>Hiển thị:</span>
+                    <select 
+                        value={itemsPerPage}
+                        onChange={handleItemsPerPageChange}
+                        className="border border-gray-200 rounded-md px-2 py-1 focus:outline-none focus:border-blue-500 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                        <option value={2}>2 bản ghi</option>
+                        <option value={5}>5 bản ghi</option>
+                        <option value={10}>10 bản ghi</option>
+                        <option value={20}>20 bản ghi</option>
+                    </select>
+                    <span className="ml-2 hidden sm:inline-block">/ tổng số {totalItems}</span>
+                </div>
+                
+                {totalPages > 1 && (
+                    <div className="flex items-center gap-2">
+                        <button
+                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                            disabled={currentPage === 1}
+                            className="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        >
+                            <ChevronLeft size={18} />
+                        </button>
+                        
+                        <div className="flex items-center gap-1">
+                            {Array.from({ length: totalPages }).map((_, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => setCurrentPage(i + 1)}
+                                    className={`w-9 h-9 flex items-center justify-center text-sm font-semibold rounded-lg transition-colors ${
+                                        currentPage === i + 1
+                                            ? 'bg-blue-600 text-white shadow-sm'
+                                            : 'text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                                    }`}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
+                        </div>
+
+                        <button
+                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                            disabled={currentPage === totalPages}
+                            className="p-2 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        >
+                            <ChevronRight size={18} />
+                        </button>
+                    </div>
+                )}
+            </div>
+        );
+    };
+
     return (
         <div className="animate-fadeIn pb-12">
             <div className="mb-6">
@@ -76,21 +162,21 @@ const UserHistoryPage = () => {
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-2 mb-6 overflow-x-auto scrollbar-hide">
                 <div className="flex bg-gray-50 p-1 rounded-lg min-w-max">
                     <button 
-                        onClick={() => setActiveTab('favorites')}
+                        onClick={() => changeTab('favorites')}
                         className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-md transition-all ${activeTab === 'favorites' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600 hover:text-gray-900 duration-200'}`}
                     >
                         <Heart size={16} className={activeTab === 'favorites' ? 'fill-blue-100' : ''} /> 
                         Đã Yêu thích <span className="hidden sm:inline-block ml-1 bg-gray-100 px-2 py-0.5 rounded-full text-xs text-gray-500">{favorites.length}</span>
                     </button>
                     <button 
-                        onClick={() => setActiveTab('comments')}
+                        onClick={() => changeTab('comments')}
                         className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-md transition-all ${activeTab === 'comments' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600 hover:text-gray-900 duration-200'}`}
                     >
                         <MessageSquare size={16} className={activeTab === 'comments' ? 'fill-blue-100' : ''} /> 
                         Bình luận <span className="hidden sm:inline-block ml-1 bg-gray-100 px-2 py-0.5 rounded-full text-xs text-gray-500">{comments.length}</span>
                     </button>
                     <button 
-                        onClick={() => setActiveTab('activities')}
+                        onClick={() => changeTab('activities')}
                         className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium rounded-md transition-all ${activeTab === 'activities' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600 hover:text-gray-900 duration-200'}`}
                     >
                         <Activity size={16} /> 
@@ -127,7 +213,7 @@ const UserHistoryPage = () => {
                         </div>
 
                         <div className="space-y-4">
-                            {favorites.filter(f => f.title.toLowerCase().includes(searchTerm.toLowerCase())).map(item => (
+                            {paginatedFavorites.map(item => (
                                 <div key={item.id} className="flex flex-col sm:flex-row gap-4 p-5 rounded-xl border border-gray-100 hover:border-blue-200 bg-white hover:bg-blue-50/10 transition-colors group">
                                     <div className={`w-12 h-12 rounded-lg flex items-center justify-center shrink-0 ${
                                         item.type === 'vanban' ? 'bg-blue-100 text-blue-600' : 
@@ -165,6 +251,8 @@ const UserHistoryPage = () => {
                                     <p>Bạn chưa lưu bài viết nào.</p>
                                 </div>
                             )}
+                            
+                            {renderPagination(totalFavoritePages, filteredFavorites.length)}
                         </div>
                     </div>
                 )}
@@ -173,7 +261,7 @@ const UserHistoryPage = () => {
                 {activeTab === 'comments' && (
                     <div className="animate-fadeIn p-6">
                         <div className="space-y-6">
-                            {comments.map(comment => (
+                            {paginatedComments.map(comment => (
                                 <div key={comment.id} className="p-5 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:shadow-sm transition-all relative group">
                                     <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-3">
                                         <div className="text-xs font-semibold px-2.5 py-1 rounded-full w-fit flex items-center gap-1.5 ${
@@ -224,6 +312,8 @@ const UserHistoryPage = () => {
                                     <p>Bạn chưa có bình luận nào.</p>
                                 </div>
                             )}
+                            
+                            {renderPagination(totalCommentPages, comments.length)}
                         </div>
                     </div>
                 )}
@@ -237,7 +327,7 @@ const UserHistoryPage = () => {
                         </div>
                         
                         <div className="relative border-l-2 border-gray-100 ml-4 pl-6 space-y-6">
-                            {activityLogs.map((log) => {
+                            {paginatedActivities.map((log) => {
                                 const isExpanded = expandedLogs.includes(log.id);
                                 const statusTheme = getStatusStyle(log.status);
                                 
@@ -328,6 +418,8 @@ const UserHistoryPage = () => {
                                 );
                             })}
                         </div>
+                        
+                        {renderPagination(totalActivityPages, activityLogs.length)}
                     </div>
                 )}
                 
