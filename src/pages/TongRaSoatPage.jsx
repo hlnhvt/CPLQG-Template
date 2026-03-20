@@ -377,54 +377,140 @@ const TongRaSoatPage = () => {
                                     </span>
                                 </div> */}
 
-                                {/* Trưởng ban */}
-                                <div className="flex justify-center">
-                                    <div className="group cursor-pointer rounded-xl overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300 w-[240px] border border-gray-200 bg-white">
-                                        <div className="aspect-[3/4] w-full bg-gray-100 overflow-hidden">
-                                            <img src={MOCK_MEMBERS[0].image} alt={MOCK_MEMBERS[0].name} className="w-full h-full object-cover object-top" />
+                                <div className="py-6 overflow-x-auto">
+                                    <div className="min-w-[800px] flex flex-col items-center">
+                                        {/* TIER 1: Trưởng ban */}
+                                        <div className="relative flex flex-col items-center">
+                                            <div className="bg-[#f0f7ff] border-2 border-[#0a3a73] rounded-full px-12 py-3 shadow-sm mb-6">
+                                                <h3 className="text-[#0a3a73] font-bold text-lg uppercase">Sơ đồ Ban Chỉ đạo tổng rà soát VBQPPL</h3>
+                                            </div>
+
+                                            <div className="bg-gradient-to-b from-[#0a3a73] to-[#1a3b8b] rounded-2xl px-12 py-6 shadow-xl text-center text-white border-2 border-blue-400/20 relative z-10 w-[400px]">
+                                                <div className="text-[#fdb714] font-bold text-xs uppercase mb-2 tracking-wider">Trưởng Ban Chỉ đạo</div>
+                                                <h2 className="text-xl font-bold uppercase tracking-tight">Chủ tịch Quốc hội</h2>
+                                            </div>
                                         </div>
-                                        <div className="bg-[#0a3a73] text-center p-4">
-                                            <div className="text-[#fdb714] font-bold text-sm mb-1 uppercase">Đồng chí</div>
-                                            <h3 className="text-white font-bold text-lg mb-2">{MOCK_MEMBERS[0].name}</h3>
-                                            <p className="text-white text-[10px] uppercase leading-snug">
-                                                {MOCK_MEMBERS[0].role}
-                                            </p>
+
+                                        {/* Connector Tier 1 to Tier 2 */}
+                                        <div className="w-[2px] h-12 bg-[#0a3a73]/60"></div>
+
+                                        {/* TIER 2: Phó Trưởng ban (Centrally grouped) */}
+                                        <div className="relative flex flex-col items-center w-full max-w-2xl">
+                                            <div className="bg-white border-2 border-blue-600 rounded-2xl p-6 shadow-lg relative z-10 w-full">
+                                                <div className="flex flex-col gap-4 text-center">
+                                                    <div className="bg-[#eef6ff] border border-blue-200 rounded-xl px-6 py-2 shadow-sm mb-2">
+                                                        <h4 className="text-[#0a3a73] font-bold uppercase text-sm">Phó Trưởng ban thường trực</h4>
+                                                    </div>
+
+                                                    <div className="flex flex-col gap-3">
+                                                        <div className="bg-blue-50 p-3 rounded-r-lg shadow-sm text-sm font-bold text-[#0a3a73]">
+                                                            Các Phó  Trưởng ban
+                                                        </div>
+                                                        <div className="grid grid-cols-2 gap-3">
+                                                            <div className="bg-gray-50 p-3 rounded-lg text-[11px] font-bold text-gray-700 leading-tight flex items-center gap-2">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                                                                Phó Chủ tịch Quốc hội phụ trách công tác pháp luật và tư pháp
+                                                            </div>
+                                                            <div className="bg-gray-50 p-3 rounded-lg text-[11px] font-bold text-gray-700 leading-tight flex items-center gap-2">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                                                                Phó Thủ tướng Chính phủ phụ trách công tác pháp luật
+                                                            </div>
+                                                            <div className="bg-gray-50 p-3 rounded-lg text-[11px] font-bold text-gray-700 leading-tight flex items-center gap-2">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                                                                Phó Trưởng Ban Nội chính Trung ương
+                                                            </div>
+                                                            <div className="bg-gray-50 p-3 rounded-lg text-[11px] font-bold text-gray-700 leading-tight flex items-center gap-2">
+                                                                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                                                                Phó Chủ tịch - TTK Ủy ban Trung ương MTTQ Việt Nam
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Connector Tier 2 to Tier 3 with Dot */}
+                                            <div className="w-[2px] h-20 bg-[#0a3a73]/60 relative flex flex-col items-center">
+                                                <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-blue-100 border-2 border-[#0a3a73]/60 shadow-sm z-20"></div>
+                                            </div>
+                                        </div>
+
+                                        {/* TIER 3: Parallel Commissioners Blocks */}
+                                        <div className="w-full grid grid-cols-2 gap-x-12 relative px-4">
+                                            {/* MIRRORED CONNECTOR SYSTEM - Replaces all individual lines to ensure perfect alignment */}
+                                            <div className="absolute top-0 left-0 w-full grid grid-cols-2 gap-x-12 px-4 pointer-events-none z-0 h-10">
+                                                {/* Column 1 Connector Part */}
+                                                <div className="relative flex flex-col items-center">
+                                                    {/* Horizontal line from center to right (+ half-gap) */}
+                                                    <div className="absolute top-0 left-1/2 w-[calc(50%+24px)] h-[2px] bg-[#0a3a73]/60"></div>
+                                                    {/* Vertical segment with arrowhead */}
+                                                    <div className="absolute top-0 left-1/2 w-[2px] h-10 bg-[#0a3a73]/60 flex items-end justify-center">
+                                                        <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-[#0a3a73]/60 translate-y-[2px]"></div>
+                                                    </div>
+                                                </div>
+                                                {/* Column 2 Connector Part */}
+                                                <div className="relative flex flex-col items-center">
+                                                    {/* Horizontal line from center to left (+ half-gap) */}
+                                                    <div className="absolute top-0 right-1/2 w-[calc(50%+24px)] h-[2px] bg-[#0a3a73]/60"></div>
+                                                    {/* Vertical segment with arrowhead */}
+                                                    <div className="absolute top-0 left-1/2 w-[2px] h-10 bg-[#0a3a73]/60 flex items-end justify-center">
+                                                        <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-[#0a3a73]/60 translate-y-[2px]"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* COLUMN 1: Khối các ủy viên thường trực */}
+                                            <div className="flex flex-col items-center relative pt-10">
+
+                                                <div className="bg-[#f0fff4] border border-green-200 rounded-xl px-6 py-2.5 shadow-md mb-6 w-full text-center">
+                                                    <h4 className="text-green-800 font-bold uppercase text-xs">Khối các Ủy viên thường trực</h4>
+                                                </div>
+
+                                                <div className="w-full space-y-3">
+                                                    <div className="bg-white border-t-2 border-green-500 p-4 rounded-lg shadow-sm">
+                                                        <ul className="space-y-3 text-[13px] font-bold text-gray-700">
+                                                            <li className="flex items-center gap-3">
+                                                                <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[10px]">1</div>
+                                                                Chủ nhiệm Ủy ban Pháp luật và Tư pháp
+                                                            </li>
+                                                            <li className="flex items-center gap-3">
+                                                                <div className="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[10px]">2</div>
+                                                                Bộ trưởng Bộ Tư pháp
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* COLUMN 2: Khối các ủy viên Ban Chỉ đạo */}
+                                            <div className="flex flex-col items-center relative pt-10">
+
+                                                <div className="bg-[#fff9e6] border border-amber-200 rounded-xl px-6 py-2.5 shadow-md mb-6 w-full text-center">
+                                                    <h4 className="text-amber-700 font-bold uppercase text-xs">Khối các Ủy viên Ban Chỉ đạo</h4>
+                                                </div>
+
+                                                <div className="w-full">
+                                                    <div className="bg-white border-t-2 border-amber-400 p-4 rounded-lg shadow-sm">
+                                                        <div className="grid grid-cols-2 gap-x-3 gap-y-2 max-h-[350px] overflow-y-auto no-scrollbar pt-1">
+                                                            {[
+                                                                'Văn phòng TW Đảng', 'MTTQ Việt Nam', 'Tòa án nhân dân tối cao',
+                                                                'Viện kiểm sát ND tối cao', 'Kiểm toán nhà nước', 'Văn phòng Chủ tịch nước',
+                                                                'Văn phòng Quốc hội', 'Các cơ quan của Quốc hội', 'Bộ Tư pháp',
+                                                                'Văn phòng Chính phủ', 'Các Bộ, cơ quan ngang Bộ', 'UBND Hà Nội',
+                                                                'UBND TP. HCM', 'UBND Đà Nẵng', 'UBND Bắc Ninh', 'UBND Quảng Ninh',
+                                                                'VCCI', 'Hiệp hội Doanh nghiệp NVV', 'Liên đoàn Luật sư', 'Hội Luật gia'
+                                                            ].map((item, idx) => (
+                                                                <div key={idx} className={`p-2 rounded text-[11px] font-bold leading-tight flex items-center gap-2 ${idx % 2 === 0 ? 'bg-gray-50 text-gray-700' : 'bg-transparent text-[#0a3a73]'}`}>
+                                                                    <div className="w-1 h-1 rounded-full bg-amber-400 shrink-0"></div>
+                                                                    {item}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                    <div className="mt-3 text-[10px] text-center text-gray-400 italic italic">Đại diện lãnh đạo các cơ quan, tổ chức theo quy định</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                {/* Phó Trưởng ban */}
-                                <div className="flex justify-center gap-8 flex-wrap">
-                                    {MOCK_MEMBERS.slice(1, 3).map((member) => (
-                                        <div key={member.id} className="group cursor-pointer rounded-xl overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300 w-[220px] border border-gray-200 bg-white">
-                                            <div className="aspect-[3/4] w-full bg-gray-100 overflow-hidden">
-                                                <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top" />
-                                            </div>
-                                            <div className="bg-[#0a3a73] text-center p-3 h-[130px] flex flex-col justify-center">
-                                                <div className="text-[#fdb714] font-bold text-xs mb-1 uppercase">Đồng chí</div>
-                                                <h3 className="text-white font-bold text-base mb-1">{member.name}</h3>
-                                                <p className="text-white text-[10px] uppercase leading-tight line-clamp-3">
-                                                    {member.role}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                                {/* Ủy viên */}
-                                <div className="flex justify-center gap-6 flex-wrap">
-                                    {MOCK_MEMBERS.slice(3, 7).map((member) => (
-                                        <div key={member.id} className="group cursor-pointer rounded-xl overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300 w-[200px] border border-gray-200 bg-white">
-                                            <div className="aspect-[3/4] w-full bg-gray-100 overflow-hidden">
-                                                <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top" />
-                                            </div>
-                                            <div className="bg-[#0a3a73] text-center p-3 h-[130px] flex flex-col justify-center">
-                                                <div className="text-[#fdb714] font-bold text-xs mb-1 uppercase">Đồng chí</div>
-                                                <h3 className="text-white font-bold text-[15px] mb-1">{member.name}</h3>
-                                                <p className="text-white text-[9px] uppercase leading-tight line-clamp-4">
-                                                    {member.role}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    ))}
                                 </div>
 
                                 {/* Legal Document Link */}
