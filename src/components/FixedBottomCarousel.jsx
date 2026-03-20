@@ -92,6 +92,12 @@ const CAROUSEL_ITEMS = [
 const FixedBottomCarousel = () => {
     const [isVisible, setIsVisible] = useState(true);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setIsLoaded(true), 1200);
+        return () => clearTimeout(timer);
+    }, []);
 
     // Auto-advance every 5s if visible
     useEffect(() => {
@@ -112,7 +118,7 @@ const FixedBottomCarousel = () => {
 
     if (!isVisible) {
         return (
-            <div className="fixed bottom-0 left-1/2 -translate-x-1/2 z-[100] animate-fadeIn">
+            <div className={`fixed bottom-0 left-1/2 -translate-x-1/2 z-[100] transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
                 <button 
                     onClick={() => setIsVisible(true)}
                     className="bg-[#1a3673] hover:bg-[#0f2350] text-white w-[300px] h-8 rounded-t-xl shadow-[0_-5px_15px_rgba(0,0,0,0.2)] flex items-center justify-center gap-2 transition-colors border border-cyan-400 border-b-0 cursor-pointer"
@@ -132,7 +138,7 @@ const FixedBottomCarousel = () => {
     };
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 bg-[#2585f9]/70 backdrop-blur-md border-t border-cyan-400/50 z-[100] shadow-[0_-8px_30px_rgba(0,0,0,0.15)] py-2 transition-all duration-500 flex flex-col items-center animate-fadeIn">
+        <div className={`fixed bottom-0 left-0 right-0 bg-[#2585f9]/30 backdrop-blur-md border-t border-cyan-400/50 z-[100] shadow-[0_-8px_30px_rgba(0,0,0,0.15)] py-2 transition-all duration-[1200ms] ease-out flex flex-col items-center transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-[120%] opacity-0'}`}>
             {/* Toggle Button Container */}
             <div className="absolute -top-8 left-1/2 -translate-x-1/2">
                 <button 
