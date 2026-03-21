@@ -8,7 +8,8 @@ const CAROUSEL_ITEMS = [
         type: 'image',
         src: '/BO NHAN DIEN TONG RA SOAT/800x150.Banner chay.jpg',
         alt: 'Tổng rà soát hệ thống văn bản quy phạm pháp luật',
-        link: '/tong-ra-soat'
+        link: '/tong-ra-soat',
+        state: { activeTab: 'tin-tuc-hoat-dong' }
     },
     {
         id: 2,
@@ -219,7 +220,7 @@ const FixedBottomCarousel = () => {
                                 style={{...style, zIndex}}
                                 onClick={() => {
                                     if (offset === 0 && item.link) {
-                                        navigate(item.link);
+                                        navigate(item.link, { state: item.state });
                                     } else if (offset === -1) {
                                         handlePrev();
                                     } else if (offset === 1) {

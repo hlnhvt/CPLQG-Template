@@ -35,14 +35,14 @@ const NewlyIssuedDocs = () => {
 
                 {/* Right Column - Highlight Banners */}
                 <div className="flex flex-col gap-4 w-full lg:w-[412.66px] shrink-0 h-[412.66px]">
-                    <Link to="/tong-ra-soat" className="rounded-xl overflow-hidden shadow-sm relative group block w-full flex-[2] bg-red-800 outline-none focus:ring-2 focus:ring-blue-400">
+                    <Link to="/tong-ra-soat" state={{ activeTab: 'tin-tuc-hoat-dong' }} className="rounded-xl overflow-hidden shadow-sm relative group block w-full flex-[2] bg-red-800 outline-none focus:ring-2 focus:ring-blue-400">
                         <img
                             src="/BO NHAN DIEN TONG RA SOAT/đại hội 1200 800 jpg.jpg"
                             alt="Đại hội Đảng"
                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         />
                     </Link>
-                    <Link to="/tong-ra-soat" className="rounded-xl overflow-hidden shadow-sm relative group block w-full flex-[1] bg-red-800 outline-none focus:ring-2 focus:ring-blue-400">
+                    <Link to="/tong-ra-soat" state={{ activeTab: 'tin-tuc-hoat-dong' }} className="rounded-xl overflow-hidden shadow-sm relative group block w-full flex-[1] bg-red-800 outline-none focus:ring-2 focus:ring-blue-400">
                         <img
                             src="/BO NHAN DIEN TONG RA SOAT/1200x400 Banner Trang chu.jpg"
                             alt="Tổng rà soát văn bản quy phạm pháp luật"
