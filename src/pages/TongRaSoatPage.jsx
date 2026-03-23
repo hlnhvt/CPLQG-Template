@@ -191,8 +191,8 @@ const TongRaSoatPage = () => {
     const fullDateStr = `${weekdays[now.getDay()]}, Ngày ${now.toLocaleDateString('vi-VN', { day: '2-digit', month: 'numeric', year: 'numeric' })}`;;
 
     const tabs = [
-        { id: 'tin-tuc-hoat-dong', label: 'Tin tức hoạt động' },
         { id: 'ban-chi-dao', label: 'Ban chỉ đạo' },
+        { id: 'tin-tuc-hoat-dong', label: 'Tin tức hoạt động' },
         { id: 'chi-dao-huong-dan', label: 'Chỉ đạo, hướng dẫn nghiệp vụ ' },
         { id: 'van-ban-tai-lieu', label: 'Văn bản tài liệu' },
         { id: 'he-thong-thong-tin', label: 'Hệ thống thông tin, báo cáo' }
@@ -327,7 +327,7 @@ const TongRaSoatPage = () => {
                             <div className="w-full px-2 mb-6">
                                 <div className="bg-white border border-gray-200 text-gray-800 font-medium text-sm overflow-hidden flex items-stretch shadow-sm relative rounded-lg h-10 w-full">
                                     {/* Date - skewed to match label */}
-                                    <span className="relative z-0 -ml-2 shrink-0 font-semibold text-gray-700 border-r border-gray-200 pl-6 pr-4 flex items-center text-[11px] md:text-[12px] bg-gray-50 whitespace-nowrap skew-x-[-10deg]">
+                                    <span className="relative z-0 -ml-2 shrink-0 font-bold text-gray-700 border-r border-gray-200 pl-6 pr-4 flex items-center text-[11px] md:text-[12px] bg-gray-50 whitespace-nowrap skew-x-[-10deg]">
                                         <span className="skew-x-[10deg]">{fullDateStr}</span>
                                     </span>
                                     {/* Label Tag */}
@@ -341,7 +341,7 @@ const TongRaSoatPage = () => {
                                             className="w-full text-left"
                                         >
                                             <span
-                                                className={`block text-[13px] md:text-sm text-[#0a1e3f] font-bold truncate transition-all duration-350 ${tickerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
+                                                className={`block text-[13px] md:text-sm text-gray-900 font-bold truncate transition-all duration-350 ${tickerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-3'
                                                     }`}
                                                 style={{ transition: 'opacity 0.35s ease, transform 0.35s ease' }}
                                             >
@@ -918,7 +918,6 @@ const TongRaSoatPage = () => {
                                                         <div className="flex-1">
                                                             <a href={system.link} className="text-lg font-bold text-gray-900 hover:text-black transition-colors flex items-center gap-2 group">
                                                                 {system.title}
-                                                                <ArrowRight size={16} className="text-gray-400 group-hover:text-black transition-colors" />
                                                             </a>
                                                             <p className="text-gray-600 mt-2 text-sm">{system.description}</p>
 
