@@ -803,7 +803,7 @@ const TongRaSoatPage = () => {
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Hệ thống VBQPPL</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết đến Cơ sở dữ liệu quốc gia về pháp luật</p>
-                                        <a href="https://vbpl.vn" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-900 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
+                                        <a href="https://vbpl.vn" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-500 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
                                             Truy cập
                                         </a>
                                     </div>
@@ -814,7 +814,7 @@ const TongRaSoatPage = () => {
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Văn bản, tài liệu của Đảng</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết chuyên mục, Trang của các Ban Đảng Trung ương</p>
-                                        <a href="https://tulieuvankien.dangcongsan.vn/" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-900 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
+                                        <a href="https://tulieuvankien.dangcongsan.vn/" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-500 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
                                             Truy cập
                                         </a>
                                     </div>
@@ -825,7 +825,7 @@ const TongRaSoatPage = () => {
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Điều ước quốc tế</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết danh sách Điều ước quốc tế cập nhật từ Bộ Ngoại giao</p>
-                                        <a href="https://treaty.mofa.gov.vn/vi-vn/dieu-uoc/dieu-uoc-quoc-te-moi-co-hieu-luc/" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-900 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
+                                        <a href="https://treaty.mofa.gov.vn/vi-vn/dieu-uoc/dieu-uoc-quoc-te-moi-co-hieu-luc/" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-500 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
                                             Truy cập
                                         </a>
                                     </div>
