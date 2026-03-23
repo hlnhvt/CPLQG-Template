@@ -432,13 +432,17 @@ const TongRaSoatPage = () => {
                                             <div className="min-w-[800px] flex flex-col items-center">
                                                 {/* TIER 1: Trưởng ban */}
                                                 <div className="relative flex flex-col items-center">
-                                                    <div className="bg-[#fff0f0] border-2 border-[#e21414] rounded-full px-12 py-3 shadow-sm mb-6">
+                                                    {/* <div className="bg-[#fff0f0] border-2 border-[#e21414] rounded-full px-12 py-3 shadow-sm mb-6">
                                                         <h3 className="text-[#e21414] font-bold text-xl uppercase">Sơ đồ Ban Chỉ đạo tổng rà soát VBQPPL</h3>
-                                                    </div>
+                                                    </div> */}
 
-                                                    <div className="bg-gradient-to-b from-[#d10000] to-[#fa4a39] rounded-2xl px-12 py-6 shadow-xl text-center text-white border-2 border-red-400/20 relative z-10 w-[400px]">
-                                                        <div className="text-[#fdb714] font-bold text-xl uppercase mb-2">Trưởng Ban Chỉ đạo</div>
-                                                        <h2 className="text-2xl font-bold uppercase">Chủ tịch Quốc hội</h2>
+                                                    <div className="bg-white border-2 border-[#e21414] rounded-2xl px-12 py-6 shadow-xl text-center relative z-10 w-[400px]">
+                                                        <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-6 py-2 shadow-sm mb-4">
+                                                            <h4 className="text-[#e21414] font-bold text-xl">TRƯỞNG BAN CHỈ ĐẠO</h4>
+                                                        </div>
+                                                        <div className="bg-gray-50 p-3 rounded-lg text-lg font-bold text-gray-700">
+                                                            CHỦ TỊCH QUỐC HỘI
+                                                        </div>
                                                     </div>
                                                 </div>
 
