@@ -356,7 +356,7 @@ const TongRaSoatPage = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 max-w-[1286px] mt-6">
+            <div className="container mx-auto px-4 max-w-[1286px] mt-6 flex-1">
                 {/* Breadcrumb */}
                 {/* <nav className="flex items-center flex-wrap gap-1 text-[12px] text-gray-500 mb-6">
                     <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
