@@ -8,12 +8,12 @@ const TongRaSoatNewsDetailPage = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen bg-[#f4f7fb] pb-12">
+        <div className="min-h-screen bg-[#f4f7fb]">
             {/* Header Banner */}
             <div className="bg-[#e21414] text-white pt-8 md:pt-12 pb-12 md:pb-16 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-red-500/20 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
                 <div className="absolute inset-0 opacity-100 mix-blend-screen pointer-events-none z-0" style={{ backgroundImage: "url('/trong_dong_gold2.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}></div>
-                <div className="container mx-auto px-4 relative z-10 max-w-6xl">
+                <div className="container mx-auto px-4 relative z-10 max-w-7xl">
                     <div className="mb-0">
                         <Link to="/tong-ra-soat" state={{ activeTab: 'tin-tuc-hoat-dong' }} className="inline-flex items-center text-black bg-white hover:bg-gray-50 transition-colors font-bold px-4 py-2 rounded-lg shadow-sm border border-gray-100">
                             <ArrowLeft size={18} className="mr-2" /> Quay về Trang chủ Chuyên mục
@@ -22,7 +22,7 @@ const TongRaSoatNewsDetailPage = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 max-w-6xl -mt-8 relative z-20">
+            <div className="container mx-auto px-4 max-w-7xl -mt-8 relative z-20">
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden p-6 md:p-10">
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                         {/* Main Content Area */}
@@ -160,7 +160,7 @@ const TongRaSoatNewsDetailPage = () => {
             </div>
 
             {/* Custom Footer cho trang Tổng Rà Soát */}
-            <div className="relative w-full mt-12 mb-0 flex items-center justify-center overflow-hidden border-t-4 border-yellow-500 bg-[#e21414] shadow-[0_-4px_15px_-3px_rgba(0,0,0,0.1)] h-[100px]">
+            <div className="relative w-full mt-0 mb-0 flex items-center justify-center overflow-hidden border-t-4 border-yellow-500 bg-[#e21414] shadow-[0_-4px_15px_-3px_rgba(0,0,0,0.1)] h-[100px]">
                 {/* Background giống Header */}
                 <div className="absolute inset-0 opacity-100 pointer-events-none" style={{ backgroundImage: "url('/trong_dong_gold2.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}></div>
 

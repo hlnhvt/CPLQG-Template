@@ -42,12 +42,12 @@ III. TỔ CHỨC THỰC HIỆN
     };
 
     return (
-        <div className="min-h-screen bg-[#f4f7fb] pb-12">
+        <div className="min-h-screen bg-[#f4f7fb]">
             {/* Header Banner */}
             <div className="bg-[#e21414] text-white pt-8 md:pt-12 pb-12 md:pb-16 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-red-500/20 rounded-full blur-3xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
                 <div className="absolute inset-0 opacity-100 mix-blend-screen pointer-events-none z-0" style={{ backgroundImage: "url('/trong_dong_gold2.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}></div>
-                <div className="container mx-auto px-4 relative z-10 max-w-5xl">
+                <div className="container mx-auto px-4 relative z-10 max-w-7xl">
                     {/* Nút quay về chuyên mục thay cho breadcrumb */}
                     <div className="mb-6">
                         <Link to="/tong-ra-soat" state={{ activeTab: 'tin-tuc-hoat-dong' }} className="inline-flex items-center text-black bg-white hover:bg-gray-50 transition-colors font-bold px-4 py-2 rounded-lg shadow-sm">
@@ -60,7 +60,7 @@ III. TỔ CHỨC THỰC HIỆN
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 max-w-5xl -mt-8 relative z-20">
+            <div className="container mx-auto px-4 max-w-7xl -mt-8 relative z-20">
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10">
                     <div className="flex flex-wrap items-center gap-6 border-b border-gray-100 pb-6 mb-6">
                         <div className="flex items-center gap-2 text-gray-600">
@@ -109,7 +109,7 @@ III. TỔ CHỨC THỰC HIỆN
             </div>
 
             {/* Custom Footer cho trang Tổng Rà Soát */}
-            <div className="relative w-full mt-12 mb-0 flex items-center justify-center overflow-hidden border-t-4 border-yellow-500 bg-[#e21414] shadow-[0_-4px_15px_-3px_rgba(0,0,0,0.1)] h-[100px]">
+            <div className="relative w-full mt-0 mb-0 flex items-center justify-center overflow-hidden border-t-4 border-yellow-500 bg-[#e21414] shadow-[0_-4px_15px_-3px_rgba(0,0,0,0.1)] h-[100px]">
                 {/* Background giống Header */}
                 <div className="absolute inset-0 opacity-100 pointer-events-none" style={{ backgroundImage: "url('/trong_dong_gold2.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}></div>
 
