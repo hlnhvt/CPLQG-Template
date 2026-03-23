@@ -68,7 +68,7 @@ const Header = () => {
     return (
         <header className="flex flex-col font-sans relative">
             {/* Top Bar - Light Blue */}
-            <div className="bg-[var(--bg-header-top)] text-[var(--text-on-blue)] py-2 relative z-[100] transition-colors duration-200">
+            <div className="bg-[var(--bg-header-top)] text-[var(--text-on-blue)] py-2 relative z-[200] transition-colors duration-200">
                 {/* Decorative background swirls (simplified) */}
                 <div className="absolute top-0 right-0 bottom-0 left-0 pointer-events-none opacity-20">
                     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -205,7 +205,7 @@ const Header = () => {
             </div>
 
             {/* Bottom Bar - Dark Blue Navigation (Desktop) */}
-            <div className="hidden xl:block bg-[var(--bg-header-bottom)] text-[var(--text-on-blue)] transition-colors duration-200">
+            <div className="hidden xl:block bg-[var(--bg-header-bottom)] text-[var(--text-on-blue)] transition-colors duration-200 relative z-[100]">
                 <div className="container mx-auto px-4">
                     <nav className="flex justify-center xl:justify-between items-center h-[46px] text-xs xl:text-sm font-medium relative z-50">
                         <ul className="flex items-center min-w-max h-full">

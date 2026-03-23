@@ -61,7 +61,7 @@ const CommentSection = () => {
     };
 
     const handleLike = (id) => {
-        setComments(prev => prev.map(c => 
+        setComments(prev => prev.map(c =>
             c.id === id ? { ...c, likes: c.likes + 1 } : c
         ));
     };
@@ -94,7 +94,7 @@ const CommentSection = () => {
 
                                     {/* Actions */}
                                     <div className="flex items-center gap-5 mt-2 text-sm text-gray-500">
-                                        <button 
+                                        <button
                                             onClick={() => handleLike(comment.id)}
                                             className="flex items-center gap-1.5 hover:text-blue-600 font-medium transition"
                                         >
@@ -214,7 +214,7 @@ const CommentSection = () => {
                     </div>
 
                     {/* Attachment */}
-                    <div>
+                    {/* <div>
                         <div className="flex justify-between items-end mb-1">
                             <label className="block text-sm font-medium text-gray-700">
                                 File đính kèm <span className="text-gray-400 font-normal">(Tùy chọn)</span>
@@ -228,7 +228,7 @@ const CommentSection = () => {
                                 <span className="text-sm font-medium">Nhấn để chọn file (0/5)</span>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* Submit Button */}
                     <div className="flex justify-center pt-2">

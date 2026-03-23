@@ -115,7 +115,7 @@ import VuViecDienHinhTGPLPage from './pages/tro-giup-phap-ly/VuViecDienHinhTGPLP
 
 const AppLayout = () => {
     const location = useLocation();
-    const hideHeaderFooter = ['/dang-nhap', '/onboarding'].includes(location.pathname);
+    const hideHeaderFooter = ['/dang-nhap', '/onboarding'].includes(location.pathname) || location.pathname.startsWith('/tong-ra-soat');
 
     return (
         <div className="min-h-screen flex flex-col font-sans transition-colors duration-200">

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
     Users, BookOpen, Newspaper, FileText, Database, ChevronRight,
-    ArrowRight, Globe, MonitorPlay, CheckCircle2, Clock, ChevronLeft, ChevronUp, ChevronDown, Home
+    ArrowRight, Globe, MonitorPlay, CheckCircle2, Clock, ChevronLeft, ChevronUp, ChevronDown, Home, ArrowLeft
 } from 'lucide-react';
 
 const MOCK_NEWS_HOAT_DONG = [
@@ -134,7 +134,7 @@ const MOCK_PORTALS = [
 const TongRaSoatPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'ban-chi-dao');
+    const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'tin-tuc-hoat-dong');
     const [activeBanChiDaoTab, setActiveBanChiDaoTab] = useState('chuc-nang');
     const scrollContainerRef = useRef(null);
     const [expandedSystemIds, setExpandedSystemIds] = useState([]);
@@ -191,10 +191,10 @@ const TongRaSoatPage = () => {
     const fullDateStr = `${weekdays[now.getDay()]}, Ngày ${now.toLocaleDateString('vi-VN', { day: '2-digit', month: 'numeric', year: 'numeric' })}`;;
 
     const tabs = [
-        { id: 'ban-chi-dao', label: 'Ban Chỉ đạo' },
-        { id: 'chi-dao-huong-dan', label: 'Hướng dẫn nghiệp vụ ' },
         { id: 'tin-tuc-hoat-dong', label: 'Tin tức hoạt động' },
-        { id: 'van-ban-tai-lieu', label: 'Tài liệu phục vụ tổng rà soát hệ thống VBQPPL' },
+        { id: 'ban-chi-dao', label: 'Ban chỉ đạo' },
+        { id: 'chi-dao-huong-dan', label: 'Chỉ đạo, hướng dẫn nghiệp vụ ' },
+        { id: 'van-ban-tai-lieu', label: 'Văn bản tài liệu' },
         { id: 'he-thong-thong-tin', label: 'Hệ thống thông tin, báo cáo' }
     ];
 
@@ -254,7 +254,7 @@ const TongRaSoatPage = () => {
     );
 
     return (
-        <div className="bg-[#f4f7fb] min-h-screen pb-16 font-sans">
+        <div className="bg-[#f4f7fb] min-h-screen flex flex-col font-sans">
             {/* Header / Banner Area */}
             <div className="bg-[#1a3b8b] text-white">
 
@@ -262,24 +262,47 @@ const TongRaSoatPage = () => {
                 {/* Banner & Horizontal Navigation Tabs */}
                 <div className="bg-white border-b border-gray-200 shadow-sm text-black w-full">
                     {/* Banner Header mới theo yêu cầu */}
-                    <div className="container mx-auto max-w-[1286px] px-4 pt-6">
-                        <div className="relative w-full flex justify-center overflow-hidden bg-white rounded-lg shadow-md border border-gray-100 group cursor-pointer">
-                            <img
-                                src="/BO NHAN DIEN TONG RA SOAT/1870x210 Bia trang chinh.jpg"
-                                alt="Đưa Nghị quyết đại hội XIV của Đảng vào cuộc sống"
-                                className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
-                            />
+                    <div className="relative w-full bg-[#da121a] overflow-hidden">
+                        {/* Banner nền mới từ người dùng */}
+                        <div className="absolute inset-0 opacity-100 pointer-events-none" style={{ backgroundImage: "url('/trong_dong_gold2.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}></div>
+
+                        <div className="container mx-auto max-w-[1286px] px-4 h-[130px] flex items-center">
+                            {/* Content */}
+                            <div className="relative z-10 flex items-center gap-5">
+                                <img
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Emblem_of_Vietnam.svg/1200px-Emblem_of_Vietnam.svg.png"
+                                    alt="Quốc huy Việt Nam"
+                                    className="w-[60px] h-[60px] md:w-[76px] md:h-[76px] object-contain drop-shadow-md"
+                                />
+                                <h1 className="font-bold text-[16px] md:text-[22px] lg:text-[26px] text-white uppercase drop-shadow-md pb-1" >
+                                    TỔNG RÀ SOÁT HỆ THỐNG VĂN BẢN QUY PHẠM PHÁP LUẬT
+
+                                </h1>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="container mx-auto max-w-[1286px] px-4 pt-4 lg:pt-4">
+                    <div className="container mx-auto max-w-[1286px] px-4 pt-1 lg:pt-1">
 
                         <div className="w-full mx-auto flex flex-col items-center">
                             <div className="relative flex justify-center mb-6 w-full px-2">
                                 <ul
                                     ref={scrollContainerRef}
-                                    className="flex flex-wrap md:flex-nowrap overflow-x-auto items-center justify-center gap-1 md:gap-2 py-4 px-4 no-scrollbar border-b border-gray-100 mx-auto w-full scroll-smooth"
+                                    className="flex flex-wrap md:flex-nowrap overflow-x-auto items-center justify-center gap-1 md:gap-2 py-3 px-4 no-scrollbar border-b border-gray-100 mx-auto w-fit scroll-smooth"
                                 >
+                                    <li className="shrink-0 text-center pr-2 border-r border-gray-200 mr-2 flex items-center">
+                                        <button
+                                            onClick={() => setActiveTab('tin-tuc-hoat-dong')}
+                                            className={`w-10 h-10 flex items-center justify-center rounded-full transition-all text-base
+                                                ${activeTab === 'tin-tuc-hoat-dong'
+                                                    ? 'bg-[#e21414] text-white shadow-md'
+                                                    : 'text-gray-600 hover:text-[#e21414] hover:bg-gray-50'
+                                                }`}
+                                            title="Tin tức hoạt động"
+                                        >
+                                            <Home size={20} strokeWidth={2.5} />
+                                        </button>
+                                    </li>
                                     {tabs.map((tab) => {
                                         const isActive = activeTab === tab.id;
                                         return (
@@ -288,8 +311,8 @@ const TongRaSoatPage = () => {
                                                     onClick={() => setActiveTab(tab.id)}
                                                     className={`py-2 px-6 rounded-full font-bold transition-all text-base whitespace-nowrap
                                                         ${isActive
-                                                            ? 'bg-[#007bff] text-white shadow-md'
-                                                            : 'text-gray-600 hover:text-[#007bff] hover:bg-gray-50'
+                                                            ? 'bg-[#e21414] text-white shadow-md'
+                                                            : 'text-gray-600 hover:text-[#e21414] hover:bg-gray-50'
                                                         }`}
                                                 >
                                                     {tab.label}
@@ -303,21 +326,12 @@ const TongRaSoatPage = () => {
                             {/* Vertical News Ticker */}
                             <div className="w-full px-2 mb-6">
                                 <div className="bg-white border border-gray-200 text-gray-800 font-medium text-sm overflow-hidden flex items-stretch shadow-sm relative rounded-lg h-10 w-full">
-                                    {/* Nút Về trang chủ */}
-                                    <button
-                                        onClick={() => navigate('/')}
-                                        className="relative z-10 shrink-0 flex items-center justify-center gap-2 text-[#0a3a73] hover:text-white bg-blue-50 hover:bg-[#0a3a73] px-3 md:px-4 border-r border-gray-200 transition-colors cursor-pointer shadow-[2px_0_5px_rgba(0,0,0,0.05)]"
-                                        title="Về trang chủ"
-                                    >
-                                        <Home size={19} strokeWidth={2.2} />
-                                        <span className="font-bold text-[13px] md:text-[13px]">Trang chủ</span>
-                                    </button>
                                     {/* Date - skewed to match label */}
                                     <span className="relative z-0 -ml-2 shrink-0 font-semibold text-gray-700 border-r border-gray-200 pl-6 pr-4 flex items-center text-[11px] md:text-[12px] bg-gray-50 whitespace-nowrap skew-x-[-10deg]">
                                         <span className="skew-x-[10deg]">{fullDateStr}</span>
                                     </span>
                                     {/* Label Tag */}
-                                    <span className="shrink-0 font-bold bg-[#e65c00] text-white px-3 flex items-center uppercase text-[10px] md:text-[11px] shadow-sm z-20 skew-x-[-10deg] mx-1.5">
+                                    <span className="shrink-0 font-bold bg-[#e21414] text-white px-3 flex items-center uppercase text-[10px] md:text-[11px] shadow-sm z-20 skew-x-[-10deg] mx-1.5">
                                         <span className="skew-x-[10deg]">Tin tức nổi bật</span>
                                     </span>
                                     {/* Vertical ticker - Add pl-4 for spacing */}
@@ -355,27 +369,27 @@ const TongRaSoatPage = () => {
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* Main Content Area */}
                     <div className="flex-1 order-2 lg:order-1 min-w-0">
-                        {/* Tab 1: Ban Chỉ đạo */}
+                        {/* Tab 1: Ban chỉ đạo */}
                         {activeTab === 'ban-chi-dao' && (
                             <div className="bg-white rounded-2xl px-8 pt-3 pb-8 shadow-sm border border-gray-100 mt-2 animate-fadeIn">
                                 {/* Sub-tabs cho Ban chỉ đạo */}
                                 <div className="flex border-b border-gray-200 mb-8 overflow-x-auto no-scrollbar">
                                     <button
                                         onClick={() => setActiveBanChiDaoTab('chuc-nang')}
-                                        className={`px-6 py-4 font-bold text-[16px] md:text-lg whitespace-nowrap transition-colors relative ${activeBanChiDaoTab === 'chuc-nang' ? 'text-gray-900' : 'text-gray-500 hover:text-gray-800'}`}
+                                        className={`px-6 py-4 font-bold text-[16px] md:text-lg whitespace-nowrap transition-colors relative ${activeBanChiDaoTab === 'chuc-nang' ? 'text-[#e21414]' : 'text-gray-500 hover:text-[#e21414]'}`}
                                     >
                                         Chức năng, nhiệm vụ
                                         {activeBanChiDaoTab === 'chuc-nang' && (
-                                            <span className="absolute bottom-0 left-0 w-full h-[3px] bg-gray-900" />
+                                            <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#e21414]" />
                                         )}
                                     </button>
                                     <button
                                         onClick={() => setActiveBanChiDaoTab('so-do')}
-                                        className={`px-6 py-4 font-bold text-[16px] md:text-lg whitespace-nowrap transition-colors relative ${activeBanChiDaoTab === 'so-do' ? 'text-gray-900' : 'text-gray-500 hover:text-gray-800'}`}
+                                        className={`px-6 py-4 font-bold text-[16px] md:text-lg whitespace-nowrap transition-colors relative ${activeBanChiDaoTab === 'so-do' ? 'text-[#e21414]' : 'text-gray-500 hover:text-[#e21414]'}`}
                                     >
-                                        Sơ đồ Ban Chỉ đạo
+                                        Sơ đồ Ban chỉ đạo
                                         {activeBanChiDaoTab === 'so-do' && (
-                                            <span className="absolute bottom-0 left-0 w-full h-[3px] bg-gray-900" />
+                                            <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#e21414]" />
                                         )}
                                     </button>
                                 </div>
@@ -418,46 +432,46 @@ const TongRaSoatPage = () => {
                                             <div className="min-w-[800px] flex flex-col items-center">
                                                 {/* TIER 1: Trưởng ban */}
                                                 <div className="relative flex flex-col items-center">
-                                                    <div className="bg-[#f0f7ff] border-2 border-[#0a3a73] rounded-full px-12 py-3 shadow-sm mb-6">
-                                                        <h3 className="text-[#0a3a73] font-bold text-xl uppercase">Sơ đồ Ban Chỉ đạo tổng rà soát VBQPPL</h3>
+                                                    <div className="bg-[#fff0f0] border-2 border-[#e21414] rounded-full px-12 py-3 shadow-sm mb-6">
+                                                        <h3 className="text-[#e21414] font-bold text-xl uppercase">Sơ đồ Ban Chỉ đạo tổng rà soát VBQPPL</h3>
                                                     </div>
 
-                                                    <div className="bg-gradient-to-b from-[#0a3a73] to-[#1a3b8b] rounded-2xl px-12 py-6 shadow-xl text-center text-white border-2 border-blue-400/20 relative z-10 w-[400px]">
+                                                    <div className="bg-gradient-to-b from-[#d10000] to-[#fa4a39] rounded-2xl px-12 py-6 shadow-xl text-center text-white border-2 border-red-400/20 relative z-10 w-[400px]">
                                                         <div className="text-[#fdb714] font-bold text-xl uppercase mb-2">Trưởng Ban Chỉ đạo</div>
                                                         <h2 className="text-2xl font-bold uppercase">Chủ tịch Quốc hội</h2>
                                                     </div>
                                                 </div>
 
                                                 {/* Connector Tier 1 to Tier 2 */}
-                                                <div className="w-[2px] h-12 bg-[#0a3a73]/60"></div>
+                                                <div className="w-[2px] h-12 bg-[#e21414]/60"></div>
 
                                                 {/* TIER 2: Phó Trưởng ban (Centrally grouped) */}
                                                 <div className="relative flex flex-col items-center w-full max-w-4xl">
-                                                    <div className="bg-white border-2 border-blue-600 rounded-2xl p-6 shadow-lg relative z-10 w-full">
+                                                    <div className="bg-white border-2 border-[#e21414] rounded-2xl p-6 shadow-lg relative z-10 w-full">
                                                         <div className="flex flex-col gap-4 text-center">
-                                                            <div className="bg-[#eef6ff] border border-blue-200 rounded-xl px-6 py-2 shadow-sm mb-2">
-                                                                <h4 className="text-[#0a3a73] font-bold text-xl">PHÓ TRƯỞNG BAN THƯỜNG TRỰC</h4>
+                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-6 py-2 shadow-sm mb-2">
+                                                                <h4 className="text-[#e21414] font-bold text-xl">PHÓ TRƯỞNG BAN THƯỜNG TRỰC</h4>
                                                             </div>
 
                                                             <div className="flex flex-col gap-3">
-                                                                <div className="bg-blue-50 p-3 rounded-r-lg shadow-sm text-xl font-bold text-[#0a3a73]">
+                                                                <div className="bg-red-50 p-3 rounded-r-lg shadow-sm text-xl font-bold text-[#e21414]">
                                                                     CÁC PHÓ TRƯỞNG BAN
                                                                 </div>
                                                                 <div className="grid grid-cols-2 gap-3">
                                                                     <div className="bg-gray-50 p-3 rounded-lg text-lg font-bold text-gray-700 leading-snug flex items-center gap-2 text-left">
-                                                                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                                                                        <div className="w-1.5 h-1.5 rounded-full bg-[#e21414] shrink-0"></div>
                                                                         Phó Chủ tịch Quốc hội phụ trách công tác pháp luật và tư pháp
                                                                     </div>
                                                                     <div className="bg-gray-50 p-3 rounded-lg text-lg font-bold text-gray-700 leading-snug flex items-center gap-2 text-left">
-                                                                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                                                                        <div className="w-1.5 h-1.5 rounded-full bg-[#e21414] shrink-0"></div>
                                                                         Phó Thủ tướng Chính phủ phụ trách công tác pháp luật
                                                                     </div>
                                                                     <div className="bg-gray-50 p-3 rounded-lg text-lg font-bold text-gray-700 leading-snug flex items-center gap-2 text-left">
-                                                                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                                                                        <div className="w-1.5 h-1.5 rounded-full bg-[#e21414] shrink-0"></div>
                                                                         Phó Trưởng Ban Nội chính Trung ương
                                                                     </div>
                                                                     <div className="bg-gray-50 p-3 rounded-lg text-lg font-bold text-gray-700 leading-snug flex items-center gap-2 text-left">
-                                                                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                                                                        <div className="w-1.5 h-1.5 rounded-full bg-[#e21414] shrink-0"></div>
                                                                         Phó Chủ tịch - Tổng Thư ký Ủy ban Trung ương Mặt trận Tổ quốc Việt Nam
                                                                     </div>
                                                                 </div>
@@ -466,8 +480,8 @@ const TongRaSoatPage = () => {
                                                     </div>
 
                                                     {/* Connector Tier 2 to Tier 3 with Dot */}
-                                                    <div className="w-[2px] h-20 bg-[#0a3a73]/60 relative flex flex-col items-center">
-                                                        <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-blue-100 border-2 border-[#0a3a73]/60 shadow-sm z-20"></div>
+                                                    <div className="w-[2px] h-20 bg-[#e21414]/60 relative flex flex-col items-center">
+                                                        <div className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-red-100 border-2 border-[#e21414]/60 shadow-sm z-20"></div>
                                                     </div>
                                                 </div>
 
@@ -478,21 +492,21 @@ const TongRaSoatPage = () => {
                                                         {/* Column 1 Connector Part */}
                                                         <div className="relative flex flex-col items-center">
                                                             {/* Horizontal line from center to right (+ half-gap) */}
-                                                            <div className="absolute top-0 left-1/2 w-[calc(50%+24px)] h-[2px] bg-[#0a3a73]/60"></div>
+                                                            <div className="absolute top-0 left-1/2 w-[calc(50%+24px)] h-[2px] bg-[#e21414]/60"></div>
                                                             {/* Vertical segment with arrowhead (Stop line at base of triangle) */}
                                                             <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center h-10">
-                                                                <div className="w-[2px] h-8 bg-[#0a3a73]/60"></div>
-                                                                <div className="w-0 h-0 border-l-[7px] border-r-[7px] border-t-[10px] border-l-transparent border-r-transparent border-t-[#0a3a73]/60"></div>
+                                                                <div className="w-[2px] h-8 bg-[#e21414]/60"></div>
+                                                                <div className="w-0 h-0 border-l-[7px] border-r-[7px] border-t-[10px] border-l-transparent border-r-transparent border-t-[#e21414]/60"></div>
                                                             </div>
                                                         </div>
                                                         {/* Column 2 Connector Part */}
                                                         <div className="relative flex flex-col items-center">
                                                             {/* Horizontal line from center to left (+ half-gap) */}
-                                                            <div className="absolute top-0 right-1/2 w-[calc(50%+24px)] h-[2px] bg-[#0a3a73]/60"></div>
+                                                            <div className="absolute top-0 right-1/2 w-[calc(50%+24px)] h-[2px] bg-[#e21414]/60"></div>
                                                             {/* Vertical segment with arrowhead (Stop line at base of triangle) */}
                                                             <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center h-10">
-                                                                <div className="w-[2px] h-8 bg-[#0a3a73]/60"></div>
-                                                                <div className="w-0 h-0 border-l-[7px] border-r-[7px] border-t-[10px] border-l-transparent border-r-transparent border-t-[#0a3a73]/60"></div>
+                                                                <div className="w-[2px] h-8 bg-[#e21414]/60"></div>
+                                                                <div className="w-0 h-0 border-l-[7px] border-r-[7px] border-t-[10px] border-l-transparent border-r-transparent border-t-[#e21414]/60"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -588,8 +602,8 @@ const TongRaSoatPage = () => {
                                 <div className="space-y-10">
                                     {/* Nhóm 1 */}
                                     <div>
-                                        <h3 className="font-bold text-xl text-gray-800 mb-6 pb-2 border-b border-gray-200 flex items-center gap-2">
-                                            <CheckCircle2 className="text-gray-800" />
+                                        <h3 className="font-bold text-xl text-[#B70000] mb-6 pb-2 border-b border-gray-200 flex items-center gap-2">
+                                            <CheckCircle2 className="text-[#B70000]" />
                                             1. Văn bản chỉ đạo
                                         </h3>
                                         <div className="grid grid-cols-1 gap-4 mb-4">
@@ -621,8 +635,8 @@ const TongRaSoatPage = () => {
 
                                     {/* Nhóm 2 */}
                                     <div>
-                                        <h3 className="font-bold text-xl text-gray-800 mb-6 pb-2 border-b border-gray-200 flex items-center gap-2 mt-4">
-                                            <BookOpen className="text-gray-800" />
+                                        <h3 className="font-bold text-xl text-[#B70000] mb-6 pb-2 border-b border-gray-200 flex items-center gap-2 mt-4">
+                                            <BookOpen className="text-[#B70000]" />
                                             2. Hướng dẫn nghiệp vụ
                                         </h3>
                                         <div className="grid grid-cols-1 gap-4 mb-4">
@@ -668,7 +682,7 @@ const TongRaSoatPage = () => {
                                         {/* Top News */}
                                         {topNews && (
                                             <div
-                                                onClick={() => navigate(`/news/${topNews.id || 0}`)}
+                                                onClick={() => navigate(`/tong-ra-soat/tin-tuc/${topNews.id || 0}`)}
                                                 className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-lg transition-all flex flex-col md:flex-row group cursor-pointer"
                                             >
                                                 <div className="md:w-[55%] aspect-[16/9] md:aspect-auto overflow-hidden">
@@ -694,7 +708,7 @@ const TongRaSoatPage = () => {
                                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                 {gridNews.map(news => (
                                                     <div
-                                                        onClick={() => navigate(`/news/${news.id || 1}`)}
+                                                        onClick={() => navigate(`/tong-ra-soat/tin-tuc/${news.id || 1}`)}
                                                         key={news.id || Math.random()}
                                                         className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:shadow-md transition-all group cursor-pointer flex flex-col"
                                                     >
@@ -734,7 +748,7 @@ const TongRaSoatPage = () => {
                                             <div className="space-y-4">
                                                 {listNews.map(news => (
                                                     <div
-                                                        onClick={() => navigate(`/news/${news.id || 2}`)}
+                                                        onClick={() => navigate(`/tong-ra-soat/tin-tuc/${news.id || 2}`)}
                                                         key={news.id || Math.random()}
                                                         className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:shadow-md transition-all group cursor-pointer p-4 md:p-5 flex flex-col sm:flex-row gap-5 md:gap-6 items-start sm:items-center"
                                                     >
@@ -768,20 +782,20 @@ const TongRaSoatPage = () => {
                                         <div className="flex border-b border-gray-200 mb-8 overflow-x-auto no-scrollbar">
                                             <button
                                                 onClick={() => setActiveNewsTab('trung-uong')}
-                                                className={`px-6 py-4 font-bold text-[16px] md:text-lg whitespace-nowrap transition-colors relative ${activeNewsTab === 'trung-uong' ? 'text-gray-900' : 'text-gray-500 hover:text-gray-800'}`}
+                                                className={`px-6 py-4 font-bold text-[16px] md:text-lg whitespace-nowrap transition-colors relative ${activeNewsTab === 'trung-uong' ? 'text-[#e21414]' : 'text-gray-500 hover:text-[#e21414]'}`}
                                             >
                                                 Cơ quan Trung ương
                                                 {activeNewsTab === 'trung-uong' && (
-                                                    <span className="absolute bottom-0 left-0 w-full h-[3px] bg-gray-900" />
+                                                    <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#e21414]" />
                                                 )}
                                             </button>
                                             <button
                                                 onClick={() => setActiveNewsTab('dia-phuong')}
-                                                className={`px-6 py-4 font-bold text-[16px] md:text-lg whitespace-nowrap transition-colors relative ${activeNewsTab === 'dia-phuong' ? 'text-gray-900' : 'text-gray-500 hover:text-gray-800'}`}
+                                                className={`px-6 py-4 font-bold text-[16px] md:text-lg whitespace-nowrap transition-colors relative ${activeNewsTab === 'dia-phuong' ? 'text-[#e21414]' : 'text-gray-500 hover:text-[#e21414]'}`}
                                             >
                                                 Cơ quan địa phương
                                                 {activeNewsTab === 'dia-phuong' && (
-                                                    <span className="absolute bottom-0 left-0 w-full h-[3px] bg-gray-900" />
+                                                    <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#e21414]" />
                                                 )}
                                             </button>
                                         </div>
@@ -806,10 +820,12 @@ const TongRaSoatPage = () => {
 
                         {/* Tab 4: Văn kiện, VBQPPL */}
                         {activeTab === 'van-ban-tai-lieu' && (
-                            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 animate-fadeIn space-y-8 mt-2">
-                                {/* <h2 className="text-xl font-bold text-[#1a3b8b] mb-4 border-l-4 border-[#fdb714] pl-3 uppercase">
-                                    Văn bản, tài liệu phục vụ rà soát
-                                </h2> */}
+                            <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100 animate-fadeIn mt-2">
+                                <div className="text-center mb-5 pb-4 border-b border-gray-200">
+                                    <h2 className="text-[20px] md:text-xl lg:text-xl font-bold text-[#B70000] uppercase mb-4 leading-snug">
+                                        VĂN BẢN, TÀI LIỆU PHỤC VỤ TỔNG RÀ SOÁT HỆ THỐNG VBQPPL
+                                    </h2>
+                                </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     <div className="border border-blue-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-blue-50/50 text-center flex flex-col items-center group">
@@ -818,7 +834,7 @@ const TongRaSoatPage = () => {
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Hệ thống VBQPPL</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết đến Cơ sở dữ liệu quốc gia về pháp luật</p>
-                                        <a href="https://vbpl.vn" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-900 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-gray-900 hover:text-white transition w-full">
+                                        <a href="https://vbpl.vn" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-900 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#e21414] hover:border-[#e21414] hover:text-white transition w-full">
                                             Truy cập
                                         </a>
                                     </div>
@@ -829,7 +845,7 @@ const TongRaSoatPage = () => {
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Văn bản, tài liệu của Đảng</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết chuyên mục, Trang của các Ban Đảng Trung ương</p>
-                                        <a href="https://tulieuvankien.dangcongsan.vn/" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-900 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-gray-900 hover:text-white transition w-full">
+                                        <a href="https://tulieuvankien.dangcongsan.vn/" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-900 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#e21414] hover:border-[#e21414] hover:text-white transition w-full">
                                             Truy cập
                                         </a>
                                     </div>
@@ -840,11 +856,43 @@ const TongRaSoatPage = () => {
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Điều ước quốc tế</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Liên kết danh sách Điều ước quốc tế cập nhật từ Bộ Ngoại giao</p>
-                                        <a href="https://treaty.mofa.gov.vn/vi-vn/dieu-uoc/dieu-uoc-quoc-te-moi-co-hieu-luc/" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-900 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-gray-900 hover:text-white transition w-full">
+                                        <a href="https://treaty.mofa.gov.vn/vi-vn/dieu-uoc/dieu-uoc-quoc-te-moi-co-hieu-luc/" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-900 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#e21414] hover:border-[#e21414] hover:text-white transition w-full">
                                             Truy cập
                                         </a>
                                     </div>
                                 </div>
+
+                                {/* Bảng Văn bản mới ban hành */}
+                                <div className="mt-8 pt-6 border-t border-gray-100">
+                                    <div className="text-center mb-5 pb-4 border-b border-gray-200">
+                                        <h2 className="text-[20px] md:text-xl lg:text-xl font-bold text-[#B70000] uppercase leading-snug">
+                                            VĂN BẢN MỚI BAN HÀNH
+                                        </h2>
+                                    </div>
+
+                                    <div className="bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-gray-200 overflow-hidden flex flex-col mt-2">
+                                        {/* Table Header */}
+                                        <div className="flex bg-[#B70000] text-white text-[16px] font-bold py-4 px-6 shrink-0">
+                                            <div className="w-[160px] md:w-[200px] shrink-0">Ngày ban hành</div>
+                                            <div className="flex-1">Nội dung</div>
+                                        </div>
+                                        {/* Table Body */}
+                                        <div className="flex flex-col bg-white">
+                                            {[
+                                                { date: '22/03/2026', title: 'Quyết định 26/QĐ-BCĐQG của Ban Chỉ đạo quốc gia về tìm kiếm, quy tập và xác định danh tính hài cốt liệt sĩ ban hành Kế hoạch Tổ chức lấy mẫu hài cốt liệt sĩ đối với các mộ chưa xác định được thông tin trong nghĩa trang liệt sĩ để giám định ADN' },
+                                                { date: '22/03/2026', title: 'Quyết định 24/QĐ-BCĐQG của Ban Chỉ đạo quốc gia về tìm kiếm, quy tập và xác định danh tính hài cốt liệt sĩ ban hành Chương trình Hoạt động của Ban Chỉ đạo quốc gia về tìm kiếm, quy tập và xác định danh tính hài cốt liệt sĩ giai đoạn 2026 - 2030' },
+                                                { date: '22/03/2026', title: 'Quyết định 23/QĐ-BCĐQG của Ban Chỉ đạo quốc gia về tìm kiếm, quy tập và xác định danh tính hài cốt liệt sĩ ban hành Quy chế hoạt động của Ban Chỉ đạo quốc gia về tìm kiếm, quy tập và xác định danh tính hài cốt liệt sĩ' },
+                                                { date: '22/03/2026', title: 'Quyết định 25/QĐ-BCĐQG của Ban Chỉ đạo quốc gia về tìm kiếm, quy tập và xác định danh tính hài cốt liệt sĩ ban hành Kế hoạch hoạt động của Ban Chỉ đạo quốc gia về tìm kiếm, quy tập và xác định danh tính hài cốt liệt sĩ năm 2026' }
+                                            ].map((doc, index) => (
+                                                <div key={index} className="flex flex-col md:flex-row text-[15px] py-4 px-6 border-b border-gray-100 last:border-0 hover:bg-red-50/50 transition cursor-pointer group items-start md:items-center">
+                                                    <div className="w-full md:w-[200px] shrink-0 font-semibold text-gray-800 mb-1 md:mb-0">{doc.date}</div>
+                                                    <div className="flex-1 text-gray-700 group-hover:text-[#e21414] leading-relaxed font-medium transition-colors">{doc.title}</div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         )}
 
@@ -859,7 +907,6 @@ const TongRaSoatPage = () => {
                                     </div> */}
                                     <div className="grid grid-cols-1 gap-4">
                                         {MOCK_SYSTEMS.map((system) => {
-                                            const isExpanded = expandedSystemIds.includes(system.id);
                                             return (
                                                 <div key={system.id} className="border border-gray-200 rounded-lg p-5 hover:border-blue-300 transition-colors bg-white shadow-sm">
                                                     <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
@@ -875,18 +922,6 @@ const TongRaSoatPage = () => {
                                                             </a>
                                                             <p className="text-gray-600 mt-2 text-sm">{system.description}</p>
 
-                                                            <div className={`mt-3 text-sm text-gray-700 bg-gray-50 p-4 rounded-md border border-gray-100 overflow-hidden transition-all duration-300 ${isExpanded ? 'block' : 'hidden'}`}>
-                                                                <strong></strong> {system.details}
-                                                            </div>
-                                                        </div>
-                                                        <div className="flex items-center gap-3 shrink-0">
-                                                            <button
-                                                                onClick={() => toggleSystemExpansion(system.id)}
-                                                                className="p-1.5 rounded-full hover:bg-gray-100 transition-colors text-gray-500 hover:text-black focus:outline-none"
-                                                                aria-label={isExpanded ? 'Thu gọn' : 'Mở rộng'}
-                                                            >
-                                                                {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -966,6 +1001,52 @@ const TongRaSoatPage = () => {
                     scrollbar-width: none;
                 }
             `}</style>
+
+            {/* Custom Footer cho trang Tổng Rà Soát */}
+            <div className="relative w-full mt-12 mb-0 flex items-center justify-center overflow-hidden border-t-4 border-yellow-500 shadow-[0_-4px_15px_-3px_rgba(0,0,0,0.1)] h-[100px]">
+                {/* Background giống Header */}
+                <div className="absolute inset-0 opacity-100 pointer-events-none" style={{ backgroundImage: "url('/trong_dong_gold2.png')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}></div>
+
+                <div className="container mx-auto px-4 relative z-10 w-full flex flex-col items-center justify-center h-full">
+                    {/* Khối chứa Quốc huy và Tiêu đề (1 dòng) */}
+                    <div className="flex items-center justify-center gap-3 md:gap-4">
+                        <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Emblem_of_Vietnam.svg/1200px-Emblem_of_Vietnam.svg.png"
+                            alt="Quốc huy Việt Nam"
+                            className="w-[35px] h-[35px] md:w-[45px] md:h-[45px] object-contain drop-shadow-md"
+                        />
+                        <h2 className="font-basic text-[15px] md:text-[16px] lg:text-[18px] text-white uppercase drop-shadow-md whitespace-nowrap leading-none mt-1">
+                            TỔNG RÀ SOÁT HỆ THỐNG VĂN BẢN QUY PHẠM PHÁP LUẬT
+                        </h2>
+                    </div>
+
+                    {/* Nút quay lại trang chủ CPLQG */}
+                    {/* <button
+                        onClick={() => navigate('/')}
+                        className="-mt-1 flex items-center justify-center gap-2 bg-white/20 hover:bg-white/30 text-white px-5 py-[5px] rounded-full font-medium transition-all backdrop-blur-md border border-white/20 shadow-sm text-[12px] md:text-[13px] leading-none"
+                        title="Về Trang chủ Cổng Pháp luật Quốc gia"
+                    >
+                        <Home size={14} />
+                        <span>Về Trang chủ Cổng Pháp luật quốc gia</span>
+                    </button> */}
+                </div>
+            </div>
+
+            {/* Nút Home Floating Góc Trái Dưới (Mở rộng chữ khi hover + Icon Quốc huy) */}
+            <button
+                onClick={() => navigate('/')}
+                className="fixed bottom-6 left-6 z-50 h-12 min-w-[48px] px-[10px] flex items-center justify-center bg-[#da121a] hover:bg-yellow-500 text-white hover:text-[#0a3a73] rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.3)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group"
+                title="Về Trang chủ Cổng Pháp luật Quốc gia"
+            >
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Emblem_of_Vietnam.svg/1200px-Emblem_of_Vietnam.svg.png"
+                    alt="Quốc huy"
+                    className="w-[28px] h-[28px] object-contain shrink-0 group-hover:scale-110 transition-transform duration-300"
+                />
+                <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 group-hover:max-w-[400px] group-hover:opacity-100 group-hover:px-2 transition-all duration-500 ease-in-out font-bold text-[14px]">
+                    Về trang chủ Cổng pháp luật quốc gia
+                </span>
+            </button>
         </div>
     );
 };
