@@ -259,7 +259,7 @@ const TongRaSoatPage = () => {
             <div className="container mx-auto pt-8 max-w-[1368px]">
                 <div className="mb-8 rounded-lg overflow-hidden relative shadow-md group cursor-pointer border border-gray-100 mx-auto" style={{ maxWidth: '1368px', height: '153px' }}>
                     <img
-                        src="/BO NHAN DIEN TONG RA SOAT/1870x210 Bia trang chinh.jpg"
+                        src="/BO NHAN DIEN TONG RA SOAT/2.jpg"
                         alt="Đưa Nghị quyết đại hội XIV của Đảng vào cuộc sống"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
@@ -927,9 +927,9 @@ const TongRaSoatPage = () => {
                     </div>
                     {/* Right Banners Sidebar (visible on all tabs) */}
                     <div className="hidden lg:flex flex-col gap-6 order-1 lg:order-2 mt-2 shrink-0" style={{ width: '413px' }}>
-                        <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white group relative">
+                        {/* <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white group relative">
                             <img src="/banner-nghi-quyet.png" alt="Đưa nghị quyết Đại hội XIV" className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
-                        </div>
+                        </div> */}
                         <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white group relative">
                             <img src="/banner-dai-hoi.png" alt="Đưa nghị quyết Đại hội XIV vào cuộc sống" className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                         </div>

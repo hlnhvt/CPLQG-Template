@@ -179,7 +179,17 @@ const ProfilePage = () => {
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
                     <Field label="Họ và tên" value={formData.name} onChange={(v) => handleChange('name', v)} isEditing={editState.basic} />
-                    <Field label="Ngày sinh" value={formData.dob} onChange={(v) => handleChange('dob', v)} isEditing={editState.basic} type="date" />
+                    <Field
+                        label="Ngày sinh"
+                        value={editState.basic ? formData.dob : (() => {
+                            if (!formData.dob) return '';
+                            const [y, m, d] = formData.dob.split('-');
+                            return y && m && d ? `${d}/${m}/${y}` : formData.dob;
+                        })()}
+                        onChange={(v) => handleChange('dob', v)}
+                        isEditing={editState.basic}
+                        type="date"
+                    />
                     <Field label="Giới tính" value={formData.gender} onChange={(v) => handleChange('gender', v)} isEditing={editState.basic} type="select" options={['Nam', 'Nữ', 'Khác']} />
 
                     <div className="md:col-span-2">

@@ -3,13 +3,13 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Search, Bell, FileText, Edit, HelpCircle, BookOpen, Settings, Star, MoreVertical, CheckSquare, Square, Trash2, CheckCircle2, ChevronDown, Filter } from 'lucide-react';
 
 const MOCK_NOTIFICATIONS = [
-    { id: 99, type: 'tinbai', source: 'Ban biên tập', title: 'Tin bài của bạn đã được duyệt', desc: 'Tin bài "Bình luận những điểm mới của Luật Đất đai 2024 đối với kiều bào" đã được Ban biên tập phê duyệt và xuất bản.', time: 'Vừa xong', isRead: false, isImportant: true },
-    { id: 1, type: 'vanban', source: 'Bộ Tư pháp', title: 'Ban hành Luật Đất đai mới (Số 31/2024/QH15)', desc: 'Quốc hội đã chính thức ban hành Luật Đất đai mới, có hiệu lực từ 01/01/2025. Vui lòng xem chi tiết.', time: '10 phút trước', isRead: false, isImportant: true },
-    { id: 2, type: 'duthao', source: 'Cổng thông tin', title: 'Dự thảo Nghị định quy định chi tiết Luật Đất đai', desc: 'Mời bạn tham gia đóng góp ý kiến cho Dự thảo Nghị định hướng dẫn thi hành Luật Đất đai 2024.', time: '2 giờ trước', isRead: false, isImportant: false },
-    { id: 3, type: 'hoidap', source: 'Chuyên gia pháp lý', title: 'Câu hỏi của bạn đã được trả lời', desc: 'Luật sư Nguyễn Văn B đã trả lời câu hỏi của bạn về thủ tục sang tên sổ đỏ.', time: 'Hôm qua', isRead: true, isImportant: true },
-    { id: 4, type: 'tinbai', source: 'Hệ thống CPLQG', title: 'Bản tin Pháp luật tuần 2 tháng 3', desc: 'Tổng hợp các chính sách mới có hiệu lực và các văn bản chỉ đạo điều hành nổi bật.', time: '12/03/2026', isRead: true, isImportant: false },
-    { id: 5, type: 'hethong', source: 'Hệ thống', title: 'Cập nhật bảo mật tài khoản', desc: 'Chúng tôi vừa cập nhật chính sách bảo mật. Vui lòng kiểm tra lại thông tin tài khoản của bạn.', time: '10/03/2026', isRead: true, isImportant: false },
-    { id: 6, type: 'duthao', source: 'Bộ Kế hoạch và Đầu tư', title: 'Công bố dự thảo Luật Doanh nghiệp (sửa đổi)', desc: 'Dự thảo đang trong thời gian lấy ý kiến nhân dân (60 ngày).', time: '05/03/2026', isRead: true, isImportant: false },
+    { id: 99, type: 'tinbai', linh_vuc: 'dat-dai', source: 'Ban biên tập', title: 'Tin bài của bạn đã được duyệt', desc: 'Tin bài "Bình luận những điểm mới của Luật Đất đai 2024 đối với kiều bào" đã được Ban biên tập phê duyệt và xuất bản.', time: 'Vừa xong', isRead: false, isImportant: true },
+    { id: 1, type: 'vanban', linh_vuc: 'dat-dai', source: 'Bộ Tư pháp', title: 'Ban hành Luật Đất đai mới (Số 31/2024/QH15)', desc: 'Quốc hội đã chính thức ban hành Luật Đất đai mới, có hiệu lực từ 01/01/2025. Vui lòng xem chi tiết.', time: '10 phút trước', isRead: false, isImportant: true },
+    { id: 2, type: 'duthao', linh_vuc: 'doanh-nghiep', source: 'Cổng thông tin', title: 'Dự thảo Nghị định quy định chi tiết Luật Đất đai', desc: 'Mời bạn tham gia đóng góp ý kiến cho Dự thảo Nghị định hướng dẫn thi hành Luật Đất đai 2024.', time: '2 giờ trước', isRead: false, isImportant: false },
+    { id: 3, type: 'hoidap', linh_vuc: 'dan-su', source: 'Chuyên gia pháp lý', title: 'Câu hỏi của bạn đã được trả lời', desc: 'Luật sư Nguyễn Văn B đã trả lời câu hỏi của bạn về thủ tục sang tên sổ đỏ.', time: 'Hôm qua', isRead: true, isImportant: true },
+    { id: 4, type: 'tinbai', linh_vuc: 'hanh-chinh', source: 'Hệ thống CPLQG', title: 'Bản tin Pháp luật tuần 2 tháng 3', desc: 'Tổng hợp các chính sách mới có hiệu lực và các văn bản chỉ đạo điều hành nổi bật.', time: '12/03/2026', isRead: true, isImportant: false },
+    { id: 5, type: 'hethong', linh_vuc: '', source: 'Hệ thống', title: 'Cập nhật bảo mật tài khoản', desc: 'Chúng tôi vừa cập nhật chính sách bảo mật. Vui lòng kiểm tra lại thông tin tài khoản của bạn.', time: '10/03/2026', isRead: true, isImportant: false },
+    { id: 6, type: 'duthao', linh_vuc: 'doanh-nghiep', source: 'Bộ Kế hoạch và Đầu tư', title: 'Công bố dự thảo Luật Doanh nghiệp (sửa đổi)', desc: 'Dự thảo đang trong thời gian lấy ý kiến nhân dân (60 ngày).', time: '05/03/2026', isRead: true, isImportant: false },
 ];
 
 const TYPE_CONFIG = {
@@ -20,6 +20,15 @@ const TYPE_CONFIG = {
     'hethong': { icon: Settings, color: 'text-gray-600', bg: 'bg-gray-200', label: 'Hệ thống' },
 };
 
+const LINH_VUC_CONFIG = [
+    { value: 'dat-dai',      label: 'Đất đai' },
+    { value: 'dan-su',       label: 'Dân sự' },
+    { value: 'doanh-nghiep', label: 'Doanh nghiệp' },
+    { value: 'hanh-chinh',   label: 'Hành chính' },
+    { value: 'lao-dong',     label: 'Lao động' },
+    { value: 'hinh-su',      label: 'Hình sự' },
+];
+
 const NotificationCenterPage = () => {
     const navigate = useNavigate();
     const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS);
@@ -29,6 +38,7 @@ const NotificationCenterPage = () => {
 
     // Filter state
     const [filterTypes, setFilterTypes] = useState([]);
+    const [filterFields, setFilterFields] = useState([]);
     const [filterTime, setFilterTime] = useState('all');
 
     const handleToggleSelect = (id) => {
@@ -67,10 +77,15 @@ const NotificationCenterPage = () => {
         setFilterTypes(prev => prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]);
     };
 
+    const toggleFieldFilter = (field) => {
+        setFilterFields(prev => prev.includes(field) ? prev.filter(f => f !== field) : [...prev, field]);
+    };
+
     let filteredNotifications = notifications.filter(n => {
         if (activeTab === 'chua-doc' && n.isRead) return false;
         if (activeTab === 'quan-trong' && !n.isImportant) return false;
         if (filterTypes.length > 0 && !filterTypes.includes(n.type)) return false;
+        if (filterFields.length > 0 && !filterFields.includes(n.linh_vuc)) return false;
         // Basic time filter mock
         if (filterTime === 'today' && !['10 phút trước', '2 giờ trước'].includes(n.time)) return false;
         return true;
@@ -146,6 +161,19 @@ const NotificationCenterPage = () => {
                                 </label>
                             );
                         })}
+                    </div>
+
+                    <h3 className="font-bold text-gray-900 mb-4">Lọc theo lĩnh vực</h3>
+                    <div className="space-y-3 mb-6">
+                        {LINH_VUC_CONFIG.map(({ value, label }) => (
+                            <label key={value} className="flex items-center gap-3 cursor-pointer group">
+                                <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${filterFields.includes(value) ? 'bg-blue-600 border-blue-600' : 'border-gray-300 group-hover:border-blue-500'}`}>
+                                    {filterFields.includes(value) && <CheckSquare size={14} className="text-white" />}
+                                </div>
+                                <input type="checkbox" className="hidden" checked={filterFields.includes(value)} onChange={() => toggleFieldFilter(value)} />
+                                <span className="text-[14px] text-gray-700">{label}</span>
+                            </label>
+                        ))}
                     </div>
 
                     <div className="border-t border-gray-100 pt-4 mt-auto">

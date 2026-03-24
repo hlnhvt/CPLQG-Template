@@ -79,12 +79,12 @@ const Header = () => {
 
                 <div className="container mx-auto px-4 relative flex items-center justify-between h-[50px]">
                     {/* Left Logo */}
-                    <div className="flex items-center gap-2">
+                    <Link to={displayUser ? "/ca-nhan/trang-chu" : "/"} className="flex items-center gap-2">
                         <img src="/logo.png" alt="Quốc huy Việt Nam" className="w-11 h-11 object-contain shrink-0 drop-shadow-md" />
                         <h1 className="text-base md:text-lg font-bold uppercase drop-shadow-sm whitespace-nowrap">
                             CỔNG PHÁP LUẬT QUỐC GIA
                         </h1>
-                    </div>
+                    </Link>
 
                     {/* Right Utilities */}
                     <div className="flex justify-end items-center gap-4 text-xs xl:text-sm font-medium">
@@ -521,10 +521,10 @@ const Header = () => {
             <div className={`fixed top-0 right-0 bottom-0 w-[300px] sm:w-[350px] bg-[#1a3673] z-[300] transform transition-transform duration-300 ease-in-out xl:hidden flex flex-col ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
                 {/* Header in sidebar */}
                 <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#3b82f6]">
-                    <div className="flex items-center gap-2">
+                    <Link to={displayUser ? "/ca-nhan/trang-chu" : "/"} onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2">
                         <img src="/logo.png" alt="Quốc huy" className="w-8 h-8 object-contain" />
                         <span className="text-white font-bold uppercase text-sm">CổNG PHÁP LUẬT QUỐC GIA</span>
-                    </div>
+                    </Link>
                     <button onClick={() => setMobileMenuOpen(false)} className="text-white/80 hover:text-white p-1">
                         <X size={20} />
                     </button>
