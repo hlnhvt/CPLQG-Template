@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, Phone, UploadCloud, MessageSquare, ThumbsUp, Flag } from 'lucide-react';
+import { User, Mail, Phone, UploadCloud, MessageSquare, ThumbsUp, Flag, Edit3, Trash2 } from 'lucide-react';
 
 const CommentSection = () => {
     const [comments, setComments] = useState([
@@ -9,7 +9,9 @@ const CommentSection = () => {
             avatar: "T",
             content: "Việc chấm điểm KPI trong công tác xây dựng pháp luật là một bước đi rất đột phá, giúp nâng cao trách nhiệm của cơ quan soạn thảo.",
             likes: 48,
-            time: "1h trước"
+            time: "1h trước",
+            status: "published",
+            isMine: false
         },
         {
             id: 2,
@@ -17,9 +19,24 @@ const CommentSection = () => {
             avatar: "N",
             content: "Hy vọng đề án này sẽ sớm được nhân rộng để các văn bản pháp luật đi vào thực tiễn hiệu quả, hạn chế tình trạng luật chờ nghị định.",
             likes: 16,
-            time: "2h trước"
+            time: "2h trước",
+            status: "published",
+            isMine: false
+        },
+        {
+            id: 3,
+            author: "Hoàng Lương Nhân",
+            avatar: "H",
+            content: "Tôi thấy cần quy định rõ ràng hơn về bộ tiêu chí KPI để đảm bảo tính minh bạch.",
+            likes: 0,
+            time: "5 phút trước",
+            status: "pending",
+            isMine: true
         }
     ]);
+
+    const [editingId, setEditingId] = useState(null);
+    const [editContent, setEditContent] = useState('');
 
     const [formData, setFormData] = useState({
         name: 'Hoàng Lương Nhân',
@@ -48,7 +65,9 @@ const CommentSection = () => {
             avatar: formData.name.charAt(0).toUpperCase(),
             content: formData.content,
             likes: 0,
-            time: "Vừa xong"
+            time: "Vừa xong",
+            status: "pending",
+            isMine: true
         };
 
         // Add to top of the list for immediate visibility, or bottom since it's chronological. The user requested chronological order. Usually new is at bottom or top depending on view. We'll add to bottom.
@@ -58,6 +77,29 @@ const CommentSection = () => {
         // Reset content
         setFormData(prev => ({ ...prev, content: '' }));
         alert("Bình luận của bạn đã được gửi thành công và đang chờ duyệt!");
+    };
+
+    const handleDeleteComment = (id) => {
+        if (window.confirm('Bạn có chắc chắn muốn xóa bình luận này?')) {
+            setComments(prev => prev.filter(c => c.id !== id));
+        }
+    };
+
+    const handleEditComment = (comment) => {
+        setEditingId(comment.id);
+        setEditContent(comment.content);
+    };
+
+    const handleSaveEdit = (id) => {
+        if (editContent.trim() === '') return;
+        setComments(prev => prev.map(c => c.id === id ? { ...c, content: editContent } : c));
+        setEditingId(null);
+        setEditContent('');
+    };
+
+    const handleCancelEdit = () => {
+        setEditingId(null);
+        setEditContent('');
     };
 
     const handleLike = (id) => {
@@ -87,13 +129,38 @@ const CommentSection = () => {
                                 </div>
 
                                 {/* Content */}
-                                <div className="flex-1">
-                                    <h4 className="font-bold text-gray-900 text-base mb-1">
-                                        {comment.author} <span className="font-normal text-gray-700">{comment.content}</span>
+                                <div className="flex-1 w-full min-w-0">
+                                    <h4 className="font-bold text-gray-900 text-base mb-1 flex items-center gap-2 flex-wrap">
+                                        {comment.author}
+                                        {comment.isMine && (
+                                            <span className={`inline-flex items-center text-xs font-semibold px-2 py-0.5 rounded-full ${
+                                                comment.status === 'published' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
+                                            }`}>
+                                                {comment.status === 'published' ? 'Đã công khai' : 'Chờ kiểm duyệt'}
+                                            </span>
+                                        )}
                                     </h4>
 
+                                    {editingId === comment.id ? (
+                                        <div className="mt-2 text-sm w-full">
+                                            <textarea 
+                                                className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:border-blue-500 mb-2 text-gray-700"
+                                                rows={3}
+                                                value={editContent}
+                                                onChange={(e) => setEditContent(e.target.value)}
+                                            />
+                                            <div className="flex gap-2 justify-end">
+                                                <button onClick={handleCancelEdit} className="px-3 py-1.5 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors">Hủy</button>
+                                                <button onClick={() => handleSaveEdit(comment.id)} className="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">Lưu thay đổi</button>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="font-normal text-gray-700 break-words">{comment.content}</div>
+                                    )}
+
                                     {/* Actions */}
-                                    <div className="flex items-center gap-5 mt-2 text-sm text-gray-500">
+                                    {editingId !== comment.id && (
+                                    <div className="flex flex-wrap items-center gap-4 mt-2 text-sm text-gray-500">
                                         <button
                                             onClick={() => handleLike(comment.id)}
                                             className="flex items-center gap-1.5 hover:text-blue-600 font-medium transition"
@@ -105,11 +172,32 @@ const CommentSection = () => {
                                                 <ThumbsUp size={14} className="fill-current" /> {comment.likes}
                                             </span>
                                         )}
-                                        <button className="flex items-center gap-1 hover:text-gray-800 ml-auto md:ml-2">
-                                            <Flag size={14} /> Báo vi phạm
-                                        </button>
-                                        <span className="ml-auto text-gray-400">{comment.time}</span>
+
+                                        {comment.isMine && comment.status === 'pending' && (
+                                            <>
+                                                <button 
+                                                    onClick={() => handleEditComment(comment)}
+                                                    className="flex items-center gap-1 hover:text-blue-600 ml-auto md:ml-0"
+                                                >
+                                                    <Edit3 size={14} /> Sửa
+                                                </button>
+                                                <button 
+                                                    onClick={() => handleDeleteComment(comment.id)}
+                                                    className="flex items-center gap-1 hover:text-red-600 md:ml-0"
+                                                >
+                                                    <Trash2 size={14} /> Xóa
+                                                </button>
+                                            </>
+                                        )}
+
+                                        {(!comment.isMine || comment.status !== 'pending') && (
+                                            <button className="flex items-center gap-1 hover:text-gray-800 ml-auto md:ml-0">
+                                                <Flag size={14} /> Báo vi phạm
+                                            </button>
+                                        )}
+                                        <span className={`${(comment.isMine && comment.status === 'pending') ? '' : 'ml-auto text-right'} text-gray-400`}>{comment.time}</span>
                                     </div>
+                                    )}
                                 </div>
                             </div>
                         ))

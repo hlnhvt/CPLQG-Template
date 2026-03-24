@@ -32,6 +32,10 @@ const UserHistoryPage = () => {
     const [activityLogs, setActivityLogs] = useState(MOCK_ACTIVITY_LOGS);
     const [expandedLogs, setExpandedLogs] = useState([]);
     
+    // Edit comment states
+    const [editingCommentId, setEditingCommentId] = useState(null);
+    const [editCommentContent, setEditCommentContent] = useState('');
+    
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -77,7 +81,21 @@ const UserHistoryPage = () => {
     };
 
     const handleDeleteComment = (id) => {
-        setComments(comments.filter(c => c.id !== id));
+        if(window.confirm('Bạn có chắc chắn muốn xóa bình luận này?')) {
+            setComments(comments.filter(c => c.id !== id));
+        }
+    };
+
+    const handleEditCommentHistory = (comment) => {
+        setEditingCommentId(comment.id);
+        setEditCommentContent(comment.content);
+    };
+
+    const handleSaveEditHistory = (id) => {
+        if(editCommentContent.trim() === '') return;
+        setComments(comments.map(c => c.id === id ? { ...c, content: editCommentContent } : c));
+        setEditingCommentId(null);
+        setEditCommentContent('');
     };
 
     // Derived States for Pagination
@@ -278,23 +296,45 @@ const UserHistoryPage = () => {
                                         </div>
                                     </div>
                                     
-                                    <div className="mb-4 bg-white p-4 rounded-lg border border-gray-200 shadow-sm text-[15px] text-gray-800 relative">
-                                        " {comment.content} "
-                                        
-                                        {/* Actions overlayed on hover */}
-                                        <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                            {comment.status === 'published' && (
-                                                <button className="p-1.5 bg-gray-100 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors" title="Sửa (trong vòng 24h)">
-                                                    <Edit3 size={15} />
-                                                </button>
-                                            )}
-                                            <button 
-                                                onClick={() => handleDeleteComment(comment.id)}
-                                                className="p-1.5 bg-gray-100 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors" title="Xóa bình luận"
-                                            >
-                                                <Trash2 size={15} />
-                                            </button>
-                                        </div>
+                                    <div className="mb-4 bg-white p-4 rounded-lg border border-gray-200 shadow-sm text-[15px] text-gray-800 relative group/edit">
+                                        {editingCommentId === comment.id ? (
+                                            <div className="flex flex-col gap-3">
+                                                <textarea 
+                                                    className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:border-blue-500 text-[14px]"
+                                                    rows={3}
+                                                    value={editCommentContent}
+                                                    onChange={(e) => setEditCommentContent(e.target.value)}
+                                                />
+                                                <div className="flex gap-2 justify-end">
+                                                    <button onClick={() => setEditingCommentId(null)} className="px-3 py-1.5 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 text-sm font-medium transition-colors">Hủy</button>
+                                                    <button onClick={() => handleSaveEditHistory(comment.id)} className="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium transition-colors">Lưu</button>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                " {comment.content} "
+                                                
+                                                {/* Actions overlayed on hover */}
+                                                <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover/edit:opacity-100 transition-opacity">
+                                                    {comment.status === 'pending' && (
+                                                        <>
+                                                            <button 
+                                                                onClick={() => handleEditCommentHistory(comment)}
+                                                                className="p-1.5 bg-gray-100 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors shadow-sm" title="Sửa (chờ kiểm duyệt)"
+                                                            >
+                                                                <Edit3 size={15} />
+                                                            </button>
+                                                            <button 
+                                                                onClick={() => handleDeleteComment(comment.id)}
+                                                                className="p-1.5 bg-gray-100 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors shadow-sm" title="Xóa bình luận"
+                                                            >
+                                                                <Trash2 size={15} />
+                                                            </button>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
                                     
                                     <div className="flex items-center gap-2 text-sm bg-blue-50/50 p-2.5 rounded-lg border border-blue-100/50">
