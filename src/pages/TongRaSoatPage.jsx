@@ -68,7 +68,7 @@ const MOCK_MEMBERS = [
 ];
 
 const MOCK_DOCS = [
-    { title: 'Quyết định số 123/QĐ-TTg về việc thành lập Ban Chỉ đạo Trung ương', type: 'Văn bản chỉ đạo', summary: 'Cơ cấu tổ chức và trách nhiệm của các thành viên trong Ban chỉ đạo Trung ương về tổng rà soát hệ thống pháp luật quy mô toàn quốc.', date: '12/02/2026' },
+    { title: 'Quyết định số 123/QĐ-TTg về việc thành lập Ban Chỉ đạo Trung ương', type: 'Văn bản chỉ đạo', summary: 'Cơ cấu tổ chức và trách nhiệm của các thành viên trong Ban Chỉ đạo Trung ương về tổng rà soát hệ thống pháp luật quy mô toàn quốc.', date: '12/02/2026' },
     { title: 'Kế hoạch số 45/KH-BTP triển khai tổng rà soát hệ thống VBQPPL', type: 'Văn bản chỉ đạo', summary: 'Các bước triển khai cụ thể đối với các Bộ, Cơ quan ngang Bộ, và UBND các cấp trong quá trình rà soát, đánh giá chuyên sâu.', date: '15/02/2026' },
     { title: 'Công văn số 789/BTP-KTrVB đôn đốc báo cáo kết quả rà soát', type: 'Văn bản chỉ đạo', summary: 'Yêu cầu các địa phương khẩn trương gửi báo cáo kết quả rà soát các văn bản pháp luật trước ngày 30/03/2026 để tổng hợp.', date: '01/03/2026' },
     { title: 'Thông báo Kết luận số 25/TB-VPCP phiên họp thường kỳ tháng 2', type: 'Văn bản chỉ đạo', summary: 'Thông báo kết luận chỉ đạo của Phó Thủ tướng về ưu tiên rà soát mâu thuẫn trong lĩnh vực đầu tư, đất đai.', date: '05/03/2026' },
@@ -78,7 +78,7 @@ const MOCK_DOCS = [
     { title: 'Hướng dẫn chi tiết số 12/HD-BTP về tiêu chí đánh giá mâu thuẫn văn bản', type: 'Hướng dẫn nghiệp vụ', summary: 'Làm rõ các tiêu chí nhận diện điểm chồng chéo, mâu thuẫn giữa luật, nghị định và thông tư hiện hành.', date: '25/02/2026' },
     { title: 'Tài liệu tập huấn sử dụng Cơ sở dữ liệu Quốc gia về VBPL', type: 'Hướng dẫn nghiệp vụ', summary: 'Slide bài giảng và video hướng dẫn tra cứu, kết xuất dữ liệu pháp luật phục vụ thống kê, báo cáo.', date: '02/03/2026' },
     { title: 'Quy trình chuẩn (SOP) 5 bước báo cáo tổng rà soát', type: 'Hướng dẫn nghiệp vụ', summary: 'Sơ đồ hóa các bước tiếp nhận, xử lý, lập biểu báo cáo dành riêng cho bộ phận chuyên trách.', date: '10/03/2026' },
-    { title: 'Bộ câu hỏi đáp (FAQ) thường gặp về rà soát VBQPPL 2026', type: 'Hướng dẫn nghiệp vụ', summary: 'Tổng hợp 50 câu hỏi vướng mắc phổ biến và hướng giải quyết từ Ban chỉ đạo.', date: '15/03/2026' },
+    { title: 'Bộ câu hỏi đáp (FAQ) thường gặp về rà soát VBQPPL 2026', type: 'Hướng dẫn nghiệp vụ', summary: 'Tổng hợp 50 câu hỏi vướng mắc phổ biến và hướng giải quyết từ Ban Chỉ đạo.', date: '15/03/2026' },
     { title: 'Hướng dẫn tích hợp số liệu lên nền tảng trực tuyến', type: 'Hướng dẫn nghiệp vụ', summary: 'Tài liệu API và hướng dẫn cho IT quản trị của các cơ quan cập nhật trạng thái tự động.', date: '18/03/2026' },
 ];
 
@@ -191,7 +191,7 @@ const TongRaSoatPage = () => {
     const fullDateStr = `${weekdays[now.getDay()]}, Ngày ${now.toLocaleDateString('vi-VN', { day: '2-digit', month: 'numeric', year: 'numeric' })}`;;
 
     const tabs = [
-        { id: 'ban-chi-dao', label: 'Ban chỉ đạo' },
+        { id: 'ban-chi-dao', label: 'Ban Chỉ đạo' },
         { id: 'tin-tuc-hoat-dong', label: 'Tin tức hoạt động' },
         { id: 'chi-dao-huong-dan', label: 'Chỉ đạo, hướng dẫn nghiệp vụ ' },
         { id: 'van-ban-tai-lieu', label: 'Văn bản, tài liệu' },
@@ -334,10 +334,10 @@ const TongRaSoatPage = () => {
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* Main Content Area */}
                     <div className="flex-1 order-2 lg:order-1 min-w-0">
-                        {/* Tab 1: Ban chỉ đạo */}
+                        {/* Tab 1: Ban Chỉ đạo */}
                         {activeTab === 'ban-chi-dao' && (
                             <div className="bg-white rounded-2xl px-8 pt-3 pb-8 shadow-sm border border-gray-100 mt-2 animate-fadeIn">
-                                {/* Sub-tabs cho Ban chỉ đạo */}
+                                {/* Sub-tabs cho Ban Chỉ đạo */}
                                 <div className="flex border-b border-gray-200 mb-8 overflow-x-auto no-scrollbar">
                                     <button
                                         onClick={() => setActiveBanChiDaoTab('chuc-nang')}
@@ -352,7 +352,7 @@ const TongRaSoatPage = () => {
                                         onClick={() => setActiveBanChiDaoTab('so-do')}
                                         className={`px-6 py-4 font-bold text-[16px] md:text-lg whitespace-nowrap transition-colors relative ${activeBanChiDaoTab === 'so-do' ? 'text-[#ea492a]' : 'text-gray-500 hover:text-[#ea492a]'}`}
                                     >
-                                        Sơ đồ Ban chỉ đạo
+                                        Sơ đồ Ban Chỉ đạo
                                         {activeBanChiDaoTab === 'so-do' && (
                                             <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#ea492a]" />
                                         )}
@@ -403,7 +403,7 @@ const TongRaSoatPage = () => {
 
                                                     <div className="bg-white border-2 border-[#e21414] rounded-2xl px-12 py-6 shadow-xl text-center relative z-10 w-[400px]">
                                                         <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-6 py-2 shadow-sm mb-4">
-                                                            <h4 className="text-[#e21414] font-bold text-xl">TRƯỞNG BAN CHỈ ĐẠO</h4>
+                                                            <h4 className="text-[#e21414] font-bold text-xl">TRƯỞNG Ban Chỉ đạo</h4>
                                                         </div>
                                                         <div className="bg-gray-50 p-3 rounded-lg text-lg font-bold text-gray-700">
                                                             CHỦ TỊCH QUỐC HỘI
@@ -516,7 +516,7 @@ const TongRaSoatPage = () => {
                                                     <div className="flex flex-col items-center relative pt-10">
 
                                                         <div className="bg-[#fff9e6] border border-amber-200 rounded-xl px-6 py-2.5 shadow-md mb-6 w-full text-center">
-                                                            <h4 className="text-amber-700 font-bold text-xl">CÁC ỦY VIÊN BAN CHỈ ĐẠO</h4>
+                                                            <h4 className="text-amber-700 font-bold text-xl">CÁC ỦY VIÊN Ban Chỉ đạo</h4>
                                                         </div>
 
                                                         <div className="w-full">
@@ -699,7 +699,7 @@ const TongRaSoatPage = () => {
                                         )}
 
                                         {/* Banner separator */}
-                                        <div className="w-full flex justify-center pt-2 pb-3 mb-1 animate-fadeIn">
+                                        {/* <div className="w-full flex justify-center pt-2 pb-3 mb-1 animate-fadeIn">
                                             <div
                                                 className="rounded-xl overflow-hidden shadow-sm border border-gray-100 group cursor-pointer hover:shadow-md transition-all shrink-0"
                                                 style={{ width: '849.31px', height: '159.19px' }}
@@ -710,7 +710,7 @@ const TongRaSoatPage = () => {
                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                 />
                                             </div>
-                                        </div>
+                                        </div> */}
 
                                         {/* List News (Remaining) */}
                                         {listNews.length > 0 && (
