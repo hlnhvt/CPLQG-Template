@@ -194,7 +194,7 @@ const TongRaSoatPage = () => {
         { id: 'ban-chi-dao', label: 'Ban chỉ đạo' },
         { id: 'tin-tuc-hoat-dong', label: 'Tin tức hoạt động' },
         { id: 'chi-dao-huong-dan', label: 'Chỉ đạo, hướng dẫn nghiệp vụ ' },
-        { id: 'van-ban-tai-lieu', label: 'Văn bản tài liệu' },
+        { id: 'van-ban-tai-lieu', label: 'Văn bản, tài liệu' },
         { id: 'he-thong-thong-tin', label: 'Hệ thống thông tin, báo cáo' }
     ];
 
