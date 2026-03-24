@@ -10,14 +10,14 @@ const TongRaSoatNewsDetailPage = () => {
         <div className="min-h-screen bg-[#f4f7fb]">
             {/* Breadcrumb */}
             <div className="container mx-auto px-4 max-w-7xl pt-6 pb-4">
-                <nav className="flex items-center flex-wrap gap-1.5 text-[13px] text-gray-500">
-                    <Link to="/" className="hover:text-[#ea492a] transition-colors">Trang chủ</Link>
+                <nav className="flex items-center flex-wrap gap-1.5 text-[13px] font-bold text-[#1677ff]">
+                    <Link to="/" className="hover:text-[#293981] transition-colors">Trang chủ</Link>
                     <ChevronRight size={13} className="text-gray-400" />
-                    <Link to="/tong-ra-soat" className="hover:text-[#ea492a] transition-colors">Tổng rà soát VBQPPL</Link>
+                    <Link to="/tong-ra-soat" className="hover:text-[#293981] transition-colors">Tổng rà soát VBQPPL</Link>
                     <ChevronRight size={13} className="text-gray-400" />
-                    <Link to="/tong-ra-soat" state={{ activeTab: 'tin-tuc-hoat-dong' }} className="hover:text-[#ea492a] transition-colors">Tin tức hoạt động</Link>
+                    <Link to="/tong-ra-soat" state={{ activeTab: 'tin-tuc-hoat-dong' }} className="hover:text-[#293981] transition-colors">Tin tức hoạt động</Link>
                     <ChevronRight size={13} className="text-gray-400" />
-                    <span className="text-gray-800 font-medium line-clamp-1">Thủ tướng: Khẩn trương thí điểm đánh giá, chấm điểm về công tác xây dựng pháp luật</span>
+                    <span className="text-gray-800 font-bold line-clamp-1">Thủ tướng: Khẩn trương thí điểm đánh giá, chấm điểm về công tác xây dựng pháp luật</span>
                 </nav>
             </div>
 
