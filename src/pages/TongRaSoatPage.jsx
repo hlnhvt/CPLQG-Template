@@ -259,7 +259,7 @@ const TongRaSoatPage = () => {
             <div className="container mx-auto pt-8 max-w-[1368px]">
                 <div className="mb-8 rounded-lg overflow-hidden relative shadow-md group cursor-pointer border border-gray-100 mx-auto" style={{ maxWidth: '1368px', height: '153px' }}>
                     <img
-                        src="/BO NHAN DIEN TONG RA SOAT/2 2.png"
+                        src="/BO NHAN DIEN TONG RA SOAT/2.png"
                         alt="Đưa Nghị quyết đại hội XIV của Đảng vào cuộc sống"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
