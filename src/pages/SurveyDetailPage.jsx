@@ -227,7 +227,7 @@ const SurveyDetailPage = () => {
                         </div>
 
                         {/* Per-Question Charts */}
-                        {survey.questions.map((q, index) => (
+                        {/* {survey.questions.map((q, index) => (
                             <div key={q.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 md:p-6">
                                 <div className="font-bold text-[16px] text-gray-800 mb-5">
                                     <span className="text-blue-600 mr-2">Câu {index + 1}:</span>
@@ -247,7 +247,7 @@ const SurveyDetailPage = () => {
                                     </div>
                                 )}
                             </div>
-                        ))}
+                        ))} */}
 
                         <div className="text-[13px] text-gray-400 text-right">Cập nhật lần cuối: {survey.lastUpdated}</div>
                     </div>
