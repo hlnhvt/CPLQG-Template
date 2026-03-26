@@ -6,7 +6,7 @@ const AuthContext = createContext(null);
 const MOCK_USERS = [
     { cccd: '001234567890', password: '123456', name: 'Hoàng Lương Nhân', email: 'nhanlh@example.com', avatar: null },
     { cccd: '012345678901', password: 'password', name: 'Nguyễn Anh Quân', email: 'anvan@example.com', avatar: null },
-    { cccd: '098765432109', password: 'password', name: 'Nguyễn Văn Nam', email: 'newuser@example.com', avatar: null, isNewUser: true },
+    { cccd: '098765432109', password: 'password', name: 'Nguyễn Tuấn Minh', email: 'newuser@example.com', avatar: null, isNewUser: true },
 ];
 
 export const AuthProvider = ({ children }) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -43,6 +43,8 @@ import VanBanMoiPage from './pages/VanBanMoiPage';
 import VanBanChuYPage from './pages/VanBanChuYPage';
 import VanBanQPPLPage from './pages/VanBanQPPLPage';
 import VanBanDetailPage from './pages/VanBanDetailPage';
+import VanBanHomePage from './pages/VanBanHomePage';
+import PublicUserProfilePage from './pages/PublicUserProfilePage';
 import DuThaoPage from './pages/DuThaoPage';
 import DuThaoDetailPage from './pages/DuThaoDetailPage';
 import BaoCaoTiepThuDetailPage from './pages/BaoCaoTiepThuDetailPage';
@@ -78,6 +80,7 @@ import DatLichTuVanPage from './pages/cau-hoi-phap-luat/DatLichTuVanPage';
 // Legal Questions Dashboard imports
 import DanhSachCauHoiCaNhanPage from './pages/dashboard/DanhSachCauHoiCaNhanPage';
 import CauHoiCaNhanDetailPage from './pages/dashboard/CauHoiCaNhanDetailPage';
+import UserPetitionsPage from './pages/dashboard/UserPetitionsPage';
 
 // Onboarding import
 import OnboardingPage from './pages/onboarding/OnboardingPage';
@@ -122,6 +125,11 @@ const AppLayout = () => {
     const location = useLocation();
     const hideHeaderFooter = ['/dang-nhap', '/onboarding'].includes(location.pathname);
 
+    // Scroll to top on every route change
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, [location.pathname]);
+
     return (
         <div className="min-h-screen flex flex-col font-sans transition-colors duration-200">
             {!hideHeaderFooter && <Header />}
@@ -163,7 +171,9 @@ const AppLayout = () => {
                     <Route path="/van-ban/moi-ban-hanh" element={<VanBanMoiPage />} />
                     <Route path="/van-ban/chu-y" element={<VanBanChuYPage />} />
                     <Route path="/van-ban/tim-kiem" element={<VanBanQPPLPage />} />
+                    <Route path="/van-ban" element={<VanBanHomePage />} />
                     <Route path="/van-ban/:id" element={<VanBanDetailPage />} />
+                    <Route path="/thanh-vien/:id" element={<PublicUserProfilePage />} />
                     <Route path="/du-thao" element={<DuThaoPage />} />
                     <Route path="/du-thao/:id" element={<DuThaoDetailPage />} />
                     <Route path="/bao-cao-tiep-thu/:id" element={<BaoCaoTiepThuDetailPage />} />
@@ -233,6 +243,7 @@ const AppLayout = () => {
                         <Route path="dien-dan-quan-tam" element={<FollowedForumsPage />} />
                         <Route path="cau-hoi-ca-nhan" element={<DanhSachCauHoiCaNhanPage />} />
                         <Route path="cau-hoi-ca-nhan/:id" element={<CauHoiCaNhanDetailPage />} />
+                        <Route path="phan-anh-kien-nghi" element={<UserPetitionsPage />} />
                     </Route>
 
                     {/* Officer Portal Routes */}

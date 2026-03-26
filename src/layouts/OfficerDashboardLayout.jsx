@@ -49,11 +49,11 @@ const OfficerDashboardLayout = () => {
         { path: '/can-bo/trang-chu', icon: Home, label: 'Trang chủ cán bộ' },
         { path: '/can-bo/ho-so', icon: User, label: 'Hồ sơ cán bộ' },
         { path: '/can-bo/cai-dat', icon: Settings, label: 'Cấu hình cá nhân hóa' },
-        { path: '/can-bo/lich-su', icon: History, label: 'Lịch sử hoạt động' },
-        { path: '/can-bo/bo-suu-tap', icon: Bookmark, label: 'Bộ sưu tập' },
-        { path: '/can-bo/thong-bao', icon: Bell, label: 'Thông báo nội bộ' },
-        { path: '/can-bo/chu-de-dien-dan', icon: MessageSquare, label: 'Trạm quản lý chủ đề diễn đàn' },
-        { path: '/can-bo/cau-hoi-ca-nhan', icon: HelpCircle, label: 'Quản lý câu hỏi' },
+        // { path: '/can-bo/lich-su', icon: History, label: 'Lịch sử hoạt động' },
+        // { path: '/can-bo/bo-suu-tap', icon: Bookmark, label: 'Bộ sưu tập' },
+        // { path: '/can-bo/thong-bao', icon: Bell, label: 'Thông báo nội bộ' },
+        // { path: '/can-bo/chu-de-dien-dan', icon: MessageSquare, label: 'Trạm quản lý chủ đề diễn đàn' },
+        // { path: '/can-bo/cau-hoi-ca-nhan', icon: HelpCircle, label: 'Quản lý câu hỏi' },
     ];
 
     return (

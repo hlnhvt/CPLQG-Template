@@ -4,8 +4,15 @@ import {
     ChevronRight, ArrowLeft, Eye, MessageSquare, Download, FileText,
     Calendar, CheckCircle2, Clock, Building2, Layers, Search,
     ZoomIn, ZoomOut, File, FileCode2, Paperclip, ChevronDown, ChevronUp, User, Send,
-    ChevronLeft, Mail, Phone, Upload, History, X
+    ChevronLeft, Mail, Phone, Upload, History, X, LayoutList
 } from 'lucide-react';
+
+const TABS = [
+    { id: 'tom-tat', label: 'Tóm tắt', icon: FileText },
+    { id: 'toan-van', label: 'Toàn văn', icon: FileText },
+    { id: 'thong-tin-bo-sung', label: 'Thông tin bổ sung', icon: LayoutList },
+    { id: 'tai-lieu', label: 'Tài liệu đính kèm', icon: Paperclip }
+];
 
 // ── Mock Data ─────────────────────────────────────────────────────────────────
 const DOC_DATA = {
@@ -24,23 +31,25 @@ const DOC_DATA = {
         { id: 3, name: 'Bao_cao_danh_gia_tac_dong.pdf', size: '4.1 MB', type: 'PDF' }
     ],
     related: [
-        { id: 1, type: 'Tin tức', title: 'Hội thảo lấy ý kiến chuyên gia về Dự thảo Luật Dữ liệu', date: '12/03/2026' },
-        { id: 2, type: 'Sự kiện', title: 'Toạ đàm: An ninh dữ liệu trong kỷ nguyên AI', date: '08/03/2026' },
-        { id: 3, type: 'Văn bản chỉ đạo', title: 'Nghị quyết số 175/NQ-CP về đẩy mạnh chuyển đổi số', date: '15/11/2025' },
-        { id: 4, type: 'Tin tức', title: 'Lấy ý kiến nhân dân về Dự thảo Luật Dữ liệu trên toàn quốc', date: '10/03/2026' },
-        { id: 5, type: 'Văn bản chỉ đạo', title: 'Chỉ thị số 05/CT-TTg về tăng cường bảo vệ dữ liệu', date: '01/01/2026' },
-        // { id: 6, type: 'Sự kiện', title: 'Họp Tổ biên tập Dự án Luật Dữ liệu', date: '20/02/2026' },
-        // { id: 7, type: 'Tin tức', title: 'Nhiều điểm mới trong cơ sở dữ liệu quốc gia', date: '05/03/2026' },
-        // { id: 8, type: 'Văn bản chỉ đạo', title: 'Kế hoạch triển khai Đề án 06 năm 2026', date: '10/01/2026' },
-        // { id: 9, type: 'Tin tức', title: 'Phân quyền, phân cấp trong quản lý dữ liệu số', date: '25/02/2026' },
-        // { id: 10, type: 'Văn bản chỉ đạo', title: 'Bộ Công an ban hành hướng dẫn an toàn hệ thống', date: '15/02/2026' },
-        // { id: 11, type: 'Tin tức', title: 'Sự cần thiết ban hành Luật Dữ liệu', date: '01/03/2026' },
-        // { id: 12, type: 'Tin tức', title: 'Kết quả khảo sát về nhận thức an toàn dữ liệu của doanh nghiệp', date: '20/02/2026' },
+        { id: 1, type: 'Tin tức', title: 'Hội thảo lấy ý kiến chuyên gia về Dự thảo Luật Dữ liệu', date: '12/03/2026', image: 'https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=300&h=200&fit=crop' },
+        { id: 2, type: 'Sự kiện', title: 'Toạ đàm: An ninh dữ liệu trong kỷ nguyên AI', date: '08/03/2026', image: 'https://images.unsplash.com/photo-1591696205602-2f950c417cb9?w=300&h=200&fit=crop' },
+        { id: 3, type: 'Văn bản chỉ đạo', title: 'Nghị quyết số 175/NQ-CP về đẩy mạnh chuyển đổi số', date: '15/11/2025', image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=300&h=200&fit=crop' },
+        { id: 4, type: 'Tin tức', title: 'Lấy ý kiến nhân dân về Dự thảo Luật Dữ liệu trên toàn quốc', date: '10/03/2026', image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=300&h=200&fit=crop' },
+        { id: 5, type: 'Văn bản chỉ đạo', title: 'Chỉ thị số 05/CT-TTg về tăng cường bảo vệ dữ liệu', date: '01/01/2026', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=200&fit=crop' },
+        { id: 6, type: 'Sự kiện', title: 'Họp Tổ biên tập Dự án Luật Dữ liệu', date: '20/02/2026', image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=300&h=200&fit=crop' },
+        { id: 7, type: 'Tin tức', title: 'Nhiều điểm mới trong cơ sở dữ liệu quốc gia', date: '05/03/2026', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop' },
+        { id: 8, type: 'Văn bản chỉ đạo', title: 'Kế hoạch triển khai Đề án 06 năm 2026', date: '10/01/2026', image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=300&h=200&fit=crop' },
+        { id: 9, type: 'Tin tức', title: 'Phân quyền, phân cấp trong quản lý dữ liệu số', date: '25/02/2026', image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=200&fit=crop' },
+        { id: 10, type: 'Văn bản chỉ đạo', title: 'Bộ Công an ban hành hướng dẫn an toàn hệ thống', date: '15/02/2026', image: 'https://images.unsplash.com/photo-1614064641913-6b714041d13a?w=300&h=200&fit=crop' },
+        { id: 11, type: 'Tin tức', title: 'Sự cần thiết ban hành Luật Dữ liệu', date: '01/03/2026', image: 'https://images.unsplash.com/photo-1589391886645-d51941baf7fb?w=300&h=200&fit=crop' },
+        { id: 12, type: 'Tin tức', title: 'Kết quả khảo sát về nhận thức an toàn dữ liệu của doanh nghiệp', date: '20/02/2026', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop' },
     ],
+    trangThai: 'Đang lấy ý kiến',
+    coGuanTrachNhiem: 'Bộ Thông tin và Truyền thông, Bộ Tư pháp',
     timeline: [
-        { status: 'done', date: '01/01/2026', title: 'Soạn thảo', desc: 'Lập hồ sơ đề nghị xây dựng dự án Luật.', attachments: [{ name: 'To_trinh_De_nghi.pdf', type: 'PDF' }] },
-        { status: 'done', date: '10/03/2026', title: 'Lấy ý kiến công khai', desc: 'Đăng tải dự thảo trên Cổng Thông tin điện tử để lấy ý kiến nhân dân (60 ngày).' },
-        { status: 'current', date: '—', title: 'Thẩm định', desc: 'Bộ Tư pháp thẩm định dự án Luật.' },
+        { status: 'done', date: '01/01/2026', title: 'Soạn thảo', desc: 'Lập hồ sơ đề nghị xây dựng dự án Luật.', extraInfo: 'Hoàn thành hồ sơ sơ bộ trình các cấp có thẩm quyền đánh giá.', attachments: [{ name: 'To_trinh_De_nghi.pdf', type: 'PDF' }] },
+        { status: 'done', date: '10/03/2026', title: 'Lấy ý kiến công khai', desc: 'Đăng tải dự thảo trên Cổng Thông tin điện tử để lấy ý kiến nhân dân (60 ngày).', extraInfo: 'Mở hòm thư góp ý công khai tại cổng thông tin.', attachments: [{ name: 'Du_thao_Quy_dinh_chi_tiet.docx', type: 'DOCX' }, { name: 'Thong_bao_lay_y_kien.pdf', type: 'PDF' }] },
+        { status: 'current', date: '—', title: 'Thẩm định', desc: 'Bộ Tư pháp thẩm định dự án Luật.', extraInfo: 'Đang trong quá trình rà soát tính hợp hiến, hợp pháp.' },
         { status: 'pending', date: '—', title: 'Trình Chính phủ', desc: 'Trình Chính phủ xem xét, thống nhất thông qua.' },
         { status: 'pending', date: '—', title: 'Trình Quốc hội', desc: 'Dự kiến ban hành tại Kỳ họp thứ 11.' }
     ],
@@ -121,13 +130,264 @@ const PdfViewerPanel = () => {
     );
 };
 
+// ── Timeline Popup Component ──────────────────────────────────────────────────
+const TimelinePopup = ({ title, timeline, onClose }) => {
+    const [viewMode, setViewMode] = useState('latest');
+    const [sortOrder, setSortOrder] = useState('newest'); // 'oldest' or 'newest'
+    const [expandedAll, setExpandedAll] = useState(true);
+
+    // Map existing status to colors
+    const getStatusColor = (status) => {
+        if (status === 'done') return 'bg-[#1a3b8b]';
+        if (status === 'current') return 'bg-orange-500';
+        return 'bg-gray-300';
+    };
+
+    // Prepare timeline data based on view mode
+    let displayTimeline = [...timeline].reverse(); // Mock data is oldest first, default to newest first
+    if (viewMode === 'latest') {
+        displayTimeline = displayTimeline.slice(0, 2);
+    } else {
+        if (sortOrder === 'oldest') {
+            displayTimeline.reverse();
+        }
+    }
+
+    return (
+        <div className="fixed inset-0 bg-black/50 z-[1000] flex items-center justify-center p-4">
+            <div className="bg-white w-full max-w-5xl max-h-[90vh] rounded-xl shadow-2xl flex flex-col overflow-hidden animate-fade-in relative">
+                {/* Header */}
+                <div className="bg-[#f8f9fa] border-b border-gray-200 px-6 py-4 flex items-center justify-between shrink-0">
+                    <h2 className="text-[18px] font-bold text-[#1a3b8b]">Tiến độ xây dựng: {title}</h2>
+                    <button onClick={onClose} className="text-gray-500 hover:text-red-500 transition-colors p-1"><X size={20} /></button>
+                </div>
+
+                <div className="flex-1 overflow-y-auto bg-white relative p-6 custom-scrollbar">
+                    {/* Top Controls */}
+                    <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
+                        <div className="flex items-center gap-3">
+                            {viewMode === 'all' && (
+                                <>
+                                    <span className="text-[13px] font-semibold text-gray-700">Sắp xếp:</span>
+                                    <select
+                                        value={sortOrder}
+                                        onChange={(e) => setSortOrder(e.target.value)}
+                                        className="border border-gray-300 text-[13px] rounded px-3 py-1.5 outline-none focus:border-blue-500 bg-white"
+                                    >
+                                        <option value="oldest">Từ cũ nhất đến mới nhất</option>
+                                        <option value="newest">Từ mới nhất đến cũ nhất</option>
+                                    </select>
+                                </>
+                            )}
+
+                            <button
+                                onClick={() => setExpandedAll(!expandedAll)}
+                                className={`border border-gray-300 text-[13px] rounded px-3 py-1.5 outline-none bg-white hover:bg-gray-50 transition-colors flex items-center gap-1 ${viewMode === 'all' ? 'ml-2' : ''}`}
+                            >
+                                {expandedAll ? 'Thu gọn' : 'Mở rộng'} <ChevronDown size={14} className={`transform transition-transform ${expandedAll ? 'rotate-180' : ''}`} />
+                            </button>
+                        </div>
+
+                        <div className="flex rounded overflow-hidden border border-[#1a3b8b]">
+                            <button
+                                onClick={() => setViewMode('latest')}
+                                className={`px-4 py-1.5 text-[13px] font-semibold transition-colors ${viewMode === 'latest' ? 'bg-[#1a3b8b] text-white' : 'bg-white text-[#1a3b8b] hover:bg-gray-50'}`}
+                            >
+                                Sự kiện mới nhất
+                            </button>
+                            <button
+                                onClick={() => setViewMode('all')}
+                                className={`px-4 py-1.5 text-[13px] font-semibold transition-colors ${viewMode === 'all' ? 'bg-[#1a3b8b] text-white' : 'bg-white text-[#1a3b8b] hover:bg-gray-50'}`}
+                            >
+                                Toàn bộ dòng thời gian
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Timeline Container */}
+                    <div className="relative pl-[100px] sm:pl-[140px] mt-8">
+                        {/* Vertical Line */}
+                        <div className="absolute left-[89px] sm:left-[129px] top-4 bottom-4 w-0.5 bg-gray-300"></div>
+
+                        {displayTimeline.map((item, idx) => {
+                            // Section Header Logic for "latest" viewMode
+                            let sectionHeader = null;
+                            if (viewMode === 'latest') {
+                                if (idx === 0) sectionHeader = "Sự kiện mới nhất";
+                                else if (idx === 1) sectionHeader = "Sự kiện trước đó";
+                            }
+
+                            return (
+                                <div key={idx} className="flex flex-col mb-10 relative">
+                                    {sectionHeader && (
+                                        <div className="mb-8 relative z-20 -left-[100px] sm:-left-[140px] w-[calc(100%+100px)] sm:w-[calc(100%+140px)] max-w-4xl bg-gray-100 border border-gray-200 py-1.5 px-4 rounded-r-lg font-bold text-[14px] text-gray-800">
+                                            {sectionHeader}
+                                        </div>
+                                    )}
+
+                                    <div className="relative group">
+                                        {/* Date (Left Side) */}
+                                        <div className="absolute -left-[100px] sm:-left-[140px] top-1 w-[80px] sm:w-[120px] text-right pr-4">
+                                        <span className={`text-[13px] font-bold ${item.status === 'done' || item.status === 'current' ? 'text-gray-800' : 'text-gray-400'}`}>
+                                            {item.date}
+                                        </span>
+                                    </div>
+
+                                    {/* Dot on the Line */}
+                                    <div className={`absolute -left-[14px] top-1.5 w-[9px] h-[9px] rounded-full ${getStatusColor(item.status)} border-2 border-white ring-2 ring-transparent group-hover:ring-blue-200 transition-all z-10`}></div>
+
+                                    {/* Content Box */}
+                                    <div className="pl-6 w-full max-w-3xl">
+                                        <div className="flex items-center justify-between mb-3 border-b border-gray-100 pb-2">
+                                            <h3 className={`text-[15px] font-bold ${item.status === 'done' || item.status === 'current' ? 'text-[#1a3b8b]' : 'text-gray-500'}`}>
+                                                {item.title}
+                                            </h3>
+                                            <button className="text-gray-400 hover:text-blue-600 bg-gray-50 hover:bg-blue-50 rounded-full p-1 transition-colors">
+                                                <ChevronUp size={16} />
+                                            </button>
+                                        </div>
+
+                                        {expandedAll && (
+                                            <div className="animate-fade-in pl-2">
+                                                <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[150px_1fr] gap-x-4 gap-y-3 text-[13px]">
+                                                    {/* Fields */}
+                                                    <div className="font-semibold text-gray-500">Mô tả:</div>
+                                                    <div className="text-gray-800 leading-relaxed font-medium">{item.desc || 'Đang cập nhật'}</div>
+
+                                                    <div className="font-semibold text-gray-500">Sân khấu:</div>
+                                                    <div className="text-gray-700">{item.title}</div>
+
+                                                    {item.extraInfo && (
+                                                        <>
+                                                            <div className="font-semibold text-gray-500">Thông tin thêm:</div>
+                                                            <div className="text-gray-700 italic">{item.extraInfo}</div>
+                                                        </>
+                                                    )}
+
+                                                    <div className="font-semibold text-gray-500">Tài liệu đính kèm:</div>
+                                                    <div>
+                                                        {item.attachments && item.attachments.length > 0 ? (
+                                                            <div className="flex flex-col gap-1.5">
+                                                                {item.attachments.map((att, i) => (
+                                                                    <a key={i} href="#" className="font-bold text-[#1a3b8b] hover:underline flex items-center gap-1.5 group/link">
+                                                                        {att.type === 'PDF' ? <File size={14} className="text-red-500 shrink-0" /> : <FileCode2 size={14} className="text-blue-500 shrink-0" />}
+                                                                        <span className="truncate">{att.name}</span>
+                                                                    </a>
+                                                                ))}
+                                                            </div>
+                                                        ) : (
+                                                            <span className="text-gray-400 italic">Không có tài liệu</span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// ── Related Popup Component ───────────────────────────────────────────────────
+const RelatedPopup = ({ related, onClose }) => {
+    // Basic pagination logic for popup
+    const [page, setPage] = useState(1);
+    const itemsPerPage = 5;
+    const totalPages = Math.ceil(related.length / itemsPerPage);
+    const currentItems = related.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+
+    return (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4">
+            <div className="bg-[#f4f7fb] w-full max-w-3xl rounded-xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden animate-zoom-in">
+                {/* Header */}
+                <div className="flex items-center justify-between p-5 bg-white border-b border-gray-200 shrink-0">
+                    <h2 className="text-[20px] font-bold text-[#1a3b8b] flex items-center gap-2">
+                        <Layers size={22} />
+                        Tất cả thông tin liên quan
+                    </h2>
+                    <button
+                        onClick={onClose}
+                        className="text-gray-400 hover:text-red-500 bg-gray-50 hover:bg-red-50 p-2 rounded-full transition-colors"
+                    >
+                        <X size={20} />
+                    </button>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 overflow-y-auto" style={{ scrollbarWidth: 'thin' }}>
+                    <div className="space-y-4">
+                        {currentItems.map(rel => (
+                            <div key={rel.id} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:border-blue-200 transition-colors flex gap-4 items-center">
+                                <div className="w-24 h-16 sm:w-28 sm:h-20 shrink-0 rounded-lg overflow-hidden border border-gray-200 bg-gray-50">
+                                    <img src={rel.image} alt={rel.title} className="w-full h-full object-cover" />
+                                </div>
+                                <div className="flex-1 flex flex-col justify-center min-w-0">
+                                    <a href="#" className="text-[14px] sm:text-[15px] font-bold text-[#1a3b8b] hover:text-blue-800 hover:underline leading-snug block mb-2 truncate">
+                                        {rel.title}
+                                    </a>
+                                    <div className="flex flex-wrap items-center gap-2">
+                                        <span className={`px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-bold ${rel.type === 'Tin tức' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
+                                            rel.type === 'Sự kiện' ? 'bg-red-50 text-red-600 border border-red-100' : 'bg-purple-50 text-purple-600 border border-purple-100'
+                                        }`}>
+                                            {rel.type}
+                                        </span>
+                                        <div className="text-[11px] sm:text-[12px] text-gray-400 font-semibold flex items-center gap-1.5 whitespace-nowrap"><Calendar size={12}/> {rel.date}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Footer / Pagination */}
+                {totalPages > 1 && (
+                    <div className="bg-white p-4 border-t border-gray-200 shrink-0 flex items-center justify-between">
+                        <div className="text-[13px] font-semibold text-gray-500">
+                            Hiển thị {((page - 1) * itemsPerPage) + 1} - {Math.min(page * itemsPerPage, related.length)} / {related.length}
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button
+                                disabled={page === 1}
+                                onClick={() => setPage(page - 1)}
+                                className="px-3 py-1.5 bg-white border border-gray-300 rounded text-[13px] font-bold text-gray-700 disabled:opacity-50 hover:bg-gray-50 transition-colors"
+                            >
+                                Trước
+                            </button>
+                            <span className="text-[13px] font-bold px-2">{page} / {totalPages}</span>
+                            <button
+                                disabled={page === totalPages}
+                                onClick={() => setPage(page + 1)}
+                                className="px-3 py-1.5 bg-white border border-gray-300 rounded text-[13px] font-bold text-gray-700 disabled:opacity-50 hover:bg-gray-50 transition-colors"
+                            >
+                                Sau
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+};
+
 // ── Main Layout ───────────────────────────────────────────────────────────────
 const DuThaoDetailPage = () => {
     const { id } = useParams();
     const doc = DOC_DATA;
 
+    // Timeline Popup State
+    const [showTimelinePopup, setShowTimelinePopup] = useState(false);
+
+    // Related Info Popup State
+    const [showRelatedPopup, setShowRelatedPopup] = useState(false);
+
     // Tab State (UC55, UC56)
-    const [activeTab, setActiveTab] = useState('toan-van');
+    const [activeTab, setActiveTab] = useState('tom-tat');
 
     // Mocks for UC59
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -210,9 +470,7 @@ const DuThaoDetailPage = () => {
     };
 
     // Related Content Lazy Load (UC57)
-    const [relatedCount, setRelatedCount] = useState(10);
-    const currentRelated = doc.related.slice(0, relatedCount);
-    const hasMoreRelated = doc.related.length > relatedCount;
+    const currentRelated = doc.related.slice(0, 3);
 
     return (
         <div className="bg-[#f4f7fb] font-sans pb-16 min-h-screen">
@@ -247,14 +505,17 @@ const DuThaoDetailPage = () => {
                             <h1 className="text-[26px] md:text-[32px] font-bold text-[#0f4c81] leading-tight mb-6">
                                 {doc.title}
                             </h1>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                <div className="bg-white border border-gray-100 p-3 rounded-lg shadow-sm flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0"><Building2 size={15} /></div>
-                                    <div>
-                                        <p className="text-[10px] text-gray-400 uppercase font-semibold">Cơ quan chủ trì</p>
-                                        <p className="text-[12px] font-bold text-gray-800 line-clamp-1" title={doc.org}>{doc.org}</p>
-                                    </div>
-                                </div>
+                            <div className="flex flex-wrap items-center gap-3 text-[12px] mb-3">
+                                {/* Badge */}
+                                <span className="inline-block px-2.5 py-0.5 rounded border text-[11px] font-semibold bg-orange-50 text-orange-600 border-orange-200">{doc.trangThai || 'Đang lấy ý kiến'}</span>
+
+                                {/* Badge "Đã kiểm tra" */}
+                                <span className="inline-block px-2.5 py-0.5 rounded border border-blue-200 text-[11px] font-semibold bg-blue-50 text-blue-700">
+                                    ✓ Đã kiểm tra
+                                </span>
+                            </div>
+
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                                 <div className="bg-white border border-gray-100 p-3 rounded-lg shadow-sm flex items-center gap-3">
                                     <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0"><Calendar size={15} /></div>
                                     <div>
@@ -280,40 +541,72 @@ const DuThaoDetailPage = () => {
                         </div>
 
                         {/* Thanh tab điều hướng */}
-                        <div className="flex bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
-                            <button
-                                onClick={() => setActiveTab('toan-van')}
-                                className={`flex-1 py-3 text-[14px] font-bold flex items-center justify-center gap-2 transition-colors ${activeTab === 'toan-van' ? 'bg-[#1a3b8b] text-white' : 'text-gray-600 hover:bg-gray-50'}`}
-                            >
-                                <FileText size={16} /> Toàn văn
-                            </button>
-                            <button
-                                onClick={() => setActiveTab('tai-lieu')}
-                                className={`flex-1 py-3 text-[14px] font-bold flex items-center justify-center gap-2 transition-colors border-l border-gray-200 ${activeTab === 'tai-lieu' ? 'bg-[#1a3b8b] text-white' : 'text-gray-600 hover:bg-gray-50'}`}
-                            >
-                                <Paperclip size={16} /> Tài liệu đính kèm ({doc.attachments.length})
-                            </button>
+                        <div className="flex bg-white rounded-lg border-b border-gray-200 overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
+                            {TABS.map(tab => {
+                                const Icon = tab.icon;
+                                return (
+                                    <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+                                        className={`flex items-center gap-1.5 px-6 py-3 text-[14px] font-semibold border-b-2 -mb-px transition-colors whitespace-nowrap ${activeTab === tab.id ? 'border-[#1a3b8b] text-[#1a3b8b] bg-blue-50/50' : 'border-transparent text-gray-500 hover:text-[#1a3b8b]'}`}>
+                                        <Icon size={16} />
+                                        {tab.label} {tab.id === 'tai-lieu' && `(${doc.attachments.length})`}
+                                    </button>
+                                );
+                            })}
                         </div>
 
                         {/* Nội dung Tab */}
                         <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm min-h-[400px]">
+                            {activeTab === 'tom-tat' && (
+                                <div className="animate-fade-in space-y-4">
+                                    <h3 className="text-[16px] font-bold text-[#1a3b8b] mb-4">Tóm tắt nội dung Dự thảo</h3>
+                                    <p className="text-[13px] text-gray-700 leading-relaxed text-justify">
+                                        Dự thảo Luật Dữ liệu (sửa đổi) được xây dựng nhằm tạo lập khung pháp lý đồng bộ, thống nhất cho các hoạt động quản trị, bảo vệ và khai thác dữ liệu số quốc gia. Luật này điều chỉnh trực tiếp quy trình thu thập, xử lý, lưu trữ và chia sẻ dữ liệu trên lãnh thổ Việt Nam, hướng tới mục tiêu xây dựng chính phủ số và nền kinh tế số an toàn, bền vững.
+                                    </p>
+                                    <p className="text-[13px] text-gray-700 leading-relaxed text-justify">
+                                        So với quy định hiện hành, dự thảo lần này có nhiều điểm mới đột phá, đặc biệt là việc làm rõ khái niệm dữ liệu cá nhân dùng chung, cơ chế bảo vệ quyền riêng tư theo tiêu chuẩn quốc tế, và trách nhiệm cụ thể của các tổ chức thu thập dữ liệu gốc. Điểm nhấn của dự thảo là việc quy định bắt buộc phải mã hóa và lưu trữ tại Việt Nam đối với các loại hình dữ liệu quan trọng.
+                                    </p>
+                                </div>
+                            )}
+
                             {activeTab === 'toan-van' && (
                                 <div className="animate-fade-in">
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                                        <div>
-                                            <p className="text-[11px] font-bold text-gray-800 uppercase mb-1">Mục tiêu xây dựng</p>
-                                            <p className="text-[13px] text-gray-700 leading-relaxed bg-gray-50 p-3 rounded border border-gray-100 h-full">{doc.mucTieu || 'Đang cập nhật.'}</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-[11px] font-bold text-gray-800 uppercase mb-1">Phạm vi điều chỉnh</p>
-                                            <p className="text-[13px] text-gray-700 leading-relaxed bg-gray-50 p-3 rounded border border-gray-100 h-full">{doc.phamVi || 'Đang cập nhật.'}</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-[11px] font-bold text-gray-800 uppercase mb-1">Đối tượng tác động</p>
-                                            <p className="text-[13px] text-gray-700 leading-relaxed bg-gray-50 p-3 rounded border border-gray-100 h-full">{doc.doiTuong || 'Đang cập nhật.'}</p>
+                                    <PdfViewerPanel />
+                                </div>
+                            )}
+
+                            {activeTab === 'thong-tin-bo-sung' && (
+                                <div className="animate-fade-in space-y-6">
+                                    <div>
+                                        <p className="text-[12px] font-bold text-gray-800 uppercase mb-2 border-b border-gray-100 pb-1">Cơ quan chủ trì và trách nhiệm</p>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div className="bg-gray-50 p-3 rounded border border-gray-100">
+                                                <p className="text-[11px] text-gray-500 mb-1">Cơ quan chủ trì soạn thảo</p>
+                                                <p className="text-[13px] font-semibold text-[#1a3b8b]">{doc.org}</p>
+                                            </div>
+                                            <div className="bg-gray-50 p-3 rounded border border-gray-100">
+                                                <p className="text-[11px] text-gray-500 mb-1">Các tổ chức và cơ quan có trách nhiệm</p>
+                                                <p className="text-[13px] font-semibold text-gray-800">{doc.coGuanTrachNhiem || 'Đang cập nhật'}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <PdfViewerPanel />
+
+                                    <div>
+                                        <p className="text-[12px] font-bold text-gray-800 uppercase mb-2 border-b border-gray-100 pb-1">Tác động dự kiến</p>
+                                        <div className="grid grid-cols-1 gap-4">
+                                            <div className="bg-gray-50 p-3 rounded border border-gray-100">
+                                                <p className="text-[11px] font-bold text-[#1a3b8b] mb-1.5 flex items-center gap-1.5"><ChevronRight size={12} /> Mục tiêu xây dựng</p>
+                                                <p className="text-[13px] text-gray-700 leading-relaxed text-justify">{doc.mucTieu || 'Đang cập nhật.'}</p>
+                                            </div>
+                                            <div className="bg-gray-50 p-3 rounded border border-gray-100">
+                                                <p className="text-[11px] font-bold text-[#1a3b8b] mb-1.5 flex items-center gap-1.5"><ChevronRight size={12} /> Phạm vi điều chỉnh</p>
+                                                <p className="text-[13px] text-gray-700 leading-relaxed text-justify">{doc.phamVi || 'Đang cập nhật.'}</p>
+                                            </div>
+                                            <div className="bg-gray-50 p-3 rounded border border-gray-100">
+                                                <p className="text-[11px] font-bold text-[#1a3b8b] mb-1.5 flex items-center gap-1.5"><ChevronRight size={12} /> Đối tượng tác động</p>
+                                                <p className="text-[13px] text-gray-700 leading-relaxed text-justify">{doc.doiTuong || 'Đang cập nhật.'}</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             )}
 
@@ -617,7 +910,15 @@ const DuThaoDetailPage = () => {
 
                         {/* Timeline (UC58) */}
                         <div className="bg-white rounded-xl border border-t-[3px] border-t-emerald-500 border-gray-100 shadow-sm p-6 text-sm">
-                            <h3 className="text-[16px] font-bold text-gray-800 border-b border-gray-100 pb-3 mb-5 uppercase tracking-wide">Tiến độ xây dựng</h3>
+                            <div className="flex items-center justify-between border-b border-gray-100 pb-3 mb-5">
+                                <h3 className="text-[16px] font-bold text-gray-800 uppercase tracking-wide">Tiến độ xây dựng</h3>
+                                <button
+                                    onClick={() => setShowTimelinePopup(true)}
+                                    className="text-[12px] font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded transition-colors"
+                                >
+                                    Xem chi tiết
+                                </button>
+                            </div>
                             {doc.timeline.length === 0 ? (
                                 <p className="text-center text-gray-400 py-4">Chưa có thông tin tiến độ.</p>
                             ) : (
@@ -638,12 +939,6 @@ const DuThaoDetailPage = () => {
                                                     <p className={`font-bold text-[14px] mb-0.5 ${item.status === 'current' ? 'text-orange-600' : item.status === 'done' ? 'text-gray-800' : 'text-gray-400'}`}>{item.title}</p>
                                                     <p className="text-[12px] font-semibold text-gray-500 mb-1">{item.date}</p>
                                                     {item.desc && <p className="text-[13px] text-gray-600 leading-snug">{item.desc}</p>}
-                                                    {item.attachments && item.attachments.map((att, i) => (
-                                                        <div key={i} className="flex flex-wrap items-center gap-2 mt-2 bg-gray-50 p-2 rounded border border-gray-200 hover:border-blue-300 transition-colors">
-                                                            {att.type === 'PDF' ? <File size={16} className="text-red-500 shrink-0" /> : <FileCode2 size={16} className="text-blue-500 shrink-0" />}
-                                                            <a href="#" className="text-[12px] font-bold text-blue-700 hover:underline leading-tight truncate max-w-[200px]" title={att.name}>{att.name}</a>
-                                                        </div>
-                                                    ))}
                                                 </div>
                                             </div>
                                         ))}
@@ -654,9 +949,9 @@ const DuThaoDetailPage = () => {
 
                         {/* Thông tin liên quan (UC57) */}
                         <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
-                            <h3 className="text-[16px] font-bold text-gray-800 border-b border-gray-100 pb-3 mb-5 uppercase tracking-wide">Văn bản liên quan</h3>
+                            <h3 className="text-[16px] font-bold text-gray-800 border-b border-gray-100 pb-3 mb-5 uppercase tracking-wide">Thông tin liên quan</h3>
                             {doc.related.length === 0 ? (
-                                <p className="text-center text-gray-400 py-4">Chưa có văn bản liên quan.</p>
+                                <p className="text-center text-gray-400 py-4">Chưa có thông tin liên quan.</p>
                             ) : (
                                 <div>
                                     <div className="space-y-4">
@@ -672,16 +967,14 @@ const DuThaoDetailPage = () => {
                                             </div>
                                         ))}
                                     </div>
-                                    {hasMoreRelated && (
-                                        <div className="pt-4 mt-2">
-                                            <button
-                                                onClick={() => setRelatedCount(prev => prev + 10)}
-                                                className="w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded text-[13px] font-bold text-gray-600 transition-colors"
-                                            >
-                                                Xem thêm
-                                            </button>
-                                        </div>
-                                    )}
+                                    <div className="pt-4 border-t border-gray-100 mt-2 text-center">
+                                        <button
+                                            onClick={() => setShowRelatedPopup(true)}
+                                            className="text-[#1a3b8b] hover:text-blue-800 text-[13px] font-semibold transition-colors flex items-center justify-center mx-auto gap-1"
+                                        >
+                                            Xem tất cả thông tin liên quan <span className="text-[16px] leading-none mb-0.5">&rarr;</span>
+                                        </button>
+                                    </div>
                                 </div>
                             )}
                         </div>
@@ -713,6 +1006,23 @@ const DuThaoDetailPage = () => {
 
                 </div>
             </div>
+
+            {/* Timeline Details Popup */}
+            {showTimelinePopup && (
+                <TimelinePopup
+                    title={doc.title}
+                    timeline={doc.timeline}
+                    onClose={() => setShowTimelinePopup(false)}
+                />
+            )}
+
+            {/* Related Information Popup */}
+            {showRelatedPopup && (
+                <RelatedPopup
+                    related={doc.related}
+                    onClose={() => setShowRelatedPopup(false)}
+                />
+            )}
         </div>
     );
 };

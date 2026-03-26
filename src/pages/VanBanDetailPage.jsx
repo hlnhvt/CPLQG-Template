@@ -5,7 +5,7 @@ import {
     BookOpen, List, GitBranch, Clock, File, Link2, Upload,
     Maximize2, RotateCw, ZoomIn, ZoomOut, Printer, Search, Info,
     BookmarkPlus, FileEdit, MessageCircle, MessageSquarePlus, Mail,
-    ChevronDown, Plus, X, Folder, ShieldCheck
+    ChevronDown, Plus, X, Folder, ShieldCheck, User
 } from 'lucide-react';
 import { THONG_TU_78_CONTENT } from '../data/thongTu78';
 
@@ -113,6 +113,7 @@ const TABS = [
     { id: 'van-ban-goc', label: 'Văn bản gốc', icon: File },
     { id: 'van-ban-lq', label: 'Văn bản liên quan', icon: Link2 },
     { id: 'tai-ve', label: 'Tải về', icon: Upload },
+    { id: 'chu-de-lq', label: 'Chủ đề thảo luận', icon: MessageCircle },
 ];
 
 // ── Quick action buttons (shared in list rows) ────────────────────────────────
@@ -466,6 +467,14 @@ const TabNoiDung = ({ doc, tocOpen, setTocOpen }) => {
     const handleTocClick = (id) => {
         setActiveToc(id);
         setHighlightedSection(id);
+        
+        // Scroll to element
+        const el = document.getElementById(id);
+        if (el) {
+            // Check if window is Mobile, maybe offset is needed, but block: center is good enough
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
         if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current);
         highlightTimeoutRef.current = setTimeout(() => {
             setHighlightedSection(null);
@@ -575,7 +584,7 @@ const TabNoiDung = ({ doc, tocOpen, setTocOpen }) => {
                                     {[
                                         { icon: BookmarkPlus, label: 'Lưu trữ', onClick: () => setShowCollectionModal(true) },
                                         { icon: FileEdit, label: 'Ghi chú', onClick: () => setShowNoteModal(true) },
-                                        { icon: MessageCircle, label: 'Ý kiến', onClick: () => { } },
+                                        { icon: MessageCircle, label: 'Kiến nghị', onClick: () => window.open(`/phan-anh-kien-nghi/tao-moi?vanban=${encodeURIComponent((doc?.soHieu ? doc.soHieu + ' - ' : '') + (doc?.title || ''))}`, '_blank') },
                                         { icon: MessageSquarePlus, label: 'Tạo chủ đề', onClick: () => window.open(`/dien-dan/tao-moi?title=${encodeURIComponent('Thảo luận về ' + (doc?.title || ''))}`, '_blank') },
                                         {
                                             icon: Mail, label: 'Email', onClick: () => {
@@ -1313,6 +1322,48 @@ const TabVanBanLienQuan = ({ navigate }) => {
     );
 };
 
+// ── Tab: Chủ đề thảo luận liên quan ──────────────────────────────────────────
+const FORUM_TOPICS = [
+    { id: 1, title: 'Thảo luận về những điểm mới của Thông tư 78/2014/TT-BTC', author: 'Nguyễn Văn A', replies: 15, views: 230, date: '10/05/2026' },
+    { id: 2, title: 'Hỏi đáp các vướng mắc khi áp dụng quy định về Thuế thu nhập doanh nghiệp', author: 'Trần Thị B', replies: 8, views: 120, date: '05/05/2026' },
+    { id: 3, title: 'Chia sẻ kinh nghiệm quyết toán thuế theo quy định mới', author: 'Lê Hoàng', replies: 32, views: 500, date: '01/05/2026' },
+];
+
+const TabChuDeThaoLuanLienQuan = ({ doc }) => (
+    <div className="space-y-4">
+        <div className="flex justify-between items-center mb-4">
+            <p className="text-[13px] text-gray-500 italic">Các chủ đề thảo luận trên diễn đàn liên quan đến văn bản pháp luật này.</p>
+            <button 
+                onClick={() => window.open(`/dien-dan/tao-moi?title=${encodeURIComponent('Thảo luận về ' + (doc?.title || ''))}`, '_blank')}
+                className="flex items-center gap-1.5 px-4 py-2 bg-[#1a3b8b] text-white rounded hover:bg-blue-800 transition-colors text-[13px] font-semibold shrink-0"
+            >
+                <Plus size={14} /> Tạo chủ đề mới
+            </button>
+        </div>
+        <div className="grid gap-3">
+            {FORUM_TOPICS.map(topic => (
+                <Link to={'/dien-dan/bai-viet/' + topic.id} key={topic.id} className="flex gap-4 p-4 border border-gray-200 rounded-xl bg-white hover:border-blue-300 transition-colors shadow-sm group cursor-pointer">
+                    <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center shrink-0 text-blue-600 group-hover:bg-blue-100 transition-colors">
+                        <MessageSquarePlus size={20} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        <span className="text-[15px] font-bold text-gray-800 group-hover:text-blue-600 group-hover:underline leading-snug line-clamp-1 mb-1">{topic.title}</span>
+                        <div className="flex flex-wrap items-center gap-4 text-[12px] text-gray-500">
+                            <span className="flex items-center gap-1"><User size={12}/> {topic.author}</span>
+                            <span className="flex items-center gap-1"><Clock size={12}/> {topic.date}</span>
+                            <span className="flex items-center gap-1"><MessageCircle size={12}/> {topic.replies} phản hồi</span>
+                            <span className="flex items-center gap-1"><Eye size={12}/> {topic.views} lượt xem</span>
+                        </div>
+                    </div>
+                    <div className="shrink-0 flex items-center">
+                        <span className="text-[13px] font-semibold text-[#1a3b8b] group-hover:underline">Xem chi tiết &rarr;</span>
+                    </div>
+                </Link>
+            ))}
+        </div>
+    </div>
+);
+
 // ── Tab: Tải về (UC50) ────────────────────────────────────────────────────────
 const FILES = [
     { id: 1, name: 'Quyết định 631/QĐ-BYT của Bộ Y tế ban hành Kế hoạch Phòng, chống bệnh truyền nhiễm năm 2026', type: 'Văn bản gốc', lang: 'Tiếng Việt', ext: 'PDF' },
@@ -1432,6 +1483,7 @@ const VanBanDetailPage = () => {
                     {activeTab === 'van-ban-goc' && <TabVanBanGoc />}
                     {activeTab === 'van-ban-lq' && <TabVanBanLienQuan navigate={navigate} />}
                     {activeTab === 'tai-ve' && <TabTaiVe />}
+                    {activeTab === 'chu-de-lq' && <TabChuDeThaoLuanLienQuan doc={doc} />}
                 </div>
             </div>
 

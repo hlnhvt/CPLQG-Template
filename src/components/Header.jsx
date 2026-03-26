@@ -345,9 +345,9 @@ const Header = () => {
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <a href="#" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
+                                <Link to="/van-ban" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
                                     Văn bản pháp luật <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
-                                </a>
+                                </Link>
                                 {/* Dropdown – Văn bản pháp luật */}
                                 <div className="absolute top-full left-0 mt-0 w-[280px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
                                     <ul className="py-2 text-sm text-gray-200 font-normal">
@@ -489,26 +489,9 @@ const Header = () => {
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <Link to="/du-thao" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
-                                    Dự thảo VBQPPL <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
+                                <Link to="/du-thao" className="h-full flex items-center px-4 gap-1.5 hover:bg-white/10 transition-colors">
+                                    Dự thảo VBQPPL
                                 </Link>
-                                {/* Dropdown – Dự thảo VBQPPL */}
-                                <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-2 text-sm text-gray-200 font-normal">
-                                        <li>
-                                            <Link to="/du-thao" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
-                                                Danh sách dự thảo
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/bao-cao-tiep-thu" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
-                                                Báo cáo tiếp thu, giải trình
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
                         </ul>
                     </nav>

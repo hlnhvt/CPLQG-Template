@@ -78,9 +78,15 @@ const UserProfilePopover = ({ user, children }) => {
                         </div>
                     </div>
                     <div className="p-3 flex justify-between gap-2 bg-white">
+                        <Link
+                            to={`/thanh-vien/${user.id || '1'}`}
+                            className="flex-1 py-1.5 px-3 bg-[#1a3b8b] border border-[#1a3b8b] rounded text-sm font-bold text-white hover:bg-blue-800 transition-colors text-center"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Xem hồ sơ
+                        </Link>
                         <button className="flex-1 py-1.5 px-3 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">Theo dõi</button>
-                        <button className="flex-1 py-1.5 px-3 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">Bỏ qua</button>
-                        <button className="flex-1 py-1.5 px-3 bg-blue-600 border border-blue-600 rounded text-sm font-medium text-white hover:bg-blue-700 transition-colors shrink-0">Nhắn tin</button>
+                        <button className="flex-1 py-1.5 px-3 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">Nhắn tin</button>
                     </div>
                 </div>
             )}
