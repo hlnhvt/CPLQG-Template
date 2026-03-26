@@ -94,7 +94,7 @@ const ThuNgoPage = () => {
                                     <p className="text-gray-500 uppercase text-xs font-bold tracking-widest mt-2 border-b-2 border-yellow-400 inline-block pb-1">BỘ TRƯỞNG</p>
                                 </div>
                                 <div className="order-1 md:order-2 w-32 h-32 rounded-full border-4 border-white shadow-xl shadow-blue-900/10 flex items-center justify-center overflow-hidden shrink-0 relative bg-gray-100">
-                                    <img src="/vietnamese_official_1.png" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-sm font-medium text-gray-400">Hình ảnh<br/>Lãnh đạo</span>' }} alt="Lãnh đạo" className="w-full h-full object-cover" />
+                                    <img src="/bo-truong.jpg" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-sm font-medium text-gray-400">Hình ảnh<br/>Lãnh đạo</span>' }} alt="Lãnh đạo" className="w-full h-full object-cover" />
                                     <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-full"></div>
                                 </div>
                             </div>
