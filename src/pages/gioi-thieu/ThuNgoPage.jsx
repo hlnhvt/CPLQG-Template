@@ -59,7 +59,7 @@ const ThuNgoPage = () => {
                                 &nbsp;&emsp;Kính gửi: <span className="text-[#0f4c81]">Toàn thể người dân, doanh nghiệp và các tổ chức</span>.
                             </h3>
 
-                            <div className="text-gray-800 text-[17px] md:text-[19px] leading-[1.9] space-y-7 text-justify tracking-wide">
+                            <div className="text-gray-800 text-[17px] md:text-[19px] leading-[1.9] space-y-7 text-justify">
                                 <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-[#0f4c81] first-letter:mr-3 first-letter:float-left first-letter:leading-[0.8]">
                                     Thay mặt Lãnh đạo Bộ Tư pháp và Ban quản trị Cổng Thông tin pháp luật quốc gia, tôi xin gửi lời chào trân trọng và lời cảm ơn sâu sắc nhất tới quý vị vì đã luôn đồng hành, quan tâm và sử dụng các dịch vụ của Cổng trong suốt thời gian qua.
                                 </p>
@@ -94,7 +94,7 @@ const ThuNgoPage = () => {
                                     <p className="text-gray-500 uppercase text-xs font-bold tracking-widest mt-2 border-b-2 border-yellow-400 inline-block pb-1">BỘ TRƯỞNG</p>
                                 </div>
                                 <div className="order-1 md:order-2 w-32 h-32 rounded-full border-4 border-white shadow-xl shadow-blue-900/10 flex items-center justify-center overflow-hidden shrink-0 relative bg-gray-100">
-                                    <img src="/bo-truong.jpg" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-sm font-medium text-gray-400">Hình ảnh<br/>Lãnh đạo</span>' }} alt="Lãnh đạo" className="w-full h-full object-cover" />
+                                    <img src="/bo-truong.jpg" onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span class="text-sm font-medium text-gray-400">Hình ảnh<br/>Lãnh đạo</span>' }} alt="Lãnh đạo" className="w-full h-full object-cover object-[center_20%]" />
                                     <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-full"></div>
                                 </div>
                             </div>

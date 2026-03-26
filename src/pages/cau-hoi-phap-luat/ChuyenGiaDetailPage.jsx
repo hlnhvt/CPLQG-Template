@@ -8,7 +8,7 @@ const MOCK_EXPERT = {
     name: 'Ls. Hoàng Ngọc Cường',
     role: 'Luật sư tư vấn - Đoàn Luật sư TP. Hà Nội',
     company: 'Công ty Luật TNHH V&H',
-    avatar: '',
+    avatar: '/images/experts/expert_avatar_1.png',
     domains: ['Đất đai', 'Dân sự', 'Hành chính'],
     rating: 4.9,
     reviews: 120,
@@ -130,8 +130,12 @@ const ChuyenGiaDetailPage = () => {
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 flex flex-col sm:flex-row gap-8">
                         {/* Avatar */}
                         <div className="shrink-0 flex flex-col items-center">
-                            <div className="w-32 h-32 md:w-40 md:h-40 bg-blue-50 border-4 border-blue-100 rounded-full flex justify-center items-center shadow-md mb-4">
-                                <User size={80} className="text-blue-200" />
+                            <div className="w-32 h-32 md:w-40 md:h-40 bg-blue-50 border-4 border-blue-100 rounded-full flex justify-center items-center shadow-md mb-4 overflow-hidden">
+                                {MOCK_EXPERT.avatar ? (
+                                    <img src={MOCK_EXPERT.avatar} alt={MOCK_EXPERT.name} className="w-full h-full object-cover" />
+                                ) : (
+                                    <User size={80} className="text-blue-200" />
+                                )}
                             </div>
                             <div className="flex items-center gap-1 bg-amber-50 text-amber-700 px-3 py-1.5 rounded-full font-bold text-sm">
                                 <Star size={16} className="fill-amber-500" /> {MOCK_EXPERT.rating} / 5.0

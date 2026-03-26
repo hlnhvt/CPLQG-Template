@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { 
     Home, ChevronRight, Bold, Italic, Underline, 
     List, Image as ImageIcon, Link as LinkIcon, Paperclip, Check,
@@ -9,8 +9,9 @@ import { MOCK_FORUMS } from '../../data/mockForumData';
 
 const CreateTopicPage = () => {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const [selectedForum, setSelectedForum] = useState('');
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState(() => searchParams.get('title') || '');
     const [content, setContent] = useState('');
     const [tags, setTags] = useState('');
     
@@ -33,12 +34,33 @@ const CreateTopicPage = () => {
     };
 
     const handleConfirmPost = () => {
+        // Save new topic to localStorage so TopicDetailPage can pick it up
+        const existingRaw = localStorage.getItem('forumNewTopics');
+        const existing = existingRaw ? JSON.parse(existingRaw) : [];
+        const newId = Date.now();
+        const newTopic = {
+            id: newId,
+            title: title || 'Chủ đề không tên',
+            content: content || '',
+            forum: MOCK_FORUMS.find(f => f.id === selectedForum)?.title || 'Chưa xác định',
+            author: { name: 'Nguyễn Anh Quân', role: 'Cán bộ', avatar: '/images/default_avatar.png', joinDate: '01/01/2024', points: 0, messages: 1, reactions: 0, workplace: 'Bộ Tư Pháp' },
+            createdAt: new Date().toLocaleString('vi-VN'),
+            tags: [],
+            votes: 0,
+            views: 1,
+            replies: 0,
+            contributions: 0,
+            isHot: false,
+        };
+        localStorage.setItem('forumNewTopics', JSON.stringify([newTopic, ...existing]));
         setShowConfirm(false);
         setShowSuccess(true);
+        // Store the new topic id to redirect after success
+        window._latestForumTopicId = newId;
     };
 
     const handleFinishSuccess = () => {
-        navigate('/ca-nhan/chu-de-dien-dan');
+        navigate(`/dien-dan/chu-de/${window._latestForumTopicId || 'new'}`);
     };
 
     return (

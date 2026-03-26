@@ -112,6 +112,11 @@ import NguoiThucHienTGPLDetailPage from './pages/tro-giup-phap-ly/NguoiThucHienT
 import BaoCaoCongTacTGPLPage from './pages/tro-giup-phap-ly/BaoCaoCongTacTGPLPage';
 import VuViecDienHinhTGPLPage from './pages/tro-giup-phap-ly/VuViecDienHinhTGPLPage';
 
+import OfficerDashboardLayout from './layouts/OfficerDashboardLayout';
+import OfficerHomePage from './pages/dashboard/OfficerHomePage';
+import OfficerProfilePage from './pages/dashboard/OfficerProfilePage';
+import OfficerSettingsPage from './pages/dashboard/OfficerSettingsPage';
+
 
 const AppLayout = () => {
     const location = useLocation();
@@ -228,6 +233,13 @@ const AppLayout = () => {
                         <Route path="dien-dan-quan-tam" element={<FollowedForumsPage />} />
                         <Route path="cau-hoi-ca-nhan" element={<DanhSachCauHoiCaNhanPage />} />
                         <Route path="cau-hoi-ca-nhan/:id" element={<CauHoiCaNhanDetailPage />} />
+                    </Route>
+
+                    {/* Officer Portal Routes */}
+                    <Route path="/can-bo" element={<OfficerDashboardLayout />}>
+                        <Route path="trang-chu" element={<OfficerHomePage />} />
+                        <Route path="ho-so" element={<OfficerProfilePage />} />
+                        <Route path="cai-dat" element={<OfficerSettingsPage />} />
                     </Route>
 
                     {/* Full-screen Editor Routes */}

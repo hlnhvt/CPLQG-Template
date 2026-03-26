@@ -92,26 +92,10 @@ const MOCK_LINKS = [
 const MOCK_SYSTEMS = [
     {
         id: 1,
-        title: 'Phần mềm Quản lý tiến độ rà soát VBQPPL Toàn quốc',
-        description: 'Hệ thống hỗ trợ đôn đốc, theo dõi quá trình rà soát văn bản theo từng Bộ, Ngành, Địa phương.',
-        details: 'Phần mềm có khả năng đồng bộ dữ liệu thời gian thực từ cơ sở dữ liệu pháp luật quốc gia, tự động trích xuất các cảnh báo mâu thuẫn văn bản, hỗ trợ kết xuất báo cáo đa dạng theo biểu mẫu.',
-        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=200&h=150&auto=format&fit=crop',
-        link: '#'
-    },
-    {
-        id: 2,
-        title: 'Hệ thống thu thập dữ liệu và biểu diễn thống kê trực quan',
-        description: 'Phục vụ việc giám sát trực quan bằng bản đồ số, biểu đồ thống kê đa chiều.',
-        details: 'Tích hợp công nghệ phân tích dữ liệu lớn (Big Data) để biểu diễn mật độ văn bản bị chồng chéo theo vùng miền và theo từng lĩnh vực chuyên ngành.',
-        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=200&h=150&auto=format&fit=crop',
-        link: '#'
-    },
-    {
-        id: 3,
-        title: 'Trợ lý AI phân tích mâu thuẫn chồng chéo',
-        description: 'Hệ thống dùng AI để tự động đọc, hiểu và đánh giá mức độ mâu thuẫn giữa các dự thảo và luật đang ban hành.',
-        details: 'Sử dụng mô hình xử lý ngôn ngữ tự nhiên (NLP) tiên tiến, hệ thống hỗ trợ phát hiện các điểm chưa thống nhất trong khái niệm, định nghĩa và chế tài xử lý.',
-        image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=200&h=150&auto=format&fit=crop',
+        title: 'Phần mềm hỗ trợ kiểm tra, rà soát VBQPPL',
+        description: 'Phần mềm hỗ trợ kiểm tra, rà soát VBQPPL là phần mềm quản lý hoạt động kiểm tra, rà soát và hệ thống hóa VBQPPL. Giúp việc kiểm tra, rà soát, hệ thống hóa VBQPPL thực hiện dễ dàng và giảm bớt thời gian, công sức của cán bộ pháp chế',
+        details: 'Phần mềm hỗ trợ kiểm tra, rà soát VBQPPL là phần mềm quản lý hoạt động kiểm tra, rà soát và hệ thống hóa VBQPPL. Giúp việc kiểm tra, rà soát, hệ thống hóa VBQPPL thực hiện dễ dàng và giảm bớt thời gian, công sức của cán bộ pháp chế',
+        image: 'https://thietkelogo.vn/wp-content/uploads/2015/11/BoTuPhap1.jpg',
         link: '#'
     }
 ];

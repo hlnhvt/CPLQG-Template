@@ -22,57 +22,12 @@ const SURVEY_DATA = {
     organization: "Bộ Tư pháp – Cục Phổ biến, Giáo dục pháp luật",
     audience: "Người dân, doanh nghiệp đã sử dụng dịch vụ hành chính công trong 12 tháng gần đây",
     questionCount: 12,
-    estimatedTime: "Khoảng 8-12 phút",
+    estimatedTime: "10 phút",
     legalBasis: [
         "Nghị quyết số 76/NQ-CP ngày 15/7/2021 của Chính phủ ban hành Chương trình tổng thể cải cách hành chính nhà nước giai đoạn 2021-2030",
         "Quyết định số 766/QĐ-TTg ngày 23/6/2022 của Thủ tướng Chính phủ phê duyệt Bộ chỉ số chỉ đạo, điều hành và đánh giá chất lượng phục vụ người dân, doanh nghiệp trong thực hiện thủ tục hành chính"
-    ],
-    // Questions statistics
-    questions: [
-        {
-            id: 1,
-            type: "radio",
-            text: "Bạn đánh giá thế nào về thái độ phục vụ của cán bộ tiếp nhận hồ sơ?",
-            options: [
-                { label: "Rất hài lòng", percent: 45 },
-                { label: "Hài lòng", percent: 35 },
-                { label: "Bình thường", percent: 14 },
-                { label: "Không hài lòng", percent: 6 }
-            ]
-        },
-        {
-            id: 2,
-            type: "rating",
-            text: "Đánh giá số sao cho chất lượng dịch vụ tổng thể:",
-            avgScore: 4.2,
-            distribution: [
-                { stars: 5, count: 820 },
-                { stars: 4, count: 675 },
-                { stars: 3, count: 277 },
-                { stars: 2, count: 82 },
-                { stars: 1, count: 36 }
-            ]
-        },
-        {
-            id: 3,
-            type: "radio",
-            text: "Thời gian xử lý hồ sơ có đúng theo quy định không?",
-            options: [
-                { label: "Đúng hẹn", percent: 62 },
-                { label: "Sớm hơn", percent: 18 },
-                { label: "Trễ hẹn", percent: 20 }
-            ]
-        },
-        {
-            id: 4,
-            type: "text",
-            text: "Đề xuất, góp ý của bạn để cải thiện chất lượng dịch vụ hành chính công:",
-            responseCount: 1250
-        }
     ]
 };
-
-const CHART_COLORS = ['#2563eb', '#7c3aed', '#059669', '#d97706', '#dc2626', '#0891b2'];
 
 const SurveyDetailPage = () => {
     const { surveyId } = useParams();
@@ -85,57 +40,6 @@ const SurveyDetailPage = () => {
         closed: { text: 'Đã kết thúc', classes: 'bg-gray-100 text-gray-700 border-gray-200', dot: 'bg-gray-500' }
     };
     const sc = statusConfig[survey.status];
-
-    const renderBarChartQuestion = (question) => (
-        <div className="space-y-3">
-            {question.options.map((opt, idx) => (
-                <div key={idx} className="flex items-center gap-3">
-                    <div className="w-36 md:w-48 text-right text-[13px] text-gray-600 shrink-0 font-medium leading-tight">{opt.label}</div>
-                    <div className="flex-1 h-8 bg-gray-100 rounded-lg overflow-hidden">
-                        <div
-                            className="h-full rounded-lg transition-all duration-700"
-                            style={{ width: `${opt.percent}%`, backgroundColor: CHART_COLORS[idx % CHART_COLORS.length] }}
-                        />
-                    </div>
-                    <div className="w-10 text-[13px] font-bold text-gray-700 shrink-0">{opt.percent}%</div>
-                </div>
-            ))}
-        </div>
-    );
-
-    const renderRatingQuestion = (question) => {
-        const maxCount = Math.max(...question.distribution.map(d => d.count));
-        return (
-            <div className="flex flex-col md:flex-row gap-8 items-center">
-                <div className="flex-1 space-y-2.5 w-full">
-                    {[...question.distribution].reverse().map((d, idx) => (
-                        <div key={idx} className="flex items-center gap-3">
-                            <div className="flex items-center justify-end gap-0.5 w-14 shrink-0">
-                                <span className="text-[13px] font-medium text-gray-600">{d.stars}</span>
-                                <Star size={13} className="fill-yellow-400 text-yellow-400 ml-0.5" />
-                            </div>
-                            <div className="flex-1 h-7 bg-gray-100 rounded overflow-hidden">
-                                <div
-                                    className="h-full bg-yellow-400 rounded transition-all duration-700"
-                                    style={{ width: `${(d.count / maxCount) * 100}%` }}
-                                />
-                            </div>
-                            <div className="w-12 text-[13px] text-gray-600 shrink-0">{d.count.toLocaleString('vi-VN')}</div>
-                        </div>
-                    ))}
-                </div>
-                <div className="flex flex-col items-center justify-center w-40 shrink-0">
-                    <div className="text-5xl font-black text-[#0f4c81]">{question.avgScore}</div>
-                    <div className="flex gap-0.5 mt-1">
-                        {[1, 2, 3, 4, 5].map(s => (
-                            <Star key={s} size={18} className={s <= Math.round(question.avgScore) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"} />
-                        ))}
-                    </div>
-                    <div className="text-[13px] text-gray-500 mt-1">Điểm trung bình</div>
-                </div>
-            </div>
-        );
-    };
 
     return (
         <div className="bg-[#f4f7fb] min-h-screen font-sans pb-20">
@@ -176,7 +80,7 @@ const SurveyDetailPage = () => {
                     </div>
 
                     {/* Tabs */}
-                    <div className="flex flex-nowrap overflow-x-auto border-b-2 border-gray-100 no-scrollbar">
+                    <div className="flex flex-nowrap overflow-x-auto border-b-2 border-gray-100 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                         <button className={`flex items-center gap-2 px-6 py-3.5 font-semibold text-[15px] whitespace-nowrap transition-colors border-b-2 -mb-[2px] ${activeTab === 'stats' ? 'text-blue-600 border-blue-600' : 'text-gray-500 border-transparent hover:text-gray-700'}`} onClick={() => setActiveTab('stats')}>
                             <BarChart2 size={17} /> Thống kê
                         </button>
@@ -194,62 +98,51 @@ const SurveyDetailPage = () => {
                 {activeTab === 'stats' && (
                     <div className="space-y-6">
                         {/* Summary Stats Cards */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                             {[
-                                { icon: <Users size={24} className="text-blue-500" />, value: survey.totalParticipants.toLocaleString('vi-VN'), label: 'Lượt tham gia', bg: 'bg-blue-50' },
-                                { icon: <CheckCircle size={24} className="text-green-500" />, value: survey.totalCompleted.toLocaleString('vi-VN'), label: 'Tổng hoàn thành', bg: 'bg-green-50' },
-                                { icon: <BarChart2 size={24} className="text-purple-500" />, value: `${survey.completionRate}%`, label: 'Tỷ lệ hoàn thành', bg: 'bg-purple-50' },
-                                { icon: <Clock size={24} className="text-orange-500" />, value: `31/03/2026`, label: 'Ngày kết thúc', bg: 'bg-orange-50' }
-                            ].map((card, i) => (
-                                <div key={i} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex items-center gap-4">
-                                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${card.bg} shrink-0`}>{card.icon}</div>
-                                    <div>
-                                        <div className="text-2xl font-black text-[#0f4c81]">{card.value}</div>
-                                        <div className="text-[13px] text-gray-500">{card.label}</div>
+                                { icon: Users, value: survey.totalParticipants.toLocaleString('vi-VN'), label: 'Người tiếp cận', colorClasses: 'text-blue-600 bg-blue-50 border-blue-100' },
+                                { icon: CheckCircle, value: survey.totalCompleted.toLocaleString('vi-VN'), label: 'Tổng hoàn thành', colorClasses: 'text-emerald-600 bg-emerald-50 border-emerald-100' },
+                                { icon: Timer, value: survey.estimatedTime, label: 'T.g thực hiện TB', colorClasses: 'text-indigo-600 bg-indigo-50 border-indigo-100' },
+                                { icon: Clock, value: survey.daysLeft + ' ngày', label: 'Thời gian còn lại', colorClasses: 'text-amber-600 bg-amber-50 border-amber-100' }
+                            ].map((card, i) => {
+                                const Icon = card.icon;
+                                return (
+                                    <div key={i} className={`rounded-xl border bg-white shadow-sm p-6 relative flex flex-col justify-center overflow-hidden group hover:-translate-y-1 transition-transform duration-300 ${card.colorClasses.split(' ').pop()}`}>
+                                        <div className="flex items-start justify-between relative z-10 w-full">
+                                            <div>
+                                                <div className="text-2xl font-bold text-[#0f4c81] tracking-tight mb-1">{card.value}</div>
+                                                <div className="text-[13px] font-medium text-gray-500">{card.label}</div>
+                                            </div>
+                                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${card.colorClasses.split(' ').slice(0, 2).join(' ')}`}>
+                                                <Icon size={20} strokeWidth={2}/>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
 
                         {/* Completion Rate Progress Bar */}
-                        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
-                            <div className="flex justify-between items-center mb-3">
-                                <span className="font-semibold text-gray-700">Tỷ lệ hoàn thành</span>
-                                <span className="font-bold text-[#0f4c81]">{survey.completionRate}%</span>
+                        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6 md:p-8 mt-6">
+                            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-4 gap-4">
+                                <div>
+                                    <h3 className="font-semibold text-[16px] text-[#0f4c81] mb-1">Tiến độ thu thập ý kiến tham gia</h3>
+                                    <div className="text-[14px] text-gray-500">
+                                        Ghi nhận <strong className="text-emerald-600 font-semibold">{survey.totalCompleted.toLocaleString('vi-VN')}</strong> kết quả trên tổng số <strong className="text-blue-600 font-semibold">{survey.totalParticipants.toLocaleString('vi-VN')}</strong> người truy cập
+                                    </div>
+                                </div>
+                                <span className="text-2xl font-bold text-[#0f4c81] shrink-0">{survey.completionRate}%</span>
                             </div>
-                            <div className="h-4 bg-gray-100 rounded-full overflow-hidden">
-                                <div className="h-full bg-gradient-to-r from-blue-500 to-blue-700 rounded-full" style={{ width: `${survey.completionRate}%` }} />
-                            </div>
-                            <div className="flex justify-between text-[13px] text-gray-500 mt-2">
-                                <span>{survey.totalCompleted.toLocaleString('vi-VN')} lượt hoàn thành</span>
-                                <span>{survey.totalParticipants.toLocaleString('vi-VN')} lượt tham gia</span>
+                            <div className="h-3 bg-gray-100 rounded-full overflow-hidden shadow-inner relative group">
+                                <div className="h-full bg-gradient-to-r from-blue-500 to-[#0f4c81] rounded-full transition-all duration-1000 relative overflow-hidden" style={{ width: `${survey.completionRate}%` }}>
+                                    <div className="absolute inset-0 bg-white/20 w-full h-full transform -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                                </div>
                             </div>
                         </div>
 
-                        {/* Per-Question Charts */}
-                        {/* {survey.questions.map((q, index) => (
-                            <div key={q.id} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 md:p-6">
-                                <div className="font-bold text-[16px] text-gray-800 mb-5">
-                                    <span className="text-blue-600 mr-2">Câu {index + 1}:</span>
-                                    {q.text}
-                                </div>
-                                {q.type === 'radio' && renderBarChartQuestion(q)}
-                                {q.type === 'rating' && renderRatingQuestion(q)}
-                                {q.type === 'text' && (
-                                    <div className="flex items-center gap-3 text-gray-600">
-                                        <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
-                                            <FileText size={22} className="text-blue-500" />
-                                        </div>
-                                        <div>
-                                            <div className="text-[20px] font-black text-[#0f4c81]">{q.responseCount.toLocaleString('vi-VN')}</div>
-                                            <div className="text-[13px] text-gray-500">lượt trả lời văn bản</div>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        ))} */}
-
-                        <div className="text-[13px] text-gray-400 text-right">Cập nhật lần cuối: {survey.lastUpdated}</div>
+                        <div className="text-[13px] font-medium text-gray-400 text-right mt-8 flex items-center justify-end gap-1.5">
+                            <Clock size={14} className="text-gray-300" /> Cập nhật lần cuối: {survey.lastUpdated}
+                        </div>
                     </div>
                 )}
 
@@ -311,7 +204,7 @@ const SurveyDetailPage = () => {
                                 <div className="flex gap-3">
                                     <Timer size={18} className="text-blue-500 mt-0.5 shrink-0" />
                                     <div>
-                                        <div className="text-[13px] font-medium text-gray-500 mb-1">Thời gian hoàn thành</div>
+                                        <div className="text-[13px] font-medium text-gray-500 mb-1">Thời gian làm TB</div>
                                         <div className="font-semibold text-gray-800">{survey.estimatedTime}</div>
                                     </div>
                                 </div>

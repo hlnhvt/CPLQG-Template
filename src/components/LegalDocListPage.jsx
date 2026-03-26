@@ -64,13 +64,13 @@ const ActionBtns = ({ docId }) => (
         {[['Tổng quan', ''], ['Nội dung', 'noi-dung'], ['Văn bản gốc', 'van-ban-goc'], ['Hiệu lực', 'thuoc-tinh']].map(([l, tab]) => (
             <Link key={l}
                 to={`/van-ban/${docId}${tab ? `?tab=${tab}` : ''}`}
-                className="text-[11px] px-2.5 py-1 border border-gray-300 rounded hover:border-blue-400 hover:text-blue-600 transition-colors text-gray-600">
+                className="text-[13px] px-2.5 py-1 border border-gray-300 rounded hover:border-blue-400 hover:text-blue-600 transition-colors text-gray-600">
                 {l}
             </Link>
         ))}
         <Link to={`/van-ban/${docId}?tab=tai-ve`}
-            className="text-[11px] px-2.5 py-1 border border-gray-300 rounded hover:border-blue-400 hover:text-blue-600 transition-colors text-gray-600 flex items-center gap-1">
-            <Download size={11} /> Tải về
+            className="text-[13px] px-2.5 py-1 border border-gray-300 rounded hover:border-blue-400 hover:text-blue-600 transition-colors text-gray-600 flex items-center gap-1">
+            <Download size={13} /> Tải về
         </Link>
     </div>
 );
@@ -314,8 +314,8 @@ const LegalDocListPage = ({
                             </div>
                         )}
 
-                        <h1 className="text-[20px] font-bold text-[#0f4c81] mb-1">{currentTitle}</h1>
-                        <p className="text-[12px] text-gray-400 italic mb-4">
+                        <h1 className="text-[22px] font-bold text-[#0f4c81] mb-1">{currentTitle}</h1>
+                        <p className="text-[14px] text-gray-400 italic mb-4">
                             Nguồn dữ liệu được lấy từ cơ sở dữ liệu quốc gia về pháp luật.
                         </p>
 
@@ -397,33 +397,33 @@ const LegalDocListPage = ({
                                     const sb = STATUS_BADGE[doc.status] || STATUS_BADGE.active;
                                     const globalIdx = (page - 1) * perPage + idx + 1;
                                     return (
-                                        <div key={doc.id} className="flex gap-3 py-4 first:pt-0">
+                                        <div key={doc.id} className="flex gap-4 py-5 first:pt-0">
                                             {/* STT */}
-                                            <div className={`w-8 h-8 rounded-lg ${badgeColor} text-white text-[12px] font-bold flex items-center justify-center shrink-0 mt-0.5`}>
+                                            <div className={`w-10 h-10 rounded-lg ${badgeColor} text-white text-[14px] font-bold flex items-center justify-center shrink-0 mt-0.5`}>
                                                 {String(globalIdx).padStart(2, '0')}
                                             </div>
 
                                             {/* Body */}
                                             <div className="flex-1 min-w-0">
                                                 <div className="flex flex-wrap items-start gap-2">
-                                                    <Link to={`/van-ban/${doc.id}`} className="text-[14px] font-bold text-blue-700 hover:underline leading-snug flex-1">
+                                                    <Link to={`/van-ban/${doc.id}`} className="text-[16px] font-bold text-blue-700 hover:underline leading-snug flex-1">
                                                         {doc.title}
                                                     </Link>
                                                 </div>
 
                                                 {/* Engagement row */}
                                                 {showEngagement && (
-                                                    <div className="flex items-center gap-4 text-[11px] text-gray-500 mt-1.5">
-                                                        <span className="flex items-center gap-1 text-blue-600"><Eye size={11} />{doc.views.toLocaleString('vi-VN')} lượt xem</span>
-                                                        <span className="flex items-center gap-1"><Share2 size={11} />{doc.shares} chia sẻ</span>
-                                                        <span className="flex items-center gap-1"><Bookmark size={11} />{doc.saves} lưu</span>
+                                                    <div className="flex items-center gap-4 text-[13px] text-gray-500 mt-1.5">
+                                                        <span className="flex items-center gap-1 text-blue-600"><Eye size={13} />{doc.views.toLocaleString('vi-VN')} lượt xem</span>
+                                                        <span className="flex items-center gap-1"><Share2 size={13} />{doc.shares} chia sẻ</span>
+                                                        <span className="flex items-center gap-1"><Bookmark size={13} />{doc.saves} lưu</span>
                                                     </div>
                                                 )}
 
                                                 {/* View count row */}
                                                 {showViewCount && (
-                                                    <div className="flex items-center gap-1 text-[11px] text-blue-600 mt-1.5">
-                                                        <Eye size={11} />{doc.views.toLocaleString('vi-VN')} lượt xem
+                                                    <div className="flex items-center gap-1 text-[13px] text-blue-600 mt-1.5">
+                                                        <Eye size={13} />{doc.views.toLocaleString('vi-VN')} lượt xem
                                                     </div>
                                                 )}
 
@@ -431,10 +431,10 @@ const LegalDocListPage = ({
                                             </div>
 
                                             {/* Meta */}
-                                            <div className="shrink-0 text-right text-[11px] text-gray-500 min-w-[130px] space-y-1 mt-0.5">
+                                            <div className="shrink-0 text-right text-[13px] text-gray-500 min-w-[140px] space-y-1.5 mt-0.5">
                                                 <p><span className="text-gray-400">Áp dụng:</span> {doc.ngay_ap_dung}</p>
                                                 <p><span className="text-gray-400">Ban hành:</span> {doc.ngay_ban_hanh}</p>
-                                                <span className={`inline-block px-2 py-0.5 rounded border text-[10px] font-semibold ${sb.cls}`}>
+                                                <span className={`inline-block px-2.5 py-1 rounded border text-[12px] font-semibold ${sb.cls}`}>
                                                     {sb.label}
                                                 </span>
                                             </div>

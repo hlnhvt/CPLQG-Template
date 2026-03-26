@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { 
-    ChevronRight, ArrowLeft, Eye, MessageSquare, Download, FileText, 
-    Calendar, CheckCircle2, Clock, Building2, Layers, Search, 
+import {
+    ChevronRight, ArrowLeft, Eye, MessageSquare, Download, FileText,
+    Calendar, CheckCircle2, Clock, Building2, Layers, Search,
     ZoomIn, ZoomOut, File, FileCode2, Paperclip, ChevronDown, ChevronUp, User, Send,
     ChevronLeft, Mail, Phone, Upload, History, X
 } from 'lucide-react';
@@ -29,16 +29,16 @@ const DOC_DATA = {
         { id: 3, type: 'Văn bản chỉ đạo', title: 'Nghị quyết số 175/NQ-CP về đẩy mạnh chuyển đổi số', date: '15/11/2025' },
         { id: 4, type: 'Tin tức', title: 'Lấy ý kiến nhân dân về Dự thảo Luật Dữ liệu trên toàn quốc', date: '10/03/2026' },
         { id: 5, type: 'Văn bản chỉ đạo', title: 'Chỉ thị số 05/CT-TTg về tăng cường bảo vệ dữ liệu', date: '01/01/2026' },
-        { id: 6, type: 'Sự kiện', title: 'Họp Tổ biên tập Dự án Luật Dữ liệu', date: '20/02/2026' },
-        { id: 7, type: 'Tin tức', title: 'Nhiều điểm mới trong cơ sở dữ liệu quốc gia', date: '05/03/2026' },
-        { id: 8, type: 'Văn bản chỉ đạo', title: 'Kế hoạch triển khai Đề án 06 năm 2026', date: '10/01/2026' },
-        { id: 9, type: 'Tin tức', title: 'Phân quyền, phân cấp trong quản lý dữ liệu số', date: '25/02/2026' },
-        { id: 10, type: 'Văn bản chỉ đạo', title: 'Bộ Công an ban hành hướng dẫn an toàn hệ thống', date: '15/02/2026' },
-        { id: 11, type: 'Tin tức', title: 'Sự cần thiết ban hành Luật Dữ liệu', date: '01/03/2026' },
-        { id: 12, type: 'Tin tức', title: 'Kết quả khảo sát về nhận thức an toàn dữ liệu của doanh nghiệp', date: '20/02/2026' },
+        // { id: 6, type: 'Sự kiện', title: 'Họp Tổ biên tập Dự án Luật Dữ liệu', date: '20/02/2026' },
+        // { id: 7, type: 'Tin tức', title: 'Nhiều điểm mới trong cơ sở dữ liệu quốc gia', date: '05/03/2026' },
+        // { id: 8, type: 'Văn bản chỉ đạo', title: 'Kế hoạch triển khai Đề án 06 năm 2026', date: '10/01/2026' },
+        // { id: 9, type: 'Tin tức', title: 'Phân quyền, phân cấp trong quản lý dữ liệu số', date: '25/02/2026' },
+        // { id: 10, type: 'Văn bản chỉ đạo', title: 'Bộ Công an ban hành hướng dẫn an toàn hệ thống', date: '15/02/2026' },
+        // { id: 11, type: 'Tin tức', title: 'Sự cần thiết ban hành Luật Dữ liệu', date: '01/03/2026' },
+        // { id: 12, type: 'Tin tức', title: 'Kết quả khảo sát về nhận thức an toàn dữ liệu của doanh nghiệp', date: '20/02/2026' },
     ],
     timeline: [
-        { status: 'done', date: '01/01/2026', title: 'Soạn thảo', desc: 'Lập hồ sơ đề nghị xây dựng dự án Luật.', attachments: [{name: 'To_trinh_De_nghi.pdf', type: 'PDF'}] },
+        { status: 'done', date: '01/01/2026', title: 'Soạn thảo', desc: 'Lập hồ sơ đề nghị xây dựng dự án Luật.', attachments: [{ name: 'To_trinh_De_nghi.pdf', type: 'PDF' }] },
         { status: 'done', date: '10/03/2026', title: 'Lấy ý kiến công khai', desc: 'Đăng tải dự thảo trên Cổng Thông tin điện tử để lấy ý kiến nhân dân (60 ngày).' },
         { status: 'current', date: '—', title: 'Thẩm định', desc: 'Bộ Tư pháp thẩm định dự án Luật.' },
         { status: 'pending', date: '—', title: 'Trình Chính phủ', desc: 'Trình Chính phủ xem xét, thống nhất thông qua.' },
@@ -78,25 +78,25 @@ const PdfViewerPanel = () => {
             {/* Toolbar */}
             <div className="bg-gray-50 border-b border-gray-200 px-4 py-2 flex flex-wrap gap-3 items-center justify-between text-[13px] text-gray-600">
                 <div className="flex items-center gap-2">
-                    <button className="p-1 hover:bg-gray-200 rounded"><ChevronLeft size={16}/></button>
+                    <button className="p-1 hover:bg-gray-200 rounded"><ChevronLeft size={16} /></button>
                     <span className="font-medium">1 / 45</span>
-                    <button className="p-1 hover:bg-gray-200 rounded"><ChevronRight size={16}/></button>
+                    <button className="p-1 hover:bg-gray-200 rounded"><ChevronRight size={16} /></button>
                 </div>
                 <div className="flex items-center gap-1">
-                    <button onClick={() => setZoom(Math.max(50, zoom - 10))} disabled={zoom <= 50} className="p-1.5 hover:bg-gray-200 rounded disabled:opacity-50"><ZoomOut size={16}/></button>
+                    <button onClick={() => setZoom(Math.max(50, zoom - 10))} disabled={zoom <= 50} className="p-1.5 hover:bg-gray-200 rounded disabled:opacity-50"><ZoomOut size={16} /></button>
                     <span className="w-12 text-center font-medium">{zoom}%</span>
-                    <button onClick={() => setZoom(Math.min(200, zoom + 10))} disabled={zoom >= 200} className="p-1.5 hover:bg-gray-200 rounded disabled:opacity-50"><ZoomIn size={16}/></button>
+                    <button onClick={() => setZoom(Math.min(200, zoom + 10))} disabled={zoom >= 200} className="p-1.5 hover:bg-gray-200 rounded disabled:opacity-50"><ZoomIn size={16} /></button>
                 </div>
                 <div className="hidden sm:flex relative items-center">
-                    <Search size={14} className="absolute left-2 text-gray-400"/>
+                    <Search size={14} className="absolute left-2 text-gray-400" />
                     <input className="pl-7 pr-2 py-1 border border-gray-300 rounded text-[12px] w-48 outline-none focus:border-blue-400" placeholder="Tìm kiếm trong tài liệu..." />
                 </div>
                 <div className="flex gap-2">
                     <button className="flex items-center gap-1.5 px-3 py-1 bg-white border border-gray-300 rounded hover:text-blue-600 transition-colors">
-                        <FileCode2 size={14} className="text-blue-500"/> Tải Word
+                        <FileCode2 size={14} className="text-blue-500" /> Tải Word
                     </button>
                     <button className="flex items-center gap-1.5 px-3 py-1 bg-[#1a3b8b] text-white border border-[#1a3b8b] rounded hover:bg-blue-800 transition-colors shadow-sm">
-                        <Download size={14}/> Tải PDF
+                        <Download size={14} /> Tải PDF
                     </button>
                 </div>
             </div>
@@ -105,11 +105,11 @@ const PdfViewerPanel = () => {
                 <div className="bg-white shadow-md p-8 sm:p-12 transition-all w-full max-w-[800px]" style={{ transform: `scale(${zoom / 100})`, transformOrigin: 'top center' }}>
                     <h2 className="text-center font-bold text-[18px] mb-8">DỰ THẢO LUẬT DỮ LIỆU (SỬA ĐỔI)</h2>
                     <p className="indent-8 text-justify leading-relaxed mb-4 text-[14px]">
-                        <strong>Điều 1. Phạm vi điều chỉnh</strong><br/>
+                        <strong>Điều 1. Phạm vi điều chỉnh</strong><br />
                         Luật này quy định về hoạt động thu thập, tổ chức, lưu trữ, xử lý, chia sẻ và bảo vệ dữ liệu trên lãnh thổ nước Cộng hòa Xã hội Chủ nghĩa Việt Nam...
                     </p>
                     <p className="indent-8 text-justify leading-relaxed mb-4 text-[14px]">
-                        <strong>Điều 2. Đối tượng áp dụng</strong><br/>
+                        <strong>Điều 2. Đối tượng áp dụng</strong><br />
                         Cơ quan nhà nước, tổ chức chính trị - xã hội, doanh nghiệp và cá nhân có liên quan đến việc xử lý dữ liệu phục vụ mục đích chung và lợi ích quốc gia...
                     </p>
                     <div className="h-64 flex items-center justify-center border-2 border-dashed border-gray-300 text-gray-400 mt-10 rounded">
@@ -125,18 +125,18 @@ const PdfViewerPanel = () => {
 const DuThaoDetailPage = () => {
     const { id } = useParams();
     const doc = DOC_DATA;
-    
+
     // Tab State (UC55, UC56)
     const [activeTab, setActiveTab] = useState('toan-van');
 
     // Mocks for UC59
-    const [isLoggedIn, setIsLoggedIn] = useState(false); 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isExpired, setIsExpired] = useState(false);
 
     // Comment State (UC59, UC60)
     const [commentText, setCommentText] = useState('');
     const [commentSuccess, setCommentSuccess] = useState(false);
-    const [showComments, setShowComments] = useState(false); 
+    const [showComments, setShowComments] = useState(false);
     const [isFormHidden, setIsFormHidden] = useState(false);
     const [submittedComments, setSubmittedComments] = useState([]);
     const [attachedFiles, setAttachedFiles] = useState([]);
@@ -182,7 +182,7 @@ const DuThaoDetailPage = () => {
         if (newValidFiles.length > 0) {
             setAttachedFiles(prev => [...prev, ...newValidFiles]);
         }
-        
+
         if (fileInputRef.current) fileInputRef.current.value = '';
     };
 
@@ -192,7 +192,7 @@ const DuThaoDetailPage = () => {
 
     const handleSubmitComment = () => {
         if (!commentText.trim() || isExpired) return;
-        
+
         const newComment = {
             id: Date.now(),
             user: 'Hoàng Lương Nhân',
@@ -200,7 +200,7 @@ const DuThaoDetailPage = () => {
             date: 'Vừa xong',
             attachments: attachedFiles.map(f => f.name)
         };
-        
+
         setSubmittedComments([newComment, ...submittedComments]);
         setCommentSuccess(true);
         setCommentText('');
@@ -235,42 +235,42 @@ const DuThaoDetailPage = () => {
 
             <div className="container mx-auto px-4 max-w-[1280px]">
                 <div className="flex flex-col lg:flex-row gap-8">
-                    
+
                     {/* ── LEFT COLUMN (70%) ──────────────────────────────────── */}
                     <div className="lg:w-[70%] space-y-6">
-                        
+
                         {/* Title & Metadata */}
                         <div>
                             <p className="text-[13px] text-gray-500 uppercase font-semibold tracking-wide mb-2 flex items-center gap-1.5">
-                                <FileText size={14} className="text-blue-600"/> Xem chi tiết văn bản dự thảo VBQPPL
+                                <FileText size={14} className="text-blue-600" /> Xem chi tiết văn bản dự thảo VBQPPL
                             </p>
                             <h1 className="text-[26px] md:text-[32px] font-bold text-[#0f4c81] leading-tight mb-6">
                                 {doc.title}
                             </h1>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                                 <div className="bg-white border border-gray-100 p-3 rounded-lg shadow-sm flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0"><Building2 size={15}/></div>
+                                    <div className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0"><Building2 size={15} /></div>
                                     <div>
                                         <p className="text-[10px] text-gray-400 uppercase font-semibold">Cơ quan chủ trì</p>
                                         <p className="text-[12px] font-bold text-gray-800 line-clamp-1" title={doc.org}>{doc.org}</p>
                                     </div>
                                 </div>
                                 <div className="bg-white border border-gray-100 p-3 rounded-lg shadow-sm flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0"><Calendar size={15}/></div>
+                                    <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0"><Calendar size={15} /></div>
                                     <div>
                                         <p className="text-[10px] text-gray-400 uppercase font-semibold">Ngày đăng</p>
                                         <p className="text-[12px] font-bold text-gray-800">{doc.ngayDang}</p>
                                     </div>
                                 </div>
                                 <div className="bg-white border border-gray-100 p-3 rounded-lg shadow-sm flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center shrink-0"><Eye size={15}/></div>
+                                    <div className="w-8 h-8 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center shrink-0"><Eye size={15} /></div>
                                     <div>
                                         <p className="text-[10px] text-gray-400 uppercase font-semibold">Lượt xem</p>
                                         <p className="text-[12px] font-bold text-gray-800">{doc.views.toLocaleString('vi-VN')}</p>
                                     </div>
                                 </div>
                                 <div className="bg-white border border-gray-100 p-3 rounded-lg shadow-sm flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center shrink-0"><MessageSquare size={15}/></div>
+                                    <div className="w-8 h-8 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center shrink-0"><MessageSquare size={15} /></div>
                                     <div>
                                         <p className="text-[10px] text-gray-400 uppercase font-semibold">Lượt góp ý</p>
                                         <p className="text-[12px] font-bold text-gray-800">{doc.comments + (commentSuccess ? 1 : 0)}</p>
@@ -281,17 +281,17 @@ const DuThaoDetailPage = () => {
 
                         {/* Thanh tab điều hướng */}
                         <div className="flex bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm">
-                            <button 
+                            <button
                                 onClick={() => setActiveTab('toan-van')}
                                 className={`flex-1 py-3 text-[14px] font-bold flex items-center justify-center gap-2 transition-colors ${activeTab === 'toan-van' ? 'bg-[#1a3b8b] text-white' : 'text-gray-600 hover:bg-gray-50'}`}
                             >
-                                <FileText size={16}/> Toàn văn
+                                <FileText size={16} /> Toàn văn
                             </button>
-                            <button 
+                            <button
                                 onClick={() => setActiveTab('tai-lieu')}
                                 className={`flex-1 py-3 text-[14px] font-bold flex items-center justify-center gap-2 transition-colors border-l border-gray-200 ${activeTab === 'tai-lieu' ? 'bg-[#1a3b8b] text-white' : 'text-gray-600 hover:bg-gray-50'}`}
                             >
-                                <Paperclip size={16}/> Tài liệu đính kèm ({doc.attachments.length})
+                                <Paperclip size={16} /> Tài liệu đính kèm ({doc.attachments.length})
                             </button>
                         </div>
 
@@ -336,8 +336,8 @@ const DuThaoDetailPage = () => {
                                                     </div>
                                                 </div>
                                                 <div className="flex gap-2 shrink-0 w-full sm:w-auto">
-                                                    <button className="flex-1 sm:flex-none justify-center items-center gap-1.5 px-4 py-2 border border-gray-300 rounded hover:text-blue-600 hover:border-blue-400 font-bold transition-colors text-[13px] text-gray-700 shadow-sm"><Eye size={15}/> Xem</button>
-                                                    <button className="flex-1 sm:flex-none justify-center items-center gap-1.5 px-4 py-2 bg-[#1a3b8b] text-white border border-[#1a3b8b] rounded hover:bg-blue-800 font-bold transition-colors text-[13px] shadow-sm"><Download size={15}/> Tải xuống</button>
+                                                    <button className="flex-1 sm:flex-none justify-center items-center gap-1.5 px-4 py-2 border border-gray-300 rounded hover:text-blue-600 hover:border-blue-400 font-bold transition-colors text-[13px] text-gray-700 shadow-sm"><Eye size={15} /> Xem</button>
+                                                    <button className="flex-1 sm:flex-none justify-center items-center gap-1.5 px-4 py-2 bg-[#1a3b8b] text-white border border-[#1a3b8b] rounded hover:bg-blue-800 font-bold transition-colors text-[13px] shadow-sm"><Download size={15} /> Tải xuống</button>
                                                 </div>
                                             </div>
                                         ))
@@ -362,14 +362,14 @@ const DuThaoDetailPage = () => {
                                                         {report.title}
                                                     </Link>
                                                     <div className="flex flex-wrap items-center gap-3 text-[12px] text-gray-500 font-medium">
-                                                        <span className="flex items-center gap-1.5"><Building2 size={12} className="text-gray-400"/> {report.org}</span>
-                                                        <span className="flex items-center gap-1.5"><Calendar size={12} className="text-gray-400"/> {report.date}</span>
+                                                        <span className="flex items-center gap-1.5"><Building2 size={12} className="text-gray-400" /> {report.org}</span>
+                                                        <span className="flex items-center gap-1.5"><Calendar size={12} className="text-gray-400" /> {report.date}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="flex gap-2 shrink-0">
-                                                <Link to={`/bao-cao-tiep-thu/${report.id}`} className="flex items-center justify-center gap-1.5 px-4 py-2 border border-gray-300 rounded-lg hover:text-blue-600 hover:border-blue-400 font-bold transition-colors text-[13px] text-gray-700 shadow-sm bg-white"><Eye size={15}/> Xem</Link>
-                                                <button className="flex items-center justify-center gap-1.5 px-4 py-2 bg-[#e4f0fc] text-[#1a3b8b] hover:bg-[#cbe0f5] rounded-lg font-bold transition-colors text-[13px] shadow-sm"><Download size={15}/> Tải xuống</button>
+                                                <Link to={`/bao-cao-tiep-thu/${report.id}`} className="flex items-center justify-center gap-1.5 px-4 py-2 border border-gray-300 rounded-lg hover:text-blue-600 hover:border-blue-400 font-bold transition-colors text-[13px] text-gray-700 shadow-sm bg-white"><Eye size={15} /> Xem</Link>
+                                                <button className="flex items-center justify-center gap-1.5 px-4 py-2 bg-[#e4f0fc] text-[#1a3b8b] hover:bg-[#cbe0f5] rounded-lg font-bold transition-colors text-[13px] shadow-sm"><Download size={15} /> Tải xuống</button>
                                             </div>
                                         </div>
                                     ))}
@@ -403,7 +403,7 @@ const DuThaoDetailPage = () => {
                                         </Link>
                                     </div>
                                     <Link to="/dang-nhap" className="bg-[#1a56db] hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-[13px] font-bold mt-3 sm:mt-0 flex items-center gap-2 transition-colors shadow-sm focus:outline-none">
-                                         <Send size={14} className="rotate-0 shrink-0" /> Đăng nhập để góp ý
+                                        <Send size={14} className="rotate-0 shrink-0" /> Đăng nhập để góp ý
                                     </Link>
                                 </div>
                             ) : (
@@ -416,7 +416,7 @@ const DuThaoDetailPage = () => {
                                             </div>
                                             <div className="text-[12px] text-gray-500 ml-6">Hạn góp ý: {doc.hanGopY}</div>
                                         </div>
-                                        <button 
+                                        <button
                                             onClick={() => setIsFormHidden(!isFormHidden)}
                                             className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-1.5 rounded-lg text-[13px] font-bold mt-3 sm:mt-0 flex items-center gap-1.5 transition-colors shadow-sm focus:outline-none"
                                         >
@@ -455,12 +455,12 @@ const DuThaoDetailPage = () => {
                                             {/* Textarea */}
                                             <div className="mb-4">
                                                 <label className="block text-[12px] font-semibold text-gray-700 mb-1.5">Nội dung góp ý <span className="text-red-500">*</span></label>
-                                                <textarea 
+                                                <textarea
                                                     value={commentText}
                                                     onChange={(e) => setCommentText(e.target.value)}
-                                                    rows={4} 
+                                                    rows={4}
                                                     disabled={isExpired}
-                                                    className="w-full border border-gray-300 rounded-lg p-3 text-[14px] outline-none focus:border-blue-500 resize-none transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed" 
+                                                    className="w-full border border-gray-300 rounded-lg p-3 text-[14px] outline-none focus:border-blue-500 resize-none transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed"
                                                     placeholder="Góp ý"
                                                 ></textarea>
                                             </div>
@@ -469,17 +469,17 @@ const DuThaoDetailPage = () => {
                                             <div className="mb-6">
                                                 <label className="block text-[12px] font-semibold text-gray-700 mb-0.5">File đính kèm <span className="text-gray-400 font-normal">(Tùy chọn)</span></label>
                                                 <p className="text-[11px] text-gray-500 mb-2">PDF, Word, Excel, Image - Tối đa 10MB/file, tối đa 5 file</p>
-                                                
-                                                <input 
-                                                    type="file" 
-                                                    multiple 
-                                                    ref={fileInputRef} 
+
+                                                <input
+                                                    type="file"
+                                                    multiple
+                                                    ref={fileInputRef}
                                                     onChange={handleFileChange}
-                                                    className="hidden" 
+                                                    className="hidden"
                                                     id="file-upload-input"
                                                     accept=".pdf,.doc,.docx,.xls,.xlsx,image/*"
                                                 />
-                                                <label 
+                                                <label
                                                     htmlFor="file-upload-input"
                                                     className={`border border-dashed border-gray-300 rounded-lg p-3 flex flex-col items-center justify-center text-[13px] cursor-pointer transition-colors ${attachedFiles.length >= 5 ? 'cursor-not-allowed opacity-50 bg-gray-50 text-gray-400' : 'hover:bg-gray-50 text-gray-500 hover:text-blue-600 hover:border-blue-400'}`}
                                                     onClick={(e) => {
@@ -515,7 +515,7 @@ const DuThaoDetailPage = () => {
 
                                             {/* Submit Button */}
                                             <div className="flex justify-center border-b border-gray-100 pb-8 mb-6">
-                                                <button 
+                                                <button
                                                     onClick={handleSubmitComment}
                                                     disabled={isExpired || !commentText.trim()}
                                                     className="bg-[#1a56db] hover:bg-blue-700 text-white rounded-lg px-8 py-2 text-[14px] font-bold flex items-center gap-2 shadow-sm transition-colors focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
@@ -528,13 +528,13 @@ const DuThaoDetailPage = () => {
 
                                     {/* Danh sách góp ý đã gửi (UC60 - Theo Mockup) */}
                                     <div>
-                                        <div 
+                                        <div
                                             className="bg-[#f0f4f8] rounded-xl p-4 flex items-center justify-between cursor-pointer hover:bg-[#e2e8f0] transition-colors border border-gray-100"
                                             onClick={() => setShowComments(!showComments)}
                                         >
                                             <div className="flex items-center gap-4">
                                                 <div className="w-12 h-12 bg-[#1a56db] rounded-[14px] flex items-center justify-center text-white shrink-0 shadow-sm">
-                                                    <History size={24} strokeWidth={2.5}/>
+                                                    <History size={24} strokeWidth={2.5} />
                                                 </div>
                                                 <div>
                                                     <h4 className="font-bold text-[15px] text-gray-800">Góp ý đã gửi</h4>
@@ -584,7 +584,7 @@ const DuThaoDetailPage = () => {
                                                                             <div className="mt-3 flex flex-wrap gap-2 pt-3 border-t border-gray-100">
                                                                                 {cmt.attachments.map((fileName, idx) => (
                                                                                     <div key={idx} title={fileName} className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-md shadow-sm text-[12px] text-blue-600 font-medium hover:bg-gray-100 transition-colors cursor-pointer">
-                                                                                        <Paperclip size={13} strokeWidth={2.5}/>
+                                                                                        <Paperclip size={13} strokeWidth={2.5} />
                                                                                         <span className="truncate max-w-[200px]">{fileName}</span>
                                                                                     </div>
                                                                                 ))}
@@ -614,7 +614,7 @@ const DuThaoDetailPage = () => {
 
                     {/* ── RIGHT COLUMN (30%) - SIDEBAR ──────────────────────── */}
                     <div className="lg:w-[30%] space-y-6">
-                        
+
                         {/* Timeline (UC58) */}
                         <div className="bg-white rounded-xl border border-t-[3px] border-t-emerald-500 border-gray-100 shadow-sm p-6 text-sm">
                             <h3 className="text-[16px] font-bold text-gray-800 border-b border-gray-100 pb-3 mb-5 uppercase tracking-wide">Tiến độ xây dựng</h3>
@@ -627,20 +627,20 @@ const DuThaoDetailPage = () => {
                                         {doc.timeline.map((item, idx) => (
                                             <div key={idx} className="relative z-10 flex gap-4">
                                                 {item.status === 'done' ? (
-                                                    <div className="w-4 h-4 rounded-full bg-emerald-500 border-[3px] border-white shadow-sm mt-0.5 shrink-0 flex items-center justify-center"><CheckCircle2 size={10} className="text-white"/></div>
+                                                    <div className="w-4 h-4 rounded-full bg-emerald-500 border-[3px] border-white shadow-sm mt-0.5 shrink-0 flex items-center justify-center"><CheckCircle2 size={10} className="text-white" /></div>
                                                 ) : item.status === 'current' ? (
                                                     <div className="w-4 h-4 rounded-full bg-orange-500 border-[3px] border-orange-100 mt-0.5 shrink-0"></div>
                                                 ) : (
                                                     <div className="w-4 h-4 rounded-full bg-gray-300 border-[3px] border-white mt-0.5 shrink-0"></div>
                                                 )}
-                                                
+
                                                 <div className="flex-1 mt-[-2px]">
                                                     <p className={`font-bold text-[14px] mb-0.5 ${item.status === 'current' ? 'text-orange-600' : item.status === 'done' ? 'text-gray-800' : 'text-gray-400'}`}>{item.title}</p>
                                                     <p className="text-[12px] font-semibold text-gray-500 mb-1">{item.date}</p>
                                                     {item.desc && <p className="text-[13px] text-gray-600 leading-snug">{item.desc}</p>}
                                                     {item.attachments && item.attachments.map((att, i) => (
                                                         <div key={i} className="flex flex-wrap items-center gap-2 mt-2 bg-gray-50 p-2 rounded border border-gray-200 hover:border-blue-300 transition-colors">
-                                                            {att.type === 'PDF' ? <File size={16} className="text-red-500 shrink-0"/> : <FileCode2 size={16} className="text-blue-500 shrink-0"/>}
+                                                            {att.type === 'PDF' ? <File size={16} className="text-red-500 shrink-0" /> : <FileCode2 size={16} className="text-blue-500 shrink-0" />}
                                                             <a href="#" className="text-[12px] font-bold text-blue-700 hover:underline leading-tight truncate max-w-[200px]" title={att.name}>{att.name}</a>
                                                         </div>
                                                     ))}
@@ -652,7 +652,7 @@ const DuThaoDetailPage = () => {
                             )}
                         </div>
 
-                        {/* Văn bản liên quan (UC57) */}
+                        {/* Thông tin liên quan (UC57) */}
                         <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
                             <h3 className="text-[16px] font-bold text-gray-800 border-b border-gray-100 pb-3 mb-5 uppercase tracking-wide">Văn bản liên quan</h3>
                             {doc.related.length === 0 ? (
@@ -663,10 +663,9 @@ const DuThaoDetailPage = () => {
                                         {currentRelated.map(rel => (
                                             <div key={rel.id} className="pb-4 border-b border-gray-50 last:border-b-0 last:pb-0">
                                                 <div className="flex items-center gap-2 mb-1">
-                                                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                                                        rel.type === 'Tin tức' ? 'bg-blue-50 text-blue-600' :
+                                                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${rel.type === 'Tin tức' ? 'bg-blue-50 text-blue-600' :
                                                         rel.type === 'Sự kiện' ? 'bg-red-50 text-red-600' : 'bg-purple-50 text-purple-600'
-                                                    }`}>{rel.type}</span>
+                                                        }`}>{rel.type}</span>
                                                 </div>
                                                 <a href="#" className="text-[14px] font-semibold text-gray-800 hover:text-blue-600 hover:underline leading-snug line-clamp-2 mb-1.5">{rel.title}</a>
                                                 <div className="text-[11px] text-gray-400 font-medium tracking-wide">{rel.date}</div>
@@ -675,7 +674,7 @@ const DuThaoDetailPage = () => {
                                     </div>
                                     {hasMoreRelated && (
                                         <div className="pt-4 mt-2">
-                                            <button 
+                                            <button
                                                 onClick={() => setRelatedCount(prev => prev + 10)}
                                                 className="w-full py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded text-[13px] font-bold text-gray-600 transition-colors"
                                             >
@@ -707,7 +706,7 @@ const DuThaoDetailPage = () => {
                             <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full -mr-10 -mt-10"></div>
                             <p className="font-bold text-[16px] mb-2 uppercase tracking-wide relative z-10">Hỗ trợ</p>
                             <p className="text-[13px] text-blue-100 mb-4 opacity-90 leading-relaxed relative z-10">Nếu bạn gặp khó khăn trong việc đóng góp ý kiến hoặc cần cung cấp thêm tài liệu, vui lòng liên hệ trực tiếp:</p>
-                            <div className="text-[14px] font-bold flex items-center gap-2 mb-2 relative z-10"><Building2 size={16}/> Bộ Công an</div>
+                            <div className="text-[14px] font-bold flex items-center gap-2 mb-2 relative z-10"><Building2 size={16} /> Bộ Công an</div>
                             <div className="text-[13px] flex items-center gap-2 relative z-10"><div className="w-5 h-5 rounded bg-white/20 flex items-center justify-center font-bold">@</div> duthap@bocongan.gov.vn</div>
                         </div>
                     </div>

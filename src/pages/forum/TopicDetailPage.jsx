@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
     Home, ChevronRight, MessageSquare, Eye, Clock,
@@ -135,6 +135,15 @@ const TopicDetailPage = () => {
     const { id } = useParams();
     const [activeTab, setActiveTab] = useState('comments');
     const [topic, setTopic] = useState(MOCK_ARTICLE);
+
+    // Load from localStorage if the topic was user-created
+    useEffect(() => {
+        const raw = localStorage.getItem('forumNewTopics');
+        if (!raw) return;
+        const topics = JSON.parse(raw);
+        const found = topics.find(t => String(t.id) === String(id));
+        if (found) setTopic(found);
+    }, [id]);
 
     // Follow State
     const [isFollowing, setIsFollowing] = useState(false);

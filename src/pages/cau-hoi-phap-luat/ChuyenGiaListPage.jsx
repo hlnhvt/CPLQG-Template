@@ -4,11 +4,11 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Search, Star, Clock, Calendar, ChevronRight, User, Shield, Briefcase, PlayCircle, PhoneCall, Filter } from 'lucide-react';
 
 const MOCK_EXPERTS = [
-    { id: 1, name: 'Ls. Hoàng Ngọc Cường', role: 'Luật sư - Đoàn Luật sư TP. Hà Nội', avatar: '', domains: ['Đất đai', 'Dân sự', 'Hành chính'], rating: 4.9, reviews: 120, sessions: 350, available: true, methods: ['Gặp trực tiếp', 'Video call'] },
-    { id: 2, name: 'Ts. Trần Thị Thu Thủy', role: 'Tiến sĩ Luật - Đại học Luật HN', avatar: '', domains: ['Doanh nghiệp', 'Sở hữu trí tuệ'], rating: 4.8, reviews: 85, sessions: 210, available: true, methods: ['Video call', 'Điện thoại'] },
-    { id: 3, name: 'Ls. Nguyễn Hải Đăng', role: 'Luật sư cao cấp', avatar: '', domains: ['Hình sự', 'Dân sự'], rating: 4.7, reviews: 156, sessions: 420, available: false, methods: ['Gặp trực tiếp'] },
-    { id: 4, name: 'Ths. Lê Cẩm Phương', role: 'Chuyên viên pháp lý cấp cao', avatar: '', domains: ['Lao động', 'Bảo hiểm'], rating: 4.9, reviews: 65, sessions: 180, available: true, methods: ['Video call', 'Điện thoại'] },
-    { id: 5, name: 'Ls. Phạm Việt Hoàng', role: 'Luật sư điều hành - V&H Law', avatar: '', domains: ['Đầu tư', 'Thương mại quốc tế'], rating: 5.0, reviews: 42, sessions: 110, available: true, methods: ['Gặp trực tiếp', 'Video call'] },
+    { id: 1, name: 'Ls. Hoàng Ngọc Cường', role: 'Luật sư - Đoàn Luật sư TP. Hà Nội', avatar: '/images/experts/expert_avatar_1.png', domains: ['Đất đai', 'Dân sự', 'Hành chính'], rating: 4.9, reviews: 120, sessions: 350, available: true, methods: ['Gặp trực tiếp', 'Video call'] },
+    { id: 2, name: 'Ts. Trần Thị Thu Thủy', role: 'Tiến sĩ Luật - Đại học Luật HN', avatar: '/images/experts/expert_avatar_2.png', domains: ['Doanh nghiệp', 'Sở hữu trí tuệ'], rating: 4.8, reviews: 85, sessions: 210, available: true, methods: ['Video call', 'Điện thoại'] },
+    { id: 3, name: 'Ls. Nguyễn Hải Đăng', role: 'Luật sư cao cấp', avatar: '/images/experts/expert_avatar_3.png', domains: ['Hình sự', 'Dân sự'], rating: 4.7, reviews: 156, sessions: 420, available: false, methods: ['Gặp trực tiếp'] },
+    { id: 4, name: 'Ths. Lê Cẩm Phương', role: 'Chuyên viên pháp lý cấp cao', avatar: '/images/experts/expert_avatar_4.png', domains: ['Lao động', 'Bảo hiểm'], rating: 4.9, reviews: 65, sessions: 180, available: true, methods: ['Video call', 'Điện thoại'] },
+    { id: 5, name: 'Ls. Phạm Việt Hoàng', role: 'Luật sư điều hành - V&H Law', avatar: '/images/experts/expert_avatar_5.png', domains: ['Đầu tư', 'Thương mại quốc tế'], rating: 5.0, reviews: 42, sessions: 110, available: true, methods: ['Gặp trực tiếp', 'Video call'] },
 ];
 
 const ChuyenGiaListPage = () => {
@@ -92,7 +92,11 @@ const ChuyenGiaListPage = () => {
                                     </div>
                                 )}
                                 <div className="w-24 h-24 bg-gray-100 rounded-full mx-auto mb-4 border-4 border-white shadow-md flex justify-center items-center overflow-hidden">
-                                    <User size={48} className="text-gray-300" />
+                                    {expert.avatar ? (
+                                        <img src={expert.avatar} alt={expert.name} className="w-full h-full object-cover" />
+                                    ) : (
+                                        <User size={48} className="text-gray-300" />
+                                    )}
                                 </div>
                                 <h3 className="text-xl font-bold text-[#0f4c81] mb-1 group-hover:text-blue-600 transition">
                                     {expert.name}

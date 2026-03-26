@@ -18,7 +18,7 @@ const DanhBaDienTuTGPLPage = () => {
         <div className="bg-[#f4f7fb] min-h-screen pb-20 font-sans">
             <div className="bg-[#1e3a8a] text-white pt-12 pb-16 relative overflow-hidden">
                 <div className="container mx-auto px-4 max-w-[1000px] relative z-10 text-center">
-                    <h1 className="text-3xl md:text-5xl font-bold mb-4 uppercase tracking-wide">
+                    <h1 className="text-3xl md:text-5xl font-bold mb-4 uppercase">
                         Danh bạ điện tử Trợ giúp pháp lý
                     </h1>
                     <p className="text-blue-200 text-lg max-w-2xl mx-auto">
@@ -30,9 +30,9 @@ const DanhBaDienTuTGPLPage = () => {
             <div className="container mx-auto px-4 max-w-[1000px] -mt-8 relative z-20">
                 <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 mb-8 flex gap-4">
                     <div className="flex-1 relative">
-                        <input 
-                            type="text" 
-                            placeholder="Nhập tên cơ quan, tỉnh/thành phố cần tìm..." 
+                        <input
+                            type="text"
+                            placeholder="Nhập tên cơ quan, tỉnh/thành phố cần tìm..."
                             className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 text-[15px]"
                         />
                         <Search className="absolute left-4 top-4 text-gray-400" size={20} />
