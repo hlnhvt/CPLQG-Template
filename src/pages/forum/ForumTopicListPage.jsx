@@ -95,7 +95,7 @@ const ForumTopicListPage = () => {
     return (
         <div className="bg-[#f4f7fb] min-h-screen pb-12">
             {/* Header / Hero for specific forum */}
-            <div className="bg-[#1e293b] pt-8 pb-12 relative border-b border-gray-700 z-30">
+            <div className="bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] pt-8 pb-12 relative border-b border-blue-700/30 z-30 shadow-lg">
                 {/* Decorative background pattern */}
                 <div
                     className="absolute inset-0 opacity-40 mix-blend-overlay overflow-hidden"

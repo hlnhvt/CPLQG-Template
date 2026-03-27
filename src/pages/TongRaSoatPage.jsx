@@ -910,14 +910,14 @@ const TongRaSoatPage = () => {
                         )}
                     </div>
                     {/* Right Banners Sidebar (visible on all tabs) */}
-                    <div className="hidden lg:flex flex-col gap-6 order-1 lg:order-2 mt-2 shrink-0" style={{ width: '413px' }}>
-                        {/* <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white group relative">
+                    {/* <div className="hidden lg:flex flex-col gap-6 order-1 lg:order-2 mt-2 shrink-0" style={{ width: '413px' }}>
+                        <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white group relative">
                             <img src="/banner-nghi-quyet.png" alt="Đưa nghị quyết Đại hội XIV" className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
-                        </div> */}
+                        </div>
                         <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-white group relative">
                             <img src="/banner-dai-hoi.png" alt="Đưa nghị quyết Đại hội XIV vào cuộc sống" className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500" />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
