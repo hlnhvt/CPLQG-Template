@@ -501,48 +501,38 @@ const TongRaSoatPage = () => {
                                                         <h4 className="text-[#e21414] font-bold text-xl uppercase">ỦY VIÊN BAN CHỈ ĐẠO</h4>
                                                     </div>
                                                     <div className="w-full">
-                                                        {/* Nhóm Ủy viên thường trực */}
-                                                        <div className="mb-6">
-                                                            <div className="text-[#e21414] font-bold text-lg mb-3 border-b border-red-100 pb-2 flex items-center gap-2">
-                                                                <div className="w-2 h-6 bg-[#e21414] rounded-sm"></div>
-                                                                Các Ủy viên Thường trực
-                                                            </div>
-                                                            <div className="grid grid-cols-1 gap-y-3 relative z-10">
-                                                                {[
-                                                                    'Chủ nhiệm Ủy ban Pháp luật và Tư pháp',
-                                                                    'Bộ trưởng Bộ Tư pháp'
-                                                                ].map((item, idx) => (
-                                                                    <div key={`tt-${idx}`} className="p-3 rounded-lg text-[17px] font-bold leading-snug flex items-center gap-3 text-left bg-red-50/50 border border-red-100/50 text-gray-800">
-                                                                        <div className="w-2 h-2 rounded-full bg-[#e21414] shadow-sm shrink-0"></div>
-                                                                        {item}
-                                                                    </div>
-                                                                ))}
-                                                            </div>
+                                                        <div className="grid grid-cols-1 gap-y-3 relative z-10 w-full">
+                                                            {[
+                                                                { type: 'Ủy viên Thường trực', name: 'Chủ nhiệm Ủy ban Pháp luật và Tư pháp', isThườngTrực: true },
+                                                                { type: 'Ủy viên Thường trực', name: 'Bộ trưởng Bộ Tư pháp', isThườngTrực: true },
+                                                                { type: 'Ủy viên', name: 'Văn phòng Trung ương Đảng' },
+                                                                { type: 'Ủy viên', name: 'Ủy ban Trung ương Mặt trận Tổ quốc Việt Nam' },
+                                                                { type: 'Ủy viên', name: 'Tòa án nhân dân tối cao' },
+                                                                { type: 'Ủy viên', name: 'Viện kiểm sát nhân dân tối cao' },
+                                                                { type: 'Ủy viên', name: 'Kiểm toán nhà nước' },
+                                                                { type: 'Ủy viên', name: 'Văn phòng Chủ tịch nước' },
+                                                                { type: 'Ủy viên', name: 'Văn phòng Quốc hội' },
+                                                                { type: 'Ủy viên', name: 'Các cơ quan của Quốc hội' },
+                                                                { type: 'Ủy viên', name: 'Bộ Tư pháp' },
+                                                                { type: 'Ủy viên', name: 'Văn phòng Chính phủ' },
+                                                                { type: 'Ủy viên', name: 'Các Bộ, cơ quan ngang Bộ' },
+                                                                { type: 'Ủy viên', name: 'Ủy ban nhân dân Thành phố Hà Nội' },
+                                                                { type: 'Ủy viên', name: 'Ủy ban nhân dân Thành phố Hồ Chí Minh' },
+                                                                { type: 'Ủy viên', name: 'Ủy ban nhân dân Thành phố Đà Nẵng' },
+                                                                { type: 'Ủy viên', name: 'Ủy ban nhân dân Tỉnh Bắc Ninh' },
+                                                                { type: 'Ủy viên', name: 'Ủy ban nhân dân Tỉnh Quảng Ninh' },
+                                                                { type: 'Ủy viên', name: 'Liên đoàn Thương mại và Công nghiệp Việt Nam' },
+                                                                { type: 'Ủy viên', name: 'Hiệp hội Doanh nghiệp nhỏ và vừa Việt Nam' },
+                                                                { type: 'Ủy viên', name: 'Liên đoàn Luật sư Việt Nam' },
+                                                                { type: 'Ủy viên', name: 'Hội Luật gia Việt Nam' }
+                                                            ].map((member, idx) => (
+                                                                <div key={`uv-${idx}`} className={`p-3 rounded-lg text-[17px] font-bold leading-snug flex items-center gap-3 text-left border ${member.isThườngTrực ? 'bg-red-50/50 border-red-100/50 text-gray-800' : 'bg-gray-50 border-gray-100/80 text-gray-700'}`}>
+                                                                    <div className={`w-2 h-2 rounded-full shadow-sm shrink-0 ${member.isThườngTrực ? 'bg-[#e21414]' : 'bg-amber-400'}`}></div>
+                                                                    <span>{member.type} - {member.name}</span>
+                                                                </div>
+                                                            ))}
                                                         </div>
-
-                                                        {/* Nhóm Ủy viên */}
-                                                        <div>
-                                                            <div className="text-[#e21414] font-bold text-lg mb-3 border-b border-red-100 pb-2 pt-2 flex items-center gap-2">
-                                                                <div className="w-2 h-6 bg-[#e21414] rounded-sm opacity-60"></div>
-                                                                Các Ủy viên
-                                                            </div>
-                                                            <div className="grid grid-cols-1 gap-y-3 relative z-10">
-                                                                {[
-                                                                    'Văn phòng Trung ương Đảng', 'Mặt trận Tổ quốc Việt Nam', 'Tòa án nhân dân tối cao',
-                                                                    'Viện kiểm sát nhân dân tối cao', 'Kiểm toán nhà nước', 'Văn phòng Chủ tịch nước',
-                                                                    'Văn phòng Quốc hội', 'Các cơ quan của Quốc hội', 'Bộ Tư pháp',
-                                                                    'Văn phòng Chính phủ', 'Các Bộ, cơ quan ngang Bộ', 'Ủy ban nhân dân Thành phố Hà Nội',
-                                                                    'Ủy ban nhân dân Thành phố Hồ Chí Minh', 'Ủy ban nhân dân Thành phố Đà Nẵng', 'Ủy ban nhân dân Tỉnh Bắc Ninh', 'Ủy ban nhân dân Tỉnh Quảng Ninh',
-                                                                    'VCCI', 'Hiệp hội Doanh nghiệp Việt Nam', 'Liên đoàn Luật sư', 'Hội Luật gia'
-                                                                ].map((item, idx) => (
-                                                                    <div key={`uv-${idx}`} className="p-2.5 rounded-lg text-[17px] font-bold leading-snug flex items-center gap-3 text-left bg-gray-50 border border-gray-100/80 text-gray-700">
-                                                                        <div className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0"></div>
-                                                                        {item}
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                            <div className="mt-5 text-[17px] text-center text-gray-500 italic font-medium">Đại diện lãnh đạo các cơ quan, tổ chức theo quy định</div>
-                                                        </div>
+                                                        <div className="mt-5 text-[17px] text-center text-gray-500 italic font-medium">Đại diện lãnh đạo các cơ quan, tổ chức theo quy định</div>
                                                     </div>
                                                 </div>
                                             </div>
