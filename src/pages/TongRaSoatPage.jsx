@@ -405,10 +405,10 @@ const TongRaSoatPage = () => {
                                                             <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#e21414]/60"></div>
                                                         </div>
                                                         <div className="bg-white border-2 border-[#e21414] rounded-2xl p-4 shadow-lg flex flex-col h-full relative z-10">
-                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-2 py-3 shadow-sm mb-4 text-center items-center justify-center flex">
+                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-2 py-2 shadow-sm mb-4 min-h-[72px] text-center items-center justify-center flex">
                                                                 <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-snug">PHÓ TRƯỞNG BAN<br />THƯỜNG TRỰC</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-center justify-center">
+                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-start justify-center pt-4">
                                                                 Phó Thủ tướng Chính phủ
                                                             </div>
                                                         </div>
@@ -422,10 +422,10 @@ const TongRaSoatPage = () => {
                                                             <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#e21414]/60"></div>
                                                         </div>
                                                         <div className="bg-white border-2 border-[#e21414] rounded-2xl p-4 shadow-lg flex flex-col h-full relative z-10">
-                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-2 py-3 shadow-sm mb-4 text-center items-center justify-center flex">
+                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-2 py-2 shadow-sm mb-4 min-h-[72px] text-center items-center justify-center flex">
                                                                 <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-snug">PHÓ TRƯỞNG BAN</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-center justify-center">
+                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-start justify-center pt-4">
                                                                 Phó Chủ tịch Quốc hội
                                                             </div>
                                                         </div>
@@ -439,10 +439,10 @@ const TongRaSoatPage = () => {
                                                             <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#e21414]/60"></div>
                                                         </div>
                                                         <div className="bg-white border-2 border-[#e21414] rounded-2xl p-4 shadow-lg flex flex-col h-full relative z-10">
-                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-2 py-3 shadow-sm mb-4 text-center items-center justify-center flex">
+                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-2 py-2 shadow-sm mb-4 min-h-[72px] text-center items-center justify-center flex">
                                                                 <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-snug">PHÓ TRƯỞNG BAN</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-center justify-center">
+                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-start justify-center pt-4">
                                                                 Phó Trưởng ban<br />Nội chính Trung ương
                                                             </div>
                                                         </div>
@@ -456,10 +456,10 @@ const TongRaSoatPage = () => {
                                                             <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#e21414]/60"></div>
                                                         </div>
                                                         <div className="bg-white border-2 border-[#e21414] rounded-2xl p-4 shadow-lg flex flex-col h-full relative z-10">
-                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-2 py-3 shadow-sm mb-4 text-center items-center justify-center flex">
+                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-2 py-2 shadow-sm mb-4 min-h-[72px] text-center items-center justify-center flex">
                                                                 <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-snug">PHÓ TRƯỞNG BAN</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-center justify-center">
+                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-start justify-center pt-4">
                                                                 Phó Chủ tịch - Tổng Thư ký<br />Ủy ban Trung ương<br />Mặt trận Tổ quốc Việt Nam
                                                             </div>
                                                         </div>
