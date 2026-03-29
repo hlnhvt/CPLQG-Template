@@ -408,7 +408,7 @@ const TongRaSoatPage = () => {
                                                             <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-2 py-2 shadow-sm mb-4 min-h-[72px] text-center items-center justify-center flex">
                                                                 <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-snug">PHÓ TRƯỞNG BAN<br />THƯỜNG TRỰC</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-start justify-center pt-4">
+                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-center justify-center">
                                                                 Phó Thủ tướng Chính phủ
                                                             </div>
                                                         </div>
@@ -425,7 +425,7 @@ const TongRaSoatPage = () => {
                                                             <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-2 py-2 shadow-sm mb-4 min-h-[72px] text-center items-center justify-center flex">
                                                                 <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-snug">PHÓ TRƯỞNG BAN</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-start justify-center pt-4">
+                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-center justify-center">
                                                                 Phó Chủ tịch Quốc hội
                                                             </div>
                                                         </div>
@@ -442,7 +442,7 @@ const TongRaSoatPage = () => {
                                                             <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-2 py-2 shadow-sm mb-4 min-h-[72px] text-center items-center justify-center flex">
                                                                 <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-snug">PHÓ TRƯỞNG BAN</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-start justify-center pt-4">
+                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-center justify-center">
                                                                 Phó Trưởng ban<br />Nội chính Trung ương
                                                             </div>
                                                         </div>
@@ -459,7 +459,7 @@ const TongRaSoatPage = () => {
                                                             <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-2 py-2 shadow-sm mb-4 min-h-[72px] text-center items-center justify-center flex">
                                                                 <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-snug">PHÓ TRƯỞNG BAN</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-start justify-center pt-4">
+                                                            <div className="bg-gray-50 p-3 rounded-lg text-[17px] font-bold text-gray-700 text-center leading-snug flex-1 flex items-center justify-center">
                                                                 Phó Chủ tịch - Tổng Thư ký<br />Ủy ban Trung ương<br />Mặt trận Tổ quốc Việt Nam
                                                             </div>
                                                         </div>
@@ -506,7 +506,7 @@ const TongRaSoatPage = () => {
                                                                 { type: 'Ủy viên Thường trực', name: 'Chủ nhiệm Ủy ban Pháp luật và Tư pháp', isThườngTrực: true },
                                                                 { type: 'Ủy viên Thường trực', name: 'Bộ trưởng Bộ Tư pháp', isThườngTrực: true },
                                                                 { type: 'Ủy viên', name: 'Lãnh đạo Văn phòng Trung ương Đảng' },
-                                                                { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban Trung ương Mặt trận Tổ quốc Việt Nam' },
+                                                                // { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban Trung ương Mặt trận Tổ quốc Việt Nam' },
                                                                 { type: 'Ủy viên', name: 'Lãnh đạo Tòa án nhân dân tối cao' },
                                                                 { type: 'Ủy viên', name: 'Lãnh đạo Viện kiểm sát nhân dân tối cao' },
                                                                 { type: 'Ủy viên', name: 'Lãnh đạo Kiểm toán nhà nước' },
@@ -517,8 +517,8 @@ const TongRaSoatPage = () => {
                                                                 { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban Quốc phòng, An ninh và Đối ngoại của Quốc hội' },
                                                                 { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban Văn hóa và Xã hội của Quốc hội' },
                                                                 { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban Khoa học, Công nghệ và Môi trường' },
-                                                                { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban Công tác đại biểu của Quốc hội' },
-                                                                { type: 'Ủy viên', name: 'Lãnh đạo Dân nguyện và Giám sát của Quốc hội' },
+                                                                // { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban Công tác đại biểu của Quốc hội' },
+                                                                // { type: 'Ủy viên', name: 'Lãnh đạo Dân nguyện và Giám sát của Quốc hội' },
                                                                 { type: 'Ủy viên', name: 'Lãnh đạo Bộ Công an' },
                                                                 { type: 'Ủy viên', name: 'Lãnh đạo Bộ Công Thương' },
                                                                 { type: 'Ủy viên', name: 'Lãnh đạo Bộ Dân tộc và Tôn giáo' },
@@ -541,11 +541,10 @@ const TongRaSoatPage = () => {
                                                                 // { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban nhân dân Thành phố Đà Nẵng' },
                                                                 // { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban nhân dân Tỉnh Bắc Ninh' },
                                                                 // { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban nhân dân Tỉnh Quảng Ninh' },
-                                                                { type: 'Ủy viên', name: 'Lãnh đạo Văn phòng Chính phủ' },
-                                                                { type: 'Ủy viên', name: 'Lãnh đạo Liên đoàn Thương mại và Công nghiệp Việt Nam' },
-                                                                { type: 'Ủy viên', name: 'Lãnh đạo Hiệp hội Doanh nghiệp nhỏ và vừa Việt Nam' },
-                                                                { type: 'Ủy viên', name: 'Lãnh đạo Liên đoàn Luật sư Việt Nam' },
-                                                                { type: 'Ủy viên', name: 'Lãnh đạo Hội Luật gia Việt Nam' }
+                                                                // { type: 'Ủy viên', name: 'Lãnh đạo Liên đoàn Thương mại và Công nghiệp Việt Nam' },
+                                                                // { type: 'Ủy viên', name: 'Lãnh đạo Hiệp hội Doanh nghiệp nhỏ và vừa Việt Nam' },
+                                                                // { type: 'Ủy viên', name: 'Lãnh đạo Liên đoàn Luật sư Việt Nam' },
+                                                                // { type: 'Ủy viên', name: 'Lãnh đạo Hội Luật gia Việt Nam' }
                                                             ].map((member, idx) => (
                                                                 <div key={`uv-${idx}`} className={`p-3 rounded-lg text-[17px] font-bold leading-snug flex items-center gap-3 text-left border ${member.isThườngTrực ? 'bg-red-50/50 border-red-100/50 text-gray-800' : 'bg-gray-50 border-gray-100/80 text-gray-700'}`}>
                                                                     <div className={`w-2 h-2 rounded-full shadow-sm shrink-0 ${member.isThườngTrực ? 'bg-[#e21414]' : 'bg-amber-400'}`}></div>
