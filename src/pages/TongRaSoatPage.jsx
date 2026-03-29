@@ -336,7 +336,7 @@ const TongRaSoatPage = () => {
                                         onClick={() => setActiveBanChiDaoTab('so-do')}
                                         className={`px-6 py-4 font-bold text-[16px] md:text-lg whitespace-nowrap transition-colors relative ${activeBanChiDaoTab === 'so-do' ? 'text-[#ea492a]' : 'text-gray-500 hover:text-[#ea492a]'}`}
                                     >
-                                        Sơ đồ Ban Chỉ đạo
+                                        Ban Chỉ đạo
                                         {activeBanChiDaoTab === 'so-do' && (
                                             <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#ea492a]" />
                                         )}
