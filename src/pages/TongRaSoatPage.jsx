@@ -507,24 +507,45 @@ const TongRaSoatPage = () => {
                                                                 { type: 'Ủy viên Thường trực', name: 'Bộ trưởng Bộ Tư pháp', isThườngTrực: true },
                                                                 { type: 'Ủy viên', name: 'Văn phòng Trung ương Đảng' },
                                                                 { type: 'Ủy viên', name: 'Ủy ban Trung ương Mặt trận Tổ quốc Việt Nam' },
-                                                                { type: 'Ủy viên', name: 'Tòa án nhân dân tối cao' },
-                                                                { type: 'Ủy viên', name: 'Viện kiểm sát nhân dân tối cao' },
-                                                                { type: 'Ủy viên', name: 'Kiểm toán nhà nước' },
-                                                                { type: 'Ủy viên', name: 'Văn phòng Chủ tịch nước' },
-                                                                { type: 'Ủy viên', name: 'Văn phòng Quốc hội' },
-                                                                { type: 'Ủy viên', name: 'Các cơ quan của Quốc hội' },
-                                                                { type: 'Ủy viên', name: 'Bộ Tư pháp' },
-                                                                { type: 'Ủy viên', name: 'Văn phòng Chính phủ' },
-                                                                { type: 'Ủy viên', name: 'Các Bộ, cơ quan ngang Bộ' },
-                                                                { type: 'Ủy viên', name: 'Ủy ban nhân dân Thành phố Hà Nội' },
-                                                                { type: 'Ủy viên', name: 'Ủy ban nhân dân Thành phố Hồ Chí Minh' },
-                                                                { type: 'Ủy viên', name: 'Ủy ban nhân dân Thành phố Đà Nẵng' },
-                                                                { type: 'Ủy viên', name: 'Ủy ban nhân dân Tỉnh Bắc Ninh' },
-                                                                { type: 'Ủy viên', name: 'Ủy ban nhân dân Tỉnh Quảng Ninh' },
-                                                                { type: 'Ủy viên', name: 'Liên đoàn Thương mại và Công nghiệp Việt Nam' },
-                                                                { type: 'Ủy viên', name: 'Hiệp hội Doanh nghiệp nhỏ và vừa Việt Nam' },
-                                                                { type: 'Ủy viên', name: 'Liên đoàn Luật sư Việt Nam' },
-                                                                { type: 'Ủy viên', name: 'Hội Luật gia Việt Nam' }
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Tòa án nhân dân tối cao' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Viện kiểm sát nhân dân tối cao' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Kiểm toán nhà nước' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Văn phòng Chủ tịch nước' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Văn phòng Quốc hội' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Hội đồng dân tộc của Quốc hội' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban Kinh tế và Tài chính của Quốc hội' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban Quốc phòng, An ninh và Đối ngoại của Quốc hội' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban Văn hóa và Xã hội của Quốc hội' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban Khoa học, Công nghệ và Môi trường' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban Công tác đại biểu của Quốc hội' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Dân nguyện và Giám sát của Quốc hội' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Văn phòng Chính phủ' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Công an' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Công Thương' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Dân tộc và Tôn giáo' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Giáo dục và Đào tạo' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Khoa học và Công nghệ' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Ngoại giao' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Nông nghiệp và Môi trường' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Nội vụ' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Quốc phòng' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Tài chính' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Tư pháp' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Văn hóa, Thể thao và Du lịch' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Xây dựng' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Bộ Y tế' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Ngân hàng Nhà nước Việt Nam' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Thanh tra Chính phủ' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Văn phòng Chính phủ' },
+                                                                // { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban nhân dân Thành phố Hà Nội' },
+                                                                // { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban nhân dân Thành phố Hồ Chí Minh' },
+                                                                // { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban nhân dân Thành phố Đà Nẵng' },
+                                                                // { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban nhân dân Tỉnh Bắc Ninh' },
+                                                                // { type: 'Ủy viên', name: 'Lãnh đạo Ủy ban nhân dân Tỉnh Quảng Ninh' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Liên đoàn Thương mại và Công nghiệp Việt Nam' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Hiệp hội Doanh nghiệp nhỏ và vừa Việt Nam' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Liên đoàn Luật sư Việt Nam' },
+                                                                { type: 'Ủy viên', name: 'Lãnh đạo Hội Luật gia Việt Nam' }
                                                             ].map((member, idx) => (
                                                                 <div key={`uv-${idx}`} className={`p-3 rounded-lg text-[17px] font-bold leading-snug flex items-center gap-3 text-left border ${member.isThườngTrực ? 'bg-red-50/50 border-red-100/50 text-gray-800' : 'bg-gray-50 border-gray-100/80 text-gray-700'}`}>
                                                                     <div className={`w-2 h-2 rounded-full shadow-sm shrink-0 ${member.isThườngTrực ? 'bg-[#e21414]' : 'bg-amber-400'}`}></div>
@@ -532,7 +553,7 @@ const TongRaSoatPage = () => {
                                                                 </div>
                                                             ))}
                                                         </div>
-                                                        <div className="mt-5 text-[17px] text-center text-gray-500 italic font-medium">Đại diện lãnh đạo các cơ quan, tổ chức theo quy định</div>
+                                                        {/* <div className="mt-5 text-[17px] text-center text-gray-500 italic font-medium">Đại diện lãnh đạo các cơ quan, tổ chức theo quy định</div> */}
                                                     </div>
                                                 </div>
                                             </div>
