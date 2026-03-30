@@ -198,7 +198,7 @@ export const MOCK_FORUMS = [
         isFollowing: false,
         isHot: true,
         isUpcoming: false,
-        thumbnail: "https://images.unsplash.com/photo-1586528116311-ad8ed74512f5?w=400&q=80"
+        thumbnail: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=400&q=80"
     }
 ];
 
