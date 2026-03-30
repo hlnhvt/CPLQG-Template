@@ -1,6 +1,7 @@
 export const MOCK_FORUMS = [
     {
         id: 1,
+        category: "Diễn đàn Doanh nghiệp & Đầu tư",
         title: "Thảo luận Luật Doanh nghiệp",
         description: "Không gian kết nối, trao đổi và giải đáp các vấn đề liên quan đến Luật Doanh nghiệp, các quy định thành lập và vận hành doanh nghiệp.",
         tags: ["Doanh nghiệp", "Đầu tư", "Khởi nghiệp"],
@@ -8,10 +9,12 @@ export const MOCK_FORUMS = [
         memberCount: 5230,
         lastActive: "10 phút trước",
         isFollowing: true,
+        isHot: true,
         thumbnail: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&q=80"
     },
     {
         id: 2,
+        category: "Diễn đàn Dân sự & Đời sống",
         title: "Hỏi đáp Pháp luật Lao động",
         description: "Góc tư vấn dành cho người lao động và người sử dụng lao động về hợp đồng, bảo hiểm, tiền lương và quyền lợi hợp pháp.",
         tags: ["Lao động", "Bảo hiểm xã hội", "Công đoàn"],
@@ -19,10 +22,12 @@ export const MOCK_FORUMS = [
         memberCount: 3400,
         lastActive: "1 giờ trước",
         isFollowing: false,
+        isHot: false,
         thumbnail: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&q=80"
     },
     {
         id: 3,
+        category: "Diễn đàn Đất đai & Bất động sản",
         title: "Tư vấn Pháp luật Đất đai",
         description: "Nơi thảo luận về các quy định phân lô, bán nền, cấp sổ đỏ, giải tỏa và đền bù đất đai.",
         tags: ["Đất đai", "Bất động sản", "Thuế"],
@@ -30,10 +35,12 @@ export const MOCK_FORUMS = [
         memberCount: 8100,
         lastActive: "5 phút trước",
         isFollowing: true,
+        isHot: true,
         thumbnail: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&q=80"
     },
     {
         id: 4,
+        category: "Diễn đàn Hình sự & Tố tụng",
         title: "Pháp luật Hình sự",
         description: "Trao đổi chuyên môn, phân tích các vụ án hình sự và quy định của Bộ luật Hình sự.",
         tags: ["Hình sự", "Tố tụng", "An ninh"],
@@ -41,10 +48,12 @@ export const MOCK_FORUMS = [
         memberCount: 2150,
         lastActive: "3 giờ trước",
         isFollowing: false,
+        isHot: false,
         thumbnail: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400&q=80"
     },
     {
         id: 5,
+        category: "Diễn đàn Dân sự & Đời sống",
         title: "Pháp luật Hôn nhân & Gia đình",
         description: "Giải đáp thắc mắc về kết hôn, ly hôn, quyền nuôi con và chia tài sản.",
         tags: ["Hôn nhân", "Gia đình", "Dân sự"],
@@ -52,10 +61,12 @@ export const MOCK_FORUMS = [
         memberCount: 6200,
         lastActive: "Vừa xong",
         isFollowing: false,
+        isHot: true,
         thumbnail: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=400&q=80"
     },
     {
         id: 6,
+        category: "Diễn đàn Thuế & Hành chính",
         title: "Thuế và Kế toán",
         description: "Cộng đồng chia sẻ kiến thức, kinh nghiệm báo cáo thuế, quyết toán và các luật thuế mới.",
         tags: ["Thuế", "Kế toán", "Tài chính"],
@@ -63,7 +74,75 @@ export const MOCK_FORUMS = [
         memberCount: 1980,
         lastActive: "4 giờ trước",
         isFollowing: false,
+        isHot: false,
         thumbnail: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&q=80"
+    },
+    {
+        id: 7,
+        category: "Diễn đàn Doanh nghiệp & Đầu tư",
+        title: "Khởi nghiệp & Công nghệ",
+        description: "Không gian kết nối startup, tư vấn gọi vốn, thành lập quỹ và các vấn đề pháp lý công nghệ.",
+        tags: ["Startup", "Gọi vốn", "Công nghệ"],
+        topicCount: 420,
+        memberCount: 1530,
+        lastActive: "15 phút trước",
+        isFollowing: false,
+        isHot: false,
+        thumbnail: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&q=80"
+    },
+    {
+        id: 8,
+        category: "Diễn đàn Hình sự & Tố tụng",
+        title: "Tố tụng Dân sự & Thương mại",
+        description: "Phương thức giải quyết tranh chấp pháp lý ngoài tòa án, trọng tài quốc tế và tố tụng dân sự.",
+        tags: ["Tố tụng", "Trọng tài", "Dân sự"],
+        topicCount: 890,
+        memberCount: 2100,
+        lastActive: "1 ngày trước",
+        isFollowing: false,
+        isHot: false,
+        thumbnail: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400&q=80"
+    },
+    {
+        id: 9,
+        category: "Diễn đàn Đất đai & Bất động sản",
+        title: "Pháp luật Xây dựng & Đấu thầu",
+        description: "Bàn luận về giấy phép xây dựng, hợp đồng EPC, luật đấu thầu và quản lý dự án.",
+        tags: ["Xây dựng", "Đấu thầu", "Dự án"],
+        topicCount: 1056,
+        memberCount: 3040,
+        lastActive: "6 giờ trước",
+        isFollowing: true,
+        isHot: true,
+        thumbnail: "https://images.unsplash.com/photo-1518133835878-5a93cc3f89e5?w=400&q=80"
+    },
+    {
+        id: 10,
+        category: "Diễn đàn Doanh nghiệp & Đầu tư",
+        title: "Sở hữu Trí tuệ",
+        description: "Đăng ký bảo hộ nhãn hiệu, bản quyền tác giả, giải quyết vi phạm sở hữu trí tuệ.",
+        tags: ["Sở hữu trí tuệ", "Bản quyền", "Nhãn hiệu"],
+        topicCount: 560,
+        memberCount: 2250,
+        lastActive: "Vừa xong",
+        isFollowing: true,
+        isHot: false,
+        thumbnail: "https://images.unsplash.com/photo-1518133835878-5a93cc3f89e5?w=400&q=80"
+    },
+    {
+        id: 11,
+        category: "Các tổ hợp Sự kiện",
+        title: "Dự thảo Luật Thuế Giá trị gia tăng (Sửa đổi)",
+        description: "Không gian mở thu thập ý kiến chuyên gia và người dân về Dự thảo Luật Thuế GTGT mới nhất (Qúy IV 2024). Diễn đàn sẽ chính thức mở sổ góp ý sau thời gian đếm ngược.",
+        tags: ["Thuế GTGT", "Dự thảo sửa đổi", "Góp ý dự thảo"],
+        topicCount: 0,
+        memberCount: 0,
+        lastActive: "Đang chờ mở",
+        isFollowing: false,
+        isHot: false,
+        isUpcoming: true,
+        openingDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000 + 15 * 60 * 1000).toISOString(),
+        thumbnail: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80"
     }
 ];
 

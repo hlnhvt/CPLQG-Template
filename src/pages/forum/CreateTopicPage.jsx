@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { 
     Home, ChevronRight, Bold, Italic, Underline, 
     List, Image as ImageIcon, Link as LinkIcon, Paperclip, Check,
-    AlertCircle, CheckCircle2, Eye, EyeOff
+    AlertCircle, CheckCircle2, Eye, EyeOff, ChevronDown
 } from 'lucide-react';
 import { MOCK_FORUMS } from '../../data/mockForumData';
 
@@ -11,6 +11,9 @@ const CreateTopicPage = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const [selectedForum, setSelectedForum] = useState('');
+    const [selectedDomains, setSelectedDomains] = useState([]);
+    const [isDomainDropdownOpen, setIsDomainDropdownOpen] = useState(false);
+    const DOMAIN_OPTIONS = ['Doanh nghiệp', 'Đầu tư', 'Sở hữu trí tuệ', 'Lao động', 'Dân sự', 'Hình sự', 'Hành chính', 'Đất đai', 'Thuế - Phí - Lệ phí'];
     const [title, setTitle] = useState(() => searchParams.get('title') || '');
     const [content, setContent] = useState('');
     const [tags, setTags] = useState('');
@@ -25,6 +28,7 @@ const CreateTopicPage = () => {
             id: Date.now(),
             title: title || 'Chủ đề không tên',
             forum: forumObj ? forumObj.title : 'Chưa xác định',
+            domains: selectedDomains,
             date: 'Vừa xong',
             status: 'draft',
             replies: 0
@@ -43,6 +47,7 @@ const CreateTopicPage = () => {
             title: title || 'Chủ đề không tên',
             content: content || '',
             forum: MOCK_FORUMS.find(f => f.id === selectedForum)?.title || 'Chưa xác định',
+            domains: selectedDomains,
             author: { name: 'Nguyễn Anh Quân', role: 'Cán bộ', avatar: '/images/default_avatar.png', joinDate: '01/01/2024', points: 0, messages: 1, reactions: 0, workplace: 'Bộ Tư Pháp' },
             createdAt: new Date().toLocaleString('vi-VN'),
             tags: [],
@@ -87,27 +92,83 @@ const CreateTopicPage = () => {
                     {/* Form Fields / Preview */}
                     <div className="space-y-6">
                         
-                        {/* Select Forum */}
-                        <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">
-                                Chọn diễn đàn tham gia <span className="text-red-500">*</span>
-                            </label>
-                            {isPreview ? (
-                                <div className="p-3 bg-gray-50 rounded-xl border border-gray-200">
-                                    {MOCK_FORUMS.find(f => f.id === selectedForum)?.title || 'Chưa chọn'}
-                                </div>
-                            ) : (
-                                <select 
-                                    className="w-full bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block p-3 outline-none transition-colors"
-                                    value={selectedForum}
-                                    onChange={(e) => setSelectedForum(e.target.value)}
-                                >
-                                    <option value="" disabled>-- Hãy chọn một diễn đàn phù hợp --</option>
-                                    {MOCK_FORUMS.map(forum => (
-                                        <option key={forum.id} value={forum.id}>{forum.title}</option>
-                                    ))}
-                                </select>
-                            )}
+                        {/* Select Forum & Domains */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label className="block text-sm font-bold text-gray-700 mb-2">
+                                    Chọn diễn đàn tham gia <span className="text-red-500">*</span>
+                                </label>
+                                {isPreview ? (
+                                    <div className="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                                        {MOCK_FORUMS.find(f => f.id === selectedForum)?.title || 'Chưa chọn'}
+                                    </div>
+                                ) : (
+                                    <select 
+                                        className="w-full bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block p-3 outline-none transition-colors h-[46px]"
+                                        value={selectedForum}
+                                        onChange={(e) => setSelectedForum(e.target.value)}
+                                    >
+                                        <option value="" disabled>-- Hãy chọn một diễn đàn phù hợp --</option>
+                                        {MOCK_FORUMS.map(forum => (
+                                            <option key={forum.id} value={forum.id}>{forum.title}</option>
+                                        ))}
+                                    </select>
+                                )}
+                            </div>
+
+                            <div className="relative">
+                                <label className="block text-sm font-bold text-gray-700 mb-2">
+                                    Lĩnh vực liên quan
+                                </label>
+                                {isPreview ? (
+                                    <div className="p-3 bg-gray-50 rounded-xl border border-gray-200">
+                                        {selectedDomains.length > 0 ? selectedDomains.join(', ') : 'Chưa chọn lĩnh vực nào'}
+                                    </div>
+                                ) : (
+                                    <div className="relative">
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsDomainDropdownOpen(!isDomainDropdownOpen)}
+                                            className="w-full bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 p-3 outline-none transition-colors text-left flex justify-between items-center h-[46px]"
+                                        >
+                                            <span className="truncate pr-4 font-medium text-gray-700">
+                                                {selectedDomains.length > 0 
+                                                    ? `${selectedDomains.length} lĩnh vực được chọn: ${selectedDomains.join(', ')}` 
+                                                    : '-- Chọn một hoặc nhiều lĩnh vực --'}
+                                            </span>
+                                            <ChevronDown size={18} className={`text-gray-500 transition-transform flex-shrink-0 ${isDomainDropdownOpen ? 'rotate-180' : ''}`} />
+                                        </button>
+
+                                        {isDomainDropdownOpen && (
+                                            <>
+                                                <div className="fixed inset-0 z-10" onClick={() => setIsDomainDropdownOpen(false)}></div>
+                                                <div className="absolute z-20 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-xl max-h-64 overflow-y-auto">
+                                                    {DOMAIN_OPTIONS.map(domain => (
+                                                        <label key={domain} className="flex items-center px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-0 transition-colors group">
+                                                            <div className={`w-5 h-5 rounded border mr-3 flex items-center justify-center transition-colors ${selectedDomains.includes(domain) ? 'bg-blue-600 border-blue-600' : 'border-gray-300 group-hover:border-blue-400 bg-white'}`}>
+                                                                {selectedDomains.includes(domain) && <Check size={14} className="text-white" strokeWidth={3} />}
+                                                            </div>
+                                                            <span className={`text-sm ${selectedDomains.includes(domain) ? 'font-bold text-blue-700' : 'font-medium text-gray-700'}`}>{domain}</span>
+                                                            <input 
+                                                                type="checkbox" 
+                                                                className="hidden"
+                                                                checked={selectedDomains.includes(domain)}
+                                                                onChange={() => {
+                                                                    if (selectedDomains.includes(domain)) {
+                                                                        setSelectedDomains(selectedDomains.filter(d => d !== domain));
+                                                                    } else {
+                                                                        setSelectedDomains([...selectedDomains, domain]);
+                                                                    }
+                                                                }}
+                                                            />
+                                                        </label>
+                                                    ))}
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                         {/* Title */}

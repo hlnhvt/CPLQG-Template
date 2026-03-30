@@ -1,19 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Filter, MessageSquare, Users, Clock, Star, TrendingUp, Hash, ArrowRight, UserPlus, Check, ChevronLeft, ChevronRight } from 'lucide-react';
-import { MOCK_FORUMS } from '../../data/mockForumData';
+import { Search, Filter, MessageSquare, Users, Clock, Star, TrendingUp, Hash, ArrowRight, UserPlus, Check, ChevronLeft, ChevronRight, ThumbsUp, Eye, Bell, Lock } from 'lucide-react';
+import { MOCK_FORUMS, MOCK_TOPICS } from '../../data/mockForumData';
+
+const ForumCountdown = ({ targetDate }) => {
+    const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0, isPast: false });
+
+    useEffect(() => {
+        const update = () => {
+            const diff = new Date(targetDate) - new Date();
+            if (diff <= 0) {
+                setTimeLeft({ d: 0, h: 0, m: 0, s: 0, isPast: true });
+                return;
+            }
+            setTimeLeft({
+                d: Math.floor(diff / (1000 * 60 * 60 * 24)),
+                h: Math.floor((diff / (1000 * 60 * 60)) % 24),
+                m: Math.floor((diff / 1000 / 60) % 60),
+                s: Math.floor((diff / 1000) % 60),
+                isPast: false
+            });
+        };
+        update();
+        const interval = setInterval(update, 1000);
+        return () => clearInterval(interval);
+    }, [targetDate]);
+
+    if (timeLeft.isPast) return <div className="text-emerald-600 font-bold text-sm flex items-center gap-1 mt-4 mb-2"><Check size={16}/> Đã chính thức mở cửa!</div>;
+
+    return (
+        <div className="mt-4 mb-4 bg-indigo-50/50 p-3 rounded-xl border border-indigo-100 flex flex-col xl:flex-row xl:items-center justify-between gap-3">
+            <div className="text-sm font-bold text-indigo-800 flex items-center gap-1.5"><Clock size={16}/> Sắp khai mở sau:</div>
+            <div className="flex items-center gap-1.5">
+                <div className="flex flex-col items-center bg-white px-2 py-1 rounded shadow-sm border border-indigo-100 min-w-[36px]">
+                    <span className="text-sm font-bold text-indigo-700 leading-none">{timeLeft.d}</span>
+                    <span className="text-[9px] text-indigo-400 font-bold uppercase mt-0.5">Ngày</span>
+                </div>
+                <span className="text-indigo-300 font-bold">:</span>
+                <div className="flex flex-col items-center bg-white px-2 py-1 rounded shadow-sm border border-indigo-100 min-w-[36px]">
+                    <span className="text-sm font-bold text-indigo-700 leading-none">{timeLeft.h.toString().padStart(2, '0')}</span>
+                    <span className="text-[9px] text-indigo-400 font-bold uppercase mt-0.5">Giờ</span>
+                </div>
+                <span className="text-indigo-300 font-bold">:</span>
+                <div className="flex flex-col items-center bg-white px-2 py-1 rounded shadow-sm border border-indigo-100 min-w-[36px]">
+                    <span className="text-sm font-bold text-indigo-700 leading-none">{timeLeft.m.toString().padStart(2, '0')}</span>
+                    <span className="text-[9px] text-indigo-400 font-bold uppercase mt-0.5">Phút</span>
+                </div>
+                <span className="text-indigo-300 font-bold">:</span>
+                <div className="flex flex-col items-center bg-white px-2 py-1 rounded shadow-sm border border-indigo-100 min-w-[36px]">
+                    <span className="text-sm font-bold text-red-500 leading-none">{timeLeft.s.toString().padStart(2, '0')}</span>
+                    <span className="text-[9px] text-indigo-400 font-bold uppercase mt-0.5">Giây</span>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const ForumListPage = () => {
-    const [activeTab, setActiveTab] = useState('all'); // all, latest, hot, following
+    const [activeTab, setActiveTab] = useState('hot'); // hot, all, latest, following
     const [searchQuery, setSearchQuery] = useState('');
     const [forums, setForums] = useState(MOCK_FORUMS);
+    const [categoryFilter, setCategoryFilter] = useState('Tất cả');
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage, setItemsPerPage] = useState(10);
+    const [itemsPerPage, setItemsPerPage] = useState(12);
 
     const tabs = [
+        { id: 'hot', label: 'Xu hướng', icon: <TrendingUp size={18} /> },
         { id: 'all', label: 'Tất cả diễn đàn', icon: '' },
         { id: 'latest', label: 'Mới cập nhật', icon: <Clock size={18} /> },
-        { id: 'hot', label: 'Xu hướng', icon: <TrendingUp size={18} /> },
         { id: 'following', label: 'Đang theo dõi', icon: <Star size={18} /> },
     ];
 
@@ -24,13 +78,17 @@ const ForumListPage = () => {
     const filteredForums = forums.filter(f => {
         if (searchQuery && !f.title.toLowerCase().includes(searchQuery.toLowerCase())) return false;
         if (activeTab === 'following' && !f.isFollowing) return false;
+        if (activeTab === 'hot' && !f.isHot) return false;
+        if (categoryFilter !== 'Tất cả' && f.category !== categoryFilter) return false;
         return true;
     });
+
+    const categories = ['Tất cả', ...new Set(forums.map(f => f.category || 'Các diễn đàn khác'))];
 
     // Reset pagination to page 1 when filters change
     React.useEffect(() => {
         setCurrentPage(1);
-    }, [activeTab, searchQuery, itemsPerPage]);
+    }, [activeTab, searchQuery, categoryFilter, itemsPerPage]);
 
     // Mock sort just for UI demonstration
     if (activeTab === 'hot') {
@@ -38,6 +96,9 @@ const ForumListPage = () => {
     } else if (activeTab === 'latest') {
         // Assume default order is somewhat latest
     }
+
+    // Always pin 'Upcoming' forums to the top for visibility
+    filteredForums.sort((a, b) => (b.isUpcoming ? 1 : 0) - (a.isUpcoming ? 1 : 0));
 
     // Pagination Logic
     const totalPages = Math.ceil(filteredForums.length / itemsPerPage);
@@ -113,19 +174,22 @@ const ForumListPage = () => {
                                 </div>
                             </Link>
 
-                            {/* <h3 className="font-bold text-gray-800 text-lg mb-4 flex items-center gap-2">
+                            <h3 className="font-bold text-gray-800 text-lg mb-4 mt-6 flex items-center gap-2">
                                 <Filter size={20} className="text-blue-600" />
-                                Theo chủ đề
+                                Nhóm diễn đàn
                             </h3>
                             <ul className="space-y-2">
-                                {['Tất cả', 'Luật Doanh nghiệp', 'Luật Dân sự', 'Luật Hình sự', 'Đất đai & BĐS', 'Sở hữu trí tuệ', 'Khác'].map((cat, idx) => (
+                                {categories.map((cat, idx) => (
                                     <li key={idx}>
-                                        <button className={`w-full text-left px-4 py-2.5 rounded-xl font-medium transition-colors ${idx === 0 ? 'bg-blue-50 text-blue-600' : 'text-gray-600 hover:bg-gray-50'}`}>
+                                        <button
+                                            onClick={() => setCategoryFilter(cat)}
+                                            className={`w-full text-left px-4 py-2.5 rounded-xl font-medium transition-colors ${categoryFilter === cat ? 'bg-blue-50 text-blue-600 font-bold border border-blue-100' : 'text-gray-600 hover:bg-gray-50 border border-transparent'}`}
+                                        >
                                             {cat}
                                         </button>
                                     </li>
                                 ))}
-                            </ul> */}
+                            </ul>
 
                             <div className="mt-6 flex flex-col gap-4">
                                 {/* Create Topic Box */}
@@ -170,64 +234,140 @@ const ForumListPage = () => {
                             </button>
                         </div>
 
-                        {/* Forum Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {paginatedForums.map(forum => (
-                                <div key={forum.id} className="bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100 transition-all duration-300 group flex flex-col h-full overflow-hidden">
-                                    <div className="p-6 flex-grow">
-                                        <div className="flex justify-between items-start mb-4">
-                                            <div className="w-20 h-14 rounded-xl overflow-hidden shrink-0 border border-gray-100 shadow-sm relative group-hover:shadow-md transition-shadow">
-                                                <img src={forum.thumbnail} alt={forum.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
-                                            </div>
-                                            <button
-                                                onClick={() => toggleFollow(forum.id)}
-                                                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors flex items-center gap-1 ${forum.isFollowing
-                                                    ? 'bg-blue-50 text-blue-600 border-blue-200'
-                                                    : 'bg-white text-gray-500 border-gray-200 hover:border-blue-300 hover:text-blue-600'
-                                                    }`}
-                                            >
-                                                {forum.isFollowing ? (
-                                                    <><Check size={14} /> Đang theo dõi</>
-                                                ) : (
-                                                    <><UserPlus size={14} /> Theo dõi</>
-                                                )}
-                                            </button>
-                                        </div>
+                        {/* Forum Cards by Category */}
+                        <div className="space-y-12">
+                            {Object.entries(
+                                paginatedForums.reduce((acc, forum) => {
+                                    const cat = forum.category || 'Các diễn đàn khác';
+                                    if (!acc[cat]) acc[cat] = [];
+                                    acc[cat].push(forum);
+                                    return acc;
+                                }, {})
+                            ).map(([category, forumsInCategory]) => (
+                                <div key={category}>
+                                    <h2 className="text-2xl font-bold text-[#1e3a8a] mb-6 flex items-center gap-3">
+                                        <span className="w-2 h-7 bg-yellow-500 rounded-full inline-block shrink-0"></span>
+                                        {category}
+                                    </h2>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {forumsInCategory.map(forum => {
+                                            const isForumHot = activeTab === 'hot' && forum.isHot;
+                                            return (
+                                                <div key={forum.id} className={`bg-white rounded-2xl shadow-sm hover:shadow-xl border ${isForumHot ? 'border-emerald-400 border-2 bg-gradient-to-br from-emerald-50/50 to-teal-50/20 shadow-emerald-500/10 hover:shadow-emerald-500/30' : 'border-gray-100'} transition-all duration-300 group flex flex-col h-full overflow-hidden relative`}>
+                                                    <div className="p-6 flex-grow">
+                                                        <div className="flex justify-between items-start mb-4">
+                                                            <div className="w-20 h-14 rounded-xl overflow-hidden shrink-0 border border-gray-100 shadow-sm relative group-hover:shadow-md transition-shadow">
+                                                                <img src={forum.thumbnail} alt={forum.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                                                            </div>
+                                                            <button
+                                                                onClick={() => toggleFollow(forum.id)}
+                                                                className={`px-3 py-1.5 rounded-full text-xs font-bold border transition-colors flex items-center gap-1 ${forum.isFollowing
+                                                                    ? (forum.isUpcoming ? 'bg-indigo-50 text-indigo-600 border-indigo-200' : 'bg-blue-50 text-blue-600 border-blue-200')
+                                                                    : 'bg-white text-gray-500 border-gray-200 hover:border-blue-300 hover:text-blue-600'
+                                                                    }`}
+                                                            >
+                                                                {forum.isFollowing ? (
+                                                                    <><Check size={14} /> {forum.isUpcoming ? 'Đã bật nhắc nhở' : 'Đang theo dõi'}</>
+                                                                ) : (
+                                                                    forum.isUpcoming ? <><Bell size={14} /> Nhận lời nhắc</> : <><UserPlus size={14} /> Theo dõi</>
+                                                                )}
+                                                            </button>
+                                                        </div>
 
-                                        <Link to={`/dien-dan/chu-de/${forum.id}`} className="block group-hover:text-blue-600 transition-colors">
-                                            <h2 className="text-xl font-bold text-gray-800 mb-2 line-clamp-2">{forum.title}</h2>
-                                        </Link>
+                                                        {forum.isUpcoming ? (
+                                                            <div className="block transition-colors mb-2 cursor-not-allowed">
+                                                                <h3 className="text-xl font-bold text-gray-800 flex flex-wrap items-center gap-2">
+                                                                    <Lock size={18} className="text-gray-400" />
+                                                                    {forum.title}
+                                                                </h3>
+                                                            </div>
+                                                        ) : (
+                                                            <Link to={`/dien-dan/chu-de/${forum.id}`} className="block group-hover:text-blue-600 transition-colors mb-2">
+                                                                <h3 className="text-xl font-bold text-gray-800 flex flex-wrap items-center gap-2">
+                                                                    {forum.title}
+                                                                    {isForumHot && (
+                                                                        <span className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded-md shadow-sm flex items-center gap-1 shrink-0">
+                                                                            <TrendingUp size={10} /> Nổi bật
+                                                                        </span>
+                                                                    )}
+                                                                </h3>
+                                                            </Link>
+                                                        )}
 
-                                        <p className="text-gray-500 text-sm mb-4 line-clamp-3">{forum.description}</p>
+                                                        <p className="text-gray-500 text-sm mb-4 line-clamp-3">{forum.description}</p>
 
-                                        <div className="flex flex-wrap gap-2 mb-4">
-                                            {forum.tags.map((tag, idx) => (
-                                                <span key={idx} className="px-2.5 py-1 bg-gray-50 text-gray-500 text-xs font-medium rounded-md border border-gray-100">
-                                                    #{tag}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
+                                                        {forum.isUpcoming ? (
+                                                            <ForumCountdown targetDate={forum.openingDate} />
+                                                        ) : (
+                                                            <div className="flex flex-wrap gap-2 mb-4">
+                                                                {forum.tags.map((tag, idx) => (
+                                                                    <span key={idx} className="px-2.5 py-1 bg-gray-50 text-gray-500 text-xs font-medium rounded-md border border-gray-100">
+                                                                        #{tag}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
+                                                        )}
 
-                                    <div className="bg-gray-50 px-6 py-4 flex items-center justify-between border-t border-gray-100 mt-auto">
-                                        <div className="flex items-center gap-4 text-sm text-gray-500 font-medium">
-                                            <div className="flex items-center gap-1.5">
-                                                <MessageSquare size={16} className="text-blue-500" />
-                                                <span>{forum.topicCount.toLocaleString()}</span>
-                                            </div>
-                                            <div className="flex items-center gap-1.5">
-                                                <Users size={16} className="text-indigo-500" />
-                                                <span>{forum.memberCount.toLocaleString()}</span>
-                                            </div>
-                                        </div>
-                                        <Link to={`/dien-dan/chu-de/${forum.id}`} className="text-blue-600 p-2 rounded-full hover:bg-blue-100 transition-colors group-hover:translate-x-1 duration-300">
-                                            <ArrowRight size={18} />
-                                        </Link>
+                                                        {isForumHot && (
+                                                            <div className="mt-6 pt-5 border-t border-emerald-200/60">
+                                                                <h4 className="text-xs font-bold text-emerald-700 uppercase mb-3 flex items-center gap-1.5">
+                                                                    <TrendingUp size={14} className="text-emerald-500" /> Chủ đề đang được quan tâm
+                                                                </h4>
+                                                                <div className="space-y-3">
+                                                                    {(forum.id === 1 ? MOCK_TOPICS.filter(t => t.isHot).slice(0, 2) : [
+                                                                        { id: forum.id + 100, title: `Bàn luận về điểm mới liên quan tới ${forum.title.replace('Thảo luận ', '').replace('Hỏi đáp ', '')}` },
+                                                                        { id: forum.id + 200, title: `Tổng hợp kinh nghiệm và giải đáp thắc mắc thường gặp nhất nửa đầu tuần` }
+                                                                    ]).map((topic, i) => (
+                                                                        <Link key={i} to={`/dien-dan/chu-de/${forum.id}`} className="block group/topic">
+                                                                            <div className="flex items-start gap-2">
+                                                                                <span className="text-emerald-500 mt-0.5 shrink-0">•</span>
+                                                                                <div>
+                                                                                    <div className="text-sm font-medium text-gray-800 line-clamp-2 group-hover/topic:text-blue-600 transition-colors drop-shadow-sm mb-1.5">
+                                                                                        {topic.title}
+                                                                                    </div>
+                                                                                    <div className="flex items-center gap-4 text-xs text-gray-400 font-medium">
+                                                                                        <span className="flex items-center gap-1 hover:text-blue-500 transition-colors" title="Lượt thích"><ThumbsUp size={12} /> {topic.votes || Math.floor(Math.random() * 500) + 50}</span>
+                                                                                        <span className="flex items-center gap-1 hover:text-blue-500 transition-colors" title="Bình luận"><MessageSquare size={12} /> {topic.comments || Math.floor(Math.random() * 100) + 10}</span>
+                                                                                        <span className="flex items-center gap-1 hover:text-blue-500 transition-colors" title="Lượt xem"><Eye size={12} /> {topic.views || Math.floor(Math.random() * 3000) + 500}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </Link>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+
+                                                    <div className="bg-gray-50 px-6 py-4 flex items-center justify-between border-t border-gray-100 mt-auto">
+                                                        <div className="flex items-center gap-4 text-sm text-gray-500 font-medium">
+                                                            <div className="flex items-center gap-1.5">
+                                                                <MessageSquare size={16} className="text-blue-500" />
+                                                                <span>{forum.topicCount.toLocaleString()}</span>
+                                                            </div>
+                                                            <div className="flex items-center gap-1.5">
+                                                                <Users size={16} className="text-indigo-500" />
+                                                                <span>{forum.memberCount.toLocaleString()}</span>
+                                                            </div>
+                                                        </div>
+                                                        {forum.isUpcoming ? (
+                                                            <div className="text-gray-400 p-2 rounded-full cursor-not-allowed">
+                                                                <Lock size={18} />
+                                                            </div>
+                                                        ) : (
+                                                            <Link to={`/dien-dan/chu-de/${forum.id}`} className="text-blue-600 p-2 rounded-full hover:bg-blue-100 transition-colors group-hover:translate-x-1 duration-300">
+                                                                <ArrowRight size={18} />
+                                                            </Link>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             ))}
                             {paginatedForums.length === 0 && (
-                                <div className="col-span-full py-16 text-center text-gray-500 bg-white rounded-2xl border border-gray-100">
+                                <div className="py-16 text-center text-gray-500 bg-white rounded-2xl border border-gray-100">
                                     <Search size={48} className="mx-auto text-gray-300 mb-4" />
                                     <p className="text-lg font-medium">Không tìm thấy diễn đàn nào phù hợp.</p>
                                 </div>

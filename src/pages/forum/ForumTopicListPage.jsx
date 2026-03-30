@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import {
     Home, ChevronRight, Search, Filter, Plus,
-    MessageSquare, Eye, ChevronDown, CheckCircle,
+    MessageSquare, Eye, ChevronDown, CheckCircle, Check,
     Clock, Tag, ArrowUpCircle, Users, FileText, ClipboardList, Award, UserPlus
 } from 'lucide-react';
 import { MOCK_FORUMS, MOCK_TOPICS } from '../../data/mockForumData';
@@ -18,6 +18,7 @@ const ForumTopicListPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [statusFilter, setStatusFilter] = useState('all');
     const [sortOrder, setSortOrder] = useState('newest');
+    const [domainFilter, setDomainFilter] = useState('Tất cả lĩnh vực');
     const [isFollowing, setIsFollowing] = useState(false);
     const [showUnfollowConfirm, setShowUnfollowConfirm] = useState(false);
     const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
@@ -35,7 +36,8 @@ const ForumTopicListPage = () => {
 
     // Generating some more mock topics to fill the list
     const moreMockTopics = useMemo(() => {
-        const topics = [...MOCK_TOPICS];
+        const domains = ["Doanh nghiệp", "Đầu tư", "Sở hữu trí tuệ", "Lao động", "Dân sự", "Hình sự"];
+        const topics = MOCK_TOPICS.map((t, idx) => ({ ...t, domain: domains[idx % domains.length] }));
         for (let i = 3; i <= 15; i++) {
             topics.push({
                 id: i,
@@ -47,8 +49,9 @@ const ForumTopicListPage = () => {
                 comments: i % 2 === 0 ? 0 : 5 * i,
                 votes: 10 * i,
                 tags: forum.tags.slice(0, 2),
+                domain: domains[i % 6],
                 status: i % 3 === 0 ? "closed" : "open",
-                isHot: i === 3,
+                isHot: i === 3 || i === 7,
                 timestamp: new Date().getTime() - i * 86400000 // mock real date for sorting
             });
         }
@@ -64,10 +67,21 @@ const ForumTopicListPage = () => {
             if (statusFilter === 'has-comment') result = result.filter(t => t.comments > 0);
         }
 
-        // Sort
-        if (sortOrder === 'newest') result.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-        else if (sortOrder === 'votes') result.sort((a, b) => b.votes - a.votes);
-        else if (sortOrder === 'comments') result.sort((a, b) => b.comments - a.comments);
+        // Filter by domain
+        if (domainFilter !== 'Tất cả lĩnh vực') {
+            result = result.filter(t => t.domain === domainFilter);
+        }
+
+        // Sort: Hot/Pinned topics always on top
+        result.sort((a, b) => {
+            if (a.isHot && !b.isHot) return -1;
+            if (!a.isHot && b.isHot) return 1;
+            
+            if (sortOrder === 'newest') return (b.timestamp || 0) - (a.timestamp || 0);
+            if (sortOrder === 'votes') return b.votes - a.votes;
+            if (sortOrder === 'comments') return b.comments - a.comments;
+            return 0;
+        });
 
         return result;
     }, [moreMockTopics, statusFilter, sortOrder]);
@@ -75,7 +89,7 @@ const ForumTopicListPage = () => {
     // Reset pagination to page 1 when filters change
     React.useEffect(() => {
         setCurrentPage(1);
-    }, [statusFilter, sortOrder, itemsPerPage]);
+    }, [statusFilter, domainFilter, sortOrder, itemsPerPage]);
 
     const totalPages = Math.ceil(filteredAndSortedTopics.length / itemsPerPage) || 1;
     const paginatedTopics = filteredAndSortedTopics.slice(
@@ -197,7 +211,7 @@ const ForumTopicListPage = () => {
                         <div className="bg-transparent lg:bg-white lg:rounded-xl lg:shadow-sm lg:border lg:border-gray-100 lg:p-5">
                             <h3 className="font-bold text-gray-900 mb-6 text-lg hidden lg:block">Bộ lọc</h3>
 
-                            <div className="mb-4">
+                            <div className="mb-5 pb-5 border-b border-gray-100">
                                 <h4 className="font-bold text-gray-700 text-sm mb-3">Nội dung</h4>
                                 <div className="space-y-4">
                                     {[
@@ -218,6 +232,20 @@ const ForumTopicListPage = () => {
                                             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${statusFilter === filter.id ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
                                                 {filter.count}
                                             </span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="mt-5 pt-5 border-t border-gray-100">
+                                <h4 className="font-bold text-gray-700 text-sm mb-3">Lĩnh vực pháp lý</h4>
+                                <div className="space-y-3">
+                                    {['Tất cả lĩnh vực', 'Doanh nghiệp', 'Đầu tư', 'Sở hữu trí tuệ', 'Lao động', 'Dân sự', 'Hình sự'].map(domain => (
+                                        <label key={domain} onClick={() => { setDomainFilter(domain); setCurrentPage(1); }} className="flex items-center gap-3 cursor-pointer group">
+                                            <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${domainFilter === domain ? 'border-blue-600 bg-blue-600' : 'border-gray-300 group-hover:border-blue-400 bg-white'}`}>
+                                                {domainFilter === domain && <Check size={12} className="text-white" strokeWidth={3} />}
+                                            </div>
+                                            <span className={`text-sm transition-colors ${domainFilter === domain ? 'font-bold text-blue-700' : 'font-medium text-gray-600 group-hover:text-gray-900'}`}>{domain}</span>
                                         </label>
                                     ))}
                                 </div>
@@ -333,7 +361,12 @@ const ForumTopicListPage = () => {
                         <div className="space-y-4">
                             {/* Rows */}
                             {paginatedTopics.length > 0 ? paginatedTopics.map((topic) => (
-                                <div key={topic.id} className="bg-white border border-gray-200 rounded-xl p-5 hover:border-blue-300 hover:shadow-md transition-all flex flex-col md:flex-row gap-6">
+                                <div key={topic.id} className={`border ${topic.isHot ? 'border-amber-400 bg-gradient-to-r from-amber-50/80 to-orange-50/30 shadow-sm shadow-amber-500/10' : 'bg-white border-gray-200 hover:border-blue-300'} rounded-xl p-5 hover:shadow-md transition-all flex flex-col md:flex-row gap-6 relative overflow-hidden`}>
+                                    {topic.isHot && (
+                                        <div className="absolute top-0 right-0 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] uppercase tracking-wide font-bold px-3 py-1.5 rounded-bl-xl shadow-sm flex items-center gap-1.5 z-10">
+                                            <Award size={12} /> Nổi bật
+                                        </div>
+                                    )}
                                     {/* Left Stats */}
                                     <div className="flex md:flex-col gap-6 md:gap-3 shrink-0 md:w-20 items-center md:items-center justify-start md:justify-center border-b md:border-b-0 md:border-r border-gray-100 pb-4 md:pb-0 pr-0 md:pr-2">
                                         <div className="text-center">
@@ -357,6 +390,9 @@ const ForumTopicListPage = () => {
                                                 : "Tôi đang có ý định thành lập một công ty TNHH theo Luật Doanh nghiệp 2020. Tuy nhiên, tôi chưa rõ về quy trình và hồ sơ cần thiết để xin cấp Giấy chứng nhận đăng ký doanh nghiệp. Cụ thể tôi muốn biết: Hồ sơ cần chuẩn bị những gì?"}
                                         </p>
                                         <div className="flex flex-wrap gap-2">
+                                            <span className="bg-indigo-50 text-indigo-700 border border-indigo-100 text-[11px] font-bold px-3 py-1.5 rounded-full whitespace-nowrap">
+                                                {topic.domain || 'Khác'}
+                                            </span>
                                             {topic.tags.map((tag, idx) => (
                                                 <span key={idx} className="bg-gray-100 text-gray-700 text-[11px] font-bold px-3 py-1.5 rounded-full whitespace-nowrap">
                                                     {tag}

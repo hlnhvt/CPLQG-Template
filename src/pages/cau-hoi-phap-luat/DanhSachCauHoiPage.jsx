@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Search, Flame, Clock, HelpCircle, FileText, CheckCircle2, RotateCw, RefreshCcw, ArrowRight, User, Eye, ThumbsUp, PlusCircle, MessageCircle, Link as LinkIcon } from 'lucide-react';
+import { Search, Flame, Clock, HelpCircle, FileText, CheckCircle2, RotateCw, RefreshCcw, ArrowRight, User, Eye, ThumbsUp, PlusCircle, MessageCircle, Link as LinkIcon, Check } from 'lucide-react';
 import CreateCauHoiModal from './CreateCauHoiModal';
 
 const MOCK_DATA = [
@@ -10,6 +10,13 @@ const MOCK_DATA = [
     { id: '3', title: 'Thủ tục thành lập công ty TNHH 1 thành viên', content: 'Tôi muốn tư vấn về hồ sơ và thủ tục thành lập công ty TNHH 1 thành viên...', date: '14:20 15/03/2026', status: 'Đã trả lời', domain: 'Doanh nghiệp', views: 2100, likes: 800, author: 'Lê Văn C', replies: 1 },
     { id: '4', title: 'Phân chia di sản thừa kế khi không có di chúc', content: 'Bố mẹ tôi mất không để lại di chúc, gia đình có 3 anh em...', date: '08:30 14/03/2026', status: 'Đã trả lời', domain: 'Dân sự', views: 1560, likes: 410, author: 'Người dùng ẩn danh', replies: 3 },
     { id: '5', title: 'Xử lý kỷ luật lao động đối với nhân viên tự ý nghỉ việc', content: 'Công ty tôi có trường hợp nhân viên tự ý nghỉ việc 5 ngày không phép...', date: '16:45 13/03/2026', status: 'Đang chờ trả lời', domain: 'Lao động', views: 500, likes: 120, author: 'Hoàng Thị D', replies: 0 },
+    { id: '6', title: 'Mức phạt vi phạm nồng độ cồn khi lái xe ô tô', content: 'Xin cho biết mức phạt hành chính đối với người điều khiển xe ô tô khi trong máu có nồng độ cồn...', date: '10:00 12/03/2026', status: 'Đã trả lời', domain: 'Hành chính', views: 3200, likes: 1100, author: 'Phạm Văn E', replies: 5 },
+    { id: '7', title: 'Quyền tác giả đối với phần mềm lập trình', content: 'Tôi viết một phần mềm mã nguồn mở, tôi có được bảo hộ quyền tác giả không?', date: '14:30 11/03/2026', status: 'Đã trả lời', domain: 'Dân sự', views: 400, likes: 80, author: 'Ẩn danh', replies: 1 },
+    { id: '8', title: 'Đóng bảo hiểm xã hội tự nguyện', content: 'Lao động tự do có được đóng bảo hiểm xã hội tự nguyện để hưởng lương hưu không?', date: '09:00 10/03/2026', status: 'Đang chờ trả lời', domain: 'Lao động', views: 600, likes: 90, author: 'Lê Thị F', replies: 0 },
+    { id: '9', title: 'Tội cố ý gây thương tích', content: 'Tỷ lệ thương tật bao nhiêu phần trăm thì bị truy cứu trách nhiệm hình sự...', date: '15:20 09/03/2026', status: 'Đã trả lời', domain: 'Hình sự', views: 1800, likes: 300, author: 'Trần Anh G', replies: 4 },
+    { id: '10', title: 'Thời hiệu khởi kiện tranh chấp đất đai', content: 'Thời hiệu khởi kiện yêu cầu chia di sản thừa kế là bất động sản dài bao lâu...', date: '08:15 08/03/2026', status: 'Đã trả lời', domain: 'Đất đai', views: 950, likes: 150, author: 'Hồ Văn H', replies: 2 },
+    { id: '11', title: 'Đăng ký kết hôn với người nước ngoài', content: 'Thủ tục đăng ký kết hôn với công dân Mỹ tại Việt Nam cần những giấy tờ gì?', date: '10:45 07/03/2026', status: 'Đang chờ trả lời', domain: 'Dân sự', views: 820, likes: 130, author: 'Nguyễn Thị I', replies: 0 },
+    { id: '12', title: 'Giải thể công ty cổ phần', content: 'Xin hướng dẫn chi tiết các bước để giải thể một công ty cổ phần...', date: '13:00 06/03/2026', status: 'Đã trả lời', domain: 'Doanh nghiệp', views: 1100, likes: 210, author: 'Lý Quốc K', replies: 1 }
 ];
 
 const DanhSachCauHoiPage = () => {
@@ -243,130 +250,196 @@ const QuestionList = ({ mode }) => {
 
 // ==============================
 // 3. SEARCH TAB
-// ==============================
 const SearchTab = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [hasSearched, setHasSearched] = useState(false);
+
+    // Filter states
+    const [selectedDomains, setSelectedDomains] = useState([]);
+    const [statusFilter, setStatusFilter] = useState('Tất cả');
+    const [sortBy, setSortBy] = useState('Mới nhất');
 
     const handleSearch = (e) => {
-        e.preventDefault();
-        setHasSearched(true);
+        if (e) e.preventDefault();
     };
 
     const handleReset = () => {
         setSearchTerm('');
-        setHasSearched(false);
+        setSelectedDomains([]);
+        setStatusFilter('Tất cả');
+        setSortBy('Mới nhất');
     };
 
-    return (
-        <div className="text-gray-800">
-            {/* Search Form */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8 mb-8">
-                <h2 className="text-xl font-bold text-[#0f4c81] mb-6 flex items-center gap-2">
-                    <Search className="text-blue-500" /> TÌM KIẾM CÂU HỎI THƯỜNG XUYÊN
-                </h2>
+    const toggleDomain = (domain) => {
+        setSelectedDomains(prev => 
+            prev.includes(domain) ? prev.filter(d => d !== domain) : [...prev, domain]
+        );
+    };
 
-                <form onSubmit={handleSearch} className="space-y-6 max-w-4xl">
-                    <div>
-                        <div className="relative">
+    // Filter data
+    const filteredData = MOCK_DATA.filter(item => {
+        if (searchTerm && !item.content.toLowerCase().includes(searchTerm.toLowerCase()) && !item.title.toLowerCase().includes(searchTerm.toLowerCase())) return false;
+        if (selectedDomains.length > 0 && !selectedDomains.includes(item.domain)) return false;
+        if (statusFilter !== 'Tất cả' && item.status !== statusFilter) return false;
+        return true;
+    });
+
+    const DOMAINS = ['Dân sự', 'Hình sự', 'Doanh nghiệp', 'Lao động', 'Đất đai', 'Hành chính'];
+
+    return (
+        <div className="flex flex-col lg:flex-row gap-8 text-gray-800">
+            {/* Left Filter Panel (25%) */}
+            <div className="lg:w-1/4">
+                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden sticky top-[90px]">
+                    <div className="bg-[#0f4c81] text-white px-5 py-4 font-bold flex items-center gap-2 text-sm uppercase">
+                        BỘ LỌC TÌM KIẾM
+                    </div>
+                    
+                    <div className="p-5 border-b border-gray-100">
+                        <h3 className="font-bold text-gray-800 mb-3 text-[15px]">Lĩnh vực pháp luật</h3>
+                        <div className="space-y-3 max-h-60 overflow-y-auto custom-scrollbar">
+                            {DOMAINS.map(domain => (
+                                <label key={domain} className="flex items-center gap-3 cursor-pointer group">
+                                    <input 
+                                        type="checkbox" 
+                                        className="hidden" 
+                                        checked={selectedDomains.includes(domain)} 
+                                        onChange={() => toggleDomain(domain)} 
+                                    />
+                                    <div className={`w-4 h-4 rounded border flex items-center justify-center shrink-0 transition-colors ${
+                                        selectedDomains.includes(domain) ? 'bg-[#fdb714] border-[#fdb714]' : 'bg-white border-gray-300 group-hover:border-[#fdb714]'
+                                    }`}>
+                                        {selectedDomains.includes(domain) && <Check size={12} className="text-white" />}
+                                    </div>
+                                    <span className={`text-[14px] ${selectedDomains.includes(domain) ? 'font-bold text-[#0f4c81]' : 'text-gray-600 group-hover:text-[#0f4c81]'}`}>
+                                        {domain}
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* State selection moved from left filter to right side under search bar */}
+                    <div className="p-5 bg-gray-50/50">
+                        <button onClick={handleReset} className="w-full bg-white border border-gray-300 text-gray-700 font-bold py-2.5 rounded-lg hover:bg-gray-50 hover:text-blue-600 hover:border-blue-300 transition flex items-center justify-center gap-2 text-sm shadow-sm">
+                            <RefreshCcw size={16} /> Thiết lập lại
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Right Results Panel (75%) */}
+            <div className="lg:w-3/4">
+                {/* Search Bar & Status */}
+                <div className="mb-6 bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+                    <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3">
+                        <div className="relative flex-1">
                             <input
                                 type="text"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 placeholder="Nhập từ khóa nội dung câu hỏi (Ví dụ: bồi thường đất đai)..."
-                                className="w-full border-2 border-gray-200 rounded-xl py-4 pl-5 pr-12 focus:border-[#0f4c81] outline-none transition text-lg bg-gray-50 focus:bg-white"
+                                className="w-full border-2 border-gray-200 rounded-lg py-3 pl-5 pr-12 focus:border-[#0f4c81] outline-none transition text-[15px] bg-white hover:border-gray-300 shadow-sm"
                             />
-                            <Search className="absolute right-5 top-4 text-gray-400" size={24} />
+                            <Search className="absolute right-4 top-3.5 text-[#0f4c81] opacity-60" size={20} />
                         </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-gray-100">
-                        <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">Lĩnh vực pháp luật</label>
-                            <select className="w-full border border-gray-300 rounded-lg py-2.5 px-3 bg-white outline-none focus:border-blue-500">
-                                <option>Tất cả</option>
-                                <option>Dân sự</option>
-                                <option>Hình sự</option>
-                                <option>Lao động</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">Trạng thái</label>
-                            <select className="w-full border border-gray-300 rounded-lg py-2.5 px-3 bg-white outline-none focus:border-blue-500">
-                                <option>Tất cả</option>
-                                <option>Đã trả lời</option>
-                                <option>Chờ trả lời</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label className="block text-sm font-bold text-gray-700 mb-2">Sắp xếp theo</label>
-                            <select className="w-full border border-gray-300 rounded-lg py-2.5 px-3 bg-white outline-none focus:border-blue-500">
-                                <option>Mức độ liên quan</option>
-                                <option>Phổ biến nhất</option>
-                                <option>Mới nhất</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className="flex gap-4 pt-2">
-                        <button type="submit" className="bg-[#0f4c81] text-white font-bold py-2.5 px-8 rounded-lg hover:bg-blue-800 transition shadow-md flex items-center justify-center gap-2">
+                        <button type="submit" className="bg-[#0f4c81] text-white font-bold px-8 py-3 rounded-lg hover:bg-blue-800 transition shadow-md whitespace-nowrap flex items-center justify-center gap-2">
                             <Search size={18} /> Tìm kiếm
                         </button>
-                        <button type="button" onClick={handleReset} className="border-2 border-gray-200 text-gray-700 font-bold py-2.5 px-8 rounded-lg hover:bg-gray-50 transition flex items-center justify-center gap-2">
-                            <RefreshCcw size={18} /> Đặt lại
-                        </button>
+                    </form>
+                    
+                    <div className="mt-5 pt-4 border-t border-gray-100 flex flex-wrap items-center gap-4">
+                        <span className="text-sm font-bold text-gray-700">Trạng thái câu hỏi:</span>
+                        <select 
+                            value={statusFilter}
+                            onChange={(e) => setStatusFilter(e.target.value)}
+                            className="border border-gray-300 rounded-lg py-2 px-4 bg-white outline-none focus:border-[#0f4c81] text-[14px] font-medium min-w-[200px] shadow-sm hover:border-gray-400 transition cursor-pointer"
+                        >
+                            <option value="Tất cả">Tất cả trạng thái</option>
+                            <option value="Đã trả lời">Đã trả lời</option>
+                            <option value="Đang chờ trả lời">Đang chờ trả lời</option>
+                        </select>
                     </div>
-                </form>
-            </div>
+                </div>
 
-            {/* Results Area */}
-            {hasSearched && (
+                {/* Results Area */}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="bg-gray-50 border-b border-gray-100 p-4 font-bold flex justify-between items-center text-gray-800">
-                        <span>KẾT QUẢ TÌM KIẾM</span>
-                        <span className="text-gray-500 font-medium text-sm">Hiển thị {MOCK_DATA.length} kết quả</span>
+                    <div className="bg-gray-50 border-b border-gray-100 p-4 font-bold flex flex-col sm:flex-row justify-between sm:items-center text-gray-800 gap-3">
+                        <span className="text-[#0f4c81]">KẾT QUẢ TÌM KIẾM ({filteredData.length})</span>
+                        <div className="flex items-center gap-2 text-sm font-normal">
+                            <span className="text-gray-500 whitespace-nowrap">Sắp xếp:</span>
+                            <select 
+                                value={sortBy}
+                                onChange={(e) => setSortBy(e.target.value)}
+                                className="border border-gray-200 rounded-md bg-white py-1.5 px-2 outline-none font-bold text-[#0f4c81] cursor-pointer hover:bg-gray-50 transition min-w-[150px]"
+                            >
+                                <option>Mới nhất</option>
+                                <option>Phổ biến nhất</option>
+                                <option>Mức độ liên quan</option>
+                            </select>
+                        </div>
                     </div>
-                    <ul className="divide-y divide-gray-100">
-                        {MOCK_DATA.map(item => (
-                            <li key={item.id} className="p-6 hover:bg-blue-50/50 transition-colors group">
-                                <Link to={`/cau-hoi-phap-luat/${item.id}`} className="block">
-                                    <div className="flex items-start justify-between gap-4 mb-2">
-                                        <h3 className="font-bold text-lg text-[#0f4c81] group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug">
-                                            {item.title}
-                                        </h3>
-                                        <span className="shrink-0 bg-blue-50 text-blue-600 border border-blue-100 text-xs font-bold px-2.5 py-1 rounded-full">
-                                            {item.domain}
-                                        </span>
-                                    </div>
-                                    <p className="text-gray-600 text-sm mb-3">"{item.content}"</p>
-                                    <div className="flex flex-wrap items-center gap-4 text-xs">
-                                        {item.status === 'Đã trả lời' ?
-                                            <span className="flex items-center gap-1 font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
-                                                <CheckCircle2 size={12} /> Đã trả lời
-                                            </span>
-                                            :
-                                            <span className="flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">
-                                                <RotateCw size={12} /> Chờ trả lời
-                                            </span>
-                                        }
-                                        <span className="flex items-center gap-1 text-gray-500 font-medium">
-                                            <Clock size={14} /> {item.date}
-                                        </span>
-                                    </div>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+                    
+                    {filteredData.length > 0 ? (
+                        <>
+                            <ul className="divide-y divide-gray-100">
+                                {filteredData.map((item, index) => {
+                                    if(index >= 10) return null; // Only show 10 items for pagination mock
+                                    return (
+                                    <li key={item.id} className="p-6 hover:bg-blue-50/50 transition-colors group">
+                                        <Link to={`/cau-hoi-phap-luat/${item.id}`} className="block">
+                                            <div className="flex items-start justify-between gap-4 mb-2">
+                                                <h3 className="font-bold text-[17px] text-[#0f4c81] group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug pr-4">
+                                                    {item.title}
+                                                </h3>
+                                                <span className="shrink-0 bg-[#f8f9fa] border border-gray-200 text-[#0f4c81] text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
+                                                    {item.domain}
+                                                </span>
+                                            </div>
+                                            <p className="text-gray-600 text-sm mb-3.5 line-clamp-2 leading-relaxed">"{item.content}"</p>
+                                            <div className="flex flex-wrap items-center gap-4 text-xs">
+                                                {item.status === 'Đã trả lời' ?
+                                                    <span className="flex items-center gap-1.5 font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded">
+                                                        <CheckCircle2 size={14} /> Đã trả lời
+                                                    </span>
+                                                    :
+                                                    <span className="flex items-center gap-1.5 font-bold text-amber-600 bg-amber-50 border border-amber-100 px-2.5 py-1 rounded">
+                                                        <RotateCw size={14} /> Chờ biên tập
+                                                    </span>
+                                                }
+                                                <span className="flex items-center gap-1.5 text-gray-500 font-medium bg-gray-50 px-2.5 py-1 rounded border border-transparent">
+                                                    <Clock size={14} /> {item.date}
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    </li>
+                                )})}
+                            </ul>
+                            
+                            {/* Pagination UI */}
+                            <div className="p-5 mt-auto flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-gray-100 bg-gray-50 block">
+                                <span className="text-gray-500 text-sm font-medium">Hiển thị 1 - {Math.min(10, filteredData.length)} của {filteredData.length} kết quả</span>
+                                <div className="flex gap-2">
+                                    <button className="px-3 py-1.5 border border-gray-200 rounded-lg text-gray-400 bg-gray-100 font-medium cursor-not-allowed text-sm">Trang trước</button>
+                                    <button className="px-3 py-1.5 border rounded-lg bg-[#0f4c81] text-white font-medium text-sm shadow-sm">1</button>
+                                    {filteredData.length > 10 && (
+                                        <button className="px-3 py-1.5 border border-gray-200 rounded-lg bg-white text-gray-700 hover:bg-gray-50 font-medium transition text-sm">2</button>
+                                    )}
+                                    <button className={`px-3 py-1.5 border border-gray-200 rounded-lg font-medium transition text-sm ${filteredData.length > 10 ? 'bg-white text-gray-700 hover:bg-gray-50' : 'text-gray-400 bg-gray-100 cursor-not-allowed'}`}>Trang sau</button>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="text-center py-20 px-4">
+                            <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-dashed border-gray-200">
+                                <Search size={32} className="text-gray-400" />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-700 mb-2">Không tìm thấy kết quả phù hợp</h3>
+                            <p className="text-gray-500 max-w-sm mx-auto">Vui lòng thử lại với một từ khóa khác hoặc xóa bớt các bộ lọc để có nhiều kết quả hơn.</p>
+                            <button onClick={handleReset} className="mt-6 text-[#0f4c81] font-bold hover:underline">Xóa tất cả bộ lọc</button>
+                        </div>
+                    )}
                 </div>
-            )}
-
-            {!hasSearched && (
-                <div className="text-center py-16 bg-white rounded-xl shadow-sm border border-gray-100">
-                    <Search size={48} className="mx-auto text-gray-300 mb-4" />
-                    <h3 className="text-xl font-bold text-gray-700 mb-2">Tra cứu câu hỏi pháp luật</h3>
-                    <p className="text-gray-500 max-w-md mx-auto">Nhập từ khóa vào ô tìm kiếm để tìm các câu hỏi tương tự đã được chuyên gia giải đáp.</p>
-                </div>
-            )}
+            </div>
         </div>
     );
 };
