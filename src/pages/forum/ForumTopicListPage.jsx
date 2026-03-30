@@ -361,7 +361,7 @@ const ForumTopicListPage = () => {
                         <div className="space-y-4">
                             {/* Rows */}
                             {paginatedTopics.length > 0 ? paginatedTopics.map((topic) => (
-                                <div key={topic.id} className={`border ${topic.isHot ? 'border-amber-400 bg-gradient-to-r from-amber-50/80 to-orange-50/30 shadow-sm shadow-amber-500/10' : 'bg-white border-gray-200 hover:border-blue-300'} rounded-xl p-5 hover:shadow-md transition-all flex flex-col md:flex-row gap-6 relative overflow-hidden`}>
+                                <div key={topic.id} className={`border ${topic.isHot ? 'border-amber-400 border-2 bg-gradient-to-r from-yellow-100 to-amber-50 shadow-lg shadow-amber-400/25' : 'bg-white border-gray-200 hover:border-blue-300'} rounded-xl p-5 hover:shadow-md transition-all flex flex-col md:flex-row gap-6 relative overflow-hidden`}>
                                     {topic.isHot && (
                                         <div className="absolute top-0 right-0 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[10px] uppercase tracking-wide font-bold px-3 py-1.5 rounded-bl-xl shadow-sm flex items-center gap-1.5 z-10">
                                             <Award size={12} /> Nổi bật
