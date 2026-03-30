@@ -1,10 +1,61 @@
 export const LEGAL_FIELDS = [
-    { id: 'dat-dai', title: 'Đất đai & Nhà ở', thumbnail: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=300' },
-    { id: 'doanh-nghiep', title: 'Doanh nghiệp & Đầu tư', thumbnail: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=300' },
-    { id: 'lao-dong', title: 'Lao động & Việc làm', thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=300' },
-    { id: 'thue', title: 'Thuế & Tài chính', thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=300' },
-    { id: 'dan-su', title: 'Dân sự', thumbnail: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=300' },
-    { id: 'hinh-su', title: 'Hình sự', thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=300' }
+    {
+        id: 'dat-dai', title: 'Đất đai & Nhà ở', thumbnail: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=300',
+        subFields: [
+            { id: 'dat-dai-quy-hoach', title: 'Quy hoạch sử dụng đất' },
+            { id: 'dat-dai-boi-thuong', title: 'Bồi thường, giải phóng mặt bằng' },
+            { id: 'dat-dai-tranh-chap', title: 'Tranh chấp đất đai' },
+            { id: 'dat-dai-chuyen-nhuong', title: 'Chuyển nhượng, mua bán nhà đất' },
+            { id: 'dat-dai-cap-so', title: 'Cấp Giấy chứng nhận (Sổ đỏ)' }
+        ]
+    },
+    {
+        id: 'doanh-nghiep', title: 'Doanh nghiệp & Đầu tư', thumbnail: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=300',
+        subFields: [
+            { id: 'doanh-nghiep-thanh-lap', title: 'Thành lập doanh nghiệp' },
+            { id: 'doanh-nghiep-ma', title: 'Mua bán sáp nhập (M&A)' },
+            { id: 'doanh-nghiep-fdi', title: 'Đầu tư nước ngoài (FDI)' },
+            { id: 'doanh-nghiep-quan-tri', title: 'Quản trị nội bộ' },
+            { id: 'doanh-nghiep-pha-san', title: 'Phá sản, giải thể' }
+        ]
+    },
+    {
+        id: 'lao-dong', title: 'Lao động & Việc làm', thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=300',
+        subFields: [
+            { id: 'lao-dong-hop-dong', title: 'Hợp đồng lao động' },
+            { id: 'lao-dong-bhxh', title: 'Bảo hiểm xã hội, BHYT, BHTN' },
+            { id: 'lao-dong-tranh-chap', title: 'Tranh chấp lao động' },
+            { id: 'lao-dong-an-toan', title: 'An toàn, vệ sinh lao động' }
+        ]
+    },
+    {
+        id: 'thue', title: 'Thuế & Tài chính', thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=300',
+        subFields: [
+            { id: 'thue-tndn', title: 'Thuế Thu nhập doanh nghiệp' },
+            { id: 'thue-tncn', title: 'Thuế Thu nhập cá nhân' },
+            { id: 'thue-gtgt', title: 'Thuế Giá trị gia tăng (VAT)' },
+            { id: 'thue-hoa-don', title: 'Hoá đơn điện tử' },
+            { id: 'thue-hai-quan', title: 'Hải quan, Xuất nhập khẩu' }
+        ]
+    },
+    {
+        id: 'dan-su', title: 'Dân sự', thumbnail: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=300',
+        subFields: [
+            { id: 'dan-su-hon-nhan', title: 'Hôn nhân & Gia đình' },
+            { id: 'dan-su-thua-ke', title: 'Thừa kế' },
+            { id: 'dan-su-hop-dong', title: 'Hợp đồng dân sự' },
+            { id: 'dan-su-so-huu-tri-tue', title: 'Sở hữu trí tuệ' }
+        ]
+    },
+    {
+        id: 'hinh-su', title: 'Hình sự', thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=300',
+        subFields: [
+            { id: 'hinh-su-kinh-te', title: 'Tội phạm kinh tế' },
+            { id: 'hinh-su-cong-nghe-cao', title: 'Tội phạm công nghệ cao' },
+            { id: 'hinh-su-tham-nhung', title: 'Tham nhũng, chức vụ' },
+            { id: 'hinh-su-hanh-chinh', title: 'Xử lý vi phạm hành chính' }
+        ]
+    }
 ];
 
 export const NEWS_CATEGORIES = [

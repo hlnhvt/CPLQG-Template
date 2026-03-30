@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, Save, RefreshCw, LayoutGrid, List, Sun, Moon, Monitor, ArrowUp, ArrowDown, CheckCircle, ChevronDown, ChevronUp, Settings2, Type, BarChart2, ShieldCheck } from 'lucide-react';
+import { Settings, Save, RefreshCw, LayoutGrid, List, Sun, Moon, Monitor, ArrowUp, ArrowDown, CheckCircle, ChevronDown, ChevronUp, Settings2, Type, BarChart2, ShieldCheck, Check } from 'lucide-react';
 import { LEGAL_FIELDS, NEWS_CATEGORIES, FORUMS, STATISTICS, ALL_ITEMS } from '../../data/personalizationData';
 
 // Officer-specific topic sets - pháp luật, văn bản nội bộ, tin ban ngành
@@ -47,6 +47,13 @@ const OfficerSettingsPage = () => {
         ];
     });
 
+    // Sub-fields state
+    const [expandedTopics, setExpandedTopics] = useState([]);
+    const [selectedSubFields, setSelectedSubFields] = useState(() => {
+        const saved = localStorage.getItem('officerSelectedSubTopics');
+        return saved ? JSON.parse(saved) : [];
+    });
+
     const [uiSettings, setUiSettings] = useState({ fontSize: '100%', theme: 'system' });
     const [isSaved, setIsSaved] = useState(false);
     const [expandedBlock, setExpandedBlock] = useState(null);
@@ -56,14 +63,68 @@ const OfficerSettingsPage = () => {
     const handleTopicToggle = (id) => {
         setIsSaved(false);
         const isSelected = selectedTopics.includes(id);
+        const item = ALL_ITEMS.find(i => i.id === id);
+        const subIds = item?.subFields ? item.subFields.map(sf => sf.id) : [];
+
         if (isSelected) {
             setSelectedTopics(prev => prev.filter(t => t !== id));
             setOrderedBlocks(prev => prev.filter(b => b.id !== id));
+            if (subIds.length > 0) {
+                setSelectedSubFields(prev => prev.filter(sfId => !subIds.includes(sfId)));
+            }
             if (expandedBlock === id) setExpandedBlock(null);
         } else {
             setSelectedTopics(prev => [...prev, id]);
             setOrderedBlocks(prev => [...prev, { id, viewMode: 'card', width: '100', recordCount: 5, sortOrder: 'newest' }]);
+            if (subIds.length > 0) {
+                setSelectedSubFields(prev => Array.from(new Set([...prev, ...subIds])));
+            }
         }
+    };
+
+    const toggleSubField = (subId, parentId) => {
+        setIsSaved(false);
+        setSelectedSubFields(prev => {
+            const isSelected = prev.includes(subId);
+            const next = isSelected ? prev.filter(id => id !== subId) : [...prev, subId];
+
+            // Auto select parent if at least one subfield is selected
+            if (!isSelected && !selectedTopics.includes(parentId)) {
+                setSelectedTopics(pf => [...pf, parentId]);
+                setOrderedBlocks(ob => [...ob, { id: parentId, viewMode: 'card', width: '100', recordCount: 5, sortOrder: 'newest' }]);
+            }
+            return next;
+        });
+    };
+
+    const toggleAllSubFields = (parentId) => {
+        setIsSaved(false);
+        const item = ALL_ITEMS.find(i => i.id === parentId);
+        if (!item || !item.subFields) return;
+
+        const subIds = item.subFields.map(sf => sf.id);
+        const isAllSelected = subIds.every(id => selectedSubFields.includes(id));
+
+        if (isAllSelected) {
+            setSelectedSubFields(prev => prev.filter(id => !subIds.includes(id)));
+            // Optionally deselect parent
+            setSelectedTopics(prev => prev.filter(id => id !== parentId));
+            setOrderedBlocks(prev => prev.filter(b => b.id !== parentId));
+            if (expandedBlock === parentId) setExpandedBlock(null);
+        } else {
+            setSelectedSubFields(prev => Array.from(new Set([...prev, ...subIds])));
+            // Select parent
+            if (!selectedTopics.includes(parentId)) {
+                setSelectedTopics(prev => [...prev, parentId]);
+                setOrderedBlocks(prev => [...prev, { id: parentId, viewMode: 'card', width: '100', recordCount: 5, sortOrder: 'newest' }]);
+            }
+        }
+    };
+
+    const toggleExpand = (e, id) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setExpandedTopics(prev => prev.includes(id) ? prev.filter(topicId => topicId !== id) : [...prev, id]);
     };
 
     const moveBlock = (index, direction) => {
@@ -105,6 +166,7 @@ const OfficerSettingsPage = () => {
     const handleSave = () => {
         setIsSaved(true);
         localStorage.setItem('officerSelectedTopics', JSON.stringify(selectedTopics));
+        localStorage.setItem('officerSelectedSubTopics', JSON.stringify(selectedSubFields));
         localStorage.setItem('officerOrderedBlocks', JSON.stringify(orderedBlocks));
         // Dispatch event so OfficerHomePage reacts without needing a page reload
         window.dispatchEvent(new Event('officerSettingsUpdated'));
@@ -137,25 +199,91 @@ const OfficerSettingsPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3">
                 {items.map(topic => {
                     const isSelected = selectedTopics.includes(topic.id);
+                    const isExpanded = expandedTopics.includes(topic.id);
                     return (
-                        <button
-                            key={topic.id}
-                            onClick={() => handleTopicToggle(topic.id)}
-                            className={`flex items-center gap-4 p-3 rounded-xl border transition-all duration-300 w-full text-left ${isSelected
-                                ? 'border-blue-500 bg-blue-50/50 shadow-sm'
-                                : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-sm'}`}
-                        >
-                            <div className="w-24 h-16 shrink-0 rounded-lg overflow-hidden relative shadow-sm">
-                                <img src={topic.thumbnail} alt={topic.title} className="w-full h-full object-cover" />
-                                <div className={`absolute inset-0 transition-opacity duration-300 ${isSelected ? 'bg-blue-900/10' : 'bg-black/5'}`}></div>
-                            </div>
-                            <div className="flex-1 flex items-center justify-between min-w-0 pr-2">
-                                <h3 className={`font-bold text-[15px] truncate ${isSelected ? 'text-blue-700' : 'text-gray-800'}`}>{topic.title}</h3>
-                                <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 border transition-all ${isSelected ? 'bg-blue-500 border-blue-500' : 'bg-white border-gray-300'}`}>
-                                    {isSelected && <CheckCircle size={14} className="text-white" />}
+                        <div key={topic.id} className="flex flex-col relative">
+                            <button
+                                onClick={() => handleTopicToggle(topic.id)}
+                                className={`flex items-center gap-4 p-3 rounded-xl border transition-all duration-300 w-full text-left relative z-10 ${isSelected
+                                    ? 'border-blue-500 bg-blue-50/50 shadow-sm'
+                                    : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-sm'}`}
+                            >
+                                <div className="w-24 h-16 shrink-0 rounded-lg overflow-hidden relative shadow-sm">
+                                    <img src={topic.thumbnail} alt={topic.title} className="w-full h-full object-cover" />
+                                    <div className={`absolute inset-0 transition-opacity duration-300 ${isSelected ? 'bg-blue-900/10' : 'bg-black/5'}`}></div>
                                 </div>
-                            </div>
-                        </button>
+                                <div className="flex-1 flex items-center justify-between min-w-0 pr-2">
+                                    <div className="flex flex-col pr-2">
+                                        <h3 className={`font-bold text-[15px] ${isSelected ? 'text-blue-700' : 'text-gray-800'}`}>{topic.title}</h3>
+                                        {topic.subFields && (
+                                            <div
+                                                className="inline-flex items-center gap-1 mt-1 text-xs text-blue-600 font-semibold cursor-pointer hover:text-blue-800 self-start"
+                                                onClick={(e) => toggleExpand(e, topic.id)}
+                                            >
+                                                {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                                                {isExpanded ? 'Thu gọn lĩnh vực' : 'Chọn lĩnh vực chi tiết'}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 border transition-all ${isSelected ? 'bg-blue-500 border-blue-500' : 'bg-white border-gray-300'}`}>
+                                        {isSelected && <span className="text-white text-xs font-bold">{orderedBlocks.findIndex(b => b.id === topic.id) + 1}</span>}
+                                    </div>
+                                </div>
+                            </button>
+
+                            {/* Subfields Expandable Area (Inline nested list) */}
+                            {topic.subFields && (
+                                <div className={`overflow-hidden transition-all duration-300 -mt-2 ${isExpanded ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                                    <div className="bg-gray-50 border border-t-0 border-gray-200 rounded-b-xl pt-4 pb-3 px-4 shadow-inner">
+                                        <div className="flex flex-wrap gap-2 mt-1">
+                                            {/* Select All Checkbox */}
+                                            <label
+                                                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm cursor-pointer transition-colors font-medium ${topic.subFields.every(sf => selectedSubFields.includes(sf.id))
+                                                        ? 'bg-blue-100 border-blue-300 text-blue-800'
+                                                        : 'bg-white border-gray-400 text-gray-700 hover:border-blue-400 hover:bg-blue-50'
+                                                    }`}
+                                            >
+                                                <input
+                                                    type="checkbox"
+                                                    className="hidden"
+                                                    checked={topic.subFields.every(sf => selectedSubFields.includes(sf.id))}
+                                                    onChange={() => toggleAllSubFields(topic.id)}
+                                                />
+                                                <div className={`w-4 h-4 rounded flex items-center justify-center border shrink-0 ${topic.subFields.every(sf => selectedSubFields.includes(sf.id)) ? 'bg-blue-600 border-blue-600' : 'bg-white border-gray-400'}`}>
+                                                    {topic.subFields.every(sf => selectedSubFields.includes(sf.id)) && <Check size={12} className="text-white" />}
+                                                    {!topic.subFields.every(sf => selectedSubFields.includes(sf.id)) && topic.subFields.some(sf => selectedSubFields.includes(sf.id)) && <div className="w-2 h-2 bg-blue-500 rounded-sm"></div>}
+                                                </div>
+                                                <span>Tất cả</span>
+                                            </label>
+
+                                            {topic.subFields.map(sub => {
+                                                const isSubSelected = selectedSubFields.includes(sub.id);
+                                                return (
+                                                    <label
+                                                        key={sub.id}
+                                                        className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm cursor-pointer transition-colors ${isSubSelected
+                                                                ? 'bg-blue-100 border-blue-300 text-blue-800'
+                                                                : 'bg-white border-gray-200 text-gray-600 hover:border-blue-200 hover:bg-blue-50'
+                                                            }`}
+                                                    >
+                                                        <input
+                                                            type="checkbox"
+                                                            className="hidden"
+                                                            checked={isSubSelected}
+                                                            onChange={() => toggleSubField(sub.id, topic.id)}
+                                                        />
+                                                        <div className={`w-4 h-4 rounded flex items-center justify-center border shrink-0 ${isSubSelected ? 'bg-blue-600 border-blue-600' : 'bg-white border-gray-300'}`}>
+                                                            {isSubSelected && <Check size={12} className="text-white" />}
+                                                        </div>
+                                                        <span>{sub.title}</span>
+                                                    </label>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     );
                 })}
             </div>

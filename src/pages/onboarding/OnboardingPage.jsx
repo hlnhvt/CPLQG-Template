@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-    Check, ArrowRight, Shield, Award, BookOpen, AlertCircle, ChevronLeft, CheckCircle
+    Check, ArrowRight, Shield, Award, BookOpen, AlertCircle, ChevronLeft, ChevronDown, ChevronUp
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { LEGAL_FIELDS, NEWS_CATEGORIES, FORUMS, STATISTICS, ALL_ITEMS } from '../../data/personalizationData';
@@ -10,9 +10,10 @@ const OnboardingPage = () => {
     const navigate = useNavigate();
     const { user } = useAuth();
 
-    // Step 1: Welcome, Step 2: Chọn lĩnh vực
     const [step, setStep] = useState(1);
     const [selectedFields, setSelectedFields] = useState([]);
+    const [expandedTopics, setExpandedTopics] = useState([]);
+    const [selectedSubFields, setSelectedSubFields] = useState([]);
 
     // Giả lập loại tài khoản
     const accountType = user?.role === 'collaborator' ? 'ca-nhan' : 'to-chuc'; // Hoặc dựa vào logic của bạn
@@ -35,19 +36,82 @@ const OnboardingPage = () => {
     const handleSelectAllRecommended = () => {
         const newSelections = new Set([...selectedFields, ...recommendedIds]);
         setSelectedFields(Array.from(newSelections));
+
+        // Auto select subfields for recommended ones
+        let subToAdd = [];
+        recommendedIds.forEach(rId => {
+            const item = ALL_ITEMS.find(i => i.id === rId);
+            if (item && item.subFields) {
+                subToAdd.push(...item.subFields.map(sf => sf.id));
+            }
+        });
+        if (subToAdd.length > 0) {
+            setSelectedSubFields(prev => Array.from(new Set([...prev, ...subToAdd])));
+        }
     };
 
     const toggleField = (id) => {
+        const item = ALL_ITEMS.find(i => i.id === id);
+        const subIds = item?.subFields ? item.subFields.map(sf => sf.id) : [];
+
         if (selectedFields.includes(id)) {
-            setSelectedFields(selectedFields.filter(fId => fId !== id));
+            // Deselect parent and its subfields
+            setSelectedFields(prev => prev.filter(fId => fId !== id));
+            if (subIds.length > 0) {
+                setSelectedSubFields(prev => prev.filter(sfId => !subIds.includes(sfId)));
+            }
         } else {
-            setSelectedFields([...selectedFields, id]);
+            // Select parent and its subfields
+            setSelectedFields(prev => [...prev, id]);
+            if (subIds.length > 0) {
+                setSelectedSubFields(prev => Array.from(new Set([...prev, ...subIds])));
+            }
         }
+    };
+
+    const toggleSubField = (subId, parentId) => {
+        setSelectedSubFields(prev => {
+            const isSelected = prev.includes(subId);
+            const next = isSelected ? prev.filter(id => id !== subId) : [...prev, subId];
+
+            // Automatically select parent if at least one subfield is selected
+            if (!isSelected && !selectedFields.includes(parentId)) {
+                setSelectedFields(pf => [...pf, parentId]);
+            }
+            return next;
+        });
+    };
+
+    const toggleAllSubFields = (parentId) => {
+        const item = ALL_ITEMS.find(i => i.id === parentId);
+        if (!item || !item.subFields) return;
+
+        const subIds = item.subFields.map(sf => sf.id);
+        const isAllSelected = subIds.every(id => selectedSubFields.includes(id));
+
+        if (isAllSelected) {
+            setSelectedSubFields(prev => prev.filter(id => !subIds.includes(id)));
+            // Deselect parent too
+            setSelectedFields(prev => prev.filter(id => id !== parentId));
+        } else {
+            setSelectedSubFields(prev => Array.from(new Set([...prev, ...subIds])));
+            // Select parent
+            if (!selectedFields.includes(parentId)) {
+                setSelectedFields(prev => [...prev, parentId]);
+            }
+        }
+    };
+
+    const toggleExpand = (e, id) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setExpandedTopics(prev => prev.includes(id) ? prev.filter(topicId => topicId !== id) : [...prev, id]);
     };
 
     const handleComplete = () => {
         // Lưu cấu hình
         localStorage.setItem('userSelectedTopics', JSON.stringify(selectedFields));
+        localStorage.setItem('userSelectedSubTopics', JSON.stringify(selectedSubFields));
         const orderedBlocks = selectedFields.map(id => ({ id, viewMode: 'card', width: '100', recordCount: 5, sortOrder: 'newest' }));
         localStorage.setItem('userOrderedBlocks', JSON.stringify(orderedBlocks));
 
@@ -114,34 +178,101 @@ const OnboardingPage = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3">
                     {items.map(topic => {
                         const isSelected = selectedFields.includes(topic.id);
+                        const isExpanded = expandedTopics.includes(topic.id);
+
                         return (
-                            <button
-                                key={topic.id}
-                                onClick={(e) => { e.preventDefault(); toggleField(topic.id); }}
-                                className={`flex items-center gap-4 p-3 rounded-xl border transition-all duration-300 w-full text-left relative ${isSelected
-                                    ? 'border-blue-500 bg-blue-50/50 shadow-sm'
-                                    : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-sm'
-                                    }`}
-                            >
-                                <div className="w-24 h-16 shrink-0 rounded-lg overflow-hidden relative shadow-sm">
-                                    <img src={topic.thumbnail} alt={topic.title} className="w-full h-full object-cover" />
-                                    <div className={`absolute inset-0 transition-opacity duration-300 ${isSelected ? 'bg-blue-900/10' : 'bg-black/5 hover:bg-black/10'}`}></div>
-                                </div>
-                                <div className="flex-1 flex items-center justify-between min-w-0 pr-2">
-                                    <h3 className={`font-bold text-[15px] truncate ${isSelected ? 'text-blue-700' : 'text-gray-800'}`}>
-                                        {topic.title}
-                                    </h3>
-                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 border transition-all ${isSelected ? 'bg-blue-500 border-blue-500' : 'bg-white border-gray-300'}`}>
-                                        {isSelected && <CheckCircle size={14} className="text-white" />}
+                            <div key={topic.id} className="flex flex-col relative">
+                                <button
+                                    onClick={(e) => { e.preventDefault(); toggleField(topic.id); }}
+                                    className={`flex items-center gap-4 p-3 rounded-xl border transition-all duration-300 w-full text-left relative z-10 ${isSelected
+                                        ? 'border-blue-500 bg-blue-50/50 shadow-sm'
+                                        : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-sm'
+                                        }`}
+                                >
+                                    <div className="w-24 h-16 shrink-0 rounded-lg overflow-hidden relative shadow-sm">
+                                        <img src={topic.thumbnail} alt={topic.title} className="w-full h-full object-cover" />
+                                        <div className={`absolute inset-0 transition-opacity duration-300 ${isSelected ? 'bg-blue-900/10' : 'bg-black/5 hover:bg-black/10'}`}></div>
                                     </div>
-                                </div>
-                                {recommendedIds.includes(topic.id) && !isSelected && (
-                                    <div className="absolute top-2 right-2 flex w-2 h-2">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full w-2 h-2 bg-amber-500"></span>
+                                    <div className="flex-1 flex items-center justify-between min-w-0 pr-2">
+                                        <div className="flex flex-col pr-2">
+                                            <h3 className={`font-bold text-[15px] ${isSelected ? 'text-blue-700' : 'text-gray-800'}`}>
+                                                {topic.title}
+                                            </h3>
+                                            {topic.subFields && (
+                                                <div
+                                                    className="inline-flex items-center gap-1 mt-1 text-xs text-blue-600 font-semibold cursor-pointer hover:text-blue-800 self-start"
+                                                    onClick={(e) => toggleExpand(e, topic.id)}
+                                                >
+                                                    {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                                                    {isExpanded ? 'Thu gọn lĩnh vực' : 'Chọn lĩnh vực chi tiết'}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 border transition-all ${isSelected ? 'bg-blue-500 border-blue-500' : 'bg-white border-gray-300'}`}>
+                                            {isSelected && <span className="text-white text-xs font-bold">{selectedFields.indexOf(topic.id) + 1}</span>}
+                                        </div>
+                                    </div>
+                                    {recommendedIds.includes(topic.id) && !isSelected && (
+                                        <div className="absolute top-2 right-2 flex w-2 h-2">
+                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                                            <span className="relative inline-flex rounded-full w-2 h-2 bg-amber-500"></span>
+                                        </div>
+                                    )}
+                                </button>
+
+                                {/* Subfields Expandable Area */}
+                                {topic.subFields && (
+                                    <div className={`overflow-hidden transition-all duration-300 -mt-2 ${isExpanded ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                                        <div className="bg-gray-50 border border-t-0 border-gray-200 rounded-b-xl pt-4 pb-3 px-4 shadow-inner">
+                                            <div className="flex flex-wrap gap-2 mt-1">
+                                                {/* Select All Checkbox */}
+                                                <label
+                                                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm cursor-pointer transition-colors font-medium ${topic.subFields.every(sf => selectedSubFields.includes(sf.id))
+                                                        ? 'bg-blue-100 border-blue-300 text-blue-800'
+                                                        : 'bg-white border-gray-400 text-gray-700 hover:border-blue-400 hover:bg-blue-50'
+                                                        }`}
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        className="hidden"
+                                                        checked={topic.subFields.every(sf => selectedSubFields.includes(sf.id))}
+                                                        onChange={() => toggleAllSubFields(topic.id)}
+                                                    />
+                                                    <div className={`w-4 h-4 rounded flex items-center justify-center border shrink-0 ${topic.subFields.every(sf => selectedSubFields.includes(sf.id)) ? 'bg-blue-600 border-blue-600' : 'bg-white border-gray-400'}`}>
+                                                        {topic.subFields.every(sf => selectedSubFields.includes(sf.id)) && <Check size={12} className="text-white" />}
+                                                        {!topic.subFields.every(sf => selectedSubFields.includes(sf.id)) && topic.subFields.some(sf => selectedSubFields.includes(sf.id)) && <div className="w-2 h-2 bg-blue-500 rounded-sm"></div>}
+                                                    </div>
+                                                    <span>Tất cả</span>
+                                                </label>
+
+                                                {topic.subFields.map(sub => {
+                                                    const isSubSelected = selectedSubFields.includes(sub.id);
+                                                    return (
+                                                        <label
+                                                            key={sub.id}
+                                                            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm cursor-pointer transition-colors ${isSubSelected
+                                                                ? 'bg-blue-100 border-blue-300 text-blue-800'
+                                                                : 'bg-white border-gray-200 text-gray-600 hover:border-blue-200 hover:bg-blue-50'
+                                                                }`}
+                                                        >
+                                                            <input
+                                                                type="checkbox"
+                                                                className="hidden"
+                                                                checked={isSubSelected}
+                                                                onChange={() => toggleSubField(sub.id, topic.id)}
+                                                            />
+                                                            <div className={`w-4 h-4 rounded flex items-center justify-center border shrink-0 ${isSubSelected ? 'bg-blue-600 border-blue-600' : 'bg-white border-gray-300'}`}>
+                                                                {isSubSelected && <Check size={12} className="text-white" />}
+                                                            </div>
+                                                            <span>{sub.title}</span>
+                                                        </label>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
                                     </div>
                                 )}
-                            </button>
+                            </div>
                         );
                     })}
                 </div>
