@@ -146,10 +146,9 @@ const ForumListPage = () => {
                 {/* Content Area */}
                 <div className="flex flex-col lg:flex-row gap-8">
 
-                    {/* Left Sidebar - Navigation/Filters (Optional, could be used for categories) */}
-                    <div className="w-full lg:w-1/4 hidden lg:block">
+                    {/* Left Sidebar - Navigation/Filters */}
+                    <div className="w-full lg:w-1/4 hidden lg:block shrink-0">
                         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 sticky top-6">
-
                             {/* Livestream Event Portal Banner */}
                             <Link to="/dien-dan/su-kien" className="group block mb-6">
                                 <div className="bg-gradient-to-br from-red-600 to-orange-500 rounded-2xl p-5 text-white shadow-lg relative overflow-hidden hover:shadow-xl transition-all flex flex-col justify-center">
@@ -174,7 +173,7 @@ const ForumListPage = () => {
                                 </div>
                             </Link>
 
-                            <h3 className="font-bold text-gray-800 text-lg mb-4 mt-6 flex items-center gap-2">
+                            <h3 className="font-bold text-gray-800 text-lg mb-4 flex items-center gap-2">
                                 <Filter size={20} className="text-blue-600" />
                                 Nhóm diễn đàn
                             </h3>
@@ -198,7 +197,7 @@ const ForumListPage = () => {
                                         <MessageSquare size={24} className="text-white" />
                                     </div>
                                     <h4 className="font-bold text-lg mb-2">Bạn có thắc mắc?</h4>
-                                    <p className="text-sm text-blue-100 mb-4">Hãy tạo một chủ đề mới để cộng đồng cùng tham gia bình luân và góp ý nhé.</p>
+                                    <p className="text-sm text-blue-100 mb-4">Hãy tạo một chủ đề mới để cộng đồng cùng tham gia bình luận và góp ý nhé.</p>
                                     <Link to="/dien-dan/tao-moi" className="block w-full py-2 bg-white text-blue-600 font-bold rounded-lg hover:bg-blue-50 transition-colors">
                                         Tạo chủ đề
                                     </Link>
@@ -208,7 +207,7 @@ const ForumListPage = () => {
                     </div>
 
                     {/* Main Content List */}
-                    <div className="w-full lg:w-3/4">
+                    <div className="w-full flex-grow lg:w-3/4">
                         {/* Tabs */}
                         <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-2 mb-6 flex flex-wrap gap-2 overflow-x-auto">
                             {tabs.map(tab => (

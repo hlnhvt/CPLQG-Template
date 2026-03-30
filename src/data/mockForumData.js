@@ -185,6 +185,20 @@ export const MOCK_FORUMS = [
         isHot: false,
         isUpcoming: false,
         thumbnail: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=400&q=80"
+    },
+    {
+        id: 15,
+        category: "Diễn đàn Thuế & Tài chính",
+        title: "Gỡ rối Thuế Xuất nhập khẩu & Hải quan",
+        description: "Chuyên mục thảo luận và giải đáp vướng mắc các loại thuế phí khi xuất nhập khẩu hàng hóa, thủ tục thông quan và xử lý vi phạm hành chính.",
+        tags: ["Thuế XNK", "Hải quan", "Logistics"],
+        topicCount: 5600,
+        memberCount: 22400,
+        lastActive: "1 phút trước",
+        isFollowing: false,
+        isHot: true,
+        isUpcoming: false,
+        thumbnail: "https://images.unsplash.com/photo-1586528116311-ad8ed74512f5?w=400&q=80"
     }
 ];
 
