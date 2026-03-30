@@ -131,7 +131,7 @@ export const MOCK_FORUMS = [
     },
     {
         id: 11,
-        category: "Các tổ hợp Sự kiện",
+        category: "Diễn đàn Thuế & Tài chính",
         title: "Dự thảo Luật Thuế Giá trị gia tăng (Sửa đổi)",
         description: "Không gian mở thu thập ý kiến chuyên gia và người dân về Dự thảo Luật Thuế GTGT mới nhất (Qúy IV 2024). Diễn đàn sẽ chính thức mở sổ góp ý sau thời gian đếm ngược.",
         tags: ["Thuế GTGT", "Dự thảo sửa đổi", "Góp ý dự thảo"],
@@ -143,6 +143,48 @@ export const MOCK_FORUMS = [
         isUpcoming: true,
         openingDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000 + 15 * 60 * 1000).toISOString(),
         thumbnail: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80"
+    },
+    {
+        id: 12,
+        category: "Diễn đàn Thuế & Tài chính",
+        title: "Hỏi đáp Thuế Thu nhập Doanh nghiệp",
+        description: "Giải đáp các vướng mắc về luật thuế TNDN, phân bổ chi phí, hóa đơn chứng từ, kê khai và quyết toán thuế cuối năm.",
+        tags: ["Thuế TNDN", "Kế toán", "Quyết toán thuế"],
+        topicCount: 3450,
+        memberCount: 12500,
+        lastActive: "5 phút trước",
+        isFollowing: true,
+        isHot: true,
+        isUpcoming: false,
+        thumbnail: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80"
+    },
+    {
+        id: 13,
+        category: "Diễn đàn Thuế & Tài chính",
+        title: "Chính sách Thuế Thu nhập Cá nhân",
+        description: "Thảo luận về các quy định hiện hành, cách tính thuế TNCN, giảm trừ gia cảnh, và thủ tục hoàn thuế cho cá nhân tự quyết toán.",
+        tags: ["Thuế TNCN", "Hoàn thuế", "Giảm trừ gia cảnh"],
+        topicCount: 1820,
+        memberCount: 8900,
+        lastActive: "15 phút trước",
+        isFollowing: false,
+        isHot: false,
+        isUpcoming: false,
+        thumbnail: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&q=80"
+    },
+    {
+        id: 14,
+        category: "Diễn đàn Thuế & Tài chính",
+        title: "Quản trị Tài chính Doanh nghiệp",
+        description: "Không gian chia sẻ kinh nghiệm quản lý dòng tiền, rủi ro tài chính, huy động vốn, và phân tích báo cáo tài chính nội bộ.",
+        tags: ["Tài chính", "Đầu tư", "Dòng tiền"],
+        topicCount: 940,
+        memberCount: 4200,
+        lastActive: "1 giờ trước",
+        isFollowing: false,
+        isHot: false,
+        isUpcoming: false,
+        thumbnail: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=400&q=80"
     }
 ];
 
