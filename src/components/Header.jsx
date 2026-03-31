@@ -490,7 +490,7 @@ const Header = () => {
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
                                 <Link to="/hien-ke" className="h-full flex items-center px-4 gap-1.5 hover:bg-white/10 transition-colors whitespace-nowrap">
-                                    Hiến kế hoàn thiện chính sách, pháp luật
+                                    Hiến kế xây dựng và thi hành pháp luật
                                 </Link>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
@@ -603,7 +603,7 @@ const Header = () => {
                         </div>
 
                         <div className="border-b border-white/5">
-                            <Link to="/hien-ke" onClick={() => setMobileMenuOpen(false)} className="block px-5 py-4 font-bold hover:bg-white/5 transition-colors">Hiến kế hoàn thiện chính sách, pháp luật</Link>
+                            <Link to="/hien-ke" onClick={() => setMobileMenuOpen(false)} className="block px-5 py-4 font-bold hover:bg-white/5 transition-colors">Hiến kế xây dựng và thi hành pháp luật</Link>
                         </div>
 
                         <div className="border-b border-white/5">

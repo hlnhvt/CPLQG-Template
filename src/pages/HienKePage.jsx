@@ -223,7 +223,7 @@ export default function HienKePage() {
                     <nav className="flex items-center gap-1.5 text-blue-300/80 text-[13px] mb-8 animate-fade-in">
                         <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
                         <ChevronRight size={14} />
-                        <span className="text-white/90">Hiến kế hoàn thiện chính sách, pháp luật</span>
+                        <span className="text-white/90"> chính sách, pháp luật</span>
                     </nav>
 
                     <div className="flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-16 pt-6 lg:pt-8">
