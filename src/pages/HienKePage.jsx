@@ -1,0 +1,530 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+    Search, ArrowRight, Users, Calendar, ChevronRight,
+    Scale, Landmark, Heart, TrendingUp,
+} from 'lucide-react';
+
+// ======================== MOCK DATA ========================
+
+// Thumbnail pool from /public directory
+const THUMBS = [
+    '/thumb1.png',
+    '/thumb2.png',
+    '/thumb3.png',
+    '/poster1.png',
+    '/banner-nghi-quyet.png',
+    '/1870-210-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg',
+];
+const thumb = (i) => THUMBS[i % THUMBS.length];
+
+const HOT_ITEMS = [
+    { id: 'h1', title: 'Góp ý Dự thảo Luật Đất đai (Sửa đổi)', agency: 'Bộ Tài nguyên và Môi trường', status: 'open', deadline: '30/04/2026', participants: 3821, thumb: thumb(0) },
+    { id: 'h2', title: 'Góp ý chính sách nhà ở xã hội cho công nhân', agency: 'Bộ Xây dựng', status: 'open', deadline: '15/04/2026', participants: 2140, thumb: thumb(1) },
+    { id: 'h3', title: 'Quy hoạch tổng thể quốc gia 2021–2030', agency: 'Bộ Kế hoạch và Đầu tư', status: 'upcoming', deadline: '01/05/2026', participants: 0, thumb: thumb(2) },
+    { id: 'h4', title: 'Chính sách phát triển kinh tế tuần hoàn', agency: 'Bộ Tài nguyên và Môi trường', status: 'closed', deadline: '15/03/2026', participants: 4230, thumb: thumb(3) },
+];
+
+const LIFE_CATEGORIES = [
+    { id: 1, emoji: '🏡', name: 'Kinh tế và Đời sống' },
+    { id: 2, emoji: '🌍', name: 'Lưu trú và Nhập tịch' },
+    { id: 3, emoji: '🚗', name: 'Giao thông vận tải' },
+    { id: 4, emoji: '💒', name: 'Hôn nhân và Gia đình' },
+    { id: 5, emoji: '🏠', name: 'Bất động sản' },
+    { id: 6, emoji: '📚', name: 'Giáo dục và Đào tạo' },
+    { id: 7, emoji: '🏥', name: 'Sức khỏe và Y tế' },
+    { id: 8, emoji: '🌱', name: 'An sinh xã hội' },
+    { id: 9, emoji: '💼', name: 'Việc làm và Lao động' },
+    { id: 10, emoji: '🏪', name: 'Khởi nghiệp' },
+    { id: 11, emoji: '⛑️', name: 'An toàn lao động' },
+];
+
+const DAILY_CONSULTATIONS = [
+    { id: 1, title: 'Khảo sát sự hài lòng với dịch vụ y tế công lập', category: 'Sức khỏe và Y tế', status: 'open', deadline: '30/04/2026', participants: 2100, agency: 'Bộ Y tế', thumb: thumb(0) },
+    { id: 2, title: 'Lấy ý kiến về điều chỉnh lương tối thiểu vùng 2026', category: 'Việc làm và Lao động', status: 'open', deadline: '15/04/2026', participants: 5340, agency: 'Bộ Lao động – TB&XH', thumb: thumb(1) },
+    { id: 3, title: 'Ý kiến về chất lượng giáo dục mầm non công lập', category: 'Giáo dục và Đào tạo', status: 'upcoming', deadline: '01/05/2026', participants: 0, agency: 'Bộ Giáo dục và Đào tạo', thumb: thumb(2) },
+    { id: 4, title: 'Tham vấn chính sách vay mua nhà lần đầu', category: 'Bất động sản', status: 'open', deadline: '25/04/2026', participants: 3240, agency: 'Ngân hàng Nhà nước', thumb: thumb(3) },
+    { id: 5, title: 'Ý kiến về chính sách bảo hiểm xã hội tự nguyện', category: 'An sinh xã hội', status: 'open', deadline: '10/04/2026', participants: 2670, agency: 'Bộ Lao động – TB&XH', thumb: thumb(4) },
+    { id: 6, title: 'Đánh giá chính sách hỗ trợ khởi nghiệp đổi mới sáng tạo', category: 'Khởi nghiệp', status: 'closed', deadline: '20/03/2026', participants: 1890, agency: 'Bộ Khoa học và Công nghệ', thumb: thumb(5) },
+];
+
+const LEGAL_CONSULTATIONS = [
+    { id: 1, title: 'Góp ý Bộ luật Dân sự sửa đổi – Phần hợp đồng điện tử', domain: 'Pháp luật dân sự', status: 'open', deadline: '30/04/2026', participants: 1240, agency: 'Bộ Tư pháp', thumb: thumb(0) },
+    { id: 2, title: 'Dự thảo Luật Doanh nghiệp sửa đổi – Quản trị công ty', domain: 'Pháp luật kinh doanh', status: 'open', deadline: '20/04/2026', participants: 2870, agency: 'Bộ Kế hoạch và Đầu tư', thumb: thumb(1) },
+    { id: 3, title: 'Nghị định xử phạt vi phạm hành chính về môi trường', domain: 'Pháp luật môi trường', status: 'upcoming', deadline: '05/05/2026', participants: 0, agency: 'Bộ Tài nguyên và Môi trường', thumb: thumb(2) },
+    { id: 4, title: 'Sửa đổi Bộ luật Lao động – Hợp đồng lao động linh hoạt', domain: 'Pháp luật lao động', status: 'open', deadline: '01/05/2026', participants: 4120, agency: 'Bộ Lao động – TB&XH', thumb: thumb(3) },
+    { id: 5, title: 'Góp ý Luật Tố tụng hành chính sửa đổi', domain: 'Pháp luật hành chính', status: 'closed', deadline: '01/03/2026', participants: 1890, agency: 'Bộ Tư pháp', thumb: thumb(4) },
+    { id: 6, title: 'Dự thảo Luật Hình sự sửa đổi – Tội phạm mạng', domain: 'Pháp luật hình sự', status: 'open', deadline: '10/05/2026', participants: 930, agency: 'Bộ Công an', thumb: thumb(5) },
+];
+
+const FUND_CONSULTATIONS = [
+    { id: 1, title: 'Nghiên cứu hiệu quả thực thi Luật Hôn nhân và Gia đình', category: 'Nghiên cứu đề xuất', status: 'open', deadline: '15/04/2026', budget: '500 triệu đồng', agency: 'Quỹ Hỗ trợ Pháp luật', thumb: thumb(0) },
+    { id: 2, title: 'Hội thảo: Chính sách thuế xanh và phát triển bền vững', category: 'Hội thảo tham vấn', status: 'upcoming', deadline: '25/04/2026', budget: '200 triệu đồng', agency: 'Quỹ Hỗ trợ Pháp luật', thumb: thumb(1) },
+    { id: 3, title: 'Tập huấn kỹ năng tham gia xây dựng pháp luật cho tổ chức dân sự', category: 'Chương trình tập huấn', status: 'open', deadline: '30/04/2026', budget: '300 triệu đồng', agency: 'Quỹ Hỗ trợ Pháp luật', thumb: thumb(2) },
+    { id: 4, title: 'Giám sát độc lập thực hiện Nghị quyết về cải cách hành chính', category: 'Giám sát thực thi', status: 'open', deadline: '20/04/2026', budget: '400 triệu đồng', agency: 'Quỹ Hỗ trợ Pháp luật', thumb: thumb(3) },
+    { id: 5, title: 'Hội thảo: Luật Tiếp cận thông tin sau 5 năm thực hiện', category: 'Hội thảo tham vấn', status: 'closed', deadline: '10/03/2026', budget: '180 triệu đồng', agency: 'Quỹ Hỗ trợ Pháp luật', thumb: thumb(4) },
+    { id: 6, title: 'Đề xuất nghiên cứu cơ chế bảo vệ người tố cáo', category: 'Nghiên cứu đề xuất', status: 'open', deadline: '05/05/2026', budget: '350 triệu đồng', agency: 'Quỹ Hỗ trợ Pháp luật', thumb: thumb(5) },
+];
+
+// ======================== HELPERS ========================
+
+const StatusBadge = ({ status, small = false }) => {
+    const base = `inline-flex items-center gap-1.5 font-semibold ${small ? 'text-[11px]' : 'text-[12px]'}`;
+    if (status === 'open') return (
+        <span className={`${base} text-green-700 bg-green-50 px-2.5 py-1 rounded-full border border-green-200`}>
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block animate-pulse" />
+            Đang mở
+        </span>
+    );
+    if (status === 'upcoming') return (
+        <span className={`${base} text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200`}>
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block" />
+            Sắp mở
+        </span>
+    );
+    return (
+        <span className={`${base} text-gray-400 bg-gray-50 px-2.5 py-1 rounded-full border border-gray-200`}>
+            <span className="w-1.5 h-1.5 rounded-full bg-gray-300 inline-block" />
+            Đã kết thúc
+        </span>
+    );
+};
+
+// ======================== CARD COMPONENT ========================
+// Horizontal card: thumbnail LEFT, content RIGHT
+const ConsultCard = ({ item, to, tag, accentColor = '#1e3a8a' }) => (
+    <Link
+        to={to}
+        className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all duration-200 flex flex-row h-[130px]"
+    >
+        {/* Left: Thumbnail */}
+        <div className="relative w-[160px] shrink-0 overflow-hidden">
+            <img
+                src={item.thumb}
+                alt={item.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                onError={e => { e.target.src = '/images/dong_son_cover.png'; }}
+            />
+            {/* Subtle overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10" />
+            {/* Tag overlay */}
+            {tag && (
+                <div className="absolute bottom-2 left-2">
+                    <span className="text-[10px] font-semibold text-white bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full leading-tight">
+                        {tag}
+                    </span>
+                </div>
+            )}
+        </div>
+
+        {/* Right: Content */}
+        <div className="flex-1 min-w-0 px-4 py-3 flex flex-col justify-between">
+            {/* Top: status + agency */}
+            <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                <StatusBadge status={item.status} small />
+                <span className="text-[11px] text-gray-400 font-medium truncate">{item.agency}</span>
+            </div>
+
+            {/* Title */}
+            <h3
+                className="text-[14px] font-bold text-gray-900 leading-snug group-hover:text-[#1e3a8a] transition-colors flex-1"
+                style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+            >
+                {item.title}
+            </h3>
+
+            {/* Footer meta */}
+            <div className="flex items-center gap-3 mt-2">
+                {item.deadline && (
+                    <span className="text-[11px] text-gray-400 flex items-center gap-1">
+                        <Calendar size={11} /> {item.deadline}
+                    </span>
+                )}
+                {item.participants > 0 && (
+                    <span className="text-[11px] text-gray-400 flex items-center gap-1">
+                        <Users size={11} /> {item.participants.toLocaleString('vi-VN')}
+                    </span>
+                )}
+                {item.budget && (
+                    <span className="text-[11px] font-semibold text-amber-600">💰 {item.budget}</span>
+                )}
+                <ArrowRight size={13} className="ml-auto text-gray-300 group-hover:text-[#1e3a8a] group-hover:translate-x-0.5 transition-all shrink-0" />
+            </div>
+        </div>
+    </Link>
+);
+
+// ======================== SECTION WRAPPER ========================
+const Section = ({ id, icon: Icon, color, label, title, subtitle, children, viewAllTo }) => (
+    <section id={id} className="py-8 border-b border-gray-100">
+        <div className="container mx-auto px-4 md:px-8 max-w-[1280px]">
+            <div className="flex items-start justify-between gap-4 mb-6">
+                <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-sm" style={{ backgroundColor: color + '15' }}>
+                        <Icon size={19} style={{ color }} />
+                    </div>
+                    <div>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color }}>{label}</p>
+                        <h2 className="text-[20px] md:text-[24px] font-extrabold text-gray-900 leading-tight">{title}</h2>
+                        {subtitle && <p className="text-gray-500 text-[13px] mt-0.5 max-w-2xl">{subtitle}</p>}
+                    </div>
+                </div>
+                {viewAllTo && (
+                    <Link to={viewAllTo} className="shrink-0 flex items-center gap-1.5 text-[13px] font-semibold hover:underline mt-1 transition-colors" style={{ color }}>
+                        Xem tất cả <ArrowRight size={14} />
+                    </Link>
+                )}
+            </div>
+            {children}
+        </div>
+    </section>
+);
+
+// ======================== PAGE ========================
+
+export default function HienKePage() {
+    const [selectedLifeCat, setSelectedLifeCat] = useState(null);
+    const [selectedLegalDomain, setSelectedLegalDomain] = useState('Tất cả');
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const filteredDaily = DAILY_CONSULTATIONS.filter(c =>
+        !selectedLifeCat || c.category === selectedLifeCat
+    );
+
+    const legalDomains = ['Tất cả', 'Pháp luật dân sự', 'Pháp luật hình sự', 'Pháp luật kinh doanh', 'Pháp luật lao động', 'Pháp luật hành chính', 'Pháp luật môi trường'];
+    const filteredLegal = LEGAL_CONSULTATIONS.filter(c =>
+        selectedLegalDomain === 'Tất cả' || c.domain === selectedLegalDomain
+    );
+
+    return (
+        <div className="bg-gray-50 min-h-screen font-sans">
+
+            {/* =====================================================
+                HERO — Full trống đồng background
+            ===================================================== */}
+            <div
+                className="relative overflow-hidden"
+                style={{ minHeight: '480px' }}
+            >
+                {/* Background: trống đồng image */}
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: "url('/images/dong_son_cover.png')" }}
+                />
+                {/* Overlay: dark navy so text is readable */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#1e3a8a]/80 to-[#1e3a8a]/60" />
+                {/* Subtle gold shimmer overlay matching trống đồng */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0f172a]/50" />
+
+                {/* Content */}
+                <div className="relative z-10 container mx-auto px-4 md:px-8 max-w-[1280px] py-16 md:py-20">
+                    {/* Breadcrumb */}
+                    <nav className="flex items-center gap-1.5 text-blue-300/80 text-[13px] mb-8">
+                        <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
+                        <ChevronRight size={14} />
+                        <span className="text-white/90">Hiến kế hoàn thiện thể chế</span>
+                    </nav>
+
+                    <div className="max-w-2xl">
+                        {/* Small label */}
+                        <h1 className="text-[38px] md:text-[52px] lg:text-[60px] font-extrabold text-white leading-[1.1] mb-5 tracking-tight">
+                            Chia sẻ ý kiến<br />
+                            <span className="text-amber-300">với chúng tôi!</span>
+                        </h1>
+                        <p className="text-blue-100 text-[16px] md:text-[17px] leading-relaxed mb-8 max-w-xl">
+                            Từ pháp luật, giáo dục, y tế đến đất đai và lao động —
+                            tiếng nói của bạn định hình chính sách quốc gia.
+                        </p>
+
+                        {/* Search bar */}
+                        <div className="flex max-w-lg mb-10">
+                            <div className="relative flex-1">
+                                <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                <input
+                                    type="text"
+                                    value={searchQuery}
+                                    onChange={e => setSearchQuery(e.target.value)}
+                                    placeholder="Tìm kiếm cuộc tham vấn..."
+                                    className="w-full pl-10 pr-4 py-3.5 rounded-l-xl text-[14px] text-gray-800 bg-white border-0 focus:outline-none focus:ring-2 focus:ring-amber-300 shadow-lg"
+                                />
+                            </div>
+                            <button className="px-6 py-3.5 bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold rounded-r-xl text-[14px] transition-colors whitespace-nowrap shadow-lg">
+                                Tìm kiếm
+                            </button>
+                        </div>
+
+                        {/* Stats */}
+                        <div className="flex flex-wrap gap-8">
+                            {[
+                                { label: 'Cuộc tham vấn đang mở', value: '24' },
+                                { label: 'Lượt tham gia', value: '85K+' },
+                                { label: 'Lĩnh vực', value: '32' },
+                            ].map(s => (
+                                <div key={s.label} className="text-white">
+                                    <div className="text-[32px] md:text-[36px] font-extrabold leading-none text-amber-300">{s.value}</div>
+                                    <div className="text-blue-200 text-[13px] font-medium mt-1">{s.label}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* =====================================================
+                QUICK NAV
+            ===================================================== */}
+            <div className="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
+                <div className="container mx-auto px-4 md:px-8 max-w-[1280px]">
+                    <nav className="flex overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
+                        {[
+                            { href: '#section-hot', label: 'Vấn đề nổi bật', icon: TrendingUp, color: '#1e3a8a' },
+                            { href: '#section-life', label: 'Đời sống thường ngày', icon: Heart, color: '#16a34a' },
+                            { href: '#section-legal', label: 'Lĩnh vực pháp lý', icon: Scale, color: '#7c3aed' },
+                            { href: '#section-fund', label: 'Quỹ hỗ trợ chính sách', icon: Landmark, color: '#b45309' },
+                        ].map(item => (
+                            <a
+                                key={item.href}
+                                href={item.href}
+                                className="flex items-center gap-2 px-5 py-4 text-[13px] font-semibold text-gray-500 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-900 transition-all whitespace-nowrap"
+                            >
+                                <item.icon size={14} style={{ color: item.color }} />
+                                {item.label}
+                            </a>
+                        ))}
+                    </nav>
+                </div>
+            </div>
+
+            {/* =====================================================
+                SECTION 1: VẤN ĐỀ NỔI BẬT — 2-col + 2-col card grid
+            ===================================================== */}
+            <Section
+                id="section-hot"
+                icon={TrendingUp}
+                color="#1e3a8a"
+                label="Các vấn đề nổi bật"
+                title="Nhà nước cần ý kiến cộng đồng"
+                subtitle="Dự thảo luật và chính sách đang cần sự đóng góp của người dân, tổ chức và doanh nghiệp."
+                viewAllTo="/hien-ke/tat-ca"
+            >
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
+                    {HOT_ITEMS.map(item => (
+                        <ConsultCard
+                            key={item.id}
+                            item={item}
+                            to={`/hien-ke/${item.id}`}
+                            accentColor="#1e3a8a"
+                        />
+                    ))}
+                </div>
+                <div className="text-center">
+                    <Link to="/hien-ke/tat-ca" className="inline-flex items-center gap-2 px-7 py-3 border-2 border-[#1e3a8a] text-[#1e3a8a] font-bold rounded-xl hover:bg-[#1e3a8a] hover:text-white transition-all duration-200 text-[14px]">
+                        Xem toàn bộ <ArrowRight size={15} />
+                    </Link>
+                </div>
+            </Section>
+
+            {/* =====================================================
+                SECTION 2: ĐỜI SỐNG THƯỜNG NGÀY
+            ===================================================== */}
+            <Section
+                id="section-life"
+                icon={Heart}
+                color="#16a34a"
+                label="Tham vấn đời sống"
+                title="Ý kiến về đời sống thường ngày"
+                subtitle="Đóng góp ý kiến về các lĩnh vực thiết yếu từ y tế, giáo dục, nhà ở đến việc làm."
+                viewAllTo="/hien-ke/doi-song"
+            >
+                {/* Category filter chips */}
+                <div className="mb-5 p-3 bg-white rounded-xl border border-gray-200 shadow-sm">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1.5">
+                        <button
+                            onClick={() => setSelectedLifeCat(null)}
+                            className={`flex items-center gap-2 px-3 py-2 rounded-lg font-semibold text-[12px] border transition-all ${!selectedLifeCat
+                                ? 'bg-[#1e3a8a] text-white border-[#1e3a8a] shadow-sm'
+                                : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-[#1e3a8a] hover:text-[#1e3a8a]'
+                                }`}
+                        >
+                            <span className="text-sm">⊞</span> Tất cả
+                        </button>
+                        {LIFE_CATEGORIES.map(c => (
+                            <button
+                                key={c.id}
+                                onClick={() => setSelectedLifeCat(c.name === selectedLifeCat ? null : c.name)}
+                                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-[12px] border transition-all text-left ${selectedLifeCat === c.name
+                                    ? 'bg-[#1e3a8a] text-white border-[#1e3a8a] font-semibold shadow-sm'
+                                    : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-[#1e3a8a] hover:text-[#1e3a8a] font-medium'
+                                    }`}
+                            >
+                                <span className="text-sm shrink-0">{c.emoji}</span>
+                                <span className="leading-snug">{c.name}</span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Card grid — 2-3 columns, horizontal cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-5">
+                    {filteredDaily.map(item => (
+                        <ConsultCard
+                            key={item.id}
+                            item={item}
+                            to={`/hien-ke/doi-song/${item.id}`}
+                            tag={item.category}
+                            accentColor="#16a34a"
+                        />
+                    ))}
+                </div>
+
+                <div className="text-center">
+                    <Link to="/hien-ke/doi-song" className="inline-flex items-center gap-2 px-7 py-3 border-2 border-green-700 text-green-700 font-bold rounded-xl hover:bg-green-700 hover:text-white transition-all duration-200 text-[14px]">
+                        Xem toàn bộ <ArrowRight size={15} />
+                    </Link>
+                </div>
+            </Section>
+
+            {/* =====================================================
+                SECTION 3: PHÁP LÝ
+            ===================================================== */}
+            <Section
+                id="section-legal"
+                icon={Scale}
+                color="#7c3aed"
+                label="Tham vấn pháp lý"
+                title="Ý kiến về các lĩnh vực pháp luật"
+                subtitle="Góp ý cho các dự thảo luật, nghị định và văn bản pháp quy đang được xây dựng."
+                viewAllTo="/hien-ke/phap-ly"
+            >
+                {/* Domain filter pills */}
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                    {legalDomains.map(d => (
+                        <button
+                            key={d}
+                            onClick={() => setSelectedLegalDomain(d)}
+                            className={`px-3.5 py-1.5 rounded-full text-[12px] font-semibold border transition-all ${selectedLegalDomain === d
+                                ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-sm'
+                                : 'bg-white text-gray-600 border-gray-200 hover:border-[#7c3aed] hover:text-[#7c3aed]'
+                                }`}
+                        >
+                            {d}
+                        </button>
+                    ))}
+                </div>
+
+                {/* Card grid — 2-3 columns, horizontal cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-5">
+                    {filteredLegal.map(item => (
+                        <ConsultCard
+                            key={item.id}
+                            item={item}
+                            to={`/hien-ke/phap-ly/${item.id}`}
+                            tag={item.domain}
+                            accentColor="#7c3aed"
+                        />
+                    ))}
+                </div>
+
+                <div className="text-center">
+                    <Link to="/hien-ke/phap-ly" className="inline-flex items-center gap-2 px-7 py-3 border-2 border-purple-700 text-purple-700 font-bold rounded-xl hover:bg-purple-700 hover:text-white transition-all duration-200 text-[14px]">
+                        Xem toàn bộ <ArrowRight size={15} />
+                    </Link>
+                </div>
+            </Section>
+
+            {/* =====================================================
+                SECTION 4: QUỸ HỖ TRỢ CHÍNH SÁCH
+            ===================================================== */}
+            <Section
+                id="section-fund"
+                icon={Landmark}
+                color="#b45309"
+                label="Quỹ hỗ trợ"
+                title="Quỹ hỗ trợ xây dựng chính sách, pháp luật"
+                subtitle="Tài trợ nghiên cứu, hội thảo, tập huấn và giám sát độc lập nhằm thúc đẩy xây dựng chính sách bằng chứng."
+                viewAllTo="/hien-ke/quy"
+            >
+                {/* Stats row */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                    {[
+                        { label: 'Nghiên cứu đề xuất', count: 9, emoji: '🔬' },
+                        { label: 'Hội thảo tham vấn', count: 14, emoji: '🏛️' },
+                        { label: 'Chương trình tập huấn', count: 6, emoji: '📚' },
+                        { label: 'Giám sát thực thi', count: 5, emoji: '🔍' },
+                    ].map(c => (
+                        <div key={c.label} className="bg-white border border-amber-100 rounded-xl p-4 text-center hover:shadow-md transition-shadow shadow-sm">
+                            <div className="text-xl mb-1">{c.emoji}</div>
+                            <div className="text-[26px] font-extrabold text-amber-700">{c.count}</div>
+                            <div className="text-[11px] text-gray-500 font-medium mt-0.5 leading-snug">{c.label}</div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Card grid — 2-3 columns, horizontal cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-5">
+                    {FUND_CONSULTATIONS.map(item => (
+                        <ConsultCard
+                            key={item.id}
+                            item={item}
+                            to={`/hien-ke/quy/${item.id}`}
+                            tag={item.category}
+                            accentColor="#b45309"
+                        />
+                    ))}
+                </div>
+
+                <div className="text-center">
+                    <Link to="/hien-ke/quy" className="inline-flex items-center gap-2 px-7 py-3 border-2 border-amber-600 text-amber-700 font-bold rounded-xl hover:bg-amber-600 hover:text-white transition-all duration-200 text-[14px]">
+                        Xem toàn bộ <ArrowRight size={15} />
+                    </Link>
+                </div>
+            </Section>
+
+            {/* =====================================================
+                BOTTOM CTA
+            ===================================================== */}
+            <div className="bg-[#1e3a8a] relative overflow-hidden">
+                {/* trống đồng watermark */}
+                <div
+                    className="absolute right-0 top-0 bottom-0 w-[400px] opacity-10 bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: "url('/images/dong_son_cover.png')" }}
+                />
+                <div className="relative z-10 container mx-auto px-4 md:px-8 max-w-[1280px] py-14">
+                    <div className="flex flex-col md:flex-row items-center gap-10">
+                        <div className="flex-1">
+                            <h3 className="text-[28px] md:text-[34px] font-extrabold text-white mb-3">
+                                Bạn muốn đóng góp ý kiến?
+                            </h3>
+                            <p className="text-blue-200 text-[15px] leading-relaxed mb-6 max-w-lg">
+                                Đăng ký tài khoản để tham gia tham vấn trực tuyến, nhận thông báo về các cuộc tham vấn mới và theo dõi kết quả tiếp thu ý kiến từ cơ quan nhà nước.
+                            </p>
+                            <div className="flex flex-wrap gap-3">
+                                <Link to="/dang-nhap" className="px-7 py-3.5 bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold rounded-xl transition-colors text-[14px] shadow-lg">
+                                    Đăng ký ngay
+                                </Link>
+                                <Link to="/gioi-thieu" className="px-7 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors text-[14px] border border-white/30 backdrop-blur-sm">
+                                    Tìm hiểu thêm
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div className="shrink-0 grid grid-cols-2 gap-4 text-center">
+                            {[
+                                { val: '85K+', label: 'Lượt tham gia' },
+                                { val: '24', label: 'Cuộc đang mở' },
+                                { val: '98%', label: 'Ý kiến được ghi nhận' },
+                                { val: '32', label: 'Lĩnh vực' },
+                            ].map(s => (
+                                <div key={s.label} className="bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-4 border border-white/20">
+                                    <div className="text-[26px] font-extrabold text-amber-300">{s.val}</div>
+                                    <div className="text-blue-200 text-[12px] font-medium mt-0.5">{s.label}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    );
+}

@@ -46,6 +46,8 @@ import VanBanDetailPage from './pages/VanBanDetailPage';
 import VanBanHomePage from './pages/VanBanHomePage';
 import PublicUserProfilePage from './pages/PublicUserProfilePage';
 import DuThaoPage from './pages/DuThaoPage';
+import HienKePage from './pages/HienKePage';
+import HienKeDetailPage from './pages/HienKeDetailPage';
 import DuThaoDetailPage from './pages/DuThaoDetailPage';
 import BaoCaoTiepThuDetailPage from './pages/BaoCaoTiepThuDetailPage';
 import UserHomePage from './pages/dashboard/UserHomePage';
@@ -175,6 +177,8 @@ const AppLayout = () => {
                     <Route path="/van-ban/:id" element={<VanBanDetailPage />} />
                     <Route path="/thanh-vien/:id" element={<PublicUserProfilePage />} />
                     <Route path="/du-thao" element={<DuThaoPage />} />
+                    <Route path="/hien-ke" element={<HienKePage />} />
+                    <Route path="/hien-ke/:id" element={<HienKeDetailPage />} />
                     <Route path="/du-thao/:id" element={<DuThaoDetailPage />} />
                     <Route path="/bao-cao-tiep-thu/:id" element={<BaoCaoTiepThuDetailPage />} />
 

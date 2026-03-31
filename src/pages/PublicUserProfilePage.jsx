@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
     MapPin, Building2, Calendar, Clock, Star, Award,
-    Heart, MessageSquare, BookOpen, Shield, ChevronRight
+    Heart, MessageSquare, BookOpen, Shield
 } from 'lucide-react';
 
 /* ──── MOCK DATA ──── */
@@ -11,7 +11,7 @@ const MOCK_USERS = {
         id: '1',
         name: 'Nguyễn Văn A',
         username: 'nguyenvana',
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80',
+        avatar: '/avatar_nguyen_van_a.png',
         role: 'Thành viên',
         roleColor: 'bg-blue-100 text-blue-700',
         badge: null,
@@ -28,7 +28,7 @@ const MOCK_USERS = {
         id: '2',
         name: 'Luật sư Lê Văn C',
         username: 'ls-levanc',
-        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80',
+        avatar: '/avatar_le_van_c.png',
         role: 'Luật sư',
         roleColor: 'bg-emerald-100 text-emerald-700',
         badge: 'Chuyên gia',
@@ -78,70 +78,70 @@ const PublicUserProfilePage = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 mt-8 max-w-4xl">
+            <div className="container mx-auto px-4 mt-8 max-w-7xl">
 
                 {/* ══ PROFILE HEADER CARD ══ */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-6">
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
 
-                    {/* Banner */}
-                    <div className="h-40 bg-gradient-to-r from-[#0a1e3f] to-[#1a3b8b] relative overflow-hidden">
-                        <div className="absolute inset-0 opacity-10"
-                            style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} />
-                        {/* Decorative orbs */}
-                        <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-blue-500 blur-3xl opacity-20 pointer-events-none" />
-                        <div className="absolute -bottom-8 left-1/3 w-32 h-32 rounded-full bg-indigo-400 blur-2xl opacity-20 pointer-events-none" />
+                    {/* Banner — trống đồng background, no overflow-hidden so avatar can protrude below */}
+                    <div className="h-44 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] relative rounded-t-xl">
+                        {/* Trống đồng pattern overlay */}
+                        <div className="absolute inset-0 opacity-40 mix-blend-overlay rounded-t-xl"
+                            style={{ backgroundImage: "url('/trong_dong_bg.png')", backgroundSize: 'cover', backgroundPosition: 'center 80%' }} />
+                        {/* decorative orbs */}
+                        <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-blue-300 blur-3xl opacity-20 pointer-events-none" />
+                        <div className="absolute -bottom-8 left-1/3 w-32 h-32 rounded-full bg-yellow-400 blur-2xl opacity-20 pointer-events-none" />
+
+                        {/* Avatar — pinned at bottom-left of banner, translate-y-1/2 makes it straddle the banner bottom edge */}
+                        <div className="absolute bottom-0 left-6 translate-y-1/2 z-10">
+                            <div className="w-28 h-28 rounded-xl overflow-hidden border-4 border-white shadow-lg bg-gray-200">
+                                {user.avatar
+                                    ? <img src={user.avatar} alt={user.name} className="w-full h-full object-cover"
+                                        onError={(e) => { e.target.style.display = 'none'; }} />
+                                    : <div className="w-full h-full flex items-center justify-center text-3xl font-black text-white bg-[#1a3b8b]">
+                                        {getInitials(user.name)}
+                                    </div>
+                                }
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Avatar row — overlaps banner */}
-                    <div className="px-6 pb-5">
-                        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 -mt-12">
-                            {/* Left: Avatar + Name */}
-                            <div className="flex flex-col sm:flex-row items-start sm:items-end gap-4">
-                                {/* Avatar */}
-                                <div className="w-24 h-24 rounded-xl overflow-hidden border-4 border-white shadow-lg bg-gray-200 shrink-0">
-                                    {user.avatar
-                                        ? <img src={user.avatar} alt={user.name} className="w-full h-full object-cover"
-                                            onError={(e) => { e.target.style.display = 'none'; }} />
-                                        : <div className="w-full h-full flex items-center justify-center text-3xl font-black text-white bg-[#1a3b8b]">
-                                            {getInitials(user.name)}
-                                          </div>
-                                    }
+                    {/* Info row — pt-16 gives space for the avatar hanging below the banner bottom */}
+                    <div className="px-6 pt-16 pb-5">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                            {/* Left: name, role, meta */}
+                            <div>
+                                <div className="flex flex-wrap items-center gap-2 mb-1">
+                                    <h1 className="text-2xl font-black text-gray-900">{user.name}</h1>
+                                    {user.verified && (
+                                        <span className="flex items-center gap-1 text-[11px] font-bold bg-green-100 text-green-700 border border-green-200 px-2 py-0.5 rounded-full">
+                                            ✓ Đã xác minh
+                                        </span>
+                                    )}
+                                    {user.badge && (
+                                        <span className="flex items-center gap-1 text-[11px] font-bold bg-amber-100 text-amber-700 border border-amber-200 px-2 py-0.5 rounded-full">
+                                            <Star size={11} className="fill-amber-400 text-amber-400" /> {user.badge}
+                                        </span>
+                                    )}
                                 </div>
-
-                                {/* Name + role + meta */}
-                                <div className="pb-1">
-                                    <div className="flex flex-wrap items-center gap-2 mb-0.5">
-                                        <h1 className="text-2xl font-black text-gray-900">{user.name}</h1>
-                                        {user.verified && (
-                                            <span className="flex items-center gap-1 text-[11px] font-bold bg-green-100 text-green-700 border border-green-200 px-2 py-0.5 rounded-full">
-                                                ✓ Đã xác minh
-                                            </span>
-                                        )}
-                                        {user.badge && (
-                                            <span className="flex items-center gap-1 text-[11px] font-bold bg-amber-100 text-amber-700 border border-amber-200 px-2 py-0.5 rounded-full">
-                                                <Star size={11} className="fill-amber-400 text-amber-400" /> {user.badge}
-                                            </span>
-                                        )}
-                                    </div>
-                                    <p className="text-gray-500 text-[14px] font-medium mb-1">{user.role}</p>
-                                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-gray-400">
-                                        {user.location && (
-                                            <span className="flex items-center gap-1">
-                                                <MapPin size={13} /> {user.location}
-                                            </span>
-                                        )}
-                                        {user.lastActive && (
-                                            <span className="flex items-center gap-1">
-                                                <Clock size={13} /> Hoạt động {user.lastActive}
-                                            </span>
-                                        )}
-                                    </div>
+                                <p className="text-gray-500 text-[14px] font-medium mb-1">{user.role}</p>
+                                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-gray-400">
+                                    {user.location && (
+                                        <span className="flex items-center gap-1">
+                                            <MapPin size={13} /> {user.location}
+                                        </span>
+                                    )}
+                                    {user.lastActive && (
+                                        <span className="flex items-center gap-1">
+                                            <Clock size={13} /> Hoạt động {user.lastActive}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
 
                             {/* Right: Workplace badge */}
                             {user.workplace && (
-                                <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-[13px] shrink-0 mb-1">
+                                <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-[13px] shrink-0">
                                     <div className="w-7 h-7 rounded bg-[#1a3b8b] flex items-center justify-center shrink-0">
                                         <Building2 size={14} className="text-white" />
                                     </div>
@@ -158,7 +158,7 @@ const PublicUserProfilePage = () => {
                 {/* ══ DETAIL GRID ══ */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                    {/* Left: About + Stats */}
+                    {/* Left: Stats + Expertise */}
                     <div className="md:col-span-1 space-y-5">
 
                         {/* Stats */}
@@ -166,10 +166,10 @@ const PublicUserProfilePage = () => {
                             <h3 className="text-[12px] font-bold text-gray-400 uppercase tracking-wider mb-3">Thống kê hoạt động</h3>
                             <div className="grid grid-cols-2 gap-3">
                                 {[
-                                    { label: 'Bài viết',    value: user.stats.posts,          icon: <MessageSquare size={15} />, color: 'bg-blue-50 text-blue-600' },
-                                    { label: 'Điểm uy tín', value: user.stats.points,          icon: <Award size={15} />,         color: 'bg-amber-50 text-amber-600' },
-                                    { label: 'Lượt thích',  value: user.stats.reactions,       icon: <Heart size={15} />,          color: 'bg-red-50 text-red-600' },
-                                    { label: 'Góp ý',       value: user.stats.contributions,   icon: <BookOpen size={15} />,       color: 'bg-emerald-50 text-emerald-600' },
+                                    { label: 'Bài viết', value: user.stats.posts, icon: <MessageSquare size={15} />, color: 'bg-blue-50 text-blue-600' },
+                                    { label: 'Điểm uy tín', value: user.stats.points, icon: <Award size={15} />, color: 'bg-amber-50 text-amber-600' },
+                                    { label: 'Lượt thích', value: user.stats.reactions, icon: <Heart size={15} />, color: 'bg-red-50 text-red-600' },
+                                    { label: 'Góp ý', value: user.stats.contributions, icon: <BookOpen size={15} />, color: 'bg-emerald-50 text-emerald-600' },
                                 ].map((s) => (
                                     <div key={s.label} className="flex flex-col items-center bg-gray-50 rounded-lg p-3 gap-1">
                                         <div className={`w-7 h-7 rounded-full flex items-center justify-center ${s.color}`}>{s.icon}</div>

@@ -42,6 +42,39 @@ const MOCK_PARENT_TOPIC = {
     title: "Quy định mới về vốn điều lệ công ty TNHH năm 2024"
 };
 
+const MOCK_SUB_CONTRIBUTIONS = [
+    {
+        id: 101,
+        title: "Bổ sung: Kiến nghị về cơ chế phong tỏa tài sản tự động",
+        summary: "Ngoài cơ chế cảnh báo sớm, cần có quy định về phong tỏa tài sản tự động khi phát hiện thành viên vi phạm thời hạn góp vốn để bảo vệ quyền lợi chủ nợ kịp thời...",
+        author: {
+            name: "Nguyễn Thị Hoa",
+            role: "Luật sư",
+            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80",
+            workplace: "Đoàn Luật sư Hà Nội"
+        },
+        createdAt: "13/03/2024 10:30",
+        upvotes: 47,
+        comments: 8,
+        type: "Góp ý"
+    },
+    {
+        id: 102,
+        title: "Phản biện: Cơ chế cảnh báo thụ động chưa đủ mạnh",
+        summary: "Tôi cho rằng chỉ cảnh báo trên Cổng thông tin là chưa đủ. Cần thêm chế tài hành chính trực tiếp đối với người đại diện pháp luật của doanh nghiệp vi phạm...",
+        author: {
+            name: "PGS.TS Lê Minh Tuấn",
+            role: "Tiến sĩ Luật",
+            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80",
+            workplace: "Đại học Luật Hà Nội"
+        },
+        createdAt: "14/03/2024 09:00",
+        upvotes: 62,
+        comments: 14,
+        type: "Phản biện"
+    }
+];
+
 const UserProfilePopover = ({ user, children }) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -202,6 +235,68 @@ const ContributionDetailPage = () => {
                                     <button className="flex items-center gap-1 text-gray-400 hover:text-red-500 text-sm font-medium transition-colors">
                                         <AlertTriangle size={16} /> Báo cáo
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Sub-Contributions Area */}
+                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-6" id="sub-contributions">
+                            <div className="flex justify-between items-center border-b border-gray-100 bg-gray-50 px-6 py-4">
+                                <h2 className="font-bold text-lg text-gray-800 flex items-center gap-2">
+                                    <CheckCircle size={20} className="text-indigo-600" />
+                                    Góp ý, phản biện ({MOCK_SUB_CONTRIBUTIONS.length})
+                                </h2>
+                                <Link
+                                    to={`/dien-dan/chu-de/${MOCK_PARENT_TOPIC.id}/tao-gop-y`}
+                                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm px-4 py-2 rounded-lg shadow-sm transition-colors flex items-center gap-1"
+                                >
+                                    <Plus size={16} /> Tạo góp ý
+                                </Link>
+                            </div>
+
+                            <div className="p-6">
+                                <div className="space-y-6">
+                                    {MOCK_SUB_CONTRIBUTIONS.map(contrib => (
+                                        <div key={contrib.id} className="border border-gray-100 rounded-xl p-5 hover:shadow-md transition-shadow relative overflow-hidden group">
+                                            {/* decorative edge */}
+                                            <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-indigo-500 to-blue-500"></div>
+
+                                            <div className="flex justify-between items-start mb-3">
+                                                <Link to={`/dien-dan/gop-y/${contrib.id}`} className="text-lg font-bold text-gray-800 hover:text-blue-600 transition-colors leading-snug line-clamp-2 pr-4">{contrib.title}</Link>
+                                                <span className={`text-[10px] font-bold px-2 py-1 rounded whitespace-nowrap ${contrib.type === 'Góp ý' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                                                    {contrib.type}
+                                                </span>
+                                            </div>
+
+                                            <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">{contrib.summary}</p>
+
+                                            <div className="flex flex-wrap gap-4 items-center justify-between text-xs border-t border-gray-100 pt-3">
+                                                <div className="flex flex-col">
+                                                    <span className="font-bold text-gray-800 text-sm mb-0.5">{contrib.author.name}</span>
+                                                    <div className="flex items-center gap-1.5 text-gray-500">
+                                                        <span className="bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded font-bold">{contrib.author.role}</span>
+                                                        {contrib.author.workplace && <span>- <span className="italic">{contrib.author.workplace}</span></span>}
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex items-center gap-4 text-gray-500 font-medium">
+                                                    <span className="flex items-center gap-1"><Clock size={14} className="text-gray-400" /> {contrib.createdAt}</span>
+                                                    <span className="flex items-center gap-1"><ArrowUpCircle size={14} className="text-gray-400" /> {contrib.upvotes}</span>
+                                                    <span className="flex items-center gap-1"><MessageSquare size={14} className="text-gray-400" /> {contrib.comments}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Pagination */}
+                                <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-100">
+                                    <span className="text-sm text-gray-500 font-medium">Trang 1 / 1</span>
+                                    <div className="flex items-center gap-2">
+                                        <button className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition-colors text-sm font-medium" disabled>Trước</button>
+                                        <button className="w-8 h-8 rounded-lg bg-indigo-600 text-white font-bold text-sm shadow-sm flex items-center justify-center">1</button>
+                                        <button className="px-3 py-1.5 rounded-lg border border-gray-200 text-gray-400 text-sm font-medium cursor-not-allowed" disabled>Sau</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
