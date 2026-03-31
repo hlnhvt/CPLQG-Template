@@ -490,7 +490,7 @@ const Header = () => {
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
                                 <Link to="/hien-ke" className="h-full flex items-center px-4 gap-1.5 hover:bg-white/10 transition-colors whitespace-nowrap">
-                                    Hiến kế hoàn thiện thể chế
+                                    Hiến kế hoàn thiện chính sách, pháp luật
                                 </Link>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
