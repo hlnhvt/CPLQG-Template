@@ -332,7 +332,7 @@ export default function HienKePage() {
                 icon={Scale}
                 color="#7c3aed"
                 label="Tham vấn pháp lý"
-                title="Ý kiến về các lĩnh vực pháp luật"
+                title="Hiến kế về các lĩnh vực pháp luật"
                 subtitle="Góp ý cho các dự thảo luật, nghị định và văn bản pháp quy đang được xây dựng."
                 viewAllTo="/hien-ke/phap-ly"
             >
