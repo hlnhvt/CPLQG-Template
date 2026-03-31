@@ -226,7 +226,7 @@ export default function HienKePage() {
                         <span className="text-white/90">Hiến kế hoàn thiện chính sách, pháp luật</span>
                     </nav>
 
-                    <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-16 pt-6 lg:pt-8">
+                    <div className="flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-16 pt-6 lg:pt-8">
                         {/* Left side: Text, Search, Stats */}
                         <div className="flex-1 max-w-xl w-full -mt-4 lg:-mt-8">
                             {/* Title */}
@@ -272,23 +272,22 @@ export default function HienKePage() {
                             </div>
                         </div>
 
-                        {/* Right side: 4 Feature Overview Cards */}
-                        <div className="lg:w-[480px] xl:w-[540px] shrink-0 w-full animate-fade-up delay-400">
-                            <div className="grid grid-cols-2 gap-4 lg:gap-5">
+                        {/* Right side: 3 Feature Overview Cards */}
+                        <div className="lg:w-[400px] xl:w-[440px] shrink-0 w-full animate-fade-up delay-400">
+                            <div className="flex flex-col gap-4 md:gap-5">
                                 {[
                                     { id: '#section-hot', label: 'Vấn đề nổi bật', desc: 'Các dự thảo tài liệu đang thu hút nhiều sự quan tâm.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500' },
                                     { id: '#section-life', label: 'Đời sống', desc: 'Đóng góp ý kiến về y tế, giáo dục, giao thông...', icon: Heart, color: 'text-green-600', hue: 'bg-green-500' },
                                     { id: '#section-legal', label: 'Luật pháp', desc: 'Tham gia xây dựng các bộ luật, nghị định.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500' },
-                                    { id: '#section-fund', label: 'Hỗ trợ', desc: 'Tài trợ cho sáng kiến, hoàn thiện pháp luật.', icon: Landmark, color: 'text-amber-600', hue: 'bg-amber-500' },
                                 ].map(item => (
-                                    <a key={item.id} href={item.id} className="relative overflow-hidden flex flex-col justify-between p-5 xl:p-6 min-h-[160px] xl:min-h-[190px] bg-[#0f172a]/60 backdrop-blur-md border border-white/10 rounded-3xl hover:bg-white/15 hover:border-white/30 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)] transition-all duration-300 group">
-                                        <div className={`absolute top-0 left-0 w-full h-1.5 ${item.hue} opacity-80`} />
-                                        <div className={`w-12 h-12 rounded-xl bg-white shadow-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shrink-0 ${item.color}`}>
-                                            <item.icon size={22} strokeWidth={2} />
+                                    <a key={item.id} href={item.id} className="relative overflow-hidden flex items-center gap-5 p-5 xl:px-6 xl:py-5 bg-[#0f172a]/60 backdrop-blur-md border border-white/10 rounded-2xl md:rounded-3xl hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)] transition-all duration-300 group">
+                                        <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${item.hue} opacity-80`} />
+                                        <div className={`w-14 h-14 rounded-2xl bg-white shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0 ${item.color}`}>
+                                            <item.icon size={26} strokeWidth={2} />
                                         </div>
-                                        <div>
-                                            <h3 className="text-white font-bold text-[16px] xl:text-[18px] mb-1.5">{item.label}</h3>
-                                            <p className="text-blue-100/70 text-[13px] leading-relaxed line-clamp-2">{item.desc}</p>
+                                        <div className="flex-1">
+                                            <h3 className="text-white font-bold text-[17px] xl:text-[20px] mb-1.5">{item.label}</h3>
+                                            <p className="text-blue-100/70 text-[14px] leading-relaxed line-clamp-2">{item.desc}</p>
                                         </div>
                                     </a>
                                 ))}
@@ -308,7 +307,6 @@ export default function HienKePage() {
                             { href: '#section-hot', label: 'Vấn đề nổi bật', icon: TrendingUp, color: '#1e3a8a' },
                             { href: '#section-life', label: 'Đời sống thường ngày', icon: Heart, color: '#16a34a' },
                             { href: '#section-legal', label: 'Lĩnh vực pháp lý', icon: Scale, color: '#7c3aed' },
-                            { href: '#section-fund', label: 'Hỗ trợ chính sách', icon: Landmark, color: '#b45309' },
                         ].map(item => (
                             <a
                                 key={item.href}
