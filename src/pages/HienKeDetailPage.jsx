@@ -169,7 +169,7 @@ const HienKeDetailPage = () => {
                     <nav className="flex items-center gap-1.5 text-[12px] text-gray-500 mb-6 flex-wrap">
                         <Link to="/" className="hover:text-[#1e3a8a] transition-colors">Trang chủ</Link>
                         <ChevronRight size={12} className="text-gray-400" />
-                        <Link to="/hien-ke" className="hover:text-[#1e3a8a] transition-colors">Hiến kế hoàn thiện thể chế</Link>
+                        <Link to="/hien-ke" className="hover:text-[#1e3a8a] transition-colors">Hiến kế hoàn thiện chính sách, pháp luật</Link>
                         <ChevronRight size={12} className="text-gray-400" />
                         <span className="text-gray-700 font-medium line-clamp-1 max-w-[300px]">{data.title}</span>
                     </nav>
@@ -333,7 +333,7 @@ const HienKeDetailPage = () => {
                                 <Link to="/hien-ke" className="flex items-center gap-2 text-[#1e3a8a] font-bold text-[14px] hover:underline mb-1">
                                     <ArrowLeft size={14} /> Quay lại danh sách
                                 </Link>
-                                <p className="text-[12px] text-gray-500 ml-6">Hiến kế hoàn thiện thể chế</p>
+                                <p className="text-[12px] text-gray-500 ml-6">Hiến kế hoàn thiện chính sách, pháp luật</p>
                             </div>
 
                             {/* Table of contents */}

@@ -603,7 +603,7 @@ const Header = () => {
                         </div>
 
                         <div className="border-b border-white/5">
-                            <Link to="/hien-ke" onClick={() => setMobileMenuOpen(false)} className="block px-5 py-4 font-bold hover:bg-white/5 transition-colors">Hiến kế hoàn thiện thể chế</Link>
+                            <Link to="/hien-ke" onClick={() => setMobileMenuOpen(false)} className="block px-5 py-4 font-bold hover:bg-white/5 transition-colors">Hiến kế hoàn thiện chính sách, pháp luật</Link>
                         </div>
 
                         <div className="border-b border-white/5">

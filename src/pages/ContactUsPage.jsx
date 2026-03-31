@@ -14,7 +14,7 @@ const DEPARTMENTS = [
 const FAQS = [
     {
         q: "Làm thế nào để tôi có thể chia sẻ ý kiến của mình?",
-        a: "Bạn có thể chia sẻ ý kiến của mình thông qua mục 'Hiến kế hoàn thiện thể chế' hoặc sử dụng biểu mẫu liên hệ trên trang này. Ý kiến của bạn sẽ được tự động phân loại và gửi đến cơ quan có thẩm quyền xử lý."
+        a: "Bạn có thể chia sẻ ý kiến của mình thông qua mục 'Hiến kế hoàn thiện chính sách, pháp luật' hoặc sử dụng biểu mẫu liên hệ trên trang này. Ý kiến của bạn sẽ được tự động phân loại và gửi đến cơ quan có thẩm quyền xử lý."
     },
     {
         q: "Ý kiến đóng góp của tôi có được giữ ẩn danh không?",
