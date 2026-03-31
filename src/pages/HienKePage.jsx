@@ -228,11 +228,11 @@ export default function HienKePage() {
 
                     <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-16 pt-6 lg:pt-8">
                         {/* Left side: Text, Search, Stats */}
-                        <div className="flex-1 max-w-2xl w-full">
+                        <div className="flex-1 max-w-xl w-full -mt-4 lg:-mt-8">
                             {/* Title */}
-                            <h1 className="text-[38px] md:text-[52px] lg:text-[60px] font-bold text-white leading-[1.2] mb-5 animate-fade-up">
+                            <h1 className="text-[38px] md:text-[52px] lg:text-[60px] font-black text-white leading-[1.2] mb-5 animate-fade-up">
                                 <span className="inline-block py-1 animate-text-gradient bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">Hiến kế</span>
-                                <span className="block text-[24px] md:text-[32px] lg:text-[38px] font-bold mt-4 leading-[1.4] text-amber-300 animate-text-gradient bg-gradient-to-r from-amber-300 via-amber-100 to-amber-300 bg-clip-text text-transparent max-w-[650px] py-1">
+                                <span className="block text-[24px] md:text-[32px] lg:text-[38px] font-bold mt-1 leading-[1.4] text-amber-300 animate-text-gradient bg-gradient-to-r from-amber-300 via-amber-100 to-amber-300 bg-clip-text text-transparent max-w-[650px] py-1">
                                     Hoàn thiện hệ thống pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới
                                 </span>
                             </h1>
