@@ -44,7 +44,7 @@ const DAILY_CONSULTATIONS = [
     { id: 1, title: 'Khảo sát sự hài lòng với dịch vụ y tế công lập', category: 'Sức khỏe và Y tế', status: 'open', deadline: '30/04/2026', participants: 2100, agency: 'Bộ Y tế', thumb: thumb(0) },
     { id: 2, title: 'Lấy ý kiến về điều chỉnh lương tối thiểu vùng 2026', category: 'Việc làm và Lao động', status: 'open', deadline: '15/04/2026', participants: 5340, agency: 'Bộ Lao động – TB&XH', thumb: thumb(1) },
     { id: 3, title: 'Ý kiến về chất lượng giáo dục mầm non công lập', category: 'Giáo dục và Đào tạo', status: 'upcoming', deadline: '01/05/2026', participants: 0, agency: 'Bộ Giáo dục và Đào tạo', thumb: thumb(2) },
-    { id: 4, title: 'Tham vấn chính sách vay mua nhà lần đầu', category: 'Bất động sản', status: 'open', deadline: '25/04/2026', participants: 3240, agency: 'Ngân hàng Nhà nước', thumb: thumb(3) },
+    { id: 4, title: 'Hiến kế chính sách vay mua nhà lần đầu', category: 'Bất động sản', status: 'open', deadline: '25/04/2026', participants: 3240, agency: 'Ngân hàng Nhà nước', thumb: thumb(3) },
     { id: 5, title: 'Ý kiến về chính sách bảo hiểm xã hội tự nguyện', category: 'An sinh xã hội', status: 'open', deadline: '10/04/2026', participants: 2670, agency: 'Bộ Lao động – TB&XH', thumb: thumb(4) },
     { id: 6, title: 'Đánh giá chính sách hỗ trợ khởi nghiệp đổi mới sáng tạo', category: 'Khởi nghiệp', status: 'closed', deadline: '20/03/2026', participants: 1890, agency: 'Bộ Khoa học và Công nghệ', thumb: thumb(5) },
 ];
@@ -277,8 +277,8 @@ export default function HienKePage() {
                             <div className="flex flex-col gap-4 md:gap-5">
                                 {[
                                     { id: '#section-hot', label: 'Vấn đề nổi bật', desc: 'Các dự thảo tài liệu đang thu hút nhiều sự quan tâm.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500' },
-                                    { id: '#section-life', label: 'Đời sống', desc: 'Đóng góp ý kiến về y tế, giáo dục, giao thông...', icon: Heart, color: 'text-green-600', hue: 'bg-green-500' },
-                                    { id: '#section-legal', label: 'Pháp luật', desc: 'Tham gia xây dựng các bộ luật, nghị định.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500' },
+                                    { id: '#section-life', label: 'Hiến kế của bạn', desc: 'Đóng góp ý kiến về y tế, giáo dục, giao thông...', icon: Heart, color: 'text-green-600', hue: 'bg-green-500' },
+                                    { id: '#section-legal', label: 'Có thể bạn quan tâm', desc: 'Tham gia xây dựng các bộ luật, nghị định.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500' },
                                 ].map(item => (
                                     <a key={item.id} href={item.id} className="relative overflow-hidden flex items-center gap-5 p-5 xl:px-6 bg-[#0f172a]/60 backdrop-blur-md border border-white/10 rounded-2xl md:rounded-3xl hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)] transition-all duration-300 group h-[104px] xl:h-[116px]">
                                         <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${item.hue} opacity-80`} />
@@ -386,7 +386,7 @@ export default function HienKePage() {
                 id="section-life"
                 icon={Heart}
                 color="#16a34a"
-                label="Tham vấn đời sống"
+                label="Hiến kế đời sống"
                 title="Hiến kế trong đời sống thường ngày"
                 subtitle="Đóng góp ý kiến về các lĩnh vực thiết yếu từ y tế, giáo dục, nhà ở đến việc làm."
                 viewAllTo="/hien-ke/doi-song"
@@ -427,7 +427,7 @@ export default function HienKePage() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-3">
                     {[
                         { label: 'Nghiên cứu đề xuất', count: 9 },
-                        { label: 'Hội thảo tham vấn', count: 14 },
+                        { label: 'Hội thảo hiến kế', count: 14 },
                         { label: 'Chương trình tập huấn', count: 6 },
                         { label: 'Giám sát thực thi', count: 5 },
                     ].map(c => (
