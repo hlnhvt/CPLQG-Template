@@ -347,7 +347,7 @@ export default function HienKePage() {
                                 to={`/hien-ke/gop-y-nhanh?domain=${encodeURIComponent(c.name)}`}
                                 className="flex flex-col items-center text-center gap-2 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50 hover:-translate-y-1 hover:shadow-md transition-all group duration-300"
                             >
-                                <c.icon size={32} strokeWidth={1.25} className="mb-1 text-gray-400 group-hover:text-[#7c3aed] group-hover:scale-110 transition-all duration-300" />
+                                <c.icon size={32} strokeWidth={1.25} className="mb-1 text-purple-400 group-hover:text-[#7c3aed] group-hover:scale-110 transition-all duration-300" />
                                 <span className="text-[13px] font-semibold text-gray-700 group-hover:text-[#7c3aed] leading-tight px-1">{c.name}</span>
                             </Link>
                         ))}
@@ -395,7 +395,7 @@ export default function HienKePage() {
                 icon={Landmark}
                 color="#b45309"
                 label="Quỹ hỗ trợ"
-                title="Ứng tuyển Quỹ hỗ trợ xây dựng chính sách, pháp luật"
+                title="Ứng tuyển quỹ hỗ trợ xây dựng chính sách, pháp luật"
                 subtitle="Hỗ trợ, tài trợ cho công tác xây dựng chính sách, pháp luật, nhằm tạo thay đổi đột phá, tích cực, hiệu quả, bền vững về xây dựng chính sách, pháp luật."
                 viewAllTo="/hien-ke/quy"
             >
