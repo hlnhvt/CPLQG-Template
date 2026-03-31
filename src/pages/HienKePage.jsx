@@ -156,22 +156,22 @@ const ConsultCard = ({ item, to, tag, accentColor = '#1e3a8a' }) => (
 
 // ======================== SECTION WRAPPER ========================
 const Section = ({ id, icon: Icon, color, label, title, subtitle, children, viewAllTo }) => (
-    <section id={id} className="py-8 border-b border-gray-100">
+    <section id={id} className="py-5 border-b border-gray-100">
         <div className="container mx-auto px-4 md:px-8 max-w-[1280px]">
-            <div className="flex items-start justify-between gap-4 mb-6">
+            <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-sm" style={{ backgroundColor: color + '15' }}>
-                        <Icon size={19} style={{ color }} />
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-sm" style={{ backgroundColor: color + '15' }}>
+                        <Icon size={17} style={{ color }} />
                     </div>
                     <div>
-                        <p className="text-[10px] font-bold uppercase tracking-[0.15em] mb-1" style={{ color }}>{label}</p>
-                        <h2 className="text-[20px] md:text-[24px] font-extrabold text-gray-900 leading-tight">{title}</h2>
-                        {subtitle && <p className="text-gray-500 text-[13px] mt-0.5 max-w-2xl">{subtitle}</p>}
+                        <p className="text-[10px] font-bold uppercase mb-0.5" style={{ color }}>{label}</p>
+                        <h2 className="text-[18px] md:text-[22px] font-bold text-gray-900 leading-tight">{title}</h2>
+                        {subtitle && <p className="text-gray-500 text-[12px] mt-0.5 max-w-2xl">{subtitle}</p>}
                     </div>
                 </div>
                 {viewAllTo && (
-                    <Link to={viewAllTo} className="shrink-0 flex items-center gap-1.5 text-[13px] font-semibold hover:underline mt-1 transition-colors" style={{ color }}>
-                        Xem tất cả <ArrowRight size={14} />
+                    <Link to={viewAllTo} className="shrink-0 flex items-center gap-1.5 text-[12px] font-semibold hover:underline mt-1 transition-colors" style={{ color }}>
+                        Xem tất cả <ArrowRight size={13} />
                     </Link>
                 )}
             </div>
@@ -227,7 +227,7 @@ export default function HienKePage() {
 
                     <div className="max-w-2xl">
                         {/* Small label */}
-                        <h1 className="text-[38px] md:text-[52px] lg:text-[60px] font-extrabold text-white leading-[1.1] mb-5 tracking-tight">
+                        <h1 className="text-[38px] md:text-[52px] lg:text-[60px] font-bold text-white leading-[1.1] mb-5">
                             Chia sẻ ý kiến<br />
                             <span className="text-amber-300">với chúng tôi!</span>
                         </h1>
@@ -261,7 +261,7 @@ export default function HienKePage() {
                                 { label: 'Lĩnh vực', value: '32' },
                             ].map(s => (
                                 <div key={s.label} className="text-white">
-                                    <div className="text-[32px] md:text-[36px] font-extrabold leading-none text-amber-300">{s.value}</div>
+                                    <div className="text-[32px] md:text-[36px] font-bold leading-none text-amber-300">{s.value}</div>
                                     <div className="text-blue-200 text-[13px] font-medium mt-1">{s.label}</div>
                                 </div>
                             ))}
@@ -307,7 +307,7 @@ export default function HienKePage() {
                 subtitle="Dự thảo luật và chính sách đang cần sự đóng góp của người dân, tổ chức và doanh nghiệp."
                 viewAllTo="/hien-ke/tat-ca"
             >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                     {HOT_ITEMS.map(item => (
                         <ConsultCard
                             key={item.id}
@@ -318,8 +318,8 @@ export default function HienKePage() {
                     ))}
                 </div>
                 <div className="text-center">
-                    <Link to="/hien-ke/tat-ca" className="inline-flex items-center gap-2 px-7 py-3 border-2 border-[#1e3a8a] text-[#1e3a8a] font-bold rounded-xl hover:bg-[#1e3a8a] hover:text-white transition-all duration-200 text-[14px]">
-                        Xem toàn bộ <ArrowRight size={15} />
+                    <Link to="/hien-ke/tat-ca" className="inline-flex items-center gap-2 px-6 py-2 border border-[#1e3a8a] text-[#1e3a8a] font-semibold rounded-lg hover:bg-[#1e3a8a] hover:text-white transition-all duration-200 text-[13px]">
+                        Xem toàn bộ <ArrowRight size={14} />
                     </Link>
                 </div>
             </Section>
@@ -337,11 +337,11 @@ export default function HienKePage() {
                 viewAllTo="/hien-ke/doi-song"
             >
                 {/* Category filter chips */}
-                <div className="mb-5 p-3 bg-white rounded-xl border border-gray-200 shadow-sm">
+                <div className="mb-3 p-2.5 bg-white rounded-lg border border-gray-200 shadow-sm">
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1.5">
                         <button
                             onClick={() => setSelectedLifeCat(null)}
-                            className={`flex items-center gap-2 px-3 py-2 rounded-lg font-semibold text-[12px] border transition-all ${!selectedLifeCat
+                            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md font-semibold text-[12px] border transition-all ${!selectedLifeCat
                                 ? 'bg-[#1e3a8a] text-white border-[#1e3a8a] shadow-sm'
                                 : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-[#1e3a8a] hover:text-[#1e3a8a]'
                                 }`}
@@ -352,7 +352,7 @@ export default function HienKePage() {
                             <button
                                 key={c.id}
                                 onClick={() => setSelectedLifeCat(c.name === selectedLifeCat ? null : c.name)}
-                                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-[12px] border transition-all text-left ${selectedLifeCat === c.name
+                                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[12px] border transition-all text-left ${selectedLifeCat === c.name
                                     ? 'bg-[#1e3a8a] text-white border-[#1e3a8a] font-semibold shadow-sm'
                                     : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-[#1e3a8a] hover:text-[#1e3a8a] font-medium'
                                     }`}
@@ -365,7 +365,7 @@ export default function HienKePage() {
                 </div>
 
                 {/* Card grid — 2-3 columns, horizontal cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
                     {filteredDaily.map(item => (
                         <ConsultCard
                             key={item.id}
@@ -378,8 +378,8 @@ export default function HienKePage() {
                 </div>
 
                 <div className="text-center">
-                    <Link to="/hien-ke/doi-song" className="inline-flex items-center gap-2 px-7 py-3 border-2 border-green-700 text-green-700 font-bold rounded-xl hover:bg-green-700 hover:text-white transition-all duration-200 text-[14px]">
-                        Xem toàn bộ <ArrowRight size={15} />
+                    <Link to="/hien-ke/doi-song" className="inline-flex items-center gap-2 px-6 py-2 border border-green-700 text-green-700 font-semibold rounded-lg hover:bg-green-700 hover:text-white transition-all duration-200 text-[13px]">
+                        Xem toàn bộ <ArrowRight size={14} />
                     </Link>
                 </div>
             </Section>
@@ -397,12 +397,12 @@ export default function HienKePage() {
                 viewAllTo="/hien-ke/phap-ly"
             >
                 {/* Domain filter pills */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
+                <div className="flex flex-wrap gap-1.5 mb-3">
                     {legalDomains.map(d => (
                         <button
                             key={d}
                             onClick={() => setSelectedLegalDomain(d)}
-                            className={`px-3.5 py-1.5 rounded-full text-[12px] font-semibold border transition-all ${selectedLegalDomain === d
+                            className={`px-3 py-1 rounded-full text-[12px] font-semibold border transition-all ${selectedLegalDomain === d
                                 ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-sm'
                                 : 'bg-white text-gray-600 border-gray-200 hover:border-[#7c3aed] hover:text-[#7c3aed]'
                                 }`}
@@ -413,7 +413,7 @@ export default function HienKePage() {
                 </div>
 
                 {/* Card grid — 2-3 columns, horizontal cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
                     {filteredLegal.map(item => (
                         <ConsultCard
                             key={item.id}
@@ -426,8 +426,8 @@ export default function HienKePage() {
                 </div>
 
                 <div className="text-center">
-                    <Link to="/hien-ke/phap-ly" className="inline-flex items-center gap-2 px-7 py-3 border-2 border-purple-700 text-purple-700 font-bold rounded-xl hover:bg-purple-700 hover:text-white transition-all duration-200 text-[14px]">
-                        Xem toàn bộ <ArrowRight size={15} />
+                    <Link to="/hien-ke/phap-ly" className="inline-flex items-center gap-2 px-6 py-2 border border-purple-700 text-purple-700 font-semibold rounded-lg hover:bg-purple-700 hover:text-white transition-all duration-200 text-[13px]">
+                        Xem toàn bộ <ArrowRight size={14} />
                     </Link>
                 </div>
             </Section>
@@ -445,23 +445,23 @@ export default function HienKePage() {
                 viewAllTo="/hien-ke/quy"
             >
                 {/* Stats row */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-3">
                     {[
                         { label: 'Nghiên cứu đề xuất', count: 9, emoji: '🔬' },
                         { label: 'Hội thảo tham vấn', count: 14, emoji: '🏛️' },
                         { label: 'Chương trình tập huấn', count: 6, emoji: '📚' },
                         { label: 'Giám sát thực thi', count: 5, emoji: '🔍' },
                     ].map(c => (
-                        <div key={c.label} className="bg-white border border-amber-100 rounded-xl p-4 text-center hover:shadow-md transition-shadow shadow-sm">
-                            <div className="text-xl mb-1">{c.emoji}</div>
-                            <div className="text-[26px] font-extrabold text-amber-700">{c.count}</div>
-                            <div className="text-[11px] text-gray-500 font-medium mt-0.5 leading-snug">{c.label}</div>
+                        <div key={c.label} className="bg-white border border-amber-100 rounded-lg p-3 text-center hover:shadow-md transition-shadow shadow-sm">
+                            <div className="text-lg mb-0.5">{c.emoji}</div>
+                            <div className="text-[22px] font-bold text-amber-700">{c.count}</div>
+                            <div className="text-[11px] text-gray-500 font-medium leading-snug">{c.label}</div>
                         </div>
                     ))}
                 </div>
 
                 {/* Card grid — 2-3 columns, horizontal cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
                     {FUND_CONSULTATIONS.map(item => (
                         <ConsultCard
                             key={item.id}
@@ -474,8 +474,8 @@ export default function HienKePage() {
                 </div>
 
                 <div className="text-center">
-                    <Link to="/hien-ke/quy" className="inline-flex items-center gap-2 px-7 py-3 border-2 border-amber-600 text-amber-700 font-bold rounded-xl hover:bg-amber-600 hover:text-white transition-all duration-200 text-[14px]">
-                        Xem toàn bộ <ArrowRight size={15} />
+                    <Link to="/hien-ke/quy" className="inline-flex items-center gap-2 px-6 py-2 border border-amber-600 text-amber-700 font-semibold rounded-lg hover:bg-amber-600 hover:text-white transition-all duration-200 text-[13px]">
+                        Xem toàn bộ <ArrowRight size={14} />
                     </Link>
                 </div>
             </Section>
@@ -492,7 +492,7 @@ export default function HienKePage() {
                 <div className="relative z-10 container mx-auto px-4 md:px-8 max-w-[1280px] py-14">
                     <div className="flex flex-col md:flex-row items-center gap-10">
                         <div className="flex-1">
-                            <h3 className="text-[28px] md:text-[34px] font-extrabold text-white mb-3">
+                            <h3 className="text-[28px] md:text-[34px] font-bold text-white mb-3">
                                 Bạn muốn đóng góp ý kiến?
                             </h3>
                             <p className="text-blue-200 text-[15px] leading-relaxed mb-6 max-w-lg">
@@ -516,7 +516,7 @@ export default function HienKePage() {
                                 { val: '32', label: 'Lĩnh vực' },
                             ].map(s => (
                                 <div key={s.label} className="bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-4 border border-white/20">
-                                    <div className="text-[26px] font-extrabold text-amber-300">{s.val}</div>
+                                    <div className="text-[26px] font-bold text-amber-300">{s.val}</div>
                                     <div className="text-blue-200 text-[12px] font-medium mt-0.5">{s.label}</div>
                                 </div>
                             ))}

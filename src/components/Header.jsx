@@ -489,6 +489,11 @@ const Header = () => {
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
+                                <Link to="/hien-ke" className="h-full flex items-center px-4 gap-1.5 hover:bg-white/10 transition-colors whitespace-nowrap">
+                                    Hiến kế hoàn thiện thể chế
+                                </Link>
+                            </li>
+                            <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
                                 <Link to="/du-thao" className="h-full flex items-center px-4 gap-1.5 hover:bg-white/10 transition-colors">
                                     Dự thảo VBQPPL
                                 </Link>
@@ -595,6 +600,10 @@ const Header = () => {
                                 <Link to="/phan-anh-kien-nghi/tao-moi" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Gửi phản ánh mới</Link>
                                 <Link to="/phan-anh-kien-nghi?tab=search" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tra cứu phản ánh</Link>
                             </div>
+                        </div>
+
+                        <div className="border-b border-white/5">
+                            <Link to="/hien-ke" onClick={() => setMobileMenuOpen(false)} className="block px-5 py-4 font-bold hover:bg-white/5 transition-colors">Hiến kế hoàn thiện thể chế</Link>
                         </div>
 
                         <div className="border-b border-white/5">
