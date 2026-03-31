@@ -402,10 +402,10 @@ export default function HienKePage() {
                 {/* Stats row */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mb-3">
                     {[
-                        { label: 'Nghiên cứu đề xuất', count: 9, emoji: '🔬' },
-                        { label: 'Hội thảo tham vấn', count: 14, emoji: '🏛️' },
-                        { label: 'Chương trình tập huấn', count: 6, emoji: '📚' },
-                        { label: 'Giám sát thực thi', count: 5, emoji: '🔍' },
+                        { label: 'Nghiên cứu đề xuất', count: 9 },
+                        { label: 'Hội thảo tham vấn', count: 14 },
+                        { label: 'Chương trình tập huấn', count: 6 },
+                        { label: 'Giám sát thực thi', count: 5 },
                     ].map(c => (
                         <div key={c.label} className="bg-white border border-amber-100 rounded-lg p-3 text-center hover:shadow-md transition-shadow shadow-sm">
                             <div className="text-lg mb-0.5">{c.emoji}</div>
