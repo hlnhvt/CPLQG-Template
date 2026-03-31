@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {
     Search, ArrowRight, Users, Calendar, ChevronRight,
     Scale, Landmark, Heart, TrendingUp,
+    Store, Globe, Car, HeartHandshake, Building2, GraduationCap, Activity, Leaf, Briefcase, Rocket, ShieldAlert
 } from 'lucide-react';
 
 // ======================== MOCK DATA ========================
@@ -26,17 +27,17 @@ const HOT_ITEMS = [
 ];
 
 const LIFE_CATEGORIES = [
-    { id: 1, emoji: '🏡', name: 'Kinh tế và Đời sống' },
-    { id: 2, emoji: '🌍', name: 'Lưu trú và Nhập tịch' },
-    { id: 3, emoji: '🚗', name: 'Giao thông vận tải' },
-    { id: 4, emoji: '💒', name: 'Hôn nhân và Gia đình' },
-    { id: 5, emoji: '🏠', name: 'Bất động sản' },
-    { id: 6, emoji: '📚', name: 'Giáo dục và Đào tạo' },
-    { id: 7, emoji: '🏥', name: 'Sức khỏe và Y tế' },
-    { id: 8, emoji: '🌱', name: 'An sinh xã hội' },
-    { id: 9, emoji: '💼', name: 'Việc làm và Lao động' },
-    { id: 10, emoji: '🏪', name: 'Khởi nghiệp' },
-    { id: 11, emoji: '⛑️', name: 'An toàn lao động' },
+    { id: 1, icon: Store, name: 'Kinh tế và Đời sống' },
+    { id: 2, icon: Globe, name: 'Lưu trú và Nhập tịch' },
+    { id: 3, icon: Car, name: 'Giao thông vận tải' },
+    { id: 4, icon: HeartHandshake, name: 'Hôn nhân và Gia đình' },
+    { id: 5, icon: Building2, name: 'Bất động sản' },
+    { id: 6, icon: GraduationCap, name: 'Giáo dục và Đào tạo' },
+    { id: 7, icon: Activity, name: 'Sức khỏe và Y tế' },
+    { id: 8, icon: Leaf, name: 'An sinh xã hội' },
+    { id: 9, icon: Briefcase, name: 'Việc làm và Lao động' },
+    { id: 10, icon: Rocket, name: 'Khởi nghiệp' },
+    { id: 11, icon: ShieldAlert, name: 'An toàn lao động' },
 ];
 
 const DAILY_CONSULTATIONS = [
@@ -227,9 +228,11 @@ export default function HienKePage() {
 
                     <div className="max-w-4xl">
                         {/* Small label */}
-                        <h1 className="text-[38px] md:text-[52px] lg:text-[60px] font-bold text-white leading-[1.1] mb-5 animate-fade-up">
-                            Hiến kế <br />
-                            <span className="text-amber-300">Hoàn thiện hệ thống pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới</span>
+                        <h1 className="text-[38px] md:text-[52px] lg:text-[60px] font-black text-white leading-[1.1] mb-5 animate-fade-up">
+                            Hiến kế
+                            <span className="block text-[34px] md:text-[44px] lg:text-[50px] font-bold text-amber-300 mt-3 leading-[1.25]">
+                                Hoàn thiện hệ thống pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới
+                            </span>
                         </h1>
                         <p className="text-blue-100 text-[16px] md:text-[17px] leading-relaxed mb-8 max-w-xl animate-fade-up delay-100">
                             Tiếng nói của bạn định hình chính sách quốc gia.
@@ -342,9 +345,9 @@ export default function HienKePage() {
                             <Link
                                 key={c.id}
                                 to={`/hien-ke/gop-y-nhanh?domain=${encodeURIComponent(c.name)}`}
-                                className="flex flex-col items-center text-center gap-2 p-3 rounded-xl border border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50 hover:-translate-y-1 hover:shadow-md transition-all group duration-300"
+                                className="flex flex-col items-center text-center gap-2 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50 hover:-translate-y-1 hover:shadow-md transition-all group duration-300"
                             >
-                                <span className="text-[28px] mb-1 group-hover:scale-110 transition-transform">{c.emoji}</span>
+                                <c.icon size={32} strokeWidth={1.25} className="mb-1 text-gray-400 group-hover:text-[#7c3aed] group-hover:scale-110 transition-all duration-300" />
                                 <span className="text-[13px] font-semibold text-gray-700 group-hover:text-[#7c3aed] leading-tight px-1">{c.name}</span>
                             </Link>
                         ))}
