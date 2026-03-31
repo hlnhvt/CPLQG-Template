@@ -278,7 +278,7 @@ export default function HienKePage() {
                                 {[
                                     { id: '#section-hot', label: 'Vấn đề nổi bật', desc: 'Các dự thảo tài liệu đang thu hút nhiều sự quan tâm.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500' },
                                     { id: '#section-life', label: 'Đời sống', desc: 'Đóng góp ý kiến về y tế, giáo dục, giao thông...', icon: Heart, color: 'text-green-600', hue: 'bg-green-500' },
-                                    { id: '#section-legal', label: 'Luật pháp', desc: 'Tham gia xây dựng các bộ luật, nghị định.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500' },
+                                    { id: '#section-legal', label: 'Pháp luật', desc: 'Tham gia xây dựng các bộ luật, nghị định.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500' },
                                 ].map(item => (
                                     <a key={item.id} href={item.id} className="relative overflow-hidden flex items-center gap-5 p-5 xl:px-6 xl:py-5 bg-[#0f172a]/60 backdrop-blur-md border border-white/10 rounded-2xl md:rounded-3xl hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)] transition-all duration-300 group">
                                         <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${item.hue} opacity-80`} />
