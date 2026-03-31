@@ -225,14 +225,14 @@ export default function HienKePage() {
                         <span className="text-white/90">Hiến kế hoàn thiện thể chế</span>
                     </nav>
 
-                    <div className="max-w-2xl">
+                    <div className="max-w-4xl">
                         {/* Small label */}
                         <h1 className="text-[38px] md:text-[52px] lg:text-[60px] font-bold text-white leading-[1.1] mb-5">
-                            Chia sẻ ý kiến<br />
-                            <span className="text-amber-300">với chúng tôi!</span>
+                            Hiến kế <br />
+                            <span className="text-amber-300">Vì một nhà nước pháp quyền của dân, do dân, vì dân</span>
                         </h1>
                         <p className="text-blue-100 text-[16px] md:text-[17px] leading-relaxed mb-8 max-w-xl">
-                            Từ pháp luật, giáo dục, y tế đến đất đai và lao động —
+                            Từ pháp luật đến hành động —
                             tiếng nói của bạn định hình chính sách quốc gia.
                         </p>
 
@@ -280,7 +280,7 @@ export default function HienKePage() {
                             { href: '#section-hot', label: 'Vấn đề nổi bật', icon: TrendingUp, color: '#1e3a8a' },
                             { href: '#section-life', label: 'Đời sống thường ngày', icon: Heart, color: '#16a34a' },
                             { href: '#section-legal', label: 'Lĩnh vực pháp lý', icon: Scale, color: '#7c3aed' },
-                            { href: '#section-fund', label: 'Quỹ hỗ trợ chính sách', icon: Landmark, color: '#b45309' },
+                            { href: '#section-fund', label: 'Hỗ trợ chính sách', icon: Landmark, color: '#b45309' },
                         ].map(item => (
                             <a
                                 key={item.href}
@@ -325,39 +325,7 @@ export default function HienKePage() {
             </Section>
 
             {/* =====================================================
-                SECTION 2: ĐỜI SỐNG THƯỜNG NGÀY
-            ===================================================== */}
-            <Section
-                id="section-life"
-                icon={Heart}
-                color="#16a34a"
-                label="Tham vấn đời sống"
-                title="Ý kiến về đời sống thường ngày"
-                subtitle="Đóng góp ý kiến về các lĩnh vực thiết yếu từ y tế, giáo dục, nhà ở đến việc làm."
-                viewAllTo="/hien-ke/doi-song"
-            >
-                {/* Card grid — 2-3 columns, horizontal cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
-                    {filteredDaily.map(item => (
-                        <ConsultCard
-                            key={item.id}
-                            item={item}
-                            to={`/hien-ke/${item.id}`}
-                            tag={item.category}
-                            accentColor="#16a34a"
-                        />
-                    ))}
-                </div>
-
-                <div className="text-center">
-                    <Link to="/hien-ke/doi-song" className="inline-flex items-center gap-2 px-6 py-2 border border-green-700 text-green-700 font-semibold rounded-lg hover:bg-green-700 hover:text-white transition-all duration-200 text-[13px]">
-                        Xem toàn bộ <ArrowRight size={14} />
-                    </Link>
-                </div>
-            </Section>
-
-            {/* =====================================================
-                SECTION 3: PHÁP LÝ
+                SECTION 2: PHÁP LÝ
             ===================================================== */}
             <Section
                 id="section-legal"
@@ -368,53 +336,54 @@ export default function HienKePage() {
                 subtitle="Góp ý cho các dự thảo luật, nghị định và văn bản pháp quy đang được xây dựng."
                 viewAllTo="/hien-ke/phap-ly"
             >
-                {/* Category filter chips (Moved from Daily Life) */}
-                <div className="mb-3 p-2.5 bg-white rounded-lg border border-gray-200 shadow-sm">
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1.5">
-                        <button
-                            onClick={() => setSelectedLifeCat(null)}
-                            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md font-semibold text-[12px] border transition-all ${!selectedLifeCat
-                                ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-sm'
-                                : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-[#7c3aed] hover:text-[#7c3aed]'
-                                }`}
-                        >
-                            <span className="text-sm">⊞</span> Tất cả
-                        </button>
+                {/* Category navigation grid */}
+                <div className="mb-3 p-5 bg-white rounded-xl border border-gray-200 shadow-sm">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
                         {LIFE_CATEGORIES.map(c => (
-                            <button
+                            <Link
                                 key={c.id}
-                                onClick={() => setSelectedLifeCat(c.name === selectedLifeCat ? null : c.name)}
-                                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[12px] border transition-all text-left ${selectedLifeCat === c.name
-                                    ? 'bg-[#7c3aed] text-white border-[#7c3aed] font-semibold shadow-sm'
-                                    : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-[#7c3aed] hover:text-[#7c3aed] font-medium'
-                                    }`}
+                                to={`/hien-ke/gop-y-nhanh?domain=${encodeURIComponent(c.name)}`}
+                                className="flex flex-col items-center text-center gap-2 p-3 rounded-xl border border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50 transition-all group"
                             >
-                                <span className="text-sm shrink-0">{c.emoji}</span>
-                                <span className="leading-snug">{c.name}</span>
-                            </button>
+                                <span className="text-[28px] mb-1 group-hover:scale-110 transition-transform">{c.emoji}</span>
+                                <span className="text-[13px] font-semibold text-gray-700 group-hover:text-[#7c3aed] leading-tight px-1">{c.name}</span>
+                            </Link>
                         ))}
                     </div>
                 </div>
+            </Section>
 
-                {/* Card grid — 2-3 columns, horizontal cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
-                    {filteredLegal.map(item => (
-                        <ConsultCard
-                            key={item.id}
-                            item={item}
-                            to={`/hien-ke/${item.id}`}
-                            tag={item.domain}
-                            accentColor="#7c3aed"
-                        />
-                    ))}
-                </div>
-
-                <div className="text-center">
-                    <Link to="/hien-ke/phap-ly" className="inline-flex items-center gap-2 px-6 py-2 border border-purple-700 text-purple-700 font-semibold rounded-lg hover:bg-purple-700 hover:text-white transition-all duration-200 text-[13px]">
-                        Xem toàn bộ <ArrowRight size={14} />
+            {/* =====================================================
+                SECTION 3: ĐỜI SỐNG THƯỜNG NGÀY
+            ===================================================== */}
+            <Section
+                id="section-life"
+                icon={Heart}
+                color="#16a34a"
+                label="Tham vấn đời sống"
+                title="Hiến kế trong đời sống thường ngày"
+                subtitle="Đóng góp ý kiến về các lĩnh vực thiết yếu từ y tế, giáo dục, nhà ở đến việc làm."
+                viewAllTo="/hien-ke/doi-song"
+            >
+                {/* CTA Banner Daily Life */}
+                <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-2xl border border-green-200 p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm mb-4">
+                    <div className="flex items-start gap-4">
+                        <div className="w-14 h-14 bg-green-200 text-green-700 rounded-full flex items-center justify-center shrink-0">
+                            <Heart size={28} />
+                        </div>
+                        <div>
+                            <h3 className="text-[20px] font-bold text-gray-900 mb-2">Chia sẻ vấn đề đời sống của bạn</h3>
+                            <p className="text-gray-700 max-w-2xl leading-relaxed text-[15px]">
+                                Mọi ý kiến đóng góp của bạn về các vấn đề dân sinh, sức khoẻ, giáo dục, hạ tầng giao thông... đều được tổng hợp và phân tích để chuyển tới các cơ quan chức năng, nhằm xây dựng môi trường sống thiết thực và tốt đẹp hơn.
+                            </p>
+                        </div>
+                    </div>
+                    <Link to="/hien-ke/gop-y-nhanh?topic=doi-song" className="px-8 py-4 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-colors shadow-md shrink-0 text-[15px] flex items-center gap-2">
+                        Bắt đầu góp ý <ArrowRight size={16} />
                     </Link>
                 </div>
             </Section>
+
 
             {/* =====================================================
                 SECTION 4: QUỸ HỖ TRỢ CHÍNH SÁCH
@@ -424,7 +393,7 @@ export default function HienKePage() {
                 icon={Landmark}
                 color="#b45309"
                 label="Quỹ hỗ trợ"
-                title="Quỹ hỗ trợ xây dựng chính sách, pháp luật"
+                title="Ứng tuyển Quỹ hỗ trợ xây dựng chính sách, pháp luật"
                 subtitle="Hỗ trợ, tài trợ cho công tác xây dựng chính sách, pháp luật, nhằm tạo thay đổi đột phá, tích cực, hiệu quả, bền vững về xây dựng chính sách, pháp luật."
                 viewAllTo="/hien-ke/quy"
             >
@@ -480,11 +449,11 @@ export default function HienKePage() {
                                 Bạn muốn đóng góp ý kiến?
                             </h3>
                             <p className="text-blue-200 text-[15px] leading-relaxed mb-6 max-w-lg">
-                                Đăng ký tài khoản để tham gia tham vấn trực tuyến, nhận thông báo về các cuộc tham vấn mới và theo dõi kết quả tiếp thu ý kiến từ cơ quan nhà nước.
+                                Đăng nhập để tham gia hiến kế trực tuyến, nhận thông báo về các cuộc tham vấn mới và theo dõi thông tin từ Cổng Pháp luật quốc gia.
                             </p>
                             <div className="flex flex-wrap gap-3">
                                 <Link to="/dang-nhap" className="px-7 py-3.5 bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold rounded-xl transition-colors text-[14px] shadow-lg">
-                                    Đăng ký ngay
+                                    Đăng nhập ngay
                                 </Link>
                                 <Link to="/gioi-thieu" className="px-7 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors text-[14px] border border-white/30 backdrop-blur-sm">
                                     Tìm hiểu thêm

@@ -50,6 +50,7 @@ import HienKePage from './pages/HienKePage';
 import HienKeDetailPage from './pages/HienKeDetailPage';
 import DuThaoDetailPage from './pages/DuThaoDetailPage';
 import ConsultFeedbackPage from './pages/ConsultFeedbackPage';
+import SimpleFeedbackPage from './pages/SimpleFeedbackPage';
 import BaoCaoTiepThuDetailPage from './pages/BaoCaoTiepThuDetailPage';
 import UserHomePage from './pages/dashboard/UserHomePage';
 import UserSettingsPage from './pages/dashboard/UserSettingsPage';
@@ -181,6 +182,7 @@ const AppLayout = () => {
                     <Route path="/hien-ke" element={<HienKePage />} />
                     <Route path="/hien-ke/:id" element={<HienKeDetailPage />} />
                     <Route path="/hien-ke/gop-y/:id" element={<ConsultFeedbackPage />} />
+                    <Route path="/hien-ke/gop-y-nhanh" element={<SimpleFeedbackPage />} />
                     <Route path="/du-thao/:id" element={<DuThaoDetailPage />} />
                     <Route path="/bao-cao-tiep-thu/:id" element={<BaoCaoTiepThuDetailPage />} />
 
