@@ -209,7 +209,7 @@ export default function HienKePage() {
             >
                 {/* Background: trống đồng image */}
                 <div
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-bg-pan"
                     style={{ backgroundImage: "url('/images/dong_son_cover.png')" }}
                 />
                 {/* Overlay: dark navy so text is readable */}
@@ -218,7 +218,7 @@ export default function HienKePage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0f172a]/50" />
 
                 {/* Content */}
-                <div className="relative z-10 container mx-auto px-4 md:px-8 max-w-[1280px] py-16 md:py-20">
+                <div className="relative z-10 container mx-auto px-4 md:px-8 max-w-[1280px] py-16 md:py-24">
                     {/* Breadcrumb */}
                     <nav className="flex items-center gap-1.5 text-blue-300/80 text-[13px] mb-8 animate-fade-in">
                         <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
@@ -226,47 +226,73 @@ export default function HienKePage() {
                         <span className="text-white/90">Hiến kế hoàn thiện chính sách, pháp luật</span>
                     </nav>
 
-                    <div className="max-w-4xl">
-                        {/* Small label */}
-                        <h1 className="text-[38px] md:text-[52px] lg:text-[60px] font-black text-white leading-[1.1] mb-5 animate-fade-up">
-                            Hiến kế
-                            <span className="block text-[34px] md:text-[44px] lg:text-[50px] font-bold text-amber-300 mt-3 leading-[1.25]">
-                                Hoàn thiện hệ thống pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới
-                            </span>
-                        </h1>
-                        <p className="text-blue-100 text-[16px] md:text-[17px] leading-relaxed mb-8 max-w-xl animate-fade-up delay-100">
-                            Tiếng nói của bạn định hình chính sách quốc gia.
-                        </p>
+                    <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-16 pt-6 lg:pt-8">
+                        {/* Left side: Text, Search, Stats */}
+                        <div className="flex-1 max-w-2xl w-full">
+                            {/* Title */}
+                            <h1 className="text-[38px] md:text-[52px] lg:text-[60px] font-black text-white leading-[1.1] mb-5 animate-fade-up">
+                                <span className="animate-text-gradient bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">Hiến kế</span>
+                                <span className="block text-[24px] md:text-[32px] lg:text-[38px] font-bold mt-4 leading-[1.35] text-amber-300 animate-text-gradient bg-gradient-to-r from-amber-300 via-amber-100 to-amber-300 bg-clip-text text-transparent max-w-[650px]">
+                                    Hoàn thiện hệ thống pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới
+                                </span>
+                            </h1>
+                            <p className="text-blue-100 text-[16px] md:text-[17px] leading-relaxed mb-8 max-w-xl animate-fade-up delay-100">
+                                Tiếng nói của bạn định hình chính sách quốc gia.
+                            </p>
 
-                        {/* Search bar */}
-                        <div className="flex max-w-lg mb-10 animate-fade-up delay-200">
-                            <div className="relative flex-1">
-                                <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                                <input
-                                    type="text"
-                                    value={searchQuery}
-                                    onChange={e => setSearchQuery(e.target.value)}
-                                    placeholder="Tìm kiếm cuộc tham vấn..."
-                                    className="w-full pl-10 pr-4 py-3.5 rounded-l-xl text-[14px] text-gray-800 bg-white border-0 focus:outline-none focus:ring-2 focus:ring-amber-300 shadow-lg"
-                                />
+                            {/* Search bar */}
+                            <div className="flex max-w-lg mb-10 animate-fade-up delay-200">
+                                <div className="relative flex-1">
+                                    <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                    <input
+                                        type="text"
+                                        value={searchQuery}
+                                        onChange={e => setSearchQuery(e.target.value)}
+                                        placeholder="Tìm kiếm cuộc tham vấn..."
+                                        className="w-full pl-10 pr-4 py-3.5 rounded-l-xl text-[14px] text-gray-800 bg-white border-0 focus:outline-none focus:ring-2 focus:ring-amber-300 shadow-lg"
+                                    />
+                                </div>
+                                <button className="px-6 py-3.5 bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold rounded-r-xl text-[14px] transition-colors whitespace-nowrap shadow-lg">
+                                    Tìm kiếm
+                                </button>
                             </div>
-                            <button className="px-6 py-3.5 bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold rounded-r-xl text-[14px] transition-colors whitespace-nowrap shadow-lg">
-                                Tìm kiếm
-                            </button>
+
+                            {/* Stats */}
+                            <div className="flex flex-wrap md:flex-nowrap gap-6 md:gap-12 animate-fade-up delay-300">
+                                {[
+                                    { label: 'Cuộc tham vấn\nđang mở', value: '24' },
+                                    { label: 'Lượt người\ntham gia đóng góp', value: '85K+' },
+                                    { label: 'Lĩnh vực\ntrọng điểm', value: '32' },
+                                ].map(s => (
+                                    <div key={s.label} className="text-white min-w-[120px]">
+                                        <div className="text-[36px] md:text-[42px] font-black leading-none text-amber-300">{s.value}</div>
+                                        <div className="text-blue-200 text-[13.5px] font-medium mt-2 leading-snug whitespace-pre-line">{s.label}</div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
 
-                        {/* Stats */}
-                        <div className="flex flex-wrap gap-8 animate-fade-up delay-300">
-                            {[
-                                { label: 'Cuộc tham vấn đang mở', value: '24' },
-                                { label: 'Lượt tham gia', value: '85K+' },
-                                { label: 'Lĩnh vực', value: '32' },
-                            ].map(s => (
-                                <div key={s.label} className="text-white">
-                                    <div className="text-[32px] md:text-[36px] font-bold leading-none text-amber-300">{s.value}</div>
-                                    <div className="text-blue-200 text-[13px] font-medium mt-1">{s.label}</div>
-                                </div>
-                            ))}
+                        {/* Right side: 4 Feature Overview Cards */}
+                        <div className="lg:w-[480px] xl:w-[540px] shrink-0 w-full animate-fade-up delay-400">
+                            <div className="grid grid-cols-2 gap-4 lg:gap-5">
+                                {[
+                                    { id: '#section-hot', label: 'Vấn đề nổi bật', desc: 'Các dự thảo tài liệu đang thu hút nhiều sự quan tâm.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500' },
+                                    { id: '#section-life', label: 'Đời sống', desc: 'Đóng góp ý kiến về y tế, giáo dục, giao thông...', icon: Heart, color: 'text-green-600', hue: 'bg-green-500' },
+                                    { id: '#section-legal', label: 'Luật pháp', desc: 'Tham gia xây dựng các bộ luật, nghị định.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500' },
+                                    { id: '#section-fund', label: 'Hỗ trợ', desc: 'Tài trợ cho sáng kiến, hoàn thiện pháp luật.', icon: Landmark, color: 'text-amber-600', hue: 'bg-amber-500' },
+                                ].map(item => (
+                                    <a key={item.id} href={item.id} className="relative overflow-hidden flex flex-col justify-between p-5 xl:p-6 min-h-[160px] xl:min-h-[190px] bg-[#0f172a]/60 backdrop-blur-md border border-white/10 rounded-3xl hover:bg-white/15 hover:border-white/30 hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)] transition-all duration-300 group">
+                                        <div className={`absolute top-0 left-0 w-full h-1.5 ${item.hue} opacity-80`} />
+                                        <div className={`w-12 h-12 rounded-xl bg-white shadow-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300 shrink-0 ${item.color}`}>
+                                            <item.icon size={22} strokeWidth={2} />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-white font-bold text-[16px] xl:text-[18px] mb-1.5">{item.label}</h3>
+                                            <p className="text-blue-100/70 text-[13px] leading-relaxed line-clamp-2">{item.desc}</p>
+                                        </div>
+                                    </a>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -489,6 +515,23 @@ export default function HienKePage() {
                 .delay-400 { animation-delay: 400ms; }
                 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
                 @keyframes fadeIn { to { opacity: 1; } }
+
+                @keyframes bgPan {
+                    0% { transform: scale(1) translate(0, 0); }
+                    50% { transform: scale(1.03) translate(-1%, 1.5%); }
+                    100% { transform: scale(1) translate(0, 0); }
+                }
+                .animate-bg-pan { animation: bgPan 40s ease-in-out infinite; }
+
+                @keyframes textGradient {
+                    0% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                    100% { background-position: 0% 50%; }
+                }
+                .animate-text-gradient {
+                    background-size: 200% auto;
+                    animation: textGradient 6s linear infinite;
+                }
             `}</style>
         </div>
     );
