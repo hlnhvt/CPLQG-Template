@@ -95,7 +95,7 @@ const StatusBadge = ({ status, small = false }) => {
 const ConsultCard = ({ item, to, tag, accentColor = '#1e3a8a' }) => (
     <Link
         to={to}
-        className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all duration-200 flex flex-row h-[130px]"
+        className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl hover:border-gray-300 hover:-translate-y-1 transition-all duration-300 flex flex-row h-[130px]"
     >
         {/* Left: Thumbnail */}
         <div className="relative w-[160px] shrink-0 overflow-hidden">
@@ -156,7 +156,7 @@ const ConsultCard = ({ item, to, tag, accentColor = '#1e3a8a' }) => (
 
 // ======================== SECTION WRAPPER ========================
 const Section = ({ id, icon: Icon, color, label, title, subtitle, children, viewAllTo }) => (
-    <section id={id} className="py-5 border-b border-gray-100">
+    <section id={id} className="py-5 border-b border-gray-100 animate-fade-up">
         <div className="container mx-auto px-4 md:px-8 max-w-[1280px]">
             <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="flex items-center gap-3">
@@ -219,7 +219,7 @@ export default function HienKePage() {
                 {/* Content */}
                 <div className="relative z-10 container mx-auto px-4 md:px-8 max-w-[1280px] py-16 md:py-20">
                     {/* Breadcrumb */}
-                    <nav className="flex items-center gap-1.5 text-blue-300/80 text-[13px] mb-8">
+                    <nav className="flex items-center gap-1.5 text-blue-300/80 text-[13px] mb-8 animate-fade-in">
                         <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
                         <ChevronRight size={14} />
                         <span className="text-white/90">Hiến kế hoàn thiện thể chế</span>
@@ -227,17 +227,16 @@ export default function HienKePage() {
 
                     <div className="max-w-4xl">
                         {/* Small label */}
-                        <h1 className="text-[38px] md:text-[52px] lg:text-[60px] font-bold text-white leading-[1.1] mb-5">
+                        <h1 className="text-[38px] md:text-[52px] lg:text-[60px] font-bold text-white leading-[1.1] mb-5 animate-fade-up">
                             Hiến kế <br />
-                            <span className="text-amber-300">Vì một nhà nước pháp quyền của dân, do dân, vì dân</span>
+                            <span className="text-amber-300">Hoàn thiện hệ thống pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới</span>
                         </h1>
-                        <p className="text-blue-100 text-[16px] md:text-[17px] leading-relaxed mb-8 max-w-xl">
-                            Từ pháp luật đến hành động —
-                            tiếng nói của bạn định hình chính sách quốc gia.
+                        <p className="text-blue-100 text-[16px] md:text-[17px] leading-relaxed mb-8 max-w-xl animate-fade-up delay-100">
+                            Tiếng nói của bạn định hình chính sách quốc gia.
                         </p>
 
                         {/* Search bar */}
-                        <div className="flex max-w-lg mb-10">
+                        <div className="flex max-w-lg mb-10 animate-fade-up delay-200">
                             <div className="relative flex-1">
                                 <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                                 <input
@@ -254,7 +253,7 @@ export default function HienKePage() {
                         </div>
 
                         {/* Stats */}
-                        <div className="flex flex-wrap gap-8">
+                        <div className="flex flex-wrap gap-8 animate-fade-up delay-300">
                             {[
                                 { label: 'Cuộc tham vấn đang mở', value: '24' },
                                 { label: 'Lượt tham gia', value: '85K+' },
@@ -343,7 +342,7 @@ export default function HienKePage() {
                             <Link
                                 key={c.id}
                                 to={`/hien-ke/gop-y-nhanh?domain=${encodeURIComponent(c.name)}`}
-                                className="flex flex-col items-center text-center gap-2 p-3 rounded-xl border border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50 transition-all group"
+                                className="flex flex-col items-center text-center gap-2 p-3 rounded-xl border border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50 hover:-translate-y-1 hover:shadow-md transition-all group duration-300"
                             >
                                 <span className="text-[28px] mb-1 group-hover:scale-110 transition-transform">{c.emoji}</span>
                                 <span className="text-[13px] font-semibold text-gray-700 group-hover:text-[#7c3aed] leading-tight px-1">{c.name}</span>
@@ -442,7 +441,7 @@ export default function HienKePage() {
                     className="absolute right-0 top-0 bottom-0 w-[400px] opacity-10 bg-cover bg-center bg-no-repeat"
                     style={{ backgroundImage: "url('/images/dong_son_cover.png')" }}
                 />
-                <div className="relative z-10 container mx-auto px-4 md:px-8 max-w-[1280px] py-14">
+                <div className="relative z-10 container mx-auto px-4 md:px-8 max-w-[1280px] py-14 animate-fade-in">
                     <div className="flex flex-col md:flex-row items-center gap-10">
                         <div className="flex-1">
                             <h3 className="text-[28px] md:text-[34px] font-bold text-white mb-3">
@@ -478,6 +477,16 @@ export default function HienKePage() {
                 </div>
             </div>
 
+            <style>{`
+                .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+                .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
+                .delay-100 { animation-delay: 100ms; }
+                .delay-200 { animation-delay: 200ms; }
+                .delay-300 { animation-delay: 300ms; }
+                .delay-400 { animation-delay: 400ms; }
+                @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+                @keyframes fadeIn { to { opacity: 1; } }
+            `}</style>
         </div>
     );
 }
