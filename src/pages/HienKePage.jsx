@@ -280,7 +280,7 @@ export default function HienKePage() {
                                     { id: '#section-life', label: 'Đời sống', desc: 'Đóng góp ý kiến về y tế, giáo dục, giao thông...', icon: Heart, color: 'text-green-600', hue: 'bg-green-500' },
                                     { id: '#section-legal', label: 'Pháp luật', desc: 'Tham gia xây dựng các bộ luật, nghị định.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500' },
                                 ].map(item => (
-                                    <a key={item.id} href={item.id} className="relative overflow-hidden flex items-center gap-5 p-5 xl:px-6 xl:py-5 bg-[#0f172a]/60 backdrop-blur-md border border-white/10 rounded-2xl md:rounded-3xl hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)] transition-all duration-300 group">
+                                    <a key={item.id} href={item.id} className="relative overflow-hidden flex items-center gap-5 p-5 xl:px-6 bg-[#0f172a]/60 backdrop-blur-md border border-white/10 rounded-2xl md:rounded-3xl hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)] transition-all duration-300 group h-[104px] xl:h-[116px]">
                                         <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${item.hue} opacity-80`} />
                                         <div className={`w-14 h-14 rounded-2xl bg-white shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0 ${item.color}`}>
                                             <item.icon size={26} strokeWidth={2} />
