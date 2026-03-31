@@ -176,7 +176,7 @@ const HienKeDetailPage = () => {
 
                     {/* Hero content */}
                     <div className="max-w-[800px]">
-                        <h1 className="text-[28px] md:text-[38px] font-black text-gray-900 leading-tight mb-5">
+                        <h1 className="text-[28px] md:text-[38px] font-bold text-gray-900 leading-tight mb-5">
                             {data.title}
                         </h1>
                         <p className="text-[16px] text-gray-700 leading-relaxed mb-7 max-w-[680px]">
