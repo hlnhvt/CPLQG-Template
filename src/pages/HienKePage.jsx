@@ -342,7 +342,7 @@ export default function HienKePage() {
                         <ConsultCard
                             key={item.id}
                             item={item}
-                            to={`/hien-ke/doi-song/${item.id}`}
+                            to={`/hien-ke/${item.id}`}
                             tag={item.category}
                             accentColor="#16a34a"
                         />
@@ -402,7 +402,7 @@ export default function HienKePage() {
                         <ConsultCard
                             key={item.id}
                             item={item}
-                            to={`/hien-ke/phap-ly/${item.id}`}
+                            to={`/hien-ke/${item.id}`}
                             tag={item.domain}
                             accentColor="#7c3aed"
                         />
@@ -450,7 +450,7 @@ export default function HienKePage() {
                         <ConsultCard
                             key={item.id}
                             item={item}
-                            to={`/hien-ke/quy/${item.id}`}
+                            to={`/hien-ke/${item.id}`}
                             tag={item.category}
                             accentColor="#b45309"
                         />
