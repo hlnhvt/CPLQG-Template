@@ -87,7 +87,7 @@ export default function SimpleFeedbackPage() {
                     <Link to="/hien-ke" className="inline-flex items-center gap-2 text-blue-200 hover:text-white mb-6 font-medium text-[14px] transition-colors">
                         <ArrowLeft size={16} /> Quay lại trang chủ Hiến kế
                     </Link>
-                    <h1 className="text-[32px] md:text-[40px] font-black text-white mb-3 leading-tight">Gửi Hiến kế Nhanh</h1>
+                    <h1 className="text-[32px] md:text-[40px] font-black text-white mb-3 leading-tight">Gửi Hiến kế</h1>
                     <p className="text-blue-100 text-[16px] leading-relaxed max-w-[600px]">
                         Hãy chia sẻ trực tiếp những ý tưởng, giải pháp hoặc khúc mắc của bạn về pháp luật và đời sống để cùng xây dựng xã hội tốt đẹp hơn.
                     </p>
@@ -97,32 +97,32 @@ export default function SimpleFeedbackPage() {
             {/* Form Content */}
             <div className="container mx-auto px-4 md:px-8 max-w-[800px] -mt-16 relative z-20">
                 <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:p-10 mb-8">
-                    
+
                     <div className="space-y-8">
                         {/* Section 1: Nội dung */}
                         <div>
                             <h3 className="text-[18px] font-bold text-gray-900 border-b border-gray-100 pb-3 mb-5 flex items-center gap-2">
-                                <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-[13px] font-black">1</span> 
+                                <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-[13px] font-black">1</span>
                                 Nội dung ý kiến
                             </h3>
-                            
+
                             <div className="space-y-5">
                                 <div>
                                     <label className="block text-[14px] font-bold text-gray-800 mb-2">Tiêu đề hiến kế <span className="text-red-500">*</span></label>
-                                    <input 
+                                    <input
                                         type="text" required name="title"
                                         placeholder="Tóm tắt ngắn gọn ý kiến của bạn"
                                         value={formData.title} onChange={handleChange}
-                                        className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]" 
+                                        className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
                                     />
                                 </div>
 
                                 <div>
                                     <label className="block text-[14px] font-bold text-gray-800 mb-2">Lĩnh vực liên quan <span className="text-red-500">*</span></label>
-                                    <select 
+                                    <select
                                         required name="category"
                                         value={formData.category} onChange={handleChange}
-                                        className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px] cursor-pointer" 
+                                        className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px] cursor-pointer"
                                     >
                                         <option value="" disabled>-- Vui lòng chọn lĩnh vực --</option>
                                         {CATEGORIES.map(c => (
@@ -133,11 +133,11 @@ export default function SimpleFeedbackPage() {
 
                                 <div>
                                     <label className="block text-[14px] font-bold text-gray-800 mb-2">Nội dung chi tiết <span className="text-red-500">*</span></label>
-                                    <textarea 
+                                    <textarea
                                         required rows={6} name="content"
                                         placeholder="Trình bày chi tiết thực trạng, vấn đề và giải pháp đề xuất của bạn..."
                                         value={formData.content} onChange={handleChange}
-                                        className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px] resize-y" 
+                                        className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px] resize-y"
                                     />
                                 </div>
 
@@ -155,7 +155,7 @@ export default function SimpleFeedbackPage() {
                         {/* Section 2: Người gửi */}
                         <div>
                             <h3 className="text-[18px] font-bold text-gray-900 border-b border-gray-100 pb-3 mb-5 flex items-center gap-2">
-                                <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-[13px] font-black">2</span> 
+                                <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-[13px] font-black">2</span>
                                 Thông tin liên hệ
                             </h3>
 
@@ -167,7 +167,7 @@ export default function SimpleFeedbackPage() {
                             </div>
 
                             <label className="flex items-center gap-3 mb-5 cursor-pointer">
-                                <input 
+                                <input
                                     type="checkbox" name="isAnonymous"
                                     checked={formData.isAnonymous} onChange={handleChange}
                                     className="w-5 h-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
@@ -179,26 +179,26 @@ export default function SimpleFeedbackPage() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 animate-fadeIn">
                                     <div className="md:col-span-2">
                                         <label className="block text-[14px] font-bold text-gray-800 mb-2">Họ và tên</label>
-                                        <input 
+                                        <input
                                             type="text" name="name"
                                             value={formData.name} onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]" 
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
                                         />
                                     </div>
                                     <div>
                                         <label className="block text-[14px] font-bold text-gray-800 mb-2">Email</label>
-                                        <input 
+                                        <input
                                             type="email" name="email"
                                             value={formData.email} onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]" 
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
                                         />
                                     </div>
                                     <div>
                                         <label className="block text-[14px] font-bold text-gray-800 mb-2">Số điện thoại</label>
-                                        <input 
+                                        <input
                                             type="tel" name="phone"
                                             value={formData.phone} onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]" 
+                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
                                         />
                                     </div>
                                 </div>
@@ -208,7 +208,7 @@ export default function SimpleFeedbackPage() {
                     </div>
 
                     <div className="pt-8 mt-8 border-t border-gray-100 flex justify-end">
-                        <button 
+                        <button
                             type="submit"
                             className="w-full md:w-auto px-10 py-4 bg-[#16a34a] text-white font-bold rounded-xl hover:bg-green-700 transition-colors shadow-md text-[15px] flex items-center justify-center gap-2"
                         >
