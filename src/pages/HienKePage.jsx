@@ -336,34 +336,6 @@ export default function HienKePage() {
                 subtitle="Đóng góp ý kiến về các lĩnh vực thiết yếu từ y tế, giáo dục, nhà ở đến việc làm."
                 viewAllTo="/hien-ke/doi-song"
             >
-                {/* Category filter chips */}
-                <div className="mb-3 p-2.5 bg-white rounded-lg border border-gray-200 shadow-sm">
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1.5">
-                        <button
-                            onClick={() => setSelectedLifeCat(null)}
-                            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md font-semibold text-[12px] border transition-all ${!selectedLifeCat
-                                ? 'bg-[#1e3a8a] text-white border-[#1e3a8a] shadow-sm'
-                                : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-[#1e3a8a] hover:text-[#1e3a8a]'
-                                }`}
-                        >
-                            <span className="text-sm">⊞</span> Tất cả
-                        </button>
-                        {LIFE_CATEGORIES.map(c => (
-                            <button
-                                key={c.id}
-                                onClick={() => setSelectedLifeCat(c.name === selectedLifeCat ? null : c.name)}
-                                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[12px] border transition-all text-left ${selectedLifeCat === c.name
-                                    ? 'bg-[#1e3a8a] text-white border-[#1e3a8a] font-semibold shadow-sm'
-                                    : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-[#1e3a8a] hover:text-[#1e3a8a] font-medium'
-                                    }`}
-                            >
-                                <span className="text-sm shrink-0">{c.emoji}</span>
-                                <span className="leading-snug">{c.name}</span>
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
                 {/* Card grid — 2-3 columns, horizontal cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-3">
                     {filteredDaily.map(item => (
@@ -396,20 +368,32 @@ export default function HienKePage() {
                 subtitle="Góp ý cho các dự thảo luật, nghị định và văn bản pháp quy đang được xây dựng."
                 viewAllTo="/hien-ke/phap-ly"
             >
-                {/* Domain filter pills */}
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                    {legalDomains.map(d => (
+                {/* Category filter chips (Moved from Daily Life) */}
+                <div className="mb-3 p-2.5 bg-white rounded-lg border border-gray-200 shadow-sm">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1.5">
                         <button
-                            key={d}
-                            onClick={() => setSelectedLegalDomain(d)}
-                            className={`px-3 py-1 rounded-full text-[12px] font-semibold border transition-all ${selectedLegalDomain === d
+                            onClick={() => setSelectedLifeCat(null)}
+                            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md font-semibold text-[12px] border transition-all ${!selectedLifeCat
                                 ? 'bg-[#7c3aed] text-white border-[#7c3aed] shadow-sm'
-                                : 'bg-white text-gray-600 border-gray-200 hover:border-[#7c3aed] hover:text-[#7c3aed]'
+                                : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-[#7c3aed] hover:text-[#7c3aed]'
                                 }`}
                         >
-                            {d}
+                            <span className="text-sm">⊞</span> Tất cả
                         </button>
-                    ))}
+                        {LIFE_CATEGORIES.map(c => (
+                            <button
+                                key={c.id}
+                                onClick={() => setSelectedLifeCat(c.name === selectedLifeCat ? null : c.name)}
+                                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[12px] border transition-all text-left ${selectedLifeCat === c.name
+                                    ? 'bg-[#7c3aed] text-white border-[#7c3aed] font-semibold shadow-sm'
+                                    : 'bg-gray-50 text-gray-700 border-gray-200 hover:border-[#7c3aed] hover:text-[#7c3aed] font-medium'
+                                    }`}
+                            >
+                                <span className="text-sm shrink-0">{c.emoji}</span>
+                                <span className="leading-snug">{c.name}</span>
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Card grid — 2-3 columns, horizontal cards */}
@@ -441,7 +425,7 @@ export default function HienKePage() {
                 color="#b45309"
                 label="Quỹ hỗ trợ"
                 title="Quỹ hỗ trợ xây dựng chính sách, pháp luật"
-                subtitle="Tài trợ nghiên cứu, hội thảo, tập huấn và giám sát độc lập nhằm thúc đẩy xây dựng chính sách bằng chứng."
+                subtitle="Hỗ trợ, tài trợ cho công tác xây dựng chính sách, pháp luật, nhằm tạo thay đổi đột phá, tích cực, hiệu quả, bền vững về xây dựng chính sách, pháp luật."
                 viewAllTo="/hien-ke/quy"
             >
                 {/* Stats row */}

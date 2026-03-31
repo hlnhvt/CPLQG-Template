@@ -183,17 +183,10 @@ const HienKeDetailPage = () => {
                             {data.summary}
                         </p>
                         <div className="flex flex-wrap items-center gap-3 mb-6">
-                            {isLoggedIn ? (
-                                <button className="inline-flex items-center gap-2 px-6 py-3 bg-[#16a34a] text-white font-bold rounded-lg hover:bg-green-700 transition-all shadow-sm text-[15px]">
-                                    <Send size={16} /> Gửi ý kiến của bạn
-                                    <ExternalLink size={14} className="ml-1 opacity-70" />
-                                </button>
-                            ) : (
-                                <Link to="/dang-nhap" className="inline-flex items-center gap-2 px-6 py-3 bg-[#16a34a] text-white font-bold rounded-lg hover:bg-green-700 transition-all shadow-sm text-[15px]">
-                                    <Send size={16} /> Gửi ý kiến của bạn
-                                    <ExternalLink size={14} className="ml-1 opacity-70" />
-                                </Link>
-                            )}
+                            <Link to={`/hien-ke/gop-y/${data.id}`} className="inline-flex items-center gap-2 px-6 py-3 bg-[#16a34a] text-white font-bold rounded-lg hover:bg-green-700 transition-all shadow-sm text-[15px]">
+                                <Send size={16} /> Gửi ý kiến của bạn
+                                <ExternalLink size={14} className="ml-1 opacity-70" />
+                            </Link>
                             <Link to="/hien-ke" className="inline-flex items-center gap-2 px-5 py-3 bg-white/70 text-gray-700 font-semibold rounded-lg hover:bg-white border border-gray-300 transition-all text-[14px]">
                                 <ArrowLeft size={15} /> Quay lại danh sách
                             </Link>
@@ -329,93 +322,7 @@ const HienKeDetailPage = () => {
                             </div>
 
                             {/* Comment / Feedback section */}
-                            <div id="gop-y" className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 mb-6">
-                                <h2 className="text-[18px] font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100 flex items-center gap-2">
-                                    <MessageSquare size={18} className="text-[#1e3a8a]" />
-                                    Ý kiến đóng góp
-                                    <span className="ml-1 text-[13px] font-normal text-gray-400">({allComments.length} ý kiến)</span>
-                                </h2>
 
-                                {/* CTA banner */}
-                                <div className="bg-[#e8f5e9] border border-green-200 rounded-xl p-5 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                                    <div>
-                                        <p className="font-bold text-[#16a34a] text-[15px] mb-1 flex items-center gap-2">
-                                            <Send size={15} /> Gửi ý kiến đóng góp của bạn
-                                        </p>
-                                        <p className="text-[13px] text-gray-600">Hạn gửi ý kiến: <strong>{data.endDate}</strong></p>
-                                    </div>
-                                    {!isLoggedIn ? (
-                                        <Link to="/dang-nhap" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#16a34a] text-white font-bold rounded-lg hover:bg-green-700 transition-all text-[13px] shrink-0">
-                                            Đăng nhập để góp ý
-                                        </Link>
-                                    ) : null}
-                                </div>
-
-                                {/* Comment form — only if logged in */}
-                                {isLoggedIn && (
-                                    <div className="mb-6 space-y-4">
-                                        {commentSuccess && (
-                                            <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-3 text-green-700 text-[13px] font-semibold">
-                                                <CheckCircle2 size={16} /> Ý kiến của bạn đã được gửi thành công!
-                                            </div>
-                                        )}
-                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                            {[
-                                                { label: 'Họ và tên', icon: User, value: 'Người dùng', type: 'text' },
-                                                { label: 'Email', icon: Mail, value: 'email@example.com', type: 'email' },
-                                                { label: 'Số điện thoại', icon: Phone, value: '', type: 'tel' },
-                                            ].map(f => (
-                                                <div key={f.label}>
-                                                    <label className="block text-[12px] font-semibold text-gray-700 mb-1.5">{f.label}</label>
-                                                    <div className="relative">
-                                                        <f.icon size={14} className="absolute left-3 top-2.5 text-gray-400" />
-                                                        <input type={f.type} readOnly={!!f.value} defaultValue={f.value}
-                                                            className="w-full pl-8 pr-3 py-2 border border-gray-200 rounded-lg text-[13px] bg-gray-50 focus:border-[#1e3a8a] outline-none transition-colors" />
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                        <div>
-                                            <label className="block text-[12px] font-semibold text-gray-700 mb-1.5">Nội dung ý kiến <span className="text-red-500">*</span></label>
-                                            <textarea
-                                                value={commentText}
-                                                onChange={e => setCommentText(e.target.value)}
-                                                rows={5}
-                                                className="w-full border border-gray-200 rounded-lg p-3 text-[14px] outline-none focus:border-[#1e3a8a] resize-none transition-colors"
-                                                placeholder="Nhập ý kiến đóng góp của bạn..."
-                                            />
-                                        </div>
-                                        <button
-                                            onClick={handleSubmit}
-                                            disabled={!commentText.trim()}
-                                            className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#1e3a8a] text-white font-bold rounded-lg hover:bg-blue-800 transition-all text-[14px] disabled:opacity-40 disabled:cursor-not-allowed"
-                                        >
-                                            <Send size={14} /> Gửi ý kiến
-                                        </button>
-                                    </div>
-                                )}
-
-                                {/* Comments list */}
-                                <div className="space-y-4">
-                                    {allComments.map((c, idx) => (
-                                        <div key={c.id || idx} className="border border-gray-100 rounded-xl p-4 bg-gray-50 hover:bg-white hover:border-gray-200 transition-all">
-                                            <div className="flex items-start gap-3">
-                                                <div className="w-9 h-9 rounded-full bg-[#1e3a8a] flex items-center justify-center shrink-0 text-white font-bold text-[14px]">
-                                                    {c.user ? c.user.charAt(0) : '?'}
-                                                </div>
-                                                <div className="flex-1 min-w-0">
-                                                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                                                        <span className="font-bold text-[13px] text-gray-900">{c.user || 'Ẩn danh'}</span>
-                                                        {c.org && <span className="text-[11px] text-gray-500 bg-gray-100 px-2 py-0.5 rounded">{c.org}</span>}
-                                                        <span className="text-[11px] text-gray-400 ml-auto">{c.date}</span>
-                                                    </div>
-                                                    <p className="text-[13px] text-gray-700 leading-relaxed">{c.content}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
                         </div>
 
                         {/* ── RIGHT: SIDEBAR (30%) ── */}
@@ -474,15 +381,9 @@ const HienKeDetailPage = () => {
 
                                 {/* CTA */}
                                 <div className="mt-5 pt-4 border-t border-gray-100">
-                                    {isLoggedIn ? (
-                                        <button className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#16a34a] text-white font-bold rounded-lg hover:bg-green-700 transition-all text-[14px]">
-                                            <Send size={15} /> Gửi ý kiến
-                                        </button>
-                                    ) : (
-                                        <Link to="/dang-nhap" className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#16a34a] text-white font-bold rounded-lg hover:bg-green-700 transition-all text-[14px]">
-                                            <Send size={15} /> Gửi ý kiến
-                                        </Link>
-                                    )}
+                                    <Link to={`/hien-ke/gop-y/${data.id}`} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#16a34a] text-white font-bold rounded-lg hover:bg-green-700 transition-all text-[14px]">
+                                        <Send size={15} /> Gửi ý kiến
+                                    </Link>
                                 </div>
                             </div>
 

@@ -22,7 +22,7 @@ import ThuNgoPage from './pages/gioi-thieu/ThuNgoPage';
 import UserManualArticlePage from './pages/huong-dan-su-dung/UserManualArticlePage';
 import UserManualDocListPage from './pages/huong-dan-su-dung/UserManualDocListPage';
 import NewsHighlightsPage from './pages/NewsHighlightsPage';
-import ContactPage from './pages/ContactPage';
+import ContactUsPage from './pages/ContactUsPage';
 import SurveyTopicsPage from './pages/SurveyTopicsPage';
 import SurveyGlobalPage from './pages/SurveyGlobalPage';
 import SurveyTopicDetailPage from './pages/SurveyTopicDetailPage';
@@ -49,6 +49,7 @@ import DuThaoPage from './pages/DuThaoPage';
 import HienKePage from './pages/HienKePage';
 import HienKeDetailPage from './pages/HienKeDetailPage';
 import DuThaoDetailPage from './pages/DuThaoDetailPage';
+import ConsultFeedbackPage from './pages/ConsultFeedbackPage';
 import BaoCaoTiepThuDetailPage from './pages/BaoCaoTiepThuDetailPage';
 import UserHomePage from './pages/dashboard/UserHomePage';
 import UserSettingsPage from './pages/dashboard/UserSettingsPage';
@@ -148,7 +149,7 @@ const AppLayout = () => {
                     <Route path="/tin-tuc/noi-bat" element={<NewsHighlightsPage />} />
                     <Route path="/tin-tuc/nghien-cuu-trao-doi" element={<NghienCuuTraoDoiPage />} />
                     <Route path="/tin-tuc/nghien-cuu-trao-doi/:id" element={<NghienCuuTraoDoiDetailPage />} />
-                    <Route path="/lien-he" element={<ContactPage />} />
+                    <Route path="/lien-he" element={<ContactUsPage />} />
                     <Route path="/chu-de-khao-sat" element={<SurveyTopicsPage />} />
                     <Route path="/chu-de-khao-sat/:id" element={<SurveyTopicDetailPage />} />
                     <Route path="/ban-tin/dang-ky" element={<NewsletterRegistrationPage />} />
@@ -179,6 +180,7 @@ const AppLayout = () => {
                     <Route path="/du-thao" element={<DuThaoPage />} />
                     <Route path="/hien-ke" element={<HienKePage />} />
                     <Route path="/hien-ke/:id" element={<HienKeDetailPage />} />
+                    <Route path="/hien-ke/gop-y/:id" element={<ConsultFeedbackPage />} />
                     <Route path="/du-thao/:id" element={<DuThaoDetailPage />} />
                     <Route path="/bao-cao-tiep-thu/:id" element={<BaoCaoTiepThuDetailPage />} />
 
