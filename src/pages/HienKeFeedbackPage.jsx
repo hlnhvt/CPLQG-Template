@@ -124,9 +124,9 @@ export default function HienKeFeedbackPage() {
                                 Xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới
                             </span>
                         </h1>
-                        <p className="text-[22px] md:text-[28px] font-semibold leading-relaxed mb-6 whitespace-nowrap max-w-none animate-fade-in delay-100 italic">
-                            <span className="relative inline-block animate-text-shimmer bg-[linear-gradient(110deg,#bfdbfe,45%,#ffffff,55%,#fde68a)] bg-[length:200%_100%] bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] tracking-wider">
-                                "Tiếng nói của bạn định hình chính sách quốc gia"
+                        <p className="text-[18px] md:text-[24px] font-semibold leading-tight mb-6 max-w-6xl animate-fade-in delay-100 italic">
+                            <span className="relative inline-block animate-text-shimmer bg-[linear-gradient(110deg,#bfdbfe,45%,#ffffff,55%,#fde68a)] bg-[length:200%_100%] bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+                                "Tiếng nói của bạn góp phần quan trọng định hình chính sách, pháp luật quốc gia"
                             </span>
                         </p>
                     </div>

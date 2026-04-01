@@ -59,9 +59,9 @@ export default function HienKePage() {
                                     Xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới
                                 </span>
                             </h1>
-                            <p className="text-[18px] md:text-[23px] font-semibold leading-relaxed mb-10 whitespace-nowrap max-w-none animate-fade-in delay-100 italic">
-                                <span className="relative inline-block animate-text-shimmer bg-[linear-gradient(110deg,#bfdbfe,45%,#ffffff,55%,#fde68a)] bg-[length:200%_100%] bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] tracking-wider">
-                                    "Tiếng nói của bạn định hình chính sách quốc gia"
+                            <p className="text-[18px] md:text-[24px] font-semibold leading-tight mb-10 max-w-xl animate-fade-in delay-100 italic">
+                                <span className="relative inline-block animate-text-shimmer bg-[linear-gradient(110deg,#bfdbfe,45%,#ffffff,55%,#fde68a)] bg-[length:200%_100%] bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+                                    "Tiếng nói của bạn góp phần quan trọng định hình chính sách, pháp luật quốc gia"
                                 </span>
                             </p>
 
@@ -112,7 +112,7 @@ export default function HienKePage() {
                         <div className="lg:w-[400px] xl:w-[440px] shrink-0 w-full -mt-6 lg:-mt-10 animate-fade-up delay-400">
                             <div className="flex flex-col gap-4 md:gap-5">
                                 {[
-                                    { id: '/hien-ke/gop-y-nhanh?topic=doi-song', label: 'Hiến kế của bạn', desc: 'Chia sẻ ý kiến, sáng kiến của bạn về các vấn đề xã hội nhằm góp phần xây dựng, thi hành và hoàn thiện pháp luật.', icon: Heart, color: 'text-green-600', hue: 'bg-green-500' },
+                                    { id: '/hien-ke/gop-y-nhanh?topic=doi-song', label: 'Hiến kế của bạn', desc: 'Ý kiến, sáng kiến của bạn góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật trên các lĩnh vực.', icon: Heart, color: 'text-green-600', hue: 'bg-green-500' },
                                     { id: '/hien-ke/noi-bat', label: 'Chúng tôi cần bạn', desc: 'Những nội dung đang cần ý kiến đóng góp của bạn trong quá trình xây dựng và thực thi chính sách.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500' },
                                     { id: '/hien-ke/linh-vuc', label: 'Có thể bạn quan tâm', desc: 'Các lĩnh vực gợi ý để bạn dễ dàng tham gia đóng góp như: doanh nghiệp - đầu tư, thuế - hải quan, lao động - an sinh xã hội…', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500' },
                                 ].map(item => (
