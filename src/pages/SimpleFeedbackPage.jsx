@@ -148,9 +148,9 @@ export default function SimpleFeedbackPage() {
                                 )}
 
                                 <div>
-                                    <label className="block text-[14px] font-bold text-gray-800 mb-2">Đề xuất hình thức ban hành <span className="text-red-500">*</span></label>
+                                    <label className="block text-[14px] font-bold text-gray-800 mb-2">Đề xuất hình thức ban hành (không bắt buộc)</label>
                                     <select
-                                        required name="issuanceForm"
+                                        name="issuanceForm"
                                         value={formData.issuanceForm} onChange={handleChange}
                                         className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px] cursor-pointer"
                                     >
