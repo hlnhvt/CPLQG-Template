@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ChevronRight, Scale, Search } from 'lucide-react';
+import { ChevronRight, Scale, Search, Heart, ArrowRight } from 'lucide-react';
 import { Section, LIFE_CATEGORIES } from './HienKeShared';
 
 const HienKeLinhVucPage = () => {
@@ -28,7 +28,7 @@ const HienKeLinhVucPage = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#1e3a8a]/80 to-[#1e3a8a]/60" />
                 {/* Subtle gold shimmer overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0f172a]/50" />
-                
+
                 <div className="container mx-auto px-4 md:px-8 max-w-[1280px] relative z-20">
                     <nav className="flex items-center gap-1.5 text-blue-300/80 text-[13px] mb-6">
                         <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
@@ -37,7 +37,7 @@ const HienKeLinhVucPage = () => {
                         <ChevronRight size={14} />
                         <span className="text-white/90">Có thể bạn quan tâm</span>
                     </nav>
-                    
+
                     <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
                         Lĩnh vực pháp luật
                     </h1>
@@ -52,7 +52,7 @@ const HienKeLinhVucPage = () => {
                     id="section-legal"
                     icon={Scale}
                     color="#7c3aed"
-                    title="Lựa chọn lĩnh vực pháp luật mà bạn quan tâm"
+                    title="Lựa chọn lĩnh vực bạn quan tâm"
                     subtitle="Bao gồm các lĩnh vực gợi ý để bạn dễ dàng tham gia đóng góp."
                 >
                     <div className="mb-3 p-5 bg-white rounded-xl border border-gray-200 shadow-sm">
@@ -87,6 +87,28 @@ const HienKeLinhVucPage = () => {
                                 Không tìm thấy tiêu đề phù hợp với "{searchTerm}"
                             </div>
                         )}
+
+                        {/* CTA Block: Share your hien ke */}
+                        <div className="mt-8 bg-green-50/50 border border-green-200 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                            <div className="flex items-start gap-4">
+                                <div className="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center shrink-0">
+                                    <Heart size={28} />
+                                </div>
+                                <div className="flex-1">
+                                    <h3 className="text-[20px] font-bold text-gray-900 mb-2">Chia sẻ hiến kế của bạn</h3>
+                                    <p className="text-gray-600 max-w-2xl leading-relaxed text-[15px]">
+                                        Mọi ý kiến đóng góp của bạn về các vấn đề dân sinh, sức khoẻ, giáo dục, hạ tầng giao thông... đều được tổng hợp và phân tích để chuyển tới các cơ quan chức năng, nhằm xây dựng môi trường sống thiết thực và tốt đẹp hơn.
+                                    </p>
+                                </div>
+                            </div>
+                            <Link 
+                                to="/hien-ke/gop-y-nhanh" 
+                                className="px-8 py-3.5 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-colors shadow-md shadow-green-600/20 shrink-0 text-[15px] flex items-center gap-2 group"
+                            >
+                                Bắt đầu góp ý 
+                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            </Link>
+                        </div>
                     </div>
                 </Section>
             </div>
