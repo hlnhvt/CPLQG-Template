@@ -11,11 +11,12 @@ import { useAuth } from '../../contexts/AuthContext';
 
 const LivestreamEventPage = () => {
     const { user } = useAuth();
+    const [mainTab, setMainTab] = useState('info');
     const [activeTab, setActiveTab] = useState('chat'); // chat, qa, poll, results
     const [infoTab, setInfoTab] = useState('overview'); // overview, documents
     const [chatInput, setChatInput] = useState('');
     const [isRegistered, setIsRegistered] = useState(false); // Mock registration gate
-    const [highContrast, setHighContrast] = useState(false);
+    const [highContrast, setHighContrast] = useState(true);
     const [isInteractionCollapsed, setIsInteractionCollapsed] = useState(false);
     const [registrationModalState, setRegistrationModalState] = useState({ isOpen: false, eventTitle: 'Hội thảo trực tuyến: Góp ý Dự thảo Luật Doanh nghiệp sửa đổi' });
 
@@ -155,85 +156,25 @@ const LivestreamEventPage = () => {
             </div>
 
             <div className="container mx-auto px-4 mt-6">
-                {!isRegistered ? (
-                    <div className="flex flex-col items-center justify-center h-[60vh] text-center bg-[#1f2937] rounded-2xl border border-gray-800 shadow-2xl p-8 max-w-2xl mx-auto mt-12">
-                        <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
-                            <Info size={40} className="text-red-500" />
-                        </div>
-                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Bạn chưa có quyền truy cập</h2>
-                        <p className="text-gray-400 mb-8 max-w-md mx-auto text-lg hover:text-gray-300">
-                            Bạn cần đăng ký tham gia hoặc sự kiện này chưa được phê duyệt cho tải khoản của bạn.<br /><br />
-                            Vui lòng kiểm tra lại trạng thái đăng ký tại danh sách sự kiện.
-                        </p>
+                {/* Main Event Tabs */}
+                <div className={`flex border-b mb-6 ${highContrast ? 'border-gray-200' : 'border-gray-800'}`}>
+                    <button
+                        onClick={() => setMainTab('info')}
+                        className={`py-3 px-6 md:px-8 text-[15px] font-bold uppercase transition-colors border-b-4 ${mainTab === 'info' ? 'border-blue-500 text-blue-500' : `border-transparent hover:text-gray-400 ${highContrast ? 'text-gray-500' : 'text-gray-400'}`}`}
+                    >
+                        Thông tin chung
+                    </button>
+                    <button
+                        onClick={() => setMainTab('livestream')}
+                        className={`py-3 px-6 md:px-8 text-[15px] font-bold uppercase transition-colors border-b-4 flex items-center gap-2 ${mainTab === 'livestream' ? 'border-blue-500 text-blue-500' : `border-transparent hover:text-gray-400 ${highContrast ? 'text-gray-500' : 'text-gray-400'}`}`}
+                    >
+                        <PlayCircle size={18} /> Chi tiết buổi phát
+                    </button>
+                </div>
 
-                        <div className="flex gap-4 flex-col sm:flex-row w-full sm:w-auto">
-                            <Link
-                                to="/dien-dan/su-kien"
-                                className="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-8 rounded-xl transition-colors min-w-[200px]"
-                            >
-                                Quay lại Danh sách
-                            </Link>
-
-                            {/* Registration Button */}
-                            <button
-                                onClick={() => setRegistrationModalState(prev => ({ ...prev, isOpen: true }))}
-                                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold flex items-center justify-center gap-2 py-3 px-8 rounded-xl transition-colors min-w-[200px] shadow-lg hover:-translate-y-0.5"
-                            >
-                                Đăng ký tham gia ngay
-                            </button>
-                        </div>
-                    </div>
-                ) : (
-                    <div className="flex flex-col xl:flex-row gap-6 min-h-[85vh] items-start relative">
-                        {/* Left Column - Video Player & Info */}
-                        <div className={`w-full transition-all duration-300 ease-in-out flex flex-col gap-6 ${isInteractionCollapsed ? 'xl:w-full' : 'xl:w-8/12 lg:w-7/12'}`}>
-
-                            {/* Block 1: Video Area */}
-                            <div 
-                                ref={videoWrapperRef}
-                                className={`w-full aspect-video rounded-2xl overflow-hidden border shadow-2xl bg-black relative flex flex-col items-center justify-center transition-colors duration-300 group ${highContrast ? 'border-gray-200' : 'border-gray-800'}`}
-                            >
-                                {/* Overlay UI elements */}
-                                <div className="absolute top-4 left-4 z-20 flex gap-3 pointer-events-none">
-                                    <span className="flex items-center gap-2 bg-red-600/90 backdrop-blur-sm text-white px-3 py-1 rounded shadow-lg text-sm font-bold uppercase tracking-wider animate-pulse">
-                                        <span className="w-2 h-2 bg-white rounded-full"></span> Trực tiếp
-                                    </span>
-                                    <span className="flex items-center gap-2 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded shadow-lg text-sm font-medium">
-                                        <Users size={16} /> 1,245
-                                    </span>
-                                </div>
-                                
-                                {/* Streaming Video Element - Using stable MP4 to bypass YouTube X-Frame blocks */}
-                                <video 
-                                    ref={videoRef}
-                                    className="absolute inset-0 w-full h-full object-cover z-0"
-                                    src="https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4"
-                                    autoPlay 
-                                    loop 
-                                    muted={isMuted} 
-                                    playsInline
-                                    poster="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                ></video>
-                                
-                                {/* Optional: Control Overlay (Mute / Fullscreen) */}
-                                <div className="absolute bottom-4 right-4 z-20 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <button 
-                                        onClick={toggleMute}
-                                        className="bg-black/50 hover:bg-black/80 backdrop-blur-md text-white p-2 rounded-full transition-colors border border-white/10" 
-                                        title={isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
-                                    >
-                                        {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-                                    </button>
-                                    <button 
-                                        onClick={toggleFullscreen}
-                                        className="bg-black/50 hover:bg-black/80 backdrop-blur-md text-white p-2 rounded-full transition-colors border border-white/10" 
-                                        title={isFullscreen ? "Thu nhỏ màn hình" : "Toàn màn hình"}
-                                    >
-                                        {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
-                                    </button>
-                                </div>
-                            </div>
-
+                {mainTab === 'info' && (
+                    <div className="flex justify-center mb-10 w-full">
+                        <div className="w-full xl:w-5/6">
                             {/* Block 2: Event Info Tabs & Content */}
                             <div className={`w-full rounded-2xl overflow-hidden border shadow-2xl transition-colors duration-300 flex flex-col ${highContrast ? 'bg-white border-gray-200' : 'bg-[#1f2937] border-gray-800'}`}>
                                 {/* Event Info Tabs */}
@@ -326,6 +267,92 @@ const LivestreamEventPage = () => {
                                     )}
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+                )}
+
+                {mainTab === 'livestream' && (
+                    !isRegistered ? (
+
+                    <div className="flex flex-col items-center justify-center h-[60vh] text-center bg-[#1f2937] rounded-2xl border border-gray-800 shadow-2xl p-8 max-w-2xl mx-auto mt-12">
+                        <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mb-6">
+                            <Info size={40} className="text-red-500" />
+                        </div>
+                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Bạn chưa có quyền truy cập</h2>
+                        <p className="text-gray-400 mb-8 max-w-md mx-auto text-lg hover:text-gray-300">
+                            Bạn cần đăng ký tham gia hoặc sự kiện này chưa được phê duyệt cho tải khoản của bạn.<br /><br />
+                            Vui lòng kiểm tra lại trạng thái đăng ký tại danh sách sự kiện.
+                        </p>
+
+                        <div className="flex gap-4 flex-col sm:flex-row w-full sm:w-auto">
+                            <Link
+                                to="/dien-dan/su-kien"
+                                className="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-8 rounded-xl transition-colors min-w-[200px]"
+                            >
+                                Quay lại Danh sách
+                            </Link>
+
+                            {/* Registration Button */}
+                            <button
+                                onClick={() => setRegistrationModalState(prev => ({ ...prev, isOpen: true }))}
+                                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold flex items-center justify-center gap-2 py-3 px-8 rounded-xl transition-colors min-w-[200px] shadow-lg hover:-translate-y-0.5"
+                            >
+                                Đăng ký tham gia ngay
+                            </button>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="flex flex-col xl:flex-row gap-6 min-h-[85vh] items-start relative">
+                        {/* Left Column - Video Player & Info */}
+                        <div className={`w-full transition-all duration-300 ease-in-out flex flex-col gap-6 ${isInteractionCollapsed ? 'xl:w-full' : 'xl:w-8/12 lg:w-7/12'}`}>
+
+                            {/* Block 1: Video Area */}
+                            <div 
+                                ref={videoWrapperRef}
+                                className={`w-full aspect-video rounded-2xl overflow-hidden border shadow-2xl bg-black relative flex flex-col items-center justify-center transition-colors duration-300 group ${highContrast ? 'border-gray-200' : 'border-gray-800'}`}
+                            >
+                                {/* Overlay UI elements */}
+                                <div className="absolute top-4 left-4 z-20 flex gap-3 pointer-events-none">
+                                    <span className="flex items-center gap-2 bg-red-600/90 backdrop-blur-sm text-white px-3 py-1 rounded shadow-lg text-sm font-bold uppercase tracking-wider animate-pulse">
+                                        <span className="w-2 h-2 bg-white rounded-full"></span> Trực tiếp
+                                    </span>
+                                    <span className="flex items-center gap-2 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded shadow-lg text-sm font-medium">
+                                        <Users size={16} /> 1,245
+                                    </span>
+                                </div>
+                                
+                                {/* Streaming Video Element - Using stable MP4 to bypass YouTube X-Frame blocks */}
+                                <video 
+                                    ref={videoRef}
+                                    className="absolute inset-0 w-full h-full object-cover z-0"
+                                    src="https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4"
+                                    autoPlay 
+                                    loop 
+                                    muted={isMuted} 
+                                    playsInline
+                                    poster="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                ></video>
+                                
+                                {/* Optional: Control Overlay (Mute / Fullscreen) */}
+                                <div className="absolute bottom-4 right-4 z-20 flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button 
+                                        onClick={toggleMute}
+                                        className="bg-black/50 hover:bg-black/80 backdrop-blur-md text-white p-2 rounded-full transition-colors border border-white/10" 
+                                        title={isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
+                                    >
+                                        {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+                                    </button>
+                                    <button 
+                                        onClick={toggleFullscreen}
+                                        className="bg-black/50 hover:bg-black/80 backdrop-blur-md text-white p-2 rounded-full transition-colors border border-white/10" 
+                                        title={isFullscreen ? "Thu nhỏ màn hình" : "Toàn màn hình"}
+                                    >
+                                        {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
 
                         {/* Right Column - Interaction area (Taller layout and collapsible) */}
@@ -525,6 +552,7 @@ const LivestreamEventPage = () => {
                             </div>
                         )}
                     </div>
+                )
                 )}
             </div>
             {/* Custom scrollbar styles would be in index.css */}

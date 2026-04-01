@@ -89,9 +89,9 @@ const MOCK_CONSULTATION = {
         { id: 3, user: 'Lê Minh Tuấn', date: '13/03/2026 11:00', content: 'Cần bổ sung quy định bảo vệ quyền lợi của người nông dân khi thu hồi đất nông nghiệp phục vụ phát triển kinh tế - xã hội.' },
     ],
     relatedEvents: [
-        { id: 'e1', title: 'Diễn đàn trực tuyến: Tác động của Luật Đất đai lên thị trường BĐS', type: 'forum', date: '10/04/2026', icon: 'MessageSquare', color: 'text-blue-600', bg: 'bg-blue-50', to: '/dien-dan/chu-de/1' },
-        { id: 'e2', title: 'Tọa đàm: Gỡ vướng pháp lý trong bồi thường tái định cư', type: 'event', date: '15/04/2026', icon: 'Users', color: 'text-purple-600', bg: 'bg-purple-50', to: '/dien-dan/su-kien/toa-dam-1' },
-        { id: 'e3', title: 'Livestream: Giải đáp thắc mắc về bảng giá đất mới', type: 'stream', date: '20/04/2026', icon: 'Video', color: 'text-red-600', bg: 'bg-red-50', to: '/dien-dan/su-kien/livestream-1' },
+        { id: 'e1', title: 'Diễn đàn trực tuyến: Tác động của Luật Đất đai lên thị trường BĐS', type: 'forum', date: '10/04/2026', color: 'text-blue-600', bg: 'bg-blue-50', to: '/dien-dan/chu-de/1', thumbnail: '/thumbnails/forum_dat_dai.png' },
+        { id: 'e2', title: 'Tọa đàm: Gỡ vướng pháp lý trong bồi thường tái định cư', type: 'event', date: '15/04/2026', color: 'text-purple-600', bg: 'bg-purple-50', to: '/dien-dan/su-kien/toa-dam-1', thumbnail: '/thumbnails/toadan_phapluat.png' },
+        { id: 'e3', title: 'Livestream: Giải đáp thắc mắc về bảng giá đất mới', type: 'stream', date: '20/04/2026', color: 'text-red-600', bg: 'bg-red-50', to: '/dien-dan/su-kien/livestream-1', thumbnail: '/thumbnails/livestream_giabangdat.png' },
     ]
 };
 
@@ -307,31 +307,33 @@ const HienKeDetailPage = () => {
                                     Sự kiện liên quan
                                     <span className="ml-1 text-[13px] font-normal text-gray-400">({data.relatedEvents.length})</span>
                                 </h2>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <div className="flex flex-col gap-3">
                                     {data.relatedEvents.map(ev => {
-                                        let Icon = MessageSquare;
-                                        if (ev.type === 'stream') Icon = Video;
-                                        if (ev.type === 'event') Icon = Users;
-
+                                        const typeLabel = ev.type === 'stream' ? 'Livestream' : ev.type === 'event' ? 'Tọa đàm' : 'Diễn đàn';
+                                        const typeBg = ev.type === 'stream' ? 'bg-red-100 text-red-700' : ev.type === 'event' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700';
                                         return (
-                                            <Link
-                                                key={ev.id}
-                                                to={ev.to}
-                                                className="block group h-full"
-                                            >
-                                                <div className="flex flex-col gap-3 p-4 rounded-xl border border-gray-100 hover:border-[#1e3a8a] hover:bg-blue-50/30 transition-all h-full bg-gray-50/50">
-                                                    <div className={`w-10 h-10 rounded-lg ${ev.bg} ${ev.color} flex items-center justify-center shrink-0`}>
-                                                        <Icon size={20} />
-                                                    </div>
-                                                    <div className="flex-1 flex flex-col">
-                                                        <p className="text-[14px] font-bold text-gray-800 group-hover:text-[#1e3a8a] leading-snug mb-2 line-clamp-3">
-                                                            {ev.title}
-                                                        </p>
-                                                        <p className="text-[12px] text-gray-500 flex items-center gap-1.5 mt-auto font-medium">
-                                                            <Calendar size={12} /> {ev.date}
-                                                        </p>
-                                                    </div>
+                                            <Link key={ev.id} to={ev.to} className="group flex items-center gap-4 p-3 rounded-xl border border-gray-100 hover:border-[#1e3a8a] hover:bg-blue-50/20 transition-all">
+                                                {/* Thumbnail */}
+                                                <div className="shrink-0 w-28 h-20 rounded-lg overflow-hidden bg-gray-100 relative">
+                                                    <img
+                                                        src={ev.thumbnail}
+                                                        alt={ev.title}
+                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                                    />
+                                                    <span className={`absolute top-1.5 left-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full ${typeBg}`}>
+                                                        {typeLabel}
+                                                    </span>
                                                 </div>
+                                                {/* Info */}
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-[14px] font-semibold text-gray-800 group-hover:text-[#1e3a8a] leading-snug line-clamp-2 mb-2 transition-colors">
+                                                        {ev.title}
+                                                    </p>
+                                                    <p className="text-[12px] text-gray-500 flex items-center gap-1.5 font-medium">
+                                                        <Calendar size={12} className="shrink-0" /> {ev.date}
+                                                    </p>
+                                                </div>
+                                                <ChevronRight size={16} className="text-gray-300 group-hover:text-[#1e3a8a] shrink-0 transition-colors" />
                                             </Link>
                                         );
                                     })}
