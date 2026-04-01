@@ -7,6 +7,7 @@ import {
     User, Mail, Phone, TrendingUp, Scale, Heart, Landmark, ChevronUp,
     Video, Mic2
 } from 'lucide-react';
+import { MOCK_DETAILS } from './HienKeShared';
 
 // ======================== MOCK DATA ========================
 const MOCK_CONSULTATION = {
@@ -127,7 +128,7 @@ const StatusBadge = ({ status, large = false }) => {
 // ======================== MAIN PAGE ========================
 const HienKeDetailPage = () => {
     const { id } = useParams();
-    const data = MOCK_CONSULTATION;
+    const data = MOCK_DETAILS[id] || MOCK_CONSULTATION;
 
     const [commentText, setCommentText] = useState('');
     const [commentSuccess, setCommentSuccess] = useState(false);
@@ -136,7 +137,11 @@ const HienKeDetailPage = () => {
     const [submittedComments, setSubmittedComments] = useState([]);
     const fileInputRef = useRef(null);
 
-    const allComments = [...submittedComments, ...data.comments];
+    const allComments = [...submittedComments, ...(data.comments || [])];
+    const allEvents = data.relatedEvents || [];
+    const allAttachments = data.attachments || [];
+    const allRelated = data.relatedConsultations || [];
+    const allSections = data.sections || [];
 
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
@@ -273,7 +278,7 @@ const HienKeDetailPage = () => {
                                 </h2>
 
                                 <div className="space-y-8">
-                                    {data.sections.map((sec, idx) => (
+                                    {allSections.map((sec, idx) => (
                                         <div key={sec.id} id={sec.id}>
                                             <h3 className="text-[17px] font-bold text-gray-900 mb-3">{sec.label}</h3>
                                             <div className="space-y-3">
@@ -305,10 +310,10 @@ const HienKeDetailPage = () => {
                                 <h2 className="text-[18px] font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100 flex items-center gap-2">
                                     <MessageSquare size={18} className="text-[#1e3a8a]" />
                                     Sự kiện liên quan
-                                    <span className="ml-1 text-[13px] font-normal text-gray-400">({data.relatedEvents.length})</span>
+                                    <span className="ml-1 text-[13px] font-normal text-gray-400">({allEvents.length})</span>
                                 </h2>
                                 <div className="flex flex-col gap-3">
-                                    {data.relatedEvents.map(ev => {
+                                    {allEvents.map(ev => {
                                         const typeLabel = ev.type === 'stream' ? 'Livestream' : ev.type === 'event' ? 'Tọa đàm' : 'Diễn đàn';
                                         const typeBg = ev.type === 'stream' ? 'bg-red-100 text-red-700' : ev.type === 'event' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700';
                                         return (
@@ -345,10 +350,10 @@ const HienKeDetailPage = () => {
                                 <h2 className="text-[18px] font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100 flex items-center gap-2">
                                     <Paperclip size={18} className="text-[#1e3a8a]" />
                                     Tài liệu đính kèm
-                                    <span className="ml-1 text-[13px] font-normal text-gray-400">({data.attachments.length} tệp)</span>
+                                    <span className="ml-1 text-[13px] font-normal text-gray-400">({allAttachments.length} tệp)</span>
                                 </h2>
                                 <div className="space-y-3">
-                                    {data.attachments.map(att => (
+                                    {allAttachments.map(att => (
                                         <div key={att.id} className="flex items-center justify-between gap-4 p-3.5 border border-gray-200 rounded-lg hover:border-[#1e3a8a] hover:bg-blue-50/30 transition-all group">
                                             <div className="flex items-center gap-3 min-w-0">
                                                 {att.type === 'PDF' ? (
@@ -396,7 +401,7 @@ const HienKeDetailPage = () => {
                             <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
                                 <h3 className="text-[13px] font-bold text-gray-700 uppercase tracking-wide mb-3">Nội dung trang</h3>
                                 <nav className="space-y-1">
-                                    {data.sections.map(sec => (
+                                    {allSections.map(sec => (
                                         <a
                                             key={sec.id}
                                             href={`#${sec.id}`}
@@ -447,7 +452,7 @@ const HienKeDetailPage = () => {
                             <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
                                 <h3 className="text-[13px] font-bold text-gray-700 uppercase tracking-wide mb-4">Nội dung liên quan</h3>
                                 <div className="space-y-3">
-                                    {data.relatedConsultations.map(r => (
+                                    {allRelated.map(r => (
                                         <Link
                                             key={r.id}
                                             to={`/hien-ke/${r.id}`}

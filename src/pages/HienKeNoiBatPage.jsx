@@ -1,11 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, TrendingUp, Search, ChevronLeft } from 'lucide-react';
-import { Section, ConsultCard, HOT_ITEMS, thumb } from './HienKeShared';
+import { Section, ConsultCard, HOT_ITEMS, NEW_HIGHLIGHTS, thumb } from './HienKeShared';
 
 // Extended mock data for Nổi bật
 const EXPANDED_ITEMS = [
-    ...HOT_ITEMS,
+    NEW_HIGHLIGHTS[0], // Luật Thủ đô (nb1)
+    HOT_ITEMS[0],      // Luật Đất đai (h1)
+    ...NEW_HIGHLIGHTS.slice(1),
+    ...HOT_ITEMS.slice(1),
     { id: 'h5', title: 'Hoàn thiện khung pháp lý về quản lý tài sản số', agency: 'Ngân hàng Nhà nước', status: 'open', deadline: '20/05/2026', participants: 1540, thumb: thumb(4), description: 'Bổ sung định nghĩa pháp lý liên quan đến tiền điện tử và dịch vụ giao dịch tài sản số hiện nay.' },
     { id: 'h6', title: 'Sửa đổi Luật BHXH: Điều kiện hưởng lương hưu', agency: 'Bộ Lao động – TB&XH', status: 'upcoming', deadline: '01/06/2026', participants: 0, thumb: thumb(5), description: 'Tháo gỡ những bất cập trong việc nhận BHXH một lần và điều chỉnh số năm đóng BHXH tối thiểu để nhận hưu trí.' },
     { id: 'h7', title: 'Dự thảo Nghị định bảo vệ dữ liệu cá nhân', agency: 'Bộ Công an', status: 'open', deadline: '10/05/2026', participants: 3200, thumb: thumb(0), description: 'Quy định khắt khe trách nhiệm của các cơ quan, tổ chức khi thu thập, xử lý và lưu trữ dữ liệu cá nhân.' },
