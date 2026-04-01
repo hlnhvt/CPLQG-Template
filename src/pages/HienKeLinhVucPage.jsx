@@ -42,7 +42,7 @@ const HienKeLinhVucPage = () => {
                         Lĩnh vực pháp luật
                     </h1>
                     <p className="text-blue-100/90 text-[15px] max-w-2xl leading-relaxed">
-                        Các chủ đề, nội dung mang tính gợi ý cho xã hội, doanh nghiệp và người dân hiến kế theo từng lĩnh vực cụ thể.
+                        Mỗi ý kiến, sáng kiến của bạn trong từng lĩnh vực pháp luật là góc nhìn đa chiều để công tác xây dựng, tổ chức thi hành pháp luật tiếp tục được hoàn thiện.
                     </p>
                 </div>
             </div>
@@ -101,11 +101,11 @@ const HienKeLinhVucPage = () => {
                                     </p>
                                 </div>
                             </div>
-                            <Link 
-                                to="/hien-ke/gop-y-nhanh" 
+                            <Link
+                                to="/hien-ke/gop-y-nhanh"
                                 className="px-8 py-3.5 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-colors shadow-md shadow-green-600/20 shrink-0 text-[15px] flex items-center gap-2 group"
                             >
-                                Bắt đầu góp ý 
+                                Bắt đầu góp ý
                                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </div>

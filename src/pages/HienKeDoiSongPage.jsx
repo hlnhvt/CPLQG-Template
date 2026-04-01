@@ -17,7 +17,7 @@ const HienKeDoiSongPage = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#1e3a8a]/80 to-[#1e3a8a]/60" />
                 {/* Subtle gold shimmer overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0f172a]/50" />
-                
+
                 <div className="container mx-auto px-4 md:px-8 max-w-[1280px] relative z-20">
                     <nav className="flex items-center gap-1.5 text-blue-300/80 text-[13px] mb-6">
                         <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
@@ -26,12 +26,12 @@ const HienKeDoiSongPage = () => {
                         <ChevronRight size={14} />
                         <span className="text-white/90">Hiến kế của bạn</span>
                     </nav>
-                    
+
                     <h1 className="text-2xl md:text-4xl font-extrabold text-white mb-3 tracking-tight">
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-200">Hiến kế</span> của bạn
                     </h1>
                     <p className="text-blue-100/90 text-[15px] max-w-2xl leading-relaxed">
-                        Đóng góp ý kiến về các vấn đề dân sinh, đời sống thường ngày nhằm xây dựng môi trường sống thiết thực và tốt đẹp hơn.
+                        Chia sẻ ý kiến, sáng kiến của bạn góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật trên toàn diện các lĩnh vực nhằm thúc đẩy phát triển kinh tế - xã hội của đất nước.
                     </p>
                 </div>
             </div>

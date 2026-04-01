@@ -69,7 +69,7 @@ const HienKeNoiBatPage = () => {
                         Chúng tôi cần bạn
                     </h1>
                     <p className="text-blue-100/90 text-[15px] max-w-3xl leading-relaxed">
-                        Các nội dung, chủ đề cơ quan quản lý nhà nước cần sự hiến kế, tham gia ý kiến, phản biện của xã hội, doanh nghiệp và người dân trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và thi hành hiệu quả pháp luật.
+                        Hãy đóng góp ý kiến, sáng kiến để tiếp tục hoàn thiện các nội dung, chủ đề đang được Đảng và Nhà nước tập trung nguồn lực triển khai.
                     </p>
                 </div>
             </div>

@@ -102,8 +102,8 @@ export default function SimpleFeedbackPage() {
                         <ArrowLeft size={16} /> Quay lại trang chủ Hiến kế
                     </Link>
                     <h1 className="text-[32px] md:text-[40px] font-bold text-white mb-3 leading-tight">Gửi hiến kế</h1>
-                    <p className="text-blue-100 text-[16px] leading-relaxed max-w-[600px]">
-                        Hãy chia sẻ trực tiếp những ý tưởng, đề xuất xây dựng pháp luật, thi hành pháp luật để điều chỉnh về các vấn đề thực tế.
+                    <p className="text-blue-100 text-[16px] leading-relaxed max-w-[800px]">
+                        Chia sẻ ý kiến, sáng kiến của bạn góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật trên toàn diện các lĩnh vực nhằm thúc đẩy phát triển kinh tế - xã hội của đất nước.
                     </p>
                 </div>
             </div>
