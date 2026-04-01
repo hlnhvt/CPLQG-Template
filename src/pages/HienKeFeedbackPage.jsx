@@ -288,7 +288,7 @@ export default function HienKeFeedbackPage() {
                                 >
                                     <div className="relative z-10">
                                         <h4 className="font-bold text-[18px] mb-2 flex items-center gap-2">
-                                            Quỹ hỗ trợ xây dựng chính sách
+                                            Quỹ hỗ trợ xây dựng chính sách, pháp luật
                                             <ArrowUpRight size={18} />
                                         </h4>
                                         <p className="text-blue-100 text-[14px] leading-relaxed">Tiêu chí hỗ trợ & tài trợ cho các sáng kiến pháp luật giá trị.</p>
