@@ -1,9 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronRight, Scale } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ChevronRight, Scale, Search } from 'lucide-react';
 import { Section, LIFE_CATEGORIES } from './HienKeShared';
 
 const HienKeLinhVucPage = () => {
+    const [searchParams] = useSearchParams();
+    const q = searchParams.get('q') || '';
+    const [searchTerm, setSearchTerm] = useState(q);
+
+    useEffect(() => {
+        setSearchTerm(q);
+    }, [q]);
+
+    const filteredCategories = LIFE_CATEGORIES.filter(c =>
+        c.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
     return (
         <div className="bg-gray-50 min-h-screen font-sans pb-20">
             {/* Hero Banner with Background */}
@@ -45,18 +56,37 @@ const HienKeLinhVucPage = () => {
                     subtitle="Bao gồm các lĩnh vực gợi ý để bạn dễ dàng tham gia đóng góp."
                 >
                     <div className="mb-3 p-5 bg-white rounded-xl border border-gray-200 shadow-sm">
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-                            {LIFE_CATEGORIES.map(c => (
-                                <Link
-                                    key={c.id}
-                                    to={`/hien-ke/gop-y-nhanh?domain=${encodeURIComponent(c.name)}`}
-                                    className="flex flex-col items-center text-center gap-2 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50 hover:-translate-y-1 hover:shadow-md transition-all group duration-300"
-                                >
-                                    <c.icon size={32} strokeWidth={1.25} className="mb-1 text-purple-400 group-hover:text-[#7c3aed] group-hover:scale-110 transition-all duration-300" />
-                                    <span className="text-[13px] font-semibold text-gray-700 group-hover:text-[#7c3aed] leading-tight px-1">{c.name}</span>
-                                </Link>
-                            ))}
+                        <div className="flex justify-end mb-4">
+                            <div className="relative w-full sm:w-64">
+                                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                                <input
+                                    type="text"
+                                    placeholder="Tìm kiếm lĩnh vực..."
+                                    value={searchTerm}
+                                    onChange={e => setSearchTerm(e.target.value)}
+                                    className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7c3aed] focus:bg-white transition-all text-[13px]"
+                                />
+                            </div>
                         </div>
+
+                        {filteredCategories.length > 0 ? (
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+                                {filteredCategories.map(c => (
+                                    <Link
+                                        key={c.id}
+                                        to={`/hien-ke/gop-y-nhanh?domain=${encodeURIComponent(c.name)}`}
+                                        className="flex flex-col items-center text-center gap-2 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50 hover:-translate-y-1 hover:shadow-md transition-all group duration-300"
+                                    >
+                                        <c.icon size={32} strokeWidth={1.25} className="mb-1 text-purple-400 group-hover:text-[#7c3aed] group-hover:scale-110 transition-all duration-300" />
+                                        <span className="text-[13px] font-semibold text-gray-700 group-hover:text-[#7c3aed] leading-tight px-1">{c.name}</span>
+                                    </Link>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="text-center py-10 text-gray-500 text-[14px]">
+                                Không tìm thấy tiêu đề phù hợp với "{searchTerm}"
+                            </div>
+                        )}
                     </div>
                 </Section>
             </div>

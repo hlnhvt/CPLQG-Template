@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     Search, ArrowRight, Users, Calendar, ChevronRight,
     Scale, Landmark, Heart, TrendingUp, Send
@@ -9,6 +9,14 @@ import {
 
 export default function HienKePage() {
     const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            navigate(`/hien-ke/linh-vuc?q=${encodeURIComponent(searchQuery)}`);
+        }
+    };
 
     return (
         <div className="bg-gray-50 min-h-screen font-sans flex flex-col">
@@ -56,21 +64,21 @@ export default function HienKePage() {
                             </p>
 
                             {/* Search bar */}
-                            <div className="flex max-w-lg mb-10 animate-fade-up delay-200">
+                            <form onSubmit={handleSearch} className="flex max-w-lg mb-10 animate-fade-up delay-200">
                                 <div className="relative flex-1">
                                     <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                                     <input
                                         type="text"
                                         value={searchQuery}
                                         onChange={e => setSearchQuery(e.target.value)}
-                                        placeholder="Tìm kiếm cuộc tham vấn..."
+                                        placeholder="Tìm kiếm nội dung..."
                                         className="w-full pl-10 pr-4 py-3.5 rounded-l-xl text-[14px] text-gray-800 bg-white border-0 focus:outline-none focus:ring-2 focus:ring-amber-300 shadow-lg"
                                     />
                                 </div>
-                                <button className="px-6 py-3.5 bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold rounded-r-xl text-[14px] transition-colors whitespace-nowrap shadow-lg">
+                                <button type="submit" className="px-6 py-3.5 bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold rounded-r-xl text-[14px] transition-colors whitespace-nowrap shadow-lg">
                                     Tìm kiếm
                                 </button>
-                            </div>
+                            </form>
 
                             {/* New CTA Button */}
                             <div className="flex flex-wrap gap-4 mb-10 animate-fade-up delay-[250ms]">
@@ -78,7 +86,7 @@ export default function HienKePage() {
                                     to="/hien-ke/lien-he"
                                     className="px-8 py-3.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-gray-900 font-bold rounded-xl text-[15px] transition-all shadow-[0_10px_20px_-5px_rgba(251,191,36,0.4)] flex items-center gap-2 group"
                                 >
-                                    <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                    <Users size={18} className="transition-transform group-hover:scale-110" />
                                     Về chúng tôi
                                 </Link>
                             </div>

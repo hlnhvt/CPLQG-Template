@@ -117,7 +117,7 @@ export default function HienKeFeedbackPage() {
                         <span className="text-white/90">Giới thiệu</span>
                     </nav>
 
-                    <h1 className="text-[34px] md:text-[48px] lg:text-[56px] font-black leading-[1.1] max-w-4xl mb-6">
+                    <h1 className="text-[34px] md:text-[48px] lg:text-[56px] font-black leading-[1.1] max-w-4xl mb-6 text-white">
                         Hiến kế xây dựng <br className="hidden md:block" />
                         <span className="text-amber-400">Và thi hành pháp luật</span>
                     </h1>
