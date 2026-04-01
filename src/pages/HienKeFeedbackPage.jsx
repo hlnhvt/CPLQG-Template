@@ -97,7 +97,7 @@ export default function HienKeFeedbackPage() {
         <div className="bg-white min-h-screen font-sans selection:bg-amber-100 italic-none">
 
             {/* HEROBANNER */}
-            <div className="relative pt-24 pb-20 overflow-hidden bg-[#0f172a]">
+            <div className="relative overflow-hidden bg-[#0f172a] min-h-[450px] flex items-center">
                 {/* Background: trống đồng image */}
                 <div
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-bg-pan"
@@ -105,11 +105,11 @@ export default function HienKeFeedbackPage() {
                 />
                 {/* Overlay: dark navy so text is readable */}
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#1e3a8a]/80 to-[#1e3a8a]/60" />
-                {/* Subtle gold shimmer overlay */}
+                {/* Subtle gold shimmer overlay matching trống đồng */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0f172a]/50" />
 
-                <div className="container mx-auto px-4 md:px-8 max-w-[1280px] relative z-20">
-                    <nav className="flex items-center gap-1.5 text-blue-300/80 text-[13px] mb-8">
+                <div className="container mx-auto px-4 md:px-8 max-w-[1280px] relative z-20 py-12">
+                    <nav className="flex items-center gap-1.5 text-blue-300/80 text-[13px] mb-8 animate-fade-in">
                         <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
                         <ChevronRight size={14} />
                         <Link to="/hien-ke" className="hover:text-white transition-colors">Hiến kế xây dựng và thi hành pháp luật</Link>
@@ -117,13 +117,17 @@ export default function HienKeFeedbackPage() {
                         <span className="text-white/90">Giới thiệu</span>
                     </nav>
 
-                    <h1 className="text-[34px] md:text-[48px] lg:text-[56px] font-black leading-[1.1] max-w-4xl mb-6 text-white">
-                        Hiến kế xây dựng <br className="hidden md:block" />
-                        <span className="text-amber-400">Và thi hành pháp luật</span>
-                    </h1>
-                    <p className="text-blue-100/70 text-[18px] md:text-[20px] max-w-2xl leading-relaxed">
-                        Tham gia đóng góp sáng kiến, hiến kế để hoàn thiện thể chế và nâng cao hiệu quả thực thi pháp luật.
-                    </p>
+                    <div className="max-w-4xl">
+                        <h1 className="text-[32px] md:text-[45px] lg:text-[53px] font-black text-white leading-[1.2] mb-5 animate-fade-up">
+                            <span className="inline-block py-1 animate-text-gradient bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">Hiến kế</span>
+                            <span className="block text-[24px] md:text-[32px] lg:text-[38px] font-bold mt-1 leading-[1.4] text-amber-300 animate-text-gradient bg-gradient-to-r from-amber-300 via-amber-100 to-amber-300 bg-clip-text text-transparent py-1">
+                                Xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới
+                            </span>
+                        </h1>
+                        <p className="text-blue-100 text-[16px] md:text-[18px] leading-relaxed mb-0 max-w-2xl animate-fade-up delay-100">
+                            Tiếng nói của bạn định hình chính sách quốc gia.
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -329,8 +333,21 @@ export default function HienKeFeedbackPage() {
                     100% { transform: scale(1) translate(0, 0); }
                 }
                 .animate-bg-pan { animation: bgPan 40s ease-in-out infinite; }
-                .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
-                @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+                .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
+                .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+                .delay-100 { animation-delay: 100ms; }
+                @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+                @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+                @keyframes textGradient {
+                    0% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                    100% { background-position: 0% 50%; }
+                }
+                .animate-text-gradient {
+                    background-size: 200% auto;
+                    animation: textGradient 6s linear infinite;
+                }
             `}</style>
         </div>
     );
