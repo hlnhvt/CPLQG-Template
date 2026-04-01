@@ -247,7 +247,7 @@ export default function HienKeFeedbackPage() {
                         </Section>
 
                         {/* Section: Office Address */}
-                        <Section id="address" title="Địa chỉ văn phòng">
+                        {/* <Section id="address" title="Địa chỉ văn phòng">
                             <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100 flex flex-col md:flex-row gap-8 items-start">
                                 <div className="flex-1 space-y-6">
                                     <div className="flex gap-4">
@@ -283,7 +283,7 @@ export default function HienKeFeedbackPage() {
                                     <div className="absolute inset-0 bg-[url('/images/trong_dong_gold.png')] bg-cover opacity-10 group-hover:opacity-20 transition-opacity" />
                                 </div>
                             </div>
-                        </Section>
+                        </Section> */}
 
                         {/* Section: Useful Links & FAQ */}
                         <Section id="faq" title="Liên kết hữu ích & FAQ">

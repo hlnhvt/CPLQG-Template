@@ -148,6 +148,16 @@ export default function SimpleFeedbackPage() {
                                 )}
 
                                 <div>
+                                    <label className="block text-[14px] font-bold text-gray-800 mb-2">Nội dung chi tiết <span className="text-red-500">*</span></label>
+                                    <textarea
+                                        required rows={6} name="content"
+                                        placeholder="Trình bày chi tiết thực trạng, vấn đề và giải pháp đề xuất của bạn..."
+                                        value={formData.content} onChange={handleChange}
+                                        className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px] resize-y"
+                                    />
+                                </div>
+
+                                <div>
                                     <label className="block text-[14px] font-bold text-gray-800 mb-2">Đề xuất hình thức ban hành (không bắt buộc)</label>
                                     <select
                                         name="issuanceForm"
@@ -159,16 +169,6 @@ export default function SimpleFeedbackPage() {
                                             <option key={f} value={f}>{f}</option>
                                         ))}
                                     </select>
-                                </div>
-
-                                <div>
-                                    <label className="block text-[14px] font-bold text-gray-800 mb-2">Nội dung chi tiết <span className="text-red-500">*</span></label>
-                                    <textarea
-                                        required rows={6} name="content"
-                                        placeholder="Trình bày chi tiết thực trạng, vấn đề và giải pháp đề xuất của bạn..."
-                                        value={formData.content} onChange={handleChange}
-                                        className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px] resize-y"
-                                    />
                                 </div>
 
                                 <div>
