@@ -63,6 +63,23 @@ export default function HienKePage() {
                                 Tiếng nói của bạn định hình chính sách quốc gia.
                             </p>
 
+                            {/* Search bar */}
+                            <form onSubmit={handleSearch} className="flex max-w-lg mb-10 animate-fade-up delay-200">
+                                <div className="relative flex-1">
+                                    <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                                    <input
+                                        type="text"
+                                        value={searchQuery}
+                                        onChange={e => setSearchQuery(e.target.value)}
+                                        placeholder="Tìm kiếm nội dung..."
+                                        className="w-full pl-10 pr-4 py-3.5 rounded-l-xl text-[14px] text-gray-800 bg-white border-0 focus:outline-none focus:ring-2 focus:ring-amber-300 shadow-lg"
+                                    />
+                                </div>
+                                <button type="submit" className="px-6 py-3.5 bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold rounded-r-xl text-[14px] transition-colors whitespace-nowrap shadow-lg">
+                                    Tìm kiếm
+                                </button>
+                            </form>
+
                             {/* New CTA Button */}
                             <div className="flex flex-wrap gap-4 mb-10 animate-fade-up delay-[250ms]">
                                 <Link
