@@ -1,25 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Send, Paperclip, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { LIFE_CATEGORIES } from './HienKeShared';
 
-const CATEGORIES = [
+const CATEGORIES = Array.from(new Set([
     'Đời sống thường ngày - Chung',
+    ...LIFE_CATEGORIES.map(c => c.name),
     'Hình sự',
     'Dân sự',
-    'Hôn nhân & Gia đình',
-    'Lao động',
-    'Doanh nghiệp & Thương mại',
-    'Đất đai & Nhà ở',
-    'Hành chính',
-    'Thuế & Ngân sách',
-    'Đầu tư',
-    'Sở hữu trí tuệ',
-    'Môi trường',
-    'Giáo dục',
-    'Y tế',
-    'Giao thông',
-    'Khác'
-];
+    'Hành chính'
+]));
 
 export default function SimpleFeedbackPage() {
     const [searchParams] = useSearchParams();
@@ -87,7 +77,7 @@ export default function SimpleFeedbackPage() {
                     <Link to="/hien-ke" className="inline-flex items-center gap-2 text-blue-200 hover:text-white mb-6 font-medium text-[14px] transition-colors">
                         <ArrowLeft size={16} /> Quay lại trang chủ Hiến kế
                     </Link>
-                    <h1 className="text-[32px] md:text-[40px] font-black text-white mb-3 leading-tight">Gửi Hiến kế</h1>
+                    <h1 className="text-[32px] md:text-[40px] font-bold text-white mb-3 leading-tight">Gửi hiến kế</h1>
                     <p className="text-blue-100 text-[16px] leading-relaxed max-w-[600px]">
                         Hãy chia sẻ trực tiếp những ý tưởng, giải pháp hoặc khúc mắc của bạn về pháp luật và đời sống để cùng xây dựng xã hội tốt đẹp hơn.
                     </p>

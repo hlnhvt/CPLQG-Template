@@ -61,6 +61,11 @@ import RecommendedPage from './pages/RecommendedPage';
 import NghienCuuTraoDoiPage from './pages/tin-tuc/NghienCuuTraoDoiPage';
 import NghienCuuTraoDoiDetailPage from './pages/tin-tuc/NghienCuuTraoDoiDetailPage';
 
+import HienKeDoiSongPage from './pages/HienKeDoiSongPage';
+import HienKeNoiBatPage from './pages/HienKeNoiBatPage';
+import HienKeLinhVucPage from './pages/HienKeLinhVucPage';
+import HienKeFeedbackPage from './pages/HienKeFeedbackPage';
+
 // Forum imports
 import ForumListPage from './pages/forum/ForumListPage';
 import ForumDashboardPage from './pages/forum/ForumDashboardPage';
@@ -180,6 +185,10 @@ const AppLayout = () => {
                     <Route path="/thanh-vien/:id" element={<PublicUserProfilePage />} />
                     <Route path="/du-thao" element={<DuThaoPage />} />
                     <Route path="/hien-ke" element={<HienKePage />} />
+                    <Route path="/hien-ke/doi-song" element={<HienKeDoiSongPage />} />
+                    <Route path="/hien-ke/noi-bat" element={<HienKeNoiBatPage />} />
+                    <Route path="/hien-ke/linh-vuc" element={<HienKeLinhVucPage />} />
+                    <Route path="/hien-ke/lien-he" element={<HienKeFeedbackPage />} />
                     <Route path="/hien-ke/:id" element={<HienKeDetailPage />} />
                     <Route path="/hien-ke/gop-y/:id" element={<ConsultFeedbackPage />} />
                     <Route path="/hien-ke/gop-y-nhanh" element={<SimpleFeedbackPage />} />

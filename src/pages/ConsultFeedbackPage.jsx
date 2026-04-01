@@ -160,7 +160,7 @@ export default function ConsultFeedbackPage() {
                     <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
                         <CheckCircle2 size={40} />
                     </div>
-                    <h2 className="text-[24px] font-black text-gray-900 mb-3">Cảm ơn bạn!</h2>
+                    <h2 className="text-[24px] font-bold text-gray-900 mb-3">Cảm ơn bạn!</h2>
                     <p className="text-[15px] text-gray-600 mb-8 leading-relaxed">
                         Ý kiến đóng góp của bạn cho <strong>{data.title}</strong> đã được ghi nhận. Hệ thống mã hồ sơ: <span className="font-mono text-gray-900 bg-gray-100 px-2 py-0.5 rounded font-semibold ml-1">HK-98231</span>
                     </p>
@@ -219,11 +219,11 @@ export default function ConsultFeedbackPage() {
                                 </a>
                             ))}
                         </nav>
-                        <div className="p-4 bg-blue-50/50 border-t border-blue-100 m-2 rounded-lg">
+                        {/* <div className="p-4 bg-blue-50/50 border-t border-blue-100 m-2 rounded-lg">
                             <p className="text-[12px] text-blue-800 leading-relaxed font-medium">
                                 Ý kiến của bạn sẽ đóng góp trực tiếp vào quá trình hoạch định chính sách quốc gia.
                             </p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -234,10 +234,10 @@ export default function ConsultFeedbackPage() {
                     <div id="instructions" className="bg-white border-t-4 border-green-600 rounded-xl shadow-md p-6 md:p-10 mb-8 scroll-mt-24">
                         <div className="mb-6 flex gap-4 items-start">
                             <div className="w-16 h-16 bg-[#1e3a8a] rounded-2xl flex items-center justify-center shrink-0 shadow-sm">
-                                <span className="text-white text-[12px] font-black uppercase tracking-wider text-center">{data.agency.split(' ').map(w => w[0]).join('')}</span>
+                                <span className="text-white text-[12px] font-bold uppercase tracking-wider text-center">{data.agency.split(' ').map(w => w[0]).join('')}</span>
                             </div>
                             <div>
-                                <h2 className="text-[26px] md:text-[32px] font-black text-gray-900 leading-[1.15] mb-2">{data.title}</h2>
+                                <h2 className="text-[26px] md:text-[32px] font-bold text-gray-900 leading-[1.15] mb-2">{data.title}</h2>
                                 <p className="text-[14px] text-gray-500 font-semibold">{data.agency}</p>
                             </div>
                         </div>

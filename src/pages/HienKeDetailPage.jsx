@@ -163,23 +163,33 @@ const HienKeDetailPage = () => {
         <div className="min-h-screen bg-white font-sans">
 
             {/* ── HERO SECTION ─────────────────────────────────────────── */}
-            <div style={{ backgroundColor: '#e8f5e9' }} className="pt-5 pb-10">
-                <div className="container mx-auto px-4 md:px-8 max-w-[1200px]">
+            <div className="relative pt-8 pb-10 overflow-hidden border-b border-[#1e3a8a]/20">
+                {/* Background: trống đồng image */}
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-bg-pan"
+                    style={{ backgroundImage: "url('/images/dong_son_cover.png')" }}
+                />
+                {/* Overlay: dark navy so text is readable */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#1e3a8a]/80 to-[#1e3a8a]/60 z-0" />
+                {/* Subtle gold shimmer overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0f172a]/50 z-0" />
+
+                <div className="container mx-auto px-4 md:px-8 max-w-[1200px] relative z-20">
                     {/* Breadcrumb */}
-                    <nav className="flex items-center gap-1.5 text-[12px] text-gray-500 mb-6 flex-wrap">
-                        <Link to="/" className="hover:text-[#1e3a8a] transition-colors">Trang chủ</Link>
-                        <ChevronRight size={12} className="text-gray-400" />
-                        <Link to="/hien-ke" className="hover:text-[#1e3a8a] transition-colors">Hiến kế xây dựng và thi hành pháp luật</Link>
-                        <ChevronRight size={12} className="text-gray-400" />
-                        <span className="text-gray-700 font-medium line-clamp-1 max-w-[300px]">{data.title}</span>
+                    <nav className="flex items-center gap-1.5 text-[13px] text-blue-300/80 mb-6 flex-wrap">
+                        <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
+                        <ChevronRight size={14} />
+                        <Link to="/hien-ke" className="hover:text-white transition-colors">Hiến kế xây dựng và thi hành pháp luật</Link>
+                        <ChevronRight size={14} />
+                        <span className="text-white/90 font-medium line-clamp-1 max-w-[300px]">{data.title}</span>
                     </nav>
 
                     {/* Hero content */}
                     <div className="max-w-[800px]">
-                        <h1 className="text-[28px] md:text-[38px] font-bold text-gray-900 leading-tight mb-5">
+                        <h1 className="text-[28px] md:text-[38px] font-bold text-white leading-tight mb-5">
                             {data.title}
                         </h1>
-                        <p className="text-[16px] text-gray-700 leading-relaxed mb-7 max-w-[680px]">
+                        <p className="text-[16px] text-blue-100/90 leading-relaxed mb-7 max-w-[680px]">
                             {data.summary}
                         </p>
                         <div className="flex flex-wrap items-center gap-3 mb-6">
@@ -187,11 +197,11 @@ const HienKeDetailPage = () => {
                                 <Send size={16} /> Gửi ý kiến của bạn
                                 <ExternalLink size={14} className="ml-1 opacity-70" />
                             </Link>
-                            <Link to="/hien-ke" className="inline-flex items-center gap-2 px-5 py-3 bg-white/70 text-gray-700 font-semibold rounded-lg hover:bg-white border border-gray-300 transition-all text-[14px]">
+                            <Link to="/hien-ke" className="inline-flex items-center gap-2 px-5 py-3 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 border border-white/20 transition-all text-[14px]">
                                 <ArrowLeft size={15} /> Quay lại danh sách
                             </Link>
                         </div>
-                        <p className="text-[12px] text-gray-500">
+                        <p className="text-[13px] text-blue-300/80">
                             Cập nhật lần cuối: {data.lastUpdated}
                         </p>
                     </div>
