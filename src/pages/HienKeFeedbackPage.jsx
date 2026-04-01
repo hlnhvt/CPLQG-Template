@@ -124,8 +124,10 @@ export default function HienKeFeedbackPage() {
                                 Xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới
                             </span>
                         </h1>
-                        <p className="text-blue-100 text-[16px] md:text-[18px] leading-relaxed mb-0 max-w-2xl animate-fade-up delay-100">
-                            Tiếng nói của bạn định hình chính sách quốc gia.
+                        <p className="text-[22px] md:text-[28px] font-semibold leading-relaxed mb-6 whitespace-nowrap max-w-none animate-fade-in delay-100 italic">
+                            <span className="relative inline-block animate-text-shimmer bg-[linear-gradient(110deg,#bfdbfe,45%,#ffffff,55%,#fde68a)] bg-[length:200%_100%] bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] tracking-wider">
+                                "Tiếng nói của bạn định hình chính sách quốc gia"
+                            </span>
                         </p>
                     </div>
                 </div>
@@ -339,14 +341,12 @@ export default function HienKeFeedbackPage() {
                 @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
                 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-                @keyframes textGradient {
-                    0% { background-position: 0% 50%; }
-                    50% { background-position: 100% 50%; }
-                    100% { background-position: 0% 50%; }
+                @keyframes textShimmer {
+                    0% { background-position: 200% 0; }
+                    100% { background-position: -200% 0; }
                 }
-                .animate-text-gradient {
-                    background-size: 200% auto;
-                    animation: textGradient 6s linear infinite;
+                .animate-text-shimmer {
+                    animation: textShimmer 8s linear infinite;
                 }
             `}</style>
         </div>
