@@ -107,7 +107,7 @@ export default function HienKeFeedbackPage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#1e3a8a]/80 to-[#1e3a8a]/60" />
                 {/* Subtle gold shimmer overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0f172a]/50" />
-                
+
                 <div className="container mx-auto px-4 md:px-8 max-w-[1280px] relative z-20">
                     <nav className="flex items-center gap-1.5 text-blue-300/80 text-[13px] mb-8">
                         <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
@@ -162,7 +162,7 @@ export default function HienKeFeedbackPage() {
                         <Section id="gioi-thieu" title="Giới thiệu">
                             <div className="prose prose-blue max-w-none text-gray-600 text-[16px] leading-relaxed">
                                 <p className="text-[18px] font-medium mb-6">
-                                    Trang Thông tin điện tử “Hiến kế xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới” trên Cổng Pháp luật quốc gia được thiết lập nhằm tạo ra một cầu nối đối thoại trực tiếp, đa chiều giữa các cơ quan quản lý Nhà nước với cộng đồng doanh nghiệp và người dân.
+                                    Trang Thông tin điện tử “Hiến kế xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới” trên Cổng Pháp luật quốc gia được thiết lập nhằm tạo ra một cầu nối đối thoại trực tiếp, đa chiều giữa các cơ quan quản lý Nhà nước với cộng đồng doanh nghiệp và người dân vì mục đích hoạt động pháp luật.
                                 </p>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -171,7 +171,7 @@ export default function HienKeFeedbackPage() {
                                             Mục tiêu cốt lõi
                                         </h3>
                                         <ul className="list-none pl-0 space-y-2">
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Lắng nghe và cụ thể hóa các sáng kiến của Nhân dân kịp thời nhằm hoàn thiện hệ thống pháp luật.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Lắng nghe và luật hóa hiến kế của Nhân dân để kịp thời hoàn thiện hệ thống pháp luật.</li>
                                             <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Thúc đẩy trách nhiệm xã hội, phát huy trí tuệ toàn dân trong việc giải quyết các vấn đề kinh tế - xã hội quan trọng.</li>
                                             <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Nâng cao hiệu quả thi hành pháp luật, đáp ứng yêu cầu phát triển đất nước theo tinh thần Nghị quyết số 66-NQ/TW của Bộ Chính trị.</li>
                                         </ul>
@@ -183,13 +183,13 @@ export default function HienKeFeedbackPage() {
                                         </h3>
                                         <ul className="list-none pl-0 space-y-2">
                                             <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Ghi nhận ý kiến:</strong> Qua biểu mẫu trực tuyến, diễn đàn, email.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Xử lý kịp thời:</strong> Các hiến kế sẽ được Cục Công nghệ Thông tin tiếp nhận, phân loại và chuyển đến cơ quan chuyên môn nghiên cứu.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Tài trợ sáng kiến:</strong> Những đề xuất pháp luật xuất sắc có thể được xem xét hỗ trợ bởi Quỹ Hỗ trợ xây dựng chính sách.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Xử lý kịp thời:</strong> Các thông tin hiến kế sẽ được tiếp nhận, phân loại và được chuyển đến cơ quan chuyên môn nghiên cứu, đánh giá.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Tài trợ hiến kế:</strong> Những sáng kiến đề xuất pháp luật có thể được xem xét hỗ trợ, tài trợ bởi Quỹ Hỗ trợ hoạt động xây dựng chính sách, pháp luật.</li>
                                         </ul>
                                     </div>
                                 </div>
 
-                                <h3 className="text-[18px] font-bold text-[#0f172a] mb-4">Các hoạt động tham vấn chính</h3>
+                                <h3 className="text-[18px] font-bold text-[#0f172a] mb-4">Các hoạt động chính</h3>
                                 <div className="space-y-4">
                                     <div className="flex gap-4 p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-green-100 flex items-center justify-center text-green-600 font-bold text-xl">1</div>
@@ -208,7 +208,7 @@ export default function HienKeFeedbackPage() {
                                     <div className="flex gap-4 p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-xl">3</div>
                                         <div>
-                                            <h4 className="font-bold text-gray-900 mb-1">Các lĩnh vực chuyên sâu</h4>
+                                            <h4 className="font-bold text-gray-900 mb-1">Có thể bạn quan tâm</h4>
                                             <p className="text-[14.5px] text-gray-600">Các chủ đề, nội dung mang tính gợi ý cho xã hội, người dân, doanh nghiệp theo từng lĩnh vực pháp luật cụ thể.</p>
                                         </div>
                                     </div>
@@ -247,7 +247,7 @@ export default function HienKeFeedbackPage() {
                                     <div className="flex gap-4">
                                         <MapPin className="text-blue-600 shrink-0" size={24} />
                                         <div>
-                                            <h4 className="font-bold text-gray-900 mb-1">Cục Công nghệ thông tin - Bộ Tư pháp</h4>
+                                            <h4 className="font-bold text-gray-900 mb-1">Bộ Tư pháp</h4>
                                             <p className="text-gray-600 text-[15px]">Số 60 Trần Phú, phường Ba Đình, TP Hà Nội</p>
                                         </div>
                                     </div>

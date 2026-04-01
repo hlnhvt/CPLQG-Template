@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Send, Paperclip, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Send, Paperclip, ShieldCheck, CheckCircle2, User, Lock } from 'lucide-react';
 import { LIFE_CATEGORIES } from './HienKeShared';
+import { useAuth } from '../contexts/AuthContext';
 
 const CATEGORIES = Array.from(new Set([
     'Đời sống thường ngày - Chung',
@@ -11,21 +12,44 @@ const CATEGORIES = Array.from(new Set([
     'Hành chính'
 ]));
 
+const ISSUANCE_FORMS = [
+    'Luật',
+    'Nghị quyết',
+    'Nghị định',
+    'Thông tư',
+    'Quyết định',
+    'Khác'
+];
+
 export default function SimpleFeedbackPage() {
     const [searchParams] = useSearchParams();
     const domainQuery = searchParams.get('domain');
     const topicQuery = searchParams.get('topic');
+    const { user } = useAuth();
 
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
         category: '',
+        issuanceForm: '',
         content: '',
         isAnonymous: false,
         name: '',
         email: '',
         phone: ''
     });
+
+    // Pre-fill from logged-in user profile
+    useEffect(() => {
+        if (user) {
+            setFormData(prev => ({
+                ...prev,
+                name: user.name || '',
+                email: user.email || '',
+                phone: user.phone || '',
+            }));
+        }
+    }, [user]);
 
     useEffect(() => {
         if (domainQuery) {
@@ -79,7 +103,7 @@ export default function SimpleFeedbackPage() {
                     </Link>
                     <h1 className="text-[32px] md:text-[40px] font-bold text-white mb-3 leading-tight">Gửi hiến kế</h1>
                     <p className="text-blue-100 text-[16px] leading-relaxed max-w-[600px]">
-                        Hãy chia sẻ trực tiếp những ý tưởng, giải pháp hoặc khúc mắc của bạn về pháp luật và đời sống để cùng xây dựng xã hội tốt đẹp hơn.
+                        Hãy chia sẻ trực tiếp những ý tưởng, đề xuất xây dựng pháp luật, thi hành pháp luật để điều chỉnh về các vấn đề thực tế.
                     </p>
                 </div>
             </div>
@@ -107,16 +131,32 @@ export default function SimpleFeedbackPage() {
                                     />
                                 </div>
 
+                                {topicQuery !== 'doi-song' && (
+                                    <div>
+                                        <label className="block text-[14px] font-bold text-gray-800 mb-2">Lĩnh vực liên quan <span className="text-red-500">*</span></label>
+                                        <select
+                                            required name="category"
+                                            value={formData.category} onChange={handleChange}
+                                            className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px] cursor-pointer"
+                                        >
+                                            <option value="" disabled>-- Vui lòng chọn lĩnh vực --</option>
+                                            {CATEGORIES.map(c => (
+                                                <option key={c} value={c}>{c}</option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                )}
+
                                 <div>
-                                    <label className="block text-[14px] font-bold text-gray-800 mb-2">Lĩnh vực liên quan <span className="text-red-500">*</span></label>
+                                    <label className="block text-[14px] font-bold text-gray-800 mb-2">Đề xuất hình thức ban hành <span className="text-red-500">*</span></label>
                                     <select
-                                        required name="category"
-                                        value={formData.category} onChange={handleChange}
+                                        required name="issuanceForm"
+                                        value={formData.issuanceForm} onChange={handleChange}
                                         className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px] cursor-pointer"
                                     >
-                                        <option value="" disabled>-- Vui lòng chọn lĩnh vực --</option>
-                                        {CATEGORIES.map(c => (
-                                            <option key={c} value={c}>{c}</option>
+                                        <option value="" disabled>-- Vui lòng chọn hình thức --</option>
+                                        {ISSUANCE_FORMS.map(f => (
+                                            <option key={f} value={f}>{f}</option>
                                         ))}
                                     </select>
                                 </div>
@@ -156,40 +196,89 @@ export default function SimpleFeedbackPage() {
                                 </div>
                             </div>
 
-                            <label className="flex items-center gap-3 mb-5 cursor-pointer">
-                                <input
-                                    type="checkbox" name="isAnonymous"
-                                    checked={formData.isAnonymous} onChange={handleChange}
-                                    className="w-5 h-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                />
-                                <span className="text-[14px] font-bold text-gray-800">Tôi muốn gửi ý kiến ẩn danh</span>
-                            </label>
-
                             {!formData.isAnonymous && (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 animate-fadeIn">
+
+                                    {/* Auto-fill notice if logged in */}
+                                    {user && (
+                                        <div className="md:col-span-2 flex items-center gap-2.5 bg-blue-50 border border-blue-200 text-blue-800 text-[13px] px-4 py-3 rounded-xl">
+                                            <User size={15} className="shrink-0" />
+                                            <span>Thông tin liên hệ được điền tự động từ hồ sơ cá nhân của bạn.</span>
+                                        </div>
+                                    )}
+
                                     <div className="md:col-span-2">
-                                        <label className="block text-[14px] font-bold text-gray-800 mb-2">Họ và tên</label>
-                                        <input
-                                            type="text" name="name"
-                                            value={formData.name} onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
-                                        />
+                                        <label className="block text-[14px] font-bold text-gray-800 mb-2">
+                                            Họ và tên
+                                        </label>
+                                        {user ? (
+                                            <div className="relative">
+                                                <input
+                                                    type="text" name="name" readOnly
+                                                    value={formData.name}
+                                                    className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-xl text-[15px] text-gray-700 pr-32 cursor-not-allowed"
+                                                />
+                                                <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-[11px] font-bold text-green-700 bg-green-100 px-2 py-1 rounded-full border border-green-200">
+                                                    <Lock size={10} /> Đã xác thực
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            <input
+                                                type="text" name="name"
+                                                value={formData.name} onChange={handleChange}
+                                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
+                                            />
+                                        )}
                                     </div>
+
                                     <div>
                                         <label className="block text-[14px] font-bold text-gray-800 mb-2">Email</label>
-                                        <input
-                                            type="email" name="email"
-                                            value={formData.email} onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
-                                        />
+                                        {user ? (
+                                            <div className="relative">
+                                                <input
+                                                    type="email" name="email" readOnly
+                                                    value={formData.email}
+                                                    className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-xl text-[15px] text-gray-700 pr-32 cursor-not-allowed"
+                                                />
+                                                <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-[11px] font-bold text-green-700 bg-green-100 px-2 py-1 rounded-full border border-green-200">
+                                                    <Lock size={10} /> Đã xác thực
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            <input
+                                                type="email" name="email"
+                                                value={formData.email} onChange={handleChange}
+                                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
+                                            />
+                                        )}
                                     </div>
+
                                     <div>
                                         <label className="block text-[14px] font-bold text-gray-800 mb-2">Số điện thoại</label>
-                                        <input
-                                            type="tel" name="phone"
-                                            value={formData.phone} onChange={handleChange}
-                                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
-                                        />
+                                        {user ? (
+                                            <div className="relative">
+                                                <input
+                                                    type="tel" name="phone" readOnly
+                                                    value={formData.phone || 'Chưa cập nhật'}
+                                                    className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-xl text-[15px] text-gray-700 pr-32 cursor-not-allowed"
+                                                />
+                                                {formData.phone ? (
+                                                    <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-[11px] font-bold text-green-700 bg-green-100 px-2 py-1 rounded-full border border-green-200">
+                                                        <Lock size={10} /> Đã xác thực
+                                                    </span>
+                                                ) : (
+                                                    <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-[11px] font-bold text-amber-700 bg-amber-50 px-2 py-1 rounded-full border border-amber-200">
+                                                        Chưa có
+                                                    </span>
+                                                )}
+                                            </div>
+                                        ) : (
+                                            <input
+                                                type="tel" name="phone"
+                                                value={formData.phone} onChange={handleChange}
+                                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
+                                            />
+                                        )}
                                     </div>
                                 </div>
                             )}

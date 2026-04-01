@@ -110,7 +110,7 @@ export default function HienKePage() {
                         <div className="lg:w-[400px] xl:w-[440px] shrink-0 w-full -mt-6 lg:-mt-10 animate-fade-up delay-400">
                             <div className="flex flex-col gap-4 md:gap-5">
                                 {[
-                                    { id: '/hien-ke/gop-y-nhanh?topic=doi-song', label: 'Hiến kế của bạn', desc: 'Chia sẻ ý kiến, sáng kiến của bạn về các vấn đề xã hội nhằm góp phần xây dựng và hoàn thiện chính sách, pháp luật.', icon: Heart, color: 'text-green-600', hue: 'bg-green-500' },
+                                    { id: '/hien-ke/gop-y-nhanh?topic=doi-song', label: 'Hiến kế của bạn', desc: 'Chia sẻ ý kiến, sáng kiến của bạn về các vấn đề xã hội nhằm góp phần xây dựng, thi hành và hoàn thiện pháp luật.', icon: Heart, color: 'text-green-600', hue: 'bg-green-500' },
                                     { id: '/hien-ke/noi-bat', label: 'Chúng tôi cần bạn', desc: 'Những nội dung đang cần ý kiến đóng góp của bạn trong quá trình xây dựng và thực thi chính sách.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500' },
                                     { id: '/hien-ke/linh-vuc', label: 'Có thể bạn quan tâm', desc: 'Các lĩnh vực gợi ý để bạn dễ dàng tham gia đóng góp như: doanh nghiệp - đầu tư, thuế - hải quan, lao động - an sinh xã hội…', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500' },
                                 ].map(item => (

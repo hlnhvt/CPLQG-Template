@@ -83,7 +83,7 @@ const HienKeNoiBatPage = () => {
                             <TrendingUp size={20} />
                         </div>
                         <div>
-                            <h2 className="text-[18px] font-bold text-gray-900 leading-tight">Danh sách các nội dung nổi bật</h2>
+                            <h2 className="text-[18px] font-bold text-gray-900 leading-tight">Danh sách các chủ đề nổi bật</h2>
                             <p className="text-gray-500 text-[13px] mt-0.5">Hiển thị {filteredItems.length} kết quả</p>
                         </div>
                     </div>

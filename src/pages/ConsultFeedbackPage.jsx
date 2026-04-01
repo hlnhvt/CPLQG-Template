@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, ChevronRight, CheckCircle2, Shield, Info, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ChevronRight, CheckCircle2, Shield, Info, ExternalLink, Lock, User } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 // ======================== MOCK DATA MAPPING ========================
 // In a real app, this would be fetched from an API based on the :id
@@ -112,11 +113,23 @@ const FieldCheckbox = ({ q, val = [], onChange }) => {
 export default function ConsultFeedbackPage() {
     const { id } = useParams();
     const data = MOCK_FORM_DATA;
+    const { user } = useAuth();
 
     const [answers, setAnswers] = useState({});
     const [partProceed, setPartProceed] = useState({});
     const [activePart, setActivePart] = useState('instructions');
     const [isSubmitted, setIsSubmitted] = useState(false);
+
+    // Pre-fill user info
+    useEffect(() => {
+        if (user) {
+            setAnswers(prev => ({
+                ...prev,
+                qC1: user.name || '',
+                qC2: user.email || '',
+            }));
+        }
+    }, [user]);
 
     // Track scroll to update active sidebar item
     useEffect(() => {
@@ -300,12 +313,20 @@ export default function ConsultFeedbackPage() {
                                             )}
 
                                             {(q.type === 'text' || q.type === 'email') && (
-                                                <input
-                                                    type={q.type}
-                                                    className="w-full mt-3 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-600 focus:border-green-600 transition-colors text-[14px] text-gray-800"
-                                                    value={answers[q.id] || ''}
-                                                    onChange={e => handleAnswer(q.id, e.target.value)}
-                                                />
+                                                <div className="relative">
+                                                    <input
+                                                        type={q.type}
+                                                        readOnly={user && (q.id === 'qC1' || q.id === 'qC2')}
+                                                        className={`w-full mt-3 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-600 focus:border-green-600 transition-colors text-[14px] text-gray-800 ${user && (q.id === 'qC1' || q.id === 'qC2') ? 'bg-gray-100 cursor-not-allowed pr-32' : 'bg-white'}`}
+                                                        value={answers[q.id] || ''}
+                                                        onChange={e => handleAnswer(q.id, e.target.value)}
+                                                    />
+                                                    {user && (q.id === 'qC1' || q.id === 'qC2') && (
+                                                        <span className="absolute right-3 top-[calc(50%+6px)] -translate-y-1/2 flex items-center gap-1 text-[10px] font-bold text-green-700 bg-green-50 px-2 py-1 rounded-full border border-green-200">
+                                                            <Lock size={10} /> Đã xác thực
+                                                        </span>
+                                                    )}
+                                                </div>
                                             )}
                                         </div>
                                     ))}

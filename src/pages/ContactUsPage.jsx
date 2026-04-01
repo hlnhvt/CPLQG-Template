@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, ArrowRight, MapPin, Mail, Phone, Clock, FileUp, Send, Facebook, Instagram, Linkedin, MessageCircle, Youtube } from 'lucide-react';
+import { ChevronRight, ArrowRight, MapPin, Mail, Phone, Clock, FileUp, Send, Facebook, Instagram, Linkedin, MessageCircle, Youtube, Lock } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const DEPARTMENTS = [
     'Tư vấn pháp lý chung',
@@ -27,10 +28,22 @@ const FAQS = [
 ];
 
 export default function ContactUsPage() {
+    const { user } = useAuth();
     const [formData, setFormData] = useState({
         name: '', email: '', mobile: '', phone: '', subject: '', message: ''
     });
     const [openFaq, setOpenFaq] = useState(null);
+
+    useEffect(() => {
+        if (user) {
+            setFormData(prev => ({
+                ...prev,
+                name: user.name || '',
+                email: user.email || '',
+                mobile: user.phone || '',
+            }));
+        }
+    }, [user]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -78,39 +91,63 @@ export default function ContactUsPage() {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <label className="block text-[14px] font-bold text-gray-800 mb-2">Họ và tên <span className="text-red-500">*</span></label>
-                                            <input
-                                                type="text" required
-                                                value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition-colors"
-                                                placeholder="VD: Nguyễn Văn A"
-                                            />
+                                            <div className="relative">
+                                                <input
+                                                    type="text" required
+                                                    readOnly={!!user}
+                                                    value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                                    className={`w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition-colors ${user ? 'bg-gray-100 cursor-not-allowed pr-32' : 'bg-gray-50'}`}
+                                                    placeholder="VD: Nguyễn Văn A"
+                                                />
+                                                {user && (
+                                                    <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-[10px] font-bold text-green-700 bg-green-50 px-2 py-1 rounded-full border border-green-200">
+                                                        <Lock size={10} /> Đã xác thực
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
                                         <div>
                                             <label className="block text-[14px] font-bold text-gray-800 mb-2">Địa chỉ Email <span className="text-red-500">*</span></label>
-                                            <input
-                                                type="email" required
-                                                value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })}
-                                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition-colors"
-                                                placeholder="VD: email@example.com"
-                                            />
+                                            <div className="relative">
+                                                <input
+                                                    type="email" required
+                                                    readOnly={!!user}
+                                                    value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })}
+                                                    className={`w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition-colors ${user ? 'bg-gray-100 cursor-not-allowed pr-32' : 'bg-gray-50'}`}
+                                                    placeholder="VD: email@example.com"
+                                                />
+                                                {user && (
+                                                    <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-[10px] font-bold text-green-700 bg-green-50 px-2 py-1 rounded-full border border-green-200">
+                                                        <Lock size={10} /> Đã xác thực
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <label className="block text-[14px] font-bold text-gray-800 mb-2">Điện thoại di động</label>
-                                            <input
-                                                type="tel"
-                                                value={formData.mobile} onChange={e => setFormData({ ...formData, mobile: e.target.value })}
-                                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition-colors"
-                                            />
+                                            <div className="relative">
+                                                <input
+                                                    type="tel"
+                                                    readOnly={user && !!user.phone}
+                                                    value={formData.mobile} onChange={e => setFormData({ ...formData, mobile: e.target.value })}
+                                                    className={`w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition-colors ${user && !!user.phone ? 'bg-gray-100 cursor-not-allowed pr-32' : 'bg-gray-50'}`}
+                                                />
+                                                {user && !!user.phone && (
+                                                    <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-[10px] font-bold text-green-700 bg-green-50 px-2 py-1 rounded-full border border-green-200">
+                                                        <Lock size={10} /> Đã xác thực
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
                                         <div>
                                             <label className="block text-[14px] font-bold text-gray-800 mb-2">Điện thoại bàn</label>
                                             <input
                                                 type="tel"
                                                 value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition-colors"
+                                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition-colors"
                                             />
                                         </div>
                                     </div>
