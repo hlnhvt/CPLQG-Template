@@ -79,8 +79,7 @@ const NghienCuuTraoDoiDetailPage = () => {
 
                 {/* Breadcrumb */}
                 <div className="flex items-center flex-wrap gap-1 text-[13px] text-gray-500 mb-6">
-                    <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
-                    <ChevronRight size={13} />
+
                     <Link to="/tin-tuc/noi-bat" className="hover:text-blue-600">Tin tức</Link>
                     <ChevronRight size={13} />
                     <Link to="/tin-tuc/nghien-cuu-trao-doi" className="hover:text-blue-600">Nghiên cứu & Trao đổi</Link>

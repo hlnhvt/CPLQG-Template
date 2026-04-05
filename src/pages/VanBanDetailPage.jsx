@@ -1418,8 +1418,7 @@ const VanBanDetailPage = () => {
             <div className="container mx-auto px-4 max-w-[1280px] pt-5">
                 {/* Breadcrumb */}
                 <nav className="flex items-center flex-wrap gap-1 text-[12px] text-gray-500 mb-4">
-                    <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
-                    <ChevronRight size={12} />
+
                     <span className="cursor-pointer hover:text-blue-600">Văn bản pháp luật</span>
                     <ChevronRight size={12} />
                     <Link to="/van-ban/tim-kiem" className="hover:text-blue-600">Hệ thống VBQPPL</Link>

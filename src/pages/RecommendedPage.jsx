@@ -68,8 +68,7 @@ const RecommendedPage = () => {
             <div className="bg-white border-b border-gray-200 py-3 shadow-sm">
                 <div className="container mx-auto px-4 max-w-[1500px]">
                     <div className="flex items-center text-[13px] text-gray-500">
-                        <Link to="/" className="hover:text-blue-600 transition-colors">Trang chủ</Link>
-                        <ChevronRight size={14} className="mx-2 shrink-0" />
+
                         <span className="text-gray-800 font-medium">Dành cho bạn</span>
                     </div>
                 </div>

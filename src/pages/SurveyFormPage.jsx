@@ -265,8 +265,7 @@ const SurveyFormPage = () => {
                 <div className="container mx-auto px-4 max-w-[800px]">
                     {/* Breadcrumb */}
                     <div className="flex items-center flex-wrap text-[13px] text-gray-500 mb-4 gap-1">
-                        <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
-                        <ChevronRight size={14} className="shrink-0" />
+
                         <Link to="/chu-de-khao-sat" className="hover:text-blue-600">Khảo sát</Link>
                         <ChevronRight size={14} className="shrink-0" />
                         <Link to={`/chu-de-khao-sat/${survey.topicId}`} className="hover:text-blue-600 hidden md:inline">{survey.topicTitle}</Link>

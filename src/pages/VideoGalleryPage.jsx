@@ -98,8 +98,7 @@ const VideoGalleryPage = () => {
             <div className="bg-gradient-to-r from-[#0f4c81] to-[#1a6cc4] text-white py-8">
                 <div className="container mx-auto px-4 max-w-[1200px]">
                     <div className="flex items-center gap-2 text-[13px] text-blue-200 mb-3">
-                        <Link to="/" className="hover:text-white">Trang chủ</Link>
-                        <ChevronRight size={14} />
+
                         <Link to="/tin-tuc/noi-bat" className="hover:text-white">Tin tức</Link>
                         <ChevronRight size={14} />
                         <span className="text-white font-medium">Video</span>

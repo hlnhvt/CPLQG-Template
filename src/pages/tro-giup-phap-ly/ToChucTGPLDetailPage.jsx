@@ -34,8 +34,7 @@ const ToChucTGPLDetailPage = () => {
             <div className="bg-white border-b border-gray-200 py-3">
                 <div className="container mx-auto px-4 max-w-[1200px]">
                     <div className="flex items-center text-sm text-gray-500 gap-2">
-                        <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
-                        <ChevronRight size={14} />
+
                         <Link to="/tro-giup-phap-ly/to-chuc" className="hover:text-blue-600">Tổ chức thực hiện TGPL</Link>
                         <ChevronRight size={14} />
                         <span className="text-gray-800 font-medium truncate max-w-xs">{org.name}</span>

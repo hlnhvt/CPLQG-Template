@@ -69,8 +69,7 @@ const PublicUserProfilePage = () => {
             <div className="bg-white border-b shadow-sm">
                 <div className="container mx-auto px-4 py-3">
                     <div className="flex flex-wrap items-center text-sm font-medium text-gray-500 gap-2">
-                        <Link to="/" className="hover:text-[#0f4c81]">Trang chủ</Link>
-                        <span>/</span>
+
                         <Link to="/dien-dan" className="hover:text-[#0f4c81]">Diễn đàn</Link>
                         <span>/</span>
                         <span className="text-[#0f4c81] font-bold">Hồ sơ thành viên</span>

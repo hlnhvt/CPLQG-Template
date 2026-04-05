@@ -9,8 +9,7 @@ const NewsDetailPage = () => {
             <div className="container mx-auto px-4 py-6">
                 {/* Breadcrumbs */}
                 <nav className="flex items-center text-sm text-gray-500 mb-6">
-                    <Link to="/" className="hover:text-[#0f4c81]">Trang chủ</Link>
-                    <ChevronRight size={14} className="mx-2" />
+
                     <a href="#" className="hover:text-[#0f4c81]">Nghị quyết số 06-NQ/TW</a>
                     <ChevronRight size={14} className="mx-2" />
                     <a href="#" className="hover:text-[#0f4c81]">Tin tức hoạt động</a>

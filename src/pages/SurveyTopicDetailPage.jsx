@@ -182,8 +182,7 @@ const SurveyTopicDetailPage = () => {
                 <div className="container mx-auto px-4 max-w-[1200px]">
                     {/* Breadcrumbs */}
                     <div className="flex items-center flex-wrap text-[13px] text-gray-500 mb-4 gap-1">
-                        <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
-                        <BreadcrumbRight size={14} className="mx-1 shrink-0" />
+
                         <Link to="/chu-de-khao-sat" className="hover:text-blue-600">Khảo sát</Link>
                         <BreadcrumbRight size={14} className="mx-1 shrink-0" />
                         <span className="text-gray-800 font-medium truncate max-w-[300px] md:max-w-none">{TOPIC_INFO.title}</span>

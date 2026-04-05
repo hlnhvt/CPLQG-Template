@@ -73,8 +73,7 @@ const PhotoDetailPage = () => {
             <div className="container mx-auto px-4 max-w-[1200px] pt-6">
                 {/* Breadcrumb */}
                 <nav className="flex items-center flex-wrap gap-1 text-[13px] text-gray-500 mb-5">
-                    <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
-                    <ChevronRight size={13} />
+
                     <Link to="/tin-tuc/noi-bat" className="hover:text-blue-600">Tin tức</Link>
                     <ChevronRight size={13} />
                     <Link to="/anh" className="hover:text-blue-600">Photo</Link>

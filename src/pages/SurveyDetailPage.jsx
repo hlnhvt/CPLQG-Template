@@ -48,8 +48,7 @@ const SurveyDetailPage = () => {
                 <div className="container mx-auto px-4 max-w-[1200px]">
                     {/* Breadcrumbs */}
                     <div className="flex items-center flex-wrap text-[13px] text-gray-500 mb-4 gap-1">
-                        <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
-                        <ChevronRight size={14} className="shrink-0" />
+
                         <Link to="/chu-de-khao-sat" className="hover:text-blue-600">Khảo sát</Link>
                         <ChevronRight size={14} className="shrink-0" />
                         <Link to={`/chu-de-khao-sat/${survey.topicId}`} className="hover:text-blue-600 hidden md:inline truncate max-w-[200px]">{survey.topicTitle}</Link>
@@ -102,7 +101,7 @@ const SurveyDetailPage = () => {
                             {[
                                 { icon: Users, value: survey.totalParticipants.toLocaleString('vi-VN'), label: 'Người tiếp cận', colorClasses: 'text-blue-600 bg-blue-50 border-blue-100' },
                                 { icon: CheckCircle, value: survey.totalCompleted.toLocaleString('vi-VN'), label: 'Tổng hoàn thành', colorClasses: 'text-emerald-600 bg-emerald-50 border-emerald-100' },
-                                { icon: Timer, value: survey.estimatedTime, label: 'T.g thực hiện TB', colorClasses: 'text-indigo-600 bg-indigo-50 border-indigo-100' },
+                                { icon: Timer, value: survey.estimatedTime, label: 'Thời gian trung bình', colorClasses: 'text-indigo-600 bg-indigo-50 border-indigo-100' },
                                 { icon: Clock, value: survey.daysLeft + ' ngày', label: 'Thời gian còn lại', colorClasses: 'text-amber-600 bg-amber-50 border-amber-100' }
                             ].map((card, i) => {
                                 const Icon = card.icon;
@@ -114,7 +113,7 @@ const SurveyDetailPage = () => {
                                                 <div className="text-[13px] font-medium text-gray-500">{card.label}</div>
                                             </div>
                                             <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${card.colorClasses.split(' ').slice(0, 2).join(' ')}`}>
-                                                <Icon size={20} strokeWidth={2}/>
+                                                <Icon size={20} strokeWidth={2} />
                                             </div>
                                         </div>
                                     </div>
@@ -204,7 +203,7 @@ const SurveyDetailPage = () => {
                                 <div className="flex gap-3">
                                     <Timer size={18} className="text-blue-500 mt-0.5 shrink-0" />
                                     <div>
-                                        <div className="text-[13px] font-medium text-gray-500 mb-1">Thời gian làm TB</div>
+                                        <div className="text-[13px] font-medium text-gray-500 mb-1">Thời gian làm tối đa</div>
                                         <div className="font-semibold text-gray-800">{survey.estimatedTime}</div>
                                     </div>
                                 </div>

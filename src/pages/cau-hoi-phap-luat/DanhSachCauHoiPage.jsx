@@ -5,18 +5,18 @@ import { Search, Flame, Clock, HelpCircle, FileText, CheckCircle2, RotateCw, Ref
 import CreateCauHoiModal from './CreateCauHoiModal';
 
 const MOCK_DATA = [
-    { id: '1', title: 'Quy định bồi thường giải phóng mặt bằng khi thu hồi đất ở nông thôn', content: 'Gia đình tôi có mảnh đất ở nông thôn đang bị thu hồi để làm đường...', date: '11:09 17/03/2026', status: 'Đã trả lời', domain: 'Đất đai', views: 1250, likes: 450, author: 'Nguyễn Văn A', replies: 2 },
+    { id: '1', title: 'Quy định bồi thường giải phóng mặt bằng khi thu hồi đất ở nông thôn', content: 'Gia đình tôi có mảnh đất ở nông thôn đang bị thu hồi để làm đường...', date: '11:09 17/03/2026', status: 'Đã trả lời', domain: 'Đất đai', views: 1250, likes: 450, author: 'Nguyễn Văn A', replies: 2, isOfficial: true },
     { id: '2', title: 'Điều kiện hưởng lương hưu trước tuổi năm 2026', content: 'Tôi năm nay 55 tuổi, đóng BHXH được 25 năm, làm việc trong môi trường độc hại...', date: '09:15 16/03/2026', status: 'Đang chờ trả lời', domain: 'Lao động', views: 890, likes: 320, author: 'Trần Thị B', replies: 0 },
-    { id: '3', title: 'Thủ tục thành lập công ty TNHH 1 thành viên', content: 'Tôi muốn tư vấn về hồ sơ và thủ tục thành lập công ty TNHH 1 thành viên...', date: '14:20 15/03/2026', status: 'Đã trả lời', domain: 'Doanh nghiệp', views: 2100, likes: 800, author: 'Lê Văn C', replies: 1 },
-    { id: '4', title: 'Phân chia di sản thừa kế khi không có di chúc', content: 'Bố mẹ tôi mất không để lại di chúc, gia đình có 3 anh em...', date: '08:30 14/03/2026', status: 'Đã trả lời', domain: 'Dân sự', views: 1560, likes: 410, author: 'Người dùng ẩn danh', replies: 3 },
+    { id: '3', title: 'Thủ tục thành lập công ty TNHH 1 thành viên', content: 'Tôi muốn tư vấn về hồ sơ và thủ tục thành lập công ty TNHH 1 thành viên...', date: '14:20 15/03/2026', status: 'Đã trả lời', domain: 'Doanh nghiệp', views: 2100, likes: 800, author: 'Lê Văn C', replies: 1, isOfficial: false },
+    { id: '4', title: 'Phân chia di sản thừa kế khi không có di chúc', content: 'Bố mẹ tôi mất không để lại di chúc, gia đình có 3 anh em...', date: '08:30 14/03/2026', status: 'Đã trả lời', domain: 'Dân sự', views: 1560, likes: 410, author: 'Người dùng ẩn danh', replies: 3, isOfficial: true },
     { id: '5', title: 'Xử lý kỷ luật lao động đối với nhân viên tự ý nghỉ việc', content: 'Công ty tôi có trường hợp nhân viên tự ý nghỉ việc 5 ngày không phép...', date: '16:45 13/03/2026', status: 'Đang chờ trả lời', domain: 'Lao động', views: 500, likes: 120, author: 'Hoàng Thị D', replies: 0 },
-    { id: '6', title: 'Mức phạt vi phạm nồng độ cồn khi lái xe ô tô', content: 'Xin cho biết mức phạt hành chính đối với người điều khiển xe ô tô khi trong máu có nồng độ cồn...', date: '10:00 12/03/2026', status: 'Đã trả lời', domain: 'Hành chính', views: 3200, likes: 1100, author: 'Phạm Văn E', replies: 5 },
-    { id: '7', title: 'Quyền tác giả đối với phần mềm lập trình', content: 'Tôi viết một phần mềm mã nguồn mở, tôi có được bảo hộ quyền tác giả không?', date: '14:30 11/03/2026', status: 'Đã trả lời', domain: 'Dân sự', views: 400, likes: 80, author: 'Ẩn danh', replies: 1 },
+    { id: '6', title: 'Mức phạt vi phạm nồng độ cồn khi lái xe ô tô', content: 'Xin cho biết mức phạt hành chính đối với người điều khiển xe ô tô khi trong máu có nồng độ cồn...', date: '10:00 12/03/2026', status: 'Đã trả lời', domain: 'Hành chính', views: 3200, likes: 1100, author: 'Phạm Văn E', replies: 5, isOfficial: true },
+    { id: '7', title: 'Quyền tác giả đối với phần mềm lập trình', content: 'Tôi viết một phần mềm mã nguồn mở, tôi có được bảo hộ quyền tác giả không?', date: '14:30 11/03/2026', status: 'Đã trả lời', domain: 'Dân sự', views: 400, likes: 80, author: 'Ẩn danh', replies: 1, isOfficial: false },
     { id: '8', title: 'Đóng bảo hiểm xã hội tự nguyện', content: 'Lao động tự do có được đóng bảo hiểm xã hội tự nguyện để hưởng lương hưu không?', date: '09:00 10/03/2026', status: 'Đang chờ trả lời', domain: 'Lao động', views: 600, likes: 90, author: 'Lê Thị F', replies: 0 },
-    { id: '9', title: 'Tội cố ý gây thương tích', content: 'Tỷ lệ thương tật bao nhiêu phần trăm thì bị truy cứu trách nhiệm hình sự...', date: '15:20 09/03/2026', status: 'Đã trả lời', domain: 'Hình sự', views: 1800, likes: 300, author: 'Trần Anh G', replies: 4 },
-    { id: '10', title: 'Thời hiệu khởi kiện tranh chấp đất đai', content: 'Thời hiệu khởi kiện yêu cầu chia di sản thừa kế là bất động sản dài bao lâu...', date: '08:15 08/03/2026', status: 'Đã trả lời', domain: 'Đất đai', views: 950, likes: 150, author: 'Hồ Văn H', replies: 2 },
+    { id: '9', title: 'Tội cố ý gây thương tích', content: 'Tỷ lệ thương tật bao nhiêu phần trăm thì bị truy cứu trách nhiệm hình sự...', date: '15:20 09/03/2026', status: 'Đã trả lời', domain: 'Hình sự', views: 1800, likes: 300, author: 'Trần Anh G', replies: 4, isOfficial: false },
+    { id: '10', title: 'Thời hiệu khởi kiện tranh chấp đất đai', content: 'Thời hiệu khởi kiện yêu cầu chia di sản thừa kế là bất động sản dài bao lâu...', date: '08:15 08/03/2026', status: 'Đã trả lời', domain: 'Đất đai', views: 950, likes: 150, author: 'Hồ Văn H', replies: 2, isOfficial: true },
     { id: '11', title: 'Đăng ký kết hôn với người nước ngoài', content: 'Thủ tục đăng ký kết hôn với công dân Mỹ tại Việt Nam cần những giấy tờ gì?', date: '10:45 07/03/2026', status: 'Đang chờ trả lời', domain: 'Dân sự', views: 820, likes: 130, author: 'Nguyễn Thị I', replies: 0 },
-    { id: '12', title: 'Giải thể công ty cổ phần', content: 'Xin hướng dẫn chi tiết các bước để giải thể một công ty cổ phần...', date: '13:00 06/03/2026', status: 'Đã trả lời', domain: 'Doanh nghiệp', views: 1100, likes: 210, author: 'Lý Quốc K', replies: 1 }
+    { id: '12', title: 'Giải thể công ty cổ phần', content: 'Xin hướng dẫn chi tiết các bước để giải thể một công ty cổ phần...', date: '13:00 06/03/2026', status: 'Đã trả lời', domain: 'Doanh nghiệp', views: 1100, likes: 210, author: 'Lý Quốc K', replies: 1, isOfficial: false }
 ];
 
 const DanhSachCauHoiPage = () => {
@@ -175,9 +175,16 @@ const QuestionList = ({ mode }) => {
                                     <div className="flex flex-wrap items-center justify-between mt-2 pt-3 border-t border-gray-50">
                                         <div className="flex items-center gap-4 text-xs">
                                             {item.status === 'Đã trả lời' ?
-                                                <span className="flex items-center gap-1 font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
-                                                    <CheckCircle2 size={12} /> Đã trả lời
-                                                </span>
+                                                <div className="flex items-center gap-2">
+                                                    <span className="flex items-center gap-1 font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
+                                                        <CheckCircle2 size={12} /> Đã trả lời
+                                                    </span>
+                                                    {item.isOfficial && (
+                                                        <span className="flex items-center gap-1 font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded shadow-sm border border-blue-100">
+                                                            <Check size={12} /> Cơ quan nhà nước
+                                                        </span>
+                                                    )}
+                                                </div>
                                                 :
                                                 <span className="flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">
                                                     <RotateCw size={12} /> Chờ trả lời
@@ -398,9 +405,16 @@ const SearchTab = () => {
                                             <p className="text-gray-600 text-sm mb-3.5 line-clamp-2 leading-relaxed">"{item.content}"</p>
                                             <div className="flex flex-wrap items-center gap-4 text-xs">
                                                 {item.status === 'Đã trả lời' ?
-                                                    <span className="flex items-center gap-1.5 font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded">
-                                                        <CheckCircle2 size={14} /> Đã trả lời
-                                                    </span>
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="flex items-center gap-1.5 font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded">
+                                                            <CheckCircle2 size={14} /> Đã trả lời
+                                                        </span>
+                                                        {item.isOfficial && (
+                                                            <span className="flex items-center gap-1.5 font-bold text-blue-600 bg-blue-50 border border-blue-100 px-2.5 py-1 rounded shadow-sm">
+                                                                <Check size={14} /> Cơ quan nhà nước
+                                                            </span>
+                                                        )}
+                                                    </div>
                                                     :
                                                     <span className="flex items-center gap-1.5 font-bold text-amber-600 bg-amber-50 border border-amber-100 px-2.5 py-1 rounded">
                                                         <RotateCw size={14} /> Chờ biên tập
@@ -445,3 +459,5 @@ const SearchTab = () => {
 };
 
 export default DanhSachCauHoiPage;
+// Force HMR reload
+

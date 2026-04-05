@@ -35,7 +35,7 @@ const Header = () => {
     const navigate = useNavigate();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [notifOpen, setNotifOpen] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [mobileNavExpanded, setMobileNavExpanded] = useState({}); // Track expanded groups in mobile menu
 
     const dropdownRef = useRef(null);
@@ -203,7 +203,7 @@ const Header = () => {
                         {/* Hamburger menu for mobile */}
                         <button
                             className="xl:hidden p-1.5 text-white hover:bg-white/10 rounded-lg transition-colors ml-2"
-                            onClick={() => setMobileMenuOpen(true)}
+                            onClick={() => setIsSidebarOpen(true)}
                         >
                             <Menu size={24} />
                         </button>
@@ -216,75 +216,87 @@ const Header = () => {
                 <div className="container mx-auto px-4">
                     <nav className="flex justify-center xl:justify-between items-center h-[46px] text-xs xl:text-sm font-medium relative z-50">
                         <ul className="flex items-center min-w-max h-full">
+                            <li className="h-full border-r border-white/10">
+                                <button
+                                    onClick={() => setIsSidebarOpen(true)}
+                                    className="h-full flex items-center px-4 hover:bg-white/10 transition-colors gap-2 text-cyan-400 font-bold"
+                                >
+                                    <Menu size={18} />
+                                </button>
+                            </li>
                             <li className="h-full">
                                 <Link to="/" className="h-full flex items-center px-4 hover:bg-white/10 transition-colors border-b-2 border-transparent">
                                     Trang chủ
                                 </Link>
                             </li>
-                            <li className="h-full relative group cursor-pointer">
-                                <a href="#" className="h-full flex items-center px-6 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
-                                    Giới thiệu <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
+                            <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
+                                <a href="#" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
+                                    Tin tức <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
-                                {/* Dropdown */}
                                 <div className="absolute top-full left-0 mt-0 w-64 bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
                                     <ul className="py-3 text-sm text-gray-200 font-normal space-y-1">
                                         <li>
-                                            <Link to="/gioi-thieu" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                                                Giới thiệu chung
+                                            <Link to="/tin-tuc/noi-bat" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>Tin tức nổi bật
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/gioi-thieu/chuc-nang-nhiem-vu" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                                                Chức năng, nhiệm vụ
+                                            <a href="#" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>Tọa đàm - Sự kiện
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
+                                <Link to="/van-ban" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
+                                    Văn bản pháp luật <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
+                                </Link>
+                                <div className="absolute top-full left-0 mt-0 w-[280px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
+                                    <ul className="py-2 text-sm text-gray-200 font-normal">
+                                        <li>
+                                            <Link to="/van-ban/tim-kiem" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>Danh sách Văn bản QPPL
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/tam-nhin" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                                                Tầm nhìn - Định hướng
+                                            <Link to="/van-ban/hieu-luc" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>Văn bản có hiệu lực trong tháng
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/gioi-thieu/thu-ngo" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                                                Thư ngỏ
+                                            <Link to="/van-ban/het-hieu-luc" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-red-400 shrink-0"></span>Văn bản hết hiệu lực trong tháng
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/huong-dan-su-dung" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                                                Hướng dẫn sử dụng
+                                            <Link to="/van-ban/moi-ban-hanh" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>Văn bản mới ban hành / Hợp nhất
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/lien-he" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                                                Thông tin liên hệ
+                                            <Link to="/van-ban/chu-y" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-indigo-400 shrink-0"></span>Văn bản được chú ý
                                             </Link>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <a href="#" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
-                                    Tin tức <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
-                                </a>
-                                {/* Dropdown Tin tức */}
-                                <div className="absolute top-full left-0 mt-0 w-64 bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-3 text-sm text-gray-200 font-normal space-y-1">
+                                <Link to="/cau-hoi-phap-luat" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
+                                    Hỏi đáp pháp luật <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
+                                </Link>
+                                <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
+                                    <ul className="py-2 text-sm text-gray-200 font-normal">
                                         <li>
-                                            <Link to="/tin-tuc/noi-bat" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                                                Tin tức nổi bật
+                                            <Link to="/cau-hoi-phap-luat" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>Danh sách câu hỏi
                                             </Link>
                                         </li>
                                         <li>
-                                            <a href="#" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                                                Tọa đàm - Sự kiện
-                                            </a>
+                                            <Link to="/cau-hoi-phap-luat/chuyen-gia" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>Chuyên gia tư vấn
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -293,7 +305,6 @@ const Header = () => {
                                 <a href="#" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
                                     Trợ giúp pháp lý <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
-                                {/* Dropdown – Trợ giúp pháp lý */}
                                 <div className="absolute top-full left-0 mt-0 w-[560px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400 p-2">
                                     <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-gray-200 font-normal">
                                         <Link to="/tro-giup-phap-ly" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded">
@@ -345,40 +356,19 @@ const Header = () => {
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <Link to="/van-ban" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
-                                    Văn bản pháp luật <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
+                                <Link to="/khao-sat" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
+                                    Khảo sát <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </Link>
-                                {/* Dropdown – Văn bản pháp luật */}
-                                <div className="absolute top-full left-0 mt-0 w-[280px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
+                                <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
                                     <ul className="py-2 text-sm text-gray-200 font-normal">
                                         <li>
-                                            <Link to="/van-ban/tim-kiem" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
-                                                Danh sách Văn bản QPPL
+                                            <Link to="/chu-de-khao-sat" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>Chủ đề khảo sát
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/van-ban/hieu-luc" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
-                                                Văn bản có hiệu lực trong tháng
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/van-ban/het-hieu-luc" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-red-400 shrink-0"></span>
-                                                Văn bản hết hiệu lực trong tháng
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/van-ban/moi-ban-hanh" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
-                                                Văn bản mới ban hành / Hợp nhất
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/van-ban/chu-y" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-indigo-400 shrink-0"></span>
-                                                Văn bản được chú ý
+                                            <Link to="/khao-sat" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>Danh sách cuộc khảo sát
                                             </Link>
                                         </li>
                                     </ul>
@@ -388,147 +378,96 @@ const Header = () => {
                                 <Link to="/dien-dan" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
                                     Diễn đàn <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </Link>
-                                {/* Dropdown – Diễn đàn */}
                                 <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
                                     <ul className="py-2 text-sm text-gray-200 font-normal">
                                         <li>
                                             <Link to="/dien-dan" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
-                                                Diễn đàn
+                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>Diễn đàn
                                             </Link>
                                         </li>
                                         <li>
                                             <Link to="/dien-dan/thong-ke" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
-                                                Thống kê
+                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>Thống kê
                                             </Link>
                                         </li>
                                         <li>
                                             <Link to="/dien-dan/su-kien" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
-                                                Buổi phát trực tuyến
+                                                <span className="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>Buổi phát trực tuyến
                                             </Link>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <Link to="/cau-hoi-phap-luat" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
-                                    Hỏi đáp pháp luật <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
-                                </Link>
-                                <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-2 text-sm text-gray-200 font-normal">
-                                        <li>
-                                            <Link to="/cau-hoi-phap-luat" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
-                                                Danh sách câu hỏi
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/cau-hoi-phap-luat/chuyen-gia" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
-                                                Chuyên gia tư vấn
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <Link to="/khao-sat" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
-                                    Khảo sát <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
-                                </Link>
-                                <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-2 text-sm text-gray-200 font-normal">
-                                        <li>
-                                            <Link to="/chu-de-khao-sat" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
-                                                Chủ đề khảo sát
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/khao-sat" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
-                                                Danh sách cuộc khảo sát
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <Link to="/phan-anh-kien-nghi" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
+                                <Link to="/phan-anh-kien-nghi" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
                                     Phản ánh, kiến nghị <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </Link>
-                                {/* Dropdown – Phản ánh kiến nghị */}
                                 <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
                                     <ul className="py-2 text-sm text-gray-200 font-normal">
                                         <li>
                                             <Link to="/phan-anh-kien-nghi" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
-                                                Phản ánh kiến nghị
+                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>Phản ánh kiến nghị
                                             </Link>
                                         </li>
                                         <li>
                                             <Link to="/phan-anh-kien-nghi/huong-dan" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>
-                                                Hướng dẫn gửi phản ánh
+                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>Hướng dẫn gửi phản ánh
                                             </Link>
                                         </li>
                                         <li>
                                             <Link to="/phan-anh-kien-nghi/tao-moi" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>
-                                                Gửi phản ánh mới
+                                                <span className="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>Gửi phản ánh mới
                                             </Link>
                                         </li>
                                         <li>
                                             <Link to="/phan-anh-kien-nghi?tab=search" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-yellow-400 shrink-0"></span>
-                                                Tra cứu phản ánh
+                                                <span className="w-2 h-2 rounded-full bg-yellow-400 shrink-0"></span>Tra cứu phản ánh
                                             </Link>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <Link to="/hien-ke" className="h-full flex items-center px-4 gap-1.5 hover:bg-white/10 transition-colors whitespace-nowrap">
-                                    Hiến kế xây dựng và thi hành pháp luật
+                                <Link to="/du-thao" className="h-full flex items-center px-4 gap-1.5 hover:bg-white/10 transition-colors whitespace-nowrap">
+                                    Dự thảo VBQPPL
                                 </Link>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <Link to="/du-thao" className="h-full flex items-center px-4 gap-1.5 hover:bg-white/10 transition-colors">
-                                    Dự thảo VBQPPL
-                                </Link>
+                                <a href="#" className="h-full flex items-center px-4 gap-1.5 hover:bg-white/10 transition-colors whitespace-nowrap">
+                                    AI pháp luật
+                                </a>
                             </li>
                         </ul>
                     </nav>
                 </div>
             </div>
 
-            {/* Mobile Sidebar Navigation */}
+            {/* Mobile/Desktop Sidebar Navigation */}
             {/* Overlay */}
-            {mobileMenuOpen && (
+            {isSidebarOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 z-[250] xl:hidden transition-opacity"
-                    onClick={() => setMobileMenuOpen(false)}
+                    className="fixed inset-0 bg-black/50 z-[250] transition-opacity"
+                    onClick={() => setIsSidebarOpen(false)}
                 ></div>
             )}
 
             {/* Drawer */}
-            <div className={`fixed top-0 right-0 bottom-0 w-[300px] sm:w-[350px] bg-[#1a3673] z-[300] transform transition-transform duration-300 ease-in-out xl:hidden flex flex-col ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+            <div className={`fixed top-0 left-0 bottom-0 w-[300px] sm:w-[350px] bg-[#1a3673] z-[300] transform transition-transform duration-300 ease-in-out flex flex-col ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
                 {/* Header in sidebar */}
                 <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#3b82f6]">
-                    <Link to={displayUser ? "/ca-nhan/trang-chu" : "/"} onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2">
+                    <Link to={displayUser ? "/ca-nhan/trang-chu" : "/"} onClick={() => setIsSidebarOpen(false)} className="flex items-center gap-2">
                         <img src="/logo.png" alt="Quốc huy" className="w-8 h-8 object-contain" />
                         <span className="text-white font-bold uppercase text-sm">CổNG PHÁP LUẬT QUỐC GIA</span>
                     </Link>
-                    <button onClick={() => setMobileMenuOpen(false)} className="text-white/80 hover:text-white p-1">
+                    <button onClick={() => setIsSidebarOpen(false)} className="text-white/80 hover:text-white p-1">
                         <X size={20} />
                     </button>
                 </div>
 
-                <div className="overflow-y-auto flex-grow pb-8">
+                <div className="overflow-y-auto flex-grow pb-8 custom-scrollbar">
                     {/* Navigation Links */}
                     <div className="flex flex-col text-white">
-                        <Link to="/" onClick={() => setMobileMenuOpen(false)} className="px-5 py-4 border-b border-white/5 font-bold hover:bg-white/5 transition-colors">Trang chủ</Link>
+                        <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-5 py-4 border-b border-white/5 font-bold hover:bg-white/5 transition-colors">Trang chủ</Link>
 
                         <div className="border-b border-white/5">
                             <button onClick={() => toggleMobileNavGroup('tienIch')} className="w-full flex items-center justify-between px-5 py-4 font-bold hover:bg-white/5 transition-colors">
@@ -536,8 +475,19 @@ const Header = () => {
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.tienIch ? 'rotate-180' : ''}`} />
                             </button>
                             <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.tienIch ? 'max-h-96' : 'max-h-0'}`}>
-                                <Link to="/tin-tuc/noi-bat" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tin tức nổi bật</Link>
+                                <Link to="/tin-tuc/noi-bat" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tin tức nổi bật</Link>
                                 <a href="#" className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tọa đàm - Sự kiện</a>
+                            </div>
+                        </div>
+
+                        <div className="border-b border-white/5">
+                            <button onClick={() => toggleMobileNavGroup('multimedia')} className="w-full flex items-center justify-between px-5 py-4 font-bold hover:bg-white/5 transition-colors">
+                                Multimedia
+                                <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.multimedia ? 'rotate-180' : ''}`} />
+                            </button>
+                            <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.multimedia ? 'max-h-96' : 'max-h-0'}`}>
+                                <Link to="/infographic" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Infographic</Link>
+                                <Link to="/radio" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Radio pháp luật</Link>
                             </div>
                         </div>
 
@@ -547,10 +497,10 @@ const Header = () => {
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.vanBan ? 'rotate-180' : ''}`} />
                             </button>
                             <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.vanBan ? 'max-h-[500px]' : 'max-h-0'}`}>
-                                <Link to="/van-ban/tim-kiem" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Danh sách Văn bản QPPL</Link>
-                                <Link to="/van-ban/hieu-luc" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Văn bản có hiệu lực trong tháng</Link>
-                                <Link to="/van-ban/het-hieu-luc" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Văn bản hết hiệu lực trong tháng</Link>
-                                <Link to="/van-ban/moi-ban-hanh" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Văn bản mới ban hành / Hợp nhất</Link>
+                                <Link to="/van-ban/tim-kiem" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Danh sách Văn bản QPPL</Link>
+                                <Link to="/van-ban/hieu-luc" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Văn bản có hiệu lực trong tháng</Link>
+                                <Link to="/van-ban/het-hieu-luc" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Văn bản hết hiệu lực trong tháng</Link>
+                                <Link to="/van-ban/moi-ban-hanh" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Văn bản mới ban hành / Hợp nhất</Link>
                             </div>
                         </div>
 
@@ -560,21 +510,21 @@ const Header = () => {
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.tgpl ? 'rotate-180' : ''}`} />
                             </button>
                             <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.tgpl ? 'max-h-[1000px]' : 'max-h-0'}`}>
-                                <Link to="/tro-giup-phap-ly" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Giới thiệu chung</Link>
-                                <Link to="/tro-giup-phap-ly/lich-su-phat-trien" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Lịch sử phát triển</Link>
-                                <Link to="/tro-giup-phap-ly/chuc-nang-nhiem-vu" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Chức năng, nhiệm vụ</Link>
-                                <Link to="/tro-giup-phap-ly/co-cau-to-chuc" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Cơ cấu tổ chức</Link>
-                                <Link to="/tro-giup-phap-ly/chi-dao-dieu-hanh" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Thông tin chỉ đạo, điều hành</Link>
-                                <Link to="/tro-giup-phap-ly/huong-dan-nghiep-vu" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Hướng dẫn nghiệp vụ</Link>
-                                <Link to="/tro-giup-phap-ly/an-pham" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Sách, báo, ấn phẩm</Link>
-                                <Link to="/tro-giup-phap-ly/tin-tuc" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tin tức hoạt động</Link>
-                                <Link to="/tro-giup-phap-ly/video" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Video, Phóng sự</Link>
-                                <Link to="/tro-giup-phap-ly/nghien-cuu-trao-doi" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Nghiên cứu trao đổi</Link>
-                                <Link to="/tro-giup-phap-ly/bao-cao-cong-tac" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Báo cáo công tác</Link>
-                                <Link to="/tro-giup-phap-ly/vu-viec-dien-hinh" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Vụ việc điển hình</Link>
-                                <Link to="/tro-giup-phap-ly/danh-ba" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Danh bạ điện tử</Link>
-                                <Link to="/tro-giup-phap-ly/to-chuc" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Danh sách tổ chức TGPL</Link>
-                                <Link to="/tro-giup-phap-ly/nguoi-thuc-hien" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Người thực hiện TGPL</Link>
+                                <Link to="/tro-giup-phap-ly" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Giới thiệu chung</Link>
+                                <Link to="/tro-giup-phap-ly/lich-su-phat-trien" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Lịch sử phát triển</Link>
+                                <Link to="/tro-giup-phap-ly/chuc-nang-nhiem-vu" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Chức năng, nhiệm vụ</Link>
+                                <Link to="/tro-giup-phap-ly/co-cau-to-chuc" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Cơ cấu tổ chức</Link>
+                                <Link to="/tro-giup-phap-ly/chi-dao-dieu-hanh" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Thông tin chỉ đạo, điều hành</Link>
+                                <Link to="/tro-giup-phap-ly/huong-dan-nghiep-vu" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Hướng dẫn nghiệp vụ</Link>
+                                <Link to="/tro-giup-phap-ly/an-pham" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Sách, báo, ấn phẩm</Link>
+                                <Link to="/tro-giup-phap-ly/tin-tuc" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tin tức hoạt động</Link>
+                                <Link to="/tro-giup-phap-ly/video" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Video, Phóng sự</Link>
+                                <Link to="/tro-giup-phap-ly/nghien-cuu-trao-doi" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Nghiên cứu trao đổi</Link>
+                                <Link to="/tro-giup-phap-ly/bao-cao-cong-tac" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Báo cáo công tác</Link>
+                                <Link to="/tro-giup-phap-ly/vu-viec-dien-hinh" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Vụ việc điển hình</Link>
+                                <Link to="/tro-giup-phap-ly/danh-ba" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Danh bạ điện tử</Link>
+                                <Link to="/tro-giup-phap-ly/to-chuc" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Danh sách tổ chức TGPL</Link>
+                                <Link to="/tro-giup-phap-ly/nguoi-thuc-hien" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Người thực hiện TGPL</Link>
                             </div>
                         </div>
 
@@ -584,8 +534,8 @@ const Header = () => {
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.hoTro ? 'rotate-180' : ''}`} />
                             </button>
                             <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.hoTro ? 'max-h-96' : 'max-h-0'}`}>
-                                <Link to="/dien-dan" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Trang chủ Diễn đàn</Link>
-                                <Link to="/dien-dan/su-kien" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Buổi phát trực tuyến</Link>
+                                <Link to="/dien-dan" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Trang chủ Diễn đàn</Link>
+                                <Link to="/dien-dan/su-kien" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Buổi phát trực tuyến</Link>
                             </div>
                         </div>
 
@@ -595,19 +545,19 @@ const Header = () => {
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.phanAnh ? 'rotate-180' : ''}`} />
                             </button>
                             <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.phanAnh ? 'max-h-96' : 'max-h-0'}`}>
-                                <Link to="/phan-anh-kien-nghi" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Phản ánh kiến nghị</Link>
-                                <Link to="/phan-anh-kien-nghi/huong-dan" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Hướng dẫn gửi phản ánh</Link>
-                                <Link to="/phan-anh-kien-nghi/tao-moi" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Gửi phản ánh mới</Link>
-                                <Link to="/phan-anh-kien-nghi?tab=search" onClick={() => setMobileMenuOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tra cứu phản ánh</Link>
+                                <Link to="/phan-anh-kien-nghi" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Phản ánh kiến nghị</Link>
+                                <Link to="/phan-anh-kien-nghi/huong-dan" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Hướng dẫn gửi phản ánh</Link>
+                                <Link to="/phan-anh-kien-nghi/tao-moi" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Gửi phản ánh mới</Link>
+                                <Link to="/phan-anh-kien-nghi?tab=search" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tra cứu phản ánh</Link>
                             </div>
                         </div>
 
                         <div className="border-b border-white/5">
-                            <Link to="/hien-ke" onClick={() => setMobileMenuOpen(false)} className="block px-5 py-4 font-bold hover:bg-white/5 transition-colors">Hiến kế xây dựng và thi hành pháp luật</Link>
+                            <Link to="/hien-ke" onClick={() => setIsSidebarOpen(false)} className="block px-5 py-4 font-bold hover:bg-white/5 transition-colors">Hiến kế xây dựng và thi hành pháp luật</Link>
                         </div>
 
                         <div className="border-b border-white/5">
-                            <Link to="/du-thao" onClick={() => setMobileMenuOpen(false)} className="block px-5 py-4 font-bold hover:bg-white/5 transition-colors">Dự thảo VBQPPL</Link>
+                            <Link to="/du-thao" onClick={() => setIsSidebarOpen(false)} className="block px-5 py-4 font-bold hover:bg-white/5 transition-colors">Dự thảo VBQPPL</Link>
                         </div>
 
                         <div className="border-b border-white/5">
@@ -620,16 +570,16 @@ const Header = () => {
                         {/* Additional utilities */}
                         <div className="mt-4 pt-4 border-t border-white/10 px-5 space-y-4 font-bold">
                             <a href="#" className="flex items-center gap-2 text-white hover:text-cyan-400">
-                                International <span className="text-[10px] ml-1">↗</span>
+                                International
                             </a>
 
                             {!displayUser ? (
-                                <Link to="/dang-nhap" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-white hover:text-cyan-400">
+                                <Link to="/dang-nhap" onClick={() => setIsSidebarOpen(false)} className="flex items-center gap-2 text-white hover:text-cyan-400">
                                     <User size={18} /> Đăng nhập
                                 </Link>
                             ) : (
                                 <div className="space-y-4">
-                                    <Link to="/ca-nhan/ho-so" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2 text-white hover:text-cyan-400">
+                                    <Link to="/ca-nhan/ho-so" onClick={() => setIsSidebarOpen(false)} className="flex items-center gap-2 text-white hover:text-cyan-400">
                                         <LayoutDashboard size={18} /> Khu vực cá nhân
                                     </Link>
                                     <button onClick={handleLogout} className="flex items-center gap-2 text-red-400 hover:text-red-300">

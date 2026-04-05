@@ -45,8 +45,7 @@ III. TỔ CHỨC THỰC HIỆN
             {/* Breadcrumb */}
             <div className="container mx-auto px-4 max-w-7xl pt-6 pb-4">
                 <nav className="flex items-center flex-wrap gap-1.5 text-[13px] text-gray-500">
-                    <Link to="/" className="hover:text-[#ea492a] transition-colors">Trang chủ</Link>
-                    <ChevronRight size={13} className="text-gray-400" />
+
                     <Link to="/tong-ra-soat" className="hover:text-[#ea492a] transition-colors">Tổng rà soát VBQPPL</Link>
                     <ChevronRight size={13} className="text-gray-400" />
                     <Link to="/tong-ra-soat" state={{ activeTab: 'van-ban-tai-lieu' }} className="hover:text-[#ea492a] transition-colors">Văn bản, tài liệu</Link>

@@ -308,8 +308,7 @@ const TongRaSoatPage = () => {
             <div className="container mx-auto max-w-[1368px] flex-1 mt-6">
                 {/* Breadcrumb */}
                 {/* <nav className="flex items-center flex-wrap gap-1 text-[12px] text-gray-500 mb-6">
-                    <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
-                    <ChevronRight size={12} />
+
                     <span className="text-gray-800 font-medium">Tổng rà soát hệ thống VBQPPL</span>
                     <ChevronRight size={12} />
                     <span className="text-[#1a3b8b] font-bold">{tabs.find(t => t.id === activeTab)?.label}</span>
@@ -347,7 +346,7 @@ const TongRaSoatPage = () => {
                                     <div className="animate-fadeIn bg-white">
                                         <div className="md:px-2 pt-2 pb-6 text-gray-800 leading-relaxed text-[15px] space-y-4">
                                             <p className="indent-8 text-base">
-                                                Căn cứ Quyết định của Thủ tướng Chính phủ về việc thành lập Ban Chỉ đạo rà soát, xử lý vướng mắc trong hệ thống văn bản quy phạm pháp luật, chức năng, nhiệm vụ và quyền hạn của Ban Chỉ đạo được quy định như sau:
+                                                Căn cứ Khoản 2 Điều 1 Nghị quyết số 2093/NQ-UBNTVQH15 về việc thành lập Ban Chỉ đạo rà soát, xử lý vướng mắc trong hệ thống văn bản quy phạm pháp luật, chức năng, nhiệm vụ và quyền hạn của Ban Chỉ đạo được quy định như sau:
                                             </p>
 
                                             <p className="font-bold text-base">

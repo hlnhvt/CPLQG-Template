@@ -21,8 +21,6 @@ const TinTucHoatDongTGPLPage = () => {
             <div className="bg-white border-b border-gray-200 py-6 mb-8 shadow-sm">
                 <div className="container mx-auto px-4 max-w-[1200px]">
                     <div className="flex items-center text-sm text-gray-500 gap-2 mb-2">
-                        <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
-                        <ChevronRight size={14} />
                         <span className="text-gray-800 font-medium">Trợ giúp pháp lý</span>
                     </div>
                     <h1 className="text-3xl font-bold text-[#1e3a8a] flex items-center gap-3 uppercase tracking-wide mt-2">

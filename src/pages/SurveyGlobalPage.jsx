@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { Search, List, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Calendar, Users, Filter, X, ChevronDown, ChevronRight as BreadcrumbRight } from 'lucide-react';
+import { Search, List, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Calendar, Users, Filter, X, ChevronDown, ChevronRight as BreadcrumbRight, Clock, CheckCircle } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
 // --- MOCK DATA ---
 const baseSurveys = [
-    { title: "Khảo sát ý kiến về thủ tục cấp Giấy chứng nhận quyền sử dụng đất", status: "opening", statusText: "Đang mở", date: "01/03/2026 - 31/03/2026", participants: 1250, desc: "Đánh giá mức độ hài lòng về thời gian, chi phí và thái độ cán bộ khi thực hiện thủ tục đất đai.", topic: "Đất đai" },
-    { title: "Đánh giá chất lượng dịch vụ công trực tuyến mức độ 4", status: "upcoming", statusText: "Sắp diễn ra", date: "15/04/2026 - 15/05/2026", participants: 0, desc: "Khảo sát trải nghiệm người dùng trên hệ thống dịch vụ công Quốc gia để cải thiện giao diện và tính năng.", topic: "Dịch vụ hành chính công" },
-    { title: "Khảo sát hiệu quả hoạt động của Bộ phận Một cửa cấp xã", status: "closed", statusText: "Đã kết thúc", date: "01/01/2026 - 31/01/2026", participants: 3420, desc: "Lấy ý kiến người dân về sự thuận tiện, thái độ phục vụ và kết quả giải quyết hồ sơ tại cấp xã.", topic: "Dịch vụ hành chính công" },
-    { title: "Đánh giá mức độ ứng dụng CNTT trong cơ quan nhà nước", status: "opening", statusText: "Đang mở", date: "10/03/2026 - 10/04/2026", participants: 850, desc: "Đo lường mức độ sẵn sàng và hiệu quả ứng dụng phần mềm trong công tác chỉ đạo điều hành.", topic: "Chuyển đổi số" },
-    { title: "Khảo sát nhu cầu sử dụng ứng dụng thanh toán điện tử", status: "closed", statusText: "Đã kết thúc", date: "15/11/2025 - 15/12/2025", participants: 5120, desc: "Nghiên cứu thói quen và những khó khăn của người dân khi thực hiện thanh toán phí, lệ phí trực tuyến.", topic: "Tài chính" },
-    { title: "Lấy ý kiến đánh giá rèn luyện cán bộ, công chức năm 2025", status: "closed", statusText: "Đã kết thúc", date: "01/12/2025 - 31/12/2025", participants: 2100, desc: "Bình xét và đánh giá năng lực, phẩm chất đạo đức của cán bộ công chức định kỳ hàng năm.", topic: "Cán bộ, công chức" }
+    { title: "Khảo sát ý kiến về thủ tục cấp Giấy chứng nhận quyền sử dụng đất", status: "opening", statusText: "Đang mở", date: "01/03/2026 - 31/03/2026", participants: 1250, desc: "Đánh giá mức độ hài lòng về thời gian, chi phí và thái độ cán bộ khi thực hiện thủ tục đất đai.", topic: "Đất đai", duration: "15 phút", audience: ["Cá nhân", "Doanh nghiệp"] },
+    { title: "Đánh giá chất lượng dịch vụ công trực tuyến mức độ 4", status: "upcoming", statusText: "Sắp diễn ra", date: "15/04/2026 - 15/05/2026", participants: 0, desc: "Khảo sát trải nghiệm người dùng trên hệ thống dịch vụ công Quốc gia để cải thiện giao diện và tính năng.", topic: "Dịch vụ hành chính công", duration: "10 phút", audience: ["Cá nhân"] },
+    { title: "Khảo sát hiệu quả hoạt động của Bộ phận Một cửa cấp xã", status: "closed", statusText: "Đã kết thúc", date: "01/01/2026 - 31/01/2026", participants: 3420, desc: "Lấy ý kiến người dân về sự thuận tiện, thái độ phục vụ và kết quả giải quyết hồ sơ tại cấp xã.", topic: "Dịch vụ hành chính công", duration: "5 phút", audience: ["Cá nhân"] },
+    { title: "Đánh giá mức độ ứng dụng CNTT trong cơ quan nhà nước", status: "opening", statusText: "Đang mở", date: "10/03/2026 - 10/04/2026", participants: 850, desc: "Đo lường mức độ sẵn sàng và hiệu quả ứng dụng phần mềm trong công tác chỉ đạo điều hành.", topic: "Chuyển đổi số", duration: "20 phút", audience: ["Cán bộ, công chức"] },
+    { title: "Khảo sát nhu cầu sử dụng ứng dụng thanh toán điện tử", status: "closed", statusText: "Đã kết thúc", date: "15/11/2025 - 15/12/2025", participants: 5120, desc: "Nghiên cứu thói quen và những khó khăn của người dân khi thực hiện thanh toán phí, lệ phí trực tuyến.", topic: "Tài chính", duration: "10 phút", audience: ["Cá nhân", "Doanh nghiệp"] },
+    { title: "Lấy ý kiến đánh giá rèn luyện cán bộ, công chức năm 2025", status: "closed", statusText: "Đã kết thúc", date: "01/12/2025 - 31/12/2025", participants: 2100, desc: "Bình xét và đánh giá năng lực, phẩm chất đạo đức của cán bộ công chức định kỳ hàng năm.", topic: "Cán bộ, công chức", duration: "15 phút", audience: ["Cán bộ, công chức"] }
 ];
 
 const MOCK_SURVEYS = Array.from({ length: 45 }, (_, i) => ({
@@ -20,7 +20,9 @@ const MOCK_SURVEYS = Array.from({ length: 45 }, (_, i) => ({
     date: baseSurveys[i % baseSurveys.length].date,
     participants: baseSurveys[i % baseSurveys.length].participants + (i * 15),
     description: baseSurveys[i % baseSurveys.length].desc,
-    topic: baseSurveys[i % baseSurveys.length].topic
+    topic: baseSurveys[i % baseSurveys.length].topic,
+    duration: baseSurveys[i % baseSurveys.length].duration,
+    audience: baseSurveys[i % baseSurveys.length].audience
 })).sort((a, b) => b.id - a.id); // Sort by newest (id)
 
 // All topics for the filter panel
@@ -145,15 +147,23 @@ const SurveyGlobalPage = () => {
                     {survey.title}
                 </Link>
 
-                <p className="text-gray-600 text-[14px] leading-relaxed line-clamp-2">
+                <p className="text-gray-600 text-[14px] leading-relaxed line-clamp-2 mb-3">
                     {survey.description}
                 </p>
 
-                {survey.participants > 0 && (
-                    <div className="mt-3 text-[13px] text-gray-500 flex items-center gap-1">
-                        <Users size={14} /> {survey.participants.toLocaleString('vi-VN')} lượt tham gia
+                <div className="flex flex-wrap items-center gap-4 text-[13px] text-gray-500">
+                    <div className="flex items-center gap-1.5">
+                        <Clock size={14} /> {survey.duration}
                     </div>
-                )}
+                    <div className="flex items-center gap-1.5">
+                        <Users size={14} /> {survey.audience.join(', ')}
+                    </div>
+                    {survey.participants > 0 && (
+                        <div className="flex items-center gap-1.5 ml-auto md:ml-0">
+                            <CheckCircle size={14} className="text-green-500" /> {survey.participants.toLocaleString('vi-VN')}
+                        </div>
+                    )}
+                </div>
             </div>
 
             <div className="md:w-32 flex items-center justify-end md:justify-center border-t md:border-t-0 md:border-l border-gray-100 pt-4 md:pt-0 shrink-0">
@@ -213,8 +223,7 @@ const SurveyGlobalPage = () => {
                 <div className="container mx-auto px-4 max-w-[1200px]">
                     {/* Breadcrumbs */}
                     <div className="flex items-center text-[13px] text-gray-500 mb-4 whitespace-nowrap overflow-x-auto">
-                        <Link to="/" className="hover:text-blue-600">Trang chủ</Link>
-                        <BreadcrumbRight size={14} className="mx-2 shrink-0" />
+
                         <span className="text-gray-800 font-medium">Khảo sát</span>
                     </div>
 
@@ -412,6 +421,12 @@ const SurveyGlobalPage = () => {
                                                     </div>
                                                     <div className="flex items-center gap-1.5">
                                                         <Calendar size={14} /> {survey.date}
+                                                    </div>
+                                                    <div className="flex items-center gap-1.5">
+                                                        <Clock size={14} /> {survey.duration}
+                                                    </div>
+                                                    <div className="flex items-center gap-1.5">
+                                                        <Users size={14} /> {survey.audience.join(', ')}
                                                     </div>
                                                     <div className="flex items-center gap-1.5">
                                                         <span className="px-2 py-0.5 rounded-full text-[12px] font-medium bg-blue-50 text-blue-600 border border-blue-100">

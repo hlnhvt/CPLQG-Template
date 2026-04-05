@@ -38,7 +38,8 @@ const MOCK_ARTICLE = {
     replies: 12,
     contributions: 3,
     isFollowing: false,
-    isHot: true
+    isHot: true,
+    isPinned: true
 };
 
 const MOCK_COMMENTER = {
@@ -227,12 +228,20 @@ const TopicDetailPage = () => {
 
                             {/* Content Body */}
                             <div className="p-6">
-                                {topic.isHot && (
-                                    <div className="flex items-center gap-1.5 text-green-600 bg-green-50 w-max px-3 py-1 rounded-full mb-3 border border-green-200 shadow-sm">
-                                        <CheckCircle size={16} className="fill-white" />
-                                        <span className="font-bold text-xs uppercase tracking-wide">Chủ đề nổi bật</span>
-                                    </div>
-                                )}
+                                <div className="flex flex-wrap gap-2 mb-3">
+                                    {topic.isPinned && (
+                                        <div className="flex items-center gap-1.5 text-blue-600 bg-blue-50 w-max px-3 py-1 rounded-full border border-blue-200 shadow-sm">
+                                            <span>📌</span>
+                                            <span className="font-bold text-xs uppercase tracking-wide">Đã ghim</span>
+                                        </div>
+                                    )}
+                                    {topic.isHot && (
+                                        <div className="flex items-center gap-1.5 text-green-600 bg-green-50 w-max px-3 py-1 rounded-full border border-green-200 shadow-sm">
+                                            <CheckCircle size={16} className="fill-white" />
+                                            <span className="font-bold text-xs uppercase tracking-wide">Chủ đề nổi bật</span>
+                                        </div>
+                                    )}
+                                </div>
                                 <h1 className="text-2xl font-bold text-gray-900 mb-6 leading-snug">{topic.title}</h1>
 
                                 <div
