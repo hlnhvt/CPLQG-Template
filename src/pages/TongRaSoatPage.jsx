@@ -345,33 +345,41 @@ const TongRaSoatPage = () => {
                                 {activeBanChiDaoTab === 'chuc-nang' && (
                                     <div className="animate-fadeIn bg-white">
                                         <div className="md:px-2 pt-2 pb-6 text-gray-800 leading-relaxed text-[15px] space-y-4">
-                                            <p className="indent-8 text-base">
-                                                Căn cứ Khoản 2 Điều 1 Nghị quyết số 2093/NQ-UBNTVQH15 về việc thành lập Ban Chỉ đạo rà soát, xử lý vướng mắc trong hệ thống văn bản quy phạm pháp luật, chức năng, nhiệm vụ và quyền hạn của Ban Chỉ đạo được quy định như sau:
-                                            </p>
-
-                                            <p className="font-bold text-base">
-                                                Điều 1. Vị trí và chức năng
-                                            </p>
+                                            {/* <p className="text-base">
+                                                
+                                            </p> */}
                                             <p className="text-base">
-                                                Ban Chỉ đạo là tổ chức phối hợp liên ngành, có chức năng giúp cấp có thẩm quyền chỉ đạo, đôn đốc, điều phối giữa các bộ, ngành, địa phương trong việc rà soát, phát hiện và đề xuất phương án xử lý các quy định pháp luật mâu thuẫn, chồng chéo, bất cập hoặc không còn phù hợp với thực tiễn, nhằm tháo gỡ điểm nghẽn cho phát triển kinh tế - xã hội.
+                                                Căn cứ khoản 2 Điều 1 Nghị quyết số 2093/NQ-UBNTVQH15 ngày 03/04/2026 của Ủy ban Thường vụ Quốc hội về việc Thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật (sau đây gọi tắt là Ban chỉ đạo). Ban chỉ đạo giúp Ủy ban Thường vụ Quốc hội chỉ đạo, hướng dẫn, đôn đốc việc thực hiện tổng rà soát hệ thống văn bản quy phạm pháp luật và có nhiệm vụ, quyền hạn sau đây:
                                             </p>
+                                            <div className="space-y-3 text-base">
+                                                <p>a) Ban hành Quy chế hoạt động của Ban Chỉ đạo;</p>
+                                                <p>b) Ban hành Kế hoạch triển khai tổng rà soát hệ thống văn bản quy phạm pháp luật; </p>
+                                                <p>c) Ban hành tài liệu hướng dẫn về trách nhiệm, tiêu chí, cách thức tổ chức thực hiện tổng rà soát hệ thống văn bản quy phạm pháp luật thống nhất trong cả nước; <br />
+                                                    Trên cơ sở quy định của pháp luật, tài liệu hướng dẫn tổng rà soát hệ thống văn bản quy phạm pháp luật đã được Ban Chỉ đạo phê duyệt, căn cứ tình hình thực tiễn, Cơ quan thường trực Ban Chỉ đạo hướng dẫn cụ thể để thống nhất giải quyết các vấn đề phát sinh trong quá trình triển khai tổng rà soát hệ thống văn bản quy phạm pháp luật. Trường hợp nội dung phức tạp hoặc có ý kiến khác nhau, Cơ quan thường trực Ban Chỉ đạo báo cáo Ban Chỉ đạo xem xét, quyết định;</p>
+                                                <p>d) Chỉ đạo tổ chức Hội nghị toàn quốc quán triệt triển khai thực hiện tổng rà soát hệ thống văn bản quy phạm pháp luật;</p>
+                                                <p>đ) Cho ý kiến đối với dự thảo Báo cáo tình hình triển khai tổng rà soát hệ thống văn bản quy phạm pháp luật và dự thảo Báo cáo kết quả tổng rà soát và giải pháp xử lý tổng thể hệ thống văn bản quy phạm pháp luật trước khi Chính phủ trình Ủy ban Thường vụ Quốc hội;</p>
+                                                <p>e) Chỉ đạo các thành viên Ban Chỉ đạo, Cơ quan thường trực Ban Chỉ đạo theo dõi, đôn đốc các cơ quan, đơn vị, tổ chức, cá nhân thực hiện hiệu quả, chất lượng các nhiệm vụ theo Kế hoạch triển khai tổng rà soát hệ thống văn bản quy phạm pháp luật;</p>
+                                                <p>g) Tổng kết, đánh giá kết quả thực hiện nhiệm vụ tổng rà soát hệ thống văn bản quy phạm pháp luật;</p>
+                                                <p>h) Thực hiện các nhiệm vụ khác theo yêu cầu của Ủy ban Thường vụ Quốc hội.</p>
+                                            </div>
 
-                                            <p className="font-bold text-base">
-                                                Điều 2. Nhiệm vụ và quyền hạn
-                                            </p>
-                                            <p className="text-base">
-                                                Ban Chỉ đạo thực hiện các nhiệm vụ, quyền hạn cụ thể sau đây:
-                                            </p>
-
-                                            <div className="space-y-3 pt-1 text-base">
-                                                <p>1. Tham mưu, giúp cấp có thẩm quyền xây dựng kế hoạch chi tiết, chỉ đạo, đôn đốc các cơ quan, đơn vị tổ chức triển khai thực hiện việc tổng rà soát hệ thống văn bản quy phạm pháp luật trên phạm vi toàn quốc theo đúng tiến độ đề ra.</p>
-                                                <p>2. Tiếp nhận, xem xét và cho ý kiến đối với các báo cáo kết quả rà soát từ các bộ, ngành, địa phương; đánh giá toàn diện các quy định đang gây vướng mắc, từ đó định hướng các giải pháp xử lý dứt điểm để báo cáo Chính phủ và Quốc hội tháo gỡ.</p>
-                                                <p>3. Chỉ đạo việc xây dựng, vận hành và khai thác hiệu quả Hệ thống cơ sở dữ liệu trực tuyến về kết quả rà soát văn bản quy phạm pháp luật, đảm bảo công khai, minh bạch quy trình tiếp thu, giải trình phản ánh của người dân và doanh nghiệp.</p>
-                                                <p>4. Yêu cầu các bộ, cơ quan ngang bộ, cơ quan thuộc Chính phủ và Ủy ban nhân dân cấp tỉnh, cơ quan tổ chức, cá nhân có liên quan cung cấp thông tin, hồ sơ, tài liệu và báo cáo tình hình thực hiện công tác rà soát khi cần thiết.</p>
-                                                <p>5. Chủ trì tổ chức các hội nghị, hội thảo nghiên cứu chuyên sâu; mời các chuyên gia, nhà khoa học, đại diện hiệp hội doanh nghiệp tham gia tư vấn, phản biện độc lập đối với các vấn đề mang tính vĩ mô, trọng tâm và gây vướng mắc lớn trong thực tiễn.</p>
+                                            {/* Legal Document Link */}
+                                            <div className="mt-8 text-center pb-4 border-t border-gray-100 pt-8">
+                                                <p className="text-gray-600 text-sm md:text-base font-medium leading-relaxed max-w-4xl mx-auto italic">
+                                                    Văn bản đính kèm:
+                                                    <a
+                                                        href="/Nghi_quyet_so_2093.UBTVQH15_ve_thanh_lap_BCD_tong_ra_soat_he_thong_VBQPPL_1775270062866.pdf"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-gray-500 hover:text-gray-800 hover:underline font-bold ml-1 transition-colors"
+                                                    >
+                                                        Nghị quyết số 2093/NQ-UBTVQH15 ngày 03/4/2026 của Ủy ban Thường vụ Quốc hội về thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật
+                                                    </a>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
+
                                 )}
 
                                 {activeBanChiDaoTab === 'so-do' && (
@@ -597,10 +605,12 @@ const TongRaSoatPage = () => {
                                             <p className="text-gray-600 text-sm md:text-base font-medium leading-relaxed max-w-4xl mx-auto italic">
                                                 Văn bản đính kèm:
                                                 <a
-                                                    href="#"
-                                                    className="text-grey-500 hover:text-grey-800 hover:underline font-bold ml-1 transition-colors"
+                                                    href="/Nghi_quyet_so_2093.UBTVQH15_ve_thanh_lap_BCD_tong_ra_soat_he_thong_VBQPPL_1775270062866.pdf"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-gray-500 hover:text-gray-800 hover:underline font-bold ml-1 transition-colors"
                                                 >
-                                                    Quyết định số 603/QĐ-TTg của Thủ tướng Chính phủ: Về việc thành lập Ban Chỉ đạo rà soát, xử lý vướng mắc trong hệ thống văn bản quy phạm pháp luật
+                                                    Nghị quyết số 2093/NQ-UBTVQH15 ngày 03/4/2026 của Ủy ban Thường vụ Quốc hội về thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật
                                                 </a>
                                             </p>
                                         </div>
