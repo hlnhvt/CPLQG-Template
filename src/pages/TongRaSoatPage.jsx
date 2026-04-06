@@ -380,7 +380,7 @@ const TongRaSoatPage = () => {
                                             <div className="min-w-[1300px] flex flex-col items-center">
                                                 {/* TIER 1: Trưởng ban */}
                                                 <div className="relative flex flex-col items-center">
-                                                    <div className="bg-white border-2 border-[#e21414] rounded-2xl px-12 py-6 shadow-xl text-center relative z-10 w-[450px]">
+                                                    <div className="bg-white border-2 border-[#e21414] rounded-2xl px-8 py-6 shadow-xl text-center relative z-10 w-[500px]">
                                                         <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-6 py-2 shadow-sm mb-4">
                                                             <h4 className="text-[#e21414] font-bold text-xl uppercase">TRƯỞNG BAN CHỈ ĐẠO</h4>
                                                         </div>
@@ -408,7 +408,7 @@ const TongRaSoatPage = () => {
                                                                 <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-tight">PHÓ TRƯỞNG BAN<br />THƯỜNG TRỰC</h4>
                                                             </div>
                                                             <div className="bg-gray-50 p-2 rounded-md text-[17px] font-bold text-gray-700 text-center leading-tight flex-1 flex items-center justify-center">
-                                                                Phó Thủ tướng <br />Chính phủ
+                                                                Phó Thủ tướng <br />Chính phủ phụ trách công tác xây dựng thể chế
                                                             </div>
                                                         </div>
                                                     </div>
