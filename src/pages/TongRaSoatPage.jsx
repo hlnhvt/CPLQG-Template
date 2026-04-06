@@ -6,28 +6,23 @@ import {
 } from 'lucide-react';
 
 const MOCK_NEWS_HOAT_DONG = [
-    { id: 1, title: 'Tiếp tục ưu tiên nguồn lực trọng tâm vào xây dựng pháp luật tại các vùng kinh tế', date: '10/03/2026', image: 'https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&q=80&w=400&h=250' },
-    { id: 2, title: 'Hướng dẫn giải quyết vướng mắc trong phân bổ nguồn thu ngân sách nhà nước', date: '09/03/2026', image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 3, title: 'Ban Chỉ đạo Trung ương kiểm tra tiến độ rà soát tại các tỉnh phía Nam', date: '08/03/2026', image: 'https://images.unsplash.com/photo-1589391886645-d51941baf7fb?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 4, title: 'Tăng cường ứng dụng CNTT trong công tác báo cáo hệ thống pháp luật', date: '07/03/2026', image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 5, title: 'Bộ Tư pháp phối hợp cùng các Bộ, ngành đánh giá quy định về thủ tục hành chính', date: '06/03/2026', image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 6, title: 'Hội nghị trực tuyến toàn quốc: Đẩy nhanh tiến độ rà soát các Luật chuyên ngành', date: '05/03/2026', image: 'https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 7, title: 'Tăng cường ứng dụng CNTT trong công tác báo cáo hệ thống pháp luật', date: '07/03/2026', image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 8, title: 'Bộ Tư pháp phối hợp cùng các Bộ, ngành đánh giá quy định về thủ tục hành chính', date: '06/03/2026', image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 9, title: 'Hội nghị trực tuyến toàn quốc: Đẩy nhanh tiến độ rà soát các Luật chuyên ngành', date: '05/03/2026', image: 'https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?auto=format&fit=crop&q=80&w=200&h=150' },
+    {
+        id: 1,
+        title: 'Thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật',
+        date: '04/04/2026',
+        summary: 'Thay mặt Ủy ban Thường vụ Quốc hội, Chủ tịch Quốc hội Trần Thanh Mẫn vừa ký ban hành Nghị quyết số 2093/NQ-UBTVQH15 Thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật',
+        image: '/TintucTongRaSoatDemo/299b1ef2-5adc-4444-afdf-fc1d13236df6.jpeg.avif'
+    },
+    {
+        id: 2,
+        title: 'Tổng rà soát hệ thống văn bản quy phạm pháp luật, khơi thông mọi nguồn lực cho phát triển',
+        date: '27/03/2026',
+        summary: 'Sáng 27/3, Thường trực Ủy ban Pháp luật và Tư pháp của Quốc hội (QH) tổ chức cuộc họp cho ý kiến về Đề án Tổng rà soát hệ thống văn bản quy phạm pháp luật (VBQPPL) đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới (Đề án) và dự thảo Nghị quyết của Ủy ban Thường vụ (UBTV) QH về tổng rà soát hệ thống VBQPPL. Thứ trưởng Bộ Tư pháp Phan Chí Hiếu đã trình bày tóm tắt Tờ trình Đề án tại cuộc họp.',
+        image: '/TintucTongRaSoatDemo/270326 trs tthieu.jpg'
+    }
 ];
 
-const MOCK_NEWS_THOI_SU = [
-    { id: 7, title: 'Hướng tới bầu cử đại biểu Quốc hội khoá XVI và đại biểu HĐND các cấp', date: '08/03/2026', image: 'https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&q=80&w=400&h=250' },
-    { id: 8, title: 'Bộ Tư pháp đề nghị tăng cường hỗ trợ tháo gỡ khó khăn doanh nghiệp', date: '07/03/2026', image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 9, title: 'Triển khai công tác kiểm tra văn bản quy phạm pháp luật năm 2026', date: '06/03/2026', image: 'https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 10, title: 'Bình luận về dự thảo Luật Thuế mới: Những điểm nổi bật có lợi cho người lao động', date: '05/03/2026', image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 11, title: 'Xử phạt nghiêm các hành vi vi phạm trật tự an toàn giao thông đường bộ', date: '04/03/2026', image: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 12, title: 'Lấy ý kiến đóng góp cho Phương án bảo vệ môi trường khu công nghiệp', date: '03/03/2026', image: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 13, title: 'Tăng cường ứng dụng CNTT trong công tác báo cáo hệ thống pháp luật', date: '07/03/2026', image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 14, title: 'Bộ Tư pháp phối hợp cùng các Bộ, ngành đánh giá quy định về thủ tục hành chính', date: '06/03/2026', image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=200&h=150' },
-    { id: 15, title: 'Hội nghị trực tuyến toàn quốc: Đẩy nhanh tiến độ rà soát các Luật chuyên ngành', date: '05/03/2026', image: 'https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?auto=format&fit=crop&q=80&w=200&h=150' },
-];
+const MOCK_NEWS_THOI_SU = [];
 
 const MOCK_MEMBERS = [
     {
@@ -701,8 +696,8 @@ const TongRaSoatPage = () => {
                             const renderNewsLayout = (newsItems) => {
                                 if (!newsItems || newsItems.length === 0) return null;
                                 const topNews = newsItems[0];
-                                const gridNews = newsItems.slice(1, 4);
-                                const listNews = newsItems.slice(4);
+                                const gridNews = newsItems.length > 4 ? newsItems.slice(1, 4) : [];
+                                const listNews = newsItems.length > 4 ? newsItems.slice(4) : newsItems.slice(1);
 
                                 return (
                                     <div className="space-y-5 animate-fadeIn">
