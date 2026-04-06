@@ -168,7 +168,7 @@ export default function HienKeFeedbackPage() {
                         <Section id="gioi-thieu" title="Giới thiệu">
                             <div className="prose prose-blue max-w-none text-gray-600 text-[16px] leading-relaxed">
                                 <p className="text-[18px] font-medium mb-6">
-                                    Trang Thông tin điện tử “Hiến kế xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới” trên Cổng Pháp luật quốc gia được thiết lập nhằm huy động trí tuệ xã hội, tiếp nhận ý kiến đa chiều để hoàn thiện hệ thống pháp luật, bảo đảm tính đồng bộ, khả thi và phù hợp thực tiễn phát triển đất nước trong kỷ nguyên số.
+                                    Trang Thông tin điện tử này được thiết lập nhằm huy động trí tuệ của xã hội, người dân, doanh nghiệp; tạo kênh đối thoại đa chiều, tiếp thu các ý kiến góp phần xây dựng, hoàn thiện chính sách, pháp luật và nâng cao hiệu quả thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới.
                                 </p>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -177,9 +177,9 @@ export default function HienKeFeedbackPage() {
                                             Mục tiêu cốt lõi
                                         </h3>
                                         <ul className="list-none pl-0 space-y-2">
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Hình thành hệ sinh thái dữ liệu pháp luật mở để lắng nghe, tiếp nhận, tổng hợp, đánh giá góp phần công khai, minh bạch trong xây dựng pháp luật.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Thúc đẩy trách nhiệm xã hội, phát huy trí tuệ toàn dân trong việc giải quyết các vấn đề kinh tế - xã hội quan trọng.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Nâng cao hiệu quả thi hành pháp luật, đáp ứng yêu cầu phát triển đất nước theo tinh thần Nghị quyết số 66-NQ/TW của Bộ Chính trị.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Góp phần cụ thể hóa nội dung Nghị quyết số 66-NQ/TW ngày 30/4/2025 của Bộ Chính trị về đổi mới công tác xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Thúc đẩy văn hóa, trách nhiệm xã hội của doanh nghiệp, người dân trong xây dựng, hoàn thiện hệ thống pháp luật và tổ chức thi hành hiệu quả pháp luật góp phần phát triển kinh tế - xã hội của đất nước.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Hình thành hệ sinh thái dữ liệu pháp luật mở để lắng nghe, tiếp nhận, tổng hợp các ý kiến góp ý trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và nâng cao hiệu quả thi hành pháp luật.</li>
                                         </ul>
                                     </div>
 
@@ -215,7 +215,7 @@ export default function HienKeFeedbackPage() {
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-xl">3</div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Có thể bạn quan tâm</h4>
-                                            <p className="text-[14.5px] text-gray-600">Đây là mục tin được cấu trúc theo các lĩnh vực pháp luật cụ thể để gợi ý cho người dân, doanh nghiệp, các tổ chức chính trị - xã hội lựa chọn hiến kế có trọng tâm, trọng điểm đối với các vấn đề chưa được pháp luật điều chỉnh hoặc việc điều chỉnh không còn phù hợp cũng như hiến kế trong việc tổ chức thi hành pháp luật hiệu quả hơn đến các chủ thể có liên quan.</p>
+                                            <p className="text-[14.5px] text-gray-600">Các chủ đề, nội dung mang tính gợi ý để xã hội, người dân, doanh nghiệp hiến kế, góp ý theo từng lĩnh vực pháp luật cụ thể.</p>
                                         </div>
                                     </div>
                                 </div>
