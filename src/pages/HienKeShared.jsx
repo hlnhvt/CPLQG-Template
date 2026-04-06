@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import {
     Search, ArrowRight, Users, Calendar, ChevronRight,
     Scale, Landmark, Heart, TrendingUp,
-    Store, Globe, Car, HeartHandshake, Building2, GraduationCap, Activity, Leaf, 
-    Briefcase, Rocket, ShieldAlert, ShoppingBag, Sprout, CloudSun, Smartphone, Map, 
+    Store, Globe, Car, HeartHandshake, Building2, GraduationCap, Activity, Leaf,
+    Briefcase, Rocket, ShieldAlert, ShoppingBag, Sprout, CloudSun, Smartphone, Map,
     Baby, Grid, MoreHorizontal
 } from 'lucide-react';
 
@@ -143,10 +143,10 @@ export const ConsultCard = ({ item, to, tag, accentColor = '#1e3a8a' }) => (
             >
                 {item.title}
             </h3>
-            
+
             {/* Description */}
             {item.description ? (
-                <p 
+                <p
                     className="text-[12.5px] text-gray-500 mt-1.5 leading-snug flex-1"
                     style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
                 >
@@ -302,17 +302,21 @@ export const MOCK_DETAILS = {
         sections: [
             { id: 'gioi-thieu', label: 'A. Giới thiệu', content: ['Luật Thủ đô (sửa đổi) tập trung vào 9 nhóm chính sách nhằm đẩy mạnh phân cấp, phân quyền cho TP Hà Nội.'] },
             { id: 'boi-canh', label: 'B. Bối cảnh', content: ['Luật Thủ đô 2012 qua 10 năm thi hành cần được thay thế bằng những cơ chế linh hoạt, mạnh mẽ hơn.'] },
-            { id: 'cac-kien-nghi', label: 'C. Các kiến nghị chính', content: ['Dự thảo tập trung vào các nhóm vấn đề sau:'], bullets: [
-                'Tăng cường phân quyền cho Hà Nội trong quản lý biên chế, tuyển dụng công chức.',
-                'Cơ chế đặc thù trong quy hoạch, quản lý không gian kiến trúc và bảo tồn di sản.',
-                'Chính sách thu hút đầu tư chiến lược trong các lĩnh vực công nghệ cao và bảo vệ môi trường.',
-                'Phát huy thế mạnh của Hà Nội là trung tâm giáo dục, đào tạo và y tế chất lượng cao.'
-            ]},
-            { id: 'phan-hoi', label: 'D. Những vấn đề cần phản hồi', content: ['Mong nhận được ý kiến đóng góp về:'], bullets: [
-                'Tính khả thi của việc cho phép Hà Nội tự quyết định một số mức phí, lệ phí đặc thù.',
-                'Quy định về việc bảo tồn các công trình di tích quốc gia đặc biệt trên địa bàn.',
-                'Các tiêu chí lựa chọn nhà đầu tư chiến lược cho dự án hạ tầng giao thông lớn.'
-            ]}
+            {
+                id: 'cac-kien-nghi', label: 'C. Các kiến nghị chính', content: ['Dự thảo tập trung vào các nhóm vấn đề sau:'], bullets: [
+                    'Tăng cường phân quyền cho Hà Nội trong quản lý biên chế, tuyển dụng công chức.',
+                    'Cơ chế đặc thù trong quy hoạch, quản lý không gian kiến trúc và bảo tồn di sản.',
+                    'Chính sách thu hút đầu tư chiến lược trong các lĩnh vực công nghệ cao và bảo vệ môi trường.',
+                    'Phát huy thế mạnh của Hà Nội là trung tâm giáo dục, đào tạo và y tế chất lượng cao.'
+                ]
+            },
+            {
+                id: 'phan-hoi', label: 'D. Những vấn đề cần phản hồi', content: ['Mong nhận được ý kiến đóng góp về:'], bullets: [
+                    'Tính khả thi của việc cho phép Hà Nội tự quyết định một số mức phí, lệ phí đặc thù.',
+                    'Quy định về việc bảo tồn các công trình di tích quốc gia đặc biệt trên địa bàn.',
+                    'Các tiêu chí lựa chọn nhà đầu tư chiến lược cho dự án hạ tầng giao thông lớn.'
+                ]
+            }
         ],
         attachments: [
             { id: 1, name: 'Du_thao_Luat_Thu_do_2026.pdf', size: '3.8 MB', type: 'PDF' },
@@ -320,7 +324,7 @@ export const MOCK_DETAILS = {
             { id: 3, name: 'Ban_danh_gia_tac_dong_social.pdf', size: '2.1 MB', type: 'PDF' }
         ],
         relatedEvents: [
-            { id: 'e10', title: 'Tọa đàm: Luật Thủ đô - Động lực phát triển mới', type: 'event', date: '05/04/2026', color: 'text-purple-600', bg: 'bg-purple-50', to: '#' }
+            { id: 'e10', title: 'Tọa đàm: Luật Thủ đô - Động lực phát triển mới', type: 'event', date: '05/04/2026', color: 'text-purple-600', bg: 'bg-purple-50', to: '/dien-dan/su-kien/toa-dam-1', thumbnail: '/thumbnails/toadan_phapluat.png' }
         ],
         relatedConsultations: [
             { id: 'h2', title: 'Góp ý Dự thảo Luật Đất đai (Sửa đổi)', status: 'open', agency: 'BTNMT', deadline: '30/04/2026' }
@@ -346,17 +350,21 @@ export const MOCK_DETAILS = {
         sections: [
             { id: 'gioi-thieu', label: 'A. Giới thiệu', content: ['Hỗ trợ tái định cư và chuyển đổi nghề nghiệp cho các hộ gia đình bị ảnh hưởng bởi dự án dừng triển khai.'] },
             { id: 'boi-canh', label: 'B. Bối cảnh', content: ['Dự án điện hạt nhân Ninh Thuận tạm dừng khiến hàng nghìn hộ dân gặp khó khăn về sinh kế do đất đai bị treo quyền sử dụng.'] },
-            { id: 'cac-kien-nghi', label: 'C. Các kiến nghị chính', content: ['Chính sách bao gồm các nhóm nội dung:'], bullets: [
-                'Bồi thường bổ sung cho người dân theo khung giá đất mới nhất.',
-                'Hỗ trợ đào tạo nghề và giới thiệu việc làm tại các khu công nghiệp tại địa phương.',
-                'Đầu tư hạ tầng thiết yếu tại các khu tái định cư tập trung.',
-                'Ưu tiên vay vốn lãi suất thấp cho các hộ dân chuyển đổi sang mô hình kinh tế nông nghiệp bền vững.'
-            ]},
-            { id: 'phan-hoi', label: 'D. Những vấn đề cần phản hồi', content: ['Đề nghị ý kiến về:'], bullets: [
-                'Mức bồi dưỡng hỗ trợ chuyển đổi nghề có phù hợp thực tế chưa?',
-                'Thời gian thực hiện gói hỗ trợ nên kéo dài trong bao lâu?',
-                'Các loại giấy tờ cần thiết để nhận hỗ trợ nhanh chóng nhất.'
-            ]}
+            {
+                id: 'cac-kien-nghi', label: 'C. Các kiến nghị chính', content: ['Chính sách bao gồm các nhóm nội dung:'], bullets: [
+                    'Bồi thường bổ sung cho người dân theo khung giá đất mới nhất.',
+                    'Hỗ trợ đào tạo nghề và giới thiệu việc làm tại các khu công nghiệp tại địa phương.',
+                    'Đầu tư hạ tầng thiết yếu tại các khu tái định cư tập trung.',
+                    'Ưu tiên vay vốn lãi suất thấp cho các hộ dân chuyển đổi sang mô hình kinh tế nông nghiệp bền vững.'
+                ]
+            },
+            {
+                id: 'phan-hoi', label: 'D. Những vấn đề cần phản hồi', content: ['Đề nghị ý kiến về:'], bullets: [
+                    'Mức bồi dưỡng hỗ trợ chuyển đổi nghề có phù hợp thực tế chưa?',
+                    'Thời gian thực hiện gói hỗ trợ nên kéo dài trong bao lâu?',
+                    'Các loại giấy tờ cần thiết để nhận hỗ trợ nhanh chóng nhất.'
+                ]
+            }
         ],
         attachments: [
             { id: 1, name: 'Du_thao_Nghi_quyet_Ninh_Thuan.docx', size: '1.2 MB', type: 'DOCX' },
@@ -382,15 +390,19 @@ export const MOCK_DETAILS = {
         sections: [
             { id: 'gioi-thieu', label: 'A. Giới thiệu', content: ['Thống nhất biểu mẫu và công cụ báo cáo điện tử cho hệ thống giám định tư pháp quốc gia.'] },
             { id: 'boi-canh', label: 'B. Bối cảnh', content: ['Sự thiếu hụt thông tin kịp thời giữa các cơ quan giám định và tòa án gây chậm trễ trong công tác tố tụng.'] },
-            { id: 'cac-kien-nghi', label: 'C. Các kiến nghị chính', content: ['Thông tư đề xuất cơ chế phối hợp:'], bullets: [
-                'Sử dụng chung nền tảng báo cáo điện tử liên ngành.',
-                'Phân cấp trách nhiệm cung cấp số liệu của từng đơn vị giám định.',
-                'Quy định thời gian báo cáo bắt buộc hàng quý và năm.'
-            ]},
-            { id: 'phan-hoi', label: 'D. Những vấn đề cần phản hồi', content: ['Nội dung cần đóng góp:'], bullets: [
-                'Tính tương thích của phần mềm báo cáo với hạ tầng công nghệ hiện tại.',
-                'Quy trình xác minh tính xác thực của dữ liệu giám định.'
-            ]}
+            {
+                id: 'cac-kien-nghi', label: 'C. Các kiến nghị chính', content: ['Thông tư đề xuất cơ chế phối hợp:'], bullets: [
+                    'Sử dụng chung nền tảng báo cáo điện tử liên ngành.',
+                    'Phân cấp trách nhiệm cung cấp số liệu của từng đơn vị giám định.',
+                    'Quy định thời gian báo cáo bắt buộc hàng quý và năm.'
+                ]
+            },
+            {
+                id: 'phan-hoi', label: 'D. Những vấn đề cần phản hồi', content: ['Nội dung cần đóng góp:'], bullets: [
+                    'Tính tương thích của phần mềm báo cáo với hạ tầng công nghệ hiện tại.',
+                    'Quy trình xác minh tính xác thực của dữ liệu giám định.'
+                ]
+            }
         ],
         attachments: [{ id: 1, name: 'Thong_tu_lien_tich_thong_ke.pdf', size: '0.9 MB', type: 'PDF' }],
         relatedEvents: [],
@@ -413,15 +425,19 @@ export const MOCK_DETAILS = {
         sections: [
             { id: 'gioi-thieu', label: 'A. Giới thiệu', content: ['Bổ sung danh mục các hoạt động giám định độc hại được hưởng trợ cấp bồi dưỡng đặc thù.'] },
             { id: 'boi-canh', label: 'B. Bối cảnh', content: ['Mức bồi dưỡng hiện tại từ năm 2013 không còn đáp ứng được yêu cầu về trang trải chi phí và bù đắp hao phí sức lao động.'] },
-            { id: 'cac-kien-nghi', label: 'C. Các kiến nghị chính', content: ['Các điểm mới trong dự thảo:'], bullets: [
-                'Tăng mức bồi dưỡng theo ngày công cho các trường hợp giám định phức tạp.',
-                'Bổ sung chế độ bồi dưỡng theo hồ sơ vụ việc.',
-                'Quy định rõ nguồn kinh phí chi trả từ ngân sách nhà nước.'
-            ]},
-            { id: 'phan-hoi', label: 'D. Những vấn đề cần phản hồi', content: ['Ý kiến đóng góp về:'], bullets: [
-                'Mức bồi dưỡng đề xuất đã tương xứng với tính chất nguy hiểm của công việc chưa?',
-                'Quy trình thanh quyết toán kinh phí bồi dưỡng nên được giản lược như thế nào?'
-            ]}
+            {
+                id: 'cac-kien-nghi', label: 'C. Các kiến nghị chính', content: ['Các điểm mới trong dự thảo:'], bullets: [
+                    'Tăng mức bồi dưỡng theo ngày công cho các trường hợp giám định phức tạp.',
+                    'Bổ sung chế độ bồi dưỡng theo hồ sơ vụ việc.',
+                    'Quy định rõ nguồn kinh phí chi trả từ ngân sách nhà nước.'
+                ]
+            },
+            {
+                id: 'phan-hoi', label: 'D. Những vấn đề cần phản hồi', content: ['Ý kiến đóng góp về:'], bullets: [
+                    'Mức bồi dưỡng đề xuất đã tương xứng với tính chất nguy hiểm của công việc chưa?',
+                    'Quy trình thanh quyết toán kinh phí bồi dưỡng nên được giản lược như thế nào?'
+                ]
+            }
         ],
         attachments: [{ id: 1, name: 'Quyet_dinh_08_BD_Giam_dinh.pdf', size: '1.5 MB', type: 'PDF' }],
         relatedEvents: [],
@@ -444,15 +460,19 @@ export const MOCK_DETAILS = {
         sections: [
             { id: 'gioi-thieu', label: 'A. Giới thiệu', content: ['Phân rõ trách nhiệm các bộ, ngành trong việc cung cấp thông tin văn bản QPPL lên hệ thống.'] },
             { id: 'boi-canh', label: 'B. Bối cảnh', content: ['Xây dựng kho dữ liệu số thống nhất về pháp luật để phục vụ người dân và doanh nghiệp tra cứu nhanh chóng, chính xác.'] },
-            { id: 'cac-kien-nghi', label: 'C. Các kiến nghị chính', content: ['Nội dung quy chế tập trung vào:'], bullets: [
-                'Quy trình đăng tải và cập nhật văn bản QPPL mới ban hành.',
-                'Tiêu chuẩn về tính bảo mật và toàn vẹn của dữ liệu pháp luật điện tử.',
-                'Cơ chế khai thác dữ liệu mở cho bên thứ ba.'
-            ]},
-            { id: 'phan-hoi', label: 'D. Những vấn đề cần phản hồi', content: ['Nhận ý kiến về:'], bullets: [
-                'Giao diện người dùng đã thân thiện với mọi đối tượng chưa?',
-                'Tốc độ cập nhật văn bản nên tính theo giờ hay theo ngày?'
-            ]}
+            {
+                id: 'cac-kien-nghi', label: 'C. Các kiến nghị chính', content: ['Nội dung quy chế tập trung vào:'], bullets: [
+                    'Quy trình đăng tải và cập nhật văn bản QPPL mới ban hành.',
+                    'Tiêu chuẩn về tính bảo mật và toàn vẹn của dữ liệu pháp luật điện tử.',
+                    'Cơ chế khai thác dữ liệu mở cho bên thứ ba.'
+                ]
+            },
+            {
+                id: 'phan-hoi', label: 'D. Những vấn đề cần phản hồi', content: ['Nhận ý kiến về:'], bullets: [
+                    'Giao diện người dùng đã thân thiện với mọi đối tượng chưa?',
+                    'Tốc độ cập nhật văn bản nên tính theo giờ hay theo ngày?'
+                ]
+            }
         ],
         attachments: [{ id: 1, name: 'Quy_che_Cong_PLQG.pdf', size: '2.1 MB', type: 'PDF' }],
         relatedEvents: [],
@@ -475,15 +495,19 @@ export const MOCK_DETAILS = {
         sections: [
             { id: 'gioi-thieu', label: 'A. Giới thiệu', content: ['Xác định rõ các danh mục công việc được phép ký hợp đồng dài hạn trong cơ quan nhà nước.'] },
             { id: 'boi-canh', label: 'B. Bối cảnh', content: ['Nhằm tinh giản biên chế và tăng cường tính linh hoạt trong sử dụng lao động tại các đơn vị sự nghiệp.'] },
-            { id: 'cac-kien-nghi', label: 'C. Các kiến nghị chính', content: ['Các chính sách đột phá:'], bullets: [
-                'Phân cấp quyền tuyển dụng hợp đồng cho người đứng đầu đơn vị nghiệp.',
-                'Quy định mức lương hợp đồng thỏa thuận dựa trên hiệu suất công việc.',
-                'Chế độ bảo hiểm và phúc lợi tương đương viên chức tại cùng vị trí.'
-            ]},
-            { id: 'phan-hoi', label: 'D. Những vấn đề cần phản hồi', content: ['Góp ý cho:'], bullets: [
-                'Mô hình đánh giá hiệu suất để làm căn cứ gia hạn hợp đồng.',
-                'Các vị trí đặc thù nào không nên áp dụng hình thức hợp đồng này?'
-            ]}
+            {
+                id: 'cac-kien-nghi', label: 'C. Các kiến nghị chính', content: ['Các chính sách đột phá:'], bullets: [
+                    'Phân cấp quyền tuyển dụng hợp đồng cho người đứng đầu đơn vị nghiệp.',
+                    'Quy định mức lương hợp đồng thỏa thuận dựa trên hiệu suất công việc.',
+                    'Chế độ bảo hiểm và phúc lợi tương đương viên chức tại cùng vị trí.'
+                ]
+            },
+            {
+                id: 'phan-hoi', label: 'D. Những vấn đề cần phản hồi', content: ['Góp ý cho:'], bullets: [
+                    'Mô hình đánh giá hiệu suất để làm căn cứ gia hạn hợp đồng.',
+                    'Các vị trí đặc thù nào không nên áp dụng hình thức hợp đồng này?'
+                ]
+            }
         ],
         attachments: [{ id: 1, name: 'Nghi_dinh_hop_dong_cong_viec.pdf', size: '1.8 MB', type: 'PDF' }],
         relatedEvents: [],
