@@ -174,11 +174,8 @@ const TongRaSoatPage = () => {
 
     // Vertical news ticker
     const tickerItems = [
-        { id: 1, text: 'Báo cáo kết quả rà soát quý I/2026 phải được gửi trước ngày 15/04/2026.' },
-        { id: 2, text: 'Phát biểu Khai mạc Hội nghị Trung ương 14 của Tổng Bí thư Tô Lâm.' },
-        { id: 3, text: 'Trọng tâm công tác rà soát năm nay tập trung vào các văn bản liên quan đến đất đai và đầu tư công.' },
-        { id: 4, text: 'Hội nghị trực tuyến toàn quốc: Đẩy nhanh tiến độ rà soát các Luật chuyên ngành.' },
-        { id: 5, text: 'Bộ Tư pháp phối hợp cùng các Bộ, ngành đánh giá quy định về thủ tục hành chính.' },
+        { id: 1, text: 'Tổng rà soát hệ thống văn bản quy phạm pháp luật, khơi thông mọi nguồn lực cho phát triển' },
+        { id: 2, text: 'Thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật' }
     ];
     const [tickerIndex, setTickerIndex] = useState(0);
     const [tickerVisible, setTickerVisible] = useState(true);
