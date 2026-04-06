@@ -30,9 +30,11 @@ export default function HienKePage() {
             >
                 {/* Background: trống đồng image */}
                 <div
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-bg-pan"
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-bg-cinematic"
                     style={{ backgroundImage: "url('/images/dong_son_cover.png')" }}
                 />
+                {/* Animated Gold Aura for impressive solemn feeling */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-amber-600/0 via-amber-500/15 to-transparent animate-gold-aura mix-blend-overlay pointer-events-none" />
                 {/* Overlay: dark navy so text is readable */}
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/90 via-[#1e3a8a]/80 to-[#1e3a8a]/60" />
                 {/* Subtle gold shimmer overlay matching trống đồng */}
@@ -143,12 +145,18 @@ export default function HienKePage() {
                 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
                 @keyframes fadeIn { to { opacity: 1; } }
 
-                @keyframes bgPan {
-                    0% { transform: scale(1) translate(0, 0); }
-                    50% { transform: scale(1.03) translate(-1%, 1.5%); }
-                    100% { transform: scale(1) translate(0, 0); }
+                @keyframes cinematicZoom {
+                    0% { transform: scale(1); }
+                    100% { transform: scale(1.12); }
                 }
-                .animate-bg-pan { animation: bgPan 40s ease-in-out infinite; }
+                .animate-bg-cinematic { animation: cinematicZoom 30s alternate ease-in-out infinite; transform-origin: center center; }
+
+                @keyframes goldAura {
+                    0% { opacity: 0.2; }
+                    50% { opacity: 0.9; }
+                    100% { opacity: 0.2; }
+                }
+                .animate-gold-aura { animation: goldAura 8s ease-in-out infinite; }
 
                 @keyframes textShimmer {
                     0% { background-position: 200% 0; }

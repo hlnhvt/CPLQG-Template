@@ -428,6 +428,11 @@ const Header = () => {
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
+                                <Link to="/hien-ke" className="h-full flex items-center px-4 gap-1.5 hover:bg-white/10 transition-colors whitespace-nowrap">
+                                    Hiến kế xây dựng và thi hành pháp luật
+                                </Link>
+                            </li>
+                            <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
                                 <Link to="/du-thao" className="h-full flex items-center px-4 gap-1.5 hover:bg-white/10 transition-colors whitespace-nowrap">
                                     Dự thảo VBQPPL
                                 </Link>
