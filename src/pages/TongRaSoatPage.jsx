@@ -6,23 +6,28 @@ import {
 } from 'lucide-react';
 
 const MOCK_NEWS_HOAT_DONG = [
-    {
-        id: 1,
-        title: 'Thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật',
-        date: '04/04/2026',
-        summary: 'Thay mặt Ủy ban Thường vụ Quốc hội, Chủ tịch Quốc hội Trần Thanh Mẫn vừa ký ban hành Nghị quyết số 2093/NQ-UBTVQH15 Thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật',
-        image: '/TintucTongRaSoatDemo/299b1ef2-5adc-4444-afdf-fc1d13236df6.jpeg.avif'
-    },
-    {
-        id: 2,
-        title: 'Tổng rà soát hệ thống văn bản quy phạm pháp luật, khơi thông mọi nguồn lực cho phát triển',
-        date: '27/03/2026',
-        summary: 'Sáng 27/3, Thường trực Ủy ban Pháp luật và Tư pháp của Quốc hội (QH) tổ chức cuộc họp cho ý kiến về Đề án Tổng rà soát hệ thống văn bản quy phạm pháp luật (VBQPPL) đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới (Đề án) và dự thảo Nghị quyết của Ủy ban Thường vụ (UBTV) QH về tổng rà soát hệ thống VBQPPL. Thứ trưởng Bộ Tư pháp Phan Chí Hiếu đã trình bày tóm tắt Tờ trình Đề án tại cuộc họp.',
-        image: '/TintucTongRaSoatDemo/270326 trs tthieu.jpg'
-    }
+    { id: 1, title: 'Tiếp tục ưu tiên nguồn lực trọng tâm vào xây dựng pháp luật tại các vùng kinh tế', date: '10/03/2026', image: 'https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&q=80&w=400&h=250' },
+    { id: 2, title: 'Hướng dẫn giải quyết vướng mắc trong phân bổ nguồn thu ngân sách nhà nước', date: '09/03/2026', image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 3, title: 'Ban Chỉ đạo Trung ương kiểm tra tiến độ rà soát tại các tỉnh phía Nam', date: '08/03/2026', image: 'https://images.unsplash.com/photo-1589391886645-d51941baf7fb?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 4, title: 'Tăng cường ứng dụng CNTT trong công tác báo cáo hệ thống pháp luật', date: '07/03/2026', image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 5, title: 'Bộ Tư pháp phối hợp cùng các Bộ, ngành đánh giá quy định về thủ tục hành chính', date: '06/03/2026', image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 6, title: 'Hội nghị trực tuyến toàn quốc: Đẩy nhanh tiến độ rà soát các Luật chuyên ngành', date: '05/03/2026', image: 'https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 7, title: 'Tăng cường ứng dụng CNTT trong công tác báo cáo hệ thống pháp luật', date: '07/03/2026', image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 8, title: 'Bộ Tư pháp phối hợp cùng các Bộ, ngành đánh giá quy định về thủ tục hành chính', date: '06/03/2026', image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 9, title: 'Hội nghị trực tuyến toàn quốc: Đẩy nhanh tiến độ rà soát các Luật chuyên ngành', date: '05/03/2026', image: 'https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?auto=format&fit=crop&q=80&w=200&h=150' },
 ];
 
-const MOCK_NEWS_THOI_SU = [];
+const MOCK_NEWS_THOI_SU = [
+    { id: 7, title: 'Hướng tới bầu cử đại biểu Quốc hội khoá XVI và đại biểu HĐND các cấp', date: '08/03/2026', image: 'https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?auto=format&fit=crop&q=80&w=400&h=250' },
+    { id: 8, title: 'Bộ Tư pháp đề nghị tăng cường hỗ trợ tháo gỡ khó khăn doanh nghiệp', date: '07/03/2026', image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 9, title: 'Triển khai công tác kiểm tra văn bản quy phạm pháp luật năm 2026', date: '06/03/2026', image: 'https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 10, title: 'Bình luận về dự thảo Luật Thuế mới: Những điểm nổi bật có lợi cho người lao động', date: '05/03/2026', image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 11, title: 'Xử phạt nghiêm các hành vi vi phạm trật tự an toàn giao thông đường bộ', date: '04/03/2026', image: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 12, title: 'Lấy ý kiến đóng góp cho Phương án bảo vệ môi trường khu công nghiệp', date: '03/03/2026', image: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 13, title: 'Tăng cường ứng dụng CNTT trong công tác báo cáo hệ thống pháp luật', date: '07/03/2026', image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 14, title: 'Bộ Tư pháp phối hợp cùng các Bộ, ngành đánh giá quy định về thủ tục hành chính', date: '06/03/2026', image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=200&h=150' },
+    { id: 15, title: 'Hội nghị trực tuyến toàn quốc: Đẩy nhanh tiến độ rà soát các Luật chuyên ngành', date: '05/03/2026', image: 'https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?auto=format&fit=crop&q=80&w=200&h=150' },
+];
 
 const MOCK_MEMBERS = [
     {
@@ -340,37 +345,30 @@ const TongRaSoatPage = () => {
                                 {activeBanChiDaoTab === 'chuc-nang' && (
                                     <div className="animate-fadeIn bg-white">
                                         <div className="md:px-2 pt-2 pb-6 text-gray-800 leading-relaxed text-[15px] space-y-4">
-                                            {/* <p className="text-base">
-                                                
-                                            </p> */}
-                                            <p className="text-base">
-                                                Căn cứ khoản 2 Điều 1 Nghị quyết số 2093/NQ-UBNTVQH15 ngày 03/04/2026 của Ủy ban Thường vụ Quốc hội về việc Thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật (sau đây gọi tắt là Ban chỉ đạo). Ban chỉ đạo giúp Ủy ban Thường vụ Quốc hội chỉ đạo, hướng dẫn, đôn đốc việc thực hiện tổng rà soát hệ thống văn bản quy phạm pháp luật và có nhiệm vụ, quyền hạn sau đây:
+                                            <p className="indent-8 text-base">
+                                                Căn cứ Khoản 2 Điều 1 Nghị quyết số 2093/NQ-UBNTVQH15 về việc thành lập Ban Chỉ đạo rà soát, xử lý vướng mắc trong hệ thống văn bản quy phạm pháp luật, chức năng, nhiệm vụ và quyền hạn của Ban Chỉ đạo được quy định như sau:
                                             </p>
-                                            <div className="space-y-3 text-base">
-                                                <p>a) Ban hành Quy chế hoạt động của Ban Chỉ đạo;</p>
-                                                <p>b) Ban hành Kế hoạch triển khai tổng rà soát hệ thống văn bản quy phạm pháp luật; </p>
-                                                <p>c) Ban hành tài liệu hướng dẫn về trách nhiệm, tiêu chí, cách thức tổ chức thực hiện tổng rà soát hệ thống văn bản quy phạm pháp luật thống nhất trong cả nước; <br />
-                                                    Trên cơ sở quy định của pháp luật, tài liệu hướng dẫn tổng rà soát hệ thống văn bản quy phạm pháp luật đã được Ban Chỉ đạo phê duyệt, căn cứ tình hình thực tiễn, Cơ quan thường trực Ban Chỉ đạo hướng dẫn cụ thể để thống nhất giải quyết các vấn đề phát sinh trong quá trình triển khai tổng rà soát hệ thống văn bản quy phạm pháp luật. Trường hợp nội dung phức tạp hoặc có ý kiến khác nhau, Cơ quan thường trực Ban Chỉ đạo báo cáo Ban Chỉ đạo xem xét, quyết định;</p>
-                                                <p>d) Chỉ đạo tổ chức Hội nghị toàn quốc quán triệt triển khai thực hiện tổng rà soát hệ thống văn bản quy phạm pháp luật;</p>
-                                                <p>đ) Cho ý kiến đối với dự thảo Báo cáo tình hình triển khai tổng rà soát hệ thống văn bản quy phạm pháp luật và dự thảo Báo cáo kết quả tổng rà soát và giải pháp xử lý tổng thể hệ thống văn bản quy phạm pháp luật trước khi Chính phủ trình Ủy ban Thường vụ Quốc hội;</p>
-                                                <p>e) Chỉ đạo các thành viên Ban Chỉ đạo, Cơ quan thường trực Ban Chỉ đạo theo dõi, đôn đốc các cơ quan, đơn vị, tổ chức, cá nhân thực hiện hiệu quả, chất lượng các nhiệm vụ theo Kế hoạch triển khai tổng rà soát hệ thống văn bản quy phạm pháp luật;</p>
-                                                <p>g) Tổng kết, đánh giá kết quả thực hiện nhiệm vụ tổng rà soát hệ thống văn bản quy phạm pháp luật;</p>
-                                                <p>h) Thực hiện các nhiệm vụ khác theo yêu cầu của Ủy ban Thường vụ Quốc hội.</p>
-                                            </div>
 
-                                            {/* Legal Document Link */}
-                                            <div className="mt-8 text-center pb-4 border-t border-gray-100 pt-8">
-                                                <p className="text-gray-600 text-sm md:text-base font-medium leading-relaxed max-w-4xl mx-auto italic">
-                                                    Văn bản đính kèm:
-                                                    <a
-                                                        href="/Nghi_quyet_so_2093.UBTVQH15_ve_thanh_lap_BCD_tong_ra_soat_he_thong_VBQPPL_1775270062866.pdf"
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="text-gray-500 hover:text-gray-800 hover:underline font-bold ml-1 transition-colors"
-                                                    >
-                                                        Nghị quyết số 2093/NQ-UBTVQH15 ngày 03/4/2026 của Ủy ban Thường vụ Quốc hội về thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật
-                                                    </a>
-                                                </p>
+                                            <p className="font-bold text-base">
+                                                Điều 1. Vị trí và chức năng
+                                            </p>
+                                            <p className="text-base">
+                                                Ban Chỉ đạo là tổ chức phối hợp liên ngành, có chức năng giúp cấp có thẩm quyền chỉ đạo, đôn đốc, điều phối giữa các bộ, ngành, địa phương trong việc rà soát, phát hiện và đề xuất phương án xử lý các quy định pháp luật mâu thuẫn, chồng chéo, bất cập hoặc không còn phù hợp với thực tiễn, nhằm tháo gỡ điểm nghẽn cho phát triển kinh tế - xã hội.
+                                            </p>
+
+                                            <p className="font-bold text-base">
+                                                Điều 2. Nhiệm vụ và quyền hạn
+                                            </p>
+                                            <p className="text-base">
+                                                Ban Chỉ đạo thực hiện các nhiệm vụ, quyền hạn cụ thể sau đây:
+                                            </p>
+
+                                            <div className="space-y-3 pt-1 text-base">
+                                                <p>1. Tham mưu, giúp cấp có thẩm quyền xây dựng kế hoạch chi tiết, chỉ đạo, đôn đốc các cơ quan, đơn vị tổ chức triển khai thực hiện việc tổng rà soát hệ thống văn bản quy phạm pháp luật trên phạm vi toàn quốc theo đúng tiến độ đề ra.</p>
+                                                <p>2. Tiếp nhận, xem xét và cho ý kiến đối với các báo cáo kết quả rà soát từ các bộ, ngành, địa phương; đánh giá toàn diện các quy định đang gây vướng mắc, từ đó định hướng các giải pháp xử lý dứt điểm để báo cáo Chính phủ và Quốc hội tháo gỡ.</p>
+                                                <p>3. Chỉ đạo việc xây dựng, vận hành và khai thác hiệu quả Hệ thống cơ sở dữ liệu trực tuyến về kết quả rà soát văn bản quy phạm pháp luật, đảm bảo công khai, minh bạch quy trình tiếp thu, giải trình phản ánh của người dân và doanh nghiệp.</p>
+                                                <p>4. Yêu cầu các bộ, cơ quan ngang bộ, cơ quan thuộc Chính phủ và Ủy ban nhân dân cấp tỉnh, cơ quan tổ chức, cá nhân có liên quan cung cấp thông tin, hồ sơ, tài liệu và báo cáo tình hình thực hiện công tác rà soát khi cần thiết.</p>
+                                                <p>5. Chủ trì tổ chức các hội nghị, hội thảo nghiên cứu chuyên sâu; mời các chuyên gia, nhà khoa học, đại diện hiệp hội doanh nghiệp tham gia tư vấn, phản biện độc lập đối với các vấn đề mang tính vĩ mô, trọng tâm và gây vướng mắc lớn trong thực tiễn.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -382,100 +380,171 @@ const TongRaSoatPage = () => {
                                             <div className="min-w-[1300px] flex flex-col items-center">
                                                 {/* TIER 1: Trưởng ban */}
                                                 <div className="relative flex flex-col items-center">
-                                                    <div className="bg-white border-2 border-[#e21414] rounded-2xl px-10 py-8 shadow-xl text-center relative z-10 w-[520px]">
-                                                        <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-6 py-5 shadow-sm mb-5">
-                                                            <h4 className="text-[#e21414] font-bold text-2xl uppercase">TRƯỞNG BAN CHỈ ĐẠO</h4>
+                                                    <div className="bg-white border-2 border-[#e21414] rounded-2xl px-12 py-6 shadow-xl text-center relative z-10 w-[450px]">
+                                                        <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-6 py-2 shadow-sm mb-4">
+                                                            <h4 className="text-[#e21414] font-bold text-xl uppercase">TRƯỞNG BAN CHỈ ĐẠO</h4>
                                                         </div>
-                                                        <div className="bg-gray-50 p-5 rounded-lg text-2xl font-bold text-gray-700 uppercase">
+                                                        <div className="bg-gray-50 p-4 rounded-lg text-xl font-bold text-gray-700">
                                                             CHỦ TỊCH QUỐC HỘI
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                {/* Connector Tier 1 to Central Trunk */}
-                                                <div className="w-[2px] h-12 bg-[#e21414]/60 relative z-0"></div>
+                                                {/* Connector Tier 1 to Tier 2 (Drop) */}
+                                                <div className="w-[2px] h-6 bg-[#e21414]/60 relative z-0"></div>
 
-                                                {/* TIER 2: KHỐI PHÓ TRƯỞNG BAN (Unified Group) */}
-                                                <div className="relative w-full max-w-[1320px] bg-white border-2 border-solid border-[#e21414]/40 rounded-[40px] p-10 pb-12 shadow-sm flex flex-col items-center animate-fadeIn">
-                                                    {/* Row 1: 1 block */}
-                                                    <div className="mb-8 flex justify-center w-full">
-                                                        <div className="w-[500px] bg-white border-2 border-[#e21414] rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all">
-                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-4 py-2 shadow-sm mb-4 min-h-[70px] text-center items-center justify-center flex">
-                                                                <h4 className="text-[#e21414] font-bold text-2xl uppercase leading-tight">PHÓ TRƯỞNG BAN THƯỜNG TRỰC</h4>
+                                                {/* TIER 2: Phó Trưởng ban (6 khối song song) cùng hệ thống đường nối */}
+                                                <div className="w-full max-w-[1320px] grid grid-cols-6 gap-3 px-2">
+
+                                                    {/* Block 1 */}
+                                                    <div className="relative pt-6 h-full">
+                                                        <div className="absolute top-0 left-1/2 w-[calc(50%+8px)] h-[2px] bg-[#e21414]/60 z-0"></div>
+                                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                                                            <div className="w-[2px] h-[18px] bg-[#e21414]/60"></div>
+                                                            <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#e21414]/60"></div>
+                                                        </div>
+                                                        <div className="bg-white border-2 border-[#e21414] rounded-xl p-2 shadow-lg flex flex-col h-full relative z-10 transition-all hover:shadow-xl">
+                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-lg px-1 py-1.5 shadow-sm mb-3 min-h-[60px] text-center items-center justify-center flex">
+                                                                <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-tight">PHÓ TRƯỞNG BAN<br />THƯỜNG TRỰC</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-4 rounded-lg text-2xl font-bold text-gray-700 text-center leading-snug min-h-[110px] flex items-center justify-center">
-                                                                Phó Thủ tướng Chính phủ <br /> phụ trách công tác xây dựng thể chế
+                                                            <div className="bg-gray-50 p-2 rounded-md text-[17px] font-bold text-gray-700 text-center leading-tight flex-1 flex items-center justify-center">
+                                                                Phó Thủ tướng <br />Chính phủ
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    {/* Row 2: 3 blocks */}
-                                                    <div className="mb-8 w-full max-w-[1280px] grid grid-cols-3 gap-8">
-                                                        {/* Block 2 */}
-                                                        <div className="bg-white border-2 border-[#e21414] rounded-2xl p-5 shadow-md hover:shadow-lg transition-all">
-                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-lg px-2 py-2 shadow-sm mb-4 min-h-[70px] text-center items-center justify-center flex">
-                                                                <h4 className="text-[#e21414] font-bold text-2xl uppercase leading-tight">PHÓ TRƯỞNG BAN</h4>
+                                                    {/* Block 2 */}
+                                                    <div className="relative pt-6 h-full">
+                                                        <div className="absolute top-0 -left-[8px] w-[calc(100%+16px)] h-[2px] bg-[#e21414]/60 z-0"></div>
+                                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                                                            <div className="w-[2px] h-[18px] bg-[#e21414]/60"></div>
+                                                            <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#e21414]/60"></div>
+                                                        </div>
+                                                        <div className="bg-white border-2 border-[#e21414] rounded-xl p-2 shadow-lg flex flex-col h-full relative z-10 transition-all hover:shadow-xl">
+                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-lg px-1 py-1.5 shadow-sm mb-3 min-h-[60px] text-center items-center justify-center flex">
+                                                                <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-tight">PHÓ TRƯỞNG BAN</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-2xl font-bold text-gray-700 text-center leading-snug min-h-[110px] flex items-center justify-center">
-                                                                Phó Chủ tịch Quốc hội
+                                                            <div className="bg-gray-50 p-2 rounded-md text-[17px] font-bold text-gray-700 text-center leading-tight flex-1 flex items-center justify-center">
+                                                                Phó Chủ tịch <br />Quốc hội
                                                             </div>
                                                         </div>
-                                                        {/* Block 3 */}
-                                                        <div className="bg-white border-2 border-[#e21414] rounded-2xl p-5 shadow-md hover:shadow-lg transition-all">
-                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-lg px-2 py-2 shadow-sm mb-4 min-h-[70px] text-center items-center justify-center flex">
-                                                                <h4 className="text-[#e21414] font-bold text-2xl uppercase leading-tight">PHÓ TRƯỞNG BAN</h4>
+                                                    </div>
+
+                                                    {/* Block 3 */}
+                                                    <div className="relative pt-6 h-full">
+                                                        <div className="absolute top-0 -left-[8px] w-[calc(100%+16px)] h-[2px] bg-[#e21414]/60 z-0"></div>
+                                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                                                            <div className="w-[2px] h-[18px] bg-[#e21414]/60"></div>
+                                                            <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#e21414]/60"></div>
+                                                        </div>
+                                                        <div className="bg-white border-2 border-[#e21414] rounded-xl p-2 shadow-lg flex flex-col h-full relative z-10 transition-all hover:shadow-xl">
+                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-lg px-1 py-1.5 shadow-sm mb-3 min-h-[60px] text-center items-center justify-center flex">
+                                                                <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-tight">PHÓ TRƯỞNG BAN</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-2xl font-bold text-gray-700 text-center leading-snug min-h-[110px] flex items-center justify-center">
-                                                                Chánh án <br />Tòa án nhân dân tối cao
+                                                            <div className="bg-gray-50 p-2 rounded-md text-[17px] font-bold text-gray-700 text-center leading-tight flex-1 flex items-center justify-center">
+                                                                Chánh án Tòa án<br />nhân dân tối cao
                                                             </div>
                                                         </div>
-                                                        {/* Block 4 */}
-                                                        <div className="bg-white border-2 border-[#e21414] rounded-2xl p-5 shadow-md hover:shadow-lg transition-all">
-                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-lg px-2 py-2 shadow-sm mb-4 min-h-[70px] text-center items-center justify-center flex">
-                                                                <h4 className="text-[#e21414] font-bold text-2xl uppercase leading-tight">PHÓ TRƯỞNG BAN</h4>
+                                                    </div>
+
+                                                    {/* Block 4 */}
+                                                    <div className="relative pt-6 h-full">
+                                                        <div className="absolute top-0 -left-[8px] w-[calc(100%+16px)] h-[2px] bg-[#e21414]/60 z-0"></div>
+                                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                                                            <div className="w-[2px] h-[18px] bg-[#e21414]/60"></div>
+                                                            <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#e21414]/60"></div>
+                                                        </div>
+                                                        <div className="bg-white border-2 border-[#e21414] rounded-xl p-2 shadow-lg flex flex-col h-full relative z-10 transition-all hover:shadow-xl">
+                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-lg px-1 py-1.5 shadow-sm mb-3 min-h-[60px] text-center items-center justify-center flex">
+                                                                <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-tight">PHÓ TRƯỞNG BAN</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-2xl font-bold text-gray-700 text-center leading-snug min-h-[110px] flex items-center justify-center">
+                                                            <div className="bg-gray-50 p-2 rounded-md text-[17px] font-bold text-gray-700 text-center leading-tight flex-1 flex items-center justify-center">
                                                                 Viện trưởng Viện kiểm sát nhân dân tối cao
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    {/* Row 3: 2 blocks */}
-                                                    <div className="w-full max-w-[880px] grid grid-cols-2 gap-10">
-                                                        {/* Block 5 */}
-                                                        <div className="bg-white border-2 border-[#e21414] rounded-2xl p-5 shadow-md hover:shadow-lg transition-all">
-                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-lg px-2 py-2 shadow-sm mb-4 min-h-[70px] text-center items-center justify-center flex">
-                                                                <h4 className="text-[#e21414] font-bold text-2xl uppercase leading-tight">PHÓ TRƯỞNG BAN</h4>
+                                                    {/* Block 5 */}
+                                                    <div className="relative pt-6 h-full">
+                                                        <div className="absolute top-0 -left-[8px] w-[calc(100%+16px)] h-[2px] bg-[#e21414]/60 z-0"></div>
+                                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                                                            <div className="w-[2px] h-[18px] bg-[#e21414]/60"></div>
+                                                            <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#e21414]/60"></div>
+                                                        </div>
+                                                        <div className="bg-white border-2 border-[#e21414] rounded-xl p-2 shadow-lg flex flex-col h-full relative z-10 transition-all hover:shadow-xl">
+                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-lg px-1 py-1.5 shadow-sm mb-3 min-h-[60px] text-center items-center justify-center flex">
+                                                                <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-tight">PHÓ TRƯỞNG BAN</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-2xl font-bold text-gray-700 text-center leading-snug min-h-[125px] flex items-center justify-center">
-                                                                Phó Trưởng ban Nội chính Trung ương
+                                                            <div className="bg-gray-50 p-2 rounded-md text-[17px] font-bold text-gray-700 text-center leading-tight flex-1 flex items-center justify-center">
+                                                                Phó Trưởng ban<br />Nội chính Trung ương
                                                             </div>
                                                         </div>
-                                                        {/* Block 6 */}
-                                                        <div className="bg-white border-2 border-[#e21414] rounded-2xl p-5 shadow-md hover:shadow-lg transition-all">
-                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-lg px-2 py-2 shadow-sm mb-4 min-h-[70px] text-center items-center justify-center flex">
-                                                                <h4 className="text-[#e21414] font-bold text-2xl uppercase leading-tight">PHÓ TRƯỞNG BAN</h4>
+                                                    </div>
+
+                                                    {/* Block 6 */}
+                                                    <div className="relative pt-6 h-full">
+                                                        <div className="absolute top-0 -left-[8px] w-[calc(50%+8px)] h-[2px] bg-[#e21414]/60 z-0"></div>
+                                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                                                            <div className="w-[2px] h-[18px] bg-[#e21414]/60"></div>
+                                                            <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#e21414]/60"></div>
+                                                        </div>
+                                                        <div className="bg-white border-2 border-[#e21414] rounded-xl p-2 shadow-lg flex flex-col h-full relative z-10 transition-all hover:shadow-xl">
+                                                            <div className="bg-[#fff0f0] border border-red-200 rounded-lg px-1 py-1.5 shadow-sm mb-3 min-h-[60px] text-center items-center justify-center flex">
+                                                                <h4 className="text-[#e21414] font-bold text-[17px] uppercase leading-tight">PHÓ TRƯỞNG BAN</h4>
                                                             </div>
-                                                            <div className="bg-gray-50 p-3 rounded-lg text-2xl font-bold text-gray-700 text-center leading-snug min-h-[125px] flex items-center justify-center">
-                                                                Tổng Thư ký<br /> Ủy ban Trung ương <br />Mặt trận Tổ quốc Việt Nam
+                                                            <div className="bg-gray-50 p-2 rounded-md text-[17px] font-bold text-gray-700 text-center leading-tight flex-1 flex items-center justify-center">
+                                                                Phó Chủ tịch - Tổng Thư ký Ủy ban Trung ương Mặt trận Tổ quốc Việt Nam
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                {/* Connector from Group to Tier 3 */}
-                                                <div className="flex flex-col items-center">
-                                                    <div className="w-[2px] h-[40px] bg-[#e21414]/60 relative z-0"></div>
-                                                    <div className="w-0 h-0 border-l-[10px] border-r-[10px] border-t-[12px] border-l-transparent border-r-transparent border-t-[#e21414]/60 relative z-10 -mt-[1px]"></div>
+                                                {/* Connector Tier 2 to Tier 3 */}
+                                                <div className="w-full max-w-[1320px] grid grid-cols-6 gap-3 px-2 h-6 relative z-0">
+                                                    {/* Block 1 */}
+                                                    <div className="relative">
+                                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-6 bg-[#e21414]/60 z-0"></div>
+                                                        <div className="absolute top-6 left-1/2 w-[calc(50%+8px)] h-[2px] bg-[#e21414]/60 z-0"></div>
+                                                    </div>
+                                                    {/* Block 2 */}
+                                                    <div className="relative">
+                                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-6 bg-[#e21414]/60 z-0"></div>
+                                                        <div className="absolute top-6 -left-[8px] w-[calc(100%+16px)] h-[2px] bg-[#e21414]/60 z-0"></div>
+                                                    </div>
+                                                    {/* Block 3 */}
+                                                    <div className="relative">
+                                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-6 bg-[#e21414]/60 z-0"></div>
+                                                        <div className="absolute top-6 -left-[8px] w-[calc(100%+16px)] h-[2px] bg-[#e21414]/60 z-0"></div>
+                                                    </div>
+                                                    {/* Block 4 */}
+                                                    <div className="relative">
+                                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-6 bg-[#e21414]/60 z-0"></div>
+                                                        <div className="absolute top-6 -left-[8px] w-[calc(100%+16px)] h-[2px] bg-[#e21414]/60 z-0"></div>
+                                                    </div>
+                                                    {/* Block 5 */}
+                                                    <div className="relative">
+                                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-6 bg-[#e21414]/60 z-0"></div>
+                                                        <div className="absolute top-6 -left-[8px] w-[calc(100%+16px)] h-[2px] bg-[#e21414]/60 z-0"></div>
+                                                    </div>
+                                                    {/* Block 6 */}
+                                                    <div className="relative">
+                                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-6 bg-[#e21414]/60 z-0"></div>
+                                                        <div className="absolute top-6 -left-[8px] w-[calc(50%+8px)] h-[2px] bg-[#e21414]/60 z-0"></div>
+                                                    </div>
                                                 </div>
 
-                                                {/* TIER 3: Ủy viên (Combined block) */}
-                                                <div className="bg-white border-2 border-[#e21414] rounded-[32px] p-12 shadow-lg w-full max-w-[1000px] flex flex-col items-center mt-2 relative z-10">
-                                                    <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-12 py-5 shadow-sm mb-6 text-center w-full">
-                                                        <h4 className="text-[#e21414] font-bold text-2xl uppercase">ỦY VIÊN BAN CHỈ ĐẠO</h4>
+                                                <div className="flex flex-col items-center">
+                                                    <div className="w-[2px] h-[24px] bg-[#e21414]/60 relative z-0"></div>
+                                                    <div className="w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#e21414]/60 relative z-10 -mt-[1px]"></div>
+                                                </div>
+
+                                                {/* TIER 3: Ủy viên (1 khối gộp) */}
+                                                <div className="bg-white border-2 border-[#e21414] rounded-2xl p-8 shadow-lg w-full max-w-[800px] flex flex-col items-center mt-2">
+                                                    <div className="bg-[#fff0f0] border border-red-200 rounded-xl px-10 py-3 shadow-sm mb-8 text-center w-full">
+                                                        <h4 className="text-[#e21414] font-bold text-xl uppercase">ỦY VIÊN BAN CHỈ ĐẠO</h4>
                                                     </div>
                                                     <div className="w-full">
-                                                        <div className="grid grid-cols-1 gap-y-1 relative z-10 w-full">
+                                                        <div className="grid grid-cols-1 gap-y-3 relative z-10 w-full">
                                                             {[
                                                                 { type: 'Ủy viên Thường trực', name: 'Bộ trưởng Bộ Tư pháp', isThườngTrực: true },
                                                                 { type: 'Ủy viên Thường trực', name: 'Chủ nhiệm Ủy ban Pháp luật và Tư pháp', isThườngTrực: true },
@@ -511,7 +580,7 @@ const TongRaSoatPage = () => {
                                                                 { type: 'Ủy viên', name: 'Chủ tịch Hội luật gia Việt Nam' },
                                                                 { type: 'Ủy viên', name: 'Chủ tịch Liên đoàn Thương mại và Công nghiệp Việt Nam' }
                                                             ].map((member, idx) => (
-                                                                <div key={`uv-${idx}`} className={`p-3 rounded-lg text-[23px] font-bold leading-snug flex items-center gap-3 text-left border ${member.isThườngTrực ? 'bg-red-50/50 border-red-100/50 text-gray-800' : 'bg-gray-50 border-gray-100/80 text-gray-700'}`}>
+                                                                <div key={`uv-${idx}`} className={`p-3 rounded-lg text-[17px] font-bold leading-snug flex items-center gap-3 text-left border ${member.isThườngTrực ? 'bg-red-50/50 border-red-100/50 text-gray-800' : 'bg-gray-50 border-gray-100/80 text-gray-700'}`}>
                                                                     <div className={`w-2 h-2 rounded-full shadow-sm shrink-0 ${member.isThườngTrực ? 'bg-[#e21414]' : 'bg-amber-400'}`}></div>
                                                                     <span>{member.type} - {member.name}</span>
                                                                 </div>
@@ -528,12 +597,10 @@ const TongRaSoatPage = () => {
                                             <p className="text-gray-600 text-sm md:text-base font-medium leading-relaxed max-w-4xl mx-auto italic">
                                                 Văn bản đính kèm:
                                                 <a
-                                                    href="/Nghi_quyet_so_2093.UBTVQH15_ve_thanh_lap_BCD_tong_ra_soat_he_thong_VBQPPL_1775270062866.pdf"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="text-gray-500 hover:text-gray-800 hover:underline font-bold ml-1 transition-colors"
+                                                    href="#"
+                                                    className="text-grey-500 hover:text-grey-800 hover:underline font-bold ml-1 transition-colors"
                                                 >
-                                                    Nghị quyết số 2093/NQ-UBTVQH15 ngày 03/4/2026 của Ủy ban Thường vụ Quốc hội về thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật
+                                                    Quyết định số 603/QĐ-TTg của Thủ tướng Chính phủ: Về việc thành lập Ban Chỉ đạo rà soát, xử lý vướng mắc trong hệ thống văn bản quy phạm pháp luật
                                                 </a>
                                             </p>
                                         </div>
@@ -624,8 +691,8 @@ const TongRaSoatPage = () => {
                             const renderNewsLayout = (newsItems) => {
                                 if (!newsItems || newsItems.length === 0) return null;
                                 const topNews = newsItems[0];
-                                const gridNews = newsItems.length > 4 ? newsItems.slice(1, 4) : [];
-                                const listNews = newsItems.length > 4 ? newsItems.slice(4) : newsItems.slice(1);
+                                const gridNews = newsItems.slice(1, 4);
+                                const listNews = newsItems.slice(4);
 
                                 return (
                                     <div className="space-y-5 animate-fadeIn">
