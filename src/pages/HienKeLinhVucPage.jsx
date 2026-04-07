@@ -39,8 +39,7 @@ const HienKeLinhVucPage = () => {
                     </nav>
 
                     <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
-                        Lĩnh vực pháp luật
-                    </h1>
+                        Có thể bạn quan tâm                    </h1>
                     <p className="text-blue-100/90 text-[15px] max-w-2xl leading-relaxed">
                         Mỗi ý kiến, sáng kiến của bạn trong từng lĩnh vực pháp luật là góc nhìn đa chiều để công tác xây dựng, tổ chức thi hành pháp luật tiếp tục được hoàn thiện.
                     </p>

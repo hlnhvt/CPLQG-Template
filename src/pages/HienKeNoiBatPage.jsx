@@ -72,8 +72,7 @@ const HienKeNoiBatPage = () => {
                         Chúng tôi cần bạn
                     </h1>
                     <p className="text-blue-100/90 text-[15px] max-w-3xl leading-relaxed">
-                        Hãy đóng góp ý kiến, sáng kiến để tiếp tục hoàn thiện các nội dung, chủ đề đang được Đảng và Nhà nước tập trung nguồn lực triển khai.
-                    </p>
+                        Nội dung, chủ đề cần sáng kiến, ý kiến đóng góp của bạn.                     </p>
                 </div>
             </div>
 
