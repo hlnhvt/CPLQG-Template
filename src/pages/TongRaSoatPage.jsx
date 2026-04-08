@@ -119,7 +119,7 @@ const MOCK_SYSTEMS = [
         title: 'Phần mềm hỗ trợ kiểm tra, rà soát VBQPPL',
         description: 'Phần mềm hỗ trợ kiểm tra, rà soát VBQPPL là phần mềm quản lý hoạt động kiểm tra, rà soát và hệ thống hóa VBQPPL. Giúp việc kiểm tra, rà soát, hệ thống hóa VBQPPL thực hiện dễ dàng và giảm bớt thời gian, công sức của cán bộ pháp chế',
         details: 'Phần mềm hỗ trợ kiểm tra, rà soát VBQPPL là phần mềm quản lý hoạt động kiểm tra, rà soát và hệ thống hóa VBQPPL. Giúp việc kiểm tra, rà soát, hệ thống hóa VBQPPL thực hiện dễ dàng và giảm bớt thời gian, công sức của cán bộ pháp chế',
-        image: 'https://thietkelogo.vn/wp-content/uploads/2015/11/BoTuPhap1.jpg',
+        image: '/BO NHAN DIEN TONG RA SOAT/Botuphap.svg.png',
         link: '#'
     }
 ];
@@ -739,8 +739,8 @@ const TongRaSoatPage = () => {
                                                 <div key={system.id} className="border border-gray-200 rounded-lg p-5 hover:border-blue-300 transition-colors bg-white shadow-sm">
                                                     <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                                                         <div className="w-[120px] shrink-0">
-                                                            <div className="aspect-[4/3] rounded-md overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center p-1">
-                                                                <img src={system.image} alt={system.title} className="w-full h-full object-cover rounded" />
+                                                            <div className="aspect-[4/3] rounded-md overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center p-2">
+                                                                <img src={system.image} alt={system.title} className="w-full h-full object-contain rounded" />
                                                             </div>
                                                         </div>
                                                         <div className="flex-1">
