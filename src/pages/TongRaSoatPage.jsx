@@ -370,7 +370,7 @@ const TongRaSoatPage = () => {
                                                 
                                             </p> */}
                                             <p className="text-base">
-                                                Căn cứ khoản 2 Điều 1 Nghị quyết số 2093/NQ-UBNTVQH15 ngày 03/04/2026 của Ủy ban Thường vụ Quốc hội về việc Thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật (sau đây gọi tắt là Ban chỉ đạo). Ban chỉ đạo giúp Ủy ban Thường vụ Quốc hội chỉ đạo, hướng dẫn, đôn đốc việc thực hiện tổng rà soát hệ thống văn bản quy phạm pháp luật và có nhiệm vụ, quyền hạn sau đây:
+                                                Khoản 2 Điều 1 Nghị quyết số 2093/NQ-UBNTVQH15 ngày 03/04/2026 của Ủy ban Thường vụ Quốc hội thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật (sau đây gọi tắt là Ban chỉ đạo) quy định: Ban chỉ đạo giúp Ủy ban Thường vụ Quốc hội chỉ đạo, hướng dẫn, đôn đốc việc thực hiện tổng rà soát hệ thống văn bản quy phạm pháp luật và có nhiệm vụ, quyền hạn sau đây:
                                             </p>
                                             <div className="space-y-3 text-base">
                                                 <p>a) Ban hành Quy chế hoạt động của Ban Chỉ đạo;</p>
@@ -402,19 +402,41 @@ const TongRaSoatPage = () => {
                                     </div>
                                 )}
 
-                                {/* Legal Document Link */}
-                                <div className="mt-8 text-center pb-4 border-t border-gray-100 pt-8">
-                                    <p className="text-gray-600 text-sm md:text-base font-medium leading-relaxed max-w-4xl mx-auto italic">
-                                        Văn bản đính kèm:
-                                        <a
-                                            href="/Nghi_quyet_so_2093.UBTVQH15_ve_thanh_lap_BCD_tong_ra_soat_he_thong_VBQPPL_1775270062866.pdf"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-gray-500 hover:text-gray-800 hover:underline font-bold ml-1 transition-colors"
-                                        >
-                                            Nghị quyết số 2093/NQ-UBTVQH15 ngày 03/4/2026 của Ủy ban Thường vụ Quốc hội về thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật
-                                        </a>
-                                    </p>
+                                {/* Attached Documents Section */}
+                                <div className="mt-10 pt-8 border-t border-gray-100">
+                                    <h4 className="text-gray-900 font-bold text-lg mb-6 flex items-center gap-2">
+                                        Văn bản, tài liệu liên quan
+                                    </h4>
+                                    <div className="grid grid-cols-1 gap-4">
+                                        {[
+                                            {
+                                                title: 'Quyết định số 4/QĐ-BCĐ ngày 10/4/2026 về việc ban hành Quy chế hoạt động của Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật',
+                                                file: '/Quy_che_hoat_dong_cua_BCD_tong_ra_soat_he_thong_VBQPPL_1775821347869.pdf'
+                                            },
+                                            {
+                                                title: 'Nghị quyết số 2093/NQ-UBNTVQH15 của Ủy ban Thường vụ Quốc hội thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật',
+                                                file: '/Nghi_quyet_so_2093.UBTVQH15_ve_thanh_lap_BCD_tong_ra_soat_he_thong_VBQPPL_1775270062866.pdf'
+                                            }
+                                        ].map((doc, idx) => (
+                                            <a
+                                                key={idx}
+                                                href={doc.file}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center gap-4 p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:border-[#ea492a] hover:shadow-md transition-all group"
+                                            >
+                                                <div className="p-2.5 bg-white rounded-lg shadow-sm border border-gray-100 group-hover:border-[#ea492a]/30 group-hover:bg-[#ea492a]/5 transition-colors shrink-0">
+                                                    <FileText className="text-[#ea492a]" size={24} />
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-gray-800 font-bold text-sm leading-snug group-hover:text-[#ea492a] transition-colors line-clamp-3">
+                                                        {doc.title}
+                                                    </p>
+                                                    <span className="text-[11px] text-gray-500 mt-2 inline-block font-medium uppercase">Xem chi tiết</span>
+                                                </div>
+                                            </a>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         )}
