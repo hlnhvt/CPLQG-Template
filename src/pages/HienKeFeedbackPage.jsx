@@ -174,16 +174,13 @@ export default function HienKeFeedbackPage() {
                                 {/* Blockquotes Section */}
                                 <div className="my-10 space-y-6">
                                     <div className="relative p-6 md:p-8 bg-amber-50 rounded-2xl border-l-8 border-amber-400 shadow-sm">
-                                        <div className="absolute top-2 right-4 text-amber-200 opacity-50">
-                                            <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H16.017C14.9124 8 14.017 7.10457 14.017 6V3L19.017 3C20.6739 3 22.017 4.34315 22.017 6V15C22.017 16.6569 20.6739 18 19.017 18H17.017L17.017 21H14.017ZM2.01695 21L2.01695 18C2.01695 16.8954 2.91238 16 4.01695 16H7.01695C7.56923 16 8.01695 15.5523 8.01695 15V9C8.01695 8.44772 7.56923 8 7.01695 8H4.01695C2.91238 8 2.01695 7.10457 2.01695 6V3L7.01695 3C8.6738 3 10.017 4.34315 10.017 6V15C10.017 16.6569 8.6738 18 7.01695 18H5.01695L5.01695 21H2.01695Z" /></svg>
-                                        </div>
-                                        <p className="relative z-10 text-[17px] md:text-[20px] font-bold text-gray-800 leading-relaxed mb-4 italic">
-                                            "Bao nhiêu lợi ích cũng vì dân. Bao nhiêu quyền hạn cũng của dân... Nói tóm lại, quyền hành và lực lượng đều ở nơi dân."
+                                        <p className="relative z-10 text-[15px] md:text-[18px] font-basic text-gray-800 leading-relaxed mb-4 italic">
+                                            "Nước ta là nước dân chủ. Bao nhiêu lợi ích đều vì dân. Bao nhiêu quyền hạn đều của dân... Nói tóm lại, quyền hành và lực lượng đều ở nơi dân."
                                         </p>
-                                        <p className="text-right font-black text-amber-700 uppercase tracking-wider">— Chủ tịch Hồ Chí Minh</p>
+                                        <p className="text-right font-bold text-amber-700 uppercase">- Chủ tịch Hồ Chí Minh -</p>
                                     </div>
 
-                                    <div className="relative p-6 md:p-8 bg-blue-50 rounded-2xl border-l-8 border-blue-600 shadow-sm">
+                                    {/* <div className="relative p-6 md:p-8 bg-blue-50 rounded-2xl border-l-8 border-blue-600 shadow-sm">
                                         <div className="absolute top-2 right-4 text-blue-200 opacity-50">
                                             <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H16.017C14.9124 8 14.017 7.10457 14.017 6V3L19.017 3C20.6739 3 22.017 4.34315 22.017 6V15C22.017 16.6569 20.6739 18 19.017 18H17.017L17.017 21H14.017ZM2.01695 21L2.01695 18C2.01695 16.8954 2.91238 16 4.01695 16H7.01695C7.56923 16 8.01695 15.5523 8.01695 15V9C8.01695 8.44772 7.56923 8 7.01695 8H4.01695C2.91238 8 2.01695 7.10457 2.01695 6V3L7.01695 3C8.6738 3 10.017 4.34315 10.017 6V15C10.017 16.6569 8.6738 18 7.01695 18H5.01695L5.01695 21H2.01695Z" /></svg>
                                         </div>
@@ -191,7 +188,7 @@ export default function HienKeFeedbackPage() {
                                             "Phải đổi mới tư duy xây dựng pháp luật theo hướng vừa bảo đảm yêu cầu quản lý nhà nước, vừa khuyến khích sáng tạo, giải phóng mọi nguồn lực để phát triển. Lấy người dân, doanh nghiệp là trung tâm, chủ thể."
                                         </p>
                                         <p className="text-right font-black text-blue-700 uppercase tracking-wider">— Tổng Bí thư Tô Lâm</p>
-                                    </div>
+                                    </div> */}
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
