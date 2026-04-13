@@ -164,7 +164,7 @@ const TimelinePopup = ({ title, timeline, onClose }) => {
 
                 <div className="flex-1 overflow-y-auto bg-white relative p-6 custom-scrollbar">
                     {/* Top Controls */}
-                    <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
+                    <div className="flex flex-col sm:flex-row justify-start items-center gap-4 sm:gap-6 mb-4 mt-2">
                         <div className="flex items-center gap-3">
                             {viewMode === 'all' && (
                                 <>
@@ -205,7 +205,7 @@ const TimelinePopup = ({ title, timeline, onClose }) => {
                     </div>
 
                     {/* Timeline Container */}
-                    <div className="relative pl-[100px] sm:pl-[140px] mt-8">
+                    <div className="relative pl-[100px] sm:pl-[140px] mt-8 max-w-4xl">
                         {/* Vertical Line */}
                         <div className="absolute left-[89px] sm:left-[129px] top-4 bottom-4 w-0.5 bg-gray-300"></div>
 
@@ -220,7 +220,7 @@ const TimelinePopup = ({ title, timeline, onClose }) => {
                             return (
                                 <div key={idx} className="flex flex-col mb-10 relative">
                                     {sectionHeader && (
-                                        <div className="mb-8 relative z-20 -left-[100px] sm:-left-[140px] w-[calc(100%+100px)] sm:w-[calc(100%+140px)] max-w-4xl bg-gray-100 border border-gray-200 py-1.5 px-4 rounded-r-lg font-bold text-[14px] text-gray-800">
+                                        <div className="mb-8 relative z-20 -left-[100px] sm:-left-[140px] w-[calc(100%+100px)] sm:w-[calc(100%+140px)] bg-gray-100 border border-gray-200 py-1.5 px-4 rounded-r-lg font-bold text-[14px] text-gray-800">
                                             {sectionHeader}
                                         </div>
                                     )}
@@ -228,61 +228,61 @@ const TimelinePopup = ({ title, timeline, onClose }) => {
                                     <div className="relative group">
                                         {/* Date (Left Side) */}
                                         <div className="absolute -left-[100px] sm:-left-[140px] top-1 w-[80px] sm:w-[120px] text-right pr-4">
-                                        <span className={`text-[13px] font-bold ${item.status === 'done' || item.status === 'current' ? 'text-gray-800' : 'text-gray-400'}`}>
-                                            {item.date}
-                                        </span>
-                                    </div>
-
-                                    {/* Dot on the Line */}
-                                    <div className={`absolute -left-[14px] top-1.5 w-[9px] h-[9px] rounded-full ${getStatusColor(item.status)} border-2 border-white ring-2 ring-transparent group-hover:ring-blue-200 transition-all z-10`}></div>
-
-                                    {/* Content Box */}
-                                    <div className="pl-6 w-full max-w-3xl">
-                                        <div className="flex items-center justify-between mb-3 border-b border-gray-100 pb-2">
-                                            <h3 className={`text-[15px] font-bold ${item.status === 'done' || item.status === 'current' ? 'text-[#1a3b8b]' : 'text-gray-500'}`}>
-                                                {item.title}
-                                            </h3>
-                                            <button className="text-gray-400 hover:text-blue-600 bg-gray-50 hover:bg-blue-50 rounded-full p-1 transition-colors">
-                                                <ChevronUp size={16} />
-                                            </button>
+                                            <span className={`text-[13px] font-bold ${item.status === 'done' || item.status === 'current' ? 'text-gray-800' : 'text-gray-400'}`}>
+                                                {item.date}
+                                            </span>
                                         </div>
 
-                                        {expandedAll && (
-                                            <div className="animate-fade-in pl-2">
-                                                <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[150px_1fr] gap-x-4 gap-y-3 text-[13px]">
-                                                    {/* Fields */}
-                                                    <div className="font-semibold text-gray-500">Mô tả:</div>
-                                                    <div className="text-gray-800 leading-relaxed font-medium">{item.desc || 'Đang cập nhật'}</div>
+                                        {/* Dot on the Line */}
+                                        <div className={`absolute -left-[14px] top-1.5 w-[9px] h-[9px] rounded-full ${getStatusColor(item.status)} border-2 border-white ring-2 ring-transparent group-hover:ring-blue-200 transition-all z-10`}></div>
 
-                                                    <div className="font-semibold text-gray-500">Sân khấu:</div>
-                                                    <div className="text-gray-700">{item.title}</div>
+                                        {/* Content Box */}
+                                        <div className="pl-6 w-full pr-4 lg:pr-8">
+                                            <div className="flex items-center justify-between mb-3 border-b border-gray-100 pb-2">
+                                                <h3 className={`text-[15px] font-bold ${item.status === 'done' || item.status === 'current' ? 'text-[#1a3b8b]' : 'text-gray-500'}`}>
+                                                    {item.title}
+                                                </h3>
+                                                <button className="text-gray-400 hover:text-blue-600 bg-gray-50 hover:bg-blue-50 rounded-full p-1 transition-colors">
+                                                    <ChevronUp size={16} />
+                                                </button>
+                                            </div>
 
-                                                    {item.extraInfo && (
-                                                        <>
-                                                            <div className="font-semibold text-gray-500">Thông tin thêm:</div>
-                                                            <div className="text-gray-700 italic">{item.extraInfo}</div>
-                                                        </>
-                                                    )}
+                                            {expandedAll && (
+                                                <div className="animate-fade-in pl-2">
+                                                    <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[150px_1fr] gap-x-4 gap-y-3 text-[13px]">
+                                                        {/* Fields */}
+                                                        <div className="font-semibold text-gray-500">Mô tả:</div>
+                                                        <div className="text-gray-800 leading-relaxed font-medium">{item.desc || 'Đang cập nhật'}</div>
 
-                                                    <div className="font-semibold text-gray-500">Tài liệu đính kèm:</div>
-                                                    <div>
-                                                        {item.attachments && item.attachments.length > 0 ? (
-                                                            <div className="flex flex-col gap-1.5">
-                                                                {item.attachments.map((att, i) => (
-                                                                    <a key={i} href="#" className="font-bold text-[#1a3b8b] hover:underline flex items-center gap-1.5 group/link">
-                                                                        {att.type === 'PDF' ? <File size={14} className="text-red-500 shrink-0" /> : <FileCode2 size={14} className="text-blue-500 shrink-0" />}
-                                                                        <span className="truncate">{att.name}</span>
-                                                                    </a>
-                                                                ))}
-                                                            </div>
-                                                        ) : (
-                                                            <span className="text-gray-400 italic">Không có tài liệu</span>
+                                                        <div className="font-semibold text-gray-500">Sân khấu:</div>
+                                                        <div className="text-gray-700">{item.title}</div>
+
+                                                        {item.extraInfo && (
+                                                            <>
+                                                                <div className="font-semibold text-gray-500">Thông tin thêm:</div>
+                                                                <div className="text-gray-700 italic">{item.extraInfo}</div>
+                                                            </>
                                                         )}
+
+                                                        <div className="font-semibold text-gray-500">Tài liệu đính kèm:</div>
+                                                        <div>
+                                                            {item.attachments && item.attachments.length > 0 ? (
+                                                                <div className="flex flex-col gap-1.5">
+                                                                    {item.attachments.map((att, i) => (
+                                                                        <a key={i} href="#" className="font-bold text-[#1a3b8b] hover:underline flex items-center gap-1.5 group/link">
+                                                                            {att.type === 'PDF' ? <File size={14} className="text-red-500 shrink-0" /> : <FileCode2 size={14} className="text-blue-500 shrink-0" />}
+                                                                            <span className="truncate">{att.name}</span>
+                                                                        </a>
+                                                                    ))}
+                                                                </div>
+                                                            ) : (
+                                                                <span className="text-gray-400 italic">Không có tài liệu</span>
+                                                            )}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        )}
-                                    </div>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             );
@@ -334,10 +334,10 @@ const RelatedPopup = ({ related, onClose }) => {
                                     <div className="flex flex-wrap items-center gap-2">
                                         <span className={`px-2 py-0.5 rounded text-[10px] sm:text-[11px] font-bold ${rel.type === 'Tin tức' ? 'bg-blue-50 text-blue-600 border border-blue-100' :
                                             rel.type === 'Sự kiện' ? 'bg-red-50 text-red-600 border border-red-100' : 'bg-purple-50 text-purple-600 border border-purple-100'
-                                        }`}>
+                                            }`}>
                                             {rel.type}
                                         </span>
-                                        <div className="text-[11px] sm:text-[12px] text-gray-400 font-semibold flex items-center gap-1.5 whitespace-nowrap"><Calendar size={12}/> {rel.date}</div>
+                                        <div className="text-[11px] sm:text-[12px] text-gray-400 font-semibold flex items-center gap-1.5 whitespace-nowrap"><Calendar size={12} /> {rel.date}</div>
                                     </div>
                                 </div>
                             </div>
@@ -499,7 +499,7 @@ const DuThaoDetailPage = () => {
 
                         {/* Title & Metadata */}
                         <div>
-                            <p className="text-[13px] text-gray-500 uppercase font-semibold tracking-wide mb-2 flex items-center gap-1.5">
+                            <p className="text-[13px] text-gray-500 uppercase font-semibold mb-2 flex items-center gap-1.5">
                                 <FileText size={14} className="text-blue-600" /> Xem chi tiết văn bản dự thảo VBQPPL
                             </p>
                             <h1 className="text-[26px] md:text-[32px] font-bold text-[#0f4c81] leading-tight mb-6">
@@ -911,7 +911,7 @@ const DuThaoDetailPage = () => {
                         {/* Timeline (UC58) */}
                         <div className="bg-white rounded-xl border border-t-[3px] border-t-emerald-500 border-gray-100 shadow-sm p-6 text-sm">
                             <div className="flex items-center justify-between border-b border-gray-100 pb-3 mb-5">
-                                <h3 className="text-[16px] font-bold text-gray-800 uppercase tracking-wide">Tiến độ xây dựng</h3>
+                                <h3 className="text-[16px] font-bold text-gray-800 uppercase">Tiến độ xây dựng</h3>
                                 <button
                                     onClick={() => setShowTimelinePopup(true)}
                                     className="text-[12px] font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded transition-colors"
@@ -949,7 +949,7 @@ const DuThaoDetailPage = () => {
 
                         {/* Thông tin liên quan (UC57) */}
                         <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
-                            <h3 className="text-[16px] font-bold text-gray-800 border-b border-gray-100 pb-3 mb-5 uppercase tracking-wide">Thông tin liên quan</h3>
+                            <h3 className="text-[16px] font-bold text-gray-800 border-b border-gray-100 pb-3 mb-5 uppercase">Thông tin liên quan</h3>
                             {doc.related.length === 0 ? (
                                 <p className="text-center text-gray-400 py-4">Chưa có thông tin liên quan.</p>
                             ) : (
@@ -963,7 +963,7 @@ const DuThaoDetailPage = () => {
                                                         }`}>{rel.type}</span>
                                                 </div>
                                                 <a href="#" className="text-[14px] font-semibold text-gray-800 hover:text-blue-600 hover:underline leading-snug line-clamp-2 mb-1.5">{rel.title}</a>
-                                                <div className="text-[11px] text-gray-400 font-medium tracking-wide">{rel.date}</div>
+                                                <div className="text-[11px] text-gray-400 font-medium">{rel.date}</div>
                                             </div>
                                         ))}
                                     </div>
@@ -981,14 +981,14 @@ const DuThaoDetailPage = () => {
 
                         {/* Dự thảo khác */}
                         <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
-                            <h3 className="text-[16px] font-bold text-gray-800 border-b border-gray-100 pb-3 mb-4 uppercase tracking-wide">Dự thảo khác</h3>
+                            <h3 className="text-[16px] font-bold text-gray-800 border-b border-gray-100 pb-3 mb-4 uppercase">Dự thảo khác</h3>
                             <div className="space-y-4">
                                 {DRAFTS_KHAC.map((draft) => (
                                     <div key={draft.id} className="pb-4 border-b border-gray-50 last:border-b-0 last:pb-0">
                                         <Link to={`/du-thao/${draft.id}`} className="text-[14px] font-semibold text-[#1a3b8b] hover:text-orange-500 hover:underline leading-snug block mb-1.5">
                                             {draft.title}
                                         </Link>
-                                        <span className="text-[11px] text-gray-500 font-medium tracking-wide">{draft.date}</span>
+                                        <span className="text-[11px] text-gray-500 font-medium">{draft.date}</span>
                                     </div>
                                 ))}
                             </div>
@@ -997,7 +997,7 @@ const DuThaoDetailPage = () => {
                         {/* Support Card */}
                         <div className="bg-gradient-to-br from-[#1a3b8b] to-blue-800 rounded-xl shadow-md p-6 text-white relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full -mr-10 -mt-10"></div>
-                            <p className="font-bold text-[16px] mb-2 uppercase tracking-wide relative z-10">Hỗ trợ</p>
+                            <p className="font-bold text-[16px] mb-2 uppercase relative z-10">Hỗ trợ</p>
                             <p className="text-[13px] text-blue-100 mb-4 opacity-90 leading-relaxed relative z-10">Nếu bạn gặp khó khăn trong việc đóng góp ý kiến hoặc cần cung cấp thêm tài liệu, vui lòng liên hệ trực tiếp:</p>
                             <div className="text-[14px] font-bold flex items-center gap-2 mb-2 relative z-10"><Building2 size={16} /> Bộ Công an</div>
                             <div className="text-[13px] flex items-center gap-2 relative z-10"><div className="w-5 h-5 rounded bg-white/20 flex items-center justify-center font-bold">@</div> duthap@bocongan.gov.vn</div>

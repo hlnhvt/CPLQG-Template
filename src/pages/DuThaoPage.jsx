@@ -112,7 +112,7 @@ const TabDanhSach = () => {
     const [showAdvanced, setShowAdvanced] = useState(false);
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
-    
+
     // Sidebar filters
     const [selOrgs, setSelOrgs] = useState([]);
     const [selTypes, setSelTypes] = useState([]);
@@ -141,7 +141,7 @@ const TabDanhSach = () => {
                         <button onClick={() => { setSelOrgs([]); setSelTypes([]); }} className="text-[11px] text-blue-600 hover:underline">Bỏ lọc</button>
                     )}
                 </div>
-                
+
                 <div className="mb-5">
                     <p className="font-semibold text-[11px] text-gray-500 uppercase tracking-wide mb-2">Cơ quan soạn thảo</p>
                     <label className="flex items-center gap-2 text-[13px] text-gray-600 cursor-pointer mb-1">
@@ -208,7 +208,7 @@ const TabDanhSach = () => {
                         </div>
                     </div>
 
-                    {showAdvanced && <AdvancedSearchForm onClear={() => {}} />}
+                    {showAdvanced && <AdvancedSearchForm onClear={() => { }} />}
                 </div>
 
                 {/* Danh sách */}
@@ -216,7 +216,7 @@ const TabDanhSach = () => {
                     <div className="flex justify-between items-center border-b border-gray-100 pb-3 mb-4">
                         <p className="text-[13px] text-gray-500 italic">Có tất cả {filtered.length} dự thảo</p>
                         <select value={perPage} onChange={e => { setPerPage(+e.target.value); setPage(1); }}
-                                className="border border-gray-200 rounded px-2 py-1 text-[12px] outline-none focus:border-blue-400 bg-white text-gray-600">
+                            className="border border-gray-200 rounded px-2 py-1 text-[12px] outline-none focus:border-blue-400 bg-white text-gray-600">
                             <option value="10">10 văn bản/trang</option>
                             <option value="20">20 văn bản/trang</option>
                             <option value="50">50 văn bản/trang</option>
@@ -236,10 +236,10 @@ const TabDanhSach = () => {
                                         {String((page - 1) * perPage + idx + 1).padStart(2, '0')}
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                                {/* Nhanhl2: Replaced <a> with <Link> for Title Routing */}
-                                                <Link to={`/du-thao/${doc.id}`} className="text-[14px] font-bold text-blue-700 hover:underline leading-snug block mb-1">
-                                                    {doc.title}
-                                                </Link>
+                                        {/* Nhanhl2: Replaced <a> with <Link> for Title Routing */}
+                                        <Link to={`/du-thao/${doc.id}`} className="text-[14px] font-bold text-blue-700 hover:underline leading-snug block mb-1">
+                                            {doc.title}
+                                        </Link>
                                         <div className="flex flex-wrap items-center gap-3 text-[11px] text-gray-500 mb-2">
                                             <span className="font-semibold text-gray-600">{doc.org}</span>
                                             <span className="w-1 h-1 rounded-full bg-gray-300"></span>
@@ -247,7 +247,7 @@ const TabDanhSach = () => {
                                         </div>
                                         <div className="flex gap-2">
                                             <button className="text-[11px] px-2 py-1 border border-gray-300 rounded hover:border-blue-400 hover:text-blue-600 transition-colors text-gray-600 bg-white">Toàn văn</button>
-                                            <button className="text-[11px] px-2 py-1 border border-gray-300 rounded hover:border-blue-400 hover:text-blue-600 transition-colors text-gray-600 bg-white flex items-center gap-1"><Download size={11}/> Tải về dự thảo</button>
+                                            <button className="text-[11px] px-2 py-1 border border-gray-300 rounded hover:border-blue-400 hover:text-blue-600 transition-colors text-gray-600 bg-white flex items-center gap-1"><Download size={11} /> Tải về dự thảo</button>
                                         </div>
                                     </div>
                                     <div className="shrink-0 text-right text-[11px] text-gray-500 min-w-[120px] space-y-1">
@@ -274,15 +274,15 @@ const TabDanhSach = () => {
 const TabXemNhieu = () => {
     const [period, setPeriod] = useState('30 ngày');
     const [page, setPage] = useState(1);
-    
+
     // Sort array by views descending
-    const sorted = [...MOCK_DUTHAO].sort((a,b) => b.views - a.views);
-    const items = sorted.slice((page-1)*10, page*10);
+    const sorted = [...MOCK_DUTHAO].sort((a, b) => b.views - a.views);
+    const items = sorted.slice((page - 1) * 10, page * 10);
 
     return (
         <div className="flex gap-6 items-start">
             <aside className="hidden lg:block w-64 shrink-0 bg-white rounded-xl border border-gray-100 shadow-sm p-4 sticky top-4">
-                 <div className="flex items-center justify-between mb-3 border-b border-gray-100 pb-2">
+                <div className="flex items-center justify-between mb-3 border-b border-gray-100 pb-2">
                     <span className="font-bold text-[14px] text-gray-800">Bộ lọc</span>
                 </div>
                 <div className="mb-5">
@@ -293,14 +293,14 @@ const TabXemNhieu = () => {
                     ))}
                 </div>
                 <div>
-                     <p className="font-semibold text-[11px] text-gray-500 uppercase tracking-wide mb-2">Loại dự thảo</p>
+                    <p className="font-semibold text-[11px] text-gray-500 uppercase tracking-wide mb-2">Loại dự thảo</p>
                     <label className="flex items-center gap-2 text-[13px] text-gray-600 cursor-pointer mb-1"><input type="checkbox" defaultChecked className="accent-blue-700" /> Tất cả</label>
                 </div>
             </aside>
 
             <div className="flex-1 min-w-0">
-                 {/* Top Controls */}
-                 <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 mb-4">
+                {/* Top Controls */}
+                <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 mb-4">
                     <div className="flex flex-wrap items-center justify-between gap-4">
                         <div className="flex gap-2">
                             {['7 ngày', '30 ngày', '3 tháng', 'Tất cả'].map(t => (
@@ -311,7 +311,7 @@ const TabXemNhieu = () => {
                             ))}
                         </div>
                         <div className="flex gap-2 sm:max-w-xs w-full">
-                             <div className="relative flex-1">
+                            <div className="relative flex-1">
                                 <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                                 <input className="w-full pl-9 pr-3 py-1.5 border border-gray-200 rounded-lg text-[13px] outline-none focus:border-blue-400" placeholder="Tìm kiếm..." />
                             </div>
@@ -325,33 +325,33 @@ const TabXemNhieu = () => {
                     <p className="text-[13px] text-gray-500 italic border-b border-gray-100 pb-3 mb-4">Có tất cả {sorted.length} dự thảo xem nhiều trong {period}</p>
                     <div className="space-y-4">
                         {items.map((doc, idx) => (
-                             <div key={doc.id} className="flex gap-4 pb-4 border-b border-gray-50 last:border-b-0">
+                            <div key={doc.id} className="flex gap-4 pb-4 border-b border-gray-50 last:border-b-0">
                                 <div className={`w-10 h-10 rounded-xl text-white text-[14px] font-bold flex items-center justify-center shrink-0 shadow-sm
                                     ${idx === 0 ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' :
-                                      idx === 1 ? 'bg-gradient-to-br from-gray-300 to-gray-500' :
-                                      idx === 2 ? 'bg-gradient-to-br from-[#CD7F32] to-[#A0522D]' : 'bg-[#1a3b8b]/10 text-[#1a3b8b] shadow-none'}`}>
+                                        idx === 1 ? 'bg-gradient-to-br from-gray-300 to-gray-500' :
+                                            idx === 2 ? 'bg-gradient-to-br from-[#CD7F32] to-[#A0522D]' : 'bg-[#1a3b8b]/10 text-[#1a3b8b] shadow-none'}`}>
                                     {idx + 1}
                                 </div>
                                 <div className="flex-1 min-w-0 mt-0.5">
-{/* Nhanhl2: Replaced <a> with <Link> for Title Routing */}
+                                    {/* Nhanhl2: Replaced <a> with <Link> for Title Routing */}
                                     <Link to={`/du-thao/${doc.id}`} className="text-[14px] font-bold text-blue-700 hover:underline leading-snug block mb-1">
                                         {doc.title}
                                     </Link>
                                     <div className="flex items-center gap-1 text-[12px] text-blue-600 font-semibold mb-1">
-                                        <Eye size={12}/> {doc.views.toLocaleString('vi-VN')} lượt xem
+                                        <Eye size={12} /> {doc.views.toLocaleString('vi-VN')} lượt xem
                                     </div>
-                                     <div className="flex gap-2 mt-2">
+                                    <div className="flex gap-2 mt-2">
                                         <button className="text-[11px] px-2 py-1 border border-gray-300 rounded hover:border-blue-400 hover:text-blue-600 transition-colors text-gray-600">Toán văn</button>
                                     </div>
                                 </div>
-                                 <div className="shrink-0 text-right text-[11px] text-gray-500 min-w-[120px] space-y-1">
+                                <div className="shrink-0 text-right text-[11px] text-gray-500 min-w-[120px] space-y-1">
                                     <p><span className="text-gray-400">Đăng:</span> {doc.ngayDang}</p>
                                     <p><span className="text-gray-400">Hạn:</span> <span className={doc.isExpired ? "text-red-500" : ""}>{doc.hanGopY}</span></p>
                                 </div>
                             </div>
                         ))}
                     </div>
-                    <Pagination current={page} total={Math.ceil(sorted.length/10)} onChange={setPage} />
+                    <Pagination current={page} total={Math.ceil(sorted.length / 10)} onChange={setPage} />
                 </div>
             </div>
         </div>
@@ -366,7 +366,7 @@ const TabThongKe = () => {
             <div className="bg-white border border-gray-100 rounded-xl shadow-sm p-6 overflow-hidden">
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
                     <h2 className="text-[18px] font-bold text-[#0f4c81] flex items-center gap-2">
-                        <BarChart2 className="text-blue-500"/> Thống kê dự thảo mới
+                        <BarChart2 className="text-blue-500" /> Thống kê dự thảo mới
                     </h2>
                     <select className="border border-gray-200 rounded-lg px-3 py-1.5 text-[13px] font-medium outline-none text-gray-700 focus:border-blue-400 bg-gray-50">
                         <option>30 ngày qua</option>
@@ -377,17 +377,17 @@ const TabThongKe = () => {
                 </div>
 
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                     {[
-                         { lbl: 'Tổng số dự thảo', val: '2,405', color: 'blue' },
-                         { lbl: 'Dự thảo mới trong kỳ', val: '142', color: 'emerald' },
-                         { lbl: 'Đang lấy ý kiến', val: '86', color: 'indigo' },
-                         { lbl: 'Dự thảo hết hạn', val: '56', color: 'rose' },
-                     ].map(card => (
-                         <div key={card.lbl} className={`bg-${card.color}-50 border border-${card.color}-100 rounded-xl p-4 flex flex-col items-center justify-center text-center`}>
+                    {[
+                        { lbl: 'Tổng số dự thảo', val: '2,405', color: 'blue' },
+                        { lbl: 'Dự thảo mới trong kỳ', val: '142', color: 'emerald' },
+                        { lbl: 'Đang lấy ý kiến', val: '86', color: 'indigo' },
+                        { lbl: 'Dự thảo hết hạn', val: '56', color: 'rose' },
+                    ].map(card => (
+                        <div key={card.lbl} className={`bg-${card.color}-50 border border-${card.color}-100 rounded-xl p-4 flex flex-col items-center justify-center text-center`}>
                             <p className={`text-[12px] font-semibold text-${card.color}-700 opacity-80 mb-1`}>{card.lbl}</p>
                             <p className={`text-[28px] font-bold text-${card.color}-800`}>{card.val}</p>
-                         </div>
-                     ))}
+                        </div>
+                    ))}
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -395,16 +395,16 @@ const TabThongKe = () => {
                     <div>
                         <p className="font-semibold text-[13px] text-gray-700 mb-4 text-center">Số lượng dự thảo mới theo tuần</p>
                         <div className="h-64 flex items-end justify-between gap-2 border-b border-l border-gray-200 pb-2 pl-2">
-                             {[40, 65, 30, 85].map((h, i) => (
-                                 <div key={i} className="w-1/4 flex flex-col items-center group relative">
+                            {[40, 65, 30, 85].map((h, i) => (
+                                <div key={i} className="w-1/4 flex flex-col items-center group relative">
                                     <div className="w-12 bg-blue-500 rounded-t-sm hover:bg-blue-600 transition-colors relative" style={{ height: `${h}%` }}>
-                                         <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[11px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                                        <div className="absolute -top-7 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-[11px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
                                             {h} dự thảo
-                                         </div>
+                                        </div>
                                     </div>
-                                    <span className="text-[11px] text-gray-500 absolute -bottom-6">Tuần {i+1}</span>
-                                 </div>
-                             ))}
+                                    <span className="text-[11px] text-gray-500 absolute -bottom-6">Tuần {i + 1}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
@@ -423,11 +423,11 @@ const TabThongKe = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 {/* Data Table */}
                 <div className="mt-8 border border-gray-200 rounded-lg overflow-hidden">
                     <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center cursor-pointer">
-                        <p className="font-semibold text-[13px] text-gray-700 flex items-center gap-2"><FileSpreadsheet size={15}/> Bảng dữ liệu</p>
+                        <p className="font-semibold text-[13px] text-gray-700 flex items-center gap-2"><FileSpreadsheet size={15} /> Bảng dữ liệu</p>
                         <ChevronDown size={15} className="text-gray-500" />
                     </div>
                 </div>
@@ -437,7 +437,7 @@ const TabThongKe = () => {
             <div className="bg-white border border-gray-100 rounded-xl shadow-sm p-6 overflow-hidden">
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-gray-100">
                     <h2 className="text-[18px] font-bold text-teal-700 flex items-center gap-2">
-                        <Activity className="text-teal-500"/> Văn bản mới sắp có hiệu lực
+                        <Activity className="text-teal-500" /> Văn bản mới sắp có hiệu lực
                     </h2>
                     <select className="border border-gray-200 rounded-lg px-3 py-1.5 text-[13px] font-medium outline-none text-gray-700 focus:border-teal-400 bg-gray-50">
                         <option>Trong 30 ngày tới</option>
@@ -450,21 +450,21 @@ const TabThongKe = () => {
                     {/* Metrics + Chart */}
                     <div className="lg:col-span-2 space-y-6">
                         <div className="grid grid-cols-3 gap-4">
-                             {[
-                                 { lbl: 'Tổng VB sắp có hiệu lực', val: '430', color: 'teal' },
-                                 { lbl: 'Trong tháng này', val: '125', color: 'cyan' },
-                                 { lbl: 'Trong quý này', val: '210', color: 'blue' },
-                             ].map(card => (
-                                 <div key={card.lbl} className={`bg-${card.color}-50 border border-${card.color}-100 rounded-xl p-4 text-center`}>
+                            {[
+                                { lbl: 'Tổng VB sắp có hiệu lực', val: '430', color: 'teal' },
+                                { lbl: 'Trong tháng này', val: '125', color: 'cyan' },
+                                { lbl: 'Trong quý này', val: '210', color: 'blue' },
+                            ].map(card => (
+                                <div key={card.lbl} className={`bg-${card.color}-50 border border-${card.color}-100 rounded-xl p-4 text-center`}>
                                     <p className={`text-[11px] font-semibold text-${card.color}-700 opacity-80 mb-1`}>{card.lbl}</p>
                                     <p className={`text-[24px] font-bold text-${card.color}-800`}>{card.val}</p>
-                                 </div>
-                             ))}
+                                </div>
+                            ))}
                         </div>
 
                         <div>
                             <p className="font-semibold text-[13px] text-gray-700 mb-4 text-center">Phân bổ theo lĩnh vực</p>
-                             <div className="flex items-center justify-center h-48 gap-8">
+                            <div className="flex items-center justify-center h-48 gap-8">
                                 <div className="relative w-32 h-32 rounded-full border-[1rem] border-t-teal-500 border-r-blue-500 border-b-indigo-500 border-l-purple-500"></div>
                                 <div className="space-y-2 text-[12px] text-gray-600">
                                     <p className="flex items-center gap-2"><span className="w-2.5 h-2.5 rounded bg-teal-500"></span> Kinh tế (40%)</p>
@@ -480,10 +480,10 @@ const TabThongKe = () => {
                     <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
                         <p className="font-bold text-[13px] text-gray-800 mb-4 uppercase tracking-wide border-b border-gray-200 pb-2">Văn bản sắp có hiệu lực gần nhất</p>
                         <div className="space-y-4">
-                            {[1,2,3,4].map(idx => (
+                            {[1, 2, 3, 4].map(idx => (
                                 <div key={idx} className="pb-3 border-b border-gray-100 last:border-b-0 last:pb-0">
                                     <a href="#" className="font-semibold text-[12px] text-blue-700 hover:underline leading-tight line-clamp-2 mb-1.5">
-                                        Nghị định số {idx*11}/2026/NĐ-CP quy định chi tiết thi hành một số điều của Luật
+                                        Nghị định số {idx * 11}/2026/NĐ-CP quy định chi tiết thi hành một số điều của Luật
                                     </a>
                                     <div className="flex items-center justify-between">
                                         <span className="text-[11px] text-gray-500">Có hiệu lực: 1{idx}/04/2026</span>
@@ -517,7 +517,7 @@ const DuThaoPage = () => {
             <div className="bg-[#1a3b8b] py-6">
                 <div className="container mx-auto px-4 max-w-[1280px]">
                     <h1 className="text-[28px] font-bold text-white mb-2 relative inline-block">
-                        Dự thảo VBQPPL
+                        Dự thảo văn bản quy phạm pháp luật
                         <div className="absolute -bottom-2 left-0 w-16 h-1 bg-[#fdb714]"></div>
                     </h1>
                     <p className="text-blue-100 text-[14px] mt-4 opacity-90 max-w-2xl">
@@ -531,9 +531,8 @@ const DuThaoPage = () => {
                 <div className="container mx-auto px-4 max-w-[1280px] flex gap-2 overflow-x-auto no-scrollbar">
                     {tabs.map(t => (
                         <button key={t.id} onClick={() => setActiveTab(t.id)}
-                            className={`px-5 py-3.5 text-[14px] font-bold transition-all border-b-[3px] whitespace-nowrap ${
-                                activeTab === t.id ? 'border-[#fdb714] text-[#1a3b8b]' : 'border-transparent text-gray-500 hover:text-[#1a3b8b]'
-                            }`}>
+                            className={`px-5 py-3.5 text-[14px] font-bold transition-all border-b-[3px] whitespace-nowrap ${activeTab === t.id ? 'border-[#fdb714] text-[#1a3b8b]' : 'border-transparent text-gray-500 hover:text-[#1a3b8b]'
+                                }`}>
                             {t.label}
                         </button>
                     ))}
