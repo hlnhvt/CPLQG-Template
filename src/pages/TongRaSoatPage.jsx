@@ -405,7 +405,7 @@ const TongRaSoatPage = () => {
                                 {/* Attached Documents Section */}
                                 <div className="mt-10 pt-8 border-t border-gray-100">
                                     <h4 className="text-gray-900 font-bold text-lg mb-6 flex items-center gap-2">
-                                        Văn bản, tài liệu liên quan
+                                        Văn bản đính kèm
                                     </h4>
                                     <div className="grid grid-cols-1 gap-4">
                                         {[
