@@ -414,7 +414,7 @@ const TongRaSoatPage = () => {
                                                 file: '/Quy_che_hoat_dong_cua_BCD_tong_ra_soat_he_thong_VBQPPL_1775821347869.pdf'
                                             },
                                             {
-                                                title: 'Nghị quyết số 2093/NQ-UBNTVQH15 của Ủy ban Thường vụ Quốc hội thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật',
+                                                title: 'Nghị quyết số 2093/NQ-UBNTVQH15 ngày 03/4/2026 của Ủy ban Thường vụ Quốc hội thành lập Ban Chỉ đạo tổng rà soát hệ thống văn bản quy phạm pháp luật',
                                                 file: '/Nghi_quyet_so_2093.UBTVQH15_ve_thanh_lap_BCD_tong_ra_soat_he_thong_VBQPPL_1775270062866.pdf'
                                             }
                                         ].map((doc, idx) => (
