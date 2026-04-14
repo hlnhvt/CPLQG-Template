@@ -286,14 +286,9 @@ const Header = () => {
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <a href="#" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
-                                    Trợ giúp pháp lý <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
-                                </a>
-                                <div className="absolute top-full left-0 mt-0 w-64 bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400 p-2">
-                                    <ul className="text-sm text-gray-200 font-normal space-y-1">
-                                        <li><Link to="/tro-giup-phap-ly" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded"><span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>Trợ giúp pháp lý</Link></li>
-                                    </ul>
-                                </div>
+                                <Link to="/tro-giup-phap-ly" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
+                                    Trợ giúp pháp lý
+                                </Link>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
                                 <a href="#" className="h-full flex items-center px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
@@ -448,27 +443,9 @@ const Header = () => {
                         </div>
 
                         <div className="border-b border-white/5">
-                            <button onClick={() => toggleMobileNavGroup('tgpl')} className="w-full flex items-center justify-between px-5 py-4 font-bold hover:bg-white/5 transition-colors">
+                            <Link to="/tro-giup-phap-ly" onClick={() => setIsSidebarOpen(false)} className="block px-5 py-4 font-bold hover:bg-white/5 transition-colors">
                                 Trợ giúp pháp lý
-                                <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.tgpl ? 'rotate-180' : ''}`} />
-                            </button>
-                            <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.tgpl ? 'max-h-[1000px]' : 'max-h-0'}`}>
-                                <Link to="/tro-giup-phap-ly" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Giới thiệu chung</Link>
-                                <Link to="/tro-giup-phap-ly/lich-su-phat-trien" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Lịch sử phát triển</Link>
-                                <Link to="/tro-giup-phap-ly/chuc-nang-nhiem-vu" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Chức năng, nhiệm vụ</Link>
-                                <Link to="/tro-giup-phap-ly/co-cau-to-chuc" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Cơ cấu tổ chức</Link>
-                                <Link to="/tro-giup-phap-ly/chi-dao-dieu-hanh" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Thông tin chỉ đạo, điều hành</Link>
-                                <Link to="/tro-giup-phap-ly/huong-dan-nghiep-vu" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Hướng dẫn nghiệp vụ</Link>
-                                <Link to="/tro-giup-phap-ly/an-pham" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Sách, báo, ấn phẩm</Link>
-                                <Link to="/tro-giup-phap-ly/tin-tuc" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tin tức hoạt động</Link>
-                                <Link to="/tro-giup-phap-ly/video" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Video, Phóng sự</Link>
-                                <Link to="/tro-giup-phap-ly/nghien-cuu-trao-doi" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Nghiên cứu trao đổi</Link>
-                                <Link to="/tro-giup-phap-ly/bao-cao-cong-tac" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Báo cáo công tác</Link>
-                                <Link to="/tro-giup-phap-ly/vu-viec-dien-hinh" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Vụ việc điển hình</Link>
-                                <Link to="/tro-giup-phap-ly/danh-ba" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Danh bạ điện tử</Link>
-                                <Link to="/tro-giup-phap-ly/to-chuc" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Danh sách tổ chức TGPL</Link>
-                                <Link to="/tro-giup-phap-ly/nguoi-thuc-hien" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Người thực hiện TGPL</Link>
-                            </div>
+                            </Link>
                         </div>
 
                         <div className="border-b border-white/5">
