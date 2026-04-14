@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 
 const PoliciesAndLife = () => {
     return (
-        <div className="container mx-auto px-4 pt-4 pb-8">
-            <h2 className="text-2xl font-bold text-primary border-b-2 border-primary pb-2 inline-block mb-6 uppercase tracking-wide">
+        <div className="container mx-auto px-4 pt-0 pb-8">
+            {/* <h2 className="text-2xl font-bold text-primary border-b-2 border-primary pb-2 inline-block mb-6 uppercase tracking-wide">
                 Chính sách & Cuộc sống
-            </h2>
+            </h2> */}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                 {/* Left - Ban chỉ đạo */}
                 <div>
                     <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-lg font-bold text-primary">Ban Chỉ đạo Nghị quyết số 06-NQ/TW</h3>
+                        <h3 className="text-2xl font-bold text-primary">Chính sách & Cuộc sống</h3>
                     </div>
 
                     <div className="grid grid-cols-1 gap-6">
@@ -57,7 +57,7 @@ const PoliciesAndLife = () => {
                 {/* Right - Theo dòng pháp luật */}
                 <div>
                     <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-lg font-bold text-primary">Theo dòng pháp luật</h3>
+                        <h3 className="text-2xl font-bold text-primary">Thời sự pháp luật</h3>
                     </div>
 
                     <div className="grid grid-cols-1 gap-6">

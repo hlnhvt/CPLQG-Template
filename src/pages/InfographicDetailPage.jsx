@@ -94,7 +94,7 @@ const InfographicDetailPage = () => {
     const [lightboxIndex, setLightboxIndex] = useState(null);
     const [copied, setCopied] = useState(false);
 
-    const item = INFOGRAPHIC_LIST.find(x => x.slug === slug);
+    const item = INFOGRAPHIC_LIST.find(x => x.slug === slug || x.id.toString() === slug);
 
     // If not found, redirect
     useEffect(() => {

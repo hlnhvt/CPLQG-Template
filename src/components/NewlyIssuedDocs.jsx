@@ -11,7 +11,7 @@ const NewlyIssuedDocs = () => {
 
     return (
         <div className="container mx-auto px-4 pt-6 pb-4">
-            <h2 className="text-[28px] font-bold text-[#1e3a8a] mb-4">Văn bản mới ban hành</h2>
+            <h2 className="text-[25px] font-bold text-[#1e3a8a] mb-4">Văn bản mới ban hành</h2>
             <div className="flex flex-col lg:flex-row gap-6">
                 {/* Left Column - Documents List */}
                 <div className="flex-1 lg:max-w-none">

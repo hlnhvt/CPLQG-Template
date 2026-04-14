@@ -3,10 +3,11 @@ import Hero from '../components/Hero';
 import NewlyIssuedDocs from '../components/NewlyIssuedDocs';
 import PoliciesAndLife from '../components/PoliciesAndLife';
 import EventsActivities from '../components/EventsActivities';
-import LegalRadio from '../components/LegalRadio';
+import Multimedia from '../components/Multimedia';
 import LinkedPortals from '../components/LinkedPortals';
 import RecommendedForYou from '../components/RecommendedForYou';
 import FixedBottomCarousel from '../components/FixedBottomCarousel';
+import NewsHighlightsHome from '../components/NewsHighlightsHome';
 import { useAuth } from '../contexts/AuthContext';
 
 function HomePage() {
@@ -17,12 +18,14 @@ function HomePage() {
     return (
         <>
             <Hero />
-            <div className="flex-grow">
-                {(user && hasConfiguredPrefs) && <RecommendedForYou />}
+            <div className="flex-grow bg-white">
+                {/* {(user && hasConfiguredPrefs) && <RecommendedForYou />} */}
                 <NewlyIssuedDocs />
+                <NewsHighlightsHome />
+                <hr className="w-full max-w-[1504px] mx-auto border-t border-gray-300 my-2" />
                 <PoliciesAndLife />
                 <EventsActivities />
-                <LegalRadio />
+                <Multimedia />
                 <LinkedPortals />
             </div>
             <FixedBottomCarousel />

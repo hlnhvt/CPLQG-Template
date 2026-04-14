@@ -2,13 +2,9 @@ import React, { useState, useRef } from 'react';
 import { Clock, PlayCircle, Star, Radio, Newspaper, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-// --- Sub-Navigator Category Tabs ---
 const NEWS_CATEGORIES = [
     { label: 'Tin hoạt động', path: '/tin-tuc/noi-bat' },
     { label: 'Đưa Nghị quyết Đại hội XIV của Đảng vào cuộc sống', path: '/tin-tuc/noi-bat' },
-    { label: 'Ảnh', path: '/anh' },
-    { label: 'Video', path: '/video' },
-    { label: 'Infographic', path: '/infographic' },
     { label: 'Chính sách mới', path: '/tin-tuc/noi-bat' },
     { label: 'Thời sự pháp luật', path: '/tin-tuc/noi-bat' },
     { label: 'Radio pháp luật', path: '/tin-tuc/noi-bat' },
@@ -31,7 +27,7 @@ const SubNavigator = ({ activeLabel }) => {
     };
     return (
         <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-[40]">
-            <div className="container mx-auto px-4 max-w-[1400px]">
+            <div className="container mx-auto px-4 max-w-[1286px]">
                 <div className="flex items-center h-11">
                     <div className="shrink-0 pr-3 border-r border-gray-200 flex items-center text-blue-600">
                         <Newspaper size={18} />
@@ -72,12 +68,12 @@ const NewsHighlightsPage = () => {
             {/* Sub Navigator */}
             <SubNavigator activeLabel="Tin hoạt động" />
 
-            <div className="container mx-auto px-4 py-8 max-w-[1400px]">
-                
+            <div className="container mx-auto px-4 py-8 max-w-[1286px]">
+
                 {/* 1. Top Banner */}
                 <div className="mb-8 rounded-lg overflow-hidden relative shadow-md group cursor-pointer border border-gray-100">
-                    <img 
-                        src="/1870-210-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg" 
+                    <img
+                        src="/1870-210-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg"
                         alt="Đưa Nghị quyết đại hội XIV của Đảng vào cuộc sống"
                         className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
                     />
@@ -86,7 +82,7 @@ const NewsHighlightsPage = () => {
                 {/* 2. Tin tức nổi bật */}
                 <div className="mb-12">
                     <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-red-700 inline-block pb-2 pr-8 mb-6 uppercase">Tin tức nổi bật</h2>
-                    
+
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                         {/* Cột Trái (3 tin nhỏ) */}
                         <div className="lg:col-span-1 flex flex-col space-y-4">
@@ -147,7 +143,7 @@ const NewsHighlightsPage = () => {
                 {/* 3. Chính sách mới */}
                 <div className="mb-12">
                     <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-red-700 inline-block pb-2 pr-8 mb-6 uppercase tracking-wide">Chính sách mới</h2>
-                    
+
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                         {/* Chiếm 3 cột trái */}
                         <div className="lg:col-span-3 flex flex-col">
@@ -166,7 +162,7 @@ const NewsHighlightsPage = () => {
                                     </div>
                                 </div>
                             </Link>
-                            
+
                             {/* 3 tin nhỏ phía dưới */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 {[8, 9, 10].map((id) => (
@@ -184,13 +180,13 @@ const NewsHighlightsPage = () => {
                                 ))}
                             </div>
                         </div>
-                        
+
                         {/* Banner bên phải */}
                         <div className="lg:col-span-1 h-full">
                             <div className="rounded-xl overflow-hidden bg-[#fff2e6] text-[#c92a2a] p-6 h-full flex flex-col items-center justify-center text-center shadow border border-red-200 cursor-pointer min-h-[350px]">
                                 <Star className="text-yellow-500 fill-yellow-500 mb-2" size={32} />
                                 <Star className="text-yellow-500 fill-yellow-500 mb-6" size={56} />
-                                <h3 className="font-bold text-[22px] uppercase tracking-wide leading-snug">Hoàn thiện <br/>Chính sách, thể chế <br/>Góp phần đưa đất nước <br/>Bước vào kỷ nguyên mới</h3>
+                                <h3 className="font-bold text-[22px] uppercase tracking-wide leading-snug">Hoàn thiện <br />Chính sách, thể chế <br />Góp phần đưa đất nước <br />Bước vào kỷ nguyên mới</h3>
                             </div>
                         </div>
                     </div>
@@ -228,7 +224,7 @@ const NewsHighlightsPage = () => {
                             ))}
                         </div>
                     </div>
-                    
+
                     {/* Thời sự pháp luật */}
                     <div>
                         <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-red-700 inline-block pb-2 pr-8 mb-6 uppercase tracking-wide">Thời sự pháp luật</h2>
@@ -266,7 +262,7 @@ const NewsHighlightsPage = () => {
                     <div className="flex items-center gap-2 mb-6 border-b-2 border-red-700 pb-2 inline-flex pr-8">
                         <h2 className="text-2xl font-bold text-[#0f4c81] uppercase tracking-wide">Radio Pháp luật</h2>
                     </div>
-                    
+
                     <div className="bg-white rounded-lg overflow-hidden border border-gray-200 grid grid-cols-1 lg:grid-cols-3">
                         {/* Video Player */}
                         <Link to="/news/20" className="lg:col-span-2 relative group aspect-video bg-black overflow-hidden shadow-sm block">
@@ -278,7 +274,7 @@ const NewsHighlightsPage = () => {
                                 <h3 className="text-white font-bold text-lg md:text-xl drop-shadow">Nhiều góp ý hoàn thiện dự thảo văn kiện trình Đại hội Đảng XIV</h3>
                             </div>
                         </Link>
-                        
+
                         {/* Playlist */}
                         <div className="lg:col-span-1 p-4 h-full flex flex-col bg-white">
                             <div className="flex-1 overflow-y-auto space-y-4 pr-1">
@@ -308,7 +304,7 @@ const NewsHighlightsPage = () => {
                 {/* 6. Filter Menu */}
                 <div className="py-4 border-y border-gray-100 mb-10 overflow-x-auto hidden md:block">
                     <ul className="flex justify-center items-center gap-8 min-w-max text-[14px] font-bold text-gray-700">
-                        <li><span className="text-white bg-blue-50 px-4 py-1.5 rounded-full cursor-pointer whitespace-nowrap shadow-sm"><Radio className="inline text-blue-500 mr-2" size={16}/>Mới nhất</span></li>
+                        <li><span className="text-white bg-blue-50 px-4 py-1.5 rounded-full cursor-pointer whitespace-nowrap shadow-sm"><Radio className="inline text-blue-500 mr-2" size={16} />Mới nhất</span></li>
                         <li className="hover:text-[#0f4c81] cursor-pointer whitespace-nowrap transition-colors">Tin hoạt động</li>
                         <li className="hover:text-[#0f4c81] cursor-pointer whitespace-nowrap transition-colors">Đưa Nghị quyết vào cuộc sống</li>
                         <li className="hover:text-[#0f4c81] cursor-pointer whitespace-nowrap transition-colors">Chính sách mới</li>

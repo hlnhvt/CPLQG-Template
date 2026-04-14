@@ -17,7 +17,7 @@ const EventsActivities = () => {
                             <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
                             Hoạt động nổi bật
                         </span>
-                        <h3 className="text-2xl md:text-3xl text-primary-dark uppercase leading-tight mb-6">
+                        <h3 className="text-2xl md:text-2xl text-primary-dark font-bold uppercase leading-tight mb-6">
                             CHÀO MỪNG ĐẠI HỘI ĐẠI BIỂU TOÀN QUỐC LẦN THỨ XIV CỦA ĐẢNG
                         </h3>
 
