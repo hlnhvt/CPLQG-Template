@@ -292,7 +292,6 @@ const Header = () => {
                                 <div className="absolute top-full left-0 mt-0 w-64 bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400 p-2">
                                     <ul className="text-sm text-gray-200 font-normal space-y-1">
                                         <li><Link to="/tro-giup-phap-ly" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded"><span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>Trợ giúp pháp lý</Link></li>
-                                        <li><a href="#" className="flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors rounded"><span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></span>Hỗ trợ pháp lý doanh nghiệp</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -316,6 +315,11 @@ const Header = () => {
                                             <Link to="/dien-dan/su-kien" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
                                                 <span className="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>Buổi phát trực tuyến
                                             </Link>
+                                        </li>
+                                        <li>
+                                            <a href="#" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-yellow-400 shrink-0"></span>Hỗ trợ pháp lý doanh nghiệp
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -487,6 +491,7 @@ const Header = () => {
                                 <Link to="/dien-dan" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Diễn đàn</Link>
                                 <Link to="/dien-dan/thong-ke" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Thống kê</Link>
                                 <Link to="/dien-dan/su-kien" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Buổi phát trực tuyến</Link>
+                                <a href="#" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Hỗ trợ pháp lý doanh nghiệp</a>
                             </div>
                         </div>
 
