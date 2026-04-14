@@ -214,7 +214,7 @@ const Header = () => {
             {/* Bottom Bar - Dark Blue Navigation (Desktop) */}
             <div className="hidden xl:block bg-[var(--bg-header-bottom)] text-[var(--text-on-blue)] transition-colors duration-200 relative z-[100]">
                 <div className="w-full max-w-[1350px] mx-auto px-4">
-                    <nav className="flex items-center justify-start h-[46px] text-xs xl:text-[11px] font-medium relative z-50 tracking-tight">
+                    <nav className="flex items-center justify-start h-[46px] text-xs xl:text-[12px] font-medium relative z-50 tracking-tight">
                         <ul className="flex items-center min-w-max h-full -ml-[5px]">
                             <li className="h-full border-r border-white/10">
                                 <button
