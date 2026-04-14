@@ -214,7 +214,7 @@ const Header = () => {
             {/* Bottom Bar - Dark Blue Navigation (Desktop) */}
             <div className="hidden xl:block bg-[var(--bg-header-bottom)] text-[var(--text-on-blue)] transition-colors duration-200 relative z-[100]">
                 <div className="w-full max-w-[1350px] mx-auto px-4">
-                    <nav className="flex items-center justify-start h-[46px] text-xs xl:text-sm font-medium relative z-50">
+                    <nav className="flex items-center justify-start h-[46px] text-xs xl:text-[11px] font-medium relative z-50 tracking-tight">
                         <ul className="flex items-center min-w-max h-full -ml-[5px]">
                             <li className="h-full border-r border-white/10">
                                 <button
@@ -234,7 +234,7 @@ const Header = () => {
                                     Tin tức <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
                                 <div className="absolute top-full left-0 mt-0 w-64 bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-3 text-sm text-gray-200 font-normal space-y-1">
+                                    <ul className="py-3 text-[13px] text-gray-200 font-normal space-y-1">
                                         <li>
                                             <Link to="/tin-tuc/noi-bat" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
                                                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>Tin tức nổi bật
@@ -258,7 +258,7 @@ const Header = () => {
                                     Dự thảo, văn bản pháp luật <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
                                 <div className="absolute top-full left-0 mt-0 w-64 bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-2 text-sm text-gray-200 font-normal">
+                                    <ul className="py-2 text-[13px] text-gray-200 font-normal">
                                         <li>
                                             <Link to="/van-ban" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
                                                 <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>Văn bản pháp luật
@@ -277,7 +277,7 @@ const Header = () => {
                                     Tiêu điểm chính sách <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
                                 <div className="absolute top-full left-0 mt-0 w-[420px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-2 text-sm text-gray-200 font-normal">
+                                    <ul className="py-2 text-[13px] text-gray-200 font-normal">
                                         <li><a href="#" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>Phân quyền phân cấp</a></li>
                                         <li><a href="#" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>Các số tiêu điểm chính sách trên VTV1</a></li>
                                         <li><a href="#" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>Trung tâm tài chính quốc tế tại Việt Nam</a></li>
@@ -295,7 +295,7 @@ const Header = () => {
                                     Diễn đàn, hỗ trợ pháp lý <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
                                 <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-2 text-sm text-gray-200 font-normal">
+                                    <ul className="py-2 text-[13px] text-gray-200 font-normal">
                                         <li>
                                             <Link to="/dien-dan" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
                                                 <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>Diễn đàn
@@ -324,7 +324,7 @@ const Header = () => {
                                     Phản ánh kiến nghị <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
                                 <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-2 text-sm text-gray-200 font-normal">
+                                    <ul className="py-2 text-[13px] text-gray-200 font-normal">
                                         <li>
                                             <Link to="/phan-anh-kien-nghi" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
                                                 <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>Phản ánh kiến nghị
@@ -358,7 +358,7 @@ const Header = () => {
                                     Hỏi đáp <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </Link>
                                 <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-2 text-sm text-gray-200 font-normal">
+                                    <ul className="py-2 text-[13px] text-gray-200 font-normal">
                                         <li>
                                             <Link to="/cau-hoi-phap-luat" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
                                                 <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>Danh sách câu hỏi
