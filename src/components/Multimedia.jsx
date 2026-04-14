@@ -195,7 +195,7 @@ const Multimedia = () => {
                 </div>
 
                 {/* Content Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                     {/* Featured Item (Left) */}
                     <div className="bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm transition hover:shadow-md h-full flex flex-col">
                         <div className="relative w-full aspect-video overflow-hidden shrink-0 group">
@@ -212,16 +212,16 @@ const Multimedia = () => {
                                 </div>
                             )}
                         </div>
-                        <div className="p-6 md:p-8 flex flex-col flex-grow bg-white z-10 border-t border-gray-100 shadow-[0_-4px_15px_-5px_rgba(0,0,0,0.05)]">
+                        <div className="p-4 md:p-5 flex flex-col flex-grow bg-white z-10 border-t border-gray-100 shadow-[0_-4px_15px_-5px_rgba(0,0,0,0.05)]">
                             <Link to={`${activeTab === 'Ảnh' ? '/anh' : activeTab === 'Video' ? '/video' : '/infographic'}/${currentData.featured.id}`}>
-                                <h3 className="font-bold text-[#0f4c81] text-xl md:text-2xl line-clamp-2 md:line-clamp-3 leading-tight mb-4 hover:text-blue-700 transition">
+                                <h3 className="font-bold text-[#0f4c81] text-lg md:text-xl line-clamp-2 leading-tight mb-3 hover:text-blue-700 transition">
                                     {currentData.featured.title}
                                 </h3>
                             </Link>
-                            <p className="text-gray-600 text-[14px] md:text-[15px] line-clamp-3 md:line-clamp-4 leading-relaxed mb-6">
+                            <p className="text-gray-600 text-[13px] md:text-[14px] line-clamp-2 md:line-clamp-3 leading-relaxed mb-4">
                                 {currentData.featured.description}
                             </p>
-                            <div className="flex items-center gap-4 text-[12px] text-gray-500 mt-auto pt-4">
+                            <div className="flex items-center gap-4 text-[11px] md:text-[12px] text-gray-500 mt-auto pt-2">
                                 <div className="flex items-center gap-2 bg-gray-50 border border-gray-100 rounded-md px-3 py-1.5">
                                     <Clock size={14} className="text-[#0f4c81]" /> <span className="font-medium">{currentData.featured.date}</span>
                                 </div>
@@ -230,10 +230,10 @@ const Multimedia = () => {
                     </div>
 
                     {/* List Items (Right) */}
-                    <div className="flex flex-col gap-[13.5px] h-full">
+                    <div className="flex flex-col gap-3 h-full">
                         {currentData.list.map((item) => (
-                            <div key={item.id} className="bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm transition hover:shadow-md flex flex-row p-3 items-center gap-4 group flex-1">
-                                <div className="w-[180px] shrink-0 relative aspect-video overflow-hidden rounded shadow-sm">
+                            <div key={item.id} className="bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm transition hover:shadow-md flex flex-row p-2.5 items-center gap-3.5 group flex-1">
+                                <div className="w-[160px] md:w-[175px] shrink-0 relative aspect-video overflow-hidden rounded shadow-sm">
                                     <img
                                         src={item.image}
                                         alt={item.title}
@@ -247,16 +247,16 @@ const Multimedia = () => {
                                         </div>
                                     )}
                                 </div>
-                                <div className="flex flex-col min-w-0 flex-grow py-1">
+                                <div className="flex flex-col min-w-0 flex-grow py-0.5">
                                     <Link to={`${activeTab === 'Ảnh' ? '/anh' : activeTab === 'Video' ? '/video' : '/infographic'}/${item.id}`}>
-                                        <h4 className="font-bold text-[#0f4c81] text-[14px] md:text-[15px] line-clamp-2 leading-snug mb-2 hover:text-blue-700 transition">
+                                        <h4 className="font-bold text-[#0f4c81] text-[13px] md:text-[14px] line-clamp-2 leading-snug mb-1.5 hover:text-blue-700 transition">
                                             {item.title}
                                         </h4>
                                     </Link>
-                                    <p className="text-gray-600 text-[12px] md:text-[13px] line-clamp-2 leading-relaxed mb-3">
+                                    <p className="text-gray-600 text-[11px] md:text-[12px] line-clamp-1 md:line-clamp-2 leading-relaxed mb-2">
                                         {item.description}
                                     </p>
-                                    <div className="flex items-center gap-4 text-[11px] text-gray-500 mt-auto pt-1 rounded">
+                                    <div className="flex items-center gap-4 text-[10px] md:text-[11px] text-gray-500 mt-auto rounded">
                                         <div className="flex items-center gap-1.5 bg-gray-50 border border-gray-100 rounded px-2 py-0.5">
                                             <Clock size={11} /> <span>{item.date}</span>
                                         </div>

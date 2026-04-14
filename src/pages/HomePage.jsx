@@ -22,7 +22,6 @@ function HomePage() {
                 {/* {(user && hasConfiguredPrefs) && <RecommendedForYou />} */}
                 <NewlyIssuedDocs />
                 <NewsHighlightsHome />
-                <hr className="w-full max-w-[1504px] mx-auto border-t border-gray-300 my-2" />
                 <PoliciesAndLife />
                 <EventsActivities />
                 <Multimedia />
