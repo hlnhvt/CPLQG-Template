@@ -23,8 +23,8 @@ function HomePage() {
                 <NewlyIssuedDocs />
                 <NewsHighlightsHome />
                 <PoliciesAndLife />
-                <EventsActivities />
                 <Multimedia />
+                <EventsActivities />
                 <LinkedPortals />
             </div>
             <FixedBottomCarousel />
