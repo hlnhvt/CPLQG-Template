@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ChevronRight, Scale, Search, Heart, ArrowRight } from 'lucide-react';
+import { ChevronRight, Scale, Search, Heart, ArrowRight, Flame } from 'lucide-react';
 import { Section, LIFE_CATEGORIES } from './HienKeShared';
 
 const HienKeLinhVucPage = () => {
@@ -12,9 +12,14 @@ const HienKeLinhVucPage = () => {
         setSearchTerm(q);
     }, [q]);
 
-    const filteredCategories = LIFE_CATEGORIES.filter(c =>
-        c.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // Filter then sort: hot categories first
+    const filteredCategories = useMemo(() => {
+        const filtered = LIFE_CATEGORIES.filter(c =>
+            c.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        return [...filtered].sort((a, b) => (b.isHot ? 1 : 0) - (a.isHot ? 1 : 0));
+    }, [searchTerm]);
+
     return (
         <div className="bg-gray-50 min-h-screen font-sans pb-20">
             {/* Hero Banner with Background */}
@@ -74,10 +79,32 @@ const HienKeLinhVucPage = () => {
                                     <Link
                                         key={c.id}
                                         to={`/hien-ke/gop-y-nhanh?domain=${encodeURIComponent(c.name)}`}
-                                        className="flex flex-col items-center text-center gap-2 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50 hover:-translate-y-1 hover:shadow-md transition-all group duration-300"
+                                        className={`relative flex flex-col items-center text-center gap-2 p-4 rounded-xl border transition-all group duration-300 hover:-translate-y-1 hover:shadow-md ${
+                                            c.isHot
+                                                ? 'border-orange-200 bg-gradient-to-b from-orange-50 to-amber-50/50 ring-2 ring-orange-400 ring-offset-2 hover:border-orange-400 hover:bg-orange-50'
+                                                : 'border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50'
+                                        }`}
                                     >
-                                        <c.icon size={32} strokeWidth={1.25} className="mb-1 text-purple-400 group-hover:text-[#7c3aed] group-hover:scale-110 transition-all duration-300" />
-                                        <span className="text-[13px] font-semibold text-gray-700 group-hover:text-[#7c3aed] leading-tight px-1">{c.name}</span>
+                                        {/* "Đang được quan tâm" badge */}
+                                        {c.isHot && (
+                                            <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 z-10 bg-gradient-to-r from-orange-500 to-red-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md flex items-center gap-0.5 border-2 border-white whitespace-nowrap">
+                                                <Flame size={10} fill="currentColor" strokeWidth={2} /> Đang được quan tâm
+                                            </div>
+                                        )}
+                                        <c.icon
+                                            size={32}
+                                            strokeWidth={1.25}
+                                            className={`mb-1 transition-all duration-300 group-hover:scale-110 ${
+                                                c.isHot
+                                                    ? 'text-orange-500 group-hover:text-orange-600'
+                                                    : 'text-purple-400 group-hover:text-[#7c3aed]'
+                                            }`}
+                                        />
+                                        <span className={`text-[13px] font-semibold leading-tight px-1 ${
+                                            c.isHot
+                                                ? 'text-orange-700 group-hover:text-orange-800'
+                                                : 'text-gray-700 group-hover:text-[#7c3aed]'
+                                        }`}>{c.name}</span>
                                     </Link>
                                 ))}
                             </div>
