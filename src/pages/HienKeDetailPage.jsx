@@ -34,7 +34,8 @@ Xin trân trọng cảm ơn!`,
         attachments: [
             { name: 'Du_thao_Mo_hinh_Lienthong.pdf', size: '2.5 MB' },
             { name: 'So_lieu_khao_sat_y_te.xlsx', size: '1.2 MB' }
-        ]
+        ],
+        tags: ['Dữ liệu y tế', 'Liên thông', 'Chuyển đổi số']
     };
 
     const answerData = {
@@ -127,6 +128,16 @@ Trân trọng nể trọng!`,
                                 {/* Xử lý in đậm qua markdown cơ bản bằng css */}
                                 <div dangerouslySetInnerHTML={{ __html: hienKeData.content.replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-900 font-bold">$1</strong>') }} />
                             </div>
+
+                            {hienKeData.tags && hienKeData.tags.length > 0 && (
+                                <div className="flex flex-wrap gap-2 mt-4 mb-8">
+                                    {hienKeData.tags.map((tag, idx) => (
+                                        <span key={idx} className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-600 text-[13px] font-medium rounded-md transition-colors cursor-pointer">
+                                            #{tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
 
                             {/* Attachments */}
                             {hienKeData.attachments.length > 0 && (

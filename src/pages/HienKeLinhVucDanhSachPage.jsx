@@ -8,35 +8,35 @@ import {
 // MOCK DATA for ideas
 const DOMAIN_IDEAS = {
     'Sức khỏe và Y tế': [
-        { t: 'Đề xuất giải pháp liên thông dữ liệu y tế quốc gia', e: 'Cần xây dựng chuẩn dữ liệu chung đồng bộ và bảo mật giữa các bệnh viện tuyến tỉnh và tuyến trung ương trên toàn quốc. Điều này giúp hệ thống y tế quản lý hồ sơ sức khoẻ trọn đời, hỗ trợ chẩn đoán chính xác và giúp người dân không phải lãng phí tiền bạc, thời gian làm lại các xét nghiệm cơ bản mang tính lặp lại khi chuyển tuyến.' },
-        { t: 'Kiến nghị sửa đổi quy định về đấu thầu thuốc tập trung', e: 'Quy trình đấu thầu thuốc hiện nay kéo dài qua nhiều cấp xét duyệt gây ra tình trạng thiếu thuốc cục bộ tại các bệnh viện và trạm y tế phường/xã. Cần trao quyền tự chủ một phần cho các đơn vị tự phân bổ ngân sách, với cơ chế mua sắm khẩn cấp linh hoạt để đảm bảo liên tục nguồn cung ứng thuốc bảo hiểm y tế phục vụ nhân dân.' },
-        { t: 'Giải pháp nâng cao chất lượng y tế học đường', e: 'Y tế học đường hiện nay thường chỉ dừng ở mức khám sức khỏe qua loa. Đẩy mạnh việc tập huấn sơ cấp cứu cơ bản và kỹ năng xử lý chấn thương cho giáo viên, đồng thời trang bị hệ thống tủ thuốc y tế dự phòng tiêu chuẩn và tổ chức các khoá đào tạo sơ cứu đuối nước bắt buộc tại tất cả các cấp mầm non và tiểu học.' }
+        { t: 'Đề xuất giải pháp liên thông dữ liệu y tế quốc gia', e: 'Cần xây dựng chuẩn dữ liệu chung đồng bộ và bảo mật giữa các bệnh viện tuyến tỉnh và tuyến trung ương trên toàn quốc. Điều này giúp hệ thống y tế quản lý hồ sơ sức khoẻ trọn đời, hỗ trợ chẩn đoán chính xác và giúp người dân không phải lãng phí tiền bạc, thời gian làm lại các xét nghiệm cơ bản mang tính lặp lại khi chuyển tuyến.', tags: ['Dữ liệu y tế', 'Liên thông', 'Chuyển đổi số'] },
+        { t: 'Kiến nghị sửa đổi quy định về đấu thầu thuốc tập trung', e: 'Quy trình đấu thầu thuốc hiện nay kéo dài qua nhiều cấp xét duyệt gây ra tình trạng thiếu thuốc cục bộ tại các bệnh viện và trạm y tế phường/xã. Cần trao quyền tự chủ một phần cho các đơn vị tự phân bổ ngân sách, với cơ chế mua sắm khẩn cấp linh hoạt để đảm bảo liên tục nguồn cung ứng thuốc bảo hiểm y tế phục vụ nhân dân.', tags: ['Đấu thầu', 'Thiếu thuốc', 'Bảo hiểm y tế'] },
+        { t: 'Giải pháp nâng cao chất lượng y tế học đường', e: 'Y tế học đường hiện nay thường chỉ dừng ở mức khám sức khỏe qua loa. Đẩy mạnh việc tập huấn sơ cấp cứu cơ bản và kỹ năng xử lý chấn thương cho giáo viên, đồng thời trang bị hệ thống tủ thuốc y tế dự phòng tiêu chuẩn và tổ chức các khoá đào tạo sơ cứu đuối nước bắt buộc tại tất cả các cấp mầm non và tiểu học.', tags: ['Y tế học đường', 'Sơ cấp cứu', 'Phòng tránh đuối nước'] }
     ],
     'Giáo dục và Đào tạo': [
-        { t: 'Kiến nghị giảm tải nội dung sách giáo khoa cấp tiểu học', e: 'Học sinh tiểu học hiện đang phải tiếp thu một khối lượng kiến thức quá lớn và hàn lâm so với độ tuổi. Đề nghị cải tổ toàn diện, cắt bỏ các môn học lý thuyết chuyên sâu để tập trung thời lượng giảng dạy vào các hoạt động giáo dục kỹ năng sống, rèn luyện đạo đức ứng xử và thể chất.' },
-        { t: 'Đề xuất cơ chế hỗ trợ tài chính cho giáo viên vùng sâu', e: 'Phụ cấp bám bản và phụ cấp điểm trường hiện tại chưa phản ánh đúng sự cống hiến và không đủ sức giữ chân giáo viên giỏi tại miền núi. Rất cần có thêm những gói hỗ trợ cụ thể về nhà ở công vụ chất lượng cao, phụ cấp chi phí xăng xe đi lại hàng tháng và chính sách luân chuyển sau khoảng 3-5 năm công tác.' },
-        { t: 'Sáng kiến phát triển mạng lưới hướng nghiệp cho học sinh THPT', e: 'Học sinh cấp 3 thường thiếu thông tin thực tiễn và chọn sai nghề. Cần phải đưa các buổi tham quan nhà máy, công sở vào chương trình bắt buộc, đồng thời để học sinh được lắng nghe định hướng từ chính các chuyên gia từ doanh nghiệp thay vì giới hạn trong các bài tư vấn sáo rỗng của giáo viên chủ nhiệm.' }
+        { t: 'Kiến nghị giảm tải nội dung sách giáo khoa cấp tiểu học', e: 'Học sinh tiểu học hiện đang phải tiếp thu một khối lượng kiến thức quá lớn và hàn lâm so với độ tuổi. Đề nghị cải tổ toàn diện, cắt bỏ các môn học lý thuyết chuyên sâu để tập trung thời lượng giảng dạy vào các hoạt động giáo dục kỹ năng sống, rèn luyện đạo đức ứng xử và thể chất.', tags: ['Giảm tải', 'Sách giáo khoa', 'Kỹ năng sống'] },
+        { t: 'Đề xuất cơ chế hỗ trợ tài chính cho giáo viên vùng sâu', e: 'Phụ cấp bám bản và phụ cấp điểm trường hiện tại chưa phản ánh đúng sự cống hiến và không đủ sức giữ chân giáo viên giỏi tại miền núi. Rất cần có thêm những gói hỗ trợ cụ thể về nhà ở công vụ chất lượng cao, phụ cấp chi phí xăng xe đi lại hàng tháng và chính sách luân chuyển sau khoảng 3-5 năm công tác.', tags: ['Giáo viên vùng sâu', 'Chính sách hỗ trợ', 'Luân chuyển'] },
+        { t: 'Sáng kiến phát triển mạng lưới hướng nghiệp cho học sinh THPT', e: 'Học sinh cấp 3 thường thiếu thông tin thực tiễn và chọn sai nghề. Cần phải đưa các buổi tham quan nhà máy, công sở vào chương trình bắt buộc, đồng thời để học sinh được lắng nghe định hướng từ chính các chuyên gia từ doanh nghiệp thay vì giới hạn trong các bài tư vấn sáo rỗng của giáo viên chủ nhiệm.', tags: ['Hướng nghiệp', 'THPT', 'Kinh nghiệm thực tiễn'] }
     ],
     'Giao thông vận tải': [
-        { t: 'Đề xuất mở rộng mạng lưới xe buýt trợ giá ra khu vực ven đô', e: 'Với tốc độ đô thị hoá nhanh, lượng lớn dân cư tại các khu đô thị mới ven rìa các tỉnh thành đang bị thiếu hụt nghiêm trọng cơ sở hạ tầng phương tiện công cộng, dẫn tới việc lạm dụng xe máy đi vào trung tâm gây ùn tắc giao thông và ô nhiễm. Cần trợ giá để khuyến khích các tuyến buýt vòng ngoài.' },
-        { t: 'Kiến nghị áp dụng công nghệ AI vào phạt nguội vi phạm', e: 'Triển khai mạnh mẽ mạng lưới hệ thống camera tích hợp AI (Trí tuệ nhân tạo) để tự động phát hiện, trích xuất biển số và gửi thông báo phạt nguội đối với tài xế có hành vi lấn làn, vượt đèn đỏ hay chạy quá tốc độ trên dọc các tuyến cao tốc, quốc lộ trọng điểm.' }
+        { t: 'Đề xuất mở rộng mạng lưới xe buýt trợ giá ra khu vực ven đô', e: 'Với tốc độ đô thị hoá nhanh, lượng lớn dân cư tại các khu đô thị mới ven rìa các tỉnh thành đang bị thiếu hụt nghiêm trọng cơ sở hạ tầng phương tiện công cộng, dẫn tới việc lạm dụng xe máy đi vào trung tâm gây ùn tắc giao thông và ô nhiễm. Cần trợ giá để khuyến khích các tuyến buýt vòng ngoài.', tags: ['Phương tiện công cộng', 'Trợ giá buýt', 'Giao thông ven đô'] },
+        { t: 'Kiến nghị áp dụng công nghệ AI vào phạt nguội vi phạm', e: 'Triển khai mạnh mẽ mạng lưới hệ thống camera tích hợp AI (Trí tuệ nhân tạo) để tự động phát hiện, trích xuất biển số và gửi thông báo phạt nguội đối với tài xế có hành vi lấn làn, vượt đèn đỏ hay chạy quá tốc độ trên dọc các tuyến cao tốc, quốc lộ trọng điểm.', tags: ['Trí tuệ nhân tạo', 'Phạt nguội', 'An toàn giao thông'] }
     ],
     'Bất động sản': [
-        { t: 'Kiến nghị siết chặt quản lý môi giới bất động sản', e: 'Để hạn chế tình trạng cò đất thao túng thị trường và gây nên các cơn sốt đất ảo, cần tiến hành quy định khắt khe yêu cầu tất cả các mạng lưới môi giới cá nhân phải trải qua đào tạo thi sát hạch để được cấp mã số và chứng chỉ hành nghề chính quy của nhà nước.' },
-        { t: 'Giải pháp thúc đẩy phát triển nhà ở xã hội cho công nhân', e: 'Nhằm giải quyết vấn đề an sinh cho lực lượng lao động tại các khu công nghiệp trọng điểm, cần ban hành ngay lập tức gói tín dụng ưu đãi với mức lãi suất vay cố định dưới 4% mỗi năm, cho phép các hộ gia đình công nhân được mua nhà ở xã hội và thế chấp trả góp kéo dài trong 15-20 năm.' }
+        { t: 'Kiến nghị siết chặt quản lý môi giới bất động sản', e: 'Để hạn chế tình trạng cò đất thao túng thị trường và gây nên các cơn sốt đất ảo, cần tiến hành quy định khắt khe yêu cầu tất cả các mạng lưới môi giới cá nhân phải trải qua đào tạo thi sát hạch để được cấp mã số và chứng chỉ hành nghề chính quy của nhà nước.', tags: ['Môi giới BĐS', 'Chứng chỉ hành nghề', 'Quản lý thị trường'] },
+        { t: 'Giải pháp thúc đẩy phát triển nhà ở xã hội cho công nhân', e: 'Nhằm giải quyết vấn đề an sinh cho lực lượng lao động tại các khu công nghiệp trọng điểm, cần ban hành ngay lập tức gói tín dụng ưu đãi với mức lãi suất vay cố định dưới 4% mỗi năm, cho phép các hộ gia đình công nhân được mua nhà ở xã hội và thế chấp trả góp kéo dài trong 15-20 năm.', tags: ['Nhà ở xã hội', 'Công nhân', 'Tín dụng ưu đãi'] }
     ],
     'Môi trường và Khí hậu': [
-        { t: 'Đề xuất phân loại rác thải tại nguồn có thưởng - phạt rõ ràng', e: 'Không thể tiếp tục khuyến khích bằng khẩu hiệu mà cần áp dụng cơ chế đánh thuế tiền thu gom rác theo chính khối lượng rác vô cơ không tái chế được. Đồng thời có chế độ phát bao bì miễn phí, tặng điểm tích lũy quy đổi sản phẩm để khuyến khích các hộ gia đình tự phân loại rác nhà bếp đem ủ làm phân bón hữu cơ.' }
+        { t: 'Đề xuất phân loại rác thải tại nguồn có thưởng - phạt rõ ràng', e: 'Không thể tiếp tục khuyến khích bằng khẩu hiệu mà cần áp dụng cơ chế đánh thuế tiền thu gom rác theo chính khối lượng rác vô cơ không tái chế được. Đồng thời có chế độ phát bao bì miễn phí, tặng điểm tích lũy quy đổi sản phẩm để khuyến khích các hộ gia đình tự phân loại rác nhà bếp đem ủ làm phân bón hữu cơ.', tags: ['Phân loại rác', 'Bảo vệ môi trường', 'Thuế rác thải'] }
     ],
     'Kinh tế và Đời sống': [
-        { t: 'Đề xuất miễn thuế khoán cho tiểu thương có hoàn cảnh khó khăn', e: 'Trong bối cảnh nền kinh tế có nhiều biến động, đối với những hộ kinh doanh cá thể nhỏ lẻ buôn bán tại chợ truyền thống có mức lợi nhuận hàng tháng ở mức thấp, chính quyền các địa phương cần xem xét linh hoạt thực hiện chính sách miễn giảm một phần hoặc toàn bộ thuế khoán nhằm nuôi dưỡng nguồn thu và khuyến khích họ phát triển làm ăn kinh tế.' }
+        { t: 'Đề xuất miễn thuế khoán cho tiểu thương có hoàn cảnh khó khăn', e: 'Trong bối cảnh nền kinh tế có nhiều biến động, đối với những hộ kinh doanh cá thể nhỏ lẻ buôn bán tại chợ truyền thống có mức lợi nhuận hàng tháng ở mức thấp, chính quyền các địa phương cần xem xét linh hoạt thực hiện chính sách miễn giảm một phần hoặc toàn bộ thuế khoán nhằm nuôi dưỡng nguồn thu và khuyến khích họ phát triển làm ăn kinh tế.', tags: ['Miễn thuế', 'Tiểu thương', 'An sinh xã hội'] }
     ],
     'default': [
-        { t: 'Đề xuất số hóa hoàn toàn các thủ tục hành chính cấp xã', e: 'Hiện nay nhiều nơi người dân vẫn phải sao y công chứng và nộp hàng tá giấy tờ bản cứng mặc dù dữ liệu dân cư quốc gia đã có thể trích xuất qua hệ thống thẻ CCCD gắn chip. Đề nghị chuẩn hoá và liên thông toàn diện để mọi thủ tục như đăng ký thường trú hay cấp bản sao khai sinh đều được xử lý 100% tự động qua Cổng dịch vụ công.' },
-        { t: 'Sáng kiến thành lập tổ tư vấn pháp lý trực tuyến miễn phí', e: 'Việc tiếp cận sự trợ giúp pháp lý của người nghèo và đối tượng yếu thế còn rất nhiều rào cản. Chỉnh phủ cần có nền tảng công nghệ số nơi các tổ chức, nhóm luật sư tình nguyện có thể đăng ký tham gia tư vấn trực tiếp từ xa để giải quyết tranh chấp ngay từ cơ sở, nâng cao dân trí pháp luật cho nhân dân.' },
-        { t: 'Kiến nghị tăng cường kiểm tra, rà soát an toàn cháy nổ', e: 'Trước tình trạng liên tiếp xảy ra hoả hoạn nguy hiểm cướp đi nhiều sinh mạng, đặc biệt đối với các khu vực chung cư mini, nhà trọ đông đúc sinh viên trong các hẻm sâu xe cứu hoả không vào được, cần yêu cầu các chủ hộ lắp đặt hệ thống cảnh báo cháy lan thông minh và mở lối thoát hiểm thứ hai.' },
-        { t: 'Đề xuất xây dựng quỹ an sinh hỗ trợ người lao động tự do', e: 'Về lâu dài, các tổ chức đoàn thể địa phương cần vận động xây dựng được các mô hình quỹ an sinh xã hội cấp phường hay cụm dân cư, mục tiêu chủ chốt là để tương trợ, mua bảo hiểm cho những người chạy xe ôm công nghệ, người làm thuê, bán hàng rong khi họ không may gặp bệnh hiểm nghèo hoặc tử nạn lao động.' },
-        { t: 'Kiến nghị đơn giản hóa quy trình cấp phép cơ sở kinh doanh', e: 'Quy trình khởi sự kinh doanh đối với các ngành nghề có điều kiện hiện tại vẫn còn phải qua nhiều khâu không cần thiết dễ dẫn đến hiện tượng xin cho hoặc nhũng nhiễu làm nản lòng doanh nghiệp. Đề xuất chuẩn hoá tối đa bộ hồ sơ lên không gian số và quy định rõ ràng thời hạn phản hồi hợp lệ tối đa là 5 ngày làm việc thực tế.' }
+        { t: 'Đề xuất số hóa hoàn toàn các thủ tục hành chính cấp xã', e: 'Hiện nay nhiều nơi người dân vẫn phải sao y công chứng và nộp hàng tá giấy tờ bản cứng mặc dù dữ liệu dân cư quốc gia đã có thể trích xuất qua hệ thống thẻ CCCD gắn chip. Đề nghị chuẩn hoá và liên thông toàn diện để mọi thủ tục như đăng ký thường trú hay cấp bản sao khai sinh đều được xử lý 100% tự động qua Cổng dịch vụ công.', tags: ['Số hóa', 'Thủ tục hành chính', 'Dịch vụ công'] },
+        { t: 'Sáng kiến thành lập tổ tư vấn pháp lý trực tuyến miễn phí', e: 'Việc tiếp cận sự trợ giúp pháp lý của người nghèo và đối tượng yếu thế còn rất nhiều rào cản. Chỉnh phủ cần có nền tảng công nghệ số nơi các tổ chức, nhóm luật sư tình nguyện có thể đăng ký tham gia tư vấn trực tiếp từ xa để giải quyết tranh chấp ngay từ cơ sở, nâng cao dân trí pháp luật cho nhân dân.', tags: ['Tư vấn pháp luật', 'Trợ giúp pháp lý', 'Hoạt động trực tuyến'] },
+        { t: 'Kiến nghị tăng cường kiểm tra, rà soát an toàn cháy nổ', e: 'Trước tình trạng liên tiếp xảy ra hoả hoạn nguy hiểm cướp đi nhiều sinh mạng, đặc biệt đối với các khu vực chung cư mini, nhà trọ đông đúc sinh viên trong các hẻm sâu xe cứu hoả không vào được, cần yêu cầu các chủ hộ lắp đặt hệ thống cảnh báo cháy lan thông minh và mở lối thoát hiểm thứ hai.', tags: ['PCCC', 'An toàn cháy nổ', 'Chung cư mini'] },
+        { t: 'Đề xuất xây dựng quỹ an sinh hỗ trợ người lao động tự do', e: 'Về lâu dài, các tổ chức đoàn thể địa phương cần vận động xây dựng được các mô hình quỹ an sinh xã hội cấp phường hay cụm dân cư, mục tiêu chủ chốt là để tương trợ, mua bảo hiểm cho những người chạy xe ôm công nghệ, người làm thuê, bán hàng rong khi họ không may gặp bệnh hiểm nghèo hoặc tử nạn lao động.', tags: ['Quỹ an sinh', 'Người lao động', 'Bảo hiểm xã hội'] },
+        { t: 'Kiến nghị đơn giản hóa quy trình cấp phép cơ sở kinh doanh', e: 'Quy trình khởi sự kinh doanh đối với các ngành nghề có điều kiện hiện tại vẫn còn phải qua nhiều khâu không cần thiết dễ dẫn đến hiện tượng xin cho hoặc nhũng nhiễu làm nản lòng doanh nghiệp. Đề xuất chuẩn hoá tối đa bộ hồ sơ lên không gian số và quy định rõ ràng thời hạn phản hồi hợp lệ tối đa là 5 ngày làm việc thực tế.', tags: ['Cải cách hành chính', 'Cấp phép kinh doanh', 'Chống nhũng nhiễu'] }
     ]
 };
 
@@ -44,6 +44,11 @@ const AUTHOR_NAMES = [
     'Nguyễn Văn An', 'Trần Thị Nhàn', 'Lê Hoàng Bách', 'Phạm Quỳnh Như',
     'Hoàng Anh Tuấn', 'Đặng Tuấn Phong', 'Vũ Thị Thanh', 'Đỗ Minh Trí',
     'Phan Ngọc Hải', 'Ngô Thu Thảo', 'Bùi Văn Hùng', 'Lý Quang Cường'
+];
+
+const AGENCIES = [
+    'Bộ Tư pháp', 'Bộ Y tế', 'Bộ Giáo dục và Đào tạo', 'Sở Giao thông Vận tải', 
+    'Bộ Xây dựng', 'Bộ Tài nguyên và Môi trường', 'Cục Quản lý thị trường'
 ];
 
 const generateMockIdeas = (domain) => {
@@ -67,7 +72,9 @@ const generateMockIdeas = (domain) => {
             id,
             title: template.t + titleSuffix,
             excerpt: template.e,
+            tags: template.tags || [],
             author: AUTHOR_NAMES[i % AUTHOR_NAMES.length],
+            respondingAgency: AGENCIES[i % AGENCIES.length],
             date: baseDate.toLocaleDateString('vi-VN'),
             status: 'Đã công khai',
             isResponded: Math.random() > 0.4
@@ -159,13 +166,22 @@ export default function HienKeLinhVucDanhSachPage() {
                                 Tổng hợp các ý kiến đóng góp, sáng kiến của người dân và doanh nghiệp nhằm hoàn thiện chính sách, pháp luật trong lĩnh vực {domain}.
                             </p>
                         </div>
-                        <Link
-                            to={`/hien-ke/gop-y-nhanh?domain=${encodeURIComponent(domain)}`}
-                            className="inline-flex items-center gap-2 px-6 py-3.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl shadow-lg transition-transform hover:-translate-y-1 shrink-0"
-                        >
-                            <PlusCircle size={20} />
-                            Gửi hiến kế mới
-                        </Link>
+                        <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0 mt-4 md:mt-0">
+                            <Link
+                                to="/ca-nhan/hien-ke"
+                                className="flex justify-center items-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold rounded-xl shadow-lg transition-transform hover:-translate-y-1"
+                            >
+                                <User size={20} />
+                                Hiến kế của tôi
+                            </Link>
+                            <Link
+                                to={`/hien-ke/gop-y-nhanh?domain=${encodeURIComponent(domain)}`}
+                                className="flex justify-center items-center gap-2 px-6 py-3.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl shadow-lg transition-transform hover:-translate-y-1"
+                            >
+                                <PlusCircle size={20} />
+                                Gửi hiến kế mới
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -205,12 +221,14 @@ export default function HienKeLinhVucDanhSachPage() {
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                     {/* Toolbar */}
                     <div className="p-5 md:p-6 border-b border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4 bg-gray-50/50">
-                        <h2 className="text-[18px] font-bold text-gray-900 flex items-center gap-2">
-                            <BarChart size={20} className="text-blue-600" />
-                            Danh sách hiến kế
-                        </h2>
+                        <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                            <h2 className="text-[18px] font-bold text-gray-900 flex items-center gap-2 mr-2">
+                                <BarChart size={20} className="text-blue-600" />
+                                Danh sách hiến kế
+                            </h2>
+                        </div>
 
-                        <div className="relative w-full sm:w-[350px]">
+                        <div className="relative w-full sm:w-[300px] shrink-0">
                             <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                             <input
                                 type="text"
@@ -238,9 +256,19 @@ export default function HienKeLinhVucDanhSachPage() {
                                                 </h3>
                                             </Link>
 
-                                            <p className="text-gray-600 text-[15px] leading-relaxed mb-5 line-clamp-3">
+                                            <p className="text-gray-600 text-[15px] leading-relaxed mb-4 line-clamp-3">
                                                 "{idea.excerpt}"
                                             </p>
+
+                                            {idea.tags && idea.tags.length > 0 && (
+                                                <div className="flex flex-wrap items-center gap-2 mb-5">
+                                                    {idea.tags.map((tag, idx) => (
+                                                        <span key={idx} className="px-2 py-1 bg-gray-100 hover:bg-gray-200 text-gray-600 text-[12px] font-medium rounded-md transition-colors cursor-pointer">
+                                                            #{tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            )}
 
                                             <div className="flex flex-wrap items-center gap-5 text-[13px] text-gray-600 font-medium">
                                                 <div className="flex items-center gap-2">
@@ -250,7 +278,7 @@ export default function HienKeLinhVucDanhSachPage() {
                                                                 <CheckCircle size={12} /> Đã trả lời
                                                             </span>
                                                             <span className="px-2.5 py-1 rounded bg-blue-50 text-blue-700 font-semibold border border-blue-100 flex items-center gap-1">
-                                                                Cơ quan nhà nước
+                                                                {idea.respondingAgency}
                                                             </span>
                                                         </>
                                                     ) : (
@@ -288,10 +316,7 @@ export default function HienKeLinhVucDanhSachPage() {
 
                     {/* Pagination */}
                     {totalPages > 1 && (
-                        <div className="p-5 md:p-6 border-t border-gray-100 flex items-center justify-between bg-gray-50/50">
-                            <p className="text-[13px] text-gray-500 font-medium">
-                                Trang <span className="font-bold text-gray-900">{currentPage}</span> / {totalPages}
-                            </p>
+                        <div className="p-5 md:p-6 border-t border-gray-100 flex flex-col items-center justify-center gap-3 bg-gray-50/50">
                             <div className="flex items-center gap-2">
                                 <button
                                     onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
