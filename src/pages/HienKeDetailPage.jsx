@@ -247,7 +247,7 @@ Trân trọng nể trọng!`,
                     {/* Related */}
                     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
                         <h3 className="font-bold text-[16px] text-gray-900 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
-                            <Flame size={18} className="text-orange-500" /> Hiến kế tương tự
+                            Hiến kế liên quan
                         </h3>
                         <ul className="space-y-4">
                             {relatedIdeas.map((q) => (
