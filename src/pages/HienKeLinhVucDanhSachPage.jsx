@@ -207,7 +207,7 @@ export default function HienKeLinhVucDanhSachPage() {
                     <div className="p-5 md:p-6 border-b border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4 bg-gray-50/50">
                         <h2 className="text-[18px] font-bold text-gray-900 flex items-center gap-2">
                             <BarChart size={20} className="text-blue-600" />
-                            Danh sách đóng góp
+                            Danh sách hiến kế
                         </h2>
 
                         <div className="relative w-full sm:w-[350px]">
@@ -232,36 +232,43 @@ export default function HienKeLinhVucDanhSachPage() {
                                 <div key={idea.id} className="p-5 md:p-6 hover:bg-blue-50/30 transition-colors group">
                                     <div className="flex flex-col md:flex-row md:items-start gap-4">
                                         <div className="flex-1">
-                                            <div className="flex flex-wrap items-center gap-2 mb-2">
-                                                {idea.isResponded ? (
-                                                    <span className="px-2.5 py-1 rounded-full text-[11px] font-bold border bg-green-50 text-green-600 border-green-200 flex items-center gap-1">
-                                                        <CheckCircle size={12} /> Đã phản hồi
-                                                    </span>
-                                                ) : (
-                                                    <span className="px-2.5 py-1 rounded-full text-[11px] font-bold border bg-gray-50 text-gray-500 border-gray-200">
-                                                        Chờ phản hồi
-                                                    </span>
-                                                )}
-                                            </div>
-
-                                            <Link to={`/hien-ke/${idea.id}`} className="block mb-2">
-                                                <h3 className="text-[16px] md:text-[18px] font-bold text-gray-900 group-hover:text-blue-700 transition-colors leading-snug">
+                                            <Link to={`/hien-ke/${idea.id}`} className="block mb-3">
+                                                <h3 className="text-[18px] md:text-[20px] font-bold text-[#0f3b7d] group-hover:text-blue-600 transition-colors leading-snug">
                                                     {idea.title}
                                                 </h3>
                                             </Link>
 
-                                            <p className="text-gray-600 text-[14px] leading-relaxed mb-4 line-clamp-3">
-                                                {idea.excerpt}
+                                            <p className="text-gray-600 text-[15px] leading-relaxed mb-5 line-clamp-3">
+                                                "{idea.excerpt}"
                                             </p>
 
-                                            <div className="flex flex-wrap items-center gap-4 text-[13px] text-gray-500 font-medium">
-                                                <div className="flex items-center gap-1.5 border-r border-gray-200 pr-4">
-                                                    <User size={14} className="text-gray-400" />
-                                                    <span className="text-gray-700">{idea.author}</span>
+                                            <div className="flex flex-wrap items-center gap-5 text-[13px] text-gray-600 font-medium">
+                                                <div className="flex items-center gap-2">
+                                                    {idea.isResponded ? (
+                                                        <>
+                                                            <span className="px-2.5 py-1 rounded bg-green-50 text-green-700 font-semibold border border-green-100 flex items-center gap-1">
+                                                                <CheckCircle size={12} /> Đã trả lời
+                                                            </span>
+                                                            <span className="px-2.5 py-1 rounded bg-blue-50 text-blue-700 font-semibold border border-blue-100 flex items-center gap-1">
+                                                                Cơ quan nhà nước
+                                                            </span>
+                                                        </>
+                                                    ) : (
+                                                        <span className="px-2.5 py-1 rounded bg-orange-50 text-orange-600 font-semibold border border-orange-100">
+                                                            Chờ trả lời
+                                                        </span>
+                                                    )}
                                                 </div>
-                                                <div className="flex items-center gap-1.5">
-                                                    <Clock size={13} className="text-gray-400" />
-                                                    <span>{idea.date}</span>
+                                                
+                                                <div className="flex flex-wrap items-center gap-4 ml-auto md:ml-0">
+                                                    <div className="flex items-center gap-1.5">
+                                                        <Clock size={14} className="text-gray-400" />
+                                                        <span>{idea.date}</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-1.5">
+                                                        <User size={14} className="text-gray-400" />
+                                                        <span className="text-gray-700">{idea.author}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

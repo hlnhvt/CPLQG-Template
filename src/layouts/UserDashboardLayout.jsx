@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink, useLocation, Link } from 'react-router-dom';
-import { User, Settings, Bookmark, Bell, PenTool, LayoutDashboard, ChevronRight, History, ChevronLeft, Menu, Camera, ShieldCheck, Edit3, Share2, Building2, MapPin, MoreHorizontal, Home, MessageSquare, Hash, HelpCircle, FileText } from 'lucide-react';
+import { User, Settings, Bookmark, Bell, PenTool, LayoutDashboard, ChevronRight, History, ChevronLeft, Menu, Camera, ShieldCheck, Edit3, Share2, Building2, MapPin, MoreHorizontal, Home, MessageSquare, Hash, HelpCircle, FileText, Lightbulb } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const UserDashboardLayout = () => {
@@ -59,6 +59,7 @@ const UserDashboardLayout = () => {
         { path: '/ca-nhan/tin-bai', icon: LayoutDashboard, label: 'Tin bài cộng tác viên' },
         { path: '/ca-nhan/dang-ky-cong-tac-vien', icon: PenTool, label: 'Đăng ký cộng tác viên' },
         { path: '/ca-nhan/cau-hoi-ca-nhan', icon: HelpCircle, label: 'Quản lý câu hỏi của tôi' },
+        { path: '/ca-nhan/hien-ke', icon: Lightbulb, label: 'Hiến kế của tôi' },
         { path: '/ca-nhan/phan-anh-kien-nghi', icon: FileText, label: 'Phản ánh kiến nghị của tôi' },
     ];
 

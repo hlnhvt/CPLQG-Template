@@ -91,6 +91,7 @@ import DatLichTuVanPage from './pages/cau-hoi-phap-luat/DatLichTuVanPage';
 import DanhSachCauHoiCaNhanPage from './pages/dashboard/DanhSachCauHoiCaNhanPage';
 import CauHoiCaNhanDetailPage from './pages/dashboard/CauHoiCaNhanDetailPage';
 import UserPetitionsPage from './pages/dashboard/UserPetitionsPage';
+import UserHienKePage from './pages/dashboard/UserHienKePage';
 
 // Onboarding import
 import OnboardingPage from './pages/onboarding/OnboardingPage';
@@ -262,6 +263,7 @@ const AppLayout = () => {
                         <Route path="dien-dan-quan-tam" element={<FollowedForumsPage />} />
                         <Route path="cau-hoi-ca-nhan" element={<DanhSachCauHoiCaNhanPage />} />
                         <Route path="cau-hoi-ca-nhan/:id" element={<CauHoiCaNhanDetailPage />} />
+                        <Route path="hien-ke" element={<UserHienKePage />} />
                         <Route path="phan-anh-kien-nghi" element={<UserPetitionsPage />} />
                     </Route>
 
