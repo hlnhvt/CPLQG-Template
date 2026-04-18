@@ -47,6 +47,7 @@ const OfficerDashboardLayout = () => {
 
     const menuItems = [
         { path: '/can-bo/trang-chu', icon: Home, label: 'Trang chủ cán bộ' },
+        { path: '/can-bo/phan-hoi-hien-ke', icon: MessageSquare, label: 'Phản hồi hiến kế' },
         { path: '/can-bo/ho-so', icon: User, label: 'Hồ sơ cán bộ' },
         { path: '/can-bo/cai-dat', icon: Settings, label: 'Cấu hình cá nhân hóa' },
         // { path: '/can-bo/lich-su', icon: History, label: 'Lịch sử hoạt động' },

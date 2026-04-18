@@ -130,6 +130,8 @@ import OfficerDashboardLayout from './layouts/OfficerDashboardLayout';
 import OfficerHomePage from './pages/dashboard/OfficerHomePage';
 import OfficerProfilePage from './pages/dashboard/OfficerProfilePage';
 import OfficerSettingsPage from './pages/dashboard/OfficerSettingsPage';
+import OfficerHienKePage from './pages/dashboard/OfficerHienKePage';
+import OfficerHienKeDetailPage from './pages/dashboard/OfficerHienKeDetailPage';
 
 
 const AppLayout = () => {
@@ -272,6 +274,8 @@ const AppLayout = () => {
                         <Route path="trang-chu" element={<OfficerHomePage />} />
                         <Route path="ho-so" element={<OfficerProfilePage />} />
                         <Route path="cai-dat" element={<OfficerSettingsPage />} />
+                        <Route path="phan-hoi-hien-ke" element={<OfficerHienKePage />} />
+                        <Route path="phan-hoi-hien-ke/:id" element={<OfficerHienKeDetailPage />} />
                     </Route>
 
                     {/* Full-screen Editor Routes */}

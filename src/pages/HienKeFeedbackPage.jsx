@@ -174,7 +174,7 @@ export default function HienKeFeedbackPage() {
                                 {/* Blockquotes Section */}
                                 <div className="my-10 space-y-6">
                                     <div className="relative p-6 md:p-8 bg-amber-50 rounded-2xl border-l-8 border-r-8 border-amber-400 shadow-sm">
-                                        <p className="relative z-10 text-[17px] md:text-[19px] font-bold text-gray-800 leading-relaxed mb-4 italic ml-4 md:ml-6">
+                                        <p className="relative z-10 text-[17px] md:text-[19px] font-basic text-center text-gray-800 leading-relaxed mb-4 italic ml-1 md:ml-2">
                                             "Việc gì cũng phải bàn bạc với dân, hỏi ý kiến và kinh nghiệm của dân"
                                         </p>
                                         <div className="text-center">
@@ -183,15 +183,14 @@ export default function HienKeFeedbackPage() {
                                         </div>
                                     </div>
 
-                                    {/* <div className="relative p-6 md:p-8 bg-blue-50 rounded-2xl border-l-8 border-blue-600 shadow-sm">
-                                        <div className="absolute top-2 right-4 text-blue-200 opacity-50">
-                                            <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H16.017C14.9124 8 14.017 7.10457 14.017 6V3L19.017 3C20.6739 3 22.017 4.34315 22.017 6V15C22.017 16.6569 20.6739 18 19.017 18H17.017L17.017 21H14.017ZM2.01695 21L2.01695 18C2.01695 16.8954 2.91238 16 4.01695 16H7.01695C7.56923 16 8.01695 15.5523 8.01695 15V9C8.01695 8.44772 7.56923 8 7.01695 8H4.01695C2.91238 8 2.01695 7.10457 2.01695 6V3L7.01695 3C8.6738 3 10.017 4.34315 10.017 6V15C10.017 16.6569 8.6738 18 7.01695 18H5.01695L5.01695 21H2.01695Z" /></svg>
-                                        </div>
-                                        <p className="relative z-10 text-[17px] md:text-[20px] font-bold text-gray-800 leading-relaxed mb-4 italic">
-                                            "Phải đổi mới tư duy xây dựng pháp luật theo hướng vừa bảo đảm yêu cầu quản lý nhà nước, vừa khuyến khích sáng tạo, giải phóng mọi nguồn lực để phát triển. Lấy người dân, doanh nghiệp là trung tâm, chủ thể."
+                                    {/* Văn kiện Đại hội XIV */}
+                                    <div className="relative p-6 md:p-8 bg-rose-50 rounded-2xl border-l-8 border-r-8 border-rose-600 shadow-sm">
+
+                                        <p className="relative z-10 text-[16px] md:text-[19px] font-basic text-gray-800 leading-relaxed mb-4 italic text-justify">
+                                            "Phát huy mạnh mẽ vai trò chủ thể của Nhân dân... Quán triệt sâu sắc quan điểm 'Dân là gốc', Nhân dân là chủ thể, là trung tâm của công cuộc đổi mới. Xây dựng và thực hiện cơ chế, chính sách để thực hiện hiệu quả phương châm 'Dân biết, dân bàn, dân làm, dân kiểm tra, dân giám sát, dân thụ hưởng'; bảo đảm quyền Nhân dân được tham gia góp ý vào quá trình xây dựng chủ trương, đường lối của Đảng, chính sách, pháp luật của Nhà nước... Thiết lập và vận hành hiệu quả hệ thống thông tin hai chiều giữa Nhà nước và người dân, thông qua các nền tảng số, các công cụ lấy ý kiến Nhân dân."
                                         </p>
-                                        <p className="text-right font-black text-blue-700 uppercase tracking-wider">— Tổng Bí thư Tô Lâm</p>
-                                    </div> */}
+                                        <p className="text-center font-bold text-rose-700 uppercase">- Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV -</p>
+                                    </div>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -218,18 +217,18 @@ export default function HienKeFeedbackPage() {
                                     </div>
                                 </div>
 
-                                <div className="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-100 mb-8 w-full">
+                                <div className="bg-emerald-50/60 p-6 rounded-2xl border border-emerald-100 mb-8 w-full">
                                     <h3 className="text-[17px] font-bold text-[#0f172a] mb-3 flex items-center gap-2">
                                         Yêu cầu nhiệm vụ
                                     </h3>
                                     <ul className="list-none pl-0 space-y-2">
-                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-indigo-500 before:rounded-full">
+                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
                                             <strong>Thông tin hiến kế chính xác:</strong> Các ý kiến đóng góp, giải pháp hiến kế gửi về hệ thống phải đảm bảo tính xác thực, dựa trên dữ liệu khách quan và xuất phát từ cơ sở thực tiễn rõ ràng.
                                         </li>
-                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-indigo-500 before:rounded-full">
+                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
                                             <strong>Tiếp nhận, phản hồi kịp thời:</strong> Cơ quan quản lý nhà nước có trách nhiệm ghi nhận, nghiên cứu và phản hồi lại tiến độ, trạng thái xử lý đối với những hiến kế của người dân và doanh nghiệp một cách nhanh chóng nhất.
                                         </li>
-                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-indigo-500 before:rounded-full">
+                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
                                             <strong>Công khai và minh bạch:</strong> Toàn bộ quy trình tiếp nhận, đánh giá, xử lý đến khi áp dụng các sáng kiến pháp luật đều phải được minh bạch hóa trên Cổng để mọi cá nhân, tổ chức đều có quyền theo dõi, giám sát.
                                         </li>
                                     </ul>
