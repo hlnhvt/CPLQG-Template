@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Send, Paperclip, ShieldCheck, CheckCircle2, User, Lock } from 'lucide-react';
+import { ArrowLeft, Send, Paperclip, ShieldCheck, CheckCircle2, User, Lock, X, Search, ChevronDown } from 'lucide-react';
 import { LIFE_CATEGORIES } from './HienKeShared';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -21,6 +21,12 @@ const ISSUANCE_FORMS = [
     'Khác'
 ];
 
+const POPULAR_TAGS = [
+    'Chuyển đổi số', 'Sổ đỏ', 'Căn cước dân công', 'Visa', 
+    'Thuế thu nhập', 'Bảo hiểm xã hội', 'Bảo hiểm y tế', 
+    'An toàn giao thông', 'Khởi nghiệp', 'Trí tuệ nhân tạo'
+];
+
 export default function SimpleFeedbackPage() {
     const [searchParams] = useSearchParams();
     const domainQuery = searchParams.get('domain');
@@ -28,16 +34,28 @@ export default function SimpleFeedbackPage() {
     const { user } = useAuth();
 
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [tagSearch, setTagSearch] = useState('');
+    const [isTagDropdownOpen, setIsTagDropdownOpen] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
         category: '',
         issuanceForm: '',
         content: '',
+        tags: [],
         isAnonymous: false,
         name: '',
         email: '',
         phone: ''
     });
+
+    const toggleTag = (tag) => {
+        setFormData(prev => {
+            if (prev.tags.includes(tag)) {
+                return { ...prev, tags: prev.tags.filter(t => t !== tag) };
+            }
+            return { ...prev, tags: [...prev.tags, tag] };
+        });
+    };
 
     // Pre-fill from logged-in user profile
     useEffect(() => {
@@ -155,6 +173,58 @@ export default function SimpleFeedbackPage() {
                                         value={formData.content} onChange={handleChange}
                                         className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px] resize-y"
                                     />
+                                </div>
+
+                                <div>
+                                    <label className="block text-[14px] font-bold text-gray-800 mb-2">Từ khóa liên quan</label>
+                                    <div className="relative">
+                                        <div 
+                                            className={`min-h-[50px] w-full px-4 py-2 bg-gray-50 border ${isTagDropdownOpen ? 'border-blue-500 ring-2 ring-blue-500/20' : 'border-gray-200'} rounded-xl transition-all cursor-pointer flex flex-wrap gap-2 items-center`}
+                                            onClick={() => setIsTagDropdownOpen(true)}
+                                        >
+                                            {formData.tags.length > 0 && formData.tags.map(tag => (
+                                                <span key={tag} className="flex items-center gap-1.5 px-3 py-1 bg-blue-100 text-blue-700 text-[13px] font-bold rounded-lg border border-blue-200">
+                                                    {tag}
+                                                    <X size={14} className="cursor-pointer hover:text-blue-900" onClick={(e) => { e.stopPropagation(); toggleTag(tag); }} />
+                                                </span>
+                                            ))}
+                                            <input 
+                                                type="text" 
+                                                className="flex-1 min-w-[120px] bg-transparent outline-none text-[15px] placeholder:text-gray-400 py-1"
+                                                placeholder={formData.tags.length === 0 ? "Tìm kiếm từ khóa..." : ""}
+                                                value={tagSearch}
+                                                onChange={(e) => { setTagSearch(e.target.value); setIsTagDropdownOpen(true); }}
+                                                onFocus={() => setIsTagDropdownOpen(true)}
+                                            />
+                                            <ChevronDown size={20} className="text-gray-400 shrink-0 ml-auto" onClick={(e) => { e.stopPropagation(); setIsTagDropdownOpen(!isTagDropdownOpen); }}/>
+                                        </div>
+
+                                        {isTagDropdownOpen && (
+                                            <>
+                                                <div className="fixed inset-0 z-10" onClick={() => setIsTagDropdownOpen(false)}></div>
+                                                <div className="absolute top-[calc(100%+8px)] left-0 w-full bg-white border border-gray-200 rounded-xl shadow-lg z-20 max-h-64 overflow-y-auto p-2 animate-fadeIn">
+                                                    {POPULAR_TAGS.filter(t => t.toLowerCase().includes(tagSearch.toLowerCase())).length > 0 ? (
+                                                        POPULAR_TAGS.filter(t => t.toLowerCase().includes(tagSearch.toLowerCase())).map(tag => (
+                                                            <div 
+                                                                key={tag} 
+                                                                className="flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors"
+                                                                onClick={() => { toggleTag(tag); setTagSearch(''); }}
+                                                            >
+                                                                <div className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${formData.tags.includes(tag) ? 'bg-blue-600 border-blue-600' : 'border-gray-300'}`}>
+                                                                    {formData.tags.includes(tag) && <CheckCircle2 size={12} className="text-white" />}
+                                                                </div>
+                                                                <span className={`text-[14.5px] ${formData.tags.includes(tag) ? 'font-bold text-blue-700' : 'text-gray-700'}`}>{tag}</span>
+                                                            </div>
+                                                        ))
+                                                    ) : (
+                                                        <div className="px-4 py-6 text-center text-gray-500 text-[14px]">
+                                                            Không tìm thấy từ khóa nào phù hợp với "{tagSearch}"
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
 
                                 <div>
