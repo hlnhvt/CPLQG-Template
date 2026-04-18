@@ -64,6 +64,7 @@ import NghienCuuTraoDoiDetailPage from './pages/tin-tuc/NghienCuuTraoDoiDetailPa
 import HienKeDoiSongPage from './pages/HienKeDoiSongPage';
 import HienKeNoiBatPage from './pages/HienKeNoiBatPage';
 import HienKeLinhVucPage from './pages/HienKeLinhVucPage';
+import HienKeLinhVucDanhSachPage from './pages/HienKeLinhVucDanhSachPage';
 import HienKeFeedbackPage from './pages/HienKeFeedbackPage';
 
 // Forum imports
@@ -188,6 +189,7 @@ const AppLayout = () => {
                     <Route path="/hien-ke/doi-song" element={<HienKeDoiSongPage />} />
                     <Route path="/hien-ke/noi-bat" element={<HienKeNoiBatPage />} />
                     <Route path="/hien-ke/linh-vuc" element={<HienKeLinhVucPage />} />
+                    <Route path="/hien-ke/linh-vuc/danh-sach" element={<HienKeLinhVucDanhSachPage />} />
                     <Route path="/hien-ke/lien-he" element={<HienKeFeedbackPage />} />
                     <Route path="/hien-ke/:id" element={<HienKeDetailPage />} />
                     <Route path="/hien-ke/gop-y/:id" element={<ConsultFeedbackPage />} />

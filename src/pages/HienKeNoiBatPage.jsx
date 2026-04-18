@@ -82,7 +82,7 @@ const HienKeNoiBatPage = () => {
                         Chúng tôi cần bạn
                     </h1>
                     <p className="text-blue-100/90 text-[15px] max-w-3xl leading-relaxed">
-                        Nội dung, chủ đề cần sáng kiến, ý kiến đóng góp của bạn.                     </p>
+                        Tại mục này, người dân và doanh nghiệp có thể trực tiếp tham gia góp ý cho các dự thảo văn bản quy phạm pháp luật đang được lấy ý kiến theo quy định, đồng thời đề xuất các sáng kiến lập pháp nhằm chung tay hoàn thiện hệ thống pháp luật.                     </p>
                 </div>
             </div>
 

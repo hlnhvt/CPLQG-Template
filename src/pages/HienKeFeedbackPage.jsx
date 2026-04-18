@@ -173,11 +173,14 @@ export default function HienKeFeedbackPage() {
 
                                 {/* Blockquotes Section */}
                                 <div className="my-10 space-y-6">
-                                    <div className="relative p-6 md:p-8 bg-amber-50 rounded-2xl border-l-8 border-amber-400 shadow-sm">
-                                        <p className="relative z-10 text-[15px] md:text-[18px] font-basic text-gray-800 leading-relaxed mb-4 italic">
-                                            "Nước ta là nước dân chủ. Bao nhiêu lợi ích đều vì dân. Bao nhiêu quyền hạn đều của dân... Nói tóm lại, quyền hành và lực lượng đều ở nơi dân."
+                                    <div className="relative p-6 md:p-8 bg-amber-50 rounded-2xl border-l-8 border-r-8 border-amber-400 shadow-sm">
+                                        <p className="relative z-10 text-[17px] md:text-[19px] font-bold text-gray-800 leading-relaxed mb-4 italic ml-4 md:ml-6">
+                                            "Việc gì cũng phải bàn bạc với dân, hỏi ý kiến và kinh nghiệm của dân"
                                         </p>
-                                        <p className="text-right font-bold text-amber-700 uppercase">- Chủ tịch Hồ Chí Minh -</p>
+                                        <div className="text-center">
+                                            <p className="font-bold text-amber-700 uppercase">- Chủ tịch Hồ Chí Minh -</p>
+                                            <p className="text-[13.5px] text-amber-700/80 mt-1 italic">(Trích bài báo "Dân vận" đăng trên báo Sự thật, số 120, ngày 15 tháng 10 năm năm 1949)</p>
+                                        </div>
                                     </div>
 
                                     {/* <div className="relative p-6 md:p-8 bg-blue-50 rounded-2xl border-l-8 border-blue-600 shadow-sm">
@@ -198,8 +201,8 @@ export default function HienKeFeedbackPage() {
                                         </h3>
                                         <ul className="list-none pl-0 space-y-2">
                                             <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Góp phần cụ thể hóa nội dung Nghị quyết số 66-NQ/TW ngày 30/4/2025 của Bộ Chính trị về đổi mới công tác xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Thúc đẩy văn hóa, trách nhiệm xã hội của doanh nghiệp, người dân trong xây dựng, hoàn thiện hệ thống pháp luật và tổ chức thi hành hiệu quả pháp luật góp phần phát triển kinh tế - xã hội của đất nước.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Hình thành hệ sinh thái dữ liệu pháp luật mở để lắng nghe, tiếp nhận, tổng hợp các ý kiến góp ý trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và nâng cao hiệu quả thi hành pháp luật.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Lấy người dân, doanh nghiệp làm trung tâm. Thúc đẩy văn hóa, trách nhiệm xã hội của doanh nghiệp, người dân trong xây dựng, hoàn thiện hệ thống pháp luật và tổ chức thi hành hiệu quả pháp luật góp phần phát triển kinh tế - xã hội của đất nước.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Việc tiếp thu, ghi nhận và xử lý các hiến kế sẽ là cơ sở hình thành hệ sinh thái dữ liệu pháp luật. Hệ sinh thái này đóng sẽ vai trò là kênh thông tin quan trọng để lắng nghe, tiếp nhận, tổng hợp các ý kiến góp ý trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và nâng cao hiệu quả thi hành pháp luật.</li>
                                         </ul>
                                     </div>
 
@@ -209,10 +212,27 @@ export default function HienKeFeedbackPage() {
                                         </h3>
                                         <ul className="list-none pl-0 space-y-2">
                                             <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Ghi nhận ý kiến:</strong> Qua biểu mẫu trực tuyến, diễn đàn, email.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Xử lý kịp thời:</strong> Các thông tin hiến kế sẽ được tiếp nhận, phân loại và được chuyển đến cơ quan chuyên môn nghiên cứu, đánh giá.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Xử lý kịp thời:</strong> Các thông tin hiến kế sẽ được tiếp nhận, phân loại, phản hồi và được chuyển đến cơ quan chuyên môn nghiên cứu, đánh giá, xử lý.</li>
                                             <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Tài trợ hiến kế:</strong> Những sáng kiến đề xuất pháp luật có thể được xem xét hỗ trợ, tài trợ bởi Quỹ Hỗ trợ hoạt động xây dựng chính sách, pháp luật.</li>
                                         </ul>
                                     </div>
+                                </div>
+
+                                <div className="bg-indigo-50/50 p-6 rounded-2xl border border-indigo-100 mb-8 w-full">
+                                    <h3 className="text-[17px] font-bold text-[#0f172a] mb-3 flex items-center gap-2">
+                                        Yêu cầu nhiệm vụ
+                                    </h3>
+                                    <ul className="list-none pl-0 space-y-2">
+                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-indigo-500 before:rounded-full">
+                                            <strong>Thông tin hiến kế chính xác:</strong> Các ý kiến đóng góp, giải pháp hiến kế gửi về hệ thống phải đảm bảo tính xác thực, dựa trên dữ liệu khách quan và xuất phát từ cơ sở thực tiễn rõ ràng.
+                                        </li>
+                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-indigo-500 before:rounded-full">
+                                            <strong>Tiếp nhận, phản hồi kịp thời:</strong> Cơ quan quản lý nhà nước có trách nhiệm ghi nhận, nghiên cứu và phản hồi lại tiến độ, trạng thái xử lý đối với những hiến kế của người dân và doanh nghiệp một cách nhanh chóng nhất.
+                                        </li>
+                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-indigo-500 before:rounded-full">
+                                            <strong>Công khai và minh bạch:</strong> Toàn bộ quy trình tiếp nhận, đánh giá, xử lý đến khi áp dụng các sáng kiến pháp luật đều phải được minh bạch hóa trên Cổng để mọi cá nhân, tổ chức đều có quyền theo dõi, giám sát.
+                                        </li>
+                                    </ul>
                                 </div>
 
                                 <h3 className="text-[18px] font-bold text-[#0f172a] mb-4">Các hoạt động chính</h3>

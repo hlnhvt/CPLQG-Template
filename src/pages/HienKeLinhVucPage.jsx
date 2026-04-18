@@ -45,8 +45,8 @@ const HienKeLinhVucPage = () => {
 
                     <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
                         Có thể bạn quan tâm                    </h1>
-                    <p className="text-blue-100/90 text-[15px] max-w-2xl leading-relaxed">
-                        Mỗi ý kiến, sáng kiến của bạn trong từng lĩnh vực pháp luật là góc nhìn đa chiều để công tác xây dựng, tổ chức thi hành pháp luật tiếp tục được hoàn thiện.
+                    <p className="text-blue-100/90 text-[15px] max-w-3xl leading-relaxed">
+                        Mỗi ý kiến đóng góp và sáng kiến thiết thực trong từng lĩnh vực pháp luật cụ thể đều mang lại những góc nhìn đa chiều từ thực tiễn, qua đó đóng vai trò là cơ sở quan trọng để công tác xây dựng, thi hành pháp luật không ngừng được đổi mới và ngày càng hoàn thiện hơn.
                     </p>
                 </div>
             </div>
@@ -78,12 +78,11 @@ const HienKeLinhVucPage = () => {
                                 {filteredCategories.map(c => (
                                     <Link
                                         key={c.id}
-                                        to={`/hien-ke/gop-y-nhanh?domain=${encodeURIComponent(c.name)}`}
-                                        className={`relative flex flex-col items-center text-center gap-2 p-4 rounded-xl border transition-all group duration-300 hover:-translate-y-1 hover:shadow-md ${
-                                            c.isHot
+                                        to={`/hien-ke/linh-vuc/danh-sach?domain=${encodeURIComponent(c.name)}`}
+                                        className={`relative flex flex-col items-center text-center gap-2 p-4 rounded-xl border transition-all group duration-300 hover:-translate-y-1 hover:shadow-md ${c.isHot
                                                 ? 'border-orange-200 bg-gradient-to-b from-orange-50 to-amber-50/50 ring-2 ring-orange-400 ring-offset-2 hover:border-orange-400 hover:bg-orange-50'
                                                 : 'border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50'
-                                        }`}
+                                            }`}
                                     >
                                         {/* "Đang được quan tâm" badge */}
                                         {c.isHot && (
@@ -94,17 +93,15 @@ const HienKeLinhVucPage = () => {
                                         <c.icon
                                             size={32}
                                             strokeWidth={1.25}
-                                            className={`mb-1 transition-all duration-300 group-hover:scale-110 ${
-                                                c.isHot
+                                            className={`mb-1 transition-all duration-300 group-hover:scale-110 ${c.isHot
                                                     ? 'text-orange-500 group-hover:text-orange-600'
                                                     : 'text-purple-400 group-hover:text-[#7c3aed]'
-                                            }`}
+                                                }`}
                                         />
-                                        <span className={`text-[13px] font-semibold leading-tight px-1 ${
-                                            c.isHot
+                                        <span className={`text-[13px] font-semibold leading-tight px-1 ${c.isHot
                                                 ? 'text-orange-700 group-hover:text-orange-800'
                                                 : 'text-gray-700 group-hover:text-[#7c3aed]'
-                                        }`}>{c.name}</span>
+                                            }`}>{c.name}</span>
                                     </Link>
                                 ))}
                             </div>
