@@ -102,6 +102,16 @@ const HienKeNoiBatPage = () => {
                     style={{ backgroundImage: `radial-gradient(#1e3a8a 0.5px, transparent 0.5px)`, backgroundSize: '24px 24px' }}
                 />
 
+                {/* Full Screen Dong Son Drum Watermark */}
+                <div className="absolute inset-0 opacity-[0.04] pointer-events-none overflow-hidden"
+                    style={{ 
+                        backgroundImage: "url('/images/dong_son_cover.png')", 
+                        backgroundSize: '110% auto', 
+                        backgroundPosition: 'center 200px',
+                        backgroundRepeat: 'no-repeat',
+                        mixBlendMode: 'multiply'
+                    }}
+                />
             </div>
 
             <div className="relative z-10">
@@ -368,7 +378,7 @@ const HienKeNoiBatPage = () => {
                                     {displayedDrafts.map((draft, idx) => {
                                         const isFirstExpanded = viewMode === 'drafts' && idx === 0;
                                         return (
-                                            <div key={draft.id} className={`relative rounded-xl transition-all ${draft.isHot ? 'ring-2 ring-orange-400 ring-offset-2 shadow-md' : ''} ${isFirstExpanded ? 'md:col-span-2 bg-orange-50/30 ring-4 ring-orange-100 border-orange-200 shadow-xl' : ''}`}>
+                                            <div key={draft.id} className={`relative rounded-xl transition-all ${isFirstExpanded ? "h-[240px]" : "h-[180px]"} ${draft.isHot ? 'ring-2 ring-orange-400 ring-offset-2 shadow-md' : ''} ${isFirstExpanded ? 'md:col-span-2 bg-orange-50/30 ring-4 ring-orange-100 border-orange-200 shadow-xl' : ''}`}>
                                                 <ConsultCard
                                                     item={draft}
                                                     to={`/du-thao/${draft.id}`}
@@ -379,7 +389,6 @@ const HienKeNoiBatPage = () => {
                                                     showDateBox={true}
                                                     isHot={draft.isHot}
                                                     isFeatured={isFirstExpanded}
-                                                    className={isFirstExpanded ? "min-h-[240px]" : "h-[170px]"}
                                                 />
                                             </div>
                                         );
@@ -479,7 +488,7 @@ const HienKeNoiBatPage = () => {
                                         {displayedHighlights.map((item, idx) => {
                                             const isFirstExpanded = viewMode === 'highlights' && idx === 0;
                                             return (
-                                                <div key={item.id} className={`relative rounded-xl transition-all ${item.isHot ? 'ring-2 ring-orange-400 ring-offset-2 shadow-md' : ''} ${isFirstExpanded ? 'md:col-span-2 bg-blue-50/30 ring-4 ring-blue-100 border-blue-200 shadow-xl' : ''}`}>
+                                                <div key={item.id} className={`relative rounded-xl transition-all ${isFirstExpanded ? "h-[240px]" : "h-[180px]"} ${item.isHot ? 'ring-2 ring-orange-400 ring-offset-2 shadow-md' : ''} ${isFirstExpanded ? 'md:col-span-2 bg-blue-50/30 ring-4 ring-blue-100 border-blue-200 shadow-xl' : ''}`}>
                                                     <ConsultCard
                                                         item={{ ...item, startDate: item.startDate || item.date || '20/03/2026' }}
                                                         to={`/hien-ke/${item.id}`}
@@ -487,7 +496,6 @@ const HienKeNoiBatPage = () => {
                                                         showDateBox={true}
                                                         isHot={item.isHot}
                                                         isFeatured={isFirstExpanded}
-                                                        className={isFirstExpanded ? "min-h-[240px]" : "h-[170px]"}
                                                     />
                                                 </div>
                                             );
