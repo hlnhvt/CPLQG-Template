@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Send, Paperclip, ShieldCheck, CheckCircle2, User, Lock, X, Search, ChevronDown, Info, ChevronUp } from 'lucide-react';
+import { ArrowLeft, Send, Paperclip, ShieldCheck, CheckCircle2, User, Lock, X, Search, ChevronDown, Info, ChevronUp, Zap } from 'lucide-react';
 import { LIFE_CATEGORIES } from './HienKeShared';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -116,12 +116,12 @@ export default function SimpleFeedbackPage() {
             {/* Header / Hero */}
             <div className="bg-[#1e3a8a] pt-12 pb-24 relative">
                 <div className="absolute inset-0 bg-cover bg-center opacity-10" style={{ backgroundImage: "url('/images/dong_son_cover.png')" }} />
-                <div className="container mx-auto px-4 md:px-8 max-w-[800px] relative z-10">
+                <div className="container mx-auto px-4 md:px-8 max-w-[1000px] relative z-10">
                     <Link to="/hien-ke" className="inline-flex items-center gap-2 text-blue-200 hover:text-white mb-6 font-medium text-[14px] transition-colors">
                         <ArrowLeft size={16} /> Quay lại trang chủ Hiến kế
                     </Link>
                     <h1 className="text-[32px] md:text-[40px] font-bold text-white mb-3 leading-tight">Gửi hiến kế</h1>
-                    <p className="text-blue-100 text-[16px] leading-relaxed max-w-[800px]">
+                    <p className="text-blue-100 text-[16px] leading-relaxed max-w-[1000px]">
                         Chia sẻ ý kiến, sáng kiến của người dân và doanh nghiệp góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật trên toàn diện các lĩnh vực nhằm thúc đẩy phát triển kinh tế - xã hội của đất nước.
                     </p>
 
@@ -139,26 +139,60 @@ export default function SimpleFeedbackPage() {
             </div>
 
             {/* Form Content */}
-            <div className="container mx-auto px-4 md:px-8 max-w-[800px] -mt-16 relative z-20">
+            <div className="container mx-auto px-4 md:px-8 max-w-[1000px] -mt-16 relative z-20">
                 {isIntroOpen && (
-                    <div className="mb-6 bg-white border border-gray-100 rounded-2xl p-6 md:p-8 text-gray-700 text-[15px] leading-relaxed animate-fadeIn shadow-xl">
-                        <h4 className="font-bold text-gray-900 mb-4 text-[18px] flex items-center gap-2 text-[#1e3a8a]">
-                            <Info size={20} />
-                            Mục đích của trang Gửi hiến kế
-                        </h4>
-                        <ul className="space-y-3">
-                            {[
-                                'Cung cấp kênh tiếp nhận trực tiếp các sáng kiến, giải pháp từ người dân và doanh nghiệp nhằm hoàn thiện hệ thống pháp luật.',
-                                'Tạo không gian tương tác, trao đổi ý kiến đóng góp giúp hội đồng chuyên môn dễ dàng đánh giá, phân loại và chuyển đến các cơ quan có thẩm quyền.',
-                                'Giúp người dân có thể theo dõi tiến độ xử lý và nhận phản hồi trực tiếp, minh bạch thông qua hệ thống hoặc thông tin liên hệ.',
-                                'Mọi thông tin cá nhân của người gửi sẽ được bảo mật theo quy định của pháp luật.'
-                            ].map((item, index) => (
-                                <li key={index} className="flex gap-3 items-start">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
+                    <div className="mb-10 bg-white border border-gray-100 rounded-[2rem] p-8 md:p-12 text-gray-700 leading-relaxed animate-fadeIn shadow-2xl shadow-blue-900/10 relative overflow-hidden">
+                        {/* Dong Son Drum Background Decoration */}
+                        <div
+                            className="absolute inset-0 bg-no-repeat opacity-[0.05] pointer-events-none"
+                            style={{ backgroundImage: "url('/images/dong_son_cover.png')", backgroundSize: '140%', backgroundPosition: 'center -220px' }}
+                        />
+
+                        <div className="relative z-10">
+                            {/* Header */}
+                            <div className="text-center mb-10 max-w-3xl mx-auto">
+                                <h4 className="text-[26px] md:text-[32px] font-bold mb-4 leading-tight">
+                                    Gửi hiến kế
+                                </h4>
+                                <div className="w-20 h-1.5 bg-black/60 mx-auto rounded-full mb-6"></div>
+                                <p className="text-gray-600 text-[17px] italic font-medium">
+                                    Chia sẻ ý kiến, sáng kiến của người dân và doanh nghiệp góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật trên toàn diện các lĩnh vực nhằm thúc đẩy phát triển kinh tế - xã hội của đất nước.
+                                </p>
+                            </div>
+
+                            {/* Content Sections */}
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-10">
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
+                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                        Sứ mệnh
+                                    </h5>
+                                    <p className="text-[14px] leading-relaxed text-gray-700">
+                                        Chúng tôi cam kết tạo ra một môi trường dân chủ, minh bạch, nơi người dân và doanh nghiệp có thể trực tiếp đóng góp trí tuệ vào việc hoàn thiện hệ thống pháp luật nước nhà, thúc đẩy sự phát triển bền vững của xã hội.
+                                    </p>
+                                </div>
+
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
+                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                        Mục tiêu
+                                    </h5>
+                                    <ul className="text-[14px] space-y-2 text-gray-700">
+                                        <li className="flex gap-2"><span>•</span> Tập hợp các góc nhìn đa chiều từ thực tiễn cuộc sống.</li>
+                                        <li className="flex gap-2"><span>•</span> Chuyển hóa hiến kế thiết thực thành các giải pháp chính sách hiệu quả.</li>
+                                        <li className="flex gap-2"><span>•</span> Rút ngắn khoảng cách giữa chính sách và thực thi.</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
+                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                        Cam kết
+                                    </h5>
+                                    <p className="text-[14px] leading-relaxed text-gray-700">
+                                        Hệ thống đảm bảo bảo mật tuyệt đối thông tin định danh. Mọi ý kiến đều được hội đồng chuyên môn thẩm định thấu đáo và phản hồi kết quả xử lý một cách minh bạch, kịp thời.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 )}
                 <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:p-10 mb-8">

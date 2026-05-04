@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, TrendingUp, Search, ChevronLeft, FileText, ArrowRight, Download, Flame, Info, ChevronUp, ChevronDown } from 'lucide-react';
+import { ChevronRight, TrendingUp, Search, ChevronLeft, FileText, ArrowRight, Download, Flame, Info, ChevronUp, ChevronDown, BookOpen, Zap, Users } from 'lucide-react';
 import { Section, ConsultCard, HOT_ITEMS, NEW_HIGHLIGHTS, thumb } from './HienKeShared';
 
 // Mock Drafts
@@ -97,27 +97,60 @@ const HienKeNoiBatPage = () => {
                 </div>
             </div>
 
-            {/* ── Phần 2: Góp ý dự thảo VBQPPL (Đưa lên trên) ────────────────────────── */}
             <div className="pt-8 container mx-auto px-4 md:px-8 max-w-[1280px] max-w-5xl border-b border-gray-200 mb-4 pb-6">
                 {isIntroOpen && (
-                    <div className="mb-8 bg-white border border-gray-100 rounded-2xl p-6 md:p-8 text-gray-700 text-[15px] leading-relaxed animate-fadeIn shadow-xl">
-                        <h4 className="font-bold text-gray-900 mb-4 text-[18px] flex items-center gap-2 text-[#1e3a8a]">
-                            <Info size={20} />
-                            Về chuyên mục Vấn đề nổi bật
-                        </h4>
-                        <ul className="space-y-3">
-                            {[
-                                'Nơi tập hợp các dự thảo văn bản quy phạm pháp luật và các vấn đề nóng đang được xã hội đặc biệt quan tâm.',
-                                'Cung cấp thông tin chi tiết về các chính sách mới, giúp người dân và doanh nghiệp dễ dàng nắm bắt và tham gia đóng góp ý kiến.',
-                                'Mỗi ý kiến đóng góp tại đây đều được ưu tiên tổng hợp để chuyển đến các ban soạn thảo và cơ quan chức năng có thẩm quyền.',
-                                'Hệ thống đảm bảo tính minh bạch trong việc tiếp nhận và xử lý các ý kiến đóng góp của cộng đồng.'
-                            ].map((item, index) => (
-                                <li key={index} className="flex gap-3 items-start">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
+                    <div className="mb-10 bg-white border border-gray-100 rounded-[2rem] p-8 md:p-12 text-gray-700 leading-relaxed animate-fadeIn shadow-2xl shadow-blue-900/10 relative overflow-hidden">
+                        {/* Dong Son Drum Background Decoration */}
+                        <div
+                            className="absolute inset-0 bg-no-repeat opacity-[0.05] pointer-events-none"
+                            style={{ backgroundImage: "url('/images/dong_son_cover.png')", backgroundSize: '140%', backgroundPosition: 'center -220px' }}
+                        />
+
+                        <div className="relative z-10">
+                            {/* Header */}
+                            <div className="text-center mb-10 max-w-3xl mx-auto">
+                                <h4 className="text-[26px] md:text-[32px] font-bold text-black mb-4 leading-tight">
+                                    Chúng tôi cần bạn
+                                </h4>
+                                <div className="w-20 h-1.5 bg-black mx-auto rounded-full mb-6"></div>
+                                <p className="text-gray-600 text-[17px] italic font-medium">
+                                    Tại mục này, người dân và doanh nghiệp có thể trực tiếp tham gia góp ý cho các dự thảo văn bản quy phạm pháp luật đang được lấy ý kiến theo quy định, đồng thời đề xuất các sáng kiến lập pháp nhằm chung tay hoàn thiện hệ thống pháp luật.
+                                </p>
+                            </div>
+
+                            {/* Content Sections */}
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-10">
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
+                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                        Tầm nhìn
+                                    </h5>
+                                    <p className="text-[14px] leading-relaxed text-gray-700">
+                                        Trở thành diễn đàn tương tác hàng đầu giữa cơ quan nhà nước và cộng đồng, giúp nhận diện và tháo gỡ những điểm nghẽn pháp lý cản trở sự phát triển kinh tế - xã hội.
+                                    </p>
+                                </div>
+
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
+                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                        Mục tiêu ưu tiên
+                                    </h5>
+                                    <ul className="text-[14px] space-y-2 text-gray-700">
+                                        <li className="flex gap-2"><span>•</span> Lấy ý kiến cho các dự thảo luật có tác động sâu rộng.</li>
+                                        <li className="flex gap-2"><span>•</span> Nhận diện bất cập trong thi hành pháp luật từ thực tế.</li>
+                                        <li className="flex gap-2"><span>•</span> Tạo kênh phản biện chính thống cho chuyên gia.</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
+                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                        Giá trị cốt lõi
+                                    </h5>
+                                    <p className="text-[14px] leading-relaxed text-gray-700">
+                                        Mọi hiến kế tại mục Tiêu điểm sẽ được ưu tiên tổng hợp, báo cáo trực tiếp đến Ban soạn thảo và các cơ quan có thẩm quyền để kịp thời điều chỉnh chính sách.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 )}
                 {/* Header Đồng nhất */}

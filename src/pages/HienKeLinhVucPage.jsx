@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ChevronRight, Scale, Search, Heart, ArrowRight, Flame, Info, ChevronUp, ChevronDown } from 'lucide-react';
+import { ChevronRight, Scale, Search, Heart, ArrowRight, Flame, Info, ChevronUp, ChevronDown, Grid, Lightbulb, UserCheck } from 'lucide-react';
 import { Section, LIFE_CATEGORIES } from './HienKeShared';
 
 const HienKeLinhVucPage = () => {
@@ -64,24 +64,58 @@ const HienKeLinhVucPage = () => {
 
             <div className="mt-8 container mx-auto px-4 md:px-8 max-w-[1280px]">
                 {isIntroOpen && (
-                    <div className="mb-8 bg-white border border-gray-100 rounded-2xl p-6 md:p-8 text-gray-700 text-[15px] leading-relaxed animate-fadeIn shadow-xl">
-                        <h4 className="font-bold text-gray-900 mb-4 text-[18px] flex items-center gap-2 text-[#1e3a8a]">
-                            <Info size={20} />
-                            Về chuyên mục Lĩnh vực quan tâm
-                        </h4>
-                        <ul className="space-y-3">
-                            {[
-                                'Phân loại các vấn đề pháp luật theo từng lĩnh vực cụ thể giúp người dân dễ dàng tìm kiếm và tham gia đóng góp chuyên sâu.',
-                                'Hệ thống gợi ý các lĩnh vực đang có nhiều dự thảo mới hoặc đang được lấy ý kiến rộng rãi để người dân lựa chọn.',
-                                'Mỗi lĩnh vực đều được kết nối trực tiếp với các đơn vị chuyên môn tương ứng để tiếp nhận và xử lý hiến kế hiệu quả nhất.',
-                                'Bạn có thể chọn bất kỳ lĩnh vực nào để xem danh sách các hiến kế hiện có hoặc bắt đầu gửi ý kiến mới của mình.'
-                            ].map((item, index) => (
-                                <li key={index} className="flex gap-3 items-start">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
-                                    <span>{item}</span>
-                                </li>
-                            ))}
-                        </ul>
+                    <div className="mb-10 bg-white border border-gray-100 rounded-[2rem] p-8 md:p-12 text-gray-700 leading-relaxed animate-fadeIn shadow-2xl shadow-blue-900/10 relative overflow-hidden">
+                        {/* Dong Son Drum Background Decoration */}
+                        <div
+                            className="absolute inset-0 bg-no-repeat opacity-[0.05] pointer-events-none"
+                            style={{ backgroundImage: "url('/images/dong_son_cover.png')", backgroundSize: '140%', backgroundPosition: 'center -220px' }}
+                        />
+
+                        <div className="relative z-10">
+                            {/* Header */}
+                            <div className="text-center mb-10 max-w-3xl mx-auto">
+                                <h4 className="text-[26px] md:text-[32px] font-bold text-black mb-4 leading-tight">
+                                    Có thể bạn quan tâm
+                                </h4>
+                                <div className="w-20 h-1.5 bg-black mx-auto rounded-full mb-6"></div>
+                                <p className="text-gray-600 text-[17px] italic font-medium">
+                                    Mỗi ý kiến đóng góp và sáng kiến thiết thực trong từng lĩnh vực pháp luật cụ thể đều mang lại những góc nhìn đa chiều từ thực tiễn, qua đó đóng vai trò là cơ sở quan trọng để công tác xây dựng, thi hành pháp luật không ngừng được đổi mới và ngày càng hoàn thiện hơn.
+                                </p>
+                            </div>
+
+                            {/* Content Sections */}
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-10">
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
+                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                        Định hướng
+                                    </h5>
+                                    <p className="text-[14px] leading-relaxed text-gray-700">
+                                        Đẩy mạnh việc tham gia của cộng đồng theo từng mảng chuyên biệt như: Kinh tế, Dân sự, Hình sự, Hành chính... nhằm nâng cao tính chuyên môn hóa trong lập pháp.
+                                    </p>
+                                </div>
+
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
+                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                        Mục tiêu cốt lõi
+                                    </h5>
+                                    <ul className="text-[14px] space-y-2 text-gray-700">
+                                        <li className="flex gap-2"><span>•</span> Cung cấp dữ liệu đầy đủ về hiện trạng sửa đổi từng lĩnh vực.</li>
+                                        <li className="flex gap-2"><span>•</span> Tạo môi trường để các chuyên gia đầu ngành gửi gắm tâm huyết.</li>
+                                        <li className="flex gap-2"><span>•</span> Đảm bảo không bỏ sót bất kỳ góc cạnh pháp lý nào.</li>
+                                    </ul>
+                                </div>
+
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
+                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                        Kết nối chuyên sâu
+                                    </h5>
+                                    <p className="text-[14px] leading-relaxed text-gray-700">
+                                        Hệ thống sử dụng các thuật toán phân loại thông minh để chuyển hiến kế của bạn đến đúng đơn vị chuyên môn phụ trách, đảm bảo tính thấu đáo trong xử lý.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 )}
             </div>
@@ -115,8 +149,8 @@ const HienKeLinhVucPage = () => {
                                         key={c.id}
                                         to={`/hien-ke/linh-vuc/danh-sach?domain=${encodeURIComponent(c.name)}`}
                                         className={`relative flex flex-col items-center text-center gap-2 p-4 rounded-xl border transition-all group duration-300 hover:-translate-y-1 hover:shadow-md ${c.isHot
-                                                ? 'border-orange-200 bg-gradient-to-b from-orange-50 to-amber-50/50 ring-2 ring-orange-400 ring-offset-2 hover:border-orange-400 hover:bg-orange-50'
-                                                : 'border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50'
+                                            ? 'border-orange-200 bg-gradient-to-b from-orange-50 to-amber-50/50 ring-2 ring-orange-400 ring-offset-2 hover:border-orange-400 hover:bg-orange-50'
+                                            : 'border-gray-100 bg-gray-50 hover:border-[#7c3aed] hover:bg-purple-50'
                                             }`}
                                     >
                                         {/* "Đang được quan tâm" badge */}
@@ -129,13 +163,13 @@ const HienKeLinhVucPage = () => {
                                             size={32}
                                             strokeWidth={1.25}
                                             className={`mb-1 transition-all duration-300 group-hover:scale-110 ${c.isHot
-                                                    ? 'text-orange-500 group-hover:text-orange-600'
-                                                    : 'text-purple-400 group-hover:text-[#7c3aed]'
+                                                ? 'text-orange-500 group-hover:text-orange-600'
+                                                : 'text-purple-400 group-hover:text-[#7c3aed]'
                                                 }`}
                                         />
                                         <span className={`text-[13px] font-semibold leading-tight px-1 ${c.isHot
-                                                ? 'text-orange-700 group-hover:text-orange-800'
-                                                : 'text-gray-700 group-hover:text-[#7c3aed]'
+                                            ? 'text-orange-700 group-hover:text-orange-800'
+                                            : 'text-gray-700 group-hover:text-[#7c3aed]'
                                             }`}>{c.name}</span>
                                     </Link>
                                 ))}
