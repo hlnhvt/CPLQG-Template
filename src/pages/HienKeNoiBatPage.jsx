@@ -378,7 +378,7 @@ const HienKeNoiBatPage = () => {
                                     {displayedDrafts.map((draft, idx) => {
                                         const isFirstExpanded = viewMode === 'drafts' && idx === 0;
                                         return (
-                                            <div key={draft.id} className={`relative rounded-xl transition-all ${isFirstExpanded ? "h-[240px]" : "h-[180px]"} ${draft.isHot ? 'ring-2 ring-orange-400 ring-offset-2 shadow-md' : ''} ${isFirstExpanded ? 'md:col-span-2 bg-orange-50/30 ring-4 ring-orange-100 border-orange-200 shadow-xl' : ''}`}>
+                                            <div key={draft.id} className={`relative rounded-xl transition-all ${draft.isHot ? 'ring-2 ring-orange-400 ring-offset-2 shadow-md' : ''} ${isFirstExpanded ? 'md:col-span-2 bg-orange-50/30 ring-4 ring-orange-100 border-orange-200 shadow-xl' : ''}`} style={{ height: isFirstExpanded ? '240px' : '180px' }}>
                                                 <ConsultCard
                                                     item={draft}
                                                     to={`/du-thao/${draft.id}`}
@@ -488,7 +488,7 @@ const HienKeNoiBatPage = () => {
                                         {displayedHighlights.map((item, idx) => {
                                             const isFirstExpanded = viewMode === 'highlights' && idx === 0;
                                             return (
-                                                <div key={item.id} className={`relative rounded-xl transition-all ${isFirstExpanded ? "h-[240px]" : "h-[180px]"} ${item.isHot ? 'ring-2 ring-orange-400 ring-offset-2 shadow-md' : ''} ${isFirstExpanded ? 'md:col-span-2 bg-blue-50/30 ring-4 ring-blue-100 border-blue-200 shadow-xl' : ''}`}>
+                                                <div key={item.id} className={`relative rounded-xl transition-all ${item.isHot ? 'ring-2 ring-orange-400 ring-offset-2 shadow-md' : ''} ${isFirstExpanded ? 'md:col-span-2 bg-blue-50/30 ring-4 ring-blue-100 border-blue-200 shadow-xl' : ''}`} style={{ height: isFirstExpanded ? '240px' : '180px' }}>
                                                     <ConsultCard
                                                         item={{ ...item, startDate: item.startDate || item.date || '20/03/2026' }}
                                                         to={`/hien-ke/${item.id}`}
