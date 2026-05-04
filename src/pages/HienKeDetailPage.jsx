@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Clock, User, Eye, ThumbsUp, ThumbsDown, Share2, Download, MessageSquare, BookOpen, AlertCircle, Bookmark, CheckCircle2, FileText, Send, Flame } from 'lucide-react';
 // import { MOCK_DETAILS } from './HienKeShared';
 
 const HienKeDetailPage = () => {
     const { id } = useParams();
+    const location = useLocation();
     const { user } = useAuth();
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [hasLiked, setHasLiked] = useState(false);
     const [hasDisliked, setHasDisliked] = useState(false);
+
+    // Get status from navigation state if available
+    const displayStatus = location.state?.status || 'Chờ phản hồi';
 
     // Mock data for Hiến kê
     const hienKeData = {
@@ -108,9 +112,9 @@ Trân trọng nể trọng!`,
                                 <span className="bg-blue-50 text-blue-700 border border-blue-100 px-3 py-1.5 rounded text-[13px] font-bold tracking-wide flex items-center gap-1.5">
                                     {hienKeData.domain}
                                 </span>
-                                <span className={`flex items-center gap-1.5 px-3 py-1.5 rounded font-bold text-[13px] ${hienKeData.status === 'Đã phản hồi' ? 'text-emerald-700 bg-emerald-50' : 'text-amber-700 bg-amber-50'}`}>
-                                    {hienKeData.status === 'Đã phản hồi' ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
-                                    {hienKeData.status}
+                                <span className={`flex items-center gap-1.5 px-3 py-1.5 rounded font-bold text-[13px] ${displayStatus === 'Đã phản hồi' ? 'text-emerald-700 bg-emerald-50' : 'text-amber-700 bg-amber-50'}`}>
+                                    {displayStatus === 'Đã phản hồi' ? <CheckCircle2 size={16} /> : <Clock size={16} />}
+                                    {displayStatus}
                                 </span>
                             </div>
 
@@ -178,77 +182,21 @@ Trân trọng nể trọng!`,
                     </div>
 
                     {/* Answer Box */}
-                    {hienKeData.status === 'Đã phản hồi' ? (
-                        <div className="bg-white rounded-xl shadow-sm border border-emerald-100 overflow-hidden relative">
-                            {/* Expert header */}
-                            <div className="bg-gradient-to-r from-emerald-50/50 to-white border-b border-emerald-50 p-6 flex items-start gap-4">
-                                <div className="w-14 h-14 bg-white border border-gray-100 shadow-sm rounded-full flex justify-center items-center overflow-hidden shrink-0">
-                                    <User size={28} className="text-emerald-600/70" />
-                                </div>
-                                <div className="flex-grow">
-                                    <div className="flex flex-wrap items-center gap-3">
-                                        <h3 className="text-[18px] font-bold text-gray-900">{answerData.expertName}</h3>
-                                        <span className={`px-2 py-0.5 rounded text-[11px] font-bold ${answerData.expertType === 'Cơ quan nhà nước' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}>
-                                            {answerData.expertType === 'Cơ quan nhà nước' ? <CheckCircle2 size={12} className="inline mr-1" /> : ''}
-                                            {answerData.expertType}
-                                        </span>
-                                    </div>
-                                    <p className="text-emerald-700 font-semibold mb-1 text-[13px]">{answerData.expertRole}</p>
-                                    <p className="text-[12px] text-gray-500 flex items-center gap-1 font-medium"><Clock size={13} /> Phản hồi lúc: {answerData.date}</p>
-                                </div>
-                            </div>
-
-                            <div className="p-6 md:p-8">
-                                <div className="prose max-w-none text-gray-800 text-[15px] whitespace-pre-line leading-relaxed font-medium">
-                                    <div dangerouslySetInnerHTML={{ __html: answerData.content.replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-900 font-bold">$1</strong>') }} />
-                                </div>
-
-                                {/* Law references */}
-                                {answerData.references.length > 0 && (
-                                    <div className="mt-8 bg-amber-50/50 border border-amber-100 rounded-xl p-5">
-                                        <h4 className="font-bold text-amber-800 flex items-center gap-2 mb-3 text-[14px]">
-                                            <BookOpen size={16} /> Căn cứ đóng góp tham khảo
-                                        </h4>
-                                        <ul className="list-disc list-inside space-y-1 text-[13px] text-gray-700 font-medium">
-                                            {answerData.references.map((ref, idx) => (
-                                                <li key={idx}><a href="#" className="hover:text-blue-700 hover:underline">{ref}</a></li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
-
-                                {/* Feedback Section */}
-                                <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4 bg-gray-50/50 -mx-6 md:-mx-8 -mb-6 md:-mb-8 p-6 md:p-8">
-                                    <div className="text-gray-700 font-bold text-[14px]">
-                                        Ý kiến phản hồi này có làm bạn hài lòng?
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <button
-                                            onClick={() => handleFeedback('like')}
-                                            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold border transition shadow-sm text-[13px] ${hasLiked ? 'bg-emerald-500 text-white border-emerald-600' : 'bg-white text-emerald-600 border-emerald-200 hover:bg-emerald-50'}`}>
-                                            <ThumbsUp size={16} /> Hài lòng ({answerData.likes + (hasLiked ? 1 : 0)})
-                                        </button>
-                                        <button
-                                            onClick={() => handleFeedback('dislike')}
-                                            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold border transition shadow-sm text-[13px] ${hasDisliked ? 'bg-gray-500 text-white border-gray-600' : 'bg-white text-gray-500 border-gray-200 hover:bg-gray-50'}`}>
-                                            <ThumbsDown size={16} /> Chưa hài lòng
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                    {displayStatus === 'Đã phản hồi' ? (
+                        <div className="bg-green-50 rounded-xl shadow-sm border border-green-100 p-8 text-center">
+                            <CheckCircle2 size={40} className="mx-auto text-green-500 mb-4" />
+                            <h3 className="text-[18px] font-bold text-green-800 mb-2">Đã có kết quả phản hồi</h3>
+                            <p className="text-[14px] text-green-700/80 max-w-xl mx-auto font-medium">
+                                Hiến kế đã được Bộ y tế phản hồi vào {hienKeData.date}
+                            </p>
                         </div>
                     ) : (
                         <div className="bg-amber-50 rounded-xl shadow-sm border border-amber-100 p-8 text-center">
                             <Clock size={40} className="mx-auto text-amber-400 mb-4" />
                             <h3 className="text-[18px] font-bold text-amber-800 mb-2">Đang chờ cơ quan tiếp nhận</h3>
-                            <p className="text-[14px] text-amber-700/80 mb-6 max-w-md mx-auto">
-                                Hiến kế của bạn đang được điều hướng đến cơ quan chủ quản thích hợp. Quá trình xét duyệt và phản hồi thường mất từ 5-10 ngày làm việc.
+                            <p className="text-[14px] text-amber-700/80 max-w-xl mx-auto">
+                                Hiến kế của bạn đã được chuyển đến cơ quan chủ quản thích hợp.
                             </p>
-                            {!isBookmarked && (
-                                <button onClick={() => setIsBookmarked(true)} className="bg-white text-[14px] text-amber-600 font-bold py-2.5 px-6 rounded-xl border border-amber-200 hover:bg-amber-100 transition shadow-sm inline-flex items-center gap-2">
-                                    <Bookmark size={16} /> Theo dõi hiến kế
-                                </button>
-                            )}
                         </div>
                     )}
                 </div>

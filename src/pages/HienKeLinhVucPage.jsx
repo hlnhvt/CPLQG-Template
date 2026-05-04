@@ -7,7 +7,7 @@ const HienKeLinhVucPage = () => {
     const [searchParams] = useSearchParams();
     const q = searchParams.get('q') || '';
     const [searchTerm, setSearchTerm] = useState(q);
-    const [isIntroOpen, setIsIntroOpen] = useState(true);
+    const [isIntroOpen, setIsIntroOpen] = useState(false);
 
     useEffect(() => {
         setSearchTerm(q);
@@ -74,19 +74,21 @@ const HienKeLinhVucPage = () => {
                         <div className="relative z-10">
                             {/* Header */}
                             <div className="text-center mb-10 max-w-3xl mx-auto">
-                                <h4 className="text-[26px] md:text-[32px] font-bold text-black mb-4 leading-tight">
+                                <h4 className="text-[26px] md:text-[32px] font-bold mb-4 leading-tight">
                                     Có thể bạn quan tâm
                                 </h4>
-                                <div className="w-20 h-1.5 bg-black mx-auto rounded-full mb-6"></div>
+                                <div className="w-20 h-1.5 bg-black/70 mx-auto rounded-full mb-6"></div>
                                 <p className="text-gray-600 text-[17px] italic font-medium">
                                     Mỗi ý kiến đóng góp và sáng kiến thiết thực trong từng lĩnh vực pháp luật cụ thể đều mang lại những góc nhìn đa chiều từ thực tiễn, qua đó đóng vai trò là cơ sở quan trọng để công tác xây dựng, thi hành pháp luật không ngừng được đổi mới và ngày càng hoàn thiện hơn.
                                 </p>
                             </div>
 
+
+
                             {/* Content Sections */}
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-10">
-                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
-                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-12">
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50">
+                                    <h5 className="font-bold mb-4 text-center text-[#1e3a8a] text-[19px]">
                                         Định hướng
                                     </h5>
                                     <p className="text-[14px] leading-relaxed text-gray-700">
@@ -94,8 +96,8 @@ const HienKeLinhVucPage = () => {
                                     </p>
                                 </div>
 
-                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
-                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50">
+                                    <h5 className="font-bold mb-4 text-center text-[#1e3a8a] text-[19px]">
                                         Mục tiêu cốt lõi
                                     </h5>
                                     <ul className="text-[14px] space-y-2 text-gray-700">
@@ -105,13 +107,27 @@ const HienKeLinhVucPage = () => {
                                     </ul>
                                 </div>
 
-                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
-                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50">
+                                    <h5 className="font-bold mb-4 text-center text-[#1e3a8a] text-[19px]">
                                         Kết nối chuyên sâu
                                     </h5>
                                     <p className="text-[14px] leading-relaxed text-gray-700">
                                         Hệ thống sử dụng các thuật toán phân loại thông minh để chuyển hiến kế của bạn đến đúng đơn vị chuyên môn phụ trách, đảm bảo tính thấu đáo trong xử lý.
                                     </p>
+                                </div>
+                            </div>
+
+                            {/* Leadership Quote Section */}
+                            <div className="max-w-4xl mx-auto relative">
+                                <div className="bg-gradient-to-br from-white to-purple-50/30 p-8 rounded-3xl border border-purple-100/50 shadow-inner text-center relative overflow-hidden group">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-purple-100/20 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-purple-200/30 transition-all duration-700" />
+                                    <p className="text-[17px] md:text-[19px] text-gray-800 italic leading-relaxed relative z-10 mb-4 font-medium">
+                                        "Đột phá mạnh mẽ hơn về thể chế phát triển, tháo gỡ điểm nghẽn, rào cản; lấy thực tiễn làm thước đo, khơi thông mọi nguồn lực đưa đất nước bước vào kỷ nguyên mới."
+                                    </p>
+                                    <div className="w-12 h-0.5 bg-purple-300 mx-auto mb-4" />
+                                    <footer className="text-purple-900 font-bold text-[14px] uppercase relative z-10">
+                                        — Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV của Đảng —
+                                    </footer>
                                 </div>
                             </div>
 

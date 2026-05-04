@@ -500,7 +500,7 @@ const DuThaoDetailPage = () => {
                         {/* Title & Metadata */}
                         <div>
                             <p className="text-[13px] text-gray-500 uppercase font-semibold mb-2 flex items-center gap-1.5">
-                                <FileText size={14} className="text-blue-600" /> Xem chi tiết văn bản dự thảo VBQPPL
+                                <FileText size={14} className="text-blue-600" /> Xem chi tiết dự thảo VBQPPL
                             </p>
                             <h1 className="text-[26px] md:text-[32px] font-bold text-[#0f4c81] leading-tight mb-6">
                                 {doc.title}
@@ -515,12 +515,19 @@ const DuThaoDetailPage = () => {
                                 </span>
                             </div>
 
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                                 <div className="bg-white border border-gray-100 p-3 rounded-lg shadow-sm flex items-center gap-3">
                                     <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0"><Calendar size={15} /></div>
                                     <div>
                                         <p className="text-[10px] text-gray-400 uppercase font-semibold">Ngày đăng</p>
                                         <p className="text-[12px] font-bold text-gray-800">{doc.ngayDang}</p>
+                                    </div>
+                                </div>
+                                <div className="bg-white border border-gray-100 p-3 rounded-lg shadow-sm flex items-center gap-3">
+                                    <div className="w-8 h-8 rounded-full bg-red-50 text-red-600 flex items-center justify-center shrink-0"><Clock size={15} /></div>
+                                    <div>
+                                        <p className="text-[10px] text-gray-400 uppercase font-semibold">Hạn góp ý</p>
+                                        <p className="text-[12px] font-bold text-gray-800">{doc.hanGopY}</p>
                                     </div>
                                 </div>
                                 <div className="bg-white border border-gray-100 p-3 rounded-lg shadow-sm flex items-center gap-3">

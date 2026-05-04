@@ -103,7 +103,7 @@ export default function HienKePage() {
                                     { label: 'Lĩnh vực\ntrọng điểm', value: '32' },
                                 ].map(s => (
                                     <div key={s.label} className="text-white min-w-[120px]">
-                                        <div className="text-[36px] md:text-[42px] font-black leading-none text-amber-300">{s.value}</div>
+                                        <div className="text-[36px] md:text-[42px] font-bold leading-none text-amber-300">{s.value}</div>
                                         <div className="text-blue-200 text-[13.5px] font-medium mt-2 leading-snug whitespace-pre-line">{s.label}</div>
                                     </div>
                                 ))}

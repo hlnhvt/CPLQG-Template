@@ -130,7 +130,7 @@ const UserProfilePopover = ({ user, children }) => {
 const ContributionDetailPage = () => {
     const { id } = useParams();
     const [topic, setTopic] = useState(MOCK_CONTRIBUTION);
-    
+
     // Follow State
     const [isFollowing, setIsFollowing] = useState(false);
     const [showUnfollowConfirm, setShowUnfollowConfirm] = useState(false);
@@ -205,7 +205,7 @@ const ContributionDetailPage = () => {
                                         {topic.type}
                                     </span>
                                 </div>
-                                
+
                                 <h1 className="text-2xl font-bold text-gray-900 mb-6 leading-snug">{topic.title}</h1>
 
                                 <div
@@ -336,31 +336,31 @@ const ContributionDetailPage = () => {
 
                                 {/* Mock Comment List */}
                                 <div className="space-y-6">
-                                     <div className="flex gap-4">
-                                         <div className="w-10 h-10 flex items-center justify-center shrink-0 rounded-full border border-gray-200 overflow-hidden shadow-sm hover:ring-2 hover:ring-green-300 transition-all cursor-pointer bg-gray-100">
+                                    <div className="flex gap-4">
+                                        <div className="w-10 h-10 flex items-center justify-center shrink-0 rounded-full border border-gray-200 overflow-hidden shadow-sm hover:ring-2 hover:ring-green-300 transition-all cursor-pointer bg-gray-100">
                                             A
-                                         </div>
-                                         <div className="flex-grow">
-                                             <div className="bg-gray-50 rounded-2xl rounded-tl-none p-4 border border-gray-100">
-                                                 <div className="flex justify-between items-start mb-2">
-                                                     <div className="flex flex-col">
-                                                         <span className="font-bold text-gray-800 hover:text-blue-600 transition-colors cursor-pointer">Luật sư Nguyễn M</span>
-                                                         <div className="flex items-center gap-1.5 mt-0.5">
-                                                             <span className="text-xs text-gray-500 font-medium">Đoàn Luật sư TP.HCM</span>
-                                                         </div>
-                                                     </div>
-                                                     <span className="text-xs text-gray-400">1 ngày trước</span>
-                                                 </div>
-                                                 <p className="text-gray-700 text-sm leading-relaxed">
-                                                     Rất đồng tình với quan điểm của chuyên gia. Thực tế tôi đã giải quyết nhiều vụ án mà doanh nghiệp bị thiệt hại do thành viên trốn tránh trách nhiệm góp vốn dù quá hạn.
-                                                 </p>
-                                             </div>
-                                             <div className="flex items-center gap-4 mt-2 px-2 text-xs font-medium text-gray-500">
-                                                 <button className="hover:text-blue-600 flex items-center gap-1 transition-colors"><ArrowUpCircle size={14} className="text-gray-400" /> 8</button>
-                                                 <button className="hover:text-gray-800 transition-colors">Trả lời</button>
-                                             </div>
-                                         </div>
-                                     </div>
+                                        </div>
+                                        <div className="flex-grow">
+                                            <div className="bg-gray-50 rounded-2xl rounded-tl-none p-4 border border-gray-100">
+                                                <div className="flex justify-between items-start mb-2">
+                                                    <div className="flex flex-col">
+                                                        <span className="font-bold text-gray-800 hover:text-blue-600 transition-colors cursor-pointer">Luật sư Nguyễn M</span>
+                                                        <div className="flex items-center gap-1.5 mt-0.5">
+                                                            <span className="text-xs text-gray-500 font-medium">Đoàn Luật sư TP.HCM</span>
+                                                        </div>
+                                                    </div>
+                                                    <span className="text-xs text-gray-400">1 ngày trước</span>
+                                                </div>
+                                                <p className="text-gray-700 text-sm leading-relaxed">
+                                                    Rất đồng tình với quan điểm của chuyên gia. Thực tế tôi đã giải quyết nhiều vụ án mà doanh nghiệp bị thiệt hại do thành viên trốn tránh trách nhiệm góp vốn dù quá hạn.
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center gap-4 mt-2 px-2 text-xs font-medium text-gray-500">
+                                                <button className="hover:text-blue-600 flex items-center gap-1 transition-colors"><ArrowUpCircle size={14} className="text-gray-400" /> 8</button>
+                                                <button className="hover:text-gray-800 transition-colors">Trả lời</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -382,7 +382,7 @@ const ContributionDetailPage = () => {
                                 </Link>
                                 <p className="text-xs text-gray-500 mb-3">Tác giả: Nguyễn Văn A</p>
                                 <div className="flex items-center justify-between text-xs text-gray-500 font-medium">
-                                    <span>Đăng: 10/03/2024</span>
+                                    <span>Ngày đăng: 10/03/2024</span>
                                     <span><Eye size={12} className="inline mr-1" /> 1250 xem</span>
                                 </div>
                             </div>

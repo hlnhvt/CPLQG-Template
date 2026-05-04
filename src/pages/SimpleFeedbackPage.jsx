@@ -36,7 +36,7 @@ export default function SimpleFeedbackPage() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [tagSearch, setTagSearch] = useState('');
     const [isTagDropdownOpen, setIsTagDropdownOpen] = useState(false);
-    const [isIntroOpen, setIsIntroOpen] = useState(true);
+    const [isIntroOpen, setIsIntroOpen] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
         category: '',
@@ -160,10 +160,12 @@ export default function SimpleFeedbackPage() {
                                 </p>
                             </div>
 
+
+
                             {/* Content Sections */}
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-10">
-                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
-                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-12">
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50">
+                                    <h5 className="font-bold mb-4 text-center text-[#1e3a8a] text-[19px]">
                                         Sứ mệnh
                                     </h5>
                                     <p className="text-[14px] leading-relaxed text-gray-700">
@@ -171,8 +173,8 @@ export default function SimpleFeedbackPage() {
                                     </p>
                                 </div>
 
-                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
-                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50">
+                                    <h5 className="font-bold mb-4 text-center text-[#1e3a8a] text-[19px]">
                                         Mục tiêu
                                     </h5>
                                     <ul className="text-[14px] space-y-2 text-gray-700">
@@ -182,12 +184,29 @@ export default function SimpleFeedbackPage() {
                                     </ul>
                                 </div>
 
-                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
-                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50">
+                                    <h5 className="font-bold mb-4 text-center text-[#1e3a8a] text-[19px]">
                                         Cam kết
                                     </h5>
                                     <p className="text-[14px] leading-relaxed text-gray-700">
                                         Hệ thống đảm bảo bảo mật tuyệt đối thông tin định danh. Mọi ý kiến đều được hội đồng chuyên môn thẩm định thấu đáo và phản hồi kết quả xử lý một cách minh bạch, kịp thời.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Leadership Quote Section */}
+                            <div className="max-w-4xl mx-auto relative">
+                                <div className="bg-gradient-to-br from-white to-purple-50/30 p-8 rounded-3xl border border-purple-100/50 shadow-inner text-center relative overflow-hidden group">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-purple-100/20 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-purple-200/30 transition-all duration-700" />
+                                    <p className="text-[17px] md:text-[19px] text-gray-800 italic leading-relaxed relative z-10 mb-4 font-medium">
+                                        "Dễ mười lần không dân cũng chịu, khó trăm lần dân liệu cũng xong."
+                                    </p>
+                                    <div className="w-12 h-0.5 bg-purple-300 mx-auto mb-4" />
+                                    <footer className="text-purple-900 font-bold text-[14px] uppercase relative z-10">
+                                        — Chủ tịch Hồ Chí Minh —
+                                    </footer>
+                                    <p className="text-[12px] text-purple-600/70 mt-2 italic font-medium relative z-10">
+                                        Lời căn dặn của Chủ tịch Hồ Chí Minh về sức mạnh to lớn của Nhân dân
                                     </p>
                                 </div>
                             </div>

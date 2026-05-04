@@ -250,7 +250,11 @@ export default function HienKeLinhVucDanhSachPage() {
                                 <div key={idea.id} className="p-5 md:p-6 hover:bg-blue-50/30 transition-colors group">
                                     <div className="flex flex-col md:flex-row md:items-start gap-4">
                                         <div className="flex-1">
-                                            <Link to={`/hien-ke/${idea.id}`} className="block mb-3">
+                                            <Link
+                                                to={`/hien-ke/${idea.id}`}
+                                                state={{ status: idea.isResponded ? 'Đã phản hồi' : 'Chờ phản hồi' }}
+                                                className="block mb-3"
+                                            >
                                                 <h3 className="text-[18px] md:text-[20px] font-bold text-[#0f3b7d] group-hover:text-blue-600 transition-colors leading-snug">
                                                     {idea.title}
                                                 </h3>
@@ -275,7 +279,7 @@ export default function HienKeLinhVucDanhSachPage() {
                                                     {idea.isResponded ? (
                                                         <>
                                                             <span className="px-2.5 py-1 rounded bg-green-50 text-green-700 font-semibold border border-green-100 flex items-center gap-1">
-                                                                <CheckCircle size={12} /> Đã trả lời
+                                                                <CheckCircle size={12} /> Đã phản hồi
                                                             </span>
                                                             <span className="px-2.5 py-1 rounded bg-blue-50 text-blue-700 font-semibold border border-blue-100 flex items-center gap-1">
                                                                 {idea.respondingAgency}
@@ -283,7 +287,7 @@ export default function HienKeLinhVucDanhSachPage() {
                                                         </>
                                                     ) : (
                                                         <span className="px-2.5 py-1 rounded bg-orange-50 text-orange-600 font-semibold border border-orange-100">
-                                                            Chờ trả lời
+                                                            Chờ phản hồi
                                                         </span>
                                                     )}
                                                 </div>

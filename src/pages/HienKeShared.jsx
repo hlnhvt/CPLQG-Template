@@ -5,7 +5,7 @@ import {
     Scale, Landmark, Heart, TrendingUp,
     Store, Globe, Car, HeartHandshake, Building2, GraduationCap, Activity, Leaf,
     Briefcase, Rocket, ShieldAlert, ShoppingBag, Sprout, CloudSun, Smartphone, Map,
-    Baby, Grid, MoreHorizontal
+    Baby, Grid, MoreHorizontal, Clock, FileText
 } from 'lucide-react';
 
 // ======================== MOCK DATA ========================
@@ -103,36 +103,44 @@ export const StatusBadge = ({ status, small = false }) => {
 
 // ======================== CARD COMPONENT ========================
 
-export const ConsultCard = ({ item, to, tag, accentColor = '#1e3a8a' }) => (
+export const ConsultCard = ({ item, to, tag, accentColor = '#1e3a8a', hideThumb = false, hideStatus = false, showDateBox = false }) => (
     <Link
         to={to}
         className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl hover:border-gray-300 hover:-translate-y-1 transition-all duration-300 flex flex-row h-[160px]"
     >
-        {/* Left: Thumbnail */}
-        <div className="relative w-[150px] md:w-[180px] shrink-0 overflow-hidden">
-            <img
-                src={item.thumb}
-                alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                onError={e => { e.target.src = '/images/dong_son_cover.png'; }}
-            />
-            {/* Subtle overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10" />
-            {/* Tag overlay */}
-            {tag && (
-                <div className="absolute bottom-2 left-2">
-                    <span className="text-[10px] font-semibold text-white bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full leading-tight">
-                        {tag}
-                    </span>
+        {/* Left: Thumbnail or Icon */}
+        {!hideThumb ? (
+            <div className="relative w-[120px] md:w-[150px] shrink-0 flex items-center justify-center bg-gray-50/50 border-r border-gray-100">
+                <div className="absolute inset-0 overflow-hidden">
+                    <img
+                        src={item.thumb}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={e => { e.target.src = '/images/dong_son_cover.png'; }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10" />
                 </div>
-            )}
-        </div>
+                {/* Tag overlay for image mode */}
+                {tag && (
+                    <div className="absolute bottom-2 left-2">
+                        <span className="text-[10px] font-semibold text-white bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full leading-tight">
+                            {tag}
+                        </span>
+                    </div>
+                )}
+            </div>
+        ) : null}
 
         {/* Right: Content */}
         <div className="flex-1 min-w-0 px-4 py-3.5 flex flex-col">
             {/* Top: status + agency */}
             <div className="flex items-center gap-2 mb-2 flex-wrap">
-                <StatusBadge status={item.status} small />
+                {!hideStatus && <StatusBadge status={item.status} small />}
+                {hideThumb && tag && (
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full leading-tight" style={{ color: accentColor, backgroundColor: accentColor + '15', border: `1px solid ${accentColor}30` }}>
+                        {tag}
+                    </span>
+                )}
                 <span className="text-[11px] text-gray-400 font-medium truncate">{item.agency}</span>
             </div>
 
@@ -157,21 +165,36 @@ export const ConsultCard = ({ item, to, tag, accentColor = '#1e3a8a' }) => (
             )}
 
             {/* Footer meta */}
-            <div className="flex items-center gap-3 mt-3">
-                {item.deadline && (
-                    <span className="text-[11px] text-gray-400 flex items-center gap-1 shrink-0">
-                        <Calendar size={12} /> {item.deadline}
-                    </span>
+            <div className="flex items-center gap-3 mt-auto pt-3 border-t border-gray-50">
+                {showDateBox ? (
+                    <div className="flex items-center gap-3 text-[11px] flex-1">
+                        <div className="flex items-center gap-1.5 text-gray-500">
+                            <Clock size={12} className="opacity-70" />
+                            <span>Ngày đăng: <span className="font-semibold text-gray-700">{item.startDate}</span></span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
+                            <Calendar size={12} />
+                            <span>Hạn góp ý: <span className="font-semibold">{item.deadline}</span></span>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="flex items-center gap-3 flex-1">
+                        {item.deadline && (
+                            <span className="text-[11px] text-gray-400 flex items-center gap-1 shrink-0">
+                                <Calendar size={12} /> {item.deadline}
+                            </span>
+                        )}
+                        {item.participants > 0 && (
+                            <span className="text-[11px] text-gray-400 flex items-center gap-1 shrink-0">
+                                <Users size={12} /> {item.participants.toLocaleString('vi-VN')}
+                            </span>
+                        )}
+                        {item.budget && (
+                            <span className="text-[11px] font-semibold text-amber-600">💰 {item.budget}</span>
+                        )}
+                    </div>
                 )}
-                {item.participants > 0 && (
-                    <span className="text-[11px] text-gray-400 flex items-center gap-1 shrink-0">
-                        <Users size={12} /> {item.participants.toLocaleString('vi-VN')}
-                    </span>
-                )}
-                {item.budget && (
-                    <span className="text-[11px] font-semibold text-amber-600">💰 {item.budget}</span>
-                )}
-                <ArrowRight size={14} className="ml-auto text-gray-300 group-hover:text-[#1e3a8a] group-hover:translate-x-0.5 transition-all shrink-0" />
+                <ArrowRight size={14} className="text-gray-300 group-hover:text-[#1e3a8a] group-hover:translate-x-0.5 transition-all shrink-0" />
             </div>
         </div>
     </Link>

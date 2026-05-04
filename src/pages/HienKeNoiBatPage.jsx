@@ -1,17 +1,25 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, TrendingUp, Search, ChevronLeft, FileText, ArrowRight, Download, Flame, Info, ChevronUp, ChevronDown, BookOpen, Zap, Users } from 'lucide-react';
+import { ChevronRight, TrendingUp, Search, ChevronLeft, FileText, ArrowRight, Download, Flame, Info, ChevronUp, ChevronDown, BookOpen, Zap, Users, Maximize2, Minimize2, Calendar } from 'lucide-react';
 import { Section, ConsultCard, HOT_ITEMS, NEW_HIGHLIGHTS, thumb } from './HienKeShared';
 
 // Mock Drafts
 const MOCK_DRAFTS = [
-    { id: 1, title: "Dự thảo Luật quy định về kiểm soát rủi ro trong lĩnh vực Chính phủ", org: "Chính phủ", type: "Luật", ngayDang: "01/03/2026", hanGopY: "10/04/2026", isExpired: true, isHot: true },
-    { id: 2, title: "Dự thảo Pháp lệnh quy định về kiểm soát rủi ro trong lĩnh vực Tài chính", org: "Bộ Tài chính", type: "Pháp lệnh", ngayDang: "02/03/2026", hanGopY: "11/04/2026", isExpired: false, isHot: true },
-    { id: 3, title: "Dự thảo Nghị định quy định về kiểm soát rủi ro trong lĩnh vực Tư pháp", org: "Bộ Tư pháp", type: "Nghị định", ngayDang: "03/03/2026", hanGopY: "12/04/2026", isExpired: false },
-    { id: 4, title: "Dự thảo Quyết định quy định về kiểm soát rủi ro trong lĩnh vực Y tế", org: "Bộ Y tế", type: "Quyết định", ngayDang: "04/03/2026", hanGopY: "13/04/2026", isExpired: false },
-    { id: 5, title: "Dự thảo Thông tư quy định về kiểm soát rủi ro trong lĩnh vực Công an", org: "Bộ Công an", type: "Thông tư", ngayDang: "05/03/2026", hanGopY: "14/04/2026", isExpired: false },
-    { id: 6, title: "Dự thảo Nghị quyết quy định về kiểm soát rủi ro trong lĩnh vực Nông nghiệp và PTNT", org: "Bộ Nông nghiệp và PTNT", type: "Nghị quyết", ngayDang: "06/03/2026", hanGopY: "15/04/2026", isExpired: false }
-];
+    { id: 1, title: "Dự thảo Luật quy định về kiểm soát rủi ro trong lĩnh vực Chính phủ", org: "Chính phủ", type: "Luật", ngayDang: "01/03/2026", hanGopY: "10/04/2026", isExpired: true, isHot: true, description: "Thiết lập cơ sở pháp lý vững chắc nhằm đánh giá, dự báo và phòng ngừa các rủi ro trong hoạt động điều hành của Chính phủ." },
+    { id: 2, title: "Dự thảo Pháp lệnh quy định về kiểm soát rủi ro trong lĩnh vực Tài chính", org: "Bộ Tài chính", type: "Pháp lệnh", ngayDang: "02/03/2026", hanGopY: "11/04/2026", isExpired: false, isHot: true, description: "Quản lý chặt chẽ dòng vốn đầu tư công và nợ công, đảm bảo an toàn tài chính quốc gia trước các biến động kinh tế toàn cầu." },
+    { id: 3, title: "Dự thảo Nghị định quy định về kiểm soát rủi ro trong lĩnh vực Tư pháp", org: "Bộ Tư pháp", type: "Nghị định", ngayDang: "03/03/2026", hanGopY: "12/04/2026", isExpired: false, description: "Tăng cường năng lực giải quyết tranh chấp pháp lý và kiểm soát chất lượng văn bản quy phạm pháp luật, giảm thiểu rủi ro pháp lý." },
+    { id: 4, title: "Dự thảo Quyết định quy định về kiểm soát rủi ro trong lĩnh vực Y tế", org: "Bộ Y tế", type: "Quyết định", ngayDang: "04/03/2026", hanGopY: "13/04/2026", isExpired: false, description: "Xây dựng cơ chế phản ứng nhanh đối với dịch bệnh truyền nhiễm và quản lý rủi ro trong hệ thống khám chữa bệnh toàn dân." },
+    { id: 5, title: "Dự thảo Thông tư quy định về kiểm soát rủi ro trong lĩnh vực Công an", org: "Bộ Công an", type: "Thông tư", ngayDang: "05/03/2026", hanGopY: "14/04/2026", isExpired: false, description: "Quy định chi tiết các biện pháp nghiệp vụ nhằm nhận diện và triệt tiêu các nguy cơ đe dọa an ninh trật tự an toàn xã hội." },
+    { id: 6, title: "Dự thảo Nghị quyết quy định về kiểm soát rủi ro trong lĩnh vực Nông nghiệp và PTNT", org: "Bộ Nông nghiệp và PTNT", type: "Nghị quyết", ngayDang: "06/03/2026", hanGopY: "15/04/2026", isExpired: false, description: "Chính sách phòng chống thiên tai, thích ứng biến đổi khí hậu và kiểm soát rủi ro dịch bệnh trong sản xuất nông nghiệp." }
+].map((draft, idx) => ({
+    ...draft,
+    agency: draft.org,
+    startDate: draft.ngayDang,
+    deadline: draft.hanGopY,
+    status: draft.isExpired ? 'closed' : 'open',
+    thumb: thumb(idx + 2),
+    participants: draft.isHot ? 1520 + idx * 100 : 800 + idx * 50
+}));
 
 // Extended mock data for Nổi bật
 const EXPANDED_ITEMS = [
@@ -31,14 +39,35 @@ const EXPANDED_ITEMS = [
     { id: 'h14', title: 'Quy hoạch mạng lưới cơ sở giáo dục đại học', agency: 'Bộ Giáo dục và Đào tạo', status: 'open', deadline: '20/05/2026', participants: 1890, thumb: thumb(1), description: 'Kế hoạch sáp nhập, và cấu trúc lại hệ thống các trường công lập nhằm tối đa hóa hiệu suất đào tạo.' },
 ];
 
-const ITEMS_PER_PAGE = 8;
+const ITEMS_PER_PAGE = 5;
 
 const HienKeNoiBatPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const [isIntroOpen, setIsIntroOpen] = useState(true);
+    const [isIntroOpen, setIsIntroOpen] = useState(false);
+    const [viewMode, setViewMode] = useState('both'); // 'both', 'drafts', 'highlights'
 
-    const filteredItems = useMemo(() => {
+    // Pagination States
+    const [draftPage, setDraftPage] = useState(1);
+    const [highlightPage, setHighlightPage] = useState(1);
+
+    // Ticker State
+    const [tickerIndex, setTickerIndex] = useState(0);
+    const hotItems = useMemo(() => {
+        const drafts = MOCK_DRAFTS.filter(d => d.isHot).map(d => ({ ...d, typeLabel: 'Dự thảo' }));
+        const highlights = EXPANDED_ITEMS.filter(h => h.isHot).map(h => ({ ...h, typeLabel: 'Chủ đề' }));
+        return [...drafts, ...highlights];
+    }, []);
+
+    useEffect(() => {
+        if (hotItems.length === 0) return;
+        const interval = setInterval(() => {
+            setTickerIndex(prev => (prev + 1) % hotItems.length);
+        }, 6000);
+        return () => clearInterval(interval);
+    }, [hotItems.length]);
+
+    // Filtered Highlights based on search
+    const filteredHighlights = useMemo(() => {
         if (!searchTerm) return EXPANDED_ITEMS;
         return EXPANDED_ITEMS.filter(item =>
             item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -46,14 +75,18 @@ const HienKeNoiBatPage = () => {
         );
     }, [searchTerm]);
 
-    const totalPages = Math.ceil(filteredItems.length / ITEMS_PER_PAGE);
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const displayedItems = filteredItems.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+    // Pagination Logic for Drafts
+    const totalDraftPages = Math.ceil(MOCK_DRAFTS.length / ITEMS_PER_PAGE);
+    const displayedDrafts = MOCK_DRAFTS.slice((draftPage - 1) * ITEMS_PER_PAGE, draftPage * ITEMS_PER_PAGE);
+
+    // Pagination Logic for Highlights
+    const totalHighlightPages = Math.ceil(filteredHighlights.length / ITEMS_PER_PAGE);
+    const displayedHighlights = filteredHighlights.slice((highlightPage - 1) * ITEMS_PER_PAGE, highlightPage * ITEMS_PER_PAGE);
 
     // Reset pagination when searching
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
-        setCurrentPage(1);
+        setHighlightPage(1);
     };
 
     return (
@@ -97,7 +130,71 @@ const HienKeNoiBatPage = () => {
                 </div>
             </div>
 
-            <div className="pt-8 container mx-auto px-4 md:px-8 max-w-[1280px] max-w-5xl border-b border-gray-200 mb-4 pb-6">
+            <div className="pt-8 container mx-auto px-4 md:px-8 max-w-[1280px] mb-4 pb-6">
+                {/* Highlight Ticker */}
+                {hotItems.length > 0 && (
+                    <div className="mb-8 relative group">
+                        <div className="bg-white rounded-2xl shadow-md border border-orange-100 overflow-hidden flex items-center h-20 relative">
+                            {/* Label */}
+                            <div className="bg-orange-500 text-white h-full px-8 flex items-center gap-2 shrink-0 relative z-10">
+                                <span className="font-bold text-[13px] uppercase whitespace-nowrap">Nổi bật</span>
+                                <div className="absolute top-0 -right-4 h-full w-8 bg-orange-500 skew-x-[-15deg] z-0"></div>
+                            </div>
+
+                            {/* Content */}
+                            <div className="flex-1 px-10 overflow-hidden relative h-full">
+                                {hotItems.map((item, idx) => (
+                                    <div
+                                        key={`${item.id}-${idx}`}
+                                        className={`absolute inset-0 flex items-center px-10 transition-all duration-700 ease-in-out ${idx === tickerIndex
+                                            ? 'opacity-100 translate-y-0'
+                                            : 'opacity-0 translate-y-4 pointer-events-none'
+                                            }`}
+                                    >
+                                        <div className="flex items-center gap-5 w-full">
+                                            <span className="px-3 py-1 rounded-lg bg-orange-100 text-orange-600 text-[11px] font-bold uppercase shrink-0">
+                                                {item.typeLabel}
+                                            </span>
+                                            <Link
+                                                to={item.typeLabel === 'Dự thảo' ? `/du-thao/${item.id}` : `/hien-ke/${item.id}`}
+                                                className="flex items-center gap-4 hover:text-orange-600 transition-colors group/item truncate flex-1 min-w-0"
+                                            >
+                                                <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-gray-100 shadow-md">
+                                                    <img
+                                                        src={item.thumb}
+                                                        alt=""
+                                                        className="w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-500"
+                                                    />
+                                                </div>
+                                                <div className="flex flex-col min-w-0">
+                                                    <span className="text-[14px] md:text-[16px] font-bold text-gray-800 group-hover/item:text-orange-600 truncate leading-tight">
+                                                        {item.title}
+                                                    </span>
+                                                    <span className="text-[12px] text-gray-500 flex items-center gap-1.5 mt-0.5">
+                                                        <Calendar size={13} className="text-orange-400" />
+                                                        Hạn góp ý: <span className="font-bold text-orange-600">{item.deadline}</span>
+                                                    </span>
+                                                </div>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Ticker Controls */}
+                            <div className="flex items-center gap-1.5 pr-6 shrink-0">
+                                {hotItems.map((_, idx) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => setTickerIndex(idx)}
+                                        className={`w-2 h-2 rounded-full transition-all ${idx === tickerIndex ? 'bg-orange-500 w-6' : 'bg-orange-200'}`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {isIntroOpen && (
                     <div className="mb-10 bg-white border border-gray-100 rounded-[2rem] p-8 md:p-12 text-gray-700 leading-relaxed animate-fadeIn shadow-2xl shadow-blue-900/10 relative overflow-hidden">
                         {/* Dong Son Drum Background Decoration */}
@@ -109,19 +206,19 @@ const HienKeNoiBatPage = () => {
                         <div className="relative z-10">
                             {/* Header */}
                             <div className="text-center mb-10 max-w-3xl mx-auto">
-                                <h4 className="text-[26px] md:text-[32px] font-bold text-black mb-4 leading-tight">
+                                <h4 className="text-[26px] md:text-[32px] font-bold mb-4 leading-tight">
                                     Chúng tôi cần bạn
                                 </h4>
-                                <div className="w-20 h-1.5 bg-black mx-auto rounded-full mb-6"></div>
+                                <div className="w-20 h-1.5 bg-black/70 mx-auto rounded-full mb-6"></div>
                                 <p className="text-gray-600 text-[17px] italic font-medium">
                                     Tại mục này, người dân và doanh nghiệp có thể trực tiếp tham gia góp ý cho các dự thảo văn bản quy phạm pháp luật đang được lấy ý kiến theo quy định, đồng thời đề xuất các sáng kiến lập pháp nhằm chung tay hoàn thiện hệ thống pháp luật.
                                 </p>
                             </div>
 
                             {/* Content Sections */}
-                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-10">
-                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
-                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-12">
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50">
+                                    <h5 className="font-bold mb-4 text-center text-[#1e3a8a] text-[19px]">
                                         Tầm nhìn
                                     </h5>
                                     <p className="text-[14px] leading-relaxed text-gray-700">
@@ -129,8 +226,8 @@ const HienKeNoiBatPage = () => {
                                     </p>
                                 </div>
 
-                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
-                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50">
+                                    <h5 className="font-bold mb-4 text-center text-[#1e3a8a] text-[19px]">
                                         Mục tiêu ưu tiên
                                     </h5>
                                     <ul className="text-[14px] space-y-2 text-gray-700">
@@ -140,8 +237,8 @@ const HienKeNoiBatPage = () => {
                                     </ul>
                                 </div>
 
-                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50 hover:bg-purple-50 transition-colors">
-                                    <h5 className="font-bold text-black mb-4 text-center text-[19px]">
+                                <div className="bg-purple-50/50 p-6 rounded-2xl border border-purple-100/50">
+                                    <h5 className="font-bold mb-4 text-center text-[#1e3a8a] text-[19px]">
                                         Giá trị cốt lõi
                                     </h5>
                                     <p className="text-[14px] leading-relaxed text-gray-700">
@@ -150,146 +247,231 @@ const HienKeNoiBatPage = () => {
                                 </div>
                             </div>
 
-                        </div>
-                    </div>
-                )}
-                {/* Header Đồng nhất */}
-                <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
-                    <div className="flex items-center gap-3 w-full md:w-auto">
-                        <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-orange-600 shrink-0">
-                            <FileText size={20} />
-                        </div>
-                        <div>
-                            <h2 className="text-[18px] font-bold text-gray-900 leading-tight">Góp ý dự thảo văn bản quy phạm pháp luật</h2>
-                            <p className="text-gray-500 text-[13px] mt-0.5">Các dự thảo văn bản pháp luật hiện đang được lấy ý kiến đóng góp rộng rãi.</p>
-                        </div>
-                    </div>
-                    {/* Nút Xem tất cả bên phải */}
-                    <Link to="/du-thao" className="shrink-0 w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold rounded-lg text-sm transition-colors shadow-sm whitespace-nowrap">
-                        Xem tất cả dự thảo <ArrowRight size={16} />
-                    </Link>
-                </div>
-
-                <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mb-8">
-                    <div className="space-y-4">
-                        {MOCK_DRAFTS.map((draft, idx) => (
-                            <div key={draft.id} className={`flex gap-4 p-4 last:border-b-0 transition-all ${draft.isHot ? 'rounded-xl bg-orange-50/40 border border-orange-100 mb-2' : 'border-b border-gray-50'}`}>
-                                <div className={`w-10 h-10 rounded-xl text-[14px] font-bold flex items-center justify-center shrink-0 mt-0.5 ${draft.isHot ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-sm' : 'bg-[#1a3b8b]/10 text-[#1a3b8b]'}`}>
-                                    {String(idx + 1).padStart(2, '0')}
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <Link to={`/du-thao/${draft.id}`} className="text-[14px] font-bold text-blue-700 hover:underline leading-snug block mb-1">
-                                        {draft.isHot && <span className="inline-flex items-center gap-1 text-[10px] font-bold text-orange-600 bg-orange-100 px-1.5 py-0.5 rounded border border-orange-200 mr-2 align-middle"><Flame size={12} strokeWidth={2.5} /> Đang được quan tâm</span>}
-                                        {draft.title}
-                                    </Link>
-                                    <div className="flex flex-wrap items-center gap-3 text-[11px] text-gray-500 mb-2">
-                                        <span className="font-semibold text-gray-600">{draft.org}</span>
-                                        <span className="w-1 h-1 rounded-full bg-gray-300"></span>
-                                        <span>{draft.type}</span>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <button className="text-[11px] px-2 py-1 border border-gray-300 rounded hover:border-blue-400 hover:text-blue-600 transition-colors text-gray-600 bg-white">Toàn văn</button>
-                                        <button className="text-[11px] px-2 py-1 border border-gray-300 rounded hover:border-blue-400 hover:text-blue-600 transition-colors text-gray-600 bg-white flex items-center gap-1"><Download size={11} /> Tải về dự thảo</button>
-                                    </div>
-                                </div>
-                                <div className="shrink-0 text-right text-[11px] text-gray-500 min-w-[120px] space-y-1 mt-0.5 hidden sm:block">
-                                    <p><span className="text-gray-400">Ngày đăng:</span> {draft.ngayDang}</p>
-                                    <p><span className="text-gray-400">Hạn góp ý:</span> <span className={draft.isExpired ? "text-red-500 font-semibold" : ""}>{draft.hanGopY}</span></p>
-                                    {draft.isExpired ? (
-                                        <span className="inline-block mt-1 px-2 py-0.5 rounded border bg-red-50 text-red-600 border-red-200 text-[10px] font-semibold">Đã hết hạn</span>
-                                    ) : (
-                                        <span className="inline-block mt-1 px-2 py-0.5 rounded border bg-green-50 text-green-700 border-green-200 text-[10px] font-semibold">Đang lấy ý kiến</span>
-                                    )}
+                            {/* Leadership Quote Section */}
+                            <div className="max-w-4xl mx-auto relative">
+                                <div className="bg-gradient-to-br from-white to-purple-50/30 p-8 rounded-3xl border border-purple-100/50 shadow-inner text-center relative overflow-hidden group">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-purple-100/20 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-purple-200/30 transition-all duration-700" />
+                                    <p className="text-[17px] md:text-[19px] text-gray-800 italic leading-relaxed relative z-10 mb-4 font-medium">
+                                        "Đổi mới mạnh mẽ công tác lập pháp, chuyển đổi tư duy xây dựng pháp luật theo hướng <br />vừa bảo đảm yêu cầu quản lý nhà nước, vừa khuyến khích sáng tạo, khơi thông mọi nguồn lực để phát triển."
+                                    </p>
+                                    <div className="w-12 h-0.5 bg-purple-300 mx-auto mb-4" />
+                                    <footer className="text-purple-900 font-bold text-[14px] uppercase relative z-10">
+                                        — Tổng Bí thư, Chủ tịch nước Tô Lâm —
+                                    </footer>
+                                    <p className="text-[12px] text-purple-600/70 mt-2 italic font-medium relative z-10">
+                                        (Trích bài viết về định hướng kỷ nguyên mới, kỷ nguyên vươn mình của dân tộc Việt Nam, tháng 10 năm 2024)
+                                    </p>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
 
-            {/* ── Phần 1: Ý tưởng, sáng kiến nổi bật (Đưa xuống dưới) ──────────────── */}
-            <div className="container mx-auto px-4 md:px-8 max-w-[1280px] max-w-5xl mb-16">
-                {/* Header Đồng nhất */}
-                <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
-                    <div className="flex items-center gap-3 w-full sm:w-auto">
-                        <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-[#1e3a8a] shrink-0">
-                            <TrendingUp size={20} />
-                        </div>
-                        <div>
-                            <h2 className="text-[18px] font-bold text-gray-900 leading-tight">Các chủ đề nổi bật</h2>
-                            <p className="text-gray-500 text-[13px] mt-0.5">Hiển thị {filteredItems.length} kết quả</p>
                         </div>
                     </div>
+                )}
 
-                    <div className="relative w-full sm:w-80 shrink-0">
-                        <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                        <input
-                            type="text"
-                            placeholder="Tìm kiếm dự thảo, cơ quan..."
-                            value={searchTerm}
-                            onChange={handleSearchChange}
-                            className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-[#1e3a8a] focus:ring-1 focus:ring-[#1e3a8a] transition-all text-sm bg-gray-50 focus:bg-white"
-                        />
-                    </div>
-                </div>
-
-                {/* List Content */}
-                {displayedItems.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-8 pt-2">
-                        {displayedItems.map(item => (
-                            <div key={item.id} className={`relative rounded-xl transition-all ${item.isHot ? 'ring-2 ring-orange-400 ring-offset-2' : ''}`}>
-                                {item.isHot && (
-                                    <div className="absolute -top-3 left-3 z-10 bg-gradient-to-r from-orange-500 to-red-500 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md flex items-center gap-1 border-2 border-white">
-                                        <Flame size={13} fill="currentColor" strokeWidth={2} /> Đang được quan tâm
+                <div className={`grid gap-8 items-start transition-all duration-500 ${viewMode === 'both' ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1'}`}>
+                    {/* Left Column: Drafts */}
+                    {(viewMode === 'both' || viewMode === 'drafts') && (
+                        <div className="flex flex-col space-y-6 animate-fadeIn">
+                            <div className="relative overflow-hidden rounded-2xl shadow-lg group shrink-0 transition-all duration-300">
+                                {/* Artistic Background */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#1a3b8b] to-[#2a52be] z-0"></div>
+                                <div
+                                    className="absolute inset-0 opacity-10 mix-blend-overlay z-10 bg-no-repeat bg-center"
+                                    style={{
+                                        backgroundImage: "url('/images/dong_son_cover.png')",
+                                        backgroundSize: '150%',
+                                        backgroundPosition: 'center'
+                                    }}
+                                ></div>
+                                <div className="relative z-20 p-6 flex items-center justify-between gap-4">
+                                    <div className="flex items-center gap-3">
+                                        <div>
+                                            <h2 className="text-[18px] font-bold text-white leading-tight">Góp ý dự thảo</h2>
+                                            <p className="text-blue-100/70 text-[11px]">Tham gia xây dựng chính sách pháp luật</p>
+                                        </div>
                                     </div>
-                                )}
-                                <ConsultCard
-                                    item={item}
-                                    to={`/hien-ke/${item.id}`}
-                                    accentColor="#1e3a8a"
-                                />
+                                    <div className="flex items-center gap-3 shrink-0">
+                                        <Link to="/du-thao" className="inline-flex items-center justify-center gap-2 px-3 py-1.5 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white font-semibold rounded-xl text-[11px] transition-all">
+                                            Tất cả <ArrowRight size={14} />
+                                        </Link>
+                                        <button
+                                            onClick={() => setViewMode(viewMode === 'both' ? 'drafts' : 'both')}
+                                            className="flex items-center gap-2 px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-xl text-white transition-all border border-white/20 backdrop-blur-md group"
+                                        >
+                                            {viewMode === 'both' ? (
+                                                <>
+                                                    <Maximize2 size={16} className="group-hover:scale-110 transition-transform" />
+                                                    <span className="text-[11px] font-bold">Toàn màn hình</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Minimize2 size={16} className="group-hover:scale-110 transition-transform" />
+                                                    <span className="text-[11px] font-bold">Thu nhỏ</span>
+                                                </>
+                                            )}
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="py-20 text-center bg-white rounded-2xl border border-gray-100 shadow-sm mb-8">
-                        <p className="text-gray-500">Không tìm thấy kết quả nào phù hợp.</p>
-                    </div>
-                )}
 
-                {/* Pagination */}
-                {totalPages > 1 && (
-                    <div className="flex items-center justify-center gap-2">
-                        <button
-                            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                            disabled={currentPage === 1}
-                            className="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50 disabled:pointer-events-none transition-colors"
-                        >
-                            <ChevronLeft size={18} />
-                        </button>
+                            <div className={`grid gap-4 ${viewMode === 'drafts' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
+                                {displayedDrafts.map((draft) => (
+                                    <div key={draft.id} className={`relative rounded-xl transition-all ${draft.isHot ? 'ring-2 ring-orange-400 ring-offset-2 shadow-md' : ''}`}>
+                                        <ConsultCard
+                                            item={draft}
+                                            to={`/du-thao/${draft.id}`}
+                                            tag={draft.type}
+                                            accentColor="#ea580c"
+                                            hideThumb={true}
+                                            hideStatus={true}
+                                            showDateBox={true}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
 
-                        {Array.from({ length: totalPages }).map((_, i) => (
-                            <button
-                                key={i}
-                                onClick={() => setCurrentPage(i + 1)}
-                                className={`w-10 h-10 flex items-center justify-center rounded-xl font-medium transition-colors ${currentPage === i + 1
-                                    ? 'bg-[#1e3a8a] text-white shadow-sm'
-                                    : 'border border-gray-200 bg-white text-gray-600 hover:bg-gray-50'
-                                    }`}
-                            >
-                                {i + 1}
-                            </button>
-                        ))}
+                            {/* Numeric Pagination for Drafts */}
+                            {totalDraftPages > 1 && (
+                                <div className="flex items-center justify-center gap-2 pt-4">
+                                    <button
+                                        onClick={() => setDraftPage(p => Math.max(1, p - 1))}
+                                        disabled={draftPage === 1}
+                                        className="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#1a3b8b] hover:border-[#1a3b8b] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                                    >
+                                        <ChevronLeft size={16} />
+                                    </button>
+                                    {[...Array(totalDraftPages)].map((_, i) => (
+                                        <button
+                                            key={i + 1}
+                                            onClick={() => setDraftPage(i + 1)}
+                                            className={`w-8 h-8 rounded-lg font-bold text-[13px] transition-all ${draftPage === i + 1
+                                                ? 'bg-[#1a3b8b] text-white shadow-md'
+                                                : 'bg-white text-gray-600 border border-gray-200 hover:border-[#1a3b8b] hover:text-[#1a3b8b]'
+                                                }`}
+                                        >
+                                            {i + 1}
+                                        </button>
+                                    ))}
+                                    <button
+                                        onClick={() => setDraftPage(p => Math.min(totalDraftPages, p + 1))}
+                                        disabled={draftPage === totalDraftPages}
+                                        className="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#1a3b8b] hover:border-[#1a3b8b] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                                    >
+                                        <ChevronRight size={16} />
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    )}
 
-                        <button
-                            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                            disabled={currentPage === totalPages}
-                            className="w-10 h-10 flex items-center justify-center rounded-xl border border-gray-200 bg-white text-gray-500 hover:bg-gray-50 hover:text-gray-900 disabled:opacity-50 disabled:pointer-events-none transition-colors"
-                        >
-                            <ChevronRight size={18} />
-                        </button>
-                    </div>
-                )}
+                    {/* Right Column: Highlights */}
+                    {(viewMode === 'both' || viewMode === 'highlights') && (
+                        <div className="flex flex-col space-y-6 animate-fadeIn">
+                            <div className="relative overflow-hidden rounded-2xl shadow-lg group shrink-0 transition-all duration-300">
+                                {/* Artistic Background */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#1a3b8b] to-[#2a52be] z-0"></div>
+                                <div
+                                    className="absolute inset-0 opacity-10 mix-blend-overlay z-10 bg-no-repeat bg-center"
+                                    style={{
+                                        backgroundImage: "url('/images/dong_son_cover.png')",
+                                        backgroundSize: '150%',
+                                        backgroundPosition: 'center'
+                                    }}
+                                ></div>
+
+                                <div className="relative z-20 p-6 flex items-center justify-between gap-4">
+                                    <div className="flex items-center gap-3">
+                                        <div>
+                                            <h2 className="text-[18px] font-bold text-white leading-tight">Chủ đề nổi bật</h2>
+                                            <p className="text-blue-100/70 text-[11px]">Các hiến kế đang thu hút thảo luận</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-3 shrink-0">
+                                        <div className="relative w-32 sm:w-40">
+                                            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 z-30" />
+                                            <input
+                                                type="text"
+                                                placeholder="Tìm..."
+                                                value={searchTerm}
+                                                onChange={handleSearchChange}
+                                                className="w-full pl-9 pr-3 py-1.5 rounded-xl bg-white/10 border border-white/20 focus:outline-none focus:border-white focus:ring-0 transition-all text-[11px] text-white placeholder-white/50 backdrop-blur-md relative z-20"
+                                            />
+                                        </div>
+                                        <button
+                                            onClick={() => setViewMode(viewMode === 'both' ? 'highlights' : 'both')}
+                                            className="flex items-center gap-2 px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-xl text-white transition-all border border-white/20 backdrop-blur-md group"
+                                        >
+                                            {viewMode === 'both' ? (
+                                                <>
+                                                    <Maximize2 size={16} className="group-hover:scale-110 transition-transform" />
+                                                    <span className="text-[11px] font-bold text-nowrap">Toàn màn hình</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Minimize2 size={16} className="group-hover:scale-110 transition-transform" />
+                                                    <span className="text-[11px] font-bold text-nowrap">Thu nhỏ</span>
+                                                </>
+                                            )}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {displayedHighlights.length > 0 ? (
+                                <div className={`grid gap-4 ${viewMode === 'highlights' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
+                                    {displayedHighlights.map(item => (
+                                        <div key={item.id} className={`relative rounded-xl transition-all ${item.isHot ? 'ring-2 ring-orange-400 ring-offset-2 shadow-md' : ''}`}>
+                                            <ConsultCard
+                                                item={{ ...item, startDate: item.startDate || item.date || '20/03/2026' }}
+                                                to={`/hien-ke/${item.id}`}
+                                                accentColor="#1e3a8a"
+                                                showDateBox={true}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="flex items-center justify-center bg-white rounded-2xl border border-gray-100 shadow-sm p-10">
+                                    <p className="text-gray-500 text-sm italic">Không tìm thấy kết quả.</p>
+                                </div>
+                            )}
+
+                            {/* Numeric Pagination for Highlights */}
+                            {totalHighlightPages > 1 && (
+                                <div className="flex items-center justify-center gap-2 pt-4">
+                                    <button
+                                        onClick={() => setHighlightPage(p => Math.max(1, p - 1))}
+                                        disabled={highlightPage === 1}
+                                        className="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#1a3b8b] hover:border-[#1a3b8b] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                                    >
+                                        <ChevronLeft size={16} />
+                                    </button>
+                                    {[...Array(totalHighlightPages)].map((_, i) => (
+                                        <button
+                                            key={i + 1}
+                                            onClick={() => setHighlightPage(i + 1)}
+                                            className={`w-8 h-8 rounded-lg font-bold text-[13px] transition-all ${highlightPage === i + 1
+                                                ? 'bg-[#1a3b8b] text-white shadow-md'
+                                                : 'bg-white text-gray-600 border border-gray-200 hover:border-[#1a3b8b] hover:text-[#1a3b8b]'
+                                                }`}
+                                        >
+                                            {i + 1}
+                                        </button>
+                                    ))}
+                                    <button
+                                        onClick={() => setHighlightPage(p => Math.min(totalHighlightPages, p + 1))}
+                                        disabled={highlightPage === totalHighlightPages}
+                                        className="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#1a3b8b] hover:border-[#1a3b8b] transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                                    >
+                                        <ChevronRight size={16} />
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                </div>
             </div>
         </div>
     );
