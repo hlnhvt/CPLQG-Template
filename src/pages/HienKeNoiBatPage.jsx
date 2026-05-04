@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, TrendingUp, Search, ChevronLeft, FileText, ArrowRight, Download, Flame, Info, ChevronUp, ChevronDown, BookOpen, Zap, Users, Maximize2, Minimize2, Calendar } from 'lucide-react';
+import { ChevronRight, TrendingUp, Search, ChevronLeft, FileText, ArrowRight, Download, Flame, Info, ChevronUp, ChevronDown, BookOpen, Zap, Users, Maximize2, Minimize2, Calendar, Clock } from 'lucide-react';
 import { Section, ConsultCard, HOT_ITEMS, NEW_HIGHLIGHTS, thumb } from './HienKeShared';
 
 // Mock Drafts
@@ -133,61 +133,89 @@ const HienKeNoiBatPage = () => {
             <div className="pt-8 container mx-auto px-4 md:px-8 max-w-[1280px] mb-4 pb-6">
                 {/* Highlight Ticker */}
                 {hotItems.length > 0 && (
-                    <div className="mb-8 relative group">
-                        <div className="bg-white rounded-2xl shadow-md border border-orange-100 overflow-hidden flex items-center h-20 relative">
+                    <div className="mb-10 relative group">
+                        <div className="bg-white rounded-3xl shadow-xl shadow-blue-900/5 border border-orange-100 overflow-hidden flex items-center h-[160px] relative transition-all hover:shadow-2xl hover:shadow-blue-900/10 hover:border-orange-200">
                             {/* Label */}
-                            <div className="bg-orange-500 text-white h-full px-8 flex items-center gap-2 shrink-0 relative z-10">
-                                <span className="font-bold text-[13px] uppercase whitespace-nowrap">Nổi bật</span>
-                                <div className="absolute top-0 -right-4 h-full w-8 bg-orange-500 skew-x-[-15deg] z-0"></div>
+                            <div className="bg-gradient-to-br from-orange-400 to-orange-600 text-white h-full px-10 flex flex-col justify-center gap-1 shrink-0 relative z-10">
+                                <span className="font-bold text-[17px] text-center uppercase whitespace-nowrap opacity-80">Thông tin</span>
+                                <span className="font-bold text-[20px] text-center uppercase whitespace-nowrap">Nổi bật</span>
+                                <div className="absolute top-0 -right-6 h-full w-12 bg-gradient-to-br from-orange-400 to-orange-600 skew-x-[-12deg] z-0"></div>
                             </div>
 
                             {/* Content */}
-                            <div className="flex-1 px-10 overflow-hidden relative h-full">
+                            <div className="flex-1 px-12 overflow-hidden relative h-full">
                                 {hotItems.map((item, idx) => (
                                     <div
                                         key={`${item.id}-${idx}`}
-                                        className={`absolute inset-0 flex items-center px-10 transition-all duration-700 ease-in-out ${idx === tickerIndex
-                                            ? 'opacity-100 translate-y-0'
-                                            : 'opacity-0 translate-y-4 pointer-events-none'
+                                        className={`absolute inset-0 flex items-center px-12 transition-all duration-700 ease-in-out ${idx === tickerIndex
+                                            ? 'opacity-100 translate-y-0 scale-100'
+                                            : 'opacity-0 translate-y-10 scale-95 pointer-events-none'
                                             }`}
                                     >
-                                        <div className="flex items-center gap-5 w-full">
-                                            <span className="px-3 py-1 rounded-lg bg-orange-100 text-orange-600 text-[11px] font-bold uppercase shrink-0">
-                                                {item.typeLabel}
-                                            </span>
-                                            <Link
-                                                to={item.typeLabel === 'Dự thảo' ? `/du-thao/${item.id}` : `/hien-ke/${item.id}`}
-                                                className="flex items-center gap-4 hover:text-orange-600 transition-colors group/item truncate flex-1 min-w-0"
-                                            >
-                                                <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-gray-100 shadow-md">
-                                                    <img
-                                                        src={item.thumb}
-                                                        alt=""
-                                                        className="w-full h-full object-cover group-hover/item:scale-110 transition-transform duration-500"
-                                                    />
+                                        <div className="flex items-center gap-8 w-full">
+                                            {/* Icon or Thumbnail */}
+                                            {item.typeLabel !== 'Dự thảo' && (
+                                                <div className="shrink-0">
+                                                    <div className="w-24 h-24 rounded-2xl overflow-hidden border-4 border-white shadow-lg group-hover:shadow-xl transition-all">
+                                                        <img
+                                                            src={item.thumb}
+                                                            alt=""
+                                                            className="w-full h-full object-cover"
+                                                        />
+                                                    </div>
                                                 </div>
-                                                <div className="flex flex-col min-w-0">
-                                                    <span className="text-[14px] md:text-[16px] font-bold text-gray-800 group-hover/item:text-orange-600 truncate leading-tight">
+                                            )}
+
+                                            <div className="flex flex-col gap-2 min-w-0">
+                                                <div className="flex items-center gap-3">
+                                                    <span className="px-3 py-1 rounded-full bg-orange-100 text-orange-600 text-[11px] font-bold uppercase tracking-wider shrink-0">
+                                                        {item.typeLabel}
+                                                    </span>
+                                                    <span className="text-[13px] text-gray-400 font-medium truncate">{item.agency}</span>
+                                                </div>
+                                                <Link
+                                                    to={item.typeLabel === 'Dự thảo' ? `/du-thao/${item.id}` : `/hien-ke/${item.id}`}
+                                                    className="group/link"
+                                                >
+                                                    <h3 className="text-[17px] md:text-[21px] font-bold text-gray-900 group-hover/link:text-orange-600 transition-colors leading-tight line-clamp-2">
                                                         {item.title}
-                                                    </span>
-                                                    <span className="text-[12px] text-gray-500 flex items-center gap-1.5 mt-0.5">
-                                                        <Calendar size={13} className="text-orange-400" />
-                                                        Hạn góp ý: <span className="font-bold text-orange-600">{item.deadline}</span>
-                                                    </span>
+                                                    </h3>
+                                                </Link>
+                                                <div className="flex items-center gap-4 text-[14px] text-gray-500 font-medium">
+                                                    <div className="flex items-center gap-3 bg-gray-50 px-3 py-1 rounded-lg border border-gray-100">
+                                                        <div className="flex items-center gap-1.5 border-r border-gray-200 pr-3">
+                                                            <Calendar size={14} className="text-orange-500" />
+                                                            <span>Ngày đăng: <span className="text-gray-700">{item.startDate || '01/01/2026'}</span></span>
+                                                        </div>
+                                                        <div className="flex items-center gap-1.5">
+                                                            <Clock size={14} className="text-orange-500" />
+                                                            <span>Hạn góp ý: <span className="text-orange-600">{item.deadline}</span></span>
+                                                        </div>
+                                                    </div>
+                                                    {/* {item.participants > 0 && (
+                                                        <div className="flex items-center gap-2">
+                                                            <Users size={16} className="text-blue-400" />
+                                                            <span>{item.participants.toLocaleString('vi-VN')} người tham gia</span>
+                                                        </div>
+                                                    )} */}
                                                 </div>
-                                            </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
                             </div>
 
                             {/* Ticker Controls */}
-                            <div className="flex items-center gap-1.5 pr-6 shrink-0">
+                            <div className="flex flex-col items-center gap-2 pr-8 shrink-0 relative z-20">
                                 {hotItems.map((_, idx) => (
                                     <button
                                         key={idx}
                                         onClick={() => setTickerIndex(idx)}
-                                        className={`w-2 h-2 rounded-full transition-all ${idx === tickerIndex ? 'bg-orange-500 w-6' : 'bg-orange-200'}`}
+                                        className={`transition-all duration-300 ${idx === tickerIndex
+                                            ? 'w-3 h-3 bg-orange-500 ring-4 ring-orange-100 rounded-full'
+                                            : 'w-2 h-2 bg-gray-200 hover:bg-orange-300 rounded-full'
+                                            }`}
+                                        title={`Xem mục ${idx + 1}`}
                                     />
                                 ))}
                             </div>
@@ -283,11 +311,11 @@ const HienKeNoiBatPage = () => {
                                         backgroundPosition: 'center'
                                     }}
                                 ></div>
-                                <div className="relative z-20 p-6 flex items-center justify-between gap-4">
-                                    <div className="flex items-center gap-3">
-                                        <div>
-                                            <h2 className="text-[18px] font-bold text-white leading-tight">Góp ý dự thảo</h2>
-                                            <p className="text-blue-100/70 text-[11px]">Tham gia xây dựng chính sách pháp luật</p>
+                                <div className="relative z-20 px-8 py-8 md:py-10 flex items-center justify-between gap-4">
+                                    <div className="flex items-center gap-4">
+                                        <div className="flex flex-col">
+                                            <h2 className="text-[18px] md:text-[22px] font-bold text-white leading-tight">Góp ý dự thảo</h2>
+                                            <p className="text-blue-100/70 text-[12px] mt-1">Tham gia xây dựng chính sách pháp luật</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3 shrink-0">
@@ -325,6 +353,7 @@ const HienKeNoiBatPage = () => {
                                             hideThumb={true}
                                             hideStatus={true}
                                             showDateBox={true}
+                                            isHot={draft.isHot}
                                         />
                                     </div>
                                 ))}
@@ -379,11 +408,11 @@ const HienKeNoiBatPage = () => {
                                     }}
                                 ></div>
 
-                                <div className="relative z-20 p-6 flex items-center justify-between gap-4">
-                                    <div className="flex items-center gap-3">
-                                        <div>
-                                            <h2 className="text-[18px] font-bold text-white leading-tight">Chủ đề nổi bật</h2>
-                                            <p className="text-blue-100/70 text-[11px]">Các hiến kế đang thu hút thảo luận</p>
+                                <div className="relative z-20 px-8 py-8 md:py-10 flex items-center justify-between gap-4">
+                                    <div className="flex items-center gap-4">
+                                        <div className="flex flex-col">
+                                            <h2 className="text-[18px] md:text-[22px] font-bold text-white leading-tight">Chủ đề nổi bật</h2>
+                                            <p className="text-blue-100/70 text-[12px] mt-1">Các hiến kế đang thu hút thảo luận</p>
                                         </div>
                                     </div>
 
@@ -427,6 +456,7 @@ const HienKeNoiBatPage = () => {
                                                 to={`/hien-ke/${item.id}`}
                                                 accentColor="#1e3a8a"
                                                 showDateBox={true}
+                                                isHot={item.isHot}
                                             />
                                         </div>
                                     ))}

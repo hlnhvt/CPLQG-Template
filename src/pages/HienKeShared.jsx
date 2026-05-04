@@ -5,7 +5,7 @@ import {
     Scale, Landmark, Heart, TrendingUp,
     Store, Globe, Car, HeartHandshake, Building2, GraduationCap, Activity, Leaf,
     Briefcase, Rocket, ShieldAlert, ShoppingBag, Sprout, CloudSun, Smartphone, Map,
-    Baby, Grid, MoreHorizontal, Clock, FileText
+    Baby, Grid, MoreHorizontal, Clock, FileText, Flame
 } from 'lucide-react';
 
 // ======================== MOCK DATA ========================
@@ -103,46 +103,65 @@ export const StatusBadge = ({ status, small = false }) => {
 
 // ======================== CARD COMPONENT ========================
 
-export const ConsultCard = ({ item, to, tag, accentColor = '#1e3a8a', hideThumb = false, hideStatus = false, showDateBox = false }) => (
-    <Link
-        to={to}
-        className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl hover:border-gray-300 hover:-translate-y-1 transition-all duration-300 flex flex-row h-[160px]"
-    >
-        {/* Left: Thumbnail or Icon */}
-        {!hideThumb ? (
-            <div className="relative w-[120px] md:w-[150px] shrink-0 flex items-center justify-center bg-gray-50/50 border-r border-gray-100">
-                <div className="absolute inset-0 overflow-hidden">
-                    <img
-                        src={item.thumb}
-                        alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        onError={e => { e.target.src = '/images/dong_son_cover.png'; }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10" />
+export const ConsultCard = ({
+    item,
+    to,
+    tag,
+    accentColor = '#1e3a8a',
+    hideThumb = false,
+    hideStatus = false,
+    showDateBox = false,
+    isHot = false
+}) => {
+    return (
+        <Link
+            to={to}
+            className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl hover:border-gray-300 hover:-translate-y-1 transition-all duration-300 flex flex-row h-[160px] relative"
+        >
+            {/* Featured Badge */}
+            {isHot && (
+                <div className="absolute top-0 right-0 z-30">
+                    <div className="bg-gradient-to-l from-orange-500 to-orange-400 text-white text-[9px] font-bold px-3 py-1 rounded-bl-lg shadow-sm border-l border-b border-orange-200/20">
+                        <span>NỔI BẬT</span>
+                    </div>
                 </div>
-                {/* Tag overlay for image mode */}
-                {tag && (
-                    <div className="absolute bottom-2 left-2">
-                        <span className="text-[10px] font-semibold text-white bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full leading-tight">
+            )}
+
+            {/* Left: Thumbnail or Icon */}
+            {!hideThumb ? (
+                <div className="relative w-[120px] md:w-[150px] shrink-0 flex items-center justify-center bg-gray-50/50 border-r border-gray-100">
+                    <div className="absolute inset-0 overflow-hidden">
+                        <img
+                            src={item.thumb}
+                            alt={item.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onError={e => { e.target.src = '/images/dong_son_cover.png'; }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10" />
+                    </div>
+                    {/* Tag overlay for image mode */}
+                    {tag && (
+                        <div className="absolute bottom-2 left-2">
+                            <span className="text-[10px] font-semibold text-white bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full leading-tight">
+                                {tag}
+                            </span>
+                        </div>
+                    )}
+                </div>
+            ) : null}
+
+            {/* Right: Content */}
+            <div className="flex-1 min-w-0 px-4 py-3.5 flex flex-col">
+                {/* Top: status + agency */}
+                <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    {!hideStatus && <StatusBadge status={item.status} small />}
+                    {hideThumb && tag && (
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full leading-tight" style={{ color: accentColor, backgroundColor: accentColor + '15', border: `1px solid ${accentColor}30` }}>
                             {tag}
                         </span>
-                    </div>
-                )}
-            </div>
-        ) : null}
-
-        {/* Right: Content */}
-        <div className="flex-1 min-w-0 px-4 py-3.5 flex flex-col">
-            {/* Top: status + agency */}
-            <div className="flex items-center gap-2 mb-2 flex-wrap">
-                {!hideStatus && <StatusBadge status={item.status} small />}
-                {hideThumb && tag && (
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full leading-tight" style={{ color: accentColor, backgroundColor: accentColor + '15', border: `1px solid ${accentColor}30` }}>
-                        {tag}
-                    </span>
-                )}
-                <span className="text-[11px] text-gray-400 font-medium truncate">{item.agency}</span>
-            </div>
+                    )}
+                    <span className="text-[11px] text-gray-400 font-medium truncate">{item.agency}</span>
+                </div>
 
             {/* Title */}
             <h3
@@ -199,6 +218,7 @@ export const ConsultCard = ({ item, to, tag, accentColor = '#1e3a8a', hideThumb 
         </div>
     </Link>
 );
+};
 
 // ======================== SECTION WRAPPER ========================
 
