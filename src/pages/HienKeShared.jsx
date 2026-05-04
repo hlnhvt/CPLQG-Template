@@ -111,12 +111,13 @@ export const ConsultCard = ({
     hideThumb = false,
     hideStatus = false,
     showDateBox = false,
-    isHot = false
+    isHot = false,
+    isFeatured = false
 }) => {
     return (
         <Link
             to={to}
-            className="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl hover:border-gray-300 hover:-translate-y-1 transition-all duration-300 flex flex-row h-[160px] relative"
+            className={`group bg-white rounded-xl overflow-hidden border border-gray-200 transition-all duration-300 flex flex-row relative h-full min-h-[160px] ${isFeatured ? 'shadow-2xl shadow-blue-900/10 border-blue-200/50' : 'hover:shadow-xl hover:border-gray-300 hover:-translate-y-1'}`}
         >
             {/* Featured Badge */}
             {isHot && (
@@ -129,7 +130,7 @@ export const ConsultCard = ({
 
             {/* Left: Thumbnail or Icon */}
             {!hideThumb ? (
-                <div className="relative w-[120px] md:w-[150px] shrink-0 flex items-center justify-center bg-gray-50/50 border-r border-gray-100">
+                <div className={`relative shrink-0 flex items-center justify-center bg-gray-50/50 border-r border-gray-100 ${isFeatured ? 'w-[160px] md:w-[220px]' : 'w-[120px] md:w-[150px]'}`}>
                     <div className="absolute inset-0 overflow-hidden">
                         <img
                             src={item.thumb}
@@ -151,7 +152,7 @@ export const ConsultCard = ({
             ) : null}
 
             {/* Right: Content */}
-            <div className="flex-1 min-w-0 px-4 py-3.5 flex flex-col">
+            <div className={`flex-1 min-w-0 flex flex-col ${isFeatured ? 'px-6 py-5 md:px-8 md:py-6' : 'px-4 py-3.5'}`}>
                 {/* Top: status + agency */}
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
                     {!hideStatus && <StatusBadge status={item.status} small />}
@@ -160,22 +161,22 @@ export const ConsultCard = ({
                             {tag}
                         </span>
                     )}
-                    <span className="text-[11px] text-gray-400 font-medium truncate">{item.agency}</span>
+                    <span className={`${isFeatured ? 'text-[12px]' : 'text-[11px]'} text-gray-400 font-medium truncate`}>{item.agency}</span>
                 </div>
 
-            {/* Title */}
-            <h3
-                className="text-[14px] md:text-[15px] font-bold text-gray-900 leading-snug group-hover:text-[#1e3a8a] transition-colors"
-                style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
-            >
-                {item.title}
-            </h3>
+                {/* Title */}
+                <h3
+                    className={`${isFeatured ? 'text-[17px] md:text-[20px]' : 'text-[14px] md:text-[15px]'} font-bold text-gray-900 leading-snug group-hover:text-[#1e3a8a] transition-colors`}
+                    style={{ display: '-webkit-box', WebkitLineClamp: isFeatured ? 3 : 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+                >
+                    {item.title}
+                </h3>
 
             {/* Description */}
             {item.description ? (
                 <p
-                    className="text-[12.5px] text-gray-500 mt-1.5 leading-snug flex-1"
-                    style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+                    className={`${isFeatured ? 'text-[14px] md:text-[15px]' : 'text-[12.5px]'} text-gray-500 mt-2 leading-relaxed flex-1`}
+                    style={{ display: '-webkit-box', WebkitLineClamp: isFeatured ? 3 : 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
                 >
                     {item.description}
                 </p>
@@ -184,36 +185,36 @@ export const ConsultCard = ({
             )}
 
             {/* Footer meta */}
-            <div className="flex items-center gap-3 mt-auto pt-3 border-t border-gray-50">
+            <div className={`flex items-center gap-3 mt-auto border-t border-gray-50 ${isFeatured ? 'pt-4' : 'pt-3'}`}>
                 {showDateBox ? (
-                    <div className="flex items-center gap-3 text-[11px] flex-1">
+                    <div className={`flex items-center gap-3 ${isFeatured ? 'text-[12px]' : 'text-[11px]'} flex-1`}>
                         <div className="flex items-center gap-1.5 text-gray-500">
-                            <Clock size={12} className="opacity-70" />
+                            <Clock size={isFeatured ? 14 : 12} className="opacity-70" />
                             <span>Ngày đăng: <span className="font-semibold text-gray-700">{item.startDate}</span></span>
                         </div>
                         <div className="flex items-center gap-1.5 text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100">
-                            <Calendar size={12} />
+                            <Calendar size={isFeatured ? 14 : 12} />
                             <span>Hạn góp ý: <span className="font-semibold">{item.deadline}</span></span>
                         </div>
                     </div>
                 ) : (
                     <div className="flex items-center gap-3 flex-1">
                         {item.deadline && (
-                            <span className="text-[11px] text-gray-400 flex items-center gap-1 shrink-0">
-                                <Calendar size={12} /> {item.deadline}
+                            <span className={`${isFeatured ? 'text-[12px]' : 'text-[11px]'} text-gray-400 flex items-center gap-1 shrink-0`}>
+                                <Calendar size={isFeatured ? 14 : 12} /> {item.deadline}
                             </span>
                         )}
                         {item.participants > 0 && (
-                            <span className="text-[11px] text-gray-400 flex items-center gap-1 shrink-0">
-                                <Users size={12} /> {item.participants.toLocaleString('vi-VN')}
+                            <span className={`${isFeatured ? 'text-[12px]' : 'text-[11px]'} text-gray-400 flex items-center gap-1 shrink-0`}>
+                                <Users size={isFeatured ? 14 : 12} /> {item.participants.toLocaleString('vi-VN')}
                             </span>
                         )}
                         {item.budget && (
-                            <span className="text-[11px] font-semibold text-amber-600">💰 {item.budget}</span>
+                            <span className={`${isFeatured ? 'text-[12px]' : 'text-[11px]'} font-semibold text-amber-600`}>💰 {item.budget}</span>
                         )}
                     </div>
                 )}
-                <ArrowRight size={14} className="text-gray-300 group-hover:text-[#1e3a8a] group-hover:translate-x-0.5 transition-all shrink-0" />
+                <ArrowRight size={isFeatured ? 18 : 14} className="text-gray-300 group-hover:text-[#1e3a8a] group-hover:translate-x-0.5 transition-all shrink-0" />
             </div>
         </div>
     </Link>
