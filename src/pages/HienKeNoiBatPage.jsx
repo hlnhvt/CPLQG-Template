@@ -235,8 +235,8 @@ const HienKeNoiBatPage = () => {
                                 />
                                 {/* Label */}
                                 <div className="bg-gradient-to-br from-orange-400 to-orange-600 text-white h-full px-10 flex flex-col justify-center gap-1 shrink-0 relative z-10">
-                                    <span className="font-bold text-[17px] text-center uppercase whitespace-nowrap opacity-80">Chủ đề</span>
-                                    <span className="font-bold text-[20px] text-center uppercase whitespace-nowrap">Nổi bật</span>
+                                    <span className="font-bold text-[18px] text-center uppercase whitespace-nowrap opacity-80">Chủ đề</span>
+                                    <span className="font-bold text-[19px] text-center uppercase whitespace-nowrap">Nổi bật</span>
                                     <div className="absolute top-0 -right-6 h-full w-12 bg-gradient-to-br from-orange-400 to-orange-600 skew-x-[-12deg] z-0"></div>
                                 </div>
 
