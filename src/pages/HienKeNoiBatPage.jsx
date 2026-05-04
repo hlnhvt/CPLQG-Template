@@ -244,7 +244,7 @@ const HienKeNoiBatPage = () => {
 
                                             <div className="flex flex-col gap-3 min-w-0">
                                                 <div className="flex items-center gap-4">
-                                                    <span className="px-3 py-1 rounded-full bg-orange-100 text-orange-600 text-[11px] font-bold uppercase tracking-wider shrink-0">
+                                                    <span className="px-3 py-1 rounded-full bg-orange-100 text-orange-600 text-[11px] font-bold uppercase shrink-0">
                                                         {item.typeLabel}
                                                     </span>
                                                     <span className="text-[13px] text-gray-400 font-medium truncate">{item.agency}</span>
