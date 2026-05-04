@@ -112,12 +112,13 @@ export const ConsultCard = ({
     hideStatus = false,
     showDateBox = false,
     isHot = false,
-    isFeatured = false
+    isFeatured = false,
+    className = ""
 }) => {
     return (
         <Link
             to={to}
-            className={`group bg-white rounded-xl overflow-hidden border border-gray-200 transition-all duration-300 flex flex-row relative h-full min-h-[160px] ${isFeatured ? 'shadow-2xl shadow-blue-900/10 border-blue-200/50' : 'hover:shadow-xl hover:border-gray-300 hover:-translate-y-1'}`}
+            className={`group bg-white rounded-xl overflow-hidden border border-gray-200 transition-all duration-300 flex flex-row relative h-full min-h-[160px] ${isFeatured ? 'shadow-2xl shadow-blue-900/10 border-blue-200/50' : 'hover:shadow-xl hover:border-gray-300 hover:-translate-y-1'} ${className}`}
         >
             {/* Featured Badge */}
             {isHot && (
