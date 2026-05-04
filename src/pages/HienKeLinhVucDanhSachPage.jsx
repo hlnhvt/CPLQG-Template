@@ -47,7 +47,7 @@ const AUTHOR_NAMES = [
 ];
 
 const AGENCIES = [
-    'Bộ Tư pháp', 'Bộ Y tế', 'Bộ Giáo dục và Đào tạo', 'Sở Giao thông Vận tải', 
+    'Bộ Tư pháp', 'Bộ Y tế', 'Bộ Giáo dục và Đào tạo', 'Sở Giao thông Vận tải',
     'Bộ Xây dựng', 'Bộ Tài nguyên và Môi trường', 'Cục Quản lý thị trường'
 ];
 
@@ -167,13 +167,13 @@ export default function HienKeLinhVucDanhSachPage() {
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0 mt-4 md:mt-0">
-                            <Link
+                            {/* <Link
                                 to="/ca-nhan/hien-ke"
                                 className="flex justify-center items-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold rounded-xl shadow-lg transition-transform hover:-translate-y-1"
                             >
                                 <User size={20} />
                                 Hiến kế của tôi
-                            </Link>
+                            </Link> */}
                             <Link
                                 to={`/hien-ke/gop-y-nhanh?domain=${encodeURIComponent(domain)}`}
                                 className="flex justify-center items-center gap-2 px-6 py-3.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl shadow-lg transition-transform hover:-translate-y-1"
@@ -287,7 +287,7 @@ export default function HienKeLinhVucDanhSachPage() {
                                                         </span>
                                                     )}
                                                 </div>
-                                                
+
                                                 <div className="flex flex-wrap items-center gap-4 ml-auto md:ml-0">
                                                     <div className="flex items-center gap-1.5">
                                                         <Clock size={14} className="text-gray-400" />

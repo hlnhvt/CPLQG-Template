@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Send, Paperclip, ShieldCheck, CheckCircle2, User, Lock, X, Search, ChevronDown } from 'lucide-react';
+import { ArrowLeft, Send, Paperclip, ShieldCheck, CheckCircle2, User, Lock, X, Search, ChevronDown, Info, ChevronUp } from 'lucide-react';
 import { LIFE_CATEGORIES } from './HienKeShared';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -22,8 +22,8 @@ const ISSUANCE_FORMS = [
 ];
 
 const POPULAR_TAGS = [
-    'Chuyển đổi số', 'Sổ đỏ', 'Căn cước dân công', 'Visa', 
-    'Thuế thu nhập', 'Bảo hiểm xã hội', 'Bảo hiểm y tế', 
+    'Chuyển đổi số', 'Sổ đỏ', 'Căn cước dân công', 'Visa',
+    'Thuế thu nhập', 'Bảo hiểm xã hội', 'Bảo hiểm y tế',
     'An toàn giao thông', 'Khởi nghiệp', 'Trí tuệ nhân tạo'
 ];
 
@@ -36,6 +36,7 @@ export default function SimpleFeedbackPage() {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [tagSearch, setTagSearch] = useState('');
     const [isTagDropdownOpen, setIsTagDropdownOpen] = useState(false);
+    const [isIntroOpen, setIsIntroOpen] = useState(true);
     const [formData, setFormData] = useState({
         title: '',
         category: '',
@@ -123,11 +124,43 @@ export default function SimpleFeedbackPage() {
                     <p className="text-blue-100 text-[16px] leading-relaxed max-w-[800px]">
                         Chia sẻ ý kiến, sáng kiến của người dân và doanh nghiệp góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật trên toàn diện các lĩnh vực nhằm thúc đẩy phát triển kinh tế - xã hội của đất nước.
                     </p>
+
+                    <button
+                        type="button"
+                        onClick={() => setIsIntroOpen(!isIntroOpen)}
+                        className="mt-5 flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg text-[14px] font-medium transition-colors border border-white/20 backdrop-blur-sm"
+                    >
+                        <Info size={16} />
+                        {isIntroOpen ? 'Giới thiệu' : 'Giới thiệu'}
+                        {isIntroOpen ? <ChevronUp size={16} className="ml-1 opacity-70" /> : <ChevronDown size={16} className="ml-1 opacity-70" />}
+                    </button>
+
                 </div>
             </div>
 
             {/* Form Content */}
             <div className="container mx-auto px-4 md:px-8 max-w-[800px] -mt-16 relative z-20">
+                {isIntroOpen && (
+                    <div className="mb-6 bg-white border border-gray-100 rounded-2xl p-6 md:p-8 text-gray-700 text-[15px] leading-relaxed animate-fadeIn shadow-xl">
+                        <h4 className="font-bold text-gray-900 mb-4 text-[18px] flex items-center gap-2 text-[#1e3a8a]">
+                            <Info size={20} />
+                            Mục đích của trang Gửi hiến kế
+                        </h4>
+                        <ul className="space-y-3">
+                            {[
+                                'Cung cấp kênh tiếp nhận trực tiếp các sáng kiến, giải pháp từ người dân và doanh nghiệp nhằm hoàn thiện hệ thống pháp luật.',
+                                'Tạo không gian tương tác, trao đổi ý kiến đóng góp giúp hội đồng chuyên môn dễ dàng đánh giá, phân loại và chuyển đến các cơ quan có thẩm quyền.',
+                                'Giúp người dân có thể theo dõi tiến độ xử lý và nhận phản hồi trực tiếp, minh bạch thông qua hệ thống hoặc thông tin liên hệ.',
+                                'Mọi thông tin cá nhân của người gửi sẽ được bảo mật theo quy định của pháp luật.'
+                            ].map((item, index) => (
+                                <li key={index} className="flex gap-3 items-start">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
                 <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:p-10 mb-8">
 
                     <div className="space-y-8">
@@ -178,7 +211,7 @@ export default function SimpleFeedbackPage() {
                                 <div>
                                     <label className="block text-[14px] font-bold text-gray-800 mb-2">Từ khóa liên quan</label>
                                     <div className="relative">
-                                        <div 
+                                        <div
                                             className={`min-h-[50px] w-full px-4 py-2 bg-gray-50 border ${isTagDropdownOpen ? 'border-blue-500 ring-2 ring-blue-500/20' : 'border-gray-200'} rounded-xl transition-all cursor-pointer flex flex-wrap gap-2 items-center`}
                                             onClick={() => setIsTagDropdownOpen(true)}
                                         >
@@ -188,15 +221,15 @@ export default function SimpleFeedbackPage() {
                                                     <X size={14} className="cursor-pointer hover:text-blue-900" onClick={(e) => { e.stopPropagation(); toggleTag(tag); }} />
                                                 </span>
                                             ))}
-                                            <input 
-                                                type="text" 
+                                            <input
+                                                type="text"
                                                 className="flex-1 min-w-[120px] bg-transparent outline-none text-[15px] placeholder:text-gray-400 py-1"
                                                 placeholder={formData.tags.length === 0 ? "Tìm kiếm từ khóa..." : ""}
                                                 value={tagSearch}
                                                 onChange={(e) => { setTagSearch(e.target.value); setIsTagDropdownOpen(true); }}
                                                 onFocus={() => setIsTagDropdownOpen(true)}
                                             />
-                                            <ChevronDown size={20} className="text-gray-400 shrink-0 ml-auto" onClick={(e) => { e.stopPropagation(); setIsTagDropdownOpen(!isTagDropdownOpen); }}/>
+                                            <ChevronDown size={20} className="text-gray-400 shrink-0 ml-auto" onClick={(e) => { e.stopPropagation(); setIsTagDropdownOpen(!isTagDropdownOpen); }} />
                                         </div>
 
                                         {isTagDropdownOpen && (
@@ -205,8 +238,8 @@ export default function SimpleFeedbackPage() {
                                                 <div className="absolute top-[calc(100%+8px)] left-0 w-full bg-white border border-gray-200 rounded-xl shadow-lg z-20 max-h-64 overflow-y-auto p-2 animate-fadeIn">
                                                     {POPULAR_TAGS.filter(t => t.toLowerCase().includes(tagSearch.toLowerCase())).length > 0 ? (
                                                         POPULAR_TAGS.filter(t => t.toLowerCase().includes(tagSearch.toLowerCase())).map(tag => (
-                                                            <div 
-                                                                key={tag} 
+                                                            <div
+                                                                key={tag}
                                                                 className="flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors"
                                                                 onClick={() => { toggleTag(tag); setTagSearch(''); }}
                                                             >

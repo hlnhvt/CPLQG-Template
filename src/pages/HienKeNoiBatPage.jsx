@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, TrendingUp, Search, ChevronLeft, FileText, ArrowRight, Download, Flame } from 'lucide-react';
+import { ChevronRight, TrendingUp, Search, ChevronLeft, FileText, ArrowRight, Download, Flame, Info, ChevronUp, ChevronDown } from 'lucide-react';
 import { Section, ConsultCard, HOT_ITEMS, NEW_HIGHLIGHTS, thumb } from './HienKeShared';
 
 // Mock Drafts
@@ -36,6 +36,7 @@ const ITEMS_PER_PAGE = 8;
 const HienKeNoiBatPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const [isIntroOpen, setIsIntroOpen] = useState(true);
 
     const filteredItems = useMemo(() => {
         if (!searchTerm) return EXPANDED_ITEMS;
@@ -83,11 +84,42 @@ const HienKeNoiBatPage = () => {
                     </h1>
                     <p className="text-blue-100/90 text-[15px] max-w-3xl leading-relaxed">
                         Tại mục này, người dân và doanh nghiệp có thể trực tiếp tham gia góp ý cho các dự thảo văn bản quy phạm pháp luật đang được lấy ý kiến theo quy định, đồng thời đề xuất các sáng kiến lập pháp nhằm chung tay hoàn thiện hệ thống pháp luật.                     </p>
+
+                    <button
+                        type="button"
+                        onClick={() => setIsIntroOpen(!isIntroOpen)}
+                        className="mt-6 flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg text-[14px] font-medium transition-colors border border-white/20 backdrop-blur-sm"
+                    >
+                        <Info size={16} />
+                        Giới thiệu
+                        {isIntroOpen ? <ChevronUp size={16} className="ml-1 opacity-70" /> : <ChevronDown size={16} className="ml-1 opacity-70" />}
+                    </button>
                 </div>
             </div>
 
             {/* ── Phần 2: Góp ý dự thảo VBQPPL (Đưa lên trên) ────────────────────────── */}
             <div className="pt-8 container mx-auto px-4 md:px-8 max-w-[1280px] max-w-5xl border-b border-gray-200 mb-4 pb-6">
+                {isIntroOpen && (
+                    <div className="mb-8 bg-white border border-gray-100 rounded-2xl p-6 md:p-8 text-gray-700 text-[15px] leading-relaxed animate-fadeIn shadow-xl">
+                        <h4 className="font-bold text-gray-900 mb-4 text-[18px] flex items-center gap-2 text-[#1e3a8a]">
+                            <Info size={20} />
+                            Về chuyên mục Vấn đề nổi bật
+                        </h4>
+                        <ul className="space-y-3">
+                            {[
+                                'Nơi tập hợp các dự thảo văn bản quy phạm pháp luật và các vấn đề nóng đang được xã hội đặc biệt quan tâm.',
+                                'Cung cấp thông tin chi tiết về các chính sách mới, giúp người dân và doanh nghiệp dễ dàng nắm bắt và tham gia đóng góp ý kiến.',
+                                'Mỗi ý kiến đóng góp tại đây đều được ưu tiên tổng hợp để chuyển đến các ban soạn thảo và cơ quan chức năng có thẩm quyền.',
+                                'Hệ thống đảm bảo tính minh bạch trong việc tiếp nhận và xử lý các ý kiến đóng góp của cộng đồng.'
+                            ].map((item, index) => (
+                                <li key={index} className="flex gap-3 items-start">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
                 {/* Header Đồng nhất */}
                 <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
                     <div className="flex items-center gap-3 w-full md:w-auto">

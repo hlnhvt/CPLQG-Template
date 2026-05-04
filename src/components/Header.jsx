@@ -405,6 +405,18 @@ const Header = () => {
                         <Link to="/" onClick={() => setIsSidebarOpen(false)} className="px-5 py-4 border-b border-white/5 font-bold hover:bg-white/5 transition-colors">Trang chủ</Link>
 
                         <div className="border-b border-white/5">
+                            <button onClick={() => toggleMobileNavGroup('gioiThieu')} className="w-full flex items-center justify-between px-5 py-4 font-bold hover:bg-white/5 transition-colors">
+                                Giới thiệu
+                                <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.gioiThieu ? 'rotate-180' : ''}`} />
+                            </button>
+                            <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.gioiThieu ? 'max-h-96' : 'max-h-0'}`}>
+                                <Link to="/gioi-thieu" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Giới thiệu chung</Link>
+                                <Link to="/gioi-thieu/thu-ngo" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Thư ngỏ</Link>
+                                <Link to="/gioi-thieu/chuc-nang-nhiem-vu" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Chức năng nhiệm vụ</Link>
+                            </div>
+                        </div>
+
+                        <div className="border-b border-white/5">
                             <button onClick={() => toggleMobileNavGroup('tienIch')} className="w-full flex items-center justify-between px-5 py-4 font-bold hover:bg-white/5 transition-colors">
                                 Tin tức
                                 <ChevronDown size={16} className={`transition-transform duration-300 ${mobileNavExpanded.tienIch ? 'rotate-180' : ''}`} />

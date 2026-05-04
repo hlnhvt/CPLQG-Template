@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ChevronRight, Scale, Search, Heart, ArrowRight, Flame } from 'lucide-react';
+import { ChevronRight, Scale, Search, Heart, ArrowRight, Flame, Info, ChevronUp, ChevronDown } from 'lucide-react';
 import { Section, LIFE_CATEGORIES } from './HienKeShared';
 
 const HienKeLinhVucPage = () => {
     const [searchParams] = useSearchParams();
     const q = searchParams.get('q') || '';
     const [searchTerm, setSearchTerm] = useState(q);
+    const [isIntroOpen, setIsIntroOpen] = useState(true);
 
     useEffect(() => {
         setSearchTerm(q);
@@ -48,10 +49,44 @@ const HienKeLinhVucPage = () => {
                     <p className="text-blue-100/90 text-[15px] max-w-3xl leading-relaxed">
                         Mỗi ý kiến đóng góp và sáng kiến thiết thực trong từng lĩnh vực pháp luật cụ thể đều mang lại những góc nhìn đa chiều từ thực tiễn, qua đó đóng vai trò là cơ sở quan trọng để công tác xây dựng, thi hành pháp luật không ngừng được đổi mới và ngày càng hoàn thiện hơn.
                     </p>
+
+                    <button
+                        type="button"
+                        onClick={() => setIsIntroOpen(!isIntroOpen)}
+                        className="mt-6 flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg text-[14px] font-medium transition-colors border border-white/20 backdrop-blur-sm"
+                    >
+                        <Info size={16} />
+                        Giới thiệu
+                        {isIntroOpen ? <ChevronUp size={16} className="ml-1 opacity-70" /> : <ChevronDown size={16} className="ml-1 opacity-70" />}
+                    </button>
                 </div>
             </div>
 
-            <div className="mt-8">
+            <div className="mt-8 container mx-auto px-4 md:px-8 max-w-[1280px]">
+                {isIntroOpen && (
+                    <div className="mb-8 bg-white border border-gray-100 rounded-2xl p-6 md:p-8 text-gray-700 text-[15px] leading-relaxed animate-fadeIn shadow-xl">
+                        <h4 className="font-bold text-gray-900 mb-4 text-[18px] flex items-center gap-2 text-[#1e3a8a]">
+                            <Info size={20} />
+                            Về chuyên mục Lĩnh vực quan tâm
+                        </h4>
+                        <ul className="space-y-3">
+                            {[
+                                'Phân loại các vấn đề pháp luật theo từng lĩnh vực cụ thể giúp người dân dễ dàng tìm kiếm và tham gia đóng góp chuyên sâu.',
+                                'Hệ thống gợi ý các lĩnh vực đang có nhiều dự thảo mới hoặc đang được lấy ý kiến rộng rãi để người dân lựa chọn.',
+                                'Mỗi lĩnh vực đều được kết nối trực tiếp với các đơn vị chuyên môn tương ứng để tiếp nhận và xử lý hiến kế hiệu quả nhất.',
+                                'Bạn có thể chọn bất kỳ lĩnh vực nào để xem danh sách các hiến kế hiện có hoặc bắt đầu gửi ý kiến mới của mình.'
+                            ].map((item, index) => (
+                                <li key={index} className="flex gap-3 items-start">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            </div>
+
+            <div className="mt-0">
                 <Section
                     id="section-legal"
                     icon={Scale}
