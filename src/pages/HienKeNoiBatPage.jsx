@@ -240,7 +240,7 @@ const HienKeNoiBatPage = () => {
                                     <span className="font-bold text-[19px] text-center uppercase whitespace-nowrap">Nổi bật</span>
                                     <div className="absolute top-0 -right-6 h-full w-12 bg-gradient-to-br from-orange-400 to-orange-600 skew-x-[-12deg] z-0"></div>
                                 </div>
-
+                                {/* Label */}
                                 {/* Content */}
                                 <div className="flex-1 pl-16 pr-10 overflow-hidden relative h-full">
                                     {hotItems.map((item, idx) => (
