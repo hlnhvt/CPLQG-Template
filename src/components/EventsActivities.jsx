@@ -15,52 +15,40 @@ const EventsActivities = () => {
                     <div className="md:w-1/2 p-6 flex flex-col justify-center relative">
                         <span className="text-blue-600 font-bold mb-2 flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
-                            Hoạt động nổi bật
+                            Tọa đàm nổi bật
                         </span>
                         <h3 className="text-2xl md:text-2xl text-primary-dark font-bold uppercase leading-tight mb-6">
-                            CHÀO MỪNG ĐẠI HỘI ĐẠI BIỂU TOÀN QUỐC LẦN THỨ XIV CỦA ĐẢNG
+                            Nhận diện điểm nghẽn và đề xuất giải pháp khắc phục liên quan đến Luật Đất đai
                         </h3>
 
-                        <div className="mb-4">
-                            <p className="text-sm text-gray-500 mb-2">Thời gian còn lại:</p>
+                        <div className="mb-6">
+                            <p className="text-sm text-gray-500 mb-2 font-medium">Diễn ra lúc:</p>
                             <div className="flex gap-4">
                                 <div className="text-center">
-                                    <div className="text-3xl font-black text-blue-600">8</div>
-                                    <div className="text-xs text-gray-500 uppercase">Tháng</div>
+                                    <div className="text-2xl font-black text-blue-600">22</div>
+                                    <div className="text-[10px] text-gray-500 uppercase font-bold">Tháng 9</div>
                                 </div>
-                                <div className="text-3xl font-black text-gray-300">:</div>
+                                <div className="text-2xl font-black text-gray-300">/</div>
                                 <div className="text-center">
-                                    <div className="text-3xl font-black text-blue-600">3</div>
-                                    <div className="text-xs text-gray-500 uppercase">Ngày</div>
+                                    <div className="text-2xl font-black text-blue-600">2025</div>
+                                    <div className="text-[10px] text-gray-500 uppercase font-bold">Năm</div>
                                 </div>
-                                <div className="text-3xl font-black text-gray-300">:</div>
+                                <div className="text-2xl font-black text-gray-300">|</div>
                                 <div className="text-center">
-                                    <div className="text-3xl font-black text-blue-600">45</div>
-                                    <div className="text-xs text-gray-500 uppercase">Giờ</div>
-                                </div>
-                                <div className="text-3xl font-black text-gray-300">:</div>
-                                <div className="text-center">
-                                    <div className="text-3xl font-black text-blue-600">28</div>
-                                    <div className="text-xs text-gray-500 uppercase">Phút</div>
+                                    <div className="text-2xl font-black text-blue-600">14:00</div>
+                                    <div className="text-[10px] text-gray-500 uppercase font-bold">Giờ</div>
                                 </div>
                             </div>
                         </div>
 
-                        <Link to="/news/4" className="bg-blue-600 text-white rounded-full px-6 py-2 w-fit font-medium hover:bg-blue-700 transition">
-                            Chi tiết
+                        <Link to="/tin-tuc/toa-dam-su-kien/4" className="bg-blue-600 text-white rounded-full px-8 py-2.5 w-fit font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition">
+                            Chi tiết sự kiện
                         </Link>
                     </div>
 
                     {/* Graphic side of banner */}
-                    <div className="md:w-1/2 bg-red-600 relative overflow-hidden flex flex-col items-center justify-center p-8">
-                        <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
-                        <span className="text-yellow-400 text-5xl font-serif mb-4 z-10">★</span>
-                        <h3 className="text-yellow-400 font-bold text-2xl md:text-3xl uppercase tracking-wider drop-shadow-md z-10 text-center">
-                            CHÀO MỪNG ĐẠI HỘI
-                        </h3>
-                        <h4 className="text-white text-3xl md:text-4xl uppercase mt-2 drop-shadow-md z-10 text-center">
-                            ĐẠI BIỂU TOÀN QUỐC LẦN THỨ XIV CỦA ĐẢNG
-                        </h4>
+                    <div className="md:w-1/2 relative overflow-hidden flex flex-col items-center justify-center min-h-[350px]">
+                        <img src="/bc536d54-ce2c-4961-be6f-a1fddb4e086d.jpg" alt="Event" className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105" />
                     </div>
                 </div>
 

@@ -60,6 +60,8 @@ import CollaboratorArticleEditor from './pages/collaborator/CollaboratorArticleE
 import RecommendedPage from './pages/RecommendedPage';
 import NghienCuuTraoDoiPage from './pages/tin-tuc/NghienCuuTraoDoiPage';
 import NghienCuuTraoDoiDetailPage from './pages/tin-tuc/NghienCuuTraoDoiDetailPage';
+import ToaDamSuKienPage from './pages/tin-tuc/ToaDamSuKienPage';
+import ToaDamSuKienDetailPage from './pages/tin-tuc/ToaDamSuKienDetailPage';
 
 import HienKeDoiSongPage from './pages/HienKeDoiSongPage';
 import HienKeNoiBatPage from './pages/HienKeNoiBatPage';
@@ -160,6 +162,8 @@ const AppLayout = () => {
                     <Route path="/tin-tuc/noi-bat" element={<NewsHighlightsPage />} />
                     <Route path="/tin-tuc/nghien-cuu-trao-doi" element={<NghienCuuTraoDoiPage />} />
                     <Route path="/tin-tuc/nghien-cuu-trao-doi/:id" element={<NghienCuuTraoDoiDetailPage />} />
+                    <Route path="/tin-tuc/toa-dam-su-kien" element={<ToaDamSuKienPage />} />
+                    <Route path="/tin-tuc/toa-dam-su-kien/:id" element={<ToaDamSuKienDetailPage />} />
                     <Route path="/lien-he" element={<ContactUsPage />} />
                     <Route path="/chu-de-khao-sat" element={<SurveyTopicsPage />} />
                     <Route path="/chu-de-khao-sat/:id" element={<SurveyTopicDetailPage />} />

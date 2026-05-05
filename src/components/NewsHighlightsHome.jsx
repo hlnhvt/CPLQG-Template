@@ -21,7 +21,11 @@ const NewsHighlightsHome = () => {
                             {[2, 3, 4].map((id) => (
                                 <Link key={id} to={`/news/${id}`} className="flex items-start gap-4 group border-b border-gray-100 pb-4 last:border-0 last:pb-0">
                                     <div className="w-1/3 shrink-0">
-                                        <Image16x9 src={`/thumb${(id % 3) + 1}.png`} alt={`News ${id}`} className="rounded" />
+                                        <Image16x9 
+                                            src={id === 2 ? "/02bd53d8-37a5-4927-8d00-a00feb16a3b2.jpg" : id === 3 ? "/1748a7fd-78c7-4106-9c42-2852c0a58e1e.jpg" : "/fda33db9-762a-4d21-9317-96615cd1968b.jpg"} 
+                                            alt={`News ${id}`} 
+                                            className="rounded" 
+                                        />
                                     </div>
                                     <div className="w-2/3 flex flex-col min-w-0">
                                         <h3 className="font-bold text-[13px] md:text-[14px] text-gray-900 group-hover:text-[#0f4c81] line-clamp-3 leading-snug">Bộ Tư pháp đề nghị mang tới các giải pháp tháo gỡ khó khăn cho doanh nghiệp...</h3>
@@ -36,7 +40,7 @@ const NewsHighlightsHome = () => {
                         {/* Cột Giữa (1 tin cực lớn) */}
                         <Link to="/news/1" className="lg:col-span-2 group flex flex-col">
                             <div className="w-full mb-4 shrink-0">
-                                <Image16x9 src="/thumb1.png" alt="Main News" className="rounded-lg shadow-sm border border-gray-100" />
+                                <Image16x9 src="/fda33db9-762a-4d21-9317-96615cd1968b.jpg" alt="Main News" className="rounded-lg shadow-sm border border-gray-100" />
                             </div>
                             <div className="flex flex-col min-w-0">
                                 <h3 className="text-xl md:text-[22px] font-bold text-[#0f4c81] group-hover:text-blue-700 mb-2 leading-tight">
@@ -56,7 +60,11 @@ const NewsHighlightsHome = () => {
                             {[5, 6].map((id) => (
                                 <Link key={id} to={`/news/${id}`} className="group flex flex-col border-b border-gray-100 pb-4 last:border-0 last:pb-0">
                                     <div className="w-full mb-3 shrink-0">
-                                        <Image16x9 src={`/thumb${(id % 3) + 1}.png`} alt={`News Side ${id}`} className="rounded" />
+                                        <Image16x9 
+                                            src={id === 5 ? "/02bd53d8-37a5-4927-8d00-a00feb16a3b2.jpg" : "/1748a7fd-78c7-4106-9c42-2852c0a58e1e.jpg"} 
+                                            alt={`News Side ${id}`} 
+                                            className="rounded" 
+                                        />
                                     </div>
                                     <div className="flex flex-col min-w-0">
                                         <h3 className="font-bold text-[14px] text-gray-900 group-hover:text-[#0f4c81] mb-2 leading-snug line-clamp-3">
