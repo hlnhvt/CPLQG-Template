@@ -102,16 +102,6 @@ const HienKeNoiBatPage = () => {
                     style={{ backgroundImage: `radial-gradient(#1e3a8a 0.5px, transparent 0.5px)`, backgroundSize: '24px 24px' }}
                 />
 
-                {/* Full Screen Dong Son Drum Watermark */}
-                <div className="absolute inset-0 opacity-[0.04] pointer-events-none overflow-hidden"
-                    style={{ 
-                        backgroundImage: "url('/images/dong_son_cover.png')", 
-                        backgroundSize: '110% auto', 
-                        backgroundPosition: 'center 200px',
-                        backgroundRepeat: 'no-repeat',
-                        mixBlendMode: 'multiply'
-                    }}
-                />
             </div>
 
             <div className="relative z-10">

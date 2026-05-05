@@ -63,6 +63,7 @@ import NghienCuuTraoDoiDetailPage from './pages/tin-tuc/NghienCuuTraoDoiDetailPa
 
 import HienKeDoiSongPage from './pages/HienKeDoiSongPage';
 import HienKeNoiBatPage from './pages/HienKeNoiBatPage';
+import HienKeNoiBatV2Page from './pages/HienKeNoiBatV2Page';
 import HienKeLinhVucPage from './pages/HienKeLinhVucPage';
 import HienKeLinhVucDanhSachPage from './pages/HienKeLinhVucDanhSachPage';
 import HienKeFeedbackPage from './pages/HienKeFeedbackPage';
@@ -191,6 +192,7 @@ const AppLayout = () => {
                     <Route path="/hien-ke" element={<HienKePage />} />
                     <Route path="/hien-ke/doi-song" element={<HienKeDoiSongPage />} />
                     <Route path="/hien-ke/noi-bat" element={<HienKeNoiBatPage />} />
+                    <Route path="/hien-ke/noi-bat-v2" element={<HienKeNoiBatV2Page />} />
                     <Route path="/hien-ke/linh-vuc" element={<HienKeLinhVucPage />} />
                     <Route path="/hien-ke/linh-vuc/danh-sach" element={<HienKeLinhVucDanhSachPage />} />
                     <Route path="/hien-ke/lien-he" element={<HienKeFeedbackPage />} />
