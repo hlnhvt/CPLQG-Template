@@ -6,7 +6,7 @@ const EventsActivities = () => {
     return (
         <div className="bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white py-12 mt-8 transition-colors">
             <div className="container mx-auto px-4">
-                <h2 className="text-2xl font-bold border-b-2 border-white/30 pb-2 inline-block mb-6 uppercase tracking-wide">
+                <h2 className="text-2xl font-bold border-b-2 border-white/30 pb-2 inline-block mb-6 uppercase">
                     Sự kiện & Hoạt động
                 </h2>
 
