@@ -126,9 +126,8 @@ export default function SimpleFeedbackPage() {
                     </p>
 
                     {/* Leadership Quote */}
-                    <div className="mt-6 max-w-[1000px]">
-                        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-6 relative overflow-hidden group text-center">
-                            <div className="absolute top-0 right-0 w-24 h-24 bg-amber-400/10 rounded-full -mr-12 -mt-12 blur-2xl group-hover:bg-amber-400/20 transition-all duration-700 pointer-events-none" />
+                    <div className="mt-8 max-w-[1000px]">
+                        <div className="relative group text-center">
                             <div className="relative z-10">
                                 <p className="text-white/95 text-[15px] md:text-[18px] italic leading-relaxed font-medium mb-4">
                                     "Dễ mười lần không dân cũng chịu, khó trăm lần dân liệu cũng xong."
