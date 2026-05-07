@@ -18,14 +18,10 @@ const NghienCuuTraoDoiTGPLPage = () => {
             <div className="bg-white border-b border-gray-200 py-8 shadow-sm">
                 <div className="container mx-auto px-4 max-w-[1200px]">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <h1 className="text-3xl font-bold text-[#1e3a8a] flex items-center gap-3 uppercase tracking-wide">
+                        <h1 className="text-3xl font-bold text-[#1e3a8a] flex items-center gap-3 uppercase">
                             <Lightbulb size={32} className="text-yellow-500" />
                             Nghiên cứu & Trao đổi
                         </h1>
-                        <button className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold shadow-sm md:w-auto w-full justify-center">
-                            <PenTool size={18} />
-                            Gửi bài viết
-                        </button>
                     </div>
                     <p className="text-gray-500 text-[15px] mt-2 max-w-3xl">Diễn đàn khoa học pháp lý, chia sẻ kinh nghiệm nghiệp vụ từ đội ngũ chuyên gia, Luật sư và Trợ giúp viên pháp lý.</p>
                 </div>

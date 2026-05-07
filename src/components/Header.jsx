@@ -441,6 +441,7 @@ const Header = () => {
                             </button>
                             <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.gioiThieu ? 'max-h-96' : 'max-h-0'}`}>
                                 <Link to="/gioi-thieu" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Giới thiệu chung</Link>
+                                <Link to="/tam-nhin" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tầm nhìn định hướng</Link>
                                 <Link to="/gioi-thieu/thu-ngo" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Thư ngỏ</Link>
                                 <Link to="/gioi-thieu/chuc-nang-nhiem-vu" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Chức năng nhiệm vụ</Link>
                                 <Link to="/huong-dan-su-dung" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Hướng dẫn sử dụng</Link>
