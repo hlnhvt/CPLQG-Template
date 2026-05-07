@@ -39,24 +39,12 @@ export const NEW_HIGHLIGHTS = [
 ];
 
 export const LIFE_CATEGORIES = [
-    { id: 1, icon: Store, name: 'Kinh tế và Đời sống' },
-    { id: 2, icon: Globe, name: 'Lưu trú và Nhập tịch' },
-    { id: 3, icon: Car, name: 'Giao thông vận tải' },
-    { id: 4, icon: HeartHandshake, name: 'Hôn nhân và Gia đình' },
-    { id: 5, icon: Building2, name: 'Bất động sản', isHot: true },
-    { id: 6, icon: GraduationCap, name: 'Giáo dục và Đào tạo' },
-    { id: 7, icon: Activity, name: 'Sức khỏe và Y tế', isHot: true },
-    { id: 8, icon: Leaf, name: 'An sinh xã hội' },
-    { id: 9, icon: Briefcase, name: 'Việc làm và Lao động' },
-    { id: 10, icon: Rocket, name: 'Khởi nghiệp' },
-    { id: 11, icon: Grid, name: 'An toàn lao động' },
-    { id: 12, icon: ShoppingBag, name: 'Tiêu dùng và Dịch vụ' },
-    { id: 13, icon: Sprout, name: 'Nông nghiệp và Nông thôn' },
-    { id: 14, icon: CloudSun, name: 'Môi trường và Khí hậu' },
-    { id: 15, icon: Smartphone, name: 'Công nghệ và Viễn thông' },
-    { id: 16, icon: Map, name: 'Văn hóa và Du lịch' },
-    { id: 17, icon: Baby, name: 'Trẻ em và Gia đình' },
-    { id: 18, icon: MoreHorizontal, name: 'Lĩnh vực khác' },
+    { id: 1, icon: Landmark, name: 'Tổ chức và hoạt động của bộ máy Nhà nước pháp quyền XHCN' },
+    { id: 2, icon: TrendingUp, name: 'Phát triển nền kinh tế thị trường định hướng XHCN' },
+    { id: 3, icon: Users, name: 'Văn hóa, xã hội' },
+    { id: 4, icon: Rocket, name: 'Khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số' },
+    { id: 5, icon: Leaf, name: 'Tài nguyên, bảo vệ môi trường, thích ứng với biến đổi khí hậu' },
+    { id: 6, icon: Globe, name: 'Quốc phòng, an ninh, đối ngoại' },
 ];
 
 export const DAILY_CONSULTATIONS = [
