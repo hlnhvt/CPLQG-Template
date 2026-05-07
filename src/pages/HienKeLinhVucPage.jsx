@@ -50,6 +50,22 @@ const HienKeLinhVucPage = () => {
                         Mỗi ý kiến đóng góp và sáng kiến thiết thực trong từng lĩnh vực pháp luật cụ thể đều mang lại những góc nhìn đa chiều từ thực tiễn, qua đó đóng vai trò là cơ sở quan trọng để công tác xây dựng, thi hành pháp luật không ngừng được đổi mới và ngày càng hoàn thiện hơn.
                     </p>
 
+                    {/* Leadership Quote */}
+                    <div className="mt-6 max-w-3xl">
+                        <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-6 py-6 relative overflow-hidden group text-center">
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-amber-400/10 rounded-full -mr-12 -mt-12 blur-2xl group-hover:bg-amber-400/20 transition-all duration-700 pointer-events-none" />
+                            <div className="relative z-10">
+                                <p className="text-white/95 text-[15px] md:text-[18px] italic leading-relaxed font-medium mb-4">
+                                    "Đột phá mạnh mẽ hơn về thể chế phát triển, tháo gỡ điểm nghẽn, rào cản; lấy thực tiễn làm thước đo, khơi thông mọi nguồn lực đưa đất nước bước vào kỷ nguyên mới."
+                                </p>
+                                <div className="flex flex-col items-center gap-2">
+                                    <div className="w-12 h-[2px] bg-amber-400/50 rounded-full mb-1" />
+                                    <span className="text-amber-200 text-[13px] font-bold uppercase tracking-widest">Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV của Đảng</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <button
                         type="button"
                         onClick={() => setIsIntroOpen(!isIntroOpen)}

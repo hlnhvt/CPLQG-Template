@@ -36,7 +36,7 @@ const NewlyIssuedDocs = () => {
                     onClick={() => setActiveTab('drafts')}
                     className={`text-[18px] md:text-[22px] font-bold pb-3 border-b-[3px] transition-all -mb-[2px] ${activeTab === 'drafts' ? 'text-[#1e3a8a] border-[#1e3a8a]' : 'text-gray-400 border-transparent hover:text-gray-600'}`}
                 >
-                    Dự thảo VBQPPL mới cần góp ý
+                    Dự thảo VBQPPL
                 </button>
             </div>
 
