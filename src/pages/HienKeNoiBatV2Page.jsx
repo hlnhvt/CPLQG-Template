@@ -134,9 +134,25 @@ const HienKeNoiBatV2Page = () => {
                         <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
                             Chúng tôi cần bạn
                         </h1>
-                        <p className="text-blue-100/90 text-[15px] max-w-3xl leading-relaxed">
+                        <p className="text-blue-100/90 text-[15px] leading-relaxed">
                             Tại mục này, người dân và doanh nghiệp có thể trực tiếp tham gia góp ý cho các dự thảo văn bản quy phạm pháp luật đang được lấy ý kiến theo quy định, đồng thời đề xuất các sáng kiến lập pháp nhằm chung tay hoàn thiện hệ thống pháp luật.
                         </p>
+
+                        {/* Leadership Quote */}
+                        <div className="mt-8 w-full">
+                            <div className="relative group text-center">
+                                <div className="relative z-10">
+                                    <p className="text-white/95 text-[15px] md:text-[18px] italic leading-relaxed font-medium mb-4">
+                                        "Đổi mới mạnh mẽ công tác lập pháp, chuyển đổi tư duy xây dựng pháp luật theo hướng vừa bảo đảm yêu cầu quản lý nhà nước, vừa khuyến khích sáng tạo, khơi thông mọi nguồn lực để phát triển."
+                                    </p>
+                                    <div className="flex flex-col items-center gap-2">
+                                        <div className="w-12 h-[2px] bg-amber-400/50 rounded-full mb-1" />
+                                        <span className="text-amber-200 text-[13px] font-bold uppercase tracking-widest">Tổng Bí thư, Chủ tịch nước Tô Lâm</span>
+                                        <p className="text-blue-200/70 text-[12px] italic">(Trích bài viết về định hướng kỷ nguyên mới, kỷ nguyên vươn mình của dân tộc Việt Nam, tháng 10 năm 2024)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <button
                             type="button"

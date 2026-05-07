@@ -115,7 +115,7 @@ export default function HienKePage() {
                             <div className="flex flex-col gap-4 md:gap-5">
                                 {[
                                     { id: '/hien-ke/gop-y-nhanh?topic=doi-song', label: 'Hiến kế của bạn', desc: 'Ý kiến, sáng kiến của bạn góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật.', icon: Heart, color: 'text-green-600', hue: 'bg-green-500' },
-                                    { id: '/hien-ke/noi-bat', label: 'Chúng tôi cần bạn', desc: 'Nội dung, chủ đề cần sáng kiến, ý kiến đóng góp của bạn.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500' },
+                                    { id: '/hien-ke/noi-bat-v2', label: 'Chúng tôi cần bạn', desc: 'Nội dung, chủ đề cần sáng kiến, ý kiến đóng góp của bạn.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500' },
                                     { id: '/hien-ke/linh-vuc', label: 'Có thể bạn quan tâm', desc: 'Sáng kiến, ý kiến của bạn trên từng lĩnh vực cụ thể.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500' },
                                 ].map(item => (
                                     <Link key={item.id} to={item.id} className="relative overflow-hidden flex items-center gap-5 p-5 xl:px-6 bg-[#0f172a]/60 backdrop-blur-md border border-white/10 rounded-2xl md:rounded-3xl hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)] transition-all duration-300 group h-[130px] xl:h-[136px]">
