@@ -115,6 +115,7 @@ import GioiThieuTGPLPage from './pages/tro-giup-phap-ly/GioiThieuTGPLPage';
 import LichSuPhatTrienTGPLPage from './pages/tro-giup-phap-ly/LichSuPhatTrienTGPLPage';
 import ChucNangNhiemVuTGPLPage from './pages/tro-giup-phap-ly/ChucNangNhiemVuTGPLPage';
 import CoCauToChucTGPLPage from './pages/tro-giup-phap-ly/CoCauToChucTGPLPage';
+import CoCauToChucTGPLDetailPage from './pages/tro-giup-phap-ly/CoCauToChucTGPLDetailPage';
 import DanhBaDienTuTGPLPage from './pages/tro-giup-phap-ly/DanhBaDienTuTGPLPage';
 import VideoPhongSuTGPLPage from './pages/tro-giup-phap-ly/VideoPhongSuTGPLPage';
 import TinTucHoatDongTGPLPage from './pages/tro-giup-phap-ly/TinTucHoatDongTGPLPage';
@@ -222,6 +223,7 @@ const AppLayout = () => {
                     <Route path="/tro-giup-phap-ly/lich-su-phat-trien" element={<LichSuPhatTrienTGPLPage />} />
                     <Route path="/tro-giup-phap-ly/chuc-nang-nhiem-vu" element={<ChucNangNhiemVuTGPLPage />} />
                     <Route path="/tro-giup-phap-ly/co-cau-to-chuc" element={<CoCauToChucTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/co-cau-to-chuc/:id" element={<CoCauToChucTGPLDetailPage />} />
                     <Route path="/tro-giup-phap-ly/danh-ba" element={<DanhBaDienTuTGPLPage />} />
                     <Route path="/tro-giup-phap-ly/video" element={<VideoPhongSuTGPLPage />} />
                     <Route path="/tro-giup-phap-ly/tin-tuc" element={<TinTucHoatDongTGPLPage />} />
