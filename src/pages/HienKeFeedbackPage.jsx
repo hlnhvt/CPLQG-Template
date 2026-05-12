@@ -189,7 +189,7 @@ export default function HienKeFeedbackPage() {
                                         <p className="relative z-10 text-[16px] md:text-[19px] font-basic text-gray-800 leading-relaxed mb-4 italic text-justify">
                                             "Phát huy mạnh mẽ vai trò chủ thể của Nhân dân... Quán triệt sâu sắc quan điểm 'Dân là gốc', Nhân dân là chủ thể, là trung tâm của công cuộc đổi mới. Xây dựng và thực hiện cơ chế, chính sách để thực hiện hiệu quả phương châm 'Dân biết, dân bàn, dân làm, dân kiểm tra, dân giám sát, dân thụ hưởng'; bảo đảm quyền Nhân dân được tham gia góp ý vào quá trình xây dựng chủ trương, đường lối của Đảng, chính sách, pháp luật của Nhà nước... Thiết lập và vận hành hiệu quả hệ thống thông tin hai chiều giữa Nhà nước và người dân, thông qua các nền tảng số, các công cụ lấy ý kiến Nhân dân."
                                         </p>
-                                        <p className="text-center font-bold text-rose-700 uppercase">- Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV -</p>
+                                        <p className="text-center font-bold text-rose-700 uppercase">- Nghị quyết Đại hội đại biểu toàn quốc lần thứ XIV -</p>
                                     </div>
                                 </div>
 
@@ -200,7 +200,7 @@ export default function HienKeFeedbackPage() {
                                         </h3>
                                         <ul className="list-none pl-0 space-y-2">
                                             <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Góp phần cụ thể hóa nội dung Nghị quyết số 66-NQ/TW ngày 30/4/2025 của Bộ Chính trị về đổi mới công tác xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Lấy người dân, doanh nghiệp làm trung tâm. Thúc đẩy văn hóa, trách nhiệm xã hội của doanh nghiệp, người dân trong xây dựng, hoàn thiện hệ thống pháp luật và tổ chức thi hành hiệu quả pháp luật góp phần phát triển kinh tế - xã hội của đất nước.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Lấy người dân, doanh nghiệp làm trung tâm, chủ thể trong xây dựng, hoàn thiện hệ thống pháp luật. Thúc đẩy văn hóa, trách nhiệm xã hội của doanh nghiệp, người dân trong xây dựng, hoàn thiện hệ thống pháp luật và tổ chức thi hành hiệu quả pháp luật góp phần phát triển kinh tế - xã hội của đất nước.</li>
                                             <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Việc tiếp thu, ghi nhận và xử lý các hiến kế sẽ là cơ sở hình thành hệ sinh thái dữ liệu pháp luật. Hệ sinh thái này đóng sẽ vai trò là kênh thông tin quan trọng để lắng nghe, tiếp nhận, tổng hợp các ý kiến góp ý trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và nâng cao hiệu quả thi hành pháp luật.</li>
                                         </ul>
                                     </div>
@@ -219,49 +219,58 @@ export default function HienKeFeedbackPage() {
 
                                 <div className="bg-emerald-50/60 p-6 rounded-2xl border border-emerald-100 mb-8 w-full">
                                     <h3 className="text-[17px] font-bold text-[#0f172a] mb-3 flex items-center gap-2">
-                                        Yêu cầu nhiệm vụ
+                                        Yêu cầu:
                                     </h3>
                                     <ul className="list-none pl-0 space-y-2">
                                         <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
-                                            <strong>Thông tin hiến kế chính xác:</strong> Các ý kiến đóng góp, giải pháp hiến kế gửi về hệ thống phải đảm bảo tính xác thực, dựa trên dữ liệu khách quan và xuất phát từ cơ sở thực tiễn rõ ràng.
+                                            Nội dung của các ý kiến, hiến kế của người dân, doanh nghiệp phải đảm bảo tính xác thực, dựa trên dữ liệu khách quan và xuất phát từ cơ sở thực tiễn rõ ràng.
                                         </li>
                                         <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
-                                            <strong>Tiếp nhận, phản hồi kịp thời:</strong> Cơ quan quản lý nhà nước có trách nhiệm ghi nhận, nghiên cứu và phản hồi lại tiến độ, trạng thái xử lý đối với những hiến kế của người dân và doanh nghiệp một cách nhanh chóng nhất.
+                                            Cơ quan quản lý nhà nước căn cứ chức năng, nhiệm vụ, thẩm quyền có trách nhiệm nghiên cứu, xử lý đối với những ý kiến hiến kế của người dân và doanh nghiệp theo quy định.
                                         </li>
                                         <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
-                                            <strong>Công khai và minh bạch:</strong> Toàn bộ quy trình tiếp nhận, đánh giá, xử lý đến khi áp dụng các sáng kiến pháp luật đều phải được minh bạch hóa trên Cổng để mọi cá nhân, tổ chức đều có quyền theo dõi, giám sát.
+                                            Quy trình tiếp nhận, phân loại, nghiên cứu, xử lý các ý kiến, sáng kiến được thông tin, cập nhật để mọi người dân, doanh nghiệp theo dõi.
                                         </li>
                                     </ul>
                                 </div>
 
-                                <h3 className="text-[18px] font-bold text-[#0f172a] mb-4">Các hoạt động chính</h3>
+                                <h3 className="text-[18px] font-bold text-[#0f172a] mb-4">Nội dung</h3>
                                 <div className="space-y-4">
                                     <div className="flex gap-4 p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-green-100 flex items-center justify-center text-green-600 font-bold text-xl">1</div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Hiến kế của bạn</h4>
-                                            <p className="text-[14.5px] text-gray-600">Đây là mục tin phục vụ người dân, doanh nghiệp, các tổ chức chính trị - xã hội chủ động tham gia hiến kế xây dựng, tổ chức thi hành pháp luật hiệu quả trên cơ sở xuất phát từ các chủ đề, nội dung, vấn đề thực tế trong mọi lĩnh vực của đời sống xã hội hướng tới mục tiêu phát triển kinh tế - xã hội của đất nước.</p>
+                                            <p className="text-[14.5px] text-gray-600">Chia sẻ ý kiến, sáng kiến của người dân, doanh nghiệp góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật trên toàn diện các lĩnh vực nhằm thúc đẩy phát triển kinh tế - xã hội, hội nhập quốc tế của đất nước.</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-4 p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xl">2</div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Chúng tôi cần bạn</h4>
-                                            <p className="text-[14.5px] text-gray-600">Đây là mục tin thể hiện các nội dung, chủ đề, vấn đề cụ thể mà cơ quan quản lý nhà nước cần sự hiến kế, tham gia ý kiến, phản biện của xã hội, doanh nghiệp, người dân trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và thi hành hiệu quả pháp luật.</p>
+                                            <p className="text-[14.5px] text-gray-600">Các nội dung, chủ đề cơ quan quản lý nhà nước cần sự hiến kế, tham gia ý kiến của người dân, doanh nghiệp trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và thi hành hiệu quả pháp luật.</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-4 p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-xl">3</div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Có thể bạn quan tâm</h4>
-                                            <p className="text-[14.5px] text-gray-600">Các chủ đề, nội dung mang tính gợi ý để xã hội, người dân, doanh nghiệp hiến kế, góp ý theo từng lĩnh vực pháp luật cụ thể.</p>
+                                            <p className="text-[14.5px] text-gray-600">Gợi ý các chủ đề, nội dung để người dân, doanh nghiệp hiến kế, góp ý theo từng lĩnh vực pháp luật cụ thể.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4 p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
+                                        <div className="w-12 h-12 shrink-0 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-xl">4</div>
+                                        <div>
+                                            <h4 className="font-bold text-gray-900 mb-1">Quá trình tiếp nhận, xử lý</h4>
+                                            <p className="text-[14.5px] text-gray-600">Thông tin minh bạch, cập nhật kịp thời toàn bộ quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các ý kiến đóng góp, hiến kế từ người dân và doanh nghiệp.</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <p className="mt-8 text-center text-gray-500 italic text-[14.5px]">
-                                    "Khát vọng phát triển đất nước bắt nguồn từ chính trí tuệ và tiếng nói của Nhân dân. Hãy cùng chúng tôi kiến tạo hành lang pháp lý vững chắc cho kỷ nguyên mới!"
-                                </p>
+                                <div className="mt-8 relative px-5 md:px-6 py-6 md:py-8 bg-amber-50 rounded-2xl border-l-8 border-r-8 border-amber-400 shadow-sm">
+                                    <p className="relative z-10 text-center text-rose-800 font-bold italic text-[15.5px] md:text-[17px] leading-relaxed w-full mx-auto">
+                                        "Khát vọng phát triển đất nước bắt nguồn từ chính trí tuệ và tiếng nói của Nhân dân. Hãy cùng chúng tôi kiến tạo hành lang pháp lý vững chắc cho kỷ nguyên mới!"
+                                    </p>
+                                </div>
                             </div>
                         </Section>
 
@@ -275,7 +284,7 @@ export default function HienKeFeedbackPage() {
                                     <div>
                                         <h3 className="text-[20px] font-bold text-gray-900 mb-2">Chia sẻ hiến kế của bạn</h3>
                                         <p className="text-gray-700 max-w-2xl leading-relaxed text-[15px]">
-                                            Mọi ý kiến đóng góp của bạn về các vấn đề dân sinh, sức khoẻ, giáo dục, hạ tầng giao thông... đều được tổng hợp và phân tích để chuyển tới các cơ quan chức năng, nhằm xây dựng môi trường sống thiết thực và tốt đẹp hơn.
+                                            Mọi ý kiến, sáng kiến của người dân, doanh nghiệp trên toàn diện các lĩnh vực được tiếp nhận, phân loại, nghiên cứu, xử lý góp phần xây dựng đất nước giàu đẹp, văn minh, hiện đại.
                                         </p>
                                     </div>
                                 </div>

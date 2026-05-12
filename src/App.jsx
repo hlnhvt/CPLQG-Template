@@ -69,6 +69,7 @@ import HienKeNoiBatV2Page from './pages/HienKeNoiBatV2Page';
 import HienKeLinhVucPage from './pages/HienKeLinhVucPage';
 import HienKeLinhVucDanhSachPage from './pages/HienKeLinhVucDanhSachPage';
 import HienKeFeedbackPage from './pages/HienKeFeedbackPage';
+import HienKeQuyTrinhPage from './pages/HienKeQuyTrinhPage';
 
 // Forum imports
 import ForumListPage from './pages/forum/ForumListPage';
@@ -201,6 +202,7 @@ const AppLayout = () => {
                     <Route path="/hien-ke/linh-vuc" element={<HienKeLinhVucPage />} />
                     <Route path="/hien-ke/linh-vuc/danh-sach" element={<HienKeLinhVucDanhSachPage />} />
                     <Route path="/hien-ke/lien-he" element={<HienKeFeedbackPage />} />
+                    <Route path="/hien-ke/quy-trinh" element={<HienKeQuyTrinhPage />} />
                     <Route path="/hien-ke/:id" element={<HienKeDetailPage />} />
                     <Route path="/hien-ke/gop-y/:id" element={<ConsultFeedbackPage />} />
                     <Route path="/hien-ke/gop-y-nhanh" element={<SimpleFeedbackPage />} />

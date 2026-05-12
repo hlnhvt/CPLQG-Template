@@ -47,7 +47,7 @@ const HienKeLinhVucPage = () => {
                     <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
                         Có thể bạn quan tâm                    </h1>
                     <p className="text-blue-100/90 text-[15px] leading-relaxed">
-                        Mỗi ý kiến đóng góp và sáng kiến thiết thực trong từng lĩnh vực pháp luật cụ thể đều mang lại những góc nhìn đa chiều từ thực tiễn, qua đó đóng vai trò là cơ sở quan trọng để công tác xây dựng, thi hành pháp luật không ngừng được đổi mới và ngày càng hoàn thiện hơn.
+                        Gợi ý các chủ đề, nội dung để người dân, doanh nghiệp hiến kế, góp ý theo từng lĩnh vực pháp luật cụ thể.
                     </p>
 
                     {/* Leadership Quote */}
@@ -59,7 +59,7 @@ const HienKeLinhVucPage = () => {
                                 </p>
                                 <div className="flex flex-col items-center gap-2">
                                     <div className="w-12 h-[2px] bg-amber-400/50 rounded-full mb-1" />
-                                    <span className="text-amber-200 text-[13px] font-bold uppercase tracking-widest">Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV của Đảng</span>
+                                    <span className="text-amber-200 text-[13px] font-bold uppercase tracking-widest">Nghị quyết Đại hội đại biểu toàn quốc lần thứ XIV của Đảng</span>
                                 </div>
                             </div>
                         </div>
@@ -141,7 +141,7 @@ const HienKeLinhVucPage = () => {
                                     </p>
                                     <div className="w-12 h-0.5 bg-purple-300 mx-auto mb-4" />
                                     <footer className="text-purple-900 font-bold text-[14px] uppercase relative z-10">
-                                        — Văn kiện Đại hội đại biểu toàn quốc lần thứ XIV của Đảng —
+                                        — Nghị quyết Đại hội đại biểu toàn quốc lần thứ XIV của Đảng —
                                     </footer>
                                 </div>
                             </div>
@@ -220,7 +220,7 @@ const HienKeLinhVucPage = () => {
                                 <div className="flex-1">
                                     <h3 className="text-[20px] font-bold text-gray-900 mb-2">Chia sẻ hiến kế của bạn</h3>
                                     <p className="text-gray-600 max-w-2xl leading-relaxed text-[15px]">
-                                        Mọi ý kiến đóng góp của bạn về các vấn đề dân sinh, sức khoẻ, giáo dục, hạ tầng giao thông... đều được tổng hợp và phân tích để chuyển tới các cơ quan chức năng, nhằm xây dựng môi trường sống thiết thực và tốt đẹp hơn.
+                                        Mọi ý kiến, sáng kiến của người dân, doanh nghiệp trên toàn diện các lĩnh vực được tiếp nhận, phân loại, nghiên cứu, xử lý góp phần xây dựng đất nước giàu đẹp, văn minh, hiện đại.
                                     </p>
                                 </div>
                             </div>

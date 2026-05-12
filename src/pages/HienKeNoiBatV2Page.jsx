@@ -7,7 +7,7 @@ import { Section, ConsultCard, HOT_ITEMS, NEW_HIGHLIGHTS, thumb } from './HienKe
 const MOCK_DRAFTS = [
     { id: 1, title: "Dự thảo Luật quy định về kiểm soát rủi ro trong lĩnh vực Chính phủ", org: "Chính phủ", type: "Luật", ngayDang: "01/03/2026", hanGopY: "10/04/2026", isExpired: true, isHot: true, description: "Thiết lập cơ sở pháp lý vững chắc nhằm đánh giá, dự báo và phòng ngừa các rủi ro trong hoạt động điều hành của Chính phủ." },
     { id: 2, title: "Dự thảo Pháp lệnh quy định về kiểm soát rủi ro trong lĩnh vực Tài chính", org: "Bộ Tài chính", type: "Pháp lệnh", ngayDang: "02/03/2026", hanGopY: "11/04/2026", isExpired: false, isHot: true, description: "Quản lý chặt chẽ dòng vốn đầu tư công và nợ công, đảm bảo an toàn tài chính quốc gia trước các biến động kinh tế toàn cầu." },
-    { id: 3, title: "Dự thảo Nghị định quy định về kiểm soát rủi ro trong lĩnh vực Tư pháp", org: "Bộ Tư pháp", type: "Nghị định", ngayDang: "03/03/2026", hanGopY: "12/04/2026", isExpired: false, description: "Tăng cường năng lực giải quyết tranh chấp pháp lý và kiểm soát chất lượng văn bản quy phạm pháp luật, giảm thiểu rủi ro pháp lý." },
+    { id: 3, title: "Dự thảo Nghị định quy định về kiểm soát rủi ro trong lĩnh vực Tư pháp", org: "Bộ Tư pháp", type: "Nghị định", ngayDang: "03/03/2026", hanGopY: "12/04/2026", isExpired: false, isHot: true, description: "Tăng cường năng lực giải quyết tranh chấp pháp lý và kiểm soát chất lượng văn bản quy phạm pháp luật, giảm thiểu rủi ro pháp lý." },
     { id: 4, title: "Dự thảo Quyết định quy định về kiểm soát rủi ro trong lĩnh vực Y tế", org: "Bộ Y tế", type: "Quyết định", ngayDang: "04/03/2026", hanGopY: "13/04/2026", isExpired: false, description: "Xây dựng cơ chế phản ứng nhanh đối với dịch bệnh truyền nhiễm và quản lý rủi ro trong hệ thống khám chữa bệnh toàn dân." },
     { id: 5, title: "Dự thảo Thông tư quy định về kiểm soát rủi ro trong lĩnh vực Công an", org: "Bộ Công an", type: "Thông tư", ngayDang: "05/03/2026", hanGopY: "14/04/2026", isExpired: false, description: "Quy định chi tiết các biện pháp nghiệp vụ nhằm nhận diện và triệt tiêu các nguy cơ đe dọa an ninh trật tự an toàn xã hội." },
     { id: 6, title: "Dự thảo Nghị quyết quy định về kiểm soát rủi ro trong lĩnh vực Nông nghiệp và PTNT", org: "Bộ Nông nghiệp và PTNT", type: "Nghị quyết", ngayDang: "06/03/2026", hanGopY: "15/04/2026", isExpired: false, description: "Chính sách phòng chống thiên tai, thích ứng biến đổi khí hậu và kiểm soát rủi ro dịch bệnh trong sản xuất nông nghiệp." }
@@ -27,7 +27,7 @@ const EXPANDED_ITEMS = [
     { ...HOT_ITEMS[0], isHot: true },      // Luật Đất đai (h1)
     ...NEW_HIGHLIGHTS.slice(1),
     ...HOT_ITEMS.slice(1),
-    { id: 'h5', title: 'Hoàn thiện khung pháp lý về quản lý tài sản số', agency: 'Ngân hàng Nhà nước', status: 'open', deadline: '20/05/2026', participants: 1540, thumb: thumb(4), description: 'Bổ sung định nghĩa pháp lý liên quan đến tiền điện tử và dịch vụ giao dịch tài sản số hiện nay.' },
+    { id: 'h5', title: 'Hoàn thiện khung pháp lý về quản lý tài sản số', agency: 'Ngân hàng Nhà nước', status: 'open', deadline: '20/05/2026', participants: 1540, thumb: thumb(4), isHot: true, description: 'Bổ sung định nghĩa pháp lý liên quan đến tiền điện tử và dịch vụ giao dịch tài sản số hiện nay.' },
     { id: 'h6', title: 'Sửa đổi Luật BHXH: Điều kiện hưởng lương hưu', agency: 'Bộ Lao động – TB&XH', status: 'upcoming', deadline: '01/06/2026', participants: 0, thumb: thumb(5), description: 'Tháo gỡ những bất cập trong việc nhận BHXH một lần và điều chỉnh số năm đóng BHXH tối thiểu để nhận hưu trí.' },
     { id: 'h7', title: 'Dự thảo Nghị định bảo vệ dữ liệu cá nhân', agency: 'Bộ Công an', status: 'open', deadline: '10/05/2026', participants: 3200, thumb: thumb(0), description: 'Quy định khắt khe trách nhiệm của các cơ quan, tổ chức khi thu thập, xử lý và lưu trữ dữ liệu cá nhân.' },
     { id: 'h8', title: 'Cơ chế thí điểm phát triển điện gió ngoài khơi', agency: 'Bộ Công Thương', status: 'open', deadline: '15/05/2026', participants: 850, thumb: thumb(1), description: 'Cung cấp cơ chế tín dụng ưu đãi nhằm đẩy mạnh phát triển năng lượng tái tạo hướng biển.' },
@@ -86,11 +86,59 @@ const HienKeNoiBatV2Page = () => {
 
     // Pagination Logic for Drafts
     const totalDraftPages = Math.ceil(MOCK_DRAFTS.length / ITEMS_PER_PAGE);
-    const displayedDrafts = MOCK_DRAFTS.slice((draftPage - 1) * ITEMS_PER_PAGE, draftPage * ITEMS_PER_PAGE);
+    const baseDisplayedDrafts = MOCK_DRAFTS.slice((draftPage - 1) * ITEMS_PER_PAGE, draftPage * ITEMS_PER_PAGE);
 
     // Pagination Logic for Highlights
     const totalHighlightPages = Math.ceil(filteredHighlights.length / ITEMS_PER_PAGE);
-    const displayedHighlights = filteredHighlights.slice((highlightPage - 1) * ITEMS_PER_PAGE, highlightPage * ITEMS_PER_PAGE);
+    const baseDisplayedHighlights = filteredHighlights.slice((highlightPage - 1) * ITEMS_PER_PAGE, highlightPage * ITEMS_PER_PAGE);
+
+    // Dynamic List Rotation states for "Xem tất cả" tab
+    const [draftRotationIndex, setDraftRotationIndex] = useState(0);
+    const [highlightRotationIndex, setHighlightRotationIndex] = useState(0);
+
+    useEffect(() => {
+        setDraftRotationIndex(0);
+    }, [draftPage, viewMode]);
+
+    useEffect(() => {
+        setHighlightRotationIndex(0);
+    }, [highlightPage, viewMode]);
+
+    // Candidates marked as isHot
+    const draftHotCandidates = useMemo(() => {
+        return baseDisplayedDrafts.filter(d => d.isHot);
+    }, [baseDisplayedDrafts]);
+
+    const highlightHotCandidates = useMemo(() => {
+        return baseDisplayedHighlights.filter(h => h.isHot);
+    }, [baseDisplayedHighlights]);
+
+    useEffect(() => {
+        if (viewMode !== 'both') return;
+        const timerDraft = setInterval(() => {
+            setDraftRotationIndex(prev => draftHotCandidates.length ? (prev + 1) % draftHotCandidates.length : 0);
+        }, 10000);
+        const timerHighlight = setInterval(() => {
+            setHighlightRotationIndex(prev => highlightHotCandidates.length ? (prev + 1) % highlightHotCandidates.length : 0);
+        }, 10000);
+        return () => {
+            clearInterval(timerDraft);
+            clearInterval(timerHighlight);
+        };
+    }, [viewMode, draftHotCandidates.length, highlightHotCandidates.length]);
+
+    // Helper to place active hot candidate at index 0, followed by all remaining items in original order
+    const getDisplayedArrayWithSelectedHot = (baseArr, hotCandidates, activeHotIndex) => {
+        if (!baseArr || baseArr.length === 0) return baseArr;
+        if (viewMode !== 'both' || !hotCandidates || hotCandidates.length === 0) return baseArr;
+        
+        const selectedHot = hotCandidates[activeHotIndex] || hotCandidates[0] || baseArr[0];
+        const remaining = baseArr.filter(item => item.id !== selectedHot.id);
+        return [selectedHot, ...remaining];
+    };
+
+    const displayedDrafts = getDisplayedArrayWithSelectedHot(baseDisplayedDrafts, draftHotCandidates, draftRotationIndex);
+    const displayedHighlights = getDisplayedArrayWithSelectedHot(baseDisplayedHighlights, highlightHotCandidates, highlightRotationIndex);
 
     // Reset pagination when searching
     const handleSearchChange = (e) => {
@@ -135,7 +183,7 @@ const HienKeNoiBatV2Page = () => {
                             Chúng tôi cần bạn
                         </h1>
                         <p className="text-blue-100/90 text-[15px] leading-relaxed">
-                            Tại mục này, người dân và doanh nghiệp có thể trực tiếp tham gia góp ý cho các dự thảo văn bản quy phạm pháp luật đang được lấy ý kiến theo quy định, đồng thời đề xuất các sáng kiến lập pháp nhằm chung tay hoàn thiện hệ thống pháp luật.
+                            Các nội dung, chủ đề cơ quan quản lý nhà nước cần sự hiến kế, tham gia ý kiến của người dân, doanh nghiệp trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và thi hành hiệu quả pháp luật.
                         </p>
 
                         {/* Leadership Quote */}
@@ -388,7 +436,10 @@ const HienKeNoiBatV2Page = () => {
                                     <div className={`grid gap-5 ${viewMode === 'both' ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-12'}`}>
                                         {/* Hero Item Draft */}
                                         {displayedDrafts[0] && (
-                                            <div className={`${viewMode === 'both' ? '' : 'md:col-span-8'} flex flex-col relative rounded-[1.5rem] transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 bg-white border border-orange-100 overflow-hidden group h-[320px] md:h-[520px]`}>
+                                            <div
+                                                key={displayedDrafts[0].id}
+                                                className={`${viewMode === 'both' ? '' : 'md:col-span-8'} flex flex-col relative rounded-[1.5rem] transition-all duration-700 hover:-translate-y-1 overflow-hidden group h-[320px] md:h-[520px] bg-white border border-orange-100 hover:shadow-2xl animate-fadeIn`}
+                                            >
                                                 <div className="absolute inset-0 bg-gradient-to-br from-orange-50/80 via-white to-orange-100/30 z-0"></div>
                                                 <div className="absolute -top-24 -right-24 w-64 h-64 bg-orange-400/10 rounded-full blur-3xl z-0 transition-transform duration-700 group-hover:scale-150"></div>
 
@@ -435,7 +486,10 @@ const HienKeNoiBatV2Page = () => {
                                         {/* Sub Items Stack (Side by side with Hero in single view) */}
                                         <div className={`${viewMode === 'both' ? 'flex flex-col gap-5' : 'md:col-span-4 flex flex-col gap-5'}`}>
                                             {displayedDrafts.slice(1, 3).map((draft) => (
-                                                <div key={draft.id} className="relative rounded-[1.5rem] transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white border border-gray-100 overflow-hidden flex flex-col h-[250px]">
+                                                <div
+                                                    key={draft.id}
+                                                    className="relative rounded-[1.5rem] transition-all duration-500 hover:-translate-y-1 overflow-hidden flex flex-col h-[250px] bg-white border border-gray-100 hover:shadow-xl animate-fadeIn"
+                                                >
                                                     <ConsultCard item={draft} to={`/du-thao/${draft.id}`} tag={draft.type} accentColor="#ea580c" hideThumb={true} hideStatus={true} showDateBox={true} isHot={draft.isHot} />
                                                 </div>
                                             ))}
@@ -443,7 +497,10 @@ const HienKeNoiBatV2Page = () => {
 
                                         {/* Bottom Row (Full width grid in single view) */}
                                         {displayedDrafts.slice(3).map((draft) => (
-                                            <div key={draft.id} className={`${viewMode === 'both' ? 'w-full' : 'md:col-span-6'} relative rounded-[1.5rem] transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white border border-gray-100 overflow-hidden flex flex-col h-[250px]`}>
+                                            <div
+                                                key={draft.id}
+                                                className={`${viewMode === 'both' ? 'w-full' : 'md:col-span-6'} relative rounded-[1.5rem] transition-all duration-500 hover:-translate-y-1 overflow-hidden flex flex-col h-[250px] bg-white border border-gray-100 hover:shadow-xl animate-fadeIn`}
+                                            >
                                                 <ConsultCard item={draft} to={`/du-thao/${draft.id}`} tag={draft.type} accentColor="#ea580c" hideThumb={true} hideStatus={true} showDateBox={true} isHot={draft.isHot} />
                                             </div>
                                         ))}
@@ -493,7 +550,10 @@ const HienKeNoiBatV2Page = () => {
                                         <div className={`grid gap-5 ${viewMode === 'both' ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-12'}`}>
                                             {/* Hero Item Highlight */}
                                             {displayedHighlights[0] && (
-                                                <div className={`${viewMode === 'both' ? '' : 'md:col-span-8'} flex flex-col relative rounded-[1.5rem] transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 bg-white border border-orange-100 overflow-hidden group h-[320px] md:h-[520px]`}>
+                                                <div
+                                                    key={displayedHighlights[0].id}
+                                                    className={`${viewMode === 'both' ? '' : 'md:col-span-8'} flex flex-col relative rounded-[1.5rem] transition-all duration-700 hover:-translate-y-1 overflow-hidden group h-[320px] md:h-[520px] bg-white border border-orange-100 hover:shadow-2xl animate-fadeIn`}
+                                                >
                                                     <div className="absolute inset-0 bg-gradient-to-br from-orange-50/80 via-white to-orange-100/30 z-0"></div>
                                                     <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-orange-400/10 rounded-full blur-3xl z-0 transition-transform duration-700 group-hover:scale-150"></div>
 
@@ -542,7 +602,10 @@ const HienKeNoiBatV2Page = () => {
                                             {/* Sub Items Stack (Side by side with Hero in single view) */}
                                             <div className={`${viewMode === 'both' ? 'flex flex-col gap-5' : 'md:col-span-4 flex flex-col gap-5'}`}>
                                                 {displayedHighlights.slice(1, 3).map((item) => (
-                                                    <div key={item.id} className="relative rounded-[1.5rem] transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white border border-gray-100 overflow-hidden flex flex-col h-[250px]">
+                                                    <div
+                                                        key={item.id}
+                                                        className="relative rounded-[1.5rem] transition-all duration-500 hover:-translate-y-1 overflow-hidden flex flex-col h-[250px] bg-white border border-gray-100 hover:shadow-xl animate-fadeIn"
+                                                    >
                                                         <ConsultCard item={{ ...item, startDate: item.startDate || item.date || '20/03/2026' }} to={`/hien-ke/${item.id}`} accentColor="#ea580c" showDateBox={viewMode !== 'both'} isHot={item.isHot} />
                                                     </div>
                                                 ))}
@@ -550,7 +613,10 @@ const HienKeNoiBatV2Page = () => {
 
                                             {/* Bottom Row (Full width grid in single view) */}
                                             {displayedHighlights.slice(3).map((item) => (
-                                                <div key={item.id} className={`${viewMode === 'both' ? 'w-full' : 'md:col-span-6'} relative rounded-[1.5rem] transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-white border border-gray-100 overflow-hidden flex flex-col h-[250px]`}>
+                                                <div
+                                                    key={item.id}
+                                                    className={`${viewMode === 'both' ? 'w-full' : 'md:col-span-6'} relative rounded-[1.5rem] transition-all duration-500 hover:-translate-y-1 overflow-hidden flex flex-col h-[250px] bg-white border border-gray-100 hover:shadow-xl animate-fadeIn`}
+                                                >
                                                     <ConsultCard item={{ ...item, startDate: item.startDate || item.date || '20/03/2026' }} to={`/hien-ke/${item.id}`} accentColor="#ea580c" showDateBox={true} isHot={item.isHot} />
                                                 </div>
                                             ))}

@@ -54,7 +54,7 @@ const HienKeDoiSongPage = () => {
                             <div>
                                 <h3 className="text-[20px] font-bold text-gray-900 mb-2">Chia sẻ vấn đề đời sống của bạn</h3>
                                 <p className="text-gray-700 max-w-2xl leading-relaxed text-[15px]">
-                                    Mọi ý kiến đóng góp của bạn về các vấn đề dân sinh, sức khoẻ, giáo dục, hạ tầng giao thông... đều được tổng hợp và phân tích để chuyển tới các cơ quan chức năng, nhằm xây dựng môi trường sống thiết thực và tốt đẹp hơn.
+                                    Mọi ý kiến, sáng kiến của người dân, doanh nghiệp trên toàn diện các lĩnh vực được tiếp nhận, phân loại, nghiên cứu, xử lý góp phần xây dựng đất nước giàu đẹp, văn minh, hiện đại.
                                 </p>
                             </div>
                         </div>

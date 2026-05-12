@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
     Search, ArrowRight, Users, Calendar, ChevronRight,
@@ -9,7 +9,15 @@ import {
 
 export default function HienKePage() {
     const [searchQuery, setSearchQuery] = useState('');
+    const [activeIndex, setActiveIndex] = useState(0);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setActiveIndex((prev) => (prev + 1) % 4);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, []);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -110,25 +118,37 @@ export default function HienKePage() {
                             </div>
                         </div>
 
-                        {/* Right side: 3 Feature Overview Cards */}
+                        {/* Right side: 4 Feature Overview Cards */}
                         <div className="lg:w-[400px] xl:w-[440px] shrink-0 w-full -mt-6 lg:-mt-10 animate-fade-up delay-400">
-                            <div className="flex flex-col gap-4 md:gap-5">
+                            <div className="flex flex-col gap-3 md:gap-4">
                                 {[
-                                    { id: '/hien-ke/gop-y-nhanh?topic=doi-song', label: 'Hiến kế của bạn', desc: 'Ý kiến, sáng kiến của bạn góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật.', icon: Heart, color: 'text-green-600', hue: 'bg-green-500' },
-                                    { id: '/hien-ke/noi-bat-v2', label: 'Chúng tôi cần bạn', desc: 'Nội dung, chủ đề cần sáng kiến, ý kiến đóng góp của bạn.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500' },
-                                    { id: '/hien-ke/linh-vuc', label: 'Có thể bạn quan tâm', desc: 'Sáng kiến, ý kiến của bạn trên từng lĩnh vực cụ thể.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500' },
-                                ].map(item => (
-                                    <Link key={item.id} to={item.id} className="relative overflow-hidden flex items-center gap-5 p-5 xl:px-6 bg-[#0f172a]/60 backdrop-blur-md border border-white/10 rounded-2xl md:rounded-3xl hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)] transition-all duration-300 group h-[130px] xl:h-[136px]">
-                                        <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${item.hue} opacity-80`} />
-                                        <div className={`w-14 h-14 rounded-2xl bg-white shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0 ${item.color}`}>
-                                            <item.icon size={26} strokeWidth={2} />
-                                        </div>
-                                        <div className="flex-1">
-                                            <h3 className="text-white font-bold text-[17px] xl:text-[20px] mb-1">{item.label}</h3>
-                                            <p className="text-blue-100/70 text-[13.5px] leading-relaxed pr-1">{item.desc}</p>
-                                        </div>
-                                    </Link>
-                                ))}
+                                    { id: '/hien-ke/gop-y-nhanh?topic=doi-song', label: 'Hiến kế của bạn', desc: 'Ý kiến, sáng kiến của bạn góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật.', icon: Heart, color: 'text-green-600', hue: 'bg-green-500', glow: 'border-green-400/80 ring-green-400/20' },
+                                    { id: '/hien-ke/noi-bat-v2', label: 'Chúng tôi cần bạn', desc: 'Nội dung, chủ đề cần sáng kiến, ý kiến đóng góp của bạn.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500', glow: 'border-blue-400/80 ring-blue-400/20' },
+                                    { id: '/hien-ke/linh-vuc', label: 'Có thể bạn quan tâm', desc: 'Sáng kiến, ý kiến của bạn trên từng lĩnh vực cụ thể.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500', glow: 'border-purple-400/80 ring-purple-400/20' },
+                                    { id: '/hien-ke/quy-trinh', label: 'Quá trình tiếp nhận, xử lý', desc: 'Quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các ý kiến đóng góp của bạn.', icon: Send, color: 'text-amber-600', hue: 'bg-amber-500', glow: 'border-amber-400/80 ring-amber-400/20' },
+                                ].map((item, index) => {
+                                    const isActive = activeIndex === index;
+                                    return (
+                                        <Link
+                                            key={item.id}
+                                            to={item.id}
+                                            onMouseEnter={() => setActiveIndex(index)}
+                                            className={`relative overflow-hidden flex items-center gap-4 p-4 xl:px-5 backdrop-blur-md rounded-2xl md:rounded-3xl transition-all duration-500 group h-[115px] xl:h-[120px] ${isActive
+                                                    ? `bg-white/20 border-2 ${item.glow} -translate-y-1.5 shadow-[0_20px_40px_rgba(0,0,0,0.5)] ring-4`
+                                                    : 'bg-[#0f172a]/60 border border-white/10 hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)]'
+                                                }`}
+                                        >
+                                            <div className={`absolute left-0 top-0 bottom-0 ${isActive ? 'w-2.5 opacity-100' : 'w-1.5 opacity-80'} ${item.hue} transition-all duration-500`} />
+                                            <div className={`w-12 h-12 rounded-2xl bg-white shadow-lg flex items-center justify-center transition-transform duration-500 shrink-0 ml-1.5 ${item.color} ${isActive ? 'scale-110 shadow-white/30' : 'group-hover:scale-110'}`}>
+                                                <item.icon size={24} strokeWidth={2} />
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <h3 className={`font-bold text-[16px] xl:text-[18px] mb-0.5 transition-colors duration-500 truncate ${isActive ? 'text-amber-300' : 'text-white'}`}>{item.label}</h3>
+                                                <p className="text-blue-100/70 text-[13px] leading-relaxed pr-1 line-clamp-2">{item.desc}</p>
+                                            </div>
+                                        </Link>
+                                    );
+                                })}
                             </div>
                         </div>
                     </div>
