@@ -115,19 +115,8 @@ const KpiMetricCard = ({ title, value, subtitle, icon: Icon, colorTheme }) => {
 };
 
 export default function HienKeQuyTrinhPage() {
-    const [searchQuery, setSearchQuery] = useState('');
-    const [statusFilter, setStatusFilter] = useState('all');
-
-    const filteredRecords = MOCK_PROCESS_RECORDS.filter(record => {
-        const matchQuery = record.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           record.agency.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           record.id.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchStatus = statusFilter === 'all' || record.status === statusFilter;
-        return matchQuery && matchStatus;
-    });
-
     return (
-        <div className="bg-gray-50 min-h-screen font-sans pb-20">
+        <div className="bg-gray-50 font-sans pb-6">
             {/* Hero Banner with Background */}
             <div className="relative pt-8 pb-10 overflow-hidden border-b border-[#1e3a8a]/20">
                 {/* Background: trống đồng image */}
@@ -156,24 +145,10 @@ export default function HienKeQuyTrinhPage() {
                         Thông tin minh bạch, cập nhật kịp thời toàn bộ quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các ý kiến đóng góp từ người dân và doanh nghiệp.
                     </p>
 
-                    {/* Leadership Quote */}
-                    <div className="mt-8 w-full">
-                        <div className="relative group text-center">
-                            <div className="relative z-10">
-                                <p className="text-white/95 text-[15px] md:text-[18px] italic leading-relaxed font-medium mb-4">
-                                    "Đột phá mạnh mẽ hơn về thể chế phát triển, tháo gỡ điểm nghẽn, rào cản; lấy thực tiễn làm thước đo, khơi thông mọi nguồn lực <br />đưa đất nước bước vào kỷ nguyên mới."
-                                </p>
-                                <div className="flex flex-col items-center gap-2">
-                                    <div className="w-12 h-[2px] bg-amber-400/50 rounded-full mb-1" />
-                                    <span className="text-amber-200 text-[13px] font-bold uppercase tracking-widest">Nghị quyết Đại hội đại biểu toàn quốc lần thứ XIV của Đảng</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 md:px-8 max-w-[1280px] -mt-6 relative z-30">
+            <div className="container mx-auto px-4 md:px-8 max-w-[1280px] mt-8 relative z-30">
                 {/* KPI Metrics Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                     <KpiMetricCard
@@ -206,111 +181,11 @@ export default function HienKeQuyTrinhPage() {
                     />
                 </div>
 
-                {/* Main Dashboard Content */}
-                <div className="mt-10 bg-white rounded-2xl border border-gray-100 shadow-sm p-6 md:p-8">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-gray-100">
-                        <div>
-                            <h2 className="text-xl font-bold text-gray-900">Danh sách ý kiến hiến kế & Kết quả</h2>
-                            <p className="text-sm text-gray-500 mt-1">Tra cứu chi tiết quá trình xử lý theo mã số hoặc nội dung</p>
-                        </div>
-
-                        {/* Search & Filter tools */}
-                        <div className="flex flex-wrap items-center gap-3">
-                            <div className="relative w-full md:w-72">
-                                <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-                                <input
-                                    type="text"
-                                    value={searchQuery}
-                                    onChange={e => setSearchQuery(e.target.value)}
-                                    placeholder="Tìm kiếm nội dung, cơ quan..."
-                                    className="w-full pl-9 pr-4 py-2 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-white transition-all"
-                                />
-                            </div>
-
-                            <div className="flex items-center gap-1.5 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm">
-                                <Filter size={14} className="text-gray-500" />
-                                <select
-                                    value={statusFilter}
-                                    onChange={e => setStatusFilter(e.target.value)}
-                                    className="bg-transparent border-none outline-none text-sm font-medium text-gray-700 pr-2 cursor-pointer"
-                                >
-                                    <option value="all">Tất cả trạng thái</option>
-                                    <option value="received">Đã tiếp nhận</option>
-                                    <option value="processing">Đang xử lý</option>
-                                    <option value="completed">Đã xử lý</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Table / Listing of Tracking Process Records */}
-                    <div className="mt-6 space-y-4">
-                        {filteredRecords.length > 0 ? (
-                            filteredRecords.map(record => {
-                                // determine styling pills
-                                const statusColors = {
-                                    completed: "bg-emerald-50 text-emerald-700 border-emerald-200",
-                                    processing: "bg-amber-50 text-amber-700 border-amber-200",
-                                    received: "bg-blue-50 text-blue-700 border-blue-200"
-                                };
-
-                                const statusIndicator = {
-                                    completed: "bg-emerald-500",
-                                    processing: "bg-amber-500 animate-pulse",
-                                    received: "bg-blue-500"
-                                };
-
-                                return (
-                                    <div key={record.id} className="p-5 rounded-xl border border-gray-100 hover:border-amber-200 hover:shadow-md transition-all duration-300 bg-gray-50/30">
-                                        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-3">
-                                            <div className="flex flex-wrap items-center gap-2.5">
-                                                <span className="font-mono text-xs font-bold text-amber-700 bg-amber-100 px-2.5 py-1 rounded-md border border-amber-200">
-                                                    {record.id}
-                                                </span>
-                                                <span className="text-xs font-semibold text-gray-600 bg-white px-2.5 py-1 rounded-md border border-gray-200">
-                                                    {record.field}
-                                                </span>
-                                                <span className="text-xs text-gray-400 flex items-center gap-1">
-                                                    <Calendar size={12} /> {record.receiveDate}
-                                                </span>
-                                            </div>
-
-                                            <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${statusColors[record.status] || statusColors.received}`}>
-                                                <span className={`w-1.5 h-1.5 rounded-full ${statusIndicator[record.status] || 'bg-blue-500'}`} />
-                                                {record.statusText}
-                                            </div>
-                                        </div>
-
-                                        <h3 className="text-base font-bold text-gray-900 leading-snug mb-2 hover:text-amber-600 transition-colors">
-                                            {record.title}
-                                        </h3>
-
-                                        <div className="flex items-center gap-2 text-xs text-gray-500 mb-3">
-                                            <span className="font-medium text-gray-700">{record.sender}</span>
-                                            <span>•</span>
-                                            <span>Cơ quan chủ trì: <strong className="text-gray-800">{record.agency}</strong></span>
-                                        </div>
-
-                                        <div className="bg-white p-3.5 rounded-lg border border-gray-150 text-sm text-gray-700">
-                                            <strong className="text-xs text-gray-400 block uppercase tracking-wider mb-1">Tóm tắt kết quả / Tiến độ xử lý:</strong>
-                                            <p className="text-[13.5px] leading-relaxed">{record.responseSummary}</p>
-                                        </div>
-                                    </div>
-                                );
-                            })
-                        ) : (
-                            <div className="py-12 text-center text-gray-400">
-                                Không tìm thấy hồ sơ hiến kế nào phù hợp với bộ lọc hiện tại.
-                            </div>
-                        )}
-                    </div>
-                </div>
-
-                {/* Bottom Section: 3 Overview Feature Cards matching requests */}
+                {/* Bottom Section: Overview Feature Cards */}
                 <div className="mt-12">
                     <div className="flex items-center gap-2 mb-6">
                         <div className="w-1.5 h-5 bg-amber-500 rounded-full" />
-                        <h2 className="text-xl font-bold text-gray-900">Các tính năng nổi bật khác</h2>
+                        <h2 className="text-xl font-bold text-gray-900">Các tính năng</h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
