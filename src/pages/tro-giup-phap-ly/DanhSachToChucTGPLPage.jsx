@@ -83,24 +83,24 @@ const DanhSachToChucTGPLPage = () => {
 
             <div className="container mx-auto px-4 max-w-[1200px] mt-8">
                 
-                {/* Category Tabs */}
-                <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200 pb-4">
-                    {tabs.map((tab) => {
-                        const isActive = activeTab === tab;
-                        return (
-                            <button
-                                key={tab}
-                                onClick={() => { setActiveTab(tab); setPage(1); }}
-                                className={`px-5 py-3 rounded-xl font-bold text-[14px] md:text-[15px] transition-all flex items-center gap-2 shadow-sm ${
-                                    isActive 
-                                        ? 'bg-[#1e3a8a] text-white shadow-blue-900/20 translate-y-[-2px]' 
-                                        : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 hover:text-[#1e3a8a]'
-                                }`}
-                            >
-                                {tab}
-                            </button>
-                        );
-                    })}
+                {/* Tabs */}
+                <div className="flex border-b border-gray-200 mb-6 sticky top-16 bg-[#f4f7fb] z-10 pt-2">
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab}
+                            className={`px-6 py-4 text-[15px] font-bold tracking-wide uppercase transition-colors relative ${
+                                activeTab === tab 
+                                ? 'text-blue-700' 
+                                : 'text-gray-500 hover:text-gray-800'
+                            }`}
+                            onClick={() => { setActiveTab(tab); setPage(1); }}
+                        >
+                            {tab}
+                            {activeTab === tab && (
+                                <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-600 rounded-t-md"></div>
+                            )}
+                        </button>
+                    ))}
                 </div>
 
                 {/* Search & Filter Form */}
