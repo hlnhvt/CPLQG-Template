@@ -83,26 +83,6 @@ const DanhSachToChucTGPLPage = () => {
 
             <div className="container mx-auto px-4 max-w-[1200px] mt-8">
                 
-                {/* Tabs */}
-                <div className="flex border-b border-gray-200 mb-6 sticky top-16 bg-[#f4f7fb] z-10 pt-2">
-                    {tabs.map((tab) => (
-                        <button
-                            key={tab}
-                            className={`px-6 py-4 text-[15px] font-bold tracking-wide uppercase transition-colors relative ${
-                                activeTab === tab 
-                                ? 'text-blue-700' 
-                                : 'text-gray-500 hover:text-gray-800'
-                            }`}
-                            onClick={() => { setActiveTab(tab); setPage(1); }}
-                        >
-                            {tab}
-                            {activeTab === tab && (
-                                <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-600 rounded-t-md"></div>
-                            )}
-                        </button>
-                    ))}
-                </div>
-
                 {/* Search & Filter Form */}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
                     <div className="flex flex-col md:flex-row gap-4 mb-4">
@@ -152,6 +132,26 @@ const DanhSachToChucTGPLPage = () => {
                             Tìm kiếm
                         </button>
                     </div>
+                </div>
+
+                {/* Tabs */}
+                <div className="flex border-b border-gray-200 mb-6 sticky top-16 bg-[#f4f7fb] z-10 pt-2">
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab}
+                            className={`px-6 py-4 text-[15px] font-bold tracking-wide uppercase transition-colors relative ${
+                                activeTab === tab 
+                                ? 'text-blue-700' 
+                                : 'text-gray-500 hover:text-gray-800'
+                            }`}
+                            onClick={() => { setActiveTab(tab); setPage(1); }}
+                        >
+                            {tab}
+                            {activeTab === tab && (
+                                <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-600 rounded-t-md"></div>
+                            )}
+                        </button>
+                    ))}
                 </div>
 
                 {/* Results Area */}
