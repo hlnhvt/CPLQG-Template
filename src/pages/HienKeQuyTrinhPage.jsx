@@ -65,55 +65,6 @@ const MOCK_PROCESS_RECORDS = [
     }
 ];
 
-const KpiMetricCard = ({ title, value, subtitle, icon: Icon, colorTheme }) => {
-    // colorThemes: amber, blue, purple, green
-    const themes = {
-        amber: {
-            iconBg: "bg-amber-500 text-white",
-            valueText: "text-amber-600",
-            glow: "hover:shadow-[0_8px_24px_rgba(245,158,11,0.15)] hover:border-amber-300"
-        },
-        blue: {
-            iconBg: "bg-blue-600 text-white",
-            valueText: "text-blue-600",
-            glow: "hover:shadow-[0_8px_24px_rgba(37,99,235,0.15)] hover:border-blue-300"
-        },
-        purple: {
-            iconBg: "bg-purple-600 text-white",
-            valueText: "text-purple-600",
-            glow: "hover:shadow-[0_8px_24px_rgba(147,51,234,0.15)] hover:border-purple-300"
-        },
-        green: {
-            iconBg: "bg-emerald-600 text-white",
-            valueText: "text-emerald-600",
-            glow: "hover:shadow-[0_8px_24px_rgba(5,150,105,0.15)] hover:border-emerald-300"
-        }
-    };
-
-    const currentTheme = themes[colorTheme] || themes.blue;
-
-    return (
-        <div className={`p-6 rounded-2xl border border-gray-150 transition-all duration-300 bg-white shadow-sm relative overflow-hidden group ${currentTheme.glow}`}>
-            <div className="flex justify-between items-start mb-4">
-                <div>
-                    <p className="text-gray-500 font-medium text-sm mb-1">{title}</p>
-                    <h3 className={`text-3xl md:text-4xl font-extrabold tracking-tight ${currentTheme.valueText}`}>
-                        {value}
-                    </h3>
-                </div>
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-md transition-transform group-hover:scale-110 ${currentTheme.iconBg}`}>
-                    <Icon size={24} strokeWidth={2} />
-                </div>
-            </div>
-            <div className="flex items-center gap-1.5 text-[13px] text-gray-500 font-medium border-t border-gray-50 pt-3">
-                <span className="text-gray-600 font-semibold">{subtitle}</span>
-            </div>
-            {/* Subtle bottom gradient indicator */}
-            <div className={`absolute bottom-0 left-0 right-0 h-1 opacity-60 group-hover:opacity-100 transition-opacity ${currentTheme.iconBg}`} />
-        </div>
-    );
-};
-
 export default function HienKeQuyTrinhPage() {
     return (
         <div className="bg-gray-50 font-sans pb-6">
@@ -149,36 +100,44 @@ export default function HienKeQuyTrinhPage() {
             </div>
 
             <div className="container mx-auto px-4 md:px-8 max-w-[1280px] mt-8 relative z-30">
-                {/* KPI Metrics Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                    <KpiMetricCard
-                        title="Tổng số hiến kế"
-                        value="1,524"
-                        subtitle="Ý kiến & sáng kiến gửi về"
-                        icon={FileText}
-                        colorTheme="blue"
-                    />
-                    <KpiMetricCard
-                        title="Đã tiếp nhận"
-                        value="1,480"
-                        subtitle="Hoàn thành rà soát hợp lệ"
-                        icon={Inbox}
-                        colorTheme="purple"
-                    />
-                    <KpiMetricCard
-                        title="Đang xử lý"
-                        value="342"
-                        subtitle="Đang nghiên cứu & thẩm định"
-                        icon={Clock}
-                        colorTheme="amber"
-                    />
-                    <KpiMetricCard
-                        title="Đã xử lý"
-                        value="1,138"
-                        subtitle="Đã công bố kết quả tiếp thu"
-                        icon={CheckCircle}
-                        colorTheme="green"
-                    />
+                {/* Thống kê */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0">
+                            <FileText size={24} />
+                        </div>
+                        <div>
+                            <p className="text-[13px] text-gray-500 font-bold uppercase mb-1">Tổng số hiến kế</p>
+                            <p className="text-2xl font-bold text-gray-900">1,524</p>
+                        </div>
+                    </div>
+                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center shrink-0">
+                            <Inbox size={24} />
+                        </div>
+                        <div>
+                            <p className="text-[13px] text-gray-500 font-bold uppercase mb-1">Đã tiếp nhận</p>
+                            <p className="text-2xl font-bold text-gray-900">1,480</p>
+                        </div>
+                    </div>
+                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center shrink-0">
+                            <Clock size={24} />
+                        </div>
+                        <div>
+                            <p className="text-[13px] text-gray-500 font-bold uppercase mb-1">Đang xử lý</p>
+                            <p className="text-2xl font-bold text-gray-900">342</p>
+                        </div>
+                    </div>
+                    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
+                        <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center shrink-0">
+                            <CheckCircle size={24} />
+                        </div>
+                        <div>
+                            <p className="text-[13px] text-gray-500 font-bold uppercase mb-1">Đã xử lý</p>
+                            <p className="text-2xl font-bold text-gray-900">1,138</p>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Bottom Section: Overview Feature Cards */}
