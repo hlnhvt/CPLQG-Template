@@ -65,6 +65,7 @@ const HienKeLinhVucPage = () => {
                         </div>
                     </div>
 
+{/* 
                     <button
                         type="button"
                         onClick={() => setIsIntroOpen(!isIntroOpen)}
@@ -74,6 +75,7 @@ const HienKeLinhVucPage = () => {
                         Giới thiệu
                         {isIntroOpen ? <ChevronUp size={16} className="ml-1 opacity-70" /> : <ChevronDown size={16} className="ml-1 opacity-70" />}
                     </button>
+*/}
                 </div>
             </div>
 

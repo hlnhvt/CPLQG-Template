@@ -72,6 +72,19 @@ const MOCK_PROCESS_RECORDS = [
         excerpt: "Để hạn chế tình trạng cò đất thao túng thị trường và gây nên các cơn sốt đất ảo, cần tiến hành quy định khắt khe.",
         tags: ["Lao động", "Chính sách"],
         type: "hien-ke-cua-ban"
+    },
+    {
+        id: "HK-2026-075",
+        title: "Cải cách thủ tục đăng ký kinh doanh cho hộ kinh doanh cá thể",
+        sender: "Lê Thị E",
+        field: "Kinh tế",
+        receiveDate: "25/04/2026",
+        status: "received",
+        statusText: "Đã tiếp nhận",
+        agency: "Bộ Kế hoạch và Đầu tư",
+        excerpt: "Thủ tục đăng ký kinh doanh hiện nay vẫn còn rườm rà đối với các hộ kinh doanh nhỏ lẻ ở vùng nông thôn.",
+        tags: ["Kinh tế", "Thủ tục"],
+        type: "co-the-ban-quan-tam"
     }
 ];
 
@@ -127,7 +140,7 @@ function DetailView({ sectionKey }) {
     const Icon = section.icon;
 
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
+    const itemsPerPage = 2;
 
     const filteredRecords = MOCK_PROCESS_RECORDS.filter(r => r.type === sectionKey);
     const totalPages = Math.ceil(filteredRecords.length / itemsPerPage);

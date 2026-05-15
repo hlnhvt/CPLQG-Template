@@ -141,6 +141,7 @@ export default function SimpleFeedbackPage() {
                         </div>
                     </div>
 
+{/* 
                     <button
                         type="button"
                         onClick={() => setIsIntroOpen(!isIntroOpen)}
@@ -150,6 +151,7 @@ export default function SimpleFeedbackPage() {
                         {isIntroOpen ? 'Giới thiệu' : 'Giới thiệu'}
                         {isIntroOpen ? <ChevronUp size={16} className="ml-1 opacity-70" /> : <ChevronDown size={16} className="ml-1 opacity-70" />}
                     </button>
+*/}
 
                 </div>
             </div>
