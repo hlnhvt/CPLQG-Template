@@ -124,7 +124,7 @@ const HienKeNoiBatPage = () => {
                             <ChevronRight size={14} />
                             <span className="text-white/90">Vấn đề nổi bật</span>
                         </nav>
-                        
+
                         <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
                             Chúng tôi cần bạn
                         </h1>
@@ -140,8 +140,8 @@ const HienKeNoiBatPage = () => {
                                     </p>
                                     <div className="flex flex-col items-center gap-2">
                                         <div className="w-12 h-[2px] bg-amber-400/50 rounded-full mb-1" />
-                                        <span className="text-amber-200 text-[13px] font-bold uppercase tracking-widest">Tổng Bí thư, Chủ tịch nước Tô Lâm</span>
-                                        <p className="text-blue-200/70 text-[12px] italic">Trích bài viết về định hướng kỷ nguyên mới, kỷ nguyên vươn mình của dân tộc Việt Nam, tháng 10 năm 2024</p>
+                                        <span className="text-amber-200 text-[13px] font-bold uppercase tracking-widest">Nghị quyết Đại hội đại biểu toàn quốc lần thứ XIV</span>
+                                        {/* <p className="text-blue-200/70 text-[12px] italic">Trích bài viết về định hướng kỷ nguyên mới, kỷ nguyên vươn mình của dân tộc Việt Nam, tháng 10 năm 2024</p> */}
                                     </div>
                                 </div>
                             </div>

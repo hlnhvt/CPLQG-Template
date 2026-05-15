@@ -131,7 +131,7 @@ const HienKeNoiBatV2Page = () => {
     const getDisplayedArrayWithSelectedHot = (baseArr, hotCandidates, activeHotIndex) => {
         if (!baseArr || baseArr.length === 0) return baseArr;
         if (viewMode !== 'both' || !hotCandidates || hotCandidates.length === 0) return baseArr;
-        
+
         const selectedHot = hotCandidates[activeHotIndex] || hotCandidates[0] || baseArr[0];
         const remaining = baseArr.filter(item => item.id !== selectedHot.id);
         return [selectedHot, ...remaining];
@@ -190,13 +190,13 @@ const HienKeNoiBatV2Page = () => {
                         <div className="mt-8 w-full">
                             <div className="relative group text-center">
                                 <div className="relative z-10">
-                                    <p className="text-white/95 text-[15px] md:text-[18px] italic leading-relaxed font-medium mb-4">
-                                        "Đổi mới mạnh mẽ công tác lập pháp, chuyển đổi tư duy xây dựng pháp luật theo hướng vừa bảo đảm yêu cầu quản lý nhà nước, vừa khuyến khích sáng tạo, khơi thông mọi nguồn lực để phát triển."
+                                    <p className="text-white/95 text-[15px] md:text-[18px] italic font-medium mb-4 whitespace-nowrap overflow-hidden text-ellipsis">
+                                        "Thiết lập và vận hành hiệu quả hệ thống thông tin hai chiều giữa Nhà nước và người dân, thông qua các nền tảng số, các công cụ lấy ý kiến Nhân dân."
                                     </p>
                                     <div className="flex flex-col items-center gap-2">
                                         <div className="w-12 h-[2px] bg-amber-400/50 rounded-full mb-1" />
-                                        <span className="text-amber-200 text-[13px] font-bold uppercase tracking-widest">Tổng Bí thư, Chủ tịch nước Tô Lâm</span>
-                                        <p className="text-blue-200/70 text-[12px] italic">(Trích bài viết về định hướng kỷ nguyên mới, kỷ nguyên vươn mình của dân tộc Việt Nam, tháng 10 năm 2024)</p>
+                                        <span className="text-amber-200 text-[13px] font-bold uppercase tracking-widest">Nghị quyết Đại hội đại biểu toàn quốc lần thứ XIV</span>
+                                        {/* <p className="text-blue-200/70 text-[12px] italic">(Trích bài viết về định hướng kỷ nguyên mới, kỷ nguyên vươn mình của dân tộc Việt Nam, tháng 10 năm 2024)</p> */}
                                     </div>
                                 </div>
                             </div>
@@ -273,15 +273,15 @@ const HienKeNoiBatV2Page = () => {
                                     <div className="bg-gradient-to-br from-white to-purple-50/30 p-8 rounded-3xl border border-purple-100/50 shadow-inner text-center relative overflow-hidden group">
                                         <div className="absolute top-0 right-0 w-32 h-32 bg-purple-100/20 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-purple-200/30 transition-all duration-700" />
                                         <p className="text-[17px] md:text-[19px] text-gray-800 italic leading-relaxed relative z-10 mb-4 font-medium">
-                                            "Đổi mới mạnh mẽ công tác lập pháp, chuyển đổi tư duy xây dựng pháp luật theo hướng <br />vừa bảo đảm yêu cầu quản lý nhà nước, vừa khuyến khích sáng tạo, khơi thông mọi nguồn lực để phát triển."
+                                            "Thiết lập và vận hành hiệu quả hệ thống thông tin hai chiều giữa Nhà nước và người dân, thông qua các nền tảng số, các công cụ lấy ý kiến Nhân dân."
                                         </p>
                                         <div className="w-12 h-0.5 bg-purple-300 mx-auto mb-4" />
                                         <footer className="text-purple-900 font-bold text-[14px] uppercase relative z-10">
-                                            — Tổng Bí thư, Chủ tịch nước Tô Lâm —
+                                            — Nghị quyết Đại hội đại biểu toàn quốc lần thứ XIV —
                                         </footer>
-                                        <p className="text-[12px] text-purple-600/70 mt-2 italic font-medium relative z-10">
+                                        {/* <p className="text-[12px] text-purple-600/70 mt-2 italic font-medium relative z-10">
                                             (Trích bài viết về định hướng kỷ nguyên mới, kỷ nguyên vươn mình của dân tộc Việt Nam, tháng 10 năm 2024)
-                                        </p>
+                                        </p> */}
                                     </div>
                                 </div>
                             </div>
