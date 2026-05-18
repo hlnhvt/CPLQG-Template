@@ -24,8 +24,8 @@ function HomePage() {
                 <NewlyIssuedDocs />
                 <NewsHighlightsHome />
                 <PoliciesAndLife />
-                <TotalReviewSection />
                 <Multimedia />
+                <TotalReviewSection />
                 <EventsActivities />
                 <LinkedPortals />
             </div>

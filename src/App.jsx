@@ -111,6 +111,9 @@ import TongRaSoatPage from './pages/TongRaSoatPage';
 import TongRaSoatDocDetailPage from './pages/tong-ra-soat/TongRaSoatDocDetailPage';
 import TongRaSoatNewsDetailPage from './pages/tong-ra-soat/TongRaSoatNewsDetailPage';
 
+// Nghi Quyet 66
+import NghiQuyet66Page from './pages/NghiQuyet66Page';
+
 // Legal Aid imports
 import GioiThieuTGPLPage from './pages/tro-giup-phap-ly/GioiThieuTGPLPage';
 import LichSuPhatTrienTGPLPage from './pages/tro-giup-phap-ly/LichSuPhatTrienTGPLPage';
@@ -159,6 +162,7 @@ const AppLayout = () => {
                     <Route path="/gioi-thieu/chuc-nang-nhiem-vu" element={<ChucNangNhiemVuPage />} />
                     <Route path="/tam-nhin" element={<VisionPage />} />
                     <Route path="/gioi-thieu/thu-ngo" element={<ThuNgoPage />} />
+                    <Route path="/nghi-quyet-66" element={<NghiQuyet66Page />} />
                     <Route path="/huong-dan-su-dung" element={<UserManualDocListPage />} />
                     <Route path="/huong-dan-su-dung/bai-viet/:id" element={<UserManualArticlePage />} />
                     <Route path="/tin-tuc/noi-bat" element={<NewsHighlightsPage />} />

@@ -254,7 +254,7 @@ const Header = () => {
                                 </div>
                             </li>
                             <li className="h-full">
-                                <Link to="/" className="h-full flex items-center px-2.5 xl:px-[11px] hover:bg-white/10 transition-colors border-b-2 border-transparent">
+                                <Link to="/nghi-quyet-66?tab=ban-chi-dao" className="h-full flex items-center px-2.5 xl:px-[11px] hover:bg-white/10 transition-colors border-b-2 border-transparent">
                                     Nghị quyết 66 - Văn kiện
                                 </Link>
                             </li>
