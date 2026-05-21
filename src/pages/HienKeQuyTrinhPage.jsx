@@ -339,7 +339,7 @@ export default function HienKeQuyTrinhPage() {
                         Quá trình tiếp nhận, xử lý
                     </h1>
                     <p className="text-blue-100/90 text-[15px] leading-relaxed">
-                        Thông tin minh bạch, cập nhật kịp thời toàn bộ quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các sáng kiến, hiến kế đóng góp từ người dân và doanh nghiệp.
+                        Cập nhật kịp thời toàn bộ quy trình tiếp nhận, phân loại, nghiên cứu và xử lý các ý kiến, sáng kiến đóng góp từ người dân và doanh nghiệp.
                     </p>
 
                 </div>

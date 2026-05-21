@@ -261,7 +261,7 @@ export default function HienKeFeedbackPage() {
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-xl">4</div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Quá trình tiếp nhận, xử lý</h4>
-                                            <p className="text-[14.5px] text-gray-600 text-justify">Thông tin minh bạch, cập nhật kịp thời toàn bộ quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các sáng kiến, hiến kế đóng góp từ người dân và doanh nghiệp.</p>
+                                            <p className="text-[14.5px] text-gray-600 text-justify">Cập nhật kịp thời toàn bộ quy trình tiếp nhận, phân loại, nghiên cứu và xử lý các ý kiến, sáng kiến đóng góp từ người dân và doanh nghiệp.</p>
                                         </div>
                                     </div>
                                 </div>
