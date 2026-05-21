@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import {
     ChevronRight, ArrowLeft, ArrowUp, Calendar, Users, Building2,
     FileText, Download, Paperclip, Send, MessageSquare, Clock,
     CheckCircle2, ExternalLink, Eye, File, FileCode2, Upload, X,
     User, Mail, Phone, TrendingUp, Scale, Heart, Landmark, ChevronUp,
-    Video, Mic2
+    Video, Mic2, ThumbsUp, ThumbsDown, Share2, BookOpen, AlertCircle,
+    Bookmark, Flame
 } from 'lucide-react';
 
 // ======================== MOCK DATA ========================

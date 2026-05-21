@@ -264,7 +264,7 @@ export default function SimpleFeedbackPage() {
                         <div>
                             <h3 className="text-[18px] font-bold text-gray-900 border-b border-gray-100 pb-3 mb-5 flex items-center gap-2">
                                 <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-[13px] font-black">1</span>
-                                Nội dung ý kiến
+                                Nội dung hiến kế
                             </h3>
 
                             {!user && (
