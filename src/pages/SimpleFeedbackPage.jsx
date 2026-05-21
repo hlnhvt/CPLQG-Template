@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Send, Paperclip, ShieldCheck, CheckCircle2, User, Lock, X, Search, ChevronDown, Info, ChevronUp, Zap } from 'lucide-react';
+import { ArrowLeft, Send, Paperclip, ShieldCheck, CheckCircle2, User, Lock, X, Search, ChevronDown, Info, ChevronUp, Zap, ChevronRight } from 'lucide-react';
 import { LIFE_CATEGORIES } from './HienKeShared';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -126,9 +126,23 @@ export default function SimpleFeedbackPage() {
             <div className="bg-[#1e3a8a] pt-12 pb-24 relative">
                 <div className="absolute inset-0 bg-cover bg-center opacity-10" style={{ backgroundImage: "url('/images/dong_son_cover.png')" }} />
                 <div className="container mx-auto px-4 md:px-8 max-w-[1000px] relative z-10">
-                    <Link to="/hien-ke" className="inline-flex items-center gap-2 text-blue-200 hover:text-white mb-6 font-medium text-[14px] transition-colors">
-                        <ArrowLeft size={16} /> Quay lại trang chủ Hiến kế
-                    </Link>
+                    <div className="mb-8">
+                        <nav className="flex items-center gap-1.5 text-blue-300/80 text-[13px]">
+                            <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
+                            <ChevronRight size={14} />
+                            <Link to="/hien-ke" className="hover:text-white transition-colors">Hiến kế xây dựng và thi hành pháp luật</Link>
+                            <ChevronRight size={14} />
+                            {domainQuery ? (
+                                <>
+                                    <Link to={`/hien-ke/linh-vuc/danh-sach?domain=${encodeURIComponent(domainQuery)}`} className="hover:text-white transition-colors truncate max-w-[200px] md:max-w-none">
+                                        {domainQuery}
+                                    </Link>
+                                    <ChevronRight size={14} />
+                                </>
+                            ) : null}
+                            <span className="text-white/90">Gửi hiến kế</span>
+                        </nav>
+                    </div>
                     <h1 className="text-[32px] md:text-[40px] font-bold text-white mb-3 leading-tight">Gửi hiến kế</h1>
                     <p className="text-blue-100 text-[16px] leading-relaxed max-w-[1000px]">
                         Chia sẻ ý kiến, sáng kiến của người dân, doanh nghiệp góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật trên toàn diện các lĩnh vực nhằm thúc đẩy phát triển kinh tế - xã hội, hội nhập quốc tế của đất nước.
