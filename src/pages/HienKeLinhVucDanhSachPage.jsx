@@ -147,9 +147,9 @@ export default function HienKeLinhVucDanhSachPage() {
                     <nav className="flex items-center gap-1.5 text-blue-300/80 text-[13px] mb-6">
                         <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
                         <ChevronRight size={14} />
-                        <Link to="/hien-ke" className="hover:text-white transition-colors">Hiến kế</Link>
+                        <Link to="/hien-ke" className="hover:text-white transition-colors">Hiến kế xây dựng và thi hành pháp luật</Link>
                         <ChevronRight size={14} />
-                        <Link to="/hien-ke/linh-vuc" className="hover:text-white transition-colors">Lĩnh vực</Link>
+                        <Link to="/hien-ke/linh-vuc" className="hover:text-white transition-colors">Có thể bạn quan tâm</Link>
                         <ChevronRight size={14} />
                         <span className="text-white/90 truncate max-w-[200px]">{domain}</span>
                     </nav>

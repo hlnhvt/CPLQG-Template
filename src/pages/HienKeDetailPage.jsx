@@ -187,6 +187,8 @@ const HienKeDetailPage = () => {
                         <ChevronRight size={14} />
                         <Link to="/hien-ke" className="hover:text-white transition-colors">Hiến kế xây dựng và thi hành pháp luật</Link>
                         <ChevronRight size={14} />
+                        <Link to="/hien-ke/noi-bat-v2" className="hover:text-white transition-colors">Chúng tôi cần bạn</Link>
+                        <ChevronRight size={14} />
                         <span className="text-white/90 font-medium line-clamp-1 max-w-[300px]">{data.title}</span>
                     </nav>
 

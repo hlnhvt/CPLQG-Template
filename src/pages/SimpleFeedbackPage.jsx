@@ -134,6 +134,8 @@ export default function SimpleFeedbackPage() {
                             <ChevronRight size={14} />
                             {domainQuery ? (
                                 <>
+                                    <Link to="/hien-ke/linh-vuc" className="hover:text-white transition-colors">Có thể bạn quan tâm</Link>
+                                    <ChevronRight size={14} />
                                     <Link to={`/hien-ke/linh-vuc/danh-sach?domain=${encodeURIComponent(domainQuery)}`} className="hover:text-white transition-colors truncate max-w-[200px] md:max-w-none">
                                         {domainQuery}
                                     </Link>
