@@ -199,9 +199,9 @@ export default function HienKeFeedbackPage() {
                                             Mục tiêu cốt lõi
                                         </h3>
                                         <ul className="list-none pl-0 space-y-2">
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Góp phần cụ thể hóa nội dung Nghị quyết số 66-NQ/TW ngày 30/4/2025 của Bộ Chính trị về đổi mới công tác xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Lấy người dân, doanh nghiệp làm trung tâm, chủ thể trong xây dựng, hoàn thiện hệ thống pháp luật. Thúc đẩy văn hóa, trách nhiệm xã hội của doanh nghiệp, người dân trong xây dựng, hoàn thiện hệ thống pháp luật và tổ chức thi hành hiệu quả pháp luật góp phần phát triển kinh tế - xã hội của đất nước.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Đóng vai trò là kênh thông tin quan trọng để lắng nghe, tiếp nhận, tổng hợp các ý kiến, sáng kiến trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và nâng cao hiệu quả thi hành pháp luật.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full text-justify">Góp phần cụ thể hóa nội dung Nghị quyết số 66-NQ/TW ngày 30/4/2025 của Bộ Chính trị về đổi mới công tác xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full text-justify">Lấy người dân, doanh nghiệp làm trung tâm, chủ thể trong xây dựng, hoàn thiện hệ thống pháp luật. Thúc đẩy văn hóa, trách nhiệm xã hội của doanh nghiệp, người dân trong xây dựng, hoàn thiện hệ thống pháp luật và tổ chức thi hành hiệu quả pháp luật góp phần phát triển kinh tế - xã hội của đất nước.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full text-justify">Đóng vai trò là kênh thông tin quan trọng để lắng nghe, tiếp nhận, tổng hợp các ý kiến, sáng kiến trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và nâng cao hiệu quả thi hành pháp luật.</li>
                                         </ul>
                                     </div>
 
@@ -210,9 +210,9 @@ export default function HienKeFeedbackPage() {
                                             Cách thức hoạt động
                                         </h3>
                                         <ul className="list-none pl-0 space-y-2">
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Ghi nhận ý kiến:</strong> Qua biểu mẫu trực tuyến, diễn đàn, email.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Xử lý kịp thời:</strong> Các ý kiến, sáng kiến sẽ được tiếp nhận, phân loại, phản hồi và được chuyển đến cơ quan chuyên môn nghiên cứu, đánh giá, xử lý.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Tài trợ hiến kế:</strong> Những ý kiến, sáng kiến đề xuất pháp luật có thể được xem xét hỗ trợ, tài trợ bởi Quỹ Hỗ trợ hoạt động xây dựng chính sách, pháp luật.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full text-justify"><strong>Ghi nhận ý kiến:</strong> Qua biểu mẫu trực tuyến, diễn đàn, email.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full text-justify"><strong>Xử lý kịp thời:</strong> Các ý kiến, sáng kiến sẽ được tiếp nhận, phân loại, phản hồi và được chuyển đến cơ quan chuyên môn nghiên cứu, đánh giá, xử lý.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full text-justify"><strong>Tài trợ hiến kế:</strong> Những ý kiến, sáng kiến đề xuất pháp luật có thể được xem xét hỗ trợ, tài trợ bởi Quỹ Hỗ trợ hoạt động xây dựng chính sách, pháp luật.</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -222,13 +222,13 @@ export default function HienKeFeedbackPage() {
                                         Yêu cầu:
                                     </h3>
                                     <ul className="list-none pl-0 space-y-2">
-                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
+                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full text-justify">
                                             Nội dung các ý kiến, sáng kiến của người dân, doanh nghiệp phải đảm bảo tính xác thực, dựa trên dữ liệu khách quan và xuất phát từ cơ sở thực tiễn.
                                         </li>
-                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
-                                            Cơ quan quản lý nhà nước căn cứ chức năng, nhiệm vụ, thẩm quyền có trách nhiệm tiếp nhận, phân loại, nghiên cứu, xử lý đối với những ý kiến, sáng kiến của người dân và doanh nghiệp theo quy định.
+                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full text-justify">
+                                            Cơ quan quản lý nhà nước căn cứ theo chức năng, nhiệm vụ, thẩm quyền được giao có trách nhiệm tiếp nhận, phân loại, nghiên cứu, xử lý đối với những ý kiến, sáng kiến của người dân và doanh nghiệp theo quy định.
                                         </li>
-                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
+                                        <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full text-justify">
                                             Quy trình tiếp nhận, phân loại, nghiên cứu, xử lý các ý kiến, sáng kiến được thông tin, cập nhật để mọi người dân, doanh nghiệp theo dõi.
                                         </li>
                                     </ul>
