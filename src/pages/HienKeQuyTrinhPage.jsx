@@ -121,7 +121,7 @@ const SECTIONS = {
     'co-the-ban-quan-tam': {
         key: 'co-the-ban-quan-tam',
         title: 'Có thể bạn quan tâm',
-        desc: 'Thống kê chi tiết các sáng kiến, ý kiến đóng góp theo từng lĩnh vực chuyên môn.',
+        desc: 'Thống kê chi tiết các ý kiến, sáng kiến đóng góp theo từng lĩnh vực chuyên môn.',
         icon: Scale,
         colorText: 'text-purple-600',
         bgLight: 'bg-purple-100',
@@ -339,7 +339,7 @@ export default function HienKeQuyTrinhPage() {
                         Quá trình tiếp nhận, xử lý
                     </h1>
                     <p className="text-blue-100/90 text-[15px] leading-relaxed">
-                        Thông tin minh bạch, cập nhật kịp thời toàn bộ quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các ý kiến đóng góp từ người dân và doanh nghiệp.
+                        Thông tin minh bạch, cập nhật kịp thời toàn bộ quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các sáng kiến, hiến kế đóng góp từ người dân và doanh nghiệp.
                     </p>
 
                 </div>
@@ -419,7 +419,7 @@ export default function HienKeQuyTrinhPage() {
                                 {
                                     to: '/hien-ke/quy-trinh?view=co-the-ban-quan-tam',
                                     title: 'Có thể bạn quan tâm',
-                                    desc: 'Sáng kiến, ý kiến của bạn trên từng lĩnh vực cụ thể.',
+                                    desc: 'Ý kiến, sáng kiến của bạn trên từng lĩnh vực cụ thể.',
                                     icon: Scale,
                                     colorText: 'text-purple-600',
                                     bgLight: 'bg-purple-50',

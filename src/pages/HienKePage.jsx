@@ -123,8 +123,8 @@ export default function HienKePage() {
                             <div className="flex flex-col gap-3 md:gap-4">
                                 {[
                                     { id: '/hien-ke/gop-y-nhanh?topic=doi-song', label: 'Hiến kế của bạn', desc: 'Ý kiến, sáng kiến của bạn góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật.', icon: Heart, color: 'text-green-600', hue: 'bg-green-500', glow: 'border-green-400/80 ring-green-400/20' },
-                                    { id: '/hien-ke/noi-bat-v2', label: 'Chúng tôi cần bạn', desc: 'Nội dung, chủ đề cần sáng kiến, ý kiến đóng góp của bạn.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500', glow: 'border-blue-400/80 ring-blue-400/20' },
-                                    { id: '/hien-ke/linh-vuc', label: 'Có thể bạn quan tâm', desc: 'Sáng kiến, ý kiến của bạn trên từng lĩnh vực cụ thể.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500', glow: 'border-purple-400/80 ring-purple-400/20' },
+                                    { id: '/hien-ke/noi-bat-v2', label: 'Chúng tôi cần bạn', desc: 'Nội dung, chủ đề cần ý kiến, sáng kiến đóng góp của bạn.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500', glow: 'border-blue-400/80 ring-blue-400/20' },
+                                    { id: '/hien-ke/linh-vuc', label: 'Có thể bạn quan tâm', desc: 'Ý kiến, sáng kiến của bạn trên từng lĩnh vực cụ thể.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500', glow: 'border-purple-400/80 ring-purple-400/20' },
                                     { id: '/hien-ke/quy-trinh', label: 'Quá trình tiếp nhận, xử lý', desc: 'Quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các ý kiến đóng góp của bạn.', icon: Send, color: 'text-amber-600', hue: 'bg-amber-500', glow: 'border-amber-400/80 ring-amber-400/20' },
                                 ].map((item, index) => {
                                     const isActive = activeIndex === index;
@@ -134,8 +134,8 @@ export default function HienKePage() {
                                             to={item.id}
                                             onMouseEnter={() => setActiveIndex(index)}
                                             className={`relative overflow-hidden flex items-center gap-4 p-4 xl:px-5 backdrop-blur-md rounded-2xl md:rounded-3xl transition-all duration-500 group min-h-[115px] xl:min-h-[120px] h-auto ${isActive
-                                                    ? `bg-white/20 border-2 ${item.glow} -translate-y-1.5 shadow-[0_20px_40px_rgba(0,0,0,0.5)] ring-4`
-                                                    : 'bg-[#0f172a]/60 border border-white/10 hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)]'
+                                                ? `bg-white/20 border-2 ${item.glow} -translate-y-1.5 shadow-[0_20px_40px_rgba(0,0,0,0.5)] ring-4`
+                                                : 'bg-[#0f172a]/60 border border-white/10 hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)]'
                                                 }`}
                                         >
                                             <div className={`absolute left-0 top-0 bottom-0 ${isActive ? 'w-2.5 opacity-100' : 'w-1.5 opacity-80'} ${item.hue} transition-all duration-500`} />
