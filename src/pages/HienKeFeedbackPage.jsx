@@ -223,10 +223,10 @@ export default function HienKeFeedbackPage() {
                                     </h3>
                                     <ul className="list-none pl-0 space-y-2">
                                         <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
-                                            Nội dung các ý kiến, hiến kế của người dân, doanh nghiệp phải đảm bảo tính xác thực, dựa trên dữ liệu khách quan và xuất phát từ cơ sở thực tiễn rõ ràng.
+                                            Nội dung các ý kiến, sáng kiến của người dân, doanh nghiệp phải đảm bảo tính xác thực, dựa trên dữ liệu khách quan và xuất phát từ cơ sở thực tiễn.
                                         </li>
                                         <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
-                                            Cơ quan quản lý nhà nước căn cứ chức năng, nhiệm vụ, thẩm quyền có trách nhiệm nghiên cứu, xử lý đối với những ý kiến hiến kế của người dân và doanh nghiệp theo quy định.
+                                            Cơ quan quản lý nhà nước căn cứ chức năng, nhiệm vụ, thẩm quyền có trách nhiệm tiếp nhận, phân loại, nghiên cứu, xử lý đối với những ý kiến, sáng kiến của người dân và doanh nghiệp theo quy định.
                                         </li>
                                         <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
                                             Quy trình tiếp nhận, phân loại, nghiên cứu, xử lý các ý kiến, sáng kiến được thông tin, cập nhật để mọi người dân, doanh nghiệp theo dõi.
