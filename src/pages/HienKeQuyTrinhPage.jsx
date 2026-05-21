@@ -126,7 +126,7 @@ const SECTIONS = {
         colorText: 'text-purple-600',
         bgLight: 'bg-purple-100',
         stats: [
-            { label: 'Tổng lĩnh vực', value: '18', icon: FileText, color: 'bg-blue-100 text-blue-600' },
+            { label: 'Tổng số hiến kế', value: '18', icon: FileText, color: 'bg-blue-100 text-blue-600' },
             { label: 'Đã tiếp nhận', value: '956', icon: Inbox, color: 'bg-purple-100 text-purple-600' },
             { label: 'Đang xử lý', value: '178', icon: Clock, color: 'bg-amber-100 text-amber-600' },
             { label: 'Đã xử lý', value: '778', icon: CheckCircle, color: 'bg-green-100 text-green-600' },

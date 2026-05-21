@@ -199,10 +199,10 @@ export default function ConsultFeedbackPage() {
                             <h1 className="text-[14px] md:text-[16px] font-bold text-gray-900 leading-tight line-clamp-1 max-w-[400px] md:max-w-[600px]">{data.title}</h1>
                         </div>
                     </div>
-                    <div className="hidden sm:flex items-center gap-3">
+                    {/* <div className="hidden sm:flex items-center gap-3">
                         <span className="text-[12px] text-gray-500 font-medium">Bản nháp tự động lưu</span>
                         <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                    </div>
+                    </div> */}
                 </div>
             </header>
 
