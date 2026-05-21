@@ -160,7 +160,7 @@ export default function HienKeLinhVucDanhSachPage() {
                                 <ArrowLeft size={16} /> Quay lại danh sách lĩnh vực
                             </Link> */}
                             <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">
-                                Hiến kế lĩnh vực <span className="text-amber-400">{domain}</span>
+                                Lĩnh vực <span className="text-amber-400">{domain}</span>
                             </h1>
                             <p className="text-blue-100/90 text-[15px] max-w-2xl leading-relaxed">
                                 Tổng hợp các ý kiến đóng góp, sáng kiến của người dân và doanh nghiệp nhằm hoàn thiện chính sách, pháp luật trong lĩnh vực {domain}.
