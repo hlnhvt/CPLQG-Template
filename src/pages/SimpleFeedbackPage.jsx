@@ -242,6 +242,15 @@ export default function SimpleFeedbackPage() {
                                 Nội dung ý kiến
                             </h3>
 
+                            {!user && (
+                                <div className="bg-blue-50 border border-blue-200 text-blue-800 text-[13px] p-4 rounded-xl mb-5 flex items-start gap-3 animate-fadeIn">
+                                    <Info size={20} className="text-blue-600 shrink-0 mt-0.5" />
+                                    <div className="leading-relaxed">
+                                        Bạn chưa đăng nhập hệ thống. Để đảm bảo tính xác thực và nhận phản hồi trực tiếp về kết quả xử lý ý kiến đóng góp, vui lòng <Link to="/login" className="font-bold underline hover:text-blue-900">Đăng nhập</Link> trước khi thực hiện hiến kế.
+                                    </div>
+                                </div>
+                            )}
+
                             <div className="space-y-5">
                                 <div>
                                     <label className="block text-[14px] font-bold text-gray-800 mb-2">Tiêu đề hiến kế <span className="text-red-500">*</span></label>
