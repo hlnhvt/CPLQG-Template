@@ -125,7 +125,7 @@ export default function HienKePage() {
                                     { id: '/hien-ke/gop-y-nhanh?topic=doi-song', label: 'Hiến kế của bạn', desc: 'Ý kiến, sáng kiến của bạn góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật.', icon: Heart, color: 'text-green-600', hue: 'bg-green-500', glow: 'border-green-400/80 ring-green-400/20' },
                                     { id: '/hien-ke/noi-bat-v2', label: 'Chúng tôi cần bạn', desc: 'Nội dung, chủ đề cần ý kiến, sáng kiến đóng góp của bạn.', icon: TrendingUp, color: 'text-blue-600', hue: 'bg-blue-500', glow: 'border-blue-400/80 ring-blue-400/20' },
                                     { id: '/hien-ke/linh-vuc', label: 'Có thể bạn quan tâm', desc: 'Ý kiến, sáng kiến của bạn trên từng lĩnh vực cụ thể.', icon: Scale, color: 'text-purple-600', hue: 'bg-purple-500', glow: 'border-purple-400/80 ring-purple-400/20' },
-                                    { id: '/hien-ke/quy-trinh', label: 'Quá trình tiếp nhận, xử lý', desc: 'Quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các ý kiến đóng góp của bạn.', icon: Send, color: 'text-amber-600', hue: 'bg-amber-500', glow: 'border-amber-400/80 ring-amber-400/20' },
+                                    { id: '/hien-ke/quy-trinh', label: 'Quá trình tiếp nhận, xử lý', desc: 'Quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các ý kiến, sáng kiến đóng góp của bạn.', icon: Send, color: 'text-amber-600', hue: 'bg-amber-500', glow: 'border-amber-400/80 ring-amber-400/20' },
                                 ].map((item, index) => {
                                     const isActive = activeIndex === index;
                                     return (
