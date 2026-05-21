@@ -212,7 +212,7 @@ export default function HienKeFeedbackPage() {
                                         <ul className="list-none pl-0 space-y-2">
                                             <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Ghi nhận ý kiến:</strong> Qua biểu mẫu trực tuyến, diễn đàn, email.</li>
                                             <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Xử lý kịp thời:</strong> Các ý kiến, sáng kiến sẽ được tiếp nhận, phân loại, phản hồi và được chuyển đến cơ quan chuyên môn nghiên cứu, đánh giá, xử lý.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Tài trợ hiến kế:</strong> Những sáng kiến đề xuất pháp luật có thể được xem xét hỗ trợ, tài trợ bởi Quỹ Hỗ trợ hoạt động xây dựng chính sách, pháp luật.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-amber-500 before:rounded-full"><strong>Tài trợ hiến kế:</strong> Những ý kiến, sáng kiến đề xuất pháp luật có thể được xem xét hỗ trợ, tài trợ bởi Quỹ Hỗ trợ hoạt động xây dựng chính sách, pháp luật.</li>
                                         </ul>
                                     </div>
                                 </div>
