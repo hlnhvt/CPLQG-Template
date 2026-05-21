@@ -55,7 +55,7 @@ const HienKeLinhVucPage = () => {
                         <div className="relative group text-center">
                             <div className="relative z-10">
                                 <p className="text-white/95 text-[15px] md:text-[18px] italic leading-relaxed font-medium mb-4">
-                                    "Phát huy mạnh mẽ vai trò chủ thể của Nhân dân, dân chủ xã hội chủ nghĩa, sức mạnh của Nhân dân và khối đại đoàn kết toàn dân tộc."
+                                    "Nhân dân là chủ thể, là trung tâm của công cuộc đổi mới, xây dựng, phát triển đất nước và bảo vệ Tổ quốc."
                                 </p>
                                 <div className="flex flex-col items-center gap-2">
                                     <div className="w-12 h-[2px] bg-amber-400/50 rounded-full mb-1" />

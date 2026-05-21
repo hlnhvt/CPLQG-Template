@@ -176,7 +176,7 @@ const HienKeNoiBatV2Page = () => {
                             <ChevronRight size={14} />
                             <Link to="/hien-ke" className="hover:text-white transition-colors">Hiến kế xây dựng và thi hành pháp luật</Link>
                             <ChevronRight size={14} />
-                            <span className="text-white/90">Vấn đề nổi bật</span>
+                            <span className="text-white/90">Chúng tôi cần bạn</span>
                         </nav>
 
                         <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
@@ -191,7 +191,7 @@ const HienKeNoiBatV2Page = () => {
                             <div className="relative group text-center">
                                 <div className="relative z-10">
                                     <p className="text-white/95 text-[15px] md:text-[18px] italic font-medium mb-4 whitespace-nowrap overflow-hidden text-ellipsis">
-                                        "Nhân dân là chủ thể, là trung tâm của công cuộc đổi mới, xây dựng, phát triển đất nước và bảo vệ Tổ quốc."
+                                        "Phát huy mạnh mẽ vai trò chủ thể của Nhân dân, dân chủ xã hội chủ nghĩa, sức mạnh của Nhân dân và khối đại đoàn kết toàn dân tộc."
                                     </p>
                                     <div className="flex flex-col items-center gap-2">
                                         <div className="w-12 h-[2px] bg-amber-400/50 rounded-full mb-1" />
@@ -275,7 +275,7 @@ const HienKeNoiBatV2Page = () => {
                                     <div className="bg-gradient-to-br from-white to-purple-50/30 p-8 rounded-3xl border border-purple-100/50 shadow-inner text-center relative overflow-hidden group">
                                         <div className="absolute top-0 right-0 w-32 h-32 bg-purple-100/20 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-purple-200/30 transition-all duration-700" />
                                         <p className="text-[17px] md:text-[19px] text-gray-800 italic leading-relaxed relative z-10 mb-4 font-medium">
-                                            "Nhân dân là chủ thể, là trung tâm của công cuộc đổi mới, xây dựng, phát triển đất nước và bảo vệ Tổ quốc."
+                                            "Phát huy mạnh mẽ vai trò chủ thể của Nhân dân, dân chủ xã hội chủ nghĩa, sức mạnh của Nhân dân và khối đại đoàn kết toàn dân tộc."
                                         </p>
                                         <div className="w-12 h-0.5 bg-purple-300 mx-auto mb-4" />
                                         <footer className="text-purple-900 font-bold text-[14px] uppercase relative z-10">
