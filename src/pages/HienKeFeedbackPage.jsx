@@ -168,7 +168,7 @@ export default function HienKeFeedbackPage() {
                         <Section id="gioi-thieu" title="Giới thiệu">
                             <div className="prose prose-blue max-w-none text-gray-600 text-[16px] leading-relaxed">
                                 <p className="text-[18px] font-medium mb-6">
-                                    Trang Thông tin điện tử này được thiết lập nhằm huy động trí tuệ của người dân, doanh nghiệp và toàn thể xã hội; tạo kênh đối thoại đa chiều, tiếp thu các ý kiến góp phần xây dựng, hoàn thiện chính sách, pháp luật và nâng cao hiệu quả thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới.
+                                    Trang Thông tin điện tử Hiến kế được thiết lập nhằm huy động trí tuệ của người dân, doanh nghiệp và toàn thể xã hội; tạo kênh đối thoại đa chiều, tiếp thu các ý kiến, sáng kiến góp phần xây dựng, hoàn thiện chính sách, pháp luật và nâng cao hiệu quả thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới.
                                 </p>
 
                                 {/* Blockquotes Section */}
