@@ -144,7 +144,7 @@ export default function HienKePage() {
                                             </div>
                                             <div className="flex-1 min-w-0">
                                                 <h3 className={`font-bold text-[16px] xl:text-[18px] mb-0.5 transition-colors duration-500 truncate ${isActive ? 'text-amber-300' : 'text-white'}`}>{item.label}</h3>
-                                                <p className="text-blue-100/70 text-[13px] leading-relaxed pr-1">{item.desc}</p>
+                                                <p className="text-blue-100/70 text-[13px] leading-relaxed pr-1 w-full">{item.desc}</p>
                                             </div>
                                         </Link>
                                     );
