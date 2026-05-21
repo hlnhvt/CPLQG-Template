@@ -247,7 +247,7 @@ export default function HienKeFeedbackPage() {
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xl">2</div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Chúng tôi cần bạn</h4>
-                                            <p className="text-[14.5px] text-gray-600 text-justify">Các nội dung, chủ đề cơ quan quản lý nhà nước cần sự hiến kế, tham gia ý kiến của người dân, doanh nghiệp trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và thi hành hiệu quả pháp luật.</p>
+                                            <p className="text-[14.5px] text-gray-600 text-justify">Các nội dung, chủ đề cơ quan quản lý nhà nước cần sự hiến kế, tham gia ý kiến của người dân, doanh nghiệp trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và tổ chức thi hành pháp luật.</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-4 p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
