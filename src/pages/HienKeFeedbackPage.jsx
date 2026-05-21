@@ -201,7 +201,7 @@ export default function HienKeFeedbackPage() {
                                         <ul className="list-none pl-0 space-y-2">
                                             <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Góp phần cụ thể hóa nội dung Nghị quyết số 66-NQ/TW ngày 30/4/2025 của Bộ Chính trị về đổi mới công tác xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới.</li>
                                             <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Lấy người dân, doanh nghiệp làm trung tâm, chủ thể trong xây dựng, hoàn thiện hệ thống pháp luật. Thúc đẩy văn hóa, trách nhiệm xã hội của doanh nghiệp, người dân trong xây dựng, hoàn thiện hệ thống pháp luật và tổ chức thi hành hiệu quả pháp luật góp phần phát triển kinh tế - xã hội của đất nước.</li>
-                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Việc tiếp thu, ghi nhận và xử lý các hiến kế sẽ là cơ sở hình thành hệ sinh thái dữ liệu pháp luật. Hệ sinh thái này đóng sẽ vai trò là kênh thông tin quan trọng để lắng nghe, tiếp nhận, tổng hợp các ý kiến góp ý trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và nâng cao hiệu quả thi hành pháp luật.</li>
+                                            <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-blue-500 before:rounded-full">Đóng vai trò là kênh thông tin quan trọng để lắng nghe, tiếp nhận, tổng hợp các ý kiến góp ý trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và nâng cao hiệu quả thi hành pháp luật.</li>
                                         </ul>
                                     </div>
 
@@ -223,7 +223,7 @@ export default function HienKeFeedbackPage() {
                                     </h3>
                                     <ul className="list-none pl-0 space-y-2">
                                         <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
-                                            Nội dung của các ý kiến, hiến kế của người dân, doanh nghiệp phải đảm bảo tính xác thực, dựa trên dữ liệu khách quan và xuất phát từ cơ sở thực tiễn rõ ràng.
+                                            Nội dung các ý kiến, hiến kế của người dân, doanh nghiệp phải đảm bảo tính xác thực, dựa trên dữ liệu khách quan và xuất phát từ cơ sở thực tiễn rõ ràng.
                                         </li>
                                         <li className="relative pl-5 before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:bg-emerald-500 before:rounded-full">
                                             Cơ quan quản lý nhà nước căn cứ chức năng, nhiệm vụ, thẩm quyền có trách nhiệm nghiên cứu, xử lý đối với những ý kiến hiến kế của người dân và doanh nghiệp theo quy định.
@@ -234,7 +234,7 @@ export default function HienKeFeedbackPage() {
                                     </ul>
                                 </div>
 
-                                <h3 className="text-[18px] font-bold text-[#0f172a] mb-4">Nội dung</h3>
+                                <h3 className="text-[18px] font-bold text-[#0f172a] mb-4">Nội dung:</h3>
                                 <div className="space-y-4">
                                     <div className="flex gap-4 p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-green-100 flex items-center justify-center text-green-600 font-bold text-xl">1</div>
@@ -261,7 +261,7 @@ export default function HienKeFeedbackPage() {
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-xl">4</div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Quá trình tiếp nhận, xử lý</h4>
-                                            <p className="text-[14.5px] text-gray-600">Thông tin minh bạch, cập nhật kịp thời toàn bộ quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các ý kiến đóng góp, hiến kế từ người dân và doanh nghiệp.</p>
+                                            <p className="text-[14.5px] text-gray-600">Thông tin minh bạch, cập nhật kịp thời toàn bộ quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các ý kiến đóng góp từ người dân và doanh nghiệp.</p>
                                         </div>
                                     </div>
                                 </div>

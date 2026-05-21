@@ -133,7 +133,7 @@ export default function HienKePage() {
                                             key={item.id}
                                             to={item.id}
                                             onMouseEnter={() => setActiveIndex(index)}
-                                            className={`relative overflow-hidden flex items-center gap-4 p-4 xl:px-5 backdrop-blur-md rounded-2xl md:rounded-3xl transition-all duration-500 group h-[115px] xl:h-[120px] ${isActive
+                                            className={`relative overflow-hidden flex items-center gap-4 p-4 xl:px-5 backdrop-blur-md rounded-2xl md:rounded-3xl transition-all duration-500 group min-h-[115px] xl:min-h-[120px] h-auto ${isActive
                                                     ? `bg-white/20 border-2 ${item.glow} -translate-y-1.5 shadow-[0_20px_40px_rgba(0,0,0,0.5)] ring-4`
                                                     : 'bg-[#0f172a]/60 border border-white/10 hover:bg-white/15 hover:border-white/30 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)]'
                                                 }`}
@@ -144,7 +144,7 @@ export default function HienKePage() {
                                             </div>
                                             <div className="flex-1 min-w-0">
                                                 <h3 className={`font-bold text-[16px] xl:text-[18px] mb-0.5 transition-colors duration-500 truncate ${isActive ? 'text-amber-300' : 'text-white'}`}>{item.label}</h3>
-                                                <p className="text-blue-100/70 text-[13px] leading-relaxed pr-1 line-clamp-2">{item.desc}</p>
+                                                <p className="text-blue-100/70 text-[13px] leading-relaxed pr-1">{item.desc}</p>
                                             </div>
                                         </Link>
                                     );

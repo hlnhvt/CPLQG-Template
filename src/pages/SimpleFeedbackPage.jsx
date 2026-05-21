@@ -135,13 +135,13 @@ export default function SimpleFeedbackPage() {
                                 <div className="flex flex-col items-center gap-2">
                                     <div className="w-12 h-[2px] bg-amber-400/50 rounded-full mb-1" />
                                     <span className="text-amber-200 text-[13px] font-bold uppercase tracking-widest">Chủ tịch Hồ Chí Minh</span>
-                                    <p className="text-blue-200/70 text-[12px] italic">Lời căn dặn của Chủ tịch Hồ Chí Minh về sức mạnh to lớn của Nhân dân</p>
+                                    {/* <p className="text-blue-200/70 text-[12px] italic">Lời căn dặn của Chủ tịch Hồ Chí Minh về sức mạnh to lớn của Nhân dân</p> */}
                                 </div>
                             </div>
                         </div>
                     </div>
 
-{/* 
+                    {/* 
                     <button
                         type="button"
                         onClick={() => setIsIntroOpen(!isIntroOpen)}
@@ -223,9 +223,9 @@ export default function SimpleFeedbackPage() {
                                     <footer className="text-purple-900 font-bold text-[14px] uppercase relative z-10">
                                         — Chủ tịch Hồ Chí Minh —
                                     </footer>
-                                    <p className="text-[12px] text-purple-600/70 mt-2 italic font-medium relative z-10">
+                                    {/* <p className="text-[12px] text-purple-600/70 mt-2 italic font-medium relative z-10">
                                         Lời căn dặn của Chủ tịch Hồ Chí Minh về sức mạnh to lớn của Nhân dân
-                                    </p>
+                                    </p> */}
                                 </div>
                             </div>
 
