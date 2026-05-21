@@ -159,7 +159,6 @@ const HienKeLinhVucPage = () => {
                     icon={Scale}
                     color="#7c3aed"
                     title="Lựa chọn lĩnh vực bạn quan tâm"
-                    subtitle="Bao gồm các lĩnh vực gợi ý để bạn dễ dàng tham gia đóng góp."
                 >
                     <div className="mb-3 p-5 bg-white rounded-xl border border-gray-200 shadow-sm">
                         <div className="flex justify-end mb-4">
