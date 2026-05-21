@@ -144,7 +144,6 @@ export default function HienKeFeedbackPage() {
                             {[
                                 { id: 'gioi-thieu', label: 'Giới thiệu' },
                                 { id: 'feedback', label: 'Gửi ý kiến phản hồi' },
-                                { id: 'address', label: 'Địa chỉ văn phòng' },
                                 { id: 'faq', label: 'Liên kết hữu ích & FAQ' },
                             ].map(item => (
                                 <button
