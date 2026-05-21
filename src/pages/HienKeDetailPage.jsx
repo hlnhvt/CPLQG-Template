@@ -445,7 +445,7 @@ const HienKeDetailPage = () => {
 
                             {/* Related consultations */}
                             <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
-                                <h3 className="text-[13px] font-bold text-gray-700 uppercase tracking-wide mb-4">Nội dung liên quan</h3>
+                                <h3 className="text-[13px] font-bold text-gray-700 uppercase tracking-wide mb-4">Chủ đề nổi bật khác</h3>
                                 <div className="space-y-3">
                                     {data.relatedConsultations.map(r => (
                                         <Link
@@ -474,9 +474,8 @@ const HienKeDetailPage = () => {
 
 
                             {/* Other pages in category */}
-                            <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
-                                <h3 className="text-[13px] font-bold text-gray-700 uppercase tracking-wide mb-1">Các trang khác</h3>
-                                <p className="text-[12px] text-gray-400 mb-3">trong {data.category}</p>
+                            {/* <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
+                                <h3 className="text-[13px] font-bold text-gray-700 uppercase tracking-wide mb-1">Chủ đề nổi bật khác</h3>
                                 <div className="space-y-2">
                                     {OTHER_PAGES.map(p => (
                                         <Link
@@ -489,9 +488,9 @@ const HienKeDetailPage = () => {
                                     ))}
                                 </div>
                                 <Link to="/hien-ke" className="mt-3 block text-[13px] font-semibold text-[#1e3a8a] hover:underline">
-                                    Xem tất cả trang →
+                                    Xem tất cả chủ đề →
                                 </Link>
-                            </div>
+                            </div> */}
 
                             {/* Back to top */}
                             <button

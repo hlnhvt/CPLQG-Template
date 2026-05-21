@@ -419,7 +419,7 @@ export default function HienKeQuyTrinhPage() {
                                 {
                                     to: '/hien-ke/quy-trinh?view=co-the-ban-quan-tam',
                                     title: 'Có thể bạn quan tâm',
-                                    desc: 'Khám phá và tham gia góp ý theo từng lĩnh vực chuyên môn sâu từ Kinh tế, Tư pháp đến Đời sống xã hội.',
+                                    desc: 'Sáng kiến, ý kiến của bạn trên từng lĩnh vực cụ thể.',
                                     icon: Scale,
                                     colorText: 'text-purple-600',
                                     bgLight: 'bg-purple-50',
