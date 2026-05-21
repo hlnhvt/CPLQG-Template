@@ -167,7 +167,7 @@ export default function HienKeFeedbackPage() {
                         {/* Section: Introduction */}
                         <Section id="gioi-thieu" title="Giới thiệu">
                             <div className="prose prose-blue max-w-none text-gray-600 text-[16px] leading-relaxed">
-                                <p className="text-[18px] font-medium mb-6">
+                                <p className="text-[18px] font-medium mb-6 text-justify">
                                     Trang Thông tin điện tử Hiến kế được thiết lập nhằm huy động trí tuệ của người dân, doanh nghiệp và toàn thể xã hội; tạo kênh đối thoại đa chiều, tiếp thu các ý kiến, sáng kiến góp phần xây dựng, hoàn thiện chính sách, pháp luật và nâng cao hiệu quả thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới.
                                 </p>
 
@@ -240,28 +240,28 @@ export default function HienKeFeedbackPage() {
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-green-100 flex items-center justify-center text-green-600 font-bold text-xl">1</div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Hiến kế của bạn</h4>
-                                            <p className="text-[14.5px] text-gray-600">Chia sẻ ý kiến, sáng kiến của người dân, doanh nghiệp góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật trên toàn diện các lĩnh vực nhằm thúc đẩy phát triển kinh tế - xã hội, hội nhập quốc tế của đất nước.</p>
+                                            <p className="text-[14.5px] text-gray-600 text-justify">Chia sẻ ý kiến, sáng kiến của người dân, doanh nghiệp góp phần nâng cao chất lượng, hiệu quả công tác xây dựng, tổ chức thi hành pháp luật trên toàn diện các lĩnh vực nhằm thúc đẩy phát triển kinh tế - xã hội, hội nhập quốc tế của đất nước.</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-4 p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xl">2</div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Chúng tôi cần bạn</h4>
-                                            <p className="text-[14.5px] text-gray-600">Các nội dung, chủ đề cơ quan quản lý nhà nước cần sự hiến kế, tham gia ý kiến của người dân, doanh nghiệp trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và thi hành hiệu quả pháp luật.</p>
+                                            <p className="text-[14.5px] text-gray-600 text-justify">Các nội dung, chủ đề cơ quan quản lý nhà nước cần sự hiến kế, tham gia ý kiến của người dân, doanh nghiệp trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và thi hành hiệu quả pháp luật.</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-4 p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 font-bold text-xl">3</div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Có thể bạn quan tâm</h4>
-                                            <p className="text-[14.5px] text-gray-600">Gợi ý các chủ đề, nội dung để người dân, doanh nghiệp hiến kế, góp ý theo từng lĩnh vực pháp luật cụ thể.</p>
+                                            <p className="text-[14.5px] text-gray-600 text-justify">Gợi ý các chủ đề, nội dung để người dân, doanh nghiệp hiến kế, góp ý theo từng lĩnh vực pháp luật cụ thể.</p>
                                         </div>
                                     </div>
                                     <div className="flex gap-4 p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition-colors">
                                         <div className="w-12 h-12 shrink-0 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 font-bold text-xl">4</div>
                                         <div>
                                             <h4 className="font-bold text-gray-900 mb-1">Quá trình tiếp nhận, xử lý</h4>
-                                            <p className="text-[14.5px] text-gray-600">Thông tin minh bạch, cập nhật kịp thời toàn bộ quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các sáng kiến, hiến kế đóng góp từ người dân và doanh nghiệp.</p>
+                                            <p className="text-[14.5px] text-gray-600 text-justify">Thông tin minh bạch, cập nhật kịp thời toàn bộ quy trình tiếp nhận, phân loại, nghiên cứu và kết quả xử lý các sáng kiến, hiến kế đóng góp từ người dân và doanh nghiệp.</p>
                                         </div>
                                     </div>
                                 </div>
