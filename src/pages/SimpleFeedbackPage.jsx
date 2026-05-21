@@ -88,6 +88,15 @@ export default function SimpleFeedbackPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!user) {
+            const noticeEl = document.getElementById('login-required-notice');
+            if (noticeEl) {
+                noticeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            return;
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
         setIsSubmitted(true);
     };
@@ -243,7 +252,7 @@ export default function SimpleFeedbackPage() {
                             </h3>
 
                             {!user && (
-                                <div className="bg-blue-50 border border-blue-200 text-blue-800 text-[13px] p-4 rounded-xl mb-5 flex items-start gap-3 animate-fadeIn">
+                                <div id="login-required-notice" className="bg-blue-50 border border-blue-200 text-blue-800 text-[13px] p-4 rounded-xl mb-5 flex items-start gap-3 animate-fadeIn scroll-mt-28">
                                     <Info size={20} className="text-blue-600 shrink-0 mt-0.5" />
                                     <div className="leading-relaxed">
                                         Bạn chưa đăng nhập hệ thống. Để đảm bảo tính xác thực và nhận phản hồi trực tiếp về kết quả xử lý ý kiến đóng góp, vui lòng <Link to="/login" className="font-bold underline hover:text-blue-900">Đăng nhập</Link> trước khi thực hiện hiến kế.
