@@ -183,7 +183,7 @@ const HienKeNoiBatV2Page = () => {
                             Chúng tôi cần bạn
                         </h1>
                         <p className="text-blue-100/90 text-[15px] leading-relaxed">
-                            Các nội dung, chủ đề cơ quan quản lý nhà nước cần sự hiến kế, tham gia ý kiến của người dân, doanh nghiệp trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và thi hành hiệu quả pháp luật.
+                            Các nội dung, chủ đề cơ quan quản lý nhà nước cần sự hiến kế, tham gia ý kiến của người dân, doanh nghiệp trong quá trình xây dựng, hoàn thiện chính sách, pháp luật và tổ chức thi hành pháp luật.
                         </p>
 
                         {/* Leadership Quote */}

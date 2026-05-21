@@ -47,7 +47,7 @@ const HienKeLinhVucPage = () => {
                     <h1 className="text-2xl md:text-4xl font-bold text-white mb-3 tracking-tight">
                         Có thể bạn quan tâm                    </h1>
                     <p className="text-blue-100/90 text-[15px] leading-relaxed">
-                        Gợi ý các chủ đề, nội dung để người dân, doanh nghiệp hiến kế, góp ý theo từng lĩnh vực pháp luật cụ thể.
+                        Các chủ đề, nội dung để người dân, doanh nghiệp hiến kế, góp ý theo từng lĩnh vực pháp luật cụ thể.
                     </p>
 
                     {/* Leadership Quote */}
