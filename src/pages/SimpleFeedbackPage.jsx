@@ -500,7 +500,7 @@ export default function SimpleFeedbackPage() {
                             className="w-full md:w-auto px-10 py-4 bg-[#16a34a] text-white font-bold rounded-xl hover:bg-green-700 transition-colors shadow-md text-[15px] flex items-center justify-center gap-2"
                         >
                             <Send size={18} />
-                            Gửi ý kiến đóng góp
+                            Gửi hiến kế
                         </button>
                     </div>
 

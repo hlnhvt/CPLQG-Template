@@ -59,7 +59,7 @@ const HienKeDoiSongPage = () => {
                             </div>
                         </div>
                         <Link to="/hien-ke/gop-y-nhanh?topic=doi-song" className="px-8 py-4 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-colors shadow-md shrink-0 text-[15px] flex items-center gap-2">
-                            Bắt đầu góp ý <ArrowRight size={16} />
+                            Bắt đầu hiến kế <ArrowRight size={16} />
                         </Link>
                     </div>
                 </Section>

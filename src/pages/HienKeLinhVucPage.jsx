@@ -229,7 +229,7 @@ const HienKeLinhVucPage = () => {
                                 to="/hien-ke/gop-y-nhanh"
                                 className="px-8 py-3.5 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-colors shadow-md shadow-green-600/20 shrink-0 text-[15px] flex items-center gap-2 group"
                             >
-                                Bắt đầu góp ý
+                                Bắt đầu hiến kế
                                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </div>
