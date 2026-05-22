@@ -1,164 +1,248 @@
 import React from 'react';
-import { Video, FileText } from 'lucide-react';
+import { Video, FileText, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Multimedia = () => {
-    const rightItems = [
+    const infographicsList = [
         {
             id: 1,
-            type: 'video',
-            title: 'Điểm mới nổi bật của Luật Đất đai 2024 ảnh hưởng trực tiếp đến người dân và doanh nghiệp',
-            image: '/thumb2.png',
-            to: '/video/11'
+            title: 'Quy hoạch sử dụng đất quốc gia thời kỳ 2021 - 2030, tầm nhìn đến năm 2050',
+            image: '/thumb1.png',
+            to: '/infographic/infographic-1',
+            date: '22/05/2026',
+            summary: 'Bản đồ số trực quan hóa toàn bộ phương án quy hoạch, phân bổ chỉ tiêu sử dụng đất lâm nghiệp, nông nghiệp và đất phi nông nghiệp trên phạm vi toàn quốc.'
         },
         {
             id: 2,
-            type: 'infographic',
-            title: 'Quy trình 5 bước gửi đề xuất hiến kế hoàn thiện quy định pháp luật qua Cổng Quốc gia',
-            image: '/thumb3.png',
-            to: '/infographic/infographic-2'
+            title: 'Chính sách hỗ trợ chi phí học tập và học bổng cho học sinh, sinh viên năm 2026',
+            image: '/thumb2.png',
+            to: '/infographic/infographic-2',
+            date: '20/05/2026',
+            summary: 'Chi tiết các mức hỗ trợ học phí, học bổng khuyến khích học tập và sinh hoạt phí cho học sinh nghèo vượt khó và sinh viên sư phạm.'
         },
         {
             id: 3,
-            type: 'infographic',
-            title: 'Diễn đàn đối thoại chính sách: Giải pháp tháo gỡ vướng mắc về thủ tục hành chính',
-            image: '/thumb1.png',
-            to: '/infographic/infographic-3'
+            title: 'Khung kiến trúc tổng thể quốc gia số và định hướng phát triển hạ tầng dữ liệu',
+            image: '/thumb3.png',
+            to: '/infographic/infographic-3',
+            date: '18/05/2026',
+            summary: 'Mô hình tổng thể liên thông dữ liệu quốc gia từ Trung ương đến địa phương, định hướng số hóa toàn diện thủ tục hành chính công.'
         },
         {
             id: 4,
-            type: 'infographic',
-            title: 'Toàn bộ điểm mới quan trọng của Luật Căn cước có hiệu lực thi hành',
-            image: '/thumb2.png',
-            to: '/infographic/infographic-1'
+            title: 'Quy trình đăng ký thành lập doanh nghiệp trực tuyến qua Cổng Dịch vụ công Quốc gia',
+            image: '/thumb1.png',
+            to: '/infographic/infographic-4',
+            date: '16/05/2026',
+            summary: 'Quy trình tinh gọn giúp doanh nghiệp hoàn tất thủ tục đăng ký kinh doanh, cấp mã số thuế trực tuyến trong vòng 24 giờ.'
         },
         {
             id: 5,
-            type: 'video',
-            title: 'Tuyên truyền phổ biến pháp luật phòng chống bạo lực học đường và tệ nạn xã hội',
-            image: '/thumb1.png',
-            to: '/video/4'
-        },
-        {
-            id: 6,
-            type: 'video',
-            title: 'Lễ công bố và trao giải cuộc thi trực tuyến tìm hiểu Hiến pháp và pháp luật Việt Nam',
-            image: '/thumb3.png',
-            to: '/video/5'
+            title: 'Hướng dẫn thực hiện kê khai và quyết toán thuế thu nhập cá nhân điện tử',
+            image: '/thumb2.png',
+            to: '/infographic/infographic-5',
+            date: '15/05/2026',
+            summary: 'Hướng dẫn người nộp thuế thực hiện tự quyết toán thuế thu nhập cá nhân qua ứng dụng điện tử nhanh chóng, chính xác.'
         }
     ];
 
-    const getTypeIcon = (type, size = 12) => {
-        switch (type) {
-            case 'video':
-                return <Video size={size} className="text-white" />;
-            case 'infographic':
-                return <FileText size={size} className="text-white" />;
-            default:
-                return null;
+    const videosList = [
+        {
+            id: 1,
+            title: 'Toàn cảnh Phiên họp thứ 38 của Ủy ban Thường vụ Quốc hội về xây dựng pháp luật',
+            image: '/thumb3.png',
+            to: '/video/3',
+            date: '21/05/2026',
+            summary: 'Kính mời quý vị theo dõi bản tin truyền hình phản ánh đầy đủ các thảo luận trọng tâm và hoạt động lập pháp nổi bật tại Phiên họp thứ 38 của Ủy ban Thường vụ Quốc hội khóa XV.'
+        },
+        {
+            id: 2,
+            title: 'Phát biểu của Tổng Bí thư Tô Lâm về đổi mới công tác lập pháp trong kỷ nguyên mới',
+            image: '/thumb1.png',
+            to: '/video/1',
+            date: '19/05/2026',
+            summary: 'Bài phát biểu mang tính lịch sử về tinh thần đổi mới thể chế xây dựng pháp luật, lấy người dân và doanh nghiệp làm trung tâm phục vụ.'
+        },
+        {
+            id: 3,
+            title: 'Diễn đàn đối thoại chính sách: Giải pháp tháo gỡ vướng mắc về thủ tục hành chính',
+            image: '/thumb2.png',
+            to: '/video/2',
+            date: '17/05/2026',
+            summary: 'Các chuyên gia và đại diện doanh nghiệp đối thoại trực tiếp để tìm giải pháp cải cách thủ tục hành chính, tháo gỡ điểm nghẽn thể chế.'
+        },
+        {
+            id: 4,
+            title: 'Tuyên truyền phổ biến pháp luật phòng chống bạo lực học đường và tệ nạn xã hội',
+            image: '/thumb1.png',
+            to: '/video/4',
+            date: '14/05/2026',
+            summary: 'Chương trình truyền hình phổ biến giáo dục pháp luật học đường, tăng cường nhận thức pháp lý và kỹ năng phòng ngừa tệ nạn xã hội.'
+        },
+        {
+            id: 5,
+            title: 'Lễ công bố và trao giải cuộc thi trực tuyến tìm hiểu Hiến pháp và pháp luật Việt Nam',
+            image: '/thumb3.png',
+            to: '/video/5',
+            date: '12/05/2026',
+            summary: 'Lễ tổng kết trang trọng vinh danh các cá nhân và tập thể xuất sắc đạt giải cao trong cuộc thi tìm hiểu Hiến pháp trực tuyến toàn quốc.'
         }
-    };
+    ];
 
     return (
-        <section 
-            className="py-12 relative overflow-hidden font-sans text-white" 
-            style={{ 
-                backgroundColor: "#316ad2"
-            }}
-        >
-            {/* Elegant, faint Trống Đồng pattern background watermark */}
-            <div 
-                className="absolute inset-0 bg-cover bg-center pointer-events-none mix-blend-overlay" 
-                style={{ 
-                    backgroundImage: "url('/images/dong_son_cover.png')",
-                    opacity: 0.04
-                }}
-            />
-            {/* Ambient gold glow to accent the Trống Đồng details */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(251,191,36,0.05),transparent_40%)] pointer-events-none" />
+        <section className="pt-8 pb-16 bg-white font-sans border-t border-gray-100 relative">
+            <div className="container mx-auto px-4 max-w-[1504px]">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    
+                    {/* Left Column: INFOGRAPHIC */}
+                    <div className="flex flex-col">
+                        {/* Column Header */}
+                        <div className="pb-3 border-b-2 border-[#e11d48] mb-6">
+                            <Link to="/infographic" className="flex items-center gap-2 group/header w-fit hover:opacity-80 transition-opacity">
+                                <FileText className="text-[#e11d48] w-6 h-6" />
+                                <h2 className="text-xl md:text-2xl font-bold tracking-tight text-[#0f4c81] group-hover/header:text-blue-600 transition-colors">
+                                    Infographic
+                                </h2>
+                            </Link>
+                        </div>
 
-            <div className="container mx-auto px-4 max-w-[1504px] relative z-10">
-                {/* Header Row */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-4 border-b border-white/20">
-                    <h2 className="text-2xl md:text-[26px] font-bold tracking-tight text-white drop-shadow-sm">
-                        Multimedia
-                    </h2>
-
-                    {/* Navigation Menu */}
-                    <div className="flex items-center gap-3 md:gap-4 mt-4 sm:mt-0 text-[13px] md:text-sm font-semibold text-white/90">
-                        <Link to="/infographic" className="hover:text-amber-300 transition-colors flex items-center gap-1.5 py-1">
-                            Infographic
-                        </Link>
-                        <span className="text-white/30 font-light">|</span>
-                        <Link to="/video" className="hover:text-amber-300 transition-colors flex items-center gap-1.5 py-1">
-                            Video
-                        </Link>
-                    </div>
-                </div>
-
-                {/* Content Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    {/* Featured Item (Left 5-columns) */}
-                    <Link to="/video/3" className="lg:col-span-5 flex flex-col group cursor-pointer text-white hover:text-white">
-                        <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg border border-white/10 group-hover:shadow-xl transition-all duration-300 mb-4">
-                            {/* Category Badge Framed in Top-Left Corner (Icon) */}
-                            <div className="absolute top-3 left-3 z-20 w-8 h-8 flex items-center justify-center bg-black/60 backdrop-blur-xs border border-white/20 rounded-md text-white shadow-sm">
-                                {getTypeIcon('video', 16)}
-                            </div>
-                            <img
-                                src="/thumb1.png"
-                                alt="Tiêu điểm quốc tế"
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                            />
-                            {/* Play overlay for video */}
-                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors duration-300">
-                                <div className="bg-black/50 rounded-full p-4 backdrop-blur-xs shadow-lg ring-1 ring-white/20 transform group-hover:scale-110 transition-all duration-300">
-                                    <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-white border-b-[12px] border-b-transparent ml-1.5"></div>
+                        {/* Featured Infographic Card (Item 1) */}
+                        <Link to={infographicsList[0].to} className="group block mb-6">
+                            <div className="relative aspect-video rounded-xl overflow-hidden shadow-sm border border-gray-100 group-hover:shadow-md transition-all duration-300 mb-4">
+                                {/* Dotted/Framed overlay icon in top-left */}
+                                <div className="absolute top-3 left-3 z-20 w-8 h-8 flex items-center justify-center bg-black/60 text-white rounded-md shadow-md border border-white/20">
+                                    <FileText size={16} />
                                 </div>
+                                <img
+                                    src={infographicsList[0].image}
+                                    alt={infographicsList[0].title}
+                                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+                                />
                             </div>
-                        </div>
-                        <div className="flex flex-col px-1">
-                            <h3 className="font-bold text-white text-[16px] md:text-[18px] leading-snug mb-2 group-hover:text-amber-300 transition-colors">
-                                Toàn cảnh Phiên họp thứ 38 của Ủy ban Thường vụ Quốc hội về xây dựng và thi hành pháp luật
+                            <h3 className="font-bold text-gray-900 text-[18px] md:text-[20px] leading-snug mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+                                {infographicsList[0].title}
                             </h3>
-                            <p className="text-white/80 text-[13px] leading-relaxed">
-                                Kính mời quý vị theo dõi bản tin truyền hình phản ánh đầy đủ các thảo luận trọng tâm và hoạt động lập pháp nổi bật tại Phiên họp thứ 38 của Ủy ban Thường vụ Quốc hội khóa XV.
+                            <div className="flex items-center gap-1.5 text-[13px] text-gray-400 mb-2 font-medium">
+                                <Clock size={13} className="shrink-0" />
+                                <span>{infographicsList[0].date}</span>
+                            </div>
+                            <p className="text-gray-600 text-[14.5px] leading-relaxed line-clamp-2">
+                                {infographicsList[0].summary}
                             </p>
-                        </div>
-                    </Link>
+                        </Link>
 
-                    {/* Right Items Grid (Right 7-columns) */}
-                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        {rightItems.map((item) => {
-                            return (
-                                <Link key={item.id} to={item.to} className="flex flex-col group cursor-pointer text-white hover:text-white">
-                                    <div className="relative aspect-video rounded-lg overflow-hidden shadow-md border border-white/10 mb-3 group-hover:shadow-lg transition-all duration-300">
-                                        {/* Category Badge Framed in Top-Left Corner (Icon) */}
-                                        <div className="absolute top-2 left-2 z-20 w-6 h-6 flex items-center justify-center bg-black/60 backdrop-blur-xs border border-white/20 rounded text-white shadow-sm">
-                                            {getTypeIcon(item.type, 12)}
+                        {/* List of 4 Sub-Infographics (Items 2-5) */}
+                        <div className="flex flex-col">
+                            {infographicsList.slice(1).map((item) => (
+                                <Link 
+                                    key={item.id} 
+                                    to={item.to} 
+                                    className="flex gap-4 py-4 group cursor-pointer border-t border-gray-100 items-start"
+                                >
+                                    <div className="relative w-32 md:w-40 aspect-[4/3] rounded-lg overflow-hidden shadow-xs border border-gray-100 shrink-0 mt-0.5">
+                                        <div className="absolute top-2 left-2 z-20 w-6 h-6 flex items-center justify-center bg-black/60 text-white rounded shadow-sm border border-white/20">
+                                            <FileText size={12} />
                                         </div>
                                         <img
                                             src={item.image}
                                             alt={item.title}
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                            className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
                                         />
-                                        {item.type === 'video' && (
-                                            <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/25 transition-colors">
-                                                <div className="bg-black/40 rounded-full p-2 backdrop-blur-xs">
-                                                    <div className="w-0 h-0 border-t-[5px] border-t-transparent border-l-[9px] border-l-white border-b-[5px] border-b-transparent ml-0.5"></div>
-                                                </div>
-                                            </div>
-                                        )}
                                     </div>
-                                    <div className="px-0.5">
-                                        <h4 className="font-semibold text-white text-[13px] md:text-[13.5px] line-clamp-3 leading-snug group-hover:text-amber-300 transition-colors">
+                                    <div className="flex-grow">
+                                        <h4 className="font-semibold text-gray-800 text-[15px] md:text-[16.5px] leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors mb-1.5">
                                             {item.title}
                                         </h4>
+                                        <div className="flex items-center gap-1 text-[12px] text-gray-400 font-medium">
+                                            <Clock size={12} className="shrink-0" />
+                                            <span>{item.date}</span>
+                                        </div>
                                     </div>
                                 </Link>
-                            );
-                        })}
+                            ))}
+                        </div>
                     </div>
+
+                    {/* Right Column: VIDEO */}
+                    <div className="flex flex-col">
+                        {/* Column Header */}
+                        <div className="pb-3 border-b-2 border-[#e11d48] mb-6">
+                            <Link to="/video" className="flex items-center gap-2 group/header w-fit hover:opacity-80 transition-opacity">
+                                <Video className="text-[#e11d48] w-6 h-6" />
+                                <h2 className="text-xl md:text-2xl font-bold tracking-tight text-[#0f4c81] group-hover/header:text-blue-600 transition-colors">
+                                    Video
+                                </h2>
+                            </Link>
+                        </div>
+
+                        {/* Featured Video Card (Item 1) */}
+                        <Link to={videosList[0].to} className="group block mb-6">
+                            <div className="relative aspect-video rounded-xl overflow-hidden shadow-sm border border-gray-100 group-hover:shadow-md transition-all duration-300 mb-4">
+                                <div className="absolute top-3 left-3 z-20 w-8 h-8 flex items-center justify-center bg-black/60 text-white rounded-md shadow-md border border-white/20">
+                                    <Video size={16} />
+                                </div>
+                                <img
+                                    src={videosList[0].image}
+                                    alt={videosList[0].title}
+                                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+                                />
+                                {/* Play overlay icon */}
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/25 transition-colors">
+                                    <div className="bg-red-600 text-white rounded-full p-3.5 shadow-lg transform group-hover:scale-110 transition-all duration-300 ring-2 ring-white/20">
+                                        <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[14px] border-l-white border-b-[8px] border-b-transparent ml-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 className="font-bold text-gray-900 text-[18px] md:text-[20px] leading-snug mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+                                {videosList[0].title}
+                            </h3>
+                            <div className="flex items-center gap-1.5 text-[13px] text-gray-400 mb-2 font-medium">
+                                <Clock size={13} className="shrink-0" />
+                                <span>{videosList[0].date}</span>
+                            </div>
+                            <p className="text-gray-600 text-[14.5px] leading-relaxed line-clamp-2">
+                                {videosList[0].summary}
+                            </p>
+                        </Link>
+
+                        {/* List of 4 Sub-Videos (Items 2-5) */}
+                        <div className="flex flex-col">
+                            {videosList.slice(1).map((item) => (
+                                <Link 
+                                    key={item.id} 
+                                    to={item.to} 
+                                    className="flex gap-4 py-4 group cursor-pointer border-t border-gray-100 items-start"
+                                >
+                                    <div className="relative w-32 md:w-40 aspect-[4/3] rounded-lg overflow-hidden shadow-xs border border-gray-100 shrink-0 mt-0.5">
+                                        <div className="absolute top-2 left-2 z-20 w-6 h-6 flex items-center justify-center bg-black/60 text-white rounded shadow-sm border border-white/20">
+                                            <Video size={12} />
+                                        </div>
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+                                        />
+                                        {/* Play icon overlay */}
+                                        <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors">
+                                            <div className="bg-red-600 text-white rounded-full p-1.5 shadow-md">
+                                                <div className="w-0 h-0 border-t-[4px] border-t-transparent border-l-[7px] border-l-white border-b-[4px] border-b-transparent ml-0.5"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex-grow">
+                                        <h4 className="font-semibold text-gray-800 text-[15px] md:text-[16.5px] leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors mb-1.5">
+                                            {item.title}
+                                        </h4>
+                                        <div className="flex items-center gap-1 text-[12px] text-gray-400 font-medium">
+                                            <Clock size={12} className="shrink-0" />
+                                            <span>{item.date}</span>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
