@@ -26,7 +26,7 @@ function HomePage() {
                 <PoliciesAndLife />
                 <Multimedia />
                 <TotalReviewSection />
-                <EventsActivities />
+                {/* <EventsActivities /> */}
                 <LinkedPortals />
             </div>
             <FixedBottomCarousel />

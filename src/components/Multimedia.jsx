@@ -1,279 +1,164 @@
-import React, { useState } from 'react';
-import { Camera, Video, Image as ImageIcon, Clock, Eye, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { Video, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Multimedia = () => {
-    const [activeTab, setActiveTab] = useState('Ảnh');
-
-    const tabs = [
-        { id: 'Ảnh', icon: Camera },
-        { id: 'Video', icon: Video },
-        { id: 'Infographic', icon: ImageIcon },
+    const rightItems = [
+        {
+            id: 1,
+            type: 'video',
+            title: 'Điểm mới nổi bật của Luật Đất đai 2024 ảnh hưởng trực tiếp đến người dân và doanh nghiệp',
+            image: '/thumb2.png',
+            to: '/video/11'
+        },
+        {
+            id: 2,
+            type: 'infographic',
+            title: 'Quy trình 5 bước gửi đề xuất hiến kế hoàn thiện quy định pháp luật qua Cổng Quốc gia',
+            image: '/thumb3.png',
+            to: '/infographic/infographic-2'
+        },
+        {
+            id: 3,
+            type: 'infographic',
+            title: 'Diễn đàn đối thoại chính sách: Giải pháp tháo gỡ vướng mắc về thủ tục hành chính',
+            image: '/thumb1.png',
+            to: '/infographic/infographic-3'
+        },
+        {
+            id: 4,
+            type: 'infographic',
+            title: 'Toàn bộ điểm mới quan trọng của Luật Căn cước có hiệu lực thi hành',
+            image: '/thumb2.png',
+            to: '/infographic/infographic-1'
+        },
+        {
+            id: 5,
+            type: 'video',
+            title: 'Tuyên truyền phổ biến pháp luật phòng chống bạo lực học đường và tệ nạn xã hội',
+            image: '/thumb1.png',
+            to: '/video/4'
+        },
+        {
+            id: 6,
+            type: 'video',
+            title: 'Lễ công bố và trao giải cuộc thi trực tuyến tìm hiểu Hiến pháp và pháp luật Việt Nam',
+            image: '/thumb3.png',
+            to: '/video/5'
+        }
     ];
 
-    const data = {
-        'Ảnh': {
-            featured: {
-                id: 1,
-                tag: 'CHUYỂN ĐỔI SỐ',
-                title: 'Giao ban Ban Chỉ đạo 57 về phát triển khoa học và công nghệ năm 2026',
-                description: 'Thứ trưởng Bộ Tư pháp chủ trì cuộc họp lớn về công tác đổi mới sáng tạo và chuyển đổi số toàn diện ngành Tư pháp năm 2026, tháo gỡ những điểm nghẽn về hạ tầng số.',
-                date: '20/03/2026',
-                views: '1.250',
-                image: '/thumb1.png'
-            },
-            list: [
-                {
-                    id: 2,
-                    tag: 'AN NINH MẠNG',
-                    title: 'Tập huấn hệ thống bảo mật nền tảng số cho các đơn vị trong Bộ',
-                    description: 'Cục Công nghệ thông tin tổ chức buổi tập huấn về an toàn thông tin.',
-                    date: '15/03/2026',
-                    views: '980',
-                    image: '/thumb2.png'
-                },
-                {
-                    id: 3,
-                    tag: 'PHÁP LUẬT',
-                    title: 'Phổ biến các quy định mới về ứng dụng CNTT trong ngành Tư pháp',
-                    description: 'Hội nghị đã tổng kết công tác triển khai quyết định 06 về dữ liệu dân cư.',
-                    date: '10/03/2026',
-                    views: '764',
-                    image: '/thumb3.png'
-                },
-                {
-                    id: 4,
-                    tag: 'CHUYỂN ĐỔI SỐ',
-                    title: 'Hội thảo chuyên đề về ứng dụng AI trong quản lý tư pháp điện tử',
-                    description: 'Các chuyên gia trình bày giải pháp tích hợp trí tuệ nhân tạo vào hệ thống tư pháp số.',
-                    date: '05/03/2026',
-                    views: '622',
-                    image: '/thumb1.png'
-                },
-                {
-                    id: 13,
-                    tag: 'CỘNG ĐỒNG',
-                    title: 'Đẩy mạnh tuyên truyền pháp luật trực tuyến tại vùng sâu vùng xa',
-                    description: 'Hoàn thành lắp đặt hệ thống màn hình tương tác phục vụ tuyên truyền.',
-                    date: '01/03/2026',
-                    views: '840',
-                    image: '/thumb2.png'
-                }
-            ]
-        },
-        'Video': {
-            featured: {
-                id: 5,
-                tag: 'PHÓNG SỰ',
-                title: 'Dấu ấn ngành Tư pháp trong nhiệm kỳ vừa qua',
-                description: 'Phóng sự toàn diện về các thành tựu của ngành Tư pháp, đặc biệt trong công tác cải cách thể chế và xây dựng pháp luật.',
-                date: '22/03/2026',
-                views: '3.420',
-                image: '/thumb2.png'
-            },
-            list: [
-                {
-                    id: 6,
-                    tag: 'THỜI SỰ',
-                    title: 'Bộ trưởng trả lời phỏng vấn về định hướng phát triển',
-                    description: 'VTV1 Phỏng vấn trực tiếp Bộ trưởng về công tác tư pháp.',
-                    date: '18/03/2026',
-                    views: '2.140',
-                    image: '/thumb3.png'
-                },
-                {
-                    id: 7,
-                    tag: 'VIDEO CỦA BẠN',
-                    title: 'Hướng dẫn sử dụng Cổng đăng ký giao dịch bảo đảm',
-                    description: 'Video hướng dẫn thao tác cơ bản trên cổng dịch vụ công.',
-                    date: '12/03/2026',
-                    views: '1.560',
-                    image: '/thumb1.png'
-                },
-                {
-                    id: 8,
-                    tag: 'TỌA ĐÀM',
-                    title: 'Tọa đàm: Nâng cao chất lượng nguồn nhân lực',
-                    description: 'Thảo luận về đào tạo và bồi dưỡng cán bộ ngành Tư pháp.',
-                    date: '08/03/2026',
-                    views: '985',
-                    image: '/thumb2.png'
-                },
-                {
-                    id: 14,
-                    tag: 'PHÓNG SỰ',
-                    title: 'Nhìn lại 5 năm số hóa hệ thống lưu trữ hồ sơ',
-                    description: 'Công tác lưu trữ đã mang diện mạo mới sau quyết định đột phá.',
-                    date: '01/03/2026',
-                    views: '1.450',
-                    image: '/thumb3.png'
-                }
-            ]
-        },
-        'Infographic': {
-            featured: {
-                id: 9,
-                tag: 'INFOGRAPHIC',
-                title: 'Kết quả công tác năm 2025 và phương hướng 2026',
-                description: 'Toàn cảnh kết quả đạt được qua các con số thống kê nổi bật trên các mặt công tác của Bộ, Ngành Tư pháp.',
-                date: '25/03/2026',
-                views: '4.500',
-                image: '/thumb3.png'
-            },
-            list: [
-                {
-                    id: 10,
-                    tag: 'THỐNG KÊ',
-                    title: 'Quy trình giải quyết khiếu nại, tố cáo hành chính',
-                    description: 'Cẩm nang rút gọn các bước giải quyết theo luật định.',
-                    date: '16/03/2026',
-                    views: '2.840',
-                    image: '/thumb1.png'
-                },
-                {
-                    id: 11,
-                    tag: 'HƯỚNG DẪN',
-                    title: 'Các mốc thời gian quan trọng trong năm',
-                    description: 'Sự kiện và các quy định có hiệu lực trong năm.',
-                    date: '14/03/2026',
-                    views: '1.200',
-                    image: '/thumb2.png'
-                },
-                {
-                    id: 12,
-                    tag: 'BÁO CÁO',
-                    title: 'Tóm tắt Đề án 06 về phát triển dữ liệu dân cư',
-                    description: 'Các mục tiêu cơ bản và lộ trình thực hiện đến 2030.',
-                    date: '02/03/2026',
-                    views: '3.150',
-                    image: '/thumb3.png'
-                },
-                {
-                    id: 15,
-                    tag: 'THỐNG KÊ',
-                    title: 'Báo cáo tình hình tiếp nhận và xử lý phản ánh kiến nghị',
-                    description: 'Biểu đồ phản ánh chi tiết thời gian và hiệu suất xử lý trong Quý I/2026.',
-                    date: '28/02/2026',
-                    views: '1.800',
-                    image: '/thumb1.png'
-                }
-            ]
+    const getTypeIcon = (type, size = 12) => {
+        switch (type) {
+            case 'video':
+                return <Video size={size} className="text-white" />;
+            case 'infographic':
+                return <FileText size={size} className="text-white" />;
+            default:
+                return null;
         }
     };
 
-    const currentData = data[activeTab];
-
     return (
-        <section className="py-8 bg-white border-t border-gray-100">
-            <div className="container mx-auto px-4 max-w-[1504px]">
-                {/* Header Row */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-gray-200 pb-4">
-                    <div className="flex items-center">
-                        <h2 className="text-xl md:text-2xl font-bold text-[#0f4c81]">
-                            Multimedia
-                        </h2>
-                    </div>
+        <section 
+            className="py-12 relative overflow-hidden font-sans text-white" 
+            style={{ 
+                backgroundColor: "#316ad2"
+            }}
+        >
+            {/* Elegant, faint Trống Đồng pattern background watermark */}
+            <div 
+                className="absolute inset-0 bg-cover bg-center pointer-events-none mix-blend-overlay" 
+                style={{ 
+                    backgroundImage: "url('/images/dong_son_cover.png')",
+                    opacity: 0.04
+                }}
+            />
+            {/* Ambient gold glow to accent the Trống Đồng details */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(251,191,36,0.05),transparent_40%)] pointer-events-none" />
 
-                    <div className="flex gap-1 mt-4 md:mt-0 bg-gray-100 p-1 rounded-xl shadow-inner border border-gray-200/60">
-                        {tabs.map((tab) => {
-                            const Icon = tab.icon;
-                            const isActive = activeTab === tab.id;
-                            return (
-                                <button
-                                    key={tab.id}
-                                    onClick={() => setActiveTab(tab.id)}
-                                    className={`flex items-center gap-2 px-5 py-2 rounded-lg font-medium text-[13px] md:text-sm transition-all duration-300 ${isActive
-                                        ? 'bg-white text-[#0f4c81] shadow-sm ring-1 ring-black/5 scale-100 font-bold'
-                                        : 'text-gray-500 hover:text-[#0f4c81] hover:bg-white/60 hover:shadow-xs scale-95'
-                                        }`}
-                                >
-                                    <Icon size={16} className={isActive ? "text-[#0f4c81]" : ""} /> {tab.id}
-                                </button>
-                            );
-                        })}
+            <div className="container mx-auto px-4 max-w-[1504px] relative z-10">
+                {/* Header Row */}
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-4 border-b border-white/20">
+                    <h2 className="text-2xl md:text-[26px] font-bold tracking-tight text-white drop-shadow-sm">
+                        Multimedia
+                    </h2>
+
+                    {/* Navigation Menu */}
+                    <div className="flex items-center gap-3 md:gap-4 mt-4 sm:mt-0 text-[13px] md:text-sm font-semibold text-white/90">
+                        <Link to="/infographic" className="hover:text-amber-300 transition-colors flex items-center gap-1.5 py-1">
+                            Infographic
+                        </Link>
+                        <span className="text-white/30 font-light">|</span>
+                        <Link to="/video" className="hover:text-amber-300 transition-colors flex items-center gap-1.5 py-1">
+                            Video
+                        </Link>
                     </div>
                 </div>
 
                 {/* Content Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-                    {/* Featured Item (Left) */}
-                    <div className="bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm transition hover:shadow-md h-full flex flex-col">
-                        <div className="relative w-full aspect-video overflow-hidden shrink-0 group">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    {/* Featured Item (Left 5-columns) */}
+                    <Link to="/video/3" className="lg:col-span-5 flex flex-col group cursor-pointer text-white hover:text-white">
+                        <div className="relative aspect-video rounded-xl overflow-hidden shadow-lg border border-white/10 group-hover:shadow-xl transition-all duration-300 mb-4">
+                            {/* Category Badge Framed in Top-Left Corner (Icon) */}
+                            <div className="absolute top-3 left-3 z-20 w-8 h-8 flex items-center justify-center bg-black/60 backdrop-blur-xs border border-white/20 rounded-md text-white shadow-sm">
+                                {getTypeIcon('video', 16)}
+                            </div>
                             <img
-                                src={currentData.featured.image}
-                                alt={currentData.featured.title}
+                                src="/thumb1.png"
+                                alt="Tiêu điểm quốc tế"
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                             />
-                            {activeTab === 'Video' && (
-                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                    <div className="bg-black/50 rounded-full p-4 backdrop-blur-sm shadow-lg ring-1 ring-white/20">
-                                        <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-white border-b-[12px] border-b-transparent ml-1.5"></div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                        <div className="p-4 md:p-5 flex flex-col flex-grow bg-white z-10 border-t border-gray-100 shadow-[0_-4px_15px_-5px_rgba(0,0,0,0.05)]">
-                            <Link to={`${activeTab === 'Ảnh' ? '/anh' : activeTab === 'Video' ? '/video' : '/infographic'}/${currentData.featured.id}`}>
-                                <h3 className="font-bold text-[#0f4c81] text-lg md:text-xl line-clamp-2 leading-tight mb-3 hover:text-blue-700 transition">
-                                    {currentData.featured.title}
-                                </h3>
-                            </Link>
-                            <p className="text-gray-600 text-[13px] md:text-[14px] line-clamp-2 md:line-clamp-3 leading-relaxed mb-4">
-                                {currentData.featured.description}
-                            </p>
-                            <div className="flex items-center gap-4 text-[11px] md:text-[12px] text-gray-500 mt-auto pt-2">
-                                <div className="flex items-center gap-2 bg-gray-50 border border-gray-100 rounded-md px-3 py-1.5">
-                                    <Clock size={14} className="text-[#0f4c81]" /> <span className="font-medium">{currentData.featured.date}</span>
+                            {/* Play overlay for video */}
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors duration-300">
+                                <div className="bg-black/50 rounded-full p-4 backdrop-blur-xs shadow-lg ring-1 ring-white/20 transform group-hover:scale-110 transition-all duration-300">
+                                    <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-white border-b-[12px] border-b-transparent ml-1.5"></div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div className="flex flex-col px-1">
+                            <h3 className="font-bold text-white text-[16px] md:text-[18px] leading-snug mb-2 group-hover:text-amber-300 transition-colors">
+                                Toàn cảnh Phiên họp thứ 38 của Ủy ban Thường vụ Quốc hội về xây dựng và thi hành pháp luật
+                            </h3>
+                            <p className="text-white/80 text-[13px] leading-relaxed">
+                                Kính mời quý vị theo dõi bản tin truyền hình phản ánh đầy đủ các thảo luận trọng tâm và hoạt động lập pháp nổi bật tại Phiên họp thứ 38 của Ủy ban Thường vụ Quốc hội khóa XV.
+                            </p>
+                        </div>
+                    </Link>
 
-                    {/* List Items (Right) */}
-                    <div className="flex flex-col gap-3 h-full">
-                        {currentData.list.map((item) => (
-                            <div key={item.id} className="bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm transition hover:shadow-md flex flex-row p-2.5 items-center gap-3.5 group flex-1">
-                                <div className="w-[160px] md:w-[175px] shrink-0 relative aspect-video overflow-hidden rounded shadow-sm">
-                                    <img
-                                        src={item.image}
-                                        alt={item.title}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                    {activeTab === 'Video' && (
-                                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                            <div className="bg-black/50 rounded-full p-1.5 backdrop-blur-sm">
-                                                <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-white border-b-[6px] border-b-transparent ml-0.5"></div>
-                                            </div>
+                    {/* Right Items Grid (Right 7-columns) */}
+                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                        {rightItems.map((item) => {
+                            return (
+                                <Link key={item.id} to={item.to} className="flex flex-col group cursor-pointer text-white hover:text-white">
+                                    <div className="relative aspect-video rounded-lg overflow-hidden shadow-md border border-white/10 mb-3 group-hover:shadow-lg transition-all duration-300">
+                                        {/* Category Badge Framed in Top-Left Corner (Icon) */}
+                                        <div className="absolute top-2 left-2 z-20 w-6 h-6 flex items-center justify-center bg-black/60 backdrop-blur-xs border border-white/20 rounded text-white shadow-sm">
+                                            {getTypeIcon(item.type, 12)}
                                         </div>
-                                    )}
-                                </div>
-                                <div className="flex flex-col min-w-0 flex-grow py-0.5">
-                                    <Link to={`${activeTab === 'Ảnh' ? '/anh' : activeTab === 'Video' ? '/video' : '/infographic'}/${item.id}`}>
-                                        <h4 className="font-bold text-[#0f4c81] text-[13px] md:text-[14px] line-clamp-2 leading-snug mb-1.5 hover:text-blue-700 transition">
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        />
+                                        {item.type === 'video' && (
+                                            <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/25 transition-colors">
+                                                <div className="bg-black/40 rounded-full p-2 backdrop-blur-xs">
+                                                    <div className="w-0 h-0 border-t-[5px] border-t-transparent border-l-[9px] border-l-white border-b-[5px] border-b-transparent ml-0.5"></div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="px-0.5">
+                                        <h4 className="font-semibold text-white text-[13px] md:text-[13.5px] line-clamp-3 leading-snug group-hover:text-amber-300 transition-colors">
                                             {item.title}
                                         </h4>
-                                    </Link>
-                                    <p className="text-gray-600 text-[11px] md:text-[12px] line-clamp-1 md:line-clamp-2 leading-relaxed mb-2">
-                                        {item.description}
-                                    </p>
-                                    <div className="flex items-center gap-4 text-[10px] md:text-[11px] text-gray-500 mt-auto rounded">
-                                        <div className="flex items-center gap-1.5 bg-gray-50 border border-gray-100 rounded px-2 py-0.5">
-                                            <Clock size={11} /> <span>{item.date}</span>
-                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        ))}
+                                </Link>
+                            );
+                        })}
                     </div>
-                </div>
-
-                <div className="flex justify-center mt-5">
-                    <Link
-                        to={activeTab === 'Ảnh' ? '/anh' : activeTab === 'Video' ? '/video' : '/infographic'}
-                        className="inline-flex items-center gap-2 bg-gradient-to-r from-[#17c5ed] to-[#1a0b94] text-white px-8 py-2.5 rounded-full font-semibold text-[15px] shadow-md hover:shadow-lg transition-all duration-300 hover:opacity-90"
-                    >
-                        Xem tất cả {activeTab}
-                    </Link>
                 </div>
             </div>
         </section>
