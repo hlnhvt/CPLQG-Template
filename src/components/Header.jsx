@@ -400,6 +400,11 @@ const Header = () => {
                                             </Link>
                                         </li>
                                         <li>
+                                            <Link to="/cau-hoi-phap-luat/chu-de" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                                <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>Chủ đề nổi bật
+                                            </Link>
+                                        </li>
+                                        <li>
                                             <Link to="/cau-hoi-phap-luat/chuyen-gia" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
                                                 <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>Chuyên gia tư vấn
                                             </Link>
@@ -523,6 +528,7 @@ const Header = () => {
                             </button>
                             <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.hoiDap ? 'max-h-96' : 'max-h-0'}`}>
                                 <Link to="/cau-hoi-phap-luat" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Danh sách câu hỏi</Link>
+                                <Link to="/cau-hoi-phap-luat/chu-de" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Chủ đề nổi bật</Link>
                                 <Link to="/cau-hoi-phap-luat/chuyen-gia" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Chuyên gia tư vấn</Link>
                             </div>
                         </div>

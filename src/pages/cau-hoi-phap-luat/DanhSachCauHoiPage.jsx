@@ -103,6 +103,12 @@ const DanhSachCauHoiPage = () => {
                     >
                         <Clock size={16} /> MỚI NHẤT
                     </button>
+                    <Link
+                        to="/cau-hoi-phap-luat/chu-de"
+                        className={`px-5 py-3.5 text-[14px] font-bold transition-all border-b-[3px] whitespace-nowrap flex items-center gap-2 border-transparent text-gray-500 hover:text-[#1a3b8b]`}
+                    >
+                        <HelpCircle size={16} /> CHỦ ĐỀ NỔI BẬT
+                    </Link>
                     <button
                         onClick={() => handleTabChange('search')}
                         className={`px-5 py-3.5 text-[14px] font-bold transition-all border-b-[3px] whitespace-nowrap flex items-center gap-2 ${

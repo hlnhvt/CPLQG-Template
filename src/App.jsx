@@ -90,6 +90,7 @@ import CauHoiDetailPage from './pages/cau-hoi-phap-luat/CauHoiDetailPage';
 import ChuyenGiaListPage from './pages/cau-hoi-phap-luat/ChuyenGiaListPage';
 import ChuyenGiaDetailPage from './pages/cau-hoi-phap-luat/ChuyenGiaDetailPage';
 import DatLichTuVanPage from './pages/cau-hoi-phap-luat/DatLichTuVanPage';
+import ChuDeHoiDapPage from './pages/cau-hoi-phap-luat/ChuDeHoiDapPage';
 
 // Legal Questions Dashboard imports
 import DanhSachCauHoiCaNhanPage from './pages/dashboard/DanhSachCauHoiCaNhanPage';
@@ -257,6 +258,7 @@ const AppLayout = () => {
 
                     {/* Legal Questions Routes */}
                     <Route path="/cau-hoi-phap-luat" element={<DanhSachCauHoiPage />} />
+                    <Route path="/cau-hoi-phap-luat/chu-de" element={<ChuDeHoiDapPage />} />
                     <Route path="/cau-hoi-phap-luat/:id" element={<CauHoiDetailPage />} />
                     <Route path="/cau-hoi-phap-luat/chuyen-gia" element={<ChuyenGiaListPage />} />
                     <Route path="/cau-hoi-phap-luat/chuyen-gia/:id" element={<ChuyenGiaDetailPage />} />
