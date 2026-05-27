@@ -111,6 +111,7 @@ import CreatePhanAnhKienNghiPage from './pages/phan-anh-kien-nghi/CreatePhanAnhK
 import TongRaSoatPage from './pages/TongRaSoatPage';
 import TongRaSoatDocDetailPage from './pages/tong-ra-soat/TongRaSoatDocDetailPage';
 import TongRaSoatNewsDetailPage from './pages/tong-ra-soat/TongRaSoatNewsDetailPage';
+import TongRaSoatAIDetailPage from './pages/tong-ra-soat/TongRaSoatAIDetailPage';
 
 // Nghi Quyet 66
 import NghiQuyet66Page from './pages/NghiQuyet66Page';
@@ -224,6 +225,7 @@ const AppLayout = () => {
                     <Route path="/tong-ra-soat" element={<TongRaSoatPage />} />
                     <Route path="/tong-ra-soat/van-ban/:id" element={<TongRaSoatDocDetailPage />} />
                     <Route path="/tong-ra-soat/tin-tuc/:id" element={<TongRaSoatNewsDetailPage />} />
+                    <Route path="/tong-ra-soat/ai/:id" element={<TongRaSoatAIDetailPage />} />
 
                     {/* Legal Aid Routes */}
                     <Route path="/tro-giup-phap-ly" element={<GioiThieuTGPLPage />} />

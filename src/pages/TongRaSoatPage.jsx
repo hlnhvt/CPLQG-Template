@@ -831,9 +831,14 @@ const TongRaSoatPage = () => {
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">C.Open AI - CLS</h3>
                                         {/* <p className="text-xs text-gray-500 mb-4 px-2">Hệ thống Trợ lý ảo AI thông minh giúp rà soát mâu thuẫn, kiểm tra tính hợp pháp và tính đồng bộ của hệ thống văn bản pháp luật.</p> */}
-                                        <a href="https://cls.cmcai.vn/" target="_blank" rel="noopener noreferrer" className="mt-auto bg-white border border-gray-500 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
-                                            Truy cập
-                                        </a>
+                                        <div className="mt-auto w-full flex gap-3">
+                                            <Link to="/tong-ra-soat/ai/cls" className="flex-1 bg-white border border-gray-400 hover:border-gray-600 text-gray-700 font-bold py-2 px-3 rounded-full hover:bg-gray-50 transition text-[13px]">
+                                                Giới thiệu
+                                            </Link>
+                                            <a href="https://cls.cmcai.vn/" target="_blank" rel="noopener noreferrer" className="flex-1 bg-[#ea492a] border border-[#ea492a] text-white font-bold py-2 px-3 rounded-full hover:bg-[#ea492a]/95 hover:shadow-md transition text-[13px]">
+                                                Truy cập
+                                            </a>
+                                        </div>
                                     </div>
 
                                     {/* AI 2: AI LEXcentra */}
@@ -843,9 +848,14 @@ const TongRaSoatPage = () => {
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">AI LEXcentra</h3>
                                         {/* <p className="text-xs text-gray-500 mb-4 px-2">Hệ thống phân tích rủi ro pháp lý, rà soát tính đồng bộ, mâu thuẫn của văn bản và đề xuất phương án tối ưu hóa điều khoản.</p> */}
-                                        <a href="https://lexcentra.phapluat.gov.vn/home" target="_blank" rel="noopener noreferrer" className="mt-auto bg-white border border-gray-500 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
-                                            Truy cập
-                                        </a>
+                                        <div className="mt-auto w-full flex gap-3">
+                                            <Link to="/tong-ra-soat/ai/lex" className="flex-1 bg-white border border-gray-400 hover:border-gray-600 text-gray-700 font-bold py-2 px-3 rounded-full hover:bg-gray-50 transition text-[13px]">
+                                                Giới thiệu
+                                            </Link>
+                                            <a href="https://lexcentra.phapluat.gov.vn/home" target="_blank" rel="noopener noreferrer" className="flex-1 bg-[#ea492a] border border-[#ea492a] text-white font-bold py-2 px-3 rounded-full hover:bg-[#ea492a]/95 hover:shadow-md transition text-[13px]">
+                                                Truy cập
+                                            </a>
+                                        </div>
                                     </div>
 
                                     {/* AI 3: AI BKAV */}
@@ -855,9 +865,14 @@ const TongRaSoatPage = () => {
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">BLEGAL - TRỢ LÝ SỐ PHÁP LÝ</h3>
                                         {/* <p className="text-xs text-gray-500 mb-4 px-2">Trợ lý ảo thông minh dựa trên mô hình ngôn ngữ lớn chuyên sâu phục vụ dịch vụ công, hỗ trợ tư vấn pháp luật tự động cho công dân.</p> */}
-                                        <a href="https://chatbot.demozone.vn/" target="_blank" rel="noopener noreferrer" className="mt-auto bg-white border border-gray-500 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
-                                            Truy cập
-                                        </a>
+                                        <div className="mt-auto w-full flex gap-3">
+                                            <Link to="/tong-ra-soat/ai/blegal" className="flex-1 bg-white border border-gray-400 hover:border-gray-600 text-gray-700 font-bold py-2 px-3 rounded-full hover:bg-gray-50 transition text-[13px]">
+                                                Giới thiệu
+                                            </Link>
+                                            <a href="https://chatbot.demozone.vn/" target="_blank" rel="noopener noreferrer" className="flex-1 bg-[#ea492a] border border-[#ea492a] text-white font-bold py-2 px-3 rounded-full hover:bg-[#ea492a]/95 hover:shadow-md transition text-[13px]">
+                                                Truy cập
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
