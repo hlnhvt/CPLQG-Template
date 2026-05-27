@@ -5,7 +5,7 @@ import { ChevronRight, Globe, Sparkles, Shield, Cpu, Zap, Printer, Share2, Faceb
 const AI_DATA = {
     'cls': {
         id: 'cls',
-        title: 'C-AI Legal - Trợ lý ảo hỗ trợ xây dựng và rà soát văn bản quy phạm pháp luật',
+        title: 'C-AI Legal',
         shortDesc: 'Hệ thống Trợ lý ảo AI thông minh giúp rà soát mâu thuẫn, kiểm tra tính hợp pháp và tính đồng bộ của hệ thống văn bản pháp luật.',
         logo: '/BO NHAN DIEN TONG RA SOAT/COpenAIlogo.svg',
         url: 'https://cls.cmcai.vn/',
@@ -69,7 +69,7 @@ const AI_DATA = {
     },
     'lex': {
         id: 'lex',
-        title: 'AI LEXcentra - Nền tảng trợ lý pháp lý toàn diện ứng dụng Trí tuệ nhân tạo (AI)',
+        title: 'Trợ lý pháp chế AI LEXcentra',
         shortDesc: 'Hệ thống phân tích rủi ro pháp lý, rà soát tính đồng bộ, mâu thuẫn của văn bản và đề xuất phương án tối ưu hóa điều khoản.',
         logo: '/BO NHAN DIEN TONG RA SOAT/logo-lex.svg',
         url: 'https://lexcentra.phapluat.gov.vn/home',
@@ -162,7 +162,7 @@ const AI_DATA = {
     },
     'blegal': {
         id: 'blegal',
-        title: 'BLegal - Trợ lý ảo hỗ trợ công tác rà soát, tra cứu và phân tích hệ thống văn bản pháp lý của Bkav',
+        title: 'Trợ lý số BKAV',
         shortDesc: 'Trợ lý ảo thông minh dựa trên mô hình ngôn ngữ lớn chuyên sâu phục vụ dịch vụ công, hỗ trợ tư vấn pháp luật tự động cho công dân.',
         logo: '/BO NHAN DIEN TONG RA SOAT/icon_BLegal.png',
         url: 'https://chatbot.demozone.vn/',
@@ -292,7 +292,7 @@ const TongRaSoatAIDetailPage = () => {
 
                     {/* Logo & Intro area */}
                     <div className="p-8 pb-6 border-b border-gray-100 flex flex-col md:flex-row gap-6 items-center justify-between text-center md:text-left">
-                        <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
+                        <div className="flex flex-col md:flex-row gap-6 items-center md:items-center">
                             <div className="w-24 h-24 bg-gray-50 rounded-2xl border border-gray-100 p-4 flex items-center justify-center shrink-0 shadow-inner">
                                 <img src={ai.logo} alt={ai.title} className={`max-h-full max-w-full object-contain ${ai.brightness || ''}`} />
                             </div>

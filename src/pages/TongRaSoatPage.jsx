@@ -833,7 +833,7 @@ const TongRaSoatPage = () => {
                                         <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
                                             <img src="/BO NHAN DIEN TONG RA SOAT/icon_BLegal.png" alt="Logo BKAV BLegal" className="h-14 w-auto object-contain group-hover:scale-110 transition-transform duration-300" />
                                         </div>
-                                        <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">BLEGAL - TRỢ LÝ SỐ PHÁP LÝ</h3>
+                                        <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">Trợ lý số BKAV</h3>
                                         {/* <p className="text-xs text-gray-500 mb-4 px-2">Trợ lý ảo thông minh dựa trên mô hình ngôn ngữ lớn chuyên sâu phục vụ dịch vụ công, hỗ trợ tư vấn pháp luật tự động cho công dân.</p> */}
                                         <div className="mt-auto w-full flex gap-3">
                                             <Link to="/tong-ra-soat/ai/blegal" className="flex-1 bg-white border border-gray-400 hover:border-gray-600 text-gray-700 font-bold py-2 px-3 rounded-full hover:bg-gray-50 transition text-[13px]">
@@ -867,7 +867,7 @@ const TongRaSoatPage = () => {
                                         <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
                                             <img src="/BO NHAN DIEN TONG RA SOAT/logo-lex.svg" alt="Logo LEXcentra" className="h-9 w-auto object-contain group-hover:scale-110 transition-transform duration-300 brightness-0" />
                                         </div>
-                                        <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">AI LEXcentra</h3>
+                                        <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">TRỢ LÝ PHÁP CHẾ AI LEXCENTRA </h3>
                                         {/* <p className="text-xs text-gray-500 mb-4 px-2">Hệ thống phân tích rủi ro pháp lý, rà soát tính đồng bộ, mâu thuẫn của văn bản và đề xuất phương án tối ưu hóa điều khoản.</p> */}
                                         <div className="mt-auto w-full flex gap-3">
                                             <Link to="/tong-ra-soat/ai/lex" className="flex-1 bg-white border border-gray-400 hover:border-gray-600 text-gray-700 font-bold py-2 px-3 rounded-full hover:bg-gray-50 transition text-[13px]">
