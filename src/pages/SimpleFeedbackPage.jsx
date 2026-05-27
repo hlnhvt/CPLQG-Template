@@ -416,7 +416,7 @@ export default function SimpleFeedbackPage() {
                                         </div>
                                     )}
 
-                                    <div className="md:col-span-2">
+                                    {/* <div className="md:col-span-2">
                                         <label className="block text-[14px] font-bold text-gray-800 mb-2">
                                             Họ và tên
                                         </label>
@@ -438,57 +438,9 @@ export default function SimpleFeedbackPage() {
                                                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
                                             />
                                         )}
-                                    </div>
+                                    </div> */}
 
-                                    <div>
-                                        <label className="block text-[14px] font-bold text-gray-800 mb-2">Email</label>
-                                        {user ? (
-                                            <div className="relative">
-                                                <input
-                                                    type="email" name="email" readOnly
-                                                    value={formData.email}
-                                                    className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-xl text-[15px] text-gray-700 pr-32 cursor-not-allowed"
-                                                />
-                                                <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-[11px] font-bold text-green-700 bg-green-100 px-2 py-1 rounded-full border border-green-200">
-                                                    <Lock size={10} /> Đã xác thực
-                                                </span>
-                                            </div>
-                                        ) : (
-                                            <input
-                                                type="email" name="email"
-                                                value={formData.email} onChange={handleChange}
-                                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
-                                            />
-                                        )}
-                                    </div>
 
-                                    <div>
-                                        <label className="block text-[14px] font-bold text-gray-800 mb-2">Số điện thoại</label>
-                                        {user ? (
-                                            <div className="relative">
-                                                <input
-                                                    type="tel" name="phone" readOnly
-                                                    value={formData.phone || 'Chưa cập nhật'}
-                                                    className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-xl text-[15px] text-gray-700 pr-32 cursor-not-allowed"
-                                                />
-                                                {formData.phone ? (
-                                                    <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-[11px] font-bold text-green-700 bg-green-100 px-2 py-1 rounded-full border border-green-200">
-                                                        <Lock size={10} /> Đã xác thực
-                                                    </span>
-                                                ) : (
-                                                    <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 text-[11px] font-bold text-amber-700 bg-amber-50 px-2 py-1 rounded-full border border-amber-200">
-                                                        Chưa có
-                                                    </span>
-                                                )}
-                                            </div>
-                                        ) : (
-                                            <input
-                                                type="tel" name="phone"
-                                                value={formData.phone} onChange={handleChange}
-                                                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white transition-all text-[15px]"
-                                            />
-                                        )}
-                                    </div>
                                 </div>
                             )}
                         </div>
