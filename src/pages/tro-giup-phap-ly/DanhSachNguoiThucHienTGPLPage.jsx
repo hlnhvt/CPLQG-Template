@@ -54,14 +54,14 @@ const DanhSachNguoiThucHienTGPLPage = () => {
             </div>
 
             <div className="container mx-auto px-4 max-w-[1200px] mt-8">
-                
+
                 {/* Search & Filter Form */}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
                     <div className="flex flex-col md:flex-row gap-4 mb-4">
                         <div className="flex-1 relative">
-                            <input 
-                                type="text" 
-                                placeholder="Nhập họ tên hoặc mã số thẻ..." 
+                            <input
+                                type="text"
+                                placeholder="Nhập họ tên hoặc mã số thẻ..."
                                 className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-[15px]"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -69,7 +69,7 @@ const DanhSachNguoiThucHienTGPLPage = () => {
                             <Search className="absolute left-4 top-3.5 text-gray-400" size={20} />
                         </div>
                         <div className="w-full md:w-64 shrink-0">
-                            <select 
+                            <select
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-[15px]"
                                 value={selectedProvince}
                                 onChange={(e) => setSelectedProvince(e.target.value)}
@@ -79,7 +79,7 @@ const DanhSachNguoiThucHienTGPLPage = () => {
                             </select>
                         </div>
                         <div className="w-full md:w-64 shrink-0">
-                            <select 
+                            <select
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-[15px]"
                                 value={selectedField}
                                 onChange={(e) => setSelectedField(e.target.value)}
@@ -90,15 +90,15 @@ const DanhSachNguoiThucHienTGPLPage = () => {
                         </div>
                     </div>
                     <div className="flex justify-end gap-3 border-t border-gray-100 pt-4">
-                        <button 
+                        <button
                             onClick={resetFilters}
                             className="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors flex items-center gap-2"
                         >
                             <RefreshCw size={18} />
                             Làm mới
                         </button>
-                        <button 
-                             className="px-6 py-2.5 bg-[#1e3a8a] hover:bg-blue-800 text-white rounded-lg font-medium shadow-md transition-colors flex items-center gap-2"
+                        <button
+                            className="px-6 py-2.5 bg-[#1e3a8a] hover:bg-blue-800 text-white rounded-lg font-medium shadow-md transition-colors flex items-center gap-2"
                         >
                             <Search size={18} />
                             Tìm kiếm
@@ -111,11 +111,10 @@ const DanhSachNguoiThucHienTGPLPage = () => {
                     {tabs.map((tab) => (
                         <button
                             key={tab.id}
-                            className={`px-6 py-4 text-[15px] font-bold tracking-wide uppercase transition-colors relative ${
-                                activeTab === tab.id 
-                                ? 'text-blue-700' 
-                                : 'text-gray-500 hover:text-gray-800'
-                            }`}
+                            className={`px-6 py-4 text-[15px] font-bold tracking-wide uppercase transition-colors relative ${activeTab === tab.id
+                                    ? 'text-blue-700'
+                                    : 'text-gray-500 hover:text-gray-800'
+                                }`}
                             onClick={() => setActiveTab(tab.id)}
                         >
                             {tab.label}
@@ -168,7 +167,7 @@ const DanhSachNguoiThucHienTGPLPage = () => {
                                 </div>
                                 <div className="pt-3 flex justify-end">
                                     <Link to={`/tro-giup-phap-ly/nguoi-thuc-hien/${worker.id}`} className="text-sm font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 group">
-                                        Xem hồ sơ 
+                                        Xem hồ sơ
                                         <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
                                     </Link>
                                 </div>
@@ -179,7 +178,7 @@ const DanhSachNguoiThucHienTGPLPage = () => {
 
                 {/* Pagination */}
                 {filteredWorkers.length > 0 && (
-                     <div className="mt-8 flex justify-center">
+                    <div className="mt-8 flex justify-center">
                         <div className="flex items-center gap-1">
                             <button className="w-10 h-10 rounded-lg border border-gray-300 bg-white flex items-center justify-center text-gray-400 cursor-not-allowed">
                                 <ChevronLeft size={20} />
