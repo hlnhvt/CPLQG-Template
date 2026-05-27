@@ -353,7 +353,7 @@ const TongRaSoatAIDetailPage = () => {
                         {ai.manuals && ai.manuals.length > 0 && (
                             <div className="mt-12 pt-8 border-t border-gray-100">
                                 <h4 className="text-gray-900 font-bold text-lg mb-6 flex items-center gap-2">
-                                    File hướng dẫn sử dụng
+                                    Hướng dẫn sử dụng
                                 </h4>
                                 <div className="grid grid-cols-1 gap-4">
                                     {ai.manuals.map((doc, idx) => (
