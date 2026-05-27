@@ -22,87 +22,49 @@ const AI_DATA = {
             }
         ],
         content: `
-            <p class="text-base text-justify leading-relaxed mb-6">
-                <strong>C-AI Legal (CLS)</strong> là nền tảng trợ lý ảo pháp luật chuyên sâu do <strong>CMC OpenAI (C-OpenAI)</strong>, một thành viên của Tập đoàn Công nghệ CMC, nghiên cứu và phát triển. Hệ thống được định hướng trở thành giải pháp công nghệ quốc gia tiên phong nhằm hiện thực hóa mục tiêu chuyển đổi số toàn diện (AI-X) trong lĩnh vực pháp luật, hỗ trợ các cơ quan Nhà nước, cán bộ công chức và doanh nghiệp tiếp cận thông tin pháp lý minh bạch, chính xác.
+            <h4 class="text-base font-bold text-gray-800 mt-0 mb-3">
+                1. TỔNG QUAN SẢN PHẨM
+            </h4>
+            <p class="text-base text-justify leading-relaxed mb-6 text-gray-700 indent-8">
+                C-AI Legal là nền tảng trí tuệ nhân tạo pháp lý do CMC OpenAI nghiên cứu và phát triển. Giải pháp được xây dựng chuyên biệt cho hệ thống pháp luật Việt Nam, tự động hóa quy trình quản lý, rà soát và hệ thống hóa văn bản quy phạm pháp luật ở quy mô lớn. Giải pháp giúp các Bộ, ngành, địa phương hoàn thành nhiệm vụ pháp chế nhanh chóng, chính xác và tiết kiệm nguồn lực đáng kể so với phương thức truyền thống.
             </p>
 
-            <div class="my-8 border border-gray-100 rounded-xl overflow-hidden shadow-sm">
-                <img src="/BO NHAN DIEN TONG RA SOAT/cls-preview.webp" alt="Không gian làm việc CLS" class="w-full h-auto object-cover" />
-                <p class="text-xs text-center italic text-gray-500 py-3 bg-gray-50 border-t border-gray-100">
-                    Giao diện tổng quan và bảng điều khiển rà soát mâu thuẫn hệ thống văn bản của C-AI Legal (CLS)
-                </p>
-            </div>
+            <h4 class="text-base font-bold text-gray-800 mt-8 mb-3">
+                2. ĐƯỜNG DẪN TRUY CẬP VÀ QR HƯỚNG DẪN
+            </h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 border border-gray-200 rounded-xl overflow-hidden mt-4 mb-8 shadow-sm">
+                <!-- Left Column: Links and Registration info -->
+                <div class="md:col-span-8 p-6 md:p-8 bg-white border-b md:border-b-0 md:border-r border-gray-200 flex flex-col justify-between">
+                    <div>
+                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">TRUY CẬP SẢN PHẨM</h5>
+                        <p class="text-sm text-gray-600 mb-6">
+                            Link sản phẩm: <a href="https://cls.cmcai.vn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold hover:underline">https://cls.cmcai.vn/</a>
+                        </p>
 
-            <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4 border-l-4 border-red-500 pl-3">
-                Các tính năng đột phá của C-AI Legal
-            </h3>
-            <p class="text-base text-justify leading-relaxed mb-6">
-                C-AI Legal tích hợp sâu công nghệ trí tuệ nhân tạo (xử lý ngôn ngữ tự nhiên NLP, mô hình ngôn ngữ lớn LLM) với các phân hệ chức năng chuyên nghiệp để giải quyết các tác vụ lập pháp phức tạp:
-            </p>
-            <ul class="space-y-4 mb-8">
-                <li class="flex items-start gap-3 text-gray-700">
-                    <span class="p-1 bg-red-100 text-red-600 rounded-full shrink-0 mt-0.5">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                        </svg>
-                    </span>
-                    <div>
-                        <strong>Không gian làm việc thông minh (Workspace):</strong> Tạo lập môi trường làm việc thực tế cho từng dự án, cho phép người dùng chuẩn bị hồ sơ tài liệu, tải lên các văn bản cá nhân hoặc dự thảo luật để rà soát.
+                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">ĐĂNG KÝ SỬ DỤNG CHO ĐỢT TỔNG RÀ SOÁT VBQPPL</h5>
+                        <p class="text-sm text-gray-500 mb-4">
+                            Cơ quan, tổ chức có nhu cầu đăng ký tài khoản vui lòng liên hệ:
+                        </p>
+                        <div class="space-y-1 bg-gray-50 p-4 rounded-lg border border-gray-100">
+                            <p class="text-sm text-gray-800 font-bold">Bà Nguyễn Thị Nghĩa</p>
+                            <p class="text-sm text-gray-600">SĐT: <span class="font-semibold text-gray-800">097.964.2249</span></p>
+                            <p class="text-sm text-gray-600">Email: <a href="mailto:nghiant@cmcai.vn" class="text-blue-600 hover:underline">nghiant@cmcai.vn</a></p>
+                        </div>
                     </div>
-                </li>
-                <li class="flex items-start gap-3 text-gray-700">
-                    <span class="p-1 bg-red-100 text-red-600 rounded-full shrink-0 mt-0.5">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                    </span>
-                    <div>
-                        <strong>Rà soát mâu thuẫn, chồng chéo:</strong> Tính năng cốt lõi giúp tự động quét và đối chiếu chéo các quy định giữa hàng ngàn văn bản quy phạm pháp luật khác nhau, chỉ ra các điểm mâu thuẫn, chồng chéo hoặc trái thẩm quyền một cách tự động, giúp đánh giá tính thống nhất của hệ thống pháp luật.
-                    </div>
-                </li>
-                <li class="flex items-start gap-3 text-gray-700">
-                    <span class="p-1 bg-red-100 text-red-600 rounded-full shrink-0 mt-0.5">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 5h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2z" />
-                        </svg>
-                    </span>
-                    <div>
-                        <strong>So sánh văn bản nâng cao:</strong> Nhận diện nhanh những thay đổi cốt lõi, sự khác biệt giữa các phiên bản soạn thảo (ví dụ: dự thảo so với văn bản chính thức, hoặc các phiên bản sửa đổi, bổ sung qua các năm).
-                    </div>
-                </li>
-                <li class="flex items-start gap-3 text-gray-700">
-                    <span class="p-1 bg-red-100 text-red-600 rounded-full shrink-0 mt-0.5">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </span>
-                    <div>
-                        <strong>Chatbot AI giải đáp 24/7:</strong> Trợ lý hội thoại thông minh hỗ trợ trả lời, giải nghĩa các thuật ngữ pháp lý khó hiểu và trích xuất nguồn văn bản dẫn chiếu tin cậy dựa trên kho dữ liệu tri thức khổng lồ.
-                    </div>
-                </li>
-            </ul>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                <div class="border border-gray-100 rounded-xl overflow-hidden shadow-sm">
-                    <img src="/BO NHAN DIEN TONG RA SOAT/ws1.webp" alt="Giao diện làm việc 1" class="w-full h-auto object-cover" />
-                    <p class="text-xs text-center italic text-gray-500 py-3 bg-gray-50 border-t border-gray-100">
-                        Tính năng tạo Workspace và tải lên tài liệu cá nhân để phân tích
-                    </p>
                 </div>
-                <div class="border border-gray-100 rounded-xl overflow-hidden shadow-sm">
-                    <img src="/BO NHAN DIEN TONG RA SOAT/ws2.webp" alt="Giao diện làm việc 2" class="w-full h-auto object-cover" />
-                    <p class="text-xs text-center italic text-gray-500 py-3 bg-gray-50 border-t border-gray-100">
-                        Chi tiết rà soát mâu thuẫn và chỉ dẫn điều khoản pháp lý tương thích
+                <!-- Right Column: QR Code -->
+                <div class="md:col-span-4 p-6 md:p-8 bg-gray-50 flex flex-col items-center justify-center text-center">
+                    <h5 class="text-xs font-bold text-gray-700 uppercase tracking-wider mb-4">QR HƯỚNG DẪN SỬ DỤNG</h5>
+                    <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm mb-3">
+                        <img src="/AIQR-CMC.png" alt="QR Hướng dẫn sử dụng CLS" class="w-28 h-28 object-contain" />
+                    </div>
+                    <p class="text-[11px] italic text-gray-500 leading-snug">
+                        Quét mã QR để xem tài liệu hướng dẫn sử dụng chi tiết
                     </p>
                 </div>
             </div>
 
-            <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4 border-l-4 border-red-500 pl-3">
-                Công nghệ cốt lõi & Sứ mệnh
-            </h3>
-            <p class="text-base text-justify leading-relaxed mb-6">
-                Nền tảng được vận hành bởi mô hình ngôn ngữ lớn chuyên sâu <strong>CMC-AI-Legal-32B</strong> kết hợp bộ chuẩn đánh giá AI pháp lý <strong>VLegal-Bench</strong> nhằm đo lường và đảm bảo tính chính xác cho các ứng dụng công nghệ pháp lý (LegalTech), đồng hành cùng đất nước khơi thông mọi điểm nghẽn thể chế, khơi dậy mọi nguồn lực phát triển trong kỷ nguyên mới.
-            </p>
         `
     },
     'lex': {
@@ -125,69 +87,77 @@ const AI_DATA = {
             }
         ],
         content: `
-            <p class="text-base text-justify leading-relaxed mb-6">
-                <strong>LEXcentra</strong> là nền tảng trợ lý pháp lý toàn diện ứng dụng Trí tuệ nhân tạo (AI) đột phá, do Công ty Cổ phần <strong>LEXengine</strong> (được sáng lập và điều hành chuyên môn bởi các Thạc sĩ, Luật sư giàu kinh nghiệm, đứng đầu là Thạc sĩ, Luật sư Dương Bảo Trung) nghiên cứu và phát triển. Nền tảng được xây dựng nhằm tối ưu hóa quy trình nghiên cứu, tra cứu và nâng cao hiệu suất xử lý công việc pháp lý hàng ngày thông qua công nghệ xử lý ngôn ngữ tự nhiên (NLP) và học máy (Machine Learning) tiên tiến.
+            <h4 class="text-base font-bold text-gray-800 mt-0 mb-3">
+                1. TỔNG QUAN SẢN PHẨM
+            </h4>
+            <p class="text-base text-gray-700 leading-relaxed mb-4">
+                Tên sản phẩm: <strong>Trợ lý pháp chế AI LEXcentra</strong>
             </p>
-
-            <div class="my-8 border border-gray-100 rounded-xl overflow-hidden shadow-sm">
-                <img src="/BO NHAN DIEN TONG RA SOAT/home_page_top_1.png" alt="Giao diện LEXcentra" class="w-full h-auto object-cover" />
-                <p class="text-xs text-center italic text-gray-500 py-3 bg-gray-50 border-t border-gray-100">
-                    Giao diện Trang chủ và các phân hệ tính năng quản trị thông minh của trợ lý pháp lý toàn diện LEXcentra
-                </p>
-            </div>
-
-            <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4 border-l-4 border-blue-500 pl-3">
-                Các phân hệ chức năng chính của LEXcentra
-            </h3>
-            <ul class="space-y-4 mb-8">
-                <li class="flex items-start gap-3 text-gray-700">
-                    <span class="p-1 bg-blue-100 text-blue-600 rounded-full shrink-0 mt-0.5">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                        </svg>
-                    </span>
-                    <div>
-                        <strong>Tra cứu & Phân tích thông minh:</strong> Tìm kiếm siêu tốc các văn bản quy phạm pháp luật, quyết định xét xử của tòa án, bản án và kho dữ liệu án lệ Việt Nam với độ chính xác cao nhờ các công cụ lọc và liên kết dữ liệu trực quan.
-                    </div>
+            <p class="text-base text-gray-700 leading-relaxed mb-3">
+                Các tính năng chính:
+            </p>
+            <ul class="space-y-2 mb-6 pl-4">
+                <li class="flex items-start gap-2.5 text-gray-700 text-[15px]">
+                    <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 shrink-0"></div>
+                    <span>Soạn thảo văn bản pháp luật & văn bản hành chính</span>
                 </li>
-                <li class="flex items-start gap-3 text-gray-700">
-                    <span class="p-1 bg-blue-100 text-blue-600 rounded-full shrink-0 mt-0.5">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                    </span>
-                    <div>
-                        <strong>Tóm tắt bản án tự động:</strong> Tự động hóa quá trình phân tích và tóm tắt nội dung các bản án dài, bóc tách nhanh các yếu tố cốt lõi như bản chất tranh chấp, lập luận pháp lý của các bên và quyết định cuối cùng của Tòa án, hỗ trợ đắc lực cho luật sư chuẩn bị hồ sơ vụ việc.
-                    </div>
+                <li class="flex items-start gap-2.5 text-gray-700 text-[15px]">
+                    <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 shrink-0"></div>
+                    <span>Rà soát tính hợp hiến, hợp pháp & tính thống nhất của dự thảo văn bản</span>
                 </li>
-                <li class="flex items-start gap-3 text-gray-700">
-                    <span class="p-1 bg-blue-100 text-blue-600 rounded-full shrink-0 mt-0.5">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 5h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2z" />
-                        </svg>
-                    </span>
-                    <div>
-                        <strong>LEXgpt - Trợ lý tư vấn tình huống pháp lý:</strong> Phân hệ trợ lý hội thoại AI chuyên sâu (hoạt động trên nền tảng Web và Zalo OA) cho phép người dùng nhập các tình huống pháp lý thực tế bằng ngôn ngữ tự nhiên để nhận tư vấn, dẫn chiếu điều luật và gợi ý giải pháp tức thì.
-                    </div>
+                <li class="flex items-start gap-2.5 text-gray-700 text-[15px]">
+                    <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 shrink-0"></div>
+                    <span>Hỗ trợ đánh giá tác động chính sách</span>
                 </li>
-                <li class="flex items-start gap-3 text-gray-700">
-                    <span class="p-1 bg-blue-100 text-blue-600 rounded-full shrink-0 mt-0.5">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </span>
-                    <div>
-                        <strong>Soạn thảo & Rà soát văn bản:</strong> Công cụ tự động hỗ trợ rà soát rủi ro pháp lý trong hợp đồng, phát hiện các điều khoản thiếu tính khả thi, chồng chéo và hỗ trợ kiểm soát tính tuân thủ pháp luật nội bộ của doanh nghiệp.
-                    </div>
+                <li class="flex items-start gap-2.5 text-gray-700 text-[15px]">
+                    <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 shrink-0"></div>
+                    <span>Theo dõi & rà soát văn bản pháp luật hiện hành</span>
+                </li>
+                <li class="flex items-start gap-2.5 text-gray-700 text-[15px]">
+                    <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 shrink-0"></div>
+                    <span>Hỗ trợ xử lý sự vụ, khiếu nại, tố cáo & tranh chấp hành chính theo tình huống</span>
+                </li>
+                <li class="flex items-start gap-2.5 text-gray-700 text-[15px]">
+                    <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 shrink-0"></div>
+                    <span>Dịch thuật văn bản pháp lý phục vụ hợp tác quốc tế</span>
                 </li>
             </ul>
 
-            <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4 border-l-4 border-blue-500 pl-3">
-                Ưu điểm nổi bật và khả năng học liên tục
-            </h3>
-            <p class="text-base text-justify leading-relaxed mb-6">
-                Nhờ công nghệ học máy tiên tiến, <strong>LEXcentra</strong> có khả năng học liên tục (Continuous Learning) từ dữ liệu án lệ mới, cập nhật xu hướng xét xử và những thay đổi quy định pháp luật quy phạm quốc gia. Nền tảng giúp tiết kiệm đến 80% thời gian nghiên cứu tài liệu, nâng cao độ chính xác, hỗ trợ đắc lực cho luật sư, doanh nghiệp quản lý rủi ro pháp lý và ra quyết định thể chế tối ưu.
-            </p>
+            <h4 class="text-base font-bold text-gray-800 mt-8 mb-3">
+                2. ĐƯỜNG DẪN TRUY CẬP VÀ QR HƯỚNG DẪN
+            </h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 border border-gray-200 rounded-xl overflow-hidden mt-4 mb-8 shadow-sm">
+                <!-- Left Column: Links and Registration info -->
+                <div class="md:col-span-8 p-6 md:p-8 bg-white border-b md:border-b-0 md:border-r border-gray-200 flex flex-col justify-between">
+                    <div>
+                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">TRUY CẬP SẢN PHẨM</h5>
+                        <p class="text-sm text-gray-600 mb-6">
+                            Link sản phẩm: <a href="https://lexcentra.ai/" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold hover:underline">https://lexcentra.ai/</a>
+                        </p>
+
+                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">ĐĂNG KÝ SỬ DỤNG CHO ĐỢT TỔNG RÀ SOÁT VBQPPL</h5>
+                        <p class="text-sm text-gray-500 mb-4">
+                            Cơ quan, tổ chức có nhu cầu đăng ký tài khoản vui lòng liên hệ:
+                        </p>
+                        <div class="space-y-1 bg-gray-50 p-4 rounded-lg border border-gray-100">
+                            <p class="text-sm text-gray-800 font-bold">Ông/Bà: Phương Uyên</p>
+                            <p class="text-sm text-gray-600">SĐT: <span class="font-semibold text-gray-800">028 7105 4934</span></p>
+                            <p class="text-sm text-gray-600">Email: <a href="mailto:support@lexengine.vn" class="text-blue-600 hover:underline">support@lexengine.vn</a></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column: QR Code -->
+                <div class="md:col-span-4 p-6 md:p-8 bg-gray-50 flex flex-col items-center justify-center text-center">
+                    <h5 class="text-xs font-bold text-gray-700 uppercase tracking-wider mb-4">QR HƯỚNG DẪN SỬ DỤNG</h5>
+                    <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm mb-3">
+                        <img src="/AIQR-Lexcentra.png" alt="QR Hướng dẫn sử dụng Lexcentra" class="w-28 h-28 object-contain" />
+                    </div>
+                    <p class="text-[11px] italic text-gray-500 leading-snug">
+                        Quét mã QR để xem tài liệu hướng dẫn sử dụng chi tiết
+                    </p>
+                </div>
+            </div>
         `
     },
     'blegal': {
@@ -209,62 +179,74 @@ const AI_DATA = {
             }
         ],
         content: `
-            <p class="text-base text-justify leading-relaxed mb-6">
-                <strong>BLegal</strong> là giải pháp Trợ lý ảo AI Pháp luật chuyên sâu do <strong>Tập đoàn Công nghệ Bkav</strong> nghiên cứu và phát triển. Trong bối cảnh Bộ Tư pháp đẩy mạnh ứng dụng trí tuệ nhân tạo (AI), Bkav đã tham gia đồng hành chiến lược, cung cấp hạ tầng công nghệ và giải pháp thuật toán AI tiên tiến phục vụ đắc lực cho công tác rà soát, tra cứu và phân tích hệ thống văn bản quy phạm pháp luật (VBQPPL) quốc gia.
+            <h4 class="text-base font-bold text-gray-800 mt-0 mb-3">
+                1. TỔNG QUAN SẢN PHẨM
+            </h4>
+            <p class="text-base text-gray-700 leading-relaxed mb-4">
+                <strong>Trợ lý số Bkav</strong> là nền tảng trí tuệ nhân tạo chuyên sâu về pháp lý do Bkav nghiên cứu và phát triển với các tính năng cốt lõi:
             </p>
-
-            <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4 border-l-4 border-emerald-500 pl-3">
-                Vai trò và tính năng then chốt của trợ lý số BLegal
-            </h3>
-            <ul class="space-y-4 mb-8">
-                <li class="flex items-start gap-3 text-gray-700">
-                    <span class="p-1 bg-emerald-100 text-emerald-600 rounded-full shrink-0 mt-0.5">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                        </svg>
-                    </span>
+            <ul class="space-y-4 mb-6 pl-4">
+                <li class="flex items-start gap-2.5 text-gray-700 text-[15px]">
+                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2.5 shrink-0"></div>
                     <div>
-                        <strong>Tích hợp chặt chẽ với Cơ sở dữ liệu quốc gia về VBQPPL:</strong> Kết nối và đồng bộ trực tiếp với kho dữ liệu pháp luật quốc gia để đảm bảo thông tin trả lời luôn có độ tin cậy tuyệt đối và cập nhật thời gian thực về tình trạng hiệu lực văn bản.
+                        <strong>Tra cứu thông minh:</strong> Tìm kiếm chính xác nội dung dựa trên kho cơ sở dữ liệu pháp luật khổng lồ.
                     </div>
                 </li>
-                <li class="flex items-start gap-3 text-gray-700">
-                    <span class="p-1 bg-emerald-100 text-emerald-600 rounded-full shrink-0 mt-0.5">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                    </span>
+                <li class="flex items-start gap-2.5 text-gray-700 text-[15px]">
+                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2.5 shrink-0"></div>
                     <div>
-                        <strong>Tự động hóa các nhiệm vụ rà soát lặp đi lặp lại:</strong> Hỗ trợ cán bộ chuyên trách giảm tải khối lượng công việc rà soát thủ công khổng lồ, bóc tách nhanh các quy phạm, điều khoản chồng chéo theo từ khóa chính sách phức tạp.
+                        <strong>Soạn thảo & Góp ý:</strong> Hỗ trợ đắc lực trong việc xây dựng và đóng góp ý kiến cho các dự thảo văn bản quy phạm pháp luật.
                     </div>
                 </li>
-                <li class="flex items-start gap-3 text-gray-700">
-                    <span class="p-1 bg-emerald-100 text-emerald-600 rounded-full shrink-0 mt-0.5">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 5h10a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2z" />
-                        </svg>
-                    </span>
+                <li class="flex items-start gap-2.5 text-gray-700 text-[15px]">
+                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2.5 shrink-0"></div>
                     <div>
-                        <strong>Phân tích tính đồng bộ thể chế:</strong> Trợ giúp chỉ ra điểm xung đột, không đồng nhất tiềm ẩn giữa các thông tư hướng dẫn với nghị định quy định chi tiết và các luật ban hành mới.
+                        <strong>Thẩm định chặt chẽ:</strong> Tự động hóa quy trình kiểm tra, đánh giá nội dung văn bản theo các tiêu chuẩn pháp lý quy định.
                     </div>
                 </li>
-                <li class="flex items-start gap-3 text-gray-700">
-                    <span class="p-1 bg-emerald-100 text-emerald-600 rounded-full shrink-0 mt-0.5">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </span>
+                <li class="flex items-start gap-2.5 text-gray-700 text-[15px]">
+                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-2.5 shrink-0"></div>
                     <div>
-                        <strong>Giao diện hội thoại thông minh hỗ trợ Dịch vụ công:</strong> Trợ lý số dễ dàng tư vấn và giải đáp các thủ tục hành chính công trực tuyến cấp bộ và cấp tỉnh, giảm tải áp lực cho cán bộ hành chính tại bộ phận một cửa và giúp công dân tiếp cận pháp luật nhanh chóng.
+                        <strong>Phân tích chuyên sâu:</strong> Rà soát các điểm chồng chéo, mâu thuẫn; đánh giá khó khăn, vướng mắc và tính khả thi của văn bản khi áp dụng vào thực tế.
                     </div>
                 </li>
             </ul>
 
-            <h3 class="text-xl font-bold text-gray-900 mt-8 mb-4 border-l-4 border-emerald-500 pl-3">
-                Cánh tay nối dài cho các chuyên gia Tư pháp
-            </h3>
-            <p class="text-base text-justify leading-relaxed mb-6">
-                Hệ thống <strong>BLegal</strong> của Bkav đóng vai trò là một trợ thủ đắc lực giúp tăng tốc hiệu quả rà soát văn bản lên gấp nhiều lần. Trợ lý số này được thiết kế để đảm nhận các công tác kỹ thuật lặp lại, nhường lại các công đoạn đánh giá chính sách và suy luận pháp lý cao cấp cho chuyên gia lập pháp, đảm bảo sự phối hợp hoàn mỹ giữa trí tuệ nhân tạo và kinh nghiệm thực tiễn để khơi thông điểm nghẽn thể chế lập pháp quốc gia.
-            </p>
+            <h4 class="text-base font-bold text-gray-800 mt-8 mb-3">
+                2. ĐƯỜNG DẪN TRUY CẬP VÀ QR HƯỚNG DẪN
+            </h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 border border-gray-200 rounded-xl overflow-hidden mt-4 mb-8 shadow-sm">
+                <!-- Left Column: Links and Registration info -->
+                <div class="md:col-span-8 p-6 md:p-8 bg-white border-b md:border-b-0 md:border-r border-gray-200 flex flex-col justify-between">
+                    <div>
+                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">TRUY CẬP SẢN PHẨM</h5>
+                        <p class="text-sm text-gray-600 mb-6">
+                            Link sản phẩm: <a href="https://chatbot.demozone.vn" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold hover:underline">https://chatbot.demozone.vn</a>
+                        </p>
+
+                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">ĐĂNG KÝ SỬ DỤNG CHO ĐỢT TỔNG RÀ SOÁT VBQPPL</h5>
+                        <p class="text-sm text-gray-500 mb-4">
+                            Cơ quan, tổ chức có nhu cầu đăng ký tài khoản vui lòng liên hệ:
+                        </p>
+                        <div class="space-y-1 bg-gray-50 p-4 rounded-lg border border-gray-100">
+                            <p class="text-sm text-gray-800 font-bold">Ông: Trần Nhân Anh</p>
+                            <p class="text-sm text-gray-600">SĐT: <span class="font-semibold text-gray-800">0917509665</span></p>
+                            <p class="text-sm text-gray-600">Email: <a href="mailto:anhtn@bkav.com" class="text-blue-600 hover:underline">anhtn@bkav.com</a></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column: QR Code -->
+                <div class="md:col-span-4 p-6 md:p-8 bg-gray-50 flex flex-col items-center justify-center text-center">
+                    <h5 class="text-xs font-bold text-gray-700 uppercase tracking-wider mb-4">QR HƯỚNG DẪN SỬ DỤNG</h5>
+                    <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm mb-3">
+                        <img src="/AIQR-BKAV.png" alt="QR Hướng dẫn sử dụng BLegal" class="w-28 h-28 object-contain" />
+                    </div>
+                    <p class="text-[11px] italic text-gray-500 leading-snug">
+                        Quét mã QR để xem tài liệu hướng dẫn sử dụng chi tiết
+                    </p>
+                </div>
+            </div>
         `
     }
 };
@@ -343,7 +325,7 @@ const TongRaSoatAIDetailPage = () => {
                     </div>
 
                     {/* Article Content */}
-                    <div className="p-8">
+                    <div className="px-8 pt-5 pb-8">
                         <div
                             className="prose max-w-none text-gray-800 text-[16px] leading-relaxed mb-6"
                             dangerouslySetInnerHTML={{ __html: ai.content }}
