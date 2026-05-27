@@ -811,7 +811,7 @@ const TongRaSoatPage = () => {
                             <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-100 animate-fadeIn mt-2">
                                 <div className="border-b border-gray-200 pb-6 mb-8 bg-white">
                                     <div className="md:px-2 pt-2 text-gray-800 leading-relaxed text-[15px] space-y-4">
-                                        <h2 className="text-xl font-bold text-[#ea492a] uppercase mb-4 leading-snug">
+                                        <h2 className="text-xl font-bold text-[#ea492a] text-center uppercase mb-8 leading-snug">
                                             TRỢ LÝ ẢO TRÍ TUỆ NHÂN TẠO (AI) PHỤC VỤ CÔNG TÁC TỔNG RÀ SOÁT VĂN BẢN QUY PHẠM PHÁP LUẬT
                                         </h2>
                                         <p className="text-base text-justify">
