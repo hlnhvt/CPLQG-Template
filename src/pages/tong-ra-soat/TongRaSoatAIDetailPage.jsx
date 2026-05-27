@@ -25,7 +25,7 @@ const AI_DATA = {
             <h4 class="text-base font-bold text-gray-800 mt-0 mb-3">
                 1. TỔNG QUAN SẢN PHẨM
             </h4>
-            <p class="text-base text-justify leading-relaxed mb-6 text-gray-700 indent-8">
+            <p class="text-base text-justify leading-relaxed mb-6 text-gray-700">
                 C-AI Legal là nền tảng trí tuệ nhân tạo pháp lý do CMC OpenAI nghiên cứu và phát triển. Giải pháp được xây dựng chuyên biệt cho hệ thống pháp luật Việt Nam, tự động hóa quy trình quản lý, rà soát và hệ thống hóa văn bản quy phạm pháp luật ở quy mô lớn. Giải pháp giúp các Bộ, ngành, địa phương hoàn thành nhiệm vụ pháp chế nhanh chóng, chính xác và tiết kiệm nguồn lực đáng kể so với phương thức truyền thống.
             </p>
 
