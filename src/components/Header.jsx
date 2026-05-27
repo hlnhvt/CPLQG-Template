@@ -79,9 +79,9 @@ const Header = () => {
 
                 <div className="w-full max-w-[1350px] mx-auto px-4 relative flex items-center justify-between h-[50px]">
                     {/* Left Logo */}
-                    <Link to={displayUser ? "/ca-nhan/trang-chu" : "/"} className="flex items-center gap-2">
-                        <img src="/logo.png" alt="Quốc huy Việt Nam" className="w-11 h-11 object-contain shrink-0 drop-shadow-md" />
-                        <h1 className="text-base md:text-lg font-bold uppercase drop-shadow-sm whitespace-nowrap">
+                    <Link to={displayUser ? "/ca-nhan/trang-chu" : "/"} className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                        <img src="/logo.png" alt="Quốc huy Việt Nam" className="w-8 h-8 sm:w-11 sm:h-11 object-contain shrink-0 drop-shadow-md" />
+                        <h1 className="text-[12px] sm:text-base md:text-lg font-bold uppercase drop-shadow-sm whitespace-nowrap">
                             CỔNG PHÁP LUẬT QUỐC GIA
                         </h1>
                     </Link>

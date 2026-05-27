@@ -262,18 +262,18 @@ const TongRaSoatPage = () => {
     return (
         <div className="bg-[#f4f7fb] min-h-screen flex flex-col font-sans">
 
-            <div className="container mx-auto pt-8 max-w-[1368px]">
-                <div className="mb-8 rounded-lg overflow-hidden relative shadow-md group cursor-pointer border border-gray-100 mx-auto" style={{ maxWidth: '1368px', height: '153px' }}>
+            <div className="container mx-auto pt-4 md:pt-8 max-w-[1368px] px-4 md:px-0">
+                <div className="mb-4 md:mb-8 rounded-lg overflow-hidden relative shadow-sm md:shadow-md group cursor-pointer border border-gray-100 mx-auto h-[60px] sm:h-[100px] md:h-[153px] w-full">
                     <img
                         src="/BO NHAN DIEN TONG RA SOAT/2.png"
                         alt="Đưa Nghị quyết đại hội XIV của Đảng vào cuộc sống"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-fill md:object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                 </div>
             </div>
 
             {/* Horizontal Navigation Tabs */}
-            <div className="container mx-auto max-w-[1368px]">
+            <div className="container mx-auto max-w-[1368px] px-4 md:px-0">
                 <div className="bg-white border border-gray-200 shadow-sm rounded-2xl overflow-x-auto no-scrollbar">
                     <div className="flex justify-start md:justify-evenly items-center min-w-max md:min-w-0 w-full px-4 py-4 gap-2 md:gap-0">
                         {tabs.map((tab) => {
