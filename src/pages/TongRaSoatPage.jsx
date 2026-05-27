@@ -848,7 +848,7 @@ const TongRaSoatPage = () => {
                                     {/* AI 2: CMC AI - CLS */}
                                     <div className="border border-red-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-red-50/50 text-center flex flex-col items-center group">
                                         <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
-                                            <img src="/BO NHAN DIEN TONG RA SOAT/COpenAIlogo.svg" alt="Logo CMC AI - CLS" className="h-14 w-auto object-contain group-hover:scale-110 transition-transform duration-300" />
+                                             <img src="/BO NHAN DIEN TONG RA SOAT/Logo C-AI Legal.png" alt="Logo C-AI Legal" className="h-14 w-auto object-contain rounded-lg group-hover:scale-110 transition-transform duration-300" />
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">C-AI Legal</h3>
                                         {/* <p className="text-xs text-gray-500 mb-4 px-2">Hệ thống Trợ lý ảo AI thông minh giúp rà soát mâu thuẫn, kiểm tra tính hợp pháp và tính đồng bộ của hệ thống văn bản pháp luật.</p> */}

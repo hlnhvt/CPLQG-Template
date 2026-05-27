@@ -7,7 +7,7 @@ const AI_DATA = {
         id: 'cls',
         title: 'C-AI Legal',
         shortDesc: 'Hệ thống Trợ lý ảo AI thông minh giúp rà soát mâu thuẫn, kiểm tra tính hợp pháp và tính đồng bộ của hệ thống văn bản pháp luật.',
-        logo: '/BO NHAN DIEN TONG RA SOAT/COpenAIlogo.svg',
+        logo: '/BO NHAN DIEN TONG RA SOAT/Logo C-AI Legal.png',
         url: 'https://cls.cmcai.vn/',
         color: 'red',
         gradient: 'from-red-500 to-orange-600',
