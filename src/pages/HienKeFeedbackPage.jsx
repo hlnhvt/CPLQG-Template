@@ -4,7 +4,7 @@ import {
     ChevronRight, Send, MapPin, Phone, Mail,
     Facebook, Linkedin, MessageCircle, Share2,
     ChevronDown, ChevronUp, ExternalLink, ArrowUpRight,
-    Heart, ArrowRight
+    Heart, ArrowRight, FileText, Settings, Award
 } from 'lucide-react';
 
 // ======================== MOCK DATA ========================
@@ -65,6 +65,7 @@ const AccordionItem = ({ question, answer }) => {
 export default function HienKeFeedbackPage() {
     const [activeSection, setActiveSection] = useState('gioi-thieu');
     const [formData, setFormData] = useState({ name: '', email: '', topic: 'hien-ke-cua-ban', message: '' });
+    const [showProcessFlow, setShowProcessFlow] = useState(false);
 
     // Handle scroll to highlight active sidebar item
     useEffect(() => {
@@ -348,17 +349,94 @@ export default function HienKeFeedbackPage() {
                                     </div>
                                     <ExternalLink className="absolute bottom-4 right-4 opacity-20" size={48} />
                                 </a>
-                                <a
-                                    href="#"
-                                    className="p-6 bg-white border border-gray-200 rounded-2xl text-gray-900 group hover:border-amber-400 transition-all shadow-sm"
+                                <button
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setShowProcessFlow(!showProcessFlow);
+                                    }}
+                                    className={`p-6 text-left border rounded-2xl text-gray-900 group transition-all shadow-sm cursor-pointer ${showProcessFlow ? 'bg-amber-50/60 border-amber-400 ring-2 ring-amber-400/20' : 'bg-white border-gray-200 hover:border-amber-400'}`}
                                 >
-                                    <h4 className="font-bold text-[18px] mb-2 text-[#0f172a] flex items-center gap-2">
-                                        Quy trình tiếp nhận & xử lý
-                                        <ArrowUpRight size={18} />
+                                    <h4 className="font-bold text-[18px] mb-2 text-[#0f172a] flex items-center justify-between w-full">
+                                        <span className="flex items-center gap-2">
+                                            Quy trình tiếp nhận & xử lý
+
+                                        </span>
+                                        <ArrowUpRight size={18} className="text-gray-400 group-hover:text-amber-500 transition-colors" />
                                     </h4>
                                     <p className="text-gray-500 text-[14px] leading-relaxed">Hướng dẫn chi tiết về các bước sau khi bạn gửi hiến kế thành công.</p>
-                                </a>
+                                </button>
                             </div>
+
+                            {showProcessFlow && (
+                                <div className="mb-12 p-8 bg-gradient-to-br from-white to-blue-50/20 border border-blue-100 rounded-3xl shadow-xl shadow-blue-900/5 animate-fadeIn relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100/10 rounded-full -mr-32 -mt-32 blur-3xl pointer-events-none" />
+                                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-100/10 rounded-full -ml-32 -mb-32 blur-3xl pointer-events-none" />
+
+                                    <div className="relative z-10">
+                                        <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
+                                            <div>
+                                                <h4 className="text-[20px] font-bold text-gray-900">Sơ đồ quy trình tiếp nhận & xử lý hiến kế</h4>
+                                                <p className="text-gray-500 text-[13.5px] mt-1">Các bước từ lúc tiếp nhận ý kiến đóng góp cho đến khi xem xét hỗ trợ, tài trợ phát triển sáng kiến.</p>
+                                            </div>
+                                            <button
+                                                onClick={() => setShowProcessFlow(false)}
+                                                className="text-gray-400 hover:text-gray-600 transition-colors p-2 hover:bg-gray-100 rounded-full"
+                                            >
+                                                <ChevronUp size={20} />
+                                            </button>
+                                        </div>
+
+                                        <div className="relative mt-12 mb-4">
+                                            {/* Connector line for Desktop */}
+                                            <div className="hidden md:block absolute top-[48px] left-[16.67%] right-[16.67%] h-[3px] bg-gradient-to-r from-blue-300 via-blue-500 to-amber-400 rounded-full" />
+
+                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+                                                {/* Step 1 */}
+                                                <div className="flex flex-col items-center text-center group relative">
+                                                    <div className="w-24 h-24 rounded-full bg-blue-50 border-4 border-white shadow-md flex items-center justify-center text-blue-600 font-extrabold text-[24px] mb-6 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:border-blue-100 shrink-0 relative z-20">
+                                                        <FileText size={32} className="group-hover:rotate-12 transition-transform duration-300" />
+                                                        <span className="absolute -top-1 -right-1 w-6 h-6 bg-blue-600 text-white rounded-full text-[11px] flex items-center justify-center border-2 border-white shadow-sm font-bold">1</span>
+                                                    </div>
+                                                    <h5 className="text-[17px] font-bold text-gray-950 mb-3 group-hover:text-blue-700 transition-colors text-center">
+                                                        Ghi nhận ý kiến
+                                                    </h5>
+                                                    <p className="text-[14px] text-gray-600 leading-relaxed text-justify w-full">
+                                                        Qua biểu mẫu trực tuyến, diễn đàn, email.
+                                                    </p>
+                                                </div>
+
+                                                {/* Step 2 */}
+                                                <div className="flex flex-col items-center text-center group relative">
+                                                    <div className="w-24 h-24 rounded-full bg-blue-50 border-4 border-white shadow-md flex items-center justify-center text-blue-600 font-extrabold text-[24px] mb-6 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:border-blue-100 shrink-0 relative z-20">
+                                                        <Settings size={32} className="group-hover:rotate-45 transition-transform duration-500" />
+                                                        <span className="absolute -top-1 -right-1 w-6 h-6 bg-blue-600 text-white rounded-full text-[11px] flex items-center justify-center border-2 border-white shadow-sm font-bold">2</span>
+                                                    </div>
+                                                    <h5 className="text-[17px] font-bold text-gray-950 mb-3 group-hover:text-blue-700 transition-colors text-center">
+                                                        Xử lý kịp thời
+                                                    </h5>
+                                                    <p className="text-[14px] text-gray-600 leading-relaxed text-justify w-full">
+                                                        Các ý kiến, sáng kiến sẽ được tiếp nhận, phân loại, phản hồi và được chuyển đến cơ quan chuyên môn nghiên cứu, đánh giá, xử lý.
+                                                    </p>
+                                                </div>
+
+                                                {/* Step 3 */}
+                                                <div className="flex flex-col items-center text-center group relative">
+                                                    <div className="w-24 h-24 rounded-full bg-amber-50 border-4 border-white shadow-md flex items-center justify-center text-amber-600 font-extrabold text-[24px] mb-6 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:border-amber-100 shrink-0 relative z-20">
+                                                        <Award size={32} className="group-hover:scale-110 transition-transform duration-300" />
+                                                        <span className="absolute -top-1 -right-1 w-6 h-6 bg-amber-500 text-white rounded-full text-[11px] flex items-center justify-center border-2 border-white shadow-sm font-bold">3</span>
+                                                    </div>
+                                                    <h5 className="text-[17px] font-bold text-gray-950 mb-3 group-hover:text-amber-700 transition-colors text-center">
+                                                        Tài trợ hiến kế
+                                                    </h5>
+                                                    <p className="text-[14px] text-gray-600 leading-relaxed text-justify w-full">
+                                                        Những ý kiến, sáng kiến đề xuất pháp luật có thể được xem xét hỗ trợ, tài trợ bởi Quỹ Hỗ trợ hoạt động xây dựng chính sách, pháp luật.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
 
                             <div className="space-y-4">
                                 <h3 className="text-[18px] font-bold text-gray-900 mb-6 flex items-center gap-2">
