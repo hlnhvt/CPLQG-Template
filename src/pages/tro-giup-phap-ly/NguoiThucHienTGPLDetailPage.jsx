@@ -64,8 +64,13 @@ const NguoiThucHienTGPLDetailPage = () => {
                         <div className="flex-1 text-center sm:text-left pt-2 sm:pt-16">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                                 <div>
-                                    <h1 className="text-3xl font-bold text-gray-900 mb-1">{worker.name}</h1>
-                                    <p className="text-[#1e3a8a] font-bold text-lg mb-2">{worker.title}</p>
+                                    <h1 className="text-3xl font-bold text-gray-900 mb-1.5">{worker.name}</h1>
+                                    <div className="mb-3">
+                                        <Link to={`/tro-giup-phap-ly/to-chuc/${worker.orgId}`} className="inline-flex items-center gap-1.5 text-[#1e3a8a] hover:text-blue-600 font-semibold text-lg transition-colors">
+                                            <Briefcase size={18} className="text-[#1e3a8a]" />
+                                            {worker.org}
+                                        </Link>
+                                    </div>
                                     <div className="inline-flex items-center px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold rounded uppercase tracking-wide">
                                         {worker.status}
                                     </div>
@@ -87,13 +92,6 @@ const NguoiThucHienTGPLDetailPage = () => {
                                     <div>
                                         <p className="text-xs text-gray-500 mb-0.5">Mã số thẻ</p>
                                         <p className="font-bold text-gray-900">{worker.code}</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start gap-3">
-                                    <Briefcase size={18} className="text-gray-400 mt-0.5" />
-                                    <div>
-                                        <p className="text-xs text-gray-500 mb-0.5">Kinh nghiệm nghề nghiệp</p>
-                                        <p className="font-bold text-gray-900">{worker.experience}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
@@ -123,62 +121,21 @@ const NguoiThucHienTGPLDetailPage = () => {
 
                     {/* Right Column - Details */}
                     <div className="md:col-span-2 space-y-6">
-                        
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
-                            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
-                                <UserCircle2 size={20} className="text-[#1e3a8a]" />
-                                <h2 className="text-lg font-bold text-gray-900">Giới thiệu bản thân</h2>
-                            </div>
-                            <div className="p-6">
-                                <p className="text-gray-700 leading-relaxed text-[15px] text-justify mb-6">
-                                    {worker.bio}
-                                </p>
-                                
-                                {worker.achievements && worker.achievements.length > 0 && (
-                                    <>
-                                        <h3 className="text-[15px] font-bold text-gray-800 mb-3 block">Thành tích nổi bật:</h3>
-                                        <ul className="space-y-2">
-                                            {worker.achievements.map((item, idx) => (
-                                                <li key={idx} className="flex items-start gap-2.5 text-gray-700 text-[15px]">
-                                                    <div className="w-1.5 h-1.5 rounded-full bg-yellow-400 mt-2 shrink-0"></div>
-                                                    <span>{item}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </>
-                                )}
-                            </div>
-                        </div>
 
                         <div className="bg-white rounded-xl shadow-sm border border-gray-200">
                             <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
                                 <Briefcase size={20} className="text-[#1e3a8a]" />
                                 <h2 className="text-lg font-bold text-gray-900">Thông tin hoạt động</h2>
                             </div>
-                            <div className="p-6 space-y-6">
-                                <div>
-                                    <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Tổ chức trực thuộc</h3>
-                                    <Link to={`/tro-giup-phap-ly/to-chuc/${worker.orgId}`} className="flex items-center gap-3 p-4 rounded-lg border border-blue-100 bg-blue-50/50 hover:bg-blue-50 transition-colors group">
-                                        <div className="w-10 h-10 rounded bg-white flex items-center justify-center shrink-0 border border-blue-100">
-                                            <Briefcase size={20} className="text-blue-600" />
-                                        </div>
-                                        <div>
-                                            <p className="font-bold text-[#1e3a8a] group-hover:text-blue-600 transition-colors">{worker.org}</p>
-                                            <p className="text-sm text-gray-500 mt-0.5 flex items-center gap-1"><MapPin size={14}/> {worker.province}</p>
-                                        </div>
-                                    </Link>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Lĩnh vực chuyên môn</h3>
-                                    <div className="flex flex-wrap gap-2">
-                                        {worker.fields.map((field, idx) => (
-                                            <span key={idx} className="inline-flex items-center px-3 py-1.5 rounded-md text-[13px] font-medium bg-gray-50 text-gray-700 border border-gray-200">
-                                                <CheckCircle size={14} className="mr-1.5 shrink-0 text-emerald-500" />
-                                                {field}
-                                            </span>
-                                        ))}
-                                    </div>
+                            <div className="p-6">
+                                <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Lĩnh vực chuyên môn</h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {worker.fields.map((field, idx) => (
+                                        <span key={idx} className="inline-flex items-center px-3 py-1.5 rounded-md text-[13px] font-medium bg-gray-50 text-gray-700 border border-gray-200">
+                                            <CheckCircle size={14} className="mr-1.5 shrink-0 text-emerald-500" />
+                                            {field}
+                                        </span>
+                                    ))}
                                 </div>
                             </div>
                         </div>
