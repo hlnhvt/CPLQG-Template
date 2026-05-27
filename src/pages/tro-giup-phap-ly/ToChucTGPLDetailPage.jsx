@@ -79,20 +79,13 @@ const ToChucTGPLDetailPage = () => {
                     {/* Left Col - Details */}
                     <div className="flex-1 space-y-6">
                         
-                        {/* Giới thiệu */}
+                        {/* Lĩnh vực Trợ giúp pháp lý */}
                         <div className="bg-white rounded-xl shadow-sm border border-gray-200">
                             <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
-                                <FileText size={20} className="text-[#1e3a8a]" />
-                                <h2 className="text-lg font-bold text-gray-900">Giới thiệu chung</h2>
+                                <CheckCircle size={20} className="text-[#1e3a8a]" />
+                                <h2 className="text-lg font-bold text-gray-900">Lĩnh vực Trợ giúp pháp lý</h2>
                             </div>
                             <div className="p-6">
-                                <p className="text-gray-700 leading-relaxed text-[15px] mb-6 text-justify">
-                                    {org.description}
-                                </p>
-                                
-                                <h3 className="text-[15px] font-bold text-gray-800 mb-4 border-l-4 border-emerald-500 pl-3">
-                                    Lĩnh vực Trợ giúp pháp lý
-                                </h3>
                                 <div className="flex flex-wrap gap-2">
                                     {org.fields.map((field, idx) => (
                                         <span key={idx} className="inline-flex items-center px-3 py-1.5 rounded-md text-[13px] font-medium bg-blue-50 text-blue-700 border border-blue-100 transition-colors hover:bg-blue-100 cursor-default">
@@ -118,6 +111,10 @@ const ToChucTGPLDetailPage = () => {
                                 <div>
                                     <p className="text-sm text-gray-500 font-medium mb-1">Số lượng nhân sự TGPL</p>
                                     <p className="font-bold text-gray-900">{org.memberCount} Người</p>
+                                </div>
+                                <div className="md:col-span-2 border-t border-gray-100 pt-4">
+                                    <p className="text-sm text-gray-500 font-medium mb-1">Loại hình tổ chức</p>
+                                    <p className="font-bold text-[#1e3a8a] text-[15px]">{org.type}</p>
                                 </div>
                             </div>
                         </div>
@@ -151,13 +148,8 @@ const ToChucTGPLDetailPage = () => {
                                         <Phone size={20} className="text-blue-600" />
                                     </div>
                                     <div>
-                                        <p className="text-xs uppercase font-bold text-gray-400 mb-1 tracking-wider">Điện thoại / Hotline</p>
+                                        <p className="text-xs uppercase font-bold text-gray-400 mb-1 tracking-wider">Điện thoại</p>
                                         <p className="text-[16px] font-bold text-gray-900">{org.phone}</p>
-                                        {org.hotline && (
-                                            <p className="text-[14px] font-bold text-red-600 mt-0.5 flex items-center gap-1">
-                                                Hotline: {org.hotline}
-                                            </p>
-                                        )}
                                     </div>
                                 </div>
 
@@ -181,22 +173,6 @@ const ToChucTGPLDetailPage = () => {
                                     </div>
                                 </div>
 
-                                <div className="border-t border-gray-100 pt-6">
-                                    <div className="flex items-start gap-4 bg-gray-50 p-4 rounded-lg border border-gray-100">
-                                        <Clock size={20} className="text-gray-500 shrink-0" />
-                                        <div>
-                                            <p className="text-xs uppercase font-bold text-gray-500 mb-1 tracking-wider">Giờ làm việc</p>
-                                            <p className="text-sm font-medium text-gray-700 leading-relaxed">{org.workingHours}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            
-                            <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 rounded-b-xl flex gap-3">
-                                <button className="flex-1 bg-white border border-blue-200 text-blue-700 py-2.5 rounded-lg font-bold text-sm hover:bg-blue-50 transition-colors shadow-sm">
-                                    Xem vị trí (Bản đồ)
-                                </button>
                             </div>
                         </div>
                     </div>

@@ -274,8 +274,8 @@ const TongRaSoatPage = () => {
 
             {/* Horizontal Navigation Tabs */}
             <div className="container mx-auto max-w-[1368px]">
-                <div className="bg-white border border-gray-200 shadow-sm rounded-2xl overflow-hidden">
-                    <div className="flex justify-evenly items-center w-full px-2 py-4">
+                <div className="bg-white border border-gray-200 shadow-sm rounded-2xl overflow-x-auto no-scrollbar">
+                    <div className="flex justify-start md:justify-evenly items-center min-w-max md:min-w-0 w-full px-4 py-4 gap-2 md:gap-0">
                         {tabs.map((tab) => {
                             const isActive = activeTab === tab.id;
                             return (
