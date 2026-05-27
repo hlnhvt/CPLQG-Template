@@ -201,7 +201,7 @@ const TongRaSoatPage = () => {
         { id: 'chi-dao-huong-dan', label: 'Chỉ đạo, hướng dẫn nghiệp vụ ' },
         { id: 'van-ban-tai-lieu', label: 'Văn bản, tài liệu' },
         { id: 'he-thong-thong-tin', label: 'Hệ thống thông tin, báo cáo' },
-        { id: 'ai-phap-luat', label: 'AI Pháp luật' }
+        { id: 'ai-phap-luat', label: 'AI hỗ trợ rà soát' }
     ];
 
     const [activeNewsTab, setActiveNewsTab] = useState('trung-uong');
@@ -812,7 +812,7 @@ const TongRaSoatPage = () => {
                                 <div className="border-b border-gray-200 pb-6 mb-8 bg-white">
                                     <div className="md:px-2 pt-2 text-gray-800 leading-relaxed text-[15px] space-y-4">
                                         <h2 className="text-xl font-bold text-[#ea492a] uppercase mb-4 leading-snug">
-                                            TRỢ LÝ ẢO TRÍ TUỆ NHÂN TẠO (AI) PHỤC VỤ CÔNG TÁC RÀ SOÁT PHÁP LUẬT
+                                            TRỢ LÝ ẢO TRÍ TUỆ NHÂN TẠO (AI) PHỤC VỤ CÔNG TÁC TỔNG RÀ SOÁT VĂN BẢN QUY PHẠM PHÁP LUẬT
                                         </h2>
                                         <p className="text-base text-justify">
                                             Trong bối cảnh đẩy mạnh xây dựng Nhà nước pháp quyền xã hội chủ nghĩa và hội nhập quốc tế sâu rộng, việc đổi mới, nâng cao chất lượng công tác xây dựng và tổ chức thi hành pháp luật là nhiệm vụ trọng tâm được đặt ra tại Nghị quyết số 66-NQ/TW của Bộ Chính trị. Để đáp ứng yêu cầu khắt khe của kỷ nguyên mới - kỷ nguyên vươn mình của dân tộc Việt Nam, việc ứng dụng Trí tuệ nhân tạo (AI) và các mô hình ngôn ngữ lớn chuyên sâu về pháp luật là bước đi đột phá mang tính chiến lược. Công nghệ AI thế hệ mới đóng vai trò là "cánh tay nối dài" của các chuyên gia pháp lý, cán bộ pháp chế và Ban Chỉ đạo rà soát. Hệ thống có khả năng tự động hóa quy trình phân tích hàng vạn văn bản, nhận diện và bóc tách cấu trúc pháp lý phức tạp trong thời gian tính bằng giây.
@@ -824,14 +824,14 @@ const TongRaSoatPage = () => {
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    {/* AI 1: AI Luật - LuatVietnam.vn */}
+                                    {/* AI 1: CMC AI - CLS */}
                                     <div className="border border-red-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-red-50/50 text-center flex flex-col items-center group">
                                         <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
-                                            <img src="/logo.png" alt="Logo LuatVietnam" className="h-14 w-auto object-contain group-hover:scale-110 transition-transform duration-300" />
+                                            <img src="/BO NHAN DIEN TONG RA SOAT/COpenAIlogo.svg" alt="Logo CMC AI - CLS" className="h-14 w-auto object-contain group-hover:scale-110 transition-transform duration-300" />
                                         </div>
-                                        <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">AI Luật - LuatVietnam.vn</h3>
-                                        <p className="text-xs text-gray-500 mb-4 px-2">Trợ lý ảo hỗ trợ tra cứu nhanh văn bản, phân tích hiệu lực pháp lý và giải đáp các câu hỏi pháp luật phức tạp.</p>
-                                        <a href="https://luatvietnam.vn" target="_blank" rel="noreferrer" className="mt-auto bg-white border border-gray-500 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
+                                        <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">C-Open AI - CLS</h3>
+                                        <p className="text-xs text-gray-500 mb-4 px-2">Hệ thống Trợ lý ảo AI thông minh giúp rà soát mâu thuẫn, kiểm tra tính hợp pháp và tính đồng bộ của hệ thống văn bản pháp luật.</p>
+                                        <a href="https://cls.cmcai.vn/" target="_blank" rel="noopener noreferrer" className="mt-auto bg-white border border-gray-500 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
                                             Truy cập
                                         </a>
                                     </div>
@@ -839,11 +839,11 @@ const TongRaSoatPage = () => {
                                     {/* AI 2: AI LEXcentra */}
                                     <div className="border border-blue-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-blue-50/50 text-center flex flex-col items-center group">
                                         <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
-                                            <img src="/BO NHAN DIEN TONG RA SOAT/logo-lex.svg" alt="Logo LEXcentra" className="h-12 w-auto object-contain group-hover:scale-110 transition-transform duration-300 brightness-0" />
+                                            <img src="/BO NHAN DIEN TONG RA SOAT/logo-lex.svg" alt="Logo LEXcentra" className="h-9 w-auto object-contain group-hover:scale-110 transition-transform duration-300 brightness-0" />
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">AI LEXcentra</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Hệ thống phân tích rủi ro pháp lý, rà soát tính đồng bộ, mâu thuẫn của văn bản và đề xuất phương án tối ưu hóa điều khoản.</p>
-                                        <a href="#" className="mt-auto bg-white border border-gray-500 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
+                                        <a href="https://lexcentra.phapluat.gov.vn/home" target="_blank" rel="noopener noreferrer" className="mt-auto bg-white border border-gray-500 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
                                             Truy cập
                                         </a>
                                     </div>
@@ -851,11 +851,11 @@ const TongRaSoatPage = () => {
                                     {/* AI 3: AI BKAV */}
                                     <div className="border border-green-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-green-50/50 text-center flex flex-col items-center group">
                                         <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
-                                            <img src="/BO NHAN DIEN TONG RA SOAT/Logo_Bkav.svg.png" alt="Logo BKAV" className="h-10 w-auto object-contain group-hover:scale-110 transition-transform duration-300" />
+                                            <img src="/BO NHAN DIEN TONG RA SOAT/icon_BLegal.png" alt="Logo BKAV BLegal" className="h-10 w-auto object-contain group-hover:scale-110 transition-transform duration-300" />
                                         </div>
-                                        <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">AI BKAV Pháp luật</h3>
+                                        <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">BLEGAL - TRỢ LÝ SỐ PHÁP LÝ</h3>
                                         <p className="text-xs text-gray-500 mb-4 px-2">Trợ lý ảo thông minh dựa trên mô hình ngôn ngữ lớn chuyên sâu phục vụ dịch vụ công, hỗ trợ tư vấn pháp luật tự động cho công dân.</p>
-                                        <a href="#" className="mt-auto bg-white border border-gray-500 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
+                                        <a href="https://chatbot.demozone.vn/" target="_blank" rel="noopener noreferrer" className="mt-auto bg-white border border-gray-500 text-gray-900 font-bold py-2 px-6 rounded-full hover:bg-[#ea492a] hover:border-[#ea492a] hover:text-white transition w-full">
                                             Truy cập
                                         </a>
                                     </div>
