@@ -828,7 +828,24 @@ const TongRaSoatPage = () => {
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    {/* AI 1: CMC AI - CLS */}
+                                    {/* AI 1: AI BKAV (BLEGAL) */}
+                                    <div className="border border-green-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-green-50/50 text-center flex flex-col items-center group">
+                                        <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
+                                            <img src="/BO NHAN DIEN TONG RA SOAT/icon_BLegal.png" alt="Logo BKAV BLegal" className="h-14 w-auto object-contain group-hover:scale-110 transition-transform duration-300" />
+                                        </div>
+                                        <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">BLEGAL - TRỢ LÝ SỐ PHÁP LÝ</h3>
+                                        {/* <p className="text-xs text-gray-500 mb-4 px-2">Trợ lý ảo thông minh dựa trên mô hình ngôn ngữ lớn chuyên sâu phục vụ dịch vụ công, hỗ trợ tư vấn pháp luật tự động cho công dân.</p> */}
+                                        <div className="mt-auto w-full flex gap-3">
+                                            <Link to="/tong-ra-soat/ai/blegal" className="flex-1 bg-white border border-gray-400 hover:border-gray-600 text-gray-700 font-bold py-2 px-3 rounded-full hover:bg-gray-50 transition text-[13px]">
+                                                Giới thiệu
+                                            </Link>
+                                            <a href="https://chatbot.demozone.vn/" target="_blank" rel="noopener noreferrer" className="flex-1 bg-[#ea492a] border border-[#ea492a] text-white font-bold py-2 px-3 rounded-full hover:bg-[#ea492a]/95 hover:shadow-md transition text-[13px]">
+                                                Truy cập
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    {/* AI 2: CMC AI - CLS */}
                                     <div className="border border-red-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-red-50/50 text-center flex flex-col items-center group">
                                         <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
                                             <img src="/BO NHAN DIEN TONG RA SOAT/COpenAIlogo.svg" alt="Logo CMC AI - CLS" className="h-14 w-auto object-contain group-hover:scale-110 transition-transform duration-300" />
@@ -845,7 +862,7 @@ const TongRaSoatPage = () => {
                                         </div>
                                     </div>
 
-                                    {/* AI 2: AI LEXcentra */}
+                                    {/* AI 3: AI LEXcentra */}
                                     <div className="border border-blue-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-blue-50/50 text-center flex flex-col items-center group">
                                         <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
                                             <img src="/BO NHAN DIEN TONG RA SOAT/logo-lex.svg" alt="Logo LEXcentra" className="h-9 w-auto object-contain group-hover:scale-110 transition-transform duration-300 brightness-0" />
@@ -857,23 +874,6 @@ const TongRaSoatPage = () => {
                                                 Giới thiệu
                                             </Link>
                                             <a href="https://lexcentra.phapluat.gov.vn/home" target="_blank" rel="noopener noreferrer" className="flex-1 bg-[#ea492a] border border-[#ea492a] text-white font-bold py-2 px-3 rounded-full hover:bg-[#ea492a]/95 hover:shadow-md transition text-[13px]">
-                                                Truy cập
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    {/* AI 3: AI BKAV */}
-                                    <div className="border border-green-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-green-50/50 text-center flex flex-col items-center group">
-                                        <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
-                                            <img src="/BO NHAN DIEN TONG RA SOAT/icon_BLegal.png" alt="Logo BKAV BLegal" className="h-14 w-auto object-contain group-hover:scale-110 transition-transform duration-300" />
-                                        </div>
-                                        <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">BLEGAL - TRỢ LÝ SỐ PHÁP LÝ</h3>
-                                        {/* <p className="text-xs text-gray-500 mb-4 px-2">Trợ lý ảo thông minh dựa trên mô hình ngôn ngữ lớn chuyên sâu phục vụ dịch vụ công, hỗ trợ tư vấn pháp luật tự động cho công dân.</p> */}
-                                        <div className="mt-auto w-full flex gap-3">
-                                            <Link to="/tong-ra-soat/ai/blegal" className="flex-1 bg-white border border-gray-400 hover:border-gray-600 text-gray-700 font-bold py-2 px-3 rounded-full hover:bg-gray-50 transition text-[13px]">
-                                                Giới thiệu
-                                            </Link>
-                                            <a href="https://chatbot.demozone.vn/" target="_blank" rel="noopener noreferrer" className="flex-1 bg-[#ea492a] border border-[#ea492a] text-white font-bold py-2 px-3 rounded-full hover:bg-[#ea492a]/95 hover:shadow-md transition text-[13px]">
                                                 Truy cập
                                             </a>
                                         </div>
