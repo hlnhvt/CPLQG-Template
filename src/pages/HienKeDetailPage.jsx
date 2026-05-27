@@ -382,7 +382,7 @@ const HienKeDetailPage = () => {
     const hienKeData = getIndividualIdea(id, location.state);
     const answerData = getAnswerData(hienKeData);
     const isTrackingId = id && id.toString().startsWith('HK-');
-    const showAnswer = hienKeData.status === 'Đã phản hồi' && !isTrackingId;
+    const showAnswer = false; // Suppress the answer box for all individual ideas as requested by the user
     const relatedIdeas = [
         { id: 2, title: 'Kiến nghị sửa đổi quy định về đấu thầu thuốc tập trung' },
         { id: 3, title: 'Giải pháp nâng cao chất lượng y tế học đường' },
@@ -585,7 +585,7 @@ const HienKeDetailPage = () => {
                                 <Clock size={40} className="mx-auto text-amber-500 mb-4" />
                                 <h3 className="text-[18px] font-bold text-amber-800 mb-2">Đang chờ cơ quan tiếp nhận</h3>
                                 <p className="text-[14px] text-amber-700/80 max-w-md mx-auto">
-                                    Hiến kế của bạn đã được chuyển đến cơ quan chủ quản thích hợp.
+                                    Hiến kế của bạn đang được chuyển đến cơ quan chủ quản thích hợp.
                                 </p>
                             </div>
                         ) : (
@@ -593,7 +593,7 @@ const HienKeDetailPage = () => {
                                 <Clock size={40} className="mx-auto text-amber-400 mb-4" />
                                 <h3 className="text-[18px] font-bold text-amber-800 mb-2">Đang chờ cơ quan tiếp nhận</h3>
                                 <p className="text-[14px] text-amber-700/80 mb-6 max-w-md mx-auto">
-                                    Hiến kế của bạn đang được điều hướng đến cơ quan chủ quản thích hợp. Quá trình xét duyệt và phản hồi thường mất từ 5-10 ngày làm việc.
+                                    Hiến kế của bạn đang được chuyển đến cơ quan chủ quản thích hợp.
                                 </p>
                                 {!isBookmarked && (
                                     <button onClick={() => setIsBookmarked(true)} className="bg-white text-[14px] text-amber-600 font-bold py-2.5 px-6 rounded-xl border border-amber-200 hover:bg-amber-100 transition shadow-sm inline-flex items-center gap-2">
