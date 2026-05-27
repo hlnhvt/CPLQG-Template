@@ -325,7 +325,7 @@ const TongRaSoatAIDetailPage = () => {
                                 href={ai.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#ea492a] hover:bg-[#ea492a]/95 text-white font-bold px-8 py-3.5 rounded-full hover:shadow-lg transition-all duration-300 text-sm active:scale-[0.98] select-none uppercase tracking-wider"
+                                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#ea492a] hover:bg-[#ea492a]/95 text-white font-bold px-8 py-3.5 rounded-full hover:shadow-lg transition-all duration-300 text-sm active:scale-[0.98] select-none uppercase"
                             >
                                 Truy cập hệ thống
                             </a>
