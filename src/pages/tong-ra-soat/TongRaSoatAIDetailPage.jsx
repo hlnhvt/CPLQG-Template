@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ChevronRight, Globe, Sparkles, Shield, Cpu, Zap, Printer, Share2, Facebook, FileText } from 'lucide-react';
+import { ChevronRight, Globe, Sparkles, Shield, Cpu, Zap, Printer, Share2, Facebook, FileText, ArrowUpRight } from 'lucide-react';
 
 const AI_DATA = {
     'cls': {
@@ -436,9 +436,10 @@ const TongRaSoatAIDetailPage = () => {
                                 href={ai.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#ea492a] hover:bg-[#ea492a]/95 text-white font-bold px-8 py-3.5 rounded-full hover:shadow-lg transition-all duration-300 text-sm active:scale-[0.98] select-none uppercase"
+                                className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-[#ea492a] hover:bg-[#ea492a]/95 text-white font-bold px-8 py-3.5 rounded-full hover:shadow-lg transition-all duration-300 text-sm active:scale-[0.98] select-none uppercase group"
                             >
                                 Truy cập hệ thống
+                                <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300" />
                             </a>
                         </div>
                     </div>
