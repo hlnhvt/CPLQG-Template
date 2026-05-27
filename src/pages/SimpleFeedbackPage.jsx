@@ -110,7 +110,7 @@ export default function SimpleFeedbackPage() {
                     </div>
                     <h2 className="text-[26px] font-black text-gray-900 mb-3">Đã gửi ý kiến!</h2>
                     <p className="text-[15px] text-gray-600 mb-8 leading-relaxed">
-                        Cảm ơn bạn đã đóng góp hiến kế. Ý kiến của bạn đã được chuyển đến bộ phận chuyên môn.
+                        Cảm ơn bạn đã đóng góp hiến kế. Ý kiến của bạn đã được chuyển đến bộ phận chuyên môn. Bạn có thể xem lại hiến kế của mình trong <b>Khu vực cá nhân - Hiến kế của tôi</b>
                         {/* Mã theo dõi: <span className="font-mono text-gray-900 font-bold ml-1">HK-89102</span> */}
                     </p>
                     <Link to="/hien-ke" className="flex items-center justify-center gap-2 w-full py-4 bg-[#1e3a8a] text-white rounded-xl font-bold hover:bg-blue-800 transition-colors shadow-md text-[15px]">
