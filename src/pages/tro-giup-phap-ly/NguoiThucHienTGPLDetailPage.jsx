@@ -53,7 +53,7 @@ const NguoiThucHienTGPLDetailPage = () => {
 
                     <div className="p-8 flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
                         <div className="space-y-3">
-                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-700 rounded-md text-xs font-bold uppercase tracking-wider">
+                            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-700 rounded-md text-xs font-bold uppercase">
                                 Trợ giúp viên pháp lý
                             </span>
                             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
