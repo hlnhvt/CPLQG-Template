@@ -33,35 +33,78 @@ const AI_DATA = {
                 2. ĐƯỜNG DẪN TRUY CẬP VÀ QR HƯỚNG DẪN
             </h4>
             
-            <div class="grid grid-cols-1 md:grid-cols-12 border border-gray-200 rounded-xl overflow-hidden mt-4 mb-8 shadow-sm">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-4 mb-8">
                 <!-- Left Column: Links and Registration info -->
-                <div class="md:col-span-8 p-6 md:p-8 bg-white border-b md:border-b-0 md:border-r border-gray-200 flex flex-col justify-between">
-                    <div>
-                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">TRUY CẬP SẢN PHẨM</h5>
-                        <p class="text-sm text-gray-600 mb-6">
-                            Link sản phẩm: <a href="https://cls.cmcai.vn/" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold hover:underline">https://cls.cmcai.vn/</a>
-                        </p>
+                <div class="md:col-span-7 bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between">
+                    <div class="bg-[#0c3e7d] px-6 py-4 flex items-center gap-3">
+                        <svg class="w-5 h-5 text-white shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span class="text-white font-bold text-[16px] uppercase tracking-wide">Truy cập sản phẩm</span>
+                    </div>
+                    <div class="p-6 md:p-8 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h5 class="text-[12px] font-bold text-gray-400 uppercase mb-2">Link sản phẩm</h5>
+                            <a href="https://cls.cmcai.vn/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-[#f4f7fb] hover:bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 group transition-all duration-300">
+                                <span class="text-[#0c3e7d] font-bold text-[15px] break-all select-all">https://cls.cmcai.vn/</span>
+                                <span class="w-8 h-8 rounded-full bg-[#ea492a] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300">
+                                    <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </span>
+                            </a>
 
-                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">ĐĂNG KÝ SỬ DỤNG CHO ĐỢT TỔNG RÀ SOÁT VBQPPL</h5>
-                        <p class="text-sm text-gray-500 mb-4">
-                            Cơ quan, tổ chức có nhu cầu đăng ký tài khoản vui lòng liên hệ:
-                        </p>
-                        <div class="space-y-1 bg-gray-50 p-4 rounded-lg border border-gray-100">
-                            <p class="text-sm text-gray-800 font-bold">Bà Nguyễn Thị Nghĩa</p>
-                            <p class="text-sm text-gray-600">SĐT: <span class="font-semibold text-gray-800">097.964.2249</span></p>
-                            <p class="text-sm text-gray-600">Email: <a href="mailto:nghiant@cmcai.vn" class="text-blue-600 hover:underline">nghiant@cmcai.vn</a></p>
+                            <h5 class="text-[12px] font-bold text-gray-400 uppercase mt-6 mb-2">Đăng ký sử dụng cho đợt tổng rà soát VBQPPL</h5>
+                            <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                                Cơ quan, tổ chức có nhu cầu đăng ký tài khoản vui lòng liên hệ:
+                            </p>
+                            <div class="space-y-4">
+                                <!-- Contact Row 1 -->
+                                <div class="flex items-center gap-4">
+                                    <div class="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-[#ea492a] shrink-0">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-bold text-gray-400 uppercase mb-0.5">Người liên hệ</p>
+                                        <p class="font-bold text-slate-800 text-sm">Bà Nguyễn Thị Nghĩa</p>
+                                    </div>
+                                </div>
+                                <div class="border-t border-dashed border-slate-200"></div>
+                                <!-- Contact Row 2 -->
+                                <div class="flex items-center gap-4">
+                                    <div class="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-[#ea492a] shrink-0">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-bold text-gray-400 uppercase mb-0.5">Số điện thoại</p>
+                                        <p class="font-bold text-slate-800 text-sm">097.964.2249</p>
+                                    </div>
+                                </div>
+                                <div class="border-t border-dashed border-slate-200"></div>
+                                <!-- Contact Row 3 -->
+                                <div class="flex items-center gap-4">
+                                    <div class="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-[#ea492a] shrink-0">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-bold text-gray-400 uppercase mb-0.5">Email</p>
+                                        <a href="mailto:nghiant@cmcai.vn" class="font-bold text-blue-600 hover:underline text-sm break-all">nghiant@cmcai.vn</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Right Column: QR Code -->
-                <div class="md:col-span-4 p-6 md:p-8 bg-gray-50 flex flex-col items-center justify-center text-center">
-                    <h5 class="text-xs font-bold text-gray-700 uppercase tracking-wider mb-4">QR HƯỚNG DẪN SỬ DỤNG</h5>
-                    <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm mb-3">
-                        <img src="/AIQR-CMC.png" alt="QR Hướng dẫn sử dụng CLS" class="w-28 h-28 object-contain" />
+                <div class="md:col-span-5 bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between">
+                    <div class="bg-[#b81432] px-6 py-4 flex items-center gap-3">
+                        <svg class="w-5 h-5 text-white shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                        <span class="text-white font-bold text-[16px] uppercase tracking-wide">QR Hướng dẫn sử dụng</span>
                     </div>
-                    <p class="text-[11px] italic text-gray-500 leading-snug">
-                        Quét mã QR để xem tài liệu hướng dẫn sử dụng chi tiết
-                    </p>
+                    <div class="p-6 md:p-8 flex-1 bg-[#f4f7fb]/40 flex flex-col items-center justify-center text-center gap-6">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 mb-2">
+                            <img src="/AIQR-CMC.png" alt="QR Hướng dẫn sử dụng CLS" class="w-36 h-36 object-contain" />
+                        </div>
+                        <p class="text-sm text-gray-500 leading-relaxed max-w-[240px]">
+                            Quét mã QR để xem <span class="text-[#0c3e7d] font-bold">tài liệu hướng dẫn sử dụng chi tiết</span>
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -127,35 +170,78 @@ const AI_DATA = {
                 2. ĐƯỜNG DẪN TRUY CẬP VÀ QR HƯỚNG DẪN
             </h4>
             
-            <div class="grid grid-cols-1 md:grid-cols-12 border border-gray-200 rounded-xl overflow-hidden mt-4 mb-8 shadow-sm">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-4 mb-8">
                 <!-- Left Column: Links and Registration info -->
-                <div class="md:col-span-8 p-6 md:p-8 bg-white border-b md:border-b-0 md:border-r border-gray-200 flex flex-col justify-between">
-                    <div>
-                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">TRUY CẬP SẢN PHẨM</h5>
-                        <p class="text-sm text-gray-600 mb-6">
-                            Link sản phẩm: <a href="https://lexcentra.ai/" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold hover:underline">https://lexcentra.ai/</a>
-                        </p>
+                <div class="md:col-span-7 bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between">
+                    <div class="bg-[#0c3e7d] px-6 py-4 flex items-center gap-3">
+                        <svg class="w-5 h-5 text-white shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span class="text-white font-bold text-[16px] uppercase tracking-wide">Truy cập sản phẩm</span>
+                    </div>
+                    <div class="p-6 md:p-8 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h5 class="text-[12px] font-bold text-gray-400 uppercase mb-2">Link sản phẩm</h5>
+                            <a href="https://lexcentra.ai/" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-[#f4f7fb] hover:bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 group transition-all duration-300">
+                                <span class="text-[#0c3e7d] font-bold text-[15px] break-all select-all">https://lexcentra.ai/</span>
+                                <span class="w-8 h-8 rounded-full bg-[#ea492a] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300">
+                                    <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </span>
+                            </a>
 
-                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">ĐĂNG KÝ SỬ DỤNG CHO ĐỢT TỔNG RÀ SOÁT VBQPPL</h5>
-                        <p class="text-sm text-gray-500 mb-4">
-                            Cơ quan, tổ chức có nhu cầu đăng ký tài khoản vui lòng liên hệ:
-                        </p>
-                        <div class="space-y-1 bg-gray-50 p-4 rounded-lg border border-gray-100">
-                            <p class="text-sm text-gray-800 font-bold">Ông/Bà: Phương Uyên</p>
-                            <p class="text-sm text-gray-600">SĐT: <span class="font-semibold text-gray-800">028 7105 4934</span></p>
-                            <p class="text-sm text-gray-600">Email: <a href="mailto:support@lexengine.vn" class="text-blue-600 hover:underline">support@lexengine.vn</a></p>
+                            <h5 class="text-[12px] font-bold text-gray-400 uppercase mt-6 mb-2">Đăng ký sử dụng cho đợt tổng rà soát VBQPPL</h5>
+                            <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                                Cơ quan, tổ chức có nhu cầu đăng ký tài khoản vui lòng liên hệ:
+                            </p>
+                            <div class="space-y-4">
+                                <!-- Contact Row 1 -->
+                                <div class="flex items-center gap-4">
+                                    <div class="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-[#ea492a] shrink-0">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-bold text-gray-400 uppercase mb-0.5">Người liên hệ</p>
+                                        <p class="font-bold text-slate-800 text-sm">Ông/Bà: Phương Uyên</p>
+                                    </div>
+                                </div>
+                                <div class="border-t border-dashed border-slate-200"></div>
+                                <!-- Contact Row 2 -->
+                                <div class="flex items-center gap-4">
+                                    <div class="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-[#ea492a] shrink-0">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-bold text-gray-400 uppercase mb-0.5">Số điện thoại</p>
+                                        <p class="font-bold text-slate-800 text-sm">028 7105 4934</p>
+                                    </div>
+                                </div>
+                                <div class="border-t border-dashed border-slate-200"></div>
+                                <!-- Contact Row 3 -->
+                                <div class="flex items-center gap-4">
+                                    <div class="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-[#ea492a] shrink-0">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-bold text-gray-400 uppercase mb-0.5">Email</p>
+                                        <a href="mailto:support@lexengine.vn" class="font-bold text-blue-600 hover:underline text-sm break-all">support@lexengine.vn</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Right Column: QR Code -->
-                <div class="md:col-span-4 p-6 md:p-8 bg-gray-50 flex flex-col items-center justify-center text-center">
-                    <h5 class="text-xs font-bold text-gray-700 uppercase tracking-wider mb-4">QR HƯỚNG DẪN SỬ DỤNG</h5>
-                    <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm mb-3">
-                        <img src="/AIQR-Lexcentra.png" alt="QR Hướng dẫn sử dụng Lexcentra" class="w-28 h-28 object-contain" />
+                <div class="md:col-span-5 bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between">
+                    <div class="bg-[#b81432] px-6 py-4 flex items-center gap-3">
+                        <svg class="w-5 h-5 text-white shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                        <span class="text-white font-bold text-[16px] uppercase tracking-wide">QR Hướng dẫn sử dụng</span>
                     </div>
-                    <p class="text-[11px] italic text-gray-500 leading-snug">
-                        Quét mã QR để xem tài liệu hướng dẫn sử dụng chi tiết
-                    </p>
+                    <div class="p-6 md:p-8 flex-1 bg-[#f4f7fb]/40 flex flex-col items-center justify-center text-center gap-6">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 mb-2">
+                            <img src="/AIQR-Lexcentra.png" alt="QR Hướng dẫn sử dụng Lexcentra" class="w-36 h-36 object-contain" />
+                        </div>
+                        <p class="text-sm text-gray-500 leading-relaxed max-w-[240px]">
+                            Quét mã QR để xem <span class="text-[#0c3e7d] font-bold">tài liệu hướng dẫn sử dụng chi tiết</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         `
@@ -165,7 +251,7 @@ const AI_DATA = {
         title: 'Trợ lý số BKAV',
         shortDesc: 'Trợ lý ảo thông minh dựa trên mô hình ngôn ngữ lớn chuyên sâu phục vụ dịch vụ công, hỗ trợ tư vấn pháp luật tự động cho công dân.',
         logo: '/BO NHAN DIEN TONG RA SOAT/icon_BLegal.png',
-        url: 'https://chatbot.demozone.vn/',
+        url: 'https://chatbotlandingpage.demozone.vn',
         color: 'green',
         gradient: 'from-emerald-500 to-teal-600',
         manuals: [
@@ -216,35 +302,78 @@ const AI_DATA = {
                 2. ĐƯỜNG DẪN TRUY CẬP VÀ QR HƯỚNG DẪN
             </h4>
             
-            <div class="grid grid-cols-1 md:grid-cols-12 border border-gray-200 rounded-xl overflow-hidden mt-4 mb-8 shadow-sm">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mt-4 mb-8">
                 <!-- Left Column: Links and Registration info -->
-                <div class="md:col-span-8 p-6 md:p-8 bg-white border-b md:border-b-0 md:border-r border-gray-200 flex flex-col justify-between">
-                    <div>
-                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">TRUY CẬP SẢN PHẨM</h5>
-                        <p class="text-sm text-gray-600 mb-6">
-                            Link sản phẩm: <a href="https://chatbot.demozone.vn" target="_blank" rel="noopener noreferrer" class="text-blue-600 font-bold hover:underline">https://chatbot.demozone.vn</a>
-                        </p>
+                <div class="md:col-span-7 bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between">
+                    <div class="bg-[#0c3e7d] px-6 py-4 flex items-center gap-3">
+                        <svg class="w-5 h-5 text-white shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span class="text-white font-bold text-[16px] uppercase tracking-wide">Truy cập sản phẩm</span>
+                    </div>
+                    <div class="p-6 md:p-8 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h5 class="text-[12px] font-bold text-gray-400 uppercase mb-2">Link sản phẩm</h5>
+                            <a href="https://chatbotlandingpage.demozone.vn" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between bg-[#f4f7fb] hover:bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 group transition-all duration-300">
+                                <span class="text-[#0c3e7d] font-bold text-[15px] break-all select-all">https://chatbotlandingpage.demozone.vn</span>
+                                <span class="w-8 h-8 rounded-full bg-[#ea492a] flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300">
+                                    <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </span>
+                            </a>
 
-                        <h5 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-2">ĐĂNG KÝ SỬ DỤNG CHO ĐỢT TỔNG RÀ SOÁT VBQPPL</h5>
-                        <p class="text-sm text-gray-500 mb-4">
-                            Cơ quan, tổ chức có nhu cầu đăng ký tài khoản vui lòng liên hệ:
-                        </p>
-                        <div class="space-y-1 bg-gray-50 p-4 rounded-lg border border-gray-100">
-                            <p class="text-sm text-gray-800 font-bold">Ông: Trần Nhân Anh</p>
-                            <p class="text-sm text-gray-600">SĐT: <span class="font-semibold text-gray-800">0917509665</span></p>
-                            <p class="text-sm text-gray-600">Email: <a href="mailto:anhtn@bkav.com" class="text-blue-600 hover:underline">anhtn@bkav.com</a></p>
+                            <h5 class="text-[12px] font-bold text-gray-400 uppercase mt-6 mb-2">Đăng ký sử dụng cho đợt tổng rà soát VBQPPL</h5>
+                            <p class="text-sm text-gray-500 mb-4 leading-relaxed">
+                                Cơ quan, tổ chức có nhu cầu đăng ký tài khoản vui lòng liên hệ:
+                            </p>
+                            <div class="space-y-4">
+                                <!-- Contact Row 1 -->
+                                <div class="flex items-center gap-4">
+                                    <div class="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-[#ea492a] shrink-0">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-bold text-gray-400 uppercase mb-0.5">Người liên hệ</p>
+                                        <p class="font-bold text-slate-800 text-sm">Ông: Trần Nhân Anh</p>
+                                    </div>
+                                </div>
+                                <div class="border-t border-dashed border-slate-200"></div>
+                                <!-- Contact Row 2 -->
+                                <div class="flex items-center gap-4">
+                                    <div class="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-[#ea492a] shrink-0">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-bold text-gray-400 uppercase mb-0.5">Số điện thoại</p>
+                                        <p class="font-bold text-slate-800 text-sm">0917509665</p>
+                                    </div>
+                                </div>
+                                <div class="border-t border-dashed border-slate-200"></div>
+                                <!-- Contact Row 3 -->
+                                <div class="flex items-center gap-4">
+                                    <div class="w-9 h-9 rounded-full bg-red-50 flex items-center justify-center text-[#ea492a] shrink-0">
+                                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-[11px] font-bold text-gray-400 uppercase mb-0.5">Email</p>
+                                        <a href="mailto:anhtn@bkav.com" class="font-bold text-blue-600 hover:underline text-sm break-all">anhtn@bkav.com</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Right Column: QR Code -->
-                <div class="md:col-span-4 p-6 md:p-8 bg-gray-50 flex flex-col items-center justify-center text-center">
-                    <h5 class="text-xs font-bold text-gray-700 uppercase tracking-wider mb-4">QR HƯỚNG DẪN SỬ DỤNG</h5>
-                    <div class="bg-white p-3 rounded-xl border border-gray-200 shadow-sm mb-3">
-                        <img src="/AIQR-BKAV.png" alt="QR Hướng dẫn sử dụng BLegal" class="w-28 h-28 object-contain" />
+                <div class="md:col-span-5 bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col justify-between">
+                    <div class="bg-[#b81432] px-6 py-4 flex items-center gap-3">
+                        <svg class="w-5 h-5 text-white shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                        <span class="text-white font-bold text-[16px] uppercase tracking-wide">QR Hướng dẫn sử dụng</span>
                     </div>
-                    <p class="text-[11px] italic text-gray-500 leading-snug">
-                        Quét mã QR để xem tài liệu hướng dẫn sử dụng chi tiết
-                    </p>
+                    <div class="p-6 md:p-8 flex-1 bg-[#f4f7fb]/40 flex flex-col items-center justify-center text-center gap-6">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 mb-2">
+                            <img src="/AIQR-BKAV.png" alt="QR Hướng dẫn sử dụng BLegal" class="w-36 h-36 object-contain" />
+                        </div>
+                        <p class="text-sm text-gray-500 leading-relaxed max-w-[240px]">
+                            Quét mã QR để xem <span class="text-[#0c3e7d] font-bold">tài liệu hướng dẫn sử dụng chi tiết</span>
+                        </p>
+                    </div>
                 </div>
             </div>
         `

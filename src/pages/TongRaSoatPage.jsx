@@ -839,7 +839,7 @@ const TongRaSoatPage = () => {
                                             <Link to="/tong-ra-soat/ai/blegal" className="flex-1 bg-white border border-gray-400 hover:border-gray-600 text-gray-700 font-bold py-2 px-3 rounded-full hover:bg-gray-50 transition text-[13px]">
                                                 Giới thiệu
                                             </Link>
-                                            <a href="https://chatbot.demozone.vn/" target="_blank" rel="noopener noreferrer" className="flex-1 bg-[#ea492a] border border-[#ea492a] text-white font-bold py-2 px-3 rounded-full hover:bg-[#ea492a]/95 hover:shadow-md transition text-[13px]">
+                                            <a href="https://chatbotlandingpage.demozone.vn" target="_blank" rel="noopener noreferrer" className="flex-1 bg-[#ea492a] border border-[#ea492a] text-white font-bold py-2 px-3 rounded-full hover:bg-[#ea492a]/95 hover:shadow-md transition text-[13px]">
                                                 Truy cập
                                             </a>
                                         </div>
