@@ -812,7 +812,7 @@ const TongRaSoatPage = () => {
                                 <div className="border-b border-gray-200 pb-6 mb-8 bg-white">
                                     <div className="md:px-2 pt-2 text-gray-800 leading-relaxed text-[15px] space-y-4">
                                         <h2 className="text-xl font-bold text-[#ea492a] text-center uppercase mb-8 leading-snug">
-                                            TRỢ LÝ ẢO TRÍ TUỆ NHÂN TẠO (AI) PHỤC VỤ CÔNG TÁC TỔNG RÀ SOÁT VĂN BẢN QUY PHẠM PHÁP LUẬT
+                                            TRỢ LÝ ẢO HỖ TRỢ CÔNG TÁC TỔNG RÀ SOÁT HỆ THỐNG VĂN BẢN QUY PHẠM PHÁP LUẬT
                                         </h2>
                                         <p className="text-base text-justify">
                                             Trong bối cảnh đẩy mạnh xây dựng Nhà nước pháp quyền xã hội chủ nghĩa ở Việt Nam và hội nhập quốc tế sâu rộng, việc đổi mới, nâng cao chất lượng công tác xây dựng và tổ chức thi hành pháp luật là nhiệm vụ trọng tâm được xác định tại Nghị quyết số 66-NQ/TW của Bộ Chính trị. Để đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên vươn mình của dân tộc, việc ứng dụng trí tuệ nhân tạo (AI) và các mô hình ngôn ngữ lớn chuyên sâu về pháp luật là bước đi đột phá mang tính chiến lược.
@@ -848,7 +848,7 @@ const TongRaSoatPage = () => {
                                     {/* AI 2: CMC AI - CLS */}
                                     <div className="border border-red-200 rounded-xl p-5 hover:shadow-md transition-shadow bg-gradient-to-br from-white to-red-50/50 text-center flex flex-col items-center group">
                                         <div className="mb-4 flex items-center justify-center h-16 w-full overflow-hidden">
-                                             <img src="/BO NHAN DIEN TONG RA SOAT/Logo C-AI Legal.png" alt="Logo C-AI Legal" className="h-14 w-auto object-contain rounded-lg group-hover:scale-110 transition-transform duration-300" />
+                                            <img src="/BO NHAN DIEN TONG RA SOAT/Logo C-AI Legal.png" alt="Logo C-AI Legal" className="h-14 w-auto object-contain rounded-lg group-hover:scale-110 transition-transform duration-300" />
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm px-2">C-AI Legal</h3>
                                         {/* <p className="text-xs text-gray-500 mb-4 px-2">Hệ thống Trợ lý ảo AI thông minh giúp rà soát mâu thuẫn, kiểm tra tính hợp pháp và tính đồng bộ của hệ thống văn bản pháp luật.</p> */}
