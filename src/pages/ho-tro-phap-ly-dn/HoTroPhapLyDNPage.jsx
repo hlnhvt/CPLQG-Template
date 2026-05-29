@@ -240,7 +240,7 @@ import {
                                                 }}
                                                 className={`inline-flex items-center gap-1.5 text-[14px] font-bold transition-all duration-200 border-0 cursor-pointer py-2 px-4 rounded-full ${
                                                     isActive 
-                                                        ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm shadow-blue-500/25 scale-105" 
+                                                        ? "bg-gradient-to-r from-[#2563eb] via-[#4f46e5] to-[#7c3aed] text-white shadow-[0_4px_16px_rgba(79,70,229,0.35)] scale-105" 
                                                         : "bg-transparent text-slate-600 hover:text-blue-600 hover:bg-slate-100/80"
                                                 }`}
                                             >
