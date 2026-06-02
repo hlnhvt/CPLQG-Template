@@ -191,7 +191,7 @@ import {
             const isOverflowing = showLeftArrow || showRightArrow;
 
             return (
-                <div className="bg-white border-b border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.015)] relative z-30 overflow-visible">
+                <div className="bg-gradient-to-b from-[#e8f1ff] via-[#f7faff] to-white border-t border-[#cbdffb] shadow-[0_10px_25px_-5px_rgba(30,79,161,0.12),0_4px_12px_-4px_rgba(30,79,161,0.06)] relative z-30 overflow-visible">
                     <div className="mx-auto max-w-[1520px] px-4 lg:px-6 relative flex items-center overflow-visible py-3.5">
                         
                         {/* Left Scroll Button */}
@@ -240,7 +240,7 @@ import {
                                                 }}
                                                 className={`inline-flex items-center gap-1.5 text-[14px] font-bold transition-all duration-200 border-0 cursor-pointer py-2 px-4 rounded-full ${
                                                     isActive 
-                                                        ? "bg-gradient-to-r from-[#2563eb] via-[#4f46e5] to-[#7c3aed] text-white shadow-[0_4px_16px_rgba(79,70,229,0.35)] scale-105" 
+                                                        ? "bg-gradient-to-r from-[#2563eb] via-[#4f46e5] to-[#7c3aed] text-white scale-105" 
                                                         : "bg-transparent text-slate-600 hover:text-blue-600 hover:bg-slate-100/80"
                                                 }`}
                                             >

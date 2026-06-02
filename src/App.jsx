@@ -5,6 +5,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
+import HomePageV2 from './pages/HomePageV2';
 import UserDashboardLayout from './layouts/UserDashboardLayout';
 import ProfilePage from './pages/dashboard/ProfilePage';
 import CollectionsPage from './pages/dashboard/CollectionsPage';
@@ -163,6 +164,7 @@ const AppLayout = () => {
             <main className="flex-grow">
                 <Routes>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/trang-chu-v2" element={<HomePageV2 />} />
                     <Route path="/ho-tro-phap-ly-doanh-nghiep/*" element={<HoTroPhapLyDNPage />} />
                     <Route path="/news/:id" element={<NewsDetailPage />} />
                     <Route path="/gioi-thieu" element={<AboutPage />} />

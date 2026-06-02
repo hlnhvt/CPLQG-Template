@@ -31,7 +31,7 @@ const LinkedPortals = () => {
     ];
 
     return (
-        <div className="bg-white pb-10 pt-2">
+        <div className="bg-white pb-10 pt-10">
             <div className="container mx-auto px-4 max-w-[1504px]">
                 <h2 className="text-2xl font-bold text-[#0f4c81] mb-10">
                     Hệ thống cổng thông tin liên kết
