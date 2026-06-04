@@ -96,58 +96,67 @@ const MultimediaV2 = () => {
     };
 
     return (
-        <section className="py-16 bg-gradient-to-br from-[#0c2461] via-[#013aae] to-[#0a2a6f] text-white font-sans relative overflow-hidden">
+        <section className="mt-8 py-6 md:py-8 text-white font-sans relative overflow-hidden" style={{ background: 'linear-gradient(135deg, rgb(15, 71, 158) 0%, rgb(69, 114, 187) 35%, rgb(42, 47, 127) 65%, rgb(71, 87, 129) 100%)' }}>
             {/* Glowing neon mesh backgrounds */}
-            <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-blue-500/10 blur-[130px] pointer-events-none -z-10"></div>
-            <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-cyan-500/10 blur-[130px] pointer-events-none -z-10"></div>
+            <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-blue-500/20 blur-[100px] pointer-events-none z-0"></div>
+            <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-cyan-500/20 blur-[100px] pointer-events-none z-0"></div>
+            
+            {/* Hoa văn hình học trang trí (Geometric patterns) */}
+            <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full border-[1px] border-white/5 -translate-y-1/2 translate-x-1/3 pointer-events-none z-0"></div>
+            <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full border-[2px] border-white/5 -translate-y-1/2 translate-x-1/3 pointer-events-none z-0"></div>
+            <div className="absolute bottom-0 left-0 w-[800px] h-[800px] rounded-full border-[1px] border-white/5 translate-y-1/3 -translate-x-1/4 pointer-events-none z-0"></div>
+            
             {/* Subtle digital dot-matrix background mesh */}
-            <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[size:1.5rem_1.5rem] opacity-60 pointer-events-none -z-10"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[size:1.5rem_1.5rem] opacity-80 pointer-events-none z-0"></div>
 
             {/* Faint drum pattern overlay (Hình trống đồng mờ mờ) */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-[0.06] pointer-events-none -z-10 overflow-hidden">
-                <img 
-                    src="/trong_dong_bg.png" 
-                    alt="Trống đồng mờ" 
-                    className="w-[800px] h-[800px] object-contain animate-[spin_180s_linear_infinite]" 
+            <div className="absolute inset-0 flex items-center justify-center opacity-[0.85] pointer-events-none z-0 overflow-hidden mix-blend-overlay">
+                <img
+                    src="/trong_dong_bg.png"
+                    alt="Trống đồng mờ"
+                    className="w-[200vw] h-[200vw] md:w-[150vw] md:h-[150vw] max-w-none object-cover animate-[spin_240s_linear_infinite]"
                 />
             </div>
 
-            <div className="container mx-auto px-4 max-w-[1504px]">
+            <div className="container mx-auto px-4 max-w-[1504px] relative z-10">
 
                 {/* 1. Thanh Tiêu Đề Trên Cùng (Header Row) */}
                 <div className="flex items-center justify-between border-b border-white/10 pb-3.5 mb-8">
                     <div className="flex items-center gap-2.5">
-                        <span className="p-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400">
-                            <Sparkles size={18} className="animate-pulse" />
-                        </span>
+
                         <h2 className="text-xl md:text-2xl font-black tracking-tight text-white uppercase">
                             Multimedia
                         </h2>
                     </div>
                     {/* Danh mục con liên kết bên phải */}
-                    <div className="flex items-center gap-5 text-[12.5px] md:text-sm font-bold text-slate-300">
-                        <Link to="/video" className="flex items-center gap-1.5 hover:text-blue-400 transition-colors">
-                            <Play size={12} className="text-blue-400 fill-blue-400 shrink-0" />
-                            <span>Video</span>
+                    <div className="flex items-center gap-3 md:gap-4 text-[13px] md:text-[14px] font-bold text-white">
+                        <Link to="/video" className="group flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 shadow-lg hover:shadow-blue-500/20">
+                            <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-blue-600 to-blue-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-inner">
+                                <Play size={12} className="text-white fill-white ml-0.5" />
+                            </div>
+                            <span className="tracking-wide">Video</span>
                         </Link>
-                        <Link to="/infographic" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
-                            <FileText size={13} className="text-cyan-400 shrink-0" />
-                            <span>Infographics</span>
+                        <Link to="/infographic" className="group flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 shadow-lg hover:shadow-cyan-500/20">
+                            <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-600 to-cyan-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-inner">
+                                <FileText size={12} className="text-white" />
+                            </div>
+                            <span className="tracking-wide">Infographics</span>
                         </Link>
                     </div>
                 </div>
 
-                {/* 2. Khung Cinematic Hero Slider Khổng Lồ */}
-                <div className="relative w-full aspect-[21/9] md:aspect-[24/9] rounded-3xl overflow-hidden shadow-2xl bg-slate-950 border border-white/10 group mb-12">
+                {/* 2. Slider Banner Lớn Siêu To Khổng Lồ (Hero Banner) */}
+                <div className="relative w-full aspect-[21/9] md:aspect-[32/9] max-h-[300px] rounded-3xl overflow-hidden shadow-2xl bg-slate-950 border border-white/10 group mb-6">
                     <img
                         src={bannerSlides[slideIndex].image}
                         alt={bannerSlides[slideIndex].title}
                         className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-1000"
                     />
 
-                    {/* Shadow overlays on left/right for cinematic depth */}
+                    {/* Shadow overlays on left/right/bottom for cinematic depth */}
                     <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black/50 to-transparent z-10 pointer-events-none"></div>
                     <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black/50 to-transparent z-10 pointer-events-none"></div>
+                    <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 pointer-events-none"></div>
 
                     {/* Left/Right Slider Arrow Controls */}
                     <button
@@ -163,29 +172,29 @@ const MultimediaV2 = () => {
                         <span className="text-lg md:text-xl font-bold -mt-0.5">&gt;</span>
                     </button>
 
-                    {/* Big Glassmorphic Overlay Banner at Bottom Center */}
+                    {/* Clean Text Overlay at Bottom Center without box */}
                     <Link
                         to={bannerSlides[slideIndex].to}
-                        className="absolute bottom-6 inset-x-6 md:inset-x-12 z-20 backdrop-blur-md bg-slate-900/60 border border-white/15 rounded-2xl p-4 md:p-6 flex flex-row items-center gap-4 md:gap-6 shadow-2xl hover:bg-slate-900/70 transition-all duration-300"
+                        className="absolute bottom-0 inset-x-0 px-6 pb-6 pt-10 md:px-12 md:pb-8 z-20 flex flex-row items-end gap-4 md:gap-6 group/title transition-all duration-300"
                     >
                         {/* Round Play Button */}
-                        <div className="relative flex items-center justify-center shrink-0">
+                        <div className="relative flex items-center justify-center shrink-0 mb-1">
                             <div className="absolute w-12 h-12 md:w-16 md:h-16 bg-blue-500/20 rounded-full animate-ping duration-1000 pointer-events-none"></div>
-                            <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg border border-blue-400/20">
+                            <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(37,99,235,0.5)] border border-blue-400/20 group-hover/title:scale-110 transition-transform">
                                 <Play size={16} className="fill-white ml-0.5 text-white" />
                             </div>
                         </div>
                         {/* Heading text */}
                         <div className="flex-grow text-left">
-                            <h3 className="font-extrabold text-white text-sm md:text-2xl leading-snug drop-shadow-md line-clamp-1">
+                            <h3 className="font-bold text-white text-lg md:text-2xl leading-snug drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] line-clamp-2 group-hover/title:text-blue-200 transition-colors">
                                 {bannerSlides[slideIndex].title}
                             </h3>
                             {/* Dots indicator */}
-                            <div className="flex items-center gap-1.5 mt-2 md:mt-3">
+                            <div className="flex items-center gap-2 mt-2 md:mt-3">
                                 {bannerSlides.map((_, i) => (
                                     <span
                                         key={i}
-                                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === slideIndex ? 'bg-blue-400 w-4' : 'bg-white/30'}`}
+                                        className={`h-1.5 rounded-full transition-all duration-300 shadow-sm ${i === slideIndex ? 'bg-blue-400 w-6' : 'bg-white/40 w-2 hover:bg-white/60'}`}
                                     ></span>
                                 ))}
                             </div>
@@ -194,17 +203,17 @@ const MultimediaV2 = () => {
                 </div>
 
                 {/* 3. Lưới 2 Cột Chuyên Mục Song Song Phía Dưới */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-start">
 
                     {/* VIDEO COLUMN */}
                     <div className="flex flex-col">
                         {/* Section Header */}
                         <Link
                             to="/video"
-                            className="flex items-center gap-2 pb-2 mb-6 border-b-2 border-blue-500 w-fit hover:opacity-85 transition"
+                            className="flex items-center gap-2 pb-2 mb-4 border-b-2 border-blue-500 w-fit hover:opacity-85 transition"
                         >
                             <Play size={14} className="text-blue-400 fill-blue-400 shrink-0" />
-                            <h3 className="text-sm font-black text-white uppercase tracking-wider">
+                            <h3 className="text-sm font-bold text-white uppercase tracking-wider">
                                 Video nổi bật
                             </h3>
                         </Link>
@@ -212,9 +221,9 @@ const MultimediaV2 = () => {
                         {/* Featured Video Card (Made smaller & side-by-side horizontally) */}
                         <Link
                             to={videosList[0].to}
-                            className="group flex flex-col sm:flex-row gap-4 mb-5 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 rounded-2xl p-4 shadow-lg"
+                            className="group flex flex-col sm:flex-row gap-3 md:gap-4 mb-4 bg-white/15 backdrop-blur-md border border-white/20 hover:bg-white/25 hover:border-white/30 transition-all duration-300 rounded-xl md:rounded-2xl p-3 shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
                         >
-                            <div className="relative w-full sm:w-[200px] aspect-[16/10] rounded-xl overflow-hidden shadow-md border border-white/10 shrink-0 bg-slate-950">
+                            <div className="relative w-full sm:w-[160px] md:w-[180px] aspect-[16/10] rounded-xl overflow-hidden shadow-md border border-white/10 shrink-0 bg-slate-950">
                                 <img
                                     src={videosList[0].image}
                                     alt={videosList[0].title}
@@ -232,7 +241,7 @@ const MultimediaV2 = () => {
                                     <span className="inline-block px-2 py-0.5 text-[10px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-md mb-2 uppercase tracking-wider">
                                         Tiêu điểm
                                     </span>
-                                    <h4 className="font-extrabold text-white group-hover:text-blue-400 transition-colors text-xs md:text-sm lg:text-base leading-snug line-clamp-2">
+                                    <h4 className="font-semibold text-white group-hover:text-blue-400 transition-colors text-xs md:text-sm lg:text-base leading-snug line-clamp-2">
                                         {videosList[0].title}
                                     </h4>
                                 </div>
@@ -244,7 +253,7 @@ const MultimediaV2 = () => {
                         </Link>
 
                         {/* Horizontal list of 3 sub-videos */}
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-2.5">
                             {videosList.slice(1).map((item) => (
                                 <Link
                                     key={item.id}
@@ -264,7 +273,7 @@ const MultimediaV2 = () => {
                                         </div>
                                     </div>
                                     <div className="flex-grow">
-                                        <h5 className="font-bold text-white text-xs md:text-sm leading-snug line-clamp-2 group-hover:text-blue-400 transition-colors">
+                                        <h5 className="font-semibold text-white text-xs md:text-sm leading-snug line-clamp-2 group-hover:text-blue-400 transition-colors">
                                             {item.title}
                                         </h5>
                                         <div className="flex items-center gap-1 mt-1 text-[11px] text-slate-400">
@@ -282,20 +291,20 @@ const MultimediaV2 = () => {
                         {/* Section Header */}
                         <Link
                             to="/infographic"
-                            className="flex items-center gap-2 pb-2 mb-6 border-b-2 border-cyan-500 w-fit hover:opacity-85 transition"
+                            className="flex items-center gap-2 pb-2 mb-4 border-b-2 border-cyan-500 w-fit hover:opacity-85 transition"
                         >
                             <FileText size={14} className="text-cyan-400 shrink-0" />
-                            <h3 className="text-sm font-black text-white uppercase tracking-wider">
+                            <h3 className="text-sm font-bold text-white uppercase tracking-wider">
                                 Infographic nổi bật
                             </h3>
                         </Link>
 
-                        {/* Featured Infographic Card (Made smaller & side-by-side horizontally) */}
+                        {/* Featured Infographic Card */}
                         <Link
                             to={infographicsList[0].to}
-                            className="group flex flex-col sm:flex-row gap-4 mb-5 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 rounded-2xl p-4 shadow-lg"
+                            className="group flex flex-col sm:flex-row gap-3 md:gap-4 mb-4 bg-white/15 backdrop-blur-md border border-white/20 hover:bg-white/25 hover:border-white/30 transition-all duration-300 rounded-xl md:rounded-2xl p-3 shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
                         >
-                            <div className="relative w-full sm:w-[200px] aspect-[16/10] rounded-xl overflow-hidden shadow-md border border-white/10 shrink-0 bg-slate-950">
+                            <div className="relative w-full sm:w-[160px] md:w-[180px] aspect-[16/10] rounded-xl overflow-hidden shadow-md border border-white/10 shrink-0 bg-slate-950">
                                 <img
                                     src={infographicsList[0].image}
                                     alt={infographicsList[0].title}
@@ -307,7 +316,7 @@ const MultimediaV2 = () => {
                                     <span className="inline-block px-2 py-0.5 text-[10px] font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 rounded-md mb-2 uppercase tracking-wider">
                                         Tiêu điểm
                                     </span>
-                                    <h4 className="font-extrabold text-white group-hover:text-cyan-400 transition-colors text-xs md:text-sm lg:text-base leading-snug line-clamp-2">
+                                    <h4 className="font-semibold text-white group-hover:text-cyan-400 transition-colors text-xs md:text-sm lg:text-base leading-snug line-clamp-2">
                                         {infographicsList[0].title}
                                     </h4>
                                 </div>
@@ -319,7 +328,7 @@ const MultimediaV2 = () => {
                         </Link>
 
                         {/* Horizontal list of 3 sub-infographics */}
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-2.5">
                             {infographicsList.slice(1).map((item) => (
                                 <Link
                                     key={item.id}
@@ -334,7 +343,7 @@ const MultimediaV2 = () => {
                                         />
                                     </div>
                                     <div className="flex-grow">
-                                        <h5 className="font-bold text-white text-xs md:text-sm leading-snug line-clamp-2 group-hover:text-cyan-400 transition-colors">
+                                        <h5 className="font-semibold text-white text-xs md:text-sm leading-snug line-clamp-2 group-hover:text-cyan-400 transition-colors">
                                             {item.title}
                                         </h5>
                                         <div className="flex items-center gap-1 mt-1 text-[11px] text-slate-400">

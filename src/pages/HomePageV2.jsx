@@ -12,6 +12,7 @@ import TotalReviewSection from '../components/TotalReviewSection';
 import AppLauncherSection from '../components/AppLauncherSection';
 import PhanAnhKienNghiHomeSection from '../components/PhanAnhKienNghiHomeSection';
 import { useAuth } from '../contexts/AuthContext';
+import HighlightTicker from '../components/HighlightTicker';
 
 function HomePageV2() {
     const { user } = useAuth();
@@ -20,34 +21,34 @@ function HomePageV2() {
 
     return (
         <>
+            <HighlightTicker />
             <Hero isV2={true} />
             <div className="flex-grow bg-white">
                 {/* {(user && hasConfiguredPrefs) && <RecommendedForYou />} */}
-                <NewlyIssuedDocsV2 />
-                <AppLauncherSection />
                 <NewsHighlightsHome />
+                <NewlyIssuedDocsV2 />
                 
                 <MultimediaV2 />
                 
                 {/* Unified Row: Chính sách & Cuộc sống (60%) and Tổng rà soát (40%) */}
-                <section className="py-10 bg-slate-50 relative overflow-hidden">
+                <section className="pt-8 pb-4 bg-slate-50 relative overflow-hidden">
                     {/* Background vector detail */}
                     <div className="absolute top-1/2 left-1/2 w-[800px] h-[800px] bg-slate-100/50 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 -z-10"></div>
                     <div className="container mx-auto px-4 max-w-[1504px]">
                         <div className="flex flex-col lg:flex-row gap-10 items-stretch">
-                            <div className="w-full lg:w-[60%] flex flex-col">
+                            <div className="w-full lg:w-1/2 flex flex-col">
                                 <PoliciesAndLifeV2 isHalfWidth={true} />
                             </div>
-                            <div className="w-full lg:w-[40%] flex flex-col">
+                            <div className="w-full lg:w-1/2 flex flex-col">
                                 <TotalReviewSection isHalfWidth={true} />
                             </div>
                         </div>
                     </div>
                 </section>
-
-                <PhanAnhKienNghiHomeSection />
+                <AppLauncherSection />
                 {/* <EventsActivities /> */}
                 <LinkedPortals />
+                <PhanAnhKienNghiHomeSection />
             </div>
             <FixedBottomCarousel />
         </>

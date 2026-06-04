@@ -164,14 +164,14 @@ const NewlyIssuedDocsV2 = () => {
                                     Xem toàn văn
                                 </Link>
                                 <Link
-                                    to={`/hien-ke/gop-y/${doc.id}`}
+                                    to={`/du-thao/${doc.id}#gop-y`}
                                     className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-600 hover:bg-sky-50 hover:border-sky-200 hover:text-sky-700 transition text-[12px] font-semibold whitespace-nowrap"
                                 >
                                     <MessageSquare size={13} />
                                     Xem góp ý
                                 </Link>
                                 <Link
-                                    to={`/hien-ke/gop-y-nhanh`}
+                                    to={`/du-thao/${doc.id}#gop-y`}
                                     className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 hover:bg-emerald-100 hover:border-emerald-300 transition text-[12px] font-semibold whitespace-nowrap"
                                 >
                                     <Mail size={13} />

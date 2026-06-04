@@ -50,7 +50,7 @@ const Hero = ({ isV2 = false }) => {
     const [quickFormData, setQuickFormData] = useState({ domain: '', title: '', content: '' });
     const [activeHighlightIndex, setActiveHighlightIndex] = useState(0);
     const [isHoveredList, setIsHoveredList] = useState(false);
-    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(true);
 
     const handleQuickSubmit = (e) => {
         e.preventDefault();
@@ -194,7 +194,7 @@ const Hero = ({ isV2 = false }) => {
 
                         {/* RIGHT COLUMN: TIÊU ĐIỂM HÔM NAY WITH VERTICAL TABS */}
                         <div className={`transition-all duration-700 ease-in-out transform mt-8 lg:mt-0 flex justify-center lg:justify-end shrink-0 ${isCollapsed ? 'w-0 max-w-0 opacity-0 scale-95 pointer-events-none overflow-hidden h-0 lg:h-auto' : 'w-full lg:w-[38%] opacity-100 scale-100'}`}>
-                            <div className="w-full max-w-[520px] flex flex-row items-stretch gap-3 h-[75vh] min-h-[600px] animate-float">
+                            <div className="w-full max-w-[530px] flex flex-row items-stretch gap-3 h-[75vh] min-h-[600px] animate-float">
                                 {/* Vertical Tab Bar on the Left */}
                                 <div className="flex flex-col gap-3 shrink-0 justify-start py-2">
                                     <button
@@ -224,7 +224,7 @@ const Hero = ({ isV2 = false }) => {
                                 {/* Main Card Container */}
                                 <div
                                     key={isCollapsed ? 'collapsed' : 'expanded'}
-                                    className={`flex-grow bg-gradient-to-br from-[#162e55]/90 via-[#102444]/80 to-[#0b172e]/95 backdrop-blur-xl border border-white/20 rounded-[28px] pt-6 pb-6 px-6 shadow-[0_25px_60px_rgba(0,0,0,0.65)] text-white relative overflow-hidden group select-none shimmer-effect hover:shadow-[0_30px_60px_rgba(59,130,246,0.3)] hover:border-white/30 transition-all duration-500 flex flex-col ${!isCollapsed ? 'animate-reveal-card' : ''}`}
+                                    className={`flex-grow bg-gradient-to-br from-[#162e55]/60 via-[#102444]/60 to-[#0b172e]/65 backdrop-blur-xl border border-white/20 rounded-[28px] pt-6 pb-6 px-6 shadow-[0_25px_60px_rgba(0,0,0,0.65)] text-white relative overflow-hidden group select-none shimmer-effect hover:shadow-[0_30px_60px_rgba(59,130,246,0.3)] hover:border-white/30 transition-all duration-500 flex flex-col ${!isCollapsed ? 'animate-reveal-card' : ''}`}
                                 >
                                     {/* Decorative glowing gradient border glow */}
                                     <div className="absolute -inset-px bg-gradient-to-r from-sky-500/30 via-indigo-500/20 to-amber-500/25 rounded-[28px] -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
@@ -491,7 +491,7 @@ const Hero = ({ isV2 = false }) => {
             {isCollapsed && (
                 <div
                     onClick={() => setIsCollapsed(false)}
-                    className="fixed right-0 top-1/2 -translate-y-1/2 z-50 bg-[#0c1e3d]/95 backdrop-blur-md border border-r-0 border-white/20 hover:border-amber-500/40 text-white rounded-l-2xl shadow-[0_10px_35px_rgba(0,0,0,0.5)] cursor-pointer hover:bg-[#0e2a52] hover:-translate-x-1 transition-all duration-300 flex flex-col items-center py-5 px-3 gap-2 group/restore"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 z-50 bg-[#0c1e3d]/95 backdrop-blur-md border border-r-0 border-white/20 hover:border-amber-500/40 text-white rounded-l-2xl shadow-[0_10px_35px_rgba(0,0,0,0.5)] cursor-pointer hover:bg-[#0e2a52] hover:-translate-x-1 transition-all duration-300 flex flex-col items-center py-5 px-3 gap-2 group/restore"
                     title="Mở rộng bảng Tiêu điểm & Hỏi đáp"
                 >
                     <ChevronLeft size={16} className="text-amber-400 animate-pulse group-hover/restore:-translate-x-0.5 transition-transform" />

@@ -199,7 +199,7 @@ const AppLauncherSection = () => {
 
                         {/* Title */}
                         <h2 className="text-[22px] xl:text-[26px] font-bold text-center text-white leading-tight mb-4 tracking-tight">
-                            Khám phá toàn bộ chức năng
+                            KHÁM PHÁ TOÀN BỘ CHỨC NĂNG
                         </h2>
 
                         {/* Description */}

@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import {
     ChevronRight, ArrowLeft, Eye, MessageSquare, Download, FileText,
     Calendar, CheckCircle2, Clock, Building2, Layers, Search,
@@ -378,7 +378,23 @@ const RelatedPopup = ({ related, onClose }) => {
 // ── Main Layout ───────────────────────────────────────────────────────────────
 const DuThaoDetailPage = () => {
     const { id } = useParams();
+    const { hash } = useLocation();
     const doc = DOC_DATA;
+
+    // Scroll to feedback section if URL has hash
+    useEffect(() => {
+        if (hash === '#gop-y') {
+            // Slight delay to ensure DOM is fully painted
+            setTimeout(() => {
+                const element = document.getElementById('gop-y');
+                if (element) {
+                    // Calculate offset for sticky header (around 80px)
+                    const y = element.getBoundingClientRect().top + window.scrollY - 80;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+            }, 200);
+        }
+    }, [hash]);
 
     // Timeline Popup State
     const [showTimelinePopup, setShowTimelinePopup] = useState(false);
