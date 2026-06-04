@@ -114,9 +114,6 @@ const NewlyIssuedDocsV2 = () => {
                         <MessageSquare size={16} className="opacity-80" />
                         <span className="text-[15px] font-bold">Dự thảo VBQPPL</span>
                     </div>
-                    <Link to="/du-thao" className="text-[13px] font-semibold text-white/80 hover:text-white flex items-center gap-1 transition-colors">
-                        Xem tất cả <ChevronRight size={14} />
-                    </Link>
                 </div>
 
                 {/* Column headers */}
@@ -124,7 +121,7 @@ const NewlyIssuedDocsV2 = () => {
                     <div className="w-[105px] shrink-0">Ngày đăng</div>
                     <div className="w-[105px] shrink-0">Hạn góp ý</div>
                     <div className="flex-1 px-2 min-w-0">Nội dung dự thảo</div>
-                    <div className="w-[410px] shrink-0 text-right">Thao tác</div>
+                    <div className="w-[480px] shrink-0 text-left pl-2">Thao tác</div>
                 </div>
 
                 {/* Rows */}
@@ -155,7 +152,7 @@ const NewlyIssuedDocsV2 = () => {
                             </div>
 
                             {/* Actions — plain text labels, no tooltips */}
-                            <div className="w-[410px] shrink-0 flex items-center justify-end gap-1">
+                            <div className="w-[480px] shrink-0 flex items-center justify-start gap-1.5 pl-2">
                                 <Link
                                     to={`/du-thao/${doc.id}`}
                                     className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-600 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition text-[12px] font-semibold whitespace-nowrap"
@@ -188,6 +185,11 @@ const NewlyIssuedDocsV2 = () => {
                         </div>
                     ))}
                 </ul>
+                <div className="flex justify-end px-6 py-3 border-t border-gray-100 bg-slate-50/80">
+                    <Link to="/du-thao" className="text-[13px] font-semibold text-[#155a8a] hover:text-blue-700 flex items-center gap-1 transition-colors">
+                        Xem tất cả <ChevronRight size={14} />
+                    </Link>
+                </div>
             </div>
         </div>
     );

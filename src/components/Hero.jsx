@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, BookA, Landmark, Users, Bot, Flame, Sparkles, Send, MessageSquare, HelpCircle, ChevronRight, ChevronLeft, User, Tag, Clock } from 'lucide-react';
+import { Search, BookA, Landmark, Users, Bot, Flame, Sparkles, Send, MessageSquare, HelpCircle, ChevronRight, ChevronLeft, User, Tag, Clock, Paperclip } from 'lucide-react';
 
 const highlightSlides = [
     {
@@ -194,36 +194,45 @@ const Hero = ({ isV2 = false }) => {
 
                         {/* RIGHT COLUMN: TIÊU ĐIỂM HÔM NAY WITH VERTICAL TABS */}
                         <div className={`transition-all duration-700 ease-in-out transform mt-8 lg:mt-0 flex justify-center lg:justify-end shrink-0 ${isCollapsed ? 'w-0 max-w-0 opacity-0 scale-95 pointer-events-none overflow-hidden h-0 lg:h-auto' : 'w-full lg:w-[38%] opacity-100 scale-100'}`}>
-                            <div className="w-full max-w-[530px] flex flex-row items-stretch gap-3 h-[75vh] min-h-[600px] animate-float">
+                            <div className="w-[100vw] sm:w-[530px] max-w-[530px] flex flex-row items-stretch gap-3 h-[75vh] min-h-[600px] animate-float">
                                 {/* Vertical Tab Bar on the Left */}
                                 <div className="flex flex-col gap-3 shrink-0 justify-start py-2">
                                     <button
                                         type="button"
                                         onClick={() => setActiveSection(0)}
-                                        className={`flex flex-col items-center justify-center py-5 px-1 w-[76px] rounded-2xl border transition-all duration-300 cursor-pointer ${activeSection === 0
-                                            ? 'bg-gradient-to-b from-[#162e55]/95 to-[#0b172e]/95 border-amber-500/50 text-amber-400 font-bold shadow-[0_4px_20px_rgba(245,158,11,0.15)] scale-105'
+                                        className={`flex flex-col-reverse items-center justify-center py-5 px-1 w-[40px] rounded-2xl border transition-all duration-300 cursor-pointer ${activeSection === 0
+                                            ? 'bg-white/20 backdrop-blur-xl border-amber-400/50 text-amber-400 font-bold shadow-[0_0_15px_rgba(245,158,11,0.3)] scale-105'
                                             : 'bg-[#162e55]/30 backdrop-blur-md border-white/10 text-white/60 hover:text-white hover:border-white/20'
                                             }`}
                                     >
-                                        <Sparkles size={20} className={activeSection === 0 ? 'text-amber-400 animate-pulse' : 'text-white/50'} />
-                                        <span className="text-[10px] text-center uppercase tracking-wider font-bold mt-2 leading-tight">Tiêu điểm</span>
+                                        <Sparkles size={18} className={activeSection === 0 ? 'text-amber-400 animate-pulse shrink-0' : 'text-white/50 shrink-0'} />
+                                        <span
+                                            className="text-[10px] uppercase tracking-wider font-bold mb-4 whitespace-nowrap"
+                                            style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+                                        >
+                                            Tiêu điểm
+                                        </span>
                                     </button>
                                     <button
                                         type="button"
                                         onClick={() => setActiveSection(1)}
-                                        className={`flex flex-col items-center justify-center py-5 px-1 w-[76px] rounded-2xl border transition-all duration-300 cursor-pointer ${activeSection === 1
-                                            ? 'bg-gradient-to-b from-[#162e55]/95 to-[#0b172e]/95 border-sky-500/50 text-sky-400 font-bold shadow-[0_4px_20px_rgba(56,189,248,0.15)] scale-105'
+                                        className={`flex flex-col-reverse items-center justify-center py-5 px-1 w-[40px] rounded-2xl border transition-all duration-300 cursor-pointer ${activeSection === 1
+                                            ? 'bg-white/20 backdrop-blur-xl border-amber-400/50 text-amber-400 font-bold shadow-[0_0_15px_rgba(245,158,11,0.3)] scale-105'
                                             : 'bg-[#162e55]/30 backdrop-blur-md border-white/10 text-white/60 hover:text-white hover:border-white/20'
                                             }`}
                                     >
-                                        <MessageSquare size={20} className={activeSection === 1 ? 'text-sky-400' : 'text-white/50'} />
-                                        <span className="text-[10px] text-center uppercase tracking-wider font-bold mt-2 leading-tight">Hỏi đáp</span>
+                                        <MessageSquare size={18} className={activeSection === 1 ? 'text-amber-400 shrink-0' : 'text-white/50 shrink-0'} />
+                                        <span
+                                            className="text-[10px] uppercase tracking-wider font-bold mb-4 whitespace-nowrap"
+                                            style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+                                        >
+                                            Hỏi đáp
+                                        </span>
                                     </button>
                                 </div>
 
                                 {/* Main Card Container */}
                                 <div
-                                    key={isCollapsed ? 'collapsed' : 'expanded'}
                                     className={`flex-grow bg-gradient-to-br from-[#162e55]/60 via-[#102444]/60 to-[#0b172e]/65 backdrop-blur-xl border border-white/20 rounded-[28px] pt-6 pb-6 px-6 shadow-[0_25px_60px_rgba(0,0,0,0.65)] text-white relative overflow-hidden group select-none shimmer-effect hover:shadow-[0_30px_60px_rgba(59,130,246,0.3)] hover:border-white/30 transition-all duration-500 flex flex-col ${!isCollapsed ? 'animate-reveal-card' : ''}`}
                                 >
                                     {/* Decorative glowing gradient border glow */}
@@ -249,10 +258,10 @@ const Hero = ({ isV2 = false }) => {
                                             <button
                                                 type="button"
                                                 onClick={() => setIsCollapsed(true)}
-                                                className="w-7 h-7 bg-white/10 hover:bg-white/20 border border-white/10 hover:border-white/20 rounded-full flex justify-center items-center text-white/70 hover:text-white transition-all duration-300 cursor-pointer shadow-md hover:scale-110"
+                                                className="px-3 py-1 bg-white/10 hover:bg-white/20 border border-white/10 hover:border-white/20 rounded-full flex justify-center items-center gap-1 text-[11px] font-bold text-white/70 hover:text-white transition-all duration-300 cursor-pointer shadow-md hover:scale-105"
                                                 title="Thu gọn bảng tin"
                                             >
-                                                <ChevronRight size={14} />
+                                                Thu gọn <ChevronRight size={14} />
                                             </button>
                                         </div>
                                     </div>
@@ -352,29 +361,25 @@ const Hero = ({ isV2 = false }) => {
                                                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                                                             </span>
-                                                            <span className="text-[11px] font-bold text-sky-300 tracking-wide uppercase font-sans">Tư vấn trực tuyến 24/7</span>
+                                                            <span className="text-[11px] font-bold text-sky-300 tracking-wide uppercase font-sans">Quy trình hỏi đáp</span>
                                                         </div>
-                                                        <span className="text-[9px] text-gray-400 font-medium flex items-center gap-1">
-                                                            <Clock size={10} /> Phản hồi: 3-5 ngày
-                                                        </span>
                                                     </div>
 
                                                     {/* Interactive-looking Process Timeline */}
                                                     <div className="grid grid-cols-3 gap-2 text-[9px] text-gray-300 text-center font-medium relative">
                                                         {/* Connector lines */}
-                                                        <div className="absolute top-[8px] left-[15%] right-[15%] h-[1px] bg-white/10 z-0"></div>
 
                                                         <div className="flex flex-col items-center gap-1 bg-white/5 py-2 px-1 rounded-xl border border-white/10 relative z-10 scale-105 shadow-md">
-                                                            <span className="w-4.5 h-4.5 bg-sky-500 text-white rounded-full flex items-center justify-center font-bold text-[9px] shadow-[0_0_10px_rgba(14,165,233,0.3)]">1</span>
+                                                            <span className="w-4.5 h-4.5 text-white rounded-full flex items-center justify-center font-bold text-[9px] shadow-[0_0_10px_rgba(14,165,233,0.3)]">1</span>
                                                             <span className="text-white font-semibold">Gửi câu hỏi</span>
                                                         </div>
-                                                        <div className="flex flex-col items-center gap-1 bg-[#07132a]/30 py-2 px-1 rounded-xl border border-white/5 relative z-10">
-                                                            <span className="w-4.5 h-4.5 bg-white/10 text-white/60 rounded-full flex items-center justify-center font-bold text-[9px]">2</span>
-                                                            <span className="text-white/50">Tiếp nhận</span>
+                                                        <div className="flex flex-col items-center gap-1 bg-white/5 py-2 px-1 rounded-xl border border-white/10 relative z-10 scale-105 shadow-md">
+                                                            <span className="w-4.5 h-4.5 text-white/60 rounded-full flex items-center justify-center font-bold text-[9px]">2</span>
+                                                            <span className="text-white">Tiếp nhận</span>
                                                         </div>
-                                                        <div className="flex flex-col items-center gap-1 bg-[#07132a]/30 py-2 px-1 rounded-xl border border-white/5 relative z-10">
-                                                            <span className="w-4.5 h-4.5 bg-white/10 text-white/60 rounded-full flex items-center justify-center font-bold text-[9px]">3</span>
-                                                            <span className="text-white/50">Trả lời</span>
+                                                        <div className="flex flex-col items-center gap-1 bg-white/5 py-2 px-1 rounded-xl border border-white/10 relative z-10 scale-105 shadow-md">
+                                                            <span className="w-4.5 h-4.5 text-white/60 rounded-full flex items-center justify-center font-bold text-[9px]">3</span>
+                                                            <span className="text-white">Trả lời</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -393,7 +398,7 @@ const Hero = ({ isV2 = false }) => {
                                                                     type="text"
                                                                     value="Nguyễn Văn A"
                                                                     disabled
-                                                                    className="w-full bg-[#07132a]/60 border border-white/10 rounded-xl pl-9 pr-2.5 py-2 text-[11px] text-gray-400 cursor-not-allowed outline-none font-medium"
+                                                                    className="w-full bg-white/10 border border-white/20 rounded-xl pl-9 pr-2.5 py-2 text-[11px] text-white/70 cursor-not-allowed outline-none font-medium"
                                                                 />
                                                             </div>
                                                         </div>
@@ -408,7 +413,7 @@ const Hero = ({ isV2 = false }) => {
                                                                     name="quickDomain"
                                                                     value={quickFormData.domain}
                                                                     onChange={(e) => setQuickFormData({ ...quickFormData, domain: e.target.value })}
-                                                                    className="w-full bg-[#07132a]/80 border border-white/10 rounded-xl pl-9 pr-2.5 py-2 text-[11px] text-gray-200 outline-none focus:border-sky-400 focus:bg-[#0c1e3d] transition cursor-pointer font-medium"
+                                                                    className="w-full bg-white/15 border border-white/20 rounded-xl pl-9 pr-2.5 py-2 text-[11px] text-white outline-none focus:border-sky-400 focus:bg-white/25 transition cursor-pointer font-medium"
                                                                 >
                                                                     <option value="" disabled className="text-gray-500">-- Chọn lĩnh vực --</option>
                                                                     <option value="Dân sự" className="bg-[#0c1e3d] text-white">Dân sự</option>
@@ -434,7 +439,7 @@ const Hero = ({ isV2 = false }) => {
                                                                 placeholder="Nhập tiêu đề ngắn gọn..."
                                                                 value={quickFormData.title}
                                                                 onChange={(e) => setQuickFormData({ ...quickFormData, title: e.target.value })}
-                                                                className="w-full bg-[#07132a]/80 border border-white/10 rounded-xl pl-9 pr-2.5 py-2 text-[11px] text-white placeholder-gray-500 outline-none focus:border-sky-400 transition font-medium"
+                                                                className="w-full bg-white/15 border border-white/20 rounded-xl pl-9 pr-2.5 py-2 text-[11px] text-white placeholder-white/50 outline-none focus:border-sky-400 focus:bg-white/25 transition font-medium"
                                                             />
                                                         </div>
                                                     </div>
@@ -447,10 +452,33 @@ const Hero = ({ isV2 = false }) => {
                                                             placeholder="Mô tả hoàn cảnh và vấn đề pháp lý bạn cần giải đáp..."
                                                             value={quickFormData.content}
                                                             onChange={(e) => setQuickFormData({ ...quickFormData, content: e.target.value })}
-                                                            className="w-full bg-[#07132a]/80 border border-white/10 rounded-xl px-3 py-2.5 text-[11px] text-white placeholder-gray-500 outline-none focus:border-sky-400 transition resize-none leading-normal h-[105px] font-medium"
+                                                            className="w-full bg-white/15 border border-white/20 rounded-xl px-3 py-2.5 text-[11px] text-white placeholder-white/50 outline-none focus:border-sky-400 focus:bg-white/25 transition resize-none leading-normal h-[105px] font-medium"
                                                             maxLength={500}
                                                         />
                                                         <p className="text-right text-[9px] text-gray-400 mt-1 font-semibold">{quickFormData.content.length}/500 ký tự</p>
+                                                    </div>
+
+                                                    {/* File Attachment */}
+                                                    <div className="flex flex-col">
+                                                        <label className="block text-[11px] font-bold text-gray-300 mb-1">Tài liệu đính kèm (tùy chọn)</label>
+                                                        <div className="relative">
+                                                            <input
+                                                                type="file"
+                                                                multiple
+                                                                className="hidden"
+                                                                id="file-upload"
+                                                            />
+                                                            <label
+                                                                htmlFor="file-upload"
+                                                                className="flex items-center justify-between w-full bg-white/10 border border-white/20 border-dashed rounded-xl px-3 py-2 text-[11px] text-gray-300 hover:bg-white/20 hover:border-sky-400 transition cursor-pointer font-medium"
+                                                            >
+                                                                <div className="flex items-center gap-2">
+                                                                    <Paperclip size={12} className="text-sky-300" />
+                                                                    <span className="text-white/70">Đính kèm file (Tối đa 5 file, &lt; 10MB)</span>
+                                                                </div>
+                                                                <span className="bg-sky-500 hover:bg-sky-400 text-white px-2 py-1 rounded-md text-[9px] transition-colors shadow-sm">Chọn file</span>
+                                                            </label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -459,23 +487,14 @@ const Hero = ({ isV2 = false }) => {
                                             <div className="flex flex-col gap-3 mt-auto font-medium">
                                                 <button
                                                     type="submit"
-                                                    className="w-full bg-gradient-to-r from-sky-600 to-[#0f4c81] hover:from-sky-500 hover:to-[#155e94] text-white font-bold py-2.5 px-4 rounded-xl text-[12px] transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(15,76,129,0.3)] hover:shadow-[0_4px_20px_rgba(15,76,129,0.5)] hover:scale-[1.01] cursor-pointer shrink-0"
+                                                    className="w-full bg-gradient-to-r from-[#00bdf2] to-[#0072ff] hover:from-[#33cbf5] hover:to-[#338dff] text-white font-bold py-2.5 px-4 rounded-xl text-[13px] transition-all flex items-center justify-center gap-2 shadow-[0_4px_15px_rgba(0,114,255,0.4)] hover:shadow-[0_4px_20px_rgba(0,114,255,0.6)] hover:scale-[1.01] cursor-pointer shrink-0"
                                                 >
-                                                    <Send size={12} className="animate-pulse" /> Gửi câu hỏi nhanh
+                                                    <Send size={14} className="animate-pulse" /> Gửi câu hỏi nhanh
                                                 </button>
 
                                                 {/* Empathy statistics bar */}
                                                 <div className="flex items-center justify-between border-t border-white/10 pt-3 px-1 text-[10px] text-gray-400 font-medium">
-                                                    <div className="flex items-center gap-1.5 text-emerald-400">
-                                                        <span className="flex h-1.5 w-1.5 relative">
-                                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-                                                        </span>
-                                                        <span>14 Chuyên viên trực tuyến</span>
-                                                    </div>
-                                                    <div>
-                                                        Đã giải đáp: <strong className="text-white font-bold">12.8K+</strong> câu hỏi
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </form>

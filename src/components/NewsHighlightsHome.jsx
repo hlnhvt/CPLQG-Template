@@ -18,7 +18,7 @@ const NewsHighlightsHome = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                         {/* Cột Trái (3 tin nhỏ) */}
                         <div className="lg:col-span-1 flex flex-col space-y-4">
-                            {[2, 3, 4].map((id) => (
+                            {[2, 3, 4, 7].map((id) => (
                                 <Link key={id} to={`/news/${id}`} className="flex items-start gap-4 group border-b border-gray-100 pb-4 last:border-0 last:pb-0">
                                     <div className="w-1/3 shrink-0">
                                         <Image16x9 

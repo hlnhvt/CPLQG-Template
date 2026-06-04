@@ -198,12 +198,12 @@ const AppLauncherSection = () => {
                         </div>
 
                         {/* Title */}
-                        <h2 className="text-[22px] xl:text-[26px] font-bold text-center text-white leading-tight mb-4 tracking-tight">
+                        <h2 className="text-[22px] xl:text-[28px] font-bold text-center text-white leading-tight mb-4 tracking-tight">
                             KHÁM PHÁ TOÀN BỘ CHỨC NĂNG
                         </h2>
 
                         {/* Description */}
-                        <p className="text-slate-400 text-[13px] leading-relaxed mb-6">
+                        <p className="text-blue-100 text-[14.5px] leading-relaxed font-light mb-8">
                             Truy cập nhanh tất cả chuyên mục và dịch vụ pháp luật — từ tra cứu văn bản, tham vấn ý kiến đến hỏi đáp chuyên gia, diễn đàn cộng đồng và nhiều tiện ích khác.
                         </p>
 

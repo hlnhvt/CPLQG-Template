@@ -100,12 +100,12 @@ const MultimediaV2 = () => {
             {/* Glowing neon mesh backgrounds */}
             <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-blue-500/20 blur-[100px] pointer-events-none z-0"></div>
             <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-cyan-500/20 blur-[100px] pointer-events-none z-0"></div>
-            
+
             {/* Hoa văn hình học trang trí (Geometric patterns) */}
             <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full border-[1px] border-white/5 -translate-y-1/2 translate-x-1/3 pointer-events-none z-0"></div>
             <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full border-[2px] border-white/5 -translate-y-1/2 translate-x-1/3 pointer-events-none z-0"></div>
             <div className="absolute bottom-0 left-0 w-[800px] h-[800px] rounded-full border-[1px] border-white/5 translate-y-1/3 -translate-x-1/4 pointer-events-none z-0"></div>
-            
+
             {/* Subtle digital dot-matrix background mesh */}
             <div className="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[size:1.5rem_1.5rem] opacity-80 pointer-events-none z-0"></div>
 
@@ -145,217 +145,67 @@ const MultimediaV2 = () => {
                     </div>
                 </div>
 
-                {/* 2. Slider Banner Lớn Siêu To Khổng Lồ (Hero Banner) */}
-                <div className="relative w-full aspect-[21/9] md:aspect-[32/9] max-h-[300px] rounded-3xl overflow-hidden shadow-2xl bg-slate-950 border border-white/10 group mb-6">
-                    <img
-                        src={bannerSlides[slideIndex].image}
-                        alt={bannerSlides[slideIndex].title}
-                        className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-1000"
-                    />
+                {/* Main Content Grid Layout */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start mt-4">
 
-                    {/* Shadow overlays on left/right/bottom for cinematic depth */}
-                    <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black/50 to-transparent z-10 pointer-events-none"></div>
-                    <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black/50 to-transparent z-10 pointer-events-none"></div>
-                    <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 pointer-events-none"></div>
+                    {/* Main Big Item (Left) - Col span 5 */}
+                    <div className="lg:col-span-5 flex flex-col group cursor-pointer relative top-0 hover:-top-1 transition-all duration-300">
+                        <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.4)] mb-5 border border-white/10 bg-slate-900">
+                            <img
+                                src={bannerSlides[0].image}
+                                alt={bannerSlides[0].title}
+                                className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-1000 ease-out"
+                            />
 
-                    {/* Left/Right Slider Arrow Controls */}
-                    <button
-                        onClick={handlePrevSlide}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center shadow-lg border border-white/15 hover:border-white/35 transition-all outline-none"
-                    >
-                        <span className="text-lg md:text-xl font-bold -mt-0.5">&lt;</span>
-                    </button>
-                    <button
-                        onClick={handleNextSlide}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center shadow-lg border border-white/15 hover:border-white/35 transition-all outline-none"
-                    >
-                        <span className="text-lg md:text-xl font-bold -mt-0.5">&gt;</span>
-                    </button>
+                            {/* Cinematic Gradient Overlay */}
+                            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none"></div>
 
-                    {/* Clean Text Overlay at Bottom Center without box */}
-                    <Link
-                        to={bannerSlides[slideIndex].to}
-                        className="absolute bottom-0 inset-x-0 px-6 pb-6 pt-10 md:px-12 md:pb-8 z-20 flex flex-row items-end gap-4 md:gap-6 group/title transition-all duration-300"
-                    >
-                        {/* Round Play Button */}
-                        <div className="relative flex items-center justify-center shrink-0 mb-1">
-                            <div className="absolute w-12 h-12 md:w-16 md:h-16 bg-blue-500/20 rounded-full animate-ping duration-1000 pointer-events-none"></div>
-                            <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(37,99,235,0.5)] border border-blue-400/20 group-hover/title:scale-110 transition-transform">
-                                <Play size={16} className="fill-white ml-0.5 text-white" />
-                            </div>
-                        </div>
-                        {/* Heading text */}
-                        <div className="flex-grow text-left">
-                            <h3 className="font-bold text-white text-lg md:text-2xl leading-snug drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] line-clamp-2 group-hover/title:text-blue-200 transition-colors">
-                                {bannerSlides[slideIndex].title}
-                            </h3>
-                            {/* Dots indicator */}
-                            <div className="flex items-center gap-2 mt-2 md:mt-3">
-                                {bannerSlides.map((_, i) => (
-                                    <span
-                                        key={i}
-                                        className={`h-1.5 rounded-full transition-all duration-300 shadow-sm ${i === slideIndex ? 'bg-blue-400 w-6' : 'bg-white/40 w-2 hover:bg-white/60'}`}
-                                    ></span>
-                                ))}
-                            </div>
-                        </div>
-                    </Link>
-                </div>
-
-                {/* 3. Lưới 2 Cột Chuyên Mục Song Song Phía Dưới */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-start">
-
-                    {/* VIDEO COLUMN */}
-                    <div className="flex flex-col">
-                        {/* Section Header */}
-                        <Link
-                            to="/video"
-                            className="flex items-center gap-2 pb-2 mb-4 border-b-2 border-blue-500 w-fit hover:opacity-85 transition"
-                        >
-                            <Play size={14} className="text-blue-400 fill-blue-400 shrink-0" />
-                            <h3 className="text-sm font-bold text-white uppercase tracking-wider">
-                                Video nổi bật
-                            </h3>
-                        </Link>
-
-                        {/* Featured Video Card (Made smaller & side-by-side horizontally) */}
-                        <Link
-                            to={videosList[0].to}
-                            className="group flex flex-col sm:flex-row gap-3 md:gap-4 mb-4 bg-white/15 backdrop-blur-md border border-white/20 hover:bg-white/25 hover:border-white/30 transition-all duration-300 rounded-xl md:rounded-2xl p-3 shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
-                        >
-                            <div className="relative w-full sm:w-[160px] md:w-[180px] aspect-[16/10] rounded-xl overflow-hidden shadow-md border border-white/10 shrink-0 bg-slate-950">
-                                <img
-                                    src={videosList[0].image}
-                                    alt={videosList[0].title}
-                                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
-                                />
-                                {/* Play overlay icon */}
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/35 transition-colors">
-                                    <div className="bg-blue-600 text-white rounded-full p-2 shadow-lg transform group-hover:scale-110 transition-all duration-300 border border-white/20">
-                                        <Play size={14} className="fill-white ml-0.5 text-white" />
-                                    </div>
+                            {/* Center Play Button Overlay */}
+                            <div className="absolute inset-0 flex items-center justify-center z-20">
+                                <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-black/40 border border-white/30 backdrop-blur-sm flex items-center justify-center group-hover:bg-blue-600/90 group-hover:border-blue-400 group-hover:scale-110 transition-all duration-500 shadow-[0_0_20px_rgba(0,0,0,0.5)] group-hover:shadow-[0_0_30px_rgba(37,99,235,0.8)]">
+                                    <Play size={28} className="text-white fill-white ml-1" />
                                 </div>
                             </div>
-                            <div className="flex flex-col justify-between py-1 flex-grow">
-                                <div>
-                                    <span className="inline-block px-2 py-0.5 text-[10px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-md mb-2 uppercase tracking-wider">
-                                        Tiêu điểm
-                                    </span>
-                                    <h4 className="font-semibold text-white group-hover:text-blue-400 transition-colors text-xs md:text-sm lg:text-base leading-snug line-clamp-2">
-                                        {videosList[0].title}
-                                    </h4>
-                                </div>
-                                <div className="flex items-center gap-1.5 mt-2.5 text-xs text-slate-400">
-                                    <Clock size={12} />
-                                    <span>{videosList[0].date}</span>
-                                </div>
-                            </div>
-                        </Link>
-
-                        {/* Horizontal list of 3 sub-videos */}
-                        <div className="flex flex-col gap-2.5">
-                            {videosList.slice(1).map((item) => (
-                                <Link
-                                    key={item.id}
-                                    to={item.to}
-                                    className="flex gap-4 p-3 group bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 rounded-xl items-center transition duration-300"
-                                >
-                                    <div className="relative w-20 md:w-24 aspect-[16/10] rounded-lg overflow-hidden border border-white/10 shrink-0 bg-slate-950">
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            className="w-full h-full object-cover"
-                                        />
-                                        <div className="absolute inset-0 flex items-center justify-center bg-black/25 group-hover:bg-black/40 transition-colors">
-                                            <div className="bg-blue-600 text-white rounded-full p-1.5 shadow-md">
-                                                <Play size={10} className="fill-white ml-0.5 text-white" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="flex-grow">
-                                        <h5 className="font-semibold text-white text-xs md:text-sm leading-snug line-clamp-2 group-hover:text-blue-400 transition-colors">
-                                            {item.title}
-                                        </h5>
-                                        <div className="flex items-center gap-1 mt-1 text-[11px] text-slate-400">
-                                            <Clock size={10} />
-                                            <span>{item.date}</span>
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
                         </div>
+
+                        <h3 className="text-xl md:text-[22px] font-bold text-white leading-snug mb-3 group-hover:text-blue-300 transition-colors flex items-start gap-2 drop-shadow-md">
+                            <Video size={24} className="shrink-0 mt-0.5 text-white fill-white/20" />
+                            <span>{bannerSlides[0].title}</span>
+                        </h3>
+                        <p className="text-white/80 text-[14px] md:text-[15px] line-clamp-3 leading-relaxed font-medium">
+                            Nội dung chi tiết của video hoặc bài viết tiêu điểm, phản ánh những thông tin nóng hổi và quan trọng nhất trong ngày, được cập nhật liên tục...
+                        </p>
                     </div>
 
-                    {/* INFOGRAPHIC COLUMN */}
-                    <div className="flex flex-col">
-                        {/* Section Header */}
-                        <Link
-                            to="/infographic"
-                            className="flex items-center gap-2 pb-2 mb-4 border-b-2 border-cyan-500 w-fit hover:opacity-85 transition"
-                        >
-                            <FileText size={14} className="text-cyan-400 shrink-0" />
-                            <h3 className="text-sm font-bold text-white uppercase tracking-wider">
-                                Infographic nổi bật
-                            </h3>
-                        </Link>
+                    {/* Right Grid (6 items) - Col span 7 */}
+                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-7">
+                        {videosList.concat(infographicsList).slice(0, 6).map((item, index) => (
+                            <Link to={item.to} key={index} className="flex flex-col group relative top-0 hover:-top-1 transition-all duration-300">
+                                <div className="relative w-full aspect-[16/10] rounded-lg overflow-hidden shadow-lg mb-3 border border-white/10 bg-slate-900">
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                                    />
 
-                        {/* Featured Infographic Card */}
-                        <Link
-                            to={infographicsList[0].to}
-                            className="group flex flex-col sm:flex-row gap-3 md:gap-4 mb-4 bg-white/15 backdrop-blur-md border border-white/20 hover:bg-white/25 hover:border-white/30 transition-all duration-300 rounded-xl md:rounded-2xl p-3 shadow-[0_8px_30px_rgb(0,0,0,0.12)]"
-                        >
-                            <div className="relative w-full sm:w-[160px] md:w-[180px] aspect-[16/10] rounded-xl overflow-hidden shadow-md border border-white/10 shrink-0 bg-slate-950">
-                                <img
-                                    src={infographicsList[0].image}
-                                    alt={infographicsList[0].title}
-                                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
-                                />
-                            </div>
-                            <div className="flex flex-col justify-between py-1 flex-grow">
-                                <div>
-                                    <span className="inline-block px-2 py-0.5 text-[10px] font-bold text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 rounded-md mb-2 uppercase tracking-wider">
-                                        Tiêu điểm
-                                    </span>
-                                    <h4 className="font-semibold text-white group-hover:text-cyan-400 transition-colors text-xs md:text-sm lg:text-base leading-snug line-clamp-2">
-                                        {infographicsList[0].title}
-                                    </h4>
-                                </div>
-                                <div className="flex items-center gap-1.5 mt-2.5 text-xs text-slate-400">
-                                    <Clock size={12} />
-                                    <span>{infographicsList[0].date}</span>
-                                </div>
-                            </div>
-                        </Link>
-
-                        {/* Horizontal list of 3 sub-infographics */}
-                        <div className="flex flex-col gap-2.5">
-                            {infographicsList.slice(1).map((item) => (
-                                <Link
-                                    key={item.id}
-                                    to={item.to}
-                                    className="flex gap-4 p-3 group bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 rounded-xl items-center transition duration-300"
-                                >
-                                    <div className="relative w-20 md:w-24 aspect-[16/10] rounded-lg overflow-hidden border border-white/10 shrink-0 bg-slate-950">
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
-                                    <div className="flex-grow">
-                                        <h5 className="font-semibold text-white text-xs md:text-sm leading-snug line-clamp-2 group-hover:text-cyan-400 transition-colors">
-                                            {item.title}
-                                        </h5>
-                                        <div className="flex items-center gap-1 mt-1 text-[11px] text-slate-400">
-                                            <Clock size={10} />
-                                            <span>{item.date}</span>
+                                    {/* Play Overlay on Hover */}
+                                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center z-10">
+                                        <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.6)]">
+                                            <Play size={16} className="fill-white ml-0.5" />
                                         </div>
                                     </div>
-                                </Link>
-                            ))}
-                        </div>
+                                </div>
+                                <h4 className="font-semibold text-white/95 text-[14px] leading-snug line-clamp-3 group-hover:text-blue-300 transition-colors flex gap-1.5 items-start drop-shadow-sm">
+                                    {index < videosList.length ? (
+                                        <Video size={16} className="shrink-0 mt-0.5 text-white fill-white/20" />
+                                    ) : (
+                                        <FileText size={16} className="shrink-0 mt-0.5 text-white fill-white/20" />
+                                    )}
+                                    <span>{item.title}</span>
+                                </h4>
+                            </Link>
+                        ))}
                     </div>
-
                 </div>
 
             </div>

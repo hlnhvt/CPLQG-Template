@@ -81,15 +81,16 @@ const Footer = () => {
                 </div>
             </div>
 
-            {/* Right fixed/absolute action buttons */}
-            <div className="absolute right-4 bottom-8 md:right-8 flex flex-col items-end gap-3 z-30">
+            {/* Right fixed action buttons */}
+            <div className="fixed right-4 bottom-8 md:right-8 flex flex-col items-end gap-3 z-[100]">
                 {/* Back to top button */}
                 <button
                     onClick={scrollToTop}
-                    className="w-[36px] h-[36px] rounded-full border-[1.5px] border-white flex items-center justify-center hover:bg-white/20 transition-all shadow-sm mr-2"
+                    className="w-11 h-11 rounded-full bg-gradient-to-br from-[#00bdf2] to-[#05115e] border-[2px] border-white flex items-center justify-center hover:scale-110 transition-all shadow-[0_4px_15px_rgba(0,114,255,0.4)] mr-2 relative overflow-hidden group"
                     title="Lên đầu trang"
                 >
-                    <ArrowUp size={18} className="text-white" />
+                    <div className="absolute inset-0 rounded-full border border-white/30 scale-[1.15] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <ArrowUp size={20} className="text-white stroke-[2.5px]" />
                 </button>
 
                 {/* Live support button */}

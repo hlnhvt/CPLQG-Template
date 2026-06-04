@@ -24,14 +24,16 @@ const PhanAnhKienNghiHomeSection = () => {
                             Cổng Pháp luật quốc gia tiếp nhận mọi ý kiến đóng góp, phản ánh vướng mắc về thực thi pháp lý, và đề xuất sáng kiến cải cách thể chế nhằm chung tay hoàn thiện hệ thống luật pháp Việt Nam.
                         </p>
 
-                        <Link
-                            to="/phan-anh-kien-nghi"
+                        <a
+                            href="https://paknvbqppl.moj.gov.vn/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="group inline-flex items-center gap-2.5 px-6 py-3 bg-white text-[#0f4c81] hover:bg-slate-50 font-bold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 border border-slate-100"
                         >
                             <MessageSquare size={18} className="text-[#0f4c81]" />
                             <span className="text-[14px]">Gửi phản ánh kiến nghị ngay</span>
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform text-[#0f4c81]" />
-                        </Link>
+                        </a>
 
                         {/* Stats mini */}
                         {/* <div className="mt-8 flex items-center gap-6 border-t border-white/20 pt-4 w-full">
