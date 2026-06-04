@@ -140,7 +140,7 @@ const MultimediaV2 = () => {
                             <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-600 to-cyan-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-inner">
                                 <FileText size={12} className="text-white" />
                             </div>
-                            <span className="tracking-wide">Infographics</span>
+                            <span className="tracking-wide">Infographic</span>
                         </Link>
                     </div>
                 </div>
