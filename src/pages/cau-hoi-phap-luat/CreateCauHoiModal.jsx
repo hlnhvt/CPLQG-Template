@@ -48,6 +48,30 @@ const CreateCauHoiModal = ({ isOpen, onClose }) => {
         setIsSubmitting(true);
         // Mock API call
         setTimeout(() => {
+            const domainMapping = {
+                'dan-su': 'Dân sự',
+                'hinh-su': 'Hình sự',
+                'lao-dong': 'Lao động',
+                'doanh-nghiep': 'Doanh nghiệp',
+                'dat-dai': 'Đất đai'
+            };
+            
+            const newQuestion = {
+                id: 'user-' + Date.now(),
+                title: formData.title,
+                content: formData.content,
+                domain: domainMapping[formData.domain] || 'Dân sự',
+                date: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) + ' ' + new Date().toLocaleDateString('vi-VN'),
+                status: 'Đang chờ trả lời',
+                views: 1,
+                likes: 0,
+                author: formData.isAnonymous ? 'Người dùng ẩn danh' : 'Nguyễn Văn A',
+                replies: 0
+            };
+            
+            const existing = JSON.parse(localStorage.getItem('cplqg_user_questions') || '[]');
+            localStorage.setItem('cplqg_user_questions', JSON.stringify([newQuestion, ...existing]));
+
             setIsSubmitting(false);
             setIsSuccess(true);
             setGeneratedCode('CH-2026-00' + Math.floor(Math.random() * 1000));
@@ -105,7 +129,7 @@ const CreateCauHoiModal = ({ isOpen, onClose }) => {
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="bg-blue-50 text-blue-800 p-4 rounded-xl flex gap-3 text-sm border border-blue-100">
                                 <AlertCircle className="shrink-0 text-blue-500" size={20} />
-                                <p>Câu hỏi của bạn sẽ được chuyên gia/cán bộ trả lời trong vòng 3-5 ngày làm việc. Vui lòng cung cấp thông tin chi tiết và chính xác.</p>
+                                <p>Câu hỏi của bạn sẽ được chuyên gia/cán bộ trả lời trong thời gian sớm nhất. Vui lòng cung cấp thông tin chi tiết và chính xác.</p>
                             </div>
 
                             <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm space-y-5">

@@ -23,6 +23,12 @@ const DanhSachCauHoiPage = () => {
     const { user } = useAuth();
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
+    const [questions, setQuestions] = useState([]);
+
+    useEffect(() => {
+        const localQuestions = JSON.parse(localStorage.getItem('cplqg_user_questions') || '[]');
+        setQuestions([...localQuestions, ...MOCK_DATA]);
+    }, []);
 
     // Tab logic
     const initialTab = searchParams.get('tab') || 'popular';
@@ -123,9 +129,9 @@ const DanhSachCauHoiPage = () => {
             <div className="container mx-auto px-4 max-w-[1280px] pb-16">
                 {/* Tab Contents */}
                 <div className="min-h-[500px]">
-                    {activeTab === 'popular' && <QuestionList mode="popular" />}
-                    {activeTab === 'latest' && <QuestionList mode="latest" />}
-                    {activeTab === 'search' && <SearchTab />}
+                    {activeTab === 'popular' && <QuestionList mode="popular" questions={questions} />}
+                    {activeTab === 'latest' && <QuestionList mode="latest" questions={questions} />}
+                    {activeTab === 'search' && <SearchTab questions={questions} />}
                 </div>
             </div>
 
@@ -137,8 +143,11 @@ const DanhSachCauHoiPage = () => {
 // ==============================
 // QUESTION LIST (Popular & Latest)
 // ==============================
-const QuestionList = ({ mode }) => {
+const QuestionList = ({ mode, questions = [] }) => {
     const isPopular = mode === 'popular';
+    const sortedQuestions = isPopular 
+        ? [...questions].sort((a, b) => (b.views || 0) - (a.views || 0)) 
+        : questions;
 
     return (
         <div className="flex flex-col lg:flex-row gap-8">
@@ -160,7 +169,7 @@ const QuestionList = ({ mode }) => {
                     </div>
 
                     <ul className="space-y-4">
-                        {MOCK_DATA.map((item, index) => (
+                        {sortedQuestions.map((item, index) => (
                             <li key={item.id} className="p-5 rounded-xl border border-gray-100 hover:shadow-md transition-shadow group relative overflow-hidden">
                                 {isPopular && index < 3 && (
                                     <div className="absolute top-0 right-0 bg-amber-400 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
@@ -263,7 +272,7 @@ const QuestionList = ({ mode }) => {
 
 // ==============================
 // 3. SEARCH TAB
-const SearchTab = () => {
+const SearchTab = ({ questions = [] }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     // Filter states
@@ -289,7 +298,7 @@ const SearchTab = () => {
     };
 
     // Filter data
-    const filteredData = MOCK_DATA.filter(item => {
+    const filteredData = questions.filter(item => {
         if (searchTerm && !item.content.toLowerCase().includes(searchTerm.toLowerCase()) && !item.title.toLowerCase().includes(searchTerm.toLowerCase())) return false;
         if (selectedDomains.length > 0 && !selectedDomains.includes(item.domain)) return false;
         if (statusFilter !== 'Tất cả' && item.status !== statusFilter) return false;

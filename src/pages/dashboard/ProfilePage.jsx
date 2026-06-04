@@ -67,7 +67,7 @@ const Field = ({ label, value, isEditing, type = "text", placeholder, options, o
                 </div>
             ) : (
                 type === 'select' ? (
-                    <select 
+                    <select
                         className="w-full text-[15px] border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all shadow-sm"
                         value={value}
                         onChange={(e) => onChange && onChange(e.target.value)}
@@ -111,7 +111,8 @@ const ProfilePage = () => {
         job: user?.job || "",
         workplace: user?.workplace || "",
         expertise: user?.expertise || "",
-        description: user?.description || ""
+        description: user?.description || "",
+        province: user?.province || "TP. Hà Nội"
     });
 
     const [originalData, setOriginalData] = useState({ ...formData });
@@ -144,12 +145,12 @@ const ProfilePage = () => {
     const handleSave = (section) => {
         // Save to AuthContext if it's basic section explicitly
         if (section === 'basic') {
-            updateUser({ name: formData.name });
+            updateUser({ name: formData.name, province: formData.province });
         }
-        
+
         setOriginalData({ ...formData }); // Commit local
         setEditState(prev => ({ ...prev, [section]: false }));
-        
+
         setSavedNotice('Lưu thông tin thành công!');
         setTimeout(() => setSavedNotice(''), 3000);
     };
@@ -191,6 +192,15 @@ const ProfilePage = () => {
                         type="date"
                     />
                     <Field label="Giới tính" value={formData.gender} onChange={(v) => handleChange('gender', v)} isEditing={editState.basic} type="select" options={['Nam', 'Nữ', 'Khác']} />
+                    <Field
+                        label="Địa phương sinh sống"
+                        value={formData.province}
+                        onChange={(v) => handleChange('province', v)}
+                        isEditing={editState.basic}
+                        type="select"
+                        options={['TP. Hà Nội', 'TP. Hồ Chí Minh', 'TP. Đà Nẵng', 'TP. Hải Phòng', 'TP. Cần Thơ', 'Tỉnh Quảng Ninh', 'Tỉnh Nghệ An', 'Tỉnh Thừa Thiên Huế', 'Tỉnh Đồng Nai', 'Tỉnh Bình Dương']}
+                    />
+
 
                     <div className="md:col-span-2">
                         <Field label="Địa chỉ thường trú" value={formData.address} onChange={(v) => handleChange('address', v)} isEditing={editState.basic} />
@@ -231,11 +241,11 @@ const ProfilePage = () => {
                                 <span className="px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-700">Đã xác thực</span>
                             </div>
                         ) : (
-                            <input 
-                                type="tel" 
-                                className="w-full text-[15px] border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none shadow-sm" 
+                            <input
+                                type="tel"
+                                className="w-full text-[15px] border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none shadow-sm"
                                 value={formData.phone}
-                                onChange={(e) => handleChange('phone', e.target.value)} 
+                                onChange={(e) => handleChange('phone', e.target.value)}
                             />
                         )}
                     </div>
@@ -246,6 +256,30 @@ const ProfilePage = () => {
                     </div>
                 </div>
             </EditableSection>
+
+            {/* Trợ giúp pháp lý Section */}
+            {user?.isLegalAid === 'Có' && (
+                <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mb-6 transition-all duration-300 hover:shadow-md">
+                    <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                        <h3 className="text-[16px] font-bold text-gray-800">Trợ giúp pháp lý</h3>
+                        <span className="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-100 text-emerald-800 select-none">Đã xác thực</span>
+                    </div>
+                    <div className="px-6 py-5">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div>
+                                <div className="min-h-[32px] flex items-center">
+                                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200 shadow-sm select-none">
+                                        <ShieldCheck size={14} className="text-blue-500" /> Đối tượng được trợ giúp pháp lý
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="text-[13px] text-gray-400 italic max-w-md sm:text-right">
+                                Thông tin được đồng bộ tự động từ Hệ thống Trợ giúp pháp lý.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Career Section (MH04) */}
             <EditableSection

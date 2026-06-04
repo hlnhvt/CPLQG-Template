@@ -52,7 +52,7 @@ const NewlyIssuedDocsV2 = () => {
 
                 {/* Left: Newly Issued Docs Table */}
                 <div className="flex-1">
-                    <div className="bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-gray-100 overflow-hidden flex flex-col h-full min-h-[340px]">
+                    <div className="bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-gray-100 overflow-hidden flex flex-col h-[413px]">
                         {/* Table header */}
                         <div className="flex bg-[#1e3a8a] text-white text-[15px] font-bold py-3.5 px-6 shrink-0">
                             <div className="flex items-center gap-2.5">
@@ -88,15 +88,15 @@ const NewlyIssuedDocsV2 = () => {
                 </div>
 
                 {/* Right: Highlight Banners */}
-                <div className="flex flex-col gap-4 w-full lg:w-[412px] shrink-0">
-                    <Link to="/tong-ra-soat" state={{ activeTab: 'tin-tuc-hoat-dong' }} className="rounded-xl overflow-hidden shadow-sm relative group block w-full h-[160px] bg-red-800 outline-none focus:ring-2 focus:ring-blue-400">
+                <div className="flex flex-col gap-4 w-full lg:w-[412.66px] shrink-0 h-[413px]">
+                    <Link to="/tong-ra-soat" state={{ activeTab: 'tin-tuc-hoat-dong' }} className="rounded-xl overflow-hidden shadow-sm relative group block w-full flex-[2] bg-red-800 outline-none focus:ring-2 focus:ring-blue-400">
                         <img
                             src="/BO NHAN DIEN TONG RA SOAT/đại hội 1200 800 jpg.jpg"
                             alt="Đại hội Đảng"
                             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         />
                     </Link>
-                    <Link to="/tong-ra-soat" state={{ activeTab: 'tin-tuc-hoat-dong' }} className="rounded-xl overflow-hidden shadow-sm relative group block w-full h-[160px] bg-red-800 outline-none focus:ring-2 focus:ring-blue-400">
+                    <Link to="/tong-ra-soat" state={{ activeTab: 'tin-tuc-hoat-dong' }} className="rounded-xl overflow-hidden shadow-sm relative group block w-full flex-[1] bg-red-800 outline-none focus:ring-2 focus:ring-blue-400">
                         <img
                             src="/BO NHAN DIEN TONG RA SOAT/1200x400 Banner Trang chu.jpg"
                             alt="Tổng rà soát văn bản quy phạm pháp luật"
@@ -121,10 +121,10 @@ const NewlyIssuedDocsV2 = () => {
 
                 {/* Column headers */}
                 <div className="flex bg-slate-50 border-b border-gray-100 text-[13px] font-semibold text-slate-500 py-2.5 px-6">
-                    <div className="w-[120px] shrink-0">Ngày đăng</div>
-                    <div className="w-[120px] shrink-0">Hạn góp ý</div>
-                    <div className="flex-1 px-2">Nội dung dự thảo</div>
-                    <div className="w-[310px] shrink-0 text-right">Thao tác</div>
+                    <div className="w-[105px] shrink-0">Ngày đăng</div>
+                    <div className="w-[105px] shrink-0">Hạn góp ý</div>
+                    <div className="flex-1 px-2 min-w-0">Nội dung dự thảo</div>
+                    <div className="w-[410px] shrink-0 text-right">Thao tác</div>
                 </div>
 
                 {/* Rows */}
@@ -135,17 +135,17 @@ const NewlyIssuedDocsV2 = () => {
                             className="flex text-[14px] py-3.5 px-6 hover:bg-blue-50/30 transition items-center"
                         >
                             {/* Date */}
-                            <div className="w-[120px] shrink-0 font-medium text-gray-500 text-[13px]">{doc.date}</div>
+                            <div className="w-[105px] shrink-0 font-medium text-gray-500 text-[13px]">{doc.date}</div>
 
                             {/* Deadline - highlighted */}
-                            <div className="w-[120px] shrink-0">
+                            <div className="w-[105px] shrink-0">
                                 <span className="inline-block bg-amber-50 border border-amber-200 text-amber-700 font-semibold text-[12px] px-2.5 py-0.5 rounded-full">
                                     {doc.deadline}
                                 </span>
                             </div>
 
                             {/* Title */}
-                            <div className="flex-1 px-2 min-w-0">
+                            <div className="flex-1 px-2 min-w-0 overflow-hidden">
                                 <Link
                                     to={`/du-thao/${doc.id}`}
                                     className="text-slate-700 hover:text-blue-700 font-medium leading-snug line-clamp-2 transition-colors"
@@ -155,7 +155,7 @@ const NewlyIssuedDocsV2 = () => {
                             </div>
 
                             {/* Actions — plain text labels, no tooltips */}
-                            <div className="w-[310px] shrink-0 flex items-center justify-end gap-1.5">
+                            <div className="w-[410px] shrink-0 flex items-center justify-end gap-1">
                                 <Link
                                     to={`/du-thao/${doc.id}`}
                                     className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-600 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition text-[12px] font-semibold whitespace-nowrap"

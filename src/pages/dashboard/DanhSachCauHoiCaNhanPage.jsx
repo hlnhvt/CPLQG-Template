@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { MessageSquare, Clock, CheckCircle2, AlertCircle, PlusCircle, Search, Eye, Filter, Settings, FileText, ChevronRight, User, Calendar } from 'lucide-react';
@@ -13,14 +13,30 @@ const DanhSachCauHoiCaNhanPage = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('all');
+    const [questions, setQuestions] = useState([]);
+
+    useEffect(() => {
+        const localQuestions = JSON.parse(localStorage.getItem('cplqg_user_questions') || '[]');
+        const mappedLocal = localQuestions.map(q => ({
+            ...q,
+            code: q.code || ('CH-2026-00' + (q.id?.split('-')[1]?.substring(0, 3) || '999')),
+            status: q.status === 'Đang chờ trả lời' ? 'Chờ trả lời' : q.status,
+            submittedDate: q.date ? q.date.split(' ')[1] : '03/06/2026',
+            answeredDate: null,
+            hasUnreadReply: false,
+            summary: q.content,
+            answerSummary: null
+        }));
+        setQuestions([...mappedLocal, ...MOCK_PERSONAL_QUESTIONS]);
+    }, []);
 
     // Stats
-    const total = MOCK_PERSONAL_QUESTIONS.length;
-    const pending = MOCK_PERSONAL_QUESTIONS.filter(q => q.status === 'Chờ trả lời').length;
-    const answered = MOCK_PERSONAL_QUESTIONS.filter(q => q.status === 'Đã trả lời').length;
-    const unread = MOCK_PERSONAL_QUESTIONS.filter(q => q.hasUnreadReply).length;
+    const total = questions.length;
+    const pending = questions.filter(q => q.status === 'Chờ trả lời').length;
+    const answered = questions.filter(q => q.status === 'Đã trả lời').length;
+    const unread = questions.filter(q => q.hasUnreadReply).length;
 
-    const filteredQuestions = MOCK_PERSONAL_QUESTIONS.filter(q => {
+    const filteredQuestions = questions.filter(q => {
         if (activeTab === 'all') return true;
         if (activeTab === 'pending') return q.status === 'Chờ trả lời';
         if (activeTab === 'answered') return q.status === 'Đã trả lời';

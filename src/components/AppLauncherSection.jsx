@@ -160,7 +160,7 @@ const AppLauncherSection = () => {
         <section
             className="relative overflow-hidden mt-4"
             style={{
-                background: 'linear-gradient(135deg, #0a1628 0%, #0f2d5e 35%, #1a1f6e 65%, #0c1a3e 100%)',
+                background: 'linear-gradient(135deg, rgb(15 71 158) 0%, rgb(69 114 187) 35%, rgb(42 47 127) 65%, rgb(71 87 129) 100%)',
             }}
         >
             {/* Background decorative elements */}
@@ -188,24 +188,18 @@ const AppLauncherSection = () => {
                     {/* ===== LEFT: Introduction Panel ===== */}
                     <div className="w-full lg:w-[280px] xl:w-[300px] shrink-0 flex flex-col items-start">
 
-                        {/* Badge */}
-                        <div className="flex items-center gap-2 mb-5">
-                            <span className="flex items-center gap-1.5 px-3 py-1 text-[11px] font-bold text-blue-300 bg-blue-500/15 rounded-full border border-blue-500/25 uppercase tracking-widest">
-                                <Sparkles size={10} className="text-blue-400 animate-pulse" />
-                                Tiện ích &amp; Dịch vụ
-                            </span>
+                        {/* Logo */}
+                        <div className="w-full flex justify-center mb-5">
+                            <img
+                                src="/logo.png"
+                                alt="Quốc huy"
+                                className="w-16 h-16 object-contain drop-shadow-lg"
+                            />
                         </div>
 
                         {/* Title */}
-                        <h2 className="text-[22px] xl:text-[26px] font-black text-white leading-tight mb-4 tracking-tight">
-                            Khám phá{' '}
-                            <span
-                                className="text-transparent bg-clip-text"
-                                style={{ backgroundImage: 'linear-gradient(90deg, #60a5fa, #a78bfa, #34d399)' }}
-                            >
-                                toàn bộ
-                            </span>{' '}
-                            chức năng của Cổng
+                        <h2 className="text-[22px] xl:text-[26px] font-bold text-center text-white leading-tight mb-4 tracking-tight">
+                            Khám phá toàn bộ chức năng
                         </h2>
 
                         {/* Description */}
@@ -213,32 +207,7 @@ const AppLauncherSection = () => {
                             Truy cập nhanh tất cả chuyên mục và dịch vụ pháp luật — từ tra cứu văn bản, tham vấn ý kiến đến hỏi đáp chuyên gia, diễn đàn cộng đồng và nhiều tiện ích khác.
                         </p>
 
-                        {/* Stats pills */}
-                        <div className="flex flex-col gap-2.5 mb-6 w-full">
-                            {[
-                                { num: '16+', label: 'Chuyên mục & Dịch vụ' },
-                                { num: '120K+', label: 'Thành viên tham gia' },
-                                { num: '2.4M+', label: 'Văn bản pháp luật' },
-                            ].map((s, i) => (
-                                <div
-                                    key={i}
-                                    className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10"
-                                >
-                                    <span className="text-[18px] font-black text-blue-300 leading-none">{s.num}</span>
-                                    <span className="text-[12px] text-slate-400">{s.label}</span>
-                                </div>
-                            ))}
-                        </div>
 
-                        {/* CTA */}
-                        <Link
-                            to="/van-ban"
-                            className="group flex items-center gap-2 text-[13px] font-bold text-blue-300 hover:text-white transition-colors"
-                        >
-                            <Layers size={15} />
-                            <span>Xem toàn bộ dịch vụ</span>
-                            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                        </Link>
                     </div>
 
                     {/* ===== RIGHT: App Grid ===== */}

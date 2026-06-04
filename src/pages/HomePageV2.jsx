@@ -20,7 +20,7 @@ function HomePageV2() {
 
     return (
         <>
-            {/* <Hero /> */}
+            <Hero isV2={true} />
             <div className="flex-grow bg-white">
                 {/* {(user && hasConfiguredPrefs) && <RecommendedForYou />} */}
                 <NewlyIssuedDocsV2 />

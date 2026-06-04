@@ -6,7 +6,7 @@ const CAROUSEL_ITEMS = [
     {
         id: 1,
         type: 'image',
-        src: '/BO NHAN DIEN TONG RA SOAT/800x150.Banner chay.jpg',
+        src: '/BO NHAN DIEN TONG RA SOAT/800x150.Banner chay.modern.jpg?v=1',
         alt: 'Tổng rà soát hệ thống văn bản quy phạm pháp luật',
         link: '/tong-ra-soat',
         state: { activeTab: 'tin-tuc-hoat-dong' }
@@ -98,7 +98,7 @@ const CAROUSEL_ITEMS = [
 
 const FixedBottomCarousel = () => {
     const navigate = useNavigate();
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
 
