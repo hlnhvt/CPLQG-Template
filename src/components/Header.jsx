@@ -347,9 +347,9 @@ const Header = () => {
                                             </Link>
                                         </li>
                                         <li>
-                                            <a href="https://preeminent-blancmange-bb14f2.netlify.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                            <Link to="/ho-tro-phap-ly-doanh-nghiep" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
                                                 <span className="w-2 h-2 rounded-full bg-yellow-400 shrink-0"></span>Hỗ trợ pháp lý doanh nghiệp
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -542,7 +542,7 @@ const Header = () => {
                                 <Link to="/dien-dan" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Diễn đàn</Link>
                                 <Link to="/dien-dan/thong-ke" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Thống kê</Link>
                                 <Link to="/dien-dan/su-kien" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Buổi phát trực tuyến</Link>
-                                <a href="https://preeminent-blancmange-bb14f2.netlify.app/" target="_blank" rel="noopener noreferrer" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Hỗ trợ pháp lý doanh nghiệp</a>
+                                <Link to="/ho-tro-phap-ly-doanh-nghiep" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Hỗ trợ pháp lý doanh nghiệp</Link>
                             </div>
                         </div>
 

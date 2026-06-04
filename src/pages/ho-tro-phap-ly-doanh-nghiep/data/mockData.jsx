@@ -4,44 +4,44 @@ import React from 'react';
 export const getFileIcon = (fileName) => {
     if (!fileName) return null;
     const lowerName = fileName.toLowerCase();
-    
+
     if (lowerName.endsWith('.pdf')) return (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="12" y="4" width="16" height="24" rx="1" fill="#FFFFFF" stroke="#E3242B" strokeWidth="1.5"/>
-            <rect x="16" y="10" width="8" height="1.5" fill="#E3242B"/>
-            <rect x="16" y="14" width="8" height="1.5" fill="#E3242B"/>
-            <rect x="16" y="18" width="6" height="1.5" fill="#E3242B"/>
-            <path d="M4 8C4 7.44772 4.44772 7 5 7H14V25H5C4.44772 25 4 24.5523 4 24V8Z" fill="#E3242B"/>
+            <rect x="12" y="4" width="16" height="24" rx="1" fill="#FFFFFF" stroke="#E3242B" strokeWidth="1.5" />
+            <rect x="16" y="10" width="8" height="1.5" fill="#E3242B" />
+            <rect x="16" y="14" width="8" height="1.5" fill="#E3242B" />
+            <rect x="16" y="18" width="6" height="1.5" fill="#E3242B" />
+            <path d="M4 8C4 7.44772 4.44772 7 5 7H14V25H5C4.44772 25 4 24.5523 4 24V8Z" fill="#E3242B" />
             <text x="5.5" y="18" fill="white" fontSize="9" fontWeight="bold" fontFamily="Arial">PDF</text>
         </svg>
     );
-    
+
     if (lowerName.endsWith('.doc') || lowerName.endsWith('.docx')) return (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="12" y="4" width="16" height="24" rx="1" fill="#FFFFFF" stroke="#185ABD" strokeWidth="1.5"/>
-            <rect x="16" y="10" width="8" height="1.5" fill="#185ABD"/>
-            <rect x="16" y="14" width="8" height="1.5" fill="#185ABD"/>
-            <rect x="16" y="18" width="8" height="1.5" fill="#185ABD"/>
-            <rect x="16" y="22" width="6" height="1.5" fill="#185ABD"/>
-            <path d="M4 8C4 7.44772 4.44772 7 5 7H14V25H5C4.44772 25 4 24.5523 4 24V8Z" fill="#2B579A"/>
-            <path d="M6 11L7 19H8.5L9.5 15L10.5 19H12L13 11H11.5L10.8 16L9.8 11H8.2L7.2 16L6.5 11H6Z" fill="white"/>
+            <rect x="12" y="4" width="16" height="24" rx="1" fill="#FFFFFF" stroke="#185ABD" strokeWidth="1.5" />
+            <rect x="16" y="10" width="8" height="1.5" fill="#185ABD" />
+            <rect x="16" y="14" width="8" height="1.5" fill="#185ABD" />
+            <rect x="16" y="18" width="8" height="1.5" fill="#185ABD" />
+            <rect x="16" y="22" width="6" height="1.5" fill="#185ABD" />
+            <path d="M4 8C4 7.44772 4.44772 7 5 7H14V25H5C4.44772 25 4 24.5523 4 24V8Z" fill="#2B579A" />
+            <path d="M6 11L7 19H8.5L9.5 15L10.5 19H12L13 11H11.5L10.8 16L9.8 11H8.2L7.2 16L6.5 11H6Z" fill="white" />
         </svg>
     );
-    
+
     if (lowerName.endsWith('.xls') || lowerName.endsWith('.xlsx')) return (
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="12" y="4" width="16" height="24" rx="1" fill="#FFFFFF" stroke="#107C41" strokeWidth="1.5"/>
-            <path d="M15 10H25M15 14H25M15 18H25M15 22H25M15 10V22M19 10V22M23 10V22" stroke="#107C41" strokeWidth="1"/>
-            <path d="M4 8C4 7.44772 4.44772 7 5 7H14V25H5C4.44772 25 4 24.5523 4 24V8Z" fill="#107C41"/>
-            <path d="M6.5 11L8.5 15L6.5 19H8.5L9.5 16.5L10.5 19H12.5L10.5 15L12.5 11H10.5L9.5 13.5L8.5 11H6.5Z" fill="white"/>
+            <rect x="12" y="4" width="16" height="24" rx="1" fill="#FFFFFF" stroke="#107C41" strokeWidth="1.5" />
+            <path d="M15 10H25M15 14H25M15 18H25M15 22H25M15 10V22M19 10V22M23 10V22" stroke="#107C41" strokeWidth="1" />
+            <path d="M4 8C4 7.44772 4.44772 7 5 7H14V25H5C4.44772 25 4 24.5523 4 24V8Z" fill="#107C41" />
+            <path d="M6.5 11L8.5 15L6.5 19H8.5L9.5 16.5L10.5 19H12.5L10.5 15L12.5 11H10.5L9.5 13.5L8.5 11H6.5Z" fill="white" />
         </svg>
     );
-    
+
     return <div className="flex h-8 w-8 items-center justify-center rounded bg-gray-500 text-[10px] font-bold text-white shadow-sm">FILE</div>;
 };
 
 export const getDocStatusBadge = (status) => {
-    switch(status) {
+    switch (status) {
         case 1: return <span className="px-2.5 py-0.5 bg-[#E8F5E9] text-[#2E7D32] rounded-full text-[11px] font-bold border border-[#C8E6C9] flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#2E7D32]"></span> Còn hiệu lực</span>;
         case 0: return <span className="px-2.5 py-0.5 bg-[#FFEBEE] text-[#C62828] rounded-full text-[11px] font-bold border border-[#FFCDD2] flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#C62828]"></span> Hết hiệu lực</span>;
         case 2: return <span className="px-2.5 py-0.5 bg-[#FFF8E1] text-[#F57F17] rounded-full text-[11px] font-bold border border-[#FFECB3] flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#F57F17]"></span> Chưa hiệu lực</span>;
@@ -50,7 +50,7 @@ export const getDocStatusBadge = (status) => {
 };
 
 export const getDocStatusText = (status) => {
-    switch(status) {
+    switch (status) {
         case 1: return "Còn hiệu lực";
         case 0: return "Hết hiệu lực";
         case 2: return "Chưa hiệu lực";
@@ -61,7 +61,7 @@ export const getDocStatusText = (status) => {
 // --- DATA DEFINITIONS ---
 
 export const NAV_ITEMS = [
-    { key: "trang-chu", label: "Trang chủ" },
+    { key: "trang-chu", label: "Tổng quan" },
     {
         key: "gioi-thieu",
         label: "Giới thiệu",
@@ -174,7 +174,7 @@ export const thongBaoData = Array.from({ length: 15 }).map((_, idx) => ({
     ][idx % 4]}?auto=format&fit=crop&w=400&q=80`,
     menuKey: "hoat-dong-trung-tam",
     subKey: "thong-bao",
-    attachments: idx % 3 === 0 ? [{ name: `ThongBao_So_${idx+1}.pdf`, size: "1.2 MB" }] : [],
+    attachments: idx % 3 === 0 ? [{ name: `ThongBao_So_${idx + 1}.pdf`, size: "1.2 MB" }] : [],
     content: `<h4>1. Mục đích thông báo</h4><p>Thông báo này nhằm phổ biến kiến thức và hướng dẫn các doanh nghiệp thực hiện đúng quy định pháp luật hiện hành, đồng thời cập nhật những thay đổi mới nhất trong chính sách hỗ trợ doanh nghiệp.</p><h4>2. Nội dung chính</h4><ul><li>${['Tổ chức tọa đàm về thủ tục pháp lý cho doanh nghiệp nhỏ và vừa', 'Mở lớp bồi dưỡng kỹ năng pháp lý trực tuyến tháng 5/2026', 'Cập nhật danh sách tài liệu hỗ trợ pháp lý mới nhất', 'Tiếp nhận câu hỏi tư vấn pháp luật từ doanh nghiệp'][idx % 4]}</li><li>Hướng dẫn chi tiết quy trình, thủ tục thực hiện</li><li>Thời gian, địa điểm và thành phần tham dự</li><li>Các tài liệu liên quan được đính kèm trong thông báo</li></ul><h4>3. Thời hạn thực hiện</h4><p>Đề nghị các doanh nghiệp quan tâm thực hiện đúng thời hạn quy định và báo cáo kết quả về Trung tâm trước ngày ${String(30 - idx).padStart(2, '0')}/05/2026.</p><h4>4. Liên hệ hỗ trợ</h4><p>Mọi thắc mắc xin liên hệ: Hotline 1900-xxxx hoặc email hotro@legal.gov.vn để được hướng dẫn chi tiết.</p>`
 }));
 
@@ -240,7 +240,7 @@ export const vanBanChinhSachMoiData = Array.from({ length: 5 }).map((_, idx) => 
     date: `${String(30 - idx).padStart(2, '0')}/04/2026`,
     thumb: `https://images.unsplash.com/photo-${['1589829085413-56de8ae18c73', '1556761175-4b46a572b786', '1521791136064-7986c2920216'][idx % 3]}?auto=format&fit=crop&w=400&q=80`,
     field: ['Pháp luật', 'Doanh nghiệp', 'Thuế', 'Đầu tư'][idx % 4],
-    attachments: [{ name: `VanBanChinhSach_Thang4_${idx+1}.pdf`, size: '2.1 MB' }],
+    attachments: [{ name: `VanBanChinhSach_Thang4_${idx + 1}.pdf`, size: '2.1 MB' }],
     content: `<h4>Nội dung văn bản</h4><p>Văn bản quy định chi tiết về trình tự, thủ tục, hồ sơ và thời gian giải quyết đối với các thủ tục hành chính mới.</p>`
 }));
 
@@ -261,7 +261,7 @@ export const vanBanPhapLuatData = Array.from({ length: 15 }).map((_, idx) => {
         tinhTrang: idx % 5 === 0 ? 0 : (idx % 7 === 0 ? 2 : 1),
         nguoiKy: "Chủ tịch / Bộ trưởng",
         noiDung: `<h2 style="text-align:center; font-weight:bold; margin-top:30px; margin-bottom:20px;">CHƯƠNG I: QUY ĐỊNH CHUNG</h2><p style="font-weight:bold;">Điều 1. Phạm vi điều chỉnh</p><p style="margin-bottom:15px; text-indent: 20px;">Văn bản này quy định chi tiết về các biện pháp hỗ trợ, quản lý và giám sát hoạt động của các doanh nghiệp vừa và nhỏ trên phạm vi toàn quốc.</p>`,
-        fileDinhKem: [{ name: `VBPL_2024_${idx+1}.pdf`, size: '1.5 MB' }]
+        fileDinhKem: [{ name: `VBPL_2024_${idx + 1}.pdf`, size: '1.5 MB' }]
     };
 });
 
