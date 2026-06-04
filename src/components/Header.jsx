@@ -246,9 +246,9 @@ const Header = () => {
                                             </Link>
                                         </li>
                                         <li>
-                                            <a href="https://chuyentrangpbgdpl.netlify.app/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
+                                            <Link to="/pho-bien-giao-duc" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
                                                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>Phổ biến giáo dục pháp luật
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -466,7 +466,7 @@ const Header = () => {
                             <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.tienIch ? 'max-h-96' : 'max-h-0'}`}>
                                 <Link to="/tin-tuc/noi-bat" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tin tức nổi bật</Link>
                                 <Link to="/tin-tuc/toa-dam-su-kien" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tọa đàm - Sự kiện</Link>
-                                <a href="https://chuyentrangpbgdpl.netlify.app/" target="_blank" rel="noopener noreferrer" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Phổ biến giáo dục pháp luật</a>
+                                <Link to="/pho-bien-giao-duc" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Phổ biến giáo dục pháp luật</Link>
                             </div>
                         </div>
 

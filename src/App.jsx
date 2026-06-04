@@ -106,6 +106,9 @@ import OnboardingPage from './pages/onboarding/OnboardingPage';
 import HoTroPhapLyDoanhNghiepPage from './pages/ho-tro-phap-ly-doanh-nghiep/HoTroPhapLyDoanhNghiepPage';
 import HoTroPhapLyDNPage from './pages/ho-tro-phap-ly-dn/HoTroPhapLyDNPage';
 
+// Pho bien giao duc phap luat import
+import PhoBienGiaoDucPhapLuatPage from './pages/pho-bien-giao-duc/PhoBienGiaoDucPhapLuatPage';
+
 
 // Phan Anh Kien Nghi imports
 import PhanAnhKienNghiPage from './pages/phan-anh-kien-nghi/PhanAnhKienNghiPage';
@@ -167,6 +170,7 @@ const AppLayout = () => {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/trang-chu-v2" element={<HomePageV2 />} />
                     <Route path="/ho-tro-phap-ly-doanh-nghiep/*" element={<HoTroPhapLyDoanhNghiepPage />} />
+                    <Route path="/pho-bien-giao-duc" element={<PhoBienGiaoDucPhapLuatPage />} />
                     <Route path="/news/:id" element={<NewsDetailPage />} />
                     <Route path="/gioi-thieu" element={<AboutPage />} />
                     <Route path="/gioi-thieu/chuc-nang-nhiem-vu" element={<ChucNangNhiemVuPage />} />
