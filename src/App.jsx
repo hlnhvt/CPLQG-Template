@@ -103,6 +103,7 @@ import UserHienKePage from './pages/dashboard/UserHienKePage';
 import OnboardingPage from './pages/onboarding/OnboardingPage';
 
 // Ho tro phap ly doanh nghiep import
+import HoTroPhapLyDoanhNghiepPage from './pages/ho-tro-phap-ly-doanh-nghiep/HoTroPhapLyDoanhNghiepPage';
 import HoTroPhapLyDNPage from './pages/ho-tro-phap-ly-dn/HoTroPhapLyDNPage';
 
 
@@ -165,7 +166,7 @@ const AppLayout = () => {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/trang-chu-v2" element={<HomePageV2 />} />
-                    <Route path="/ho-tro-phap-ly-doanh-nghiep/*" element={<HoTroPhapLyDNPage />} />
+                    <Route path="/ho-tro-phap-ly-doanh-nghiep/*" element={<HoTroPhapLyDoanhNghiepPage />} />
                     <Route path="/news/:id" element={<NewsDetailPage />} />
                     <Route path="/gioi-thieu" element={<AboutPage />} />
                     <Route path="/gioi-thieu/chuc-nang-nhiem-vu" element={<ChucNangNhiemVuPage />} />

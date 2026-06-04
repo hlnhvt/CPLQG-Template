@@ -201,13 +201,13 @@ const Hero = ({ isV2 = false }) => {
                                         type="button"
                                         onClick={() => setActiveSection(0)}
                                         className={`flex flex-col-reverse items-center justify-center py-5 px-1 w-[40px] rounded-2xl border transition-all duration-300 cursor-pointer ${activeSection === 0
-                                            ? 'bg-white/20 backdrop-blur-xl border-amber-400/50 text-amber-400 font-bold shadow-[0_0_15px_rgba(245,158,11,0.3)] scale-105'
+                                            ? 'bg-white/20 backdrop-blur-xl border-amber-400 text-amber-400 font-bold shadow-[0_0_15px_rgba(245,158,11,0.5)] scale-105'
                                             : 'bg-[#162e55]/30 backdrop-blur-md border-white/10 text-white/60 hover:text-white hover:border-white/20'
                                             }`}
                                     >
                                         <Sparkles size={18} className={activeSection === 0 ? 'text-amber-400 animate-pulse shrink-0' : 'text-white/50 shrink-0'} />
                                         <span
-                                            className="text-[10px] uppercase tracking-wider font-bold mb-4 whitespace-nowrap"
+                                            className="text-[11px] uppercase tracking-wider font-bold mb-4 whitespace-nowrap"
                                             style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
                                         >
                                             Tiêu điểm
@@ -217,23 +217,38 @@ const Hero = ({ isV2 = false }) => {
                                         type="button"
                                         onClick={() => setActiveSection(1)}
                                         className={`flex flex-col-reverse items-center justify-center py-5 px-1 w-[40px] rounded-2xl border transition-all duration-300 cursor-pointer ${activeSection === 1
-                                            ? 'bg-white/20 backdrop-blur-xl border-amber-400/50 text-amber-400 font-bold shadow-[0_0_15px_rgba(245,158,11,0.3)] scale-105'
+                                            ? 'bg-white/20 backdrop-blur-xl border-amber-400 text-amber-400 font-bold shadow-[0_0_15px_rgba(245,158,11,0.5)] scale-105'
                                             : 'bg-[#162e55]/30 backdrop-blur-md border-white/10 text-white/60 hover:text-white hover:border-white/20'
                                             }`}
                                     >
                                         <MessageSquare size={18} className={activeSection === 1 ? 'text-amber-400 shrink-0' : 'text-white/50 shrink-0'} />
                                         <span
-                                            className="text-[10px] uppercase tracking-wider font-bold mb-4 whitespace-nowrap"
+                                            className="text-[11px] uppercase tracking-wider font-bold mb-4 whitespace-nowrap"
                                             style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
                                         >
                                             Hỏi đáp
                                         </span>
                                     </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setActiveSection(2)}
+                                        className={`flex flex-col-reverse items-center justify-center py-5 px-1 w-[40px] rounded-2xl border transition-all duration-300 cursor-pointer ${activeSection === 2
+                                            ? 'bg-white/20 backdrop-blur-xl border-amber-400 text-amber-400 font-bold shadow-[0_0_15px_rgba(245,158,11,0.5)] scale-105'
+                                            : 'bg-[#162e55]/30 backdrop-blur-md border-white/10 text-white/60 hover:text-white hover:border-white/20'
+                                            }`}
+                                    >
+                                        <Bot size={18} className={activeSection === 2 ? 'text-amber-400 shrink-0' : 'text-white/50 shrink-0'} />
+                                        <span
+                                            className="text-[10px] uppercase tracking-wider font-bold mb-4 whitespace-nowrap"
+                                            style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+                                        >
+                                            AI pháp luật
+                                        </span>
+                                    </button>
                                 </div>
 
-                                {/* Main Card Container */}
                                 <div
-                                    className={`flex-grow bg-gradient-to-br from-[#162e55]/60 via-[#102444]/60 to-[#0b172e]/65 backdrop-blur-xl border border-white/20 rounded-[28px] pt-6 pb-6 px-6 shadow-[0_25px_60px_rgba(0,0,0,0.65)] text-white relative overflow-hidden group select-none shimmer-effect hover:shadow-[0_30px_60px_rgba(59,130,246,0.3)] hover:border-white/30 transition-all duration-500 flex flex-col ${!isCollapsed ? 'animate-reveal-card' : ''}`}
+                                    className={`flex-grow bg-gradient-to-br from-[#162e55]/60 via-[#102444]/60 to-[#0b172e]/65 backdrop-blur-xl border border-white/20 rounded-[28px] pt-6 pb-6 px-6 shadow-[0_25px_60px_rgba(0,0,0,0.65)] text-white relative overflow-hidden group select-none hover:shadow-[0_30px_60px_rgba(59,130,246,0.3)] hover:border-white/30 transition-all duration-500 flex flex-col`}
                                 >
                                     {/* Decorative glowing gradient border glow */}
                                     <div className="absolute -inset-px bg-gradient-to-r from-sky-500/30 via-indigo-500/20 to-amber-500/25 rounded-[28px] -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
@@ -245,14 +260,16 @@ const Hero = ({ isV2 = false }) => {
                                     {/* Card Header */}
                                     <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/10 shrink-0">
                                         <h3 className="text-[18px] md:text-[20px] font-bold tracking-wide uppercase flex items-center gap-2">
-                                            {activeSection === 0 ? 'TIÊU ĐIỂM NỔI BẬT' : 'HỎI ĐÁP PHÁP LUẬT'}
+                                            {activeSection === 0 ? 'TIÊU ĐIỂM NỔI BẬT' : activeSection === 1 ? 'HỎI ĐÁP PHÁP LUẬT' : 'AI PHÁP LUẬT'}
                                         </h3>
                                         <div className="flex items-center gap-2">
                                             <div className="w-7 h-7 bg-white/10 border border-white/10 rounded-full flex justify-center items-center">
                                                 {activeSection === 0 ? (
                                                     <Sparkles size={14} className="text-amber-400 animate-pulse" />
-                                                ) : (
+                                                ) : activeSection === 1 ? (
                                                     <HelpCircle size={14} className="text-sky-400" />
+                                                ) : (
+                                                    <Bot size={14} className="text-amber-400 animate-pulse" />
                                                 )}
                                             </div>
                                             <button
@@ -349,7 +366,7 @@ const Hero = ({ isV2 = false }) => {
                                                 );
                                             })}
                                         </div>
-                                    ) : (
+                                    ) : activeSection === 1 ? (
                                         /* TAB 2: DETAILED QUESTION FORM */
                                         <form onSubmit={handleQuickSubmit} className="flex flex-col flex-grow text-gray-800 justify-between h-full gap-4">
                                             <div className="flex flex-col gap-4 flex-grow justify-start">
@@ -498,6 +515,80 @@ const Hero = ({ isV2 = false }) => {
                                                 </div>
                                             </div>
                                         </form>
+                                    ) : null}
+
+                                    {/* TAB 3: AI PHÁP LUẬT */}
+                                    {activeSection === 2 && (
+                                        <div className="flex flex-col gap-2 h-full flex-grow mt-2 overflow-hidden pb-1">
+                                            {/* AI 1: AI BKAV (BLEGAL) */}
+                                            <div className="flex-1 border border-white/10 rounded-xl p-3 hover:border-sky-400/40 transition-all duration-300 bg-gradient-to-br from-white/5 to-white/[0.02] hover:from-white/10 hover:to-white/5 shadow-md hover:shadow-[0_4px_20px_rgba(56,189,248,0.15)] flex flex-col items-center text-center group relative overflow-hidden">
+                                                <div className="absolute -top-8 -left-8 w-24 h-24 bg-sky-500/20 rounded-full blur-[20px] group-hover:bg-sky-500/30 transition-all duration-500 pointer-events-none"></div>
+
+                                                <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 group-hover:border-sky-400/40 p-1.5 transition-all duration-300 mb-1.5 z-10 shadow-[0_2px_10px_rgba(0,0,0,0.2)] group-hover:-translate-y-0.5">
+                                                    <img src="/BO NHAN DIEN TONG RA SOAT/icon_BLegal.png" alt="Logo BKAV BLegal" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]" />
+                                                </div>
+
+                                                <div className="z-10 mb-2 flex-grow flex flex-col justify-center w-full">
+                                                    <h3 className="font-bold text-white text-[12px] md:text-[14px] uppercase tracking-wide group-hover:text-sky-400 transition-colors mb-0.5 line-clamp-1">Trợ lý số BKAV</h3>
+                                                    <p className="text-[11px] text-gray-300 leading-snug line-clamp-2">Hỗ trợ tư vấn pháp luật tự động cho công dân, dựa trên mô hình ngôn ngữ lớn chuyên sâu.</p>
+                                                </div>
+
+                                                <div className="w-full flex gap-2 z-10 mt-auto">
+                                                    <button onClick={() => navigate('/tong-ra-soat/ai/blegal')} className="flex-1 bg-white/5 border border-white/20 hover:border-white/50 text-white/90 hover:text-white font-semibold py-1.5 px-2 rounded-lg transition-all text-[11px] backdrop-blur-md hover:bg-white/10">
+                                                        Giới thiệu
+                                                    </button>
+                                                    <a href="https://chatbotlandingpage.demozone.vn" target="_blank" rel="noopener noreferrer" className="flex-1 bg-gradient-to-r from-[#00c6ff] to-[#0072ff] border border-transparent text-white font-bold py-1.5 px-2 rounded-lg hover:shadow-[0_0_15px_rgba(0,198,255,0.4)] transition-all text-center text-[11px] flex items-center justify-center group-hover:scale-[1.02]">
+                                                        Truy cập
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            {/* AI 2: CMC AI - CLS */}
+                                            <div className="flex-1 border border-white/10 rounded-xl p-3 hover:border-sky-400/40 transition-all duration-300 bg-gradient-to-br from-white/5 to-white/[0.02] hover:from-white/10 hover:to-white/5 shadow-md hover:shadow-[0_4px_20px_rgba(56,189,248,0.15)] flex flex-col items-center text-center group relative overflow-hidden">
+                                                <div className="absolute -top-8 -left-8 w-24 h-24 bg-sky-500/20 rounded-full blur-[20px] group-hover:bg-sky-500/30 transition-all duration-500 pointer-events-none"></div>
+
+                                                <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 group-hover:border-sky-400/40 p-1.5 transition-all duration-300 mb-1.5 z-10 shadow-[0_2px_10px_rgba(0,0,0,0.2)] group-hover:-translate-y-0.5">
+                                                    <img src="/BO NHAN DIEN TONG RA SOAT/Logo C-AI Legal.png" alt="Logo C-AI Legal" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300 filter drop-shadow-[0_0_5px_rgba(255,255,255,0.3)]" />
+                                                </div>
+
+                                                <div className="z-10 mb-2 flex-grow flex flex-col justify-center w-full">
+                                                    <h3 className="font-bold text-white text-[12px] md:text-[14px] uppercase tracking-wide group-hover:text-sky-400 transition-colors mb-0.5 line-clamp-1">C-AI Legal</h3>
+                                                    <p className="text-[11px] text-gray-300 leading-snug line-clamp-2">Hệ thống AI rà soát mâu thuẫn, kiểm tra tính hợp pháp và đồng bộ của văn bản.</p>
+                                                </div>
+
+                                                <div className="w-full flex gap-2 z-10 mt-auto">
+                                                    <button onClick={() => navigate('/tong-ra-soat/ai/cls')} className="flex-1 bg-white/5 border border-white/20 hover:border-white/50 text-white/90 hover:text-white font-semibold py-1.5 px-2 rounded-lg transition-all text-[11px] backdrop-blur-md hover:bg-white/10">
+                                                        Giới thiệu
+                                                    </button>
+                                                    <a href="https://cls.cmcai.vn/" target="_blank" rel="noopener noreferrer" className="flex-1 bg-gradient-to-r from-[#00c6ff] to-[#0072ff] border border-transparent text-white font-bold py-1.5 px-2 rounded-lg hover:shadow-[0_0_15px_rgba(0,198,255,0.4)] transition-all text-center text-[11px] flex items-center justify-center group-hover:scale-[1.02]">
+                                                        Truy cập
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            {/* AI 3: AI LEXcentra */}
+                                            <div className="flex-1 border border-white/10 rounded-xl p-3 hover:border-sky-400/40 transition-all duration-300 bg-gradient-to-br from-white/5 to-white/[0.02] hover:from-white/10 hover:to-white/5 shadow-md hover:shadow-[0_4px_20px_rgba(56,189,248,0.15)] flex flex-col items-center text-center group relative overflow-hidden">
+                                                <div className="absolute -top-8 -left-8 w-24 h-24 bg-sky-500/20 rounded-full blur-[20px] group-hover:bg-sky-500/30 transition-all duration-500 pointer-events-none"></div>
+
+                                                <div className="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 group-hover:border-sky-400/40 p-1.5 transition-all duration-300 mb-1.5 z-10 shadow-[0_2px_10px_rgba(0,0,0,0.2)] group-hover:-translate-y-0.5">
+                                                    <img src="/BO NHAN DIEN TONG RA SOAT/logo-lex.svg" alt="Logo LEXcentra" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300 brightness-0 invert opacity-90 drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]" />
+                                                </div>
+
+                                                <div className="z-10 mb-2 flex-grow flex flex-col justify-center w-full">
+                                                    <h3 className="font-bold text-white text-[12px] md:text-[14px] uppercase tracking-wide group-hover:text-sky-400 transition-colors mb-0.5 line-clamp-1">AI LEXCENTRA</h3>
+                                                    <p className="text-[11px] text-gray-300 leading-snug line-clamp-2">Phân tích rủi ro pháp lý, rà soát tính đồng bộ, mâu thuẫn và đề xuất phương án.</p>
+                                                </div>
+
+                                                <div className="w-full flex gap-2 z-10 mt-auto">
+                                                    <button onClick={() => navigate('/tong-ra-soat/ai/lex')} className="flex-1 bg-white/5 border border-white/20 hover:border-white/50 text-white/90 hover:text-white font-semibold py-1.5 px-2 rounded-lg transition-all text-[11px] backdrop-blur-md hover:bg-white/10">
+                                                        Giới thiệu
+                                                    </button>
+                                                    <a href="https://lexcentra.phapluat.gov.vn/home" target="_blank" rel="noopener noreferrer" className="flex-1 bg-gradient-to-r from-[#00c6ff] to-[#0072ff] border border-transparent text-white font-bold py-1.5 px-2 rounded-lg hover:shadow-[0_0_15px_rgba(0,198,255,0.4)] transition-all text-center text-[11px] flex items-center justify-center group-hover:scale-[1.02]">
+                                                        Truy cập
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     )}
                                 </div>
                             </div>

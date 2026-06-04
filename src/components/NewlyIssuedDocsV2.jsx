@@ -121,7 +121,7 @@ const NewlyIssuedDocsV2 = () => {
                     <div className="w-[105px] shrink-0">Ngày đăng</div>
                     <div className="w-[105px] shrink-0">Hạn góp ý</div>
                     <div className="flex-1 px-2 min-w-0">Nội dung dự thảo</div>
-                    <div className="w-[480px] shrink-0 text-left pl-2">Thao tác</div>
+                    <div className="w-[420px] shrink-0 text-left pl-2">Thao tác</div>
                 </div>
 
                 {/* Rows */}
@@ -152,7 +152,7 @@ const NewlyIssuedDocsV2 = () => {
                             </div>
 
                             {/* Actions — plain text labels, no tooltips */}
-                            <div className="w-[480px] shrink-0 flex items-center justify-start gap-1.5 pl-2">
+                            <div className="w-[420px] shrink-0 flex items-center justify-start gap-1.5 pl-2">
                                 <Link
                                     to={`/du-thao/${doc.id}`}
                                     className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-600 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition text-[12px] font-semibold whitespace-nowrap"

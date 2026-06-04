@@ -150,7 +150,7 @@ const MultimediaV2 = () => {
 
                     {/* Main Big Item (Left) - Col span 5 */}
                     <div className="lg:col-span-5 flex flex-col group cursor-pointer relative top-0 hover:-top-1 transition-all duration-300">
-                        <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.4)] mb-5 border border-white/10 bg-slate-900">
+                        <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.4)] mb-5">
                             <img
                                 src={bannerSlides[0].image}
                                 alt={bannerSlides[0].title}
@@ -181,7 +181,7 @@ const MultimediaV2 = () => {
                     <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-7">
                         {videosList.concat(infographicsList).slice(0, 6).map((item, index) => (
                             <Link to={item.to} key={index} className="flex flex-col group relative top-0 hover:-top-1 transition-all duration-300">
-                                <div className="relative w-full aspect-[16/10] rounded-lg overflow-hidden shadow-lg mb-3 border border-white/10 bg-slate-900">
+                                <div className="relative w-full aspect-[16/10] rounded-lg overflow-hidden shadow-lg mb-3">
                                     <img
                                         src={item.image}
                                         alt={item.title}
