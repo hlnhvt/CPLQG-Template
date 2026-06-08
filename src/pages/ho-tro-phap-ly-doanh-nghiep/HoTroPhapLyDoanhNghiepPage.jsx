@@ -165,7 +165,7 @@ import {
             };
 
             return (
-                <div className={`bg-white rounded-xl shadow-sm border border-[#d8e1f2] h-full lg:sticky lg:top-4 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'w-full lg:w-[280px]' : 'w-full lg:w-[88px]'}`}>
+                <div className={`bg-white rounded-xl shadow-sm border border-[#d8e1f2] h-fit lg:sticky lg:top-4 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'w-full lg:w-[280px]' : 'w-full lg:w-[88px]'}`}>
                     <div className={`p-4 flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'} border-b border-[#e8effc]`}>
                         {isSidebarOpen && <h3 className="text-[15px] font-bold text-[#1b2b49] uppercase tracking-wide truncate">Danh mục</h3>}
                         <button 
@@ -181,7 +181,7 @@ import {
                         </button>
                     </div>
                     
-                    <div className="flex-grow overflow-y-auto custom-scrollbar p-3">
+                    <div className="p-3">
                         <ul className="flex flex-col gap-1.5 list-none m-0 p-0">
                             {navItems.map((item) => {
                                 const isActive = activeMenu === item.key;
