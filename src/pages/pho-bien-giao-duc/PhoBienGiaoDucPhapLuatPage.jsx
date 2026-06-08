@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { councilData, programsData, effectiveModelsData, difficultiesData } from './data/mockData';
 
 const MENU_ITEMS = [
-    { key: 'trang-chu', label: 'Trang chủ', color: 'bg-blue-500' },
+    { key: 'trang-chu', label: 'Tổng quan', color: 'bg-blue-500' },
     { key: 'gioi-thieu', label: 'Giới thiệu', color: 'bg-green-500' },
     { key: 'tin-tuc', label: 'Tin tức giới thiệu văn bản mới', color: 'bg-amber-500' },
     { key: 'thong-cao', label: 'Thông cáo báo chí', color: 'bg-red-500' },
@@ -30,11 +30,11 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
     const getNavIcon = (key, isActive) => {
         const strokeClass = isActive ? "stroke-[#2580f0]" : "stroke-slate-500 group-hover:stroke-[#2580f0]";
         const props = {
-            width: 20, height: 20, viewBox: "0 0 24 24", fill: "none", 
+            width: 20, height: 20, viewBox: "0 0 24 24", fill: "none",
             stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round", strokeLinejoin: "round",
             className: `shrink-0 transition-colors ${strokeClass}`
         };
-        switch(key) {
+        switch (key) {
             case 'trang-chu': return <svg {...props}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>;
             case 'gioi-thieu': return <svg {...props}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>;
             case 'tin-tuc': return <svg {...props}><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>;
@@ -63,32 +63,31 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
         <div className={`bg-white rounded-xl shadow-sm border border-[#d8e1f2] h-fit lg:sticky lg:top-4 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'w-full lg:w-[280px]' : 'w-full lg:w-[88px]'}`}>
             <div className={`p-4 flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'} border-b border-[#e8effc]`}>
                 {isSidebarOpen && <h3 className="text-[15px] font-bold text-[#1b2b49] uppercase tracking-wide truncate">Danh mục</h3>}
-                <button 
+                <button
                     onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                     className="p-2 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-[#2580f0] transition-colors"
                     title={isSidebarOpen ? "Thu gọn menu" : "Mở rộng menu"}
                 >
                     {isSidebarOpen ? (
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
                     ) : (
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                     )}
                 </button>
             </div>
-            
+
             <div className="p-3">
                 <ul className="flex flex-col gap-1 list-none m-0 p-0">
                     {MENU_ITEMS.map((item) => {
                         const isActive = activeMenu === item.key;
-                        
+
                         return (
                             <li key={item.key} className="flex flex-col group relative">
-                                <div 
-                                    className={`flex items-center p-2.5 rounded-lg cursor-pointer transition-all duration-200 ${
-                                        isActive 
-                                            ? 'bg-blue-50/70 text-[#2580f0]' 
+                                <div
+                                    className={`flex items-center p-2.5 rounded-lg cursor-pointer transition-all duration-200 ${isActive
+                                            ? 'bg-blue-50/70 text-[#2580f0]'
                                             : 'hover:bg-slate-50 text-slate-600 hover:text-[#2580f0]'
-                                    } ${!isSidebarOpen ? 'justify-center' : 'justify-start'}`}
+                                        } ${!isSidebarOpen ? 'justify-center' : 'justify-start'}`}
                                     onClick={() => {
                                         if (!isSidebarOpen) setIsSidebarOpen(true);
                                         setActiveMenu(item.key);
@@ -144,7 +143,7 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                 <div className="absolute top-40 right-40 w-1 h-1 bg-white rounded-full opacity-50"></div>
                 <div className="absolute bottom-20 left-1/3 w-1.5 h-1.5 bg-blue-300 rounded-full opacity-40"></div>
                 <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 bg-blue-200 rounded-full opacity-30"></div>
-                
+
                 <div className="max-w-6xl mx-auto px-4 relative z-10 flex flex-col items-center text-center">
                     <div className="bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-6 flex items-center gap-2 uppercase tracking-wide">
                         <Landmark size={14} /> Hệ thống PBGDPL Quốc gia
@@ -156,9 +155,9 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                         Nền tảng thông tin pháp luật hàng đầu dành cho người dân và doanh nghiệp. Tiếp cận tri thức pháp luật mọi lúc, mọi nơi.
                     </p>
                     <div className="w-full max-w-2xl relative">
-                        <input 
-                            type="text" 
-                            placeholder="Tìm kiếm văn bản, tài liệu, khóa học..." 
+                        <input
+                            type="text"
+                            placeholder="Tìm kiếm văn bản, tài liệu, khóa học..."
                             className="w-full h-14 pl-6 pr-12 rounded-full text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-xl"
                         />
                         <button className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-700">
@@ -171,12 +170,12 @@ const PhoBienGiaoDucPhapLuatPage = () => {
             {/* Layout Wrapper */}
             <div className="mx-auto max-w-[1520px] px-4 -mt-14 relative z-20 lg:px-6">
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
-                    
+
                     {/* Sidebar Menu */}
                     <aside className={`shrink-0 transition-all duration-300 z-30 ${isSidebarOpen ? 'w-full lg:w-[280px]' : 'w-full lg:w-[88px]'}`}>
-                        <VerticalMenuNav 
-                            isSidebarOpen={isSidebarOpen} 
-                            setIsSidebarOpen={setIsSidebarOpen} 
+                        <VerticalMenuNav
+                            isSidebarOpen={isSidebarOpen}
+                            setIsSidebarOpen={setIsSidebarOpen}
                             activeMenu={activeMenu}
                             setActiveMenu={setActiveMenu}
                         />
@@ -287,7 +286,7 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                                             Xem chi tiết <ArrowRight size={14} />
                                         </button>
                                     </div>
-                                    
+
                                     <div className="flex justify-between items-center mb-6 px-4">
                                         <div className="text-center">
                                             <div className="text-2xl font-bold text-blue-600">1.200 tỷ</div>
@@ -306,7 +305,7 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                                             <div className="text-[10px] font-bold text-gray-500 uppercase tracking-wide mt-1">Địa phương</div>
                                         </div>
                                     </div>
-                                    
+
                                     <div>
                                         <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-wide mb-3">Phân bổ theo cấp</h4>
                                         <div className="space-y-3">
@@ -448,12 +447,12 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                                 {difficultiesData.map((diff, idx) => (
                                     <div key={idx} className="border border-gray-100 rounded-xl p-4 hover:border-pink-200 hover:shadow-md transition-all bg-white flex flex-col">
                                         <h3 className="font-bold text-gray-800 text-sm mb-3 line-clamp-3 flex-1">{diff.title}</h3>
-                                        
+
                                         <div className="flex flex-col gap-1.5 text-[11px] text-gray-500 mb-4 font-medium border-t border-gray-50 pt-3">
                                             <span className="flex items-center gap-1.5"><Building2 size={12} className="text-gray-400" /> {diff.source}</span>
                                             <span className="flex items-center gap-1.5"><Calendar size={12} className="text-gray-400" /> {diff.date}</span>
                                         </div>
-                                        
+
                                         <div>
                                             <span className={`px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wide inline-block ${getBadgeColor(diff.type)}`}>
                                                 {diff.type}
