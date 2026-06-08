@@ -5,57 +5,17 @@ import { councilData, programsData, effectiveModelsData, difficultiesData } from
 
 const MENU_ITEMS = [
     { key: 'trang-chu', label: 'Trang chủ', color: 'bg-blue-500' },
-    { 
-        key: 'gioi-thieu', 
-        label: 'Giới thiệu', 
-        color: 'bg-green-500',
-        children: [
-            { key: 'chuc-nang', label: 'Chức năng, nhiệm vụ' },
-            { key: 'co-cau', label: 'Cơ cấu tổ chức' }
-        ]
-    },
-    { 
-        key: 'tin-tuc', 
-        label: 'Tin tức giới thiệu văn bản mới', 
-        color: 'bg-amber-500',
-        children: [
-            { key: 'tin-hoat-dong', label: 'Tin hoạt động' },
-            { key: 'tin-dia-phuong', label: 'Tin địa phương' }
-        ]
-    },
+    { key: 'gioi-thieu', label: 'Giới thiệu', color: 'bg-green-500' },
+    { key: 'tin-tuc', label: 'Tin tức giới thiệu văn bản mới', color: 'bg-amber-500' },
     { key: 'thong-cao', label: 'Thông cáo báo chí', color: 'bg-red-500' },
-    { 
-        key: 'van-ban-chi-dao', 
-        label: 'Văn bản chỉ đạo, hướng dẫn', 
-        color: 'bg-purple-500',
-        children: [
-            { key: 'nghi-dinh', label: 'Nghị định' },
-            { key: 'thong-tu', label: 'Thông tư' }
-        ]
-    },
-    { 
-        key: 'tai-lieu-huong-dan', 
-        label: 'Tài liệu hướng dẫn nghiệp vụ', 
-        color: 'bg-pink-500',
-        children: [
-            { key: 'tai-lieu-nghiep-vu', label: 'Tài liệu nghiệp vụ' },
-            { key: 'so-tay', label: 'Sổ tay pháp luật' }
-        ]
-    },
+    { key: 'van-ban-chi-dao', label: 'Văn bản chỉ đạo, hướng dẫn', color: 'bg-purple-500' },
+    { key: 'tai-lieu-huong-dan', label: 'Tài liệu hướng dẫn nghiệp vụ', color: 'bg-pink-500' },
     { key: 'nghien-cuu-trao-doi', label: 'Nghiên cứu, trao đổi', color: 'bg-cyan-500' },
     { key: 'tu-sach-phap-luat', label: 'Tủ sách pháp luật', color: 'bg-lime-500' },
     { key: 'boi-duong-tap-huan', label: 'Bồi dưỡng, tập huấn trực tuyến', color: 'bg-orange-500' },
     { key: 'thi-tim-hieu', label: 'Thi tìm hiểu pháp luật', color: 'bg-teal-500' },
     { key: 'hoi-dong-phoi-hop', label: 'Hội đồng phối hợp', color: 'bg-blue-400' },
-    { 
-        key: 'de-an-chuong-trinh', 
-        label: 'Đề án/Chương trình', 
-        color: 'bg-yellow-500',
-        children: [
-            { key: 'de-an-tw', label: 'Đề án Trung ương' },
-            { key: 'chuong-trinh-dp', label: 'Chương trình địa phương' }
-        ]
-    },
+    { key: 'de-an-chuong-trinh', label: 'Đề án/Chương trình', color: 'bg-yellow-500' },
     { key: 'bao-cao-vien', label: 'Báo cáo viên', color: 'bg-rose-500' },
     { key: 'tuyen-truyen-vien', label: 'Tuyên truyền viên', color: 'bg-indigo-500' },
     { key: 'to-hoa-giai', label: 'Tổ hòa giải', color: 'bg-pink-600' },
@@ -66,11 +26,37 @@ const MENU_ITEMS = [
     { key: 'mo-hinh-hoat-dong', label: 'Mô hình hoạt động hiệu quả', color: 'bg-blue-600' }
 ];
 
-function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiveMenu, activeSubMenu, setActiveSubMenu }) {
-    const [openMenus, setOpenMenus] = useState({});
-
-    const toggleMenu = (key) => {
-        setOpenMenus(prev => ({ ...prev, [key]: !prev[key] }));
+function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiveMenu }) {
+    const getNavIcon = (key, isActive) => {
+        const strokeClass = isActive ? "stroke-[#2580f0]" : "stroke-slate-500 group-hover:stroke-[#2580f0]";
+        const props = {
+            width: 20, height: 20, viewBox: "0 0 24 24", fill: "none", 
+            stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round", strokeLinejoin: "round",
+            className: `shrink-0 transition-colors ${strokeClass}`
+        };
+        switch(key) {
+            case 'trang-chu': return <svg {...props}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>;
+            case 'gioi-thieu': return <svg {...props}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>;
+            case 'tin-tuc': return <svg {...props}><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>;
+            case 'thong-cao': return <svg {...props}><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>;
+            case 'van-ban-chi-dao': return <svg {...props}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>;
+            case 'tai-lieu-huong-dan': return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>;
+            case 'nghien-cuu-trao-doi': return <svg {...props}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>;
+            case 'tu-sach-phap-luat': return <svg {...props}><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>;
+            case 'boi-duong-tap-huan': return <svg {...props}><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>;
+            case 'thi-tim-hieu': return <svg {...props}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>;
+            case 'hoi-dong-phoi-hop': return <svg {...props}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>;
+            case 'de-an-chuong-trinh': return <svg {...props}><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>;
+            case 'bao-cao-vien': return <svg {...props}><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 17 22 12"></polyline></svg>;
+            case 'tuyen-truyen-vien': return <svg {...props}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>;
+            case 'to-hoa-giai': return <svg {...props}><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>;
+            case 'hoa-giai-vien': return <svg {...props}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>;
+            case 'xa-dat-chuan': return <svg {...props}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>;
+            case 'kinh-phi': return <svg {...props}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>;
+            case 'kho-khan-vuong-mac': return <svg {...props}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>;
+            case 'mo-hinh-hoat-dong': return <svg {...props}><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>;
+            default: return <svg {...props}><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>;
+        }
     };
 
     return (
@@ -94,9 +80,7 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
                 <ul className="flex flex-col gap-1 list-none m-0 p-0">
                     {MENU_ITEMS.map((item) => {
                         const isActive = activeMenu === item.key;
-                        const hasChildren = item.children && item.children.length > 0;
-                        const isOpen = openMenus[item.key] || isActive;
-
+                        
                         return (
                             <li key={item.key} className="flex flex-col group relative">
                                 <div 
@@ -104,65 +88,22 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
                                         isActive 
                                             ? 'bg-blue-50/70 text-[#2580f0]' 
                                             : 'hover:bg-slate-50 text-slate-600 hover:text-[#2580f0]'
-                                    } ${!isSidebarOpen ? 'justify-center' : 'justify-between'}`}
+                                    } ${!isSidebarOpen ? 'justify-center' : 'justify-start'}`}
                                     onClick={() => {
                                         if (!isSidebarOpen) setIsSidebarOpen(true);
-                                        
-                                        if (hasChildren) {
-                                            toggleMenu(item.key);
-                                        } else {
-                                            setActiveMenu(item.key);
-                                            setActiveSubMenu(null);
-                                        }
+                                        setActiveMenu(item.key);
                                     }}
                                     title={!isSidebarOpen ? item.label : undefined}
                                 >
                                     <div className="flex items-center gap-3">
-                                        <div className="w-[18px] h-[18px] shrink-0 flex items-center justify-center">
-                                            <span className={`w-2 h-2 rounded-full ${item.color}`}></span>
-                                        </div>
+                                        {getNavIcon(item.key, isActive)}
                                         {isSidebarOpen && (
                                             <span className={`font-semibold text-[13px] leading-[1.3] ${isActive ? 'text-[#2580f0]' : ''}`}>
                                                 {item.label}
                                             </span>
                                         )}
                                     </div>
-                                    
-                                    {isSidebarOpen && hasChildren && (
-                                        <span className={`text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-                                        </span>
-                                    )}
                                 </div>
-                                
-                                {/* Sub menu */}
-                                {isSidebarOpen && hasChildren && isOpen && (
-                                    <ul className="flex flex-col gap-1 mt-1 mb-1 ml-[26px] border-l border-slate-200 pl-3 py-1">
-                                        {item.children.map((child) => {
-                                            const isSubActive = activeSubMenu === child.key;
-                                            return (
-                                                <li key={child.key}>
-                                                    <button 
-                                                        onClick={() => {
-                                                            setActiveMenu(item.key);
-                                                            setActiveSubMenu(child.key);
-                                                        }} 
-                                                        className={`w-full text-left px-3 py-1.5 text-[12px] font-medium transition-all duration-200 rounded-md relative ${
-                                                            isSubActive 
-                                                                ? 'text-[#2580f0] bg-blue-50/50' 
-                                                                : 'text-slate-500 hover:text-[#2580f0] hover:bg-slate-50'
-                                                        }`}
-                                                    >
-                                                        {isSubActive && (
-                                                            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-1/2 bg-[#2580f0] rounded-r-md"></div>
-                                                        )}
-                                                        <span className={isSubActive ? "ml-1" : ""}>{child.label}</span>
-                                                    </button>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                )}
                             </li>
                         );
                     })}
@@ -175,7 +116,6 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
 const PhoBienGiaoDucPhapLuatPage = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [activeMenu, setActiveMenu] = useState('trang-chu');
-    const [activeSubMenu, setActiveSubMenu] = useState(null);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -239,8 +179,6 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                             setIsSidebarOpen={setIsSidebarOpen} 
                             activeMenu={activeMenu}
                             setActiveMenu={setActiveMenu}
-                            activeSubMenu={activeSubMenu}
-                            setActiveSubMenu={setActiveSubMenu}
                         />
                     </aside>
 
