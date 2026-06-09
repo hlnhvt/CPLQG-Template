@@ -156,7 +156,7 @@ export default function SimpleFeedbackPage() {
                         <div className="relative group text-center">
                             <div className="relative z-10">
                                 <p className="text-white/95 text-[15px] md:text-[18px] italic leading-relaxed font-medium mb-4">
-                                    "Dễ mười lần không dân cũng chịu, khó trăm lần dân liệu cũng xong."
+                                    "Dễ mười lần không dân cũng chịu, khó trăm lần dân liệu cũng xong"
                                 </p>
                                 <div className="flex flex-col items-center gap-2">
                                     <div className="w-12 h-[2px] bg-amber-400/50 rounded-full mb-1" />
@@ -243,7 +243,7 @@ export default function SimpleFeedbackPage() {
                                 <div className="bg-gradient-to-br from-white to-purple-50/30 p-8 rounded-3xl border border-purple-100/50 shadow-inner text-center relative overflow-hidden group">
                                     <div className="absolute top-0 right-0 w-32 h-32 bg-purple-100/20 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-purple-200/30 transition-all duration-700" />
                                     <p className="text-[17px] md:text-[19px] text-gray-800 italic leading-relaxed relative z-10 mb-4 font-medium">
-                                        "Dễ mười lần không dân cũng chịu, khó trăm lần dân liệu cũng xong."
+                                        "Dễ mười lần không dân cũng chịu, khó trăm lần dân liệu cũng xong"
                                     </p>
                                     <div className="w-12 h-0.5 bg-purple-300 mx-auto mb-4" />
                                     <footer className="text-purple-900 font-bold text-[14px] uppercase relative z-10">

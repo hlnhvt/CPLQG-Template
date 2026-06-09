@@ -478,7 +478,7 @@ const Header = () => {
                             <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.multimedia ? 'max-h-96' : 'max-h-0'}`}>
                                 <Link to="/infographic" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Infographic</Link>
                                 <Link to="/radio" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Radio pháp luật</Link>
-                                <a href="#" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Ảnh</a>
+                                <Link to="/anh" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Ảnh</Link>
                                 <Link to="/video" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Video</Link>
                             </div>
                         </div>

@@ -44,7 +44,7 @@ const PhotoGalleryPage = () => {
         const matchKw = !kw || a.title.toLowerCase().includes(kw);
         let matchDate = true;
         if (fromDate) matchDate = matchDate && new Date(a.date.split('/').reverse().join('-')) >= new Date(fromDate);
-        if (toDate)   matchDate = matchDate && new Date(a.date.split('/').reverse().join('-')) <= new Date(toDate);
+        if (toDate) matchDate = matchDate && new Date(a.date.split('/').reverse().join('-')) <= new Date(toDate);
         return matchKw && matchDate;
     });
 
@@ -61,14 +61,14 @@ const PhotoGalleryPage = () => {
 
                     <Link to="/tin-tuc/noi-bat" className="hover:text-blue-600">Tin tức</Link>
                     <ChevronRight size={13} />
-                    <span className="text-gray-800 font-medium">Photo</span>
+                    <span className="text-gray-800 font-medium">Ảnh</span>
                 </nav>
 
                 {/* ── Title + Search Bar ── */}
                 <div className="flex flex-col md:flex-row md:items-end gap-4 mb-8">
                     <div className="flex items-center gap-2">
                         <Images size={26} className="text-blue-700" />
-                        <h1 className="text-[24px] font-bold text-[#0f4c81]">Photo</h1>
+                        <h1 className="text-[24px] font-bold text-[#0f4c81]">Ảnh</h1>
                     </div>
 
                     <form onSubmit={handleSearch} className="flex flex-wrap items-center gap-2 ml-auto">
