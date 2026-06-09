@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Search, Landmark, Menu } from 'lucide-react';
+import { Search, Landmark } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import DashboardContent from './components/DashboardContent';
@@ -7,7 +7,6 @@ import GioiThieuContent from './components/GioiThieuContent';
 import GenericArticleList from './components/GenericArticleList';
 import GenericDocumentList from './components/GenericDocumentList';
 import GenericDataTable from './components/GenericDataTable';
-import GenericFilterSidebar from './components/GenericFilterSidebar';
 
 const MENU_ITEMS = [
     { key: 'trang-chu', label: 'Tổng quan', color: 'bg-blue-500' },
@@ -32,7 +31,7 @@ const MENU_ITEMS = [
     { key: 'mo-hinh-hoat-dong', label: 'Mô hình hoạt động hiệu quả', color: 'bg-blue-600' }
 ];
 
-function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiveMenu, isOverlay = false }) {
+function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiveMenu }) {
     const getNavIcon = (key, isActive) => {
         const strokeClass = isActive ? "stroke-[#2580f0]" : "stroke-slate-500 group-hover:stroke-[#2580f0]";
         const props = {
@@ -66,7 +65,7 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
     };
 
     return (
-        <div className={`bg-white rounded-xl border border-[#d8e1f2] flex flex-col transition-all duration-300 ${isOverlay ? 'w-[280px] shadow-2xl max-h-[calc(100vh-140px)]' : `shadow-sm lg:sticky lg:top-4 max-h-[calc(100vh-2rem)] ${isSidebarOpen ? 'w-full lg:w-[280px]' : 'w-full lg:w-[88px]'}`}`}>
+        <div className={`bg-white rounded-xl shadow-sm border border-[#d8e1f2] h-fit lg:sticky lg:top-4 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'w-full lg:w-[280px]' : 'w-full lg:w-[88px]'}`}>
             <div className={`p-4 flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'} border-b border-[#e8effc]`}>
                 {isSidebarOpen && <h3 className="text-[15px] font-bold text-[#1b2b49] uppercase tracking-wide truncate">Danh mục</h3>}
                 <button
@@ -82,7 +81,7 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
                 </button>
             </div>
 
-            <div className="p-3 flex-1 overflow-y-auto custom-scrollbar-light">
+            <div className="p-3">
                 <ul className="flex flex-col gap-1 list-none m-0 p-0">
                     {MENU_ITEMS.map((item) => {
                         const isActive = activeMenu === item.key;
@@ -91,8 +90,8 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
                             <li key={item.key} className="flex flex-col group relative">
                                 <div
                                     className={`flex items-center p-2.5 rounded-lg cursor-pointer transition-all duration-200 ${isActive
-                                        ? 'bg-blue-50/70 text-[#2580f0]'
-                                        : 'hover:bg-slate-50 text-slate-600 hover:text-[#2580f0]'
+                                            ? 'bg-blue-50/70 text-[#2580f0]'
+                                            : 'hover:bg-slate-50 text-slate-600 hover:text-[#2580f0]'
                                         } ${!isSidebarOpen ? 'justify-center' : 'justify-start'}`}
                                     onClick={() => {
                                         if (!isSidebarOpen) setIsSidebarOpen(true);
@@ -118,23 +117,13 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
     );
 }
 
-const PhoBienGiaoDucPhapLuatPage = () => {
+const PhoBienGiaoDucPhapLuatPageBackup = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [activeMenu, setActiveMenu] = useState('trang-chu');
-
-    const isHomePage = activeMenu === 'trang-chu';
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-
-    useEffect(() => {
-        if (!isHomePage) {
-            setIsSidebarOpen(false);
-        } else {
-            setIsSidebarOpen(true);
-        }
-    }, [activeMenu, isHomePage]);
 
     const getBadgeColor = (type) => {
         switch (type) {
@@ -152,95 +141,50 @@ const PhoBienGiaoDucPhapLuatPage = () => {
 
     return (
         <div className="bg-[#f0f4f8] min-h-screen pb-16 font-sans">
-            {/* 1. Hero Banner - Only on home page */}
-            {isHomePage && (
-                <div className="bg-gradient-to-r from-[#0a1e3f] to-[#1a4b9c] text-white pt-20 pb-28 relative overflow-hidden">
-                    {/* Decorative particles */}
-                    <div className="absolute top-10 left-20 w-1 h-1 bg-white rounded-full opacity-50"></div>
-                    <div className="absolute top-40 right-40 w-1 h-1 bg-white rounded-full opacity-50"></div>
-                    <div className="absolute bottom-20 left-1/3 w-1.5 h-1.5 bg-blue-300 rounded-full opacity-40"></div>
-                    <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 bg-blue-200 rounded-full opacity-30"></div>
+            {/* 1. Hero Banner */}
+            <div className="bg-gradient-to-r from-[#0a1e3f] to-[#1a4b9c] text-white pt-20 pb-28 relative overflow-hidden">
+                {/* Decorative particles */}
+                <div className="absolute top-10 left-20 w-1 h-1 bg-white rounded-full opacity-50"></div>
+                <div className="absolute top-40 right-40 w-1 h-1 bg-white rounded-full opacity-50"></div>
+                <div className="absolute bottom-20 left-1/3 w-1.5 h-1.5 bg-blue-300 rounded-full opacity-40"></div>
+                <div className="absolute top-1/4 right-1/4 w-1.5 h-1.5 bg-blue-200 rounded-full opacity-30"></div>
 
-                    <div className="max-w-6xl mx-auto px-4 relative z-10 flex flex-col items-center text-center">
-                        <div className="bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-6 flex items-center gap-2 uppercase tracking-wide">
-                            <Landmark size={14} /> Hệ thống PBGDPL Quốc gia
-                        </div>
-                        <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
-                            Phổ biến Giáo dục Pháp luật
-                        </h1>
-                        <p className="text-blue-100 text-sm md:text-base max-w-xl mb-10">
-                            Nền tảng thông tin pháp luật hàng đầu dành cho người dân và doanh nghiệp. Tiếp cận tri thức pháp luật mọi lúc, mọi nơi.
-                        </p>
-                        <div className="w-full max-w-2xl relative">
-                            <input
-                                type="text"
-                                placeholder="Tìm kiếm văn bản, tài liệu, khóa học..."
-                                className="w-full h-14 pl-6 pr-12 rounded-full text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-xl"
-                            />
-                            <button className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-700">
-                                <Search size={20} />
-                            </button>
-                        </div>
+                <div className="max-w-6xl mx-auto px-4 relative z-10 flex flex-col items-center text-center">
+                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-6 flex items-center gap-2 uppercase tracking-wide">
+                        <Landmark size={14} /> Hệ thống PBGDPL Quốc gia
+                    </div>
+                    <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
+                        {MENU_ITEMS.find(m => m.key === activeMenu)?.label || 'Phổ biến Giáo dục Pháp luật'}
+                    </h1>
+                    <p className="text-blue-100 text-sm md:text-base max-w-xl mb-10">
+                        Nền tảng thông tin pháp luật hàng đầu dành cho người dân và doanh nghiệp. Tiếp cận tri thức pháp luật mọi lúc, mọi nơi.
+                    </p>
+                    <div className="w-full max-w-2xl relative">
+                        <input
+                            type="text"
+                            placeholder="Tìm kiếm văn bản, tài liệu, khóa học..."
+                            className="w-full h-14 pl-6 pr-12 rounded-full text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-xl"
+                        />
+                        <button className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-700">
+                            <Search size={20} />
+                        </button>
                     </div>
                 </div>
-            )}
-
-            {/* Overlay Sidebar & Floating Menu Button for non-home pages */}
-            {!isHomePage && (
-                <>
-                    <div className={`fixed inset-0 bg-black/20 z-[9998] transition-opacity duration-300 ${isSidebarOpen ? 'opacity-100 visible pointer-events-auto' : 'opacity-0 invisible pointer-events-none'}`} onClick={() => setIsSidebarOpen(false)}></div>
-                    <div className="fixed top-32 left-0 right-0 z-[9999] pointer-events-none">
-                        <div className="mx-auto max-w-[1520px] px-4 lg:px-6">
-                            <div className="relative">
-                                {/* Fixed Floating Menu Button */}
-                                <button
-                                    onClick={() => setIsSidebarOpen(true)}
-                                    className={`absolute top-0 -left-4 lg:-left-6 pointer-events-auto w-fit bg-[#2580f0] text-white px-4 py-2.5 rounded-xl shadow-[0_4px_20px_-4px_rgba(37,128,240,0.4)] border border-blue-500 hover:bg-blue-700 transition-all duration-300 flex items-center gap-2 group ${isSidebarOpen ? 'opacity-0 invisible' : 'opacity-100 visible'}`}
-                                >
-                                    <Menu size={20} className="transition-transform group-hover:scale-110" />
-                                    <span className="font-bold text-[14px] whitespace-nowrap">Danh mục</span>
-                                </button>
-
-                                {/* Overlay Sidebar */}
-                                <aside className={`absolute top-0 -left-4 lg:-left-6 transition-all duration-300 ${isSidebarOpen ? 'translate-x-0 opacity-100 visible pointer-events-auto' : '-translate-x-[150%] opacity-0 invisible pointer-events-none'} w-[280px]`}>
-                                    <div className="h-fit max-h-[calc(100vh-140px)] overflow-y-auto custom-scrollbar-light rounded-xl shadow-2xl">
-                                        <VerticalMenuNav
-                                            isSidebarOpen={true}
-                                            setIsSidebarOpen={setIsSidebarOpen}
-                                            activeMenu={activeMenu}
-                                            setActiveMenu={setActiveMenu}
-                                            isOverlay={true}
-                                        />
-                                    </div>
-                                </aside>
-                            </div>
-                        </div>
-                    </div>
-                </>
-            )}
+            </div>
 
             {/* Layout Wrapper */}
-            <div className={`mx-auto max-w-[1520px] px-4 relative z-20 lg:px-6 ${isHomePage ? '-mt-14' : 'pt-28'}`}>
+            <div className="mx-auto max-w-[1520px] px-4 -mt-14 relative z-20 lg:px-6">
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
 
                     {/* Sidebar Menu */}
-                    {isHomePage ? (
-                        <aside className={`shrink-0 transition-all duration-300 z-30 ${isSidebarOpen ? 'w-full lg:w-[280px]' : 'w-full lg:w-[88px]'}`}>
-                            <VerticalMenuNav
-                                isSidebarOpen={isSidebarOpen}
-                                setIsSidebarOpen={setIsSidebarOpen}
-                                activeMenu={activeMenu}
-                                setActiveMenu={setActiveMenu}
-                            />
-                        </aside>
-                    ) : (
-                        /* Filter Sidebar for non-home pages */
-                        activeMenu !== 'gioi-thieu' && (
-                            <aside className="shrink-0 transition-all duration-300 z-30 w-full lg:w-[280px]">
-                                <GenericFilterSidebar />
-                            </aside>
-                        )
-                    )}
+                    <aside className={`shrink-0 transition-all duration-300 z-30 ${isSidebarOpen ? 'w-full lg:w-[280px]' : 'w-full lg:w-[88px]'}`}>
+                        <VerticalMenuNav
+                            isSidebarOpen={isSidebarOpen}
+                            setIsSidebarOpen={setIsSidebarOpen}
+                            activeMenu={activeMenu}
+                            setActiveMenu={setActiveMenu}
+                        />
+                    </aside>
 
                     {/* Main Content Area */}
                     <main className="flex-1 min-w-0 space-y-6 z-20">
@@ -297,4 +241,4 @@ const PhoBienGiaoDucPhapLuatPage = () => {
     );
 };
 
-export default PhoBienGiaoDucPhapLuatPage;
+export default PhoBienGiaoDucPhapLuatPageBackup;

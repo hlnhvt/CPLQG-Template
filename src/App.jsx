@@ -108,6 +108,7 @@ import HoTroPhapLyDNPage from './pages/ho-tro-phap-ly-dn/HoTroPhapLyDNPage';
 
 // Pho bien giao duc phap luat import
 import PhoBienGiaoDucPhapLuatPage from './pages/pho-bien-giao-duc/PhoBienGiaoDucPhapLuatPage';
+import PhoBienGiaoDucPhapLuatPageBackup from './pages/pho-bien-giao-duc/PhoBienGiaoDucPhapLuatPageBackup';
 
 
 // Phan Anh Kien Nghi imports
@@ -171,6 +172,7 @@ const AppLayout = () => {
                     <Route path="/trang-chu-v2" element={<HomePageV2 />} />
                     <Route path="/ho-tro-phap-ly-doanh-nghiep/*" element={<HoTroPhapLyDoanhNghiepPage />} />
                     <Route path="/pho-bien-giao-duc" element={<PhoBienGiaoDucPhapLuatPage />} />
+                    <Route path="/pho-bien-giao-duc-backup" element={<PhoBienGiaoDucPhapLuatPageBackup />} />
                     <Route path="/news/:id" element={<NewsDetailPage />} />
                     <Route path="/gioi-thieu" element={<AboutPage />} />
                     <Route path="/gioi-thieu/chuc-nang-nhiem-vu" element={<ChucNangNhiemVuPage />} />
