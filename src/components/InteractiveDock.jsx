@@ -107,48 +107,96 @@ const POPUP_CONTENTS = {
     tieudiem: {
         title: "Tin tức Tiêu điểm nổi bật",
         listTitle: "Danh sách tiêu điểm nổi bật",
-        items: [
-            {
-                title: "Thủ tướng Chính phủ chỉ đạo các giải pháp cấp bách tháo gỡ khó khăn cho sản xuất, kinh doanh",
-                icon: Sparkles,
-                image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80",
-                meta: [
-                    <span className="font-semibold text-rose-300 bg-rose-500/15 px-1.5 py-0.5 rounded text-[10px] border border-rose-500/20">Quan trọng</span>,
-                    <span>Cập nhật: Hôm nay</span>
-                ],
-                path: "/news/1"
-            },
-            {
-                title: "Công bố lấy ý kiến Nhân dân đối với dự thảo Nghị định sửa đổi Luật Đất đai năm 2024",
-                icon: Sparkles,
-                image: "https://images.unsplash.com/photo-1505664177922-9818f15aa85b?auto=format&fit=crop&q=80&w=200",
-                meta: [
-                    <span className="font-semibold text-amber-300 bg-amber-500/15 px-1.5 py-0.5 rounded text-[10px] border border-amber-500/20">Dự thảo</span>,
-                    <span>Cập nhật: 1 ngày trước</span>
-                ],
-                path: "/du-thao/1"
-            },
-            {
-                title: "Tăng cường công tác tuyên truyền phổ biến giáo dục pháp luật tại khu vực biên giới hải đảo",
-                icon: Sparkles,
-                image: "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&q=80&w=200",
-                meta: [
-                    <span className="font-semibold text-emerald-300 bg-emerald-500/15 px-1.5 py-0.5 rounded text-[10px] border border-emerald-500/20">Phổ biến PL</span>,
-                    <span>Cập nhật: 3 ngày trước</span>
-                ],
-                path: "/news/6"
-            },
-            {
-                title: "Chính thức ban hành quy định mới về quản lý thuế đối với thương mại điện tử xuyên biên giới",
-                icon: Sparkles,
-                image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=200",
-                meta: [
-                    <span className="font-semibold text-blue-300 bg-blue-500/15 px-1.5 py-0.5 rounded text-[10px] border border-blue-500/20">Chính sách</span>,
-                    <span>Cập nhật: 4 ngày trước</span>
-                ],
-                path: "/news/8"
-            }
-        ],
+        items: {
+            news: [
+                {
+                    title: "Thủ tướng Chính phủ chỉ đạo các giải pháp cấp bách tháo gỡ khó khăn cho sản xuất, kinh doanh",
+                    icon: Newspaper,
+                    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80",
+                    meta: [
+                        <span className="font-semibold text-rose-300 bg-rose-500/15 px-1.5 py-0.5 rounded text-[10px] border border-rose-500/20">Quan trọng</span>,
+                        "18/06/2026 09:30"
+                    ],
+                    path: "/news/1"
+                },
+                {
+                    title: "Chính thức ban hành quy định mới về quản lý thuế đối với thương mại điện tử xuyên biên giới",
+                    icon: Newspaper,
+                    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=200",
+                    meta: [
+                        <span className="font-semibold text-blue-300 bg-blue-500/15 px-1.5 py-0.5 rounded text-[10px] border border-blue-500/20">Chính sách</span>,
+                        "14/06/2026 08:00"
+                    ],
+                    path: "/news/8"
+                }
+            ],
+            draft: [
+                {
+                    title: "Công bố lấy ý kiến Nhân dân đối với dự thảo Nghị định sửa đổi Luật Đất đai năm 2024",
+                    icon: FileText,
+                    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=200",
+                    meta: [
+                        <span className="font-semibold text-amber-300 bg-amber-500/15 px-1.5 py-0.5 rounded text-[10px] border border-amber-500/20">Dự thảo</span>,
+                        "17/06/2026 15:45"
+                    ],
+                    path: "/du-thao/1"
+                },
+                {
+                    title: "Dự thảo Luật Thuế giá trị gia tăng (sửa đổi) trình Quốc hội",
+                    icon: FileText,
+                    image: "https://images.unsplash.com/photo-1554224154-26032ffc0d04?auto=format&fit=crop&q=80&w=200",
+                    meta: [
+                        <span className="font-semibold text-amber-300 bg-amber-500/15 px-1.5 py-0.5 rounded text-[10px] border border-amber-500/20">Dự thảo</span>,
+                        "16/06/2026 14:20"
+                    ],
+                    path: "/du-thao/2"
+                }
+            ],
+            qa: [
+                {
+                    title: "Quy định mới nhất về điều kiện tách thửa đất ở tại TP.HCM",
+                    icon: HelpCircle,
+                    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=200",
+                    meta: [
+                        <span className="font-semibold text-emerald-300 bg-emerald-500/15 px-1.5 py-0.5 rounded text-[10px] border border-emerald-500/20">Hỏi đáp</span>,
+                        "18/06/2026 11:00"
+                    ],
+                    path: "/cau-hoi-phap-luat/1"
+                },
+                {
+                    title: "Thủ tục và hồ sơ xin cấp Giấy phép lao động cho người nước ngoài",
+                    icon: HelpCircle,
+                    image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=200",
+                    meta: [
+                        <span className="font-semibold text-emerald-300 bg-emerald-500/15 px-1.5 py-0.5 rounded text-[10px] border border-emerald-500/20">Hỏi đáp</span>,
+                        "15/06/2026 09:15"
+                    ],
+                    path: "/cau-hoi-phap-luat/2"
+                }
+            ],
+            forum: [
+                {
+                    title: "Thảo luận về những bất cập trong việc áp dụng bảng giá đất mới",
+                    icon: MessageSquare,
+                    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=200",
+                    meta: [
+                        <span className="font-semibold text-purple-300 bg-purple-500/15 px-1.5 py-0.5 rounded text-[10px] border border-purple-500/20">Diễn đàn</span>,
+                        "18/06/2026 13:45"
+                    ],
+                    path: "/dien-dan/1"
+                },
+                {
+                    title: "Chia sẻ kinh nghiệm: Đăng ký bảo hộ nhãn hiệu trực tuyến",
+                    icon: MessageSquare,
+                    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=200",
+                    meta: [
+                        <span className="font-semibold text-purple-300 bg-purple-500/15 px-1.5 py-0.5 rounded text-[10px] border border-purple-500/20">Diễn đàn</span>,
+                        "17/06/2026 10:30"
+                    ],
+                    path: "/dien-dan/2"
+                }
+            ]
+        },
         links: [
             { label: "Tin tức nổi bật", path: "/tin-tuc/noi-bat" },
             { label: "Tổng rà soát VBQPPL", path: "/tong-ra-soat" },
@@ -336,6 +384,7 @@ const InteractiveDock = () => {
     const { user, logout } = useAuth();
 
     const [activeTab, setActiveTab] = useState(null); // active tab ID
+    const [activeTieudiemTab, setActiveTieudiemTab] = useState('all');
     const [showWelcome, setShowWelcome] = useState(false);
     const [isCreateCauHoiModalOpen, setIsCreateCauHoiModalOpen] = useState(false);
 
@@ -534,79 +583,130 @@ const InteractiveDock = () => {
                                         </div>
                                     </>
                                 ) : activeTab === 'tieudiem' ? (
-                                    <>
-                                        {/* Left Column: Hero Article (55%) */}
-                                        <div className="w-full sm:w-[55%] p-6 flex flex-col justify-end bg-gradient-to-t from-[#0b172e] via-[#0b172e]/80 to-transparent sm:rounded-bl-2xl relative overflow-hidden group cursor-pointer" onClick={() => { setActiveTab(null); navigate(currentChat.items[0].path); }}>
-                                            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80')] bg-cover bg-center mix-blend-overlay opacity-30 group-hover:scale-105 transition-transform duration-700"></div>
-                                            <div className="absolute inset-0 bg-gradient-to-t from-[#0b172e] via-[#0b172e]/60 to-transparent"></div>
-                                            
-                                            <div className="relative z-10 flex flex-col gap-3">
-                                                <div className="flex gap-2 items-center">
-                                                    <span className="bg-rose-500 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-sm tracking-wider shadow-lg">Tiêu điểm nóng</span>
-                                                    <span className="bg-white/20 backdrop-blur-md text-white/90 text-[10px] font-bold px-2 py-1 rounded-sm border border-white/10">Hôm nay</span>
-                                                </div>
-                                                <h3 className="text-xl md:text-2xl font-bold text-white leading-snug group-hover:text-rose-300 transition-colors drop-shadow-md">
-                                                    {currentChat.items[0].title}
-                                                </h3>
-                                                <p className="text-sm text-slate-300 line-clamp-2 mt-1">
-                                                    Toàn cảnh về các điểm mới và chính sách nổi bật sắp được ban hành, tác động sâu rộng đến đời sống kinh tế xã hội và quyền lợi của người dân.
-                                                </p>
-                                                <div className="flex items-center text-rose-400 text-xs font-bold uppercase tracking-wide group-hover:translate-x-1 transition-transform mt-2">
-                                                    Đọc bài viết <ArrowRight size={14} className="ml-1.5" />
-                                                </div>
-                                            </div>
-                                        </div>
+                                    (() => {
+                                        let displayItems = [];
+                                        if (activeTieudiemTab === 'all') {
+                                            displayItems = [
+                                                ...currentChat.items.news,
+                                                ...currentChat.items.draft,
+                                                ...currentChat.items.qa,
+                                                ...currentChat.items.forum
+                                            ];
+                                        } else {
+                                            displayItems = currentChat.items[activeTieudiemTab] || [];
+                                        }
+                                        
+                                        if (displayItems.length === 0) return null;
+                                        
+                                        const heroItem = displayItems[0];
+                                        const listItems = displayItems.slice(1);
 
-                                        {/* Right Column: Other News (45%) */}
-                                        <div className="w-full sm:w-[45%] p-6 flex flex-col gap-4 bg-[#314568f2] sm:rounded-br-2xl border-l border-white/5 relative z-10">
-                                            <div className="text-[11px] font-semibold text-white/50 uppercase flex items-center justify-between mb-2">
-                                                <span>Các tin tức khác</span>
-                                                <button onClick={() => { setActiveTab(null); navigate('/tin-tuc/noi-bat'); }} className="text-blue-400 hover:text-blue-300 transition-colors flex items-center">Xem tất cả <ChevronRight size={14}/></button>
-                                            </div>
-                                            <div className="flex flex-col gap-3 overflow-y-auto custom-scrollbar pr-1 flex-grow">
-                                                {currentChat.items.slice(1).map((item, idx) => (
-                                                    <div 
-                                                        key={idx}
-                                                        onClick={() => { setActiveTab(null); navigate(item.path); }}
-                                                        className="group flex gap-4 items-start p-3 hover:bg-white/5 rounded-xl cursor-pointer transition-colors border border-transparent hover:border-white/10"
-                                                    >
-                                                        <div className="w-16 h-16 rounded-lg bg-slate-800 shrink-0 overflow-hidden relative shadow-inner">
-                                                            {item.image ? (
-                                                                <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                                            ) : (
-                                                                <>
-                                                                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 group-hover:scale-110 transition-transform duration-500"></div>
-                                                                    <Sparkles size={16} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/50 group-hover:text-amber-300 transition-colors" />
-                                                                </>
-                                                            )}
-                                                        </div>
-                                                        <div className="flex-grow min-w-0 flex flex-col justify-center gap-1.5">
-                                                            <h4 className="text-[13px] font-bold text-white/90 group-hover:text-blue-400 transition-colors line-clamp-2 leading-snug">
-                                                                {item.title}
-                                                            </h4>
-                                                            <div className="flex flex-wrap items-center gap-1.5 text-[10px] text-white/40">
-                                                                {item.meta[0]}
-                                                                <span className="opacity-50">•</span>
-                                                                {item.meta[1]}
+                                        return (
+                                            <div className="w-full bg-[#314568f2] sm:rounded-b-2xl shadow-inner min-h-[580px] overflow-hidden flex flex-col">
+                                                {/* Tab Bar */}
+                                                <div className="p-4 border-b border-white/10 flex flex-wrap justify-center gap-2 bg-black/10">
+                                                    {[
+                                                        { id: 'all', label: 'Tất cả' },
+                                                        { id: 'news', label: 'Tin tức' },
+                                                        { id: 'draft', label: 'Dự thảo' },
+                                                        { id: 'qa', label: 'Hỏi đáp' },
+                                                        { id: 'forum', label: 'Diễn đàn' }
+                                                    ].map(tab => (
+                                                        <button
+                                                            key={tab.id}
+                                                            onClick={() => setActiveTieudiemTab(tab.id)}
+                                                            className={`px-4 py-1.5 rounded-full text-[12px] font-semibold transition-all ${
+                                                                activeTieudiemTab === tab.id 
+                                                                ? 'bg-blue-500 text-white shadow-md' 
+                                                                : 'text-white/60 hover:text-white hover:bg-white/10'
+                                                            }`}
+                                                        >
+                                                            {tab.label}
+                                                        </button>
+                                                    ))}
+                                                </div>
+
+                                                {/* Magazine Layout */}
+                                                <div className="flex flex-col sm:flex-row flex-grow min-h-0">
+                                                    {/* Left Column: Hero Article (55%) */}
+                                                    <div className="w-full sm:w-[55%] p-6 flex flex-col justify-end relative overflow-hidden group cursor-pointer border-r border-white/5" onClick={() => { setActiveTab(null); navigate(heroItem.path); }}>
+                                                        <div 
+                                                            className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700 opacity-50" 
+                                                            style={{ backgroundImage: `url(${heroItem.image})` }}
+                                                        ></div>
+                                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0b172e] via-[#0b172e]/80 to-[#0b172e]/20"></div>
+
+                                                        <div className="relative z-10 flex flex-col gap-3">
+                                                            <div className="flex gap-2 items-center">
+                                                                <span className="bg-rose-500 text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-sm tracking-wider shadow-lg">Tiêu điểm nóng</span>
+                                                                <span className="bg-white/20 backdrop-blur-md text-white/90 text-[10px] font-bold px-2 py-1 rounded-sm border border-white/10">{heroItem.meta[1]}</span>
+                                                            </div>
+                                                            <h3 className="text-xl md:text-2xl font-bold text-white leading-snug group-hover:text-rose-300 transition-colors drop-shadow-md">
+                                                                {heroItem.title}
+                                                            </h3>
+                                                            <p className="text-sm text-slate-300 line-clamp-2 mt-1">
+                                                                Toàn cảnh về các điểm mới và chính sách nổi bật sắp được ban hành, tác động sâu rộng đến đời sống kinh tế xã hội và quyền lợi của người dân.
+                                                            </p>
+                                                            <div className="flex items-center text-rose-400 text-xs font-bold uppercase tracking-wide group-hover:translate-x-1 transition-transform mt-2">
+                                                                Đọc bài viết <ArrowRight size={14} className="ml-1.5" />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                ))}
-                                                
-                                                {/* Hot links / Keywords */}
-                                                <div className="mt-auto pt-5 border-t border-white/10">
-                                                    <div className="text-[10.5px] font-bold text-white/40 uppercase mb-3 flex items-center gap-1.5"><TrendingUp size={12}/> Chủ đề xu hướng</div>
-                                                    <div className="flex flex-wrap gap-2">
-                                                        {['#LuậtĐấtĐai2024', '#ChínhSáchMới', '#KhởiNghiệp'].map(kw => (
-                                                            <span key={kw} onClick={() => { setActiveTab(null); navigate('/tim-kiem'); }} className="text-[11px] px-2.5 py-1 bg-white/5 hover:bg-blue-500/20 hover:text-blue-300 rounded-full text-white/70 cursor-pointer transition-colors border border-white/5 hover:border-blue-500/30 font-medium">
-                                                                {kw}
-                                                            </span>
-                                                        ))}
+
+                                                    {/* Right Column: Other News (45%) */}
+                                                    <div className="w-full sm:w-[45%] p-6 flex flex-col gap-4 bg-[#314568f2] relative z-10 min-h-0 overflow-y-auto custom-scrollbar">
+                                                        <div className="text-[11px] font-semibold text-white/50 uppercase flex items-center justify-between mb-2 shrink-0">
+                                                            <span>Các tin tức khác</span>
+                                                            <button onClick={() => { setActiveTab(null); navigate('/tin-tuc/noi-bat'); }} className="text-blue-400 hover:text-blue-300 transition-colors flex items-center">Xem tất cả <ChevronRight size={14} /></button>
+                                                        </div>
+                                                        <div className="flex flex-col gap-3 flex-grow">
+                                                            {listItems.map((item, idx) => (
+                                                                <div
+                                                                    key={idx}
+                                                                    onClick={() => { setActiveTab(null); navigate(item.path); }}
+                                                                    className="group flex gap-4 items-start p-3 hover:bg-white/5 rounded-xl cursor-pointer transition-colors border border-transparent hover:border-white/10 shrink-0"
+                                                                >
+                                                                    <div className="w-16 h-16 rounded-lg bg-slate-800 shrink-0 overflow-hidden relative shadow-inner">
+                                                                        {item.image ? (
+                                                                            <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                                                        ) : (
+                                                                            <>
+                                                                                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 group-hover:scale-110 transition-transform duration-500"></div>
+                                                                                <Sparkles size={16} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/50 group-hover:text-amber-300 transition-colors" />
+                                                                            </>
+                                                                        )}
+                                                                    </div>
+                                                                    <div className="flex-grow min-w-0 flex flex-col justify-center gap-1.5">
+                                                                        <h4 className="text-[13px] font-bold text-white/90 group-hover:text-blue-400 transition-colors line-clamp-2 leading-snug">
+                                                                            {item.title}
+                                                                        </h4>
+                                                                        <div className="flex flex-wrap items-center gap-1.5 text-[10px] text-white/40">
+                                                                            {item.meta[0]}
+                                                                            <span className="opacity-50">•</span>
+                                                                            {item.meta[1]}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                            
+                                                            {/* Hot links / Keywords */}
+                                                            <div className="mt-auto pt-5 border-t border-white/10">
+                                                                <div className="text-[10.5px] font-bold text-white/40 uppercase mb-3 flex items-center gap-1.5"><TrendingUp size={12} /> Chủ đề xu hướng</div>
+                                                                <div className="flex flex-wrap gap-2">
+                                                                    {['#LuậtĐấtĐai2024', '#ChínhSáchMới', '#KhởiNghiệp'].map(kw => (
+                                                                        <span key={kw} onClick={() => { setActiveTab(null); navigate('/tim-kiem'); }} className="text-[11px] px-2.5 py-1 bg-white/5 hover:bg-blue-500/20 hover:text-blue-300 rounded-full text-white/70 cursor-pointer transition-colors border border-white/5 hover:border-blue-500/30 font-medium">
+                                                                            {kw}
+                                                                        </span>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </>
+                                        );
+                                    })()
+
                                 ) : activeTab === 'user-history' ? (
                                     <div className="w-full p-6 flex flex-col gap-4 bg-[#314568f2] sm:rounded-b-2xl shadow-inner min-h-[580px] overflow-hidden">
                                         <div className="text-[12px] font-semibold text-white/50 uppercase flex items-center justify-between mb-2">
@@ -615,7 +715,7 @@ const InteractiveDock = () => {
                                                 <span>Lịch sử hoạt động gần đây</span>
                                             </div>
                                             <button onClick={() => { setActiveTab(null); navigate('/ca-nhan/lich-su'); }} className="text-blue-400 hover:text-blue-300 transition-colors flex items-center text-[11px] bg-blue-500/10 px-3 py-1.5 rounded-full border border-blue-500/20">
-                                                Quản lý toàn bộ <ChevronRight size={14} className="ml-1"/>
+                                                Quản lý toàn bộ <ChevronRight size={14} className="ml-1" />
                                             </button>
                                         </div>
 
@@ -633,12 +733,12 @@ const InteractiveDock = () => {
                                                         <div className="absolute -left-[30px] top-4 w-3 h-3 rounded-full bg-[#1a2f4c] border-2 border-white/30 flex items-center justify-center shadow-sm z-10">
                                                             <div className={`w-1.5 h-1.5 rounded-full ${log.status === 'warning' ? 'bg-amber-400' : 'bg-emerald-400'}`}></div>
                                                         </div>
-                                                        
+
                                                         {/* Line connecting to next item (except last one) */}
                                                         {index < 4 && (
                                                             <div className="absolute -left-[25px] top-7 bottom-[-20px] w-px bg-white/10 z-0"></div>
                                                         )}
-                                                        
+
                                                         <div className="bg-white/5 border border-white/10 text-white rounded-xl transition-all duration-300 shadow-sm hover:shadow-md hover:bg-white/10 cursor-pointer p-4 group-hover:-translate-y-0.5">
                                                             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                                                                 <div className="flex-1 pr-4">
@@ -772,14 +872,17 @@ const InteractiveDock = () => {
                                 {/* Button - expands on hover to show label */}
                                 <button
                                     onClick={() => handleItemClick(item)}
-                                    className={`h-12 rounded-xl flex items-center justify-center transition-all duration-300 relative group/btn px-3.5 group-hover/item:px-4 ${isActive
-                                        ? 'text-amber-300 bg-white/10 scale-105 shadow-inner'
-                                        : 'text-white/80 hover:text-white hover:bg-white/10 hover:scale-105'
+                                    className={`h-12 rounded-xl flex items-center justify-center transition-all duration-300 relative group/btn px-3.5 group-hover/item:px-4 ${
+                                        item.id === 'tieudiem' 
+                                            ? `animate-pulse-slow bg-gradient-to-br from-rose-500 via-orange-500 to-amber-500 text-white shadow-[0_0_15px_rgba(244,63,94,0.5)] border border-white/20 hover:scale-110 ${isActive ? 'scale-110 ring-2 ring-white/50' : ''}`
+                                            : isActive
+                                                ? 'text-amber-300 bg-white/10 scale-105 shadow-inner'
+                                                : 'text-white/80 hover:text-white hover:bg-white/10 hover:scale-105'
                                         }`}
                                 >
                                     <Icon
-                                        size={21}
-                                        strokeWidth={isActive ? 2.5 : 2}
+                                        size={item.id === 'tieudiem' ? 24 : 21}
+                                        strokeWidth={isActive || item.id === 'tieudiem' ? 2.5 : 2}
                                         className={`transition-transform duration-300 shrink-0 ${item.id === 'hienke' && isActive ? 'text-amber-300 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]' : ''}`}
                                     />
                                     <span className="max-w-0 opacity-0 group-hover/item:max-w-[180px] group-hover/item:opacity-100 group-hover/item:ml-2 overflow-hidden transition-all duration-300 ease-in-out delay-0 group-hover/item:delay-150 whitespace-nowrap text-[12.5px] font-semibold leading-none shrink-0">
