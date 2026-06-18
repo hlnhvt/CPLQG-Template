@@ -3,10 +3,55 @@ import { useNavigate } from 'react-router-dom';
 import { Search, Plus, Clock, CheckCircle, XCircle, FileText, Send, MessageSquare, Trash2, Eye, FileEdit } from 'lucide-react';
 
 const MOCK_TOPICS = [
-    { id: 1, title: 'Hỏi về quy trình xử lý vi phạm hành chính trong lĩnh vực giao thông', forum: 'Giao thông vận tải', date: 'Vừa xong', status: 'draft', replies: 0 },
-    { id: 2, title: 'Thủ tục đăng ký doanh nghiệp qua mạng gặp lỗi hệ thống', forum: 'Doanh nghiệp & Đầu tư', date: '14/03/2026', status: 'pending', replies: 0 },
-    { id: 3, title: 'Kinh nghiệm nộp thuế TNCN cho freelancer', forum: 'Thuế & Phí', date: '10/03/2026', status: 'published', replies: 15 },
-    { id: 4, title: 'Quy định mới về bảo hiểm y tế năm 2026', forum: 'Lao động & Bảo hiểm xã hội', date: '05/03/2026', status: 'rejected', replies: 0, reason: 'Chủ đề đã tồn tại trong diễn đàn, vui lòng tham gia bình luận tại chủ đề gốc.' }
+    { 
+        id: 1, 
+        title: 'Hỏi về quy trình xử lý vi phạm hành chính trong lĩnh vực giao thông', 
+        forum: 'Pháp luật Hình sự', 
+        forumId: 4, 
+        date: 'Vừa xong', 
+        status: 'draft', 
+        replies: 0, 
+        domains: ['Hành chính'], 
+        content: 'Tôi muốn hỏi về quy trình xử lý vi phạm hành chính trong lĩnh vực giao thông đường bộ, đặc biệt là thời hạn ra quyết định xử phạt kể từ ngày lập biên bản vi phạm hành chính là bao lâu?', 
+        tags: 'giao-thong, hanh-chinh' 
+    },
+    { 
+        id: 2, 
+        title: 'Thủ tục đăng ký doanh nghiệp qua mạng gặp lỗi hệ thống', 
+        forum: 'Thảo luận Luật Doanh nghiệp', 
+        forumId: 1, 
+        date: '14/03/2026', 
+        status: 'pending', 
+        replies: 0, 
+        domains: ['Doanh nghiệp'], 
+        content: 'Khi thực hiện nộp hồ sơ đăng ký doanh nghiệp qua cổng thông tin quốc gia thì hệ thống liên tục báo lỗi tải tệp tin và không thể chuyển bước tiếp theo.', 
+        tags: 'dang-ky-doanh-nghiep' 
+    },
+    { 
+        id: 3, 
+        title: 'Kinh nghiệm nộp thuế TNCN cho freelancer', 
+        forum: 'Thuế và Kế toán', 
+        forumId: 6, 
+        date: '10/03/2026', 
+        status: 'published', 
+        replies: 15, 
+        domains: ['Thuế - Phí - Lệ phí'], 
+        content: 'Tôi là freelancer làm việc cho nhiều công ty khác nhau. Cuối năm tôi muốn tự quyết toán thuế thu nhập cá nhân thì cần chuẩn bị chứng từ khấu trừ thuế và làm thủ tục như thế nào?', 
+        tags: 'thue-tncn, freelancer' 
+    },
+    { 
+        id: 4, 
+        title: 'Quy định mới về bảo hiểm y tế năm 2026', 
+        forum: 'Hỏi đáp Pháp luật Lao động', 
+        forumId: 2, 
+        date: '05/03/2026', 
+        status: 'rejected', 
+        replies: 0, 
+        reason: 'Chủ đề đã tồn tại trong diễn đàn, vui lòng tham gia bình luận tại chủ đề gốc.', 
+        domains: ['Lao động'], 
+        content: 'Xin được hỏi các quy định mới nhất về bảo hiểm y tế hộ gia đình áp dụng từ năm 2026 có những thay đổi gì về mức đóng và mức hưởng?', 
+        tags: 'BHYT, bao-hiem' 
+    }
 ];
 
 const STATUS_CONFIG = {
@@ -25,6 +70,11 @@ const ForumTopicManagementPage = () => {
     // In a real app, retrieve from state/context/API if we just saved a draft
     // For now, we will merge any drafted topic stored in localStorage
     const [topics, setTopics] = useState(() => {
+        const stored = localStorage.getItem('managementTopics');
+        if (stored) {
+            return JSON.parse(stored);
+        }
+        
         let initialTopics = [...MOCK_TOPICS];
         try {
             const savedDraft = localStorage.getItem('newForumDraft');
@@ -35,8 +85,17 @@ const ForumTopicManagementPage = () => {
                 localStorage.removeItem('newForumDraft');
             }
         } catch(e) {}
+        localStorage.setItem('managementTopics', JSON.stringify(initialTopics));
         return initialTopics;
     });
+
+    const handleDelete = (id) => {
+        if (window.confirm('Bạn có chắc chắn muốn xóa chủ đề này?')) {
+            const updated = topics.filter(t => t.id !== id);
+            setTopics(updated);
+            localStorage.setItem('managementTopics', JSON.stringify(updated));
+        }
+    };
 
     const filteredTopics = topics.filter(topic => {
         if (activeTab !== 'all' && topic.status !== activeTab) return false;
@@ -166,6 +225,7 @@ const ForumTopicManagementPage = () => {
                                                 )}
                                                 {(topic.status === 'draft' || topic.status === 'rejected') && (
                                                     <button 
+                                                        onClick={() => navigate(`/dien-dan/cap-nhat/${topic.id}`)}
                                                         className="p-1.5 hover:text-blue-600 hover:bg-blue-50 rounded" 
                                                         title="Chỉnh sửa"
                                                     >
@@ -178,7 +238,11 @@ const ForumTopicManagementPage = () => {
                                                     </button>
                                                 )}
                                                 <div className="w-px h-5 bg-gray-200 mx-1"></div>
-                                                <button className="p-1.5 hover:text-red-600 hover:bg-red-50 rounded transition-colors" title="Xóa">
+                                                <button 
+                                                    onClick={() => handleDelete(topic.id)}
+                                                    className="p-1.5 hover:text-red-600 hover:bg-red-50 rounded transition-colors" 
+                                                    title="Xóa"
+                                                >
                                                     <Trash2 size={18} />
                                                 </button>
                                             </div>

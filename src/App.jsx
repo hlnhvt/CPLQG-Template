@@ -78,6 +78,7 @@ import ForumDashboardPage from './pages/forum/ForumDashboardPage';
 import ForumTopicListPage from './pages/forum/ForumTopicListPage';
 import TopicDetailPage from './pages/forum/TopicDetailPage';
 import CreateTopicPage from './pages/forum/CreateTopicPage';
+import UpdateTopicPage from './pages/forum/UpdateTopicPage';
 import LivestreamEventPage from './pages/forum/LivestreamEventPage';
 import ForumTopicManagementPage from './pages/forum/ForumTopicManagementPage';
 import LivestreamListPage from './pages/forum/LivestreamListPage';
@@ -269,6 +270,7 @@ const AppLayout = () => {
                     <Route path="/dien-dan/bai-viet/:id" element={<TopicDetailPage />} />
                     <Route path="/dien-dan/gop-y/:id" element={<ContributionDetailPage />} />
                     <Route path="/dien-dan/tao-moi" element={<CreateTopicPage />} />
+                    <Route path="/dien-dan/cap-nhat/:id" element={<UpdateTopicPage />} />
                     <Route path="/dien-dan/su-kien" element={<LivestreamListPage />} />
                     <Route path="/dien-dan/su-kien/:slug" element={<LivestreamEventPage />} />
 

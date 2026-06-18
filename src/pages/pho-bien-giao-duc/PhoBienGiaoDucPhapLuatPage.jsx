@@ -188,19 +188,13 @@ const PhoBienGiaoDucPhapLuatPage = () => {
             {/* Overlay Sidebar & Floating Menu Button for non-home pages */}
             {!isHomePage && (
                 <>
+                    {/* The Backdrop - z-[9998] */}
                     <div className={`fixed inset-0 bg-black/20 z-[9998] transition-opacity duration-300 ${isSidebarOpen ? 'opacity-100 visible pointer-events-auto' : 'opacity-0 invisible pointer-events-none'}`} onClick={() => setIsSidebarOpen(false)}></div>
+                    
+                    {/* The Overlay Menu Wrapper - z-[9999] */}
                     <div className="fixed top-32 left-0 right-0 z-[9999] pointer-events-none">
                         <div className="mx-auto max-w-[1520px] px-4 lg:px-6">
                             <div className="relative">
-                                {/* Fixed Floating Menu Button */}
-                                <button
-                                    onClick={() => setIsSidebarOpen(true)}
-                                    className={`absolute top-0 -left-4 lg:-left-6 pointer-events-auto w-fit bg-[#2580f0] text-white px-4 py-2.5 rounded-xl shadow-[0_4px_20px_-4px_rgba(37,128,240,0.4)] border border-blue-500 hover:bg-blue-700 transition-all duration-300 flex items-center gap-2 group ${isSidebarOpen ? 'opacity-0 invisible' : 'opacity-100 visible'}`}
-                                >
-                                    <Menu size={20} className="transition-transform group-hover:scale-110" />
-                                    <span className="font-bold text-[14px] whitespace-nowrap">Danh mục</span>
-                                </button>
-
                                 {/* Overlay Sidebar */}
                                 <aside className={`absolute top-0 -left-4 lg:-left-6 transition-all duration-300 ${isSidebarOpen ? 'translate-x-0 opacity-100 visible pointer-events-auto' : '-translate-x-[150%] opacity-0 invisible pointer-events-none'} w-[280px]`}>
                                     <div className="h-fit max-h-[calc(100vh-140px)] overflow-y-auto custom-scrollbar-light rounded-xl shadow-2xl">
@@ -213,6 +207,22 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                                         />
                                     </div>
                                 </aside>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* The Button Wrapper - z-[40] */}
+                    <div className="fixed top-32 left-0 right-0 z-[40] pointer-events-none">
+                        <div className="mx-auto max-w-[1520px] px-4 lg:px-6">
+                            <div className="relative">
+                                {/* Fixed Floating Menu Button */}
+                                <button
+                                    onClick={() => setIsSidebarOpen(true)}
+                                    className={`absolute top-0 -left-4 lg:-left-6 pointer-events-auto w-fit bg-[#2580f0] text-white px-4 py-2.5 rounded-xl shadow-[0_4px_20px_-4px_rgba(37,128,240,0.4)] border border-blue-500 hover:bg-blue-700 transition-all duration-300 flex items-center gap-2 group ${isSidebarOpen ? 'opacity-0 invisible' : 'opacity-100 visible'}`}
+                                >
+                                    <Menu size={20} className="transition-transform group-hover:scale-110" />
+                                    <span className="font-bold text-[14px] whitespace-nowrap">Danh mục</span>
+                                </button>
                             </div>
                         </div>
                     </div>
