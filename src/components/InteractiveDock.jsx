@@ -387,6 +387,7 @@ const InteractiveDock = () => {
     const [activeTieudiemTab, setActiveTieudiemTab] = useState('all');
     const [showWelcome, setShowWelcome] = useState(false);
     const [isCreateCauHoiModalOpen, setIsCreateCauHoiModalOpen] = useState(false);
+    const [showTieudiemTooltip, setShowTieudiemTooltip] = useState(true);
 
     useEffect(() => {
         // Slide open after a brief delay
@@ -406,6 +407,7 @@ const InteractiveDock = () => {
     }, []);
 
     const handleItemClick = (item) => {
+        setShowTieudiemTooltip(false);
         if (item.id === 'home') {
             setActiveTab(null);
             navigate(item.path);
@@ -868,10 +870,20 @@ const InteractiveDock = () => {
 
                         return (
                             <div key={item.id} className="relative group/item flex flex-col items-center">
+                                {/* Tooltip for Tieudiem */}
+                                {item.id === 'tieudiem' && showTieudiemTooltip && (
+                                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce z-50 pointer-events-none">
+                                        <div className="bg-rose-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
+                                            Tiêu điểm
+                                        </div>
+                                        <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-rose-500"></div>
+                                    </div>
+                                )}
+
                                 {/* Button - expands on hover to show label */}
                                 <button
                                     onClick={() => handleItemClick(item)}
-                                    className={`h-12 rounded-xl flex items-center justify-center transition-all duration-300 relative group/btn ${item.id === 'tieudiem' || isActive ? 'px-4' : 'px-3.5 group-hover/item:px-4'} ${item.id === 'tieudiem'
+                                    className={`h-12 rounded-xl flex items-center justify-center transition-all duration-300 relative group/btn ${isActive ? 'px-4' : 'px-3.5 group-hover/item:px-4'} ${item.id === 'tieudiem'
                                             ? `animate-pulse-slow bg-gradient-to-br from-rose-500 via-orange-500 to-amber-500 text-white shadow-[0_0_15px_rgba(244,63,94,0.5)] border border-white/20 hover:scale-110 ${isActive ? 'scale-110 ring-2 ring-white/50' : ''}`
                                             : isActive
                                                 ? 'text-amber-300 bg-white/10 scale-105 shadow-inner'
@@ -884,7 +896,7 @@ const InteractiveDock = () => {
                                         className={`transition-transform duration-300 shrink-0 ${item.id === 'hienke' && isActive ? 'text-amber-300 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]' : ''}`}
                                     />
                                     <span className={`overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap text-[12.5px] font-semibold leading-none shrink-0 ${
-                                        item.id === 'tieudiem' || isActive
+                                        isActive
                                             ? 'max-w-[180px] opacity-100 ml-2'
                                             : 'max-w-0 opacity-0 group-hover/item:max-w-[180px] group-hover/item:opacity-100 group-hover/item:ml-2 delay-0 group-hover/item:delay-150'
                                     }`}>
