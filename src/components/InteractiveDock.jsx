@@ -105,7 +105,7 @@ const POPUP_CONTENTS = {
         mainPath: "/cau-hoi-phap-luat"
     },
     tieudiem: {
-        title: "Tin tức Tiêu điểm nổi bật",
+        title: "Tiêu điểm nổi bật",
         listTitle: "Danh sách tiêu điểm nổi bật",
         items: {
             news: [
@@ -595,14 +595,14 @@ const InteractiveDock = () => {
                                         } else {
                                             displayItems = currentChat.items[activeTieudiemTab] || [];
                                         }
-                                        
+
                                         if (displayItems.length === 0) return null;
-                                        
+
                                         const heroItem = displayItems[0];
                                         const listItems = displayItems.slice(1);
 
                                         return (
-                                            <div className="w-full bg-[#314568f2] sm:rounded-b-2xl shadow-inner min-h-[580px] overflow-hidden flex flex-col">
+                                            <div className="w-full bg-[#314568f2] sm:rounded-b-2xl shadow-inner h-[460px] overflow-hidden flex flex-col">
                                                 {/* Tab Bar */}
                                                 <div className="p-4 border-b border-white/10 flex flex-wrap justify-center gap-2 bg-black/10">
                                                     {[
@@ -615,11 +615,10 @@ const InteractiveDock = () => {
                                                         <button
                                                             key={tab.id}
                                                             onClick={() => setActiveTieudiemTab(tab.id)}
-                                                            className={`px-4 py-1.5 rounded-full text-[12px] font-semibold transition-all ${
-                                                                activeTieudiemTab === tab.id 
-                                                                ? 'bg-blue-500 text-white shadow-md' 
-                                                                : 'text-white/60 hover:text-white hover:bg-white/10'
-                                                            }`}
+                                                            className={`px-4 py-1.5 rounded-full text-[12px] font-semibold transition-all ${activeTieudiemTab === tab.id
+                                                                    ? 'bg-blue-500 text-white shadow-md'
+                                                                    : 'text-white/60 hover:text-white hover:bg-white/10'
+                                                                }`}
                                                         >
                                                             {tab.label}
                                                         </button>
@@ -630,8 +629,8 @@ const InteractiveDock = () => {
                                                 <div className="flex flex-col sm:flex-row flex-grow min-h-0">
                                                     {/* Left Column: Hero Article (55%) */}
                                                     <div className="w-full sm:w-[55%] p-6 flex flex-col justify-end relative overflow-hidden group cursor-pointer border-r border-white/5" onClick={() => { setActiveTab(null); navigate(heroItem.path); }}>
-                                                        <div 
-                                                            className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700 opacity-50" 
+                                                        <div
+                                                            className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700 opacity-50"
                                                             style={{ backgroundImage: `url(${heroItem.image})` }}
                                                         ></div>
                                                         <div className="absolute inset-0 bg-gradient-to-t from-[#0b172e] via-[#0b172e]/80 to-[#0b172e]/20"></div>
@@ -688,7 +687,7 @@ const InteractiveDock = () => {
                                                                     </div>
                                                                 </div>
                                                             ))}
-                                                            
+
                                                             {/* Hot links / Keywords */}
                                                             <div className="mt-auto pt-5 border-t border-white/10">
                                                                 <div className="text-[10.5px] font-bold text-white/40 uppercase mb-3 flex items-center gap-1.5"><TrendingUp size={12} /> Chủ đề xu hướng</div>
@@ -708,7 +707,7 @@ const InteractiveDock = () => {
                                     })()
 
                                 ) : activeTab === 'user-history' ? (
-                                    <div className="w-full p-6 flex flex-col gap-4 bg-[#314568f2] sm:rounded-b-2xl shadow-inner min-h-[580px] overflow-hidden">
+                                    <div className="w-full p-6 flex flex-col gap-4 bg-[#314568f2] sm:rounded-b-2xl shadow-inner h-[460px] overflow-hidden">
                                         <div className="text-[12px] font-semibold text-white/50 uppercase flex items-center justify-between mb-2">
                                             <div className="flex items-center gap-2">
                                                 <Activity size={16} className="text-blue-400" />
@@ -872,8 +871,7 @@ const InteractiveDock = () => {
                                 {/* Button - expands on hover to show label */}
                                 <button
                                     onClick={() => handleItemClick(item)}
-                                    className={`h-12 rounded-xl flex items-center justify-center transition-all duration-300 relative group/btn px-3.5 group-hover/item:px-4 ${
-                                        item.id === 'tieudiem' 
+                                    className={`h-12 rounded-xl flex items-center justify-center transition-all duration-300 relative group/btn ${item.id === 'tieudiem' || isActive ? 'px-4' : 'px-3.5 group-hover/item:px-4'} ${item.id === 'tieudiem'
                                             ? `animate-pulse-slow bg-gradient-to-br from-rose-500 via-orange-500 to-amber-500 text-white shadow-[0_0_15px_rgba(244,63,94,0.5)] border border-white/20 hover:scale-110 ${isActive ? 'scale-110 ring-2 ring-white/50' : ''}`
                                             : isActive
                                                 ? 'text-amber-300 bg-white/10 scale-105 shadow-inner'
@@ -885,7 +883,11 @@ const InteractiveDock = () => {
                                         strokeWidth={isActive || item.id === 'tieudiem' ? 2.5 : 2}
                                         className={`transition-transform duration-300 shrink-0 ${item.id === 'hienke' && isActive ? 'text-amber-300 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]' : ''}`}
                                     />
-                                    <span className="max-w-0 opacity-0 group-hover/item:max-w-[180px] group-hover/item:opacity-100 group-hover/item:ml-2 overflow-hidden transition-all duration-300 ease-in-out delay-0 group-hover/item:delay-150 whitespace-nowrap text-[12.5px] font-semibold leading-none shrink-0">
+                                    <span className={`overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap text-[12.5px] font-semibold leading-none shrink-0 ${
+                                        item.id === 'tieudiem' || isActive
+                                            ? 'max-w-[180px] opacity-100 ml-2'
+                                            : 'max-w-0 opacity-0 group-hover/item:max-w-[180px] group-hover/item:opacity-100 group-hover/item:ml-2 delay-0 group-hover/item:delay-150'
+                                    }`}>
                                         {item.label}
                                     </span>
                                 </button>
