@@ -25,7 +25,9 @@ function HomePageV3() {
             <Hero isV2={true} />
             <div className="flex-grow bg-white">
                 {/* {(user && hasConfiguredPrefs) && <RecommendedForYou />} */}
-                <NewsHighlightsHome />
+                <div id="tin-tuc-noi-bat">
+                    <NewsHighlightsHome />
+                </div>
                 <NewlyIssuedDocsV2 />
                 
                 <MultimediaV2 />
@@ -48,7 +50,9 @@ function HomePageV3() {
                 <AppLauncherSection />
                 {/* <EventsActivities /> */}
                 <LinkedPortals />
-                <PhanAnhKienNghiHomeSection />
+                <div id="phan-anh-kien-nghi">
+                    <PhanAnhKienNghiHomeSection />
+                </div>
             </div>
             <InteractiveDock />
         </>

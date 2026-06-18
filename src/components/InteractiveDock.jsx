@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, FileText, Shield, Share2, Crown, Trophy, LogIn, LogOut, X, MessageSquare, Clock, Eye, User, ChevronRight, HelpCircle, Lightbulb, History, ArrowRight, BookOpen, Sparkles, ExternalLink } from 'lucide-react';
+import { Home, FileText, Shield, Share2, Crown, Trophy, LogIn, LogOut, X, MessageSquare, Clock, Eye, User, ChevronRight, HelpCircle, Lightbulb, History, ArrowRight, BookOpen, Sparkles, ExternalLink, TrendingUp, Newspaper, Megaphone } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import CreateCauHoiModal from '../pages/cau-hoi-phap-luat/CreateCauHoiModal';
+import ActivityStatistics from './ActivityStatistics';
 
 const DOCK_ITEMS = [
     { id: 'home', label: 'Trang chủ', icon: Home, path: '/trang-chu-v3' },
+    { id: 'news-highlights', label: 'Tin tức nổi bật', icon: Newspaper, path: '/trang-chu-v3', action: 'scroll', targetId: 'tin-tuc-noi-bat' },
+    { id: 'pakn', label: 'Phản ánh kiến nghị', icon: Megaphone, path: '/trang-chu-v3', action: 'scroll', targetId: 'phan-anh-kien-nghi' },
     { id: 'search', label: 'Tra cứu văn bản', icon: FileText, path: '/van-ban' },
     { id: 'qa', label: 'Hỏi đáp pháp luật', icon: Shield, path: '/cau-hoi-phap-luat' },
     { id: 'tieudiem', label: 'Tiêu điểm', icon: Sparkles, path: '/tin-tuc/noi-bat' },
     { id: 'forum', label: 'Diễn đàn thảo luận', icon: MessageSquare, path: '/dien-dan' },
     { id: 'hienke', label: 'Hiến kế quốc gia', icon: Lightbulb, path: '/hien-ke' },
     { id: 'notebook', label: 'Sổ tay pháp luật', icon: BookOpen, path: '/ca-nhan/bo-suu-tap' },
-    { id: 'user-history', label: 'Lịch sử cá nhân', icon: History, path: '/ca-nhan/lich-su' }
+    { id: 'user-history', label: 'Lịch sử cá nhân', icon: History, path: '/ca-nhan/lich-su' },
+    { id: 'stats', label: 'Thống kê', icon: TrendingUp, path: null }
 ];
 
 const POPUP_CONTENTS = {
+    stats: {
+        title: "Thống kê Hệ thống",
+        mainPath: "/trang-chu-v3"
+    },
     search: {
         title: "Tra cứu Văn bản pháp luật",
         listTitle: "Văn bản mới ban hành nổi bật",
@@ -339,6 +347,25 @@ const InteractiveDock = () => {
         if (item.id === 'home') {
             setActiveTab(null);
             navigate(item.path);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (item.action === 'scroll') {
+            setActiveTab(null);
+            if (location.pathname !== item.path) {
+                navigate(item.path);
+                setTimeout(() => {
+                    const el = document.getElementById(item.targetId);
+                    if (el) {
+                        const y = el.getBoundingClientRect().top + window.scrollY - 100;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
+                    }
+                }, 300);
+            } else {
+                const el = document.getElementById(item.targetId);
+                if (el) {
+                    const y = el.getBoundingClientRect().top + window.scrollY - 100;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+            }
         } else {
             // Toggle or change tab
             if (activeTab === item.id) {
@@ -375,7 +402,7 @@ const InteractiveDock = () => {
 
                 {/* Popover Window (Modern Dark Glassmorphism) */}
                 {activeTab && currentChat && (
-                    <div className="w-[92vw] sm:w-[540px] md:w-[680px] bg-gradient-to-br from-[#162e55]/95 via-[#102444]/95 to-[#0b172e]/98 backdrop-blur-xl border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.55)] flex flex-col overflow-hidden mb-4 animate-popIn text-white relative rounded-2xl">
+                    <div className={`w-[92vw] sm:w-[540px] md:w-[680px] ${activeTab === 'stats' ? 'lg:w-[1024px] xl:w-[1200px]' : ''} bg-gradient-to-br from-[#162e55]/95 via-[#102444]/95 to-[#0b172e]/98 backdrop-blur-xl border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.55)] flex flex-col overflow-hidden mb-4 animate-popIn text-white relative rounded-2xl`}>
                         {/* Glowing decorative blur lines */}
                         <div className="absolute -inset-px bg-gradient-to-r from-sky-500/20 via-indigo-500/10 to-amber-500/15 pointer-events-none -z-10"></div>
                         <div className="absolute -top-16 -left-16 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
@@ -407,9 +434,14 @@ const InteractiveDock = () => {
                             </div>
                         </div>
 
-                        {/* Content Panel - Two Column Layout with increased height */}
-                        <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-white/10 bg-black/10 min-h-[440px]">
-                            {activeTab === 'qa' ? (
+                        {/* Content Panel */}
+                        {activeTab === 'stats' ? (
+                            <div className="w-full bg-slate-50/95 sm:rounded-b-2xl h-[480px]">
+                                <ActivityStatistics />
+                            </div>
+                        ) : (
+                            <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-white/10 bg-black/10 min-h-[440px]">
+                                {activeTab === 'qa' ? (
                                 <>
                                     {/* Left Column for QA: Outstanding List (70%) */}
                                     <div className="w-full sm:w-[70%] p-6 flex flex-col gap-4 min-w-0 bg-[#314568f2] sm:rounded-bl-2xl">
@@ -535,7 +567,8 @@ const InteractiveDock = () => {
                                     </div>
                                 </>
                             )}
-                        </div>
+                            </div>
+                        )}
                     </div>
                 )}
 
