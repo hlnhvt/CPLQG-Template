@@ -872,7 +872,7 @@ const InteractiveDock = () => {
                             <div key={item.id} className="relative group/item flex flex-col items-center">
                                 {/* Tooltip for Tieudiem */}
                                 {item.id === 'tieudiem' && showTieudiemTooltip && (
-                                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce z-50 pointer-events-none">
+                                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 -ml-2.5 flex flex-col items-center animate-bounce z-50 pointer-events-none">
                                         <div className="bg-rose-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
                                             Tiêu điểm
                                         </div>
