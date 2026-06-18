@@ -207,7 +207,7 @@ const Hero = ({ isV2 = false }) => {
                                     >
                                         <Sparkles size={18} className={activeSection === 0 ? 'text-amber-400 animate-pulse shrink-0' : 'text-white/50 shrink-0'} />
                                         <span
-                                            className="text-[11px] uppercase tracking-wider font-bold mb-4 whitespace-nowrap"
+                                            className="text-[11px] uppercase font-semibold mb-4 whitespace-nowrap"
                                             style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
                                         >
                                             Tiêu điểm
@@ -223,7 +223,7 @@ const Hero = ({ isV2 = false }) => {
                                     >
                                         <MessageSquare size={18} className={activeSection === 1 ? 'text-amber-400 shrink-0' : 'text-white/50 shrink-0'} />
                                         <span
-                                            className="text-[11px] uppercase tracking-wider font-bold mb-4 whitespace-nowrap"
+                                            className="text-[11px] uppercase font-semibold mb-4 whitespace-nowrap"
                                             style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
                                         >
                                             Hỏi đáp
@@ -239,7 +239,7 @@ const Hero = ({ isV2 = false }) => {
                                     >
                                         <Bot size={18} className={activeSection === 2 ? 'text-amber-400 shrink-0' : 'text-white/50 shrink-0'} />
                                         <span
-                                            className="text-[10px] uppercase tracking-wider font-bold mb-4 whitespace-nowrap"
+                                            className="text-[10px] uppercase font-semibold mb-4 whitespace-nowrap"
                                             style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
                                         >
                                             AI pháp luật
@@ -259,7 +259,7 @@ const Hero = ({ isV2 = false }) => {
 
                                     {/* Card Header */}
                                     <div className="flex items-center justify-between pb-3 mb-4 border-b border-white/10 shrink-0">
-                                        <h3 className="text-[18px] md:text-[20px] font-bold tracking-wide uppercase flex items-center gap-2">
+                                        <h3 className="text-[18px] md:text-[20px] font-bold uppercase flex items-center gap-2">
                                             {activeSection === 0 ? 'TIÊU ĐIỂM NỔI BẬT' : activeSection === 1 ? 'HỎI ĐÁP PHÁP LUẬT' : 'AI PHÁP LUẬT'}
                                         </h3>
                                         <div className="flex items-center gap-2">
@@ -343,7 +343,7 @@ const Hero = ({ isV2 = false }) => {
                                                         {/* Right: Content (Chủ đề, Tiêu đề, Nội dung) (63% width) */}
                                                         <div className="w-[63%] flex-grow flex flex-col justify-center min-w-0 pr-1 gap-1">
                                                             <div className="flex items-center justify-between gap-2">
-                                                                <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider transition-all duration-300 ${slide.title.toLowerCase().includes('dự thảo')
+                                                                <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded-full uppercase transition-all duration-300 ${slide.title.toLowerCase().includes('dự thảo')
                                                                     ? isActive
                                                                         ? 'bg-amber-500 text-slate-900 border border-amber-500'
                                                                         : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
@@ -378,7 +378,7 @@ const Hero = ({ isV2 = false }) => {
                                                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                                                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                                                             </span>
-                                                            <span className="text-[11px] font-bold text-sky-300 tracking-wide uppercase font-sans">Quy trình hỏi đáp</span>
+                                                            <span className="text-[11px] font-bold text-sky-300 uppercase font-sans">Quy trình hỏi đáp</span>
                                                         </div>
                                                     </div>
 
@@ -529,7 +529,7 @@ const Hero = ({ isV2 = false }) => {
                                                 </div>
 
                                                 <div className="z-10 mb-2 flex-grow flex flex-col justify-center w-full">
-                                                    <h3 className="font-bold text-white text-[12px] md:text-[14px] uppercase tracking-wide group-hover:text-sky-400 transition-colors mb-0.5 line-clamp-1">Trợ lý số BKAV</h3>
+                                                    <h3 className="font-bold text-white text-[12px] md:text-[14px] uppercase group-hover:text-sky-400 transition-colors mb-0.5 line-clamp-1">Trợ lý số BKAV</h3>
                                                     <p className="text-[11px] text-gray-300 leading-snug line-clamp-2">Hỗ trợ tư vấn pháp luật tự động cho công dân, dựa trên mô hình ngôn ngữ lớn chuyên sâu.</p>
                                                 </div>
 
@@ -552,7 +552,7 @@ const Hero = ({ isV2 = false }) => {
                                                 </div>
 
                                                 <div className="z-10 mb-2 flex-grow flex flex-col justify-center w-full">
-                                                    <h3 className="font-bold text-white text-[12px] md:text-[14px] uppercase tracking-wide group-hover:text-sky-400 transition-colors mb-0.5 line-clamp-1">C-AI Legal</h3>
+                                                    <h3 className="font-bold text-white text-[12px] md:text-[14px] uppercase group-hover:text-sky-400 transition-colors mb-0.5 line-clamp-1">C-AI Legal</h3>
                                                     <p className="text-[11px] text-gray-300 leading-snug line-clamp-2">Hệ thống AI rà soát mâu thuẫn, kiểm tra tính hợp pháp và đồng bộ của văn bản.</p>
                                                 </div>
 
@@ -575,7 +575,7 @@ const Hero = ({ isV2 = false }) => {
                                                 </div>
 
                                                 <div className="z-10 mb-2 flex-grow flex flex-col justify-center w-full">
-                                                    <h3 className="font-bold text-white text-[12px] md:text-[14px] uppercase tracking-wide group-hover:text-sky-400 transition-colors mb-0.5 line-clamp-1">AI LEXCENTRA</h3>
+                                                    <h3 className="font-bold text-white text-[12px] md:text-[14px] uppercase group-hover:text-sky-400 transition-colors mb-0.5 line-clamp-1">AI LEXCENTRA</h3>
                                                     <p className="text-[11px] text-gray-300 leading-snug line-clamp-2">Phân tích rủi ro pháp lý, rà soát tính đồng bộ, mâu thuẫn và đề xuất phương án.</p>
                                                 </div>
 
@@ -606,7 +606,7 @@ const Hero = ({ isV2 = false }) => {
                 >
                     <ChevronLeft size={16} className="text-amber-400 animate-pulse group-hover/restore:-translate-x-0.5 transition-transform" />
                     <span
-                        className="text-[10px] uppercase tracking-wider font-extrabold text-amber-400 select-none mt-1 font-sans"
+                        className="text-[10px] uppercase font-bold text-amber-400 select-none mt-1 font-sans"
                         style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
                     >
                         Hiện Tiêu điểm & Hỏi đáp
@@ -616,7 +616,7 @@ const Hero = ({ isV2 = false }) => {
 
             {/* Scroll indicator animation */}
             <div className={`absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center transition-opacity duration-1000 delay-[1200ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-                <span className="text-white/60 text-[10px] tracking-widest uppercase mb-1.5">Khám phá</span>
+                <span className="text-white/60 text-[10px] uppercase mb-1.5">Khám phá</span>
                 <div className="w-5 h-8 border-2 border-white/40 rounded-full flex justify-center p-1">
                     <div className="w-1 h-2 bg-white rounded-full animate-bounce"></div>
                 </div>

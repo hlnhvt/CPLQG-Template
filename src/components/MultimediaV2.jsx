@@ -123,24 +123,23 @@ const MultimediaV2 = () => {
                 {/* 1. Thanh Tiêu Đề Trên Cùng (Header Row) */}
                 <div className="flex items-center justify-between border-b border-white/10 pb-3.5 mb-8">
                     <div className="flex items-center gap-2.5">
-
-                        <h2 className="text-xl md:text-2xl font-black tracking-tight text-white uppercase">
+                        <h2 className="text-xl md:text-2xl font-bold tracking-tight text-white uppercase">
                             Multimedia
                         </h2>
                     </div>
                     {/* Danh mục con liên kết bên phải */}
-                    <div className="flex items-center gap-3 md:gap-4 text-[13px] md:text-[14px] font-bold text-white">
-                        <Link to="/video" className="group flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 shadow-lg hover:shadow-blue-500/20">
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-blue-600 to-blue-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-inner">
-                                <Play size={12} className="text-white fill-white ml-0.5" />
+                    <div className="flex items-center gap-3 md:gap-4 text-xs font-semibold text-white">
+                        <Link to="/video" className="group flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 border border-white/10 hover:bg-white/20 hover:border-white/30 transition-all duration-250 shadow-md">
+                            <div className="w-5 h-5 rounded-md bg-blue-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                <Play size={10} className="text-white fill-white ml-0.5" />
                             </div>
-                            <span className="tracking-wide">Video</span>
+                            <span className="text-white">Video</span>
                         </Link>
-                        <Link to="/infographic" className="group flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 shadow-lg hover:shadow-cyan-500/20">
-                            <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-cyan-600 to-cyan-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-inner">
-                                <FileText size={12} className="text-white" />
+                        <Link to="/infographic" className="group flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 border border-white/10 hover:bg-white/20 hover:border-white/30 transition-all duration-250 shadow-md">
+                            <div className="w-5 h-5 rounded-md bg-cyan-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                <FileText size={10} className="text-white" />
                             </div>
-                            <span className="tracking-wide">Infographic</span>
+                            <span className="text-white">Infographic</span>
                         </Link>
                     </div>
                 </div>

@@ -55,6 +55,10 @@ const PoliciesAndLifeV2 = ({ isHalfWidth = false }) => {
                     <h2 className="text-2xl md:text-3xl font-bold text-[#0f4c81] tracking-tight leading-tight">
                         Chính sách &amp; Cuộc sống
                     </h2>
+                    <Link to="/tin-tuc/chinh-sach-cuoc-song" className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-100 hover:border-blue-200 text-[#0f4c81] text-xs font-semibold rounded-lg transition-all duration-200 shadow-sm active:scale-95">
+                        <span>Xem tất cả</span>
+                        <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
                 </div>
 
                 {/* 3 Pseudo-Tabs */}
@@ -88,7 +92,7 @@ const PoliciesAndLifeV2 = ({ isHalfWidth = false }) => {
                             alt={featured.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
-                        <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-[#0f4c81] text-white text-[10px] font-bold uppercase tracking-wider">
+                        <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-[#0f4c81] text-white text-[10px] font-bold uppercase">
                             Tiêu điểm
                         </div>
                     </div>
@@ -170,7 +174,7 @@ const PoliciesAndLifeV2 = ({ isHalfWidth = false }) => {
                 <Link to={`/news/${featured.id}`} className="group lg:w-[45%] flex flex-col shrink-0">
                     <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-200 mb-4">
                         <img src={featured.image} alt={featured.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-[#0f4c81] text-white text-[11px] font-bold uppercase tracking-wider">Tiêu điểm</div>
+                        <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-[#0f4c81] text-white text-[11px] font-bold uppercase">Tiêu điểm</div>
                     </div>
                     <h3 className="font-bold text-[#0f4c81] text-lg md:text-xl leading-snug group-hover:text-blue-700 transition-colors line-clamp-2 mb-2">{featured.title}</h3>
                     {featured.sapo && <p className="text-slate-500 text-sm leading-relaxed line-clamp-3 mb-3">{featured.sapo}</p>}

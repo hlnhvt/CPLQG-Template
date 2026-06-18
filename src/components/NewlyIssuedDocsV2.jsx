@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Download, Mail, Eye, MessageSquare, ChevronRight, FileText } from 'lucide-react';
+import { Download, Mail, Eye, MessageSquare, ChevronRight, FileText, ArrowRight } from 'lucide-react';
 
 const NewlyIssuedDocsV2 = () => {
 
@@ -79,9 +79,10 @@ const NewlyIssuedDocsV2 = () => {
                         </ul>
 
                         {/* Footer link */}
-                        <div className="border-t border-gray-100 px-6 py-3 shrink-0 bg-white flex justify-end">
-                            <Link to="/van-ban/moi-ban-hanh" className="text-[13px] font-semibold text-[#1e3a8a] hover:text-blue-600 flex items-center gap-1 transition-colors">
-                                Xem tất cả <ChevronRight size={14} />
+                        <div className="border-t border-gray-100 px-6 py-3.5 shrink-0 bg-slate-50/50 flex justify-end">
+                            <Link to="/van-ban/moi-ban-hanh" className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-100 hover:border-blue-200 text-[#1e3a8a] hover:text-blue-700 text-xs font-semibold rounded-lg transition-all duration-200 shadow-sm hover:shadow active:scale-95">
+                                <span>Xem tất cả</span>
+                                <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
                             </Link>
                         </div>
                     </div>
@@ -185,9 +186,10 @@ const NewlyIssuedDocsV2 = () => {
                         </div>
                     ))}
                 </ul>
-                <div className="flex justify-end px-6 py-3 border-t border-gray-100 bg-slate-50/80">
-                    <Link to="/du-thao" className="text-[13px] font-semibold text-[#155a8a] hover:text-blue-700 flex items-center gap-1 transition-colors">
-                        Xem tất cả <ChevronRight size={14} />
+                <div className="flex justify-end px-6 py-3.5 border-t border-gray-100 bg-slate-50/80">
+                    <Link to="/du-thao" className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-100 hover:border-blue-200 text-[#155a8a] hover:text-blue-700 text-xs font-semibold rounded-lg transition-all duration-200 shadow-sm hover:shadow active:scale-95">
+                        <span>Xem tất cả</span>
+                        <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
                     </Link>
                 </div>
             </div>

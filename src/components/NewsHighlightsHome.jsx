@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock } from 'lucide-react';
+import { Clock, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Image16x9 = ({ src, alt, className = "" }) => (
@@ -13,7 +13,13 @@ const NewsHighlightsHome = () => {
         <section className="pt-8 pb-2">
             <div className="container mx-auto px-4 max-w-[1504px]">
                 <div className="mb-6">
-                    <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 inline-block pb-2 pr-8 mb-6">Tin tức nổi bật</h2>
+                    <div className="flex justify-between items-center border-b border-slate-200 pb-2 mb-6">
+                        <h2 className="text-2xl font-bold text-[#0f4c81] leading-tight">Tin tức nổi bật</h2>
+                        <Link to="/tin-tuc/noi-bat" className="group inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 border border-blue-100 hover:border-blue-200 text-[#0f4c81] text-xs font-semibold rounded-lg transition-all duration-200 shadow-sm active:scale-95">
+                            <span>Xem tất cả</span>
+                            <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                        </Link>
+                    </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                         {/* Cột Trái (3 tin nhỏ) */}

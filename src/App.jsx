@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import HomePageV2 from './pages/HomePageV2';
+import HomePageV3 from './pages/HomePageV3';
 import UserDashboardLayout from './layouts/UserDashboardLayout';
 import ProfilePage from './pages/dashboard/ProfilePage';
 import CollectionsPage from './pages/dashboard/CollectionsPage';
@@ -171,6 +172,7 @@ const AppLayout = () => {
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/trang-chu-v2" element={<HomePageV2 />} />
+                    <Route path="/trang-chu-v3" element={<HomePageV3 />} />
                     <Route path="/ho-tro-phap-ly-doanh-nghiep/*" element={<HoTroPhapLyDoanhNghiepPage />} />
                     <Route path="/pho-bien-giao-duc" element={<PhoBienGiaoDucPhapLuatPage />} />
                     <Route path="/pho-bien-giao-duc-backup" element={<PhoBienGiaoDucPhapLuatPageBackup />} />

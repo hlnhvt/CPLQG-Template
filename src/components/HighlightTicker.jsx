@@ -8,6 +8,7 @@ const tickerItems = [
         type: 'news',
         typeName: 'Tin tức',
         title: 'Đẩy mạnh chuyển đổi số quốc gia, đặt công tác an ninh trật tự lên hàng đầu trong kỷ nguyên mới',
+        thumbnail: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=100&q=80',
         link: '/news/1'
     },
     {
@@ -29,6 +30,7 @@ const tickerItems = [
         type: 'news',
         typeName: 'Tin tức',
         title: 'Bộ Tư pháp đề xuất giải pháp tháo gỡ khó khăn về mặt pháp lý cho cộng đồng doanh nghiệp',
+        thumbnail: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=100&q=80',
         link: '/news/2'
     },
     {
@@ -47,7 +49,7 @@ const tickerItems = [
     }
 ];
 
-const HighlightTicker = () => {
+const HighlightTicker = ({ isV3 }) => {
     const [isVisible, setIsVisible] = useState(true);
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -90,7 +92,7 @@ const HighlightTicker = () => {
     const activeItem = tickerItems[activeIndex];
 
     return (
-        <div className="w-full bg-gradient-to-r from-[#0f0785] via-[#4c65b9] to-[#0f0785] border-b border-blue-700/50 text-white min-h-[40px] md:min-h-[44px] relative z-40 select-none shadow-[0_2px_15px_rgba(0,100,255,0.15)]">
+        <div className={`w-full ${isV3 ? 'bg-gradient-to-r from-[#ce8aa3] via-[#bc663d] to-[#ce8aa3] border-b border-[#ce8aa3]/30' : 'bg-gradient-to-r from-[#0f0785] via-[#4c65b9] to-[#0f0785] border-b border-blue-700/50'} text-white min-h-[40px] md:min-h-[44px] relative z-40 select-none shadow-[0_2px_15px_rgba(0,100,255,0.15)]`}>
             <style>{`
                 .ticker-item-enter {
                     animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -115,7 +117,7 @@ const HighlightTicker = () => {
                             to={activeItem.link}
                             className="flex items-center gap-3.5 text-[11px] md:text-[13px] hover:text-amber-400 transition-colors duration-200 group"
                         >
-                            <span className={`px-2 py-0.5 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-wide shrink-0 ${getBadgeStyle(activeItem.type)}`}>
+                            <span className={`px-2 py-0.5 rounded-full text-[9px] md:text-[10px] font-bold uppercase shrink-0 ${getBadgeStyle(activeItem.type)}`}>
                                 {activeItem.typeName}
                             </span>
                             <span className="text-gray-100 group-hover:text-amber-300 font-medium transition-colors">
