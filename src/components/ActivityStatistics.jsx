@@ -89,15 +89,15 @@ const ActivityStatistics = () => {
     };
 
     return (
-        <div className="w-full h-full p-6 bg-slate-50/95 backdrop-blur-md overflow-y-auto custom-scrollbar relative z-10 sm:rounded-b-2xl flex flex-col gap-6">
+        <div className="w-full h-full p-6 bg-transparent overflow-y-auto custom-scrollbar relative z-10 sm:rounded-b-2xl flex flex-col gap-6">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div>
                         <div className="flex items-center gap-2 mb-2">
-                            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                            <span className="text-emerald-600 font-bold text-sm tracking-wide uppercase">Cập nhật theo thời gian thực</span>
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                            <span className="text-emerald-400 font-bold text-sm tracking-wide uppercase">Cập nhật theo thời gian thực</span>
                         </div>
-                        <h2 className="text-2xl font-black text-[#1a365d] tracking-tight">Thống kê hoạt động trực tuyến</h2>
-                        <p className="text-gray-500 mt-1 text-[13px] font-medium">Theo dõi các chỉ số tương tác và lưu lượng hệ thống</p>
+                        <h2 className="text-2xl font-black text-white tracking-tight">Thống kê hoạt động trực tuyến</h2>
+                        <p className="text-white/60 mt-1 text-[13px] font-medium">Theo dõi các chỉ số tương tác và lưu lượng hệ thống</p>
                     </div>
                 </div>
 
@@ -119,39 +119,39 @@ const ActivityStatistics = () => {
                             colorClass="bg-gradient-to-br from-blue-500 to-indigo-600" 
                         />
                         <div className="grid grid-cols-2 gap-5">
-                            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex flex-col items-center justify-center text-center group hover:bg-white hover:shadow-md transition-all duration-300">
-                                <div className="w-10 h-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                            <div className="bg-white/5 p-4 rounded-2xl border border-white/10 flex flex-col items-center justify-center text-center group hover:bg-white/10 transition-all duration-300">
+                                <div className="w-10 h-10 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform border border-orange-500/20">
                                     <MessageSquare size={20} />
                                 </div>
-                                <h4 className="text-xl font-black text-slate-800">1,204</h4>
-                                <p className="text-[11px] text-slate-500 font-bold uppercase mt-1">Chủ đề thảo luận</p>
+                                <h4 className="text-xl font-black text-white">1,204</h4>
+                                <p className="text-[11px] text-white/50 font-bold uppercase mt-1">Chủ đề thảo luận</p>
                             </div>
-                            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 flex flex-col items-center justify-center text-center group hover:bg-white hover:shadow-md transition-all duration-300">
-                                <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                            <div className="bg-white/5 p-4 rounded-2xl border border-white/10 flex flex-col items-center justify-center text-center group hover:bg-white/10 transition-all duration-300">
+                                <div className="w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform border border-purple-500/20">
                                     <Activity size={20} />
                                 </div>
-                                <h4 className="text-xl font-black text-slate-800">8,912</h4>
-                                <p className="text-[11px] text-slate-500 font-bold uppercase mt-1">Lượt tương tác</p>
+                                <h4 className="text-xl font-black text-white">8,912</h4>
+                                <p className="text-[11px] text-white/50 font-bold uppercase mt-1">Lượt tương tác</p>
                             </div>
                         </div>
                     </div>
 
                     {/* Right side: Chart */}
-                    <div className="col-span-1 lg:col-span-8 bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
+                    <div className="col-span-1 lg:col-span-8 bg-white/5 border border-white/10 rounded-3xl p-6 shadow-sm">
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                            <h3 className="text-lg font-bold text-slate-800">Lưu lượng tương tác 7 ngày qua</h3>
+                            <h3 className="text-lg font-bold text-white">Lưu lượng tương tác 7 ngày qua</h3>
                             <div className="flex gap-4">
                                 <div className="flex items-center gap-2">
                                     <div className="w-3 h-3 rounded-full bg-[#818cf8]"></div>
-                                    <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">Diễn đàn</span>
+                                    <span className="text-xs font-bold text-white/60 uppercase tracking-wide">Diễn đàn</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <div className="w-3 h-3 rounded-full bg-[#3b82f6]"></div>
-                                    <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">Hỏi đáp</span>
+                                    <span className="text-xs font-bold text-white/60 uppercase tracking-wide">Hỏi đáp</span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <div className="w-3 h-3 rounded-full bg-[#fbbf24]"></div>
-                                    <span className="text-xs font-bold text-gray-500 uppercase tracking-wide">Hiến kế</span>
+                                    <span className="text-xs font-bold text-white/60 uppercase tracking-wide">Hiến kế</span>
                                 </div>
                             </div>
                         </div>
@@ -172,18 +172,18 @@ const ActivityStatistics = () => {
                                             <stop offset="95%" stopColor="#fbbf24" stopOpacity={0}/>
                                         </linearGradient>
                                     </defs>
-                                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff15" />
                                     <XAxis 
                                         dataKey="name" 
                                         axisLine={false} 
                                         tickLine={false} 
-                                        tick={{ fill: '#94a3b8', fontSize: 12, fontWeight: 600 }}
+                                        tick={{ fill: '#cbd5e1', fontSize: 12, fontWeight: 600 }}
                                         dy={10}
                                     />
                                     <YAxis 
                                         axisLine={false} 
                                         tickLine={false} 
-                                        tick={{ fill: '#94a3b8', fontSize: 12, fontWeight: 600 }}
+                                        tick={{ fill: '#cbd5e1', fontSize: 12, fontWeight: 600 }}
                                     />
                                     <Tooltip content={<CustomTooltip />} />
                                     <Area type="monotone" dataKey="forum" stroke="#818cf8" strokeWidth={3} fillOpacity={1} fill="url(#colorForum)" />

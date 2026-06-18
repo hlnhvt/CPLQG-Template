@@ -13,7 +13,7 @@ const DOCK_ITEMS = [
     { id: 'qa', label: 'Hỏi đáp pháp luật', icon: Shield, path: '/cau-hoi-phap-luat' },
     { id: 'tieudiem', label: 'Tiêu điểm', icon: Sparkles, path: '/tin-tuc/noi-bat' },
     { id: 'forum', label: 'Diễn đàn thảo luận', icon: MessageSquare, path: '/dien-dan' },
-    { id: 'hienke', label: 'Hiến kế quốc gia', icon: Lightbulb, path: '/hien-ke' },
+    { id: 'hienke', label: 'Hiến kế', icon: Lightbulb, path: '/hien-ke' },
     { id: 'notebook', label: 'Sổ tay pháp luật', icon: BookOpen, path: '/ca-nhan/bo-suu-tap' },
     { id: 'user-history', label: 'Lịch sử cá nhân', icon: History, path: '/ca-nhan/lich-su' },
     { id: 'stats', label: 'Thống kê', icon: TrendingUp, path: null }
@@ -188,7 +188,7 @@ const POPUP_CONTENTS = {
         mainPath: "/dien-dan"
     },
     hienke: {
-        title: "Cổng Hiến kế quốc gia",
+        title: "Hiến kế",
         listTitle: "Hiến kế & Sáng kiến tiêu biểu",
         items: [
             {
@@ -224,7 +224,7 @@ const POPUP_CONTENTS = {
             { label: "Hiến kế nổi bật", path: "/hien-ke/doi-song" },
             { label: "Quy trình xử lý", path: "/hien-ke/quy-trinh" }
         ],
-        mainLabel: "Vào Cổng Hiến kế quốc gia",
+        mainLabel: "Vào trang Hiến kế",
         mainPath: "/hien-ke"
     },
     notebook: {
@@ -402,7 +402,7 @@ const InteractiveDock = () => {
 
                 {/* Popover Window (Modern Dark Glassmorphism) */}
                 {activeTab && currentChat && (
-                    <div className={`w-[92vw] sm:w-[540px] md:w-[680px] ${activeTab === 'stats' ? 'lg:w-[1024px] xl:w-[1200px]' : ''} bg-gradient-to-br from-[#162e55]/95 via-[#102444]/95 to-[#0b172e]/98 backdrop-blur-xl border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.55)] flex flex-col overflow-hidden mb-4 animate-popIn text-white relative rounded-2xl`}>
+                    <div className={`w-[92vw] sm:w-[640px] md:w-[768px] ${activeTab === 'stats' ? 'lg:w-[1024px] xl:w-[1200px]' : 'lg:w-[900px] xl:w-[960px]'} bg-gradient-to-br from-[#162e55]/95 via-[#102444]/95 to-[#0b172e]/98 backdrop-blur-xl border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.55)] flex flex-col overflow-hidden mb-4 animate-popIn text-white relative rounded-2xl`}>
                         {/* Glowing decorative blur lines */}
                         <div className="absolute -inset-px bg-gradient-to-r from-sky-500/20 via-indigo-500/10 to-amber-500/15 pointer-events-none -z-10"></div>
                         <div className="absolute -top-16 -left-16 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
@@ -436,137 +436,137 @@ const InteractiveDock = () => {
 
                         {/* Content Panel */}
                         {activeTab === 'stats' ? (
-                            <div className="w-full bg-slate-50/95 sm:rounded-b-2xl h-[480px]">
+                            <div className="w-full bg-[#314568f2] sm:rounded-b-2xl min-h-[580px]">
                                 <ActivityStatistics />
                             </div>
                         ) : (
                             <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-white/10 bg-black/10 min-h-[440px]">
                                 {activeTab === 'qa' ? (
-                                <>
-                                    {/* Left Column for QA: Outstanding List (70%) */}
-                                    <div className="w-full sm:w-[70%] p-6 flex flex-col gap-4 min-w-0 bg-[#314568f2] sm:rounded-bl-2xl">
-                                        <div className="text-[11px] font-semibold text-white/50 uppercase flex items-center justify-between">
-                                            <span>{currentChat.listTitle}</span>
-                                            <span className="text-[10px] text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded-full border border-blue-500/30 font-bold">Quan tâm nhiều</span>
-                                        </div>
+                                    <>
+                                        {/* Left Column for QA: Outstanding List (70%) */}
+                                        <div className="w-full sm:w-[70%] p-6 flex flex-col gap-4 min-w-0 bg-[#314568f2] sm:rounded-bl-2xl">
+                                            <div className="text-[11px] font-semibold text-white/50 uppercase flex items-center justify-between">
+                                                <span>{currentChat.listTitle}</span>
+                                                <span className="text-[10px] text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded-full border border-blue-500/30 font-bold">Quan tâm nhiều</span>
+                                            </div>
 
-                                        <div className="flex flex-col gap-3.5 overflow-y-auto custom-scrollbar pr-2">
-                                            {currentChat.items.map((item, idx) => (
-                                                <div
-                                                    key={idx}
-                                                    onClick={() => {
-                                                        setActiveTab(null);
-                                                        navigate(item.path);
-                                                    }}
-                                                    className="flex items-start gap-4 p-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer group min-w-0"
-                                                >
-                                                    <div className="w-10 h-10 rounded-xl bg-white/5 group-hover:bg-blue-600 group-hover:text-white text-blue-300 flex items-center justify-center shrink-0 transition-all duration-200 mt-0.5">
-                                                        <item.icon size={18} />
-                                                    </div>
-                                                    <div className="flex-grow min-w-0">
-                                                        <h4 className="text-[13px] font-bold text-white/95 group-hover:text-amber-300 transition-colors line-clamp-1 leading-snug">
-                                                            {item.title}
-                                                        </h4>
-                                                        <div className="flex flex-wrap items-center gap-2 mt-1.5 text-[10.5px] text-white/40">
-                                                            {item.meta.map((m, mIdx) => (
-                                                                <span key={mIdx} className="flex items-center gap-1.5">
-                                                                    {mIdx > 0 && <span className="text-white/20">•</span>}
-                                                                    {m}
-                                                                </span>
-                                                            ))}
+                                            <div className="flex flex-col gap-3.5 overflow-y-auto custom-scrollbar pr-2">
+                                                {currentChat.items.map((item, idx) => (
+                                                    <div
+                                                        key={idx}
+                                                        onClick={() => {
+                                                            setActiveTab(null);
+                                                            navigate(item.path);
+                                                        }}
+                                                        className="flex items-start gap-4 p-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer group min-w-0"
+                                                    >
+                                                        <div className="w-10 h-10 rounded-xl bg-white/5 group-hover:bg-blue-600 group-hover:text-white text-blue-300 flex items-center justify-center shrink-0 transition-all duration-200 mt-0.5">
+                                                            <item.icon size={18} />
                                                         </div>
-                                                    </div>
-                                                    <ChevronRight size={13} className="text-white/30 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all mt-2.5 shrink-0" />
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Right Column for QA: Vivid Banner (30%) */}
-                                    <div className="w-full sm:w-[30%] p-6 flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-blue-600/80 to-indigo-800/80 sm:rounded-br-2xl border-l border-white/5 relative overflow-hidden group shrink-0">
-                                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500 transform translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-                                        <div className="absolute bottom-0 left-0 w-24 h-24 bg-amber-400/10 rounded-full blur-xl pointer-events-none"></div>
-
-                                        <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-2 shadow-lg backdrop-blur-sm border border-white/20 group-hover:scale-110 transition-transform duration-300 relative z-10">
-                                            <HelpCircle size={32} className="text-amber-300" />
-                                        </div>
-                                        <h3 className="text-[16px] font-bold text-white text-center leading-tight relative z-10">
-                                            Bạn có vướng mắc pháp lý?
-                                        </h3>
-                                        <p className="text-[12px] text-blue-100 text-center mb-4 relative z-10">
-                                            Chuyên gia và luật sư của chúng tôi luôn sẵn sàng hỗ trợ giải đáp.
-                                        </p>
-                                        <button
-                                            onClick={() => setIsCreateCauHoiModalOpen(true)}
-                                            className="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-900 text-[13px] font-bold rounded-xl shadow-lg hover:shadow-amber-500/30 flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98] mt-auto relative z-10"
-                                        >
-                                            <MessageSquare size={16} />
-                                            <span>Đặt câu hỏi</span>
-                                        </button>
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    {/* Normal Left Column: Quick Links & Actions */}
-                                    <div className="w-full sm:w-[220px] p-6 flex flex-col gap-4 shrink-0 bg-white/[0.02]">
-                                        <div className="text-[11px] font-semibold text-white/50 uppercase">Lựa chọn nhanh</div>
-                                        <div className="flex flex-col gap-2.5">
-                                            {currentChat.links.map((link, i) => (
-                                                <button
-                                                    key={i}
-                                                    onClick={() => {
-                                                        setActiveTab(null);
-                                                        navigate(link.path);
-                                                    }}
-                                                    className="w-full text-left px-3.5 py-2 hover:bg-white/10 text-white/80 hover:text-white text-[12.5px] font-medium rounded-lg transition-all duration-200 flex items-center gap-2 group/link"
-                                                >
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 opacity-60 group-hover/link:opacity-100 group-hover/link:bg-amber-300 transition-colors shrink-0" />
-                                                    <span>{link.label}</span>
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Normal Right Column: Outstanding List */}
-                                    <div className="flex-grow p-6 flex flex-col gap-4 min-w-0 bg-[#314568f2] sm:rounded-r-2xl border-l border-white/5 shadow-inner">
-                                        <div className="text-[11px] font-semibold text-white/50 uppercase flex items-center justify-between">
-                                            <span>{currentChat.listTitle}</span>
-                                            <span className="text-[10px] text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded-full border border-blue-500/30 font-bold">Nổi bật</span>
-                                        </div>
-
-                                        <div className="flex flex-col gap-3.5 overflow-y-auto custom-scrollbar pr-2">
-                                            {currentChat.items.map((item, idx) => (
-                                                <div
-                                                    key={idx}
-                                                    onClick={() => {
-                                                        setActiveTab(null);
-                                                        navigate(item.path);
-                                                    }}
-                                                    className="flex items-start gap-4 p-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer group min-w-0"
-                                                >
-                                                    <div className="w-10 h-10 rounded-xl bg-white/5 group-hover:bg-blue-600 group-hover:text-white text-blue-300 flex items-center justify-center shrink-0 transition-all duration-200 mt-0.5">
-                                                        <item.icon size={18} />
-                                                    </div>
-                                                    <div className="flex-grow min-w-0">
-                                                        <h4 className="text-[13px] font-bold text-white/95 group-hover:text-amber-300 transition-colors line-clamp-1 leading-snug">
-                                                            {item.title}
-                                                        </h4>
-                                                        <div className="flex flex-wrap items-center gap-2 mt-1.5 text-[10.5px] text-white/40">
-                                                            {item.meta.map((m, mIdx) => (
-                                                                <span key={mIdx} className="flex items-center gap-1.5">
-                                                                    {mIdx > 0 && <span className="text-white/20">•</span>}
-                                                                    {m}
-                                                                </span>
-                                                            ))}
+                                                        <div className="flex-grow min-w-0">
+                                                            <h4 className="text-[13px] font-bold text-white/95 group-hover:text-amber-300 transition-colors line-clamp-1 leading-snug">
+                                                                {item.title}
+                                                            </h4>
+                                                            <div className="flex flex-wrap items-center gap-2 mt-1.5 text-[10.5px] text-white/40">
+                                                                {item.meta.map((m, mIdx) => (
+                                                                    <span key={mIdx} className="flex items-center gap-1.5">
+                                                                        {mIdx > 0 && <span className="text-white/20">•</span>}
+                                                                        {m}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
                                                         </div>
+                                                        <ChevronRight size={13} className="text-white/30 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all mt-2.5 shrink-0" />
                                                     </div>
-                                                    <ChevronRight size={13} className="text-white/30 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all mt-2.5 shrink-0" />
-                                                </div>
-                                            ))}
+                                                ))}
+                                            </div>
                                         </div>
-                                    </div>
-                                </>
-                            )}
+
+                                        {/* Right Column for QA: Vivid Banner (30%) */}
+                                        <div className="w-full sm:w-[30%] p-6 flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-blue-600/80 to-indigo-800/80 sm:rounded-br-2xl border-l border-white/5 relative overflow-hidden group shrink-0">
+                                            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500 transform translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+                                            <div className="absolute bottom-0 left-0 w-24 h-24 bg-amber-400/10 rounded-full blur-xl pointer-events-none"></div>
+
+                                            <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-2 shadow-lg backdrop-blur-sm border border-white/20 group-hover:scale-110 transition-transform duration-300 relative z-10">
+                                                <HelpCircle size={32} className="text-amber-300" />
+                                            </div>
+                                            <h3 className="text-[16px] font-bold text-white text-center leading-tight relative z-10">
+                                                Bạn có vướng mắc pháp lý?
+                                            </h3>
+                                            <p className="text-[12px] text-blue-100 text-center mb-4 relative z-10">
+                                                Chuyên gia và luật sư của chúng tôi luôn sẵn sàng hỗ trợ giải đáp.
+                                            </p>
+                                            <button
+                                                onClick={() => setIsCreateCauHoiModalOpen(true)}
+                                                className="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-900 text-[13px] font-bold rounded-xl shadow-lg hover:shadow-amber-500/30 flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98] mt-auto relative z-10"
+                                            >
+                                                <MessageSquare size={16} />
+                                                <span>Đặt câu hỏi</span>
+                                            </button>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        {/* Normal Left Column: Quick Links & Actions */}
+                                        <div className="w-full sm:w-[220px] p-6 flex flex-col gap-4 shrink-0 bg-white/[0.02]">
+                                            <div className="text-[11px] font-semibold text-white/50 uppercase">Lựa chọn nhanh</div>
+                                            <div className="flex flex-col gap-2.5">
+                                                {currentChat.links.map((link, i) => (
+                                                    <button
+                                                        key={i}
+                                                        onClick={() => {
+                                                            setActiveTab(null);
+                                                            navigate(link.path);
+                                                        }}
+                                                        className="w-full text-left px-3.5 py-2 hover:bg-white/10 text-white/80 hover:text-white text-[12.5px] font-medium rounded-lg transition-all duration-200 flex items-center gap-2 group/link"
+                                                    >
+                                                        <span className="w-1.5 h-1.5 rounded-full bg-blue-400 opacity-60 group-hover/link:opacity-100 group-hover/link:bg-amber-300 transition-colors shrink-0" />
+                                                        <span>{link.label}</span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        {/* Normal Right Column: Outstanding List */}
+                                        <div className="flex-grow p-6 flex flex-col gap-4 min-w-0 bg-[#314568f2] sm:rounded-r-2xl border-l border-white/5 shadow-inner">
+                                            <div className="text-[11px] font-semibold text-white/50 uppercase flex items-center justify-between">
+                                                <span>{currentChat.listTitle}</span>
+                                                <span className="text-[10px] text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded-full border border-blue-500/30 font-bold">Nổi bật</span>
+                                            </div>
+
+                                            <div className="flex flex-col gap-3.5 overflow-y-auto custom-scrollbar pr-2">
+                                                {currentChat.items.map((item, idx) => (
+                                                    <div
+                                                        key={idx}
+                                                        onClick={() => {
+                                                            setActiveTab(null);
+                                                            navigate(item.path);
+                                                        }}
+                                                        className="flex items-start gap-4 p-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer group min-w-0"
+                                                    >
+                                                        <div className="w-10 h-10 rounded-xl bg-white/5 group-hover:bg-blue-600 group-hover:text-white text-blue-300 flex items-center justify-center shrink-0 transition-all duration-200 mt-0.5">
+                                                            <item.icon size={18} />
+                                                        </div>
+                                                        <div className="flex-grow min-w-0">
+                                                            <h4 className="text-[13px] font-bold text-white/95 group-hover:text-amber-300 transition-colors line-clamp-1 leading-snug">
+                                                                {item.title}
+                                                            </h4>
+                                                            <div className="flex flex-wrap items-center gap-2 mt-1.5 text-[10.5px] text-white/40">
+                                                                {item.meta.map((m, mIdx) => (
+                                                                    <span key={mIdx} className="flex items-center gap-1.5">
+                                                                        {mIdx > 0 && <span className="text-white/20">•</span>}
+                                                                        {m}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                        <ChevronRight size={13} className="text-white/30 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all mt-2.5 shrink-0" />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         )}
                     </div>
@@ -591,7 +591,7 @@ const InteractiveDock = () => {
                     {DOCK_ITEMS.map((item) => {
                         const Icon = item.icon;
                         const isSelected = activeTab === item.id;
-                        const isActive = location.pathname === item.path || isSelected;
+                        const isActive = activeTab ? isSelected : (location.pathname === item.path && item.action !== 'scroll');
 
                         return (
                             <div key={item.id} className="relative group/item flex flex-col items-center">
