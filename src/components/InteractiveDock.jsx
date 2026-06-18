@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, FileText, Shield, Share2, Crown, Trophy, LogIn, LogOut, X, MessageSquare, Clock, Eye, User, ChevronRight, HelpCircle, Lightbulb, History, ArrowRight, BookOpen, Sparkles } from 'lucide-react';
+import { Home, FileText, Shield, Share2, Crown, Trophy, LogIn, LogOut, X, MessageSquare, Clock, Eye, User, ChevronRight, HelpCircle, Lightbulb, History, ArrowRight, BookOpen, Sparkles, ExternalLink } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import CreateCauHoiModal from '../pages/cau-hoi-phap-luat/CreateCauHoiModal';
 
 const DOCK_ITEMS = [
     { id: 'home', label: 'Trang chủ', icon: Home, path: '/trang-chu-v3' },
@@ -315,6 +316,7 @@ const InteractiveDock = () => {
 
     const [activeTab, setActiveTab] = useState(null); // active tab ID
     const [showWelcome, setShowWelcome] = useState(false);
+    const [isCreateCauHoiModalOpen, setIsCreateCauHoiModalOpen] = useState(false);
 
     useEffect(() => {
         // Slide open after a brief delay
@@ -363,14 +365,14 @@ const InteractiveDock = () => {
         <>
             {/* Click Outside Backdrop */}
             {activeTab && (
-                <div 
-                    className="fixed inset-0 z-[90] bg-transparent" 
+                <div
+                    className="fixed inset-0 z-[90] bg-transparent"
                     onClick={() => setActiveTab(null)}
                 />
             )}
 
             <div className="fixed bottom-[32px] left-1/2 -translate-x-1/2 z-[100] animate-slideUp flex flex-col items-center">
-                
+
                 {/* Popover Window (Modern Dark Glassmorphism) */}
                 {activeTab && currentChat && (
                     <div className="w-[92vw] sm:w-[540px] md:w-[680px] bg-gradient-to-br from-[#162e55]/95 via-[#102444]/95 to-[#0b172e]/98 backdrop-blur-xl border border-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.55)] flex flex-col overflow-hidden mb-4 animate-popIn text-white relative rounded-2xl">
@@ -379,92 +381,160 @@ const InteractiveDock = () => {
                         <div className="absolute -top-16 -left-16 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
 
                         {/* Header */}
-                        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 bg-transparent shrink-0">
+                        <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 bg-transparent shrink-0">
                             <div className="flex items-center gap-2.5">
                                 <NationalEmblem />
                                 <span className="font-bold text-white text-[15px] md:text-[16px] tracking-tight">{currentChat.title}</span>
                             </div>
-                            <button 
-                                onClick={() => setActiveTab(null)}
-                                className="text-white/60 hover:text-white transition-colors p-1.5 rounded-full hover:bg-white/10"
-                            >
-                                <X size={18} />
-                            </button>
+                            <div className="flex items-center gap-1.5">
+                                <button
+                                    onClick={() => {
+                                        window.open(currentChat.mainPath, '_blank');
+                                        setActiveTab(null);
+                                    }}
+                                    title="Mở trong tab mới"
+                                    className="text-white/60 hover:text-white transition-colors p-1.5 rounded-full hover:bg-white/10"
+                                >
+                                    <ExternalLink size={16} />
+                                </button>
+                                <button
+                                    onClick={() => setActiveTab(null)}
+                                    title="Đóng"
+                                    className="text-white/60 hover:text-white transition-colors p-1.5 rounded-full hover:bg-white/10"
+                                >
+                                    <X size={18} />
+                                </button>
+                            </div>
                         </div>
 
-                        {/* Content Panel - Two Column Layout */}
-                        <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-white/10 bg-black/10">
-                            
-                            {/* Left Column: Quick Links & Actions */}
-                            <div className="w-full sm:w-[220px] p-5 flex flex-col gap-3 shrink-0 bg-white/[0.02]">
-                                <div className="text-[11px] font-semibold text-white/50 uppercase">Lựa chọn nhanh</div>
-                                <div className="flex flex-col gap-2">
-                                    {currentChat.links.map((link, i) => (
-                                        <button
-                                            key={i}
-                                            onClick={() => {
-                                                setActiveTab(null);
-                                                navigate(link.path);
-                                            }}
-                                            className="w-full text-left px-3.5 py-2 bg-white/5 hover:bg-white/15 border border-white/10 hover:border-white/20 text-white/90 hover:text-white text-[12.5px] font-semibold rounded-xl transition-all duration-200 shadow-sm hover:translate-x-0.5"
-                                        >
-                                            {link.label}
-                                        </button>
-                                    ))}
-                                </div>
-                                
-                                <div className="mt-auto pt-3">
-                                    <button
-                                        onClick={() => {
-                                            setActiveTab(null);
-                                            navigate(currentChat.mainPath);
-                                        }}
-                                        className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-[12.5px] font-bold rounded-xl shadow-md shadow-blue-500/10 flex items-center justify-center gap-1.5 transition-all duration-200 hover:scale-[1.02]"
-                                    >
-                                        <span>{currentChat.mainLabel}</span>
-                                        <ArrowRight size={14} />
-                                    </button>
-                                </div>
-                            </div>
-
-                            {/* Right Column: Outstanding List */}
-                            <div className="flex-grow p-5 flex flex-col gap-3 min-w-0 bg-[#071329]/95 sm:rounded-r-2xl">
-                                <div className="text-[11px] font-semibold text-white/50 uppercase flex items-center justify-between">
-                                    <span>{currentChat.listTitle}</span>
-                                    <span className="text-[10px] text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded-full border border-blue-500/30 font-bold">Nổi bật</span>
-                                </div>
-                                
-                                <div className="flex flex-col gap-2.5">
-                                    {currentChat.items.map((item, idx) => (
-                                        <div 
-                                            key={idx}
-                                            onClick={() => {
-                                                setActiveTab(null);
-                                                navigate(item.path);
-                                            }}
-                                            className="flex items-start gap-3.5 p-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer group min-w-0"
-                                        >
-                                            <div className="w-8.5 h-8.5 rounded-lg bg-white/5 group-hover:bg-blue-600 group-hover:text-white text-blue-300 flex items-center justify-center shrink-0 transition-all duration-200 mt-0.5">
-                                                <item.icon size={15} />
-                                            </div>
-                                            <div className="flex-grow min-w-0">
-                                                <h4 className="text-[13px] font-bold text-white/95 group-hover:text-amber-300 transition-colors line-clamp-1 leading-snug">
-                                                    {item.title}
-                                                </h4>
-                                                <div className="flex flex-wrap items-center gap-2 mt-1.5 text-[10.5px] text-white/40">
-                                                    {item.meta.map((m, mIdx) => (
-                                                        <span key={mIdx} className="flex items-center gap-1.5">
-                                                            {mIdx > 0 && <span className="text-white/20">•</span>}
-                                                            {m}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                            <ChevronRight size={13} className="text-white/30 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all mt-2.5 shrink-0" />
+                        {/* Content Panel - Two Column Layout with increased height */}
+                        <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-white/10 bg-black/10 min-h-[440px]">
+                            {activeTab === 'qa' ? (
+                                <>
+                                    {/* Left Column for QA: Outstanding List (70%) */}
+                                    <div className="w-full sm:w-[70%] p-6 flex flex-col gap-4 min-w-0 bg-[#314568f2] sm:rounded-bl-2xl">
+                                        <div className="text-[11px] font-semibold text-white/50 uppercase flex items-center justify-between">
+                                            <span>{currentChat.listTitle}</span>
+                                            <span className="text-[10px] text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded-full border border-blue-500/30 font-bold">Quan tâm nhiều</span>
                                         </div>
-                                    ))}
-                                </div>
-                            </div>
+
+                                        <div className="flex flex-col gap-3.5 overflow-y-auto custom-scrollbar pr-2">
+                                            {currentChat.items.map((item, idx) => (
+                                                <div
+                                                    key={idx}
+                                                    onClick={() => {
+                                                        setActiveTab(null);
+                                                        navigate(item.path);
+                                                    }}
+                                                    className="flex items-start gap-4 p-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer group min-w-0"
+                                                >
+                                                    <div className="w-10 h-10 rounded-xl bg-white/5 group-hover:bg-blue-600 group-hover:text-white text-blue-300 flex items-center justify-center shrink-0 transition-all duration-200 mt-0.5">
+                                                        <item.icon size={18} />
+                                                    </div>
+                                                    <div className="flex-grow min-w-0">
+                                                        <h4 className="text-[13px] font-bold text-white/95 group-hover:text-amber-300 transition-colors line-clamp-1 leading-snug">
+                                                            {item.title}
+                                                        </h4>
+                                                        <div className="flex flex-wrap items-center gap-2 mt-1.5 text-[10.5px] text-white/40">
+                                                            {item.meta.map((m, mIdx) => (
+                                                                <span key={mIdx} className="flex items-center gap-1.5">
+                                                                    {mIdx > 0 && <span className="text-white/20">•</span>}
+                                                                    {m}
+                                                                </span>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                    <ChevronRight size={13} className="text-white/30 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all mt-2.5 shrink-0" />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Right Column for QA: Vivid Banner (30%) */}
+                                    <div className="w-full sm:w-[30%] p-6 flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-blue-600/80 to-indigo-800/80 sm:rounded-br-2xl border-l border-white/5 relative overflow-hidden group shrink-0">
+                                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-500 transform translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+                                        <div className="absolute bottom-0 left-0 w-24 h-24 bg-amber-400/10 rounded-full blur-xl pointer-events-none"></div>
+
+                                        <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center mb-2 shadow-lg backdrop-blur-sm border border-white/20 group-hover:scale-110 transition-transform duration-300 relative z-10">
+                                            <HelpCircle size={32} className="text-amber-300" />
+                                        </div>
+                                        <h3 className="text-[16px] font-bold text-white text-center leading-tight relative z-10">
+                                            Bạn có vướng mắc pháp lý?
+                                        </h3>
+                                        <p className="text-[12px] text-blue-100 text-center mb-4 relative z-10">
+                                            Chuyên gia và luật sư của chúng tôi luôn sẵn sàng hỗ trợ giải đáp.
+                                        </p>
+                                        <button
+                                            onClick={() => setIsCreateCauHoiModalOpen(true)}
+                                            className="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-900 text-[13px] font-bold rounded-xl shadow-lg hover:shadow-amber-500/30 flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98] mt-auto relative z-10"
+                                        >
+                                            <MessageSquare size={16} />
+                                            <span>Đặt câu hỏi</span>
+                                        </button>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    {/* Normal Left Column: Quick Links & Actions */}
+                                    <div className="w-full sm:w-[220px] p-6 flex flex-col gap-4 shrink-0 bg-white/[0.02]">
+                                        <div className="text-[11px] font-semibold text-white/50 uppercase">Lựa chọn nhanh</div>
+                                        <div className="flex flex-col gap-2.5">
+                                            {currentChat.links.map((link, i) => (
+                                                <button
+                                                    key={i}
+                                                    onClick={() => {
+                                                        setActiveTab(null);
+                                                        navigate(link.path);
+                                                    }}
+                                                    className="w-full text-left px-3.5 py-2 hover:bg-white/10 text-white/80 hover:text-white text-[12.5px] font-medium rounded-lg transition-all duration-200 flex items-center gap-2 group/link"
+                                                >
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 opacity-60 group-hover/link:opacity-100 group-hover/link:bg-amber-300 transition-colors shrink-0" />
+                                                    <span>{link.label}</span>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Normal Right Column: Outstanding List */}
+                                    <div className="flex-grow p-6 flex flex-col gap-4 min-w-0 bg-[#314568f2] sm:rounded-r-2xl border-l border-white/5 shadow-inner">
+                                        <div className="text-[11px] font-semibold text-white/50 uppercase flex items-center justify-between">
+                                            <span>{currentChat.listTitle}</span>
+                                            <span className="text-[10px] text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded-full border border-blue-500/30 font-bold">Nổi bật</span>
+                                        </div>
+
+                                        <div className="flex flex-col gap-3.5 overflow-y-auto custom-scrollbar pr-2">
+                                            {currentChat.items.map((item, idx) => (
+                                                <div
+                                                    key={idx}
+                                                    onClick={() => {
+                                                        setActiveTab(null);
+                                                        navigate(item.path);
+                                                    }}
+                                                    className="flex items-start gap-4 p-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl shadow-sm hover:shadow transition-all duration-200 cursor-pointer group min-w-0"
+                                                >
+                                                    <div className="w-10 h-10 rounded-xl bg-white/5 group-hover:bg-blue-600 group-hover:text-white text-blue-300 flex items-center justify-center shrink-0 transition-all duration-200 mt-0.5">
+                                                        <item.icon size={18} />
+                                                    </div>
+                                                    <div className="flex-grow min-w-0">
+                                                        <h4 className="text-[13px] font-bold text-white/95 group-hover:text-amber-300 transition-colors line-clamp-1 leading-snug">
+                                                            {item.title}
+                                                        </h4>
+                                                        <div className="flex flex-wrap items-center gap-2 mt-1.5 text-[10.5px] text-white/40">
+                                                            {item.meta.map((m, mIdx) => (
+                                                                <span key={mIdx} className="flex items-center gap-1.5">
+                                                                    {mIdx > 0 && <span className="text-white/20">•</span>}
+                                                                    {m}
+                                                                </span>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                    <ChevronRight size={13} className="text-white/30 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all mt-2.5 shrink-0" />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                 )}
@@ -472,18 +542,18 @@ const InteractiveDock = () => {
                 {/* Main Dock Container */}
                 <div className="flex items-center gap-3 bg-gradient-to-r from-[#879bc6]/90 via-[#7973e2]/90 to-[#879bc6]/90 backdrop-blur-xl border border-white/25 px-6 py-3 rounded-[24px] shadow-[0_15px_45px_rgba(121,115,226,0.3)] transition-all duration-300 hover:shadow-[0_20px_55px_rgba(121,115,226,0.45)]">
                     {/* Welcome Message (slides open, then collapses after 5s) */}
-                    <div 
+                    <div
                         className="flex items-center gap-2 border-r border-white/20 transition-all duration-700 ease-in-out overflow-hidden whitespace-nowrap shrink-0"
-                        style={{ 
-                            maxWidth: showWelcome ? '280px' : '0px', 
+                        style={{
+                            maxWidth: showWelcome ? '280px' : '0px',
                             opacity: showWelcome ? 1 : 0,
                             paddingRight: showWelcome ? '14px' : '0px',
                             marginRight: showWelcome ? '6px' : '0px',
                             borderRightWidth: showWelcome ? '1px' : '0px'
                         }}
                     >
-                        <span className="text-white/95 text-[14px] md:text-[15px] font-semibold">Xin chào,</span>
-                        <span className="text-amber-300 text-[14px] md:text-[15px] font-semibold drop-shadow-[0_1px_2px_rgba(251,191,36,0.3)]">{user ? user.name : 'Khách'}</span>
+                        <span className="text-white/95 text-[16px] md:text-[17px] font-semibold">Xin chào,</span>
+                        <span className="text-amber-300 text-[16px] md:text-[17px] font-semibold drop-shadow-[0_1px_2px_rgba(251,191,36,0.3)]">{user ? user.name : 'Khách'}</span>
                     </div>
                     {DOCK_ITEMS.map((item) => {
                         const Icon = item.icon;
@@ -495,26 +565,24 @@ const InteractiveDock = () => {
                                 {/* Button - expands on hover to show label */}
                                 <button
                                     onClick={() => handleItemClick(item)}
-                                    className={`h-12 rounded-xl flex items-center justify-center transition-all duration-300 relative group/btn w-12 group-hover/item:w-auto group-hover/item:px-4 ${
-                                        isActive 
-                                        ? 'text-amber-300 bg-white/10 scale-105 shadow-inner' 
+                                    className={`h-12 rounded-xl flex items-center justify-center transition-all duration-300 relative group/btn px-3.5 group-hover/item:px-4 ${isActive
+                                        ? 'text-amber-300 bg-white/10 scale-105 shadow-inner'
                                         : 'text-white/80 hover:text-white hover:bg-white/10 hover:scale-105'
-                                    }`}
+                                        }`}
                                 >
-                                    <Icon 
-                                        size={21} 
-                                        strokeWidth={isActive ? 2.5 : 2} 
-                                        className={`transition-transform duration-300 shrink-0 ${item.id === 'hienke' && isActive ? 'text-amber-300 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]' : ''}`} 
+                                    <Icon
+                                        size={21}
+                                        strokeWidth={isActive ? 2.5 : 2}
+                                        className={`transition-transform duration-300 shrink-0 ${item.id === 'hienke' && isActive ? 'text-amber-300 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]' : ''}`}
                                     />
-                                    <span className="max-w-0 opacity-0 group-hover/item:max-w-[180px] group-hover/item:opacity-100 group-hover/item:ml-2 overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap text-[12.5px] font-semibold leading-none shrink-0">
+                                    <span className="max-w-0 opacity-0 group-hover/item:max-w-[180px] group-hover/item:opacity-100 group-hover/item:ml-2 overflow-hidden transition-all duration-300 ease-in-out delay-0 group-hover/item:delay-150 whitespace-nowrap text-[12.5px] font-semibold leading-none shrink-0">
                                         {item.label}
                                     </span>
                                 </button>
 
                                 {/* Active Capsule Indicator */}
-                                <div className={`h-[3px] rounded-full bg-white transition-all duration-300 ${
-                                    isActive ? 'w-5 mt-0.5 opacity-100' : 'w-0 mt-0.5 opacity-0'
-                                }`} />
+                                <div className={`h-[3px] rounded-full bg-white transition-all duration-300 ${isActive ? 'w-5 mt-0.5 opacity-100' : 'w-0 mt-0.5 opacity-0'
+                                    }`} />
                             </div>
                         );
                     })}
@@ -534,6 +602,11 @@ const InteractiveDock = () => {
                     </div>
                 </div>
             </div>
+
+            <CreateCauHoiModal
+                isOpen={isCreateCauHoiModalOpen}
+                onClose={() => setIsCreateCauHoiModalOpen(false)}
+            />
 
             <style>{`
                 .animate-slideUp {
