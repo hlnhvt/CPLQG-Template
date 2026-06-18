@@ -604,7 +604,7 @@ const InteractiveDock = () => {
                                         const listItems = displayItems.slice(1);
 
                                         return (
-                                            <div className="w-full bg-[#314568f2] sm:rounded-b-2xl shadow-inner h-[460px] overflow-hidden flex flex-col">
+                                            <div className="w-full bg-[#314568f2] sm:rounded-b-2xl shadow-inner h-[485px] overflow-hidden flex flex-col">
                                                 {/* Tab Bar */}
                                                 <div className="p-4 border-b border-white/10 flex flex-wrap justify-center gap-2 bg-black/10">
                                                     {[
@@ -872,7 +872,7 @@ const InteractiveDock = () => {
                             <div key={item.id} className="relative group/item flex flex-col items-center">
                                 {/* Tooltip for Tieudiem */}
                                 {item.id === 'tieudiem' && showTieudiemTooltip && (
-                                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 -ml-2.5 flex flex-col items-center animate-bounce z-50 pointer-events-none">
+                                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 -ml-10 flex flex-col items-center animate-bounce z-50 pointer-events-none">
                                         <div className="bg-rose-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
                                             Tiêu điểm
                                         </div>
