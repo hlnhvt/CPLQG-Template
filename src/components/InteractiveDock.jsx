@@ -604,7 +604,7 @@ const InteractiveDock = () => {
                                         const listItems = displayItems.slice(1);
 
                                         return (
-                                            <div className="w-full bg-[#314568f2] sm:rounded-b-2xl shadow-inner h-[485px] overflow-hidden flex flex-col">
+                                            <div className="w-full bg-[#314568f2] sm:rounded-b-2xl shadow-inner h-[535px] overflow-hidden flex flex-col">
                                                 {/* Tab Bar */}
                                                 <div className="p-4 border-b border-white/10 flex flex-wrap justify-center gap-2 bg-black/10">
                                                     {[
