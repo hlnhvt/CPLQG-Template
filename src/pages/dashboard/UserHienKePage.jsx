@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Clock, Tag, MessageSquare, Plus, CheckCircle2, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, Clock, Tag, MessageSquare, Plus, CheckCircle2, AlertCircle, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
 
 const MOCK_USER_HIEN_KE = [
     {
@@ -9,6 +9,7 @@ const MOCK_USER_HIEN_KE = [
         content: "Hiện nay, quy trình đăng ký doanh nghiệp vẫn yêu cầu nộp một số giấy tờ bản cứng tại bộ phận một cửa. Đề xuất số hóa 100% quy trình này, cho phép sử dụng chữ ký số và xác thực sinh trắc học để nộp hồ sơ hoàn toàn qua mạng, giúp tiết kiệm thời gian và chi phí cho người dân và doanh nghiệp.",
         domain: "Doanh nghiệp",
         status: 'Đã phản hồi',
+        isPublic: true,
         date: "20/03/2026",
         views: 142,
         replies: 1,
@@ -211,6 +212,15 @@ const UserHienKePage = () => {
                                             <div>
                                                 Hiến kế đang trong trạng thái <strong>"{item.status}"</strong>. Các thông tin phản hồi sẽ được cập nhật tại đây khi có.
                                             </div>
+                                        </div>
+                                    )}
+
+                                    {/* Link to public detail page */}
+                                    {item.isPublic && (
+                                        <div className="mt-4 flex justify-end">
+                                            <Link to={`/hien-ke/${item.id}`} className="flex items-center gap-2 px-5 py-2 bg-white text-[#1e3a8a] border border-[#1e3a8a]/30 hover:bg-blue-50 text-[13px] font-bold rounded-lg transition-colors shadow-sm">
+                                                Đến trang chi tiết <ExternalLink size={15} />
+                                            </Link>
                                         </div>
                                     )}
                                 </div>
