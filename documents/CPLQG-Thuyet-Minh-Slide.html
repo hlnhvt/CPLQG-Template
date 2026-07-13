@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thuyết minh các hợp phần — Cổng Pháp luật Quốc gia</title>
+<style>
+  :root{
+    --navy:#0a2c66; --navy2:#0b1f3a; --ink:#0f1b33;
+    --red:#d62828; --gold:#f4c542; --paper:#f5f7fb; --line:rgba(255,255,255,.14);
+    --c1:#e63946; --c2:#2a9d8f; --c3:#4361ee; --c4:#3a86ff; --c5:#e8a13a; --c6:#8338ec; --c7:#118ab2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden;background:#05101f;
+    font-family:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;color:#0f1b33}
+  .serif{font-family:Georgia,"Times New Roman",serif}
+  #deck{position:fixed;inset:0}
+  .slide{position:absolute;inset:0;display:flex;flex-direction:column;
+    opacity:0;visibility:hidden;transform:translateY(22px) scale(.992);
+    transition:opacity .55s ease,transform .55s ease;padding:4.2vh 5vw;overflow:hidden}
+  .slide.active{opacity:1;visibility:visible;transform:none;z-index:2}
+  /* themes */
+  .dark{background:radial-gradient(1200px 700px at 75% -10%,#16407f 0%,var(--navy) 45%,var(--navy2) 100%);color:#eaf1ff}
+  .light{background:linear-gradient(180deg,#ffffff 0%,var(--paper) 100%);color:var(--ink)}
+
+  /* reveal animation for children */
+  [data-anim]{opacity:0;transform:translateY(26px)}
+  .slide.active [data-anim]{animation:rise .7s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--d,0)*1s)}
+  @keyframes rise{to{opacity:1;transform:none}}
+  [data-anim="zoom"]{transform:scale(.8)}
+  .slide.active [data-anim="zoom"]{animation:zin .7s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--d,0)*1s)}
+  @keyframes zin{to{opacity:1;transform:none}}
+
+  /* progress + footer */
+  .progress{position:fixed;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--gold),var(--red));z-index:50;transition:width .5s ease;box-shadow:0 0 12px rgba(244,197,66,.5)}
+  .pager{position:fixed;right:2.4vw;bottom:2.2vh;font-size:13px;letter-spacing:.5px;z-index:50;opacity:.65}
+  .brandmark{position:fixed;left:2.4vw;bottom:2vh;display:flex;align-items:center;gap:8px;z-index:50;font-size:12.5px;opacity:.7}
+
+  /* TITLE slide */
+  .title-wrap{margin:auto;text-align:center;max-width:1100px}
+  .emblem{width:120px;height:120px;margin:0 auto 26px;filter:drop-shadow(0 6px 24px rgba(244,197,66,.45))}
+  .kicker{letter-spacing:5px;font-size:15px;color:var(--gold);font-weight:700;text-transform:uppercase}
+  .title-wrap h1{font-size:clamp(34px,5.2vw,68px);line-height:1.08;margin:14px 0 10px;font-weight:800}
+  .title-wrap .sub{font-size:clamp(16px,1.9vw,23px);color:#bcd0f0;font-weight:500}
+  .ribbon{height:4px;width:120px;margin:26px auto 0;background:linear-gradient(90deg,var(--gold),var(--red));border-radius:4px}
+
+  /* section header generic */
+  .sec-h{display:flex;align-items:center;gap:18px;margin-bottom:2.4vh}
+  .badge{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;color:#fff;flex:0 0 auto;box-shadow:0 10px 26px rgba(0,0,0,.18)}
+  .badge svg{width:34px;height:34px}
+  .sec-h .meta .idx{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:.6}
+  .sec-h .meta h2{font-size:clamp(24px,3vw,40px);font-weight:800;line-height:1.1}
+  .tagline{font-size:clamp(15px,1.7vw,20px);color:#33518a;max-width:62ch;margin-bottom:2.2vh}
+  .light .tagline{color:#33518a}
+
+  /* OVERVIEW grid */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:1vh}
+  .card{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;
+    backdrop-filter:blur(4px);transition:transform .3s ease,box-shadow .3s ease}
+  .card:hover{transform:translateY(-4px)}
+  .card .ci{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;color:#fff;margin-bottom:12px}
+  .card .ci svg{width:26px;height:26px}
+  .card h3{font-size:19px;margin-bottom:6px;font-weight:700}
+  .card p{font-size:14px;line-height:1.5;color:#c4d4f0}
+
+  /* COMPONENT body */
+  .body{display:grid;grid-template-columns:1.18fr .82fr;gap:30px;flex:1;min-height:0}
+  .shot{border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 24px 60px rgba(0,0,0,.45);position:relative;background:#0b1f3a}
+  .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center;
+    animation:ken 18s ease-in-out infinite alternate}
+  @keyframes ken{from{transform:scale(1)}to{transform:scale(1.07)}}
+  .shot .cap{position:absolute;left:0;right:0;bottom:0;padding:10px 14px;font-size:12.5px;color:#dbe7ff;
+    background:linear-gradient(0deg,rgba(5,16,31,.85),transparent)}
+  .side{display:flex;flex-direction:column;gap:16px;min-height:0}
+  .panel{background:rgba(255,255,255,.055);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .panel .lbl{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;opacity:.62;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .hl{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .hl li{display:flex;gap:10px;font-size:15.5px;line-height:1.4;align-items:flex-start}
+  .hl li .dot{flex:0 0 auto;width:9px;height:9px;border-radius:50%;margin-top:7px;background:var(--gold)}
+  .aud{font-size:15px;color:#d7e3ff}
+  .aud b{color:#fff}
+
+  /* process flow */
+  .flow{display:flex;align-items:stretch;gap:0;margin-top:2.2vh;flex-wrap:nowrap}
+  .step{flex:1;position:relative;background:rgba(255,255,255,.06);border:1px solid var(--line);
+    border-radius:12px;padding:12px 12px;margin-right:26px;font-size:14px;line-height:1.35;display:flex;align-items:center;gap:10px;min-height:62px}
+  .step:last-child{margin-right:0}
+  .step .num{flex:0 0 auto;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px;color:#05101f;background:var(--gold)}
+  .step::after{content:"";position:absolute;right:-20px;top:50%;width:14px;height:14px;border-top:3px solid var(--gold);border-right:3px solid var(--gold);transform:translateY(-50%) rotate(45deg);opacity:.9}
+  .step:last-child::after{display:none}
+  .flow-lbl{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;opacity:.62;margin:2.4vh 0 1vh;display:flex;align-items:center;gap:8px}
+
+  /* closing */
+  .close-wrap{margin:auto;text-align:center;max-width:1000px}
+  .close-wrap h2{font-size:clamp(30px,4.4vw,58px);font-weight:800;margin-bottom:14px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px}
+  .chip{background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-size:14.5px}
+
+  .hint{position:fixed;top:2vh;right:2.4vw;font-size:12px;opacity:.5;z-index:50}
+</style>
+</head>
+<body>
+<div id="deck"></div>
+<div class="progress" id="bar"></div>
+<div class="pager" id="pager"></div>
+<div class="brandmark"><svg width="18" height="18" viewBox="0 0 24 24" fill="#f4c542"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg> Cổng Pháp luật Quốc gia</div>
+<div class="hint">← → để chuyển slide</div>
+
+<script>
+const ICON = {
+  media:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg>',
+  draft:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M8 13h8M8 17h6"/></svg>',
+  person:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>',
+  chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.3 7.3L4 21l1.7-5.7A8 8 0 1 1 21 12z"/><path d="M9 11h6M9 14h4"/></svg>',
+  bulb:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg>',
+  support:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9-4 9 4M5 9v7M19 9v7M3 20h18"/><path d="M9 20v-5h6v5"/></svg>',
+  forum:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h13v9H7l-4 3z"/><path d="M8 9h6"/><path d="M10 17h8l3 3v-9h-3"/></svg>'
+};
+
+const COMPS = [
+  {n:1,key:'media',c:'--c1',name:'Đa phương tiện',img:'images/man-hinh-da-phuong-tien.png',
+   cap:'Thư viện video, hình ảnh và Infographic',
+   goal:'Truyền tải pháp luật trực quan, sinh động qua video, hình ảnh và Infographic; tăng khả năng tiếp cận và ghi nhớ.',
+   aud:'Người dân, doanh nghiệp',
+   hl:['Nội dung trực quan, dễ tiếp nhận','Trình phát video đầy đủ tiện ích','Phóng to, tải về, chia sẻ nhanh','Gợi ý nội dung liên quan'],
+   flow:['Truy cập thư viện','Tìm kiếm / lọc','Chọn nội dung','Xem (phát · phóng to)','Tải · Chia sẻ · Bình luận']},
+  {n:2,key:'draft',c:'--c2',name:'Dự thảo văn bản',img:'images/man-hinh-du-thao.png',
+   cap:'Danh sách dự thảo và góp ý trực tuyến',
+   goal:'Công khai, minh bạch dự thảo văn bản và mở kênh để người dân, doanh nghiệp góp ý xây dựng pháp luật.',
+   aud:'Người dân, doanh nghiệp, chuyên gia, hiệp hội, cơ quan',
+   hl:['Công khai toàn văn dự thảo','Góp ý trực tuyến, không giấy tờ','Tiến độ theo dòng thời gian','Theo dõi tiếp thu, phản hồi'],
+   flow:['Xem danh sách','Đọc toàn văn','Gửi góp ý','Theo dõi ý kiến','Xem báo cáo tiếp thu']},
+  {n:3,key:'person',c:'--c3',name:'Quản lý thông tin cá nhân hóa',img:'images/man-hinh-ca-nhan-hoa.png',
+   cap:'Trang chủ cá nhân và bảng điều khiển',
+   goal:'Cá nhân hóa trải nghiệm; giúp người dùng quản lý hồ sơ, lưu trữ nội dung quan tâm và kiểm soát thông báo.',
+   aud:'Người dân, doanh nghiệp đã đăng nhập; cộng tác viên',
+   hl:['Đăng nhập VNeID an toàn','Cá nhân hóa theo lĩnh vực quan tâm','Bộ sưu tập nội dung riêng','Trung tâm thông báo linh hoạt'],
+   flow:['Đăng nhập VNeID','Hoàn thiện hồ sơ','Cá nhân hóa nội dung','Lưu · Theo dõi','Quản lý & thông báo']},
+  {n:4,key:'chat',c:'--c4',name:'Hỏi đáp và tư vấn pháp luật',img:'images/man-hinh-hoi-dap-tu-van.png',
+   cap:'Danh sách câu hỏi và mạng lưới chuyên gia',
+   goal:'Giải đáp kịp thời vướng mắc pháp lý; kết nối người dân với chuyên gia, luật sư.',
+   aud:'Người dân, doanh nghiệp; chuyên gia, luật sư, tư vấn viên',
+   hl:['Ngân hàng câu hỏi phong phú','Kết nối chuyên gia, đặt lịch','Tư vấn trực tuyến thời gian thực','Trợ lý ảo trả lời tự động'],
+   flow:['Đặt / tìm câu hỏi','Chuyển chuyên gia','Nhận trả lời','Đặt lịch · Tư vấn','Đánh giá chất lượng']},
+  {n:5,key:'bulb',c:'--c5',name:'Hiến kế',img:'images/man-hinh-hien-ke.png',
+   cap:'Trang chủ chuyên mục Hiến kế',
+   goal:'Huy động trí tuệ xã hội đóng góp sáng kiến cho công tác xây dựng và thi hành pháp luật; minh bạch tiếp nhận – xử lý – phản hồi.',
+   aud:'Người dân, doanh nghiệp; quản trị viên; đại diện bộ, ngành',
+   hl:['Ba mục rõ ràng, dễ đóng góp','Quy trình minh bạch','Thẩm định đúng bộ, ngành','Công khai hiến kế tiêu biểu'],
+   flow:['Gửi hiến kế','Tiếp nhận','Phân loại','Thẩm định','Phản hồi','Công khai / Lưu']},
+  {n:6,key:'support',c:'--c6',name:'Chuyên trang hỗ trợ pháp luật',img:'images/man-hinh-ho-tro-phap-luat.png',
+   cap:'Trợ giúp pháp lý · Phổ biến GDPL · Hỗ trợ pháp lý doanh nghiệp',
+   goal:'Cung cấp thông tin và dịch vụ pháp lý chuyên sâu theo từng nhóm đối tượng, đặc biệt nhóm yếu thế và doanh nghiệp nhỏ và vừa.',
+   aud:'Người dân (nhóm được trợ giúp pháp lý), DN nhỏ và vừa, cán bộ chuyên môn',
+   hl:['Ba chuyên trang chuyên biệt','Kho tài nguyên phong phú','Mạng lưới tư vấn viên','Tra cứu vụ việc điển hình'],
+   flow:['Chọn chuyên trang','Tra cứu','Dùng dịch vụ','Lưu · Liên hệ']},
+  {n:7,key:'forum',c:'--c7',name:'Diễn đàn',img:'images/man-hinh-dien-dan.png',
+   cap:'Diễn đàn chính sách pháp luật',
+   goal:'Tạo không gian trao đổi, phản biện chính sách công khai, đa chiều; nâng cao chất lượng xây dựng, thi hành pháp luật.',
+   aud:'Chuyên gia, luật sư, nhà khoa học, hiệp hội; quản trị & ban biên tập',
+   hl:['Góp ý theo từng đoạn nội dung','Bỏ phiếu, bình chọn ý kiến','Sự kiện phát trực tuyến tương tác','Kiểm duyệt & báo cáo vi phạm'],
+   flow:['Duyệt diễn đàn','Tạo chủ đề','Kiểm duyệt','Công khai','Thảo luận · Bỏ phiếu','Theo dõi']}
+];
+
+const deck = document.getElementById('deck');
+let d = 0;
+function dly(i){return (i*0.12).toFixed(2)}
+
+// Title
+deck.insertAdjacentHTML('beforeend', `
+<section class="slide dark">
+  <div class="title-wrap">
+    <svg class="emblem" data-anim="zoom" style="--d:0" viewBox="0 0 24 24" fill="#f4c542"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+    <div class="kicker" data-anim style="--d:.15">Cổng Pháp luật Quốc gia</div>
+    <h1 class="serif" data-anim style="--d:.3">Thuyết minh các hợp phần nghiệp vụ</h1>
+    <div class="sub" data-anim style="--d:.5">Bảy hợp phần trọng tâm phục vụ giới thiệu, thẩm định và triển khai</div>
+    <div class="ribbon" data-anim="zoom" style="--d:.7"></div>
+  </div>
+</section>`);
+
+// Overview
+deck.insertAdjacentHTML('beforeend', `
+<section class="slide dark">
+  <div class="sec-h"><div class="badge" style="background:linear-gradient(135deg,#f4c542,#d62828)" data-anim="zoom"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+    <div class="meta"><div class="idx" data-anim style="--d:.05">Tổng quan</div><h2 data-anim style="--d:.1">Bảy hợp phần của Cổng Pháp luật Quốc gia</h2></div></div>
+  <div class="grid">
+    ${COMPS.map((x,i)=>`<div class="card" data-anim style="--d:${dly(i+1)}">
+      <div class="ci" style="background:linear-gradient(135deg,var(${x.c}),rgba(0,0,0,.25))">${ICON[x.key]}</div>
+      <h3>${x.n}. ${x.name}</h3><p>${x.goal}</p></div>`).join('')}
+  </div>
+</section>`);
+
+// Components
+COMPS.forEach(x=>{
+  deck.insertAdjacentHTML('beforeend', `
+  <section class="slide dark">
+    <div class="sec-h">
+      <div class="badge" style="background:linear-gradient(135deg,var(${x.c}),rgba(0,0,0,.3))" data-anim="zoom">${ICON[x.key]}</div>
+      <div class="meta"><div class="idx" data-anim style="--d:.05">Hợp phần ${x.n} / 7</div><h2 data-anim style="--d:.1">${x.name}</h2></div>
+    </div>
+    <div class="tagline" data-anim style="--d:.18" >${x.goal}</div>
+    <div class="body">
+      <div class="shot" data-anim="zoom" style="--d:.28">
+        <img src="${x.img}" alt="${x.name}">
+        <div class="cap">${x.cap}</div>
+      </div>
+      <div class="side">
+        <div class="panel" data-anim style="--d:.36">
+          <div class="lbl">★ Điểm nổi bật</div>
+          <ul class="hl">${x.hl.map((h,i)=>`<li data-anim style="--d:${(0.45+i*0.1).toFixed(2)}"><span class="dot" style="background:var(${x.c})"></span><span>${h}</span></li>`).join('')}</ul>
+        </div>
+        <div class="panel" data-anim style="--d:.9"><div class="lbl">◍ Đối tượng sử dụng</div><div class="aud">${x.aud}</div></div>
+      </div>
+    </div>
+    <div class="flow-lbl" data-anim style="--d:1.0">➜ Luồng quy trình tổng quan</div>
+    <div class="flow">
+      ${x.flow.map((s,i)=>`<div class="step" data-anim style="--d:${(1.05+i*0.12).toFixed(2)}"><span class="num">${i+1}</span><span>${s}</span></div>`).join('')}
+    </div>
+  </section>`);
+});
+
+// Closing
+deck.insertAdjacentHTML('beforeend', `
+<section class="slide dark">
+  <div class="close-wrap">
+    <svg class="emblem" data-anim="zoom" viewBox="0 0 24 24" fill="#f4c542"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+    <h2 class="serif" data-anim style="--d:.2">Trân trọng cảm ơn</h2>
+    <div class="sub" data-anim style="--d:.35" style="color:#bcd0f0">Hệ sinh thái pháp lý số phục vụ người dân và doanh nghiệp</div>
+    <div class="chips">
+      ${COMPS.map((x,i)=>`<div class="chip" data-anim style="--d:${(0.5+i*0.08).toFixed(2)}">${x.n}. ${x.name}</div>`).join('')}
+    </div>
+  </div>
+</section>`);
+
+const slides=[...document.querySelectorAll('.slide')];
+const bar=document.getElementById('bar'), pager=document.getElementById('pager');
+function show(i){
+  d=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach((s,k)=>s.classList.toggle('active',k===d));
+  bar.style.width=((d+1)/slides.length*100)+'%';
+  pager.textContent=(d+1)+' / '+slides.length;
+}
+function next(){show(d+1)} function prev(){show(d-1)}
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();next()}
+  else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev()}
+  else if(e.key==='Home')show(0); else if(e.key==='End')show(slides.length-1);
+});
+document.addEventListener('click',e=>{ if(e.clientX < window.innerWidth*0.25) prev(); else next(); });
+show(0);
+</script>
+</body>
+</html>

@@ -122,7 +122,7 @@ const AdvancedSearch = ({ show45SoHieu = false, onClear }) => (
                 </div>
             ))}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
                 <label className="text-[12px] text-gray-600 font-medium block mb-1">Ngày ban hành (từ)</label>
                 <input type="date" className="w-full px-2 py-1.5 text-[12px] border border-gray-200 rounded outline-none focus:border-blue-400" />
@@ -130,14 +130,6 @@ const AdvancedSearch = ({ show45SoHieu = false, onClear }) => (
             <div>
                 <label className="text-[12px] text-gray-600 font-medium block mb-1">Đến ngày</label>
                 <input type="date" className="w-full px-2 py-1.5 text-[12px] border border-gray-200 rounded outline-none focus:border-blue-400" />
-            </div>
-            <div>
-                <label className="text-[12px] text-gray-600 font-medium block mb-1">Ngôn ngữ</label>
-                <select className="w-full px-2 py-1.5 text-[12px] border border-gray-200 rounded bg-white outline-none focus:border-blue-400">
-                    <option value="">-- Chọn --</option>
-                    <option>Tiếng Việt</option>
-                    <option>Tiếng Anh</option>
-                </select>
             </div>
         </div>
         <div className="flex justify-end">

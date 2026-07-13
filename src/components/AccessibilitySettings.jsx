@@ -10,8 +10,6 @@ const AccessibilitySettings = () => {
     const themes = [
         { id: 'default', name: 'Mặc định', icon: <Sun size={16} /> },
         { id: 'dark', name: 'Chế độ Tối', icon: <Moon size={16} /> },
-        { id: 'high-contrast-light', name: 'Tương phản cao - Sáng', icon: <Eye size={16} /> },
-        { id: 'high-contrast-dark', name: 'Tương phản cao - Tối', icon: <Eye size={16} className="text-yellow-400" /> },
         { id: 'grayscale', name: 'Thang xám', icon: <RefreshCw size={16} /> },
     ];
 
