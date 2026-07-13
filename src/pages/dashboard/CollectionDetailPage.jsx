@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, MoreVertical, Link as LinkIcon, ArrowLeft, BookOpen, FileText, HelpCircle, Trash2, ArrowRightLeft, Share2, Copy } from 'lucide-react';
+import { Search, MoreVertical, Link as LinkIcon, ArrowLeft, BookOpen, FileText, HelpCircle, Trash2, ArrowRightLeft, Share2, Copy, Lightbulb } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
 const MOCK_ITEMS = [
@@ -7,6 +7,7 @@ const MOCK_ITEMS = [
     { id: 102, type: 'vanban', title: 'Nghị định 102/2024/NĐ-CP', date: 'Thêm vào: 14/03/2026', snippet: 'Quy định chi tiết thi hành một số điều của Luật Đất đai.', icon: FileText, color: 'text-blue-500', bg: 'bg-blue-50' },
     { id: 103, type: 'tinbai', title: 'Điểm mới nổi bật của Luật Đất đai 2024 so với Luật trình 2013', date: 'Thêm vào: 10/03/2026', snippet: 'Bài viết phân tích các điểm thay đổi cốt lõi về bảng giá đất, thu hồi đất, và cấp sổ đỏ.', icon: BookOpen, color: 'text-green-500', bg: 'bg-green-50' },
     { id: 104, type: 'tuvan', title: 'Thủ tục sang tên sổ đỏ theo Luật Đất đai mới nhất', date: 'Thêm vào: 05/03/2026', snippet: 'Hỏi đáp về quy trình, thuế và lệ phí phải nộp khi sang tên quyền sử dụng đất.', icon: HelpCircle, color: 'text-orange-500', bg: 'bg-orange-50' },
+    { id: 105, type: 'hienke', title: 'Đề xuất số hóa hoàn toàn quy trình đăng ký doanh nghiệp', date: 'Thêm vào: 20/03/2026', snippet: 'Hiến kế nhằm giảm thiểu thủ tục hành chính, rút ngắn thời gian đăng ký doanh nghiệp xuống còn 1 ngày làm việc.', icon: Lightbulb, color: 'text-amber-500', bg: 'bg-amber-50' },
 ];
 
 const CollectionDetailPage = () => {
@@ -21,7 +22,8 @@ const CollectionDetailPage = () => {
         { id: 'tat-ca', label: 'Tất cả' },
         { id: 'vanban', label: 'Văn bản pháp luật' },
         { id: 'tinbai', label: 'Tin bài' },
-        { id: 'tuvan', label: 'Tư vấn, Hỏi đáp' }
+        { id: 'tuvan', label: 'Tư vấn, Hỏi đáp' },
+        { id: 'hienke', label: 'Hiến kế' }
     ];
 
     const filteredItems = MOCK_ITEMS.filter(item => {
@@ -94,8 +96,8 @@ const CollectionDetailPage = () => {
                                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                                 }`}
                             >
-                                {tab.label} {tab.id !== 'tat-ca' && <span className="text-xs bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded-full ml-1 rounded-full">
-                                    {tab.id === 'vanban' ? 8 : tab.id === 'tinbai' ? 2 : 2}
+                                {tab.label} {tab.id !== 'tat-ca' && <span className="text-xs bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded-full ml-1">
+                                    {tab.id === 'vanban' ? 8 : tab.id === 'tinbai' ? 2 : tab.id === 'hienke' ? 1 : 2}
                                 </span>}
                             </button>
                         ))}

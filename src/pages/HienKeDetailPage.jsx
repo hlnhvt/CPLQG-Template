@@ -8,7 +8,7 @@ import {
     CheckCircle2, ExternalLink, Eye, File, FileCode2, Upload, X,
     User, Mail, Phone, TrendingUp, Scale, Heart, Landmark, ChevronUp,
     Video, Mic2, ThumbsUp, ThumbsDown, Share2, BookOpen, AlertCircle,
-    Bookmark, Flame
+    Bookmark, Flame, Folder
 } from 'lucide-react';
 
 // ======================== MOCK DATA FOR INDIVIDUAL IDEAS ========================
@@ -363,6 +363,17 @@ const HienKeDetailPage = () => {
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [hasLiked, setHasLiked] = useState(false);
     const [hasDisliked, setHasDisliked] = useState(false);
+    const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+    const mockCollections = [
+        { id: 1, name: 'Tài liệu Luật Đất đai 2024', count: 12 },
+        { id: 2, name: 'Tài liệu Luật Tố tụng', count: 5 },
+        { id: 3, name: 'Nghiên cứu về Thuế', count: 8 },
+    ];
+
+    const handleSaveToCollection = () => {
+        setIsBookmarked(true);
+        setIsSaveModalOpen(false);
+    };
 
     // Consultation Layout States
     const [commentText, setCommentText] = useState('');
@@ -509,7 +520,7 @@ const HienKeDetailPage = () => {
 
                                 {/* Actions */}
                                 <div className="flex flex-wrap items-center justify-end gap-3 mt-8 pt-6 border-t border-gray-100">
-                                    <button onClick={() => setIsBookmarked(!isBookmarked)} className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold border transition text-[13px] ${isBookmarked ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}>
+                                    <button onClick={() => setIsSaveModalOpen(true)} className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold border transition text-[13px] ${isBookmarked ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'}`}>
                                         <Bookmark size={16} className={isBookmarked ? 'fill-amber-600' : ''} />
                                         {isBookmarked ? 'Đã lưu' : 'Lưu hiến kế'}
                                     </button>
@@ -596,7 +607,7 @@ const HienKeDetailPage = () => {
                                     Hiến kế của bạn đang được chuyển đến cơ quan chủ quản thích hợp.
                                 </p>
                                 {!isBookmarked && (
-                                    <button onClick={() => setIsBookmarked(true)} className="bg-white text-[14px] text-amber-600 font-bold py-2.5 px-6 rounded-xl border border-amber-200 hover:bg-amber-100 transition shadow-sm inline-flex items-center gap-2">
+                                    <button onClick={() => setIsSaveModalOpen(true)} className="bg-white text-[14px] text-amber-600 font-bold py-2.5 px-6 rounded-xl border border-amber-200 hover:bg-amber-100 transition shadow-sm inline-flex items-center gap-2">
                                         <Bookmark size={16} /> Theo dõi hiến kế
                                     </button>
                                 )}
@@ -637,7 +648,48 @@ const HienKeDetailPage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+
+
+            {/* Save Modal */}
+            {isSaveModalOpen && (
+                <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+                    <div className="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden animate-fadeIn">
+                        <div className="flex justify-between items-center p-4 border-b border-gray-100">
+                            <h3 className="font-bold text-gray-900 text-lg">Lưu vào bộ sưu tập</h3>
+                            <button onClick={() => setIsSaveModalOpen(false)} className="text-gray-400 hover:text-gray-600 p-1">
+                                <X size={20} />
+                            </button>
+                        </div>
+                        <div className="p-4 max-h-[60vh] overflow-y-auto">
+                            <div className="space-y-2">
+                                {mockCollections.map(col => (
+                                    <button 
+                                        key={col.id} 
+                                        onClick={handleSaveToCollection}
+                                        className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all text-left"
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center shrink-0">
+                                                <Folder size={18} />
+                                            </div>
+                                            <div>
+                                                <div className="font-bold text-gray-800 text-[14px]">{col.name}</div>
+                                                <div className="text-[12px] text-gray-500">{col.count} mục</div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="p-4 border-t border-gray-100 bg-gray-50">
+                            <button className="w-full flex items-center justify-center gap-2 text-blue-600 font-bold text-[14px] hover:text-blue-700 hover:bg-blue-50 py-2 rounded-lg transition-colors">
+                                <span className="text-lg">+</span> Tạo bộ sưu tập mới
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
         );
     }
 

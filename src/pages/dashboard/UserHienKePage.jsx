@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Clock, Tag, MessageSquare, Plus, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Search, Clock, Tag, MessageSquare, Plus, CheckCircle2, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react';
 
 const MOCK_USER_HIEN_KE = [
     {
         id: 1,
         title: "Đề xuất quy trình đăng ký doanh nghiệp trực tuyến 100%",
+        content: "Hiện nay, quy trình đăng ký doanh nghiệp vẫn yêu cầu nộp một số giấy tờ bản cứng tại bộ phận một cửa. Đề xuất số hóa 100% quy trình này, cho phép sử dụng chữ ký số và xác thực sinh trắc học để nộp hồ sơ hoàn toàn qua mạng, giúp tiết kiệm thời gian và chi phí cho người dân và doanh nghiệp.",
         domain: "Doanh nghiệp",
         status: 'Đã phản hồi',
         date: "20/03/2026",
         views: 142,
-        replies: 1
+        replies: 1,
+        responder: "Bộ Kế hoạch và Đầu tư",
+        responseTime: "22/03/2026",
+        responseContent: "Cảm ơn bạn đã gửi hiến kế. Chúng tôi đã tiếp nhận và đang tiến hành đánh giá chi tiết tính khả thi của quy trình trực tuyến 100% trong kỳ họp tới."
     },
     {
         id: 2,
         title: "Kiến nghị sửa đổi điểm giao cắt giao thông tại ngã tư XYZ",
+        content: "Ngã tư XYZ thường xuyên xảy ra ùn tắc vào giờ cao điểm do thiết kế vòng xuyến chưa hợp lý. Tôi kiến nghị xem xét thiết kế lại làn đường dành cho rẽ phải và lắp đặt hệ thống đèn tín hiệu thông minh để điều tiết lưu lượng.",
         domain: "Giao thông Vận tải",
         status: 'Chờ phản hồi',
         date: "25/03/2026",
@@ -24,6 +29,7 @@ const MOCK_USER_HIEN_KE = [
     {
         id: 3,
         title: "Giải pháp nâng cao giáo dục STEM ở nông thôn",
+        content: "Đề xuất bộ GD&ĐT có chính sách hỗ trợ thiết bị thực hành STEM cho các trường cấp 2 ở khu vực nông thôn, đồng thời tổ chức khóa đào tạo giáo viên sử dụng các công cụ mã nguồn mở và tái chế vật liệu để tiết kiệm chi phí.",
         domain: "Giáo dục và Đào tạo",
         status: 'Đang xem xét',
         date: "28/03/2026",
@@ -35,6 +41,11 @@ const MOCK_USER_HIEN_KE = [
 const UserHienKePage = () => {
     const [activeTab, setActiveTab] = useState('all'); // all, pending, processing, responded
     const [searchTerm, setSearchTerm] = useState('');
+    const [expandedId, setExpandedId] = useState(null);
+
+    const toggleExpand = (id) => {
+        setExpandedId(expandedId === id ? null : id);
+    };
 
     const filteredData = MOCK_USER_HIEN_KE.filter(item => {
         const matchSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase());
@@ -122,7 +133,7 @@ const UserHienKePage = () => {
                         <div key={item.id} className="group border border-gray-100 rounded-xl p-5 hover:border-blue-200 hover:shadow-md transition-all bg-white relative overflow-hidden">
                             <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             
-                            <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
+                            <div className="flex flex-col sm:flex-row justify-between items-start gap-4 cursor-pointer" onClick={() => toggleExpand(item.id)}>
                                 <div className="flex-grow">
                                     <div className="flex items-center gap-2 mb-2">
                                         <span className="text-xs font-bold px-2 py-0.5 rounded bg-gray-100 text-gray-600 flex items-center gap-1">
@@ -142,21 +153,68 @@ const UserHienKePage = () => {
                                             </span>
                                         )}
                                     </div>
-                                    <Link to={`/hien-ke/${item.id}`} className="block text-[16px] md:text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors line-clamp-2 leading-snug mb-3">
+                                    <div className="block text-[16px] md:text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2 leading-snug mb-3">
                                         {item.title}
-                                    </Link>
+                                    </div>
                                     <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-gray-500">
                                         <span className="flex items-center gap-1.5"><Clock size={14}/> {item.date}</span>
                                         <span className="flex items-center gap-1.5"><MessageSquare size={14}/> {item.replies} phản hồi</span>
                                     </div>
                                 </div>
                                 
-                                <div className="flex items-center shrink-0 w-full sm:w-auto mt-2 sm:mt-0">
-                                    <Link to={`/hien-ke/${item.id}`} className="w-full text-center px-4 py-2 bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white font-bold text-sm rounded-lg transition-colors whitespace-nowrap">
-                                        Xem chi tiết
-                                    </Link>
+                                <div className="flex items-center justify-center shrink-0 mt-2 sm:mt-0 text-blue-600 group-hover:text-blue-700 transition-colors pt-2 sm:pt-0 font-semibold text-[13px] bg-blue-50 px-3 py-1.5 rounded-lg border border-blue-100 group-hover:bg-blue-100">
+                                    {expandedId === item.id ? (
+                                        <>Thu gọn <ChevronUp size={16} className="ml-1" /></>
+                                    ) : (
+                                        <>Xem chi tiết <ChevronDown size={16} className="ml-1" /></>
+                                    )}
                                 </div>
                             </div>
+
+                            {/* Expandable Response Details */}
+                            {expandedId === item.id && (
+                                <div className="mt-4 pt-4 border-t border-gray-100 animate-fadeIn cursor-default" onClick={(e) => e.stopPropagation()}>
+                                    {/* Idea Content */}
+                                    <div className="mb-5">
+                                        <div className="text-[12px] text-gray-500 font-bold mb-2 uppercase tracking-wide flex items-center gap-1.5"><MessageSquare size={14} /> Nội dung hiến kế</div>
+                                        <div className="text-[14px] text-gray-700 leading-relaxed bg-gray-50/80 p-4 rounded-xl border border-gray-100">
+                                            {item.content}
+                                        </div>
+                                    </div>
+
+                                    {/* Response Content */}
+                                    {item.status === 'Đã phản hồi' ? (
+                                        <div className="bg-blue-50/50 rounded-xl p-5 border border-blue-100/50">
+                                            <div className="text-[12px] text-blue-600 font-bold mb-3 uppercase tracking-wide flex items-center gap-1.5"><CheckCircle2 size={14} /> Phản hồi từ cơ quan chức năng</div>
+                                            <div className="flex flex-col md:flex-row gap-6 mb-4">
+                                                <div className="flex-1">
+                                                    <div className="text-[12px] text-gray-500 mb-1 font-medium">Cơ quan phản hồi</div>
+                                                    <div className="font-bold text-[14px] text-gray-900">{item.responder}</div>
+                                                </div>
+                                                <div className="flex-1">
+                                                    <div className="text-[12px] text-gray-500 mb-1 font-medium">Thời gian phản hồi</div>
+                                                    <div className="font-bold text-[14px] text-gray-900 flex items-center gap-1.5">
+                                                        <Clock size={14} className="text-blue-500" /> {item.responseTime}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="text-[12px] text-gray-500 mb-1 font-medium">Nội dung phản hồi</div>
+                                                <div className="text-[14px] text-gray-800 leading-relaxed bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+                                                    {item.responseContent}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="bg-amber-50/50 rounded-xl p-4 border border-amber-100 text-[13px] text-amber-700 italic flex items-start gap-2">
+                                            <AlertCircle size={16} className="mt-0.5 shrink-0" />
+                                            <div>
+                                                Hiến kế đang trong trạng thái <strong>"{item.status}"</strong>. Các thông tin phản hồi sẽ được cập nhật tại đây khi có.
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     ))
                 ) : (
