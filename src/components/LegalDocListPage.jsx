@@ -170,17 +170,7 @@ const Sidebar = ({ nhomPQ, setNhomPQ, nhomHN, setNhomHN, selectedLV, toggleLV, s
                     ))}
                 </div>
             </div>
-            <div>
-                <p className="font-semibold text-[11px] text-gray-500 uppercase tracking-wide mb-2 border-b border-gray-100 pb-1">Cơ quan ban hành</p>
-                <div className="max-h-40 overflow-y-auto space-y-1.5 pr-1">
-                    {CO_QUAN.map(v => (
-                        <label key={v} className="flex items-center gap-2 text-[12px] text-gray-600 cursor-pointer">
-                            <input type="checkbox" checked={selectedCQ.includes(v)} onChange={() => toggleCQ(v)} className="accent-blue-700" />
-                            {v}
-                        </label>
-                    ))}
-                </div>
-            </div>
+
         </div>
     </aside>
 );

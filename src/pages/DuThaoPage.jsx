@@ -50,50 +50,46 @@ const Pagination = ({ current, total, onChange }) => (
 const AdvancedSearchForm = ({ onClear }) => (
     <div className="mt-3 bg-blue-50 border border-blue-100 rounded-lg p-5">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-[13px]">
-            {/* Lọc theo ngày */}
             <div>
-                <label className="text-gray-600 font-medium block mb-1">Loại ngày</label>
+                <label className="text-gray-600 font-medium block mb-1">Ngày ban hành từ</label>
+                <input type="date" className="w-full px-3 py-2 border border-gray-200 rounded bg-white outline-none focus:border-blue-400" />
+            </div>
+            <div>
+                <label className="text-gray-600 font-medium block mb-1">Ngày ban hành đến</label>
+                <input type="date" className="w-full px-3 py-2 border border-gray-200 rounded bg-white outline-none focus:border-blue-400" />
+            </div>
+            <div>
+                <label className="text-gray-600 font-medium block mb-1">Hạn góp ý từ</label>
+                <input type="date" className="w-full px-3 py-2 border border-gray-200 rounded bg-white outline-none focus:border-blue-400" />
+            </div>
+            <div>
+                <label className="text-gray-600 font-medium block mb-1">Hạn góp ý đến</label>
+                <input type="date" className="w-full px-3 py-2 border border-gray-200 rounded bg-white outline-none focus:border-blue-400" />
+            </div>
+            <div>
+                <label className="text-gray-600 font-medium block mb-1">Loại văn bản</label>
                 <select className="w-full px-3 py-2 border border-gray-200 rounded bg-white outline-none focus:border-blue-400">
-                    <option>Ngày đăng</option>
-                    <option>Hạn góp ý</option>
+                    <option value="">Tất cả</option>
+                    <option>Luật</option>
+                    <option>Nghị định</option>
+                    <option>Thông tư</option>
                 </select>
             </div>
             <div>
-                <label className="text-gray-600 font-medium block mb-1">Từ ngày</label>
-                <input type="date" className="w-full px-3 py-2 border border-gray-200 rounded bg-white outline-none focus:border-blue-400" />
+                <label className="text-gray-600 font-medium block mb-1">Cơ quan ban hành</label>
+                <select className="w-full px-3 py-2 border border-gray-200 rounded bg-white outline-none focus:border-blue-400">
+                    <option value="">Tất cả</option>
+                    <option>Chính phủ</option>
+                    <option>Bộ Tài chính</option>
+                    <option>Bộ Tư pháp</option>
+                </select>
             </div>
-            <div>
-                <label className="text-gray-600 font-medium block mb-1">Đến ngày</label>
-                <input type="date" className="w-full px-3 py-2 border border-gray-200 rounded bg-white outline-none focus:border-blue-400" />
-            </div>
-
-            {/* Các dropdown khác */}
             <div>
                 <label className="text-gray-600 font-medium block mb-1">Tình trạng hiệu lực</label>
                 <select className="w-full px-3 py-2 border border-gray-200 rounded bg-white outline-none focus:border-blue-400">
                     <option value="">Tất cả</option>
                     <option>Đang lấy ý kiến</option>
                     <option>Hết hạn góp ý</option>
-                </select>
-            </div>
-            <div>
-                <label className="text-gray-600 font-medium block mb-1">Lĩnh vực hoạt động</label>
-                <select className="w-full px-3 py-2 border border-gray-200 rounded bg-white outline-none focus:border-blue-400">
-                    <option value="">-- Chọn lĩnh vực --</option>
-                    <option>Hành chính</option>
-                    <option>Kinh tế</option>
-                </select>
-            </div>
-            <div>
-                <label className="text-gray-600 font-medium block mb-1">Người ký dự thảo</label>
-                <input placeholder="Nhập tên người ký..." className="w-full px-3 py-2 border border-gray-200 rounded bg-white outline-none focus:border-blue-400" />
-            </div>
-            <div>
-                <label className="text-gray-600 font-medium block mb-1">Ngôn ngữ</label>
-                <select className="w-full px-3 py-2 border border-gray-200 rounded bg-white outline-none focus:border-blue-400">
-                    <option value="">Tất cả</option>
-                    <option>Tiếng Việt</option>
-                    <option>Tiếng Anh</option>
                 </select>
             </div>
         </div>

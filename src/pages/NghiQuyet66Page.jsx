@@ -22,11 +22,8 @@ const MEMBERS = [
 ];
 
 const TABS = [
-    { id: 'toan-van', label: 'Toàn văn', icon: FileText },
-    { id: 'ban-chi-dao', label: 'Ban chỉ đạo', icon: Users },
-    { id: 'to-bien-tap', label: 'Tổ biên tập', icon: BookOpen },
-    { id: 'to-chuyen-gia', label: 'Tổ chuyên gia', icon: Briefcase },
-    { id: 'co-quan-thuong-truc', label: 'Cơ quan thường trực', icon: Building },
+    { id: 'ban-chi-dao', label: 'Ban Chỉ đạo TW về hoàn thiện thể chế và thực thi pháp luật' },
+    { id: 'van-ban-trien-khai', label: 'Văn bản triển khai' },
 ];
 
 const NghiQuyet66Page = () => {
@@ -118,80 +115,143 @@ const NghiQuyet66Page = () => {
         );
     };
 
+    const renderVanBanTrienKhai = () => {
+        const MOCK_DOCS = [
+            {
+                title: 'Nan test 2/7',
+                desc: 'a b c d e g',
+                date: '02/07/2026',
+                time: '16:31',
+                image: '/images/800-800-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg'
+            },
+            {
+                title: 'T test 2/7',
+                desc: '',
+                date: '02/07/2026',
+                time: '10:42',
+                image: '/images/800-800-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg'
+            },
+            {
+                title: 'Law amending and supplementing a number of articles of the Law on Pharmacy',
+                desc: 'The Ministry of Health has drafted a Law amending and supplementing a number of articles of the Law on Pharmacy to address current shortcomings in...',
+                date: '01/07/2026',
+                time: '09:15',
+                image: '/images/800-800-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg'
+            },
+            {
+                title: 'Thảo test toàn văn nghị quyết 9/6',
+                desc: 's',
+                date: '09/06/2026',
+                time: '15:41',
+                image: '/images/800-800-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg'
+            },
+            {
+                title: 'Chương trình công tác năm 2025 của Ban Chỉ đạo Trung ương về hoàn thiện thể chế, pháp luật',
+                desc: 'Căn cứ Quy định số 297-QĐ/TW, ngày 04/6/2025 của Bộ Chính trị về chức năng, nhiệm vụ, quyền hạn, chế độ làm việc, quan hệ công tác của Ban Chỉ đạo...',
+                date: '12/06/2025',
+                time: '03:57',
+                image: '/images/800-800-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg'
+            },
+            {
+                title: 'TOÀN VĂN: Nghị quyết 140/NQ-CP về Chương trình hành động của Chính phủ thực hiện đổi mới công tác xây dựng và thi hành pháp luật',
+                desc: 'Năm 2025, cơ bản hoàn thành việc tháo gỡ những "điểm nghẽn" do quy định pháp luật Chương trình nhằm tổ chức thể chế hóa và thực hiện đầy đủ các quan...',
+                date: '29/05/2025',
+                time: '17:08',
+                image: '/images/800-800-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg'
+            }
+        ];
+
+        return (
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10 animate-fadeIn mt-2">
+                <div className="text-center mb-8">
+                    <h2 className="text-2xl font-bold text-[#003366] mb-3">Tài liệu Nghị quyết số 66-NQ/TW và các văn bản liên quan</h2>
+                    <p className="text-gray-500 text-sm">
+                        Các tài liệu, văn bản chính thức liên quan đến Nghị quyết số 66-NQ/TW về hoàn thiện thể chế, pháp luật
+                    </p>
+                </div>
+                
+                <div className="flex flex-col">
+                    {MOCK_DOCS.map((doc, idx) => (
+                        <div key={idx} className="flex flex-col md:flex-row gap-5 py-6 border-b border-gray-100 last:border-0 hover:bg-gray-50/50 transition-colors">
+                            <div className="w-full md:w-[280px] h-[160px] shrink-0 overflow-hidden rounded-xl bg-gray-100">
+                                <img src={doc.image} alt={doc.title} className="w-full h-full object-cover" />
+                            </div>
+                            <div className="flex flex-col justify-center py-2 flex-1 min-w-0">
+                                <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 hover:text-[#0066FF] cursor-pointer transition-colors">
+                                    {doc.title}
+                                </h3>
+                                {doc.desc && (
+                                    <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+                                        {doc.desc}
+                                    </p>
+                                )}
+                                <div className="mt-auto flex items-center text-xs font-medium text-gray-400 gap-4">
+                                    <div className="flex items-center gap-1.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                                        <span>{doc.date}</span>
+                                    </div>
+                                    <div className="flex items-center gap-1.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                        <span>{doc.time}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Pagination */}
+                <div className="flex justify-center mt-10">
+                    <div className="flex gap-2 items-center">
+                        <button className="px-3 py-1.5 rounded-md border border-gray-200 text-sm text-gray-400 cursor-not-allowed">Trước</button>
+                        <button className="w-8 h-8 flex items-center justify-center rounded-md bg-[#0066FF] text-white font-medium text-sm shadow-sm">1</button>
+                        <button className="w-8 h-8 flex items-center justify-center rounded-md border border-gray-200 text-gray-600 hover:bg-gray-50 text-sm">2</button>
+                        <button className="px-3 py-1.5 rounded-md border border-gray-200 text-sm text-gray-600 hover:bg-gray-50">Sau</button>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
             {/* Hero Banner */}
-            <div className="relative pt-8 pb-16 overflow-hidden bg-[#0f172a]">
-                <div
-                    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-                    style={{ backgroundImage: "url('/images/dong_son_cover.png')" }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a] via-[#0f172a]/80 to-transparent" />
-                
-                <div className="container mx-auto px-4 relative z-10 max-w-[1280px]">
-                    <nav className="flex items-center gap-1.5 text-gray-300 text-[13px] mb-8">
-                        <Link to="/" className="hover:text-white transition-colors">Trang chủ</Link>
-                        <ChevronRight size={14} />
-                        <span className="text-white font-medium">Nghị quyết 66</span>
-                    </nav>
-
-                    <div className="max-w-4xl">
-                        <div className="inline-block bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
-                            Văn kiện Trung ương
-                        </div>
-                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-                            Nghị quyết số 66-NQ/TW
-                        </h1>
-                        <p className="text-lg text-gray-300 leading-relaxed max-w-3xl">
-                            Về đổi mới công tác xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới.
-                        </p>
-                    </div>
+            <div className="relative pt-8 pb-8 bg-gradient-to-b from-[#e8f1fc] to-white border-b border-gray-200/60 shadow-sm">
+                <div className="container mx-auto px-4 max-w-[1280px]">
+                    <h1 className="text-[#003366] text-lg md:text-xl font-bold leading-relaxed max-w-6xl">
+                        Nghị quyết số 66-NQ/TW ngày 30/4/2025 của Bộ Chính trị về đổi mới công tác xây dựng và thi hành pháp luật đáp ứng yêu cầu phát triển đất nước trong kỷ nguyên mới
+                    </h1>
                 </div>
             </div>
 
             {/* Tabs */}
-            <div className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
-                <div className="container mx-auto px-4 max-w-[1280px]">
-                    <div className="flex overflow-x-auto hide-scrollbar">
-                        <div className="flex space-x-2 md:space-x-8">
-                            {TABS.map((tab) => {
-                                const isActive = activeTab === tab.id;
-                                const Icon = tab.icon;
-                                return (
-                                    <button
-                                        key={tab.id}
-                                        onClick={() => handleTabChange(tab.id)}
-                                        className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm whitespace-nowrap transition-colors ${
-                                            isActive
-                                                ? 'border-[#1e3a8a] text-[#1e3a8a]'
-                                                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                                        }`}
-                                    >
-                                        <Icon size={16} />
-                                        {tab.label}
-                                    </button>
-                                );
-                            })}
-                        </div>
+            <div className="bg-white sticky top-0 z-40">
+                <div className="container mx-auto px-4 max-w-[1280px] py-4">
+                    <div className="flex items-center space-x-2 md:space-x-4 p-2 bg-white border border-gray-100 rounded-xl shadow-sm overflow-x-auto hide-scrollbar">
+                        {TABS.map((tab) => {
+                            const isActive = activeTab === tab.id;
+                            return (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => handleTabChange(tab.id)}
+                                    className={`font-medium text-[15px] whitespace-nowrap transition-all px-6 py-2.5 rounded-full ${
+                                        isActive
+                                            ? 'bg-[#0066FF] text-white shadow-sm'
+                                            : 'text-gray-600 hover:text-gray-900 bg-transparent'
+                                    }`}
+                                >
+                                    {tab.label}
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
 
             {/* Content Area */}
-            <div className="container mx-auto px-4 max-w-[1280px] py-10">
+            <div className="container mx-auto px-4 max-w-[1280px] py-6">
                 {activeTab === 'ban-chi-dao' && renderBanChiDao()}
-                
-                {activeTab !== 'ban-chi-dao' && (
-                    <div className="bg-white rounded-2xl p-12 text-center border border-gray-200 shadow-sm animate-fadeIn">
-                        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400">
-                            {React.createElement(TABS.find(t => t.id === activeTab)?.icon || FileText, { size: 24 })}
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">Nội dung đang được cập nhật</h3>
-                        <p className="text-gray-500 max-w-md mx-auto">
-                            Dữ liệu cho mục "{TABS.find(t => t.id === activeTab)?.label}" hiện đang được biên soạn và sẽ sớm được công bố.
-                        </p>
-                    </div>
-                )}
+                {activeTab === 'van-ban-trien-khai' && renderVanBanTrienKhai()}
             </div>
         </div>
     );
