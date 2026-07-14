@@ -10,15 +10,23 @@ const AboutPage = () => {
         <div className="font-sans min-h-screen flex flex-col pt-0 pb-0 bg-white">
             {/* About Hero Banner */}
             <div
-                className="relative bg-[#0f4c81] text-white pt-20 pb-20 overflow-hidden shadow-inner bg-cover bg-center flex flex-col items-center justify-center text-center"
-                style={{ backgroundImage: "url('/hero-bg-3.png')" }}
+                className="relative text-white min-h-[calc(100vh-80px)] overflow-hidden flex flex-col items-center justify-center text-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#0b5cd5] via-[#04337b] to-[#011a43]"
             >
+                {/* Background image overlay with mix-blend-overlay or opacity */}
+                <div
+                    className="absolute inset-0 bg-no-repeat bg-center opacity-10 mix-blend-overlay"
+                    style={{
+                        backgroundImage: "url('/images/dong_son_cover.png')",
+                        backgroundSize: 'cover'
+                    }}
+                />
+
                 <div className="relative z-10 flex flex-col items-center max-w-4xl px-4">
-                    <img src="/logo.png" alt="Quốc huy" className="w-20 h-20 md:w-24 md:h-24 object-contain mb-4 drop-shadow-lg" />
-                    <h1 className="text-3xl md:text-4xl font-bold uppercase drop-shadow-md mb-4">
+                    <img src="/logo.png" alt="Quốc huy" className="w-24 h-24 md:w-28 md:h-28 object-contain mb-8 drop-shadow-2xl" />
+                    <h1 className="text-3xl md:text-5xl font-extrabold uppercase drop-shadow-lg mb-6 font-sans">
                         CỔNG PHÁP LUẬT QUỐC GIA
                     </h1>
-                    <p className="text-lg md:text-2xl font-medium drop-shadow-sm text-blue-100 italic">
+                    <p className="text-lg md:text-xl font-medium drop-shadow-md text-blue-100 max-w-2xl leading-relaxed">
                         Đồng hành cùng người dân, doanh nghiệp bước vào kỷ nguyên mới
                     </p>
                 </div>
