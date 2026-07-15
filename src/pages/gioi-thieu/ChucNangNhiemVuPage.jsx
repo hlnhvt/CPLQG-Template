@@ -7,7 +7,7 @@ const ChucNangNhiemVuPage = () => {
         <div className="bg-[#f0f2f5] min-h-screen font-sans">
 
             {/* HERO SECTION - FORMAL */}
-            <div className="bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white pt-16 pb-16 relative">
+            <div className="bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white pt-10 pb-10 relative">
                 {/* Subtle overlay pattern */}
                 <div className="absolute inset-0 opacity-10 bg-[url('/pattern.png')] mix-blend-overlay"></div>
                 <div className="absolute top-0 right-0 w-[500px] h-full overflow-hidden opacity-5 pointer-events-none">
@@ -15,10 +15,9 @@ const ChucNangNhiemVuPage = () => {
                 </div>
 
                 <div className="container mx-auto px-4 max-w-[1200px] relative z-10">
-
                     <div className="max-w-4xl">
-                        <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight tracking-tight">CHỨC NĂNG & NHIỆM VỤ</h1>
-                        <p className="text-blue-100 text-lg leading-relaxed max-w-3xl opacity-90 border-l-4 border-yellow-400 pl-4 py-1">
+                        <h1 className="text-2xl md:text-4xl font-bold mb-4 leading-tight tracking-tight">CHỨC NĂNG & NHIỆM VỤ</h1>
+                        <p className="text-blue-100 text-base leading-relaxed max-w-3xl opacity-90 border-l-4 border-yellow-400 pl-4 py-1">
                             Quy định chi tiết về vị trí, vai trò, chức năng và các nhiệm vụ trọng tâm của Cổng Thông tin pháp luật quốc gia trong việc cung cấp thông tin, hỗ trợ pháp lý và thúc đẩy chuyển đổi số ngành Tư pháp.
                         </p>
                     </div>
@@ -156,20 +155,21 @@ const ChucNangNhiemVuPage = () => {
                     {/* RIGHT SIDEBAR - TABLE OF CONTENTS / LINKS */}
                     <aside className="w-full lg:w-[320px] shrink-0 space-y-6 flex flex-col">
 
-                        {/* TOC */}
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 sticky top-24">
-                            <h3 className="font-bold text-[#0f4c81] text-[15px] mb-4 uppercase tracking-wider relative inline-block">
-                                Danh mục nội dung
-                                <span className="absolute -bottom-1 left-0 w-1/2 h-0.5 bg-yellow-400"></span>
+                        {/* Related Docs */}
+                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+                            <h3 className="font-bold text-[#0f4c81] text-[15px] mb-4 uppercase tracking-wider flex items-center gap-2">
+                                <FileText size={18} className="text-blue-600" />
+                                Tài liệu tham khảo
                             </h3>
-                            <nav className="space-y-1">
-                                <a href="#vi-tri-chuc-nang" className="block px-3 py-2 text-[14px] font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors">
-                                    I. Vị trí và Chức năng
+                            <div className="space-y-3">
+                                <a href="#" className="flex items-start gap-3 p-3 rounded-lg border border-gray-100 hover:border-blue-300 hover:bg-blue-50/50 transition-colors group">
+                                    <FileText size={20} className="text-blue-500 mt-0.5 shrink-0" />
+                                    <div>
+                                        <p className="text-[13px] font-semibold text-gray-800 group-hover:text-blue-700 leading-tight">Quyết định phê duyệt Đề án Cổng Pháp luật quốc gia</p>
+                                        <span className="text-[11px] text-gray-500">PDF, 1.2 MB</span>
+                                    </div>
                                 </a>
-                                <a href="#nhiem-vu" className="block px-3 py-2 text-[14px] font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors">
-                                    II. Nhiệm vụ trọng tâm
-                                </a>
-                            </nav>
+                            </div>
                         </div>
 
                         {/* Co quan chu quan */}
@@ -186,19 +186,7 @@ const ChucNangNhiemVuPage = () => {
                             </div>
                         </div>
 
-                        {/* Related Docs */}
-                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5">
-                            <h3 className="font-bold text-[#0f4c81] text-[15px] mb-4 uppercase tracking-wider">Tài liệu tham khảo</h3>
-                            <div className="space-y-3">
-                                <a href="#" className="flex items-start gap-3 p-3 rounded-lg border border-gray-100 hover:border-blue-300 hover:bg-blue-50/50 transition-colors group">
-                                    <FileText size={20} className="text-blue-500 mt-0.5 shrink-0" />
-                                    <div>
-                                        <p className="text-[13px] font-semibold text-gray-800 group-hover:text-blue-700 leading-tight">Quyết định phê duyệt Đề án Cổng Pháp luật quốc gia</p>
-                                        <span className="text-[11px] text-gray-500">PDF, 1.2 MB</span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+
 
                     </aside>
                 </div>
