@@ -294,20 +294,6 @@ const NghienCuuTraoDoiPage = () => {
                             </div>
                         </div>
 
-                        {/* Contact Widget */}
-                        <div className="bg-white rounded-xl border border-gray-100 shadow-md p-6 relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500 rounded-full blur-3xl opacity-10 -mr-10 -mt-10"></div>
-                            <h3 className="font-bold text-[#0f4c81] text-[16px] mb-2 uppercase">Nhận gửi đăng bài</h3>
-                            <p className="text-[13px] text-gray-600 leading-relaxed mb-5">Ban biên tập luôn hoan nghênh và tiếp nhận các bài viết phân tích, nghiên cứu chuyên sâu từ các chuyên gia, luật sư và nhà nghiên cứu.</p>
-                            <div className="space-y-3">
-                                <a href="mailto:banbientap@cplqg.vn" className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-[#0f4c81] hover:bg-blue-800 text-white font-bold rounded-lg transition-colors text-[13px] shadow-sm">
-                                    <MessageSquare size={16} /> Gửi bài viết (Email)
-                                </a>
-                                <a href="tel:18009090" className="flex items-center justify-center gap-2 w-full px-4 py-2.5 bg-gray-50 hover:bg-gray-100 text-[#0f4c81] font-bold rounded-lg border border-gray-200 transition-colors text-[13px]">
-                                    <Phone size={16} /> Hỗ trợ: 1800 9090
-                                </a>
-                            </div>
-                        </div>
                     </aside>
                 </div>
             </div>

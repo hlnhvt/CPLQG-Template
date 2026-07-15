@@ -80,7 +80,7 @@ const DRAFTS_KHAC = [
 ];
 
 // ── Components ────────────────────────────────────────────────────────────────
-const PdfViewerPanel = () => {
+const PdfViewerPanel = ({ title }) => {
     const [zoom, setZoom] = useState(100);
     return (
         <div className="border border-gray-200 rounded-lg overflow-hidden flex flex-col mt-4">
@@ -112,7 +112,7 @@ const PdfViewerPanel = () => {
             {/* Fake Content Area */}
             <div className="bg-gray-200 h-[600px] overflow-auto p-4 md:p-8 flex justify-center custom-scrollbar">
                 <div className="bg-white shadow-md p-8 sm:p-12 transition-all w-full max-w-[800px]" style={{ transform: `scale(${zoom / 100})`, transformOrigin: 'top center' }}>
-                    <h2 className="text-center font-bold text-[18px] mb-8">DỰ THẢO LUẬT DỮ LIỆU (SỬA ĐỔI)</h2>
+                    <h2 className="text-center font-bold text-[18px] mb-8">{title ? title.toUpperCase() : 'DỰ THẢO LUẬT DỮ LIỆU (SỬA ĐỔI)'}</h2>
                     <p className="indent-8 text-justify leading-relaxed mb-4 text-[14px]">
                         <strong>Điều 1. Phạm vi điều chỉnh</strong><br />
                         Luật này quy định về hoạt động thu thập, tổ chức, lưu trữ, xử lý, chia sẻ và bảo vệ dữ liệu trên lãnh thổ nước Cộng hòa Xã hội Chủ nghĩa Việt Nam...
@@ -404,6 +404,7 @@ const DuThaoDetailPage = () => {
 
     // Tab State (UC55, UC56)
     const [activeTab, setActiveTab] = useState('tom-tat');
+    const [viewingDocId, setViewingDocId] = useState(null);
 
     // Mocks for UC59
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -592,8 +593,44 @@ const DuThaoDetailPage = () => {
                             )}
 
                             {activeTab === 'toan-van' && (
-                                <div className="animate-fade-in">
-                                    <PdfViewerPanel />
+                                <div className="animate-fade-in space-y-4">
+                                    <h3 className="text-[16px] font-bold text-[#1a3b8b] mb-4">Danh sách tài liệu</h3>
+                                    {doc.attachments.length === 0 ? (
+                                        <p className="text-gray-500 text-[14px] text-center py-8">Chưa có tài liệu toàn văn.</p>
+                                    ) : (
+                                        <div className="space-y-4">
+                                            {doc.attachments.map(att => (
+                                                <div key={att.id} className="space-y-3">
+                                                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 border border-gray-200 rounded-lg hover:border-blue-300 transition-colors bg-white">
+                                                        <div className="flex items-center gap-3 min-w-0">
+                                                            {att.type === 'PDF' ? <File size={32} className="text-red-500 shrink-0" /> : <FileCode2 size={32} className="text-blue-500 shrink-0" />}
+                                                            <div className="min-w-0">
+                                                                <a href="#" className="text-[14px] font-bold text-[#1a3b8b] hover:underline block truncate" title={att.name}>{att.name}</a>
+                                                                <div className="flex items-center gap-2 mt-1">
+                                                                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${att.type === 'PDF' ? 'bg-red-50 text-red-700 border border-red-100' : 'bg-blue-50 text-blue-700 border border-blue-100'}`}>{att.type}</span>
+                                                                    <span className="text-[12px] text-gray-500 font-medium">{att.size}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex gap-2 shrink-0 w-full sm:w-auto">
+                                                            <button
+                                                                onClick={() => setViewingDocId(viewingDocId === att.id ? null : att.id)}
+                                                                className={`flex flex-1 sm:flex-none justify-center items-center gap-1.5 px-4 py-2 border rounded font-bold transition-colors text-[13px] shadow-sm ${viewingDocId === att.id ? 'bg-blue-50 text-blue-700 border-blue-300' : 'border-gray-300 text-gray-700 hover:text-blue-600 hover:border-blue-400'}`}
+                                                            >
+                                                                <Eye size={15} /> {viewingDocId === att.id ? 'Đóng' : 'Xem'}
+                                                            </button>
+                                                            <button className="flex flex-1 sm:flex-none justify-center items-center gap-1.5 px-4 py-2 bg-[#1a3b8b] text-white border border-[#1a3b8b] rounded hover:bg-blue-800 font-bold transition-colors text-[13px] shadow-sm"><Download size={15} /> Tải xuống</button>
+                                                        </div>
+                                                    </div>
+                                                    {viewingDocId === att.id && (
+                                                        <div className="animate-fade-in pl-0 sm:pl-4">
+                                                            <PdfViewerPanel title={att.name} />
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             )}
 
@@ -635,7 +672,7 @@ const DuThaoDetailPage = () => {
 
                             {activeTab === 'tai-lieu' && (
                                 <div className="animate-fade-in space-y-3">
-                                    <h3 className="text-[18px] font-bold text-gray-800 mb-4 border-b border-gray-100 pb-2">Danh sách tài liệu đính kèm</h3>
+                                    <h3 className="text-[16px] font-bold text-[#1a3b8b] mb-4">Danh sách tài liệu đính kèm</h3>
                                     {doc.attachments.length === 0 ? (
                                         <p className="text-gray-500 text-[14px] text-center py-8">Chưa có tài liệu đính kèm.</p>
                                     ) : (
@@ -652,8 +689,8 @@ const DuThaoDetailPage = () => {
                                                     </div>
                                                 </div>
                                                 <div className="flex gap-2 shrink-0 w-full sm:w-auto">
-                                                    <button className="flex-1 sm:flex-none justify-center items-center gap-1.5 px-4 py-2 border border-gray-300 rounded hover:text-blue-600 hover:border-blue-400 font-bold transition-colors text-[13px] text-gray-700 shadow-sm"><Eye size={15} /> Xem</button>
-                                                    <button className="flex-1 sm:flex-none justify-center items-center gap-1.5 px-4 py-2 bg-[#1a3b8b] text-white border border-[#1a3b8b] rounded hover:bg-blue-800 font-bold transition-colors text-[13px] shadow-sm"><Download size={15} /> Tải xuống</button>
+                                                    <button className="flex flex-1 sm:flex-none justify-center items-center gap-1.5 px-4 py-2 border border-gray-300 rounded hover:text-blue-600 hover:border-blue-400 font-bold transition-colors text-[13px] text-gray-700 shadow-sm"><Eye size={15} /> Xem</button>
+                                                    <button className="flex flex-1 sm:flex-none justify-center items-center gap-1.5 px-4 py-2 bg-[#1a3b8b] text-white border border-[#1a3b8b] rounded hover:bg-blue-800 font-bold transition-colors text-[13px] shadow-sm"><Download size={15} /> Tải xuống</button>
                                                 </div>
                                             </div>
                                         ))
@@ -1023,7 +1060,7 @@ const DuThaoDetailPage = () => {
                             <p className="font-bold text-[16px] mb-2 uppercase relative z-10">Hỗ trợ</p>
                             <p className="text-[13px] text-blue-100 mb-4 opacity-90 leading-relaxed relative z-10">Nếu bạn gặp khó khăn trong việc đóng góp ý kiến hoặc cần cung cấp thêm tài liệu, vui lòng liên hệ trực tiếp:</p>
                             <div className="text-[14px] font-bold flex items-center gap-2 mb-2 relative z-10"><Building2 size={16} /> Bộ Công an</div>
-                            <div className="text-[13px] flex items-center gap-2 relative z-10"><div className="w-5 h-5 rounded bg-white/20 flex items-center justify-center font-bold">@</div> duthap@bocongan.gov.vn</div>
+                            <div className="text-[13px] flex items-center gap-2 relative z-10"><div className="w-5 h-5 rounded bg-white/20 flex items-center justify-center font-bold">@</div> duthao@bocongan.gov.vn</div>
                         </div>
                     </div>
 
