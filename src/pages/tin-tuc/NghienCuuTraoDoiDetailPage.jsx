@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Calendar, ChevronRight, Copy, Share2, Facebook, Phone, MessageSquare, ArrowRight, Minus, Plus, Volume2, Check, Download, FileText, FileSpreadsheet, Maximize2, X } from 'lucide-react';
+import { Calendar, ChevronRight, Copy, Share2, Facebook, Phone, MessageSquare, ArrowRight, Minus, Plus, Volume2, Check, Download, FileText, FileSpreadsheet, Maximize2, X, PenLine, Clock, Link2 } from 'lucide-react';
 
 // ---- MOCK DATA ----
 const ARTICLE = {
@@ -100,32 +100,45 @@ const NghienCuuTraoDoiDetailPage = () => {
 
                             {/* Meta Data */}
                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-gray-100">
-                                <div>
-                                    <p className="font-semibold text-gray-800 text-[15px] mb-1">Tác giả: {article.author}</p>
-                                    <div className="flex items-center gap-1.5 text-gray-500 text-[13px]">
-                                        <Calendar size={14} /> Xuất bản: {article.date} | Cập nhật gần nhất: {article.date}
+                                <div className="flex items-center gap-4 flex-wrap text-gray-500 text-[13px] font-medium">
+                                    <div className="flex items-center gap-1.5">
+                                        <Calendar size={14} className="text-gray-400" />
+                                        <span>{article.date.split(' ')[0]}</span>
+                                    </div>
+                                    <div className="flex items-center gap-1.5">
+                                        <Clock size={14} className="text-gray-400" />
+                                        <span>{article.date.split(' ')[1]}</span>
                                     </div>
                                 </div>
 
                                 {/* Toolbar */}
-                                <div className="flex flex-wrap items-center gap-2">
-                                    <div className="flex items-center gap-1 border border-gray-200 rounded-md overflow-hidden bg-gray-50">
-                                        <button onClick={decreaseFontSize} disabled={fontSize <= MIN_FONT} className="px-3 py-1.5 hover:bg-gray-200 disabled:opacity-40 transition-colors text-gray-600" title="Giảm cỡ chữ">
-                                            <Minus size={14} />
+                                <div className="flex flex-wrap items-center gap-3">
+                                    {/* Font Size Pill */}
+                                    <div className="flex items-center gap-2 border border-gray-200 rounded-full px-4 py-1 bg-white text-[13px] text-gray-600 shadow-sm">
+                                        <button onClick={() => setFontSize(100)} className="hover:text-blue-600 font-bold transition-colors">Đặt lại</button>
+                                        <span className="text-gray-200">|</span>
+                                        <button onClick={decreaseFontSize} disabled={fontSize <= MIN_FONT} className="p-1 hover:bg-gray-100 rounded-full disabled:opacity-40 transition-colors" title="Giảm cỡ chữ">
+                                            <Minus size={12} />
                                         </button>
-                                        <span className="px-2 text-[12px] font-bold text-gray-700 min-w-[44px] text-center">{fontSize}%</span>
-                                        <button onClick={increaseFontSize} disabled={fontSize >= MAX_FONT} className="px-3 py-1.5 hover:bg-gray-200 disabled:opacity-40 transition-colors text-gray-600" title="Tăng cỡ chữ">
-                                            <Plus size={14} />
+                                        <span className="text-[12px] font-bold text-gray-700 min-w-[36px] text-center">{fontSize}%</span>
+                                        <button onClick={increaseFontSize} disabled={fontSize >= MAX_FONT} className="p-1 hover:bg-gray-100 rounded-full disabled:opacity-40 transition-colors" title="Tăng cỡ chữ">
+                                            <Plus size={12} />
                                         </button>
                                     </div>
-                                    <button onClick={handleCopyLink} title="Sao chép liên kết" className={`p-1.5 px-3 flex items-center gap-1.5 rounded-md border font-medium text-[12px] transition-colors ${copied ? 'border-green-300 bg-green-50 text-green-600' : 'border-gray-200 bg-white text-gray-600 hover:bg-gray-50'}`}>
-                                        {copied ? <Check size={14} /> : <Copy size={14} />} {copied ? 'Đã chép' : 'Copy'}
+
+                                    {/* Copy Link Button */}
+                                    <button onClick={handleCopyLink} title="Sao chép liên kết" className={`w-8 h-8 flex items-center justify-center rounded-full border transition-colors ${copied ? 'border-green-300 bg-green-50 text-green-600' : 'border-gray-300 bg-white text-gray-600 hover:bg-gray-100'}`}>
+                                        {copied ? <Check size={14} /> : <Link2 size={14} />}
                                     </button>
-                                    <button title="Đọc bài viết (TTS)" className="p-1.5 px-3 flex items-center gap-1.5 rounded-md border border-blue-200 bg-blue-50 text-blue-700 font-medium text-[12px] hover:bg-blue-100 transition-colors">
-                                        <Volume2 size={14} /> Nghe
+
+                                    {/* Facebook Share Button */}
+                                    <button title="Chia sẻ Facebook" className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 hover:bg-gray-100 transition-colors">
+                                        <Facebook size={14} />
                                     </button>
-                                    <button title="Chia sẻ Facebook" className="p-1.5 rounded-md border border-gray-200 bg-blue-600 text-white hover:bg-blue-700 transition-colors">
-                                        <Facebook size={16} className="fill-current" />
+
+                                    {/* General Share Button */}
+                                    <button title="Chia sẻ" className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 hover:bg-gray-100 transition-colors">
+                                        <Share2 size={14} />
                                     </button>
                                 </div>
                             </div>
@@ -200,19 +213,10 @@ const NghienCuuTraoDoiDetailPage = () => {
 
                     {/* === SIDEBAR === */}
                     <aside className="w-full lg:w-72 xl:w-80 shrink-0 space-y-6">
-                        {/* Event Banner */}
-                        <div className="rounded-xl overflow-hidden shadow-sm border border-orange-200 group cursor-pointer relative">
-                            <img src="/poster1.png" alt="Sự kiện" className="w-full object-cover aspect-square opacity-90 group-hover:opacity-100 transition-opacity" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-red-900/90 via-transparent to-transparent flex flex-col justify-end p-5">
-                                <h4 className="text-yellow-400 font-bold text-sm uppercase drop-shadow-md pb-1 border-b border-yellow-400/50">Lễ tổng kết</h4>
-                                <h5 className="text-white font-bold text-lg leading-tight mt-2 drop-shadow-md">Giải thưởng sinh viên nghiên cứu khoa học pháp lý 2026</h5>
-                            </div>
-                        </div>
-
                         {/* Latest News */}
                         <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
                             <div className="bg-[#0f4c81] px-4 py-3">
-                                <h3 className="text-white font-bold text-[14px]">Tin bài cùng lĩnh vực</h3>
+                                <h3 className="text-white font-bold text-[14px]">Bài viết liên quan</h3>
                             </div>
                             <div className="divide-y divide-gray-50">
                                 {LATEST_NEWS.map(item => (
@@ -236,16 +240,54 @@ const NghienCuuTraoDoiDetailPage = () => {
                             </div>
                         </div>
 
-                        {/* Contact Widget */}
-                        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 pb-6">
-                            <h3 className="font-bold text-[15px] text-[#0f4c81] mb-2">Đóng góp nghiên cứu</h3>
-                            <p className="text-[13px] text-gray-600 leading-relaxed mb-4">Các chuyên gia, nhà nghiên cứu có thể chia sẻ công trình nghiên cứu để đăng tải trên hệ thống.</p>
-                            <div className="space-y-2">
-                                <a href="mailto:banbientap@cplqg.vn" className="flex items-center gap-2 w-full px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold rounded transition-colors text-[13px] justify-center">
-                                    <MessageSquare size={15} /> Liên hệ Ban biên tập
-                                </a>
+                        {/* Event Banner */}
+                        <div className="rounded-xl overflow-hidden shadow-sm border border-orange-200 group cursor-pointer relative">
+                            <img src="/poster1.png" alt="Sự kiện" className="w-full object-cover aspect-square opacity-90 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-red-900/90 via-transparent to-transparent flex flex-col justify-end p-5">
+                                <h4 className="text-yellow-400 font-bold text-sm uppercase drop-shadow-md pb-1 border-b border-yellow-400/50">Lễ tổng kết</h4>
+                                <h5 className="text-white font-bold text-lg leading-tight mt-2 drop-shadow-md">Giải thưởng sinh viên nghiên cứu khoa học pháp lý 2026</h5>
                             </div>
                         </div>
+
+                        {/* Feedback Widget Banner */}
+                        <div className="bg-gradient-to-b from-[#0f4c81] to-[#072d54] text-white p-6 rounded-2xl shadow-md text-center relative overflow-hidden flex flex-col items-center">
+                            {/* Decorative background patterns */}
+                            <div className="absolute inset-0 opacity-10 flex justify-around items-center pointer-events-none">
+                                <div className="w-4 h-24 bg-white rounded-full transform translate-y-4"></div>
+                                <div className="w-4 h-32 bg-white rounded-full transform -translate-y-4"></div>
+                                <div className="w-4 h-20 bg-white rounded-full transform translate-y-8"></div>
+                                <div className="w-4 h-28 bg-white rounded-full transform -translate-y-2"></div>
+                            </div>
+
+                            <h3 className="text-[20px] font-bold text-white mb-6 uppercase tracking-wider leading-tight z-10">
+                                Chúng tôi luôn<br />lắng nghe &<br />phản hồi
+                            </h3>
+
+                            {/* Circular feedback icon illustration */}
+                            <div className="w-24 h-24 rounded-full border-2 border-white/30 flex items-center justify-center mb-6 relative z-10">
+                                <div className="absolute inset-0 border-2 border-t-white border-b-white rounded-full animate-[spin_12s_linear_infinite] opacity-60"></div>
+                                <div className="relative flex items-center justify-center">
+                                    <div className="relative">
+                                        <MessageSquare size={32} className="text-white/90" />
+                                        <MessageSquare size={20} className="text-white/75 absolute -top-2 -right-2" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p className="text-[13px] text-blue-100 leading-relaxed mb-6 max-w-xs opacity-90 z-10">
+                                Người dân và doanh nghiệp có thể gửi kiến nghị, góp ý xây dựng, hoàn thiện chính sách, pháp luật thông qua các phương thức dưới đây.
+                            </p>
+
+                            <div className="w-full space-y-3 z-10 font-sans">
+                                <a href="tel:02462739715" className="flex items-center justify-center gap-2 w-full py-3 bg-white text-[#0f4c81] font-bold rounded-lg hover:bg-blue-50 transition-colors text-[13px] shadow-sm">
+                                    <Phone size={15} fill="currentColor" /> Gọi tổng đài 024.62739715
+                                </a>
+                                <Link to="/gop-y" className="flex items-center justify-center gap-2 w-full py-3 border border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors text-[13px]">
+                                    <PenLine size={15} /> Gửi góp ý trực tiếp
+                                </Link>
+                            </div>
+                        </div>
+
                     </aside>
                 </div>
             </div>

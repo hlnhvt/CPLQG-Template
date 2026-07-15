@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, ChevronRight, ChevronLeft, ArrowRight, Filter, Search, Phone, MessageSquare } from 'lucide-react';
+import { Calendar, ChevronRight, ChevronLeft, ArrowRight, Filter, Search, Phone, MessageSquare, PenLine } from 'lucide-react';
 
 // ---- MOCK DATA ----
 const DOMAINS = ["Tất cả lĩnh vực", "Dân sự", "Hình sự", "Hành chính", "Thương mại", "Lao động", "Sở hữu trí tuệ"];
@@ -258,15 +258,6 @@ const NghienCuuTraoDoiPage = () => {
 
                     {/* === SIDEBAR === */}
                     <aside className="w-full lg:w-72 xl:w-80 shrink-0 space-y-6">
-                        {/* Event Banner */}
-                        <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 group cursor-pointer relative">
-                            <img src="/poster1.png" alt="Sự kiện" className="w-full object-cover aspect-square opacity-90 group-hover:opacity-100 transition-opacity" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-red-900/90 via-transparent to-transparent flex flex-col justify-end p-5">
-                                <h4 className="text-yellow-400 font-bold text-sm uppercase drop-shadow-md pb-1 border-b border-yellow-400/50">Hội thảo khoa học</h4>
-                                <h5 className="text-white font-bold text-lg leading-tight mt-2 drop-shadow-md">Hoàn thiện pháp luật về tư pháp điện tử năm 2026</h5>
-                            </div>
-                        </div>
-
                         {/* Latest News Sidebar */}
                         <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
                             <div className="bg-[#0f4c81] px-5 py-3.5 flex items-center justify-between">
@@ -291,6 +282,54 @@ const NghienCuuTraoDoiPage = () => {
                                 <button onClick={clearFilters} className="text-[13px] text-blue-600 font-bold hover:text-blue-800 flex items-center gap-1.5 mx-auto">
                                     Xem tất cả bài viết <ArrowRight size={14} />
                                 </button>
+                            </div>
+                        </div>
+
+                        {/* Event Banner */}
+                        <div className="rounded-xl overflow-hidden shadow-sm border border-gray-100 group cursor-pointer relative">
+                            <img src="/poster1.png" alt="Sự kiện" className="w-full object-cover aspect-square opacity-90 group-hover:opacity-100 transition-opacity" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-red-900/90 via-transparent to-transparent flex flex-col justify-end p-5">
+                                <h4 className="text-yellow-400 font-bold text-sm uppercase drop-shadow-md pb-1 border-b border-yellow-400/50">Hội thảo khoa học</h4>
+                                <h5 className="text-white font-bold text-lg leading-tight mt-2 drop-shadow-md">Hoàn thiện pháp luật về tư pháp điện tử năm 2026</h5>
+                            </div>
+                        </div>
+
+                        {/* Feedback Widget Banner */}
+                        <div className="bg-gradient-to-b from-[#0f4c81] to-[#072d54] text-white p-6 rounded-2xl shadow-md text-center relative overflow-hidden flex flex-col items-center">
+                            {/* Decorative background patterns */}
+                            <div className="absolute inset-0 opacity-10 flex justify-around items-center pointer-events-none">
+                                <div className="w-4 h-24 bg-white rounded-full transform translate-y-4"></div>
+                                <div className="w-4 h-32 bg-white rounded-full transform -translate-y-4"></div>
+                                <div className="w-4 h-20 bg-white rounded-full transform translate-y-8"></div>
+                                <div className="w-4 h-28 bg-white rounded-full transform -translate-y-2"></div>
+                            </div>
+
+                            <h3 className="text-[20px] font-bold text-white mb-6 uppercase tracking-wider leading-tight z-10">
+                                Chúng tôi luôn<br />lắng nghe &<br />phản hồi
+                            </h3>
+
+                            {/* Circular feedback icon illustration */}
+                            <div className="w-24 h-24 rounded-full border-2 border-white/30 flex items-center justify-center mb-6 relative z-10">
+                                <div className="absolute inset-0 border-2 border-t-white border-b-white rounded-full animate-[spin_12s_linear_infinite] opacity-60"></div>
+                                <div className="relative flex items-center justify-center">
+                                    <div className="relative">
+                                        <MessageSquare size={32} className="text-white/90" />
+                                        <MessageSquare size={20} className="text-white/75 absolute -top-2 -right-2" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p className="text-[13px] text-blue-100 leading-relaxed mb-6 max-w-xs opacity-90 z-10">
+                                Người dân và doanh nghiệp có thể gửi kiến nghị, góp ý xây dựng, hoàn thiện chính sách, pháp luật thông qua các phương thức dưới đây.
+                            </p>
+
+                            <div className="w-full space-y-3 z-10 font-sans">
+                                <a href="tel:02462739715" className="flex items-center justify-center gap-2 w-full py-3 bg-white text-[#0f4c81] font-bold rounded-lg hover:bg-blue-50 transition-colors text-[13px] shadow-sm">
+                                    <Phone size={15} fill="currentColor" /> Gọi tổng đài 024.62739715
+                                </a>
+                                <Link to="/gop-y" className="flex items-center justify-center gap-2 w-full py-3 border border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors text-[13px]">
+                                    <PenLine size={15} /> Gửi góp ý trực tiếp
+                                </Link>
                             </div>
                         </div>
 
