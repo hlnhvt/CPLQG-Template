@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
     Search, ChevronLeft, ChevronRight, ChevronDown, ChevronUp,
@@ -102,41 +102,134 @@ const Pagination = ({ current, total, onChange }) => {
     );
 };
 
-// ── Advanced Search Form ──────────────────────────────────────────────────────
-const AdvancedSearch = ({ show45SoHieu = false, onClear }) => (
-    <div className="mt-3 bg-blue-50 border border-blue-100 rounded-lg p-4 space-y-3">
-        {show45SoHieu && (
-            <div>
-                <label className="text-[12px] text-gray-600 font-medium block mb-1">Số hiệu văn bản</label>
-                <input className="w-full px-3 py-1.5 text-[13px] border border-gray-200 rounded outline-none focus:border-blue-400"
-                    placeholder="Ví dụ: 66/2024/QH15" />
+const PROVINCES = [
+    "Thành phố Hà Nội", "TP. Hồ Chí Minh", "Đà Nẵng", "Hải Phòng", "Cần Thơ",
+    "Thanh Hóa", "Nghệ An", "Đồng Nai", "Bình Dương", "Bà Rịa - Vũng Tàu"
+];
+
+const AdvancedSearch = ({ show45SoHieu = false, onClear }) => {
+    const [selectedProvinces, setSelectedProvinces] = useState(["Thành phố Hà Nội"]);
+    const [isProvinceOpen, setIsProvinceOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsProvinceOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    const toggleProvince = (prov) => {
+        if (selectedProvinces.includes(prov)) {
+            setSelectedProvinces(selectedProvinces.filter(p => p !== prov));
+        } else {
+            setSelectedProvinces([...selectedProvinces, prov]);
+        }
+    };
+
+    const removeProvince = (e, prov) => {
+        e.stopPropagation();
+        setSelectedProvinces(selectedProvinces.filter(p => p !== prov));
+    };
+
+    return (
+        <div className="mt-4 bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+            <div className="flex items-center justify-between mb-5">
+                <h3 className="font-bold text-[16px] text-gray-800">Tìm kiếm nâng cao</h3>
+                <button onClick={onClear} className="text-[13px] text-blue-600 hover:underline">Xóa dữ liệu tìm kiếm</button>
             </div>
-        )}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {['Loại văn bản', 'Cơ quan ban hành', 'Tình trạng hiệu lực', 'Lĩnh vực hoạt động'].map(label => (
-                <div key={label}>
-                    <label className="text-[12px] text-gray-600 font-medium block mb-1">{label}</label>
-                    <select className="w-full px-2 py-1.5 text-[12px] border border-gray-200 rounded bg-white outline-none focus:border-blue-400">
-                        <option value="">-- Chọn --</option>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-[14px]">
+                {/* Row 1 */}
+                <div>
+                    <select className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 text-gray-700">
+                        <option>Ngày ban hành</option>
+                        <option>Ngày hiệu lực</option>
                     </select>
                 </div>
-            ))}
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-                <label className="text-[12px] text-gray-600 font-medium block mb-1">Ngày ban hành (từ)</label>
-                <input type="date" className="w-full px-2 py-1.5 text-[12px] border border-gray-200 rounded outline-none focus:border-blue-400" />
+                <div>
+                    <input type="date" className="w-full px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-blue-400 text-gray-400" />
+                </div>
+                <div>
+                    <input type="date" className="w-full px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-blue-400 text-gray-400" />
+                </div>
+                <div>
+                    <select className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 text-gray-400">
+                        <option value="">Loại văn bản</option>
+                        <option>Luật</option>
+                        <option>Nghị định</option>
+                        <option>Thông tư</option>
+                    </select>
+                </div>
+
+                {/* Row 2 */}
+                <div>
+                    <select className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 text-gray-400">
+                        <option value="">Cơ quan ban hành</option>
+                        <option>Chính phủ</option>
+                        <option>Bộ Tài chính</option>
+                    </select>
+                </div>
+                <div>
+                    <select className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 text-gray-400">
+                        <option value="">Tình trạng hiệu lực</option>
+                        <option>Còn hiệu lực</option>
+                        <option>Hết hiệu lực</option>
+                    </select>
+                </div>
+
+                <div className="relative" ref={dropdownRef}>
+                    <div
+                        onClick={() => setIsProvinceOpen(!isProvinceOpen)}
+                        className="w-full px-2 min-h-[38px] border border-gray-200 rounded-lg bg-white flex items-center justify-between cursor-pointer flex-wrap gap-1 py-1"
+                    >
+                        <div className="flex flex-wrap gap-1 items-center flex-1">
+                            {selectedProvinces.length === 0 ? (
+                                <span className="text-gray-400 text-[14px] px-1">Tỉnh, thành phố</span>
+                            ) : (
+                                selectedProvinces.map(prov => (
+                                    <div key={prov} className="bg-gray-100/80 text-gray-600 px-2 py-0.5 rounded border border-gray-200 text-[13px] flex items-center gap-1.5 mt-0.5 mb-0.5">
+                                        {prov}
+                                        <span
+                                            onClick={(e) => removeProvince(e, prov)}
+                                            className="text-gray-400 hover:text-gray-600 font-medium cursor-pointer"
+                                        >×</span>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                        <svg className="w-4 h-4 text-gray-400 shrink-0 ml-1 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+
+                    {isProvinceOpen && (
+                        <div className="absolute z-50 top-full left-0 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-48 overflow-y-auto py-1">
+                            {PROVINCES.map(prov => (
+                                <label key={prov} className="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer text-[13px] text-gray-700">
+                                    <input
+                                        type="checkbox"
+                                        className="mr-2 accent-blue-600"
+                                        checked={selectedProvinces.includes(prov)}
+                                        onChange={() => toggleProvince(prov)}
+                                    />
+                                    {prov}
+                                </label>
+                            ))}
+                        </div>
+                    )}
+                </div>
+
+                <div>
+                    <select className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 text-gray-400">
+                        <option value="">Xã/Phường</option>
+                    </select>
+                </div>
             </div>
-            <div>
-                <label className="text-[12px] text-gray-600 font-medium block mb-1">Đến ngày</label>
-                <input type="date" className="w-full px-2 py-1.5 text-[12px] border border-gray-200 rounded outline-none focus:border-blue-400" />
-            </div>
         </div>
-        <div className="flex justify-end">
-            <button onClick={onClear} className="text-[12px] text-blue-600 hover:underline">Xóa dữ liệu tìm kiếm</button>
-        </div>
-    </div>
-);
+    );
+};
 
 // ── Sidebar ───────────────────────────────────────────────────────────────────
 const Sidebar = ({ nhomPQ, setNhomPQ, nhomHN, setNhomHN, selectedLV, toggleLV, selectedCQ, toggleCQ, onReset, hasFilter }) => (
