@@ -65,11 +65,6 @@ const SuccessStoriesPage = () => {
                 </div>
             </div>
 
-            {/* Banner slogan */}
-            <div className="bg-[#c0392b] text-white text-center py-3 px-4 text-[14px] font-bold tracking-wide uppercase">
-                ĐƯA NGHỊ QUYẾT ĐẠI HỘI XIV CỦA ĐẢNG VÀO CUỘC SỐNG
-            </div>
-
             <div className="container mx-auto px-4 max-w-[1200px] mt-8">
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* === MAIN CONTENT === */}
