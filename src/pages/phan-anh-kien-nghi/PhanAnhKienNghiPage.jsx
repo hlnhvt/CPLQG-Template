@@ -1,7 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { BarChart3, Clock, Search, Send, ExternalLink, HelpCircle, FileText, CheckCircle2, RotateCw, Filter, RefreshCcw, ArrowRight } from 'lucide-react';
+import { BarChart3, Clock, Search, Send, ExternalLink, HelpCircle, FileText, CheckCircle2, RotateCw, Filter, RefreshCcw, ArrowRight, FileSpreadsheet, FileText as FilePdf } from 'lucide-react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, PieChart, Pie, Cell, LabelList, Legend } from 'recharts';
+import * as XLSX from 'xlsx';
+
+const MOCK_STATS_LINH_VUC = [
+    { name: 'Đất đai', daXuLy: 600, dangXuLy: 45 },
+    { name: 'Xây dựng', daXuLy: 450, dangXuLy: 30 },
+    { name: 'Giao thông', daXuLy: 320, dangXuLy: 20 },
+    { name: 'Môi trường', daXuLy: 280, dangXuLy: 15 },
+    { name: 'Y tế', daXuLy: 250, dangXuLy: 10 },
+    { name: 'Giáo dục', daXuLy: 210, dangXuLy: 12 },
+    { name: 'Kinh tế', daXuLy: 190, dangXuLy: 5 },
+    { name: 'Nông nghiệp', daXuLy: 150, dangXuLy: 8 },
+    { name: 'Công thương', daXuLy: 120, dangXuLy: 4 },
+    { name: 'Lao động', daXuLy: 100, dangXuLy: 3 },
+    { name: 'Văn hóa', daXuLy: 80, dangXuLy: 2 },
+    { name: 'Tư pháp', daXuLy: 60, dangXuLy: 1 },
+    { name: 'Nội vụ', daXuLy: 50, dangXuLy: 0 },
+    { name: 'Khác', daXuLy: 40, dangXuLy: 2 },
+];
+
+const MOCK_STATS_CO_QUAN = [
+    { name: 'BỘ NÔNG NGHIỆP...', daXuLy: 684, dangXuLy: 25 },
+    { name: 'BỘ TƯ PHÁP', daXuLy: 327, dangXuLy: 37 },
+    { name: 'BỘ CÔNG AN', daXuLy: 300, dangXuLy: 13 },
+    { name: 'BỘ NỘI VỤ', daXuLy: 267, dangXuLy: 32 },
+    { name: 'BỘ TÀI CHÍNH', daXuLy: 267, dangXuLy: 23 },
+    { name: 'BỘ GIÁO DỤC VÀ...', daXuLy: 129, dangXuLy: 15 },
+    { name: 'BỘ XÂY DỰNG', daXuLy: 118, dangXuLy: 5 },
+    { name: 'TP Hồ Chí Minh', daXuLy: 109, dangXuLy: 6 },
+    { name: 'THANH TRA CHÍNH...', daXuLy: 89, dangXuLy: 3 },
+    { name: 'BỘ Y TẾ', daXuLy: 78, dangXuLy: 13 },
+    { name: 'BỘ KHOA HỌC VÀ...', daXuLy: 82, dangXuLy: 2 },
+    { name: 'Hà Nội', daXuLy: 70, dangXuLy: 3 },
+    { name: 'BỘ CÔNG THƯƠNG', daXuLy: 53, dangXuLy: 0 },
+    { name: 'NGÂN HÀNG NHÀ...', daXuLy: 41, dangXuLy: 0 },
+];
+
+const MOCK_STATS_TY_LE = [
+    { name: 'Đã xử lý', value: 85 },
+    { name: 'Đang xử lý', value: 15 },
+];
+const COLORS = ['#10b981', '#f59e0b', '#3b82f6', '#8b5cf6', '#ef4444'];
 
 const MOCK_DATA = [
     { id: '1771794882779', title: 'Thông tư số 04/2025/TT-BTC hướng dẫn quản lý thu ngân sách...', content: 'Tôi đề nghị bộ tài chính làm rõ khoản 2 điều 5 về việc thu phí bảo vệ môi trường đối với khí thải công nghiệp, hiện tại nội dung này đang gây chồng chéo với Nghị định 06/2022/NĐ-CP.', date: '11:09 17/03/2026', status: 'Đã xử lý', agency: 'Bộ Tài chính', level: 'Trung ương' },
@@ -119,124 +161,209 @@ const PhanAnhKienNghiPage = () => {
 // 1. STATISTICS TAB
 // ==============================
 const StatisticsTab = () => {
+    const handleExport = (type) => {
+        if (type === 'XLSX') {
+            // 1. Dữ liệu tổng quan
+            const tongQuanData = [
+                { 'Chỉ tiêu': 'Tổng số PAKN', 'Giá trị': '8,452', 'Ghi chú': 'Tăng 12% so với tháng trước' },
+                { 'Chỉ tiêu': 'Đã xử lý', 'Giá trị': '7,100', 'Ghi chú': '85% tổng số PAKN' },
+                { 'Chỉ tiêu': 'Đang xử lý', 'Giá trị': '1,352', 'Ghi chú': 'Cần đôn đốc xử lý' },
+                { 'Chỉ tiêu': 'Thời gian xử lý TB', 'Giá trị': '5.2 ngày', 'Ghi chú': 'Nhanh hơn 1.5 ngày' }
+            ];
+
+            // 2. Dữ liệu lĩnh vực
+            const linhVucData = MOCK_STATS_LINH_VUC.map(item => ({
+                'Lĩnh vực': item.name,
+                'Đã xử lý': item.daXuLy,
+                'Đang xử lý': item.dangXuLy
+            }));
+
+            // 3. Dữ liệu cơ quan
+            const coQuanData = MOCK_STATS_CO_QUAN.map(item => ({
+                'Cơ quan': item.name,
+                'Đã xử lý': item.daXuLy,
+                'Đang xử lý': item.dangXuLy
+            }));
+
+            // 4. Danh sách PAKN
+            const paknData = MOCK_DATA.map(item => ({
+                'Mã PAKN': item.id,
+                'Tiêu đề': item.title,
+                'Nội dung': item.content,
+                'Thời gian gửi': item.date,
+                'Trạng thái': item.status,
+                'Cơ quan xử lý': item.agency,
+                'Cấp xử lý': item.level
+            }));
+
+            // Tạo workbook
+            const wb = XLSX.utils.book_new();
+
+            // Tạo các worksheet
+            const ws1 = XLSX.utils.json_to_sheet(tongQuanData);
+            const ws2 = XLSX.utils.json_to_sheet(linhVucData);
+            const ws3 = XLSX.utils.json_to_sheet(coQuanData);
+            const ws4 = XLSX.utils.json_to_sheet(paknData);
+
+            // Điều chỉnh độ rộng cột
+            ws1['!cols'] = [{ wch: 25 }, { wch: 15 }, { wch: 30 }];
+            ws2['!cols'] = [{ wch: 25 }, { wch: 15 }];
+            ws3['!cols'] = [{ wch: 25 }, { wch: 15 }];
+            ws4['!cols'] = [{ wch: 15 }, { wch: 50 }, { wch: 80 }, { wch: 20 }, { wch: 15 }, { wch: 30 }, { wch: 15 }];
+
+            // Thêm worksheet vào workbook
+            XLSX.utils.book_append_sheet(wb, ws1, "Tổng quan");
+            XLSX.utils.book_append_sheet(wb, ws2, "Theo lĩnh vực");
+            XLSX.utils.book_append_sheet(wb, ws3, "Theo cơ quan");
+            XLSX.utils.book_append_sheet(wb, ws4, "Danh sách PAKN");
+
+            // Xuất file
+            XLSX.writeFile(wb, "Thong_ke_PAKN.xlsx");
+        } else {
+            alert(`Tính năng xuất file ${type} đang được cập nhật...`);
+        }
+    };
+
     return (
-        <div className="flex flex-col lg:flex-row gap-8">
-            <div className="lg:w-2/3">
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 h-full text-gray-800">
-                    <h2 className="text-xl font-bold text-[#0f4c81] mb-6 flex items-center gap-2 pb-3 border-b border-gray-100">
-                        <Clock className="text-blue-500" /> PHẢN ÁNH ĐÃ XỬ LÝ MỚI NHẤT
-                    </h2>
-                    <ul className="space-y-4">
-                        {MOCK_DATA.slice(0, 4).map(item => (
-                            <li key={item.id} className="p-4 rounded-xl border border-gray-100 hover:shadow-md transition-shadow group">
-                                <Link to={`/phan-anh-kien-nghi/${item.id}`} className="flex items-start gap-4">
-                                    <div className="bg-blue-50 p-3 rounded-lg text-blue-600 shrink-0">
-                                        <FileText size={20} />
-                                    </div>
-                                    <div className="flex-1">
-                                        <h3 className="font-bold text-[#0f4c81] group-hover:text-blue-600 transition-colors line-clamp-2 mb-2 leading-snug">
-                                            [{item.agency}] {item.title}
-                                        </h3>
-                                        <p className="text-sm text-gray-600 line-clamp-2 mb-3">"{item.content}"</p>
-                                        <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs">
-                                            <span className="flex items-center gap-1 text-gray-500 font-medium">
-                                                <Clock size={14} /> {item.date}
-                                            </span>
-                                            {item.status === 'Đã xử lý' ?
-                                                <span className="flex items-center gap-1 font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">
-                                                    <CheckCircle2 size={12} /> Đã xử lý
-                                                </span>
-                                                :
-                                                <span className="flex items-center gap-1 font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">
-                                                    <RotateCw size={12} /> Đang xử lý
-                                                </span>
-                                            }
-                                        </div>
-                                    </div>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                    <div className="text-center mt-6">
-                        <Link to="/phan-anh-kien-nghi?tab=search" className="text-[#0f4c81] font-bold hover:underline flex items-center justify-center gap-1">
-                            Xem tất cả <ArrowRight size={16} />
-                        </Link>
-                    </div>
+        <div className="space-y-6">
+            {/* Header & Actions */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                <h2 className="text-[18px] font-bold text-[#0f4c81] flex items-center gap-2">
+                    <BarChart3 className="text-blue-500" size={20} /> Tổng quan số liệu thống kê
+                </h2>
+                <div className="flex gap-3">
+                    <button onClick={() => handleExport('XLSX')} className="flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 font-bold rounded-lg hover:bg-emerald-100 transition-colors border border-emerald-200 shadow-sm text-[13px]">
+                        <FileSpreadsheet size={16} /> Xuất XLSX
+                    </button>
+                    <button onClick={() => handleExport('PDF')} className="flex items-center gap-2 px-4 py-2 bg-red-50 text-red-700 font-bold rounded-lg hover:bg-red-100 transition-colors border border-red-200 shadow-sm text-[13px]">
+                        <FilePdf size={16} /> Xuất PDF
+                    </button>
                 </div>
             </div>
 
-            {/* Sidebar Widgets */}
-            <div className="lg:w-1/3 flex flex-col gap-6 text-gray-800">
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                    <h3 className="font-bold text-lg mb-4 text-[#0f4c81]">Thống kê lượt truy cập</h3>
-                    <div className="space-y-4">
-                        <div className="flex justify-between items-center pb-2 border-b border-gray-100">
-                            <span className="text-gray-600">Hôm nay</span>
-                            <span className="font-bold text-amber-500 text-lg">1,245</span>
-                        </div>
-                        <div className="flex justify-between items-center pb-2 border-b border-gray-100">
-                            <span className="text-gray-600">Tuần này</span>
-                            <span className="font-bold text-amber-500 text-lg">8,450</span>
-                        </div>
-                        <div className="flex justify-between items-center text-lg mt-2 pt-2">
-                            <span className="font-bold text-gray-800">Tổng lượt truy cập</span>
-                            <span className="font-bold text-[#0f4c81] text-xl">1,024,800</span>
+            {/* KPI Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                    <div className="text-gray-500 text-[13px] font-bold mb-1 uppercase">Tổng số PAKN</div>
+                    <div className="text-3xl font-bold text-[#0f4c81]">8,452</div>
+                    <div className="text-[12px] text-emerald-500 font-medium mt-2">↑ 12% so với tháng trước</div>
+                </div>
+                <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                    <div className="text-gray-500 text-[13px] font-bold mb-1 uppercase">Đã xử lý</div>
+                    <div className="text-3xl font-bold text-emerald-500">7,100</div>
+                    <div className="text-[12px] text-gray-400 font-medium mt-2">85% tổng số PAKN</div>
+                </div>
+                <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                    <div className="text-gray-500 text-[13px] font-bold mb-1 uppercase">Đang xử lý</div>
+                    <div className="text-3xl font-bold text-amber-500">1,352</div>
+                    <div className="text-[12px] text-amber-600 font-medium mt-2">Cần đôn đốc xử lý</div>
+                </div>
+                <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                    <div className="text-gray-500 text-[13px] font-bold mb-1 uppercase">Thời gian xử lý TB</div>
+                    <div className="text-3xl font-bold text-blue-500">5.2 <span className="text-lg">ngày</span></div>
+                    <div className="text-[12px] text-emerald-500 font-medium mt-2">↓ Nhanh hơn 1.5 ngày</div>
+                </div>
+            </div>
+
+            {/* Charts Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Lĩnh vực */}
+                <div className="bg-white rounded-xl shadow-md overflow-hidden">
+                    <h3 className="font-bold text-[16px] text-white bg-[#0f4c81] p-4 text-center uppercase">Thống kê PAKN theo lĩnh vực</h3>
+                    <div className="p-4 h-[600px] w-full relative pb-12">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={MOCK_STATS_LINH_VUC} layout="vertical" margin={{ top: 20, right: 40, bottom: 20, left: 10 }}>
+                                <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f0f0f0" />
+                                <XAxis type="number" hide />
+                                <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fontSize: 13, fill: '#374151', fontWeight: 500 }} width={100} />
+                                <RechartsTooltip cursor={{ fill: '#f3f4f6' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                                <Bar dataKey="daXuLy" name="Đã xử lý" stackId="a" fill="#16a34a" maxBarSize={24}>
+                                    <LabelList dataKey="daXuLy" position="insideRight" fill="#fff" fontSize={12} fontWeight={700} />
+                                </Bar>
+                                <Bar dataKey="dangXuLy" name="Đang xử lý" stackId="a" fill="#0ea5e9" maxBarSize={24}>
+                                    <LabelList dataKey="dangXuLy" position="right" fill="#1e293b" fontSize={12} fontWeight={700} />
+                                </Bar>
+                            </BarChart>
+                        </ResponsiveContainer>
+                        <div className="absolute bottom-12 left-0 right-0 text-center text-[13px] text-gray-500 font-medium">Số lượng phản ánh chính sách</div>
+                        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-6">
+                            <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-[#16a34a]"></div><span className="text-sm font-medium">Đã xử lý</span></div>
+                            <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-[#0ea5e9]"></div><span className="text-sm font-medium">Đang xử lý</span></div>
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                    <h3 className="font-bold text-lg mb-4 text-[#0f4c81]">Thống kê xử lý PAKN</h3>
-                    <div className="relative pt-4">
-                        <div className="flex justify-between items-end mb-4">
-                            <div className="text-center">
-                                <div className="text-3xl font-bold text-[#0f4c81]">8,452</div>
-                                <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mt-1">Tổng PAKN</div>
-                            </div>
-                            <div className="w-px h-12 bg-gray-200"></div>
-                            <div className="text-center">
-                                <div className="text-3xl font-bold text-emerald-500">7,100</div>
-                                <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mt-1">Đã xử lý</div>
-                            </div>
-                            <div className="w-px h-12 bg-gray-200"></div>
-                            <div className="text-center">
-                                <div className="text-3xl font-bold text-amber-500">1,352</div>
-                                <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mt-1">Đang xử lý</div>
-                            </div>
+                {/* Cơ quan */}
+                <div className="bg-white rounded-xl shadow-md overflow-hidden">
+                    <h3 className="font-bold text-[16px] text-white bg-[#0f4c81] p-4 text-center uppercase">Thống kê PAKN theo đơn vị</h3>
+                    <div className="p-4 h-[600px] w-full relative pb-12 flex">
+                        <div className="w-8 shrink-0 flex items-center justify-center">
+                            <div className="transform -rotate-90 whitespace-nowrap text-gray-500 font-medium text-sm">Bộ/Ban/Ngành/Địa phương</div>
+                        </div>
+                        <div className="flex-1 h-full">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <BarChart data={MOCK_STATS_CO_QUAN} layout="vertical" margin={{ top: 20, right: 40, bottom: 20, left: 10 }}>
+                                    <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f0f0f0" />
+                                    <XAxis type="number" axisLine={false} tickLine={false} tick={{ fontSize: 13, fill: '#6b7280' }} />
+                                    <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fontSize: 13, fill: '#374151', fontWeight: 500 }} width={130} />
+                                    <RechartsTooltip cursor={{ fill: '#f3f4f6' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                                    <Bar dataKey="daXuLy" name="Đã xử lý" stackId="a" fill="#16a34a" maxBarSize={20}>
+                                        <LabelList dataKey="daXuLy" position="insideRight" fill="#fff" fontSize={12} fontWeight={700} />
+                                    </Bar>
+                                    <Bar dataKey="dangXuLy" name="Đang xử lý" stackId="a" fill="#0ea5e9" maxBarSize={20}>
+                                        <LabelList dataKey="dangXuLy" position="right" fill="#1e293b" fontSize={12} fontWeight={700} />
+                                    </Bar>
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                        <div className="absolute bottom-12 left-0 right-0 text-center text-[13px] text-gray-500 font-medium z-10 pl-8">Số lượng phản ánh chính sách</div>
+                        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-6 z-10 pl-8">
+                            <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-[#16a34a]"></div><span className="text-sm font-medium">Đã xử lý</span></div>
+                            <div className="flex items-center gap-2"><div className="w-3 h-3 rounded-full bg-[#0ea5e9]"></div><span className="text-sm font-medium">Đang xử lý</span></div>
                         </div>
                     </div>
                 </div>
 
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                    <h3 className="font-bold text-lg mb-6 text-[#0f4c81]">Đánh giá mức độ hài lòng</h3>
-                    <div className="flex items-center gap-6">
-                        {/* Mock Pie Chart (CSS) */}
-                        <div className="w-24 h-24 rounded-full border-[10px] border-emerald-500 border-r-blue-400 border-b-amber-400 rotate-45 mx-auto shrink-0 shadow-inner"></div>
-                        <div className="space-y-2 flex-1 text-sm font-medium">
-                            <div className="flex justify-between items-center">
-                                <span className="flex items-center gap-2"><div className="w-3 h-3 bg-emerald-500 rounded-sm"></div> Rất hài lòng</span>
-                                <span className="font-bold">60%</span>
+                {/* Tỷ lệ xử lý */}
+                <div className="bg-white rounded-xl shadow-md overflow-hidden">
+                    <h3 className="font-bold text-[16px] text-white bg-[#0f4c81] p-4 text-center uppercase">Tỷ lệ xử lý</h3>
+                    <div className="p-4 h-[600px] w-full flex flex-col items-center justify-center relative">
+                        <div className="h-[300px] w-full flex items-center justify-center relative">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <PieChart>
+                                    <Pie
+                                        data={MOCK_STATS_TY_LE}
+                                        cx="50%"
+                                        cy="50%"
+                                        innerRadius={90}
+                                        outerRadius={130}
+                                        paddingAngle={2}
+                                        dataKey="value"
+                                        stroke="none"
+                                    >
+                                        {MOCK_STATS_TY_LE.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                        ))}
+                                    </Pie>
+                                    <RechartsTooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                                </PieChart>
+                            </ResponsiveContainer>
+                            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                                <span className="text-4xl font-bold text-gray-800">85%</span>
+                                <span className="text-sm text-gray-500 font-medium">Đã xử lý</span>
                             </div>
-                            <div className="flex justify-between items-center">
-                                <span className="flex items-center gap-2"><div className="w-3 h-3 bg-blue-400 rounded-sm"></div> Hài lòng</span>
-                                <span className="font-bold">25%</span>
+                        </div>
+                        <div className="flex justify-center gap-6 mt-8">
+                            <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 rounded-full bg-[#10b981]"></div>
+                                <span className="text-sm text-gray-600 font-medium">Đã xử lý</span>
                             </div>
-                            <div className="flex justify-between items-center">
-                                <span className="flex items-center gap-2"><div className="w-3 h-3 bg-amber-400 rounded-sm"></div> Bình thường</span>
-                                <span className="font-bold">10%</span>
-                            </div>
-                            <div className="flex justify-between items-center">
-                                <span className="flex items-center gap-2"><div className="w-3 h-3 bg-gray-200 rounded-sm"></div> Khác</span>
-                                <span className="font-bold">5%</span>
+                            <div className="flex items-center gap-2">
+                                <div className="w-4 h-4 rounded-full bg-[#f59e0b]"></div>
+                                <span className="text-sm text-gray-600 font-medium">Đang xử lý</span>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div className="text-right">
-                    <button className="text-sm font-bold text-[#0f4c81] border border-[#0f4c81] px-4 py-2 rounded-lg hover:bg-blue-50 transition shadow-sm">
-                        Xuất báo cáo
-                    </button>
                 </div>
             </div>
         </div>
@@ -251,7 +378,7 @@ const LatestTab = () => {
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden text-gray-800">
             <div className="p-6 border-b border-gray-100 bg-gray-50/50 flex flex-col md:flex-row gap-4 items-center justify-between">
                 <h2 className="text-xl font-bold text-[#0f4c81] flex items-center gap-2">
-                    <Clock className="text-blue-500" /> DANH SÁCH BỘ LỌC
+                    <Clock className="text-blue-500" /> DANH SÁCH PHẢN ÁNH ĐÃ XỬ LÝ MỚI NHẤT
                 </h2>
                 <div className="flex gap-4 w-full md:w-auto">
                     <select className="border border-gray-300 rounded-lg p-2 bg-white text-sm font-medium flex-1 md:w-48 outline-none focus:ring-2 ring-blue-200 transition">

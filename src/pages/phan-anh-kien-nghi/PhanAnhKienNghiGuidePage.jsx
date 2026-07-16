@@ -66,7 +66,7 @@ const PhanAnhKienNghiGuidePage = () => {
                 <div className="container mx-auto px-4 text-center max-w-4xl">
                     <h1 className="text-3xl md:text-4xl font-bold mb-4 uppercase">Hướng dẫn phản ánh, kiến nghị</h1>
                     <p className="text-blue-100 text-lg">
-                        Hướng dẫn người dân, doanh nghiệp gửi phản ánh, kiến nghị về chính sách, 
+                        Hướng dẫn người dân, doanh nghiệp gửi phản ánh, kiến nghị về chính sách,
                         văn bản pháp luật tới cơ quan nhà nước có thẩm quyền.
                     </p>
                 </div>
@@ -85,7 +85,7 @@ const PhanAnhKienNghiGuidePage = () => {
                     <div className="relative">
                         {/* Connecting Line */}
                         <div className="hidden md:block absolute top-[45px] left-[10%] right-[10%] h-1 bg-blue-100 z-0"></div>
-                        
+
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
                             {/* Step 1 */}
                             <div className="flex flex-col items-center text-center">
@@ -195,7 +195,7 @@ const PhanAnhKienNghiGuidePage = () => {
                     <div className="space-y-4">
                         {faqs.map((faq, idx) => (
                             <div key={idx} className="border border-gray-200 rounded-lg overflow-hidden">
-                                <button 
+                                <button
                                     className="w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 hover:bg-gray-50 bg-white focus:outline-none"
                                     onClick={() => toggleFaq(idx)}
                                 >
@@ -220,17 +220,17 @@ const PhanAnhKienNghiGuidePage = () => {
                         <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
                             Hãy đóng góp ý kiến để hoàn thiện chính sách, pháp luật, bảo đảm quyền và lợi ích hợp pháp của người dân, doanh nghiệp.
                         </p>
-                        
+
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <button 
+                            <button
                                 onClick={handleSendFeedbackClick}
                                 className="bg-white text-[#0f4c81] font-bold py-3 px-8 rounded-full hover:bg-blue-50 hover:shadow-lg transition-all flex items-center gap-2 w-full sm:w-auto justify-center"
                             >
                                 Gửi phản ánh kiến nghị ngay <ArrowRight size={20} />
                             </button>
-                            
-                            <Link 
-                                to="/phan-anh-kien-nghi" 
+
+                            <Link
+                                to="/phan-anh-kien-nghi"
                                 className="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white/10 transition-all w-full sm:w-auto justify-center flex"
                             >
                                 Xem danh sách phản ánh
