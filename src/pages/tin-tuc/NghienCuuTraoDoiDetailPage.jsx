@@ -109,10 +109,14 @@ const NghienCuuTraoDoiDetailPage = () => {
                                         <Clock size={14} className="text-gray-400" />
                                         <span>{article.date.split(' ')[1]}</span>
                                     </div>
+                                    <span className="text-gray-300">|</span>
+                                    <div>Tác giả: <span className="font-semibold text-gray-700">{article.author}</span></div>
+                                    <span className="text-gray-300">|</span>
+                                    <div>Năm xuất bản: <span className="font-semibold text-gray-700">{article.date.split(' ')[0].split('/')[2]}</span></div>
                                 </div>
 
                                 {/* Toolbar */}
-                                <div className="flex flex-wrap items-center gap-3">
+                                <div className="flex items-center gap-2 shrink-0">
                                     {/* Font Size Pill */}
                                     <div className="flex items-center gap-2 border border-gray-200 rounded-full px-4 py-1 bg-white text-[13px] text-gray-600 shadow-sm">
                                         <button onClick={() => setFontSize(100)} className="hover:text-blue-600 font-bold transition-colors">Đặt lại</button>

@@ -80,12 +80,12 @@ const DRAFTS_KHAC = [
 ];
 
 // ── Components ────────────────────────────────────────────────────────────────
-const PdfViewerPanel = ({ title }) => {
+const PdfViewerPanel = ({ title, fullHeight = false }) => {
     const [zoom, setZoom] = useState(100);
     return (
-        <div className="border border-gray-200 rounded-lg overflow-hidden flex flex-col mt-4">
+        <div className={`overflow-hidden flex flex-col ${fullHeight ? 'h-full' : 'border border-gray-200 rounded-lg mt-4'}`}>
             {/* Toolbar */}
-            <div className="bg-gray-50 border-b border-gray-200 px-4 py-2 flex flex-wrap gap-3 items-center justify-between text-[13px] text-gray-600">
+            <div className="bg-gray-50 border-b border-gray-200 px-4 py-2 flex flex-wrap gap-3 items-center justify-between text-[13px] text-gray-600 shrink-0">
                 <div className="flex items-center gap-2">
                     <button className="p-1 hover:bg-gray-200 rounded"><ChevronLeft size={16} /></button>
                     <span className="font-medium">1 / 45</span>
@@ -110,7 +110,7 @@ const PdfViewerPanel = ({ title }) => {
                 </div>
             </div>
             {/* Fake Content Area */}
-            <div className="bg-gray-200 h-[600px] overflow-auto p-4 md:p-8 flex justify-center custom-scrollbar">
+            <div className={`bg-gray-200 ${fullHeight ? 'flex-1' : 'h-[600px]'} overflow-auto p-4 md:p-8 flex justify-center custom-scrollbar`}>
                 <div className="bg-white shadow-md p-8 sm:p-12 transition-all w-full max-w-[800px]" style={{ transform: `scale(${zoom / 100})`, transformOrigin: 'top center' }}>
                     <h2 className="text-center font-bold text-[18px] mb-8">{title ? title.toUpperCase() : 'DỰ THẢO LUẬT DỮ LIỆU (SỬA ĐỔI)'}</h2>
                     <p className="indent-8 text-justify leading-relaxed mb-4 text-[14px]">
@@ -405,6 +405,7 @@ const DuThaoDetailPage = () => {
     // Tab State (UC55, UC56)
     const [activeTab, setActiveTab] = useState('tom-tat');
     const [viewingDocId, setViewingDocId] = useState(null);
+    const [viewingReportId, setViewingReportId] = useState(null);
 
     // Mocks for UC59
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -721,7 +722,7 @@ const DuThaoDetailPage = () => {
                                                 </div>
                                             </div>
                                             <div className="flex gap-2 shrink-0">
-                                                <Link to={`/bao-cao-tiep-thu/${report.id}`} className="flex items-center justify-center gap-1.5 px-4 py-2 border border-gray-300 rounded-lg hover:text-blue-600 hover:border-blue-400 font-bold transition-colors text-[13px] text-gray-700 shadow-sm bg-white"><Eye size={15} /> Xem</Link>
+                                                <button onClick={() => setViewingReportId(report.id)} className="flex items-center justify-center gap-1.5 px-4 py-2 border border-gray-300 rounded-lg hover:text-blue-600 hover:border-blue-400 font-bold transition-colors text-[13px] text-gray-700 shadow-sm bg-white"><Eye size={15} /> Xem</button>
                                                 <button className="flex items-center justify-center gap-1.5 px-4 py-2 bg-[#e4f0fc] text-[#1a3b8b] hover:bg-[#cbe0f5] rounded-lg font-bold transition-colors text-[13px] shadow-sm"><Download size={15} /> Tải xuống</button>
                                             </div>
                                         </div>
@@ -1082,6 +1083,21 @@ const DuThaoDetailPage = () => {
                     related={doc.related}
                     onClose={() => setShowRelatedPopup(false)}
                 />
+            )}
+
+            {/* Document Viewer Popup for Báo cáo tiếp thu */}
+            {viewingReportId && (
+                <div className="fixed inset-0 bg-black/50 z-[1000] flex items-center justify-center p-4">
+                    <div className="bg-white w-full max-w-6xl h-[90vh] rounded-xl shadow-2xl flex flex-col overflow-hidden animate-fade-in relative">
+                        <div className="bg-[#f8f9fa] border-b border-gray-200 px-6 py-4 flex items-center justify-between shrink-0">
+                            <h2 className="text-[18px] font-bold text-[#1a3b8b]">Xem chi tiết: {MOCK_BAO_CAO_TIEP_THU.find(r => r.id === viewingReportId)?.title}</h2>
+                            <button onClick={() => setViewingReportId(null)} className="text-gray-500 hover:text-red-500 transition-colors p-1"><X size={20} /></button>
+                        </div>
+                        <div className="flex-1 overflow-hidden bg-white relative flex flex-col">
+                            <PdfViewerPanel title={MOCK_BAO_CAO_TIEP_THU.find(r => r.id === viewingReportId)?.title} fullHeight={true} />
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );

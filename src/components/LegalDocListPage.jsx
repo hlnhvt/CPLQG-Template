@@ -6,12 +6,13 @@ import {
 } from 'lucide-react';
 
 // ── Shared mock data ──────────────────────────────────────────────────────────
-const LINH_VUC = [
-    'An ninh quốc gia', 'An ninh trật tự', 'Báo chí – Truyền hình',
-    'Bảo hiểm', 'Bảo hiểm y tế', 'Cán bộ – Công chức – Viên chức',
-    'Chính sách', 'Chứng khoán', 'Cơ cấu tổ chức', 'Công nghiệp',
-    'Doanh nghiệp', 'Đất đai', 'Giáo dục', 'Hành chính', 'Lao động',
-    'Ngân hàng', 'Thuế', 'Tư pháp', 'Y tế',
+const HINH_THUC = [
+    'Hiến pháp', 'Bộ luật', 'Luật', 'Pháp lệnh', 'Nghị định', 'Thông tư',
+    'Thông tư liên tịch', 'Quyết định', 'Lệnh', 'Nghị quyết',
+    'Nghị quyết liên tịch', 'Văn bản hợp nhất', 'Văn bản hành chính liên quan',
+    'Bản dịch văn bản', 'Chỉ thị', 'Văn bản hệ thống hóa', 'Chưa xác định',
+    'Công văn', 'Quy định', 'Sắc luật', 'Thông báo', 'Công ước',
+    'Văn bản khác', 'Văn bản liên quan', 'Thông tư liên bộ', 'Sắc lệnh'
 ];
 
 const CO_QUAN = [
@@ -112,6 +113,14 @@ const AdvancedSearch = ({ show45SoHieu = false, onClear }) => {
     const [isProvinceOpen, setIsProvinceOpen] = useState(false);
     const dropdownRef = useRef(null);
 
+    const [dateType, setDateType] = useState('Ngày ban hành');
+    const [dateFrom, setDateFrom] = useState('');
+    const [dateTo, setDateTo] = useState('');
+    const [linhVuc, setLinhVuc] = useState('');
+    const [coQuan, setCoQuan] = useState('');
+    const [tinhTrang, setTinhTrang] = useState('');
+    const [xaPhuong, setXaPhuong] = useState('');
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -145,39 +154,67 @@ const AdvancedSearch = ({ show45SoHieu = false, onClear }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-[14px]">
                 {/* Row 1 */}
                 <div>
-                    <select className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 text-gray-700">
-                        <option>Ngày ban hành</option>
-                        <option>Ngày hiệu lực</option>
+                    <select 
+                        value={dateType} 
+                        onChange={(e) => setDateType(e.target.value)}
+                        className={`w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 ${dateType ? 'text-gray-900' : 'text-gray-400'}`}
+                    >
+                        <option value="Ngày ban hành">Ngày ban hành</option>
+                        <option value="Ngày hiệu lực">Ngày hiệu lực</option>
                     </select>
                 </div>
                 <div>
-                    <input type="date" className="w-full px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-blue-400 text-gray-400" />
+                    <input 
+                        type="date" 
+                        value={dateFrom} 
+                        onChange={(e) => setDateFrom(e.target.value)}
+                        className={`w-full px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-blue-400 bg-white ${dateFrom ? 'text-gray-900' : 'text-gray-400'}`} 
+                    />
                 </div>
                 <div>
-                    <input type="date" className="w-full px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-blue-400 text-gray-400" />
+                    <input 
+                        type="date" 
+                        value={dateTo} 
+                        onChange={(e) => setDateTo(e.target.value)}
+                        className={`w-full px-3 py-2 border border-gray-200 rounded-lg outline-none focus:border-blue-400 bg-white ${dateTo ? 'text-gray-900' : 'text-gray-400'}`} 
+                    />
                 </div>
                 <div>
-                    <select className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 text-gray-400">
-                        <option value="">Loại văn bản</option>
-                        <option>Luật</option>
-                        <option>Nghị định</option>
-                        <option>Thông tư</option>
+                    <select 
+                        value={linhVuc} 
+                        onChange={(e) => setLinhVuc(e.target.value)}
+                        className={`w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 ${linhVuc ? 'text-gray-900' : 'text-gray-400'}`}
+                    >
+                        <option value="">Lĩnh vực</option>
+                        <option value="Hành chính">Hành chính</option>
+                        <option value="Đất đai">Đất đai</option>
+                        <option value="Lao động">Lao động</option>
+                        <option value="Y tế">Y tế</option>
+                        <option value="Giáo dục">Giáo dục</option>
                     </select>
                 </div>
 
                 {/* Row 2 */}
                 <div>
-                    <select className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 text-gray-400">
+                    <select 
+                        value={coQuan} 
+                        onChange={(e) => setCoQuan(e.target.value)}
+                        className={`w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 ${coQuan ? 'text-gray-900' : 'text-gray-400'}`}
+                    >
                         <option value="">Cơ quan ban hành</option>
-                        <option>Chính phủ</option>
-                        <option>Bộ Tài chính</option>
+                        <option value="Chính phủ">Chính phủ</option>
+                        <option value="Bộ Tài chính">Bộ Tài chính</option>
                     </select>
                 </div>
                 <div>
-                    <select className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 text-gray-400">
+                    <select 
+                        value={tinhTrang} 
+                        onChange={(e) => setTinhTrang(e.target.value)}
+                        className={`w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 ${tinhTrang ? 'text-gray-900' : 'text-gray-400'}`}
+                    >
                         <option value="">Tình trạng hiệu lực</option>
-                        <option>Còn hiệu lực</option>
-                        <option>Hết hiệu lực</option>
+                        <option value="Còn hiệu lực">Còn hiệu lực</option>
+                        <option value="Hết hiệu lực">Hết hiệu lực</option>
                     </select>
                 </div>
 
@@ -191,7 +228,7 @@ const AdvancedSearch = ({ show45SoHieu = false, onClear }) => {
                                 <span className="text-gray-400 text-[14px] px-1">Tỉnh, thành phố</span>
                             ) : (
                                 selectedProvinces.map(prov => (
-                                    <div key={prov} className="bg-gray-100/80 text-gray-600 px-2 py-0.5 rounded border border-gray-200 text-[13px] flex items-center gap-1.5 mt-0.5 mb-0.5">
+                                    <div key={prov} className="bg-gray-100/80 text-gray-900 px-2 py-0.5 rounded border border-gray-200 text-[13px] flex items-center gap-1.5 mt-0.5 mb-0.5">
                                         {prov}
                                         <span
                                             onClick={(e) => removeProvince(e, prov)}
@@ -222,7 +259,11 @@ const AdvancedSearch = ({ show45SoHieu = false, onClear }) => {
                 </div>
 
                 <div>
-                    <select className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 text-gray-400">
+                    <select 
+                        value={xaPhuong} 
+                        onChange={(e) => setXaPhuong(e.target.value)}
+                        className={`w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 ${xaPhuong ? 'text-gray-900' : 'text-gray-400'}`}
+                    >
                         <option value="">Xã/Phường</option>
                     </select>
                 </div>
@@ -253,9 +294,9 @@ const Sidebar = ({ nhomPQ, setNhomPQ, nhomHN, setNhomHN, selectedLV, toggleLV, s
                 </label>
             </div>
             <div className="mb-4">
-                <p className="font-semibold text-[11px] text-gray-500 uppercase tracking-wide mb-2 border-b border-gray-100 pb-1">Lĩnh vực tra cứu</p>
+                <p className="font-semibold text-[11px] text-gray-500 uppercase tracking-wide mb-2 border-b border-gray-100 pb-1">Hình thức văn bản</p>
                 <div className="max-h-40 overflow-y-auto space-y-1.5 pr-1">
-                    {LINH_VUC.map(v => (
+                    {HINH_THUC.map(v => (
                         <label key={v} className="flex items-center gap-2 text-[12px] text-gray-600 cursor-pointer">
                             <input type="checkbox" checked={selectedLV.includes(v)} onChange={() => toggleLV(v)} className="accent-blue-700" />
                             {v}

@@ -185,16 +185,16 @@ const TabDanhSach = () => {
                         </button>
                     </div>
                     {/* Search Scope */}
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-gray-600 border-b border-gray-100 pb-4">
-                        <div className="flex items-center gap-4 flex-wrap">
-                            {[['all', 'Tất cả'], ['title', 'Tiêu đề'], ['code', 'Số hiệu']].map(([v, lbl]) => (
-                                <label key={v} className="flex items-center gap-1.5 cursor-pointer">
-                                    <input type="radio" value={v} checked={searchScope === v} onChange={() => setSearchScope(v)} className="accent-blue-700" /> {lbl}
-                                </label>
-                            ))}
-                            <span className="w-px h-3 bg-gray-300 mx-2 hidden sm:inline-block"></span>
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-gray-700 border-b border-gray-100 pb-4">
+                        <div className="flex items-center gap-5 flex-wrap">
                             <label className="flex items-center gap-1.5 cursor-pointer">
-                                <input type="checkbox" checked={exactPhrase} onChange={(e) => setExactPhrase(e.target.checked)} className="accent-blue-700" /> Cụm từ chính xác
+                                <input type="radio" checked={!exactPhrase} onChange={() => setExactPhrase(false)} className="accent-[#007bff] w-4 h-4 cursor-pointer" /> So sánh có chứa
+                            </label>
+                            <label className="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" checked={exactPhrase} onChange={() => setExactPhrase(true)} className="accent-[#007bff] w-4 h-4 cursor-pointer" /> Cụm từ chính xác
+                            </label>
+                            <label className="flex items-center gap-1.5 ml-2 cursor-not-allowed select-none opacity-90" onClick={e => e.preventDefault()}>
+                                <input type="checkbox" checked={true} readOnly className="accent-[#007bff] w-4 h-4 rounded-sm pointer-events-none" /> Tiêu đề
                             </label>
                         </div>
                         <div className="flex items-center gap-3 ml-auto">

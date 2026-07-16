@@ -113,7 +113,7 @@ const TABS = [
     { id: 'van-ban-goc', label: 'Văn bản gốc', icon: File },
     { id: 'van-ban-lq', label: 'Văn bản liên quan', icon: Link2 },
     { id: 'tai-ve', label: 'Tải về', icon: Upload },
-    { id: 'chu-de-lq', label: 'Chủ đề thảo luận', icon: MessageCircle },
+    // { id: 'chu-de-lq', label: 'Chủ đề thảo luận', icon: MessageCircle },
 ];
 
 // ── Quick action buttons (shared in list rows) ────────────────────────────────
@@ -1271,6 +1271,14 @@ const RELATED_LIST = [
 const TabVanBanLienQuan = ({ navigate }) => {
     const [activeGroup, setActiveGroup] = useState('all');
     const filtered = activeGroup === 'all' ? RELATED_LIST : RELATED_LIST.filter(d => d.group === activeGroup);
+
+    // Nhóm các văn bản được lọc theo group
+    const groupedDocs = filtered.reduce((acc, doc) => {
+        if (!acc[doc.group]) acc[doc.group] = [];
+        acc[doc.group].push(doc);
+        return acc;
+    }, {});
+
     return (
         <div>
             <p className="text-[13px] text-gray-500 italic mb-4">Danh sách các văn bản có liên quan đến văn bản hiện tại, bao gồm văn bản căn cứ, văn bản được sửa đổi, bổ sung...</p>
@@ -1289,27 +1297,29 @@ const TabVanBanLienQuan = ({ navigate }) => {
                 </div>
 
                 {/* List */}
-                <div className="flex-1 min-w-0">
-                    {filtered.length === 0 ? (
-                        <p className="text-[13px] text-gray-400 italic py-8 text-center">Không có văn bản trong nhóm này.</p>
+                <div className="flex-1 min-w-0 bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                    {Object.keys(groupedDocs).length === 0 ? (
+                        <p className="text-[14px] text-gray-500 italic text-center py-8">Không có văn bản liên quan.</p>
                     ) : (
-                        <div className="space-y-4">
-                            {filtered.map((doc, i) => {
-                                const sb = STATUS_MAP[doc.status];
+                        <div className="space-y-8">
+                            {Object.entries(groupedDocs).map(([groupKey, docs]) => {
+                                const groupLabel = RELATED_GROUPS.find(g => g.key === groupKey)?.label || 'Văn bản liên quan khác';
                                 return (
-                                    <div key={doc.id} className="flex gap-3 pb-4 border-b border-gray-100 last:border-b-0">
-                                        <div className="w-7 h-7 rounded bg-[#1a3b8b] text-white text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                                            {String(i + 1).padStart(2, '0')}
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <a href="#" className="text-[14px] font-bold text-blue-700 hover:underline leading-snug block mb-1">{doc.title}</a>
-                                            <span className="text-[11px] text-gray-500 italic">Văn bản căn cứ</span>
-                                            <QuickBtns />
-                                        </div>
-                                        <div className="shrink-0 text-right text-[11px] text-gray-500 min-w-[120px] space-y-1 mt-0.5">
-                                            <p><span className="text-gray-400">Ban hành:</span> {doc.ngayBanHanh}</p>
-                                            <p><span className="text-gray-400">Áp dụng:</span> {doc.ngayApDung}</p>
-                                            <span className={`inline-block px-2 py-0.5 rounded border text-[10px] font-semibold ${sb.cls}`}>{sb.label}</span>
+                                    <div key={groupKey}>
+                                        <h3 className="font-bold text-[14px] text-gray-900 border-b border-gray-100 pb-3 mb-1">
+                                            {groupLabel}
+                                        </h3>
+                                        <div className="flex flex-col">
+                                            {docs.map(doc => (
+                                                <div key={doc.id} className="border-b border-gray-50 last:border-b-0">
+                                                    <a 
+                                                        href="#" 
+                                                        className="block py-3 text-[14px] text-[#2c65cc] hover:text-blue-800 hover:underline transition-colors leading-relaxed"
+                                                    >
+                                                        {doc.title}
+                                                    </a>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
                                 );

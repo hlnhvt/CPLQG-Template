@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Calendar, Image, ChevronRight, Phone, MessageSquare } from 'lucide-react';
+import { Calendar, Image, ChevronRight, Phone, MessageSquare, PenLine } from 'lucide-react';
 
 // ── Mock data (shared with detail page via URL param) ────────────────────────
 const THUMBNAILS = [
@@ -199,9 +199,9 @@ const InfographicPage = () => {
                     </div>
 
                     {/* ── Sidebar (MH04) ── */}
-                    <aside className="hidden lg:block w-[280px] shrink-0">
+                    <aside className="hidden lg:block w-[280px] shrink-0 space-y-4">
                         {/* Latest */}
-                        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4 mb-4">
+                        <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-4">
                             <h3 className="font-bold text-[14px] text-gray-800 border-b border-gray-100 pb-2 mb-3">
                                 Infographic mới nhất
                             </h3>
@@ -229,18 +229,48 @@ const InfographicPage = () => {
                             </Link>
                         </div>
 
-                        {/* Contact widget */}
-                        <div className="bg-gradient-to-br from-[#0f4c81] to-[#1a3b8b] rounded-xl p-4 text-white">
-                            <h3 className="font-bold text-[14px] mb-1">Chúng tôi luôn lắng nghe &amp; phản hồi</h3>
-                            <p className="text-[12px] text-white/70 mb-4">Mọi thắc mắc về pháp luật, hãy liên hệ với chúng tôi ngay!</p>
-                            <a href="tel:19001234"
-                                className="flex items-center justify-center gap-2 w-full py-2 bg-white/15 hover:bg-white/25 rounded-lg text-[13px] font-semibold transition-colors mb-2">
-                                <Phone size={14} /> Gọi tổng đài: 1900 1234
-                            </a>
-                            <Link to="/lien-he"
-                                className="flex items-center justify-center gap-2 w-full py-2 bg-cyan-400/20 hover:bg-cyan-400/30 rounded-lg text-[13px] font-semibold transition-colors">
-                                <MessageSquare size={14} /> Gửi góp ý trực tiếp
-                            </Link>
+                        {/* Resolution Banner */}
+                        <div className="rounded-xl overflow-hidden shadow-sm border border-gray-200 group cursor-pointer">
+                            <img src="/banner-nghi-quyet.png" alt="Đưa nghị quyết đại hội XIV của Đảng vào cuộc sống" className="w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+
+                        {/* Feedback Widget Banner */}
+                        <div className="bg-gradient-to-b from-[#0f4c81] to-[#072d54] text-white p-5 rounded-2xl shadow-md text-center relative overflow-hidden flex flex-col items-center">
+                            {/* Decorative background patterns */}
+                            <div className="absolute inset-0 opacity-10 flex justify-around items-center pointer-events-none">
+                                <div className="w-4 h-24 bg-white rounded-full transform translate-y-4"></div>
+                                <div className="w-4 h-32 bg-white rounded-full transform -translate-y-4"></div>
+                                <div className="w-4 h-20 bg-white rounded-full transform translate-y-8"></div>
+                                <div className="w-4 h-28 bg-white rounded-full transform -translate-y-2"></div>
+                            </div>
+                            
+                            <h3 className="text-[18px] font-bold text-white mb-5 uppercase tracking-wider leading-tight z-10">
+                                Chúng tôi luôn<br />lắng nghe &<br />phản hồi
+                            </h3>
+
+                            {/* Circular feedback icon illustration */}
+                            <div className="w-20 h-20 rounded-full border-2 border-white/30 flex items-center justify-center mb-5 relative z-10">
+                                <div className="absolute inset-0 border-2 border-t-white border-b-white rounded-full animate-[spin_12s_linear_infinite] opacity-60"></div>
+                                <div className="relative flex items-center justify-center">
+                                    <div className="relative">
+                                        <MessageSquare size={28} className="text-white/90" />
+                                        <MessageSquare size={16} className="text-white/75 absolute -top-2 -right-2" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p className="text-[12px] text-blue-100 leading-relaxed mb-5 max-w-xs opacity-90 z-10">
+                                Người dân và doanh nghiệp có thể gửi kiến nghị, góp ý xây dựng, hoàn thiện chính sách, pháp luật thông qua các phương thức dưới đây.
+                            </p>
+
+                            <div className="w-full space-y-2.5 z-10 font-sans">
+                                <a href="tel:02462739715" className="flex items-center justify-center gap-2 w-full py-2.5 bg-white text-[#0f4c81] font-bold rounded-lg hover:bg-blue-50 transition-colors text-[12px] shadow-sm">
+                                    <Phone size={14} fill="currentColor" /> Gọi tổng đài 024.62739715
+                                </a>
+                                <Link to="/gop-y" className="flex items-center justify-center gap-2 w-full py-2.5 border border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors text-[12px]">
+                                    <PenLine size={14} /> Gửi góp ý trực tiếp
+                                </Link>
+                            </div>
                         </div>
                     </aside>
                 </div>
