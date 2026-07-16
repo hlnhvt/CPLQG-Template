@@ -165,10 +165,10 @@ const StatisticsTab = () => {
         if (type === 'XLSX') {
             // 1. Dữ liệu tổng quan
             const tongQuanData = [
-                { 'Chỉ tiêu': 'Tổng số PAKN', 'Giá trị': '8,452', 'Ghi chú': 'Tăng 12% so với tháng trước' },
-                { 'Chỉ tiêu': 'Đã xử lý', 'Giá trị': '7,100', 'Ghi chú': '85% tổng số PAKN' },
-                { 'Chỉ tiêu': 'Đang xử lý', 'Giá trị': '1,352', 'Ghi chú': 'Cần đôn đốc xử lý' },
-                { 'Chỉ tiêu': 'Thời gian xử lý TB', 'Giá trị': '5.2 ngày', 'Ghi chú': 'Nhanh hơn 1.5 ngày' }
+                { 'Chỉ tiêu': 'Tổng số PAKN', 'Giá trị': '8,452' },
+                { 'Chỉ tiêu': 'Đã xử lý', 'Giá trị': '7,100' },
+                { 'Chỉ tiêu': 'Đang xử lý', 'Giá trị': '1,352' },
+                { 'Chỉ tiêu': 'Thời gian xử lý trung bình', 'Giá trị': '5.2 ngày' }
             ];
 
             // 2. Dữ liệu lĩnh vực
@@ -246,22 +246,18 @@ const StatisticsTab = () => {
                 <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
                     <div className="text-gray-500 text-[13px] font-bold mb-1 uppercase">Tổng số PAKN</div>
                     <div className="text-3xl font-bold text-[#0f4c81]">8,452</div>
-                    <div className="text-[12px] text-emerald-500 font-medium mt-2">↑ 12% so với tháng trước</div>
                 </div>
                 <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
                     <div className="text-gray-500 text-[13px] font-bold mb-1 uppercase">Đã xử lý</div>
-                    <div className="text-3xl font-bold text-emerald-500">7,100</div>
-                    <div className="text-[12px] text-gray-400 font-medium mt-2">85% tổng số PAKN</div>
+                    <div className="text-3xl font-bold text-[#0f4c81]">7,100</div>
                 </div>
                 <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
                     <div className="text-gray-500 text-[13px] font-bold mb-1 uppercase">Đang xử lý</div>
-                    <div className="text-3xl font-bold text-amber-500">1,352</div>
-                    <div className="text-[12px] text-amber-600 font-medium mt-2">Cần đôn đốc xử lý</div>
+                    <div className="text-3xl font-bold text-[#0f4c81]">1,352</div>
                 </div>
                 <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
-                    <div className="text-gray-500 text-[13px] font-bold mb-1 uppercase">Thời gian xử lý TB</div>
-                    <div className="text-3xl font-bold text-blue-500">5.2 <span className="text-lg">ngày</span></div>
-                    <div className="text-[12px] text-emerald-500 font-medium mt-2">↓ Nhanh hơn 1.5 ngày</div>
+                    <div className="text-gray-500 text-[13px] font-bold mb-1 uppercase">Thời gian xử lý trung bình</div>
+                    <div className="text-3xl font-bold text-[#0f4c81]">5.2 <span className="text-lg">ngày</span></div>
                 </div>
             </div>
 
