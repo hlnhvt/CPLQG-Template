@@ -207,8 +207,8 @@ const StatisticsTab = () => {
 
             // Điều chỉnh độ rộng cột
             ws1['!cols'] = [{ wch: 25 }, { wch: 15 }, { wch: 30 }];
-            ws2['!cols'] = [{ wch: 25 }, { wch: 15 }];
-            ws3['!cols'] = [{ wch: 25 }, { wch: 15 }];
+            ws2['!cols'] = [{ wch: 25 }, { wch: 15 }, { wch: 15 }];
+            ws3['!cols'] = [{ wch: 25 }, { wch: 15 }, { wch: 15 }];
             ws4['!cols'] = [{ wch: 15 }, { wch: 50 }, { wch: 80 }, { wch: 20 }, { wch: 15 }, { wch: 30 }, { wch: 15 }];
 
             // Thêm worksheet vào workbook
