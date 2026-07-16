@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, Filter, MessageSquare, Users, Clock, Star, TrendingUp, Hash, ArrowRight, UserPlus, Check, ChevronLeft, ChevronRight, ThumbsUp, Eye, Bell, Lock } from 'lucide-react';
+import { Search, Filter, MessageSquare, Users, Clock, Star, TrendingUp, Hash, ArrowRight, UserPlus, Check, ChevronLeft, ChevronRight, ThumbsUp, Eye, Bell, Lock, FileText, ArrowDown, ArrowUp } from 'lucide-react';
 import { MOCK_FORUMS, MOCK_TOPICS } from '../../data/mockForumData';
 
 const ForumCountdown = ({ targetDate }) => {
@@ -63,6 +63,8 @@ const ForumListPage = () => {
     const [categoryFilter, setCategoryFilter] = useState('Tất cả');
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(12);
+    const [sortBy, setSortBy] = useState('time');
+    const [sortDirection, setSortDirection] = useState('desc');
 
     const tabs = [
         { id: 'hot', label: 'Xu hướng', icon: <TrendingUp size={18} /> },
@@ -88,13 +90,28 @@ const ForumListPage = () => {
     // Reset pagination to page 1 when filters change
     React.useEffect(() => {
         setCurrentPage(1);
-    }, [activeTab, searchQuery, categoryFilter, itemsPerPage]);
+    }, [activeTab, searchQuery, categoryFilter, itemsPerPage, sortBy, sortDirection]);
 
     // Mock sort just for UI demonstration
     if (activeTab === 'hot') {
         filteredForums.sort((a, b) => b.memberCount - a.memberCount);
     } else if (activeTab === 'latest') {
         // Assume default order is somewhat latest
+    } else if (activeTab === 'all') {
+        filteredForums.sort((a, b) => {
+            let valA = 0, valB = 0;
+            if (sortBy === 'time') {
+                valA = a.id; valB = b.id;
+            } else if (sortBy === 'members') {
+                valA = a.memberCount; valB = b.memberCount;
+            } else if (sortBy === 'topics') {
+                valA = a.topicCount; valB = b.topicCount;
+            } else if (sortBy === 'comments') {
+                valA = a.topicCount * 3 + (a.id * 13 % 50);
+                valB = b.topicCount * 3 + (b.id * 13 % 50);
+            }
+            return sortDirection === 'desc' ? valB - valA : valA - valB;
+        });
     }
 
     // Always pin 'Upcoming' forums to the top for visibility
@@ -208,21 +225,46 @@ const ForumListPage = () => {
 
                     {/* Main Content List */}
                     <div className="w-full flex-grow lg:w-3/4">
-                        {/* Tabs */}
-                        <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-2 mb-6 flex flex-wrap gap-2 overflow-x-auto">
-                            {tabs.map(tab => (
-                                <button
-                                    key={tab.id}
-                                    onClick={() => setActiveTab(tab.id)}
-                                    className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${activeTab === tab.id
-                                        ? 'bg-blue-600 text-white shadow-md'
-                                        : 'text-gray-500 hover:bg-gray-50 hover:text-blue-600'
-                                        }`}
-                                >
-                                    {tab.icon}
-                                    {tab.label}
-                                </button>
-                            ))}
+                        {/* Tabs & Sort */}
+                        <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4 mb-6">
+                            <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-2 flex flex-wrap gap-2 overflow-x-auto w-full xl:w-auto">
+                                {tabs.map(tab => (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => setActiveTab(tab.id)}
+                                        className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${activeTab === tab.id
+                                            ? 'bg-blue-600 text-white shadow-md'
+                                            : 'text-gray-500 hover:bg-gray-50 hover:text-blue-600'
+                                            }`}
+                                    >
+                                        {tab.icon}
+                                        {tab.label}
+                                    </button>
+                                ))}
+                            </div>
+                            
+                            {activeTab === 'all' && (
+                                <div className="flex items-center gap-2 bg-white rounded-xl shadow-sm border border-gray-100 p-2 shrink-0">
+                                    <span className="text-sm font-medium text-gray-500 pl-2">Sắp xếp:</span>
+                                    <select 
+                                        value={sortBy} 
+                                        onChange={(e) => setSortBy(e.target.value)}
+                                        className="text-sm font-bold text-gray-700 bg-transparent outline-none cursor-pointer p-1"
+                                    >
+                                        <option value="time">Thời gian</option>
+                                        <option value="members">Số lượng thành viên</option>
+                                        <option value="topics">Số lượng chủ đề</option>
+                                        <option value="comments">Số lượng bình luận</option>
+                                    </select>
+                                    <button 
+                                        onClick={() => setSortDirection(prev => prev === 'desc' ? 'asc' : 'desc')}
+                                        className="p-1.5 hover:bg-gray-100 rounded-lg text-gray-600 transition-colors flex items-center justify-center"
+                                        title={sortDirection === 'desc' ? 'Giảm dần' : 'Tăng dần'}
+                                    >
+                                        {sortDirection === 'desc' ? <ArrowDown size={16} /> : <ArrowUp size={16} />}
+                                    </button>
+                                </div>
+                            )}
                         </div>
 
                         {/* Stats Summary Mobile */}
@@ -340,13 +382,17 @@ const ForumListPage = () => {
 
                                                     <div className="bg-gray-50 px-6 py-4 flex items-center justify-between border-t border-gray-100 mt-auto">
                                                         <div className="flex items-center gap-4 text-sm text-gray-500 font-medium">
-                                                            <div className="flex items-center gap-1.5">
-                                                                <MessageSquare size={16} className="text-blue-500" />
+                                                            <div className="flex items-center gap-1.5 hover:text-blue-600 transition-colors cursor-help" title="Số lượng chủ đề">
+                                                                <FileText size={16} className="text-blue-500" />
                                                                 <span>{forum.topicCount.toLocaleString()}</span>
                                                             </div>
-                                                            <div className="flex items-center gap-1.5">
+                                                            <div className="flex items-center gap-1.5 hover:text-indigo-600 transition-colors cursor-help" title="Số thành viên tham gia">
                                                                 <Users size={16} className="text-indigo-500" />
                                                                 <span>{forum.memberCount.toLocaleString()}</span>
+                                                            </div>
+                                                            <div className="flex items-center gap-1.5 hover:text-green-600 transition-colors cursor-help" title="Số bình luận">
+                                                                <MessageSquare size={16} className="text-green-500" />
+                                                                <span>{(forum.topicCount * 3 + (forum.id * 13 % 50)).toLocaleString()}</span>
                                                             </div>
                                                         </div>
                                                         {forum.isUpcoming ? (

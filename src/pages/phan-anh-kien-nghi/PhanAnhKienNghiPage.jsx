@@ -262,7 +262,7 @@ const StatisticsTab = () => {
             </div>
 
             {/* Charts Row */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Lĩnh vực */}
                 <div className="bg-white rounded-xl shadow-md overflow-hidden">
                     <h3 className="font-bold text-[16px] text-white bg-[#0f4c81] p-4 text-center uppercase">Thống kê PAKN theo lĩnh vực</h3>
@@ -320,47 +320,6 @@ const StatisticsTab = () => {
                     </div>
                 </div>
 
-                {/* Tỷ lệ xử lý */}
-                <div className="bg-white rounded-xl shadow-md overflow-hidden">
-                    <h3 className="font-bold text-[16px] text-white bg-[#0f4c81] p-4 text-center uppercase">Tỷ lệ xử lý</h3>
-                    <div className="p-4 h-[600px] w-full flex flex-col items-center justify-center relative">
-                        <div className="h-[300px] w-full flex items-center justify-center relative">
-                            <ResponsiveContainer width="100%" height="100%">
-                                <PieChart>
-                                    <Pie
-                                        data={MOCK_STATS_TY_LE}
-                                        cx="50%"
-                                        cy="50%"
-                                        innerRadius={90}
-                                        outerRadius={130}
-                                        paddingAngle={2}
-                                        dataKey="value"
-                                        stroke="none"
-                                    >
-                                        {MOCK_STATS_TY_LE.map((entry, index) => (
-                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                        ))}
-                                    </Pie>
-                                    <RechartsTooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                                </PieChart>
-                            </ResponsiveContainer>
-                            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                                <span className="text-4xl font-bold text-gray-800">85%</span>
-                                <span className="text-sm text-gray-500 font-medium">Đã xử lý</span>
-                            </div>
-                        </div>
-                        <div className="flex justify-center gap-6 mt-8">
-                            <div className="flex items-center gap-2">
-                                <div className="w-4 h-4 rounded-full bg-[#10b981]"></div>
-                                <span className="text-sm text-gray-600 font-medium">Đã xử lý</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <div className="w-4 h-4 rounded-full bg-[#f59e0b]"></div>
-                                <span className="text-sm text-gray-600 font-medium">Đang xử lý</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     );
