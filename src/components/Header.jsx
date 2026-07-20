@@ -154,13 +154,13 @@ const Header = () => {
                                                 >
                                                     <LayoutDashboard size={16} /> Khu vực cá nhân
                                                 </Link>
-                                                <Link
+                                                {/* <Link
                                                     to="/can-bo/trang-chu"
                                                     className="w-full flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors text-[14px] font-medium"
                                                     onClick={() => setDropdownOpen(false)}
                                                 >
                                                     <Building2 size={16} /> Khu vực cán bộ
-                                                </Link>
+                                                </Link> */}
                                                 <Link
                                                     to="/ca-nhan/bo-suu-tap"
                                                     className="w-full flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-blue-600 transition-colors text-[14px] font-medium"

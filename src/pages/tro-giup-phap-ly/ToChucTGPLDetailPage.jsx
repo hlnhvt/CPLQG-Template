@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Building2, MapPin, Phone, Mail, Globe, Clock, ChevronRight, FileText, CheckCircle } from 'lucide-react';
+import { Building2, MapPin, Phone, Mail, Globe, Clock, ChevronRight, FileText, CheckCircle, Info, ClipboardList, Users } from 'lucide-react';
 
 const ToChucTGPLDetailPage = () => {
     const { id } = useParams();
@@ -116,6 +116,39 @@ const ToChucTGPLDetailPage = () => {
                                     <p className="text-sm text-gray-500 font-medium mb-1">Loại hình tổ chức</p>
                                     <p className="font-bold text-[#1e3a8a] text-[15px]">{org.type}</p>
                                 </div>
+                            </div>
+                        </div>
+
+                        {/* Ho so gioi thieu */}
+                        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+                            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                                <Info size={20} className="text-[#1e3a8a]" />
+                                <h2 className="text-lg font-bold text-gray-900">Hồ sơ giới thiệu</h2>
+                            </div>
+                            <div className="p-6 text-center text-gray-500 italic text-[14px]">
+                                Chưa có dữ liệu
+                            </div>
+                        </div>
+
+                        {/* Chuc nang nhiem vu */}
+                        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+                            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                                <ClipboardList size={20} className="text-[#1e3a8a]" />
+                                <h2 className="text-lg font-bold text-gray-900">Chức năng, nhiệm vụ</h2>
+                            </div>
+                            <div className="p-6 text-center text-gray-500 italic text-[14px]">
+                                Chưa có dữ liệu
+                            </div>
+                        </div>
+
+                        {/* Doi ngu chuyen mon */}
+                        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+                            <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-2">
+                                <Users size={20} className="text-[#1e3a8a]" />
+                                <h2 className="text-lg font-bold text-gray-900">Đội ngũ chuyên môn</h2>
+                            </div>
+                            <div className="p-6 text-center text-gray-500 italic text-[14px]">
+                                Chưa có dữ liệu
                             </div>
                         </div>
 

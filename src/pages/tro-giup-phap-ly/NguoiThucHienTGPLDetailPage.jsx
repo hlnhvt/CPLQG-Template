@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Briefcase, MapPin, Award, CheckCircle, ChevronRight, Hash, Phone, Mail } from 'lucide-react';
+import { Briefcase, MapPin, Award, CheckCircle, ChevronRight, Hash, Phone, Mail, Clock } from 'lucide-react';
 
 const NguoiThucHienTGPLDetailPage = () => {
     const { id } = useParams();
@@ -148,6 +148,17 @@ const NguoiThucHienTGPLDetailPage = () => {
                                 ))}
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                {/* Kinh nghiem */}
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mt-6">
+                    <h3 className="text-base font-bold text-gray-900 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
+                        <Clock size={18} className="text-blue-600" />
+                        Kinh nghiệm
+                    </h3>
+                    <div className="p-4 text-center text-gray-500 italic text-[14px]">
+                        Chưa có dữ liệu
                     </div>
                 </div>
 

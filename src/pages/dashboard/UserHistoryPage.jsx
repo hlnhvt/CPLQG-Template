@@ -3,10 +3,10 @@ import { Search, Heart, MessageSquare, Trash2, Edit3, MoreVertical, FileText, Ch
 import { Link } from 'react-router-dom';
 
 const MOCK_FAVORITES = [
-    { id: 1, type: 'vanban', title: 'Luật Đất đai số 31/2024/QH15', date: 'Đã lưu: 15/03/2026', snippet: 'Được Quốc hội thông qua ngày 18 tháng 01 năm 2024.', url: '#' },
-    { id: 2, type: 'tinbai', title: 'Quy định mới về bảo hiểm thất nghiệp từ 2026', date: 'Đã lưu: 12/03/2026', snippet: 'Mức hưởng trợ cấp thất nghiệp tăng đáng kể theo quy định mới.', url: '#' },
-    { id: 3, type: 'tuvan', title: 'Thủ tục thành lập doanh nghiệp nhanh nhất 2026', date: 'Đã lưu: 10/03/2026', snippet: 'Hướng dẫn chi tiết bộ hồ sơ và quy trình trực tuyến trên Cổng DVC.', url: '#' },
-    { id: 4, type: 'vanban', title: 'Nghị định 102/2024/NĐ-CP hướng dẫn Luật Đất đai', date: 'Đã lưu: 05/03/2026', snippet: 'Quy định chi tiết thi hành một số điều của Luật Đất đai mới.', url: '#' },
+    { id: 1, type: 'vanban', topic: 'Đất đai', priority: true, title: 'Luật Đất đai số 31/2024/QH15', date: '2026-03-15', dateStr: '15/03/2026', snippet: 'Được Quốc hội thông qua ngày 18 tháng 01 năm 2024.', url: '#' },
+    { id: 2, type: 'tinbai', topic: 'Lao động', priority: false, title: 'Quy định mới về bảo hiểm thất nghiệp từ 2026', date: '2026-03-12', dateStr: '12/03/2026', snippet: 'Mức hưởng trợ cấp thất nghiệp tăng đáng kể theo quy định mới.', url: '#' },
+    { id: 3, type: 'tuvan', topic: 'Doanh nghiệp', priority: false, title: 'Thủ tục thành lập doanh nghiệp nhanh nhất 2026', date: '2026-03-10', dateStr: '10/03/2026', snippet: 'Hướng dẫn chi tiết bộ hồ sơ và quy trình trực tuyến trên Cổng DVC.', url: '#' },
+    { id: 4, type: 'vanban', topic: 'Đất đai', priority: true, title: 'Nghị định 102/2024/NĐ-CP hướng dẫn Luật Đất đai', date: '2026-03-05', dateStr: '05/03/2026', snippet: 'Quy định chi tiết thi hành một số điều của Luật Đất đai mới.', url: '#' },
 ];
 
 const MOCK_COMMENTS = [
@@ -28,6 +28,13 @@ const UserHistoryPage = () => {
     const [activeTab, setActiveTab] = useState('favorites');
     const [searchTerm, setSearchTerm] = useState('');
     const [favorites, setFavorites] = useState(MOCK_FAVORITES);
+    
+    // Filters for favorites
+    const [filterType, setFilterType] = useState('all');
+    const [filterTopic, setFilterTopic] = useState('all');
+    const [filterPriority, setFilterPriority] = useState('all');
+    const [sortDate, setSortDate] = useState('desc');
+    
     const [comments, setComments] = useState(MOCK_COMMENTS);
     const [activityLogs, setActivityLogs] = useState(MOCK_ACTIVITY_LOGS);
     const [expandedLogs, setExpandedLogs] = useState([]);
@@ -99,8 +106,26 @@ const UserHistoryPage = () => {
     };
 
     // Derived States for Pagination
-    const filteredFavorites = favorites.filter(f => f.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    let filteredFavorites = favorites.filter(f => f.title.toLowerCase().includes(searchTerm.toLowerCase()));
     
+    if (filterType !== 'all') {
+        filteredFavorites = filteredFavorites.filter(f => f.type === filterType);
+    }
+    
+    if (filterTopic !== 'all') {
+        filteredFavorites = filteredFavorites.filter(f => f.topic === filterTopic);
+    }
+    
+    if (filterPriority !== 'all') {
+        filteredFavorites = filteredFavorites.filter(f => String(f.priority) === filterPriority);
+    }
+    
+    filteredFavorites.sort((a, b) => {
+        const dateA = new Date(a.date).getTime();
+        const dateB = new Date(b.date).getTime();
+        return sortDate === 'desc' ? dateB - dateA : dateA - dateB;
+    });
+
     const paginatedFavorites = filteredFavorites.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
     const totalFavoritePages = Math.ceil(filteredFavorites.length / itemsPerPage);
 
@@ -109,6 +134,13 @@ const UserHistoryPage = () => {
 
     const paginatedActivities = activityLogs.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
     const totalActivityPages = Math.ceil(activityLogs.length / itemsPerPage);
+
+    const getPriorityBadge = (priority) => {
+        if (priority === true || priority === 'true') {
+            return <span className="px-2 py-0.5 bg-red-100 text-red-700 rounded text-[11px] font-semibold flex items-center gap-1"><Heart size={10} className="fill-red-700" /> Được ưu tiên</span>;
+        }
+        return <span className="px-2 py-0.5 bg-gray-100 text-gray-500 rounded text-[11px] font-semibold">Không được ưu tiên</span>;
+    }
 
     const renderPagination = (totalPages, totalItems) => {
         if (totalItems === 0) return null;
@@ -209,8 +241,8 @@ const UserHistoryPage = () => {
                 {/* FAVORITES TAB */}
                 {activeTab === 'favorites' && (
                     <div className="animate-fadeIn p-6">
-                        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
-                            <div className="relative w-full sm:w-96">
+                        <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4 mb-6">
+                            <div className="relative w-full xl:w-80">
                                 <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                                 <input 
                                     type="text" 
@@ -220,12 +252,46 @@ const UserHistoryPage = () => {
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                 />
                             </div>
-                            <div className="flex gap-2 w-full sm:w-auto">
-                                <select className="w-full sm:w-auto px-4 py-2 border border-gray-200 rounded-lg text-[14px] focus:outline-none focus:border-blue-500 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer outline-none">
-                                    <option>Tất cả loại hình</option>
-                                    <option>Văn bản pháp luật</option>
-                                    <option>Tin bài</option>
-                                    <option>Hỏi đáp & Tư vấn</option>
+                            <div className="flex flex-wrap gap-2 w-full xl:w-auto">
+                                <select 
+                                    value={sortDate}
+                                    onChange={(e) => setSortDate(e.target.value)}
+                                    className="w-full sm:w-auto px-3 py-2 border border-gray-200 rounded-lg text-[13px] focus:outline-none focus:border-blue-500 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer outline-none"
+                                >
+                                    <option value="desc">Mới nhất</option>
+                                    <option value="asc">Cũ nhất</option>
+                                </select>
+
+                                <select 
+                                    value={filterType}
+                                    onChange={(e) => setFilterType(e.target.value)}
+                                    className="w-full sm:w-auto px-3 py-2 border border-gray-200 rounded-lg text-[13px] focus:outline-none focus:border-blue-500 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer outline-none"
+                                >
+                                    <option value="all">Tất cả loại hình</option>
+                                    <option value="vanban">Văn bản pháp luật</option>
+                                    <option value="tinbai">Tin bài</option>
+                                    <option value="tuvan">Hỏi đáp & Tư vấn</option>
+                                </select>
+                                
+                                <select 
+                                    value={filterTopic}
+                                    onChange={(e) => setFilterTopic(e.target.value)}
+                                    className="w-full sm:w-auto px-3 py-2 border border-gray-200 rounded-lg text-[13px] focus:outline-none focus:border-blue-500 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer outline-none"
+                                >
+                                    <option value="all">Tất cả chủ đề</option>
+                                    <option value="Đất đai">Đất đai</option>
+                                    <option value="Lao động">Lao động</option>
+                                    <option value="Doanh nghiệp">Doanh nghiệp</option>
+                                </select>
+                                
+                                <select 
+                                    value={filterPriority}
+                                    onChange={(e) => setFilterPriority(e.target.value)}
+                                    className="w-full sm:w-auto px-3 py-2 border border-gray-200 rounded-lg text-[13px] focus:outline-none focus:border-blue-500 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer outline-none"
+                                >
+                                    <option value="all">Tất cả mức độ</option>
+                                    <option value="true">Được ưu tiên</option>
+                                    <option value="false">Không được ưu tiên</option>
                                 </select>
                             </div>
                         </div>
@@ -240,16 +306,22 @@ const UserHistoryPage = () => {
                                         <FileText size={24} />
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <Link to={item.url} className="text-base font-bold text-gray-900 hover:text-blue-600 mb-1 line-clamp-2">
-                                            {item.title}
-                                        </Link>
+                                        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-1">
+                                            <Link to={item.url} className="text-base font-bold text-gray-900 hover:text-blue-600 line-clamp-2">
+                                                {item.title}
+                                            </Link>
+                                            <div className="shrink-0 pt-0.5">
+                                                {getPriorityBadge(item.priority)}
+                                            </div>
+                                        </div>
                                         <p className="text-[13px] text-gray-500 line-clamp-2 mb-2">{item.snippet}</p>
                                         <div className="flex items-center gap-4 text-[12px] font-medium text-gray-400">
-                                            <span>{item.date}</span>
+                                            <span className="flex items-center gap-1.5"><Clock size={14} className="text-gray-400"/> Đã lưu: {item.dateStr}</span>
                                             <span className="capitalize">{
                                                 item.type === 'vanban' ? 'Văn bản PL' : 
                                                 item.type === 'tinbai' ? 'Tin bài' : 'Hỏi đáp'
                                             }</span>
+                                            <span className="px-2 py-0.5 bg-gray-100 rounded text-gray-600">{item.topic}</span>
                                         </div>
                                     </div>
                                     <div className="shrink-0 flex items-start">
@@ -314,9 +386,9 @@ const UserHistoryPage = () => {
                                             <>
                                                 " {comment.content} "
                                                 
-                                                {/* Actions overlayed on hover */}
-                                                <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover/edit:opacity-100 transition-opacity">
-                                                    {comment.status === 'pending' && (
+                                                {/* Actions */}
+                                                <div className="absolute top-2 right-2 flex gap-1">
+                                                    {comment.status === 'pending' ? (
                                                         <>
                                                             <button 
                                                                 onClick={() => handleEditCommentHistory(comment)}
@@ -327,6 +399,21 @@ const UserHistoryPage = () => {
                                                             <button 
                                                                 onClick={() => handleDeleteComment(comment.id)}
                                                                 className="p-1.5 bg-gray-100 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors shadow-sm" title="Xóa bình luận"
+                                                            >
+                                                                <Trash2 size={15} />
+                                                            </button>
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <button 
+                                                                className="p-1.5 bg-gray-50 text-gray-300 cursor-not-allowed rounded-md shadow-sm" title="Không thể sửa bình luận đã công khai"
+                                                                disabled
+                                                            >
+                                                                <Edit3 size={15} />
+                                                            </button>
+                                                            <button 
+                                                                className="p-1.5 bg-gray-50 text-gray-300 cursor-not-allowed rounded-md shadow-sm" title="Không thể xóa bình luận đã công khai"
+                                                                disabled
                                                             >
                                                                 <Trash2 size={15} />
                                                             </button>

@@ -11,10 +11,10 @@ const INITIAL_ARTICLES = [
 
 const STATUS_CONFIG = {
     'all': { label: 'Tất cả', count: 4 },
-    'draft': { label: 'Bản nháp', bg: 'bg-gray-100', text: 'text-gray-700', icon: FileEdit, count: 1 },
+    'draft': { label: 'Nháp', bg: 'bg-gray-100', text: 'text-gray-700', icon: FileEdit, count: 1 },
     'pending': { label: 'Chờ duyệt', bg: 'bg-yellow-100', text: 'text-yellow-700', icon: Clock, count: 1 },
-    'published': { label: 'Đang xuất bản', bg: 'bg-green-100', text: 'text-green-700', icon: CheckCircle, count: 1 },
-    'rejected': { label: 'Bị từ chối', bg: 'bg-red-100', text: 'text-red-700', icon: XCircle, count: 1 },
+    'published': { label: 'Đã duyệt', bg: 'bg-green-100', text: 'text-green-700', icon: CheckCircle, count: 1 },
+    'rejected': { label: 'Từ chối', bg: 'bg-red-100', text: 'text-red-700', icon: XCircle, count: 1 },
 };
 
 const CollaboratorArticlesPage = () => {
@@ -27,12 +27,13 @@ const CollaboratorArticlesPage = () => {
     const [deleteModal, setDeleteModal] = useState({ isOpen: false, article: null });
     const [sendModal, setSendModal] = useState({ isOpen: false, article: null });
     const [errorModal, setErrorModal] = useState({ isOpen: false, message: '' });
+    const [previewModal, setPreviewModal] = useState({ isOpen: false, article: null });
 
     const handleDeleteClick = (article) => {
         if (article.status !== 'draft' && article.status !== 'published') {
             setErrorModal({ 
                 isOpen: true, 
-                message: 'Chỉ được phép xóa các bài viết ở trạng thái "Bản nháp" hoặc "Đang xuất bản". Các trạng thái khác không được phép xóa.' 
+                message: 'Chỉ được phép xóa các bài viết ở trạng thái "Nháp" hoặc "Đã duyệt". Các trạng thái khác không được phép xóa.' 
             });
         } else {
             setDeleteModal({ isOpen: true, article });
@@ -188,11 +189,13 @@ const CollaboratorArticlesPage = () => {
                                                         <FileEdit size={18} />
                                                     </button>
                                                 )}
-                                                {article.status === 'published' && (
-                                                    <button className="p-1.5 hover:text-blue-600 hover:bg-blue-50 rounded" title="Xem bài viết">
-                                                        <Eye size={18} />
-                                                    </button>
-                                                )}
+                                                <button 
+                                                    onClick={() => setPreviewModal({ isOpen: true, article })}
+                                                    className="p-1.5 hover:text-blue-600 hover:bg-blue-50 rounded" 
+                                                    title="Xem bài viết"
+                                                >
+                                                    <Eye size={18} />
+                                                </button>
                                                 <div className="w-px h-5 bg-gray-200 mx-1"></div>
                                                 <button onClick={() => handleDeleteClick(article)} className="p-1.5 hover:text-red-600 hover:bg-red-50 rounded transition-colors" title="Xóa">
                                                     <Trash2 size={18} />
@@ -266,6 +269,50 @@ const CollaboratorArticlesPage = () => {
                             <h3 className="text-xl font-bold text-gray-900 mb-2">Thao tác không hợp lệ</h3>
                             <p className="text-gray-600 text-sm mb-6 leading-relaxed">{errorModal.message}</p>
                             <button onClick={() => setErrorModal({ isOpen: false, message: '' })} className="w-full py-2.5 bg-gray-800 hover:bg-gray-900 text-white font-medium rounded-xl transition-colors">Đã hiểu</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Preview Modal */}
+            {previewModal.isOpen && previewModal.article && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                    <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setPreviewModal({ isOpen: false, article: null })}></div>
+                    <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden animate-fadeIn">
+                        {/* Header */}
+                        <div className="flex justify-between items-center p-4 border-b border-gray-100">
+                            <h3 className="text-lg font-bold text-gray-900">Xem trước bài viết</h3>
+                            <button onClick={() => setPreviewModal({ isOpen: false, article: null })} className="text-gray-400 hover:text-gray-600 transition-colors">
+                                <XCircle size={24} />
+                            </button>
+                        </div>
+                        {/* Body */}
+                        <div className="p-6 overflow-y-auto">
+                            <h2 className="text-2xl font-bold text-[#0f4c81] mb-3">{previewModal.article.title}</h2>
+                            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-6">
+                                <span className="bg-gray-100 px-2.5 py-1 rounded-md text-gray-700 font-medium">{previewModal.article.category}</span>
+                                <span className="flex items-center gap-1.5"><Clock size={14}/> {previewModal.article.date}</span>
+                                <span className="flex items-center gap-1.5"><Eye size={14}/> Lượt xem: {previewModal.article.views || 0}</span>
+                            </div>
+                            
+                            <div className="prose max-w-none text-gray-700 text-[15px] leading-relaxed">
+                                <div className="p-4 bg-blue-50 rounded-lg text-blue-800 text-sm mb-6 flex gap-3">
+                                    <AlertCircle size={20} className="shrink-0" />
+                                    <div>
+                                        <strong>Lưu ý:</strong> Đây là giao diện xem trước. Nội dung đầy đủ sẽ được hiển thị như bên dưới khi xuất bản.
+                                    </div>
+                                </div>
+                                <p className="mb-4">
+                                    Mô phỏng nội dung bài viết... Nội dung chi tiết của bài viết sẽ được hiển thị ở đây dựa trên những gì bạn đã soạn thảo trong trình soạn thảo văn bản.
+                                </p>
+                                <p className="mb-4">
+                                    Bài viết có thể bao gồm văn bản định dạng, hình ảnh, bảng biểu và các liên kết liên quan.
+                                </p>
+                            </div>
+                        </div>
+                        {/* Footer */}
+                        <div className="p-4 border-t border-gray-100 flex justify-end">
+                            <button onClick={() => setPreviewModal({ isOpen: false, article: null })} className="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-colors">Đóng</button>
                         </div>
                     </div>
                 </div>

@@ -219,7 +219,7 @@ const ProfilePage = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                     {/* Readonly verified email */}
                     <div>
-                        <label className="block text-[13px] font-semibold text-gray-600 mb-1.5">Email đăng nhập (Chính)</label>
+                        <label className="block text-[13px] font-semibold text-gray-600 mb-1.5">Email liên hệ (Chính)</label>
                         <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                             <div className="flex-1 flex items-center px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-gray-500 cursor-not-allowed">
                                 <Mail size={16} className="mr-2 opacity-50" /> {user?.email || 'nguyenvana@gmail.com'}

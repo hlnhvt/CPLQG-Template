@@ -268,8 +268,10 @@ const TabDanhSach = () => {
 
 // ── Tab 2: Dự thảo xem nhiều (UC54) ───────────────────────────────────────────
 const TabXemNhieu = () => {
-    const [period, setPeriod] = useState('30 ngày');
     const [page, setPage] = useState(1);
+    const [keyword, setKeyword] = useState('');
+    const [exactPhrase, setExactPhrase] = useState(false);
+    const [showAdvanced, setShowAdvanced] = useState(false);
 
     // Sort array by views descending
     const sorted = [...MOCK_DUTHAO].sort((a, b) => b.views - a.views);
@@ -295,30 +297,46 @@ const TabXemNhieu = () => {
             </aside>
 
             <div className="flex-1 min-w-0">
-                {/* Top Controls */}
+                {/* Search & Advanced Filters */}
                 <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 mb-4">
-                    <div className="flex flex-wrap items-center justify-between gap-4">
-                        <div className="flex gap-2">
-                            {['7 ngày', '30 ngày', '3 tháng', 'Tất cả'].map(t => (
-                                <button key={t} onClick={() => setPeriod(t)}
-                                    className={`px-3 py-1.5 text-[12px] font-semibold rounded-lg border transition-colors ${period === t ? 'bg-[#1a3b8b] text-white border-[#1a3b8b]' : 'bg-gray-50 text-gray-600 border-gray-200 hover:border-blue-400'}`}>
-                                    {t}
-                                </button>
-                            ))}
+                    {/* Search Bar */}
+                    <div className="flex gap-2 mb-3">
+                        <div className="relative flex-1">
+                            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                            <input value={keyword} onChange={e => setKeyword(e.target.value)}
+                                className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-[13px] outline-none focus:border-blue-400"
+                                placeholder="Nhập tiêu đề hoặc số hiệu dự thảo cần tìm..." />
                         </div>
-                        <div className="flex gap-2 sm:max-w-xs w-full">
-                            <div className="relative flex-1">
-                                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                                <input className="w-full pl-9 pr-3 py-1.5 border border-gray-200 rounded-lg text-[13px] outline-none focus:border-blue-400" placeholder="Tìm kiếm..." />
-                            </div>
-                            <button className="px-4 py-1.5 bg-[#1a3b8b] text-white rounded-lg text-[12px] font-semibold">Tìm</button>
+                        <button className="px-5 py-2 bg-[#1a3b8b] hover:bg-blue-800 text-white font-semibold rounded-lg text-[13px] transition-colors shrink-0">
+                            Tìm kiếm
+                        </button>
+                    </div>
+                    {/* Search Scope */}
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-gray-700 border-b border-gray-100 pb-4">
+                        <div className="flex items-center gap-5 flex-wrap">
+                            <label className="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" checked={!exactPhrase} onChange={() => setExactPhrase(false)} className="accent-[#007bff] w-4 h-4 cursor-pointer" /> So sánh có chứa
+                            </label>
+                            <label className="flex items-center gap-1.5 cursor-pointer">
+                                <input type="radio" checked={exactPhrase} onChange={() => setExactPhrase(true)} className="accent-[#007bff] w-4 h-4 cursor-pointer" /> Cụm từ chính xác
+                            </label>
+                            <label className="flex items-center gap-1.5 ml-2 cursor-not-allowed select-none opacity-90" onClick={e => e.preventDefault()}>
+                                <input type="checkbox" checked={true} readOnly className="accent-[#007bff] w-4 h-4 rounded-sm pointer-events-none" /> Tiêu đề
+                            </label>
+                        </div>
+                        <div className="flex items-center gap-3 ml-auto">
+                            <button onClick={() => setShowAdvanced(!showAdvanced)} className="flex items-center gap-1 text-blue-600 hover:underline">
+                                Tìm kiếm nâng cao {showAdvanced ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+                            </button>
                         </div>
                     </div>
+
+                    {showAdvanced && <AdvancedSearchForm onClear={() => { }} />}
                 </div>
 
                 {/* Danh sách rank */}
                 <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5">
-                    <p className="text-[13px] text-gray-500 italic border-b border-gray-100 pb-3 mb-4">Có tất cả {sorted.length} dự thảo xem nhiều trong {period}</p>
+                    <p className="text-[13px] text-gray-500 italic border-b border-gray-100 pb-3 mb-4">Có tất cả {sorted.length} dự thảo xem nhiều</p>
                     <div className="space-y-4">
                         {items.map((doc, idx) => (
                             <div key={doc.id} className="flex gap-4 pb-4 border-b border-gray-50 last:border-b-0">
