@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutGrid, List, CloudSun, Wind, Droplets, MessageSquare, BarChart2, PieChart } from 'lucide-react';
+import { LayoutGrid, List, CloudSun, Wind, Droplets, MessageSquare, BarChart2, PieChart, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -210,6 +210,10 @@ const UserHomePage = () => {
                                                         <img src={itemDef.thumbnail} className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500" alt="" />
                                                     </div>
                                                     <div className="p-4 flex flex-col flex-1">
+                                                        <div className="text-xs text-gray-400 mb-1.5 flex items-center gap-1.5">
+                                                            <Clock size={12} />
+                                                            <span>20/07/2026</span>
+                                                        </div>
                                                         <h5 className="font-bold text-[15px] leading-snug line-clamp-2 text-gray-800 group-hover/card:text-blue-700 transition-colors mb-2">Bản tin pháp luật mới nhất liên quan đến {itemDef.title.toLowerCase()}</h5>
                                                         <p className="text-sm text-gray-500 line-clamp-2 mt-auto">Mô tả ngắn gọn nội dung chi tiết của bản tin này, cung cấp thêm thông tin hữu ích cho người đọc.</p>
                                                     </div>
@@ -226,9 +230,7 @@ const UserHomePage = () => {
                                                     <div className="flex-1 py-1 flex flex-col justify-center min-w-0">
                                                         <h5 className="font-bold text-[15px] leading-snug line-clamp-2 text-gray-800 group-hover/list:text-blue-700 transition-colors mb-1.5">Tiêu đề chi tiết bài viết {i + 1} trong danh mục {itemDef.title}</h5>
                                                         <div className="text-xs text-gray-500 flex items-center gap-3">
-                                                            <span>10 phút trước</span>
-                                                            <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
-                                                            <span>120 lượt xem</span>
+                                                            <span className="flex items-center gap-1.5"><Clock size={12}/> 20/07/2026</span>
                                                         </div>
                                                     </div>
                                                 </div>

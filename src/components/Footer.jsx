@@ -56,6 +56,8 @@ const Footer = () => {
                         <span className="hidden md:inline">|</span>
                         <Link to="/lien-he" className="hover:text-yellow-300 transition-colors">Liên hệ</Link>
                         <span className="hidden md:inline">|</span>
+                        <Link to="/ban-tin/dang-ky" className="hover:text-yellow-300 transition-colors">Đăng ký nhận bản tin</Link>
+                        <span className="hidden md:inline">|</span>
                     </div>
 
                     <div className="flex items-center gap-2">
@@ -70,9 +72,15 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* 5. Visitors */}
-                <div className="mb-4 text-[13px] md:text-[14px] drop-shadow-sm">
-                    Tổng lượt truy cập: <span className="text-[#fdb714] font-bold ml-1">1.468.244</span>
+                {/* 5. Visitors count */}
+                <div className="mb-5 drop-shadow flex items-center justify-center gap-4 text-[13px] md:text-[14px]">
+                    <div>
+                        Tổng lượt truy cập: <span className="text-yellow-400 font-bold ml-1">1.436.718</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.8)] animate-pulse"></span>
+                        Đang truy cập: <span className="text-yellow-400 font-bold ml-1">42</span>
+                    </div>
                 </div>
 
                 {/* 6. Copyright */}
