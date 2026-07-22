@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, MapPin, Briefcase, Award, RefreshCw, ChevronLeft, ChevronRight, UserCircle2 } from 'lucide-react';
+import { Users, ChevronDown } from 'lucide-react';
+import TGPLSidebar from '../../components/tro-giup-phap-ly/TGPLSidebar';
 
 const DanhSachNguoiThucHienTGPLPage = () => {
     useEffect(() => {
@@ -8,193 +9,200 @@ const DanhSachNguoiThucHienTGPLPage = () => {
     }, []);
 
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedProvince, setSelectedProvince] = useState('');
-    const [selectedField, setSelectedField] = useState('');
-    const [activeTab, setActiveTab] = useState('tro-giup-vien');
-
-    const provinces = ['Hà Nội', 'TP. Hồ Chí Minh', 'Đà Nẵng', 'Hải Phòng', 'Cần Thơ', 'Quảng Ninh', 'Nghệ An'];
-    const fields = ['Hình sự', 'Dân sự', 'Hành chính', 'Hôn nhân & Gia đình', 'Lao động', 'Đất đai', 'Doanh nghiệp'];
+    const [showAdvanced, setShowAdvanced] = useState(false);
+    const [activeTab, setActiveTab] = useState('Trợ giúp viên pháp lý');
 
     const tabs = [
-        { id: 'tro-giup-vien', label: 'Trợ giúp viên pháp lý' },
-        { id: 'luat-su', label: 'Luật sư thực hiện TGPL' },
-        { id: 'cong-tac-vien', label: 'Cộng tác viên TGPL' },
+        'Trợ giúp viên pháp lý',
+        'Luật sư thực hiện trợ giúp pháp lý',
+        'Cộng tác viên trợ giúp pháp lý'
     ];
-
+    
     // Mock Data
     const mockWorkers = [
-        { id: 1, type: 'tro-giup-vien', code: 'TGV.HN.001', name: 'Nguyễn Văn An', org: 'Trung tâm TGPL Nhà nước TP Hà Nội', province: 'Hà Nội', fields: ['Hình sự', 'Dân sự'], experience: '10 năm', photo: null },
-        { id: 2, type: 'tro-giup-vien', code: 'TGV.HCM.012', name: 'Trần Thị Bình', org: 'Trung tâm TGPL Nhà nước TP.HCM', province: 'TP. Hồ Chí Minh', fields: ['Hôn nhân & Gia đình', 'Lao động'], experience: '8 năm', photo: null },
-        { id: 3, type: 'luat-su', code: 'LS.DN.045', name: 'Lê Hoàng Cường', org: 'Công ty Luật TNHH Miền Trung', province: 'Đà Nẵng', fields: ['Hành chính', 'Đất đai'], experience: '15 năm', photo: null },
-        { id: 4, type: 'luat-su', code: 'LS.HN.088', name: 'Phạm Thu Dung', org: 'Văn phòng Luật sư Ánh Sáng Công Lý', province: 'Hà Nội', fields: ['Doanh nghiệp', 'Dân sự'], experience: '12 năm', photo: null },
-        { id: 5, type: 'cong-tac-vien', code: 'CTV.NA.005', name: 'Hoàng Văn Em', org: 'Hội Luật gia tỉnh Nghệ An', province: 'Nghệ An', fields: ['Dân sự'], experience: '5 năm', photo: null },
+        { id: 1, code: 'BC260615135043', name: 'admin_stp_test', org: 'Sở tư pháp test', role: '-', province: 'Thành phố Hà Nội', tabCategory: 'Trợ giúp viên pháp lý' },
+        { id: 2, code: 'BC260615160728', name: 'admin_tt_test', org: 'trung tâm test', role: '-', province: 'Thành phố Đà Nẵng', tabCategory: 'Trợ giúp viên pháp lý' },
+        { id: 3, code: '-', name: 'A Lê Hồ Thủy', org: 'Trung tâm TGPL NN tỉnh Phú Yên', role: 'Khác', province: 'Tỉnh Phú Yên', tabCategory: 'Trợ giúp viên pháp lý' },
+        { id: 4, code: 'LS.12345', name: 'Luật sư Nguyễn Văn A', org: 'Đoàn Luật sư Hà Nội', role: 'Luật sư', province: 'Thành phố Hà Nội', tabCategory: 'Luật sư thực hiện trợ giúp pháp lý' },
+        { id: 5, code: '-', name: 'Âu Đức Nam', org: 'Chi nhánh trợ giúp pháp lý - Tuyên Quang', role: 'Cộng tác viên', province: 'Tuyên Quang', tabCategory: 'Cộng tác viên trợ giúp pháp lý' },
     ];
 
-    const filteredWorkers = mockWorkers.filter(w => w.type === activeTab);
-
-    const resetFilters = () => {
-        setSearchTerm('');
-        setSelectedProvince('');
-        setSelectedField('');
-    };
+    const filteredWorkers = mockWorkers.filter(w => 
+        w.tabCategory === activeTab && 
+        w.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
-        <div className="bg-[#f4f7fb] min-h-screen pb-20 font-sans">
-            {/* Header Area */}
-            <div className="bg-white border-b border-gray-200 shadow-sm pt-8 pb-8">
-                <div className="container mx-auto px-4 max-w-[1200px]">
-                    <h1 className="text-3xl font-bold text-[#1e3a8a] mb-2 uppercase tracking-wide flex items-center gap-3">
-                        <Briefcase size={32} className="text-blue-600" />
-                        Người thực hiện Trợ giúp pháp lý
-                    </h1>
-                    <p className="text-gray-500 text-[15px] max-w-3xl">
-                        Tra cứu thông tin danh sách Trợ giúp viên pháp lý, Luật sư và Cộng tác viên tham gia mạng lưới trợ giúp pháp lý trên toàn quốc.
-                    </p>
+        <div className="bg-[#f4f7fb] min-h-screen font-sans">
+            {/* HERO SECTION */}
+            <div className="bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white pt-16 pb-24 relative overflow-hidden">
+                <div className="absolute inset-0 opacity-10 bg-[url('/pattern.png')] mix-blend-overlay"></div>
+                <div className="container mx-auto px-4 max-w-[1200px] relative z-10">
+                    <div className="max-w-3xl">
+                        <div className="flex items-center gap-2 mb-4">
+                            <span className="bg-blue-900/50 text-blue-100 text-[11px] font-bold px-4 py-1 rounded-full border border-blue-400/30 backdrop-blur-sm uppercase tracking-wider">
+                                VỀ CHÚNG TÔI
+                            </span>
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-bold mb-5 leading-tight tracking-tight drop-shadow-md flex items-center gap-3 uppercase">
+                            <Users size={36} className="text-white" />
+                            NGƯỜI THỰC HIỆN
+                        </h1>
+                        <p className="text-blue-50 text-[15px] leading-relaxed border-l-4 border-yellow-400 pl-4 py-1.5 font-medium bg-blue-900/20 rounded-r-lg max-w-2xl shadow-sm">
+                            Thông tin về các cá nhân thực hiện Trợ giúp pháp lý, bao gồm chuyên gia, Luật sư và Trợ giúp viên pháp lý.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 max-w-[1200px] mt-8">
-
-                {/* Search & Filter Form */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
-                    <div className="flex flex-col md:flex-row gap-4 mb-4">
-                        <div className="flex-1 relative">
-                            <input
-                                type="text"
-                                placeholder="Nhập họ tên hoặc mã số thẻ..."
-                                className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-[15px]"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
-                            <Search className="absolute left-4 top-3.5 text-gray-400" size={20} />
-                        </div>
-                        <div className="w-full md:w-64 shrink-0">
-                            <select
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-[15px]"
-                                value={selectedProvince}
-                                onChange={(e) => setSelectedProvince(e.target.value)}
-                            >
-                                <option value="">-- Tất cả Tỉnh/Thành phố --</option>
-                                {provinces.map(p => <option key={p} value={p}>{p}</option>)}
-                            </select>
-                        </div>
-                        <div className="w-full md:w-64 shrink-0">
-                            <select
-                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-[15px]"
-                                value={selectedField}
-                                onChange={(e) => setSelectedField(e.target.value)}
-                            >
-                                <option value="">-- Tất cả Lĩnh vực TGPL --</option>
-                                {fields.map(f => <option key={f} value={f}>{f}</option>)}
-                            </select>
-                        </div>
-                    </div>
-                    <div className="flex justify-end gap-3 border-t border-gray-100 pt-4">
-                        <button
-                            onClick={resetFilters}
-                            className="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-colors flex items-center gap-2"
-                        >
-                            <RefreshCw size={18} />
-                            Làm mới
-                        </button>
-                        <button
-                            className="px-6 py-2.5 bg-[#1e3a8a] hover:bg-blue-800 text-white rounded-lg font-medium shadow-md transition-colors flex items-center gap-2"
-                        >
-                            <Search size={18} />
-                            Tìm kiếm
-                        </button>
-                    </div>
-                </div>
-
-                {/* Tabs */}
-                <div className="flex border-b border-gray-200 mb-6 sticky top-16 bg-[#f4f7fb] z-10 pt-2">
-                    {tabs.map((tab) => (
-                        <button
-                            key={tab.id}
-                            className={`px-6 py-4 text-[15px] font-bold tracking-wide uppercase transition-colors relative ${activeTab === tab.id
-                                    ? 'text-blue-700'
-                                    : 'text-gray-500 hover:text-gray-800'
-                                }`}
-                            onClick={() => setActiveTab(tab.id)}
-                        >
-                            {tab.label}
-                            {activeTab === tab.id && (
-                                <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-600 rounded-t-md"></div>
-                            )}
-                        </button>
-                    ))}
-                </div>
-
-                <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-bold text-gray-800">
-                        Tìm thấy <span className="text-blue-600">{filteredWorkers.length}</span> người thực hiện phù hợp
-                    </h2>
-                </div>
-
-                {/* Results List */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {filteredWorkers.map((worker) => (
-                        <div key={worker.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex gap-5 hover:border-blue-300 transition-colors">
-                            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center shrink-0 border border-gray-200 overflow-hidden">
-                                {worker.photo ? (
-                                    <img src={worker.photo} alt={worker.name} className="w-full h-full object-cover" />
-                                ) : (
-                                    <UserCircle2 size={40} className="text-gray-400" />
-                                )}
+            {/* MAIN CONTENT AREA */}
+            <div className="container mx-auto px-4 max-w-[1200px] -mt-12 relative z-20 pb-20">
+                <div className="flex flex-col lg:flex-row gap-6">
+                    
+                    {/* LEFT CONTENT */}
+                    <div className="flex-1 space-y-6">
+                        
+                        <div>
+                            {/* Tabs */}
+                            <div className="bg-gray-100 rounded-t-xl flex flex-col md:flex-row border border-gray-200 overflow-hidden shadow-sm">
+                                {tabs.map((tab) => (
+                                    <button
+                                        key={tab}
+                                        className={`whitespace-nowrap px-4 py-3.5 text-[14px] font-bold transition-colors flex-1 text-center md:border-r border-b md:border-b-0 border-gray-200 last:border-r-0 last:border-b-0 ${
+                                            activeTab === tab 
+                                            ? 'bg-white text-[#1e3a8a] border-t-2 border-t-blue-600' 
+                                            : 'text-gray-500 hover:text-gray-700 hover:bg-gray-200 border-t-2 border-t-transparent'
+                                        }`}
+                                        onClick={() => setActiveTab(tab)}
+                                    >
+                                        {tab}
+                                    </button>
+                                ))}
                             </div>
-                            <div className="flex-1 space-y-3">
-                                <div>
-                                    <Link to={`/tro-giup-phap-ly/nguoi-thuc-hien/${worker.id}`} className="text-xl font-bold text-[#1e3a8a] hover:text-blue-600 mb-1 block">
-                                        {worker.name}
-                                    </Link>
-                                    <span className="inline-block px-2.5 py-0.5 bg-blue-50 text-blue-700 text-xs font-bold rounded border border-blue-100">
-                                        Mã thẻ: {worker.code}
-                                    </span>
+
+                            {/* Search & Filter Area */}
+                            <div className="bg-white p-6 border-x border-b border-gray-200 shadow-sm relative mb-6 rounded-b-xl">
+                                {/* Simple Search */}
+                                <div className="flex gap-3 items-center mb-2">
+                                    <div className="flex-1 relative">
+                                    <input 
+                                        type="text" 
+                                        placeholder="Tìm kiếm theo họ tên..." 
+                                        className="w-full px-4 py-2 border border-gray-300 rounded text-[14px] focus:outline-none focus:border-blue-500"
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                    />
                                 </div>
-                                <div className="space-y-1.5 text-sm text-gray-600">
-                                    <div className="flex items-start gap-2">
-                                        <Briefcase size={16} className="text-gray-400 mt-0.5 shrink-0" />
-                                        <span className="font-medium text-gray-800">{worker.org}</span>
+                                <button className="px-6 py-2 bg-[#1e3a8a] text-white rounded text-[14px] font-medium hover:bg-blue-800 transition-colors shadow-sm">
+                                    Tìm kiếm
+                                </button>
+                                <button className="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded text-[14px] font-medium hover:bg-gray-50 transition-colors shadow-sm">
+                                    Xóa
+                                </button>
+                            </div>
+                            <div className="flex justify-end mb-6">
+                                <button 
+                                    onClick={() => setShowAdvanced(!showAdvanced)}
+                                    className="text-blue-600 text-[13px] hover:underline flex items-center gap-1 font-medium"
+                                >
+                                    Tìm kiếm nâng cao <ChevronDown size={14} className={`transition-transform ${showAdvanced ? 'rotate-180' : ''}`} />
+                                </button>
+                            </div>
+
+                            {/* Advanced Filters */}
+                            {showAdvanced && (
+                                <>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4 mb-6">
+                                        <div>
+                                            <label className="block text-[13px] text-gray-700 mb-1.5 font-medium">Đơn vị công tác</label>
+                                            <select className="w-full px-3 py-2 border border-gray-300 rounded text-[14px] text-gray-600 focus:outline-none focus:border-blue-500 bg-white">
+                                                <option>-- Tất cả --</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label className="block text-[13px] text-gray-700 mb-1.5 font-medium">Chức vụ</label>
+                                            <select className="w-full px-3 py-2 border border-gray-300 rounded text-[14px] text-gray-600 focus:outline-none focus:border-blue-500 bg-white">
+                                                <option>-- Tất cả --</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label className="block text-[13px] text-gray-700 mb-1.5 font-medium">Trạng thái hoạt động</label>
+                                            <select className="w-full px-3 py-2 border border-gray-300 rounded text-[14px] text-gray-600 focus:outline-none focus:border-blue-500 bg-white">
+                                                <option>-- Tất cả --</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label className="block text-[13px] text-gray-700 mb-1.5 font-medium">Trình độ nghiệp vụ</label>
+                                            <select className="w-full px-3 py-2 border border-gray-300 rounded text-[14px] text-gray-600 focus:outline-none focus:border-blue-500 bg-white">
+                                                <option>-- Tất cả --</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <MapPin size={16} className="text-gray-400 shrink-0" />
-                                        <span>Khu vực: <span className="font-medium text-gray-800">{worker.province}</span></span>
+                                        <span className="text-[13px] text-gray-700 font-medium">Số lượng kết quả trên trang:</span>
+                                        <select className="px-2 py-1 border border-gray-300 rounded text-[13px] focus:outline-none bg-white font-medium">
+                                            <option>10</option>
+                                            <option>20</option>
+                                            <option>50</option>
+                                        </select>
                                     </div>
-                                    <div className="flex items-start gap-2">
-                                        <Award size={16} className="text-gray-400 mt-0.5 shrink-0" />
-                                        <span>Lĩnh vực: <span className="font-medium text-gray-800">{worker.fields.join(', ')}</span></span>
-                                    </div>
-                                </div>
-                                <div className="pt-3 flex justify-end">
-                                    <Link to={`/tro-giup-phap-ly/nguoi-thuc-hien/${worker.id}`} className="text-sm font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 group">
-                                        Xem hồ sơ
-                                        <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                                    </Link>
-                                </div>
+                                </>
+                            )}
+                        </div>
+                        </div>
+
+                        {/* Results Table */}
+                        <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left border-collapse min-w-[900px]">
+                                    <thead>
+                                        <tr className="border-b border-gray-200">
+                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-12 text-center whitespace-nowrap">STT</th>
+                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-36 whitespace-nowrap">Mã người thực hiện</th>
+                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800 whitespace-nowrap">Tên người thực hiện</th>
+                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-72 whitespace-nowrap">Thuộc tổ chức</th>
+                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800 whitespace-nowrap">Chức vụ</th>
+                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800 whitespace-nowrap">Khu vực</th>
+                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-24 text-center whitespace-nowrap">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {filteredWorkers.length > 0 ? (
+                                            filteredWorkers.map((worker, index) => (
+                                                <tr key={worker.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                                    <td className="py-4 px-4 text-center text-[13px] font-semibold text-gray-700">{index + 1}</td>
+                                                    <td className="py-4 px-4 text-[13px] text-blue-600 font-medium">{worker.code}</td>
+                                                    <td className="py-4 px-4 text-[13px] font-bold text-gray-800">{worker.name}</td>
+                                                    <td className="py-4 px-4 text-[13px] text-gray-800 leading-tight">{worker.org}</td>
+                                                    <td className="py-4 px-4 text-[13px] text-gray-800 whitespace-nowrap">{worker.role}</td>
+                                                    <td className="py-4 px-4 text-[13px] text-gray-800 whitespace-nowrap">{worker.province}</td>
+                                                    <td className="py-4 px-4 text-center">
+                                                        <Link to={`/tro-giup-phap-ly/nguoi-thuc-hien/${worker.id}`} className="whitespace-nowrap inline-block px-3 py-1.5 border border-gray-300 text-gray-600 rounded text-[13px] hover:bg-gray-50 hover:text-gray-900 transition-colors bg-white font-medium shadow-sm">
+                                                            Chi tiết
+                                                        </Link>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan="7" className="py-8 text-center text-gray-500 text-[14px]">
+                                                    Không tìm thấy dữ liệu phù hợp trong mục này.
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    ))}
-                </div>
-
-                {/* Pagination */}
-                {filteredWorkers.length > 0 && (
-                    <div className="mt-8 flex justify-center">
-                        <div className="flex items-center gap-1">
-                            <button className="w-10 h-10 rounded-lg border border-gray-300 bg-white flex items-center justify-center text-gray-400 cursor-not-allowed">
-                                <ChevronLeft size={20} />
-                            </button>
-                            <button className="w-10 h-10 rounded-lg border border-blue-600 bg-blue-600 flex items-center justify-center text-white font-bold shadow-sm">
-                                1
-                            </button>
-                            <button className="w-10 h-10 rounded-lg border border-gray-300 bg-white flex items-center justify-center text-gray-700 hover:bg-gray-50 font-medium transition-colors">
-                                2
-                            </button>
-                            <button className="w-10 h-10 rounded-lg border border-gray-300 bg-white flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors">
-                                <ChevronRight size={20} />
-                            </button>
-                        </div>
+                        
                     </div>
-                )}
+
+                    {/* RIGHT CONTENT (SIDEBAR) */}
+                    <div className="w-full lg:w-[320px] shrink-0 space-y-6">
+                        <TGPLSidebar />
+                    </div>
+                    
+                </div>
             </div>
         </div>
     );
