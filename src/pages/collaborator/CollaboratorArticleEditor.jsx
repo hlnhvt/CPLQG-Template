@@ -57,7 +57,6 @@ const CollaboratorArticleEditor = () => {
     const [isSaving, setIsSaving] = useState(false);
     const [lastSaved, setLastSaved] = useState(null);
     const [showSubmitDialog, setShowSubmitDialog] = useState(false);
-    const [submitNote, setSubmitNote] = useState('');
     const editorRef = useRef(null);
 
     // Initialize data
@@ -382,15 +381,7 @@ const CollaboratorArticleEditor = () => {
                                 </div>
                             </div>
 
-                            {/* Note textarea */}
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Ghi chú gửi biên tập viên (tùy chọn)</label>
-                            <textarea
-                                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                                placeholder="Nhập ghi chú hoặc lời nhắn cho biên tập viên..."
-                                rows="3"
-                                value={submitNote}
-                                onChange={(e) => setSubmitNote(e.target.value)}
-                            ></textarea>
+                            {/* Removed Note textarea */}
                         </div>
 
                         <div className="p-5 border-t border-gray-100 flex justify-end gap-3 bg-white">
