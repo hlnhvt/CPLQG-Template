@@ -238,7 +238,6 @@ const ProfilePage = () => {
                                 <div className="text-[15px] font-medium text-gray-900 pb-1">
                                     {formData.phone}
                                 </div>
-                                <span className="px-2 py-0.5 rounded text-xs font-semibold bg-green-100 text-green-700">Đã xác thực</span>
                             </div>
                         ) : (
                             <input
