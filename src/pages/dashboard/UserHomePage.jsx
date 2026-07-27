@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutGrid, List, CloudSun, Wind, Droplets, MessageSquare, BarChart2, PieChart, Clock, FileText, Share2, Download } from 'lucide-react';
+import { LayoutGrid, List, CloudSun, Wind, Droplets, MessageSquare, BarChart2, PieChart, Clock, FileText, Share2, Download, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -103,7 +103,7 @@ const FIELD_KEYWORDS = {
 
 const generateMockDocsForField = (field, type) => {
     const keywords = FIELD_KEYWORDS[field] || FIELD_KEYWORDS['Đất đai và Bất động sản'];
-    
+
     if (type === 'new') {
         return [
             { id: `new-${field}-1`, title: `Luật ${keywords[0]} năm 2024`, status: 'Chưa có hiệu lực', issueDate: '18/01/2024', effectiveDate: '01/01/2025', isNew: true },
@@ -125,6 +125,32 @@ const generateMockDocsForField = (field, type) => {
     }
 };
 
+const MOCK_NEWS = [
+    {
+        id: 'news1',
+        title: '4 hành vi vi phạm trong hoạt động công chứng bị phạt đến 25 triệu đồng',
+        description: 'Ngày 01/4/2026, Chính phủ ban hành Nghị định số 109/2026/NĐ-CP quy định xử phạt vi phạm hành chính trong lĩnh vực bổ trợ tư pháp, hành chính tư pháp, hôn nhân và gia đình, thi hành án dân sự, phá sản doanh nghiệp, hợp tác xã. Trong đó, quy định mức phạt tiền đối với 4 hành vi vi phạm trong hoạt động công chứng.',
+        date: '22/07/2026',
+        time: '09:10',
+        imageUrl: '/thumb1.png'
+    },
+    {
+        id: 'news2',
+        title: '7 đối tượng được hỗ trợ tiền sử dụng sản phẩm, dịch vụ công ích thủy lợi',
+        description: 'Chính phủ đã ban hành Nghị định 115/2026/NĐ-CP vào ngày 02/04/2026, quy định chi tiết một số điều và biện pháp thi hành Luật Thủy lợi. Nghị định này quy định cụ thể 7 đối tượng được Nhà nước hỗ trợ tiền sử dụng sản phẩm, dịch vụ công ích thủy lợi từ ngân sách trung ương.',
+        date: '20/07/2026',
+        time: '14:50',
+        imageUrl: '/thumb2.png'
+    },
+    {
+        id: 'news3',
+        title: 'THỦ TƯỚNG CHÍNH PHỦ BAN HÀNH QUY CHẾ QUẢN LÝ, VẬN HÀNH, KHAI THÁC CỔNG PHÁP LUẬT QUỐC GIA',
+        description: 'Ngày 13/7/2026, Thủ tướng Chính phủ đã ban hành Quyết định số 35/2026/QĐ-TTg ban hành Quy chế quản lý, duy trì, cập nhật, khai thác và sử dụng Cổng Thông tin điện tử Pháp điển. Đây là bước tiến quan trọng nhằm minh bạch hóa và phổ biến thông tin pháp luật rộng rãi đến người dân và doanh nghiệp.',
+        date: '18/07/2026',
+        time: '10:51',
+        imageUrl: '/thumb3.png'
+    }
+];
 
 const getSortOrderLabel = (key) => {
     switch (key) {
@@ -214,83 +240,116 @@ const UserHomePage = () => {
                 </div>
             </div>
 
-            {/* Đề xuất văn bản Section */}
-            <section className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 animate-slideUpFade" style={{ animationDelay: '100ms' }}>
-                <h4 className="font-bold text-xl text-gray-800 flex items-center gap-3 mb-2">
-                    <span className="w-1.5 h-6 bg-blue-600 rounded-full block"></span>
-                    Đề xuất văn bản
-                </h4>
-                <p className="text-[14px] text-gray-600 mb-5 ml-4 italic">
-                    Danh sách các văn bản được đề xuất vì bạn đã quan tâm tới lĩnh vực <span className="font-semibold text-blue-600">{randomField}</span>
-                </p>
-                {/* Tabs */}
-                <div className="flex flex-col sm:flex-row border-b border-gray-200 mb-4 gap-1">
-                    <button
-                        onClick={() => setActiveRecTab('moi-ban-hanh')}
-                        className={`flex-1 py-3 px-2 text-center font-bold text-[15px] transition-colors rounded-t ${activeRecTab === 'moi-ban-hanh' ? 'bg-[#0056b3] text-white' : 'bg-white text-gray-600 hover:bg-gray-50 border border-b-0 border-gray-200'}`}
-                    >
-                        Văn bản mới ban hành
-                    </button>
-                    <button
-                        onClick={() => setActiveRecTab('het-hieu-luc')}
-                        className={`flex-1 py-3 px-2 text-center font-bold text-[15px] transition-colors rounded-t ${activeRecTab === 'het-hieu-luc' ? 'bg-[#0056b3] text-white' : 'bg-white text-gray-600 hover:bg-gray-50 border border-b-0 border-gray-200'}`}
-                    >
-                        Văn bản hết hiệu lực
-                    </button>
-                    <button
-                        onClick={() => setActiveRecTab('sua-doi')}
-                        className={`flex-1 py-3 px-2 text-center font-bold text-[15px] transition-colors rounded-t ${activeRecTab === 'sua-doi' ? 'bg-[#0056b3] text-white' : 'bg-white text-gray-600 hover:bg-gray-50 border border-b-0 border-gray-200'}`}
-                    >
-                        Văn bản sửa đổi
-                    </button>
-                </div>
-                {/* List */}
-                <div className="space-y-3">
-                    {docsByTab[activeRecTab].map((doc) => (
-                        <div key={doc.id} className="bg-white border border-gray-200 rounded p-4 flex flex-col md:flex-row gap-4 hover:shadow-sm transition-shadow">
-                            <div className="flex-1">
-                                <div className="mb-3 flex items-start gap-2">
-                                    {doc.isNew && (
-                                        <span className="bg-[#dc3545] text-white text-[11px] font-bold px-1.5 py-0.5 rounded mt-0.5 shrink-0">
-                                            Mới
-                                        </span>
-                                    )}
-                                    <Link to={`/van-ban/${doc.id}`} className="text-[15px] font-medium text-gray-800 hover:text-[#0056b3] leading-relaxed line-clamp-3">
-                                        {doc.title}
+            {/* Split Grid for Recommendations and News */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                {/* Văn bản đề xuất Section */}
+                <section className="lg:col-span-8 bg-white rounded-xl shadow-sm border border-gray-100 p-5 animate-slideUpFade" style={{ animationDelay: '100ms' }}>
+                    <h4 className="font-bold text-xl text-gray-800 flex items-center gap-3 mb-2">
+                        <span className="w-1.5 h-6 bg-blue-600 rounded-full block"></span>
+                        Văn bản đề xuất
+                    </h4>
+                    <p className="text-[14px] text-gray-600 mb-5 ml-4 italic">
+                        Danh sách văn bản được đề xuất vì bạn quan tâm tới lĩnh vực <span className="font-semibold text-blue-600">{randomField}</span>
+                    </p>
+                    {/* Tabs */}
+                    <div className="flex flex-col sm:flex-row border-b border-gray-200 mb-4 gap-1">
+                        <button
+                            onClick={() => setActiveRecTab('moi-ban-hanh')}
+                            className={`flex-1 py-3 px-2 text-center font-bold text-[15px] transition-colors rounded-t ${activeRecTab === 'moi-ban-hanh' ? 'bg-[#0056b3] text-white' : 'bg-white text-gray-600 hover:bg-gray-50 border border-b-0 border-gray-200'}`}
+                        >
+                            Văn bản mới ban hành
+                        </button>
+                        <button
+                            onClick={() => setActiveRecTab('het-hieu-luc')}
+                            className={`flex-1 py-3 px-2 text-center font-bold text-[15px] transition-colors rounded-t ${activeRecTab === 'het-hieu-luc' ? 'bg-[#0056b3] text-white' : 'bg-white text-gray-600 hover:bg-gray-50 border border-b-0 border-gray-200'}`}
+                        >
+                            Văn bản hết hiệu lực
+                        </button>
+                        <button
+                            onClick={() => setActiveRecTab('sua-doi')}
+                            className={`flex-1 py-3 px-2 text-center font-bold text-[15px] transition-colors rounded-t ${activeRecTab === 'sua-doi' ? 'bg-[#0056b3] text-white' : 'bg-white text-gray-600 hover:bg-gray-50 border border-b-0 border-gray-200'}`}
+                        >
+                            Văn bản sửa đổi
+                        </button>
+                    </div>
+                    {/* List */}
+                    <div className="space-y-3">
+                        {docsByTab[activeRecTab].map((doc) => (
+                            <div key={doc.id} className="bg-white border border-gray-200 rounded p-4 flex flex-col md:flex-row gap-4 hover:shadow-sm transition-shadow">
+                                <div className="flex-1">
+                                    <div className="mb-3 flex items-start gap-2">
+                                        {doc.isNew && (
+                                            <span className="bg-[#dc3545] text-white text-[11px] font-bold px-1.5 py-0.5 rounded mt-0.5 shrink-0">
+                                                Mới
+                                            </span>
+                                        )}
+                                        <Link to={`/van-ban/${doc.id}`} className="text-[15px] font-medium text-gray-800 hover:text-[#0056b3] leading-relaxed line-clamp-3">
+                                            {doc.title}
+                                        </Link>
+                                    </div>
+
+                                    <div className="flex items-center gap-2 mt-4">
+                                        <button className="flex items-center gap-1.5 border border-gray-200 rounded px-3 py-1.5 text-[12px] text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-colors">
+                                            <FileText size={13} /> PDF
+                                        </button>
+                                        <button className="flex items-center gap-1.5 border border-gray-200 rounded px-3 py-1.5 text-[12px] text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-colors">
+                                            <Share2 size={13} /> Lược đồ
+                                        </button>
+                                        <button className="flex items-center gap-1.5 border border-gray-200 rounded px-3 py-1.5 text-[12px] text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-colors">
+                                            <Download size={13} /> Tải về
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="w-full md:w-[200px] shrink-0 text-[12px] border-t md:border-t-0 md:border-l border-gray-200 pt-3 md:pt-0 md:pl-4 flex flex-col justify-center gap-2">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-gray-500">Trạng thái:</span>
+                                        <span className="text-[#d9a406] font-medium text-right">{doc.status}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-gray-500">Ngày ban hành:</span>
+                                        <span className="text-gray-700 text-right">{doc.issueDate}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-gray-500">Ngày hiệu lực:</span>
+                                        <span className="text-gray-700 text-right">{doc.effectiveDate}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Tin tức đề xuất Section */}
+                <section className="lg:col-span-4 bg-white rounded-xl shadow-sm border border-gray-100 p-5 animate-slideUpFade flex flex-col" style={{ animationDelay: '200ms' }}>
+                    <h4 className="font-bold text-xl text-gray-800 flex items-center gap-3 mb-2">
+                        <span className="w-1.5 h-6 bg-[#0056b3] rounded-full block"></span>
+                        Tin tức đề xuất
+                    </h4>
+                    <p className="text-[14px] text-gray-600 mb-5 ml-4 italic">
+                        Tin tức được đề xuất dành cho bạn
+                    </p>
+                    <div className="space-y-4 flex-1">
+                        {MOCK_NEWS.map((news) => (
+                            <div key={news.id} className="group border border-gray-100 rounded-lg p-3 flex gap-3 hover:shadow-md transition-shadow bg-white">
+                                <div className="w-[100px] h-[75px] shrink-0 rounded overflow-hidden relative">
+                                    <img src={news.imageUrl} alt={news.title} className="w-full h-full object-cover" />
+                                </div>
+                                <div className="flex-1 flex flex-col justify-between">
+                                    <Link to="#" className="font-bold text-[14px] leading-tight text-[#0056b3] group-hover:text-blue-800 line-clamp-2 mb-1">
+                                        {news.title}
                                     </Link>
-                                </div>
-
-                                <div className="flex items-center gap-2 mt-4">
-                                    <button className="flex items-center gap-1.5 border border-gray-200 rounded px-3 py-1.5 text-[12px] text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-colors">
-                                        <FileText size={13} /> PDF
-                                    </button>
-                                    <button className="flex items-center gap-1.5 border border-gray-200 rounded px-3 py-1.5 text-[12px] text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-colors">
-                                        <Share2 size={13} /> Lược đồ
-                                    </button>
-                                    <button className="flex items-center gap-1.5 border border-gray-200 rounded px-3 py-1.5 text-[12px] text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-colors">
-                                        <Download size={13} /> Tải về
-                                    </button>
+                                    <p className="text-[12px] text-gray-600 line-clamp-3 mb-1">{news.description}</p>
+                                    <div className="flex items-center gap-3 text-[11px] text-gray-500">
+                                        <span className="flex items-center gap-1"><Calendar size={12} /> {news.date}</span>
+                                        <span className="flex items-center gap-1"><Clock size={12} /> {news.time}</span>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div className="w-full md:w-[200px] shrink-0 text-[12px] border-t md:border-t-0 md:border-l border-gray-200 pt-3 md:pt-0 md:pl-4 flex flex-col justify-center gap-2">
-                                <div className="flex justify-between items-center">
-                                    <span className="text-gray-500">Trạng thái:</span>
-                                    <span className="text-[#d9a406] font-medium text-right">{doc.status}</span>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-gray-500">Ngày ban hành:</span>
-                                    <span className="text-gray-700 text-right">{doc.issueDate}</span>
-                                </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-gray-500">Ngày hiệu lực:</span>
-                                    <span className="text-gray-700 text-right">{doc.effectiveDate}</span>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
+                        ))}
+                    </div>
+                </section>
+            </div>
 
             {/* Configured Layout Preview */}
             <div className="flex flex-wrap -mx-3 md:-mx-4 lg:-mx-5">
