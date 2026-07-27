@@ -791,7 +791,7 @@ const DuThaoDetailPage = () => {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <label className="block text-[12px] font-semibold text-gray-700 mb-1.5">Email <span className="text-red-500">*</span></label>
+                                                    <label className="block text-[12px] font-semibold text-gray-700 mb-1.5">Email</label>
                                                     <div className="relative">
                                                         <Mail size={16} className="absolute left-3 top-2.5 text-gray-400" />
                                                         <input type="email" value="hoangluongnhan@gmail.com" readOnly className="w-full bg-[#f4f7fb] border border-gray-200 rounded-lg py-2 pl-9 pr-3 text-[13px] text-gray-600 outline-none shadow-inner" />

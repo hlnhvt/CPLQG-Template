@@ -249,7 +249,7 @@ const UserHomePage = () => {
                         Văn bản đề xuất
                     </h4>
                     <p className="text-[14px] text-gray-600 mb-5 ml-4 italic">
-                        Danh sách văn bản được đề xuất vì bạn quan tâm tới lĩnh vực <span className="font-semibold text-blue-600">{randomField}</span>
+                        Danh sách văn bản được đề xuất dành cho bạn
                     </p>
                     {/* Tabs */}
                     <div className="flex flex-col sm:flex-row border-b border-gray-200 mb-4 gap-1">

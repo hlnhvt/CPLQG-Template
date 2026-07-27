@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, Phone, UploadCloud, MessageSquare, ThumbsUp, Flag, Edit3, Trash2 } from 'lucide-react';
+import { User, Mail, Phone, UploadCloud, MessageSquare, Flag, Edit3, Trash2 } from 'lucide-react';
 
 const CommentSection = () => {
     const [comments, setComments] = useState([
@@ -102,12 +102,6 @@ const CommentSection = () => {
         setEditContent('');
     };
 
-    const handleLike = (id) => {
-        setComments(prev => prev.map(c =>
-            c.id === id ? { ...c, likes: c.likes + 1 } : c
-        ));
-    };
-
     return (
         <div className="mt-12 space-y-12">
             {/* --- Ý KIẾN SECTION --- */}
@@ -161,18 +155,6 @@ const CommentSection = () => {
                                     {/* Actions */}
                                     {editingId !== comment.id && (
                                     <div className="flex flex-wrap items-center gap-4 mt-2 text-sm text-gray-500">
-                                        <button
-                                            onClick={() => handleLike(comment.id)}
-                                            className="flex items-center gap-1.5 hover:text-blue-600 font-medium transition"
-                                        >
-                                            <ThumbsUp size={16} /> Thích
-                                        </button>
-                                        {comment.likes > 0 && (
-                                            <span className="flex items-center gap-1.5 font-medium text-red-500 bg-red-50 px-2 py-0.5 rounded-full text-xs">
-                                                <ThumbsUp size={14} className="fill-current" /> {comment.likes}
-                                            </span>
-                                        )}
-
                                         {comment.isMine && comment.status === 'pending' && (
                                             <>
                                                 <button 
