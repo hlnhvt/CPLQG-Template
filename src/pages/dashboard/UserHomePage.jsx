@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutGrid, List, CloudSun, Wind, Droplets, MessageSquare, BarChart2, PieChart, Clock } from 'lucide-react';
+import { LayoutGrid, List, CloudSun, Wind, Droplets, MessageSquare, BarChart2, PieChart, Clock, FileText, Share2, Download } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -92,6 +92,40 @@ const DEFAULT_BLOCKS = [
     { id: 'forum-luat-su', viewMode: 'card', width: '50', recordCount: 5, sortOrder: 'most_commented' },
 ];
 
+const FIELD_KEYWORDS = {
+    'Đất đai và Bất động sản': ['Đất đai', 'Nhà ở', 'Kinh doanh bất động sản', 'Giá đất', 'Thu hồi đất'],
+    'Xây dựng và Đầu tư': ['Xây dựng', 'Đầu tư', 'Đấu thầu', 'Quy hoạch đô thị', 'Quản lý dự án'],
+    'Thuế và Kế toán': ['Thuế thu nhập', 'Quản lý thuế', 'Kế toán', 'Hóa đơn chứng từ', 'Kiểm toán độc lập'],
+    'Lao động và Tiền lương': ['Lao động', 'Tiền lương', 'Bảo hiểm xã hội', 'Việc làm', 'An toàn lao động'],
+    'Dân sự và Hình sự': ['Dân sự', 'Hình sự', 'Tố tụng hình sự', 'Thi hành án', 'Xử lý vi phạm hành chính'],
+    'Bảo hiểm và Y tế': ['Bảo hiểm y tế', 'Khám chữa bệnh', 'Dược', 'Phòng chống bệnh truyền nhiễm', 'Vệ sinh an toàn thực phẩm']
+};
+
+const generateMockDocsForField = (field, type) => {
+    const keywords = FIELD_KEYWORDS[field] || FIELD_KEYWORDS['Đất đai và Bất động sản'];
+    
+    if (type === 'new') {
+        return [
+            { id: `new-${field}-1`, title: `Luật ${keywords[0]} năm 2024`, status: 'Chưa có hiệu lực', issueDate: '18/01/2024', effectiveDate: '01/01/2025', isNew: true },
+            { id: `new-${field}-2`, title: `Luật ${keywords[1]} sửa đổi năm 2023`, status: 'Chưa có hiệu lực', issueDate: '27/11/2023', effectiveDate: '01/01/2025', isNew: true },
+            { id: `new-${field}-3`, title: `Nghị định quy định chi tiết thi hành Luật ${keywords[2]}`, status: 'Chưa có hiệu lực', issueDate: '28/11/2023', effectiveDate: '01/01/2025', isNew: true }
+        ];
+    } else if (type === 'expired') {
+        return [
+            { id: `exp-${field}-1`, title: `Luật ${keywords[0]} năm 2013`, status: 'Hết hiệu lực', issueDate: '29/11/2013', effectiveDate: '01/07/2014', isNew: false },
+            { id: `exp-${field}-2`, title: `Luật ${keywords[1]} năm 2014`, status: 'Hết hiệu lực', issueDate: '25/11/2014', effectiveDate: '01/07/2015', isNew: false },
+            { id: `exp-${field}-3`, title: `Nghị định quy định chi tiết thi hành một số điều của Luật ${keywords[2]}`, status: 'Hết hiệu lực', issueDate: '15/05/2014', effectiveDate: '01/07/2014', isNew: false }
+        ];
+    } else {
+        return [
+            { id: `amd-${field}-1`, title: `Luật ${keywords[0]} năm 2014`, status: 'Còn hiệu lực', issueDate: '18/06/2014', effectiveDate: '01/01/2015', isNew: false },
+            { id: `amd-${field}-2`, title: `Luật ${keywords[1]} năm 2014`, status: 'Còn hiệu lực', issueDate: '25/11/2014', effectiveDate: '01/07/2015', isNew: false },
+            { id: `amd-${field}-3`, title: `Nghị định quy định chi tiết và hướng dẫn thi hành Luật ${keywords[2]}`, status: 'Còn hiệu lực', issueDate: '20/10/2015', effectiveDate: '10/12/2015', isNew: false }
+        ];
+    }
+};
+
+
 const getSortOrderLabel = (key) => {
     switch (key) {
         case 'newest': return 'Mới nhất';
@@ -112,6 +146,20 @@ const UserHomePage = () => {
         const saved = localStorage.getItem('userOrderedBlocks');
         return saved ? JSON.parse(saved) : DEFAULT_BLOCKS;
     });
+
+    const [activeRecTab, setActiveRecTab] = React.useState('moi-ban-hanh');
+    const [randomField] = React.useState(() => {
+        const fields = ['Đất đai và Bất động sản', 'Xây dựng và Đầu tư', 'Thuế và Kế toán', 'Lao động và Tiền lương', 'Dân sự và Hình sự', 'Bảo hiểm và Y tế'];
+        return fields[Math.floor(Math.random() * fields.length)];
+    });
+
+    const docsByTab = React.useMemo(() => {
+        return {
+            'moi-ban-hanh': generateMockDocsForField(randomField, 'new'),
+            'het-hieu-luc': generateMockDocsForField(randomField, 'expired'),
+            'sua-doi': generateMockDocsForField(randomField, 'amended')
+        };
+    }, [randomField]);
 
     // Get current date string
     const today = new Date();
@@ -166,6 +214,84 @@ const UserHomePage = () => {
                 </div>
             </div>
 
+            {/* Đề xuất văn bản Section */}
+            <section className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 animate-slideUpFade" style={{ animationDelay: '100ms' }}>
+                <h4 className="font-bold text-xl text-gray-800 flex items-center gap-3 mb-2">
+                    <span className="w-1.5 h-6 bg-blue-600 rounded-full block"></span>
+                    Đề xuất văn bản
+                </h4>
+                <p className="text-[14px] text-gray-600 mb-5 ml-4 italic">
+                    Danh sách các văn bản được đề xuất vì bạn đã quan tâm tới lĩnh vực <span className="font-semibold text-blue-600">{randomField}</span>
+                </p>
+                {/* Tabs */}
+                <div className="flex flex-col sm:flex-row border-b border-gray-200 mb-4 gap-1">
+                    <button
+                        onClick={() => setActiveRecTab('moi-ban-hanh')}
+                        className={`flex-1 py-3 px-2 text-center font-bold text-[15px] transition-colors rounded-t ${activeRecTab === 'moi-ban-hanh' ? 'bg-[#0056b3] text-white' : 'bg-white text-gray-600 hover:bg-gray-50 border border-b-0 border-gray-200'}`}
+                    >
+                        Văn bản mới ban hành
+                    </button>
+                    <button
+                        onClick={() => setActiveRecTab('het-hieu-luc')}
+                        className={`flex-1 py-3 px-2 text-center font-bold text-[15px] transition-colors rounded-t ${activeRecTab === 'het-hieu-luc' ? 'bg-[#0056b3] text-white' : 'bg-white text-gray-600 hover:bg-gray-50 border border-b-0 border-gray-200'}`}
+                    >
+                        Văn bản hết hiệu lực
+                    </button>
+                    <button
+                        onClick={() => setActiveRecTab('sua-doi')}
+                        className={`flex-1 py-3 px-2 text-center font-bold text-[15px] transition-colors rounded-t ${activeRecTab === 'sua-doi' ? 'bg-[#0056b3] text-white' : 'bg-white text-gray-600 hover:bg-gray-50 border border-b-0 border-gray-200'}`}
+                    >
+                        Văn bản sửa đổi
+                    </button>
+                </div>
+                {/* List */}
+                <div className="space-y-3">
+                    {docsByTab[activeRecTab].map((doc) => (
+                        <div key={doc.id} className="bg-white border border-gray-200 rounded p-4 flex flex-col md:flex-row gap-4 hover:shadow-sm transition-shadow">
+                            <div className="flex-1">
+                                <div className="mb-3 flex items-start gap-2">
+                                    {doc.isNew && (
+                                        <span className="bg-[#dc3545] text-white text-[11px] font-bold px-1.5 py-0.5 rounded mt-0.5 shrink-0">
+                                            Mới
+                                        </span>
+                                    )}
+                                    <Link to={`/van-ban/${doc.id}`} className="text-[15px] font-medium text-gray-800 hover:text-[#0056b3] leading-relaxed line-clamp-3">
+                                        {doc.title}
+                                    </Link>
+                                </div>
+
+                                <div className="flex items-center gap-2 mt-4">
+                                    <button className="flex items-center gap-1.5 border border-gray-200 rounded px-3 py-1.5 text-[12px] text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-colors">
+                                        <FileText size={13} /> PDF
+                                    </button>
+                                    <button className="flex items-center gap-1.5 border border-gray-200 rounded px-3 py-1.5 text-[12px] text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-colors">
+                                        <Share2 size={13} /> Lược đồ
+                                    </button>
+                                    <button className="flex items-center gap-1.5 border border-gray-200 rounded px-3 py-1.5 text-[12px] text-gray-600 hover:bg-gray-50 hover:border-gray-300 transition-colors">
+                                        <Download size={13} /> Tải về
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="w-full md:w-[200px] shrink-0 text-[12px] border-t md:border-t-0 md:border-l border-gray-200 pt-3 md:pt-0 md:pl-4 flex flex-col justify-center gap-2">
+                                <div className="flex justify-between items-center">
+                                    <span className="text-gray-500">Trạng thái:</span>
+                                    <span className="text-[#d9a406] font-medium text-right">{doc.status}</span>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-gray-500">Ngày ban hành:</span>
+                                    <span className="text-gray-700 text-right">{doc.issueDate}</span>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-gray-500">Ngày hiệu lực:</span>
+                                    <span className="text-gray-700 text-right">{doc.effectiveDate}</span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
             {/* Configured Layout Preview */}
             <div className="flex flex-wrap -mx-3 md:-mx-4 lg:-mx-5">
                 {orderedBlocks.map((block, idx) => {
@@ -181,8 +307,8 @@ const UserHomePage = () => {
                     if (block.width === '25') wClass = 'w-full xl:w-1/4 md:w-1/2';
 
                     return (
-                        <div 
-                            key={`user-home-${block.id}`} 
+                        <div
+                            key={`user-home-${block.id}`}
                             className={`${wClass} px-3 md:px-4 lg:px-5 mb-6 md:mb-8 lg:mb-10 animate-slideUpFade`}
                             style={{ animationDelay: `${(idx + 1) * 150}ms` }}
                         >
@@ -230,7 +356,7 @@ const UserHomePage = () => {
                                                     <div className="flex-1 py-1 flex flex-col justify-center min-w-0">
                                                         <h5 className="font-bold text-[15px] leading-snug line-clamp-2 text-gray-800 group-hover/list:text-blue-700 transition-colors mb-1.5">Tiêu đề chi tiết bài viết {i + 1} trong danh mục {itemDef.title}</h5>
                                                         <div className="text-xs text-gray-500 flex items-center gap-3">
-                                                            <span className="flex items-center gap-1.5"><Clock size={12}/> 20/07/2026</span>
+                                                            <span className="flex items-center gap-1.5"><Clock size={12} /> 20/07/2026</span>
                                                         </div>
                                                     </div>
                                                 </div>

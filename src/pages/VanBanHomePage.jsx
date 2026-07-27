@@ -19,7 +19,7 @@ const MOCK_ACTIVE_DOCS = [
         status: 'Chưa có hiệu lực',
         issueDate: '07/04/2026',
         effectiveDate: '25/05/2026',
-        isNew: true
+        isNew: false
     },
     {
         id: '102',
@@ -27,7 +27,7 @@ const MOCK_ACTIVE_DOCS = [
         status: 'Chưa có hiệu lực',
         issueDate: '01/04/2026',
         effectiveDate: '19/05/2026',
-        isNew: true
+        isNew: false
     },
     {
         id: '103',
@@ -35,7 +35,7 @@ const MOCK_ACTIVE_DOCS = [
         status: 'Chưa có hiệu lực',
         issueDate: '31/03/2026',
         effectiveDate: '15/05/2026',
-        isNew: true
+        isNew: false
     }
 ];
 
@@ -155,7 +155,7 @@ const VanBanHomePage = () => {
                                     {/* Row 1 */}
                                     <div>
                                         <label className="block text-[13px] font-medium mb-1.5">Loại văn bản</label>
-                                        <select 
+                                        <select
                                             value={loaiVanBan}
                                             onChange={e => setLoaiVanBan(e.target.value)}
                                             className={`w-full bg-white text-[13px] py-2 px-3 rounded outline-none shadow-sm cursor-pointer border-r-[12px] border-transparent ${loaiVanBan ? 'text-gray-900' : 'text-gray-400'}`}
@@ -167,7 +167,7 @@ const VanBanHomePage = () => {
                                     </div>
                                     <div>
                                         <label className="block text-[13px] font-medium mb-1.5">Cơ quan ban hành</label>
-                                        <select 
+                                        <select
                                             value={coQuanBanHanh}
                                             onChange={e => setCoQuanBanHanh(e.target.value)}
                                             className={`w-full bg-white text-[13px] py-2 px-3 rounded outline-none shadow-sm cursor-pointer border-r-[12px] border-transparent ${coQuanBanHanh ? 'text-gray-900' : 'text-gray-400'}`}
@@ -180,19 +180,19 @@ const VanBanHomePage = () => {
                                     <div>
                                         <label className="block text-[13px] font-medium mb-1.5">Ngày ban hành</label>
                                         <div className="relative text-gray-700">
-                                            <input 
-                                                type="text" 
-                                                placeholder="dd/mm/yyyy - dd/mm/yyyy" 
+                                            <input
+                                                type="text"
+                                                placeholder="dd/mm/yyyy - dd/mm/yyyy"
                                                 value={ngayBanHanh}
                                                 onChange={e => setNgayBanHanh(e.target.value)}
-                                                className={`w-full bg-white text-[13px] py-2 px-3 pr-8 rounded outline-none shadow-sm ${ngayBanHanh ? 'text-gray-900' : 'text-gray-400 placeholder:text-gray-400'}`} 
+                                                className={`w-full bg-white text-[13px] py-2 px-3 pr-8 rounded outline-none shadow-sm ${ngayBanHanh ? 'text-gray-900' : 'text-gray-400 placeholder:text-gray-400'}`}
                                             />
                                             <Calendar size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
                                         </div>
                                     </div>
                                     <div>
                                         <label className="block text-[13px] font-medium mb-1.5">Tình trạng hiệu lực</label>
-                                        <select 
+                                        <select
                                             value={tinhTrangHieuLuc}
                                             onChange={e => setTinhTrangHieuLuc(e.target.value)}
                                             className={`w-full bg-white text-[13px] py-2 px-3 rounded outline-none shadow-sm cursor-pointer border-r-[12px] border-transparent ${tinhTrangHieuLuc ? 'text-gray-900' : 'text-gray-400'}`}
@@ -206,7 +206,7 @@ const VanBanHomePage = () => {
                                     {/* Row 2 */}
                                     <div>
                                         <label className="block text-[13px] font-medium mb-1.5">Tỉnh/Thành phố</label>
-                                        <select 
+                                        <select
                                             value={selectedProvince}
                                             onChange={(e) => setSelectedProvince(e.target.value)}
                                             className={`w-full bg-white text-[13px] py-2 px-3 rounded outline-none shadow-sm cursor-pointer border-r-[12px] border-transparent ${selectedProvince ? 'text-gray-900' : 'text-gray-400'}`}
@@ -218,7 +218,7 @@ const VanBanHomePage = () => {
                                     </div>
                                     <div>
                                         <label className="block text-[13px] font-medium mb-1.5">Xã/Phường</label>
-                                        <select 
+                                        <select
                                             disabled={!selectedProvince}
                                             value={xaPhuong}
                                             onChange={e => setXaPhuong(e.target.value)}
@@ -242,12 +242,12 @@ const VanBanHomePage = () => {
                                     <div>
                                         <label className="block text-[13px] font-medium mb-1.5">Ngày có hiệu lực</label>
                                         <div className="relative text-gray-700">
-                                            <input 
-                                                type="text" 
-                                                placeholder="dd/mm/yyyy - dd/mm/yyyy" 
+                                            <input
+                                                type="text"
+                                                placeholder="dd/mm/yyyy - dd/mm/yyyy"
                                                 value={ngayCoHieuLuc}
                                                 onChange={e => setNgayCoHieuLuc(e.target.value)}
-                                                className={`w-full bg-white text-[13px] py-2 px-3 pr-8 rounded outline-none shadow-sm ${ngayCoHieuLuc ? 'text-gray-900' : 'text-gray-400 placeholder:text-gray-400'}`} 
+                                                className={`w-full bg-white text-[13px] py-2 px-3 pr-8 rounded outline-none shadow-sm ${ngayCoHieuLuc ? 'text-gray-900' : 'text-gray-400 placeholder:text-gray-400'}`}
                                             />
                                             <Calendar size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
                                         </div>
@@ -255,12 +255,12 @@ const VanBanHomePage = () => {
                                     <div>
                                         <label className="block text-[13px] font-medium mb-1.5">Ngày hết hiệu lực</label>
                                         <div className="relative text-gray-700">
-                                            <input 
-                                                type="text" 
-                                                placeholder="dd/mm/yyyy - dd/mm/yyyy" 
+                                            <input
+                                                type="text"
+                                                placeholder="dd/mm/yyyy - dd/mm/yyyy"
                                                 value={ngayHetHieuLuc}
                                                 onChange={e => setNgayHetHieuLuc(e.target.value)}
-                                                className={`w-full bg-white text-[13px] py-2 px-3 pr-8 rounded outline-none shadow-sm ${ngayHetHieuLuc ? 'text-gray-900' : 'text-gray-400 placeholder:text-gray-400'}`} 
+                                                className={`w-full bg-white text-[13px] py-2 px-3 pr-8 rounded outline-none shadow-sm ${ngayHetHieuLuc ? 'text-gray-900' : 'text-gray-400 placeholder:text-gray-400'}`}
                                             />
                                             <Calendar size={14} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
                                         </div>
