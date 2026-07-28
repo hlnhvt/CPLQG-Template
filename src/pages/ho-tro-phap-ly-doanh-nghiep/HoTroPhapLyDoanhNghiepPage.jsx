@@ -5590,9 +5590,6 @@ import {
                         {/* Meta info */}
                         <div className="flex flex-wrap items-center gap-4 text-[#757575] text-[14px] mb-6">
                             <span className="text-[#757575]">Ngày đăng: <strong>{article.date}</strong></span>
-                            {article.field && (
-                                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded font-medium">{article.field}</span>
-                            )}
                         </div>
 
                         {/* Tóm tắt - in nghiêng, hiển thị trước ảnh */}
