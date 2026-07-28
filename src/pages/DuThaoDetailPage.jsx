@@ -47,11 +47,11 @@ const DOC_DATA = {
     trangThai: 'Đang lấy ý kiến',
     coGuanTrachNhiem: 'Bộ Thông tin và Truyền thông, Bộ Tư pháp',
     timeline: [
-        { status: 'done', date: '01/01/2026', title: 'Soạn thảo', desc: 'Lập hồ sơ đề nghị xây dựng dự án Luật.', extraInfo: 'Hoàn thành hồ sơ sơ bộ trình các cấp có thẩm quyền đánh giá.', attachments: [{ name: 'To_trinh_De_nghi.pdf', type: 'PDF' }] },
-        { status: 'done', date: '10/03/2026', title: 'Lấy ý kiến công khai', desc: 'Đăng tải dự thảo trên Cổng Thông tin điện tử để lấy ý kiến nhân dân (60 ngày).', extraInfo: 'Mở hòm thư góp ý công khai tại cổng thông tin.', attachments: [{ name: 'Du_thao_Quy_dinh_chi_tiet.docx', type: 'DOCX' }, { name: 'Thong_bao_lay_y_kien.pdf', type: 'PDF' }] },
-        { status: 'current', date: '—', title: 'Thẩm định', desc: 'Bộ Tư pháp thẩm định dự án Luật.', extraInfo: 'Đang trong quá trình rà soát tính hợp hiến, hợp pháp.' },
-        { status: 'pending', date: '—', title: 'Trình Chính phủ', desc: 'Trình Chính phủ xem xét, thống nhất thông qua.' },
-        { status: 'pending', date: '—', title: 'Trình Quốc hội', desc: 'Dự kiến ban hành tại Kỳ họp thứ 11.' }
+        { status: 'done', date: '01/01/2026', title: 'Soạn thảo', desc: 'Lập hồ sơ đề nghị xây dựng dự án Luật.', org: 'Bộ Công an', extraInfo: 'Hoàn thành hồ sơ sơ bộ trình các cấp có thẩm quyền đánh giá.', attachments: [{ name: 'To_trinh_De_nghi.pdf', type: 'PDF' }] },
+        { status: 'done', date: '10/03/2026', title: 'Lấy ý kiến công khai', desc: 'Đăng tải dự thảo trên Cổng Thông tin điện tử để lấy ý kiến nhân dân (60 ngày).', org: 'Bộ Công an, Bộ Tư pháp', extraInfo: 'Mở hòm thư góp ý công khai tại cổng thông tin.', attachments: [{ name: 'Du_thao_Quy_dinh_chi_tiet.docx', type: 'DOCX' }, { name: 'Thong_bao_lay_y_kien.pdf', type: 'PDF' }] },
+        { status: 'current', date: '—', title: 'Thẩm định', desc: 'Bộ Tư pháp thẩm định dự án Luật.', org: 'Bộ Tư pháp', extraInfo: 'Đang trong quá trình rà soát tính hợp hiến, hợp pháp.' },
+        { status: 'pending', date: '—', title: 'Trình Chính phủ', desc: 'Trình Chính phủ xem xét, thống nhất thông qua.', org: 'Chính phủ' },
+        { status: 'pending', date: '—', title: 'Trình Quốc hội', desc: 'Dự kiến ban hành tại Kỳ họp thứ 11.', org: 'Quốc hội' }
     ],
     suggestions: [
         { id: 1, user: 'Nguyễn Văn A', org: 'Công ty TNHH Phần mềm XYZ', date: '12/03/2026 14:30', content: 'Cần quy định rõ hơn về tiêu chuẩn kỹ thuật khi chia sẻ dữ liệu giữa doanh nghiệp và cơ quan nhà nước để tránh chồng chéo.' },
@@ -251,11 +251,8 @@ const TimelinePopup = ({ title, timeline, onClose }) => {
                                                 <div className="animate-fade-in pl-2">
                                                     <div className="grid grid-cols-[100px_1fr] sm:grid-cols-[150px_1fr] gap-x-4 gap-y-3 text-[13px]">
                                                         {/* Fields */}
-                                                        <div className="font-semibold text-gray-500">Mô tả:</div>
-                                                        <div className="text-gray-800 leading-relaxed font-medium">{item.desc || 'Đang cập nhật'}</div>
-
-                                                        <div className="font-semibold text-gray-500">Sân khấu:</div>
-                                                        <div className="text-gray-700">{item.title}</div>
+                                                        <div className="font-semibold text-gray-500">Cơ quan tổ chức:</div>
+                                                        <div className="text-gray-800 leading-relaxed font-medium">{item.org || 'Đang cập nhật'}</div>
 
                                                         {item.extraInfo && (
                                                             <>
@@ -999,7 +996,7 @@ const DuThaoDetailPage = () => {
                                                 <div className="flex-1 mt-[-2px]">
                                                     <p className={`font-bold text-[14px] mb-0.5 ${item.status === 'current' ? 'text-orange-600' : item.status === 'done' ? 'text-gray-800' : 'text-gray-400'}`}>{item.title}</p>
                                                     <p className="text-[12px] font-semibold text-gray-500 mb-1">{item.date}</p>
-                                                    {item.desc && <p className="text-[13px] text-gray-600 leading-snug">{item.desc}</p>}
+                                                    <p className="text-[13px] text-gray-600 leading-snug">{item.org || 'Đang cập nhật'}</p>
                                                 </div>
                                             </div>
                                         ))}
