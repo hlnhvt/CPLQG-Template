@@ -162,7 +162,7 @@ const VuViecDienHinhDetailPage = () => {
                                     </div>
                                     <div className="pt-0.5">
                                         <div className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">NGƯỜI THỰC HIỆN</div>
-                                        <div className="text-[14px] font-medium text-gray-800">Mạc Thị Hợp <span className="text-gray-400 font-normal ml-1">0912015738</span></div>
+                                        <div className="text-[14px] font-medium text-gray-800">Mạc Thị Hợp</div>
                                     </div>
                                 </div>
 
