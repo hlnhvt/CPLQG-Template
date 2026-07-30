@@ -147,6 +147,7 @@ import DanhSachNguoiThucHienTGPLPage from './pages/tro-giup-phap-ly/DanhSachNguo
 import NguoiThucHienTGPLDetailPage from './pages/tro-giup-phap-ly/NguoiThucHienTGPLDetailPage';
 import BaoCaoCongTacTGPLPage from './pages/tro-giup-phap-ly/BaoCaoCongTacTGPLPage';
 import VuViecDienHinhTGPLPage from './pages/tro-giup-phap-ly/VuViecDienHinhTGPLPage';
+import VuViecDienHinhDetailPage from './pages/tro-giup-phap-ly/VuViecDienHinhDetailPage';
 
 import OfficerDashboardLayout from './layouts/OfficerDashboardLayout';
 import OfficerHomePage from './pages/dashboard/OfficerHomePage';
@@ -263,6 +264,7 @@ const AppLayout = () => {
                     <Route path="/tro-giup-phap-ly/nguoi-thuc-hien/:id" element={<NguoiThucHienTGPLDetailPage />} />
                     <Route path="/tro-giup-phap-ly/bao-cao-cong-tac" element={<BaoCaoCongTacTGPLPage />} />
                     <Route path="/tro-giup-phap-ly/vu-viec-dien-hinh" element={<VuViecDienHinhTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/vu-viec-dien-hinh/:id" element={<VuViecDienHinhDetailPage />} />
 
                     {/* Forum Routes */}
                     <Route path="/dien-dan" element={<ForumListPage />} />
