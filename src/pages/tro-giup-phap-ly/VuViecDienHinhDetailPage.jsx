@@ -145,15 +145,6 @@ const VuViecDienHinhDetailPage = () => {
                             </div>
                             <div className="p-6 space-y-7">
 
-                                <div className="flex gap-4 items-start">
-                                    <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-                                        <Activity size={18} className="text-teal-600" />
-                                    </div>
-                                    <div className="pt-0.5">
-                                        <div className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-1">KẾT QUẢ XỬ LÝ</div>
-                                        <div className="text-[14px] font-bold text-teal-600">Đang thực hiện</div>
-                                    </div>
-                                </div>
 
                                 <div className="flex gap-4 items-start">
                                     <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
