@@ -148,7 +148,7 @@ import NguoiThucHienTGPLDetailPage from './pages/tro-giup-phap-ly/NguoiThucHienT
 import BaoCaoCongTacTGPLPage from './pages/tro-giup-phap-ly/BaoCaoCongTacTGPLPage';
 import VuViecDienHinhTGPLPage from './pages/tro-giup-phap-ly/VuViecDienHinhTGPLPage';
 import VuViecDienHinhDetailPage from './pages/tro-giup-phap-ly/VuViecDienHinhDetailPage';
-
+import UnsubscribeNewsletterPage from './pages/UnsubscribeNewsletterPage';
 import OfficerDashboardLayout from './layouts/OfficerDashboardLayout';
 import OfficerHomePage from './pages/dashboard/OfficerHomePage';
 import OfficerProfilePage from './pages/dashboard/OfficerProfilePage';
@@ -194,6 +194,7 @@ const AppLayout = () => {
                     <Route path="/chu-de-khao-sat" element={<SurveyTopicsPage />} />
                     <Route path="/chu-de-khao-sat/:id" element={<SurveyTopicDetailPage />} />
                     <Route path="/ban-tin/dang-ky" element={<NewsletterRegistrationPage />} />
+                    <Route path="/ban-tin/huy-dang-ky" element={<UnsubscribeNewsletterPage />} />
                     <Route path="/khao-sat" element={<SurveyGlobalPage />} />
                     <Route path="/khao-sat/:surveyId" element={<SurveyDetailPage />} />
                     <Route path="/khao-sat/:surveyId/tham-gia" element={<SurveyFormPage />} />
