@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { MapPin, Phone, Mail, Building2, ChevronRight, Scale, Home, History, ClipboardList, Video, Newspaper, BookOpen, Megaphone, GraduationCap, Lightbulb, Users, Briefcase } from 'lucide-react';
+import { MapPin, Phone, Mail, Building2, ChevronRight, Scale, Home, History, ClipboardList, Video, Newspaper, BookOpen, Megaphone, GraduationCap, Lightbulb, Users, Briefcase, FileText } from 'lucide-react';
 
 const TGPLSidebar = () => {
     const location = useLocation();
@@ -19,7 +19,8 @@ const TGPLSidebar = () => {
         { path: '/tro-giup-phap-ly/huong-dan-nghiep-vu', label: 'Hướng dẫn nghiệp vụ', icon: GraduationCap },
         { path: '/tro-giup-phap-ly/nghien-cuu-trao-doi', label: 'Nghiên cứu & trao đổi', icon: Lightbulb },
         { path: '/tro-giup-phap-ly/nguoi-thuc-hien', label: 'Người thực hiện TGPL', icon: Users },
-        { path: '/tro-giup-phap-ly/vu-viec-dien-hinh', label: 'Vụ việc', icon: Briefcase },
+        { path: '/tro-giup-phap-ly/bao-cao-cong-tac', label: 'Báo cáo về công tác TGPL', icon: FileText },
+        { path: '/tro-giup-phap-ly/vu-viec-dien-hinh', label: 'Vụ việc điển hình', icon: Briefcase },
     ];
 
     return (
