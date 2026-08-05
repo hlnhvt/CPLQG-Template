@@ -92,7 +92,7 @@ const BaoCaoCongTacTGPLPage = () => {
                             BÁO CÁO CÔNG TÁC
                         </h1>
                         <p className="text-blue-50 text-[15px] leading-relaxed border-l-4 border-yellow-400 pl-4 py-1.5 font-medium bg-blue-900/20 rounded-r-lg max-w-2xl shadow-sm">
-                            Tìm kiếm và tải về các báo cáo công tác trợ giúp pháp lý (báo cáo năm, báo cáo quý, báo cáo chuyên đề...) trên toàn quốc.
+                            Báo cáo công tác trợ giúp pháp lý
                         </p>
                     </div>
                 </div>
