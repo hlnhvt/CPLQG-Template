@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar, ArrowRight, Image as ImageIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function GenericArticleList({ title, items }) {
     // Generate some mock items if none provided
@@ -19,7 +20,7 @@ export default function GenericArticleList({ title, items }) {
             
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {mockItems.map((item, idx) => (
-                    <div key={idx} className="group flex flex-col border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 bg-white hover:-translate-y-1">
+                    <Link to={`/tin-tuc/${item.id || 1}`} key={idx} className="group flex flex-col border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 bg-white hover:-translate-y-1">
                         {/* Image Placeholder */}
                         <div className="h-48 bg-slate-100 flex items-center justify-center text-slate-300 group-hover:bg-blue-50 transition-colors relative overflow-hidden">
                             <ImageIcon size={48} className="opacity-50 group-hover:scale-110 transition-transform duration-500" />
@@ -42,12 +43,12 @@ export default function GenericArticleList({ title, items }) {
                                 {item.description}
                             </p>
                             
-                            <button className="text-blue-600 font-medium text-sm flex items-center gap-1 group/btn mt-auto w-fit">
+                            <div className="text-blue-600 font-medium text-sm flex items-center gap-1 group/btn mt-auto w-fit">
                                 Xem chi tiết 
                                 <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
-                            </button>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
             

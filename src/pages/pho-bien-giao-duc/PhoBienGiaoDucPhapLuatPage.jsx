@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Search, Landmark, Menu } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 
 import DashboardContent from './components/DashboardContent';
 import GioiThieuContent from './components/GioiThieuContent';
@@ -8,19 +8,34 @@ import GenericArticleList from './components/GenericArticleList';
 import GenericDocumentList from './components/GenericDocumentList';
 import GenericDataTable from './components/GenericDataTable';
 import GenericFilterSidebar from './components/GenericFilterSidebar';
+import TinTucHoatDongList from './components/TinTucHoatDongList';
+import ThongBaoList from './components/ThongBaoList';
+import GiaoDucPhapLuatNhaTruong from './components/GiaoDucPhapLuatNhaTruong';
+import PBGDPLDanTocMienNui from './components/PBGDPLDanTocMienNui';
+import ChiaSeKinhNghiemPBGDPL from './components/ChiaSeKinhNghiemPBGDPL';
+import HoaGiaiCoSo from './components/HoaGiaiCoSo';
 
 const MENU_ITEMS = [
     { key: 'trang-chu', label: 'Tổng quan', color: 'bg-blue-500' },
     { key: 'gioi-thieu', label: 'Giới thiệu', color: 'bg-green-500' },
     { key: 'tin-tuc', label: 'Tin tức giới thiệu văn bản mới', color: 'bg-amber-500' },
+    { key: 'tin-tuc-hoat-dong', label: 'Tin tức hoạt động PBGDPL', color: 'bg-indigo-600' },
     { key: 'thong-cao', label: 'Thông cáo báo chí', color: 'bg-red-500' },
+    { key: 'thong-bao', label: 'Thông báo', color: 'bg-teal-500' },
     { key: 'van-ban-chi-dao', label: 'Văn bản chỉ đạo, hướng dẫn', color: 'bg-purple-500' },
     { key: 'tai-lieu-huong-dan', label: 'Tài liệu hướng dẫn nghiệp vụ', color: 'bg-pink-500' },
     { key: 'nghien-cuu-trao-doi', label: 'Nghiên cứu, trao đổi', color: 'bg-cyan-500' },
     { key: 'tu-sach-phap-luat', label: 'Tủ sách pháp luật', color: 'bg-lime-500' },
+    { key: 'giao-duc-nha-truong', label: 'Giáo dục pháp luật trong nhà trường', color: 'bg-emerald-500' },
+    { key: 'pbgdpl-dan-toc', label: 'PBGDPL vùng đồng bào dân tộc thiểu số và miền núi', color: 'bg-indigo-600' },
+    { key: 'chia-se-kinh-nghiem', label: 'Chia sẻ kinh nghiệm PBGDPL', color: 'bg-green-600' },
+    { key: 'cong-tac-hoa-giai', label: 'Hòa giải ở Cơ sở', color: 'bg-teal-600' },
     { key: 'boi-duong-tap-huan', label: 'Bồi dưỡng, tập huấn trực tuyến', color: 'bg-orange-500' },
     { key: 'thi-tim-hieu', label: 'Thi tìm hiểu pháp luật', color: 'bg-teal-500' },
     { key: 'hoi-dong-phoi-hop', label: 'Hội đồng phối hợp', color: 'bg-blue-400' },
+    { key: 'dien-dan', label: 'Diễn đàn chính sách pháp luật', color: 'bg-indigo-500', path: '/dien-dan' },
+    { key: 'hoi-dap', label: 'Hỏi đáp pháp luật', color: 'bg-emerald-500', path: '/cau-hoi-phap-luat' },
+    { key: 'khao-sat', label: 'Khảo sát trực tuyến', color: 'bg-pink-500', path: '/chu-de-khao-sat' },
     { key: 'de-an-chuong-trinh', label: 'Đề án/Chương trình', color: 'bg-yellow-500' },
     { key: 'bao-cao-vien', label: 'Báo cáo viên', color: 'bg-rose-500' },
     { key: 'tuyen-truyen-vien', label: 'Tuyên truyền viên', color: 'bg-indigo-500' },
@@ -33,6 +48,7 @@ const MENU_ITEMS = [
 ];
 
 function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiveMenu, isOverlay = false }) {
+    const navigate = useNavigate();
     const getNavIcon = (key, isActive) => {
         const strokeClass = isActive ? "stroke-[#2580f0]" : "stroke-slate-500 group-hover:stroke-[#2580f0]";
         const props = {
@@ -44,14 +60,23 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
             case 'trang-chu': return <svg {...props}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>;
             case 'gioi-thieu': return <svg {...props}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>;
             case 'tin-tuc': return <svg {...props}><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>;
+            case 'tin-tuc-hoat-dong': return <svg {...props}><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>;
             case 'thong-cao': return <svg {...props}><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>;
+            case 'thong-bao': return <svg {...props}><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>;
             case 'van-ban-chi-dao': return <svg {...props}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>;
             case 'tai-lieu-huong-dan': return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>;
             case 'nghien-cuu-trao-doi': return <svg {...props}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>;
             case 'tu-sach-phap-luat': return <svg {...props}><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>;
+            case 'giao-duc-nha-truong': return <svg {...props}><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path></svg>;
+            case 'pbgdpl-dan-toc': return <svg {...props}><path d="M8 3l4 8 5-5 5 15H2L8 3z"></path></svg>;
+            case 'chia-se-kinh-nghiem': return <svg {...props}><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>;
+            case 'cong-tac-hoa-giai': return <svg {...props}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>;
             case 'boi-duong-tap-huan': return <svg {...props}><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>;
             case 'thi-tim-hieu': return <svg {...props}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>;
             case 'hoi-dong-phoi-hop': return <svg {...props}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>;
+            case 'dien-dan': return <svg {...props}><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>;
+            case 'hoi-dap': return <svg {...props}><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>;
+            case 'khao-sat': return <svg {...props}><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>;
             case 'de-an-chuong-trinh': return <svg {...props}><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>;
             case 'bao-cao-vien': return <svg {...props}><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 17 22 12"></polyline></svg>;
             case 'tuyen-truyen-vien': return <svg {...props}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>;
@@ -95,8 +120,12 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
                                         : 'hover:bg-slate-50 text-slate-600 hover:text-[#2580f0]'
                                         } ${!isSidebarOpen ? 'justify-center' : 'justify-start'}`}
                                     onClick={() => {
-                                        if (!isSidebarOpen) setIsSidebarOpen(true);
-                                        setActiveMenu(item.key);
+                                        if (item.path) {
+                                            window.open(item.path, '_blank');
+                                        } else {
+                                            if (!isSidebarOpen) setIsSidebarOpen(true);
+                                            setActiveMenu(item.key);
+                                        }
                                     }}
                                     title={!isSidebarOpen ? item.label : undefined}
                                 >
@@ -119,14 +148,28 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
 }
 
 const PhoBienGiaoDucPhapLuatPage = () => {
+    const location = useLocation();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-    const [activeMenu, setActiveMenu] = useState('trang-chu');
+    const [activeMenu, setActiveMenu] = useState(searchParams.get('activeMenu') || location.state?.activeMenu || 'trang-chu');
 
     const isHomePage = activeMenu === 'trang-chu';
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    useEffect(() => {
+        const queryActiveMenu = searchParams.get('activeMenu');
+        if (queryActiveMenu) {
+            setActiveMenu(queryActiveMenu);
+            // Optionally, we could remove it from the URL:
+            // searchParams.delete('activeMenu');
+            // setSearchParams(searchParams, { replace: true });
+        } else if (location.state?.activeMenu) {
+            setActiveMenu(location.state.activeMenu);
+        }
+    }, [location.state?.activeMenu, searchParams]);
 
     useEffect(() => {
         if (!isHomePage) {
@@ -185,71 +228,25 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                 </div>
             )}
 
-            {/* Overlay Sidebar & Floating Menu Button for non-home pages */}
-            {!isHomePage && (
-                <>
-                    {/* The Backdrop - z-[9998] */}
-                    <div className={`fixed inset-0 bg-black/20 z-[9998] transition-opacity duration-300 ${isSidebarOpen ? 'opacity-100 visible pointer-events-auto' : 'opacity-0 invisible pointer-events-none'}`} onClick={() => setIsSidebarOpen(false)}></div>
-                    
-                    {/* The Overlay Menu Wrapper - z-[9999] */}
-                    <div className="fixed top-32 left-0 right-0 z-[9999] pointer-events-none">
-                        <div className="mx-auto max-w-[1520px] px-4 lg:px-6">
-                            <div className="relative">
-                                {/* Overlay Sidebar */}
-                                <aside className={`absolute top-0 -left-4 lg:-left-6 transition-all duration-300 ${isSidebarOpen ? 'translate-x-0 opacity-100 visible pointer-events-auto' : '-translate-x-[150%] opacity-0 invisible pointer-events-none'} w-[280px]`}>
-                                    <div className="h-fit max-h-[calc(100vh-140px)] overflow-y-auto custom-scrollbar-light rounded-xl shadow-2xl">
-                                        <VerticalMenuNav
-                                            isSidebarOpen={true}
-                                            setIsSidebarOpen={setIsSidebarOpen}
-                                            activeMenu={activeMenu}
-                                            setActiveMenu={setActiveMenu}
-                                            isOverlay={true}
-                                        />
-                                    </div>
-                                </aside>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* The Button Wrapper - z-[40] */}
-                    <div className="fixed top-32 left-0 right-0 z-[40] pointer-events-none">
-                        <div className="mx-auto max-w-[1520px] px-4 lg:px-6">
-                            <div className="relative">
-                                {/* Fixed Floating Menu Button */}
-                                <button
-                                    onClick={() => setIsSidebarOpen(true)}
-                                    className={`absolute top-0 -left-4 lg:-left-6 pointer-events-auto w-fit bg-[#2580f0] text-white px-4 py-2.5 rounded-xl shadow-[0_4px_20px_-4px_rgba(37,128,240,0.4)] border border-blue-500 hover:bg-blue-700 transition-all duration-300 flex items-center gap-2 group ${isSidebarOpen ? 'opacity-0 invisible' : 'opacity-100 visible'}`}
-                                >
-                                    <Menu size={20} className="transition-transform group-hover:scale-110" />
-                                    <span className="font-bold text-[14px] whitespace-nowrap">Danh mục</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </>
-            )}
-
             {/* Layout Wrapper */}
             <div className={`mx-auto max-w-[1520px] px-4 relative z-20 lg:px-6 ${isHomePage ? '-mt-14' : 'pt-28'}`}>
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
 
-                    {/* Sidebar Menu */}
-                    {isHomePage ? (
-                        <aside className={`shrink-0 transition-all duration-300 z-30 ${isSidebarOpen ? 'w-full lg:w-[280px]' : 'w-full lg:w-[88px]'}`}>
-                            <VerticalMenuNav
-                                isSidebarOpen={isSidebarOpen}
-                                setIsSidebarOpen={setIsSidebarOpen}
-                                activeMenu={activeMenu}
-                                setActiveMenu={setActiveMenu}
-                            />
+                    {/* Sidebar Menu - Always visible now */}
+                    <aside className={`shrink-0 transition-all duration-300 z-30 ${isSidebarOpen ? 'w-full lg:w-[280px]' : 'w-full lg:w-[88px]'}`}>
+                        <VerticalMenuNav
+                            isSidebarOpen={isSidebarOpen}
+                            setIsSidebarOpen={setIsSidebarOpen}
+                            activeMenu={activeMenu}
+                            setActiveMenu={setActiveMenu}
+                        />
+                    </aside>
+
+                    {/* Filter Sidebar for specific non-home pages */}
+                    {!isHomePage && activeMenu !== 'gioi-thieu' && activeMenu !== 'tin-tuc-hoat-dong' && activeMenu !== 'thong-bao' && activeMenu !== 'giao-duc-nha-truong' && activeMenu !== 'pbgdpl-dan-toc' && activeMenu !== 'chia-se-kinh-nghiem' && activeMenu !== 'cong-tac-hoa-giai' && (
+                        <aside className="shrink-0 transition-all duration-300 z-30 w-full lg:w-[280px]">
+                            <GenericFilterSidebar activeMenu={activeMenu} />
                         </aside>
-                    ) : (
-                        /* Filter Sidebar for non-home pages */
-                        activeMenu !== 'gioi-thieu' && (
-                            <aside className="shrink-0 transition-all duration-300 z-30 w-full lg:w-[280px]">
-                                <GenericFilterSidebar />
-                            </aside>
-                        )
                     )}
 
                     {/* Main Content Area */}
@@ -262,8 +259,12 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                                     return <GioiThieuContent />;
                                 case 'tin-tuc':
                                     return <GenericArticleList title="Tin tức giới thiệu văn bản mới" />;
+                                case 'tin-tuc-hoat-dong':
+                                    return <TinTucHoatDongList title="Tin tức hoạt động PBGDPL" />;
                                 case 'thong-cao':
                                     return <GenericArticleList title="Thông cáo báo chí" />;
+                                case 'thong-bao':
+                                    return <ThongBaoList title="Thông báo" />;
                                 case 'van-ban-chi-dao':
                                     return <GenericDocumentList title="Văn bản chỉ đạo, hướng dẫn" />;
                                 case 'tai-lieu-huong-dan':
@@ -272,6 +273,14 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                                     return <GenericArticleList title="Nghiên cứu, trao đổi" />;
                                 case 'tu-sach-phap-luat':
                                     return <GenericDocumentList title="Tủ sách pháp luật" />;
+                                case 'giao-duc-nha-truong':
+                                    return <GiaoDucPhapLuatNhaTruong title="Giáo dục pháp luật trong nhà trường" />;
+                                case 'pbgdpl-dan-toc':
+                                    return <PBGDPLDanTocMienNui />;
+                                case 'chia-se-kinh-nghiem':
+                                    return <ChiaSeKinhNghiemPBGDPL />;
+                                case 'cong-tac-hoa-giai':
+                                    return <HoaGiaiCoSo />;
                                 case 'boi-duong-tap-huan':
                                     return <GenericArticleList title="Bồi dưỡng, tập huấn trực tuyến" />;
                                 case 'thi-tim-hieu':

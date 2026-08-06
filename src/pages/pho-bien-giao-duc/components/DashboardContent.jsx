@@ -1,5 +1,6 @@
 import React from 'react';
 import { Landmark, FileText, ArrowRight, Coins, MapPin, Handshake, Lightbulb, AlertTriangle, Calendar, Building2 } from 'lucide-react';
+import HoiDapGopYBlock from './HoiDapGopYBlock';
 import { councilData, programsData, effectiveModelsData, difficultiesData } from '../data/mockData';
 
 export default function DashboardContent() {
@@ -297,6 +298,11 @@ export default function DashboardContent() {
                         </div>
                     ))}
                 </div>
+            </div>
+
+            {/* Khối Hỏi đáp và góp ý */}
+            <div className="mt-6">
+                <HoiDapGopYBlock />
             </div>
         </div>
     );
