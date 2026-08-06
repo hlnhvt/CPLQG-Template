@@ -148,6 +148,13 @@ import NguoiThucHienTGPLDetailPage from './pages/tro-giup-phap-ly/NguoiThucHienT
 import BaoCaoCongTacTGPLPage from './pages/tro-giup-phap-ly/BaoCaoCongTacTGPLPage';
 import VuViecDienHinhTGPLPage from './pages/tro-giup-phap-ly/VuViecDienHinhTGPLPage';
 import VuViecDienHinhDetailPage from './pages/tro-giup-phap-ly/VuViecDienHinhDetailPage';
+import BanVaTGPLPage from './pages/tro-giup-phap-ly/BanVaTGPLPage';
+import HopTacQuocTeTGPLPage from './pages/tro-giup-phap-ly/HopTacQuocTeTGPLPage';
+import KinhNghiemQuocTeTGPLPage from './pages/tro-giup-phap-ly/KinhNghiemQuocTeTGPLPage';
+import AlbumAnhTGPLPage from './pages/tro-giup-phap-ly/AlbumAnhTGPLPage';
+import AlbumAnhTGPLDetailPage from './pages/tro-giup-phap-ly/AlbumAnhTGPLDetailPage';
+import VideoTGPLPage from './pages/tro-giup-phap-ly/VideoTGPLPage';
+import VideoTGPLDetailPage from './pages/tro-giup-phap-ly/VideoTGPLDetailPage';
 import UnsubscribeNewsletterPage from './pages/UnsubscribeNewsletterPage';
 import OfficerDashboardLayout from './layouts/OfficerDashboardLayout';
 import OfficerHomePage from './pages/dashboard/OfficerHomePage';
@@ -264,6 +271,13 @@ const AppLayout = () => {
                     <Route path="/tro-giup-phap-ly/nguoi-thuc-hien" element={<DanhSachNguoiThucHienTGPLPage />} />
                     <Route path="/tro-giup-phap-ly/nguoi-thuc-hien/:id" element={<NguoiThucHienTGPLDetailPage />} />
                     <Route path="/tro-giup-phap-ly/bao-cao-cong-tac" element={<BaoCaoCongTacTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/ban-va-tgpl" element={<BanVaTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/hop-tac-quoc-te" element={<HopTacQuocTeTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/kinh-nghiem-quoc-te" element={<KinhNghiemQuocTeTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/album-anh" element={<AlbumAnhTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/album-anh/:id" element={<AlbumAnhTGPLDetailPage />} />
+                    <Route path="/tro-giup-phap-ly/video" element={<VideoTGPLPage />} />
+                    <Route path="/tro-giup-phap-ly/video/:id" element={<VideoTGPLDetailPage />} />
                     <Route path="/tro-giup-phap-ly/vu-viec-dien-hinh" element={<VuViecDienHinhTGPLPage />} />
                     <Route path="/tro-giup-phap-ly/vu-viec-dien-hinh/:id" element={<VuViecDienHinhDetailPage />} />
 

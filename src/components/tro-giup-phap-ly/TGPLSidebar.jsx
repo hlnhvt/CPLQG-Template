@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { MapPin, Phone, Mail, Building2, ChevronRight, Scale, Home, History, ClipboardList, Video, Newspaper, BookOpen, Megaphone, GraduationCap, Lightbulb, Users, Briefcase, FileText } from 'lucide-react';
+import { MapPin, Phone, Mail, Building2, ChevronRight, Scale, Home, History, ClipboardList, Video, Newspaper, BookOpen, Megaphone, GraduationCap, Lightbulb, Users, Briefcase, FileText, HeartHandshake, Globe, Map, Image as ImageIcon } from 'lucide-react';
 
 const TGPLSidebar = () => {
     const location = useLocation();
@@ -13,7 +13,11 @@ const TGPLSidebar = () => {
         { path: '/tro-giup-phap-ly/to-chuc', label: 'Tổ chức thực hiện TGPL', icon: Scale },
         { path: '/tro-giup-phap-ly/danh-ba', label: 'Danh bạ điện tử TGPL', icon: Phone },
         { path: '/tro-giup-phap-ly/video', label: 'Video phóng sự TGPL', icon: Video },
+        { path: '/tro-giup-phap-ly/album-anh', label: 'Ảnh TGPL', icon: ImageIcon },
         { path: '/tro-giup-phap-ly/tin-tuc', label: 'Tin tức hoạt động TGPL', icon: Newspaper },
+        { path: '/tro-giup-phap-ly/ban-va-tgpl', label: 'Bạn và trợ giúp pháp lý', icon: HeartHandshake },
+        { path: '/tro-giup-phap-ly/hop-tac-quoc-te', label: 'Hợp tác quốc tế về TGPL', icon: Globe },
+        { path: '/tro-giup-phap-ly/kinh-nghiem-quoc-te', label: 'Kinh nghiệm quốc tế', icon: Map },
         { path: '/tro-giup-phap-ly/an-pham', label: 'Ấn phẩm truyền thông & tài liệu', icon: BookOpen },
         { path: '/tro-giup-phap-ly/chi-dao-dieu-hanh', label: 'Thông tin chỉ đạo, điều hành', icon: Megaphone },
         { path: '/tro-giup-phap-ly/huong-dan-nghiep-vu', label: 'Hướng dẫn nghiệp vụ', icon: GraduationCap },
@@ -41,8 +45,8 @@ const TGPLSidebar = () => {
                                 key={index}
                                 to={item.path}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-lg text-[14px] font-medium transition-all duration-200 ${isActive
-                                        ? 'bg-blue-50 text-blue-600'
-                                        : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600'
+                                    ? 'bg-blue-50 text-blue-600'
+                                    : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600'
                                     }`}
                             >
                                 <Icon
