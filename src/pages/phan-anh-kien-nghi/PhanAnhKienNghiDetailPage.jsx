@@ -17,8 +17,6 @@ Tôi xin phản ánh về một số bất cập khi thực hiện nộp thuế 
 Đề nghị quý Cơ quan xem xét điều chỉnh để tạo thuận lợi cho doanh nghiệp.
 Trân trọng cảm ơn.`,
     files: [
-        { name: "anh-chup-loi-he-thong.png", size: "1.2 MB" },
-        { name: "de-xuat-sua-doi-bieu-mau.docx", size: "45 KB" }
     ],
     agency: "BỘ TÀI CHÍNH",
     docType: "Công văn trả lời (Số 1234/BTC-CST)",

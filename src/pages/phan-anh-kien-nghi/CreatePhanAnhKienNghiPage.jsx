@@ -340,39 +340,6 @@ const CreatePhanAnhKienNghiPage = () => {
                                 {errors.content && <p className="text-red-500 text-xs mt-1">{errors.content}</p>}
                             </div>
 
-                            {/* File Upload */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Tệp đính kèm</label>
-                                <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center bg-gray-50 hover:bg-gray-100 transition relative">
-                                    <input
-                                        type="file"
-                                        multiple
-                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                        onChange={handleFileChange}
-                                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                                    />
-                                    <FileUp className="mx-auto text-gray-400 mb-3" size={32} />
-                                    <p className="text-gray-700 font-medium mb-1">Kéo thả hoặc bấm để chọn file</p>
-                                    <p className="text-xs text-gray-500">Định dạng hỗ trợ: PDF, DOCX, JPG, PNG. Tối đa 10MB/file. Đính kèm tối đa 3 file.</p>
-                                </div>
-
-                                {files.length > 0 && (
-                                    <ul className="mt-4 flex flex-col gap-2">
-                                        {files.map((file, idx) => (
-                                            <li key={idx} className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg text-sm">
-                                                <div className="flex items-center overflow-hidden">
-                                                    <span className="text-blue-500 mr-2"><FileUp size={16} /></span>
-                                                    <span className="truncate max-w-[200px] sm:max-w-md">{file.name}</span>
-                                                    <span className="text-gray-400 ml-2 text-xs">({(file.size / 1024 / 1024).toFixed(2)} MB)</span>
-                                                </div>
-                                                <button type="button" onClick={() => removeFile(idx)} className="text-red-500 hover:bg-red-50 p-1.5 rounded-full transition">
-                                                    <X size={16} />
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
                         </div>
 
                         {/* Confirmation and Actions */}
