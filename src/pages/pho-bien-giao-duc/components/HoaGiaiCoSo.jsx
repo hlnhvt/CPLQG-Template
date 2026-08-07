@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { ChevronRight, Newspaper, BarChart2, Calendar, ArrowRight, ArrowLeft } from 'lucide-react';
+import { ChevronRight, Newspaper, BarChart2, Calendar, ArrowRight, Search, X } from 'lucide-react';
 import HoaGiaiCoSoList from './HoaGiaiCoSoList';
 
 export default function HoaGiaiCoSo() {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const title = "Hòa giải ở Cơ sở";
+
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filterYear, setFilterYear] = useState('Tất cả');
+    const [filterProvince, setFilterProvince] = useState('Tất cả');
+    const [filterWard, setFilterWard] = useState('Tất cả');
 
     const img1 = 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=400&h=300';
     const img2 = 'https://images.unsplash.com/photo-1555848962-6e79363ec58f?auto=format&fit=crop&q=80&w=400&h=300';
@@ -18,6 +23,12 @@ export default function HoaGiaiCoSo() {
         generateNewsItem(2, 'Hàn gắn tình cảm gia đình trước nguy cơ đổ vỡ', '15/08/2023 14:15', 'Tổ hòa giải đã phân tích có lý có tình, giúp đôi vợ chồng trẻ nhận ra lỗi lầm, hàn gắn lại hạnh phúc gia đình.', img2),
         generateNewsItem(3, 'Giải quyết êm đẹp mâu thuẫn ranh giới đất nông nghiệp', '10/05/2023 08:00', 'Áp dụng hiệu quả các quy định của Luật Đất đai kết hợp với tình làng nghĩa xóm để thuyết phục các bên.', img3),
         generateNewsItem(4, 'Thuyết phục bồi thường thiệt hại do vật nuôi gây ra', '05/04/2023 10:45', 'Vụ việc được hòa giải kịp thời, tránh tình trạng khiếu kiện kéo dài gây mất đoàn kết ở khu dân cư.', img4),
+    ];
+
+    const statsData = [
+        { id: 1, year: '2022', province: 'Thành phố Đà Nẵng', district: 'Quận Cẩm Lệ', ward: 'Phường Hòa Thọ Tây', total: 10, prev: 10, new: 1, completed: 10 },
+        { id: 2, year: '2022', province: 'Thành phố Cần Thơ', district: 'Huyện Phong Điền', ward: 'Xã Nhơn Nghĩa', total: 2, prev: 2, new: 2, completed: 2 },
+        { id: 3, year: '2021', province: 'Thành phố Cần Thơ', district: 'Huyện Phong Điền', ward: 'Xã Nhơn Ái', total: 0, prev: 0, new: 0, completed: 0 }
     ];
 
     const SectionHeader = ({ title, icon, colorClass, onViewAll }) => (
@@ -97,66 +108,97 @@ export default function HoaGiaiCoSo() {
                     colorClass="bg-teal-100 text-teal-600" 
                 />
                 
-                <div className="overflow-x-auto">
-                    <table className="w-full text-sm text-left border border-gray-200">
-                        <thead className="bg-white text-gray-700 font-bold border-b border-gray-200">
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 mb-5 flex flex-col lg:flex-row gap-4 lg:items-end">
+                    <div className="flex-1 w-full">
+                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">Tìm kiếm</label>
+                        <div className="relative">
+                            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                            <input
+                                type="text"
+                                placeholder="Nhập từ khóa..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 bg-white"
+                            />
+                        </div>
+                    </div>
+                    <div className="w-full lg:w-32">
+                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">Năm</label>
+                        <select
+                            value={filterYear}
+                            onChange={(e) => setFilterYear(e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 bg-white"
+                        >
+                            <option>Tất cả</option>
+                            <option>2022</option>
+                            <option>2021</option>
+                        </select>
+                    </div>
+                    <div className="w-full lg:w-48">
+                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">Tỉnh/Thành phố</label>
+                        <select
+                            value={filterProvince}
+                            onChange={(e) => setFilterProvince(e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 bg-white"
+                        >
+                            <option>Tất cả</option>
+                            <option>Thành phố Đà Nẵng</option>
+                            <option>Thành phố Cần Thơ</option>
+                        </select>
+                    </div>
+                    <div className="w-full lg:w-48">
+                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phường/Xã</label>
+                        <select
+                            value={filterWard}
+                            onChange={(e) => setFilterWard(e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 bg-white"
+                        >
+                            <option>Tất cả</option>
+                            <option>Phường Hòa Thọ Tây</option>
+                            <option>Xã Nhơn Nghĩa</option>
+                            <option>Xã Nhơn Ái</option>
+                        </select>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <button className="bg-[#2580f0] hover:bg-[#1a66c2] text-white font-semibold px-5 py-2 rounded-lg text-sm transition-colors shadow-sm">
+                            Áp dụng
+                        </button>
+                        <button 
+                            onClick={() => { setSearchTerm(''); setFilterYear('Tất cả'); setFilterProvince('Tất cả'); setFilterWard('Tất cả'); }}
+                            className="bg-white hover:bg-gray-50 text-gray-600 border border-gray-300 font-semibold px-4 py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-1.5"
+                        >
+                            <X size={14} /> Đặt lại
+                        </button>
+                    </div>
+                </div>
+
+                <div className="overflow-x-auto rounded-lg border border-gray-200">
+                    <table className="w-full text-sm text-left">
+                        <thead className="bg-gray-50 text-gray-700 font-semibold border-b border-gray-200">
                             <tr>
-                                <th scope="col" className="px-4 py-4 border-r border-gray-200 w-16 text-center">Năm</th>
-                                <th scope="col" className="px-4 py-4 border-r border-gray-200">Tỉnh thành phố / Quận huyện / Xã/phường/thị trấn</th>
-                                <th scope="col" className="px-4 py-4 border-r border-gray-200 w-32">Tổng số vụ việc</th>
-                                <th scope="col" className="px-4 py-4 border-r border-gray-200 w-32">Vụ việc kì trước</th>
-                                <th scope="col" className="px-4 py-4 border-r border-gray-200 w-32">Vụ việc mới</th>
-                                <th scope="col" className="px-4 py-4 w-40">Vụ việc hòa giải hoàn thành</th>
+                                <th scope="col" className="px-4 py-3.5 border-r border-gray-200 w-16 text-center">Năm</th>
+                                <th scope="col" className="px-4 py-3.5 border-r border-gray-200">Tỉnh/Thành phố</th>
+                                <th scope="col" className="px-4 py-3.5 border-r border-gray-200">Quận/Huyện</th>
+                                <th scope="col" className="px-4 py-3.5 border-r border-gray-200">Phường/Xã</th>
+                                <th scope="col" className="px-4 py-3.5 border-r border-gray-200 w-28 text-center">Tổng số vụ</th>
+                                <th scope="col" className="px-4 py-3.5 border-r border-gray-200 w-28 text-center">Kì trước</th>
+                                <th scope="col" className="px-4 py-3.5 border-r border-gray-200 w-28 text-center">Vụ mới</th>
+                                <th scope="col" className="px-4 py-3.5 w-32 text-center text-blue-700">Hoàn thành</th>
                             </tr>
                         </thead>
                         <tbody className="text-gray-700">
-                            {/* Đà Nẵng */}
-                            <tr className="border-b border-gray-200 bg-white">
-                                <td className="px-4 py-3 border-r border-gray-200 text-center text-blue-600 font-medium"></td>
-                                <td className="px-4 py-3 border-r border-gray-200 font-bold">Thành phố Đà Nẵng</td>
-                                <td colSpan="4" className="px-4 py-3"></td>
-                            </tr>
-                            <tr className="border-b border-gray-200 bg-white">
-                                <td className="px-4 py-3 border-r border-gray-200 text-center text-blue-600 font-medium"></td>
-                                <td className="px-8 py-3 border-r border-gray-200 font-bold">Quận Cẩm Lệ</td>
-                                <td colSpan="4" className="px-4 py-3"></td>
-                            </tr>
-                            <tr className="border-b border-gray-200 bg-white">
-                                <td className="px-4 py-3 border-r border-gray-200 text-center text-blue-600 font-medium">2022</td>
-                                <td className="px-14 py-3 border-r border-gray-200 text-gray-600">Phường Hòa Thọ Tây</td>
-                                <td className="px-4 py-3 border-r border-gray-200">10</td>
-                                <td className="px-4 py-3 border-r border-gray-200">10</td>
-                                <td className="px-4 py-3 border-r border-gray-200">1</td>
-                                <td className="px-4 py-3">10</td>
-                            </tr>
-                            
-                            {/* Cần Thơ */}
-                            <tr className="border-b border-gray-200 bg-white">
-                                <td className="px-4 py-3 border-r border-gray-200 text-center text-blue-600 font-medium"></td>
-                                <td className="px-4 py-3 border-r border-gray-200 font-bold">Thành phố Cần Thơ</td>
-                                <td colSpan="4" className="px-4 py-3"></td>
-                            </tr>
-                            <tr className="border-b border-gray-200 bg-white">
-                                <td className="px-4 py-3 border-r border-gray-200 text-center text-blue-600 font-medium"></td>
-                                <td className="px-8 py-3 border-r border-gray-200 font-bold">Huyện Phong Điền</td>
-                                <td colSpan="4" className="px-4 py-3"></td>
-                            </tr>
-                            <tr className="border-b border-gray-200 bg-white">
-                                <td className="px-4 py-3 border-r border-gray-200 text-center text-blue-600 font-medium">2022</td>
-                                <td className="px-14 py-3 border-r border-gray-200 text-gray-600">Xã Nhơn Nghĩa</td>
-                                <td className="px-4 py-3 border-r border-gray-200">2</td>
-                                <td className="px-4 py-3 border-r border-gray-200">2</td>
-                                <td className="px-4 py-3 border-r border-gray-200">2</td>
-                                <td className="px-4 py-3">2</td>
-                            </tr>
-                            <tr className="bg-white">
-                                <td className="px-4 py-3 border-r border-gray-200 text-center text-blue-600 font-medium">2021</td>
-                                <td className="px-14 py-3 border-r border-gray-200 text-gray-600">Xã Nhơn Ái</td>
-                                <td className="px-4 py-3 border-r border-gray-200">0</td>
-                                <td className="px-4 py-3 border-r border-gray-200">0</td>
-                                <td className="px-4 py-3 border-r border-gray-200">0</td>
-                                <td className="px-4 py-3">0</td>
-                            </tr>
+                            {statsData.map((row, idx) => (
+                                <tr key={row.id} className={`bg-white border-b border-gray-100 hover:bg-gray-50 transition-colors ${idx === statsData.length - 1 ? 'border-b-0' : ''}`}>
+                                    <td className="px-4 py-3 border-r border-gray-200 text-center font-medium">{row.year}</td>
+                                    <td className="px-4 py-3 border-r border-gray-200">{row.province}</td>
+                                    <td className="px-4 py-3 border-r border-gray-200">{row.district}</td>
+                                    <td className="px-4 py-3 border-r border-gray-200">{row.ward}</td>
+                                    <td className="px-4 py-3 border-r border-gray-200 text-center">{row.total}</td>
+                                    <td className="px-4 py-3 border-r border-gray-200 text-center">{row.prev}</td>
+                                    <td className="px-4 py-3 border-r border-gray-200 text-center">{row.new}</td>
+                                    <td className="px-4 py-3 text-center font-semibold text-blue-600">{row.completed}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

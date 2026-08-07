@@ -171,13 +171,7 @@ const PhoBienGiaoDucPhapLuatPage = () => {
         }
     }, [location.state?.activeMenu, searchParams]);
 
-    useEffect(() => {
-        if (!isHomePage) {
-            setIsSidebarOpen(false);
-        } else {
-            setIsSidebarOpen(true);
-        }
-    }, [activeMenu, isHomePage]);
+
 
     const getBadgeColor = (type) => {
         switch (type) {
