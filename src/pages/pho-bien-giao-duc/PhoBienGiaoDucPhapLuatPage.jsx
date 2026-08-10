@@ -14,6 +14,8 @@ import GiaoDucPhapLuatNhaTruong from './components/GiaoDucPhapLuatNhaTruong';
 import PBGDPLDanTocMienNui from './components/PBGDPLDanTocMienNui';
 import ChiaSeKinhNghiemPBGDPL from './components/ChiaSeKinhNghiemPBGDPL';
 import HoaGiaiCoSo from './components/HoaGiaiCoSo';
+import MediaList from './components/MediaList';
+import TuSachPhapLuat from './components/TuSachPhapLuat';
 
 const MENU_ITEMS = [
     { key: 'trang-chu', label: 'Tổng quan', color: 'bg-blue-500' },
@@ -44,7 +46,9 @@ const MENU_ITEMS = [
     { key: 'xa-dat-chuan', label: 'Xã đạt chuẩn TCPL', color: 'bg-lime-600' },
     { key: 'kinh-phi', label: 'Kinh phí hoạt động PBGDPL', color: 'bg-orange-600' },
     { key: 'kho-khan-vuong-mac', label: 'Khó khăn, vướng mắc, kiến nghị', color: 'bg-teal-600' },
-    { key: 'mo-hinh-hoat-dong', label: 'Mô hình hoạt động hiệu quả', color: 'bg-blue-600' }
+    { key: 'mo-hinh-hoat-dong', label: 'Mô hình hoạt động hiệu quả', color: 'bg-blue-600' },
+    { key: 'anh-pbgdpl', label: 'Thư viện Ảnh', color: 'bg-purple-500' },
+    { key: 'video-pbgdpl', label: 'Thư viện Video', color: 'bg-red-600' }
 ];
 
 function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiveMenu, isOverlay = false }) {
@@ -86,6 +90,8 @@ function VerticalMenuNav({ isSidebarOpen, setIsSidebarOpen, activeMenu, setActiv
             case 'kinh-phi': return <svg {...props}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>;
             case 'kho-khan-vuong-mac': return <svg {...props}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>;
             case 'mo-hinh-hoat-dong': return <svg {...props}><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>;
+            case 'anh-pbgdpl': return <svg {...props}><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>;
+            case 'video-pbgdpl': return <svg {...props}><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>;
             default: return <svg {...props}><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>;
         }
     };
@@ -237,7 +243,7 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                     </aside>
 
                     {/* Filter Sidebar for specific non-home pages */}
-                    {!isHomePage && activeMenu !== 'gioi-thieu' && activeMenu !== 'tin-tuc-hoat-dong' && activeMenu !== 'thong-bao' && activeMenu !== 'giao-duc-nha-truong' && activeMenu !== 'pbgdpl-dan-toc' && activeMenu !== 'chia-se-kinh-nghiem' && activeMenu !== 'cong-tac-hoa-giai' && (
+                    {!isHomePage && activeMenu !== 'gioi-thieu' && activeMenu !== 'tin-tuc-hoat-dong' && activeMenu !== 'thong-bao' && activeMenu !== 'giao-duc-nha-truong' && activeMenu !== 'pbgdpl-dan-toc' && activeMenu !== 'chia-se-kinh-nghiem' && activeMenu !== 'cong-tac-hoa-giai' && activeMenu !== 'anh-pbgdpl' && activeMenu !== 'video-pbgdpl' && activeMenu !== 'tu-sach-phap-luat' && (
                         <aside className="shrink-0 transition-all duration-300 z-30 w-full lg:w-[280px]">
                             <GenericFilterSidebar activeMenu={activeMenu} />
                         </aside>
@@ -266,7 +272,7 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                                 case 'nghien-cuu-trao-doi':
                                     return <GenericArticleList title="Nghiên cứu, trao đổi" />;
                                 case 'tu-sach-phap-luat':
-                                    return <GenericDocumentList title="Tủ sách pháp luật" />;
+                                    return <TuSachPhapLuat />;
                                 case 'giao-duc-nha-truong':
                                     return <GiaoDucPhapLuatNhaTruong title="Giáo dục pháp luật trong nhà trường" />;
                                 case 'pbgdpl-dan-toc':
@@ -299,6 +305,10 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                                     return <GenericArticleList title="Khó khăn, vướng mắc, kiến nghị" />;
                                 case 'mo-hinh-hoat-dong':
                                     return <GenericArticleList title="Mô hình hoạt động hiệu quả" />;
+                                case 'anh-pbgdpl':
+                                    return <MediaList title="Thư viện Ảnh" type="image" />;
+                                case 'video-pbgdpl':
+                                    return <MediaList title="Thư viện Video" type="video" />;
                                 default:
                                     return <DashboardContent />;
                             }
