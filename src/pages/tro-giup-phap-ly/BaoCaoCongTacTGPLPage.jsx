@@ -29,12 +29,12 @@ const BaoCaoCongTacTGPLPage = () => {
     ];
 
     const reports = [
-        { id: 1, title: 'Báo cáo tổng kết công tác trợ giúp pháp lý toàn quốc năm 2023', date: '2023-12-31', size: '2.5 MB', type: 'Báo cáo Năm', location: 'Toàn quốc' },
-        { id: 2, title: 'Báo cáo sơ kết công tác trợ giúp pháp lý 6 tháng đầu năm 2023 tại Hà Nội', date: '2023-07-15', size: '1.2 MB', type: 'Báo cáo 6 tháng', location: 'Hà Nội' },
-        { id: 3, title: 'Báo cáo kết quả thực hiện Đề án đổi mới công tác trợ giúp pháp lý', date: '2023-06-30', size: '3.8 MB', type: 'Báo cáo Chuyên đề', location: 'Toàn quốc' },
-        { id: 4, title: 'Báo cáo công tác trợ giúp pháp lý quý I/2023 tại TP Hồ Chí Minh', date: '2023-04-10', size: '0.8 MB', type: 'Báo cáo Quý', location: 'TP. Hồ Chí Minh' },
-        { id: 5, title: 'Báo cáo tổng kết công tác trợ giúp pháp lý tỉnh Bình Dương năm 2022', date: '2022-12-31', size: '2.1 MB', type: 'Báo cáo Năm', location: 'Bình Dương' },
-        { id: 6, title: 'Báo cáo chuyên đề: Tăng cường năng lực TGPL cho khu vực miền núi', date: '2023-11-12', size: '3.5 MB', type: 'Báo cáo Chuyên đề', location: 'Khác' }
+        { id: 1, title: 'Báo cáo tổng kết công tác trợ giúp pháp lý toàn quốc năm 2023', date: '2023-12-31', startDate: '2023-01-01', endDate: '2023-12-31', size: '2.5 MB', type: 'Báo cáo Năm', location: 'Toàn quốc' },
+        { id: 2, title: 'Báo cáo sơ kết công tác trợ giúp pháp lý 6 tháng đầu năm 2023 tại Hà Nội', date: '2023-07-15', startDate: '2023-01-01', endDate: '2023-06-30', size: '1.2 MB', type: 'Báo cáo 6 tháng', location: 'Hà Nội' },
+        { id: 3, title: 'Báo cáo kết quả thực hiện Đề án đổi mới công tác trợ giúp pháp lý', date: '2023-06-30', startDate: '2023-01-01', endDate: '2023-06-30', size: '3.8 MB', type: 'Báo cáo Chuyên đề', location: 'Toàn quốc' },
+        { id: 4, title: 'Báo cáo công tác trợ giúp pháp lý quý I/2023 tại TP Hồ Chí Minh', date: '2023-04-10', startDate: '2023-01-01', endDate: '2023-03-31', size: '0.8 MB', type: 'Báo cáo Quý', location: 'TP. Hồ Chí Minh' },
+        { id: 5, title: 'Báo cáo tổng kết công tác trợ giúp pháp lý tỉnh Bình Dương năm 2022', date: '2022-12-31', startDate: '2022-01-01', endDate: '2022-12-31', size: '2.1 MB', type: 'Báo cáo Năm', location: 'Bình Dương' },
+        { id: 6, title: 'Báo cáo chuyên đề: Tăng cường năng lực TGPL cho khu vực miền núi', date: '2023-11-12', startDate: '2023-01-01', endDate: '2023-11-12', size: '3.5 MB', type: 'Báo cáo Chuyên đề', location: 'Khác' }
     ];
 
     const formatDateDisplay = (dateString) => {
@@ -110,7 +110,7 @@ const BaoCaoCongTacTGPLPage = () => {
                                 <div className="flex-1 relative">
                                     <input
                                         type="text"
-                                        placeholder="Tìm kiếm theo trích yếu báo cáo..."
+                                        placeholder="Tìm kiếm theo tên báo cáo..."
                                         className="w-full px-4 py-2 border border-gray-300 rounded text-[14px] focus:outline-none focus:border-blue-500"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
@@ -195,10 +195,11 @@ const BaoCaoCongTacTGPLPage = () => {
                                     <thead>
                                         <tr className="border-b border-gray-200 bg-gray-50/50">
                                             <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-12 text-center">STT</th>
-                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800">Trích yếu báo cáo</th>
+                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800">Tên báo cáo</th>
                                             <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-32 text-center">Loại báo cáo</th>
                                             <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-32 text-center">Địa phương</th>
-                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-28 text-center">Thời gian</th>
+                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-32 text-center">Ngày bắt đầu kỳ</th>
+                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-32 text-center">Ngày kết thúc kỳ</th>
                                             <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-32 text-center">Tải về</th>
                                         </tr>
                                     </thead>
@@ -233,7 +234,10 @@ const BaoCaoCongTacTGPLPage = () => {
                                                         </div>
                                                     </td>
                                                     <td className="py-4 px-4 text-center text-[13px] font-medium text-gray-600">
-                                                        {formatDateDisplay(report.date)}
+                                                        {formatDateDisplay(report.startDate)}
+                                                    </td>
+                                                    <td className="py-4 px-4 text-center text-[13px] font-medium text-gray-600">
+                                                        {formatDateDisplay(report.endDate)}
                                                     </td>
                                                     <td className="py-4 px-4 text-center">
                                                         <button className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 bg-white border border-blue-200 text-blue-600 rounded text-[13px] font-bold hover:bg-blue-50 transition-colors shadow-sm w-full whitespace-nowrap">
@@ -245,7 +249,7 @@ const BaoCaoCongTacTGPLPage = () => {
                                             ))
                                         ) : (
                                             <tr>
-                                                <td colSpan="6" className="py-10 text-center">
+                                                <td colSpan="7" className="py-10 text-center">
                                                     <div className="flex flex-col items-center justify-center">
                                                         <Search className="text-gray-300 mb-3" size={32} />
                                                         <p className="text-gray-500 text-[14px] font-medium">Không tìm thấy báo cáo nào phù hợp.</p>
