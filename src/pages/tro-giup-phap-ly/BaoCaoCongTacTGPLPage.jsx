@@ -9,11 +9,11 @@ const BaoCaoCongTacTGPLPage = () => {
 
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedLocation, setSelectedLocation] = useState('Toàn quốc');
-    const [selectedType, setSelectedType] = useState('');
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [showAdvancedSearch, setShowAdvancedSearch] = useState(false);
+    const [expandedRows, setExpandedRows] = useState([1, 2, 3, 4]);
     const itemsPerPage = 10;
 
     const locations = [
@@ -29,12 +29,30 @@ const BaoCaoCongTacTGPLPage = () => {
     ];
 
     const reports = [
-        { id: 1, title: 'Báo cáo tổng kết công tác trợ giúp pháp lý toàn quốc năm 2023', date: '2023-12-31', startDate: '2023-01-01', endDate: '2023-12-31', size: '2.5 MB', type: 'Báo cáo Năm', location: 'Toàn quốc' },
-        { id: 2, title: 'Báo cáo sơ kết công tác trợ giúp pháp lý 6 tháng đầu năm 2023 tại Hà Nội', date: '2023-07-15', startDate: '2023-01-01', endDate: '2023-06-30', size: '1.2 MB', type: 'Báo cáo 6 tháng', location: 'Hà Nội' },
-        { id: 3, title: 'Báo cáo kết quả thực hiện Đề án đổi mới công tác trợ giúp pháp lý', date: '2023-06-30', startDate: '2023-01-01', endDate: '2023-06-30', size: '3.8 MB', type: 'Báo cáo Chuyên đề', location: 'Toàn quốc' },
-        { id: 4, title: 'Báo cáo công tác trợ giúp pháp lý quý I/2023 tại TP Hồ Chí Minh', date: '2023-04-10', startDate: '2023-01-01', endDate: '2023-03-31', size: '0.8 MB', type: 'Báo cáo Quý', location: 'TP. Hồ Chí Minh' },
-        { id: 5, title: 'Báo cáo tổng kết công tác trợ giúp pháp lý tỉnh Bình Dương năm 2022', date: '2022-12-31', startDate: '2022-01-01', endDate: '2022-12-31', size: '2.1 MB', type: 'Báo cáo Năm', location: 'Bình Dương' },
-        { id: 6, title: 'Báo cáo chuyên đề: Tăng cường năng lực TGPL cho khu vực miền núi', date: '2023-11-12', startDate: '2023-01-01', endDate: '2023-11-12', size: '3.5 MB', type: 'Báo cáo Chuyên đề', location: 'Khác' }
+        { 
+            id: 1, title: 'Báo cáo tổng kết công tác trợ giúp pháp lý toàn quốc năm 2023', date: '2023-12-31', startDate: '2023-01-01', endDate: '2023-12-31', size: '2.5 MB', type: 'Báo cáo Năm', location: 'Toàn quốc', reportingUnit: 'Cục Trợ giúp pháp lý',
+            children: [
+                { id: 11, title: 'Báo cáo tổng kết công tác trợ giúp pháp lý tỉnh Bình Dương năm 2023', date: '2023-12-31', startDate: '2023-01-01', endDate: '2023-12-31', size: '2.1 MB', type: 'Báo cáo Năm', location: 'Bình Dương', reportingUnit: 'Trung tâm TGPL Nhà nước tỉnh Bình Dương' },
+                { id: 12, title: 'Báo cáo tổng kết công tác trợ giúp pháp lý TP Hà Nội năm 2023', date: '2023-12-31', startDate: '2023-01-01', endDate: '2023-12-31', size: '1.8 MB', type: 'Báo cáo Năm', location: 'Hà Nội', reportingUnit: 'Trung tâm TGPL Nhà nước TP. Hà Nội' },
+                { id: 13, title: 'Báo cáo tổng kết công tác trợ giúp pháp lý TP Hồ Chí Minh năm 2023', date: '2023-12-31', startDate: '2023-01-01', endDate: '2023-12-31', size: '2.0 MB', type: 'Báo cáo Năm', location: 'TP. Hồ Chí Minh', reportingUnit: 'Sở Tư pháp TP. Hồ Chí Minh' }
+            ]
+        },
+        { 
+            id: 2, title: 'Báo cáo sơ kết công tác trợ giúp pháp lý 6 tháng đầu năm 2023 toàn quốc', date: '2023-07-15', startDate: '2023-01-01', endDate: '2023-06-30', size: '1.2 MB', type: 'Báo cáo 6 tháng', location: 'Toàn quốc', reportingUnit: 'Cục Trợ giúp pháp lý',
+            children: [
+                { id: 21, title: 'Báo cáo sơ kết công tác trợ giúp pháp lý 6 tháng đầu năm 2023 tại Hà Nội', date: '2023-07-15', startDate: '2023-01-01', endDate: '2023-06-30', size: '0.9 MB', type: 'Báo cáo 6 tháng', location: 'Hà Nội', reportingUnit: 'Trung tâm TGPL Nhà nước TP. Hà Nội' },
+            ]
+        },
+        { 
+            id: 3, title: 'Báo cáo kết quả thực hiện Đề án đổi mới công tác trợ giúp pháp lý', date: '2023-06-30', startDate: '2023-01-01', endDate: '2023-06-30', size: '3.8 MB', type: 'Báo cáo Chuyên đề', location: 'Toàn quốc', reportingUnit: 'Bộ Tư pháp',
+            children: []
+        },
+        { 
+            id: 4, title: 'Báo cáo chuyên đề: Tăng cường năng lực TGPL cho khu vực miền núi', date: '2023-11-12', startDate: '2023-01-01', endDate: '2023-11-12', size: '3.5 MB', type: 'Báo cáo Chuyên đề', location: 'Toàn quốc', reportingUnit: 'Cục Trợ giúp pháp lý',
+            children: [
+                { id: 41, title: 'Báo cáo chuyên đề: Tăng cường năng lực TGPL cho khu vực miền núi tại các tỉnh phía Bắc', date: '2023-11-10', startDate: '2023-01-01', endDate: '2023-11-10', size: '1.5 MB', type: 'Báo cáo Chuyên đề', location: 'Khác', reportingUnit: 'Trung tâm TGPL các tỉnh' }
+            ]
+        }
     ];
 
     const formatDateDisplay = (dateString) => {
@@ -46,34 +64,35 @@ const BaoCaoCongTacTGPLPage = () => {
     const resetFilters = () => {
         setSearchQuery('');
         setSelectedLocation('Toàn quốc');
-        setSelectedType('');
         setFromDate('');
         setToDate('');
         setCurrentPage(1);
     };
 
-    const filteredReports = reports.filter(report => {
-        const matchLocation = selectedLocation === 'Toàn quốc' || selectedLocation === '' || report.location === selectedLocation;
-        const matchType = selectedType === '' || report.type === selectedType;
-        const matchSearch = report.title.toLowerCase().includes(searchQuery.toLowerCase());
-
+    const filterNode = (node) => {
+        const matchLocation = selectedLocation === 'Toàn quốc' || selectedLocation === '' || node.location === selectedLocation;
+        const matchSearch = node.title.toLowerCase().includes(searchQuery.toLowerCase());
         let matchDate = true;
-        if (fromDate) {
-            matchDate = matchDate && new Date(report.date) >= new Date(fromDate);
-        }
-        if (toDate) {
-            matchDate = matchDate && new Date(report.date) <= new Date(toDate);
-        }
+        if (fromDate) matchDate = matchDate && new Date(node.date) >= new Date(fromDate);
+        if (toDate) matchDate = matchDate && new Date(node.date) <= new Date(toDate);
+        return matchLocation && matchSearch && matchDate;
+    };
 
-        return matchLocation && matchType && matchSearch && matchDate;
-    });
+    const filteredReports = reports.map(report => {
+        const parentMatches = filterNode(report);
+        const children = report.children ? report.children.filter(filterNode) : [];
+        if (parentMatches || children.length > 0) {
+            return { ...report, children };
+        }
+        return null;
+    }).filter(Boolean);
 
     const totalPages = Math.ceil(filteredReports.length / itemsPerPage);
     const paginatedReports = filteredReports.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [selectedLocation, searchQuery, selectedType, fromDate, toDate]);
+    }, [selectedLocation, searchQuery, fromDate, toDate]);
 
     return (
         <div className="bg-[#f4f7fb] min-h-screen font-sans">
@@ -137,21 +156,7 @@ const BaoCaoCongTacTGPLPage = () => {
                                 </div>
 
                                 {showAdvancedSearch && (
-                                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                                        <div>
-                                            <label className="text-[12px] font-bold text-gray-500 mb-1.5 block">Loại báo cáo</label>
-                                            <select
-                                                value={selectedType}
-                                                onChange={(e) => setSelectedType(e.target.value)}
-                                                className="w-full px-3 py-2 border border-gray-300 rounded text-[13px] focus:outline-none focus:border-blue-500"
-                                            >
-                                                <option value="">Tất cả loại báo cáo</option>
-                                                <option value="Báo cáo Năm">Báo cáo Năm</option>
-                                                <option value="Báo cáo Quý">Báo cáo Quý</option>
-                                                <option value="Báo cáo 6 tháng">Báo cáo 6 tháng</option>
-                                                <option value="Báo cáo Chuyên đề">Báo cáo Chuyên đề</option>
-                                            </select>
-                                        </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                         <div>
                                             <label className="text-[12px] font-bold text-gray-500 mb-1.5 block">Địa phương</label>
                                             <select
@@ -190,12 +195,13 @@ const BaoCaoCongTacTGPLPage = () => {
 
                         {/* Results Table */}
                         <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-                            <div className="overflow-x-auto">
-                                <table className="w-full text-left border-collapse min-w-[800px]">
-                                    <thead>
-                                        <tr className="border-b border-gray-200 bg-gray-50/50">
+                            <div className="overflow-auto max-h-[600px]">
+                                <table className="w-full text-left border-collapse min-w-[1000px]">
+                                    <thead className="sticky top-0 z-10 shadow-sm">
+                                        <tr className="border-b border-gray-200 bg-gray-50">
                                             <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-12 text-center">STT</th>
-                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800">Tên báo cáo</th>
+                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800 min-w-[200px]">Tên báo cáo</th>
+                                            <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-48 text-center">Đơn vị báo cáo</th>
                                             <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-32 text-center">Loại báo cáo</th>
                                             <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-32 text-center">Địa phương</th>
                                             <th className="py-4 px-4 text-[13px] font-bold text-gray-800 w-32 text-center">Ngày bắt đầu kỳ</th>
@@ -205,51 +211,123 @@ const BaoCaoCongTacTGPLPage = () => {
                                     </thead>
                                     <tbody>
                                         {paginatedReports.length > 0 ? (
-                                            paginatedReports.map((report, index) => (
-                                                <tr key={report.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                                                    <td className="py-4 px-4 text-center text-[13px] font-semibold text-gray-700">
-                                                        {(currentPage - 1) * itemsPerPage + index + 1}
-                                                    </td>
-                                                    <td className="py-4 px-4">
-                                                        <h3 className="text-[14px] font-bold text-gray-800 mb-1 hover:text-blue-600 transition-colors cursor-pointer line-clamp-2" title={report.title}>
-                                                            {report.title}
-                                                        </h3>
-                                                        <span className="text-[12px] text-gray-500 flex items-center gap-1">
-                                                            Kích thước: {report.size} • PDF
-                                                        </span>
-                                                    </td>
-                                                    <td className="py-4 px-4 text-center">
-                                                        <span className={`whitespace-nowrap inline-block px-2.5 py-1 text-[11px] font-bold rounded uppercase tracking-wide border ${report.type.includes('Năm') ? 'bg-indigo-50 text-indigo-600 border-indigo-200' :
-                                                            report.type.includes('Quý') ? 'bg-orange-50 text-orange-600 border-orange-200' :
-                                                                report.type.includes('Chuyên đề') ? 'bg-emerald-50 text-emerald-600 border-emerald-200' :
-                                                                    'bg-blue-50 text-blue-600 border-blue-200'
-                                                            }`}>
-                                                            {report.type}
-                                                        </span>
-                                                    </td>
-                                                    <td className="py-4 px-4 text-center">
-                                                        <div className="flex items-center justify-center gap-1.5 text-[13px] text-gray-700 font-medium">
-                                                            <MapPin size={14} className="text-gray-400" />
-                                                            {report.location}
-                                                        </div>
-                                                    </td>
-                                                    <td className="py-4 px-4 text-center text-[13px] font-medium text-gray-600">
-                                                        {formatDateDisplay(report.startDate)}
-                                                    </td>
-                                                    <td className="py-4 px-4 text-center text-[13px] font-medium text-gray-600">
-                                                        {formatDateDisplay(report.endDate)}
-                                                    </td>
-                                                    <td className="py-4 px-4 text-center">
-                                                        <button className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 bg-white border border-blue-200 text-blue-600 rounded text-[13px] font-bold hover:bg-blue-50 transition-colors shadow-sm w-full whitespace-nowrap">
-                                                            <Download size={14} />
-                                                            Tải về
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            ))
+                                            paginatedReports.map((report, index) => {
+                                                const hasChildren = report.children && report.children.length > 0;
+                                                const isExpanded = expandedRows.includes(report.id);
+                                                
+                                                return (
+                                                    <React.Fragment key={report.id}>
+                                                        <tr className={`border-b border-gray-100 transition-colors ${hasChildren ? 'bg-gray-50/30 hover:bg-gray-50' : 'hover:bg-gray-50'}`}>
+                                                            <td className="py-4 px-4 text-center text-[13px] font-semibold text-gray-700">
+                                                                {(currentPage - 1) * itemsPerPage + index + 1}
+                                                            </td>
+                                                            <td className="py-4 px-4">
+                                                                <div className="flex items-start gap-2">
+                                                                    {hasChildren && (
+                                                                        <button 
+                                                                            onClick={() => {
+                                                                                setExpandedRows(prev => 
+                                                                                    prev.includes(report.id) ? prev.filter(id => id !== report.id) : [...prev, report.id]
+                                                                                )
+                                                                            }}
+                                                                            className="mt-0.5 text-blue-600 hover:bg-blue-50 p-1 rounded transition-colors"
+                                                                        >
+                                                                            {isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                                                                        </button>
+                                                                    )}
+                                                                    {!hasChildren && <div className="w-6 shrink-0"></div>}
+                                                                    <div>
+                                                                        <h3 className="text-[14px] font-bold text-gray-800 mb-1 hover:text-blue-600 transition-colors cursor-pointer line-clamp-2" title={report.title}>
+                                                                            {report.title}
+                                                                        </h3>
+                                                                        <span className="text-[12px] text-gray-500 flex items-center gap-1">
+                                                                            Kích thước: {report.size} • PDF {hasChildren && `• ${report.children.length} báo cáo địa phương`}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td className="py-4 px-4 text-center text-[13px] font-medium text-gray-700">
+                                                                {report.reportingUnit}
+                                                            </td>
+                                                            <td className="py-4 px-4 text-center">
+                                                                <span className={`whitespace-nowrap inline-block px-2.5 py-1 text-[11px] font-bold rounded uppercase tracking-wide border ${report.type.includes('Năm') ? 'bg-indigo-50 text-indigo-600 border-indigo-200' :
+                                                                    report.type.includes('Quý') ? 'bg-orange-50 text-orange-600 border-orange-200' :
+                                                                        report.type.includes('Chuyên đề') ? 'bg-emerald-50 text-emerald-600 border-emerald-200' :
+                                                                            'bg-blue-50 text-blue-600 border-blue-200'
+                                                                    }`}>
+                                                                    {report.type}
+                                                                </span>
+                                                            </td>
+                                                            <td className="py-4 px-4 text-center">
+                                                                <div className="flex items-center justify-center gap-1.5 text-[13px] text-gray-700 font-medium">
+                                                                    <MapPin size={14} className="text-gray-400" />
+                                                                    {report.location}
+                                                                </div>
+                                                            </td>
+                                                            <td className="py-4 px-4 text-center text-[13px] font-medium text-gray-600">
+                                                                {formatDateDisplay(report.startDate)}
+                                                            </td>
+                                                            <td className="py-4 px-4 text-center text-[13px] font-medium text-gray-600">
+                                                                {formatDateDisplay(report.endDate)}
+                                                            </td>
+                                                            <td className="py-4 px-4 text-center">
+                                                                <button className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 bg-white border border-blue-200 text-blue-600 rounded text-[13px] font-bold hover:bg-blue-50 transition-colors shadow-sm w-full whitespace-nowrap">
+                                                                    <Download size={14} />
+                                                                    Tải về
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        {isExpanded && hasChildren && report.children.map((child, childIndex) => (
+                                                            <tr key={child.id} className="border-b border-gray-100 bg-[#f8fafc] hover:bg-blue-50/30 transition-colors">
+                                                                <td className="py-3 px-4 text-center text-[12px] text-gray-500">
+                                                                </td>
+                                                                <td className="py-3 px-4 pl-10">
+                                                                    <div className="flex items-start gap-2">
+                                                                        <div className="w-3 h-3 mt-1.5 border-l-2 border-b-2 border-gray-300 rounded-bl shrink-0"></div>
+                                                                        <div>
+                                                                            <h3 className="text-[13.5px] font-semibold text-gray-700 mb-1 hover:text-blue-600 transition-colors cursor-pointer line-clamp-2" title={child.title}>
+                                                                                {child.title}
+                                                                            </h3>
+                                                                            <span className="text-[11px] text-gray-500 flex items-center gap-1">
+                                                                                Kích thước: {child.size} • PDF
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td className="py-3 px-4 text-center text-[12.5px] text-gray-600">
+                                                                    {child.reportingUnit}
+                                                                </td>
+                                                                <td className="py-3 px-4 text-center">
+                                                                    <span className="whitespace-nowrap inline-block px-2 py-0.5 text-[10px] font-semibold rounded uppercase tracking-wide border bg-gray-50 text-gray-600 border-gray-200">
+                                                                        {child.type}
+                                                                    </span>
+                                                                </td>
+                                                                <td className="py-3 px-4 text-center">
+                                                                    <div className="flex items-center justify-center gap-1 text-[12.5px] text-gray-600">
+                                                                        <MapPin size={12} className="text-gray-400" />
+                                                                        {child.location}
+                                                                    </div>
+                                                                </td>
+                                                                <td className="py-3 px-4 text-center text-[12.5px] text-gray-500">
+                                                                    {formatDateDisplay(child.startDate)}
+                                                                </td>
+                                                                <td className="py-3 px-4 text-center text-[12.5px] text-gray-500">
+                                                                    {formatDateDisplay(child.endDate)}
+                                                                </td>
+                                                                <td className="py-3 px-4 text-center">
+                                                                    <button className="inline-flex items-center justify-center gap-1 px-3 py-1 bg-white border border-gray-200 text-gray-600 rounded text-[12px] font-medium hover:bg-gray-50 hover:text-blue-600 transition-colors shadow-sm w-full whitespace-nowrap">
+                                                                        <Download size={12} />
+                                                                        Tải về
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                    </React.Fragment>
+                                                );
+                                            })
                                         ) : (
                                             <tr>
-                                                <td colSpan="7" className="py-10 text-center">
+                                                <td colSpan="8" className="py-10 text-center">
                                                     <div className="flex flex-col items-center justify-center">
                                                         <Search className="text-gray-300 mb-3" size={32} />
                                                         <p className="text-gray-500 text-[14px] font-medium">Không tìm thấy báo cáo nào phù hợp.</p>
