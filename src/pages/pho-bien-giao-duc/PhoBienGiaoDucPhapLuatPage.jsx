@@ -243,7 +243,7 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                     </aside>
 
                     {/* Filter Sidebar for specific non-home pages */}
-                    {!isHomePage && activeMenu !== 'gioi-thieu' && activeMenu !== 'tin-tuc-hoat-dong' && activeMenu !== 'thong-bao' && activeMenu !== 'giao-duc-nha-truong' && activeMenu !== 'pbgdpl-dan-toc' && activeMenu !== 'chia-se-kinh-nghiem' && activeMenu !== 'cong-tac-hoa-giai' && activeMenu !== 'anh-pbgdpl' && activeMenu !== 'video-pbgdpl' && activeMenu !== 'tu-sach-phap-luat' && (
+                    {!isHomePage && activeMenu !== 'gioi-thieu' && activeMenu !== 'tin-tuc-hoat-dong' && activeMenu !== 'tin-tuc' && activeMenu !== 'thong-bao' && activeMenu !== 'giao-duc-nha-truong' && activeMenu !== 'pbgdpl-dan-toc' && activeMenu !== 'chia-se-kinh-nghiem' && activeMenu !== 'cong-tac-hoa-giai' && activeMenu !== 'anh-pbgdpl' && activeMenu !== 'video-pbgdpl' && activeMenu !== 'tu-sach-phap-luat' && (
                         <aside className="shrink-0 transition-all duration-300 z-30 w-full lg:w-[280px]">
                             <GenericFilterSidebar activeMenu={activeMenu} />
                         </aside>
@@ -258,7 +258,7 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                                 case 'gioi-thieu':
                                     return <GioiThieuContent />;
                                 case 'tin-tuc':
-                                    return <GenericArticleList title="Tin tức giới thiệu văn bản mới" />;
+                                    return <TinTucHoatDongList title="Tin tức giới thiệu văn bản mới" />;
                                 case 'tin-tuc-hoat-dong':
                                     return <TinTucHoatDongList title="Tin tức hoạt động PBGDPL" />;
                                 case 'thong-cao':
