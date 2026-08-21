@@ -10,7 +10,7 @@ export default function HoiDapGopYBlock() {
                     <HelpCircle size={28} />
                 </div>
                 <h2 className="text-[32px] font-extrabold text-gray-900 leading-[1.2]">
-                    Hỏi đáp và <br/> góp ý
+                    Hỏi đáp và <br /> góp ý
                 </h2>
                 <p className="text-gray-500 mt-2 text-[15px] leading-relaxed">
                     Bạn có thắc mắc về chính sách pháp luật? Hãy gửi câu hỏi cho các chuyên gia của chúng tôi để được giải đáp trong các buổi đối thoại trực tiếp.
@@ -55,7 +55,7 @@ export default function HoiDapGopYBlock() {
                             <span className="text-[10px] text-gray-500 leading-none">reCAPTCHA</span>
                         </div>
                     </div>
-                    
+
                     <button className="w-full bg-[#1c5dfd] hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors">
                         Gửi câu hỏi ngay
                     </button>

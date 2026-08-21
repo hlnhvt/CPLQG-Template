@@ -16,6 +16,7 @@ import ChiaSeKinhNghiemPBGDPL from './components/ChiaSeKinhNghiemPBGDPL';
 import HoaGiaiCoSo from './components/HoaGiaiCoSo';
 import MediaList from './components/MediaList';
 import TuSachPhapLuat from './components/TuSachPhapLuat';
+import HoiDapPhapLuatList from './components/HoiDapPhapLuatList';
 
 const MENU_ITEMS = [
     { key: 'trang-chu', label: 'Tổng quan', color: 'bg-blue-500' },
@@ -36,7 +37,7 @@ const MENU_ITEMS = [
     { key: 'thi-tim-hieu', label: 'Thi tìm hiểu pháp luật', color: 'bg-teal-500' },
     { key: 'hoi-dong-phoi-hop', label: 'Hội đồng phối hợp', color: 'bg-blue-400' },
     { key: 'dien-dan', label: 'Diễn đàn chính sách pháp luật', color: 'bg-indigo-500', path: '/dien-dan' },
-    { key: 'hoi-dap', label: 'Hỏi đáp pháp luật', color: 'bg-emerald-500', path: '/cau-hoi-phap-luat' },
+    { key: 'hoi-dap', label: 'Hỏi đáp pháp luật', color: 'bg-emerald-500' },
     { key: 'khao-sat', label: 'Khảo sát trực tuyến', color: 'bg-pink-500', path: '/chu-de-khao-sat' },
     { key: 'de-an-chuong-trinh', label: 'Đề án/Chương trình', color: 'bg-yellow-500' },
     { key: 'bao-cao-vien', label: 'Báo cáo viên', color: 'bg-rose-500' },
@@ -243,7 +244,7 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                     </aside>
 
                     {/* Filter Sidebar for specific non-home pages */}
-                    {!isHomePage && activeMenu !== 'gioi-thieu' && activeMenu !== 'tin-tuc-hoat-dong' && activeMenu !== 'tin-tuc' && activeMenu !== 'thong-bao' && activeMenu !== 'giao-duc-nha-truong' && activeMenu !== 'pbgdpl-dan-toc' && activeMenu !== 'chia-se-kinh-nghiem' && activeMenu !== 'cong-tac-hoa-giai' && activeMenu !== 'anh-pbgdpl' && activeMenu !== 'video-pbgdpl' && activeMenu !== 'tu-sach-phap-luat' && (
+                    {!isHomePage && activeMenu !== 'gioi-thieu' && activeMenu !== 'tin-tuc-hoat-dong' && activeMenu !== 'tin-tuc' && activeMenu !== 'thong-bao' && activeMenu !== 'hoi-dap' && activeMenu !== 'giao-duc-nha-truong' && activeMenu !== 'pbgdpl-dan-toc' && activeMenu !== 'chia-se-kinh-nghiem' && activeMenu !== 'cong-tac-hoa-giai' && activeMenu !== 'anh-pbgdpl' && activeMenu !== 'video-pbgdpl' && activeMenu !== 'tu-sach-phap-luat' && (
                         <aside className="shrink-0 transition-all duration-300 z-30 w-full lg:w-[280px]">
                             <GenericFilterSidebar activeMenu={activeMenu} />
                         </aside>
@@ -265,6 +266,8 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                                     return <GenericArticleList title="Thông cáo báo chí" />;
                                 case 'thong-bao':
                                     return <ThongBaoList title="Thông báo" />;
+                                case 'hoi-dap':
+                                    return <HoiDapPhapLuatList title="Hỏi đáp pháp luật" />;
                                 case 'van-ban-chi-dao':
                                     return <GenericDocumentList title="Văn bản chỉ đạo, hướng dẫn" />;
                                 case 'tai-lieu-huong-dan':
