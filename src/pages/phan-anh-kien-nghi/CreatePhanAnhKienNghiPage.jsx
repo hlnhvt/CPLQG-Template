@@ -4,6 +4,9 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Send, CheckCircle, Copy, AlertCircle, Search, User } from 'lucide-react';
 
 const CENTRAL_AGENCIES = [
+    'Quốc hội',
+    'Chính phủ',
+    'Văn phòng Chính phủ',
     'Bộ Tư pháp',
     'Bộ Tài chính',
     'Bộ Công an',
@@ -23,8 +26,7 @@ const CENTRAL_AGENCIES = [
     'Bộ Ngoại giao',
     'Thanh tra Chính phủ',
     'Ngân hàng Nhà nước Việt Nam',
-    'Ủy ban Dân tộc',
-    'Văn phòng Chính phủ'
+    'Ủy ban Dân tộc'
 ];
 
 const PROVINCES = [
@@ -384,7 +386,11 @@ const CreatePhanAnhKienNghiPage = () => {
             if (matched) {
                 setSelectedDoc(matched);
                 setDocSearchQuery(matched.name);
-                setFormData(prev => ({ ...prev, legalDocs: matched.tieuDe }));
+                setFormData(prev => ({
+                    ...prev,
+                    legalDocs: matched.tieuDe,
+                    agency: prev.level === 'Trung ương' && matched.coQuanBanHanh ? matched.coQuanBanHanh : prev.agency
+                }));
             }
         }
     }, [initialVanBan]);
@@ -418,15 +424,21 @@ const CreatePhanAnhKienNghiPage = () => {
 
     const handleSelectDoc = (doc) => {
         setSelectedDoc(doc);
+        const agencyToSet = doc.coQuanBanHanh || '';
         setFormData(prev => ({
             ...prev,
+            agency: prev.level === 'Trung ương' && agencyToSet ? agencyToSet : prev.agency,
             legalDocs: doc.tieuDe || doc.name,
             tableOfContent: '',
             content: ''
         }));
         setDocSearchQuery(doc.name || doc.soHieu);
         setShowDocDropdown(false);
-        setErrors(prev => ({ ...prev, legalDocs: null }));
+        setErrors(prev => ({
+            ...prev,
+            legalDocs: null,
+            ...(prev.level === 'Trung ương' && agencyToSet ? { agency: null } : {})
+        }));
     };
 
     const handleTableOfContentChange = (selectedItem) => {
@@ -696,16 +708,27 @@ const CreatePhanAnhKienNghiPage = () => {
                                         onChange={e => {
                                             const val = e.target.value;
                                             setDocSearchQuery(val);
-                                            setFormData({ ...formData, legalDocs: val });
+                                            setFormData(prev => ({ ...prev, legalDocs: val }));
                                             setShowDocDropdown(true);
-                                            setErrors({ ...errors, legalDocs: null });
+                                            setErrors(prev => ({ ...prev, legalDocs: null }));
                                             const matched = MOCK_LEGAL_DOCS_DATA.find(d =>
                                                 d.name.toLowerCase() === val.toLowerCase() ||
                                                 d.soHieu.toLowerCase() === val.toLowerCase() ||
                                                 d.tieuDe.toLowerCase() === val.toLowerCase()
                                             );
                                             setSelectedDoc(matched || null);
-                                            if (!matched) {
+                                            if (matched) {
+                                                const agencyToSet = matched.coQuanBanHanh || '';
+                                                setFormData(prev => ({
+                                                    ...prev,
+                                                    agency: prev.level === 'Trung ương' && agencyToSet ? agencyToSet : prev.agency,
+                                                    tableOfContent: '',
+                                                    content: ''
+                                                }));
+                                                if (agencyToSet) {
+                                                    setErrors(prev => ({ ...prev, agency: null }));
+                                                }
+                                            } else {
                                                 setFormData(prev => ({ ...prev, tableOfContent: '', content: '' }));
                                             }
                                         }}
