@@ -16,7 +16,6 @@ export default function HoiDapPhapLuatList({ title = 'Hỏi đáp pháp luật' 
     // Form state
     const [formData, setFormData] = useState({
         fullName: '',
-        emailOrPhone: '',
         title: '',
         field: '',
         question: ''
@@ -208,7 +207,7 @@ Người lao động làm việc theo hợp đồng lao động không xác đ�
             setTimeout(() => {
                 setSubmitSuccess(false);
                 setIsModalOpen(false);
-                setFormData({ fullName: '', emailOrPhone: '', title: '', field: '', question: '' });
+                setFormData({ fullName: '', title: '', field: '', question: '' });
                 setExpandedId(newQ.id); // auto expand newly submitted question
             }, 1200);
         }, 800);
@@ -498,33 +497,19 @@ Người lao động làm việc theo hợp đồng lao động không xác đ�
                                 </div>
                             ) : (
                                 <form onSubmit={handleSubmitQuestion} className="space-y-4">
-                                    {/* Họ và tên & Thông tin liên hệ */}
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-[13px] font-bold text-gray-800 mb-1.5">
-                                                Họ và tên <span className="text-red-500">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                required
-                                                placeholder="Nhập họ và tên của bạn"
-                                                value={formData.fullName}
-                                                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                                                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-[13px] font-bold text-gray-800 mb-1.5">
-                                                Số điện thoại / Email
-                                            </label>
-                                            <input
-                                                type="text"
-                                                placeholder="Để nhận thông báo khi có phản hồi"
-                                                value={formData.emailOrPhone}
-                                                onChange={(e) => setFormData({ ...formData, emailOrPhone: e.target.value })}
-                                                className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                                            />
-                                        </div>
+                                    {/* Họ và tên */}
+                                    <div>
+                                        <label className="block text-[13px] font-bold text-gray-800 mb-1.5">
+                                            Họ và tên <span className="text-red-500">*</span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            required
+                                            placeholder="Nhập họ và tên của bạn"
+                                            value={formData.fullName}
+                                            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                                            className="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                                        />
                                     </div>
 
                                     {/* Tiêu đề & Lĩnh vực */}
