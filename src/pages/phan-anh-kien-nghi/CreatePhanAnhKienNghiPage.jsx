@@ -304,7 +304,7 @@ const CreatePhanAnhKienNghiPage = () => {
                             </h3>
                             <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-xl p-3.5 sm:p-4 flex items-center gap-3 text-blue-900 text-sm">
                                 <User size={18} className="text-blue-600 shrink-0" />
-                                <span>Thông tin liên hệ được điền tự động từ hồ sơ cá nhân của bạn.</span>
+                                <span>Thông tin người gửi được lấy tự động từ hồ sơ cá nhân của bạn.</span>
                             </div>
                         </div>
 
@@ -321,30 +321,30 @@ const CreatePhanAnhKienNghiPage = () => {
                                     <label className="block text-sm font-medium text-gray-700 mb-2">Cấp xử lý <span className="text-red-500">*</span></label>
                                     <div className="flex gap-4">
                                         <label className="flex items-center gap-2 cursor-pointer">
-                                            <input 
-                                                type="radio" 
-                                                name="level" 
-                                                value="Trung ương" 
-                                                checked={formData.level === 'Trung ương'} 
-                                                onChange={e => { 
-                                                    setFormData({ ...formData, level: e.target.value, agency: '', province: '' }); 
-                                                    setErrors({ ...errors, agency: null, province: null }); 
-                                                }} 
-                                                className="w-4 h-4 text-[#0f4c81]" 
+                                            <input
+                                                type="radio"
+                                                name="level"
+                                                value="Trung ương"
+                                                checked={formData.level === 'Trung ương'}
+                                                onChange={e => {
+                                                    setFormData({ ...formData, level: e.target.value, agency: '', province: '' });
+                                                    setErrors({ ...errors, agency: null, province: null });
+                                                }}
+                                                className="w-4 h-4 text-[#0f4c81]"
                                             />
                                             <span className="text-sm font-medium text-gray-700">Cấp trung ương</span>
                                         </label>
                                         <label className="flex items-center gap-2 cursor-pointer">
-                                            <input 
-                                                type="radio" 
-                                                name="level" 
-                                                value="Địa phương" 
-                                                checked={formData.level === 'Địa phương'} 
-                                                onChange={e => { 
-                                                    setFormData({ ...formData, level: e.target.value, agency: '', province: '' }); 
-                                                    setErrors({ ...errors, agency: null, province: null }); 
-                                                }} 
-                                                className="w-4 h-4 text-[#0f4c81]" 
+                                            <input
+                                                type="radio"
+                                                name="level"
+                                                value="Địa phương"
+                                                checked={formData.level === 'Địa phương'}
+                                                onChange={e => {
+                                                    setFormData({ ...formData, level: e.target.value, agency: '', province: '' });
+                                                    setErrors({ ...errors, agency: null, province: null });
+                                                }}
+                                                className="w-4 h-4 text-[#0f4c81]"
                                             />
                                             <span className="text-sm font-medium text-gray-700">Cấp địa phương</span>
                                         </label>
