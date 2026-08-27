@@ -1,14 +1,97 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Send, FileUp, X, CheckCircle, Copy, AlertCircle, ArrowLeft, Search } from 'lucide-react';
+import { Send, CheckCircle, Copy, AlertCircle, Search, User } from 'lucide-react';
 
-const MOCK_AGENCIES = {
-    'Trung ương': ['Bộ Tài chính', 'Bộ Công an', 'Bộ Xây dựng', 'Bộ Tư pháp', 'Văn phòng Chính phủ'],
-    'Địa phương': ['UBND TP. Hà Nội', 'UBND TP. Hồ Chí Minh', 'UBND Tỉnh Bình Dương']
-};
+const CENTRAL_AGENCIES = [
+    'Bộ Tư pháp',
+    'Bộ Tài chính',
+    'Bộ Công an',
+    'Bộ Xây dựng',
+    'Bộ Kế hoạch và Đầu tư',
+    'Bộ Tài nguyên và Môi trường',
+    'Bộ Y tế',
+    'Bộ Giáo dục và Đào tạo',
+    'Bộ Giao thông vận tải',
+    'Bộ Nông nghiệp và Phát triển nông thôn',
+    'Bộ Công Thương',
+    'Bộ Lao động - Thương binh và Xã hội',
+    'Bộ Khoa học và Công nghệ',
+    'Bộ Văn hóa, Thể thao và Du lịch',
+    'Bộ Thông tin và Truyền thông',
+    'Bộ Nội vụ',
+    'Bộ Ngoại giao',
+    'Thanh tra Chính phủ',
+    'Ngân hàng Nhà nước Việt Nam',
+    'Ủy ban Dân tộc',
+    'Văn phòng Chính phủ'
+];
 
-const LTV_FIELDS = ['Dân sự', 'Hình sự', 'Đất đai', 'Doanh nghiệp', 'Đầu tư', 'Lao động & Việc làm'];
+const PROVINCES = [
+    'Thành phố Hà Nội',
+    'Thành phố Hồ Chí Minh',
+    'Thành phố Hải Phòng',
+    'Thành phố Đà Nẵng',
+    'Thành phố Cần Thơ',
+    'Tỉnh An Giang',
+    'Tỉnh Bà Rịa - Vũng Tàu',
+    'Tỉnh Bắc Giang',
+    'Tỉnh Bắc Kạn',
+    'Tỉnh Bạc Liêu',
+    'Tỉnh Bắc Ninh',
+    'Tỉnh Bến Tre',
+    'Tỉnh Bình Định',
+    'Tỉnh Bình Dương',
+    'Tỉnh Bình Phước',
+    'Tỉnh Bình Thuận',
+    'Tỉnh Cà Mau',
+    'Tỉnh Cao Bằng',
+    'Tỉnh Đắk Lắk',
+    'Tỉnh Đắk Nông',
+    'Tỉnh Điện Biên',
+    'Tỉnh Đồng Nai',
+    'Tỉnh Đồng Tháp',
+    'Tỉnh Gia Lai',
+    'Tỉnh Hà Giang',
+    'Tỉnh Hà Nam',
+    'Tỉnh Hà Tĩnh',
+    'Tỉnh Hải Dương',
+    'Tỉnh Hậu Giang',
+    'Tỉnh Hòa Bình',
+    'Tỉnh Hưng Yên',
+    'Tỉnh Khánh Hòa',
+    'Tỉnh Kiên Giang',
+    'Tỉnh Kon Tum',
+    'Tỉnh Lai Châu',
+    'Tỉnh Lâm Đồng',
+    'Tỉnh Lạng Sơn',
+    'Tỉnh Lào Cai',
+    'Tỉnh Long An',
+    'Tỉnh Nam Định',
+    'Tỉnh Nghệ An',
+    'Tỉnh Ninh Bình',
+    'Tỉnh Ninh Thuận',
+    'Tỉnh Phú Thọ',
+    'Tỉnh Phú Yên',
+    'Tỉnh Quảng Bình',
+    'Tỉnh Quảng Nam',
+    'Tỉnh Quảng Ngãi',
+    'Tỉnh Quảng Ninh',
+    'Tỉnh Quảng Trị',
+    'Tỉnh Sóc Trăng',
+    'Tỉnh Sơn La',
+    'Tỉnh Tây Ninh',
+    'Tỉnh Thái Bình',
+    'Tỉnh Thái Nguyên',
+    'Tỉnh Thanh Hóa',
+    'Tỉnh Thừa Thiên Huế',
+    'Tỉnh Tiền Giang',
+    'Tỉnh Trà Vinh',
+    'Tỉnh Tuyên Quang',
+    'Tỉnh Vĩnh Long',
+    'Tỉnh Vĩnh Phúc',
+    'Tỉnh Yên Bái'
+];
 
 const MOCK_LEGAL_DOCS = [
     'Luật Đất đai 2024',
@@ -22,6 +105,8 @@ const MOCK_LEGAL_DOCS = [
 const CreatePhanAnhKienNghiPage = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const initialVanBan = searchParams.get('vanban') || '';
 
     // Redirect if not logged in
     useEffect(() => {
@@ -36,14 +121,13 @@ const CreatePhanAnhKienNghiPage = () => {
     const [formData, setFormData] = useState({
         level: 'Trung ương',
         agency: '',
-        field: '',
-        title: '',
+        province: '',
         content: '',
-        legalDocs: '',
+        legalDocs: initialVanBan,
         termsAgreed: false
     });
     const [errors, setErrors] = useState({});
-    const [docSearchQuery, setDocSearchQuery] = useState('');
+    const [docSearchQuery, setDocSearchQuery] = useState(initialVanBan);
     const [showDocDropdown, setShowDocDropdown] = useState(false);
 
     if (!user) return null;
@@ -89,9 +173,11 @@ const CreatePhanAnhKienNghiPage = () => {
     const validate = () => {
         const newErrors = {};
         if (!formData.legalDocs) newErrors.legalDocs = 'Vui lòng chọn hoặc nhập văn bản pháp luật liên quan';
-        if (!formData.agency) newErrors.agency = 'Vui lòng chọn cơ quan tiếp nhận';
-        if (!formData.field) newErrors.field = 'Vui lòng chọn lĩnh vực';
-        if (!formData.title) newErrors.title = 'Vui lòng nhập tiêu đề phản ánh';
+        if (formData.level === 'Trung ương') {
+            if (!formData.agency) newErrors.agency = 'Vui lòng chọn cơ quan tiếp nhận';
+        } else {
+            if (!formData.province) newErrors.province = 'Vui lòng chọn địa phương';
+        }
         if (!formData.content) newErrors.content = 'Vui lòng nhập nội dung chi tiết';
         if (!formData.termsAgreed) newErrors.termsAgreed = 'Bạn phải đồng ý với cam kết';
 
@@ -116,7 +202,7 @@ const CreatePhanAnhKienNghiPage = () => {
     };
 
     const handleCancel = () => {
-        if (formData.title || formData.content) {
+        if (formData.content || formData.legalDocs) {
             if (window.confirm('Bạn có chắc chắn muốn hủy? Thông tin đã nhập sẽ bị mất.')) {
                 navigate('/phan-anh-kien-nghi');
             }
@@ -147,9 +233,25 @@ const CreatePhanAnhKienNghiPage = () => {
                     </div>
 
                     <div className="text-left bg-gray-50 p-5 rounded-lg border text-sm mb-8 space-y-2">
-                        <div className="flex gap-2"><span className="text-gray-500 w-32">Cơ quan tiếp nhận:</span> <span className="font-medium">{formData.agency}</span></div>
-                        <div className="flex gap-2"><span className="text-gray-500 w-32">Lĩnh vực:</span> <span className="font-medium">{formData.field}</span></div>
-                        <div className="flex gap-2"><span className="text-gray-500 w-32">Tiêu đề:</span> <span className="font-medium line-clamp-1">{formData.title}</span></div>
+                        <div className="flex gap-2">
+                            <span className="text-gray-500 w-36">Cấp xử lý:</span>
+                            <span className="font-medium">{formData.level}</span>
+                        </div>
+                        {formData.level === 'Trung ương' ? (
+                            <div className="flex gap-2">
+                                <span className="text-gray-500 w-36">Cơ quan tiếp nhận:</span>
+                                <span className="font-medium">{formData.agency}</span>
+                            </div>
+                        ) : (
+                            <div className="flex gap-2">
+                                <span className="text-gray-500 w-36">Địa phương:</span>
+                                <span className="font-medium">{formData.province}</span>
+                            </div>
+                        )}
+                        <div className="flex gap-2">
+                            <span className="text-gray-500 w-36">Văn bản liên quan:</span>
+                            <span className="font-medium">{formData.legalDocs}</span>
+                        </div>
                     </div>
 
                     <div className="flex flex-col gap-3">
@@ -157,7 +259,7 @@ const CreatePhanAnhKienNghiPage = () => {
                             Tra cứu phản ánh
                         </Link>
                         <div className="flex gap-3">
-                            <button onClick={() => { setIsSubmitted(false); setFormData({ ...formData, title: '', content: '' }); }} className="flex-1 bg-white border-2 border-gray-200 text-gray-700 py-2.5 rounded-xl font-medium hover:bg-gray-50 transition">
+                            <button onClick={() => { setIsSubmitted(false); setFormData({ ...formData, content: '', legalDocs: '', agency: '', province: '' }); }} className="flex-1 bg-white border-2 border-gray-200 text-gray-700 py-2.5 rounded-xl font-medium hover:bg-gray-50 transition">
                                 Gửi mới
                             </button>
                             <Link to="/" className="flex-1 bg-white border-2 border-gray-200 text-gray-700 py-2.5 rounded-xl font-medium hover:bg-gray-50 transition block">
@@ -194,25 +296,15 @@ const CreatePhanAnhKienNghiPage = () => {
                     </div>
 
                     <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-8">
-                        {/* Sender info (readonly) */}
+                        {/* Sender info */}
                         <div className="space-y-4">
                             <h3 className="text-lg font-bold text-gray-800 border-b pb-2 flex items-center gap-2">
                                 <span className="bg-blue-100 text-[#0f4c81] w-6 h-6 rounded-full flex items-center justify-center text-sm">1</span>
                                 Thông tin người gửi
                             </h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Họ và tên <span className="text-red-500">*</span></label>
-                                    <input type="text" value={user.name || 'Nguyễn Văn A'} readOnly className="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-gray-500 cursor-not-allowed" />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Điện thoại <span className="text-red-500">*</span></label>
-                                    <input type="text" value={'0987654321'} readOnly className="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-gray-500 cursor-not-allowed" />
-                                </div>
-                                <div className="md:col-span-2">
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">Email <span className="text-red-500">*</span></label>
-                                    <input type="email" value={user.email || 'user@example.com'} readOnly className="w-full bg-gray-50 border border-gray-300 rounded-lg p-2.5 text-gray-500 cursor-not-allowed" />
-                                </div>
+                            <div className="bg-[#eff6ff] border border-[#bfdbfe] rounded-xl p-3.5 sm:p-4 flex items-center gap-3 text-blue-900 text-sm">
+                                <User size={18} className="text-blue-600 shrink-0" />
+                                <span>Thông tin liên hệ được điền tự động từ hồ sơ cá nhân của bạn.</span>
                             </div>
                         </div>
 
@@ -222,6 +314,75 @@ const CreatePhanAnhKienNghiPage = () => {
                                 <span className="bg-blue-100 text-[#0f4c81] w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span>
                                 Nội dung phản ánh kiến nghị
                             </h3>
+
+                            {/* Target selection */}
+                            <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 space-y-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">Cấp xử lý <span className="text-red-500">*</span></label>
+                                    <div className="flex gap-4">
+                                        <label className="flex items-center gap-2 cursor-pointer">
+                                            <input 
+                                                type="radio" 
+                                                name="level" 
+                                                value="Trung ương" 
+                                                checked={formData.level === 'Trung ương'} 
+                                                onChange={e => { 
+                                                    setFormData({ ...formData, level: e.target.value, agency: '', province: '' }); 
+                                                    setErrors({ ...errors, agency: null, province: null }); 
+                                                }} 
+                                                className="w-4 h-4 text-[#0f4c81]" 
+                                            />
+                                            <span className="text-sm font-medium text-gray-700">Cấp trung ương</span>
+                                        </label>
+                                        <label className="flex items-center gap-2 cursor-pointer">
+                                            <input 
+                                                type="radio" 
+                                                name="level" 
+                                                value="Địa phương" 
+                                                checked={formData.level === 'Địa phương'} 
+                                                onChange={e => { 
+                                                    setFormData({ ...formData, level: e.target.value, agency: '', province: '' }); 
+                                                    setErrors({ ...errors, agency: null, province: null }); 
+                                                }} 
+                                                className="w-4 h-4 text-[#0f4c81]" 
+                                            />
+                                            <span className="text-sm font-medium text-gray-700">Cấp địa phương</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                {formData.level === 'Trung ương' ? (
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">Cơ quan tiếp nhận <span className="text-red-500">*</span></label>
+                                        <select
+                                            value={formData.agency}
+                                            onChange={e => { setFormData({ ...formData, agency: e.target.value }); setErrors({ ...errors, agency: null }); }}
+                                            className={`w-full border rounded-lg p-2.5 bg-white ${errors.agency ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
+                                        >
+                                            <option value="">-- Chọn cơ quan tiếp nhận --</option>
+                                            {CENTRAL_AGENCIES.map(agency => (
+                                                <option key={agency} value={agency}>{agency}</option>
+                                            ))}
+                                        </select>
+                                        {errors.agency && <p className="text-red-500 text-xs mt-1">{errors.agency}</p>}
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">Địa phương <span className="text-red-500">*</span></label>
+                                        <select
+                                            value={formData.province}
+                                            onChange={e => { setFormData({ ...formData, province: e.target.value }); setErrors({ ...errors, province: null }); }}
+                                            className={`w-full border rounded-lg p-2.5 bg-white ${errors.province ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
+                                        >
+                                            <option value="">-- Chọn địa phương --</option>
+                                            {PROVINCES.map(prov => (
+                                                <option key={prov} value={prov}>{prov}</option>
+                                            ))}
+                                        </select>
+                                        {errors.province && <p className="text-red-500 text-xs mt-1">{errors.province}</p>}
+                                    </div>
+                                )}
+                            </div>
 
                             {/* Legal Doc selection */}
                             <div className="relative z-10">
@@ -261,71 +422,6 @@ const CreatePhanAnhKienNghiPage = () => {
                                         ))}
                                     </ul>
                                 )}
-                            </div>
-
-                            {/* Target selection */}
-                            <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 space-y-4 mb-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Cấp xử lý <span className="text-red-500">*</span></label>
-                                    <div className="flex gap-4">
-                                        <label className="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="level" value="Trung ương" checked={formData.level === 'Trung ương'} onChange={e => { setFormData({ ...formData, level: e.target.value, agency: '' }); setErrors({ ...errors, agency: null }); }} className="w-4 h-4 text-[#0f4c81]" />
-                                            <span>Cấp trung ương</span>
-                                        </label>
-                                        <label className="flex items-center gap-2 cursor-pointer">
-                                            <input type="radio" name="level" value="Địa phương" checked={formData.level === 'Địa phương'} onChange={e => { setFormData({ ...formData, level: e.target.value, agency: '' }); setErrors({ ...errors, agency: null }); }} className="w-4 h-4 text-[#0f4c81]" />
-                                            <span>Cấp địa phương</span>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Cơ quan tiếp nhận <span className="text-red-500">*</span></label>
-                                        <select
-                                            value={formData.agency}
-                                            onChange={e => { setFormData({ ...formData, agency: e.target.value }); setErrors({ ...errors, agency: null }); }}
-                                            className={`w-full border rounded-lg p-2.5 bg-white ${errors.agency ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
-                                        >
-                                            <option value="">-- Chọn cơ quan tiếp nhận --</option>
-                                            {(MOCK_AGENCIES[formData.level] || []).map(agency => (
-                                                <option key={agency} value={agency}>{agency}</option>
-                                            ))}
-                                        </select>
-                                        {errors.agency && <p className="text-red-500 text-xs mt-1">{errors.agency}</p>}
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Lĩnh vực <span className="text-red-500">*</span></label>
-                                        <select
-                                            value={formData.field}
-                                            onChange={e => { setFormData({ ...formData, field: e.target.value }); setErrors({ ...errors, field: null }); }}
-                                            className={`w-full border rounded-lg p-2.5 bg-white ${errors.field ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
-                                        >
-                                            <option value="">-- Chọn lĩnh vực --</option>
-                                            {LTV_FIELDS.map(f => (
-                                                <option key={f} value={f}>{f}</option>
-                                            ))}
-                                        </select>
-                                        {errors.field && <p className="text-red-500 text-xs mt-1">{errors.field}</p>}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Content inputs */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Tiêu đề phản ánh <span className="text-red-500">*</span></label>
-                                <input
-                                    type="text"
-                                    placeholder="Tóm tắt nội dung phản ánh, kiến nghị..."
-                                    maxLength={500}
-                                    value={formData.title}
-                                    onChange={e => { setFormData({ ...formData, title: e.target.value }); setErrors({ ...errors, title: null }); }}
-                                    className={`w-full border rounded-lg p-2.5 ${errors.title ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
-                                />
-                                <div className="flex justify-between mt-1">
-                                    {errors.title ? <p className="text-red-500 text-xs">{errors.title}</p> : <span></span>}
-                                    <span className="text-xs text-gray-500">{formData.title.length}/500</span>
-                                </div>
                             </div>
 
                             <div>
