@@ -93,13 +93,200 @@ const PROVINCES = [
     'Tỉnh Yên Bái'
 ];
 
-const MOCK_LEGAL_DOCS = [
-    'Luật Đất đai 2024',
-    'Luật Nhà ở 2023',
-    'Nghị định 102/2024/NĐ-CP',
-    'Thông tư 04/2025/TT-BTC',
-    'Luật Bảo hiểm xã hội 2024',
-    'Luật Giao thông đường bộ 2008'
+const MOCK_LEGAL_DOCS_DATA = [
+    {
+        id: '120/2026/TT-BTC',
+        name: 'Thông tư 120/2026/TT-BTC',
+        soHieu: '120/2026/TT-BTC',
+        tieuDe: '[Bộ Tài chính] Thông tư số 120/2026/TT-BTC Quy định nội dung, mức chi cho công tác xác minh, xác định, bảo vệ và hỗ trợ nạn nhân, người đang trong quá trình xác định là nạn nhân bị mua bán và người dưới 18 tuổi đi cùng quy định tại Nghị định số 162/2025/NĐ-CP ngày 29 tháng 6 năm 2025 của Chính phủ quy định chi tiết thi hành một số điều và biện pháp thi hành Luật Phòng, chống mua bán người',
+        trichYeu: 'Thông tư số 120/2026/TT-BTC Quy định nội dung, mức chi cho công tác xác minh, xác định, bảo vệ và hỗ trợ nạn nhân, người đang trong quá trình xác định là nạn nhân bị mua bán và người dưới 18 tuổi đi cùng quy định tại Nghị định số 162/2025/NĐ-CP ngày 29 tháng 6 năm 2025 của Chính phủ quy định chi tiết thi hành một số điều và biện pháp thi hành Luật Phòng, chống mua bán người',
+        ngayBanHanh: '17/8/2026',
+        ngayHieuLuc: '1/10/2026',
+        loaiVanBan: 'Thông tư',
+        nganh: 'Tài chính',
+        tinhTrangHieuLuc: 'Chưa có hiệu lực',
+        coQuanBanHanh: 'Bộ Tài chính',
+        nguoiKy: 'Nguyễn Thị Bích Ngọc',
+        chucDanh: 'Thứ trưởng',
+        files: [
+            { name: 'Thông-tư-120-2026-TT-BTC.docx', url: '#' },
+            { name: 'Thông-tư-120-2026-TT-BTC.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Những quy định chung',
+            '— Điều 1: Phạm vi điều chỉnh',
+            '— Điều 2: Đối tượng áp dụng',
+            'Chương II: Nội dung và mức chi hỗ trợ nạn nhân',
+            '— Điều 3: Chi hỗ trợ nhu cầu thiết yếu và chi phí đi lại',
+            '— Điều 4: Chi hỗ trợ y tế và tâm lý',
+            '— Điều 5: Chi hỗ trợ học văn hóa, học nghề',
+            'Chương III: Tổ chức thực hiện',
+            '— Điều 6: Nguồn kinh phí thực hiện',
+            '— Điều 7: Hiệu lực thi hành'
+        ]
+    },
+    {
+        id: '31/2024/QH15',
+        name: 'Luật Đất đai 2024',
+        soHieu: '31/2024/QH15',
+        tieuDe: 'Luật Đất đai số 31/2024/QH15 ngày 18 tháng 01 năm 2024 của Quốc hội',
+        trichYeu: 'Quy định về chế độ sở hữu đất đai, quyền hạn và trách nhiệm của Nhà nước đại diện chủ sở hữu toàn dân về đất đai và thống nhất quản lý về đất đai, chế độ quản lý và sử dụng đất đai, quyền và nghĩa vụ của người sử dụng đất đối với đất đai thuộc lãnh thổ nước Cộng hòa xã hội chủ nghĩa Việt Nam.',
+        ngayBanHanh: '18/01/2024',
+        ngayHieuLuc: '01/08/2024',
+        loaiVanBan: 'Luật',
+        nganh: 'Đất đai - Tài nguyên Môi trường',
+        tinhTrangHieuLuc: 'Còn hiệu lực',
+        coQuanBanHanh: 'Quốc hội',
+        nguoiKy: 'Vương Đình Huệ',
+        chucDanh: 'Chủ tịch Quốc hội',
+        files: [
+            { name: 'Luat-Dat-dai-2024-31-2024-QH15.docx', url: '#' },
+            { name: 'Luat-Dat-dai-2024-31-2024-QH15.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Quy định chung',
+            '— Điều 1: Phạm vi điều chỉnh',
+            '— Điều 2: Đối tượng áp dụng',
+            '— Điều 3: Giải thích từ ngữ',
+            '— Điều 4: Người sử dụng đất',
+            'Chương II: Quyền và trách nhiệm của Nhà nước, quyền và nghĩa vụ của công dân đối với đất đai',
+            '— Điều 11: Quyền của Nhà nước đối với đất đai',
+            '— Điều 12: Trách nhiệm của Nhà nước đối với đất đai',
+            'Chương III: Địa giới hành chính, điều tra cơ bản về đất đai',
+            '— Điều 25: Địa giới đơn vị hành chính',
+            'Chương IV: Quy hoạch, kế hoạch sử dụng đất',
+            '— Điều 60: Nguyên tắc lập quy hoạch sử dụng đất'
+        ]
+    },
+    {
+        id: '27/2023/QH15',
+        name: 'Luật Nhà ở 2023',
+        soHieu: '27/2023/QH15',
+        tieuDe: 'Luật Nhà ở số 27/2023/QH15 ngày 27 tháng 11 năm 2023 của Quốc hội',
+        trichYeu: 'Quy định về sở hữu, phát triển, quản lý vận hành, giao dịch nhà ở; quản lý nhà nước về nhà ở tại Việt Nam.',
+        ngayBanHanh: '27/11/2023',
+        ngayHieuLuc: '01/08/2024',
+        loaiVanBan: 'Luật',
+        nganh: 'Xây dựng - Nhà ở',
+        tinhTrangHieuLuc: 'Còn hiệu lực',
+        coQuanBanHanh: 'Quốc hội',
+        nguoiKy: 'Vương Đình Huệ',
+        chucDanh: 'Chủ tịch Quốc hội',
+        files: [
+            { name: 'Luat-Nha-o-2023-27-2023-QH15.docx', url: '#' },
+            { name: 'Luat-Nha-o-2023-27-2023-QH15.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Quy định chung',
+            '— Điều 1: Phạm vi điều chỉnh',
+            '— Điều 2: Đối tượng áp dụng',
+            'Chương II: Sở hữu nhà ở',
+            '— Điều 7: Đối tượng được sở hữu nhà ở tại Việt Nam',
+            'Chương III: Chiến lược phát triển nhà ở quốc gia, chương trình, kế hoạch phát triển nhà ở cấp tỉnh',
+            'Chương VI: Chính sách về nhà ở xã hội'
+        ]
+    },
+    {
+        id: '102/2024/NĐ-CP',
+        name: 'Nghị định 102/2024/NĐ-CP',
+        soHieu: '102/2024/NĐ-CP',
+        tieuDe: 'Nghị định số 102/2024/NĐ-CP ngày 30 tháng 07 năm 2024 của Chính phủ Quy định chi tiết thi hành một số điều của Luật Đất đai',
+        trichYeu: 'Quy định chi tiết thi hành một số điều, khoản của Luật Đất đai số 31/2024/QH15 về quy hoạch, kế hoạch sử dụng đất, thu hồi đất, giao đất, cho thuê đất, chuyển mục đích sử dụng đất.',
+        ngayBanHanh: '30/07/2024',
+        ngayHieuLuc: '01/08/2024',
+        loaiVanBan: 'Nghị định',
+        nganh: 'Tài nguyên và Môi trường',
+        tinhTrangHieuLuc: 'Còn hiệu lực',
+        coQuanBanHanh: 'Chính phủ',
+        nguoiKy: 'Phạm Minh Chính',
+        chucDanh: 'Thủ tướng Chính phủ',
+        files: [
+            { name: 'Nghi-dinh-102-2024-ND-CP.docx', url: '#' },
+            { name: 'Nghi-dinh-102-2024-ND-CP.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Quy định chung',
+            '— Điều 1: Phạm vi điều chỉnh',
+            'Chương II: Chức năng, nhiệm vụ, cơ cấu tổ chức của các cơ quan quản lý đất đai',
+            'Chương III: Thu hồi đất, trưng dụng đất'
+        ]
+    },
+    {
+        id: '04/2025/TT-BTC',
+        name: 'Thông tư 04/2025/TT-BTC',
+        soHieu: '04/2025/TT-BTC',
+        tieuDe: 'Thông tư số 04/2025/TT-BTC ngày 15 tháng 01 năm 2025 của Bộ Tài chính hướng dẫn quản lý thu ngân sách nhà nước',
+        trichYeu: 'Hướng dẫn quy trình, thủ tục đối soát, tổng hợp và phân bổ nguồn thu ngân sách nhà nước qua hệ thống Kho bạc Nhà nước.',
+        ngayBanHanh: '15/01/2025',
+        ngayHieuLuc: '01/03/2025',
+        loaiVanBan: 'Thông tư',
+        nganh: 'Tài chính',
+        tinhTrangHieuLuc: 'Còn hiệu lực',
+        coQuanBanHanh: 'Bộ Tài chính',
+        nguoiKy: 'Hồ Đức Phớc',
+        chucDanh: 'Bộ trưởng',
+        files: [
+            { name: 'Thong-tu-04-2025-TT-BTC.docx', url: '#' },
+            { name: 'Thong-tu-04-2025-TT-BTC.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Quy định chung',
+            '— Điều 1: Phạm vi và đối tượng áp dụng',
+            'Chương II: Quy trình thu nộp ngân sách',
+            '— Điều 2: Hạch toán các khoản thu ngân sách'
+        ]
+    },
+    {
+        id: '41/2024/QH15',
+        name: 'Luật Bảo hiểm xã hội 2024',
+        soHieu: '41/2024/QH15',
+        tieuDe: 'Luật Bảo hiểm xã hội số 41/2024/QH15 ngày 29 tháng 06 năm 2024 của Quốc hội',
+        trichYeu: 'Quy định quyền, trách nhiệm của cơ quan, tổ chức, cá nhân về bảo hiểm xã hội; trợ cấp hưu trí xã hội; chế độ bảo hiểm xã hội bắt buộc, bảo hiểm xã hội tự nguyện; quỹ bảo hiểm xã hội.',
+        ngayBanHanh: '29/06/2024',
+        ngayHieuLuc: '01/07/2025',
+        loaiVanBan: 'Luật',
+        nganh: 'Lao động - Xã hội',
+        tinhTrangHieuLuc: 'Chưa có hiệu lực',
+        coQuanBanHanh: 'Quốc hội',
+        nguoiKy: 'Trần Thanh Mẫn',
+        chucDanh: 'Chủ tịch Quốc hội',
+        files: [
+            { name: 'Luat-BHXH-2024-41-2024-QH15.docx', url: '#' },
+            { name: 'Luat-BHXH-2024-41-2024-QH15.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Những quy định chung',
+            '— Điều 1: Phạm vi điều chỉnh',
+            '— Điều 2: Đối tượng áp dụng',
+            'Chương II: Chế độ ốm đau, thai sản',
+            'Chương III: Chế độ hưu trí, tử tuất'
+        ]
+    },
+    {
+        id: '23/2008/QH12',
+        name: 'Luật Giao thông đường bộ 2008',
+        soHieu: '23/2008/QH12',
+        tieuDe: 'Luật Giao thông đường bộ số 23/2008/QH12 ngày 13 tháng 11 năm 2008 của Quốc hội',
+        trichYeu: 'Quy định về quy tắc giao thông đường bộ; kết cấu hạ tầng giao thông đường bộ; phương tiện tham gia giao thông đường bộ; người điều khiển phương tiện tham gia giao thông đường bộ; vận tải đường bộ và quản lý nhà nước về giao thông đường bộ.',
+        ngayBanHanh: '13/11/2008',
+        ngayHieuLuc: '01/07/2009',
+        loaiVanBan: 'Luật',
+        nganh: 'Giao thông vận tải',
+        tinhTrangHieuLuc: 'Còn hiệu lực',
+        coQuanBanHanh: 'Quốc hội',
+        nguoiKy: 'Nguyễn Phú Trọng',
+        chucDanh: 'Chủ tịch Quốc hội',
+        files: [
+            { name: 'Luat-GTDB-2008-23-2008-QH12.docx', url: '#' },
+            { name: 'Luat-GTDB-2008-23-2008-QH12.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Quy định chung',
+            '— Điều 1: Phạm vi điều chỉnh',
+            '— Điều 8: Các hành vi bị nghiêm cấm',
+            'Chương II: Quy tắc giao thông đường bộ'
+        ]
+    }
 ];
 
 const CreatePhanAnhKienNghiPage = () => {
@@ -118,29 +305,53 @@ const CreatePhanAnhKienNghiPage = () => {
     const [files, setFiles] = useState([]);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [trackingCode, setTrackingCode] = useState('');
+    const [selectedDoc, setSelectedDoc] = useState(null);
     const [formData, setFormData] = useState({
         level: 'Trung ương',
         agency: '',
         province: '',
         content: '',
         legalDocs: initialVanBan,
+        tableOfContent: '',
         termsAgreed: false
     });
     const [errors, setErrors] = useState({});
     const [docSearchQuery, setDocSearchQuery] = useState(initialVanBan);
     const [showDocDropdown, setShowDocDropdown] = useState(false);
 
+    useEffect(() => {
+        if (initialVanBan) {
+            const matched = MOCK_LEGAL_DOCS_DATA.find(d =>
+                initialVanBan.toLowerCase().includes(d.soHieu.toLowerCase()) ||
+                initialVanBan.toLowerCase().includes(d.name.toLowerCase()) ||
+                d.tieuDe.toLowerCase().includes(initialVanBan.toLowerCase())
+            );
+            if (matched) {
+                setSelectedDoc(matched);
+                setDocSearchQuery(matched.name);
+                setFormData(prev => ({ ...prev, legalDocs: matched.tieuDe }));
+            }
+        }
+    }, [initialVanBan]);
+
     if (!user) return null;
 
-    const filteredDocs = MOCK_LEGAL_DOCS.filter(doc =>
-        doc.toLowerCase().includes(docSearchQuery.toLowerCase())
+    const filteredDocs = MOCK_LEGAL_DOCS_DATA.filter(doc =>
+        doc.name.toLowerCase().includes(docSearchQuery.toLowerCase()) ||
+        doc.soHieu.toLowerCase().includes(docSearchQuery.toLowerCase()) ||
+        doc.tieuDe.toLowerCase().includes(docSearchQuery.toLowerCase())
     );
 
     const handleSelectDoc = (doc) => {
-        setFormData({ ...formData, legalDocs: doc });
-        setDocSearchQuery(doc);
+        setSelectedDoc(doc);
+        setFormData(prev => ({
+            ...prev,
+            legalDocs: doc.tieuDe || doc.name,
+            tableOfContent: ''
+        }));
+        setDocSearchQuery(doc.name || doc.soHieu);
         setShowDocDropdown(false);
-        setErrors({ ...errors, legalDocs: null });
+        setErrors(prev => ({ ...prev, legalDocs: null }));
     };
 
     const handleFileChange = (e) => {
@@ -250,8 +461,14 @@ const CreatePhanAnhKienNghiPage = () => {
                         )}
                         <div className="flex gap-2">
                             <span className="text-gray-500 w-36">Văn bản liên quan:</span>
-                            <span className="font-medium">{formData.legalDocs}</span>
+                            <span className="font-medium line-clamp-1">{formData.legalDocs}</span>
                         </div>
+                        {formData.tableOfContent && (
+                            <div className="flex gap-2">
+                                <span className="text-gray-500 w-36">Mục lục:</span>
+                                <span className="font-medium">{formData.tableOfContent}</span>
+                            </div>
+                        )}
                     </div>
 
                     <div className="flex flex-col gap-3">
@@ -259,7 +476,7 @@ const CreatePhanAnhKienNghiPage = () => {
                             Tra cứu phản ánh
                         </Link>
                         <div className="flex gap-3">
-                            <button onClick={() => { setIsSubmitted(false); setFormData({ ...formData, content: '', legalDocs: '', agency: '', province: '' }); }} className="flex-1 bg-white border-2 border-gray-200 text-gray-700 py-2.5 rounded-xl font-medium hover:bg-gray-50 transition">
+                            <button onClick={() => { setIsSubmitted(false); setFormData({ ...formData, content: '', legalDocs: '', tableOfContent: '', agency: '', province: '' }); setSelectedDoc(null); }} className="flex-1 bg-white border-2 border-gray-200 text-gray-700 py-2.5 rounded-xl font-medium hover:bg-gray-50 transition">
                                 Gửi mới
                             </button>
                             <Link to="/" className="flex-1 bg-white border-2 border-gray-200 text-gray-700 py-2.5 rounded-xl font-medium hover:bg-gray-50 transition block">
@@ -395,13 +612,23 @@ const CreatePhanAnhKienNghiPage = () => {
                                         placeholder="Tìm kiếm hoặc khai báo số hiệu, tên văn bản pháp luật..."
                                         value={docSearchQuery}
                                         onChange={e => {
-                                            setDocSearchQuery(e.target.value);
-                                            setFormData({ ...formData, legalDocs: e.target.value });
+                                            const val = e.target.value;
+                                            setDocSearchQuery(val);
+                                            setFormData({ ...formData, legalDocs: val });
                                             setShowDocDropdown(true);
                                             setErrors({ ...errors, legalDocs: null });
+                                            const matched = MOCK_LEGAL_DOCS_DATA.find(d =>
+                                                d.name.toLowerCase() === val.toLowerCase() ||
+                                                d.soHieu.toLowerCase() === val.toLowerCase() ||
+                                                d.tieuDe.toLowerCase() === val.toLowerCase()
+                                            );
+                                            setSelectedDoc(matched || null);
+                                            if (!matched) {
+                                                setFormData(prev => ({ ...prev, tableOfContent: '' }));
+                                            }
                                         }}
                                         onFocus={() => setShowDocDropdown(true)}
-                                        onBlur={() => setTimeout(() => setShowDocDropdown(false), 200)}
+                                        onBlur={() => setTimeout(() => setShowDocDropdown(false), 250)}
                                         className={`w-full border rounded-lg p-2.5 pl-10 ${errors.legalDocs ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
                                     />
                                     <Search className="absolute left-3 top-3 text-gray-400" size={18} />
@@ -410,18 +637,123 @@ const CreatePhanAnhKienNghiPage = () => {
 
                                 {/* Dropdown */}
                                 {showDocDropdown && docSearchQuery && filteredDocs.length > 0 && (
-                                    <ul className="absolute z-20 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
+                                    <ul className="absolute z-20 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto divide-y divide-gray-100">
                                         {filteredDocs.map((doc, idx) => (
                                             <li
                                                 key={idx}
-                                                className="px-4 py-2 hover:bg-blue-50 cursor-pointer text-sm text-gray-700"
+                                                className="px-4 py-2.5 hover:bg-blue-50 cursor-pointer text-sm transition-colors"
                                                 onClick={() => handleSelectDoc(doc)}
                                             >
-                                                {doc}
+                                                <div className="font-semibold text-gray-800">{doc.name}</div>
+                                                <div className="text-xs text-gray-500 line-clamp-1">{doc.tieuDe}</div>
                                             </li>
                                         ))}
                                     </ul>
                                 )}
+                            </div>
+
+                            {/* Display Document Details if a document is selected */}
+                            {selectedDoc && (
+                                <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-xs space-y-4">
+                                    <h4 className="text-base font-bold text-gray-900">Thông tin Văn bản</h4>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm">
+                                        {/* Column 1 */}
+                                        <div className="space-y-3">
+                                            <div>
+                                                <span className="font-bold text-gray-800">Tiêu đề: </span>
+                                                <span className="text-gray-700 leading-relaxed">{selectedDoc.tieuDe}</span>
+                                            </div>
+                                            <div>
+                                                <span className="font-bold text-gray-800">Số ký hiệu: </span>
+                                                <span className="text-gray-700">{selectedDoc.soHieu}</span>
+                                            </div>
+                                            <div>
+                                                <span className="font-bold text-gray-800">Ngày có hiệu lực: </span>
+                                                <span className="text-gray-700">{selectedDoc.ngayHieuLuc}</span>
+                                            </div>
+                                            <div>
+                                                <span className="font-bold text-gray-800">Ngành: </span>
+                                                <span className="text-gray-700">{selectedDoc.nganh}</span>
+                                            </div>
+                                            <div>
+                                                <span className="font-bold text-gray-800">Cơ quan ban hành: </span>
+                                                <span className="text-gray-700">{selectedDoc.coQuanBanHanh}</span>
+                                            </div>
+                                            <div>
+                                                <span className="font-bold text-gray-800">Chức danh: </span>
+                                                <span className="text-gray-700">{selectedDoc.chucDanh}</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Column 2 */}
+                                        <div className="space-y-3">
+                                            <div>
+                                                <span className="font-bold text-gray-800">Trích yếu: </span>
+                                                <span className="text-gray-700 leading-relaxed">{selectedDoc.trichYeu}</span>
+                                            </div>
+                                            <div>
+                                                <span className="font-bold text-gray-800">Ngày ban hành: </span>
+                                                <span className="text-gray-700">{selectedDoc.ngayBanHanh}</span>
+                                            </div>
+                                            <div>
+                                                <span className="font-bold text-gray-800">Loại văn bản: </span>
+                                                <span className="text-gray-700">{selectedDoc.loaiVanBan}</span>
+                                            </div>
+                                            <div>
+                                                <span className="font-bold text-gray-800">Tình trạng hiệu lực: </span>
+                                                <span className="text-gray-700">{selectedDoc.tinhTrangHieuLuc}</span>
+                                            </div>
+                                            <div>
+                                                <span className="font-bold text-gray-800">Người ký: </span>
+                                                <span className="text-gray-700">{selectedDoc.nguoiKy}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Files */}
+                                    {selectedDoc.files && selectedDoc.files.length > 0 && (
+                                        <div className="pt-3 border-t border-gray-100 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+                                            <span className="font-bold text-gray-800">File đính kèm:</span>
+                                            <div className="flex flex-wrap gap-3">
+                                                {selectedDoc.files.map((file, idx) => (
+                                                    <a
+                                                        key={idx}
+                                                        href={file.url || '#'}
+                                                        onClick={(e) => e.preventDefault()}
+                                                        className="text-blue-600 hover:text-blue-800 hover:underline"
+                                                    >
+                                                        {file.name}
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Table of Contents (Mục lục) */}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Mục lục
+                                </label>
+                                <select
+                                    value={formData.tableOfContent || ''}
+                                    onChange={e => setFormData({ ...formData, tableOfContent: e.target.value })}
+                                    disabled={!selectedDoc || !selectedDoc.mucLuc || selectedDoc.mucLuc.length === 0}
+                                    className={`w-full border rounded-lg p-2.5 bg-white ${!selectedDoc
+                                            ? 'bg-gray-50 text-gray-400 border-gray-200 cursor-not-allowed'
+                                            : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500 text-gray-700'
+                                        }`}
+                                >
+                                    <option value="">
+                                        {selectedDoc ? '-- Chọn chương, mục, điều cần phản ánh (tùy chọn) --' : '-- Vui lòng chọn văn bản pháp luật để xem mục lục --'}
+                                    </option>
+                                    {selectedDoc && selectedDoc.mucLuc && selectedDoc.mucLuc.map((item, idx) => (
+                                        <option key={idx} value={item}>
+                                            {item}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div>
