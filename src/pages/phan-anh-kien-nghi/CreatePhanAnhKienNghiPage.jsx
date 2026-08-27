@@ -123,7 +123,19 @@ const MOCK_LEGAL_DOCS_DATA = [
             'Chương III: Tổ chức thực hiện',
             '— Điều 6: Nguồn kinh phí thực hiện',
             '— Điều 7: Hiệu lực thi hành'
-        ]
+        ],
+        mucLucDetails: {
+            'Chương I: Những quy định chung': `Chương I. NHỮNG QUY ĐỊNH CHUNG\nBao gồm các quy định về phạm vi điều chỉnh, đối tượng áp dụng, nguyên tắc quản lý và bố trí ngân sách cho công tác xác minh, xác định và hỗ trợ nạn nhân bị mua bán.`,
+            '— Điều 1: Phạm vi điều chỉnh': `Điều 1. Phạm vi điều chỉnh\n1. Thông tư này quy định nội dung, mức chi cho công tác xác minh, xác định, bảo vệ và hỗ trợ nạn nhân, người đang trong quá trình xác định là nạn nhân bị mua bán và người dưới 18 tuổi đi cùng quy định tại Nghị định số 162/2025/NĐ-CP ngày 29 tháng 6 năm 2025 của Chính phủ quy định chi tiết thi hành một số điều và biện pháp thi hành Luật Phòng, chống mua bán người.\n2. Kinh phí thực hiện các chế độ hỗ trợ quy định tại Thông tư này do ngân sách nhà nước bảo đảm theo phân cấp ngân sách hiện hành.`,
+            '— Điều 2: Đối tượng áp dụng': `Điều 2. Đối tượng áp dụng\n1. Nạn nhân bị mua bán là công dân Việt Nam, người không quốc tịch thường trú tại Việt Nam, người nước ngoài bị mua bán tại Việt Nam.\n2. Người đang trong quá trình xác định là nạn nhân theo quy định của pháp luật.\n3. Người dưới 18 tuổi đi cùng nạn nhân, người đang trong quá trình xác định là nạn nhân.\n4. Các cơ quan, tổ chức, cá nhân có liên quan đến việc thực hiện công tác bảo vệ và hỗ trợ nạn nhân.`,
+            'Chương II: Nội dung và mức chi hỗ trợ nạn nhân': `Chương II. NỘI DUNG VÀ MỨC CHI HỖ TRỢ NẠN NHÂN\nQuy định cụ thể các định mức chi hỗ trợ nhu cầu thiết yếu, tiền ăn, quần áo, chi phí đi lại, y tế, tâm lý, pháp lý và học nghề cho nạn nhân bị mua bán.`,
+            '— Điều 3: Chi hỗ trợ nhu cầu thiết yếu và chi phí đi lại': `Điều 3. Chi hỗ trợ nhu cầu thiết yếu và chi phí đi lại\n1. Chi tiền ăn trong thời gian lưu trú tại cơ sở trợ giúp xã hội hoặc cơ sở hỗ trợ nạn nhân: Mức chi 70.000 đồng/người/ngày, thời gian hỗ trợ tối đa không quá 60 ngày.\n2. Chi hỗ trợ quần áo, đồ dùng sinh hoạt cá nhân thiết yếu: Mức chi tối đa 400.000 đồng/người.\n3. Chi tiền tàu xe hoặc phương tiện công cộng đưa nạn nhân về nơi cư trú: Theo giá vé giao thông công cộng thực tế.`,
+            '— Điều 4: Chi hỗ trợ y tế và tâm lý': `Điều 4. Chi hỗ trợ y tế và tâm lý\n1. Chi khám, chữa bệnh: Được chi trả theo quy định của pháp luật về bảo hiểm y tế. Trường hợp nạn nhân không có thẻ BHYT thì được hỗ trợ chi phí khám chữa bệnh tương đương mức thanh toán của quỹ BHYT.\n2. Chi hỗ trợ tư vấn tâm lý: Mức chi 50.000 đồng/người/buổi tư vấn, tối đa không quá 10 buổi.`,
+            '— Điều 5: Chi hỗ trợ học văn hóa, học nghề': `Điều 5. Chi hỗ trợ học văn hóa, học nghề\n1. Hỗ trợ học phí học văn hóa theo mức thu học phí thực tế của cơ sở giáo dục công lập tại địa phương nơi nạn nhân theo học.\n2. Hỗ trợ học nghề trình độ sơ cấp hoặc đào tạo nghề dưới 3 tháng: Mức hỗ trợ tối đa 3.000.000 đồng/người/khóa học.`,
+            'Chương III: Tổ chức thực hiện': `Chương III. TỔ CHỨC THỰC HIỆN\nQuy định về nguồn kinh phí, lập dự toán, chấp hành và quyết toán kinh phí của các bộ, ngành, địa phương.`,
+            '— Điều 6: Nguồn kinh phí thực hiện': `Điều 6. Nguồn kinh phí thực hiện\n1. Nguồn ngân sách nhà nước bố trí trong dự toán chi thường xuyên của các bộ, cơ quan trung ương và địa phương theo quy định của Luật Ngân sách nhà nước.\n2. Nguồn tài trợ, viện trợ, đóng góp hợp pháp của các tổ chức, cá nhân trong và ngoài nước.`,
+            '— Điều 7: Hiệu lực thi hành': `Điều 7. Hiệu lực thi hành\n1. Thông tư này có hiệu lực thi hành kể từ ngày 01 tháng 10 năm 2026.\n2. Trường hợp các văn bản dẫn chiếu tại Thông tư này được sửa đổi, bổ sung hoặc thay thế thì áp dụng theo văn bản sửa đổi, bổ sung hoặc thay thế đó.`
+        }
     },
     {
         id: '31/2024/QH15',
@@ -156,7 +168,17 @@ const MOCK_LEGAL_DOCS_DATA = [
             '— Điều 25: Địa giới đơn vị hành chính',
             'Chương IV: Quy hoạch, kế hoạch sử dụng đất',
             '— Điều 60: Nguyên tắc lập quy hoạch sử dụng đất'
-        ]
+        ],
+        mucLucDetails: {
+            'Chương I: Quy định chung': `Chương I. QUY ĐỊNH CHUNG\nQuy định các nguyên tắc cơ bản về chế độ sở hữu đất đai, phạm vi điều chỉnh, người sử dụng đất và các hành vi bị nghiêm cấm trong quản lý, sử dụng đất đai.`,
+            '— Điều 1: Phạm vi điều chỉnh': `Điều 1. Phạm vi điều chỉnh\nLuật này quy định về chế độ sở hữu đất đai, quyền hạn và trách nhiệm của Nhà nước đại diện chủ sở hữu toàn dân về đất đai và thống nhất quản lý về đất đai, chế độ quản lý và sử dụng đất đai, quyền và nghĩa vụ của công dân, người sử dụng đất đối với đất đai thuộc lãnh thổ của nước Cộng hòa xã hội chủ nghĩa Việt Nam.`,
+            '— Điều 2: Đối tượng áp dụng': `Điều 2. Đối tượng áp dụng\n1. Cơ quan nhà nước thực hiện quyền hạn và trách nhiệm đại diện chủ sở hữu toàn dân về đất đai, thực hiện nhiệm vụ thống nhất quản lý nhà nước về đất đai.\n2. Người sử dụng đất quy định tại Điều 4 của Luật này.\n3. Các đối tượng khác có liên quan đến việc quản lý, sử dụng đất đai.`,
+            '— Điều 3: Giải thích từ ngữ': `Điều 3. Giải thích từ ngữ\nGiải thích các thuật ngữ chuyên ngành: Bồi thường về đất, Bảng giá đất, Cấp giấy chứng nhận quyền sử dụng đất, Chuyển mục đích sử dụng đất, Đất nông nghiệp, Đất phi nông nghiệp, Thu hồi đất...`,
+            '— Điều 4: Người sử dụng đất': `Điều 4. Người sử dụng đất\nNgười sử dụng đất được Nhà nước giao đất, cho thuê đất, công nhận quyền sử dụng đất; đang sử dụng đất ổn định, đủ điều kiện cấp Giấy chứng nhận quyền sử dụng đất, quyền sở hữu tài sản gắn liền với đất.`,
+            'Chương II: Quyền và trách nhiệm của Nhà nước, quyền và nghĩa vụ của công dân đối với đất đai': `Chương II. QUYỀN VÀ TRÁCH NHIỆM CỦA NHÀ NƯỚC, QUYỀN VÀ NGHĨA VỤ CỦA CÔNG DÂN ĐỐI VỚI ĐẤT ĐAI\nQuy định quyền đại diện chủ sở hữu toàn dân của Nhà nước, chính sách bảo đảm của Nhà nước cho người sử dụng đất và quyền tiếp cận thông tin đất đai của công dân.`,
+            '— Điều 11: Quyền của Nhà nước đối với đất đai': `Điều 11. Quyền của Nhà nước đối với đất đai\n1. Quyết định quy hoạch, kế hoạch sử dụng đất.\n2. Quyết định mục đích sử dụng đất.\n3. Quy định hạn mức sử dụng đất, thời hạn sử dụng đất.\n4. Quyết định thu hồi đất, trưng dụng đất.\n5. Quyết định giá đất.\n6. Trao quyền sử dụng đất cho người sử dụng đất.`,
+            '— Điều 12: Trách nhiệm của Nhà nước đối với đất đai': `Điều 12. Trách nhiệm của Nhà nước đối với người sử dụng đất\n1. Có chính sách tạo điều kiện cho người trực tiếp sản xuất nông nghiệp có đất để sản xuất.\n2. Bảo hộ quyền sử dụng đất hợp pháp của người sử dụng đất.\n3. Có chính sách bồi thường, hỗ trợ, tái định cư thỏa đáng khi Nhà nước thu hồi đất.`
+        }
     },
     {
         id: '27/2023/QH15',
@@ -184,7 +206,15 @@ const MOCK_LEGAL_DOCS_DATA = [
             '— Điều 7: Đối tượng được sở hữu nhà ở tại Việt Nam',
             'Chương III: Chiến lược phát triển nhà ở quốc gia, chương trình, kế hoạch phát triển nhà ở cấp tỉnh',
             'Chương VI: Chính sách về nhà ở xã hội'
-        ]
+        ],
+        mucLucDetails: {
+            'Chương I: Quy định chung': `Chương I. QUY ĐỊNH CHUNG\nQuy định phạm vi điều chỉnh, đối tượng áp dụng, chính sách phát triển và quản lý nhà ở của Nhà nước.`,
+            '— Điều 1: Phạm vi điều chỉnh': `Điều 1. Phạm vi điều chỉnh\nLuật này quy định về sở hữu, phát triển, quản lý vận hành, sử dụng nhà ở, giao dịch về nhà ở và quản lý nhà nước về nhà ở tại Việt Nam.`,
+            '— Điều 2: Đối tượng áp dụng': `Điều 2. Đối tượng áp dụng\nLuật này áp dụng đối với cơ quan, tổ chức, cá nhân trong nước, người Việt Nam định cư ở nước ngoài, tổ chức, cá nhân nước ngoài có liên quan đến sở hữu, phát triển, quản lý vận hành, giao dịch và quản lý nhà nước về nhà ở.`,
+            'Chương II: Sở hữu nhà ở': `Chương II. SỞ HỮU NHÀ Ở\nQuy định điều kiện, đối tượng và thời hạn sở hữu nhà ở đối với tổ chức, cá nhân trong và ngoài nước.`,
+            '— Điều 7: Đối tượng được sở hữu nhà ở tại Việt Nam': `Điều 7. Đối tượng được sở hữu nhà ở tại Việt Nam\n1. Tổ chức, cá nhân trong nước.\n2. Người Việt Nam định cư ở nước ngoài theo quy định của pháp luật về quốc tịch.\n3. Tổ chức, cá nhân nước ngoài theo quy định tại khoản 1 Điều 17 của Luật này.`,
+            'Chương VI: Chính sách về nhà ở xã hội': `Chương VI. CHÍNH SÁCH VỀ NHÀ Ở XÃ HỘI\nQuy định điều kiện thụ hưởng chính sách nhà ở xã hội, hình thức hỗ trợ, nguyên tắc xác định giá bán, cho thuê mua nhà ở xã hội.`
+        }
     },
     {
         id: '102/2024/NĐ-CP',
@@ -209,7 +239,13 @@ const MOCK_LEGAL_DOCS_DATA = [
             '— Điều 1: Phạm vi điều chỉnh',
             'Chương II: Chức năng, nhiệm vụ, cơ cấu tổ chức của các cơ quan quản lý đất đai',
             'Chương III: Thu hồi đất, trưng dụng đất'
-        ]
+        ],
+        mucLucDetails: {
+            'Chương I: Quy định chung': `Chương I. QUY ĐỊNH CHUNG\nQuy định chi tiết thi hành các điều khoản được giao trong Luật Đất đai 2024 về trình tự, thủ tục hành chính đất đai.`,
+            '— Điều 1: Phạm vi điều chỉnh': `Điều 1. Phạm vi điều chỉnh\nNghị định này quy định chi tiết thi hành một số điều, khoản của Luật Đất đai số 31/2024/QH15.`,
+            'Chương II: Chức năng, nhiệm vụ, cơ cấu tổ chức của các cơ quan quản lý đất đai': `Chương II: Quy định hệ thống cơ quan quản lý đất đai từ trung ương đến địa phương và tổ chức dịch vụ công về đất đai.`,
+            'Chương III: Thu hồi đất, trưng dụng đất': `Chương III: Quy định trình tự, thủ tục thu hồi đất vì mục đích quốc phòng, an ninh; phát triển kinh tế - xã hội vì lợi ích quốc gia, công cộng.`
+        }
     },
     {
         id: '04/2025/TT-BTC',
@@ -234,7 +270,13 @@ const MOCK_LEGAL_DOCS_DATA = [
             '— Điều 1: Phạm vi và đối tượng áp dụng',
             'Chương II: Quy trình thu nộp ngân sách',
             '— Điều 2: Hạch toán các khoản thu ngân sách'
-        ]
+        ],
+        mucLucDetails: {
+            'Chương I: Quy định chung': `Chương I. QUY ĐỊNH CHUNG\nHướng dẫn nguyên tắc hạch toán và điều tiết các khoản thu vào ngân sách nhà nước.`,
+            '— Điều 1: Phạm vi và đối tượng áp dụng': `Điều 1. Phạm vi và đối tượng áp dụng\nThông tư này áp dụng đối với cơ quan thu, Kho bạc Nhà nước, ngân hàng thương mại phối hợp thu và các tổ chức, cá nhân có nghĩa vụ nộp ngân sách nhà nước.`,
+            'Chương II: Quy trình thu nộp ngân sách': `Chương II: Quy định chi tiết luồng dữ liệu điện tử và đối soát thông tin nộp ngân sách.`,
+            '— Điều 2: Hạch toán các khoản thu ngân sách': `Điều 2. Hạch toán các khoản thu ngân sách\nQuy định việc phân chia nguồn thu giữa ngân sách trung ương và ngân sách địa phương theo đúng mục lục ngân sách.`
+        }
     },
     {
         id: '41/2024/QH15',
@@ -260,7 +302,14 @@ const MOCK_LEGAL_DOCS_DATA = [
             '— Điều 2: Đối tượng áp dụng',
             'Chương II: Chế độ ốm đau, thai sản',
             'Chương III: Chế độ hưu trí, tử tuất'
-        ]
+        ],
+        mucLucDetails: {
+            'Chương I: Những quy định chung': `Chương I. NHỮNG QUY ĐỊNH CHUNG\nQuy định phạm vi điều chỉnh, đối tượng tham gia bảo hiểm xã hội bắt buộc và tự nguyện.`,
+            '— Điều 1: Phạm vi điều chỉnh': `Điều 1. Phạm vi điều chỉnh\nLuật này quy định quyền, trách nhiệm của cơ quan, tổ chức, cá nhân về bảo hiểm xã hội; trợ cấp hưu trí xã hội; các chế độ bảo hiểm xã hội; quỹ bảo hiểm xã hội.`,
+            '— Điều 2: Đối tượng áp dụng': `Điều 2. Đối tượng tham gia bảo hiểm xã hội\nQuy định các nhóm người lao động thuộc diện tham gia bảo hiểm xã hội bắt buộc và tự nguyện.`,
+            'Chương II: Chế độ ốm đau, thai sản': `Chương II. CHẾ ĐỘ ỐM ĐAU, THAI SẢN\nQuy định điều kiện, thời gian và mức hưởng trợ cấp ốm đau, thai sản cho người lao động.`,
+            'Chương III: Chế độ hưu trí, tử tuất': `Chương III. CHẾ ĐỘ HƯU TRÍ, TỬ TUẤT\nQuy định điều kiện hưởng lương hưu, mức lương hưu hàng tháng và chế độ trợ cấp mai táng, tuất hàng tháng.`
+        }
     },
     {
         id: '23/2008/QH12',
@@ -285,7 +334,13 @@ const MOCK_LEGAL_DOCS_DATA = [
             '— Điều 1: Phạm vi điều chỉnh',
             '— Điều 8: Các hành vi bị nghiêm cấm',
             'Chương II: Quy tắc giao thông đường bộ'
-        ]
+        ],
+        mucLucDetails: {
+            'Chương I: Quy định chung': `Chương I. QUY ĐỊNH CHUNG\nQuy định nguyên tắc hoạt động giao thông đường bộ, chính sách phát triển giao thông và tuyên truyền phổ biến pháp luật giao thông.`,
+            '— Điều 1: Phạm vi điều chỉnh': `Điều 1. Phạm vi điều chỉnh\nLuật này quy định về quy tắc giao thông đường bộ; kết cấu hạ tầng giao thông đường bộ; phương tiện và người tham gia giao thông đường bộ; vận tải đường bộ và quản lý nhà nước về giao thông đường bộ.`,
+            '— Điều 8: Các hành vi bị nghiêm cấm': `Điều 8. Các hành vi bị nghiêm cấm\n1. Phá hoại công trình đường bộ.\n2. Điều khiển phương tiện giao thông đường bộ mà trong cơ thể có chất ma túy.\n3. Điều khiển phương tiện giao thông đường bộ mà trong máu hoặc hơi thở có nồng độ cồn.`,
+            'Chương II: Quy tắc giao thông đường bộ': `Chương II. QUY TẮC GIAO THÔNG ĐƯỜNG BỘ\nQuy định hệ thống báo hiệu đường bộ, tốc độ và khoảng cách giữa các xe, chuyển hướng xe và nhường đường tại nơi đường giao nhau.`
+        }
     }
 ];
 
@@ -342,16 +397,49 @@ const CreatePhanAnhKienNghiPage = () => {
         doc.tieuDe.toLowerCase().includes(docSearchQuery.toLowerCase())
     );
 
+    const handleLevelChange = (newLevel) => {
+        if (newLevel === formData.level) return;
+        setFormData(prev => ({
+            ...prev,
+            level: newLevel,
+            agency: '',
+            province: '',
+            content: '',
+            legalDocs: '',
+            tableOfContent: '',
+            termsAgreed: false
+        }));
+        setDocSearchQuery('');
+        setSelectedDoc(null);
+        setShowDocDropdown(false);
+        setFiles([]);
+        setErrors({});
+    };
+
     const handleSelectDoc = (doc) => {
         setSelectedDoc(doc);
         setFormData(prev => ({
             ...prev,
             legalDocs: doc.tieuDe || doc.name,
-            tableOfContent: ''
+            tableOfContent: '',
+            content: ''
         }));
         setDocSearchQuery(doc.name || doc.soHieu);
         setShowDocDropdown(false);
         setErrors(prev => ({ ...prev, legalDocs: null }));
+    };
+
+    const handleTableOfContentChange = (selectedItem) => {
+        const contentToFill = selectedItem ? selectedItem.replace(/^[—–-]\s*/, '') : '';
+
+        setFormData(prev => ({
+            ...prev,
+            tableOfContent: selectedItem,
+            content: contentToFill
+        }));
+        if (errors.content) {
+            setErrors(prev => ({ ...prev, content: null }));
+        }
     };
 
     const handleFileChange = (e) => {
@@ -543,10 +631,7 @@ const CreatePhanAnhKienNghiPage = () => {
                                                 name="level"
                                                 value="Trung ương"
                                                 checked={formData.level === 'Trung ương'}
-                                                onChange={e => {
-                                                    setFormData({ ...formData, level: e.target.value, agency: '', province: '' });
-                                                    setErrors({ ...errors, agency: null, province: null });
-                                                }}
+                                                onChange={() => handleLevelChange('Trung ương')}
                                                 className="w-4 h-4 text-[#0f4c81]"
                                             />
                                             <span className="text-sm font-medium text-gray-700">Cấp trung ương</span>
@@ -557,10 +642,7 @@ const CreatePhanAnhKienNghiPage = () => {
                                                 name="level"
                                                 value="Địa phương"
                                                 checked={formData.level === 'Địa phương'}
-                                                onChange={e => {
-                                                    setFormData({ ...formData, level: e.target.value, agency: '', province: '' });
-                                                    setErrors({ ...errors, agency: null, province: null });
-                                                }}
+                                                onChange={() => handleLevelChange('Địa phương')}
                                                 className="w-4 h-4 text-[#0f4c81]"
                                             />
                                             <span className="text-sm font-medium text-gray-700">Cấp địa phương</span>
@@ -624,7 +706,7 @@ const CreatePhanAnhKienNghiPage = () => {
                                             );
                                             setSelectedDoc(matched || null);
                                             if (!matched) {
-                                                setFormData(prev => ({ ...prev, tableOfContent: '' }));
+                                                setFormData(prev => ({ ...prev, tableOfContent: '', content: '' }));
                                             }
                                         }}
                                         onFocus={() => setShowDocDropdown(true)}
@@ -738,7 +820,7 @@ const CreatePhanAnhKienNghiPage = () => {
                                 </label>
                                 <select
                                     value={formData.tableOfContent || ''}
-                                    onChange={e => setFormData({ ...formData, tableOfContent: e.target.value })}
+                                    onChange={e => handleTableOfContentChange(e.target.value)}
                                     disabled={!selectedDoc || !selectedDoc.mucLuc || selectedDoc.mucLuc.length === 0}
                                     className={`w-full border rounded-lg p-2.5 bg-white ${!selectedDoc
                                             ? 'bg-gray-50 text-gray-400 border-gray-200 cursor-not-allowed'
