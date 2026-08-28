@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ChevronDown, ChevronUp, Download, CheckCircle, FileText, Scale, MessageSquare, ListTodo, LogIn, FileEdit, Send, Activity, ArrowRight } from 'lucide-react';
+import { Download, CheckCircle, FileText, Scale, ListTodo, LogIn, FileEdit, Send, Activity, ArrowRight } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 const PhanAnhKienNghiGuidePage = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
-    const [openFaq, setOpenFaq] = useState(null);
 
     const handleSendFeedbackClick = () => {
         if (!user) {
@@ -15,29 +14,6 @@ const PhanAnhKienNghiGuidePage = () => {
             navigate('/phan-anh-kien-nghi/tao-moi');
         }
     };
-
-    const toggleFaq = (index) => {
-        setOpenFaq(openFaq === index ? null : index);
-    };
-
-    const faqs = [
-        {
-            q: "Hệ thống tiếp nhận những loại phản ánh, kiến nghị nào?",
-            a: "Hệ thống chuyên trách tiếp nhận, xử lý các phản ánh, kiến nghị về văn bản quy phạm pháp luật (quy định chưa rõ ràng, mâu thuẫn, chồng chéo, bất cập hoặc không còn phù hợp với thực tiễn). Không tiếp nhận đơn thư khiếu nại, tố cáo hành chính cá nhân."
-        },
-        {
-            q: "Ai có quyền gửi phản ánh, kiến nghị?",
-            a: "Tất cả công dân, doanh nghiệp, cơ quan, tổ chức đều có quyền gửi phản ánh, kiến nghị về các quy định trong văn bản quy phạm pháp luật qua Cổng."
-        },
-        {
-            q: "Thời gian xử lý phản ánh kiến nghị là bao lâu?",
-            a: "Thời hạn xử lý và trả lời PAKN chung là không quá 20 ngày kể từ ngày nhận được PAKN hợp lệ. Trường hợp phức tạp có thể kéo dài nhưng không quá 60 ngày."
-        },
-        {
-            q: "Tôi có thể theo dõi tiến trình xử lý ở đâu?",
-            a: "Sau khi gửi thành công, bạn sẽ nhận được một Mã theo dõi. Bạn có thể dùng mã này để truy cập vào mục Tra cứu phản ánh để xem tiến trình và kết quả xử lý."
-        }
-    ];
 
     const forms = [
         { name: "BM01 - Mẫu phiếu phản ánh, kiến nghị về VBQPPL (Dành cho cá nhân)", ext: "DOCX", size: "24 KB" },
@@ -184,35 +160,6 @@ const PhanAnhKienNghiGuidePage = () => {
                                 </li>
                             ))}
                         </ul>
-                    </div>
-                </div>
-
-                {/* FAQ */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 mb-12">
-                    <div className="flex items-center gap-3 mb-6">
-                        <div className="bg-blue-100 p-2 rounded-lg text-[#0f4c81]">
-                            <MessageSquare size={24} />
-                        </div>
-                        <h2 className="text-xl font-bold text-gray-800">Câu hỏi thường gặp (FAQ)</h2>
-                    </div>
-
-                    <div className="space-y-4">
-                        {faqs.map((faq, idx) => (
-                            <div key={idx} className="border border-gray-200 rounded-lg overflow-hidden">
-                                <button
-                                    className="w-full flex justify-between items-center p-4 text-left font-medium text-gray-800 hover:bg-gray-50 bg-white focus:outline-none"
-                                    onClick={() => toggleFaq(idx)}
-                                >
-                                    <span>{faq.q}</span>
-                                    {openFaq === idx ? <ChevronUp size={20} className="text-gray-500 shrink-0" /> : <ChevronDown size={20} className="text-gray-500 shrink-0" />}
-                                </button>
-                                {openFaq === idx && (
-                                    <div className="p-4 bg-gray-50 border-t border-gray-200 text-gray-600 text-sm leading-relaxed">
-                                        {faq.a}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
                     </div>
                 </div>
 
