@@ -597,19 +597,27 @@ const CreatePhanAnhKienNghiPage = () => {
                     <div className="flex items-center text-sm text-gray-500">
                         <Link to="/" className="hover:text-[#0f4c81]">Trang chủ</Link>
                         <span className="mx-2">/</span>
-                        <Link to="/phan-anh-kien-nghi" className="hover:text-[#0f4c81]">Phản ánh kiến nghị</Link>
+                        <Link to="/phan-anh-kien-nghi" className="hover:text-[#0f4c81]">Phản ánh, kiến nghị về văn bản quy phạm pháp luật</Link>
                         <span className="mx-2">/</span>
-                        <span className="text-gray-900 font-medium">Gửi phản ánh</span>
+                        <span className="text-gray-900 font-medium">Gửi phản ánh mới</span>
                     </div>
                 </div>
             </div>
 
             <div className="container mx-auto px-4 mt-8 max-w-4xl">
+                {/* Scope Notice */}
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6 flex items-start gap-3 text-amber-900 text-sm shadow-xs">
+                    <AlertCircle size={20} className="text-amber-700 shrink-0 mt-0.5" />
+                    <div>
+                        <span className="font-bold text-amber-800">Lưu ý về phạm vi tiếp nhận:</span> Chuyên mục chuyên trách tiếp nhận và xử lý phản ánh, kiến nghị về <strong>văn bản quy phạm pháp luật</strong> (quy định chưa rõ ràng, mâu thuẫn, chồng chéo hoặc bất cập, không phù hợp thực tiễn). Vui lòng chọn chính xác Văn bản pháp luật liên quan cần phản ánh.
+                    </div>
+                </div>
+
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                     {/* Header */}
                     <div className="bg-[#1a3b8b] text-white p-6 sm:p-8">
-                        <h1 className="text-2xl sm:text-3xl font-bold mb-2">Gửi phản ánh, kiến nghị</h1>
-                        <p className="text-blue-100">Gửi phản ánh, kiến nghị của bạn về chính sách, văn bản pháp luật tới cơ quan có thẩm quyền.</p>
+                        <h1 className="text-2xl sm:text-3xl font-bold mb-2">Gửi phản ánh, kiến nghị về văn bản quy phạm pháp luật</h1>
+                        <p className="text-blue-100">Gửi phản ánh, kiến nghị của bạn về các quy định, vướng mắc trong văn bản quy phạm pháp luật tới cơ quan có thẩm quyền.</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-8">
@@ -629,11 +637,11 @@ const CreatePhanAnhKienNghiPage = () => {
                         <div className="space-y-4">
                             <h3 className="text-lg font-bold text-gray-800 border-b pb-2 flex items-center gap-2">
                                 <span className="bg-blue-100 text-[#0f4c81] w-6 h-6 rounded-full flex items-center justify-center text-sm">2</span>
-                                Nội dung phản ánh kiến nghị
+                                Nội dung phản ánh, kiến nghị về văn bản quy phạm pháp luật
                             </h3>
 
                             {/* Target selection */}
-                            <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 space-y-4">
+                            {/* <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 space-y-4">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">Cấp xử lý <span className="text-red-500">*</span></label>
                                     <div className="flex gap-4">
@@ -693,7 +701,7 @@ const CreatePhanAnhKienNghiPage = () => {
                                         {errors.province && <p className="text-red-500 text-xs mt-1">{errors.province}</p>}
                                     </div>
                                 )}
-                            </div>
+                            </div> */}
 
                             {/* Legal Doc selection */}
                             <div className="relative z-10">
@@ -846,8 +854,8 @@ const CreatePhanAnhKienNghiPage = () => {
                                     onChange={e => handleTableOfContentChange(e.target.value)}
                                     disabled={!selectedDoc || !selectedDoc.mucLuc || selectedDoc.mucLuc.length === 0}
                                     className={`w-full border rounded-lg p-2.5 bg-white ${!selectedDoc
-                                            ? 'bg-gray-50 text-gray-400 border-gray-200 cursor-not-allowed'
-                                            : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500 text-gray-700'
+                                        ? 'bg-gray-50 text-gray-400 border-gray-200 cursor-not-allowed'
+                                        : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500 text-gray-700'
                                         }`}
                                 >
                                     <option value="">

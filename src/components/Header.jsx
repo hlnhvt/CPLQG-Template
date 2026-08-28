@@ -417,6 +417,34 @@ const Header = () => {
                 </div>
             </div>
 
+            {/* Secondary Sub-Navigation Bar */}
+            <div className="bg-gradient-to-r from-[#6c80a0] via-[#c2703b] to-[#618dd3] border-t border-white/20 border-b border-black/20 text-white shadow-md relative z-[90] transition-all duration-300">
+                <div className="w-full max-w-[1350px] mx-auto px-4">
+                    <div className="flex items-center justify-center gap-1 sm:gap-2.5 md:gap-3 py-1.5 text-[12.5px] sm:text-[13px] font-medium tracking-tight overflow-x-auto no-scrollbar">
+                        <Link
+                            to="/tro-giup-phap-ly"
+                            className="whitespace-nowrap text-blue-50 hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
+                        >
+                            Trợ giúp pháp lý
+                        </Link>
+                        <span className="h-3 w-[1px] bg-white/25 inline-block shrink-0"></span>
+                        <Link
+                            to="/ho-tro-phap-ly-doanh-nghiep"
+                            className="whitespace-nowrap text-blue-50 hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
+                        >
+                            Hỗ trợ pháp lý doanh nghiệp
+                        </Link>
+                        <span className="h-3 w-[1px] bg-white/25 inline-block shrink-0"></span>
+                        <Link
+                            to="/pho-bien-giao-duc"
+                            className="whitespace-nowrap text-blue-50 hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
+                        >
+                            Phổ biến giáo dục Pháp luật
+                        </Link>
+                    </div>
+                </div>
+            </div>
+
             {/* Mobile/Desktop Sidebar Navigation */}
             {/* Overlay */}
             {isSidebarOpen && (

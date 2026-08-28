@@ -1,46 +1,66 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import './HoTroPhapLyDoanhNghiepPage.css';
-import {
-    NAV_ITEMS,
-    bieuMauData,
-    taiLieuHTPLData,
-    thongBaoData,
-    newsData,
-    suKienData,
-    hoatDongPhoiHopData,
-    boNganhData,
-    diaPhuongData,
-    chuongTrinhData,
-    vanBanChinhSachMoiData,
-    vanBanPhapLuatData,
-    mediaData,
-    videoData,
-    advisorsData,
-    orgData,
-    consultationHistoryData,
-    vuViecDienHinhData,
-    resources,
-    contactData,
-    orgChartData,
-    lienNganhData,
-    functionDutyData,
-    policyDocs,
-    faqs,
-    keHoachDaoTaoData,
-    khoaHocData,
-    hoiDapData,
-    tuVanChuyenSauData,
-    nghienCuuData,
-    tongQuanData,
-    contentBySubPage,
-    getFileIcon,
-    getDocStatusBadge,
-    getDocStatusText
-} from './data/mockData';
 
-// ==========================================
-// 1. SHARED & SUB-COMPONENTS
-// ==========================================
+
+        // --- HELPER FUNCTIONS ---
+        const getFileIcon = (fileName) => {
+            if (!fileName) return null;
+            const lowerName = fileName.toLowerCase();
+            
+            if (lowerName.endsWith('.pdf')) return (
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="12" y="4" width="16" height="24" rx="1" fill="#FFFFFF" stroke="#E3242B" strokeWidth="1.5"/>
+                    <rect x="16" y="10" width="8" height="1.5" fill="#E3242B"/>
+                    <rect x="16" y="14" width="8" height="1.5" fill="#E3242B"/>
+                    <rect x="16" y="18" width="6" height="1.5" fill="#E3242B"/>
+                    <path d="M4 8C4 7.44772 4.44772 7 5 7H14V25H5C4.44772 25 4 24.5523 4 24V8Z" fill="#E3242B"/>
+                    <text x="5.5" y="18" fill="white" fontSize="9" fontWeight="bold" fontFamily="Arial">PDF</text>
+                </svg>
+            );
+            
+            if (lowerName.endsWith('.doc') || lowerName.endsWith('.docx')) return (
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="12" y="4" width="16" height="24" rx="1" fill="#FFFFFF" stroke="#185ABD" strokeWidth="1.5"/>
+                    <rect x="16" y="10" width="8" height="1.5" fill="#185ABD"/>
+                    <rect x="16" y="14" width="8" height="1.5" fill="#185ABD"/>
+                    <rect x="16" y="18" width="8" height="1.5" fill="#185ABD"/>
+                    <rect x="16" y="22" width="6" height="1.5" fill="#185ABD"/>
+                    <path d="M4 8C4 7.44772 4.44772 7 5 7H14V25H5C4.44772 25 4 24.5523 4 24V8Z" fill="#2B579A"/>
+                    <path d="M6 11L7 19H8.5L9.5 15L10.5 19H12L13 11H11.5L10.8 16L9.8 11H8.2L7.2 16L6.5 11H6Z" fill="white"/>
+                </svg>
+            );
+            
+            if (lowerName.endsWith('.xls') || lowerName.endsWith('.xlsx')) return (
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="12" y="4" width="16" height="24" rx="1" fill="#FFFFFF" stroke="#107C41" strokeWidth="1.5"/>
+                    <path d="M15 10H25M15 14H25M15 18H25M15 22H25M15 10V22M19 10V22M23 10V22" stroke="#107C41" strokeWidth="1"/>
+                    <path d="M4 8C4 7.44772 4.44772 7 5 7H14V25H5C4.44772 25 4 24.5523 4 24V8Z" fill="#107C41"/>
+                    <path d="M6.5 11L8.5 15L6.5 19H8.5L9.5 16.5L10.5 19H12.5L10.5 15L12.5 11H10.5L9.5 13.5L8.5 11H6.5Z" fill="white"/>
+                </svg>
+            );
+            
+            return <div className="flex h-8 w-8 items-center justify-center rounded bg-gray-500 text-[10px] font-bold text-white shadow-sm">FILE</div>;
+        };
+
+        const getDocStatusBadge = (status) => {
+            switch(status) {
+                case 1: return <span className="px-2.5 py-0.5 bg-[#E8F5E9] text-[#2E7D32] rounded-full text-[11px] font-bold border border-[#C8E6C9] flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#2E7D32]"></span> Còn hiệu lực</span>;
+                case 0: return <span className="px-2.5 py-0.5 bg-[#FFEBEE] text-[#C62828] rounded-full text-[11px] font-bold border border-[#FFCDD2] flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#C62828]"></span> Hết hiệu lực</span>;
+                case 2: return <span className="px-2.5 py-0.5 bg-[#FFF8E1] text-[#F57F17] rounded-full text-[11px] font-bold border border-[#FFECB3] flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-[#F57F17]"></span> Chưa hiệu lực</span>;
+                default: return null;
+            }
+        };
+
+        const getDocStatusText = (status) => {
+            switch(status) {
+                case 1: return "Còn hiệu lực";
+                case 0: return "Hết hiệu lực";
+                case 2: return "Chưa hiệu lực";
+                default: return "";
+            }
+        };
+
+        // --- SHARED COMPONENTS ---
         const AttachmentList = ({ files, navigateToPreview }) => {
             if (!files || files.length === 0) return null;
             return (
@@ -85,7 +105,7 @@ import {
 
         // --- COMPONENTS ---
 
-        function PortalHeader({ showAccountMenu, setShowAccountMenu, setShowHistory, setRoute }) {
+        function PortalHeader({ showAccountMenu, setShowAccountMenu, setShowHistory, setRoute, isLoggedIn, setIsLoggedIn, setShowLoginPopup, userType }) {
             return (
                 <div className="bg-[linear-gradient(90deg,#2b7de9_0%,#4f92f1_40%,#2d6fe1_100%)] text-white">
                     <div className="mx-auto flex max-w-[1520px] items-center justify-between px-4 py-3 lg:px-6">
@@ -101,34 +121,73 @@ import {
                             <a href="#" className="hover:text-white/80">Mới nhất</a>
                             <a href="#" className="hover:text-white/80">International</a>
                             <div className="relative">
-                                <button onClick={() => setShowAccountMenu(!showAccountMenu)} className="flex items-center gap-2 rounded-full bg-white/12 px-3 py-2 hover:bg-white/20 transition">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                    <span className="text-sm font-semibold">Tài khoản</span>
-                                </button>
-                                {showAccountMenu && (
-                                    <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-                                        <div className="px-4 py-3 border-b border-gray-100">
-                                            <p className="text-sm font-semibold text-gray-800">Nguyễn Văn A</p>
-                                            <p className="text-xs text-gray-500">nguyenvana@example.com</p>
+                                {isLoggedIn ? (
+                                    <>
+                                    <button onClick={() => setShowAccountMenu(!showAccountMenu)} className="flex items-center gap-2 rounded-full bg-white/12 px-3 py-2 hover:bg-white/20 transition">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                        <span className="text-sm font-semibold">Tài khoản</span>
+                                    </button>
+                                    {showAccountMenu && (
+                                        <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                                            {userType === 'doanh-nghiep' ? (
+                                                <div className="px-4 py-3 border-b border-gray-100 bg-blue-50/30">
+                                                    <p className="text-sm font-bold text-[#1e63dc] truncate">Công ty TNHH ABC</p>
+                                                    <p className="text-[11px] text-gray-500 font-semibold">(Doanh nghiệp)</p>
+                                                    <p className="text-[11px] text-gray-400 font-mono">MST: 0102345678</p>
+                                                </div>
+                                            ) : (
+                                                <div className="px-4 py-3 border-b border-gray-100">
+                                                    <p className="text-sm font-semibold text-gray-800">Nguyễn Văn A</p>
+                                                    <p className="text-xs text-gray-500">nguyenvana@example.com</p>
+                                                </div>
+                                            )}
+                                            <button onClick={() => { setShowAccountMenu(false); setRoute({ page: "list", menuKey: "tu-van-phap-luat", subKey: "lich-su-hoi-dap-tu-van" }); }} className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                Lịch sử hỏi đáp/tư vấn
+                                            </button>
+                                            <button onClick={() => { setShowAccountMenu(false); setRoute({ page: "list", menuKey: "tu-van-phap-luat", subKey: "tra-cuu-lich-su-hoi-dap-tu-van" }); }} className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                                Tra cứu lịch sử hỏi đáp/tư vấn
+                                            </button>
+                                            <button onClick={() => { setShowAccountMenu(false); setRoute({ page: "list", menuKey: "tu-van-phap-luat", subKey: "lich-su-ho-so-vu-viec" }); }} className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                                                Hồ sơ vụ việc của tôi
+                                            </button>
+                                            {userType === 'doanh-nghiep' && (
+                                                <button onClick={() => { setShowAccountMenu(false); setRoute({ page: "list", menuKey: "tu-van-phap-luat", subKey: "ho-so-phap-ly-dn" }); }} className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                                                    Hồ sơ pháp lý doanh nghiệp
+                                                </button>
+                                            )}
+                                            <button onClick={() => { setShowAccountMenu(false); setRoute({ page: "list", menuKey: "dao-tao", subKey: "khoa-hoc-da-dang-ky" }); }} className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                                                Khóa học đã đăng ký
+                                            </button>
+                                            <button onClick={() => { setShowAccountMenu(false); setRoute({ page: "list", menuKey: "dao-tao", subKey: "de-xuat-dao-tao" }); }} className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                                Đề xuất đào tạo
+                                            </button>
+                                            <button onClick={() => { setShowAccountMenu(false); setRoute({ page: "list", menuKey: "dao-tao", subKey: "ket-qua-dao-tao" }); }} className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                                Kết quả đào tạo
+                                            </button>
+                                            <button className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                                Thông tin tài khoản
+                                            </button>
+                                            <div className="border-t border-gray-100 mt-1"></div>
+                                            <button onClick={() => { setIsLoggedIn(false); setShowAccountMenu(false); setRoute({ page: "home", menuKey: null, subKey: null }); }} className="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                                                Đăng xuất
+                                            </button>
                                         </div>
-                                        <button onClick={() => { setShowAccountMenu(false); setRoute({ page: "list", menuKey: "tu-van-phap-luat", subKey: "lich-su-hoi-dap-tu-van" }); }} className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                                            Lịch sử hỏi đáp/tư vấn
-                                        </button>
-                                        <button onClick={() => { setShowAccountMenu(false); setRoute({ page: "list", menuKey: "tu-van-phap-luat", subKey: "tra-cuu-lich-su-hoi-dap-tu-van" }); }} className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                                            Tra cứu lịch sử hỏi đáp/tư vấn
-                                        </button>
-                                        <button className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                            Thông tin tài khoản
-                                        </button>
-                                        <div className="border-t border-gray-100 mt-1"></div>
-                                        <button className="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2">
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                                            Đăng xuất
-                                        </button>
-                                    </div>
+                                    )}
+                                    </>
+                                ) : (
+                                    <button onClick={() => setShowLoginPopup(true)} className="flex items-center gap-2 rounded-full bg-white/12 px-4 py-2 hover:bg-white/20 transition shadow-sm font-semibold">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                                        Đăng nhập
+                                    </button>
                                 )}
                             </div>
                         </div>
@@ -137,142 +196,243 @@ import {
             );
         }
 
-        function VerticalMenuNav({ navItems, activeMenu, setActiveMenu, navigateHome, navigateToList, activeSubMenu, isSidebarOpen, setIsSidebarOpen }) {
-            const [openMenus, setOpenMenus] = useState({});
+                function VerticalSidebarNav({ navItems, route, activeMenu, setActiveMenu, navigateHome, navigateToList }) {
+            // Track which menu accordion items are open
+            const [expandedKeys, setExpandedKeys] = useState(() => {
+                // By default, open the current active menu
+                return route.menuKey ? { [route.menuKey]: true } : { "tu-van-phap-luat": true };
+            });
+            const [isMobileCollapsed, setIsMobileCollapsed] = useState(false);
 
-            const toggleMenu = (key) => {
-                setOpenMenus(prev => ({ ...prev, [key]: !prev[key] }));
+            // Auto-expand active menu when route changes
+            useEffect(() => {
+                if (route.menuKey) {
+                    setExpandedKeys(prev => ({ ...prev, [route.menuKey]: true }));
+                }
+            }, [route.menuKey]);
+
+            const toggleExpand = (key, e) => {
+                if (e) e.stopPropagation();
+                setExpandedKeys(prev => ({
+                    ...prev,
+                    [key]: !prev[key]
+                }));
             };
 
-            const getNavIcon = (key, isActive) => {
-                const strokeClass = isActive ? "stroke-[#2580f0]" : "stroke-slate-500 group-hover:stroke-[#2580f0]";
-                const props = {
-                    width: 22, height: 22, viewBox: "0 0 24 24", fill: "none", 
-                    stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round", strokeLinejoin: "round",
-                    className: `shrink-0 transition-colors ${strokeClass}`
-                };
+            const getMenuIcon = (key, isActive) => {
+                const strokeColor = isActive ? "#1e63dc" : "currentColor";
                 switch(key) {
-                    case 'trang-chu': return <svg {...props}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>;
-                    case 'gioi-thieu': return <svg {...props}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>;
-                    case 'hoat-dong-trung-tam': return <svg {...props}><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>;
-                    case 'dao-tao': return <svg {...props}><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>;
-                    case 'tu-van-phap-luat': return <svg {...props}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>;
-                    case 'van-ban-chinh-sach-moi': return <svg {...props}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>;
-                    case 'nghien-cuu-trao-doi': return <svg {...props}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>;
-                    case 'chuong-trinh-ke-hoach': return <svg {...props}><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>;
-                    default: return <svg {...props}><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>;
+                    case 'trang-chu':
+                        return (
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke={strokeColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        );
+                    case 'gioi-thieu':
+                        return (
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke={strokeColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                        );
+                    case 'hoat-dong-trung-tam':
+                        return (
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke={strokeColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path><path d="M18 14h-8"></path><path d="M15 18h-5"></path><path d="M10 6h8v4h-8V6Z"></path></svg>
+                        );
+                    case 'dao-tao':
+                        return (
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke={strokeColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                        );
+                    case 'tu-van-phap-luat':
+                        return (
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke={strokeColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                        );
+                    case 'van-ban-phap-luat':
+                        return (
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke={strokeColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        );
+                    case 'nghien-cuu-trao-doi':
+                        return (
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke={strokeColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                        );
+                    case 'chuong-trinh-ke-hoach':
+                        return (
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke={strokeColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        );
+                    default:
+                        return (
+                            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke={strokeColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        );
                 }
             };
 
             return (
-                <div className={`bg-white rounded-xl shadow-sm border border-[#d8e1f2] h-fit lg:sticky lg:top-4 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'w-full lg:w-[280px]' : 'w-full lg:w-[88px]'}`}>
-                    <div className={`p-4 flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'} border-b border-[#e8effc]`}>
-                        {isSidebarOpen && <h3 className="text-[15px] font-bold text-[#1b2b49] uppercase tracking-wide truncate">Danh mục</h3>}
+                <div className="rounded-[16px] border border-[#d8e1f2] bg-white shadow-sm overflow-hidden select-none">
+                    {/* Header DANH MỤC */}
+                    <div className="bg-[linear-gradient(135deg,#1e63dc_0%,#2580f0_100%)] px-5 py-4 text-white flex items-center justify-between shadow-xs">
+                        <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center backdrop-blur-xs">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                            </div>
+                            <div>
+                                <h2 className="text-[15px] font-bold uppercase tracking-wide text-white leading-tight">
+                                    DANH MỤC
+                                </h2>
+                                <p className="text-[11px] text-white/80 font-medium">Hỗ trợ pháp lý doanh nghiệp</p>
+                            </div>
+                        </div>
+
+                        {/* Nút thu gọn trên màn hình nhỏ */}
                         <button 
-                            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                            className="p-2 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-[#2580f0] transition-colors"
-                            title={isSidebarOpen ? "Thu gọn menu" : "Mở rộng menu"}
+                            onClick={() => setIsMobileCollapsed(!isMobileCollapsed)}
+                            className="lg:hidden w-7 h-7 rounded-lg bg-white/15 hover:bg-white/25 flex items-center justify-center transition"
+                            title={isMobileCollapsed ? "Mở danh mục" : "Thu gọn"}
                         >
-                            {isSidebarOpen ? (
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-                            ) : (
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                            )}
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${isMobileCollapsed ? "rotate-180" : ""}`}>
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
                         </button>
                     </div>
-                    
-                    <div className="p-3">
-                        <ul className="flex flex-col gap-1.5 list-none m-0 p-0">
-                            {navItems.map((item) => {
-                                const isActive = activeMenu === item.key;
-                                const hasChildren = item.children && item.children.length > 0;
-                                const isOpen = openMenus[item.key] || isActive;
 
-                                return (
-                                    <li key={item.key} className="flex flex-col group relative">
-                                        <div 
-                                            className={`flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 ${
-                                                isActive 
-                                                    ? 'bg-blue-50/70 text-[#2580f0]' 
-                                                    : 'hover:bg-slate-50 text-slate-600 hover:text-[#2580f0]'
-                                            } ${!isSidebarOpen ? 'justify-center' : 'justify-between'}`}
-                                            onClick={() => {
-                                                if (!isSidebarOpen) setIsSidebarOpen(true);
-                                                
-                                                if (hasChildren) {
-                                                    toggleMenu(item.key);
-                                                } else {
-                                                    setActiveMenu(item.key);
-                                                    if (item.key === "trang-chu") navigateHome();
-                                                    else navigateToList(item.key, null);
+                    {/* Danh sách các mục menu dọc */}
+                    <div className={`py-2 flex flex-col divide-y divide-gray-50 ${isMobileCollapsed ? "hidden lg:flex" : "flex"}`}>
+                        {navItems.map((item) => {
+                            const isHomeItem = item.key === "trang-chu";
+                            const isItemActive = (route.page === "home" && isHomeItem) || (route.menuKey === item.key);
+                            const hasChildren = item.children && item.children.length > 0;
+                            const isExpanded = !!expandedKeys[item.key];
+
+                            return (
+                                <div key={item.key} className="flex flex-col">
+                                    {/* Main Menu Row */}
+                                    <div
+                                        onClick={() => {
+                                            if (isHomeItem) {
+                                                navigateHome();
+                                            } else if (hasChildren) {
+                                                // If already expanded and active, toggle; else expand and navigate to first child
+                                                if (!isExpanded) {
+                                                    toggleExpand(item.key);
                                                 }
-                                            }}
-                                            title={!isSidebarOpen ? item.label : undefined}
-                                        >
-                                            <div className="flex items-center gap-3">
-                                                {getNavIcon(item.key, isActive)}
-                                                {isSidebarOpen && (
-                                                    <span className={`font-semibold text-[14px] ${isActive ? 'text-[#2580f0]' : ''}`}>
-                                                        {item.label}
-                                                    </span>
-                                                )}
-                                            </div>
-                                            
-                                            {isSidebarOpen && hasChildren && (
-                                                <span className={`text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-                                                </span>
-                                            )}
+                                                navigateToList(item.key, item.children[0].key);
+                                            } else {
+                                                navigateToList(item.key, item.key);
+                                            }
+                                        }}
+                                        className={`flex items-center justify-between px-4 py-3 cursor-pointer transition-all relative group ${
+                                            isItemActive 
+                                                ? "bg-[#f0f6ff] text-[#1e63dc] font-bold before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[3.5px] before:bg-[#1e63dc]" 
+                                                : "text-[#334155] hover:bg-[#f8fbff] hover:text-[#1e63dc] font-medium"
+                                        }`}
+                                    >
+                                        <div className="flex items-center gap-3 min-w-0 pr-2">
+                                            <span className={`shrink-0 transition-colors ${isItemActive ? "text-[#1e63dc]" : "text-[#64748b] group-hover:text-[#1e63dc]"}`}>
+                                                {getMenuIcon(item.key, isItemActive)}
+                                            </span>
+                                            <span className="text-[13.5px] truncate leading-snug">
+                                                {item.label}
+                                            </span>
                                         </div>
-                                        
-                                        {/* Sub menu */}
-                                        {isSidebarOpen && hasChildren && isOpen && (
-                                            <ul className="flex flex-col gap-1 mt-1 mb-2 ml-[22px] border-l border-slate-200 pl-4 py-1">
+
+                                        {hasChildren && (
+                                            <button
+                                                type="button"
+                                                onClick={(e) => toggleExpand(item.key, e)}
+                                                className="w-6 h-6 rounded flex items-center justify-center text-[#94a3b8] hover:text-[#1e63dc] hover:bg-blue-100/50 transition shrink-0 ml-1"
+                                                title={isExpanded ? "Thu gọn" : "Mở rộng"}
+                                            >
+                                                <svg 
+                                                    width="14" 
+                                                    height="14" 
+                                                    viewBox="0 0 24 24" 
+                                                    fill="none" 
+                                                    stroke="currentColor" 
+                                                    strokeWidth="2.5" 
+                                                    strokeLinecap="round" 
+                                                    strokeLinejoin="round" 
+                                                    className={`transition-transform duration-200 ${isExpanded ? "rotate-90 text-[#1e63dc]" : ""}`}
+                                                >
+                                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                                </svg>
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {/* Inline Accordion Submenu */}
+                                    {hasChildren && isExpanded && (
+                                        <div className="bg-[#f9fafc] border-t border-b border-gray-100/80 py-1.5 pl-6 pr-2 space-y-0.5 animate-fadeIn">
+                                            <div className="border-l-2 border-blue-200/80 pl-2.5 space-y-0.5">
                                                 {item.children.map((child) => {
-                                                    const isSubActive = activeSubMenu === child.key;
+                                                    const isChildActive = route.menuKey === item.key && route.subKey === child.key;
                                                     return (
-                                                        <li key={child.key}>
-                                                            <button 
-                                                                onClick={() => navigateToList(item.key, child.key)} 
-                                                                className={`w-full text-left px-3 py-2 text-[13px] font-medium transition-all duration-200 rounded-md relative ${
-                                                                    isSubActive 
-                                                                        ? 'text-[#2580f0] bg-blue-50/50' 
-                                                                        : 'text-slate-500 hover:text-[#2580f0] hover:bg-slate-50'
-                                                                }`}
-                                                            >
-                                                                {isSubActive && (
-                                                                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-1/2 bg-[#2580f0] rounded-r-md"></div>
-                                                                )}
-                                                                <span className={isSubActive ? "ml-1" : ""}>{child.label}</span>
-                                                            </button>
-                                                        </li>
+                                                        <button
+                                                            key={child.key}
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                navigateToList(item.key, child.key);
+                                                            }}
+                                                            className={`w-full text-left flex items-center gap-2 px-2.5 py-1.5 rounded-md text-[13px] transition ${
+                                                                isChildActive 
+                                                                    ? "bg-[#1e63dc] text-white font-semibold shadow-xs" 
+                                                                    : "text-[#475569] hover:bg-white hover:text-[#1e63dc] font-medium"
+                                                            }`}
+                                                        >
+                                                            <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${isChildActive ? "bg-white" : "bg-[#94a3b8]"}`}></span>
+                                                            <span className="line-clamp-1 leading-snug">{child.label}</span>
+                                                        </button>
                                                     );
                                                 })}
-                                            </ul>
-                                        )}
-                                    </li>
-                                );
-                            })}
-                        </ul>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             );
         }
 
         function HeroBanner() {
+            const [query, setQuery] = useState('');
+
             return (
-                <section className="relative overflow-hidden bg-[linear-gradient(135deg,#0f3f9f_0%,#1e63dc_55%,#2580f0_100%)] text-white">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.10),transparent_55%)]"></div>
-                    <div className="relative mx-auto max-w-[1520px] px-4 py-16 lg:px-6 lg:py-20">
-                        <div className="lg:pl-10 xl:pl-16">
-                            <div className="max-w-[760px]">
-                                <p className="text-[18px] font-semibold leading-snug text-white/90 lg:text-[22px]">Đồng hành cùng doanh nghiệp nhỏ và vừa</p>
-                                <h2 className="mt-3 text-[36px] font-bold uppercase italic leading-[1.1] tracking-[0.01em] text-white lg:text-[48px] whitespace-nowrap">HỖ TRỢ PHÁP LÝ HIỆU QUẢ</h2>
-                                <p className="mt-4 max-w-[720px] text-[17px] leading-8 text-white/85">Cung cấp thông tin, tài liệu, văn bản, hỏi đáp và chương trình hỗ trợ pháp lý dành cho doanh nghiệp nhỏ và vừa theo định hướng đồng bộ với Cổng Pháp luật Quốc gia.</p>
+                <section className="relative overflow-hidden rounded-[16px] bg-[linear-gradient(135deg,#135ecc_0%,#1d6fe5_50%,#2884f8_100%)] text-white shadow-sm p-6 sm:p-7 md:p-8">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.18),transparent_50%)] pointer-events-none"></div>
+                    <div className="relative z-10 space-y-4">
+                        <div>
+                            <div className="text-[13px] font-medium text-white/90 mb-1">
+                                Đồng hành cùng doanh nghiệp nhỏ và vừa
                             </div>
-                            <div className="mt-8 flex max-w-[760px] items-center overflow-hidden rounded-full border-[4px] border-white/25 bg-white shadow-[0_10px_30px_rgba(0,0,0,0.18)]">
-                                <input type="text" placeholder="Tra cứu nhanh văn bản, tài liệu, bài viết, thủ tục pháp lý" className="h-[60px] w-full border-0 bg-transparent px-6 text-[17px] text-[#2b3760] outline-none placeholder:text-[#8d98b3]" />
-                                <button className="mr-2 flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-full bg-[#224aa8] text-[17px] font-bold text-white transition hover:bg-[#1a3b8b]">⌕</button>
+                            <h2 className="text-[24px] sm:text-[28px] md:text-[32px] font-black uppercase tracking-tight text-white drop-shadow-xs">
+                                HỖ TRỢ PHÁP LÝ HIỆU QUẢ
+                            </h2>
+                            <p className="mt-1.5 text-[13.5px] sm:text-[14px] text-white/90 max-w-[800px] leading-relaxed">
+                                Cung cấp thông tin, tài liệu, văn bản, hỏi đáp và chương trình hỗ trợ pháp lý dành cho doanh nghiệp nhỏ và vừa theo định hướng đồng bộ với Cổng Pháp luật Quốc gia.
+                            </p>
+                        </div>
+
+                        {/* Search bar */}
+                        <div className="pt-1 max-w-[620px]">
+                            <div className="flex items-center rounded-full bg-white px-2 py-1.5 shadow-[0_4px_16px_rgba(0,0,0,0.12)] border border-white/40 focus-within:shadow-[0_6px_22px_rgba(0,0,0,0.18)] transition">
+                                <input 
+                                    type="text" 
+                                    value={query}
+                                    onChange={(e) => setQuery(e.target.value)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter' && query.trim()) {
+                                            alert(`Đang tìm kiếm: ${query.trim()}`);
+                                        }
+                                    }}
+                                    placeholder="Tra cứu bài viết, Longform, Infographics, Photos..." 
+                                    className="h-[36px] w-full border-0 bg-transparent pl-4 pr-2 text-[13.5px] text-[#1b2b49] outline-none placeholder:text-[#8d98b3]" 
+                                />
+                                <button 
+                                    onClick={() => {
+                                        if (query.trim()) {
+                                            alert(`Đang tìm kiếm: ${query.trim()}`);
+                                        }
+                                    }}
+                                    className="flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-full bg-[#0e3b8a] hover:bg-[#092b66] text-white transition shadow-sm"
+                                    title="Tìm kiếm"
+                                >
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -280,83 +440,366 @@ import {
             );
         }
 
-        function NewsSection({ newsList, notices, taiLieuHTPL, navigateToList, navigateToDetail }) {
+        function NewsSection({ newsList, notices, navigateToList, navigateToDetail }) {
+            const mainFeatured = newsList[0] || {};
+            const sideList = newsList.slice(1, 4);
+
+            const getFieldBadgeStyle = (field) => {
+                switch(field) {
+                    case 'Pháp luật': return 'bg-blue-50 text-blue-700 border-blue-200';
+                    case 'Chính sách': return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                    case 'Đào tạo': return 'bg-purple-50 text-purple-700 border-purple-200';
+                    case 'Thuế': return 'bg-amber-50 text-amber-700 border-amber-200';
+                    case 'An ninh': return 'bg-rose-50 text-rose-700 border-rose-200';
+                    case 'Hành chính': return 'bg-cyan-50 text-cyan-700 border-cyan-200';
+                    case 'Lao động': return 'bg-teal-50 text-teal-700 border-teal-200';
+                    case 'Sở hữu trí tuệ': return 'bg-indigo-50 text-indigo-700 border-indigo-200';
+                    default: return 'bg-gray-50 text-gray-700 border-gray-200';
+                }
+            };
+
             return (
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 items-start">
-                    <div className="lg:col-span-2 rounded-[8px] border border-[#d8e1f2] bg-white p-5 shadow-sm h-full flex flex-col">
-                        <div className="mb-4 flex items-center justify-between border-b pb-3">
-                            <h2 className="text-[20px] font-bold text-[#1b2b49]">Tin tức nổi bật</h2>
-                            <button onClick={() => navigateToList("hoat-dong-trung-tam", "tin-tuc-noi-bat")} className="text-[14px] text-[#2580f0] hover:underline">Xem thêm</button>
-                        </div>
-                        <div className="space-y-5 flex-1">
-                            {newsList.slice(0, 3).map(news => (
-                                <div key={news.id} className="group cursor-pointer border-b border-gray-100 pb-5 last:border-0 flex gap-4" onClick={() => navigateToDetail(news)}>
-                                    <div className="w-32 h-24 sm:w-40 sm:h-28 shrink-0 bg-gray-200 rounded overflow-hidden relative shadow-sm">
-                                        <img src={news.thumb} alt="thumb" className="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
-                                    </div>
-                                    <div className="flex-1">
-                                        <h3 className="text-[16px] font-semibold text-[#1b2b49] transition group-hover:text-[#2580f0] line-clamp-2 leading-[1.4] mb-1">{news.title}</h3>
-                                        <div className="flex items-center gap-3 mb-2 flex-wrap">
-                                            {news.field && <span className="bg-[#e2e8f0] text-[#475569] px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide">{news.field}</span>}
-                                            <p className="text-[12px] font-medium text-[#8e98b0]">{news.date}</p>
-                                        </div>
-                                        <p className="text-[14px] text-[#4c566a] line-clamp-2 leading-[1.5] hidden sm:block">{news.summary}</p>
-                                    </div>
+                <div className="space-y-6">
+                    {/* Hàng ngang chứa 2 khối độc lập song song: Tin tức nổi bật (9 cols) và Thông báo mới (3 cols) */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                        {/* Khối 1: Tin tức nổi bật (9 cols) */}
+                        <div className="lg:col-span-9 rounded-[12px] border border-[#d8e1f2] bg-white p-5 md:p-6 shadow-sm flex flex-col justify-between">
+                            {/* Header của Tin tức nổi bật */}
+                            <div className="mb-5 flex items-center justify-between border-b border-gray-100 pb-3.5">
+                                <div className="flex items-center gap-3">
+                                    <span className="h-6 w-1.5 rounded-full bg-[linear-gradient(180deg,#1e63dc,#2580f0)]"></span>
+                                    <h2 className="text-[20px] md:text-[22px] font-bold text-[#1b2b49] uppercase tracking-wide">
+                                        Tin tức nổi bật
+                                    </h2>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
-                    
-                    <div className="flex flex-col gap-6 h-full">
-                        {/* Thông báo Box */}
-                        <div className="rounded-[8px] border border-[#d8e1f2] bg-white p-5 shadow-sm flex flex-col h-[320px]">
-                            <div className="mb-4 flex items-center justify-between border-b pb-3 shrink-0">
-                                <h2 className="text-[18px] font-bold text-[#1b2b49]">Thông báo mới</h2>
-                                <button onClick={() => navigateToList("hoat-dong-trung-tam", "thong-bao")} className="text-[13px] text-[#2580f0] hover:underline">Xem thêm</button>
+                                <button 
+                                    onClick={() => navigateToList("hoat-dong-trung-tam", "tin-tuc-noi-bat")} 
+                                    className="group flex items-center gap-1.5 text-[13.5px] font-semibold text-[#2580f0] hover:text-[#1e63dc] transition"
+                                >
+                                    <span>Xem tất cả</span>
+                                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                </button>
                             </div>
-                            <div className="flex-1 overflow-hidden relative">
-                                {/* Marquee container */}
-                                <div className="marquee-vertical-content absolute top-0 left-0 right-0 space-y-3">
-                                    {/* Duplicate items to create seamless loop */}
-                                    {[...notices, ...notices].map((notice, idx) => (
-                                        <div key={idx} onClick={() => window.navigateToDetailContext && window.navigateToDetailContext(notice)} className="flex items-start gap-2.5 text-[15px] text-[#2c364c] p-2 hover:bg-[#f8f9fc] rounded transition cursor-pointer group border border-transparent hover:border-gray-200">
-                                            <span className="text-[#E3242B] mt-[3px] shrink-0 group-hover:scale-110 transition-transform">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+
+                            {/* 2 cột bên trong Tin tức nổi bật: Thẻ tin (5 cols) | Tin tiêu điểm full-size (7 cols) */}
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch flex-1">
+                                {/* Cột con 1 (5 cols): Danh sách tin nổi bật dạng thẻ */}
+                                <div className="md:col-span-5 flex flex-col justify-between gap-3">
+                                    {sideList.map((news) => (
+                                        <div 
+                                            key={news.id} 
+                                            onClick={() => navigateToDetail(news)}
+                                            className="group cursor-pointer flex gap-3 p-3 rounded-xl border border-[#e5edfa] bg-white hover:border-[#2580f0] hover:bg-[#f8fbff] hover:shadow-sm transition-all duration-200 items-start flex-1"
+                                        >
+                                            {/* 1. Ảnh */}
+                                            <div className="w-[105px] sm:w-[115px] h-[82px] sm:h-[88px] shrink-0 rounded-lg overflow-hidden bg-gray-100 relative shadow-sm">
+                                                <img 
+                                                    src={news.thumb} 
+                                                    alt={news.title} 
+                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                                />
+                                            </div>
+
+                                            {/* 2. Tag, 3. Tiêu đề, 4. Mô tả (2 dòng), 5. Ngày đăng */}
+                                            <div className="flex-1 min-w-0 flex flex-col justify-between h-full">
+                                                <div className="flex items-center justify-between gap-1 mb-1">
+                                                    <span className={`inline-block text-[9.5px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border ${getFieldBadgeStyle(news.field)}`}>
+                                                        {news.field || 'Tin tức'}
+                                                    </span>
+                                                    <span className="text-[10.5px] text-[#8e98b0] flex items-center gap-1 font-medium shrink-0">
+                                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                                        {news.date}
+                                                    </span>
+                                                </div>
+                                                <h3 className="text-[13px] font-bold text-[#1b2b49] group-hover:text-[#2580f0] line-clamp-2 leading-snug transition-colors mb-1">
+                                                    {news.title}
+                                                </h3>
+                                                <p className="text-[11.5px] text-[#55637d] line-clamp-2 leading-relaxed">
+                                                    {news.summary}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                {/* Cột con 2 (7 cols): 1 tin nổi bật hiển thị full size to nhất */}
+                                {mainFeatured.id && (
+                                    <div 
+                                        onClick={() => navigateToDetail(mainFeatured)}
+                                        className="md:col-span-7 group cursor-pointer flex flex-col justify-between rounded-xl p-4 bg-[#f8fbff] border border-[#e2eaf8] hover:border-[#2580f0] hover:shadow-md transition-all duration-300"
+                                    >
+                                        <div className="w-full h-[230px] sm:h-[260px] rounded-lg overflow-hidden relative shadow-sm bg-gray-200">
+                                            <img 
+                                                src={mainFeatured.thumb} 
+                                                alt={mainFeatured.title} 
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+                                            />
+                                            <div className="absolute top-3 left-3 bg-[#1e63dc] text-white text-[11px] font-bold px-2.5 py-1 rounded shadow-md uppercase tracking-wider flex items-center gap-1">
+                                                <span>★</span> {mainFeatured.field || 'Tiêu điểm'}
+                                            </div>
+                                        </div>
+                                        <div className="mt-3.5 flex-1 flex flex-col justify-between">
+                                            <div>
+                                                <h3 className="text-[17px] sm:text-[18px] font-bold text-[#1b2b49] group-hover:text-[#2580f0] leading-snug line-clamp-2 transition mb-2">
+                                                    {mainFeatured.title}
+                                                </h3>
+                                                <p className="text-[13px] text-[#4c566a] line-clamp-3 leading-relaxed mb-3">
+                                                    {mainFeatured.summary}
+                                                </p>
+                                            </div>
+                                            <div className="flex items-center justify-between pt-2.5 border-t border-[#e5edfa] text-[12px] text-[#8e98b0]">
+                                                <div className="flex items-center gap-3">
+                                                    <span className="flex items-center gap-1 font-medium">
+                                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                                        {mainFeatured.date}
+                                                    </span>
+                                                    <span className="flex items-center gap-1 font-medium">
+                                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        08:30
+                                                    </span>
+                                                </div>
+                                                <span className="text-[#2580f0] font-semibold flex items-center gap-1 group-hover:translate-x-0.5 transition-transform text-[12.5px]">
+                                                    Chi tiết ➔
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Khối 2: Thông báo mới tách riêng thành card độc lập (3 cols) */}
+                        <div className="lg:col-span-3 rounded-[12px] border border-[#d8e1f2] bg-white p-5 md:p-6 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <div className="mb-4 flex items-center gap-2.5 border-b border-gray-100 pb-3.5">
+                                    <span className="flex h-2.5 w-2.5 relative">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d62828] opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#d62828]"></span>
+                                    </span>
+                                    <h3 className="text-[17px] md:text-[18px] font-bold text-[#1b2b49] uppercase tracking-wide">
+                                        Thông báo mới
+                                    </h3>
+                                </div>
+                                <div className="space-y-3">
+                                    {notices.slice(0, 4).map((notice, idx) => (
+                                        <div 
+                                            key={idx} 
+                                            onClick={() => window.navigateToDetailContext && window.navigateToDetailContext(notice)} 
+                                            className="flex items-start gap-2.5 text-[13px] text-[#2c364c] p-2 hover:bg-[#f8fbff] rounded-lg transition cursor-pointer group border border-transparent hover:border-blue-100 hover:shadow-xs"
+                                        >
+                                            <span className="text-[#E3242B] mt-0.5 shrink-0 group-hover:scale-110 transition-transform">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
                                             </span>
-                                            <div className="flex-1">
-                                                <span className="line-clamp-2 leading-snug group-hover:text-[#2580f0] transition-colors">{notice.title}</span>
+                                            <div className="flex-1 min-w-0">
+                                                <span className="line-clamp-2 leading-snug group-hover:text-[#2580f0] font-medium transition-colors text-[12.5px]">{notice.title}</span>
+                                                <span className="text-[11px] text-[#8e98b0] mt-1 block flex items-center gap-1">
+                                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                                    {notice.date}
+                                                </span>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
-                        </div>
-
-                        <div className="rounded-[8px] border border-[#d8e1f2] bg-white p-5 shadow-sm flex-1">
-                            <div className="mb-4 flex items-center justify-between border-b pb-3">
-                                <h2 className="text-[18px] font-bold text-[#1b2b49]">Tài liệu HTPL doanh nghiệp</h2>
-                                <button onClick={() => navigateToList("tu-van-phap-luat", "tai-lieu-htpl")} className="text-[13px] text-[#2580f0] hover:underline">Xem thêm</button>
+                            <div className="mt-4 pt-3 border-t border-gray-100 text-center">
+                                <button 
+                                    onClick={() => navigateToList("hoat-dong-trung-tam", "thong-bao")} 
+                                    className="group inline-flex items-center justify-center gap-1.5 text-[12.5px] font-semibold text-[#2580f0] hover:text-[#1e63dc] transition w-full py-1.5 rounded-lg hover:bg-blue-50"
+                                >
+                                    <span>Xem tất cả</span>
+                                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                </button>
                             </div>
-                            <ul className="space-y-4">
-                                {taiLieuHTPL.slice(0, 3).map(item => (
-                                    <li key={item.id} className="group flex items-start gap-3 p-2 hover:bg-[#f8f9fc] rounded transition border border-transparent hover:border-gray-200 shadow-sm bg-white">
-                                        <div className="w-14 h-16 shrink-0 bg-gray-100 rounded border border-gray-200 overflow-hidden relative cursor-pointer" onClick={() => window.navigateToPreviewContext && window.navigateToPreviewContext(item.attachments[0])}>
-                                            <img src={item.thumb || "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=150&q=80"} alt="thumb" className="w-full h-full object-cover opacity-90 mix-blend-multiply" />
-                                            <div className="absolute top-0.5 left-0.5 scale-75 origin-top-left shadow-sm">
-                                                {getFileIcon(item.attachments[0]?.name)}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function HomeDocumentsSection({ vanBanChinhSachMoi, taiLieuHTPL, navigateToList, navigateToDetail }) {
+            return (
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                    {/* Khối 1: Văn bản chính sách mới */}
+                    <div className="rounded-[12px] border border-[#d8e1f2] bg-white p-5 md:p-6 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div className="mb-4 flex items-center justify-between border-b border-gray-100 pb-3.5">
+                                <div className="flex items-center gap-3">
+                                    <span className="h-6 w-1.5 rounded-full bg-[linear-gradient(180deg,#1e63dc,#2580f0)]"></span>
+                                    <h2 className="text-[20px] font-bold text-[#1b2b49] uppercase tracking-wide flex items-center gap-2">
+                                        <span className="text-[#1e63dc]">📜</span> Văn bản chính sách mới
+                                    </h2>
+                                </div>
+                                <button 
+                                    onClick={() => navigateToList("van-ban-phap-luat", "van-ban-phap-luat")} 
+                                    className="group flex items-center gap-1 text-[13.5px] font-semibold text-[#2580f0] hover:text-[#1e63dc] transition"
+                                >
+                                    <span>Xem thêm</span>
+                                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                </button>
+                            </div>
+                            <div className="space-y-4">
+                                {(vanBanChinhSachMoi || []).slice(0, 3).map(item => (
+                                    <div 
+                                        key={item.id} 
+                                        onClick={() => (navigateToDetail ? navigateToDetail(item) : (window.navigateToDetailContext && window.navigateToDetailContext(item)))}
+                                        className="group cursor-pointer flex items-start gap-3.5 p-2 rounded-xl hover:bg-[#f8fbff] border border-transparent hover:border-[#e2eaf8] transition-all duration-200"
+                                    >
+                                        {/* Ảnh thumbnail bên trái */}
+                                        <div className="w-[110px] sm:w-[125px] h-[74px] sm:h-[80px] shrink-0 rounded-lg overflow-hidden bg-gray-100 relative shadow-sm border border-gray-200">
+                                            <img 
+                                                src={item.thumb} 
+                                                alt={item.title} 
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                            />
+                                        </div>
+
+                                        {/* Nội dung bên phải */}
+                                        <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
+                                            <h3 className="text-[14px] sm:text-[15px] font-bold text-[#1b2b49] group-hover:text-[#2580f0] line-clamp-2 leading-snug transition-colors mb-1.5">
+                                                {item.title}
+                                            </h3>
+                                            <div className="flex items-center gap-2.5 mb-1 text-[12px] text-[#6b7280]">
+                                                <span className="inline-block bg-[#e8f1fd] text-[#1e63dc] text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-[4px]">
+                                                    {item.type || item.loaiVanBan || "NGHỊ ĐỊNH"}
+                                                </span>
+                                                <span className="font-medium">{item.date}</span>
+                                            </div>
+                                            <div className="text-[12.5px] text-[#4b5563] line-clamp-1">
+                                                <span>Cơ quan ban hành: {item.agency || item.coQuanBanHanh || "Chính phủ"}</span>
                                             </div>
                                         </div>
-                                        <div className="flex-1 cursor-pointer overflow-hidden" onClick={() => window.navigateToDetailContext && window.navigateToDetailContext(item)}>
-                                            <h3 className="text-[14px] font-bold text-[#1b2b49] group-hover:text-[#2580f0] line-clamp-2">{item.title}</h3>
-                                            <span className="text-[#8e98b0] text-[11px] font-medium block mt-1">{item.date}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Khối 2: Tài liệu HTPL doanh nghiệp (Chuyển vào vị trí của Hỏi đáp pháp lý) */}
+                    <div className="rounded-[12px] border border-[#d8e1f2] bg-white p-5 md:p-6 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div className="mb-4 flex items-center justify-between border-b border-gray-100 pb-3.5">
+                                <div className="flex items-center gap-3">
+                                    <span className="h-6 w-1.5 rounded-full bg-[linear-gradient(180deg,#1e63dc,#2580f0)]"></span>
+                                    <h2 className="text-[20px] font-bold text-[#1b2b49] uppercase tracking-wide flex items-center gap-2">
+                                        <span className="text-[#1e63dc]">📁</span> Tài liệu HTPL doanh nghiệp
+                                    </h2>
+                                </div>
+                                <button 
+                                    onClick={() => navigateToList("tu-van-phap-luat", "tai-lieu-htpl")} 
+                                    className="group flex items-center gap-1 text-[13.5px] font-semibold text-[#2580f0] hover:text-[#1e63dc] transition"
+                                >
+                                    <span>Xem thêm</span>
+                                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                </button>
+                            </div>
+                            <div className="space-y-3.5">
+                                {(taiLieuHTPL || []).slice(0, 3).map(item => (
+                                    <div key={item.id} className="group flex items-center justify-between gap-3.5 p-3.5 bg-[#f8fbff] rounded-xl border border-[#e2eaf8] hover:border-blue-300 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
+                                        <div className="flex items-center gap-3.5 flex-1 min-w-0 cursor-pointer" onClick={() => (navigateToDetail ? navigateToDetail(item) : (window.navigateToDetailContext && window.navigateToDetailContext(item)))}>
+                                            <div className="w-10 h-12 shrink-0 bg-blue-50 text-blue-700 rounded-lg border border-blue-200 flex items-center justify-center text-xs font-bold shadow-xs">
+                                                PDF
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <h3 className="text-[14px] font-bold text-[#1b2b49] group-hover:text-[#2580f0] line-clamp-1 transition-colors">{item.title}</h3>
+                                                <span className="text-[#8e98b0] text-[12px] block mt-1">{item.date} • {item.attachments?.[0]?.size || "PDF"}</span>
+                                            </div>
                                         </div>
                                         <button 
-                                            onClick={(e) => { e.stopPropagation(); alert(`Đang tải file ${item.attachments[0]?.name} xuống...`); }} 
-                                            className="shrink-0 flex items-center justify-center w-7 h-7 mt-4 rounded-full hover:bg-[#e2e8f0] text-[#66738f] hover:text-[#2580f0] transition tooltip relative"
+                                            onClick={(e) => { e.stopPropagation(); alert(`Đang tải file ${item.attachments?.[0]?.name || item.title} xuống...`); }} 
+                                            className="shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-white hover:bg-blue-100 text-[#66738f] hover:text-[#2580f0] transition border border-gray-200 shadow-xs"
                                             title="Tải xuống"
                                         >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                                         </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        function HomeFormsAndFAQSection({ forms, faqs, navigateToList, navigateToDetail }) {
+            return (
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                    {/* Khối 1: Thủ tục pháp lý - Biểu mẫu, hợp đồng */}
+                    <div className="rounded-[12px] border border-[#d8e1f2] bg-white p-5 md:p-6 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div className="mb-4 flex items-center justify-between border-b border-gray-100 pb-3.5">
+                                <div className="flex items-center gap-3">
+                                    <span className="h-6 w-1.5 rounded-full bg-[linear-gradient(180deg,#1e63dc,#2580f0)]"></span>
+                                    <h2 className="text-[20px] font-bold text-[#1b2b49] uppercase tracking-wide flex items-center gap-2">
+                                        <span className="text-[#1e63dc]">📝</span> Thủ tục pháp lý - Biểu mẫu, hợp đồng
+                                    </h2>
+                                </div>
+                                <button 
+                                    onClick={() => navigateToList("tu-van-phap-luat", "bieu-mau-hop-dong")} 
+                                    className="group flex items-center gap-1 text-[13.5px] font-semibold text-[#2580f0] hover:text-[#1e63dc] transition"
+                                >
+                                    <span>Xem thêm</span>
+                                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                </button>
+                            </div>
+                            <ul className="space-y-3.5">
+                                {(forms || []).slice(0, 3).map(form => (
+                                    <li key={form.id} className="group flex items-start gap-3.5 p-3 hover:bg-[#f8f9fc] rounded-xl transition border border-[#e2eaf8] hover:border-blue-300 shadow-xs bg-white">
+                                        <div className="w-14 h-16 shrink-0 bg-gray-100 rounded-lg border border-gray-200 overflow-hidden relative shadow-xs cursor-pointer" onClick={() => window.navigateToPreviewContext && window.navigateToPreviewContext(form.attachments[0])}>
+                                            <img src={form.thumb || "https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=150&q=80"} alt="thumb" className="w-full h-full object-cover opacity-80 mix-blend-multiply" />
+                                            <div className="absolute top-1 left-1 shadow-md scale-90 origin-top-left">
+                                                {getFileIcon(form.attachments[0]?.name)}
+                                            </div>
+                                        </div>
+                                        <div className="flex-1 cursor-pointer overflow-hidden py-0.5" onClick={() => (navigateToDetail ? navigateToDetail(form) : (window.navigateToDetailContext && window.navigateToDetailContext(form)))}>
+                                            <h3 className="text-[14px] font-bold text-[#1b2b49] group-hover:text-[#2580f0] line-clamp-1 transition-colors">{form.title}</h3>
+                                            <div className="mt-1 flex flex-wrap gap-x-2.5 gap-y-1 items-center">
+                                                <span className="bg-[#e2e8f0] text-[#475569] px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide">{form.field}</span>
+                                                <span className="text-[#8e98b0] text-[11.5px] font-medium">{form.date}</span>
+                                                {form.agency && <span className="text-[#64748b] text-[11.5px] truncate max-w-[140px]" title={form.agency}>• {form.agency}</span>}
+                                            </div>
+                                            <p className="mt-1.5 text-[12px] text-[#4c566a] line-clamp-2 leading-[1.5]">{form.summary}</p>
+                                        </div>
+                                        <button 
+                                            onClick={(e) => { e.stopPropagation(); alert(`Đang tải file ${form.attachments[0]?.name} xuống...`); }} 
+                                            className="shrink-0 flex items-center justify-center w-8 h-8 mt-4 rounded-full hover:bg-blue-50 text-[#66738f] hover:text-[#2580f0] transition border border-gray-200 shadow-xs"
+                                            title="Tải xuống"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+
+                    {/* Khối 2: Hỏi đáp pháp lý (Thay thế MULTIMEDIA) */}
+                    <div className="rounded-[12px] border border-[#d8e1f2] bg-white p-5 md:p-6 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div className="mb-4 flex items-center justify-between border-b border-gray-100 pb-3.5">
+                                <div className="flex items-center gap-3">
+                                    <span className="h-6 w-1.5 rounded-full bg-[linear-gradient(180deg,#1e63dc,#2580f0)]"></span>
+                                    <h2 className="text-[20px] font-bold text-[#1b2b49] uppercase tracking-wide flex items-center gap-2">
+                                        <span className="text-[#1e63dc]">💬</span> Hỏi đáp pháp lý
+                                    </h2>
+                                </div>
+                                <button 
+                                    onClick={() => navigateToList("tu-van-phap-luat", "hoi-dap-phap-luat")} 
+                                    className="group flex items-center gap-1 text-[13.5px] font-semibold text-[#2580f0] hover:text-[#1e63dc] transition"
+                                >
+                                    <span>Xem thêm</span>
+                                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                                </button>
+                            </div>
+                            <ul className="space-y-3.5">
+                                {(faqs || []).slice(0, 3).map(faq => (
+                                    <li key={faq.id} className="cursor-pointer group p-3.5 bg-[#f8fbff] rounded-xl border border-[#e2eaf8] hover:border-blue-300 hover:shadow-xs transition" onClick={() => navigateToList("tu-van-phap-luat", "hoi-dap-phap-luat")}>
+                                        <div className="text-[14px] font-bold text-[#1b2b49] group-hover:text-[#2580f0] transition-colors flex items-start gap-2">
+                                            <span className="text-[#2580f0] font-black">Q:</span>
+                                            <span className="line-clamp-1">{faq.question}</span>
+                                        </div>
+                                        <div className="mt-2 text-[12.5px] text-[#4c566a] line-clamp-2 leading-relaxed bg-white p-2.5 rounded-lg border border-gray-100">
+                                            {faq.answer}
+                                        </div>
                                     </li>
                                 ))}
                             </ul>
@@ -366,140 +809,141 @@ import {
             );
         }
 
-        function HomeDocumentsSection({ policyDocs, faqs, resources, navigateToList }) {
-            return (
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                    <div className="rounded-[8px] border border-[#d8e1f2] bg-white p-5 shadow-sm">
-                        <div className="mb-4 flex items-center justify-between border-b pb-3">
-                            <h2 className="text-[20px] font-bold text-[#1b2b49]">Văn bản chính sách mới</h2>
-                            <button onClick={() => navigateToList("van-ban-phap-luat", "van-ban-moi-ban-hanh")} className="text-[14px] text-[#2580f0] hover:underline">Xem thêm</button>
-                        </div>
-                        <ul className="space-y-4">
-                            {policyDocs.map(doc => (
-                                <li key={doc.id} className="cursor-pointer group">
-                                    <h3 className="text-[15px] font-semibold text-[#1b2b49] group-hover:text-[#2580f0]">{doc.title}</h3>
-                                    <div className="mt-1 flex gap-4 text-[13px] text-[#8e98b0]">
-                                        <span>Cơ quan: {doc.agency}</span>
-                                        <span>Ngày: {doc.date}</span>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className="rounded-[8px] border border-[#d8e1f2] bg-white p-5 shadow-sm">
-                        <div className="mb-4 flex items-center justify-between border-b pb-3">
-                            <h2 className="text-[20px] font-bold text-[#1b2b49]">Hỏi đáp pháp lý</h2>
-                            <button onClick={() => navigateToList("tu-van-phap-luat", "hoi-dap-phap-luat")} className="text-[14px] text-[#2580f0] hover:underline">Xem thêm</button>
-                        </div>
-                        <ul className="space-y-4">
-                            {faqs.map(faq => (
-                                <li key={faq.id}>
-                                    <div className="text-[15px] font-semibold text-[#1b2b49]">Hỏi: {faq.question}</div>
-                                    <div className="mt-1 text-[14px] text-[#4c566a] bg-[#f8f9fc] p-3 rounded">Đáp: {faq.answer}</div>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            );
-        }
-
-        function HomeMediaAndFormsSection({ forms, media, navigateToList }) {
+        function HomeMultimediaFullSection({ media, navigateToList, navigateToDetail }) {
             const [activeMediaTab, setActiveMediaTab] = useState('video');
 
             const mediaTabs = [
-                { id: 'video', label: 'Video bài giảng', icon: '' },
-                { id: 'longform', label: 'Longform', icon: '' },
-                { id: 'infographic', label: 'Infographics', icon: '' },
-                { id: 'photo', label: 'Photos', icon: '' }
+                { id: 'video', label: 'Video' },
+                { id: 'longform', label: 'Longform' },
+                { id: 'infographic', label: 'Infographics' },
+                { id: 'photo', label: 'Photos' }
             ];
 
-            const filteredMedia = media.filter(item => item.type === activeMediaTab);
+            const filteredMedia = (media || []).filter(item => item.type === activeMediaTab);
+            const featuredItem = filteredMedia[0] || {};
+            const subItems = filteredMedia.slice(1, 5);
 
             return (
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                    <div className="rounded-[8px] border border-[#d8e1f2] bg-white p-5 shadow-sm">
-                        <div className="mb-4 flex items-center justify-between border-b pb-3">
-                            <h2 className="text-[20px] font-bold text-[#1b2b49]">Thủ tục pháp lý - Biểu mẫu, hợp đồng</h2>
-                            <button onClick={() => navigateToList("tu-van-phap-luat", "bieu-mau-hop-dong")} className="text-[14px] text-[#2580f0] hover:underline">Xem thêm</button>
-                        </div>
-                        <ul className="space-y-4">
-                            {forms.slice(0, 3).map(form => (
-                                <li key={form.id} className="group flex items-start gap-4 p-3 hover:bg-[#f8f9fc] rounded transition border border-transparent hover:border-gray-200 shadow-sm bg-white">
-                                    <div className="w-16 h-20 shrink-0 bg-gray-100 rounded border border-gray-200 overflow-hidden relative shadow-sm cursor-pointer" onClick={() => window.navigateToPreviewContext && window.navigateToPreviewContext(form.attachments[0])}>
-                                        <img src={form.thumb || "https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=150&q=80"} alt="thumb" className="w-full h-full object-cover opacity-80 mix-blend-multiply" />
-                                        <div className="absolute top-1 left-1 shadow-md scale-90 origin-top-left">
-                                            {getFileIcon(form.attachments[0]?.name)}
-                                        </div>
-                                    </div>
-                                    <div className="flex-1 cursor-pointer overflow-hidden py-1" onClick={() => window.navigateToDetailContext && window.navigateToDetailContext(form)}>
-                                        <h3 className="text-[15px] font-bold text-[#1b2b49] group-hover:text-[#2580f0] line-clamp-1">{form.title}</h3>
-                                        <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 items-center">
-                                            <span className="bg-[#e2e8f0] text-[#475569] px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide">{form.field}</span>
-                                            <span className="text-[#8e98b0] text-[12px] font-medium">{form.date}</span>
-                                            {form.agency && <span className="text-[#64748b] text-[12px] truncate max-w-[150px]" title={form.agency}>Cơ quan: {form.agency}</span>}
-                                        </div>
-                                        <p className="mt-2 text-[13px] text-[#4c566a] line-clamp-2 leading-[1.5]">{form.summary}</p>
-                                    </div>
-                                    <button 
-                                        onClick={(e) => { e.stopPropagation(); alert(`Đang tải file ${form.attachments[0]?.name} xuống...`); }} 
-                                        className="shrink-0 flex items-center justify-center w-8 h-8 mt-6 rounded hover:bg-[#e2e8f0] text-[#66738f] hover:text-[#2580f0] transition tooltip relative border border-transparent hover:border-[#cbd5e1]"
-                                        title="Tải xuống"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className="rounded-[8px] border border-[#d8e1f2] bg-white p-5 shadow-sm relative overflow-hidden flex flex-col">
-                        <div className="mb-5 pb-3 border-b border-gray-100 flex flex-col gap-3 shrink-0">
-                            <div className="flex items-center justify-between w-full">
-                                <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigateToList("hoat-dong-trung-tam", "multimedia")}>
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" className="text-[#E3242B]"><path d="M21.582 6.186a2.632 2.632 0 0 0-1.854-1.854C18.093 3.89 12 3.89 12 3.89s-6.093 0-7.728.442A2.632 2.632 0 0 0 2.418 6.186C1.977 7.821 1.977 12 1.977 12s0 4.18.441 5.814a2.632 2.632 0 0 0 1.854 1.854c1.635.442 7.728.442 7.728.442s6.093 0 7.728-.442a2.632 2.632 0 0 0 1.854-1.854c.441-1.634.441-5.814.441-5.814s0-4.179-.441-5.814zM9.995 15.474V8.526l5.318 3.474-5.318 3.474z"/></svg>
-                                    <h2 className="text-[20px] font-bold uppercase tracking-wide text-[#1b2b49]">MULTIMEDIA</h2>
-                                </div>
-                                <button onClick={() => navigateToList("hoat-dong-trung-tam", "multimedia")} className="text-[13px] text-[#2580f0] hover:underline">Xem thêm</button>
+                <section className="rounded-[12px] border border-[#d8e1f2] bg-white p-5 md:p-6 shadow-sm">
+                    {/* Header với các tab điều hướng đơn giản như ban đầu */}
+                    <div className="mb-5 pb-3 border-b border-gray-100 flex flex-col gap-3">
+                        <div className="flex items-center justify-between w-full">
+                            <div className="flex items-center gap-2.5 cursor-pointer" onClick={() => navigateToList("hoat-dong-trung-tam", "multimedia")}>
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" className="text-[#E3242B]"><path d="M21.582 6.186a2.632 2.632 0 0 0-1.854-1.854C18.093 3.89 12 3.89 12 3.89s-6.093 0-7.728.442A2.632 2.632 0 0 0 2.418 6.186C1.977 7.821 1.977 12 1.977 12s0 4.18.441 5.814a2.632 2.632 0 0 0 1.854 1.854c1.635.442 7.728.442 7.728.442s6.093 0 7.728-.442a2.632 2.632 0 0 0 1.854-1.854c.441-1.634.441-5.814.441-5.814s0-4.179-.441-5.814zM9.995 15.474V8.526l5.318 3.474-5.318 3.474z"/></svg>
+                                <h2 className="text-[20px] font-bold uppercase tracking-wide text-[#1b2b49]">MULTIMEDIA</h2>
                             </div>
-                            <div className="flex gap-x-5 gap-y-2 flex-wrap text-[13px] font-bold text-[#66738f]">
-                                {mediaTabs.map(tab => (
-                                    <span key={tab.id} onClick={() => setActiveMediaTab(tab.id)} className={`flex items-center gap-1.5 cursor-pointer transition ${activeMediaTab === tab.id ? 'text-[#2580f0] border-b-2 border-[#2580f0] pb-0.5' : 'hover:text-[#2580f0]'}`}>
-                                        {tab.icon && <span className="text-[#2580f0]">{tab.icon}</span>} {tab.label}
-                                    </span>
+                            <button 
+                                onClick={() => navigateToList("hoat-dong-trung-tam", "multimedia")} 
+                                className="group flex items-center gap-1 text-[13.5px] font-semibold text-[#2580f0] hover:text-[#1e63dc] transition"
+                            >
+                                <span>Xem thêm</span>
+                                <span className="group-hover:translate-x-1 transition-transform">→</span>
+                            </button>
+                        </div>
+                        {/* Thanh điều hướng dạng text như ban đầu */}
+                        <div className="flex gap-x-6 gap-y-2 flex-wrap text-[14px] font-bold text-[#66738f]">
+                            {mediaTabs.map(tab => (
+                                <span 
+                                    key={tab.id} 
+                                    onClick={() => setActiveMediaTab(tab.id)} 
+                                    className={`cursor-pointer transition pb-1 ${activeMediaTab === tab.id ? 'text-[#2580f0] border-b-2 border-[#2580f0]' : 'hover:text-[#2580f0]'}`}
+                                >
+                                    {tab.label}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Nội dung danh sách media */}
+                    {filteredMedia.length > 0 ? (
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                            {/* Card chính bên trái (5 cột) */}
+                            {featuredItem.id && (
+                                <div 
+                                    onClick={() => (navigateToDetail ? navigateToDetail(featuredItem) : (window.navigateToDetailContext && window.navigateToDetailContext(featuredItem)))}
+                                    className="lg:col-span-5 group cursor-pointer flex flex-col justify-between rounded-xl bg-white border border-[#d8e1f2] hover:border-[#2580f0] hover:shadow-md transition-all duration-200 overflow-hidden"
+                                >
+                                    <div className="h-[220px] sm:h-[250px] w-full relative overflow-hidden bg-gray-900">
+                                        <img 
+                                            src={featuredItem.thumb} 
+                                            alt={featuredItem.title} 
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                                        
+                                        {/* Nút Play overlay nếu là video */}
+                                        {activeMediaTab === 'video' && (
+                                            <div className="absolute inset-0 flex items-center justify-center">
+                                                <div className="w-12 h-12 rounded-full bg-white/90 text-[#E3242B] flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-white transition-transform">
+                                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {featuredItem.duration && (
+                                            <div className="absolute bottom-2.5 right-2.5 bg-black/75 text-white text-[11px] font-semibold px-2 py-0.5 rounded">
+                                                {featuredItem.duration}
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div className="p-4 flex-1 flex flex-col justify-between">
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-1.5 text-[12px] text-[#8e98b0]">
+                                                {featuredItem.field && <span className="bg-[#e8f1fd] text-[#1e63dc] font-bold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded">{featuredItem.field}</span>}
+                                                <span>{featuredItem.date}</span>
+                                            </div>
+                                            <h3 className="text-[16px] font-bold text-[#1b2b49] group-hover:text-[#2580f0] leading-snug line-clamp-2 transition-colors mb-2">
+                                                {featuredItem.title}
+                                            </h3>
+                                            <p className="text-[13px] text-[#55637d] line-clamp-2 leading-relaxed">
+                                                {featuredItem.summary}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Lưới 4 card phụ bên phải (7 cột) */}
+                            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {subItems.map((item) => (
+                                    <div 
+                                        key={item.id}
+                                        onClick={() => (navigateToDetail ? navigateToDetail(item) : (window.navigateToDetailContext && window.navigateToDetailContext(item)))}
+                                        className="group cursor-pointer rounded-xl border border-[#e2eaf8] bg-[#fbfdff] hover:bg-white hover:border-[#2580f0] hover:shadow-sm transition-all duration-200 overflow-hidden flex flex-col justify-between p-3"
+                                    >
+                                        <div className="h-[125px] w-full rounded-lg overflow-hidden relative bg-gray-100 mb-2.5">
+                                            <img 
+                                                src={item.thumb} 
+                                                alt={item.title} 
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                                            />
+                                            {item.duration && (
+                                                <div className="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] font-medium px-1.5 py-0.5 rounded">
+                                                    {item.duration}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="flex-1 flex flex-col justify-between">
+                                            <h3 className="text-[13px] font-bold text-[#1b2b49] group-hover:text-[#2580f0] line-clamp-2 leading-snug transition-colors mb-1.5">
+                                                {item.title}
+                                            </h3>
+                                            <div className="flex items-center justify-between text-[11.5px] text-[#8e98b0] pt-1.5 border-t border-gray-100">
+                                                <span>{item.field || 'Pháp luật'}</span>
+                                                <span>{item.date}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 ))}
                             </div>
                         </div>
-
-                        <div className="space-y-4 flex-1 flex flex-col">
-                            {filteredMedia.length > 0 ? (
-                                <>
-                                    <div className="relative rounded overflow-hidden cursor-pointer group h-52 shadow-sm" onClick={() => window.navigateToDetailContext && window.navigateToDetailContext(filteredMedia[0])}>
-                                        <img src={filteredMedia[0].thumb} className="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Main Multimedia" />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-5">
-                                            <h3 className="text-white font-bold text-[16px] md:text-[18px] leading-snug line-clamp-2 drop-shadow-md">{filteredMedia[0].title}</h3>
-                                        </div>
-                                    </div>
-                                    {filteredMedia.length > 1 && (
-                                        <div className="grid grid-cols-2 gap-4 mt-auto">
-                                            {filteredMedia.slice(1, 3).map(item => (
-                                                <div key={item.id} className="cursor-pointer group flex flex-col gap-2" onClick={() => window.navigateToDetailContext && window.navigateToDetailContext(item)}>
-                                                    <div className="w-full h-[90px] bg-gray-200 rounded overflow-hidden relative shadow-sm">
-                                                        <img src={item.thumb} alt="thumbnail" className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                                                    </div>
-                                                    <h3 className="text-[13px] font-semibold text-[#1b2b49] group-hover:text-[#2580f0] line-clamp-2 leading-snug transition">{item.title}</h3>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-                                </>
-                            ) : (
-                                <div className="flex-1 flex items-center justify-center text-gray-400 text-sm border-2 border-dashed border-gray-200 rounded-lg">
-                                    Đang cập nhật nội dung...
-                                </div>
-                            )}
+                    ) : (
+                        <div className="py-10 text-center text-gray-400 bg-gray-50 rounded-xl border border-dashed border-gray-200 text-sm">
+                            Đang cập nhật nội dung...
                         </div>
-                    </div>
-                </div>
+                    )}
+                </section>
             );
         }
 
@@ -767,7 +1211,7 @@ import {
                             const displayName = item.title;
                             const displayDate = item.date;
                             const displaySummary = item.summary;
-                            const thumb = item.thumb || `https://images.unsplash.com/photo-${['1554224155-8d04cb21cd6c', '1454165804606-c3d57bc86b40', '1589829085413-56de8ae18c73', '1554224154-26032ffc0d07'][item.id % 4]}?auto=format&fit=crop&w=200&q=80`;
+                            const thumb = item.thumb || `https://images.unsplash.com/photo-${['1554224155-8d04cb21cd6c', '1454165804606-c3d57bc86b40', '1589829085413-56de8ae18c73', '1554224154-26032ffc0d07', '1503676260728-1c00da094a0b', '1516321318423-f06f85e504b3', '1552581234-26160f608093', '1534536281715-e28d76689b4d', '1540575467063-178a50c2df87', '1552664730-d307ca884978', '1511578314322-379afb476865', '1507679799987-c73779587ccf', '1563986768609-322da13575f3', '1529107386315-e1a2ed48a620'][item.id % 14]}?auto=format&fit=crop&w=200&q=80`;
                             return (
                                 <div key={item.id} className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg hover:border-[#2580f0] hover:shadow-md transition bg-white group">
                                     <div className="w-24 h-20 bg-gray-100 rounded overflow-hidden shrink-0 relative cursor-pointer" onClick={() => navigateToDetail(item)}>
@@ -812,7 +1256,7 @@ import {
                                         onChange={(e) => { setItemsPerPage(Number(e.target.value)); setCurrentPage(1); }}
                                         className="border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:border-[#2580f0]"
                                     >
-                                        <option value={10}>10 bản ghi</option>
+                                        <option value={12}>12 bản ghi</option>
                                         <option value={20}>20 bản ghi</option>
                                         <option value={50}>50 bản ghi</option>
                                     </select>
@@ -1043,7 +1487,7 @@ import {
                             return (
                                 <div key={item.id} className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg hover:border-[#2580f0] hover:shadow-md transition bg-white group">
                                     <div className="w-24 h-20 bg-gray-100 rounded overflow-hidden shrink-0 relative cursor-pointer" onClick={() => navigateToDetail(item)}>
-                                        <img src={item.thumb || `https://images.unsplash.com/photo-${['1618044733300-9472054094ee', '1554224155-8d04cb21cd6c', '1454165804606-c3d57bc86b40', '1589829085413-56de8ae18c73'][item.id % 4]}?auto=format&fit=crop&w=200&q=80`} alt={item.title} className="w-full h-full object-cover opacity-80 mix-blend-multiply" />
+                                        <img src={item.thumb || `https://images.unsplash.com/photo-${['1618044733300-9472054094ee', '1554224155-8d04cb21cd6c', '1454165804606-c3d57bc86b40', '1589829085413-56de8ae18c73', '1554224154-26032ffc0d07', '1503676260728-1c00da094a0b', '1516321318423-f06f85e504b3', '1552581234-26160f608093', '1534536281715-e28d76689b4d', '1540575467063-178a50c2df87', '1552664730-d307ca884978', '1511578314322-379afb476865', '1507679799987-c73779587ccf', '1563986768609-322da13575f3'][item.id % 14]}?auto=format&fit=crop&w=200&q=80`} alt={item.title} className="w-full h-full object-cover opacity-80 mix-blend-multiply" />
                                         <span className={`absolute top-1 right-1 text-[10px] font-bold px-1.5 py-0.5 rounded ${fileTypeInfo.color}`}>{fileTypeInfo.label}</span>
                                     </div>
                                     <div className="flex-1 min-w-0">
@@ -1088,7 +1532,7 @@ import {
                                         onChange={(e) => { setItemsPerPage(Number(e.target.value)); setCurrentPage(1); }}
                                         className="border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:border-[#2580f0]"
                                     >
-                                        <option value={10}>10 bản ghi</option>
+                                        <option value={12}>12 bản ghi</option>
                                         <option value={20}>20 bản ghi</option>
                                         <option value={50}>50 bản ghi</option>
                                     </select>
@@ -1139,8 +1583,8 @@ import {
             const fieldOptions = [...new Set(items.map(i => i.linhVuc).filter(Boolean))];
             const agencyOptions = [...new Set(items.map(i => i.coQuanBanHanh).filter(Boolean))];
             const typeOptions = [...new Set(items.map(i => i.loaiVanBan).filter(Boolean))];
-            const statusOptions = ['Có hiệu lực', 'Hết hiệu lực', 'Sửa đổi, bổ sung'];
-            const statusMap = { 0: 'Hết hiệu lực', 1: 'Có hiệu lực', 2: 'Sửa đổi, bổ sung' };
+            const statusOptions = ['Còn hiệu lực', 'Hết hiệu lực', 'Sửa đổi, bổ sung'];
+            const statusMap = { 0: 'Hết hiệu lực', 1: 'Còn hiệu lực', 2: 'Sửa đổi, bổ sung' };
 
             const filteredFieldOpts = fieldOptions.filter(f => f.toLowerCase().includes(fieldSearchTerm.toLowerCase().trim()));
             const filteredAgencyOpts = agencyOptions.filter(f => f.toLowerCase().includes(agencySearchTerm.toLowerCase().trim()));
@@ -1563,7 +2007,7 @@ import {
             if (!article) return null;
             const contentRef = useRef(null);
 
-            const statusMap = { 0: 'Hết hiệu lực', 1: 'Có hiệu lực', 2: 'Sửa đổi, bổ sung' };
+            const statusMap = { 0: 'Hết hiệu lực', 1: 'Còn hiệu lực', 2: 'Sửa đổi, bổ sung' };
             const statusClass = { 0: 'bg-red-100 text-red-700', 1: 'bg-green-100 text-green-700', 2: 'bg-yellow-100 text-yellow-700' };
 
             const handleDownload = (fileName) => {
@@ -1716,7 +2160,7 @@ import {
             const itemsPerPage = activeTab === 'video' ? 12 : activeTab === 'longform' ? 12 : 12;
 
             const tabs = [
-                { id: 'video', label: 'Video bài giảng' },
+                { id: 'video', label: 'Video' },
                 { id: 'longform', label: 'Longform' },
                 { id: 'infographic', label: 'Infographics' },
                 { id: 'photo', label: 'Photos' }
@@ -3048,6 +3492,22 @@ import {
                 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80',
                 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=400&q=80',
                 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1541888086925-920a0bba04bd?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1586528116311-ad8ed745333c?auto=format&fit=crop&w=400&q=80',
             ];
 
             const getThumb = (item, index) => {
@@ -3200,17 +3660,109 @@ import {
             );
         }
 
-        function KeHoachDaoTaoListPage({ menu, subPage, items, navigateToDetail }) {
+        function KeHoachDaoTaoListPage({ menu, subPage, items, navigateToDetail, isLoggedIn, setShowLoginPopup, setPendingAction, pendingAction, proposals, setProposals }) {
             const [currentPage, setCurrentPage] = useState(1);
             const [itemsPerPage] = useState(12);
             const [draftKeyword, setDraftKeyword] = useState('');
             const [keyword, setKeyword] = useState('');
+
+            // State for Training Proposal Modal
+            const [showProposalModal, setShowProposalModal] = useState(false);
+            const [showProposalConfirm, setShowProposalConfirm] = useState(false);
+            const [proposalSuccess, setProposalSuccess] = useState(false);
+            const [proposalForm, setProposalForm] = useState({
+                field: '',
+                content: '',
+                time: '',
+                location: '',
+                quantity: ''
+            });
+            const [proposalErrors, setProposalErrors] = useState({});
+
+            // Auto-open proposal modal after login if it was pending
+            useEffect(() => {
+                if (isLoggedIn && pendingAction && pendingAction.type === 'guiDeXuatDaoTao') {
+                    setPendingAction(null);
+                    setShowProposalModal(true);
+                }
+            }, [isLoggedIn, pendingAction]);
+
+            const handleOpenProposal = () => {
+                if (!isLoggedIn) {
+                    setPendingAction({ type: 'guiDeXuatDaoTao' });
+                    setShowLoginPopup(true);
+                } else {
+                    setShowProposalModal(true);
+                }
+            };
+
+            const validateProposal = () => {
+                const errors = {};
+                if (!proposalForm.field) errors.field = 'Lĩnh vực không được để trống';
+                if (!proposalForm.content.trim()) errors.content = 'Nội dung đề xuất không được để trống';
+                return errors;
+            };
+
+            const handleProposalSubmit = (e) => {
+                e.preventDefault();
+                const errors = validateProposal();
+                if (Object.keys(errors).length > 0) {
+                    setProposalErrors(errors);
+                    return;
+                }
+                setShowProposalConfirm(true);
+            };
+
+            const handleConfirmProposal = () => {
+                const newProposal = {
+                    id: Date.now(),
+                    field: proposalForm.field,
+                    content: proposalForm.content,
+                    time: proposalForm.time,
+                    location: proposalForm.location,
+                    quantity: proposalForm.quantity,
+                    status: 'da-gui',
+                    date: new Date().toLocaleDateString('vi-VN')
+                };
+                setProposals(prev => [newProposal, ...prev]);
+                console.log('Training Proposal Submitted:', newProposal);
+                setProposalSuccess(true);
+                setShowProposalConfirm(false);
+                setTimeout(() => {
+                    setShowProposalModal(false);
+                    setProposalForm({ field: '', content: '', time: '', location: '', quantity: '' });
+                    setProposalSuccess(false);
+                }, 2000);
+            };
+
+            const handleCloseProposal = () => {
+                setShowProposalModal(false);
+                setProposalForm({ field: '', content: '', time: '', location: '', quantity: '' });
+                setProposalErrors({});
+                setProposalSuccess(false);
+            };
 
             const fallbackThumbs = [
                 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=400&q=80',
                 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80',
                 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=400&q=80',
                 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1541888086925-920a0bba04bd?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1586528116311-ad8ed745333c?auto=format&fit=crop&w=400&q=80',
             ];
 
             const formatDateRange = (dateStr) => {
@@ -3264,9 +3816,16 @@ import {
             };
 
             return (
+                <>
                 <section className="rounded-[8px] border border-[#d8e1f2] bg-white p-6 lg:p-10 shadow-sm min-h-[600px]">
                     <p className="text-[13px] font-medium text-[#66738f] mb-4">Trang chủ / {menu.label} / {subPage.label}</p>
-                    <h2 className="text-[28px] font-bold text-[#1b2b49] mb-6 pb-4 border-b border-[#dbe5ff]">Kế hoạch đào tạo</h2>
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-[#dbe5ff]">
+                        <h2 className="text-[28px] font-bold text-[#1b2b49]">Kế hoạch đào tạo</h2>
+                        <button onClick={handleOpenProposal} className="px-5 py-2.5 text-white bg-[#2580f0] rounded-md font-semibold hover:bg-[#1e63dc] transition shadow-sm flex items-center gap-2 shrink-0">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4z"></path></svg>
+                            Gửi đề xuất đào tạo
+                        </button>
+                    </div>
 
                     <div className="bg-white rounded-lg border border-[#d8e1f2] shadow-sm mb-8">
                         <div className="p-4">
@@ -3337,20 +3896,214 @@ import {
                         </div>
                     )}
                 </section>
+
+                {showProposalModal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={handleCloseProposal}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-xl w-full max-h-[95vh] flex flex-col" onClick={e => e.stopPropagation()}>
+                            {/* Header */}
+                            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                                <h3 className="text-[18px] font-bold text-[#1b2b49]">Gửi đề xuất đào tạo</h3>
+                                <button onClick={handleCloseProposal} className="text-gray-400 hover:text-gray-600 transition">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+
+                            {proposalSuccess ? (
+                                <div className="text-center py-12 px-6">
+                                    <svg className="w-16 h-16 mx-auto mb-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <p className="text-lg font-semibold text-gray-800">Gửi đề xuất thành công!</p>
+                                    <p className="text-sm text-gray-500 mt-2">Chúng tôi ghi nhận ý kiến và sẽ phản hồi sớm nhất.</p>
+                                </div>
+                            ) : (
+                                <>
+                                    {/* Body */}
+                                    <form onSubmit={handleProposalSubmit} className="p-6 overflow-y-auto space-y-4 text-[14px]">
+                                        {/* Field 1: Lĩnh vực (Required) */}
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">
+                                                <span className="text-red-500 mr-0.5">*</span>Lĩnh vực
+                                            </label>
+                                            <select
+                                                name="field"
+                                                value={proposalForm.field}
+                                                onChange={(e) => {
+                                                    setProposalForm(prev => ({ ...prev, field: e.target.value }));
+                                                    if (proposalErrors.field) setProposalErrors(prev => ({ ...prev, field: '' }));
+                                                }}
+                                                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:border-[#2580f0] bg-white ${proposalErrors.field ? 'border-red-500' : 'border-gray-300'}`}
+                                            >
+                                                <option value="">Chọn lĩnh vực pháp luật</option>
+                                                <option value="Doanh nghiệp">Doanh nghiệp</option>
+                                                <option value="Đầu tư">Đầu tư</option>
+                                                <option value="Thuế / Hóa đơn điện tử">Thuế / Hóa đơn điện tử</option>
+                                                <option value="Lao động / BHXH">Lao động / BHXH</option>
+                                                <option value="Hợp đồng thương mại">Hợp đồng thương mại</option>
+                                                <option value="Sở hữu trí tuệ">Sở hữu trí tuệ</option>
+                                                <option value="Khác">Khác</option>
+                                            </select>
+                                            {proposalErrors.field && <p className="mt-1 text-xs text-red-500">{proposalErrors.field}</p>}
+                                        </div>
+
+                                        {/* Field 2: Nội dung đề xuất (Required) */}
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">
+                                                <span className="text-red-500 mr-0.5">*</span>Nội dung đề xuất
+                                            </label>
+                                            <textarea
+                                                name="content"
+                                                maxLength={5000}
+                                                rows="4"
+                                                placeholder="Mô tả nội dung, chủ đề đào tạo mong muốn..."
+                                                value={proposalForm.content}
+                                                onChange={(e) => {
+                                                    setProposalForm(prev => ({ ...prev, content: e.target.value }));
+                                                    if (proposalErrors.content) setProposalErrors(prev => ({ ...prev, content: '' }));
+                                                }}
+                                                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:border-[#2580f0] resize-none ${proposalErrors.content ? 'border-red-500' : 'border-gray-300'}`}
+                                            />
+                                            <div className="flex justify-between mt-0.5">
+                                                {proposalErrors.content ? <p className="text-xs text-red-500">{proposalErrors.content}</p> : <span></span>}
+                                                <span className="text-[12px] text-gray-400">{proposalForm.content.length} / 5000</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Field 3: Thời gian mong muốn */}
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">Thời gian mong muốn</label>
+                                            <input
+                                                type="text"
+                                                placeholder="VD: Quý 2/2026"
+                                                value={proposalForm.time}
+                                                onChange={(e) => setProposalForm(prev => ({ ...prev, time: e.target.value }))}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0]"
+                                            />
+                                        </div>
+
+                                        {/* Field 4: Địa điểm mong muốn */}
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">Địa điểm mong muốn</label>
+                                            <input
+                                                type="text"
+                                                placeholder="Nhập địa điểm mong muốn"
+                                                value={proposalForm.location}
+                                                onChange={(e) => setProposalForm(prev => ({ ...prev, location: e.target.value }))}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0]"
+                                            />
+                                        </div>
+
+                                        {/* Field 5: Số lượng dự kiến */}
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">Số lượng dự kiến</label>
+                                            <input
+                                                type="text"
+                                                placeholder="Số học viên"
+                                                value={proposalForm.quantity}
+                                                onChange={(e) => setProposalForm(prev => ({ ...prev, quantity: e.target.value }))}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0]"
+                                            />
+                                        </div>
+                                    </form>
+
+                                    {/* Footer */}
+                                    <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-100 bg-gray-50/50 rounded-b-lg">
+                                        <button
+                                            onClick={handleCloseProposal}
+                                            className="px-5 py-2 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[13px]"
+                                        >
+                                            Hủy
+                                        </button>
+                                        <button
+                                            onClick={handleProposalSubmit}
+                                            className="px-5 py-2 bg-[#2580f0] text-white rounded-md font-semibold hover:bg-[#1e63dc] transition text-[13px]"
+                                        >
+                                            Gửi đề xuất
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {showProposalConfirm && (
+                    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60" onClick={() => setShowProposalConfirm(false)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-md w-full" onClick={e => e.stopPropagation()}>
+                            <div className="p-6">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h4 className="text-[16px] font-bold text-[#1b2b49]">Xác nhận gửi đề xuất</h4>
+                                    <button onClick={() => setShowProposalConfirm(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                                <div className="mb-6">
+                                    <p className="text-[14px] text-gray-600"></p>Bạn có chắc chắn muốn gửi đề xuất đào tạo này không?
+                                </div>
+                                <div className="flex justify-end gap-3">
+                                    <button
+                                        onClick={() => setShowProposalConfirm(false)}
+                                        className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[13px]"
+                                    >
+                                        Hủy bỏ
+                                    </button>
+                                    <button
+                                        onClick={handleConfirmProposal}
+                                        className="px-4 py-2 bg-[#2580f0] text-white rounded-md font-semibold hover:bg-[#1e63dc] transition text-[13px]"
+                                    >
+                                        Xác nhận
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                </>
             );
         }
 
-        function KhoaHocListPage({ menu, subPage, items, navigateToDetail }) {
+        function KhoaHocListPage({ menu, subPage, items, navigateToDetail, gridCols = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4", isLoggedIn = false, setShowLoginPopup, setPendingAction, pendingAction, registeredCourses, setRegisteredCourses }) {
             const [currentPage, setCurrentPage] = useState(1);
             const [itemsPerPage] = useState(12);
             const [draftKeyword, setDraftKeyword] = useState('');
             const [keyword, setKeyword] = useState('');
+            const [selectedHinhThuc, setSelectedHinhThuc] = useState([]);
+            const [isHinhThucOpen, setIsHinhThucOpen] = useState(false);
+            const [showRegisterPopup, setShowRegisterPopup] = useState(false);
+            const [selectedCourse, setSelectedCourse] = useState(null);
+            const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+            const [showCancelPopup, setShowCancelPopup] = useState(false);
+            const [courseToCancel, setCourseToCancel] = useState(null);
+            const [showCancelSuccessPopup, setShowCancelSuccessPopup] = useState(false);
+            const [registerForm, setRegisterForm] = useState({
+                hoTen: 'Nguyễn Văn A',
+                email: 'nguyenvana@example.com',
+                sdt: '0901234567',
+                donVi: 'Công ty ABC'
+            });
+
+            const filterLabel = 'Lĩnh vực';
+            const hinhThucOptions = ['Trực tiếp', 'Trực tuyến'];
 
             const fallbackThumbs = [
                 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=400&q=80',
                 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80',
                 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=400&q=80',
                 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1618044733300-9472054094ee?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1541888086925-920a0bba04bd?auto=format&fit=crop&w=400&q=80',
+                'https://images.unsplash.com/photo-1586528116311-ad8ed745333c?auto=format&fit=crop&w=400&q=80',
             ];
 
             const formatDateRange = (dateStr) => {
@@ -3378,6 +4131,10 @@ import {
                 const normalizedKeyword = keyword.toString().trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd');
                 const normalizedTitle = item.title.toString().trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd');
                 return normalizedTitle.includes(normalizedKeyword);
+            }).filter(item => {
+                if (selectedHinhThuc.length === 0) return true;
+                const hinhThuc = item.hinhThuc || '';
+                return selectedHinhThuc.some(ht => hinhThuc.toLowerCase().includes(ht.toLowerCase()));
             });
 
             const totalItems = filteredItems.length;
@@ -3385,7 +4142,7 @@ import {
             const currentItems = filteredItems.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
             const handleSearch = () => { setKeyword(draftKeyword); setCurrentPage(1); };
-            const handleClear = () => { setDraftKeyword(''); setKeyword(''); setCurrentPage(1); };
+            const handleClear = () => { setDraftKeyword(''); setKeyword(''); setSelectedHinhThuc([]); setCurrentPage(1); };
             const handlePageChange = (newPage) => {
                 if (newPage >= 1 && newPage <= totalPages) {
                     setCurrentPage(newPage);
@@ -3398,10 +4155,70 @@ import {
                 return fallbackThumbs[index % fallbackThumbs.length];
             };
 
+            const toggleHinhThuc = (value) => {
+                setSelectedHinhThuc(prev =>
+                    prev.includes(value) ? prev.filter(v => v !== value) : [...prev, value]
+                );
+            };
+
+            const handleRegister = (e, item) => {
+                e.stopPropagation();
+                console.log('handleRegister called, isLoggedIn:', isLoggedIn, 'item:', item?.title);
+                if (!isLoggedIn) {
+                    setShowLoginPopup(true);
+                    setPendingAction({ type: 'dangKyKhoaHoc', item });
+                } else {
+                    console.log('Opening register popup for:', item?.title);
+                    setSelectedCourse(item);
+                    setShowRegisterPopup(true);
+                    console.log('showRegisterPopup set to true');
+                }
+            };
+
+            const handleRegisterSubmit = () => {
+                setRegisteredCourses(prev => {
+                    const next = new Map(prev);
+                    next.set(selectedCourse.id, { status: 'cho-duyet', date: new Date().toLocaleDateString('vi-VN') });
+                    return next;
+                });
+                setShowRegisterPopup(false);
+                setSelectedCourse(null);
+                setShowSuccessPopup(true);
+                setTimeout(() => setShowSuccessPopup(false), 3000);
+            };
+
+            const handleCancelRegister = (e, item) => {
+                e.stopPropagation();
+                setCourseToCancel(item);
+                setShowCancelPopup(true);
+            };
+
+            const confirmCancelRegister = () => {
+                setRegisteredCourses(prev => {
+                    const next = new Map(prev);
+                    next.delete(courseToCancel.id);
+                    return next;
+                });
+                setShowCancelPopup(false);
+                setCourseToCancel(null);
+                setShowCancelSuccessPopup(true);
+                setTimeout(() => setShowCancelSuccessPopup(false), 3000);
+            };
+
+            // Handle pending registration after login
+            React.useEffect(() => {
+                if (isLoggedIn && pendingAction?.type === 'dangKyKhoaHoc' && pendingAction?.item) {
+                    setSelectedCourse(pendingAction.item);
+                    setShowRegisterPopup(true);
+                    setPendingAction(null);
+                }
+            }, [isLoggedIn, pendingAction]);
+
             return (
+                <>
                 <section className="rounded-[8px] border border-[#d8e1f2] bg-white p-6 lg:p-10 shadow-sm min-h-[600px]">
                     <p className="text-[13px] font-medium text-[#66738f] mb-4">Trang chủ / {menu.label} / {subPage.label}</p>
-                    <h2 className="text-[28px] font-bold text-[#1b2b49] mb-6 pb-4 border-b border-[#dbe5ff]">Khóa học</h2>
+                    <h2 className="text-[28px] font-bold text-[#1b2b49] mb-6 pb-4 border-b border-[#dbe5ff]">{subPage.label}</h2>
 
                     <div className="bg-white rounded-lg border border-[#d8e1f2] shadow-sm mb-8">
                         <div className="p-4">
@@ -3409,6 +4226,24 @@ import {
                                 <div className="relative flex-1 w-full">
                                     <input type="text" maxLength={100} placeholder="Nhập tiêu đề để tìm kiếm..." value={draftKeyword} onChange={(e) => setDraftKeyword(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && handleSearch()} className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] shadow-sm transition" />
                                     <svg className="absolute left-3 top-2.5 text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                </div>
+                                <div className="relative w-full sm:w-[220px]">
+                                    <button onClick={() => { setIsHinhThucOpen(!isHinhThucOpen); }} className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white flex items-center justify-between text-left text-gray-700 focus:outline-none focus:border-[#2580f0] shadow-sm transition text-[14px]">
+                                        <span className="truncate">{selectedHinhThuc.length > 0 ? `Đã chọn: ${selectedHinhThuc.length} hình thức` : '-- Chọn hình thức --'}</span>
+                                        <span className="text-[10px] text-gray-400 ml-2">▼</span>
+                                    </button>
+                                    {isHinhThucOpen && (
+                                        <div className="absolute z-50 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-64 overflow-hidden flex flex-col">
+                                            <div className="overflow-y-auto flex-1">
+                                                {hinhThucOptions.map(val => (
+                                                    <label key={val} className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 cursor-pointer">
+                                                        <input type="checkbox" checked={selectedHinhThuc.includes(val)} onChange={() => { toggleHinhThuc(val); setCurrentPage(1); }} className="w-4 h-4 text-[#2580f0] border-gray-300 rounded focus:ring-[#2580f0]" />
+                                                        <span className="text-[13px] text-gray-700">{val}</span>
+                                                    </label>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="flex gap-2 shrink-0">
                                     <button onClick={handleSearch} className="px-5 py-2 text-white bg-[#2580f0] border border-[#2580f0] rounded-md font-semibold hover:bg-[#1e63dc] transition shadow-sm flex items-center justify-center gap-2">
@@ -3431,17 +4266,49 @@ import {
                                     <div key={item.id} className="border border-gray-200 rounded-lg overflow-hidden hover:border-[#1E88E5] hover:shadow-md transition-all bg-white cursor-pointer group" onClick={() => navigateToDetail(item)} title={item.title}>
                                         <div className="aspect-[4/3] overflow-hidden bg-gray-100 relative">
                                             <img src={getThumb(item, index)} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onError={(e) => { e.target.onerror = null; e.target.src = fallbackThumbs[index % fallbackThumbs.length]; }} />
-                                            {item.field && filterLabel === 'Lĩnh vực' && (
-                                                <span className="absolute top-2 left-2 text-[11px] px-2 py-0.5 bg-[#E3F2FD] text-[#1976D2] rounded font-medium whitespace-nowrap">{item.field}</span>
-                                            )}
                                         </div>
                                         <div className="p-3">
                                             <h4 className="text-[14px] font-semibold text-[#1E88E5] group-hover:text-[#1976D2] transition-colors line-clamp-2 mb-1 min-h-[36px]">{item.title}</h4>
-                                            <div className="flex items-center justify-between gap-2">
-                                                <p className="text-[12px] text-gray-500">{formatDateRange(item.date)}</p>
-                                                {item.soLuong && <p className="text-[12px] text-gray-500 shrink-0">SL: {item.soLuong}</p>}
+                                            <div className="space-y-1.5">
+                                                {item.thoiGian && (
+                                                    <div className="flex items-center gap-2">
+                                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400 shrink-0"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                                        <p className="text-[11px] text-gray-500">Thời gian mở đăng ký: {formatDateRange(item.thoiGian)}</p>
+                                                    </div>
+                                                )}
+                                                {item.date && (
+                                                    <div className="flex items-center gap-2">
+                                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400 shrink-0"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                                        <p className="text-[11px] text-gray-500">Thời gian học: {formatDateRange(item.date)}</p>
+                                                    </div>
+                                                )}
+                                                <div className="flex items-center justify-between gap-2">
+                                                    <div className="flex items-center gap-2">
+                                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-gray-400 shrink-0"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                                        <p className="text-[11px] text-gray-500">SL: 0/60 học viên</p>
+                                                    </div>
+                                                    {item.hinhThuc && (
+                                                        <span className="text-[10px] px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded whitespace-nowrap">{item.hinhThuc}</span>
+                                                    )}
+                                                </div>
+                                                {item.doiTuong && <p className="text-[11px] text-gray-500 line-clamp-1">Đối tượng: {item.doiTuong}</p>}
                                             </div>
-                                            {item.agency && <p className="text-[12px] text-gray-500 mt-0.5 line-clamp-1">{item.agency}</p>}
+                                            {registeredCourses.has(item.id) ? (
+                                                <button
+                                                    onClick={(e) => { e.stopPropagation(); handleCancelRegister(e, item); }}
+                                                    className="w-full mt-2.5 px-3 py-1.5 text-[12px] font-medium text-red-600 hover:text-white border border-red-200 hover:border-red-500 hover:bg-red-500 rounded transition flex items-center justify-center gap-1.5"
+                                                >
+                                                    Hủy đăng ký
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    onClick={(e) => { e.stopPropagation(); handleRegister(e, item); }}
+                                                    className="w-full mt-2.5 px-3 py-1.5 text-[12px] font-medium text-white bg-[#2580f0] rounded hover:bg-[#1e63dc] transition flex items-center justify-center gap-1.5"
+                                                >
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg>
+                                                    Đăng ký ngay
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
                                 ))}
@@ -3469,7 +4336,7 @@ import {
                         <div className="text-center py-12 text-gray-500">
                             <svg className="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             <p className="text-[15px] font-medium">Không tìm thấy khóa học nào</p>
-                            <p className="text-[13px] mt-1">Thử xóa bộ lọc hoặc tìm kiếm với từ khóa khác</p>
+                            <p className="text-[13px] mt-1">Thử xóa bộ lọc hoặc tìm kiếm with từ khóa khác</p>
                         </div>
                     ) : (
                         <div className="text-center py-12 text-gray-500">
@@ -3477,6 +4344,135 @@ import {
                         </div>
                     )}
                 </section>
+                {showRegisterPopup && selectedCourse && (
+                    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowRegisterPopup(false)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+                            <div className="p-6">
+                                <div className="flex items-center justify-between mb-6">
+                                    <h3 className="text-xl font-bold text-[#1b2b49]">Đăng ký khóa học</h3>
+                                    <button onClick={() => setShowRegisterPopup(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                                <div className="mb-6 p-4 bg-[#f8f9fc] rounded-lg border border-[#dbe5ff]">
+                                    <p className="text-[14px] font-semibold text-[#1E88E5] mb-1">{selectedCourse.title}</p>
+                                    <p className="text-[12px] text-gray-500">Thời gian: {formatDateRange(selectedCourse.date)}</p>
+                                </div>
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-[14px] font-medium text-gray-700 mb-1.5">Họ và tên <span className="text-red-500">*</span></label>
+                                        <input
+                                            type="text"
+                                            value={registerForm.hoTen}
+                                            onChange={(e) => setRegisterForm(prev => ({ ...prev, hoTen: e.target.value }))}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] text-[14px]"
+                                            placeholder="Nhập họ và tên"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[14px] font-medium text-gray-700 mb-1.5">Email <span className="text-red-500">*</span></label>
+                                        <input
+                                            type="email"
+                                            value={registerForm.email}
+                                            onChange={(e) => setRegisterForm(prev => ({ ...prev, email: e.target.value }))}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] text-[14px]"
+                                            placeholder="Nhập email"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[14px] font-medium text-gray-700 mb-1.5">Số điện thoại <span className="text-red-500">*</span></label>
+                                        <input
+                                            type="tel"
+                                            value={registerForm.sdt}
+                                            onChange={(e) => setRegisterForm(prev => ({ ...prev, sdt: e.target.value }))}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] text-[14px]"
+                                            placeholder="Nhập số điện thoại"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[14px] font-medium text-gray-700 mb-1.5">Đơn vị công tác</label>
+                                        <input
+                                            type="text"
+                                            value={registerForm.donVi}
+                                            onChange={(e) => setRegisterForm(prev => ({ ...prev, donVi: e.target.value }))}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] text-[14px]"
+                                            placeholder="Nhập đơn vị công tác"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="mt-6 flex justify-center gap-3">
+                                    <button
+                                        onClick={() => setShowRegisterPopup(false)}
+                                        className="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[14px]"
+                                    >
+                                        Hủy
+                                    </button>
+                                    <button
+                                        onClick={handleRegisterSubmit}
+                                        className="px-6 py-2.5 bg-[#2580f0] text-white rounded-md font-medium hover:bg-[#1e63dc] transition text-[14px]"
+                                    >
+                                        Đăng ký
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {showSuccessPopup && (
+                    <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-white border border-[#86efac] rounded-lg shadow-lg px-6 py-4 flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-[#f0fdf4] flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div>
+                            <p className="text-[14px] font-semibold text-[#16a34a]">Đăng ký thành công!</p>
+                            <p className="text-[12px] text-gray-600">Bạn đã đăng ký khóa học thành công.</p>
+                        </div>
+                    </div>
+                )}
+                {showCancelPopup && courseToCancel && (
+                    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowCancelPopup(false)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+                            <div className="p-6">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h3 className="text-lg font-bold text-[#1b2b49]">Xác nhận hủy đăng ký</h3>
+                                    <button onClick={() => setShowCancelPopup(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                                <div className="mb-6">
+                                    <p className="text-[14px] text-gray-600">Bạn có chắc chắn muốn hủy đăng ký khóa học này?</p>
+                                    <p className="text-[14px] font-semibold text-[#2580f0] mt-2 bg-[#f8f9fc] p-3 rounded border border-gray-100">{courseToCancel.title}</p>
+                                </div>
+                                <div className="flex justify-end gap-3">
+                                    <button
+                                        onClick={() => setShowCancelPopup(false)}
+                                        className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[13px]"
+                                    >
+                                        Hủy bỏ
+                                    </button>
+                                    <button
+                                        onClick={confirmCancelRegister}
+                                        className="px-4 py-2 bg-red-600 text-white rounded-md font-medium hover:bg-red-700 transition text-[13px]"
+                                    >
+                                        Xác nhận hủy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {showCancelSuccessPopup && (
+                    <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-white border border-[#fca5a5] rounded-lg shadow-lg px-6 py-4 flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                        </div>
+                        <div>
+                            <p className="text-[14px] font-semibold text-[#dc2626]">Đã hủy đăng ký!</p>
+                            <p className="text-[12px] text-gray-600">Bạn đã hủy đăng ký khóa học thành công.</p>
+                        </div>
+                    </div>
+                )}
+                </>
             );
         }
 
@@ -3575,15 +4571,68 @@ import {
             );
         }
 
-        function KhoaHocDetailPage({ menu, subPage, article, backToList, navigateToPreview }) {
+        function KhoaHocDetailPage({ menu, subPage, article, backToList, navigateToPreview, isLoggedIn = false, setShowLoginPopup, setPendingAction, registeredCourses, setRegisteredCourses }) {
             if (!article) return null;
+
+            const [showRegisterPopup, setShowRegisterPopup] = useState(false);
+            const [selectedCourse, setSelectedCourse] = useState(null);
+            const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+            const [showCancelPopup, setShowCancelPopup] = useState(false);
+            const [showCancelSuccessPopup, setShowCancelSuccessPopup] = useState(false);
+            const [registerForm, setRegisterForm] = useState({
+                hoTen: 'Nguyễn Văn A',
+                email: 'nguyenvana@example.com',
+                sdt: '0901234567',
+                donVi: 'Công ty ABC'
+            });
 
             const formatDateRange = (dateStr) => {
                 if (!dateStr) return 'Chưa xác định';
                 return dateStr;
             };
 
+            const handleRegister = (e) => {
+                e.stopPropagation();
+                if (!isLoggedIn) {
+                    setShowLoginPopup(true);
+                    setPendingAction({ type: 'dangKyKhoaHoc', item: article });
+                } else {
+                    setSelectedCourse(article);
+                    setShowRegisterPopup(true);
+                }
+            };
+
+            const handleRegisterSubmit = () => {
+                setRegisteredCourses(prev => {
+                    const next = new Map(prev);
+                    next.set(article.id, { status: 'cho-duyet', date: new Date().toLocaleDateString('vi-VN') });
+                    return next;
+                });
+                setShowRegisterPopup(false);
+                setSelectedCourse(null);
+                setShowSuccessPopup(true);
+                setTimeout(() => setShowSuccessPopup(false), 3000);
+            };
+
+            const confirmCancelRegister = () => {
+                setRegisteredCourses(prev => {
+                    const next = new Map(prev);
+                    next.delete(article.id);
+                    return next;
+                });
+                setShowCancelPopup(false);
+                setShowCancelSuccessPopup(true);
+                setTimeout(() => setShowCancelSuccessPopup(false), 3000);
+            };
+
+            React.useEffect(() => {
+                if (isLoggedIn && article && registeredCourses.has(article.id)) {
+                    // Already registered
+                }
+            }, [isLoggedIn, article?.id]);
+
             return (
+                <>
                 <section className="bg-white rounded-[8px] border border-[#E0E0E0] shadow-sm overflow-hidden pb-10">
                     <div className="px-6 py-4 border-b border-[#E0E0E0] bg-white flex items-center gap-2">
                         <button onClick={backToList} className="text-[#616161] hover:text-[#1E88E5] font-medium flex items-center gap-1 transition">
@@ -3603,8 +4652,12 @@ import {
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="flex flex-col gap-1">
-                                    <span className="text-[13px] text-gray-500 font-medium">Thời gian</span>
+                                    <span className="text-[13px] text-gray-500 font-medium">Thời gian mở đăng ký</span>
                                     <span className="text-[14px] text-[#212121] font-medium">{formatDateRange(article.thoiGian)}</span>
+                                </div>
+                                <div className="flex flex-col gap-1">
+                                    <span className="text-[13px] text-gray-500 font-medium">Thời gian học</span>
+                                    <span className="text-[14px] text-[#212121] font-medium">{formatDateRange(article.date)}</span>
                                 </div>
                                 <div className="flex flex-col gap-1">
                                     <span className="text-[13px] text-gray-500 font-medium">Hình thức đào tạo</span>
@@ -3615,10 +4668,10 @@ import {
                                     <span className="text-[14px] text-[#212121]">{article.diaDiem || 'Đang cập nhật'}</span>
                                 </div>
                                 <div className="flex flex-col gap-1">
-                                    <span className="text-[13px] text-gray-500 font-medium">Số lượng mở đăng ký</span>
-                                    <span className="text-[14px] text-[#212121] font-medium">{article.soLuong || 'Đang cập nhật'}</span>
+                                    <span className="text-[13px] text-gray-500 font-medium">Số lượng đăng ký</span>
+                                    <span className="text-[14px] text-[#212121] font-medium">0/60 học viên</span>
                                 </div>
-                                <div className="md:col-span-2 flex flex-col gap-1">
+                                <div className="flex flex-col gap-1">
                                     <span className="text-[13px] text-gray-500 font-medium">Đối tượng tham gia</span>
                                     <span className="text-[14px] text-[#212121]">{article.doiTuong || 'Đang cập nhật'}</span>
                                 </div>
@@ -3630,11 +4683,28 @@ import {
                         </div>
 
                         {/* Meta info */}
-                        <div className="flex flex-wrap items-center gap-4 text-[#757575] text-[14px] mb-6">
-                            <span className="text-[#757575]">Ngày đăng: <strong>{article.date}</strong></span>
-                            {article.field && (
-                                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded font-medium">{article.field}</span>
-                            )}
+                        <div className="flex flex-wrap items-center justify-between gap-4 text-[#757575] text-[14px] mb-6">
+                            <div className="flex flex-wrap items-center gap-4">
+                                <span className="text-[#757575]">Ngày đăng: <strong>{article.date}</strong></span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                {registeredCourses.has(article.id) ? (
+                                    <button
+                                        onClick={() => setShowCancelPopup(true)}
+                                        className="px-4 py-1.5 text-[13px] font-medium text-red-600 hover:text-white border border-red-200 hover:border-red-500 hover:bg-red-500 rounded-full transition flex items-center gap-1.5 shadow-sm"
+                                    >
+                                        Hủy đăng ký
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={handleRegister}
+                                        className="px-5 py-1.5 text-[13px] font-medium text-white bg-[#2580f0] rounded-full hover:bg-[#1e63dc] transition flex items-center gap-1.5 shadow-sm"
+                                    >
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg>
+                                        Đăng ký ngay
+                                    </button>
+                                )}
+                            </div>
                         </div>
 
                         {article.summary && (
@@ -3679,6 +4749,135 @@ import {
                         )}
                     </div>
                 </section>
+                {showRegisterPopup && selectedCourse && (
+                    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowRegisterPopup(false)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+                            <div className="p-6">
+                                <div className="flex items-center justify-between mb-6">
+                                    <h3 className="text-xl font-bold text-[#1b2b49]">Đăng ký khóa học</h3>
+                                    <button onClick={() => setShowRegisterPopup(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                                <div className="mb-6 p-4 bg-[#f8f9fc] rounded-lg border border-[#dbe5ff]">
+                                    <p className="text-[14px] font-semibold text-[#1E88E5] mb-1">{selectedCourse.title}</p>
+                                    <p className="text-[12px] text-gray-500">Thời gian: {formatDateRange(selectedCourse.date)}</p>
+                                </div>
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-[14px] font-medium text-gray-700 mb-1.5">Họ và tên <span className="text-red-500">*</span></label>
+                                        <input
+                                            type="text"
+                                            value={registerForm.hoTen}
+                                            onChange={(e) => setRegisterForm(prev => ({ ...prev, hoTen: e.target.value }))}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] text-[14px]"
+                                            placeholder="Nhập họ và tên"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[14px] font-medium text-gray-700 mb-1.5">Email <span className="text-red-500">*</span></label>
+                                        <input
+                                            type="email"
+                                            value={registerForm.email}
+                                            onChange={(e) => setRegisterForm(prev => ({ ...prev, email: e.target.value }))}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] text-[14px]"
+                                            placeholder="Nhập email"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[14px] font-medium text-gray-700 mb-1.5">Số điện thoại <span className="text-red-500">*</span></label>
+                                        <input
+                                            type="tel"
+                                            value={registerForm.sdt}
+                                            onChange={(e) => setRegisterForm(prev => ({ ...prev, sdt: e.target.value }))}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] text-[14px]"
+                                            placeholder="Nhập số điện thoại"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-[14px] font-medium text-gray-700 mb-1.5">Đơn vị công tác</label>
+                                        <input
+                                            type="text"
+                                            value={registerForm.donVi}
+                                            onChange={(e) => setRegisterForm(prev => ({ ...prev, donVi: e.target.value }))}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] text-[14px]"
+                                            placeholder="Nhập đơn vị công tác"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="mt-6 flex justify-center gap-3">
+                                    <button
+                                        onClick={() => setShowRegisterPopup(false)}
+                                        className="px-6 py-2.5 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[14px]"
+                                    >
+                                        Hủy
+                                    </button>
+                                    <button
+                                        onClick={handleRegisterSubmit}
+                                        className="px-6 py-2.5 bg-[#2580f0] text-white rounded-md font-medium hover:bg-[#1e63dc] transition text-[14px]"
+                                    >
+                                        Đăng ký
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {showSuccessPopup && (
+                    <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-white border border-[#86efac] rounded-lg shadow-lg px-6 py-4 flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-[#f0fdf4] flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div>
+                            <p className="text-[14px] font-semibold text-[#16a34a]">Đăng ký thành công!</p>
+                            <p className="text-[12px] text-gray-600">Bạn đã đăng ký khóa học thành công.</p>
+                        </div>
+                    </div>
+                )}
+                {showCancelPopup && (
+                    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowCancelPopup(false)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+                            <div className="p-6">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h3 className="text-lg font-bold text-[#1b2b49]">Xác nhận hủy đăng ký</h3>
+                                    <button onClick={() => setShowCancelPopup(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                                <div className="mb-6">
+                                    <p className="text-[14px] text-gray-600">Bạn có chắc chắn muốn hủy đăng ký khóa học này?</p>
+                                    <p className="text-[14px] font-semibold text-[#2580f0] mt-2 bg-[#f8f9fc] p-3 rounded border border-gray-100">{article.title}</p>
+                                </div>
+                                <div className="flex justify-end gap-3">
+                                    <button
+                                        onClick={() => setShowCancelPopup(false)}
+                                        className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[13px]"
+                                    >
+                                        Hủy bỏ
+                                    </button>
+                                    <button
+                                        onClick={confirmCancelRegister}
+                                        className="px-4 py-2 bg-red-600 text-white rounded-md font-medium hover:bg-red-700 transition text-[13px]"
+                                    >
+                                        Xác nhận hủy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {showCancelSuccessPopup && (
+                    <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-white border border-[#fca5a5] rounded-lg shadow-lg px-6 py-4 flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                        </div>
+                        <div>
+                            <p className="text-[14px] font-semibold text-[#dc2626]">Đã hủy đăng ký!</p>
+                            <p className="text-[12px] text-gray-600">Bạn đã hủy đăng ký khóa học thành công.</p>
+                        </div>
+                    </div>
+                )}
+                </>
             );
         }
 
@@ -5143,7 +6342,7 @@ import {
             );
         }
 
-        function VuViecDienHinhListPage({ menu, subPage, items, navigateToDetail }) {
+        function VuViecDienHinhListPage({ menu, subPage, items, navigateToDetail, isLoggedIn, userType, setShowLoginPopup, setPendingAction, pendingAction, setMyCases }) {
             const [draftSearch, setDraftSearch] = useState('');
             const [draftFields, setDraftFields] = useState([]);
             const [fieldSearchTerm, setFieldSearchTerm] = useState('');
@@ -5152,6 +6351,240 @@ import {
             const [selectedFields, setSelectedFields] = useState([]);
             const [currentPage, setCurrentPage] = useState(1);
             const [itemsPerPage, setItemsPerPage] = useState(10);
+
+            // Gửi hồ sơ vụ việc states
+            const [showSubmitModal, setShowSubmitModal] = useState(false);
+            const [submitForm, setSubmitForm] = useState({
+                senderName: '',
+                senderEmail: '',
+                senderPhone: '',
+                title: '',
+                requestContent: '',
+                legalField: '',
+                supportType: '',
+                priority: '',
+                obstacleDesc: '',
+                notes: ''
+            });
+            const [submitErrors, setSubmitErrors] = useState({});
+            const [submitFiles, setSubmitFiles] = useState([]);
+            const [submitSuccess, setSubmitSuccess] = useState(false);
+            const [isSubmitting, setIsSubmitting] = useState(false);
+            const [fileError, setFileError] = useState('');
+            const [isDragging, setIsDragging] = useState(false);
+
+            const ALLOWED_EXTENSIONS = ['doc', 'docx', 'xls', 'xlsx', 'pdf', 'png', 'gif'];
+
+            // Auto-open modal after login if it was pending
+            useEffect(() => {
+                if (isLoggedIn && pendingAction && pendingAction.type === 'guiHoSoVuViec') {
+                    setPendingAction(null);
+                    setShowSubmitModal(true);
+                }
+            }, [isLoggedIn, pendingAction]);
+
+            // Auto-fill sender info from account if available
+            useEffect(() => {
+                if (showSubmitModal && isLoggedIn) {
+                    setSubmitForm(prev => ({
+                        ...prev,
+                        senderName: prev.senderName || (userType === 'doanh-nghiep' ? 'Công ty TNHH ABC' : 'Nguyễn Văn A'),
+                        senderEmail: prev.senderEmail || 'nguyenvana@example.com',
+                        senderPhone: prev.senderPhone || '0901234567'
+                    }));
+                }
+            }, [showSubmitModal, isLoggedIn, userType]);
+
+            const handleOpenSubmitForm = () => {
+                if (!isLoggedIn) {
+                    setPendingAction({ type: 'guiHoSoVuViec' });
+                    setShowLoginPopup(true);
+                } else {
+                    setShowSubmitModal(true);
+                }
+            };
+
+            const handleFileChange = (e) => {
+                const selectedFiles = Array.from(e.target.files);
+                const validFiles = [];
+                let hasError = false;
+                
+                selectedFiles.forEach(file => {
+                    const ext = file.name.split('.').pop().toLowerCase();
+                    if (ALLOWED_EXTENSIONS.includes(ext)) {
+                        validFiles.push(file);
+                    } else {
+                        hasError = true;
+                    }
+                });
+
+                if (hasError) {
+                    setFileError('Chỉ chấp nhận các tệp có định dạng: .doc, .docx, .xls, .xlsx, .pdf, .png, .gif');
+                } else {
+                    setFileError('');
+                }
+                
+                if (validFiles.length > 0) {
+                    setSubmitFiles(prev => [...prev, ...validFiles]);
+                }
+                e.target.value = '';
+            };
+
+            const handleDragOver = (e) => {
+                e.preventDefault();
+                setIsDragging(true);
+            };
+
+            const handleDragLeave = () => {
+                setIsDragging(false);
+            };
+
+            const handleDrop = (e) => {
+                e.preventDefault();
+                setIsDragging(false);
+                const selectedFiles = Array.from(e.dataTransfer.files);
+                const validFiles = [];
+                let hasError = false;
+                
+                selectedFiles.forEach(file => {
+                    const ext = file.name.split('.').pop().toLowerCase();
+                    if (ALLOWED_EXTENSIONS.includes(ext)) {
+                        validFiles.push(file);
+                    } else {
+                        hasError = true;
+                    }
+                });
+
+                if (hasError) {
+                    setFileError('Chỉ chấp nhận các tệp có định dạng: .doc, .docx, .xls, .xlsx, .pdf, .png, .gif');
+                } else {
+                    setFileError('');
+                }
+                
+                if (validFiles.length > 0) {
+                    setSubmitFiles(prev => [...prev, ...validFiles]);
+                }
+            };
+
+            const handleRemoveFile = (indexToRemove) => {
+                setSubmitFiles(prev => prev.filter((_, idx) => idx !== indexToRemove));
+            };
+
+            const getFileIcon = (fileName) => {
+                const ext = fileName.split('.').pop().toLowerCase();
+                if (['doc', 'docx'].includes(ext)) {
+                    return (
+                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    );
+                }
+                if (['xls', 'xlsx'].includes(ext)) {
+                    return (
+                        <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    );
+                }
+                if (ext === 'pdf') {
+                    return (
+                        <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                    );
+                }
+                if (['png', 'gif'].includes(ext)) {
+                    return (
+                        <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    );
+                }
+                return (
+                    <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                );
+            };
+
+            const formatFileSize = (bytes) => {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+            };
+
+            const validateForm = () => {
+                const errors = {};
+                if (!submitForm.title.trim()) errors.title = 'Tiêu đề không được để trống';
+                if (!submitForm.requestContent.trim()) errors.requestContent = 'Nội dung yêu cầu không được để trống';
+                if (!submitForm.legalField) errors.legalField = 'Vui lòng chọn lĩnh vực pháp luật';
+                if (!submitForm.supportType) errors.supportType = 'Vui lòng chọn loại hình hỗ trợ';
+                return errors;
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                const errors = validateForm();
+                if (Object.keys(errors).length > 0) {
+                    setSubmitErrors(errors);
+                    return;
+                }
+                
+                setIsSubmitting(true);
+                setTimeout(() => {
+                    setIsSubmitting(false);
+                    setSubmitSuccess(true);
+                    
+                    const newCase = {
+                        id: Date.now(),
+                        senderName: submitForm.senderName,
+                        senderEmail: submitForm.senderEmail,
+                        senderPhone: submitForm.senderPhone,
+                        title: submitForm.title,
+                        legalField: submitForm.legalField,
+                        supportType: submitForm.supportType,
+                        priority: submitForm.priority || "Trung bình",
+                        requestContent: submitForm.requestContent,
+                        obstacleDesc: submitForm.obstacleDesc,
+                        notes: submitForm.notes,
+                        status: "cho-tiep-nhan",
+                        receptionResult: "Hồ sơ mới gửi đang trong trạng thái chờ tiếp nhận và phân công xử lý.",
+                        date: new Date().toLocaleDateString('vi-VN'),
+                        files: submitFiles.map(f => f.name)
+                    };
+                    if (typeof setMyCases === 'function') {
+                        setMyCases(prev => [newCase, ...prev]);
+                    }
+                    
+                    console.log('Submitted Ho So Vu Viec:', newCase);
+
+                    setTimeout(() => {
+                        handleCloseSubmitModal();
+                    }, 2000);
+                }, 1000);
+            };
+
+            const handleCloseSubmitModal = () => {
+                setShowSubmitModal(false);
+                setSubmitForm({
+                    senderName: '',
+                    senderEmail: '',
+                    senderPhone: '',
+                    title: '',
+                    requestContent: '',
+                    legalField: '',
+                    supportType: '',
+                    priority: '',
+                    obstacleDesc: '',
+                    notes: ''
+                });
+                setSubmitErrors({});
+                setSubmitFiles([]);
+                setFileError('');
+                setSubmitSuccess(false);
+            };
 
             const allFields = useMemo(() => {
                 const fields = [...new Set(items.map(item => item.field).filter(Boolean))];
@@ -5217,9 +6650,16 @@ import {
             };
 
             return (
+                <>
                 <section className="rounded-[8px] border border-[#d8e1f2] bg-white p-6 lg:p-10 shadow-sm min-h-[600px]">
                     <p className="text-[13px] font-medium text-[#66738f] mb-4">Trang chủ / {menu.label} / {subPage.label}</p>
-                    <h2 className="text-[28px] font-bold text-[#1b2b49] mb-6 pb-4 border-b border-[#dbe5ff]">{subPage.label}</h2>
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-[#dbe5ff]">
+                        <h2 className="text-[28px] font-bold text-[#1b2b49]">{subPage.label}</h2>
+                        <button onClick={handleOpenSubmitForm} className="px-5 py-2.5 text-white bg-[#2580f0] rounded-md font-semibold hover:bg-[#1e63dc] transition shadow-sm flex items-center gap-2 shrink-0">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4z"></path></svg>
+                            Gửi hồ sơ vụ việc
+                        </button>
+                    </div>
 
                     {/* Filters Section */}
                     <div className="bg-white rounded-lg border border-[#d8e1f2] shadow-sm mb-8">
@@ -5333,7 +6773,7 @@ import {
                                                 onChange={(e) => { setItemsPerPage(Number(e.target.value)); setCurrentPage(1); }}
                                                 className="border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:border-[#2580f0]"
                                             >
-                                                <option value={10}>10 bản ghi</option>
+                                                <option value={12}>12 bản ghi</option>
                                                 <option value={20}>20 bản ghi</option>
                                                 <option value={50}>50 bản ghi</option>
                                             </select>
@@ -5365,6 +6805,283 @@ import {
                         </div>
                     )}
                 </section>
+
+                {showSubmitModal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={handleCloseSubmitModal}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
+                            {/* Header */}
+                            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                                <h3 className="text-[18px] font-bold text-[#1b2b49]">Gửi hồ sơ vụ việc</h3>
+                                <button onClick={handleCloseSubmitModal} className="text-gray-400 hover:text-gray-600 transition">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+
+                            {submitSuccess ? (
+                                <div className="text-center py-12 px-6">
+                                    <svg className="w-16 h-16 mx-auto mb-4 text-green-500" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <p className="text-lg font-semibold text-gray-800">Gửi hồ sơ vụ việc thành công!</p>
+                                    <p className="text-sm text-gray-500 mt-2">Chúng tôi đã tiếp nhận hồ sơ vụ việc của bạn và sẽ tiến hành xử lý trong thời gian sớm nhất.</p>
+                                </div>
+                            ) : (
+                                <>
+                                    {/* Body */}
+                                    <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-4 text-[14px]">
+                                        {/* Thông tin người gửi (Optional) */}
+                                        <div className="bg-gray-50/80 p-3.5 rounded-lg border border-gray-200 space-y-2.5">
+                                            <div className="flex items-center gap-2 border-b border-gray-200 pb-2">
+                                                <svg className="w-4 h-4 text-[#2580f0]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                </svg>
+                                                <span className="font-semibold text-gray-800 text-[13.5px]">Thông tin người gửi</span>
+                                            </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                                <div>
+                                                    <label className="block font-medium text-gray-700 text-xs mb-1">Họ tên</label>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Nhập họ và tên"
+                                                        value={submitForm.senderName}
+                                                        onChange={(e) => setSubmitForm(prev => ({ ...prev, senderName: e.target.value }))}
+                                                        className="w-full px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] bg-white text-xs"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block font-medium text-gray-700 text-xs mb-1">Email</label>
+                                                    <input
+                                                        type="email"
+                                                        placeholder="Nhập email liên hệ"
+                                                        value={submitForm.senderEmail}
+                                                        onChange={(e) => setSubmitForm(prev => ({ ...prev, senderEmail: e.target.value }))}
+                                                        className="w-full px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] bg-white text-xs"
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <label className="block font-medium text-gray-700 text-xs mb-1">Số điện thoại</label>
+                                                    <input
+                                                        type="tel"
+                                                        placeholder="Nhập số điện thoại"
+                                                        value={submitForm.senderPhone}
+                                                        onChange={(e) => setSubmitForm(prev => ({ ...prev, senderPhone: e.target.value }))}
+                                                        className="w-full px-3 py-1.5 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] bg-white text-xs"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Tiêu đề (Required) */}
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">
+                                                <span className="text-red-500 mr-0.5">*</span>Tiêu đề
+                                            </label>
+                                            <input
+                                                type="text"
+                                                placeholder="Nhập tiêu đề hồ sơ vụ việc"
+                                                value={submitForm.title}
+                                                onChange={(e) => {
+                                                    setSubmitForm(prev => ({ ...prev, title: e.target.value }));
+                                                    if (submitErrors.title) setSubmitErrors(prev => ({ ...prev, title: '' }));
+                                                }}
+                                                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:border-[#2580f0] ${submitErrors.title ? 'border-red-500' : 'border-gray-300'}`}
+                                            />
+                                            {submitErrors.title && <p className="mt-1 text-xs text-red-500">{submitErrors.title}</p>}
+                                        </div>
+
+                                        {/* Nội dung yêu cầu (Required) */}
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">
+                                                <span className="text-red-500 mr-0.5">*</span>Nội dung yêu cầu
+                                            </label>
+                                            <textarea
+                                                rows="3"
+                                                placeholder="Nhập chi tiết nội dung yêu cầu hỗ trợ"
+                                                value={submitForm.requestContent}
+                                                onChange={(e) => {
+                                                    setSubmitForm(prev => ({ ...prev, requestContent: e.target.value }));
+                                                    if (submitErrors.requestContent) setSubmitErrors(prev => ({ ...prev, requestContent: '' }));
+                                                }}
+                                                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:border-[#2580f0] resize-y ${submitErrors.requestContent ? 'border-red-500' : 'border-gray-300'}`}
+                                            />
+                                            {submitErrors.requestContent && <p className="mt-1 text-xs text-red-500">{submitErrors.requestContent}</p>}
+                                        </div>
+
+                                        {/* Lĩnh vực pháp luật & Loại hình hỗ trợ & Độ ưu tiên (Grid) */}
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                            {/* Lĩnh vực pháp luật */}
+                                            <div>
+                                                <label className="block font-semibold text-gray-700 mb-1">
+                                                    <span className="text-red-500 mr-0.5">*</span>Lĩnh vực pháp luật
+                                                </label>
+                                                <select
+                                                    value={submitForm.legalField}
+                                                    onChange={(e) => {
+                                                        setSubmitForm(prev => ({ ...prev, legalField: e.target.value }));
+                                                        if (submitErrors.legalField) setSubmitErrors(prev => ({ ...prev, legalField: '' }));
+                                                    }}
+                                                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:border-[#2580f0] bg-white ${submitErrors.legalField ? 'border-red-500' : 'border-gray-300'}`}
+                                                >
+                                                    <option value="">Chọn lĩnh vực pháp luật</option>
+                                                    <option value="Thương mại">Thương mại</option>
+                                                    <option value="Thuế / Hóa đơn điện tử">Thuế / Hóa đơn điện tử</option>
+                                                    <option value="Lao động / BHXH">Lao động / BHXH</option>
+                                                    <option value="Sở hữu trí tuệ">Sở hữu trí tuệ</option>
+                                                    <option value="Doanh nghiệp">Doanh nghiệp</option>
+                                                    <option value="Xây dựng / Bất động sản">Xây dựng / Bất động sản</option>
+                                                    <option value="Hành chính">Hành chính</option>
+                                                    <option value="Khác">Khác</option>
+                                                </select>
+                                                {submitErrors.legalField && <p className="mt-1 text-xs text-red-500">{submitErrors.legalField}</p>}
+                                            </div>
+
+                                            {/* Loại hình hỗ trợ */}
+                                            <div>
+                                                <label className="block font-semibold text-gray-700 mb-1">
+                                                    <span className="text-red-500 mr-0.5">*</span>Loại hình hỗ trợ
+                                                </label>
+                                                <select
+                                                    value={submitForm.supportType}
+                                                    onChange={(e) => {
+                                                        setSubmitForm(prev => ({ ...prev, supportType: e.target.value }));
+                                                        if (submitErrors.supportType) setSubmitErrors(prev => ({ ...prev, supportType: '' }));
+                                                     }}
+                                                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:border-[#2580f0] bg-white ${submitErrors.supportType ? 'border-red-500' : 'border-gray-300'}`}
+                                                >
+                                                    <option value="">Chọn loại hình hỗ trợ</option>
+                                                    <option value="Giải quyết tranh chấp">Giải quyết tranh chấp</option>
+                                                    <option value="Tư vấn pháp lý">Tư vấn pháp lý</option>
+                                                    <option value="Soạn thảo văn bản">Soạn thảo văn bản</option>
+                                                    <option value="Hỗ trợ thủ tục hành chính">Hỗ trợ thủ tục hành chính</option>
+                                                    <option value="Đại diện ngoài tố tụng">Đại diện ngoài tố tụng</option>
+                                                    <option value="Khác">Khác</option>
+                                                </select>
+                                                {submitErrors.supportType && <p className="mt-1 text-xs text-red-500">{submitErrors.supportType}</p>}
+                                            </div>
+
+                                            {/* Độ ưu tiên */}
+                                            <div>
+                                                <label className="block font-semibold text-gray-700 mb-1">Độ ưu tiên</label>
+                                                <select
+                                                    value={submitForm.priority}
+                                                    onChange={(e) => setSubmitForm(prev => ({ ...prev, priority: e.target.value }))}
+                                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] bg-white"
+                                                >
+                                                    <option value="">Chọn độ ưu tiên</option>
+                                                    <option value="Thấp">Thấp</option>
+                                                    <option value="Trung bình">Trung bình</option>
+                                                    <option value="Cao">Cao</option>
+                                                    <option value="Rất cao">Rất cao</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        {/* Mô tả vướng mắc */}
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">Mô tả vướng mắc</label>
+                                            <textarea
+                                                rows="2"
+                                                placeholder="Mô tả cụ thể về vướng mắc doanh nghiệp gặp phải (nếu có)"
+                                                value={submitForm.obstacleDesc}
+                                                onChange={(e) => setSubmitForm(prev => ({ ...prev, obstacleDesc: e.target.value }))}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] resize-y"
+                                            />
+                                        </div>
+
+                                        {/* Ghi chú */}
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">Ghi chú</label>
+                                            <textarea
+                                                rows="2"
+                                                placeholder="Các ghi chú hoặc yêu cầu khác"
+                                                value={submitForm.notes}
+                                                onChange={(e) => setSubmitForm(prev => ({ ...prev, notes: e.target.value }))}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] resize-y"
+                                            />
+                                        </div>
+
+                                        {/* Tài liệu đính kèm */}
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">Tài liệu đính kèm</label>
+                                            <div
+                                                onDragOver={handleDragOver}
+                                                onDragLeave={handleDragLeave}
+                                                onDrop={handleDrop}
+                                                className={`border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition ${isDragging ? 'border-[#2580f0] bg-blue-50/50' : 'border-gray-300 hover:border-[#2580f0] bg-gray-50/30'}`}
+                                            >
+                                                <input
+                                                    type="file"
+                                                    multiple
+                                                    id="case-file-upload-input"
+                                                    onChange={handleFileChange}
+                                                    accept=".doc,.docx,.xls,.xlsx,.pdf,.png,.gif"
+                                                    className="hidden"
+                                                />
+                                                <label htmlFor="case-file-upload-input" className="cursor-pointer block">
+                                                    <svg className="w-8 h-8 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                                    </svg>
+                                                    <p className="font-semibold text-gray-700 text-[13px]">Kéo thả tệp vào đây hoặc <span className="text-[#2580f0] hover:underline">chọn tệp</span></p>
+                                                    <p className="text-gray-400 text-[11px] mt-1">Định dạng chấp nhận: .doc, .docx, .xls, .xlsx, .pdf, .png, .gif</p>
+                                                </label>
+                                            </div>
+                                            {fileError && <p className="mt-1 text-xs text-red-500">{fileError}</p>}
+
+                                            {/* Display selected files */}
+                                            {submitFiles.length > 0 && (
+                                                <div className="mt-3 space-y-2 max-h-36 overflow-y-auto pr-1">
+                                                    {submitFiles.map((file, index) => (
+                                                        <div key={index} className="flex items-center justify-between p-2 bg-gray-50 border border-gray-100 rounded-md">
+                                                            <div className="flex items-center gap-2 min-w-0">
+                                                                {getFileIcon(file.name)}
+                                                                <span className="text-xs font-medium text-gray-700 truncate max-w-[280px]" title={file.name}>{file.name}</span>
+                                                                <span className="text-[10px] text-gray-400">({formatFileSize(file.size)})</span>
+                                                            </div>
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => handleRemoveFile(index)}
+                                                                className="text-gray-400 hover:text-red-500 transition p-1"
+                                                            >
+                                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </form>
+
+                                    {/* Footer */}
+                                    <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-100 bg-gray-50/50 rounded-b-lg">
+                                        <button
+                                            type="button"
+                                            onClick={handleCloseSubmitModal}
+                                            className="px-5 py-2 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[13px]"
+                                            disabled={isSubmitting}
+                                        >
+                                            Hủy
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={handleSubmit}
+                                            className="px-5 py-2 bg-[#2580f0] text-white rounded-md font-semibold hover:bg-[#1e63dc] transition text-[13px] flex items-center gap-2"
+                                            disabled={isSubmitting}
+                                        >
+                                            {isSubmitting && (
+                                                <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                                </svg>
+                                            )}
+                                            Gửi hồ sơ
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                )}
+                </>
             );
         }
 
@@ -5574,6 +7291,8 @@ import {
         function NewsDetailPage({ menu, subPage, article, backToList, navigateToPreview }) {
             if (!article) return null;
 
+            const isEventOrFeaturedNews = article.subKey === 'su-kien' || article.subKey === 'tin-tuc-noi-bat' || (subPage && (subPage.key === 'su-kien' || subPage.key === 'tin-tuc-noi-bat'));
+
             return (
                 <section className="bg-white rounded-[8px] border border-[#E0E0E0] shadow-sm overflow-hidden pb-10">
                     <div className="px-6 py-4 border-b border-[#E0E0E0] bg-white flex items-center gap-2">
@@ -5590,6 +7309,9 @@ import {
                         {/* Meta info */}
                         <div className="flex flex-wrap items-center gap-4 text-[#757575] text-[14px] mb-6">
                             <span className="text-[#757575]">Ngày đăng: <strong>{article.date}</strong></span>
+                            {article.field && !isEventOrFeaturedNews && (
+                                <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded font-medium">{article.field}</span>
+                            )}
                         </div>
 
                         {/* Tóm tắt - in nghiêng, hiển thị trước ảnh */}
@@ -5900,9 +7622,9 @@ import {
             const [isFieldOpen, setIsFieldOpen] = useState(false);
             const [searchTerm, setSearchTerm] = useState('');
             const [selectedFields, setSelectedFields] = useState([]);
-            
+
             const [currentPage, setCurrentPage] = useState(1);
-            const [itemsPerPage, setItemsPerPage] = useState(10);
+            const [itemsPerPage, setItemsPerPage] = useState(12);
 
             // Cấu hình linh hoạt bộ lọc dựa theo prop filterType
             let filterOptions = [];
@@ -6080,7 +7802,7 @@ import {
                                         onChange={(e) => { setItemsPerPage(Number(e.target.value)); setCurrentPage(1); }}
                                         className="border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:border-[#2580f0]"
                                     >
-                                        <option value={10}>10 bản ghi</option>
+                                        <option value={12}>12 bản ghi</option>
                                         <option value={20}>20 bản ghi</option>
                                         <option value={50}>50 bản ghi</option>
                                     </select>
@@ -6159,10 +7881,2932 @@ import {
             );
         }
 
+        export default function HoTroPhapLyDoanhNghiepPage() {
+            const navItems = [
+                { key: "trang-chu", label: "Trang chủ" },
+                {
+                    key: "gioi-thieu",
+                    label: "Giới thiệu",
+                    children: [
+                        { key: "chuong-trinh-lien-nganh-intro", label: "Chương trình hỗ trợ pháp lý liên ngành" },
+                        { key: "chuc-nang-nhiem-vu", label: "Chức năng, nhiệm vụ" },
+                        { key: "co-cau-to-chuc", label: "Cơ cấu tổ chức" },
+                        { key: "lien-he", label: "Liên hệ" }
+                    ]
+                },
+                {
+                    key: "hoat-dong-trung-tam",
+                    label: "Tin hoạt động",
+                    children: [
+                        { key: "tin-tuc-noi-bat", label: "Tin tức nổi bật" },
+                        { key: "thong-bao", label: "Thông báo" },
+                        { key: "hoat-dong-phoi-hop", label: "Hoạt động phối hợp" },
+                        { key: "multimedia", label: "Multimedia" },
+                    ]
+                },
+                {
+                    key: "dao-tao",
+                    label: "Đào tạo",
+                    children: [
+                        { key: "ke-hoach-dao-tao", label: "Kế hoạch đào tạo" },
+                        { key: "khoa-hoc", label: "Khóa học" }
+                    ]
+                },
+                {
+                    key: "tu-van-phap-luat",
+                    label: "Tư vấn pháp luật",
+                    children: [
+                        { key: "hoi-dap-phap-luat", label: "Hỏi đáp pháp luật" },
+                        { key: "tu-van-chuyen-sau", label: "Tư vấn chuyên sâu" },
+                        { key: "mang-luoi-tu-van-vien", label: "Mạng lưới tư vấn viên" },
+                        { key: "bieu-mau-hop-dong", label: "Biểu mẫu, hợp đồng" },
+                        { key: "tai-lieu-htpl", label: "Tài liệu HTPL doanh nghiệp" },
+                        { key: "vu-viec-dien-hinh", label: "Vụ việc điển hình" }
+                    ]
+                },
+                {
+                    key: "van-ban-phap-luat",
+                    label: "Văn bản pháp luật"
+                },
+                {
+                    key: "nghien-cuu-trao-doi",
+                    label: "Nghiên cứu - trao đổi",
+                    children: [
+                        { key: "nghien-cuu-trao-doi-chi-tiet", label: "Nghiên cứu - trao đổi" },
+                        { key: "phong-van", label: "Bài phỏng vấn" }
+                    ]
+                },
+                {
+                    key: "chuong-trinh-ke-hoach",
+                    label: "Chương trình - Kế hoạch",
+                    children: [
+                        { key: "chuong-trinh-bo-nganh", label: "Chương trình - Kế hoạch bộ, ngành" },
+                        { key: "chuong-trinh-dia-phuong", label: "Chương trình - Kế hoạch địa phương" }
+                    ]
+                }
+            ];
 
-// ==========================================
-// 2. ADDITIONAL COMPONENTS AFTER APP
-// ==========================================
+            const bieuMauData = [
+                { id: 201, title: "Mẫu hợp đồng mua bán hàng hóa", agency: "Bộ Công Thương", type: "Biểu mẫu", field: "Thương mại", fileName: "Mau_HD_MuaBan.doc", date: "15/04/2026", summary: "Mẫu hợp đồng mua bán hàng hóa chuẩn dành cho doanh nghiệp trong nước và quốc tế...", attachments: [{ name: "Mau_HD_MuaBan_BanChuan.doc", url: "#" }, { name: "PhuLuc_HD.docx", url: "#" }] },
+                { id: 204, title: "Mẫu hợp đồng lao động chuẩn", agency: "Bộ Lao động - Thương binh và Xã hội", type: "Biểu mẫu", field: "Lao động", fileName: "HopDong_LaoDong.docx", date: "10/04/2026", summary: "Hợp đồng lao động mẫu theo Bộ Luật Lao động dạng Word, dễ dàng chỉnh sửa thông tin người lao động...", attachments: [{ name: "HopDong_LaoDong_2026.docx", url: "#" }] },
+                { id: 206, title: "Bảng tính lương nhân viên mẫu", agency: "Bộ Tài chính", type: "Biểu mẫu", field: "Nhân sự - Kế toán", fileName: "BangTinhLuong.xlsx", date: "08/04/2026", summary: "File excel mẫu tính lương cho nhân viên có thiết lập sẵn công thức tính thuế TNCN và BHXH...", attachments: [{ name: "Bang_Tinh_Luong_NV_2026.xlsx", url: "#" }] },
+                { id: 202, title: "Mẫu điều lệ công ty cổ phần", agency: "Bộ Kế hoạch và Đầu tư", type: "Biểu mẫu", field: "Doanh nghiệp", fileName: "DieuLe_CTCP.pdf", date: "14/04/2026", summary: "Mẫu điều lệ công ty cổ phần mới nhất theo Luật Doanh nghiệp hiện hành, đầy đủ các điều khoản cơ bản...", attachments: [{ name: "DieuLe_CTCP_2026.pdf", url: "#" }] },
+                { id: 203, title: "Mẫu nội quy lao động", agency: "Bộ Lao động - Thương binh và Xã hội", type: "Biểu mẫu", field: "Lao động", fileName: "NoiQuy_LaoDong.pdf", date: "12/04/2026", summary: "Nội quy lao động mẫu cho doanh nghiệp vừa và nhỏ, bao gồm kỷ luật lao động và thời giờ làm việc...", attachments: [{ name: "NoiQuy_LaoDong_Standard.pdf", url: "#" }] },
+                { id: 205, title: "Mẫu biên bản họp hội đồng quản trị", agency: "Bộ Kế hoạch và Đầu tư", type: "Biểu mẫu", field: "Doanh nghiệp", fileName: "BienBan_HDQT.pdf", date: "09/04/2026", summary: "Biên bản mẫu cho các cuộc họp HĐQT định kỳ, ghi nhận nghị quyết và biểu quyết...", attachments: [{ name: "BienBan_HopHDQT.pdf", url: "#" }] },
+                { id: 207, title: "Mẫu báo cáo kết quả hoạt động kinh doanh", agency: "Bộ Tài chính", type: "Biểu mẫu", field: "Nhân sự - Kế toán", fileName: "BaoCao_KD.xlsx", date: "05/04/2026", summary: "Mẫu bảng báo cáo doanh thu chi phí file excel phục vụ cho việc theo dõi nội bộ...", attachments: [{ name: "BaoCao_KQKQ_Thang.xlsx", url: "#" }] },
+                { id: 208, title: "Mẫu quyết định bổ nhiệm giám đốc", agency: "Bộ Kế hoạch và Đầu tư", type: "Biểu mẫu", field: "Doanh nghiệp", fileName: "QD_BoNhiem.docx", date: "01/04/2026", summary: "Quyết định bổ nhiệm chức danh quản lý trong doanh nghiệp theo chuẩn biểu mẫu hành chính...", attachments: [{ name: "QuyetDinh_BoNhiem_GiamDoc.docx", url: "#" }] },
+                { id: 209, title: "Mẫu hợp đồng cho thuê mặt bằng", agency: "Bộ Xây dựng", type: "Biểu mẫu", field: "Thương mại", fileName: "HD_ThueNha.doc", date: "28/03/2026", summary: "Hợp đồng thuê mặt bằng kinh doanh, thuê văn phòng với các điều khoản bảo vệ quyền lợi hai bên...", attachments: [{ name: "Hop_Dong_Thue_Mat_Bang.doc", url: "#" }] },
+                { id: 210, title: "Mẫu biên bản thanh lý hợp đồng", agency: "Bộ Công Thương", type: "Biểu mẫu", field: "Thương mại", fileName: "ThanhLy_HD.pdf", date: "20/03/2026", summary: "Biên bản thỏa thuận thanh lý hợp đồng giữa 2 bên sau khi hoàn tất nghĩa vụ...", attachments: [{ name: "BienBan_ThanhLyHopDong.pdf", url: "#" }] },
+                { id: 211, title: "Đơn xin nghỉ việc / Chấm dứt hợp đồng lao động", agency: "Bộ Lao động - Thương binh và Xã hội", type: "Biểu mẫu", field: "Lao động", fileName: "DonNghiViec.docx", date: "15/03/2026", summary: "Mẫu đơn xin nghỉ việc chuẩn theo quy định luật pháp dành cho người lao động...", attachments: [{ name: "Don_Xin_Nghi_Viec.docx", url: "#" }] },
+                { id: 212, title: "Phiếu thu / Phiếu chi nội bộ doanh nghiệp", agency: "Bộ Tài chính", type: "Biểu mẫu", field: "Nhân sự - Kế toán", fileName: "PhieuThuChi.xlsx", date: "10/03/2026", summary: "Mẫu phiếu thu chi tự động định dạng dùng in ấn nhanh khổ A5...", attachments: [{ name: "Phieu_Thu_Chi_Standard.xlsx", url: "#" }] }
+            ];
+
+            const taiLieuHTPLData = [
+                { id: 1401, title: "Cẩm nang hướng dẫn khởi nghiệp cho DNNVV", date: "10/04/2026", summary: "Tài liệu tổng hợp các bước cơ bản để thành lập và vận hành doanh nghiệp mới theo chuẩn quy định hiện hành...", thumb: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=300&q=80", attachments: [{ name: "Cam_Nang_Khoi_Nghiep.pdf", url: "#", size: "2.4 MB" }], content: "<h3>Lời nói đầu</h3><p>Khởi nghiệp là một hành trình đầy thách thức và cơ hội. Tài liệu này được biên soạn nhằm cung cấp cho các doanh nghiệp nhỏ và vừa (DNNVV) những kiến thức nền tảng về pháp lý, từ khâu thành lập đến vận hành doanh nghiệp.</p><h3>Chương 1: Thành lập doanh nghiệp</h3><p>Để thành lập một doanh nghiệp, chủ doanh nghiệp cần chuẩn bị các giấy tờ sau: Giấy đề nghị đăng ký doanh nghiệp, Điều lệ công ty, Danh sách thành viên/cổ đông, Bản sao giấy tờ pháp lý cá nhân của người đại diện pháp luật. Hồ sơ được nộp tại Phòng Đăng ký kinh doanh thuộc Sở Kế hoạch và Đầu tư tỉnh/thành phố nơi doanh nghiệp đặt trụ sở chính.</p><h3>Chương 2: Con dấu pháp lý</h3><p>Sau khi được cấp Giấy chứng nhận đăng ký doanh nghiệp, doanh nghiệp tiến hành khắc con dấu tại cơ sở được phép khắc dấu. Mẫu con dấu phải được thông báo với cơ quan đăng ký kinh doanh trước khi sử dụng.</p><h3>Chương 3: Nghĩa vụ thuế ban đầu</h3><p>Doanh nghiệp mới thành lập phải thực hiện kê khai và nộp thuế môn bài trong thời hạn 30 ngày kể từ ngày được cấp Giấy chứng nhận đăng ký doanh nghiệp. Mức thuế môn bài phụ thuộc vào vốn điều lệ đăng ký: trên 10 tỷ đồng: 3 triệu/năm; dưới 10 tỷ đồng: 2 triệu/năm.</p><h3>Chương 4: Lao động và bảo hiểm</h3><p>Khi tuyển dụng lao động, doanh nghiệp phải ký kết hợp đồng lao động bằng văn bản, đăng ký lao động với cơ quan quản lý nhà nước về lao động, và thực hiện đóng bảo hiểm xã hội, bảo hiểm y tế, bảo hiểm thất nghiệp cho người lao động theo quy định.</p>" },
+                { id: 1402, title: "Sổ tay pháp lý về Hợp đồng thương mại", date: "08/04/2026", summary: "Các lưu ý quan trọng khi soạn thảo và ký kết hợp đồng thương mại nhằm giảm thiểu rủi ro pháp lý cho công ty...", thumb: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=300&q=80", attachments: [{ name: "So_Tay_Hop_Dong.pdf", url: "#", size: "3.1 MB" }], content: "<h3>Giới thiệu</h3><p>Hợp đồng thương mại là công cụ pháp lý quan trọng nhất trong hoạt động kinh doanh. Một hợp đồng được soạn thảo kỹ lưỡng sẽ bảo vệ quyền lợi của doanh nghiệp và giảm thiểu tranh chấp.</p><h3>Điều kiện có hiệu lực của hợp đồng</h3><p>Theo Bộ luật Dân sự 2015, hợp đồng có hiệu lực khi: Các bên tham gia có năng lực hành vi dân sự đầy đủ; Mục đích và nội dung không vi phạm điều cấm của luật; Hình thức phù hợp với quy định của pháp luật. Đối với một số hợp đồng đặc thù (mua bán bất động sản, chuyển nhượng vốn), pháp luật yêu cầu phải công chứng, chứng thực.</p><h3>Các điều khoản cơ bản</h3><p>Một hợp đồng thương mại chuẩn cần có các điều khoản: Thông tin các bên; Đối tượng hợp đồng; Số lượng, chất lượng; Giá cả và phương thức thanh toán; Thời hạn, địa điểm thực hiện; Phạt vi phạm và bồi thường thiệt hại; Giải quyết tranh chấp.</p><h3>Rủi ro pháp lý thường gặp</h3><p>Các rủi ro thường gặp: Điều khoản không rõ ràng dẫn đến hiểu nhầm; Thiếu điều khoản phạt vi phạm; Không quy định rõ thời hạn thực hiện; Không có cơ chế giải quyết tranh chấp hiệu quả.</p>" },
+                { id: 1403, title: "Hướng dẫn thủ tục quyết toán thuế năm 2026", date: "05/04/2026", summary: "Chi tiết các bước quyết toán thuế TNDN, TNCN dành cho bộ phận kế toán của các doanh nghiệp vừa và nhỏ...", thumb: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=300&q=80", attachments: [{ name: "Huong_Dan_Quyet_Toan_Thue.pdf", url: "#", size: "1.8 MB" }], content: "<h3>Tổng quan</h3><p>Quyết toán thuế là nghĩa vụ bắt buộc của mọi doanh nghiệp tại Việt Nam. Tài liệu này hướng dẫn chi tiết quy trình quyết toán thuế thu nhập doanh nghiệp (TNDN) và thuế thu nhập cá nhân (TNCN) năm 2026.</p><h3>Thời hạn nộp hồ sơ quyết toán</h3><p>Đối với thuế TNDN: Chậm nhất là ngày thứ 90 kể from ngày kết thúc năm dương lịch hoặc năm tài chính. Đối với thuế TNCN: Cùng thời hạn với quyết toán thuế TNDN. Trường hợp doanh nghiệp bị giải thể, chấm dứt hoạt động thì thời hạn nộp là 45 ngày kể from ngày có quyết định giải thể.</p><h3>Hồ sơ quyết toán thuế TNDN</h3><p>Tờ khai quyết toán thuế TNDN mẫu 03/TNDN; Báo cáo tài chính năm; Các phụ lục kèm theo (nếu có).</p><h3>Hồ sơ quyết toán thuế TNCN</h3><p>Tờ khai quyết toán thuế TNCN mẫu 05/QTT-TNCN; Bảng kê thu nhập chịu thuế; Chứng từ khấu trừ thuế (nếu có).</p><h3>Lưu ý quan trọng</h3><p>Các chi phí được trừ khi tính thuế TNDN phải có hóa đơn, chứng từ hợp pháp; Chi phí lương phải có quy chế lương và hợp đồng lao động; Chi phí quảng cáo, tiếp thị, hoa hồng bị giới hạn ở mức 15% tổng chi phí hợp lý (trừ một số trường hợp đặc biệt).</p>" },
+                { id: 1404, title: "Sổ tay bảo hộ quyền sở hữu trí tuệ", date: "01/04/2026", summary: "Quy trình đăng ký, bảo vệ nhãn hiệu, bản quyền và các tài sản trí tuệ khác của doanh nghiệp trong bối cảnh số hóa...", thumb: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=300&q=80", attachments: [{ name: "So_Tay_SHTT.pdf", url: "#", size: "4.2 MB" }], content: "<h3>Giới thiệu về sở hữu trí tuệ</h3><p>Sở hữu trí tuệ (SHTT) là tài sản vô hình quan trọng của doanh nghiệp, bao gồm: Nhãn hiệu, Sáng chế/Giải pháp hữu ích, Kiểu dáng công nghiệp, Bản quyền tác giả, Bí mật kinh doanh.</p><h3>Đăng ký nhãn hiệu</h3><p>Quy trình đăng ký nhãn hiệu tại Cục Sở hữu trí tuệ: Nộp đơn đăng ký (01 Tờ khai + 05 mẫu nhãn + Giấy ủy quyền + Chứng từ nộp phí); Thẩm định hình thức (1-2 tháng); Công bố đơn (2 tháng); Thẩm định nội dung (9-12 tháng); Cấp Giấy chứng nhận đăng ký nhãn hiệu (thời hạn bảo hộ: 10 năm, có thể gia hạn).</p><h3>Đăng ký bản quyền tác giả</h3><p>Bản quyền phát sinh tự động từ khi tác phẩm được định hình. Tuy nhiên, việc đăng ký bản quyền tại Cục Bản quyền tác giả sẽ tạo chứng cứ pháp lý mạnh khi có tranh chấp. Hồ sơ gồm: Tờ khai, 02 bản sao tác phẩm, Giấy ủy quyền, Giấy cam đoan đồng tác giả (nếu có).</p><h3>Bảo vệ quyền SHTT</h3><p>Khi phát hiện hành vi xâm phạm, doanh nghiệp có thể: Yêu cầu chấm dứt hành vi xâm phạm; Khởi kiện dân sự đòi bồi thường; Yêu cầu cơ quan nhà nước xử lý hành chính; Khởi tố hình sự (đối với hành vi cố ý xâm phạm nghiêm trọng).</p>" },
+                { id: 1405, title: "Cẩm nang pháp luật lao động 2026", date: "25/03/2026", summary: "Cập nhật những quy định mới nhất về lao động, hợp đồng, quy chế tiền lương và đóng bảo hiểm xã hội...", thumb: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=300&q=80", attachments: [{ name: "Cam_Nang_Lao_Dong.docx", url: "#", size: "2.8 MB" }], content: "<h3>Cập nhật Bộ luật Lao động 2019</h3><p>Bộ luật Lao động 2019 (có hiệu lực from 01/01/2021) có nhiều thay đổi quan trọng: Định nghĩa mới về quấy rối tình dục tại nơi làm việc; Quy định chi tiết hơn về thỏa ước lao động tập thể; Mở rộng đối tượng áp dụng đối with người lao động nước ngoài.</p><h3>Các loại hợp đồng lao động</h3><p>Hợp đồng lao động không xác định thời hạn; Hợp đồng lao động xác định thời hạn (tối đa 36 tháng); Hợp đồng lao động theo mùa vụ/công việc (dưới 12 tháng). Lưu ý: Khi hợp đồng xác định thời hạn hết hạn, nếu người lao động tiếp tục làm việc thì trong 30 ngày phải ký hợp đồng mới.</p><h3>Quy chế tiền lương</h3><p>Doanh nghiệp phải xây dựng quy chế tiền lương, trong đó quy định: Thang lương, bảng lương; Định mức lao động; Hình thức trả lương; Thời hạn trả lương; Các khoản phụ cấp, bổ sung; Điều kiện nâng lương, hạ lương. Quy chế phải được tham vấn ý kiến tổ chức đại diện người lao động và công bố công khai.</p><h3>Bảo hiểm xã hội bắt buộc</h3><p>Tỷ lệ đóng BHXH năm 2026: Hưu trí - Tử tuất: 14% (DN 8%, NLĐ 6%); Ốm đau - Thai sản: 3% (DN đóng toàn bộ); Tai nạn lao động - Bệnh nghề nghiệp: 0.5% (DN đóng toàn bộ); BHYT: 4.5% (DN 3%, NLĐ 1.5%); BHTN: 1% (mỗi bên 0.5%).</p>" },
+                { id: 1406, title: "Sổ tay an toàn vệ sinh lao động trong sản xuất", date: "20/03/2026", summary: "Quy định về an toàn vệ sinh lao động, trang bị bảo hộ, và phòng chống cháy nổ tại xưởng sản xuất...", thumb: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=300&q=80", attachments: [{ name: "So_Tay_An_Toan_Lao_Dong.pdf", url: "#", size: "5.6 MB" }], content: "<h3>Quy định pháp luật về ATVSLĐ</h3><p>Luật An toàn, vệ sinh lao động 2015 quy định trách nhiệm của người sử dụng lao động: Đảm bảo nơi làm việc đạt chuẩn về yếu tố nguy hiểm, có hại; Trang bị đầy đủ phương tiện bảo vệ cá nhân; Tổ chức huấn luyện ATVSLĐ định kỳ; Khám sức khỏe định kỳ cho người lao động; Mua bảo hiểm tai nạn lao động.</p><h3>Các yếu tố nguy hiểm thường gặp</h3><p>Hóa chất độc hại: Phải có bảng chỉ dẫn an toàn hóa chất (MSDS), khu vực lưu trữ riêng biệt; Bụi, tiếng ồn, rung động: Đo đạc định kỳ, trang bị thiết bị bảo hộ; Điện: Hệ thống tiếp địa, cầu dao chống giật; Cháy nổ: Bình chữa cháy, lối thoát hiểm, diễn tập định kỳ.</p><h3>Huấn luyện ATVSLĐ</h3><p>Các nhóm đối tượng: Nhóm 1 (quản lý): 16 giờ; Nhóm 2 (an toàn vệ sinh viên): 48 giờ; Nhóm 3 (làm việc nguy hiểm): 40 giờ; Nhóm 4 (sơ cứu): 4 giờ; Nhóm 5 (giới thiệu môi trường làm việc): 2 giờ; Nhóm 6 (văn phòng): 2 giờ. Huấn luyện lại định kỳ 1-2 năm/lần.</p><h3>Xử lý tai nạn lao động</h3><p>Khi xảy ra tai nạn: Sơ cứu, cấp cứu ngay; Báo cáo cho cơ quan công an, BHXH, thanh tra lao động trong 24h; Điều tra nguyên nhân; Lập biên bản tai nạn; Thực hiện chế độ bồi thường theo quy định.</p>" },
+                { id: 1407, title: "Hướng dẫn thực hiện thủ tục hải quan điện tử", date: "15/03/2026", summary: "Cẩm nang các bước thực hiện khai báo hải quan điện tử dành cho doanh nghiệp xuất nhập khẩu...", thumb: "https://images.unsplash.com/photo-1494412519320-aa313fc17eb8?auto=format&fit=crop&w=300&q=80", attachments: [{ name: "Huong_Dan_Hai_Quan.pdf", url: "#", size: "3.3 MB" }], content: "<h3>Hệ thống VNACCS/VCIS</h3><p>Từ năm 2014, Việt Nam áp dụng Hệ thống thông quan tự động VNACCS (Vietnam Automated Cargo Clearance System) và Hệ thống giám sát hải quan thông minh VCIS. Mọi thủ tục hải quan xuất nhập khẩu đều thực hiện điện tử qua hệ thống này.</p><h3>Đăng ký tài khoản khai báo</h3><p>Doanh nghiệp cần: Chữ ký số được cấp bởi tổ chức được phép; Tài khoản khai báo hải quan điện tử; Phần mềm khai báo hải quan (ECUS5, VT, hoặc phần mềm của bên thứ ba).</p><h3>Quy trình khai báo</h3><p>Bước 1: Nhập tờ khai trên phần mềm; Bước 2: Ký số và truyền tờ khai lên hệ thống VNACCS; Bước 3: Hệ thống phân luồng (Xanh: miễn kiểm tra; Vàng: kiểm tra hồ sơ; Đỏ: kiểm tra thực tế); Bước 4: Nộp thuế (nếu có); Bước 5: Nhận kết quả thông quan.</p><h3>Các chứng từ cần chuẩn bị</h3><p>Hợp đồng mua bán; Hóa đơn thương mại (Commercial Invoice); Vận đơn (Bill củaLading); Giấy chứng nhận xuất xứ (C/O); Giấy phép nhập khẩu (đối with mặt hàng quản lý chuyên ngành); Bảng kê chi tiết hàng hóa.</p>" },
+                { id: 1408, title: "Sổ tay hướng dẫn giải quyết tranh chấp kinh doanh", date: "10/03/2026", summary: "Tài liệu tư vấn các phương thức giải quyết tranh chấp: thương lượng, hòa giải, trọng tài, tòa án...", thumb: "https://images.unsplash.com/photo-1505664177941-0669750d43bf?auto=format&fit=crop&w=300&q=80", attachments: [{ name: "So_Tay_Tranh_Chap.pdf", url: "#", size: "2.1 MB" }], content: "<h3>Các phương thức giải quyết tranh chấp</h3><p>Thương lượng: Các bên tự đàm phán, thỏa thuận mà không cần bên thứ ba. Ưu điểm: Nhanh, chi phí thấp, bảo mật. Nhược điểm: Không có giá trị cưỡng chế thi hành.</p><p>Hòa giải: Có sự tham gia của bên thứ ba làm trung gian hòa giải. Ưu điểm: Linh hoạt, các bên kiểm soát kết quả. Nhược điểm: Phụ thuộc vào thiện chí của các bên.</p><p>Trọng tài thương mại: Hội đồng trọng tài ra phán quyết cuối cùng. Ưu điểm: Nhanh (thường 6-12 tháng), chuyên môn cao, bí mật, phán quyết có giá trị chung thẩm. Nhược điểm: Chi phí cao hơn tòa án.</p><p>Tòa án: Giải quyết theo thủ tục tố tụng dân sự. Ưu điểm: Phán quyết có giá trị cưỡng chế thi hành cao nhất. Nhược điểm: Kéo dài (có thể 2-5 năm), công khai, thiếu chuyên môn sâu về lĩnh vực kinh doanh.</p><h3>Lựa chọn phương thức phù hợp</h3><p>Nên đưa điều khoản giải quyết tranh chấp vào hợp đồng ngay from đầu. Khuyến nghị: Ưu tiên thương lượng → hòa giải → trọng tài. Chỉ khởi kiện ra tòa khi các phương thức khác không hiệu quả.</p>" },
+                { id: 1409, title: "Cẩm nang pháp lý về chuyển đổi số doanh nghiệp", date: "05/03/2026", summary: "Các vấn đề pháp lý cần lưu ý khi doanh nghiệp thực hiện chuyển đổi số, bảo mật dữ liệu khách hàng...", thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=300&q=80", attachments: [{ name: "Cam_Nang_Chuyen_Doi_So.pdf", url: "#", size: "4.8 MB" }], content: "<h3>Bối cảnh chuyển đổi số</h3><p>Chuyển đổi số không chỉ là áp dụng công nghệ mà còn là thay đổi mô hình kinh doanh, quy trình vận hành và văn hóa doanh nghiệp. Tại Việt Nam, Chương trình Chuyển đổi số Quốc gia đặt mục tiêu đến 2025: Kinh tế số chiếm 20% GDP; 100% doanh nghiệp công nghệ số.</p><h3>Hợp đồng điện tử và chữ ký số</h3><p>Theo Luật Giao dịch điện tử 2005, hợp đồng điện tử có giá trị pháp lý tương đương hợp đồng giấy. Chữ ký số công cộng do tổ chức được phép cấp (VNPT, Viettel, BKAV, FPT, MISA) có giá trị pháp lý đầy đủ.</p><h3>Bảo vệ dữ liệu cá nhân</h3><p>Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân quy định: Doanh nghiệp phải có biện pháp bảo vệ dữ liệu cá nhân; Phải được sự đồng ý của chủ thể dữ liệu trước khi thu thập, sử dụng; Phải thông báo rõ mục đích thu thập; Phải xóa dữ liệu khi hết mục đích hoặc theo yêu cầu của chủ thể.</p><h3>Hóa đơn điện tử</h3><p>Từ 01/7/2022, hóa đơn điện tử là bắt buộc với mọi doanh nghiệp. Hóa đơn điện tử phải được khởi tạo từ hệ thống của doanh nghiệp hoặc từ tổ chức cung cấp dịch vụ hóa đơn điện tử, có mã của cơ quan thuế (trừ một số trường hợp đặc thù).</p>" },
+                { id: 1410, title: "Hướng dẫn quy định về hóa đơn chứng từ điện tử", date: "28/02/2026", summary: "Sổ tay tóm tắt quy định hiện hành về việc sử dụng, lưu trữ và hủy hóa đơn chứng từ điện tử...", thumb: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=300&q=80", attachments: [{ name: "Huong_Dan_Hoa_Don_Dien_Tu.pdf", url: "#", size: "1.5 MB" }], content: "<h3>Quy định về hóa đơn điện tử</h3><p>Nghị định 123/2020/NĐ-CP và Thông tư 78/2021/TT-BTC quy định chi tiết về hóa đơn, chứng từ điện tử. Hóa đơn điện tử là tập hợp các thông điệp dữ liệu điện tử về bán hàng hóa, cung ứng dịch vụ, được khởi tạo, lập, gửi, nhận, lưu trữ và quản lý bằng phương tiện điện tử.</p><h3>Đăng ký sử dụng hóa đơn điện tử</h3><p>Doanh nghiệp gửi Thông báo phát hành hóa đơn điện tử lên cổng thông tin điện tử của Tổng cục Thuế. Kèm theo: Giấy cam kết tự chịu trách nhiệm về tính chính xác của hóa đơn; Hợp đồng với tổ chức cung cấp dịch vụ hóa đơn điện tử (nếu sử dụng dịch vụ).</p><h3>Nội dung hóa đơn điện tử</h3><p>Tên, mã số thuế của người bán và người mua; Địa chỉ, số điện thoại; Tên hàng hóa, dịch vụ; Số lượng, đơn giá, thành tiền; Thuế suất, tiền thuế; Tổng tiền thanh toán; Chữ ký số của người bán (và người mua nếu là hóa đơn mua hàng của doanh nghiệp).</p><h3>Lưu trữ và hủy hóa đơn</h3><p>Thời hạn lưu trữ: Tối thiểu 10 năm; Hình thức: Bản điện tử có chữ ký số hoặc bản thể hiện trên giấy có xác nhận của người đại diện pháp luật. Hủy hóa đơn: Phải lập biên bản hủy, có sự chứng kiến của đại diện cơ quan thuế (nếu đã phát hành nhưng chưa sử dụng hết).</p>" },
+                { id: 1411, title: "Sổ tay pháp lý cho doanh nghiệp FDI", date: "20/02/2026", summary: "Tổng hợp các quy định pháp luật đặc thù áp dụng cho doanh nghiệp có vốn đầu tư nước ngoài (FDI) tại Việt Nam...", thumb: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=300&q=80", attachments: [{ name: "So_Tay_FDI.pdf", url: "#", size: "6.2 MB" }], content: "<h3>Điều kiện đầu tư</h3><p>Doanh nghiệp FDI phải tuân thủ Luật Đầu tư 2020 và các điều ước quốc tế mà Việt Nam là thành viên. Ngành nghề kinh doanh: Một số ngành bị cấm (ma túy, mại dâm, buôn bán người); Một số ngành kinh doanh có điều kiện (ngân hàng, bảo hiểm, viễn thông) phải đáp ứng điều kiện về vốn pháp định, tỷ lệ sở hữu.</p><h3>Thủ tục cấp Giấy chứng nhận đăng ký đầu tư</h3><p>Hồ sơ: Giấy đề nghị thực hiện dự án đầu tư; Tài liệu chứng minh tư cách pháp lý của nhà đầu tư; Đề xuất dự án đầu tư; Giải trình công nghệ; cam kết bảo vệ môi trường. Thời gian: 15-35 ngày làm việc tùy dự án.</p><h3>Ưu đãi đầu tư</h3><p>Thuế suất ưu đãi: 10% trong 15 năm (khu vực đặc biệt khó khăn); 17% trong 10 năm (khu công nghiệp); Miễn thuế 2 năm, giảm 50% trong 9 năm tiếp theo (tùy địa bàn, ngành nghề). Miễn thuế nhập khẩu: Nguyên liệu, máy móc nhập khẩu để tạo tài sản cố định của dự án.</p><h3>Chuyển lợi nhuận ra nước ngoài</h3><p>Nhà đầu tư nước ngoài được chuyển ra nước ngoài: Lợi nhuận sau thuế; Vốn góp; Các khoản thanh toán khác. Điều kiện: Đã hoàn thành nghĩa vụ thuế; Có báo cáo tài chính được kiểm toán; Mở tài khoản vốn trực tiếp tại ngân hàng Việt Nam.</p>" },
+                { id: 1412, title: "Cẩm nang hướng dẫn xin giấy phép môi trường", date: "15/02/2026", summary: "Quy trình, thủ tục và biểu mẫu cần chuẩn bị để xin cấp giấy phép môi trường cho cơ sở sản xuất...", thumb: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=300&q=80", attachments: [{ name: "Cam_Nang_Moi_Truong.pdf", url: "#", size: "3.7 MB" }], content: "<h3>Giấy phép môi trường theo Luật BVMT 2020</h3><p>Luật Bảo vệ môi trường 2020 (có hiệu lực 01/01/2022) thay thế Giấy phép xả thải, Giấy phép khai thác nước, Cam kết bảo vệ môi trường bằng một Giấy phép môi trường thống nhất. Đối tượng: Dự án đầu tư nhóm I, II, III có phát sinh nước thải, khí thải, chất thải nguy hại.</p><h3>Hồ sơ đề nghị cấp giấy phép</h3><p>Giấy đề nghị cấp giấy phép môi trường; Báo cáo đầu tư hoặc Giấy chứng nhận đăng ký kinh doanh; Báo cáo đánh giá tác động môi trường (ĐTM) hoặc Kế hoạch bảo vệ môi trường; Đề án bảo vệ môi trường chi tiết (nếu có); Kết quả quan trắc môi trường định kỳ.</p><h3>Thời hạn và gia hạn</h3><p>Thời hạn giấy phép: Tối đa 10 năm (tùy quy mô, tính chất dự án); Tối thiểu 3 năm. Gia hạn: Nộp hồ sơ trước khi hết hạn 06 tháng. Mỗi lần gia hạn tối đa 10 năm.</p><h3>Nghĩa vụ sau khi được cấp phép</h3><p>Lắp đặt hệ thống xử lý chất thải đạt chuẩn; Quan trắc môi trường định kỳ (nước thải, khí thải, chất thải nguy hại); Lưu trữ hồ sơ, nhật ký vận hành; Báo cáo định kỳ cho cơ quan quản lý; Thanh toán phí bảo vệ môi trường.</p>" }
+            ];
+
+            const thongBaoData = Array.from({ length: 30 }).map((_, idx) => ({
+                id: 4000 + idx,
+                isNews: true,
+                title: `Thông báo ${idx + 1}: ${[
+                    'Tổ chức tọa đàm về thủ tục pháp lý cho doanh nghiệp nhỏ và vừa',
+                    'Mở lớp bồi dưỡng kỹ năng pháp lý trực tuyến tháng 5/2026',
+                    'Cập nhật danh sách tài liệu hỗ trợ pháp lý mới nhất',
+                    'Tiếp nhận câu hỏi tư vấn pháp luật từ doanh nghiệp'
+                ][idx % 4]}`,
+                summary: "Nhằm mục đích phổ biến kiến thức và hướng dẫn các doanh nghiệp thực hiện đúng quy định pháp luật hiện hành...",
+                date: `${String(28 - (idx % 28)).padStart(2, '0')}/04/2026`,
+                thumb: `https://images.unsplash.com/photo-${[
+                    '1589829085413-56de8ae18c73',
+                    '1556761175-4b46a572b786',
+                    '1521791136064-7986c2920216',
+                    '1454165804606-c3d57bc86b40',
+                    '1507679799987-c73779587ccf',
+                    '1554224155-8d04cb21cd6c',
+                    '1432888498266-38ffec3eaf0a',
+                    '1526304640581-d334cdbbf45e'
+                ][idx % 8]}?auto=format&fit=crop&w=400&q=80`,
+                menuKey: "hoat-dong-trung-tam",
+                subKey: "thong-bao",
+                attachments: idx % 3 === 0 ? [{ name: `ThongBao_So_${idx+1}.pdf`, size: "1.2 MB" }] : [],
+                content: `<h4>1. Mục đích thông báo</h4><p>Thông báo này nhằm phổ biến kiến thức và hướng dẫn các doanh nghiệp thực hiện đúng quy định pháp luật hiện hành, đồng thời cập nhật những thay đổi mới nhất trong chính sách hỗ trợ doanh nghiệp.</p><h4>2. Nội dung chính</h4><ul><li>${['Tổ chức tọa đàm về thủ tục pháp lý cho doanh nghiệp nhỏ và vừa', 'Mở lớp bồi dưỡng kỹ năng pháp lý trực tuyến tháng 5/2026', 'Cập nhật danh sách tài liệu hỗ trợ pháp lý mới nhất', 'Tiếp nhận câu hỏi tư vấn pháp luật từ doanh nghiệp'][idx % 4]}</li><li>Hướng dẫn chi tiết quy trình, thủ tục thực hiện</li><li>Thời gian, địa điểm và thành phần tham dự</li><li>Các tài liệu liên quan được đính kèm trong thông báo</li></ul><h4>3. Thời hạn thực hiện</h4><p>Đề nghị các doanh nghiệp quan tâm thực hiện đúng thời hạn quy định và báo cáo kết quả về Trung tâm trước ngày ${String(30 - idx).padStart(2, '0')}/05/2026.</p><h4>4. Liên hệ hỗ trợ</h4><p>Mọi thắc mắc xin liên hệ: Hotline 1900-xxxx hoặc email hotro@legal.gov.vn để được hướng dẫn chi tiết.</p>`
+            }));
+
+            const newsData = [
+                { id: 601, isNews: true, title: "Bộ Tư pháp tổ chức tọa đàm chuyên sâu về hỗ trợ pháp lý cho doanh nghiệp nhỏ và vừa", summary: "Tổng hợp tin tức, bài viết về hoạt động hướng dẫn, giải đáp và hỗ trợ pháp lý dành cho doanh nghiệp trong bối cảnh mới.", date: "12/04/2026", thumb: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=400&q=80", field: "Pháp luật", menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat", attachments: [{ name: "Tai_Lieu_Toa_Dam.pdf", size: "2.4 MB" }], content: "<h4>1. Mục đích và yêu cầu của tọa đàm</h4><p>Thực hiện Chỉ thị số 18/CT-TTg ngày 15/5/2025 của Thủ tướng Chính phủ về tăng cường hỗ trợ pháp lý cho doanh nghiệp nhỏ và vừa, Bộ Tư pháp tổ chức buổi tọa đàm chuyên sâu nhằm phổ biến các quy định mới về hỗ trợ pháp lý, cập nhật những thay đổi trong chính sách ưu đãi và thủ tục hành chính liên quan.</p><p>Buổi tọa đàm có sự tham gia của đại diện các Vụ, Cục thuộc Bộ Tư pháp, cùng hơn 300 đại biểu là lãnh đạo doanh nghiệp, hiệp hội ngành nghề và chuyên gia pháp lý từ 63 tỉnh, thành phố.</p><p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Toa dam'/></p><h4>2. Nội dung trọng tâm</h4><ul><li><strong>Điểm mới trong Luật Hỗ trợ doanh nghiệp nhỏ và vừa (sửa đổi):</strong> Bổ sung quy định về hỗ trợ chuyển đổi số, hỗ trợ tiếp cận thị trường quốc tế, và mở rộng đối tượng hưởng ưu đãi</li><li><strong>Hướng dẫn tiếp cận các nguồn vốn ưu đãi:</strong> Giới thiệu các gói tín dụng đặc biệt từ Ngân hàng Chính sách Xã hội, Quỹ Bảo lãnh tín dụng cho DNNVV, và chương trình cho vay lãi suất thấp của các ngân hàng thương mại</li><li><strong>Quy trình giải quyết khiếu nại, kiến nghị của doanh nghiệp:</strong> Hướng dẫn chi tiết cách thức gửi đơn, thời hạn giải quyết, và cơ chế giám sát việc thực hiện</li><li><strong>Dịch vụ hỗ trợ pháp lý miễn phí:</strong> Giới thiệu mạng lưới 63 Trung tâm Hỗ trợ pháp lý cấp tỉnh và tổng đài tư vấn 1900-xxxx</li></ul><h4>3. Ý kiến phát biểu của các diễn giả</h4><p><strong>Bà Nguyễn Thị Minh Huệ - Vụ trưởng Vụ Pháp chế, Bộ Tư pháp:</strong> \"Hệ thống pháp luật hỗ trợ doanh nghiệp đã được hoàn thiện đáng kể trong 5 năm qua. Tuy nhiên, thách thức lớn nhất hiện nay là làm sao để doanh nghiệp, đặc biệt là DNNVV, tiếp cận được các chính sách này một cách hiệu quả. Chúng tôi cam kết sẽ tiếp tục đơn giản hóa thủ tục, tăng cường ứng dụng công nghệ thông tin và nâng cao chất lượng dịch vụ hỗ trợ.\"</p><p><strong>Ông Trần Văn Khải - Chuyên gia cao cấp về pháp luật doanh nghiệp:</strong> \"Doanh nghiệp cần chủ động hơn trong việc tìm hiểu và vận dụng các chính sách hỗ trợ. Đừng chờ đợi khó khăn xảy ra rồi mới đi tìm giải pháp. Hãy xây dựng mối quan hệ thường xuyên với các cơ quan hỗ trợ pháp lý, tham gia các buổi tập huấn, và đặc biệt là đầu tư cho bộ phận pháp chế nội bộ.\"</p><h4>4. Kết luận và kiến nghị</h4><p>Sau 4 giờ làm việc nghiêm túc, buổi tọa đàm đã thu nhận được 87 ý kiến phát biểu và 156 câu hỏi từ đại biểu. Các vấn đề được quan tâm nhất bao gồm: chi phí tuân thủ pháp luật, thủ tục thuế, đăng ký sở hữu trí tuệ, và giải quyết tranh chấp thương mại.</p><p>Bộ Tư pháp sẽ tổng hợp các ý kiến để báo cáo Chính phủ, đồng thời chỉ đạo các cơ quan liên quan nghiên cứu, hoàn thiện khung pháp lý theo hướng giảm thiểu rào cản, tạo điều kiện thuận lợi nhất cho doanh nghiệp phát triển.</p>" },
+                { id: 602, isNews: true, title: "Triển khai hiệu quả chương trình hỗ trợ pháp lý liên ngành tại 63 tỉnh thành", summary: "Cập nhật các hoạt động phối hợp giữa bộ, ngành và địa phương trong công tác hỗ trợ pháp lý cho doanh nghiệp nhỏ và vừa.", date: "10/04/2026", thumb: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80", field: "Chính sách", menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat", attachments: [{ name: "Bao_Cao_Lien_Nganh.pdf", size: "1.8 MB" }], content: "<h4>Kết quả nổi bật</h4><p>Chương trình hỗ trợ pháp lý liên ngành đã được triển khai đồng bộ tại 63 tỉnh, thành phố với sự tham gia của 12 bộ, ngành trung ương.</p><h4>Các chỉ tiêu đạt được</h4><ul><li>Tư vấn miễn phí cho hơn 15.000 doanh nghiệp</li><li>Tổ chức 245 lớp tập huấn, bồi dưỡng kiến thức pháp luật</li><li>Xây dựng 63 cổng thông tin điện tử hỗ trợ pháp lý cấp tỉnh</li></ul>" },
+                { id: 603, isNews: true, title: "Khai mạc khóa đào tạo trực tuyến về quản trị rủi ro hợp đồng thương mại quốc tế", summary: "Giới thiệu nội dung đào tạo trực tuyến, bồi dưỡng kiến thức pháp lý phục vụ doanh nghiệp nhỏ và vừa xuất nhập khẩu.", date: "05/04/2026", thumb: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=400&q=80", field: "Đào tạo", menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat", attachments: [{ name: "Lich_Dao_Tao.pdf", size: "850 KB" }], content: "<h4>Đối tượng tham gia</h4><p>Khóa đào tạo dành cho chủ doanh nghiệp, giám đốc pháp chế, trưởng phòng xuất nhập khẩu và nhân viên phụ trách hợp đồng thương mại.</p><h4>Nội dung đào tạo</h4><ul><li>Phân tích rủi ro pháp lý trong đàm phán hợp đồng</li><li>Các điều khoản bắt buộc và khuyến nghị</li><li>Cơ chế giải quyết tranh chấp theo CISG và UNCITRAL</li><li>Bảo hiểm tín dụng xuất khẩu</li></ul>" },
+                { id: 604, isNews: true, title: "Hướng dẫn giải đáp thắc mắc liên quan đến thuế thu nhập doanh nghiệp năm 2026", summary: "Cơ quan thuế tổ chức buổi đối thoại trực tiếp nhằm giải quyết các vướng mắc của doanh nghiệp khi thực hiện quyết toán thuế TNDN.", date: "01/04/2026", thumb: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=400&q=80", field: "Thuế", menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat", attachments: [{ name: "Giai_Dap_Thue.pdf", size: "3.2 MB" }], content: "<h4>Những điểm mới về thuế TNDN 2026</h4><p>Thông tư 78/2026/TT-BTC hướng dẫn một số điều mới của Luật Quản lý thuế, có hiệu lực từ 01/01/2026.</p><h4>Các nội dung được giải đáp</h4><ul><li>Chi phí được trừ và không được trừ khi tính thuế TNDN</li><li>Ưu đãi thuế đối với doanh nghiệp công nghệ cao</li><li>Thủ tục hoàn thuế GTGT cho dự án đầu tư</li><li>Xử lý hóa đơn điện tử có sai sót</li></ul>" },
+                { id: 605, isNews: true, title: "Cảnh báo rủi ro lừa đảo qua mạng trong giao dịch dân sự và thương mại", summary: "Bộ Công an phát đi văn bản cảnh báo về các thủ đoạn mới của tội phạm công nghệ cao nhằm chiếm đoạt tài sản của các công ty vừa và nhỏ.", date: "28/03/2026", thumb: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=400&q=80", field: "An ninh", menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat", attachments: [], content: "<h4>Thủ đoạn lừa đảo phổ biến</h4><ul><li>Giả mạo email đối tác để yêu cầu chuyển khoản</li><li>Tạo website thương mại điện tử giả mạo</li><li>Lừa đảo qua hình thức đặt cọc mua bán online</li><li>Chiếm quyền điều khiển tài khoản ngân hàng doanh nghiệp</li></ul><h4>Biện pháp phòng ngừa</h4><p>Doanh nghiệp cần xác minh kỹ thông tin đối tác, sử dụng chữ ký số để xác thực giao dịch, và thường xuyên rà soát các giao dịch ngân hàng.</p>" },
+                { id: 606, isNews: true, title: "Thủ tướng ban hành chỉ thị đẩy mạnh cải cách thủ tục hành chính trọng tâm", summary: "Chỉ thị yêu cầu các bộ, ban ngành rà soát và cắt giảm ít nhất 20% thủ tục hành chính rườm rà, tạo thuận lợi tối đa cho doanh nghiệp.", date: "25/03/2026", thumb: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=400&q=80", field: "Hành chính", menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat", attachments: [{ name: "Chi_Thi_Thu_Tuong.pdf", size: "1.5 MB" }], content: "<h4>Yêu cầu của Chỉ thị</h4><p>Các bộ, ngành rà soát toàn bộ thủ tục hành chính thuộc thẩm quyền quản lý, kiên quyết bãi bỏ hoặc đơn giản hóa các thủ tục không cần thiết, gây phiền hà cho người dân và doanh nghiệp.</p><h4>Lộ trình thực hiện</h4><ul><li>Giai đoạn 1 (tháng 4-6/2026): Rà soát, đề xuất</li><li>Giai đoạn 2 (tháng 7-9/2026): Trình cấp có thẩm quyền phê duyệt</li><li>Giai đoạn 3 (tháng 10-12/2026): Triển khai thực hiện</li></ul>" },
+                { id: 607, isNews: true, title: "Công bố danh mục các doanh nghiệp xuất sắc thực thi tốt pháp luật lao động", summary: "Lễ trao giải thưởng cho 100 doanh nghiệp có thành tích xuất sắc trong việc chăm lo đời sống nhân viên và tuân thủ chặt chẽ pháp luật lao động.", date: "20/03/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=400&q=80", field: "Lao động", menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat", attachments: [], content: "<h4>Tiêu chí đánh giá</h4><p>Các doanh nghiệp được vinh danh phải đáp ứng đầy đủ các tiêu chí: tuân thủ hợp đồng lao động, đóng BHXH đầy đủ, đảm bảo điều kiện an toàn vệ sinh lao động, và có chính sách phúc lợi vượt trội.</p><h4>Danh sách 10 doanh nghiệp tiêu biểu</h4><ul><li>Công ty CP Sữa Việt Nam (Vinamilk)</li><li>Tập đoàn Vingroup</li><li>Công ty CP FPT</li><li>Tập đoàn TH True Milk</li></ul>" },
+                { id: 608, isNews: true, title: "Ra mắt hệ thống tổng đài hỗ trợ pháp lý miễn phí 1900 xxxx", summary: "Doanh nghiệp trên toàn quốc nay đã có thể gọi điện trực tiếp đến tổng đài để được tư vấn nhanh về các quy trình pháp luật cơ bản.", date: "15/03/2026", thumb: "https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=400&q=80", field: "Pháp luật", menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat", attachments: [], content: "<h4>Chức năng tổng đài</h4><p>Tổng đài hoạt động 24/7 với đội ngũ luật sư, chuyên gia pháp lý giàu kinh nghiệm, sẵn sàng tư vấn miễn phí về:</p><ul><li>Thành lập và đăng ký doanh nghiệp</li><li>Hợp đồng lao động và BHXH</li><li>Thuế và kế toán</li><li>Giải quyết tranh chấp thương mại</li></ul>" },
+                { id: 609, isNews: true, title: "Hội nghị đánh giá công tác sở hữu trí tuệ tại các cụm công nghiệp phía Nam", summary: "Buổi họp tổng kết những khó khăn doanh nghiệp gặp phải khi đăng ký và bảo hộ thương hiệu tại thị trường nội địa và quốc tế.", date: "10/03/2026", thumb: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=400&q=80", field: "Sở hữu trí tuệ", menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat", attachments: [{ name: "Bao_Cao_SHTT.pdf", size: "4.1 MB" }], content: "<h4>Thực trạng đăng ký SHTT</h4><p>Năm 2025, Cục Sở hữu trí tuệ đã tiếp nhận hơn 85.000 đơn đăng ký, trong đó 62% thuộc về các doanh nghiệp trong nước.</p><h4>Khó khăn chính</h4><ul><li>Thời gian thẩm định kéo dài (trung bình 18-24 tháng)</li><li>Chi phí đăng ký và duy trì văn bằng bảo hộ cao</li><li>Khó khăn trong việc chứng minh quyền sở hữu khi có tranh chấp</li></ul>" },
+                { id: 610, isNews: true, title: "Công bố sổ tay hướng dẫn doanh nghiệp chuyển đổi số an toàn", summary: "Bộ Thông tin và Truyền thông kết hợp cùng Bộ Tư pháp phát hành sổ tay cẩm nang giúp doanh nghiệp số hóa mà không lo ngại rủi ro rò rỉ dữ liệu.", date: "05/03/2026", thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80", field: "Công nghệ", menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat", attachments: [{ name: "So_Tay_Chuyen_Doi_So.pdf", size: "5.7 MB" }], content: "<h4>Nội dung sổ tay</h4><p>Sổ tay cung cấp hướng dẫn toàn diện về chuyển đổi số an toàn, bao gồm:</p><ul><li>Đánh giá mức độ sẵn sàng số hóa</li><li>Lựa chọn giải pháp công nghệ phù hợp</li><li>Bảo vệ dữ liệu theo Nghị định 13/2023/NĐ-CP</li><li>Hợp đồng dịch vụ công nghệ thông tin</li><li>Ứng phó sự cố an ninh mạng</li></ul>" },
+                { id: 611, isNews: true, title: "Hướng dẫn tháo gỡ khó khăn về cấp phép xây dựng nhà xưởng mới", summary: "Những thay đổi mới trong quy định của Bộ Xây dựng giúp rút ngắn thời gian thẩm định và cấp phép từ 30 ngày xuống còn 15 ngày.", date: "01/03/2026", thumb: "https://images.unsplash.com/photo-1541888086925-920a0bba04bd?auto=format&fit=crop&w=400&q=80", field: "Xây dựng", menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat", attachments: [{ name: "Huong_Dan_Xay_Dung.pdf", size: "2.9 MB" }], content: "<h4>Quy trình cấp phép mới</h4><p>Thông tư 05/2026/TT-BXD áp dụng cơ chế một cửa liên thông, doanh nghiệp chỉ cần nộp một bộ hồ sơ duy nhất.</p><h4>Hồ sơ cần chuẩn bị</h4><ul><li>Giấy chứng nhận quyền sử dụng đất</li><li>Thiết kế cơ sở đã được thẩm duyệt</li><li>Giấy phép môi trường (nếu thuộc đối tượng)</li><li>Biên bản nghiệm thu hạ tầng kỹ thuật khu công nghiệp</li></ul>" },
+                { id: 612, isNews: true, title: "Cập nhật quy định về tem nhãn và xuất xứ hàng hóa xuất khẩu sang EU", summary: "Doanh nghiệp xuất khẩu cần đặc biệt lưu ý những tiêu chuẩn mới về nhãn mác sinh thái được Liên minh Châu Âu áp dụng từ giữa năm nay.", date: "25/02/2026", thumb: "https://images.unsplash.com/photo-1586528116311-ad8ed745333c?auto=format&fit=crop&w=400&q=80", field: "Thương mại", menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat", attachments: [], content: "<h4>Yêu cầu mới của EU</h4><p>Từ 01/7/2026, tất cả hàng hóa nhập khẩu vào EU phải có nhãn sinh thái (Eco-label) chứng nhận nguồn gốc bền vững và quy trình sản xuất thân thiện môi trường.</p><h4>Các bước cần thực hiện</h4><ul><li>Đăng ký chứng nhận Eco-label tại cơ quan có thẩm quyền</li><li>Điều chỉnh tem nhãn theo quy cách EU (ngôn ngữ, kích thước, mã vạch)</li><li>Lưu trữ hồ sơ truy xuất nguồn gốc nguyên liệu</li><li>Ký hợp đồng với tổ chức chứng nhận được EU công nhận</li></ul>" },
+                ...Array.from({ length: 10 }).map((_, idx) => ({
+                    id: 613 + idx, isNews: true,
+                    title: `Tin tức hỗ trợ pháp lý doanh nghiệp cập nhật tháng ${3 + (idx % 12)}/2026`,
+                    summary: "Tổng hợp các hoạt động, chính sách mới nhất về hỗ trợ pháp lý cho doanh nghiệp vừa và nhỏ trong nước.",
+                    date: `${String(20 - (idx % 20)).padStart(2, '0')}/02/2026`,
+                    thumb: `https://images.unsplash.com/photo-${['1556761175-4b46a572b786', '1589829085413-56de8ae18c73', '1521791136064-7986c2920216', '1554224154-26032ffc0d07', '1503676260728-1c00da094a0b', '1516321318423-f06f85e504b3', '1552581234-26160f608093', '1534536281715-e28d76689b4d', '1540575467063-178a50c2df87', '1552664730-d307ca884978', '1511578314322-379afb476865', '1507679799987-c73779587ccf', '1563986768609-322da13575f3', '1529107386315-e1a2ed48a620', '1454165804606-c3d57bc86b40', '1618044733300-9472054094ee', '1554224155-8d04cb21cd6c', '1451187580459-43490279c0fa', '1541888086925-920a0bba04bd', '1586528116311-ad8ed745333c'][idx % 20]}?auto=format&fit=crop&w=400&q=80`,
+                    field: ['Pháp luật', 'Chính sách', 'Hỗ trợ', 'Doanh nghiệp', 'Đầu tư'][idx % 5],
+                    menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat",
+                    attachments: [],
+                    content: `<h4>Nội dung cập nhật</h4><p>Các hoạt động hỗ trợ pháp lý trong tháng ${3 + (idx % 12)}/2026 tập trung vào việc tháo gỡ khó khăn cho doanh nghiệp về thủ tục hành chính, tiếp cận vốn và đào tạo pháp chế.</p>`
+                }))
+            ];
+
+            const keHoachDaoTaoData = Array.from({ length: 25 }).map((_, idx) => ({
+                id: 1201 + idx,
+                isNews: true,
+                title: `Kế hoạch đào tạo ${['nâng cao năng lực quản trị doanh nghiệp', 'bồi dưỡng kiến thức pháp luật về thuế', 'đào tạo kỹ năng đàm phán hợp đồng', 'tập huấn về sở hữu trí tuệ', 'đào tạo quản trị rủi ro tín dụng', 'bồi dưỡng kỹ năng giải quyết tranh chấp thương mại', 'đào tạo về chuyển đổi số trong doanh nghiệp', 'tập huấn kỹ năng xây dựng và thẩm định hợp đồng', 'đào tạo kiến thức pháp luật lao động', 'bồi dưỡng kỹ năng tư vấn pháp lý doanh nghiệp', 'đào tạo về tuân thủ pháp luật trong xuất nhập khẩu', 'tập huấn kỹ năng phòng ngừa rủi ro pháp lý', 'đào tạo pháp luật về môi trường', 'bồi dưỡng kỹ năng soạn thảo văn bản pháp quy', 'đào tạo về đầu tư nước ngoài', 'tập huấn về thương mại điện tử', 'đào tạo kỹ năng hòa giải tranh chấp', 'bồi dưỡng kiến thức về phá sản doanh nghiệp', 'đào tạo về chống rửa tiền', 'tập huấn về bảo vệ người tiêu dùng', 'đào tạo pháp luật về cạnh tranh', 'bồi dưỡng kỹ năng quản lý dự án', 'đào tạo về an toàn thông tin', 'tập huấn về hóa đơn điện tử', 'đào tạo về báo cáo tài chính'][idx % 25]}`,
+                summary: `Chương trình đào tạo nhằm trang bị kiến thức và kỹ năng thiết yếu về ${['quản trị doanh nghiệp hiện đại', 'chính sách thuế mới nhất 2026', 'đàm phán và ký kết hợp đồng thương mại', 'đăng ký và bảo hộ sở hữu trí tuệ', 'nhận diện và quản trị rủi ro tín dụng', 'giải quyết tranh chấp bằng thương lượng và trọng tài', 'chuyển đổi số và bảo vệ dữ liệu doanh nghiệp', 'soạn thảo, rà soát và thẩm định hợp đồng', 'pháp luật lao động và BHXH', 'kỹ năng tư vấn, giải đáp pháp luật', 'quy định về xuất xứ hàng hóa và thủ tục hải quan', 'các rủi ro pháp lý thường gặp và cách phòng ngừa', 'bảo vệ môi trường trong sản xuất', 'xây dựng văn bản pháp quy', 'thủ tục đầu tư nước ngoài', 'pháp luật về thương mại điện tử', 'kỹ năng hòa giải và đối thoại', 'pháp luật về phá sản và giải thể', 'phòng chống rửa tiền', 'bảo vệ quyền lợi người tiêu dùng', 'chống độc quyền và cạnh tranh', 'quản lý dự án theo chuẩn PMI', 'an toàn thông tin mạng', 'hóa đơn điện tử và chữ ký số', 'đọc và phân tích báo cáo tài chính'][idx % 25]} cho đội ngũ cán bộ, nhân viên doanh nghiệp.`,
+                date: `${String(28 - (idx % 28)).padStart(2, '0')}/04/2026`,
+                thoiGian: `01/0${(idx % 5) + 5}/2026 - 30/0${(idx % 5) + 5}/2026`,
+                nganSach: `${(Math.floor(Math.random() * 50) + 10).toLocaleString()} triệu đồng`,
+                nguonLuc: `Giảng viên: ${['TS. Nguyễn Văn A - Chuyên gia cao cấp Bộ Tư pháp', 'LS. Trần Thị B - Đoàn Luật sư TP.HCM', 'PGS.TS. Lê Văn C - Đại học Luật Hà Nội', 'Ông Phạm D - Nguyên Vụ trưởng Vụ Pháp chế', 'Bà Ngô E - Giám đốc Trung tâm Trọng tài'][idx % 5]}; Hình thức: Trực tuyến kết hợp trực tiếp; Thời lượng: ${15 + (idx % 10) * 5} giờ`,
+                thumb: `https://images.unsplash.com/photo-${['1556761175-4b46a572b786', '1589829085413-56de8ae18c73', '1521791136064-7986c2920216', '1554224154-26032ffc0d07', '1503676260728-1c00da094a0b', '1516321318423-f06f85e504b3', '1552581234-26160f608093', '1534536281715-e28d76689b4d', '1540575467063-178a50c2df87', '1552664730-d307ca884978', '1511578314322-379afb476865', '1507679799987-c73779587ccf'][idx % 12]}?auto=format&fit=crop&w=400&q=80`,
+                field: "Đào tạo",
+                menuKey: "dao-tao",
+                subKey: "ke-hoach-dao-tao",
+                attachments: idx % 3 === 0 ? [{ name: `KeHoachDaoTao_${idx+1}.pdf`, size: `${(Math.random() * 3 + 1).toFixed(1)} MB` }] : [],
+                content: `<h4>1. Mục tiêu đào tạo</h4><p>Sau khi hoàn thành khóa đào tạo, học viên có thể:</p><ul><li>Nắm vững các quy định pháp luật liên quan đến ${['quản trị doanh nghiệp', 'thuế', 'hợp đồng thương mại', 'sở hữu trí tuệ', 'tín dụng ngân hàng', 'tranh chấp thương mại', 'chuyển đổi số', 'hợp đồng dân sự', 'lao động', 'tư vấn pháp lý', 'xuất nhập khẩu', 'phòng ngừa rủi ro', 'môi trường', 'văn bản pháp quy', 'đầu tư', 'thương mại điện tử', 'hòa giải', 'phá sản', 'chống rửa tiền', 'bảo vệ người tiêu dùng', 'cạnh tranh', 'quản lý dự án', 'an toàn thông tin', 'hóa đơn điện tử', 'báo cáo tài chính'][idx % 25]}</li><li>Áp dụng kiến thức đã học vào thực tiễn công việc</li><li>Nâng cao kỹ năng xử lý các tình huống pháp lý phát sinh</li></ul><h4>2. Đối tượng tham gia</h4><p>Chủ doanh nghiệp, giám đốc điều hành, trưởng/phó phòng pháp chế, kế toán trưởng, nhân viên phụ trách các lĩnh vực liên quan.</p><h4>3. Nội dung đào tạo</h4><p>Chương trình đào tạo bao gồm các chuyên đề cập nhật những thay đổi mới nhất trong chính sách, pháp luật và thực tiễn áp dụng. Học viên được cung cấp tài liệu đầy đủ và hỗ trợ giải đáp thắc mắc trong suốt quá trình học.</p><h4>4. Chứng nhận</h4><p>Học viên hoàn thành khóa đào tạo sẽ được cấp Giấy chứng nhận bồi dưỡng kiến thức pháp luật có giá trị trên toàn quốc.</p>`
+            }));
+
+            const khoaHocData = Array.from({ length: 24 }).map((_, idx) => ({
+                id: 1301 + idx,
+                isNews: true,
+                title: `Khóa học ${['Kỹ năng soạn thảo hợp đồng thương mại', 'Pháp luật về lao động và BHXH', 'Quản trị rủi ro pháp lý trong kinh doanh', 'Sở hữu trí tuệ cho doanh nghiệp', 'Kỹ năng tư vấn pháp luật doanh nghiệp', 'Giải quyết tranh chấp thương mại', 'Pháp luật về thuế và hóa đơn điện tử', 'Kỹ năng đàm phán và ký kết hợp đồng', 'Tuân thủ pháp luật trong xuất nhập khẩu', 'Chuyển đổi số và bảo vệ dữ liệu', 'Pháp luật về cạnh tranh và chống độc quyền', 'Kỹ năng rà soát, thẩm định hợp đồng'][idx % 12]}`,
+                summary: `Khóa học cung cấp kiến thức toàn diện và kỹ năng thực hành về ${['soạn thảo hợp đồng thương mại', 'pháp luật lao động và BHXH', 'quản trị rủi ro pháp lý', 'đăng ký và bảo hộ sở hữu trí tuệ', 'tư vấn pháp luật doanh nghiệp', 'giải quyết tranh chấp thương mại', 'thuế và hóa đơn điện tử', 'đàm phán và ký kết hợp đồng', 'tuân thủ pháp luật xuất nhập khẩu', 'chuyển đổi số và bảo vệ dữ liệu', 'pháp luật cạnh tranh', 'rà soát và thẩm định hợp đồng'][idx % 12]}, giúp học viên nắm vững quy định pháp luật và vận dụng hiệu quả vào thực tiễn công việc.`,
+                date: `${String(28 - (idx % 28)).padStart(2, '0')}/04/2026`,
+                thoiGian: `01/0${(idx % 5) + 5}/2026 - 30/0${(idx % 5) + 5}/2026`,
+                chuongTrinh: ['Soạn thảo và rà soát hợp đồng thương mại', 'Quy định mới về hợp đồng lao động và BHXH', 'Nhận diện và quản trị rủi ro pháp lý', 'Đăng ký và bảo hộ sở hữu trí tuệ', 'Kỹ năng tư vấn và soạn thảo ý kiến pháp lý', 'Phương thức giải quyết tranh chấp thương mại', 'Quy định mới về thuế và hóa đơn điện tử', 'Chiến lược đàm phán và ký kết hợp đồng', 'Quy định về xuất xứ hàng hóa và thủ tục hải quan', 'Bảo vệ dữ liệu cá nhân và tuân thủ GDPR', 'Luật Cạnh tranh và kiểm soát tập trung kinh tế', 'Kỹ năng rà soát và thẩm định hợp đồng'][idx % 12],
+                hinhThuc: ['Trực tuyến', 'Trực tiếp', 'Trực tuyến', 'Trực tiếp', 'Trực tuyến', 'Trực tiếp', 'Trực tuyến', 'Trực tiếp', 'Trực tuyến', 'Trực tuyến', 'Trực tiếp', 'Trực tuyến'][idx % 12],
+                doiTuong: ['Chủ doanh nghiệp, giám đốc pháp chế, trưởng phòng kinh doanh', 'Giám đốc nhân sự, kế toán trưởng, cán bộ BHXH', 'Chủ doanh nghiệp, giám đốc điều hành, trưởng phòng pháp chế', 'Chủ doanh nghiệp, giám đốc R&D, trưởng phòng pháp chế', 'Luật sư, tư vấn viên pháp lý, cán bộ pháp chế', 'Chủ doanh nghiệp, luật sư, trưởng phòng pháp chế', 'Kế toán trưởng, giám đốc tài chính, cán bộ thuế', 'Chủ doanh nghiệp, giám đốc pháp chế, trưởng phòng kinh doanh', 'Giám đốc xuất nhập khẩu, cán bộ hải quan, trưởng phòng logistics', 'Giám đốc công nghệ, cán bộ bảo mật, trưởng phòng pháp chế', 'Chủ doanh nghiệp, giám đốc điều hành, trưởng phòng pháp chế', 'Luật sư, tư vấn viên pháp lý, cán bộ pháp chế'][idx % 12],
+                diaDiem: ['Trung tâm Hỗ trợ pháp lý, 82 Trần Phú, Hà Nội', 'Trung tâm Hỗ trợ pháp lý, 82 Trần Phú, Hà Nội', 'Trực tuyến qua Zoom', 'Khách sạn New World, 76 Lê Lai, TP.HCM', 'Trung tâm Hỗ trợ pháp lý, 82 Trần Phú, Hà Nội', 'Khách sạn Mường Thanh, 514 đường 2/9, Đà Nẵng', 'Trực tuyến qua Microsoft Teams', 'Trung tâm Hỗ trợ pháp lý, 82 Trần Phú, Hà Nội', 'Trung tâm Hỗ trợ pháp lý, 82 Trần Phú, Hà Nội', 'Trực tuyến qua Zoom', 'Khách sạn New World, 76 Lê Lai, TP.HCM', 'Trung tâm Hỗ trợ pháp lý, 82 Trần Phú, Hà Nội'][idx % 12],
+                soLuong: `${30 + (idx % 5) * 10} học viên`,
+                thumb: `https://images.unsplash.com/photo-${['1556761175-4b46a572b786', '1589829085413-56de8ae18c73', '1521791136064-7986c2920216', '1554224154-26032ffc0d07', '1503676260728-1c00da094a0b', '1516321318423-f06f85e504b3', '1552581234-26160f608093', '1534536281715-e28d76689b4d', '1540575467063-178a50c2df87', '1552664730-d307ca884978', '1511578314322-379afb476865', '1507679799987-c73779587ccf', '1563986768609-322da13575f3', '1529107386315-e1a2ed48a620', '1454165804606-c3d57bc86b40'][idx % 15]}?auto=format&fit=crop&w=400&q=80`,
+                field: "Khóa học",
+                menuKey: "dao-tao",
+                subKey: "khoa-hoc",
+                attachments: idx % 3 === 0 ? [{ name: `KhoaHoc_${idx+1}.pdf`, size: `${(Math.random() * 3 + 1).toFixed(1)} MB` }] : [],
+                content: `<h4>1. Mục tiêu khóa học</h4><p>Sau khi hoàn thành khóa học, học viên có thể:</p><ul><li>Nắm vững các quy định pháp luật liên quan đến ${['soạn thảo hợp đồng', 'lao động và BHXH', 'quản trị rủi ro', 'sở hữu trí tuệ', 'tư vấn pháp luật', 'tranh chấp thương mại', 'thuế và hóa đơn', 'đàm phán hợp đồng', 'xuất nhập khẩu', 'chuyển đổi số', 'cạnh tranh', 'thẩm định hợp đồng'][idx % 12]}</li><li>Áp dụng kiến thức đã học vào thực tiễn công việc</li><li>Nâng cao kỹ năng xử lý các tình huống pháp lý phát sinh</li></ul><h4>2. Đối tượng tham gia</h4><p>Chủ doanh nghiệp, giám đốc điều hành, trưởng/phó phòng pháp chế, kế toán trưởng, nhân viên phụ trách các lĩnh vực liên quan.</p><h4>3. Nội dung khóa học</h4><p>Khóa học bao gồm các chuyên đề cập nhật những thay đổi mới nhất trong chính sách, pháp luật và thực tiễn áp dụng. Học viên được cung cấp tài liệu đầy đủ và hỗ trợ giải đáp thắc mắc trong suốt quá trình học.</p><h4>4. Chứng nhận</h4><p>Học viên hoàn thành khóa học sẽ được cấp Giấy chứng nhận có giá trị trên toàn quốc.</p>`
+            }));
+
+            const suKienData = Array.from({ length: 35 }).map((_, idx) => ({
+                id: 7000 + idx,
+                isNews: true,
+                title: `Sự kiện ${idx + 1}: ${['Hội thảo tháo gỡ vướng mắc pháp lý cho DNNVV', 'Tập huấn kỹ năng đàm phán hợp đồng thương mại quốc tế', 'Tọa đàm về chính sách thuế mới 2026', 'Hội nghị triển khai kế hoạch hỗ trợ pháp lý liên ngành'][idx % 4]}`,
+                summary: "Sự kiện cung cấp các kiến thức thiết yếu và cập nhật những quy định mới nhất giúp doanh nghiệp phòng ngừa rủi ro pháp lý trong quá trình hoạt động kinh doanh.",
+                date: `${String(28 - (idx % 28)).padStart(2, '0')}/04/2026`,
+                thumb: `https://images.unsplash.com/photo-${['1540575467063-178a50c2df87', '1552664730-d307ca884978', '1511578314322-379afb476865', '1507679799987-c73779587ccf', '1556761175-4b46a572b786', '1589829085413-56de8ae18c73', '1521791136064-7986c2920216', '1554224155-8d04cb21cd6c', '1454165804606-c3d57bc86b40', '1563986768609-322da13575f3', '1529107386315-e1a2ed48a620', '1503676260728-1c00da094a0b'][idx % 12]}?auto=format&fit=crop&w=400&q=80`,
+                field: ['Hội thảo', 'Tập huấn', 'Tọa đàm', 'Hội nghị'][idx % 4],
+                menuKey: "hoat-dong-trung-tam",
+                subKey: "su-kien",
+                attachments: idx % 2 === 0 ? [{ name: `TaiLieu_SuKien_${idx+1}.pdf`, size: `${(Math.random() * 3 + 1).toFixed(1)} MB` }] : [],
+                content: `<h4>1. Mục đích sự kiện</h4><p>${['Hội thảo tháo gỡ vướng mắc pháp lý cho DNNVV', 'Tập huấn kỹ năng đàm phán hợp đồng thương mại quốc tế', 'Tọa đàm về chính sách thuế mới 2026', 'Hội nghị triển khai kế hoạch hỗ trợ pháp lý liên ngành'][idx % 4]} nhằm cung cấp cho doanh nghiệp những kiến thức cập nhật nhất về khung pháp lý hiện hành, giúp phòng ngừa rủi ro và nâng cao năng lực cạnh tranh.</p><h4>2. Đối tượng tham gia</h4><ul><li>Chủ doanh nghiệp, giám đốc điều hành, trưởng phòng pháp chế</li><li>Đại diện các hiệp hội doanh nghiệp, phòng thương mại và công nghiệp</li><li>Cán bộ quản lý nhà nước có liên quan</li></ul><h4>3. Nội dung chính</h4><ul><li>Cập nhật những thay đổi mới nhất trong chính sách, pháp luật liên quan</li><li>Phân tích các tình huống thực tiễn, bài học kinh nghiệm từ doanh nghiệp</li><li>Giải đáp trực tiếp các vướng mắc của người tham dự</li><li>Kết nối, giao lưu giữa doanh nghiệp với cơ quan quản lý nhà nước</li></ul><h4>4. Hình thức tham gia</h4><p>Sự kiện được tổ chức dưới hình thức trực tiếp kết hợp trực tuyến, tạo điều kiện thuận lợi cho doanh nghiệp trên toàn quốc tham gia.</p>`
+            }));
+
+            const hoatDongPhoiHopData = [
+                { id: 801, isNews: true, title: "Ký kết thỏa thuận hợp tác hỗ trợ pháp lý với Liên đoàn Thương mại và Công nghiệp Việt Nam (VCCI)", summary: "Chương trình phối hợp nhằm đẩy mạnh các hoạt động hỗ trợ pháp lý chuyên sâu cho các doanh nghiệp hội viên VCCI trên toàn quốc.", date: "25/04/2026", thumb: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=400&q=80", field: "Hợp tác", menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop", attachments: [{ name: "ThoaThuanHopTac_VCCI.pdf", size: "2.1 MB" }], content: "<h4>1. Bối cảnh hợp tác</h4><p>Thỏa thuận hợp tác giữa Trung tâm Hỗ trợ pháp lý doanh nghiệp và VCCI được ký kết nhằm thiết lập cơ chế phối hợp bền vững trong công tác hỗ trợ pháp lý cho cộng đồng doanh nghiệp hội viên.</p><h4>2. Nội dung hợp tác</h4><ul><li>Tổ chức các chương trình tập huấn, tọa đàm chuyên đề về pháp luật doanh nghiệp</li><li>Xây dựng cơ sở dữ liệu chuyên gia pháp lý chia sẻ cho doanh nghiệp</li><li>Thiết lập đường dây nóng tư vấn pháp luật miễn phí cho hội viên VCCI</li><li>Biên soạn và phát hành ấn phẩm hướng dẫn pháp luật bằng song ngữ</li></ul><h4>3. Mục tiêu đến năm 2030</h4><p>Phấn đấu 100% doanh nghiệp hội viên VCCI được tiếp cận dịch vụ hỗ trợ pháp lý chất lượng cao, góp phần nâng cao năng lực cạnh tranh và phát triển bền vững.</p>" },
+                { id: 802, isNews: true, title: "Phối hợp cùng Hội Luật gia Việt Nam tổ chức chuỗi tọa đàm pháp luật", summary: "Chuỗi sự kiện sẽ được tổ chức tại 3 miền Bắc, Trung, Nam để phổ biến kiến thức pháp luật mới nhất cho doanh nghiệp SME.", date: "22/04/2026", thumb: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=400&q=80", field: "Tọa đàm", menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop", attachments: [], content: "<h4>Lịch trình chuỗi tọa đàm</h4><ul><li><strong>Miền Bắc:</strong> Ngày 05/05/2026 tại Hà Nội</li><li><strong>Miền Trung:</strong> Ngày 12/05/2026 tại Đà Nẵng</li><li><strong>Miền Nam:</strong> Ngày 19/05/2026 tại TP. Hồ Chí Minh</li></ul><h4>Chủ đề trọng tâm</h4><p>Các chuyên đề sẽ tập trung vào: Luật Doanh nghiệp sửa đổi, chính sách thuế mới, pháp luật lao động, và giải quyết tranh chấp thương mại. Mỗi buổi tọa đàm dự kiến thu hút 200-300 đại biểu tham dự trực tiếp và hàng nghìn lượt xem trực tuyến.</p>" },
+                { id: 803, isNews: true, title: "Chương trình đồng hành pháp lý cùng doanh nghiệp trẻ khởi nghiệp", summary: "Sự kiện ký kết hợp tác giữa Trung tâm và Trung ương Đoàn TNCS Hồ Chí Minh nhằm hỗ trợ thanh niên khởi nghiệp.", date: "18/04/2026", thumb: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=400&q=80", field: "Hợp tác", menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop", attachments: [{ name: "KeHoach_HoTro_ThanhNien.pdf", size: "1.5 MB" }], content: "<h4>Đối tượng hưởng lợi</h4><p>Chương trình hướng đến thanh niên từ 18-35 tuổi đang có ý tưởng hoặc đã thành lập doanh nghiệp trong vòng 3 năm. Ưu tiên các dự án khởi nghiệp sáng tạo, ứng dụng công nghệ cao.</p><h4>Gói hỗ trợ</h4><ul><li>Tư vấn pháp lý miễn phí về đăng ký kinh doanh, sở hữu trí tuệ</li><li>Hỗ trợ soạn thảo hợp đồng, điều lệ công ty</li><li>Kết nối với quỹ đầu tư mạo hiểm và chương trình ươm tạo</li><li>Tập huấn kỹ năng quản trị rủi ro pháp lý</li></ul>" },
+                { id: 804, isNews: true, title: "Hợp tác chiến lược với Bộ Kế hoạch và Đầu tư trong công tác đăng ký kinh doanh", summary: "Thống nhất quy chế chia sẻ cơ sở dữ liệu doanh nghiệp để đơn giản hóa thủ tục hành chính, giảm phiền hà cho người dân.", date: "15/04/2026", thumb: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=400&q=80", field: "Chính sách", menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop", attachments: [], content: "<h4>Cơ chế một cửa liên thông</h4><p>Hai bên thống nhất triển khai cơ chế một cửa liên thông trong đăng ký kinh doanh, cho phép doanh nghiệp nộp một bộ hồ sơ duy nhất cho nhiều thủ tục hành chính liên quan.</p><h4>Chia sẻ dữ liệu quốc gia</h4><p>Hệ thống Cổng thông tin quốc gia về đăng ký doanh nghiệp sẽ được kết nối liên thông với Cơ sở dữ liệu hỗ trợ pháp lý, giúp doanh nghiệp dễ dàng tra cứu và tiếp cận các dịch vụ hỗ trợ.</p>" },
+                { id: 805, isNews: true, title: "Ký kết MOU with Hiệp hội Doanh nghiệp nhỏ và vừa Việt Nam", summary: "Bản ghi nhớ hợp tác (MOU) mở ra các cơ hội tiếp cận tư vấn pháp luật miễn phí cho hơn 60.000 doanh nghiệp hội viên.", date: "12/04/2026", thumb: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=400&q=80", field: "Hợp tác", menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop", attachments: [{ name: "MOU_HiepHoi_DNNVV.pdf", size: "3.4 MB" }], content: "<h4>Phạm vi hợp tác</h4><p>MOU thiết lập khung hợp tác toàn diện giữa Trung tâm và VA-SME trong các lĩnh vực: tư vấn pháp luật, đào tạo nâng cao năng lực, và kết nối doanh nghiệp với cơ quan quản lý nhà nước.</p><h4>Cam kết hỗ trợ</h4><ul><li>Mỗi tháng tổ chức ít nhất 02 buổi tư vấn trực tuyến cho hội viên</li><li>Biên soạn cẩm nang pháp luật dành riêng cho DNNVV</li><li>Hỗ trợ pháp lý trong các vụ việc tranh chấp thương mại quốc tế</li></ul>" },
+                { id: 806, isNews: true, title: "Phối hợp Bộ Thông tin & Truyền thông triển khai tổng đài tư vấn pháp lý trực tuyến", summary: "Hệ thống tổng đài đa kênh áp dụng AI để phân loại và chuyển tiếp các câu hỏi pháp lý của doanh nghiệp đến chuyên gia phù hợp.", date: "08/04/2026", thumb: "https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=400&q=80", field: "Công nghệ", menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop", attachments: [], content: "<h4>Tính năng tổng đài thông minh</h4><p>Hệ thống sử dụng trí tuệ nhân tạo để phân tích, phân loại tự động các câu hỏi theo lĩnh vực pháp luật (thuế, lao động, doanh nghiệp, thương mại...) và chuyển đến chuyên gia có chuyên môn phù hợp nhất.</p><h4>Đa kênh tiếp cận</h4><ul><li>Tổng đài điện thoại 1900-xxxx (hoạt động 24/7)</li><li>Chatbot trên website và ứng dụng di động</li><li>Email hỗ trợ với thời gian phản hồi trong 24 giờ</li><li>Zalo OA chính thức của Trung tâm</li></ul>" },
+                { id: 807, isNews: true, title: "Hợp tác với các trường Đại học Luật thành lập mạng lưới tình nguyện viên pháp lý", summary: "Sinh viên năm cuối ngành luật sẽ tham gia tư vấn các vấn đề pháp lý cơ bản cho hộ kinh doanh và cá nhân dưới sự giám sát của luật sư.", date: "05/04/2026", thumb: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=400&q=80", field: "Đào tạo", menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop", attachments: [], content: "<h4>Mô hình phòng khám pháp lý</h4><p>Các trường Đại học Luật Hà Nội, Đại học Luật TP.HCM và Đại học Luật Huế sẽ thành lập phòng khám pháp lý, nơi sinh viên năm cuối thực hành tư vấn dưới sự hướng dẫn của giảng viên là luật sư có kinh nghiệm.</p><h4>Lợi ích kép</h4><ul><li>Sinh viên được rèn luyện kỹ năng thực hành, tích lũy kinh nghiệm</li><li>Hộ kinh doanh, cá nhân được tư vấn miễn phí các vấn đề pháp lý cơ bản</li><li>Góp phần phổ biến kiến thức pháp luật trong cộng đồng</li></ul>" },
+                { id: 808, isNews: true, title: "Chương trình phối hợp với Ngân hàng Nhà nước tháo gỡ vướng mắc vốn", summary: "Tạo kênh liên lạc trực tiếp giúp giải quyết các nút thắt về hồ sơ tín dụng, tài sản đảm bảo cho doanh nghiệp vay vốn.", date: "02/04/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=400&q=80", field: "Tài chính", menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop", attachments: [{ name: "ThongTu_TinDung.pdf", size: "2.8 MB" }], content: "<h4>Vướng mắc thường gặp</h4><p>Doanh nghiệp nhỏ và vừa thường gặp khó khăn trong việc đáp ứng yêu cầu về tài sản đảm bảo, hồ sơ tín dụng phức tạp và lãi suất vay cao. Chương trình phối hợp sẽ tháo gỡ từng vấn đề cụ thể.</p><h4>Giải pháp</h4><ul><li>Thành lập Quỹ bảo lãnh tín dụng cho DNNVV</li><li>Đơn giản hóa thủ tục vay vốn, rút ngắn thời gian phê duyệt</li><li>Áp dụng lãi suất ưu đãi cho doanh nghiệp sản xuất, xuất khẩu</li><li>Tổ chức các buổi đối thoại trực tiếp giữa ngân hàng và doanh nghiệp</li></ul>" },
+                { id: 809, isNews: true, title: "Hợp tác quốc tế trao đổi kinh nghiệm hỗ trợ pháp lý với Nhật Bản", summary: "Đoàn công tác JICA phối hợp tổ chức hội thảo chia sẻ cách thức quản trị rủi ro pháp lý của doanh nghiệp SME Nhật Bản.", date: "28/03/2026", thumb: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=400&q=80", field: "Hợp tác", menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop", attachments: [], content: "<h4>Kinh nghiệm Nhật Bản</h4><p>Nhật Bản có hệ thống hỗ trợ pháp lý cho SME rất phát triển thông qua các Trung tâm Hỗ trợ Pháp lý Doanh nghiệp (Legal Support Centers) đặt tại các địa phương, cung cấp dịch vụ tư vấn miễn phí và chi phí thấp.</p><h4>Bài học áp dụng</h4><ul><li>Mô hình 'một cửa' trong hỗ trợ pháp lý</li><li>Đào tạo đội ngũ tư vấn viên chuyên nghiệp</li><li>Ứng dụng công nghệ trong quản lý hồ sơ và theo dõi vụ việc</li><li>Liên kết chặt chẽ giữa chính phủ, hiệp hội và doanh nghiệp</li></ul>" },
+                { id: 810, isNews: true, title: "Khởi động cuộc thi tìm hiểu pháp luật kinh doanh phối hợp cùng Đài Truyền hình VN", summary: "Sân chơi kiến thức pháp luật hấp dẫn được phát sóng hàng tuần nhằm lan tỏa tinh thần thượng tôn pháp luật.", date: "25/03/2026", thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80", field: "Truyền thông", menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop", attachments: [{ name: "TheLe_CuocThi.pdf", size: "1.2 MB" }], content: "<h4>Thể lệ cuộc thi</h4><p>Cuộc thi 'Doanh nghiệp & Pháp luật' được tổ chức dưới hình thức gameshow truyền hình, phát sóng vào 20h tối thứ Bảy hàng tuần trên VTV1. Mỗi số có sự tham gia của 3 đội chơi là đại diện các doanh nghiệp.</p><h4>Các phần thi</h4><ul><li>Khởi động: Trắc nghiệm kiến thức pháp luật cơ bản</li><li>Vượt chướng ngại vật: Giải quyết tình huống pháp lý thực tế</li><li>Tăng tốc: Tranh biện về một vấn đề pháp luật thời sự</li><li>Về đích: Câu hỏi dành cho khán giả truyền hình</li></ul>" },
+                { id: 811, isNews: true, title: "Ký kết quy chế phối hợp công tác thi hành án dân sự với Tổng cục THADS", summary: "Tạo cơ chế phối hợp chặt chẽ, đẩy nhanh tiến độ giải quyết các vụ việc thi hành án liên quan đến tài sản doanh nghiệp.", date: "20/03/2026", thumb: "https://images.unsplash.com/photo-1541888086925-920a0bba04bd?auto=format&fit=crop&w=400&q=80", field: "Pháp luật", menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop", attachments: [], content: "<h4>Vấn đề tồn tại</h4><p>Thời gian thi hành án dân sự kéo dài, đặc biệt trong các vụ việc liên quan đến tài sản đảm bảo là bất động sản, máy móc thiết bị của doanh nghiệp, gây thiệt hại lớn về kinh tế.</p><h4>Giải pháp phối hợp</h4><ul><li>Thành lập tổ công tác liên ngành xử lý các vụ việc tồn đọng</li><li>Áp dụng đấu giá điện tử để minh bạch hóa và đẩy nhanh tiến độ</li><li>Cơ chế ưu tiên thi hành án cho doanh nghiệp đang trong tình trạng khó khăn</li><li>Tổ chức đối thoại định kỳ giữa cơ quan thi hành án và cộng đồng doanh nghiệp</li></ul>" },
+                { id: 812, isNews: true, title: "Hợp tác toàn diện cùng Trung tâm Trọng tài Quốc tế Việt Nam (VIAC)", summary: "Khuyến khích doanh nghiệp sử dụng trọng tài và hòa giải thương mại để giải quyết tranh chấp nhanh chóng, bảo mật.", date: "15/03/2026", thumb: "https://images.unsplash.com/photo-1586528116311-ad8ed745333c?auto=format&fit=crop&w=400&q=80", field: "Hợp tác", menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop", attachments: [{ name: "QuyChe_TrongTai.pdf", size: "4.5 MB" }], content: "<h4>Ưu điểm của trọng tài thương mại</h4><p>So với tòa án, trọng tài thương mại có nhiều ưu điểm: nhanh chóng (thời gian giải quyết trung bình 6-9 tháng), bảo mật, chuyên môn cao, và phán quyết có giá trị thi hành tại hơn 170 quốc gia theo Công ước New York.</p><h4>Cam kết hỗ trợ</h4><ul><li>Tư vấn miễn phí về soạn thảo điều khoản trọng tài trong hợp đồng</li><li>Giới thiệu danh sách trọng tài viên uy tín</li><li>Hỗ trợ chi phí cho doanh nghiệp nhỏ và vừa lần đầu sử dụng trọng tài</li><li>Tập huấn kỹ năng đàm phán, hòa giải thương mại</li></ul>" },
+                ...Array.from({ length: 10 }).map((_, idx) => ({
+                    id: 813 + idx, isNews: true,
+                    title: `Hoạt động phối hợp hỗ trợ pháp lý doanh nghiệp tháng ${4 + (idx % 9)}/2026`,
+                    summary: "Các hoạt động phối hợp giữa Trung tâm Hỗ trợ pháp lý và các đối tác nhằm tháo gỡ khó khăn, vướng mắc cho doanh nghiệp trong quá trình sản xuất kinh doanh.",
+                    date: `${String(10 - (idx % 10)).padStart(2, '0')}/03/2026`,
+                    thumb: `https://images.unsplash.com/photo-${['1556761175-4b46a572b786', '1589829085413-56de8ae18c73', '1521791136064-7986c2920216', '1554224154-26032ffc0d07', '1503676260728-1c00da094a0b', '1516321318423-f06f85e504b3', '1552581234-26160f608093', '1534536281715-e28d76689b4d', '1540575467063-178a50c2df87', '1552664730-d307ca884978', '1511578314322-379afb476865', '1507679799987-c73779587ccf', '1563986768609-322da13575f3', '1529107386315-e1a2ed48a620', '1454165804606-c3d57bc86b40', '1618044733300-9472054094ee', '1554224155-8d04cb21cd6c', '1451187580459-43490279c0fa', '1541888086925-920a0bba04bd', '1586528116311-ad8ed745333c'][idx % 20]}?auto=format&fit=crop&w=400&q=80`,
+                    field: ['Phối hợp', 'Hỗ trợ', 'Tập huấn', 'Đào tạo', 'Tư vấn'][idx % 5],
+                    menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop",
+                    attachments: [],
+                    content: `<h4>Nội dung hoạt động</h4><p>Các hoạt động phối hợp trong tháng ${4 + (idx % 9)}/2026 tập trung vào việc tư vấn, hỗ trợ doanh nghiệp về pháp lý, đào tạo nâng cao năng lực và kết nối with các cơ quan quản lý nhà nước.</p>`
+                }))
+            ];
+
+            const nghienCuuData = Array.from({ length: 24 }).map((_, idx) => ({
+                id: 901 + idx,
+                isNews: true,
+                title: `Nghiên cứu & Trao đổi: Giải pháp tháo gỡ khó khăn cho doanh nghiệp SMEs trong bối cảnh mới (Phần ${idx + 1})`,
+                summary: "Bài viết phân tích chuyên sâu về các rào cản pháp lý hiện tại và đề xuất các phương án cải cách nhằm thúc đẩy sự phát triển của cộng đồng doanh nghiệp trong quá trình hội nhập kinh tế quốc tế.",
+                date: `${String(28 - (idx * 2)).padStart(2, '0')}/04/2026`,
+                thumb: `https://images.unsplash.com/photo-${['1454165804606-c3d57bc86b40', '1507679799987-c73779587ccf', '1556761175-4b46a572b786', '1521791136064-7986c2920216', '1554224154-26032ffc0d07', '1503676260728-1c00da094a0b', '1516321318423-f06f85e504b3', '1552581234-26160f608093', '1534536281715-e28d76689b4d', '1540575467063-178a50c2df87', '1552664730-d307ca884978', '1511578314322-379afb476865', '1563986768609-322da13575f3', '1529107386315-e1a2ed48a620', '1589829085413-56de8ae18c73', '1554224155-8d04cb21cd6c', '1451187580459-43490279c0fa', '1541888086925-920a0bba04bd', '1586528116311-ad8ed745333c', '1618044733300-9472054094ee'][idx % 20]}?auto=format&fit=crop&w=400&q=80`,
+                field: ['Pháp lý', 'Kinh tế', 'Thương mại', 'Đầu tư'][idx % 4],
+                attachments: idx % 2 === 0 ? [{ name: "BaiViet_ChuyenGia.pdf", size: "3.2 MB" }] : [],
+                content: `<h4>1. Thực trạng rào cản pháp lý</h4><p>Doanh nghiệp vừa và nhỏ Việt Nam hiện đang đối mặt với nhiều rào cản pháp lý, từ thủ tục thành lập, đăng ký kinh doanh đến các quy định về thuế, lao động, môi trường. Theo khảo sát của VCCI năm 2025, có tới 67% doanh nghiệp cho biết gặp khó khăn trong việc tiếp cận và hiểu rõ các quy định pháp luật.</p><h4>2. Nguyên nhân</h4><ul><li>Hệ thống văn bản pháp luật phức tạp, thường xuyên thay đổi</li><li>Chi phí tuân thủ pháp luật cao so với quy mô doanh nghiệp</li><li>Thiếu đội ngũ pháp chế chuyên nghiệp trong doanh nghiệp SME</li><li>Cơ chế hỗ trợ pháp lý từ Nhà nước chưa đủ mạnh và chưa tiếp cận được đa số doanh nghiệp</li></ul><h4>3. Đề xuất giải pháp</h4><ul><li>Đơn giản hóa thủ tục hành chính, áp dụng chính phủ điện tử</li><li>Xây dựng cổng thông tin pháp luật tích hợp, dễ tra cứu</li><li>Tăng cường đào tạo, tập huấn miễn phí cho doanh nghiệp</li><li>Thành lập Quỹ hỗ trợ pháp lý cho DNNVV</li></ul><h4>4. Kết luận</h4><p>Việc tháo gỡ rào cản pháp lý không chỉ là trách nhiệm của cơ quan quản lý nhà nước mà cần sự chung tay của cả cộng đồng doanh nghiệp, các hiệp hội ngành nghề và tổ chức tư vấn pháp luật.</p>`
+            }));
+
+            const tongQuanData = Array.from({ length: 15 }).map((_, idx) => ({
+                id: 1001 + idx, isNews: true,
+                title: `Tổng quan Kế hoạch hỗ trợ pháp lý trọng tâm giai đoạn 2026-2030 (Phần ${idx + 1})`,
+                summary: "Định hướng chiến lược và các mục tiêu cụ thể trong việc nâng cao chất lượng hỗ trợ pháp lý cho doanh nghiệp vừa và nhỏ trên phạm vi cả nước.",
+                date: `${String(28 - (idx * 2)).padStart(2, '0')}/04/2026`,
+                thumb: `https://images.unsplash.com/photo-${['1554224155-8d04cb21cd6c', '1454165804606-c3d57bc86b40', '1507679799987-c73779587ccf', '1556761175-4b46a572b786', '1589829085413-56de8ae18c73', '1521791136064-7986c2920216', '1554224154-26032ffc0d07', '1503676260728-1c00da094a0b', '1516321318423-f06f85e504b3', '1552581234-26160f608093', '1534536281715-e28d76689b4d', '1540575467063-178a50c2df87', '1552664730-d307ca884978', '1511578314322-379afb476865', '1563986768609-322da13575f3', '1529107386315-e1a2ed48a620'][idx % 16]}?auto=format&fit=crop&w=400&q=80`,
+                attachments: [{ name: `TongQuan_KeHoach_Phan${idx+1}.pdf`, size: `${(Math.random() * 3 + 1).toFixed(1)} MB` }],
+                content: `
+                    <h4>1. Quan điểm chỉ đạo</h4>
+                    <p>Kế hoạch hỗ trợ pháp lý giai đoạn 2026-2030 được xây dựng trên quan điểm: lấy doanh nghiệp làm trung tâm, tập trung vào chất lượng và hiệu quả thực chất, đảm bảo tính bền vững và khả năng tiếp cận rộng rãi. Mọi hoạt động hỗ trợ pháp lý đều phải xuất phát from nhu cầu thực tế của doanh nghiệp, tránh hình thức, lãng phí.</p>
+
+                    <h4>2. Mục tiêu cụ thể</h4>
+                    <p>Đến năm 2030, phấn đấu đạt các chỉ tiêu sau:</p>
+                    <ul>
+                        <li>100% doanh nghiệp được tiếp cận thông tin pháp luật cơ bản qua cổng thông tin điện tử, trong đó ít nhất 80% doanh nghiệp thường xuyên sử dụng dịch vụ hỗ trợ pháp lý trực tuyến.</li>
+                        <li>Giảm 50% chi phí tuân thủ pháp luật cho doanh nghiệp SME thông qua việc đơn giản hóa thủ tục hành chính và cung cấp các mẫu văn bản chuẩn miễn phí.</li>
+                        <li>Thành lập mạng lưới 63 Trung tâm Hỗ trợ pháp lý cấp tỉnh, mỗi trung tâm có ít nhất 10 tư vấn viên chuyên trách và 20 cộng tác viên là luật sư, chuyên gia pháp lý.</li>
+                        <li>Đào tạo ít nhất 5.000 tư vấn viên pháp lý doanh nghiệp, trong đó 30% có chứng chỉ tư vấn pháp lý quốc tế.</li>
+                        <li>Hỗ trợ trực tiếp cho ít nhất 50.000 doanh nghiệp giải quyết các vụ việc pháp lý cụ thể.</li>
+                        <li>Tỷ lệ doanh nghiệp hài lòng với dịch vụ hỗ trợ pháp lý đạt ít nhất 90%.</li>
+                    </ul>
+
+                    <h4>3. Nhiệm vụ trọng tâm</h4>
+                    <p>Để đạt được các mục tiêu trên, cần tập trung thực hiện các nhiệm vụ sau:</p>
+                    <ul>
+                        <li><strong>Rà soát, đơn giản hóa thủ tục hành chính:</strong> Cắt giảm ít nhất 30% thủ tục hành chính liên quan đến doanh nghiệp, ưu tiên các thủ tục về đăng ký kinh doanh, thuế, lao động, và đất đai. Áp dụng cơ chế một cửa liên thông điện tử ở mức độ 4.</li>
+                        <li><strong>Xây dựng cơ sở dữ liệu quốc gia:</strong> Tích hợp, kết nối cơ sở dữ liệu hỗ trợ pháp lý với Cổng thông tin quốc gia về đăng ký doanh nghiệp, Cổng dịch vụ công quốc gia, và Cơ sở dữ liệu quốc gia về pháp luật.</li>
+                        <li><strong>Tư vấn pháp lý lưu động:</strong> Tổ chức các đoàn tư vấn lưu động đến tận các khu công nghiệp, cụm công nghiệp, làng nghề để tư vấn trực tiếp cho doanh nghiệp, đặc biệt là các doanh nghiệp ở vùng sâu, vùng xa.</li>
+                        <li><strong>Đào tạo, bồi dưỡng:</strong> Xây dựng chương trình đào tạo trực tuyến kết hợp trực tiếp, tập trung vào các lĩnh vực: Luật Doanh nghiệp, Luật Lao động, Luật Thuế, Luật Đất đai, Sở hữu trí tuệ, và Giải quyết tranh chấp thương mại.</li>
+                        <li><strong>Hợp tác quốc tế:</strong> Học hỏi kinh nghiệm from các nước phát triển (Nhật Bản, Hàn Quốc, Singapore) trong mô hình hỗ trợ pháp lý cho SME; tổ chức các khóa đào tạo chung với các tổ chức quốc tế như JICA, KOICA, UNDP.</li>
+                    </ul>
+
+                    <h4>4. Giải pháp thực hiện</h4>
+                    <p><strong>a) Hoàn thiện thể chế:</strong> Sửa đổi, bổ sung các văn bản quy phạm pháp luật về hỗ trợ pháp lý cho doanh nghiệp; ban hành quy chế phối hợp liên ngành; xây dựng tiêu chuẩn, quy chuẩn về chất lượng dịch vụ hỗ trợ pháp lý.</p>
+                    <p><strong>b) Nâng cao năng lực:</strong> Đầu tư cơ sở vật chất, trang thiết bị cho các Trung tâm Hỗ trợ pháp lý; đào tạo, bồi dưỡng đội ngũ tư vấn viên; xây dựng đội ngũ chuyên gia pháp lý đầu ngành.</p>
+                    <p><strong>c) Ứng dụng công nghệ:</strong> Phát triển nền tảng tư vấn pháp lý trực tuyến tích hợp AI để phân loại, gợi ý câu trả lời; xây dựng chatbot pháp lý 24/7; số hóa toàn bộ cơ sở dữ liệu văn bản pháp luật.</p>
+                    <p><strong>d) Truyền thông, phổ biến:</strong> Đẩy mạnh tuyên truyền về các dịch vụ hỗ trợ pháp lý qua các kênh truyền thông đại chúng, mạng xã hội; tổ chức các ngày hội tư vấn pháp luật miễn phí; xuất bản các ấn phẩm cẩm nang pháp luật dễ hiểu, dễ tiếp cận.</p>
+
+                    <h4>5. Nguồn lực thực hiện</h4>
+                    <p>Dự kiến tổng ngân sách thực hiện Kế hoạch giai đoạn 2026-2030 là 2.500 tỷ đồng, trong đó:</p>
+                    <ul>
+                        <li>60% từ ngân sách nhà nước (ngân sách trung ương và địa phương)</li>
+                        <li>25% from các nguồn hợp tác quốc tế (ODA, viện trợ không hoàn lại, vay ưu đãi)</li>
+                        <li>15% từ đóng góp của cộng đồng doanh nghiệp và các tổ chức xã hội</li>
+                    </ul>
+                    <p>Ngân sách được phân bổ theo các hạng mục: Xây dựng cơ sở dữ liệu và nền tảng công nghệ (30%); Đào tạo, bồi dưỡng (25%); Tư vấn pháp lý lưu động (20%); Truyền thông, phổ biến (15%); Quản lý, điều hành và giám sát (10%).</p>
+
+                    <h4>6. Tổ chức thực hiện</h4>
+                    <p><strong>Bộ Tư pháp:</strong> Là cơ quan đầu mối, chủ trì phối hợp với các bộ, ngành liên quan tổ chức triển khai thực hiện; hướng dẫn, kiểm tra, giám sát việc thực hiện Kế hoạch; định kỳ báo cáo Thủ tướng Chính phủ kết quả thực hiện.</p>
+                    <p><strong>UBND cấp tỉnh:</strong> Thành lập hoặc chỉ định đơn vị sự nghiệp công lập làm đầu mối triển khai hoạt động hỗ trợ pháp lý cho doanh nghiệp tại địa phương; bố trí kinh phí và cơ sở vật chất cần thiết; phối hợp với các hiệp hội doanh nghiệp tổ chức các hoạt động tư vấn, đào tạo.</p>
+                    <p><strong>Các hiệp hội doanh nghiệp:</strong> Phối hợp với cơ quan nhà nước tổ chức các hoạt động hỗ trợ pháp lý cho hội viên; phản ánh kịp thời các vướng mắc, kiến nghị của doanh nghiệp; tham gia giám sát chất lượng dịch vụ hỗ trợ pháp lý.</p>
+
+                    <h4>7. Theo dõi, đánh giá</h4>
+                    <p>Thiết lập hệ thống chỉ số theo dõi, đánh giá (M&E) với các chỉ số định lượng cụ thể cho từng mục tiêu. Định kỳ 6 tháng, 1 năm tổ chức đánh giá giữa kỳ; đến năm 2028 đánh giá tổng kết giai đoạn I; đến năm 2030 đánh giá tổng kết toàn Kế hoạch. Kết quả đánh giá là căn cứ để điều chỉnh, bổ sung Kế hoạch cho phù hợp với tình hình thực tế.</p>
+                `
+            }));
+
+            const boNganhData = Array.from({ length: 15 }).map((_, idx) => {
+                const agencies = ['Bộ Y tế', 'Bộ Kế hoạch và Đầu tư', 'Bộ Tài chính', 'Bộ Công Thương'];
+                return {
+                    id: 1101 + idx, isNews: true,
+                    title: `Kế hoạch hỗ trợ pháp lý cho doanh nghiệp năm 2026 của ${agencies[idx % 4]}`,
+                    summary: "Chi tiết các hoạt động, ngân sách và phân công nhiệm vụ triển khai hỗ trợ pháp lý nhằm tháo gỡ khó khăn cho cộng đồng doanh nghiệp.",
+                    date: `${String(25 - (idx * 1)).padStart(2, '0')}/04/2026`,
+                    thumb: `https://images.unsplash.com/photo-${['1589829085413-56de8ae18c73', '1521791136064-7986c2920216', '1556761175-4b46a572b786', '1554224154-26032ffc0d07', '1507679799987-c73779587ccf', '1454165804606-c3d57bc86b40'][idx % 6]}?auto=format&fit=crop&w=400&q=80`,
+                    field: agencies[idx % 4],
+                    agency: agencies[idx % 4],
+                    attachments: [{ name: `KeHoach_${agencies[idx % 4].replace(/[^a-zA-Z0-9]/g, '_')}_2026.pdf`, size: `${(Math.random() * 3 + 1).toFixed(1)} MB` }],
+                    content: `
+                        <h4>1. Mục tiêu kế hoạch</h4>
+                        <p>${agencies[idx % 4]} xây dựng kế hoạch hỗ trợ pháp lý năm 2026 với mục tiêu nâng cao nhận thức pháp luật, giảm chi phí tuân thủ, và tạo môi trường kinh doanh thuận lợi cho doanh nghiệp. Phấn đấu 100% doanh nghiệp được tiếp cận thông tin pháp luật cơ bản, 80% doanh nghiệp được tư vấn trực tiếp hoặc trực tuyến khi có yêu cầu.</p>
+
+                        <h4>2. Nhiệm vụ cụ thể</h4>
+                        <p><strong>a) Tổ chức tập huấn, đào tạo:</strong></p>
+                        <ul>
+                            <li>Tổ chức ít nhất 24 lớp tập huấn pháp luật cho doanh nghiệp, mỗi lớp từ 50-100 học viên, tập trung vào các chủ đề: Luật Doanh nghiệp, Luật Thuế, Luật Lao động, Luật Đất đai, Sở hữu trí tuệ, và Giải quyết tranh chấp thương mại.</li>
+                            <li>Xây dựng 12 khóa đào tạo trực tuyến (e-learning) về các lĩnh vực pháp luật thiết yếu, mỗi khóa từ 10-15 buổi, có cấp chứng chỉ hoàn thành.</li>
+                            <li>Mời các chuyên gia, luật sư đầu ngành, giảng viên đại học, và cán bộ quản lý nhà nước có kinh nghiệm làm giảng viên.</li>
+                        </ul>
+
+                        <p><strong>b) Xây dựng và vận hành cổng thông tin hỗ trợ pháp lý:</strong></p>
+                        <ul>
+                            <li>Phát triển cổng thông tin điện tử hỗ trợ pháp lý trực tuyến với đầy đủ các chuyên mục: Văn bản pháp luật, Cẩm nang pháp lý, Hỏi đáp pháp luật, Đăng ký tư vấn, và Đăng ký đào tạo.</li>
+                            <li>Tích hợp chatbot AI để trả lời tự động các câu hỏi pháp luật cơ bản 24/7.</li>
+                            <li>Cho phép doanh nghiệp đặt lịch hẹn tư vấn trực tiếp hoặc trực tuyến với chuyên gia.</li>
+                            <li>Cập nhật hàng tuần các văn bản pháp luật mới ban hành và các tình huống pháp lý thực tiễn.</li>
+                        </ul>
+
+                        <p><strong>c) Tư vấn pháp lý lưu động:</strong></p>
+                        <ul>
+                            <li>Thành lập các đoàn tư vấn lưu động, mỗi đoàn gồm 3-5 chuyên gia, đến tận các khu công nghiệp, cụm công nghiệp, làng nghề để tư vấn trực tiếp.</li>
+                            <li>Tổ chức ít nhất 48 buổi tư vấn lưu động trong năm, mỗi buổi phục vụ 30-50 doanh nghiệp.</li>
+                            <li>Ưu tiên hỗ trợ các doanh nghiệp nhỏ và vừa, start-up, doanh nghiệp do thanh niên, phụ nữ làm chủ.</li>
+                        </ul>
+
+                        <p><strong>d) Biên soạn và phát hành ấn phẩm:</strong></p>
+                        <ul>
+                            <li>Biên soạn 08 cẩm nang pháp luật theo chuyên đề: Thành lập doanh nghiệp, Hợp đồng thương mại, Lao động và BHXH, Thuế và Kế toán, Đất đai và Xây dựng, Sở hữu trí tuệ, Giải quyết tranh chấp, và Xuất nhập khẩu.</li>
+                            <li>In ấn và phát hành miễn phí 50.000 bản cẩm nang cho doanh nghiệp trên toàn quốc.</li>
+                            <li>Phát hành phiên bản điện tử (ebook, PDF) trên cổng thông tin để doanh nghiệp dễ dàng tải về và tra cứu.</li>
+                        </ul>
+
+                        <h4>3. Kinh phí thực hiện</h4>
+                        <p>Dự kiến tổng kinh phí thực hiện là ${[120, 85, 95, 110][idx % 4]} tỷ đồng, trong đó:</p>
+                        <ul>
+                            <li>70% từ ngân sách thường xuyên của ${agencies[idx % 4]}</li>
+                            <li>20% từ các nguồn hợp tác quốc tế (ODA, viện trợ không hoàn lại)</li>
+                            <li>10% từ đóng góp của các hiệp hội doanh nghiệp và tổ chức xã hội</li>
+                        </ul>
+                        <p>Phân bổ kinh phí theo các hạng mục: Đào tạo, tập huấn (35%); Xây dựng cổng thông tin và công nghệ (25%); Tư vấn lưu động (20%); Biên soạn, in ấn ấn phẩm (10%); Quản lý, điều hành (10%).</p>
+
+                        <h4>4. Tiến độ thực hiện</h4>
+                        <ul>
+                            <li><strong>Quý I/2026:</strong> Ban hành kế hoạch chi tiết; thành lập ban chỉ đạo; khởi động xây dựng cổng thông tin điện tử.</li>
+                            <li><strong>Quý II/2026:</strong> Tổ chức các lớp tập huấn đầu tiên; ra mắt cổng thông tin; biên soạn và in ấn cẩm nang.</li>
+                            <li><strong>Quý III/2026:</strong> Triển khai tư vấn lưu động tại 3 miền; tổ chức các khóa đào tạo trực tuyến; phát hành cẩm nang điện tử.</li>
+                            <li><strong>Quý IV/2026:</strong> Đánh giá giữa kỳ; điều chỉnh, bổ sung kế hoạch; tổng kết, rút kinh nghiệm.</li>
+                        </ul>
+
+                        <h4>5. Tổ chức thực hiện</h4>
+                        <p><strong>Đơn vị chủ trì:</strong> Vụ Pháp chế/${agencies[idx % 4]} là đơn vị đầu mối, chịu trách nhiệm tổ chức triển khai, theo dõi, đôn đốc, tổng hợp báo cáo.</p>
+                        <p><strong>Đơn vị phối hợp:</strong> Các vụ, cục, tổng cục thuộc ${agencies[idx % 4]}; các hiệp hội doanh nghiệp; các trường đại học luật; các tổ chức quốc tế.</p>
+                        <p><strong>Giám sát, đánh giá:</strong> Thành lập tổ giám sát độc lập gồm đại diện doanh nghiệp, chuyên gia, và nhà báo để đánh giá chất lượng dịch vụ hỗ trợ pháp lý.</p>
+                    `
+                };
+            });
+
+            const diaPhuongData = Array.from({ length: 15 }).map((_, idx) => {
+                const provinces = ['Hà Nội', 'TP. Hồ Chí Minh', 'Đà Nẵng', 'Hải Phòng', 'Cần Thơ'];
+                return {
+                    id: 1601 + idx, isNews: true,
+                    title: `Chương trình hỗ trợ pháp lý doanh nghiệp trên địa bàn ${provinces[idx % 5]} năm 2026`,
+                    summary: "UBND ban hành kế hoạch chi tiết nhằm tháo gỡ vướng mắc, cải thiện môi trường đầu tư và nâng cao năng lực cạnh tranh cho doanh nghiệp địa phương.",
+                    date: `${String(20 - (idx * 1)).padStart(2, '0')}/04/2026`,
+                    thumb: `https://images.unsplash.com/photo-${['1507679799987-c73779587ccf', '1556761175-4b46a572b786', '1554224154-26032ffc0d07', '1589829085413-56de8ae18c73', '1521791136064-7986c2920216', '1454165804606-c3d57bc86b40'][idx % 6]}?auto=format&fit=crop&w=400&q=80`,
+                    field: provinces[idx % 5],
+                    province: provinces[idx % 5],
+                    attachments: [{ name: `ChuongTrinh_${provinces[idx % 5].replace(/[^a-zA-Z0-9]/g, '_')}_2026.pdf`, size: `${(Math.random() * 2 + 1).toFixed(1)} MB` }],
+                    content: `
+                        <h4>1. Đặc thù địa phương</h4>
+                        <p>${provinces[idx % 5]} hiện có khoảng ${[15000, 22000, 8000, 6500, 4000][idx % 5]} doanh nghiệp đang hoạt động, trong đó 95% là doanh nghiệp vừa và nhỏ, 4,5% là doanh nghiệp siêu nhỏ, và 0,5% là doanh nghiệp lớn. Địa phương tập trung vào các lĩnh vực thế mạnh như ${['công nghệ cao, dịch vụ tài chính, du lịch văn hóa', 'thương mại, logistics, công nghệ thông tin, tài chính ngân hàng', 'du lịch biển đảo, dịch vụ cảng, công nghệ phần mềm', 'công nghiệp đóng tàu, chế biến thủy sản, cảng biển nước sâu', 'nông nghiệp công nghệ cao, chế biến lương thực thực phẩm, thủy sản'][idx % 5]}.</p>
+                        <p>Trong những năm qua, ${provinces[idx % 5]} luôn nỗ lực cải thiện môi trường kinh doanh, nâng cao chỉ số năng lực cạnh tranh cấp tỉnh (PCI). Tuy nhiên, doanh nghiệp vẫn gặp nhiều khó khăn về: thủ tục hành chính rườm rà, tiếp cận đất đai, vốn vay, lao động có kỹ năng, và thông tin pháp luật không đầy đủ.</p>
+
+                        <h4>2. Mục tiêu chương trình</h4>
+                        <ul>
+                            <li>Hỗ trợ trực tiếp cho ít nhất ${[3000, 4500, 1500, 1200, 800][idx % 5]} doanh nghiệp trên địa bàn thông qua tư vấn, đào tạo, và cung cấp thông tin pháp lý.</li>
+                            <li>Giảm 40% thời gian giải quyết các thủ tục hành chính liên quan đến doanh nghiệp thông qua áp dụng cơ chế một cửa liên thông điện tử.</li>
+                            <li>Thành lập và vận hành hiệu quả Trung tâm Hỗ trợ doanh nghiệp trực thuộc UBND thành phố, với đội ngũ tư vấn viên chuyên trách và cộng tác viên là luật sư, chuyên gia.</li>
+                            <li>Đào tạo, bồi dưỡng kiến thức pháp luật cho ít nhất ${[500, 800, 300, 250, 150][idx % 5]} lượt cán bộ quản lý doanh nghiệp và chủ hộ kinh doanh.</li>
+                            <li>Phấn đấu nâng chỉ số PCI của ${provinces[idx % 5]} lên top ${[10, 5, 15, 20, 25][idx % 5]} cả nước vào năm 2026.</li>
+                        </ul>
+
+                        <h4>3. Giải pháp trọng tâm</h4>
+                        <p><strong>a) Thành lập Trung tâm Hỗ trợ doanh nghiệp:</strong></p>
+                        <ul>
+                            <li>Trung tâm trực thuộc UBND ${provinces[idx % 5]}, có tư cách pháp nhân, con dấu và tài khoản riêng.</li>
+                            <li>Biên chế: 15-20 cán bộ chuyên trách, trong đó ít nhất 70% có trình độ đại học trở lên về luật, kinh tế, quản trị kinh doanh.</li>
+                            <li>Nhiệm vụ: Tư vấn pháp lý miễn phí, tiếp nhận và chuyển tiếp kiến nghị của doanh nghiệp, tổ chức các lớp đào tạo, kết nối doanh nghiệp với cơ quan quản lý nhà nước.</li>
+                        </ul>
+
+                        <p><strong>b) Đường dây nóng tư vấn pháp lý 24/7:</strong></p>
+                        <ul>
+                            <li>Tổng đài 1900-xxxx hoạt động 24/7, kết nối với đội ngũ tư vấn viên là cán bộ Sở Tư pháp, Sở Kế hoạch và Đầu tư, Sở Tài chính, và các luật sư tình nguyện.</li>
+                            <li>Thời gian phản hồi: Câu hỏi đơn giản trả lời ngay; câu hỏi phức tạp trả lời trong vòng 24-48 giờ làm việc.</li>
+                            <li>Hỗ trợ đa kênh: điện thoại, email, Zalo, chat trực tuyến trên website.</li>
+                        </ul>
+
+                        <p><strong>c) Đối thoại định kỳ giữa lãnh đạo thành phố với doanh nghiệp:</strong></p>
+                        <ul>
+                            <li>Tổ chức ít nhất 04 buổi đối thoại/năm, do Chủ tịch hoặc Phó Chủ tịch UBND thành phố chủ trì.</li>
+                            <li>Mời đại diện các hiệp hội doanh nghiệp, phòng thương mại và công nghiệp, và doanh nghiệp tiêu biểu trên địa bàn.</li>
+                            <li>Các kiến nghị được tổng hợp, phân loại và giao cho các sở, ngành nghiên cứu, trả lời trong thời hạn 15-30 ngày.</li>
+                            <li>Kết quả giải quyết kiến nghị được công khai trên cổng thông tin điện tử của thành phố.</li>
+                        </ul>
+
+                        <p><strong>d) Cơ sở dữ liệu doanh nghiệp địa phương:</strong></p>
+                        <ul>
+                            <li>Xây dựng cơ sở dữ liệu về doanh nghiệp trên địa bàn, bao gồm: thông tin đăng ký kinh doanh, lĩnh vực hoạt động, quy mô, tình hình sản xuất kinh doanh, và các kiến nghị, vướng mắc.</li>
+                            <li>Liên thông với Cổng thông tin quốc gia về đăng ký doanh nghiệp, Cổng dịch vụ công quốc gia, và Cơ sở dữ liệu hỗ trợ pháp lý.</li>
+                            <li>Cho phép doanh nghiệp tự cập nhật thông tin, theo dõi tiến độ giải quyết kiến nghị, và đăng ký tham gia các chương trình hỗ trợ.</li>
+                        </ul>
+
+                        <h4>4. Kinh phí thực hiện</h4>
+                        <p>Dự kiến tổng kinh phí: ${[45, 65, 25, 20, 15][idx % 5]} tỷ đồng, trong đó:</p>
+                        <ul>
+                            <li>Ngân sách địa phương: 80%</li>
+                            <li>Nguồn hợp tác quốc tế và các tổ chức phi chính phủ: 15%</li>
+                            <li>Đóng góp của cộng đồng doanh nghiệp: 5%</li>
+                        </ul>
+
+                        <h4>5. Tiến độ thực hiện</h4>
+                        <ul>
+                            <li><strong>Quý I/2026:</strong> Thành lập Trung tâm Hỗ trợ doanh nghiệp; ban hành quy chế hoạt động; tuyển dụng, đào tạo tư vấn viên.</li>
+                            <li><strong>Quý II/2026:</strong> Ra mắt Trung tâm và đường dây nóng; tổ chức lớp tập huấn đầu tiên; khởi động xây dựng cơ sở dữ liệu.</li>
+                            <li><strong>Quý III/2026:</strong> Tổ chức đối thoại lần 1; triển khai tư vấn lưu động tại các quận, huyện; hoàn thiện cơ sở dữ liệu.</li>
+                            <li><strong>Quý IV/2026:</strong> Đánh giá tổng kết; điều chỉnh kế hoạch; nhân rộng mô hình.</li>
+                        </ul>
+                    `
+                };
+            });
+
+            const chuongTrinhData = Array.from({ length: 8 }).map((_, idx) => ({
+                id: 1301 + idx, isNews: true,
+                title: `Chương trình ${['Phổ biến pháp luật trực tuyến', 'Hỗ trợ pháp lý lưu động', 'Tư vấn pháp luật miễn phí', 'Đào tạo pháp chế doanh nghiệp', 'Kết nối doanh nghiệp - cơ quan quản lý', 'Tư vấn sở hữu trí tuệ', 'Giải quyết tranh chấp thương mại', 'Hỗ trợ doanh nghiệp xuất khẩu'][idx]} năm 2026`,
+                summary: "Chương trình được triển khai nhằm cung cấp dịch vụ hỗ trợ pháp lý chất lượng cao, miễn phí cho doanh nghiệp trên toàn quốc.",
+                date: `${String(15 - idx).padStart(2, '0')}/04/2026`,
+                thumb: `https://images.unsplash.com/photo-${['1589829085413-56de8ae18c73', '1556761175-4b46a572b786', '1521791136064-7986c2920216', '1454165804606-c3d57bc86b40'][idx % 4]}?auto=format&fit=crop&w=400&q=80`,
+                content: `<h4>Mục tiêu chương trình</h4><p>Chương trình hướng đến việc cung cấp dịch vụ hỗ trợ pháp lý toàn diện, từ tư vấn ban đầu đến hỗ trợ giải quyết các vụ việc phức tạp, giúp doanh nghiệp phòng ngừa rủi ro và phát triển bền vững.</p><h4>Đối tượng hưởng lợi</h4><ul><li>Doanh nghiệp vừa và nhỏ thuộc mọi lĩnh vực</li><li>Hợp tác xã, hộ kinh doanh</li><li>Start-up, doanh nghiệp công nghệ</li></ul><h4>Kết quả mong đợi</h4><p>Dự kiến chương trình sẽ hỗ trợ trực tiếp cho ít nhất 10.000 doanh nghiệp, giải quyết thành công 80% các vụ việc tư vấn, và giảm đáng kể chi phí pháp lý cho doanh nghiệp tham gia.</p>`
+            }));
+
+            const vanBanChinhSachMoiData = [
+                {
+                    id: 3001,
+                    isNews: true,
+                    title: "Nghị định hướng dẫn hỗ trợ pháp lý cho doanh nghiệp nhỏ và vừa",
+                    type: "NGHỊ ĐỊNH",
+                    loaiVanBan: "NGHỊ ĐỊNH",
+                    date: "01/04/2026",
+                    agency: "Chính phủ",
+                    coQuanBanHanh: "Chính phủ",
+                    field: "Pháp luật",
+                    thumb: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=80",
+                    summary: "Nghị định quy định chi tiết một số điều và biện pháp thi hành Luật Hỗ trợ doanh nghiệp nhỏ và vừa, tạo hành lang pháp lý thuận lợi...",
+                    attachments: [{ name: "NghiDinh_HoTroPhapLy_DNNVV.pdf", size: "2.8 MB" }],
+                    content: "<h4>Nội dung văn bản</h4><p>Nghị định hướng dẫn chi tiết các chính sách hỗ trợ pháp lý cho DNNVV, bao gồm cung cấp thông tin pháp luật, bồi dưỡng kiến thức pháp luật và tư vấn pháp luật.</p><h4>Cơ quan thực hiện</h4><p>Các Bộ, cơ quan ngang Bộ, UBND các tỉnh, thành phố trực thuộc Trung ương có trách nhiệm bố trí nguồn lực và triển khai đồng bộ.</p>"
+                },
+                {
+                    id: 3002,
+                    isNews: true,
+                    title: "Thông tư quy định tiêu chuẩn an toàn thông tin và chuyển đổi số cho doanh nghiệp",
+                    type: "THÔNG TƯ",
+                    loaiVanBan: "THÔNG TƯ",
+                    date: "28/03/2026",
+                    agency: "Bộ Thông tin và Truyền thông",
+                    coQuanBanHanh: "Bộ Thông tin và Truyền thông",
+                    field: "Công nghệ",
+                    thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80",
+                    summary: "Quy định các tiêu chuẩn kỹ thuật an toàn thông tin mạng và quy trình bảo vệ dữ liệu khách hàng trong hoạt động kinh doanh điện tử...",
+                    attachments: [{ name: "ThongTu_ATTT_DoanhNghiep.pdf", size: "1.9 MB" }],
+                    content: "<h4>Quy định an toàn thông tin</h4><p>Thông tư hướng dẫn các biện pháp kỹ thuật bắt buộc nhằm bảo vệ hệ thống thông tin phục vụ sản xuất kinh doanh của doanh nghiệp.</p>"
+                },
+                {
+                    id: 3003,
+                    isNews: true,
+                    title: "Quyết định phê duyệt chương trình hỗ trợ pháp lý liên ngành cho doanh nghiệp giai đoạn 2026 - 2030",
+                    type: "QUYẾT ĐỊNH",
+                    loaiVanBan: "QUYẾT ĐỊNH",
+                    date: "22/03/2026",
+                    agency: "Thủ tướng Chính phủ",
+                    coQuanBanHanh: "Thủ tướng Chính phủ",
+                    field: "Chính sách",
+                    thumb: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&w=400&q=80",
+                    summary: "Quyết định ban hành kế hoạch tổng thể triển khai công tác hỗ trợ pháp lý cho doanh nghiệp trên toàn quốc đến năm 2030...",
+                    attachments: [{ name: "QuyetDinh_HoTroLienNganh.pdf", size: "3.2 MB" }],
+                    content: "<h4>Mục tiêu kế hoạch</h4><p>Đẩy mạnh sự phối hợp giữa các bộ ngành và địa phương nhằm giải quyết kịp thời các vướng mắc pháp lý phát sinh trong hoạt động đầu tư, kinh doanh.</p>"
+                },
+                ...Array.from({ length: 27 }).map((_, idx) => {
+                    const types = ["NGHỊ ĐỊNH", "THÔNG TƯ", "QUYẾT ĐỊNH", "NGHỊ QUYẾT", "LUẬT"];
+                    const agencies = ["Chính phủ", "Bộ Tư pháp", "Bộ Tài chính", "Bộ Kế hoạch và Đầu tư", "Thủ tướng Chính phủ"];
+                    const fields = ["Pháp luật", "Doanh nghiệp", "Thuế", "Đầu tư", "Thương mại"];
+                    return {
+                        id: 3004 + idx,
+                        isNews: true,
+                        title: `Văn bản chính sách mới: Hướng dẫn chi tiết thực hiện thủ tục hành chính số ${idx + 4}`,
+                        type: types[idx % types.length],
+                        loaiVanBan: types[idx % types.length],
+                        agency: agencies[idx % agencies.length],
+                        coQuanBanHanh: agencies[idx % agencies.length],
+                        field: fields[idx % fields.length],
+                        summary: "Phổ biến nội dung các chính sách mới nhất nhằm tạo hành lang pháp lý thuận lợi, tháo gỡ vướng mắc cho các doanh nghiệp trong quá trình hoạt động kinh doanh.",
+                        date: `${String(20 - (idx % 20)).padStart(2, '0')}/03/2026`,
+                        thumb: `https://images.unsplash.com/photo-${['1589829085413-56de8ae18c73', '1556761175-4b46a572b786', '1521791136064-7986c2920216', '1507679799987-c73779587ccf', '1563986768609-322da13575f3', '1529107386315-e1a2ed48a620'][idx % 6]}?auto=format&fit=crop&w=400&q=80`,
+                        attachments: [{ name: `VanBanChinhSach_${idx+4}.pdf`, size: `${(Math.random() * 3 + 1).toFixed(1)} MB` }],
+                        content: `<h4>Nội dung văn bản</h4><p>Văn bản quy định chi tiết về trình tự, thủ tục, hồ sơ và thời gian giải quyết đối với doanh nghiệp.</p>`
+                    };
+                })
+            ];
+
+            const vanBanPhapLuatData = Array.from({ length: 47 }).map((_, idx) => {
+                const types = ["Luật", "Nghị định", "Thông tư", "Quyết định"];
+                const agencies = ["Quốc hội", "Chính phủ", "Bộ Tài chính", "Bộ Tư pháp"];
+                const fields = ["Doanh nghiệp", "Thuế", "Lao động", "Thương mại"];
+
+                return {
+                    id: 2000 + idx,
+                    soHieu: `${String(idx + 1).padStart(2, '0')}/2024/${types[idx % 4] === 'Luật' ? 'QH15' : 'NĐ-CP'}`,
+                    tieuDe: `Văn bản quy phạm pháp luật mẫu số ${idx + 1} về hướng dẫn thi hành các chính sách mới nhằm tháo gỡ khó khăn cho cơ sở sản xuất kinh doanh`,
+                    linhVuc: fields[idx % 4],
+                    loaiVanBan: types[idx % 4],
+                    coQuanBanHanh: agencies[idx % 4],
+                    ngayKy: `${String((idx % 28) + 1).padStart(2, '0')}/03/2024`,
+                    ngayHieuLuc: `${String((idx % 28) + 1).padStart(2, '0')}/07/2024`,
+                    tinhTrang: idx % 5 === 0 ? 0 : (idx % 7 === 0 ? 2 : 1),
+                    nguoiKy: "Chủ tịch / Bộ trưởng",
+                    noiDung: `
+                        <div style="text-align:center; font-weight:bold; margin-bottom:20px;">
+                            <p>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+                            <p>Độc lập - Tự do - Hạnh phúc</p>
+                            <p>------------------</p>
+                        </div>
+
+                        <h2 style="text-align:center; font-weight:bold; margin-top:30px; margin-bottom:20px;">CHƯƠNG I: QUY ĐỊNH CHUNG</h2>
+
+                        <p style="font-weight:bold;">Điều 1. Phạm vi điều chỉnh</p>
+                        <p style="margin-bottom:15px; text-indent: 20px;">Văn bản này quy định chi tiết về các biện pháp hỗ trợ, quản lý và giám sát hoạt động của các doanh nghiệp vừa và nhỏ trên phạm vi toàn quốc. Các biện pháp này bao gồm hỗ trợ về tiếp cận thông tin pháp luật, đào tạo nâng cao năng lực, tư vấn pháp lý miễn phí, và kết nối với các cơ quan quản lý nhà nước.</p>
+
+                        <p style="font-weight:bold;">Điều 2. Đối tượng áp dụng</p>
+                        <p style="margin-bottom:15px; text-indent: 20px;">Văn bản này áp dụng đối với các tổ chức, cá nhân tham gia vào hoạt động kinh doanh thuộc các ngành nghề đã đăng ký hợp pháp theo quy định của Luật Doanh nghiệp, bao gồm: doanh nghiệp vừa và nhỏ, hợp tác xã, tổ hợp tác, hộ kinh doanh cá thể, và các tổ chức kinh tế khác có liên quan.</p>
+
+                        <p style="font-weight:bold;">Điều 3. Giải thích từ ngữ</p>
+                        <p style="margin-bottom:15px; text-indent: 20px;">Trong văn bản này, các từ ngữ dưới đây được hiểu như sau:</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">1. <strong>Doanh nghiệp vừa và nhỏ</strong> là doanh nghiệp có số lao động bình quân năm không quá 200 người và tổng nguồn vốn không quá 100 tỷ đồng, hoặc theo tiêu chí khác do Chính phủ quy định.</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">2. <strong>Hỗ trợ pháp lý</strong> là hoạt động cung cấp thông tin, tư vấn, đào tạo và các dịch vụ pháp lý khác nhằm giúp doanh nghiệp tuân thủ pháp luật và bảo vệ quyền, lợi ích hợp pháp của mình.</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">3. <strong>Tư vấn pháp lý miễn phí</strong> là hoạt động tư vấn do các chuyên gia, luật sư thực hiện mà không thu phí từ doanh nghiệp được hỗ trợ.</p>
+
+                        <h2 style="text-align:center; font-weight:bold; margin-top:30px; margin-bottom:20px;">CHƯƠNG II: HỖ TRỢ TIẾP CẬN THÔNG TIN PHÁP LUẬT</h2>
+
+                        <p style="font-weight:bold;">Điều 4. Cổng thông tin điện tử hỗ trợ pháp lý</p>
+                        <p style="margin-bottom:15px; text-indent: 20px;">Nhà nước xây dựng và vận hành Cổng thông tin điện tử hỗ trợ pháp lý cho doanh nghiệp vừa và nhỏ, cung cấp miễn phí các thông tin sau:</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">1. Văn bản quy phạm pháp luật mới ban hành liên quan đến hoạt động kinh doanh;</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">2. Hướng dẫn thi hành các văn bản pháp luật dưới dạng cẩm nang, sổ tay, infographic;</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">3. Câu hỏi thường gặp (FAQ) và tình huống pháp lý thực tiễn;</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">4. Danh mục các tổ chức, cá nhân cung cấp dịch vụ hỗ trợ pháp lý uy tín;</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">5. Thông tin về các chương trình đào tạo, tập huấn pháp luật miễn phí.</p>
+
+                        <p style="font-weight:bold;">Điều 5. Đường dây nóng tư vấn pháp lý</p>
+                        <p style="margin-bottom:15px; text-indent: 20px;">Tổng đài tư vấn pháp lý miễn phí hoạt động 24/7 với số điện thoại 1900-xxxx, kết nối doanh nghiệp với đội ngũ luật sư, chuyên gia pháp lý có kinh nghiệm. Thời gian phản hồi tối đa cho các câu hỏi phức tạp là 48 giờ làm việc.</p>
+
+                        <h2 style="text-align:center; font-weight:bold; margin-top:30px; margin-bottom:20px;">CHƯƠNG III: ĐÀO TẠO, BỒI DƯỠNG KIẾN THỨC PHÁP LUẬT</h2>
+
+                        <p style="font-weight:bold;">Điều 6. Chương trình đào tạo thường xuyên</p>
+                        <p style="margin-bottom:15px; text-indent: 20px;">Hàng năm, các cơ quan quản lý nhà nước phối hợp với hiệp hội doanh nghiệp tổ chức ít nhất 04 khóa đào tạo trực tuyến và 02 khóa đào tạo trực tiếp về các chủ đề:</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">1. Luật Doanh nghiệp và các văn bản hướng dẫn thi hành;</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">2. Pháp luật về thuế, kế toán và hóa đơn điện tử;</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">3. Pháp luật lao động, bảo hiểm xã hội và an toàn vệ sinh lao động;</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">4. Pháp luật về thương mại, cạnh tranh và bảo vệ người tiêu dùng;</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">5. Giải quyết tranh chấp thương mại và phá sản doanh nghiệp.</p>
+
+                        <p style="font-weight:bold;">Điều 7. Cấp chứng chỉ đào tạo</p>
+                        <p style="margin-bottom:15px; text-indent: 20px;">Doanh nghiệp cử người tham gia đầy đủ các khóa đào tạo sẽ được cấp chứng chỉ có giá trị làm căn cứ để享受 các ưu đãi về hỗ trợ pháp lý theo quy định.</p>
+
+                        <h2 style="text-align:center; font-weight:bold; margin-top:30px; margin-bottom:20px;">CHƯƠNG IV: TƯ VẤN PHÁP LÝ TRỰC TIẾP</h2>
+
+                        <p style="font-weight:bold;">Điều 8. Hình thức tư vấn</p>
+                        <p style="margin-bottom:15px; text-indent: 20px;">Doanh nghiệp được tiếp cận các hình thức tư vấn pháp lý sau:</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">1. Tư vấn trực tiếp tại trụ sở Trung tâm Hỗ trợ pháp lý hoặc các điểm tư vấn lưu động;</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">2. Tư vấn qua điện thoại, email, video call;</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">3. Tư vấn theo nhóm ngành nghề, lĩnh vực kinh doanh;</p>
+                        <p style="margin-bottom:10px; text-indent: 30px;">4. Hỗ trợ soạn thảo, rà soát hợp đồng, điều lệ công ty.</p>
+
+                        <p style="font-weight:bold;">Điều 9. Phạm vi tư vấn miễn phí</p>
+                        <p style="margin-bottom:15px; text-indent: 20px;">Mỗi doanh nghiệp được tư vấn miễn phí tối đa 10 giờ/năm cho các vấn đề pháp lý cơ bản. Đối với các vụ việc phức tạp, doanh nghiệp có thể được xem xét hỗ trợ thêm theo quy chế riêng.</p>
+
+                        <h2 style="text-align:center; font-weight:bold; margin-top:30px; margin-bottom:20px;">CHƯƠNG V: TỔ CHỨC THỰC HIỆN</h2>
+
+                        <p style="font-weight:bold;">Điều 10. Trách nhiệm của Bộ Tư pháp</p>
+                        <p style="margin-bottom:15px; text-indent: 20px;">Bộ Tư pháp là cơ quan đầu mối, chủ trì phối hợp với các bộ, ngành liên quan tổ chức triển khai thực hiện văn bản này, định kỳ báo cáo Thủ tướng Chính phủ kết quả thực hiện.</p>
+
+                        <p style="font-weight:bold;">Điều 11. Trách nhiệm của UBND cấp tỉnh</p>
+                        <p style="margin-bottom:15px; text-indent: 20px;">Ủy ban nhân dân các tỉnh, thành phố trực thuộc trung ương có trách nhiệm thành lập hoặc chỉ định đơn vị sự nghiệp công lập làm đầu mối triển khai hoạt động hỗ trợ pháp lý cho doanh nghiệp tại địa phương, bố trí kinh phí và cơ sở vật chất cần thiết.</p>
+
+                        <p style="font-weight:bold;">Điều 12. Hiệu lực thi hành</p>
+                        <p style="margin-bottom:15px; text-indent: 20px;">Văn bản này có hiệu lực thi hành kể từ ngày 01 tháng 07 năm 2024. Các văn bản trước đây trái với quy định tại văn bản này đều bị bãi bỏ.</p>
+
+                        <p style="font-weight:bold; text-align:center; margin-top:30px;">Nơi nhận:</p>
+                        <p style="margin-bottom:5px; text-indent: 20px;">- Ban Bí thư Trung ương Đảng;</p>
+                        <p style="margin-bottom:5px; text-indent: 20px;">- Chủ tịch nước;</p>
+                        <p style="margin-bottom:5px; text-indent: 20px;">- Chủ tịch Quốc hội;</p>
+                        <p style="margin-bottom:5px; text-indent: 20px;">- Thủ tướng Chính phủ;</p>
+                        <p style="margin-bottom:5px; text-indent: 20px;">- Các bộ, cơ quan ngang bộ, cơ quan thuộc Chính phủ;</p>
+                        <p style="margin-bottom:5px; text-indent: 20px;">- HĐND, UBND các tỉnh, thành phố trực thuộc trung ương;</p>
+                        <p style="margin-bottom:5px; text-indent: 20px;">- Cổng TTĐT Chính phủ;</p>
+                        <p style="margin-bottom:5px; text-indent: 20px;">- Công báo;</p>
+                        <p style="margin-bottom:5px; text-indent: 20px;">- Lưu VP.</p>
+
+                        <p style="text-align:center; margin-top:30px; font-style:italic;">KT. BỘ TRƯỞNG<br/>THỨ TRƯỞNG</p>
+                    `,
+                    fileDinhKem: [{ name: `VBPL_2024_${idx+1}.pdf`, size: `${(Math.random() * 5 + 1).toFixed(1)} MB` }]
+                };
+            });
+
+            const mediaData = [
+                // Videos (15 items for pagination)
+                { id: 301, type: 'video', isNews: true, title: "Video: Hướng dẫn đăng ký kinh doanh qua mạng điện tử năm 2026", date: "12/04/2026", thumb: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=800", summary: "Chi tiết các bước đăng ký doanh nghiệp trực tuyến trên Cổng dịch vụ công Quốc gia.", field: "Doanh nghiệp", duration: "15:30", content: "<h4>Tổng quan về đăng ký kinh doanh điện tử</h4><p>Theo Nghị định 01/2021/NĐ-CP, doanh nghiệp có thể đăng ký thành lập hoàn toàn trực tuyến thông qua Cổng thông tin quốc gia về đăng ký doanh nghiệp.</p><h4>Các bước thực hiện</h4><ol><li>Chuẩn bị hồ sơ điện tử (Giấy đề nghị đăng ký, Điều lệ, Danh sách thành viên/cổ đông)</li><li>Ký số bởi người đại diện pháp luật</li><li>Nộp hồ sơ qua Cổng dịch vụ công</li><li>Theo dõi và nhận kết quả</li></ol><img src='https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=600&q=80' alt='Đăng ký kinh doanh điện tử' /><h4>Lưu ý quan trọng</h4><p>Doanh nghiệp cần có chữ ký số công cộng trước khi nộp hồ sơ. Trường hợp hồ sơ bị từ chối, phải bổ sung trong thời hạn 03 ngày làm việc.</p><h4>Thời gian giải quyết</h4><p>Trong vòng 03 ngày làm việc kể từ ngày nhận hồ sơ hợp lệ, Phòng Đăng ký kinh doanh cấp Giấy chứng nhận đăng ký doanh nghiệp.</p>" },
+                { id: 302, type: 'video', isNews: true, title: "Tọa đàm: Tháo gỡ vướng mắc pháp lý cho Start-up công nghệ", date: "05/04/2026", thumb: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=800", summary: "Thảo luận cùng chuyên gia về cách giải quyết những khó khăn pháp lý thường gặp ở giai đoạn đầu khởi nghiệp.", field: "Doanh nghiệp", duration: "45:20", content: "<h4>Những vướng mắc thường gặp</h4><p>Start-up công nghệ thường gặp khó khăn về: lựa chọn loại hình doanh nghiệp, đăng ký sở hữu trí tuệ, gọi vốn đầu tư, và tuân thủ pháp luật lao động.</p><h4>Giải pháp pháp lý</h4><ul><li>Lựa chọn công ty TNHH 2 thành viên trở lên để dễ gọi vốn</li><li>Đăng ký nhãn hiệu, bản quyền phần mềm ngay từ đầu</li><li>Soạn thảo hợp đồng cổ đông (SHA) rõ ràng</li><li>Tuân thủ BHXH cho nhân viên từ ngày đầu</li></ul><img src='https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80' alt='Tọa đàm start-up công nghệ' /><h4>Chính sách hỗ trợ</h4><p>Nhà nước có nhiều chính sách ưu đãi cho start-up công nghệ: miễn giảm thuế TNDN 2 năm đầu, hỗ trợ từ Quỹ phát triển KH&CN, và các chương trình ươm tạo.</p>" },
+                { id: 303, type: 'video', isNews: true, title: "Bản tin Pháp luật Doanh nghiệp - Điểm tin tuần 1 tháng 4/2026", date: "28/03/2026", thumb: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=800", summary: "Cập nhật nhanh các quy định và chính sách mới nhất hỗ trợ doanh nghiệp.", field: "Pháp lý chung", duration: "12:15", content: "<h4>Điểm tin nổi bật trong tuần</h4><ul><li>Chính phủ ban hành Nghị định mới về hóa đơn điện tử</li><li>Bộ Tài chính hướng dẫn kê khai thuế GTGT điện tử</li><li>Tổng cục Thống kê công bố chỉ số PMI tháng 3</li><li>Ngân hàng Nhà nước điều chỉnh lãi suất điều hành</li></ul><img src='https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&w=600&q=80' alt='Bản tin pháp luật' /><h4>Phân tích tác động</h4><p>Các quy định mới sẽ giúp đơn giản hóa thủ tục hành chính, giảm chi phí tuân thủ cho doanh nghiệp. Tuy nhiên, doanh nghiệp cần cập nhật và điều chỉnh quy trình nội bộ cho phù hợp.</p>" },
+                { id: 304, type: 'video', isNews: true, title: "Livestream: Giao lưu trực tuyến giải đáp luật Lao động", date: "20/03/2026", thumb: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800", summary: "Luật sư trực tiếp trả lời câu hỏi của doanh nghiệp về hợp đồng lao động và BHXH.", field: "Lao động", duration: "1:02:45", content: "<h4>Các câu hỏi thường gặp</h4><p>Doanh nghiệp thường thắc mắc về: thời hạn hợp đồng lao động, điều kiện thử việc, chế độ BHXH, và xử lý kỷ luật lao động.</p><h4>Giải đáp từ chuyên gia</h4><ul><li>Hợp đồng lao động xác định thời hạn không quá 36 tháng</li><li>Thời gian thử việc tối đa 60 ngày với công việc chuyên môn kỹ thuật</li><li>Người sử dụng lao động phải đóng BHXH từ ngày đầu làm việc</li><li>Xử lý kỷ luật phải tuân thủ trình tự, thủ tục nghiêm ngặt</li></ul><img src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80' alt='Giao lưu luật Lao động' /><h4>Mức xử phạt vi phạm</h4><p>Vi phạm quy định về lao động có thể bị phạt từ 5-75 triệu đồng tùy theo tính chất, mức độ vi phạm.</p>" },
+                { id: 305, type: 'video', isNews: true, title: "Hướng dẫn kê khai và nộp thuế điện tử cho doanh nghiệp", date: "18/03/2026", thumb: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800", summary: "Video hướng dẫn chi tiết quy trình kê khai, nộp thuế qua mạng.", field: "Thuế", duration: "22:10", content: "<h4>Quy trình kê khai thuế điện tử</h4><p>Doanh nghiệp thực hiện kê khai thuế qua trang web thuedientu.gdt.gov.vn theo các bước sau:</p><h4>Các bước thực hiện</h4><ol><li>Đăng nhập bằng chữ ký số</li><li>Chọn loại tờ khai (GTGT, TNDN, TNCN)</li><li>Khai đầy đủ các chỉ tiêu</li><li>Ký số và nộp tờ khai</li><li>Theo dõi kết quả và nộp thuế</li></ol><img src='https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80' alt='Kê khai thuế điện tử' /><h4>Lưu ý quan trọng</h4><p>Doanh nghiệp phải nộp tờ khai và nộp thuế đúng thời hạn để tránh bị phạt chậm nộp. Mức phạt chậm nộp là 0.03%/ngày trên số thuế chậm nộp.</p>" },
+                { id: 306, type: 'video', isNews: true, title: "Những điểm mới trong Luật Doanh nghiệp 2026", date: "15/03/2026", thumb: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=800", summary: "Phân tích các thay đổi quan trọng trong Luật Doanh nghiệp mới có hiệu lực.", field: "Doanh nghiệp", duration: "35:00" },
+                { id: 307, type: 'video', isNews: true, title: "Giải quyết tranh chấp hợp đồng thương mại", date: "10/03/2026", thumb: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800", summary: "Hướng dẫn các bước giải quyết tranh chấp hợp đồng thương mại hiệu quả.", field: "Thương mại", duration: "28:45" },
+                { id: 308, type: 'video', isNews: true, title: "Bảo hiểm xã hội điện tử: Những điều doanh nghiệp cần biết", date: "05/03/2026", thumb: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800", summary: "Tổng quan về chính sách BHXH điện tử và cách đăng ký.", field: "Lao động", duration: "18:30" },
+                { id: 309, type: 'video', isNews: true, title: "Thủ tục thành lập chi nhánh, văn phòng đại diện", date: "01/03/2026", thumb: "https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80&w=800", summary: "Hướng dẫn từng bước thực hiện thủ tục mở rộng hoạt động kinh doanh.", field: "Doanh nghiệp", duration: "25:15" },
+                { id: 310, type: 'video', isNews: true, title: "Quy định mới về hóa đơn điện tử", date: "25/02/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=800", summary: "Cập nhật các quy định mới nhất về hóa đơn điện tử.", field: "Thuế", duration: "20:00" },
+                { id: 311, type: 'video', isNews: true, title: "Pháp luật về cạnh tranh và chống độc quyền", date: "20/02/2026", thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800", summary: "Những quy định doanh nghiệp cần biết để tránh vi phạm pháp luật cạnh tranh.", field: "Thương mại", duration: "32:20" },
+                { id: 312, type: 'video', isNews: true, title: "An toàn vệ sinh thực phẩm: Quy định và thực tiễn", date: "15/02/2026", thumb: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800", summary: "Video đào tạo về các quy định ATTP cho doanh nghiệp sản xuất, kinh doanh.", field: "Pháp lý chung", duration: "27:45" },
+                { id: 313, type: 'video', isNews: true, title: "Hợp đồng lao động: Những điều khoản bắt buộc", date: "10/02/2026", thumb: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=800", summary: "Hướng dẫn soạn thảo hợp đồng lao động đúng quy định pháp luật.", field: "Lao động", duration: "19:30" },
+                { id: 314, type: 'video', isNews: true, title: "Giải thể, phá sản doanh nghiệp: Trình tự và thủ tục", date: "05/02/2026", thumb: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=800", summary: "Video tư vấn về thủ tục giải thể, phá sản theo Luật Doanh nghiệp.", field: "Doanh nghiệp", duration: "38:10" },
+                { id: 315, type: 'video', isNews: true, title: "Chuyển nhượng vốn góp: Thuế và nghĩa vụ tài chính", date: "01/02/2026", thumb: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=800", summary: "Những lưu ý về thuế khi chuyển nhượng vốn góp trong công ty.", field: "Thuế", duration: "24:00" },
+                
+                // Longform (15 items)
+                { id: 401, type: 'longform', isNews: true, title: "Toàn cảnh: Bức tranh pháp lý đối với thương mại điện tử xuyên biên giới", date: "15/04/2026", thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400", summary: "Phân tích chuyên sâu về hệ thống văn bản quy phạm pháp luật áp dụng cho các giao dịch TMĐT vượt biên giới.", field: "Thương mại", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Tổng quan về thương mại điện tử xuyên biên giới</h4><p>Thương mại điện tử xuyên biên giới (cross-border e-commerce) là hoạt động mua bán hàng hóa, dịch vụ thông qua nền tảng điện tử giữa các chủ thể thuộc nhiều quốc gia khác nhau.</p><h4>Khung pháp lý áp dụng</h4><p>Các giao dịch TMĐT xuyên biên giới chịu sự điều chỉnh của: Luật Giao dịch điện tử 2023; Luật Thương mại 2005; các điều ước quốc tế mà Việt Nam là thành viên; pháp luật về thuế xuất nhập khẩu.</p><h4>Nghia vụ thuế</h4><p>Doanh nghiệp cung cấp dịch vụ TMĐT xuyên biên giới phải đăng ký, kê khai và nộp thuế GTGT, thuế TNDN theo quy định. Đối với hàng hóa vật chất, áp dụng thuế xuất nhập khẩu tùy theo xuất xứ và loại hàng.</p><h4>Bảo vệ người tiêu dùng</h4><p>Người bán phải công bố đầy đủ thông tin hàng hóa, chính sách đổi trả, bảo hành. Người mua có quyền yêu cầu bồi thường nếu hàng hóa không đúng như mô tả.</p>" },
+                { id: 402, type: 'longform', isNews: true, title: "Từ A-Z: Hướng dẫn doanh nghiệp SME tiếp cận các quỹ hỗ trợ", date: "12/04/2026", thumb: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=400", summary: "Bài viết tổng hợp đầy đủ các kênh vay vốn, điều kiện hồ sơ pháp lý cần có.", field: "Doanh nghiệp", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Các quỹ hỗ trợ doanh nghiệp SME</h4><p>Quỹ phát triển doanh nghiệp nhỏ và vừa; Quỹ bảo lãnh tín dụng cho DNNVV; Quỹ hỗ trợ khởi nghiệp đổi mới sáng tạo; Quỹ đầu tư phát triển địa phương.</p><h4>Điều kiện tiếp cận</h4><ul><li>Doanh nghiệp có quy mô vừa và nhỏ theo quy định</li><li>Có phương án sản xuất kinh doanh khả thi</li><li>Đáp ứng các điều kiện về tài chính, tín dụng</li><li>Thuộc lĩnh vực ưu tiên hỗ trợ</li></ul><h4>Hồ sơ cần chuẩn bị</h4><ul><li>Giấy đề nghị hỗ trợ</li><li>Phương án sản xuất kinh doanh</li><li>Báo cáo tài chính 2 năm gần nhất</li><li>Giấy tờ pháp lý liên quan</li></ul><h4>Quy trình xét duyệt</h4><p>Hồ sơ được nộp trực tuyến hoặc trực tiếp, thẩm định trong 15-30 ngày làm việc. Kết quả được công bố công khai trên cổng thông tin.</p>" },
+                { id: 403, type: 'longform', isNews: true, title: "Nhận diện rủi ro khi ký kết hợp đồng nhượng quyền thương mại", date: "09/04/2026", thumb: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=400", summary: "Những lưu ý quan trọng để tránh tranh chấp trong tương lai.", field: "Thương mại", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Nhượng quyền thương mại là gì?</h4><p>Là hoạt động mua bán quyền kinh doanh, theo đó bên nhượng quyền cho phép bên nhận quyền được kinh doanh hàng hóa, dịch vụ theo phương thức của mình.</p><h4>Rủi ro pháp lý thường gặp</h4><ul><li>Hợp đồng không đăng ký với cơ quan nhà nước có thẩm quyền</li><li>Điều khoản độc quyền khu vực không rõ ràng</li><li>Phí nhượng quyền và royalty không minh bạch</li><li>Thời hạn và điều kiện gia hạn không cụ thể</li><li>Không có cơ chế giải quyết tranh chấp hiệu quả</li></ul><h4>Biện pháp phòng ngừa</h4><ul><li>Thẩm định kỹ năng lực và uy tín của bên nhượng quyền</li><li>Yêu cầu cung cấp đầy đủ tài liệu pháp lý (giấy chứng nhận đăng ký nhượng quyền, hợp đồng mẫu)</li><li>Thuê luật sư rà soát hợp đồng trước khi ký</li><li>Đàm phán các điều khoản bảo vệ quyền lợi bên nhận quyền</li></ul>" },
+                { id: 404, type: 'longform', isNews: true, title: "Pháp luật về bảo vệ dữ liệu cá nhân: Doanh nghiệp cần biết gì?", date: "06/04/2026", thumb: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=400", summary: "Phân tích các nghĩa vụ của doanh nghiệp theo Nghị định về bảo vệ dữ liệu cá nhân.", field: "Công nghệ thông tin", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Phạm vi điều chỉnh</h4><p>Nghị định 13/2023/NĐ-CP quy định về bảo vệ dữ liệu cá nhân áp dụng với mọi tổ chức, cá nhân xử lý dữ liệu cá nhân tại Việt Nam.</p><h4>Nghia vụ của doanh nghiệp</h4><ul><li>Thông báo cho chủ thể dữ liệu về mục đích, phạm vi xử lý</li><li>Chỉ thu thập dữ liệu khi có sự đồng ý</li><li>Áp dụng biện pháp bảo vệ dữ liệu phù hợp</li><li>Xóa dữ liệu khi hết mục đích hoặc theo yêu cầu</li></ul><h4>Quyền của chủ thể dữ liệu</h4><p>Được tiếp cận, yêu cầu sửa đổi, xóa dữ liệu; rút lại sự đồng ý; khiếu nại về vi phạm.</p>" },
+                { id: 405, type: 'longform', isNews: true, title: "Hướng dẫn thực hiện báo cáo ESG cho doanh nghiệp Việt", date: "03/04/2026", thumb: "https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80&w=400", summary: "Tổng quan về yêu cầu báo cáo môi trường, xã hội và quản trị (ESG) theo chuẩn quốc tế.", field: "Môi trường", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>ESG là gì?</h4><p>ESG (Environmental, Social, Governance) là bộ tiêu chí đánh giá hoạt động bền vững của doanh nghiệp trên 3 khía cạnh: môi trường, xã hội và quản trị.</p><h4>Tại sao doanh nghiệp cần báo cáo ESG?</h4><ul><li>Thu hút đầu tư từ các quỹ quốc tế</li><li>Đáp ứng yêu cầu của đối tác, khách hàng toàn cầu</li><li>Nâng cao uy tín và giá trị thương hiệu</li><li>Tuân thủ quy định ngày càng chặt về phát triển bền vững</li></ul><h4>Các bước thực hiện</h4><ol><li>Đánh giá hiện trạng và xác định phạm vi báo cáo</li><li>Thu thập dữ liệu theo khung chuẩn (GRI, SASB, TCFD)</li><li>Biên soạn báo cáo và công bố</li><li>Rà soát, cập nhật định kỳ</li></ol>" },
+                { id: 406, type: 'longform', isNews: true, title: "Chuyển đổi số trong doanh nghiệp: Khía cạnh pháp lý và thực tiễn", date: "31/03/2026", thumb: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=400", summary: "Những vấn đề pháp lý doanh nghiệp cần lưu ý khi triển khai chuyển đổi số.", field: "Công nghệ thông tin", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Khung pháp lý về chuyển đổi số</h4><p>Chương trình Chuyển đổi số Quốc gia đến 2025, định hướng 2030 đặt mục tiêu đến năm 2025, kinh tế số chiếm 20% GDP; đến 2030, kinh tế số chiếm 30% GDP. Các văn bản pháp lý nền tảng bao gồm: Luật Giao dịch điện tử 2023; Luật An ninh mạng 2018; Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân; Nghị định 42/2023/NĐ-CP về chữ ký số.</p><img src='https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=600&q=80' alt='Chuyển đổi số doanh nghiệp' /><h4>Các vấn đề pháp lý trọng tâm</h4><ul><li><strong>Hợp đồng điện tử:</strong> Có giá trị pháp lý tương đương hợp đồng giấy khi đáp ứng điều kiện về chữ ký điện tử và khả năng lưu trữ, tra cứu.</li><li><strong>Bảo mật thông tin:</strong> Doanh nghiệp phải áp dụng biện pháp kỹ thuật, quản lý phù hợp để bảo vệ dữ liệu theo Nghị định 13/2023/NĐ-CP.</li><li><strong>Sở hữu trí tuệ:</strong> Phần mềm, cơ sở dữ liệu, giao diện người dùng đều có thể được bảo hộ dưới danh nghĩa tác quyền hoặc sáng chế.</li><li><strong>Trách nhiệm pháp lý:</strong> Khi xảy ra sự cố rò rỉ dữ liệu, doanh nghiệp phải thông báo cho cơ quan nhà nước trong 72 giờ và cho chủ thể dữ liệu bị ảnh hưởng.</li></ul><img src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80' alt='Bảo mật dữ liệu số' /><h4>Kinh nghiệm triển khai thực tiễn</h4><p>Doanh nghiệp nên bắt đầu từ quy trình nội bộ (kế toán, nhân sự, quản lý văn bản), ưu tiên các giải pháp đã được kiểm chứng, đảm bảo tuân thủ pháp luật ngay từ giai đoạn thiết kế (privacy by design). Nên thuê tư vấn pháp lý độc lập đánh giá rủi ro trước khi triển khai các hệ thống lớn.</p><h4>Lộ trình khuyến nghị</h4><ol><li>Đánh giá hiện trạng và xây dựng chiến lược chuyển đổi số</li><li>Rà soát, cập nhật hợp đồng với đối tác, khách hàng</li><li>Triển khai thí điểm các quy trình số hóa</li><li>Đào tạo nhân sự về an toàn thông tin và bảo vệ dữ liệu</li><li>Mở rộng quy mô và tối ưu hóa</li></ol>" },
+                { id: 407, type: 'longform', isNews: true, title: "Luật Đất đai 2024: Tác động đến doanh nghiệp bất động sản", date: "28/03/2026", thumb: "https://images.unsplash.com/photo-1506197061617-7f5c0b093236?auto=format&fit=crop&q=80&w=400", summary: "Phân tích những điểm mới của Luật Đất đai và hệ quả với hoạt động đầu tư BĐS.", field: "Đất đai", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Những điểm mới đáng chú ý của Luật Đất đai 2024</h4><p>Luật Đất đai 2024 (có hiệu lực từ 01/01/2025) mang đến nhiều thay đổi quan trọng: siết chặt thu hồi đất, bồi thường, hỗ trợ tái định cư; điều chỉnh khung giá đất, bảng giá đất theo nguyên tắc thị trường; tăng cường minh bạch trong đấu giá, đấu thầu dự án; quy định chặt hơn về chuyển mục đích sử dụng đất; bổ sung quy định về đất khu công nghiệp, cụm công nghiệp.</p><img src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80' alt='Luật Đất đai 2024' /><h4>Tác động đến doanh nghiệp bất động sản</h4><ul><li><strong>Chi phí tiếp cận đất:</strong> Có thể tăng do bảng giá đất điều chỉnh sát giá thị trường, ảnh hưởng đến chi phí bồi thường, giải phóng mặt bằng.</li><li><strong>Thời gian phê duyệt:</strong> Quy trình có thể kéo dài hơn do yêu cầu thẩm định chặt chẽ hơn về quy hoạch, môi trường, xã hội.</li><li><strong>Năng lực chủ đầu tư:</strong> Yêu cầu cao hơn về năng lực tài chính (vốn chủ sở hữu tối thiểu), kinh nghiệm thực hiện dự án tương tự.</li><li><strong>Minh bạch hóa:</strong> Đấu giá quyền sử dụng đất, lựa chọn nhà đầu tư qua đấu thầu trở thành phương thức chủ yếu.</li></ul><img src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80' alt='Dự án bất động sản' /><h4>Khuyến nghị cho doanh nghiệp</h4><p>Doanh nghiệp cần rà soát lại danh mục dự án, đánh giá lại hiệu quả đầu tư theo khung pháp lý mới; tăng cường công tác dự báo, quản trị rủi ro; chủ động tiếp cận thông tin quy hoạch, kế hoạch sử dụng đất địa phương; cân nhắc hợp tác với các đối tác có năng lực để đáp ứng yêu cầu về vốn và kinh nghiệm.</p>" },
+                { id: 408, type: 'longform', isNews: true, title: "Tuân thủ pháp luật lao động: Cẩm nang cho chủ doanh nghiệp", date: "25/03/2026", thumb: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=400", summary: "Tổng hợp các quy định về hợp đồng, lương, BHXH và kỷ luật lao động.", field: "Lao động", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Hợp đồng lao động</h4><p>Theo Bộ luật Lao động 2019, hợp đồng lao động phải được giao kết bằng văn bản hoặc qua phương tiện điện tử dưới hình thức thông điệp dữ liệu. Hợp đồng phải ghi rõ: công việc phải thực hiện; địa điểm làm việc; thời giờ làm việc, thời giờ nghỉ ngơi; tiền lương; bảo hiểm xã hội, bảo hiểm y tế, bảo hiểm thất nghiệp; an toàn, vệ sinh lao động.</p><img src='https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=600&q=80' alt='Hợp đồng lao động' /><h4>Tiền lương</h4><ul><li><strong>Mức lương tối thiểu:</strong> Không được thấp hơn mức lương tối thiểu vùng do Chính phủ quy định (từ 1.800.000đ đến 2.600.000đ tùy vùng).</li><li><strong>Thời hạn thanh toán:</strong> Lương phải được trả đúng hạn, ít nhất 1 lần/tháng. Trả chậm quá 15 ngày, người sử dụng lao động phải trả thêm khoản tiền ít nhất bằng lãi suất tiền gửi tiết kiệm.</li><li><strong>Làm thêm giờ:</strong> Ngày thường: 150%; ngày nghỉ hàng tuần: 200%; ngày lễ, tết: 300%.</li><li><strong>Làm đêm:</strong> Trả thêm ít nhất 30% so với lương ngày.</li></ul><h4>BHXH, BHYT, BHTN</h4><p>Người sử dụng lao động phải đóng bảo hiểm bắt buộc cho người lao động ký hợp đồng từ đủ 01 tháng trở lên. Tỷ lệ đóng: BHXH 17.5% (trong đó NSDLĐ 14%, NLĐ 3.5%); BHYT 4.5% (NSDLĐ 3%, NLĐ 1.5%); BHTN 2% (mỗi bên 1%).</p><img src='https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=600&q=80' alt='Bảo hiểm xã hội' /><h4>Kỷ luật lao động</h4><p>Người sử dụng lao động chỉ được xử lý kỷ luật khi có hành vi vi phạm được quy định trong nội quy lao động đã đăng ký. Các hình thức: khiển trách; kéo dài thời hạn nâng lương (không quá 6 tháng); cách chức; sa thải. Sa thải chỉ áp dụng trong các trường hợp luật định và phải tuân thủ trình tự, thủ tục nghiêm ngặt.</p><h4>Xử phạt vi phạm</h4><p>Mức phạt tiền đối với vi phạm quy định về lao động có thể lên đến 75 triệu đồng đối với hành vi không đóng BHXH bắt buộc; 50 triệu đồng đối với hành vi trả lương thấp hơn mức tối thiểu vùng.</p>" },
+                { id: 409, type: 'longform', isNews: true, title: "Đầu tư nước ngoài vào Việt Nam: Thủ tục và điều kiện", date: "22/03/2026", thumb: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=400", summary: "Hướng dẫn chi tiết quy trình thành lập công ty FDI và các ngành nghề kinh doanh.", field: "Đầu tư", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Điều kiện tiếp cận thị trường</h4><p>Theo Luật Đầu tư 2020, nhà đầu tư nước ngoài được đối xử bình đẳng như nhà đầu tư trong nước, trừ các ngành nghề hạn chế tiếp cận thị trường. Các ngành nghề bị cấm đầu tư kinh doanh bao gồm: buôn bán ma túy; mua bán người; mại dâm; đánh bạc; kinh doanh pháo nổ. Các ngành nghề hạn chế tiếp cận: ngân hàng, bảo hiểm, viễn thông, vận tải, báo chí, xuất bản.</p><img src='https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=600&q=80' alt='Đầu tư FDI vào Việt Nam' /><h4>Quy trình thành lập công ty FDI</h4><ol><li><strong>Xin Giấy chứng nhận đăng ký đầu tư (IRC):</strong> Nộp hồ sơ tại Sở Kế hoạch và Đầu tư hoặc Ban quản lý khu công nghiệp. Hồ sơ gồm: văn bản đề nghị; tài liệu về tư cách pháp lý; đề xuất dự án (mục tiêu, quy mô, vốn, địa điểm, nhu cầu lao động, ưu đãi); tài liệu về năng lực tài chính (báo cáo tài chính, cam kết hỗ trợ tài chính).</li><li><strong>Xin Giấy chứng nhận đăng ký doanh nghiệp (ERC):</strong> Sau khi có IRC, nộp hồ sơ thành lập doanh nghiệp. Hồ sơ gồm: giấy đề nghị đăng ký; điều lệ công ty; danh sách thành viên/cổ đông; bản sao IRC; giấy ủy quyền.</li><li><strong>Các thủ tục sau thành lập:</strong> Khắc con dấu và công bố mẫu dấu; đăng ký tài khoản ngân hàng; đăng ký chữ ký số; thông báo phát hành hóa đơn; đăng ký BHXH; xin giấy phép con (nếu thuộc ngành nghề có điều kiện).</li></ol><img src='https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80' alt='Thành lập công ty FDI' /><h4>Ưu đãi đầu tư</h4><ul><li><strong>Ưu đãi thuế TNDN:</strong> Thuế suất ưu đãi 10% trong 15 năm (thay vì 20%); miễn thuế 2 năm, giảm 50% trong 9 năm tiếp theo đối với dự án thuộc lĩnh vực, địa bàn đặc biệt ưu đãi.</li><li><strong>Ưu đãi tiền thuê đất:</strong> Miễn, giảm tiền thuê đất đối với dự án thuộc lĩnh vực, địa bàn ưu đãi.</li><li><strong>Ưu đãi khác:</strong> Miễn, giảm lệ phí trước bạ; hỗ trợ đầu tư hạ tầng khu công nghiệp.</li></ul><h4>Lưu ý quan trọng</h4><p>Thời gian giải quyết: IRC khoảng 15-35 ngày làm việc; ERC khoảng 3-5 ngày làm việc. Nhà đầu tư nên thuê tư vấn pháp lý địa phương để đánh giá điều kiện tiếp cận thị trường và chuẩn bị hồ sơ phù hợp.</p>" },
+                { id: 410, type: 'longform', isNews: true, title: "Sở hữu trí tuệ: Đăng ký và bảo vệ quyền của doanh nghiệp", date: "19/03/2026", thumb: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=400", summary: "Hướng dẫn đăng ký nhãn hiệu, kiểu dáng công nghiệp, sáng chế và xử lý xâm phạm.", field: "Sở hữu trí tuệ", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Các đối tượng sở hữu trí tuệ có thể bảo hộ</h4><ul><li><strong>Nhãn hiệu:</strong> Dấu hiệu dùng để phân biệt hàng hóa, dịch vụ của các chủ thể khác nhau. Có thể là chữ cái, từ ngữ, hình vẽ, hình ba chiều, màu sắc, âm thanh.</li><li><strong>Kiểu dáng công nghiệp:</strong> Hình thức thể hiện bên ngoài của sản phẩm (hình dáng, đường nét, màu sắc hoặc sự kết hợp những yếu tố này).</li><li><strong>Sáng chế:</strong> Giải pháp kỹ thuật dưới dạng sản phẩm hoặc quy trình nhằm giải quyết một vấn đề xác định bằng sự biến đổi các nguồn lực tự nhiên.</li><li><strong>Quyền tác giả:</strong> Tác phẩm văn học, nghệ thuật, khoa học; chương trình máy tính, cơ sở dữ liệu.</li></ul><img src='https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=600&q=80' alt='Đăng ký sở hữu trí tuệ' /><h4>Quy trình đăng ký tại Việt Nam</h4><ol><li><strong>Nộp đơn:</strong> Nộp trực tiếp hoặc qua bưu điện/online tại Cục Sở hữu trí tuệ. Đơn gồm: tờ khai, mẫu nhãn hiệu/kiểu dáng, tài liệu mô tả (đối với sáng chế), chứng từ nộp phí.</li><li><strong>Thẩm định hình thức:</strong> 01-02 tháng. Kiểm tra tính hợp lệ của đơn.</li><li><strong>Công bố đơn:</strong> Sáng chế được công bố tháng thứ 18; nhãn hiệu, kiểu dáng được công bố trong thời hạn 02 tháng.</li><li><strong>Thẩm định nội dung:</strong> Sáng chế: 12-18 tháng; nhãn hiệu: 09-12 tháng; kiểu dáng: 06-08 tháng.</li><li><strong>Cấp văn bằng bảo hộ:</strong> Sau khi nộp phí cấp bằng, văn bằng được cấp và công bố trên Công báo Sở hữu công nghiệp.</li></ol><img src='https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=600&q=80' alt='Văn bằng bảo hộ' /><h4>Xử lý hành vi xâm phạm</h4><ul><li><strong>Biện pháp dân sự:</strong> Buộc chấm dứt hành vi xâm phạm; xin lỗi, cải chính công khai; bồi thường thiệt hại (mức bồi thường do Tòa án quyết định, tối đa 500 triệu đồng nếu không xác định được thiệt hại thực tế).</li><li><strong>Biện pháp hành chính:</strong> Phạt tiền từ 1-500 triệu đồng tùy mức độ; tịch thu hàng hóa vi phạm; đình chỉ hoạt động kinh doanh.</li><li><strong>Biện pháp hình sự:</strong> Đối với hành vi xâm phạm quyền sở hữu trí tuệ có yếu tố thương mại, quy mô lớn có thể bị truy cứu trách nhiệm hình sự với mức phạt tiền 50 triệu - 1 tỷ đồng hoặc phạt tù đến 03 năm.</li></ul><h4>Chiến lược bảo vệ</h4><p>Doanh nghiệp nên đăng ký bảo hộ ngay khi có ý tưởng, trước khi công bố ra thị trường. Đăng ký tại Việt Nam không tự động bảo vệ ở nước ngoài — cần đăng ký tại từng quốc gia hoặc qua hệ thống Madrid (nhãn hiệu) hay PCT (sáng chế).</p>" },
+                { id: 411, type: 'longform', isNews: true, title: "Pháp luật về môi trường: Nghĩa vụ của doanh nghiệp sản xuất", date: "16/03/2026", thumb: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=400", summary: "Các quy định về đánh giá tác động môi trường, xử lý chất thải và giấy phép môi trường.", field: "Môi trường", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Giấy phép môi trường</h4><p>Theo Luật Bảo vệ môi trường 2020, doanh nghiệp có dự án đầu tư thuộc nhóm có nguy cơ tác động xấu đến môi trường mức độ cao và mức độ cao phải xin giấy phép môi trường trước khi vận hành. Hồ sơ xin cấp phép gồm: văn bản đề nghị; báo cáo nghiên cứu khả thi hoặc báo cáo đầu tư; báo cáo đánh giá tác động môi trường (nếu thuộc đối tượng phải lập ĐTM).</p><img src='https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=600&q=80' alt='Giấy phép môi trường' /><h4>Đánh giá tác động môi trường (ĐTM)</h4><p>Đối tượng phải lập báo cáo ĐTM: dự án có nguy cơ tác động xấu đến môi trường mức độ cao (nhà máy nhiệt điện, hóa chất, luyện kim, sản xuất giấy, xi măng...); dự án có ảnh hưởng đến khu bảo tồn thiên nhiên, di tích lịch sử; dự án có quy mô lớn (khu đô thị từ 50ha, khu công nghiệp từ 10ha).</p><p>Quy trình: lập báo cáo ĐTM → gửi cơ quan thẩm quyền thẩm định → tổ chức họp thẩm định → chỉnh sửa, bổ sung → phê duyệt kết quả thẩm định. Thời gian thẩm định: không quá 45 ngày làm việc đối với dự án nhóm I, 30 ngày đối với dự án nhóm II.</p><h4>Nghia vụ xử lý chất thải</h4><ul><li><strong>Chất thải rắn:</strong> Phân loại tại nguồn (thông thường, nguy hại, tái chế); lưu giữ trong khu vực riêng, có biển báo; ký hợp đồng với đơn vị có giấy phép thu gom, xử lý.</li><li><strong>Nước thải:</strong> Xử lý đạt quy chuẩn kỹ thuật môi trường trước khi xả thải; lắp đặt hệ thống quan trắc nước thải tự động đối với cơ sở có nguy cơ ô nhiễm cao; nộp phí bảo vệ môi trường đối với nước thải.</li><li><strong>Khí thải:</strong> Thu gom, xử lý khí thải đạt quy chuẩn; quan trắc định kỳ hoặc liên tục đối với nguồn khí thải công nghiệp lớn.</li></ul><img src='https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=600&q=80' alt='Xử lý chất thải công nghiệp' /><h4>Xử phạt vi phạm</h4><p>Mức phạt tiền đối với vi phạm về môi trường có thể lên đến 1 tỷ đồng đối với hành vi xả thải vượt quy chuẩn kỹ thuật; 500 triệu đồng đối với hành vi không có giấy phép môi trường. Ngoài ra còn có thể bị đình chỉ hoạt động, buộc khắc phục hậu quả, truy cứu trách nhiệm hình sự.</p>" },
+                { id: 412, type: 'longform', isNews: true, title: "Giải quyết tranh chấp hợp đồng kinh tế: Thương lượng hay khởi kiện?", date: "13/03/2026", thumb: "https://images.unsplash.com/photo-1589197331516-4d84b72ebde3?auto=format&fit=crop&q=80&w=400", summary: "So sánh các phương thức giải quyết tranh chấp và lời khuyên cho doanh nghiệp.", field: "Pháp lý chung", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Bốn phương thức giải quyết tranh chấp</h4><ul><li><strong>Thương lượng:</strong> Các bên tự đàm phán, thỏa thuận để tìm ra giải pháp. Ưu điểm: nhanh, chi phí thấp, bảo mật, giữ được mối quan hệ hợp tác. Nhược điểm: không có giá trị cưỡng chế, phụ thuộc vào thiện chí các bên.</li><li><strong>Hòa giải:</strong> Có bên thứ ba trung gian (trung tâm hòa giải, hiệp hội ngành nghề) hỗ trợ đưa ra phương án. Ưu điểm: linh hoạt, các bên kiểm soát kết quả. Nhược điểm: kết quả hòa giải chỉ có giá trị khi các bên tự nguyện thi hành.</li><li><strong>Trọng tài thương mại:</strong> Hội đồng trọng tài (VIAC hoặc trọng tài vụ việc) ra phán quyết. Ưu điểm: nhanh hơn tòa án (thường 6-12 tháng); phán quyết chung thẩm, không bị kháng cáo; có thể thi hành ở nước ngoài theo Công ước New York. Nhược điểm: chi phí cao hơn tòa án; không có cơ chế kháng cáo nếu phán quyết sai.</li><li><strong>Tòa án:</strong> Tòa án nhân dân có thẩm quyền xét xử. Ưu điểm: phán quyết có giá trị cưỡng chế cao nhất; có cơ chế kháng cáo, giám đốc thẩm. Nhược điểm: thời gian kéo dài (có thể 2-5 năm); công khai, có thể ảnh hưởng uy tín doanh nghiệp; bản án khó thi hành ở nước ngoài.</li></ul><img src='https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80' alt='Giải quyết tranh chấp kinh tế' /><h4>So sánh chi phí và thời gian</h4><table border='1' cellpadding='8' style='border-collapse:collapse;width:100%;margin:15px 0;'><tr style='background:#f3f4f6;'><th>Phương thức</th><th>Thời gian</th><th>Chi phí ước tính</th><th>Giá trị cưỡng chế</th></tr><tr><td>Thương lượng</td><td>1-4 tuần</td><td>Thấp (chi phí đi lại, luật sư)</td><td>Không có</td></tr><tr><td>Hòa giải</td><td>1-3 tháng</td><td>Trung bình (phí hòa giải viên)</td><td>Thấp (tự nguyện)</td></tr><tr><td>Trọng tài</td><td>6-12 tháng</td><td>Cao (phí trọng tài, luật sư)</td><td>Cao (chung thẩm)</td></tr><tr><td>Tòa án</td><td>2-5 năm</td><td>Trung bình (án phí, luật sư)</td><td>Cao nhất</td></tr></table><img src='https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80' alt='So sánh phương thức giải quyết tranh chấp' /><h4>Kinh nghiệm phòng ngừa tranh chấp</h4><ul><li><strong>Soạn thảo hợp đồng chặt chẽ:</strong> Quy định rõ quyền, nghĩa vụ; điều khoản phạt vi phạm, bồi thường; cơ chế điều chỉnh giá; trường hợp bất khả kháng; luật áp dụng và cơ chế giải quyết tranh chấp.</li><li><strong>Quản lý hợp đồng:</strong> Lưu trữ đầy đủ chứng từ, biên bản giao nhận, email trao đổi; theo dõi sát tiến độ thực hiện; phát hiện sớm nguy cơ vi phạm.</li><li><strong>Đánh giá đối tác:</strong> Thẩm định năng lực tài chính, uy tín trước khi ký kết; cập nhật thông tin định kỳ.</li><li><strong>Tư vấn pháp lý định kỳ:</strong> Rà soát hợp đồng, quy trình nội bộ; đào tạo nhân sự về pháp luật kinh doanh.</li></ul><h4>Khi nào nên chọn phương thức nào?</h4><ul><li><strong>Thương lượng:</strong> Khi tranh chấp nhỏ, các bên muốn giữ quan hệ, giá trị tranh chấp không lớn.</li><li><strong>Trọng tài:</strong> Khi cần giải quyết nhanh, bí mật, có yếu tố nước ngoài, tranh chấp phức tạp về kỹ thuật.</li><li><strong>Tòa án:</strong> Khi cần giá trị cưỡng chế cao nhất, tranh chấp liên quan đến bên thứ ba, hoặc bên kia không có thiện chí hợp tác.</li></ul>" },
+                { id: 413, type: 'longform', isNews: true, title: "Thuế thu nhập doanh nghiệp: Những điểm mới năm 2026", date: "10/03/2026", thumb: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=400", summary: "Cập nhật các thay đổi về thuế suất, chi phí được trừ và ưu đãi thuế.", field: "Thuế", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Thuế suất thuế TNDN</h4><p>Thuế suất phổ thông vẫn là 20%. Tuy nhiên, từ năm 2026 có một số thay đổi quan trọng: doanh nghiệp vừa và nhỏ theo quy định tại Luật Hỗ trợ DNNVV có thể được áp dụng thuế suất 15-17% trong 11 năm đầu; doanh nghiệp công nghệ cao, doanh nghiệp khoa học công nghệ được áp dụng thuế suất 10% trong 15 năm; doanh nghiệp hoạt động trong khu kinh tế, khu công nghiệp thuộc địa bàn có điều kiện kinh tế - xã hội đặc biệt khó khăn được áp dụng thuế suất 10% trong 15 năm.</p><img src='https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80' alt='Thuế thu nhập doanh nghiệp' /><h4>Chi phí được trừ khi tính thuế TNDN</h4><p>Chi phí được trừ phải đáp ứng đồng thời các điều kiện: khoản chi thực tế phát sinh liên quan đến hoạt động sản xuất, kinh doanh; có đủ hóa đơn, chứng từ hợp pháp theo quy định; khoản chi từ 20 triệu đồng trở lên phải thanh toán qua ngân hàng (trừ một số trường hợp đặc thù như chi mua hàng nông sản của nông dân, chi trả lương...).</p><h4>Một số khoản chi không được trừ</h4><ul><li>Chi trích trước vào chi phí không đúng quy định</li><li>Chi tiền lương, tiền công không thực tế phát sinh</li><li>Phần chi lương vượt mức 1,41 lần so với mức lương cơ sở do Nhà nước quy định đối với một số trường hợp</li><li>Chi thưởng sáng kiến, cải tiến không có quy chế thưởng</li><li>Chi hỗ trợ cá nhân, tổ chức không liên quan đến hoạt động SXKD</li><li>Chi không có hóa đơn, chứng từ hoặc hóa đơn không hợp pháp</li><li>Chi từ nguồn quỹ khen thưởng, phúc lợi</li></ul><img src='https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=80' alt='Chi phí được trừ thuế TNDN' /><h4>Ưu đãi thuế TNDN</h4><ul><li><strong>Miễn thuế, giảm thuế:</strong> Miễn thuế 2 năm và giảm 50% số thuế phải nộp trong 9 năm tiếp theo đối với dự án thuộc lĩnh vực, địa bàn đặc biệt ưu đãi đầu tư; miễn thuế 4 năm và giảm 50% trong 9 năm tiếp theo đối với dự án thuộc lĩnh vực, địa bàn ưu đãi đầu tư.</li><li><strong>Thuế suất ưu đãi:</strong> 10% trong 15 năm; 15% trong 11 năm; 17% trong 10 năm tùy lĩnh vực, địa bàn.</li><li><strong>Khấu hao nhanh:</strong> Được khấu hao nhanh tối đa 2 lần đối với tài sản cố định dùng cho hoạt động nghiên cứu khoa học, phát triển công nghệ.</li></ul><h4>Nghia vụ kê khai, nộp thuế</h4><p>Doanh nghiệp phải tạm nộp thuế TNDN theo quý (chậm nhất ngày 30 của tháng đầu quý sau) và quyết toán thuế theo năm (chậm nhất ngày cuối cùng của tháng thứ 3 kể từ ngày kết thúc năm dương lịch). Trường hợp lỗ, được chuyển lỗ sang năm sau, thời gian chuyển lỗ không quá 5 năm liên tục.</p>" },
+                { id: 414, type: 'longform', isNews: true, title: "Pháp luật về thanh toán điện tử: Cơ hội và thách thức", date: "07/03/2026", thumb: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=400", summary: "Phân tích khung pháp lý và xu hướng phát triển của ví điện tử, QR code, mobile banking.", field: "Ngân hàng", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Các hình thức thanh toán điện tử phổ biến</h4><ul><li><strong>Thẻ ngân hàng:</strong> Thẻ ghi nợ (debit card), thẻ tín dụng (credit card), thẻ trả trước (prepaid card). Đây là hình thức thanh toán điện tử lâu đời và phổ biến nhất.</li><li><strong>Ví điện tử:</strong> Ứng dụng cho phép người dùng lưu trữ tiền điện tử, liên kết với tài khoản ngân hàng hoặc thẻ để thanh toán (MoMo, ZaloPay, VNPay, ShopeePay...).</li><li><strong>Cổng thanh toán trực tuyến (Payment Gateway):</strong> Dịch vụ trung gian kết nối người mua, người bán và ngân hàng để xử lý giao dịch (VNPay, OnePay, Payoo...).</li><li><strong>QR code:</strong> Thanh toán bằng cách quét mã QR, có thể là QR tĩnh (in sẵn) hoặc QR động (sinh ra cho mỗi giao dịch).</li><li><strong>Mobile banking:</strong> Ứng dụng ngân hàng trên di động cho phép chuyển khoản, thanh toán hóa đơn, mua sắm trực tuyến.</li></ul><img src='https://images.unsplash.com/photo-1556742111-a301076d9d18?auto=format&fit=crop&w=600&q=80' alt='Các hình thức thanh toán điện tử' /><h4>Điều kiện kinh doanh dịch vụ thanh toán điện tử</h4><p>Tổ chức cung ứng dịch vụ thanh toán phải được Ngân hàng Nhà nước cấp phép. Điều kiện bao gồm:</p><ul><li><strong>Vốn điều lệ:</strong> Tối thiểu 50 tỷ đồng đối với dịch vụ ví điện tử; 25 tỷ đồng đối với dịch vụ cổng thanh toán; 100 tỷ đồng đối với dịch vụ trung gian thanh toán.</li><li><strong>Nhân sự:</strong> Người quản trị, điều hành phải có trình độ đại học trở lên, kinh nghiệm tối thiểu 5 năm trong lĩnh vực ngân hàng, tài chính hoặc công nghệ thông tin.</li><li><strong>Hạ tầng kỹ thuật:</strong> Hệ thống máy chủ đặt tại Việt Nam; đáp ứng yêu cầu về an toàn, bảo mật theo quy định của Ngân hàng Nhà nước và Bộ Thông tin & Truyền thông.</li><li><strong>Phương án kinh doanh:</strong> Khả thi, có phân tích rủi ro và biện pháp quản lý rủi ro.</li></ul><img src='https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=600&q=80' alt='Thanh toán điện tử tại Việt Nam' /><h4>Nghia vụ của doanh nghiệp cung ứng dịch vụ</h4><ul><li><strong>Bảo mật thông tin:</strong> Mã hóa dữ liệu giao dịch; không lưu trữ thông tin nhạy cảm (mã PIN, CVV); tuân thủ chuẩn PCI DSS đối với thẻ.</li><li><strong>Chống rửa tiền:</strong> Xác minh danh tính khách hàng (KYC); theo dõi, phát hiện giao dịch đáng ngờ; báo cáo cho cơ quan có thẩm quyền.</li><li><strong>Đối soát, hạch toán:</strong> Thực hiện đối soát chính xác, kịp thời; lưu trữ chứng từ giao dịch tối thiểu 5 năm.</li><li><strong>Báo cáo:</strong> Báo cáo định kỳ (tháng, quý, năm) và đột xuất cho Ngân hàng Nhà nước.</li><li><strong>Quản lý rủi ro:</strong> Có chính sách, quy trình quản lý rủi ro; mua bảo hiểm trách nhiệm nghề nghiệp hoặc duy trì quỹ dự phòng rủi ro.</li></ul><h4>Xu hướng và cơ hội</h4><p>Thị trường thanh toán điện tử Việt Nam tăng trưởng 30-40%/năm. Cơ hội đến từ: tỷ lệ người dùng smartphone cao; chính sách thúc đẩy thanh toán không dùng tiền mặt; sự phát triển của thương mại điện tử. Thách thức: cạnh tranh khốc liệt; yêu cầu vốn lớn; rủi ro bảo mật, gian lận; hành lang pháp lý đang hoàn thiện.</p>" },
+                { id: 415, type: 'longform', isNews: true, title: "Hợp đồng thương mại quốc tế: Những điều khoản không thể thiếu", date: "04/03/2026", thumb: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=400", summary: "Hướng dẫn soạn thảo hợp đồng mua bán quốc tế theo thông lệ Incoterms 2020.", field: "Thương mại", menuKey: "hoat-dong-trung-tam", subKey: "multimedia", content: "<h4>Các điều khoản cơ bản trong hợp đồng mua bán quốc tế</h4><ul><li><strong>Mô tả hàng hóa:</strong> Tên hàng, quy cách, phẩm chất, số lượng, đơn giá, tổng giá trị. Nên tham chiếu đến tiêu chuẩn quốc tế (ISO, ASTM) hoặc tiêu chuẩn ngành.</li><li><strong>Điều kiện giao hàng (Incoterms 2020):</strong> Quy định rõ điều kiện giao hàng (EXW, FOB, CIF, DDP...), địa điểm giao hàng, thời điểm chuyển rủi ro từ người bán sang người mua.</li><li><strong>Phương thức thanh toán:</strong> L/C (thư tín dụng) — an toàn nhất cho người bán; T/T (chuyển khoản) — nhanh nhưng rủi ro cao; D/P (nhờ thu kèm chứng từ) — trung gian; D/A (nhờ thu kèm chấp nhận hối phiếu) — rủi ro cao cho người bán.</li><li><strong>Thời gian và địa điểm giao hàng:</strong> Ngày giao hàng cụ thể hoặc khoảng thời gian; cảng xếp/cảng dỡ; cho phép giao hàng từng phần hay không.</li><li><strong>Bao bì, đóng gói, ký mã hiệu:</strong> Quy cách đóng gói (thùng gỗ, pallet, container); ký mã hiệu (ký hiệu, số hiệu, cảnh báo) theo yêu cầu người mua hoặc thông lệ quốc tế.</li><li><strong>Bảo hiểm hàng hóa:</strong> Ai mua bảo hiểm, loại bảo hiểm (A, B, C theo ICC), giá trị bảo hiểm, đồng tiền bảo hiểm.</li><li><strong>Kiểm tra hàng hóa:</strong> Quyền kiểm tra của người mua, tổ chức giám định độc lập (SGS, Bureau Veritas), thời hạn khiếu nại về số lượng/chất lượng.</li><li><strong>Phạt vi phạm và bồi thường thiệt hại:</strong> Phạt chậm giao hàng (thường 0.1-0.5%/tuần, tối đa 5-10%); phạt chậm thanh toán; bồi thường thiệt hại thực tế.</li><li><strong>Bất khả kháng:</strong> Định nghĩa sự kiện bất khả kháng (thiên tai, chiến tranh, đình công, dịch bệnh); nghĩa vụ thông báo; hậu quả (gia hạn thời gian hoặc hủy hợp đồng).</li><li><strong>Luật áp dụng và giải quyết tranh chấp:</strong> Luật quốc gia nào điều chỉnh hợp đồng; cơ chế giải quyết tranh chấp (trọng tài quốc tế hay tòa án nước nào).</li></ul><img src='https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=600&q=80' alt='Hợp đồng thương mại quốc tế' /><h4>Incoterms 2020 — 11 điều kiện giao hàng</h4><p>Incoterms (International Commercial Terms) do Phòng Thương mại Quốc tế (ICC) ban hành, quy định rõ trách nhiệm, chi phí và rủi ro của người bán, người mua:</p><ul><li><strong>Nhóm E (Ex Works):</strong> Người bán giao hàng tại cơ sở của mình, người mua chịu mọi chi phí và rủi ro từ đó.</li><li><strong>Nhóm F (FCA, FAS, FOB):</strong> Người bán giao hàng cho người chuyên chở do người mua chỉ định; người mua chịu chi phí vận tải chính.</li><li><strong>Nhóm C (CFR, CIF, CPT, CIP):</strong> Người bán chịu chi phí vận tải chính đến nơi đến, nhưng rủi ro chuyển sang người mua khi giao cho người chuyên chở đầu tiên.</li><li><strong>Nhóm D (DAP, DPU, DDP):</strong> Người bán chịu mọi chi phí và rủi ro đến nơi đến; DDP là điều kiện người bán chịu nhiều trách nhiệm nhất (bao gồm cả thông quan nhập khẩu).</li></ul><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=600&q=80' alt='Incoterms 2020' /><h4>Lời khuyên cho doanh nghiệp Việt Nam</h4><ul><li>Luôn quy định rõ Incoterms phiên bản 2020 (ví dụ: \"FOB Cat Lai Port, Incoterms 2020\").</li><li>Chọn phương thức thanh toán phù hợp với mức độ tin cậy của đối tác — ưu tiên L/C với đối tác mới.</li><li>Thuê giám định độc lập kiểm tra hàng hóa trước khi giao, đặc biệt với hàng giá trị cao.</li><li>Chọn trọng tài quốc tế (SIAC, VIAC, ICC) thay vì tòa án nước ngoài để giải quyết tranh chấp — trung lập, chuyên môn cao.</li><li>Thuê luật sư có kinh nghiệm về thương mại quốc tế rà soát hợp đồng trước khi ký.</li></ul>" },
+                
+                // Infographic
+                { id: 321, type: 'infographic', isNews: true, title: "Infographic: Quy trình 5 bước xin cấp giấy chứng nhận VSATTP", date: "14/04/2026", thumb: "https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&q=80&w=400", summary: "Minh họa trực quan các bước thủ tục cấp phép An toàn vệ sinh thực phẩm." },
+                { id: 322, type: 'infographic', isNews: true, title: "Infographic: Tóm tắt 10 điểm mới của Luật Doanh nghiệp (sửa đổi)", date: "08/04/2026", thumb: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=400", summary: "Những thay đổi quan trọng chủ doanh nghiệp cần nắm rõ." },
+                { id: 323, type: 'infographic', isNews: true, title: "Sơ đồ: Trình tự giải quyết tranh chấp kinh doanh tại Tòa án", date: "25/03/2026", thumb: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=400", summary: "Hướng dẫn các bước từ khi khởi kiện đến thi hành án." },
+                { id: 324, type: 'infographic', isNews: true, title: "Infographic: Các loại hợp đồng kinh tế phổ biến", date: "22/03/2026", thumb: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=400", summary: "Phân biệt hợp đồng mua bán, hợp đồng dịch vụ, hợp đồng hợp tác kinh doanh." },
+                { id: 325, type: 'infographic', isNews: true, title: "Infographic: Hồ sơ thành lập doanh nghiệp cần những gì?", date: "19/03/2026", thumb: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=400", summary: "Danh mục đầy đủ giấy tờ cần chuẩn bị khi đăng ký thành lập công ty." },
+                { id: 326, type: 'infographic', isNews: true, title: "Sơ đồ: Quy trình kê khai và nộp thuế điện tử", date: "16/03/2026", thumb: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=400", summary: "Hướng dẫn từng bước kê khai thuế GTGT, TNDN, TNCN qua mạng." },
+                { id: 327, type: 'infographic', isNews: true, title: "Infographic: Quyền và nghĩa vụ của người lao động", date: "13/03/2026", thumb: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&q=80&w=400", summary: "Những quyền lợi cơ bản và nghĩa vụ của NLĐ theo Bộ luật Lao động 2019." },
+                { id: 328, type: 'infographic', isNews: true, title: "Infographic: Điều kiện xin giấy phép con", date: "10/03/2026", thumb: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=400", summary: "Tổng hợp điều kiện và hồ sơ xin các giấy phép kinh doanh có điều kiện." },
+                { id: 329, type: 'infographic', isNews: true, title: "Sơ đồ: Thủ tục giải thể doanh nghiệp", date: "07/03/2026", thumb: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=400", summary: "Trình tự, thời gian và chi phí khi làm thủ tục giải thể công ty." },
+                { id: 330, type: 'infographic', isNews: true, title: "Infographic: Các hình thức xử lý vi phạm hành chính", date: "04/03/2026", thumb: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=400", summary: "Mức phạt, hình thức xử phạt và biện pháp khắc phục hậu quả." },
+                { id: 331, type: 'infographic', isNews: true, title: "Infographic: Đăng ký sở hữu trí tuệ cần những gì?", date: "01/03/2026", thumb: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=400", summary: "Hồ sơ, quy trình và thời gian đăng ký nhãn hiệu, kiểu dáng, sáng chế." },
+                { id: 332, type: 'infographic', isNews: true, title: "Sơ đồ: Khiếu nại và tố cáo trong doanh nghiệp", date: "26/02/2026", thumb: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=400", summary: "Quy trình tiếp nhận, giải quyết khiếu nại, tố cáo tại doanh nghiệp." },
+                { id: 333, type: 'infographic', isNews: true, title: "Infographic: Nghĩa vụ BHXH năm 2026", date: "23/02/2026", thumb: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&q=80&w=400", summary: "Mức đóng, điều kiện hưởng và thủ tục hưởng các chế độ BHXH." },
+                { id: 334, type: 'infographic', isNews: true, title: "Infographic: Hóa đơn điện tử - Những điều cần biết", date: "20/02/2026", thumb: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=400", summary: "Thời điểm lập, nội dung và cách xử lý hóa đơn điện tử sai sót." },
+                { id: 335, type: 'infographic', isNews: true, title: "Sơ đồ: Đầu tư nước ngoài vào Việt Nam", date: "17/02/2026", thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400", summary: "Điều kiện, thủ tục và ưu đãi đầu tư cho nhà đầu tư nước ngoài." },
+                { id: 336, type: 'infographic', isNews: true, title: "Infographic: Chuyển đổi số doanh nghiệp - Lộ trình 2026", date: "14/02/2026", thumb: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=400", summary: "Các bước chuyển đổi số từ cơ bản đến nâng cao cho DNNVV." },
+                { id: 337, type: 'infographic', isNews: true, title: "Sơ đồ: Phòng chống rửa tiền trong doanh nghiệp", date: "11/02/2026", thumb: "https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80&w=400", summary: "Nhận diện và phòng ngừa rủi ro rửa tiền trong hoạt động kinh doanh." },
+                { id: 338, type: 'infographic', isNews: true, title: "Infographic: Thuế GTGT - Phương pháp khấu trừ", date: "08/02/2026", thumb: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=400", summary: "Cách xác định thuế GTGT đầu vào, đầu ra và số thuế phải nộp." },
+                { id: 339, type: 'infographic', isNews: true, title: "Sơ đồ: Giải quyết tai nạn lao động", date: "05/02/2026", thumb: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&q=80&w=400", summary: "Quy trình báo cáo, điều tra và xử lý tai nạn lao động." },
+                { id: 340, type: 'infographic', isNews: true, title: "Infographic: Bảo vệ người tiêu dùng trực tuyến", date: "02/02/2026", thumb: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=400", summary: "Quyền lợi và cách thức khiếu nại khi mua hàng online." },
+                { id: 341, type: 'infographic', isNews: true, title: "Sơ đồ: Phá sản doanh nghiệp - Quy trình và hệ quả", date: "30/01/2026", thumb: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=400", summary: "Trình tự mở hồ sơ phá sản, thanh lý tài sản và giải thể." },
+                { id: 342, type: 'infographic', isNews: true, title: "Infographic: An toàn thông tin mạng cho doanh nghiệp", date: "27/01/2026", thumb: "https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=400", summary: "Biện pháp bảo vệ dữ liệu, phòng chống tấn công mạng." },
+                { id: 343, type: 'infographic', isNews: true, title: "Sơ đồ: Đăng ký mã số mã vạch sản phẩm", date: "24/01/2026", thumb: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80&w=400", summary: "Hồ sơ, quy trình và lệ phí đăng ký mã số mã vạch tại Việt Nam." },
+                { id: 344, type: 'infographic', isNews: true, title: "Infographic: Chống độc quyền và cạnh tranh không lành mạnh", date: "21/01/2026", thumb: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=400", summary: "Nhận diện và xử lý hành vi vi phạm pháp luật cạnh tranh." },
+                { id: 345, type: 'infographic', isNews: true, title: "Sơ đồ: Xin giấy phép môi trường", date: "18/01/2026", thumb: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=400", summary: "Điều kiện, hồ sơ và quy trình xin giấy phép môi trường cho dự án." },
+
+                // Photos
+                { id: 331, type: 'photo', isNews: true, title: "Chùm ảnh: Lễ ký kết MOU hỗ trợ pháp lý giữa 5 bộ ngành", date: "10/04/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=400", summary: "Ghi lại những khoảnh khắc quan trọng tại sự kiện hợp tác liên ngành.", content: "<p>Ngày 10/04/2026, tại Hà Nội, đại diện 5 bộ ngành đã tham dự Lễ ký kết biên bản ghi nhớ (MOU) về hỗ trợ pháp lý cho doanh nghiệp.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Toàn cảnh lễ ký kết' /><h4>Đại biểu tham dự</h4><p>Lãnh đạo Bộ Tư pháp, Bộ Kế hoạch và Đầu tư, Bộ Tài chính, Bộ Công Thương và Bộ Lao động cùng đại diện các hiệp hội doanh nghiệp.</p><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80' alt='Đại biểu tham dự' /><h4>Ký kết MOU</h4><p>Đại diện 5 bộ ngành cùng ký kết, cam kết phối hợp hỗ trợ doanh nghiệp tháo gỡ vướng mắc.</p><img src='https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80' alt='Khoảnh khắc ký kết' /><h4>Chụp ảnh lưu niệm</h4><p>Các đại biểu cùng chụp ảnh lưu niệm ghi dấu sự hợp tác quan trọng này.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Chụp ảnh lưu niệm' />" },
+                { id: 332, type: 'photo', isNews: true, title: "Hình ảnh: Ngày hội Tư vấn pháp luật miễn phí cho doanh nghiệp khu vực phía Bắc", date: "01/04/2026", thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400", summary: "Sự kiện thu hút hơn 500 đại diện doanh nghiệp tham gia tư vấn trực tiếp.", content: "<p>Ngày hội Tư vấn pháp luật miễn phí được tổ chức tại Hà Nội với sự tham gia của hơn 500 đại diện doanh nghiệp.</p><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80' alt='Toàn cảnh ngày hội' /><h4>Khu vực tư vấn</h4><p>Các gian hàng tư vấn được bố trí theo từng lĩnh vực: doanh nghiệp, thuế, lao động, sở hữu trí tuệ.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Khu vực tư vấn' /><h4>Tư vấn trực tiếp</h4><p>Các luật sư, chuyên gia pháp lý tận tình giải đáp từng vướng mắc cụ thể của doanh nghiệp.</p><img src='https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=800&q=80' alt='Tư vấn trực tiếp' /><h4>Phát tài liệu</h4><p>Ban tổ chức phát hành hơn 2.000 cuốn cẩm nang pháp luật miễn phí.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Phát tài liệu' />" },
+                { id: 333, type: 'photo', isNews: true, title: "Ảnh: Hội thảo pháp luật Lao động 2026", date: "28/03/2026", thumb: "https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&q=80&w=400", summary: "Ghi lại không khí hội thảo với sự tham gia của 300+ doanh nghiệp.", content: "<p>Hội thảo pháp luật Lao động 2026 quy tụ hơn 300 đại biểu là đại diện doanh nghiệp, chuyên gia và cơ quan quản lý.</p><img src='https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=800&q=80' alt='Hội thảo pháp luật Lao động' /><h4>Diễn giả trình bày</h4><p>Các chuyên gia từ Bộ Lao động trình bày về những điểm mới trong chính sách lao động năm 2026.</p><img src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80' alt='Diễn giả trình bày' /><h4>Hỏi đáp</h4><p>Phần hỏi đáp sôi nổi với nhiều câu hỏi thực tế từ doanh nghiệp.</p><img src='https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80' alt='Phần hỏi đáp' />" },
+                { id: 334, type: 'photo', isNews: true, title: "Ảnh: Lễ công bố chuyên trang hỗ trợ pháp lý doanh nghiệp", date: "25/03/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=400", summary: "Sự kiện ra mắt chuyên trang với sự tham dự của lãnh đạo các bộ ngành.", content: "<p>Chuyên trang hỗ trợ pháp lý doanh nghiệp chính thức ra mắt, cung cấp thông tin pháp luật miễn phí cho cộng đồng doanh nghiệp.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Lễ công bố chuyên trang' /><h4>Nghi thức khai trương</h4><p>Lãnh đạo các bộ ngành cùng nhấn nút khai trương, chính thức đưa chuyên trang vào hoạt động.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Nghi thức khai trương' /><h4>Chụp ảnh lưu niệm</h4><p>Các đại biểu cùng chụp ảnh lưu niệm tại buổi lễ ra mắt.</p><img src='https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80' alt='Chụp ảnh lưu niệm' />" },
+                { id: 335, type: 'photo', isNews: true, title: "Ảnh: Tập huấn nghiệp vụ pháp lý cho doanh nghiệp", date: "22/03/2026", thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400", summary: "Buổi tập huấn về kỹ năng soạn thảo hợp đồng và quản trị rủi ro.", content: "<p>Chương trình tập huấn cung cấp kiến thức thực tiễn về soạn thảo hợp đồng và quản trị rủi ro pháp lý cho hơn 200 học viên.</p><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80' alt='Lớp tập huấn' /><h4>Thực hành soạn thảo</h4><p>Học viên được hướng dẫn thực hành soạn thảo các điều khoản hợp đồng quan trọng.</p><img src='https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80' alt='Thực hành soạn thảo' /><h4>Thảo luận nhóm</h4><p>Các nhóm thảo luận tình huống thực tế và đưa ra giải pháp pháp lý phù hợp.</p><img src='https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=800&q=80' alt='Thảo luận nhóm' />" },
+                { id: 336, type: 'photo', isNews: true, title: "Ảnh: Ký kết thỏa thuận hợp tác với các tổ chức quốc tế", date: "19/03/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=400", summary: "Lễ ký kết hợp tác hỗ trợ pháp lý with các tổ chức quốc tế.", content: "<p>Việt Nam ký kết thỏa thuận hợp tác với các tổ chức quốc tế nhằm tăng cường hỗ trợ pháp lý for doanh nghiệp trong bối cảnh hội nhập.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Lễ ký kết' /><h4>Phạm vi hợp tác</h4><p>Thỏa thuận bao gồm chia sẻ kinh nghiệm, đào tạo chuyên gia, và hỗ trợ kỹ thuật trong lĩnh vực pháp luật kinh doanh.</p><img src='https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80' alt='Đại diện các bên' /><h4>Trao văn kiện</h4><p>Đại diện các bên trao văn kiện hợp tác và chụp ảnh lưu niệm.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Trao văn kiện' />" },
+                { id: 337, type: 'photo', isNews: true, title: "Ảnh: Diễn đàn doanh nghiệp khu vực phía Nam", date: "16/03/2026", thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400", summary: "Diễn đàn kết nối doanh nghiệp và tháo gỡ vướng mắc pháp lý.", content: "<p>Diễn đàn doanh nghiệp khu vực phía Nam được tổ chức tại TP.HCM, kết nối hơn 400 doanh nghiệp với cơ quan quản lý.</p><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80' alt='Diễn đàn doanh nghiệp' /><h4>Tọa đàm chính</h4><p>Các chuyên gia thảo luận về tháo gỡ vướng mắc trong đầu tư, kinh doanh và xuất nhập khẩu.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Tọa đàm chính' /><h4>Kết nối doanh nghiệp</h4><p>Không gian kết nối giúp doanh nghiệp tìm kiếm đối tác và chia sẻ kinh nghiệm.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Kết nối doanh nghiệp' />" },
+                { id: 338, type: 'photo', isNews: true, title: "Ảnh: Lễ trao giải thưởng doanh nghiệp tiêu biểu", date: "13/03/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=400", summary: "Vinh danh 50 doanh nghiệp tiêu biểu trong lĩnh vực tuân thủ pháp luật.", content: "<p>Lễ trao giải thưởng vinh danh 50 doanh nghiệp có thành tích xuất sắc trong tuân thủ pháp luật và đóng góp cho cộng đồng.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Lễ trao giải' /><h4>Trao giải doanh nghiệp tiêu biểu</h4><p>Các doanh nghiệp được vinh danh thuộc nhiều lĩnh vực: sản xuất, thương mại, dịch vụ, công nghệ.</p><img src='https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80' alt='Trao giải' /><h4>Phát biểu nhận giải</h4><p>Đại diện doanh nghiệp chia sẻ kinh nghiệm xây dựng văn hóa tuân thủ pháp luật.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Phát biểu nhận giải' />" },
+                { id: 339, type: 'photo', isNews: true, title: "Ảnh: Hội nghị tổng kết công tác hỗ trợ pháp lý 2025", date: "10/03/2026", thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400", summary: "Tổng kết hoạt động hỗ trợ pháp lý và phương hướng 2026.", content: "<p>Hội nghị tổng kết những kết quả đạt được trong công tác hỗ trợ pháp lý năm 2025 và đề ra phương hướng năm 2026.</p><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80' alt='Hội nghị tổng kết' /><h4>Báo cáo tổng kết</h4><p>Năm 2025, hơn 10.000 doanh nghiệp đã được hỗ trợ pháp lý thông qua các kênh tư vấn.</p><img src='https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80' alt='Báo cáo tổng kết' /><h4>Phương hướng 2026</h4><p>Tập trung mở rộng phạm vi hỗ trợ, nâng cao chất lượng tư vấn và đẩy mạnh chuyển đổi số.</p><img src='https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=800&q=80' alt='Phương hướng 2026' />" },
+                { id: 340, type: 'photo', isNews: true, title: "Ảnh: Tọa đàm về chuyển đổi số trong tư vấn pháp luật", date: "07/03/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=400", summary: "Thảo luận về ứng dụng AI và công nghệ trong dịch vụ pháp lý.", content: "<p>Tọa đàm quy tụ các chuyên gia công nghệ và pháp lý để thảo luận về xu hướng chuyển đổi số trong ngành dịch vụ pháp luật.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Tọa đàm chuyển đổi số' /><h4>Ứng dụng AI trong pháp lý</h4><p>Trí tuệ nhân tạo đang được ứng dụng để rà soát hợp đồng, nghiên cứu án lệ và dự báo kết quả tranh chấp.</p><img src='https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80' alt='AI trong pháp lý' /><h4>Trình diễn công cụ</h4><p>Các công cụ pháp lý số được trình diễn trực tiếp, cho phép tra cứu văn bản và tạo hợp đồng tự động.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Trình diễn công cụ số' />" },
+                { id: 341, type: 'photo', isNews: true, title: "Ảnh: Chương trình kết nối doanh nghiệp Việt - Hàn", date: "04/03/2026", thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400", summary: "Sự kiện xúc tiến thương mại và đầu tư giữa doanh nghiệp hai nước.", content: "<p>Chương trình kết nối doanh nghiệp Việt - Hàn tạo cầu nối hợp tác giữa hơn 200 doanh nghiệp hai nước.</p><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80' alt='Kết nối doanh nghiệp Việt - Hàn' /><h4>Giới thiệu cơ hội đầu tư</h4><p>Các lĩnh vực được quan tâm: sản xuất, công nghệ, nông nghiệp chế biến và năng lượng tái tạo.</p><img src='https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80' alt='Giới thiệu cơ hội đầu tư' /><h4>Gặp gỡ song phương</h4><p>Hơn 50 cặp doanh nghiệp đã có buổi gặp gỡ và ký kết các thỏa thuận hợp tác ban đầu.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Gặp gỡ song phương' />" },
+                { id: 342, type: 'photo', isNews: true, title: "Ảnh: Lễ ra mắt Câu lạc bộ Doanh nhân pháp chế", date: "01/03/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=400", summary: "Diễn đàn kết nối doanh nhân và chuyên gia pháp lý.", content: "<p>Câu lạc bộ Doanh nhân pháp chế chính thức ra mắt với 150 thành viên là lãnh đạo doanh nghiệp và chuyên gia pháp lý.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Lễ ra mắt CLB' /><h4>Phát biểu khai mạc</h4><p>Chủ nhiệm CLB trình bày về sứ mệnh kết nối, chia sẻ kinh nghiệm quản trị rủi ro pháp lý.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Phát biểu khai mạc' /><h4>Thành viên CLB</h4><p>Các thành viên CLB cùng chụp ảnh lưu niệm tại buổi ra mắt.</p><img src='https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80' alt='Thành viên CLB' />" },
+                { id: 343, type: 'photo', isNews: true, title: "Ảnh: Hội thảo về sở hữu trí tuệ và thương hiệu", date: "26/02/2026", thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400", summary: "Chia sẻ kinh nghiệm đăng ký và bảo vệ thương hiệu.", content: "<p>Hội thảo cung cấp kiến thức về đăng ký nhãn hiệu, kiểu dáng công nghiệp và chiến lược bảo vệ thương hiệu.</p><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80' alt='Hội thảo SHTT' /><h4>Đăng ký nhãn hiệu</h4><p>Chuyên gia hướng dẫn quy trình đăng ký nhãn hiệu trong nước và quốc tế qua hệ thống Madrid.</p><img src='https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=800&q=80' alt='Hướng dẫn đăng ký nhãn hiệu' /><h4>Bảo vệ thương hiệu</h4><p>Các biện pháp xử lý hành vi xâm phạm và kinh nghiệm bảo vệ thương hiệu trên thị trường quốc tế.</p><img src='https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80' alt='Bảo vệ thương hiệu' />" },
+                { id: 344, type: 'photo', isNews: true, title: "Ảnh: Khóa đào tạo kỹ năng đàm phán hợp đồng", date: "23/02/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=400", summary: "Đào tạo kỹ năng đàm phán, soạn thảo và quản lý hợp đồng.", content: "<p>Khóa đào tạo trang bị kỹ năng đàm phán và soạn thảo hợp đồng cho hơn 100 học viên là cán bộ pháp chế doanh nghiệp.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Khóa đào tạo đàm phán' /><h4>Thực hành tình huống</h4><p>Học viên được thực hành đàm phán các tình huống thực tế: mua bán, hợp tác, giải quyết tranh chấp.</p><img src='https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80' alt='Thực hành đàm phán' /><h4>Chứng nhận hoàn thành</h4><p>Học viên nhận chứng nhận hoàn thành khóa đào tạo kỹ năng đàm phán hợp đồng.</p><img src='https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=800&q=80' alt='Trao chứng nhận' />" },
+                { id: 345, type: 'photo', isNews: true, title: "Ảnh: Diễn đàn pháp luật Thuế 2026", date: "20/02/2026", thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400", summary: "Cập nhật chính sách thuế mới và giải đáp vướng mắc.", content: "<p>Diễn đàn Thuế 2026 cập nhật những thay đổi chính sách thuế và giải đáp vướng mắc cho hơn 300 doanh nghiệp.</p><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80' alt='Diễn đàn Thuế 2026' /><h4>Chính sách thuế mới</h4><p>Cán bộ Tổng cục Thuế trình bày về các thay đổi trong quản lý hóa đơn điện tử và kê khai thuế.</p><img src='https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80' alt='Chính sách thuế mới' /><h4>Hỏi đáp thuế</h4><p>Doanh nghiệp đặt câu hỏi trực tiếp về các tình huống cụ thể trong kê khai và quyết toán thuế.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Hỏi đáp về thuế' />" },
+                { id: 346, type: 'photo', isNews: true, title: "Ảnh: Lễ kỷ niệm ngày Pháp luật Việt Nam", date: "17/02/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=400", summary: "Sự kiện hưởng ứng ngày 09/11 - Ngày Pháp luật nước CHXHCN Việt Nam.", content: "<p>Lễ kỷ niệm Ngày Pháp luật Việt Nam được tổ chức trọng thể với sự tham gia của lãnh đạo các cơ quan tư pháp.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Lễ kỷ niệm Ngày Pháp luật' /><h4>Phát biểu kỷ niệm</h4><p>Lãnh đạo Bộ Tư pháp phát biểu về ý nghĩa của Ngày Pháp luật và tầm quan trọng của thượng tôn pháp luật.</p><img src='https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80' alt='Phát biểu kỷ niệm' /><h4>Văn nghệ chào mừng</h4><p>Chương trình văn nghệ đặc sắc chào mừng Ngày Pháp luật Việt Nam.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Văn nghệ chào mừng' />" },
+                { id: 347, type: 'photo', isNews: true, title: "Ảnh: Hội nghị điển hình tiên tiến ngành Tư pháp", date: "14/02/2026", thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400", summary: "Vinh danh các tập thể, cá nhân có thành tích xuất sắc.", content: "<p>Hội nghị vinh danh 80 tập thể và cá nhân có thành tích xuất sắc trong công tác tư pháp năm 2025.</p><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80' alt='Hội nghị điển hình tiên tiến' /><h4>Trao bằng khen</h4><p>Lãnh đạo Bộ Tư pháp trao bằng khen cho các tập thể, cá nhân điển hình tiên tiến.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Trao bằng khen' /><h4>Báo cáo điển hình</h4><p>Đại diện các tập thể điển hình báo cáo kinh nghiệm và thành tích đạt được.</p><img src='https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=800&q=80' alt='Báo cáo điển hình' />" },
+                { id: 348, type: 'photo', isNews: true, title: "Ảnh: Chương trình tư vấn pháp luật lưu động", date: "11/02/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=400", summary: "Tư vấn pháp luật miễn phí tại các khu công nghiệp.", content: "<p>Đội tư vấn pháp luật lưu động đến tận các khu công nghiệp, hỗ trợ pháp lý miễn phí cho doanh nghiệp và người lao động.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Tư vấn pháp luật lưu động' /><h4>Tư vấn tại chỗ</h4><p>Các luật sư tư vấn trực tiếp về hợp đồng lao động, BHXH và tranh chấp kinh tế.</p><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80' alt='Tư vấn tại chỗ' /><h4>Phát tờ rơi pháp luật</h4><p>Phát hành tài liệu pháp luật dễ hiểu cho người lao động và chủ doanh nghiệp nhỏ.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Phát tài liệu pháp luật' />" },
+                { id: 349, type: 'photo', isNews: true, title: "Ảnh: Lễ ký kết chương trình phối hợp liên ngành", date: "08/02/2026", thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400", summary: "Phối hợp giữa Bộ Tư pháp và các bộ ngành trong hỗ trợ pháp lý.", content: "<p>Bộ Tư pháp ký kết chương trình phối hợp với các bộ ngành nhằm nâng cao hiệu quả hỗ trợ pháp lý cho doanh nghiệp.</p><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80' alt='Ký kết phối hợp liên ngành' /><h4>Nội dung phối hợp</h4><p>Chương trình tập trung vào chia sẻ dữ liệu, phối hợp giải quyết vướng mắc và tổ chức các hoạt động hỗ trợ chung.</p><img src='https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80' alt='Nội dung phối hợp' /><h4>Chụp ảnh lưu niệm</h4><p>Đại diện các bộ ngành chụp ảnh lưu niệm sau lễ ký kết.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Chụp ảnh lưu niệm' />" },
+                { id: 350, type: 'photo', isNews: true, title: "Ảnh: Cuộc thi tìm hiểu pháp luật trực tuyến", date: "05/02/2026", thumb: "https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&q=80&w=400", summary: "Tổng kết cuộc thi với 10.000+ thí sinh tham gia.", content: "<p>Cuộc thi tìm hiểu pháp luật trực tuyến thu hút hơn 10.000 thí sinh trên cả nước tham gia trong vòng 2 tháng.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Tổng kết cuộc thi' /><h4>Trao giải cho thí sinh xuất sắc</h4><p>Ban tổ chức trao giải nhất, nhì, ba cho các thí sinh đạt điểm cao nhất.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Trao giải cuộc thi' /><h4>Thí sinh nhận giải</h4><p>Các thí sinh vui mừng nhận giải thưởng và giấy chứng nhận từ Ban tổ chức.</p><img src='https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80' alt='Thí sinh nhận giải' />" },
+                { id: 351, type: 'photo', isNews: true, title: "Ảnh: Giao lưu thể thao ngành Tư pháp 2026", date: "02/02/2026", thumb: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=400", summary: "Giải bóng đá, cầu lông truyền thống ngành Tư pháp.", content: "<p>Giải thể thao truyền thống ngành Tư pháp quy tụ 32 đội thi đấu bóng đá và cầu lông.</p><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80' alt='Khai mạc giải thể thao' /><h4>Trận chung kết bóng đá</h4><p>Trận chung kết hấp dẫn giữa hai đội mạnh nhất giải.</p><img src='https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=800&q=80' alt='Trận chung kết bóng đá' /><h4>Trao cúp vô địch</h4><p>Đội vô địch nhận cúp và giải thưởng từ Ban tổ chức.</p><img src='https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80' alt='Trao cúp vô địch' />" },
+            ];
+
+            // Mock data cho Video bài giảng
+            const videoData = Array.from({ length: 36 }).map((_, idx) => ({
+                id: 8000 + idx,
+                title: `Bài giảng số ${idx + 1}: ${['Hướng dẫn thủ tục thành lập doanh nghiệp', 'Quy trình khai báo thuế điện tử', 'Kỹ năng đàm phán hợp đồng thương mại', 'Tìm hiểu Luật Lao động sửa đổi', 'Quản trị rủi ro trong kinh doanh'][idx % 5]}`,
+                summary: "Video hướng dẫn chi tiết các bước thực hiện thủ tục và những lưu ý quan trọng giúp doanh nghiệp áp dụng pháp luật vào thực tiễn một cách chính xác nhất.",
+                date: `${String(28 - (idx % 28)).padStart(2, '0')}/04/2026`,
+                thumb: `https://images.unsplash.com/photo-${['1516321318423-f06f85e504b3', '1556761175-5973dc0f32d7', '1432888498266-38ffec3eaf0a', '1589829085413-56de8ae18c73', '1507679799987-c73779587ccf'][idx % 5]}?auto=format&fit=crop&w=800&q=80`,
+                field: ['Doanh nghiệp', 'Thuế', 'Thương mại', 'Lao động', 'Pháp lý chung'][idx % 5],
+                duration: `1${idx % 5}:2${idx % 9}`,
+                isFeatured: idx < 5,
+                menuKey: "dao-tao",
+                subKey: "bai-giang-truc-tuyen",
+                content: `
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-lg">Phần 1: Khái quát quy định mới</h4>
+                        <p>Bài giảng tập trung làm rõ những điểm mới, quy trình mà doanh nghiệp cần cập nhật theo thông tư hiện hành.</p>
+                        <p>Theo quy định, thời gian giải quyết thủ tục được rút ngắn, nhưng yêu cầu về tính chính xác của hồ sơ cao hơn. Chi tiết tại khoản 2 Điều 15 Luật hiện hành.</p>
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="Minh họa bài giảng" class="rounded shadow-sm max-w-full my-4">
+                        <h4 class="font-bold text-lg mt-6">Phần 2: Hướng dẫn thực hành</h4>
+                        <p>Chuyên gia sẽ hướng dẫn điền từng trường thông tin cụ thể trên biểu mẫu điện tử để tránh sai sót.</p>
+                    </div>
+                `
+            }));
+
+            const policyDocs = [
+                { id: 1, title: "Nghị định hướng dẫn hỗ trợ pháp lý cho doanh nghiệp nhỏ và vừa", type: "Nghị định", agency: "Chính phủ", date: "01/04/2026", thumb: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=80" },
+                { id: 2, title: "Thông tư hướng dẫn triển khai hoạt động hỗ trợ pháp lý", type: "Thông tư", agency: "Bộ Tư pháp", date: "29/03/2026", thumb: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=400&q=80" },
+                { id: 3, title: "Kế hoạch phối hợp liên ngành năm 2026", type: "Kế hoạch", agency: "Liên ngành", date: "28/03/2026", thumb: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=400&q=80" }
+            ];
+
+            const faqs = [
+                { id: 1, question: "Doanh nghiệp nhỏ và vừa có thể gửi câu hỏi pháp lý bằng cách nào?", answer: "Doanh nghiệp có thể gửi câu hỏi qua biểu mẫu trực tuyến hoặc liên hệ trực tiếp với Trung tâm hỗ trợ pháp lý cho doanh nghiệp nhỏ và vừa." },
+                { id: 2, question: "Có thể tải biểu mẫu pháp lý ở đâu?", answer: "Biểu mẫu được công bố trong chuyên mục Tài liệu hỗ trợ pháp lý và Thủ tục pháp lý của chuyên trang." }
+            ];
+
+            const hoiDapData = [
+                {
+                    id: 401,
+                    question: "Tôi dự định thành lập công ty TNHH 2 thành viên trong lĩnh vực tư vấn pháp lý. Vậy tôi cần chuẩn bị những giấy tờ gì và trình tự thực hiện như thế nào?",
+                    answer: "Hồ sơ đăng ký thành lập công ty TNHH 2 thành viên bao gồm: (1) Giấy đề nghị đăng ký doanh nghiệp theo mẫu quy định; (2) Điều lệ công ty có chữ ký của các thành viên; (3) Danh sách thành viên kèm bản sao CMND/CCCD/hộ chiếu; (4) Giấy ủy quyền cho người nộp hồ sơ (nếu có). Đối with lĩnh vực tư vấn pháp lý, công ty phải có ít nhất 02 luật sư là thành viên và được Sở Tư pháp cấp giấy đăng ký hoạt động trước khi đăng ký kinh doanh. Trình tự: Nộp hồ sơ qua mạng tại Cổng thông tin quốc gia về đăng ký doanh nghiệp, sau đó nộp bản giấy tại Phòng Đăng ký kinh doanh - Sở KH&ĐT. Thời gian: 03 ngày làm việc. Lệ phí đăng ký: 50.000đ. Sau khi có Giấy chứng nhận đăng ký doanh nghiệp, công ty phải thực hiện thủ tục khắc dấu, công bố mẫu dấu và đăng ký chữ ký số để phục vụ kê khai thuế điện tử.",
+                    date: "28/04/2026",
+                    field: "Doanh nghiệp",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 402,
+                    question: "Công ty tôi là công ty TNHH 1 thành viên, nay muốn chuyển đổi sang công ty cổ phần để huy động vốn. Thủ tục này cần những hồ sơ gì và thời gian thực hiện bao lâu?",
+                    answer: "Hồ sơ chuyển đổi từ công ty TNHH 1 thành viên sang công ty cổ phần bao gồm: (1) Quyết định của chủ sở hữu về việc chuyển đổi; (2) Nghị quyết của Đại hội đồng cổ đông; (3) Điều lệ công ty cổ phần; (4) Danh sách cổ đông sáng lập; (5) Giấy ủy quyền. Lưu ý: Công ty phải thông báo trên Cổng thông tin quốc gia về đăng ký doanh nghiệp và đăng báo trong vòng 15 ngày kể from ngày được cấp Giấy chứng nhận đăng ký doanh nghiệp mới. Thời gian thực hiện: 05-07 ngày làm việc kể from ngày nộp hồ sơ hợp lệ. Công ty chuyển đổi được kế thừa toàn bộ quyền và nghĩa vụ của công ty cũ, không cần thực hiện thủ tục giải thể hay thành lập mới.",
+                    date: "27/04/2026",
+                    field: "Doanh nghiệp",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 403,
+                    question: "Công ty tôi cần nộp báo cáo tài chính năm 2026 vào thời gian nào? Nếu nộp chậm thì bị xử phạt ra sao và cần nộp cho những cơ quan nào?",
+                    answer: "Thời hạn nộp báo cáo tài chính năm 2026 chậm nhất là 90 ngày kể from ngày kết thúc năm tài chính (thường là ngày 31/12/2026, tức là hạn chót khoảng ngày 31/3/2027). Báo cáo tài chính phải nộp cho: (1) Cơ quan thuế trực tiếp quản lý; (2) Sở KH&ĐT (nếu là doanh nghiệp nhà nước); (3) Công bố công khai trên website của doanh nghiệp. Nếu nộp chậm sẽ bị xử phạt vi phạm hành chính về thuế: Phạt từ 2-5 triệu đồng (chậm 1-30 ngày), phạt từ 4-10 triệu đồng (chậm 31-90 ngày), phạt từ 8-20 triệu đồng (chậm trên 90 ngày). Ngoài ra, doanh nghiệp còn có thể bị truy cứu trách nhiệm hình sự nếu việc chậm nộp gây hậu quả nghiêm trọng.",
+                    date: "26/04/2026",
+                    field: "Thuế",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 404,
+                    question: "Công ty tôi có nhân viên vi phạm kỷ luật lao động. Chúng tôi muốn áp dụng hình thức phạt vi phạm trong hợp đồng. Mức phạt tối đa được quy định như thế nào?",
+                    answer: "Mức phạt vi phạm hợp đồng lao động do các bên thỏa thuận nhưng không được vượt quá 3 tháng lương theo hợp đồng lao động, theo quy định tại Điều 22 Bộ luật Lao động 2019. Khi đưa điều khoản phạt vào hợp đồng cần lưu ý: (1) Phải ghi rõ hành vi vi phạm cụ thể, không được quy định chung chung; (2) Mức phạt phải tương xứng với thiệt hại thực tế; (3) Không được phạt đối with các hành vi đã bị xử lý kỷ luật sa thải; (4) Phải được người lao động đồng ý và ký xác nhận. Ngoài ra, công ty cần ban hành quy chế thưởng phạt rõ ràng, công khai và thông báo cho người lao động biết trước khi áp dụng.",
+                    date: "25/04/2026",
+                    field: "Lao động",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 405,
+                    question: "Công ty tôi đầu tư vào lĩnh vực công nghệ cao tại khu công nghiệp. Điều kiện để được hưởng ưu đãi thuế thu nhập doanh nghiệp theo quy định mới nhất là gì?",
+                    answer: "Điều kiện hưởng ưu đãi thuế TNDN: (1) Dự án đầu tư thuộc lĩnh vực, địa bàn ưu đãi theo Luật Đầu tư 2025 (công nghệ cao, nghiên cứu phát triển, giáo dục, y tế...); (2) Có quyết định chấp thuận chủ trương đầu tư hoặc Giấy chứng nhận đăng ký đầu tư; (3) Thực hiện chế độ kế toán, hóa đơn, chứng from đúng quy định; (4) Nộp hồ sơ đề nghị hưởng ưu đãi cho cơ quan thuế quản lý trực tiếp. Ưu đãi bao gồm: Thuế suất ưu đãi 10-17% (thay vì 20%), miễn thuế từ 2-4 năm, giảm 50% số thuế phải nộp trong 4-9 năm tiếp theo. Thời gian hưởng ưu đãi tối đa 15 năm. Doanh nghiệp phải theo dõi riêng doanh thu thuộc dự án ưu đãi để xác định đúng số thuế được ưu đãi.",
+                    date: "24/04/2026",
+                    field: "Đầu tư",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 406,
+                    question: "Tôi muốn đăng ký bảo hộ nhãn hiệu cho sản phẩm của doanh nghiệp. Hồ sơ đăng ký nhãn hiệu cần những gì? Thời gian thẩm định và chi phí ra sao?",
+                    answer: "Hồ sơ đăng ký nhãn hiệu bao gồm: (1) Tờ khai đăng ký (02 bản) theo mẫu 04-NH tại Thông tư 15/2016/TT-BKHCN; (2) Mẫu nhãn hiệu (05 bản, kích thước 8x8cm); (3) Chứng from nộp phí, lệ phí; (4) Giấy ủy quyền (nếu nộp qua tổ chức đại diện); (5) Tài liệu chứng minh quyền đăng ký (nếu nhãn hiệu có yếu tố nước ngoài). Thời gian thẩm định: 18-24 tháng kể from ngày nộp đơn hợp lệ. Chi phí: Từ 600.000đ - 2.400.000đ tùy số nhóm hàng hóa/dịch vụ đăng ký. Không bắt buộc thuê tổ chức đại diện sở hữu trí tuệ, nhưng khuyến khích nếu chủ đơn là cá nhân hoặc doanh nghiệp nước ngoài để đảm bảo quyền lợi.",
+                    date: "23/04/2026",
+                    field: "Sở hữu trí tuệ",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 407,
+                    question: "Công ty tôi có đơn hàng gấp cần tăng ca cho người lao động. Quy định về thời giờ làm việc thêm như thế nào? Có bị giới hạn số giờ làm thêm không?",
+                    answer: "Thời giờ làm việc thêm (làm thêm giờ) được quy định tại Điều 107 Bộ luật Lao động 2019: (1) Không vượt quá 50% số giờ làm việc bình thường trong 1 ngày (tức tối đa 4 giờ/ngày); (2) Không vượt quá 200 giờ/năm (một số trường hợp đặc biệt như dệt may, da giày, điện tử... tối đa 300 giờ/năm); (3) Phải được người lao động đồng ý bằng văn bản. Chế độ trả lương làm thêm giờ: Ngày thường: 150% lương; Ngày nghỉ hàng tuần: 200% lương; Ngày lễ, tết, ngày nghỉ có hưởng lương: 300% lương. Làm việc ban đêm còn được trả thêm 30% lương so with lương ngày. Người sử dụng lao động phải lập sổ theo dõi giờ làm thêm và thanh toán đầy đủ cho người lao động.",
+                    date: "22/04/2026",
+                    field: "Lao động",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 408,
+                    question: "Mức đóng bảo hiểm xã hội bắt buộc năm 2026 có thay đổi gì không? Tỷ lệ đóng cụ thể của người lao động và người sử dụng lao động là bao nhiêu?",
+                    answer: "Từ 01/01/2026, mức đóng BHXH bắt buộc: Người lao động đóng 10,5% (BHXH 8%, BHYT 1,5%, BHTN 1%); Người sử dụng lao động đóng 32% (BHXH 21,5%, BHYT 6%, BHTN 3%, KPCĐ 1,5%). Tổng cộng: 42,5% quỹ lương. Tiền lương làm căn cứ đóng BHXH là mức lương theo hợp đồng lao động, bao gồm: lương theo công việc, chức danh, phụ cấp lương (nếu có). Không bao gồm: tiền thưởng, tiền ăn giữa ca, hỗ trợ xăng xe, điện thoại, đi lại, nhà ở, tiền nuôi con, tiền chăm sóc người thân... Mức lương tối thiểu làm căn cứ đóng BHXH không được thấp hơn mức lương tối thiểu vùng do Chính phủ quy định.",
+                    date: "21/04/2026",
+                    field: "Bảo hiểm",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 409,
+                    question: "Công ty tôi hoạt động không hiệu quả, các thành viên muốn giải thể. Thủ tục giải thể doanh nghiệp cần những hồ sơ gì và cần thanh toán các khoản nợ như thế nào?",
+                    answer: "Hồ sơ giải thể doanh nghiệp bao gồm: (1) Giấy đề nghị giải thể theo mẫu tại Thông tư 01/2021/TT-BKHĐT; (2) Báo cáo tình hình hoạt động của doanh nghiệp; (3) Phương án giải quyết nợ và lao động (nếu có); (4) Biên bản thanh lý tài sản (nếu có); (5) Con dấu (nếu đã được cấp). Trước khi giải thể, doanh nghiệp phải: Thanh toán hết các khoản nợ (thuế, bảo hiểm, lương, nhà cung cấp...); Giải quyết quyền lợi người lao động (trợ cấp thôi việc, BHXH...); Thông báo công khai trên Cổng thông tin quốc gia về đăng ký doanh nghiệp ít nhất 07 ngày. Thời hạn giải quyết: 05 ngày làm việc kể from ngày nhận đủ hồ sơ hợp lệ. Sau giải thể, các thành viên công ty TNHH vẫn phải liên đới chịu trách nhiệm về các khoản nợ chưa thanh toán trong phạm vi vốn góp.",
+                    date: "20/04/2026",
+                    field: "Doanh nghiệp",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 410,
+                    question: "Tôi là luật sư và muốn mở văn phòng luật sư để cung cấp dịch vụ pháp lý. Điều kiện để được cấp giấy đăng ký hoạt động là gì? Cần bao nhiêu luật sư?",
+                    answer: "Điều kiện thành lập văn phòng luật sư: (1) Có ít nhất 02 luật sư là thành viên sáng lập hoặc tham gia (trong đó có Trưởng văn phòng); (2) Có trụ sở rõ ràng, hợp pháp (có hợp đồng thuê nhà hoặc giấy chứng nhận quyền sở hữu); (3) Có điều lệ hoạt động phù hợp với Luật Luật sư; (4) Được Sở Tư pháp cấp giấy đăng ký hoạt động. Hồ sơ xin cấp giấy đăng ký hoạt động: Đơn đề nghị, Điều lệ văn phòng luật sư, Danh sách luật sư thành viên kèm bản sao chứng chỉ hành nghề, Giấy tờ chứng minh trụ sở. Vốn pháp định: Không yêu cầu. Thời gian cấp giấy: 10-15 ngày làm việc. Lưu ý: Văn phòng luật sư không được tư vấn về hình sự nếu không có luật sư chuyên về hình sự trong thành viên.",
+                    date: "19/04/2026",
+                    field: "Doanh nghiệp",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 411,
+                    question: "Công ty tôi đang chuyển đổi sang sử dụng hóa đơn điện tử. Quy định về hóa đơn điện tử hiện nay như thế nào? Cần đăng ký với cơ quan thuế ra sao?",
+                    answer: "Quy định về hóa đơn điện tử theo Nghị định 123/2020/NĐ-CP: (1) Phải có chữ ký số của người bán và người mua; (2) Phải có mã của cơ quan thuế (trừ một số trường hợp đặc biệt như bán xăng dầu, điện, nước...); (3) Thể hiện đầy đủ nội dung giao dịch; (4) Được khởi tạo từ máy tính tiền đối with bán lẻ. Doanh nghiệp phải: Đăng ký sử dụng hóa đơn điện tử với cơ quan thuế trước khi phát hành (mẫu 01/ĐKTĐ-HĐĐT); Sử dụng phần mềm hóa đơn điện tử được Tổng cục Thuế chứng nhận; Lưu trữ hóa đơn tối thiểu 10 năm. Hóa đơn điện tử có giá trị pháp lý như hóa đơn giấy. Chi phí chuyển đổi: Phần mềm từ 2-10 triệu đồng/năm, chữ ký số từ 1-3 triệu đồng/năm.",
+                    date: "18/04/2026",
+                    field: "Thuế",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 412,
+                    question: "Công ty tôi vừa nhận được quyết định xử phạt vi phạm hành chính về thuế nhưng cho rằng quyết định này chưa đúng. Chúng tôi muốn khiếu nại thì cần làm gì?",
+                    answer: "Khiếu nại quyết định xử phạt vi phạm hành chính: (1) Gửi đơn khiếu nại đến người đã ra quyết định xử phạt hoặc cơ quan cấp trên trực tiếp; (2) Hoặc khởi kiện tại Tòa án theo Luật Tố tụng hành chính 2015. Thời hạn khiếu nại: 90 ngày kể from ngày nhận quyết định xử phạt. Nội dung đơn khiếu nại: Thông tin người khiếu nại, số quyết định bị khiếu nại, lý do và yêu cầu cụ thể (hủy quyết định, giảm mức phạt...). Trong thời hạn giải quyết khiếu nại, quyết định xử phạt vẫn có hiệu lực trừ khi có quyết định đình chỉ thi hành. Nếu khiếu nại lần đầu không được chấp nhận, có thể khiếu nại lần hai lên cấp trên của người giải quyết khiếu nại lần đầu hoặc khởi kiện ra Tòa án.",
+                    date: "17/04/2026",
+                    field: "Thuế",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 1413,
+                    question: "Công ty tôi muốn tuyển dụng một chuyên gia người Hàn Quốc. Điều kiện để được cấp giấy phép lao động cho người nước ngoài là gì? Hồ sơ cần những gì?",
+                    answer: "Điều kiện cấp giấy phép lao động cho người nước ngoài: (1) Đủ 18 tuổi trở lên; (2) Có trình độ chuyên môn, kỹ thuật, tay nghề cao (đại học trở lên hoặc có chứng chỉ nghề); (3) Có kinh nghiệm làm việc phù hợp (tối thiểu 3 năm); (4) Có lý lịch tư pháp rõ ràng (không án tích); (5) Đáp ứng yêu cầu sức khỏe (giấy khám sức khỏe); (6) Không thuộc trường hợp bị cấm nhập cảnh. Hồ sơ: Đơn đề nghị cấp giấy phép lao động (mẫu 11/PLI), Hộ chiếu còn hạn, Giấy khám sức khỏe, Lý lịch tư pháp, Văn bằng chứng chỉ, Hợp đồng lao động, Giấy xác nhận kinh nghiệm. Thời hạn: Tối đa 2 năm, có thể gia hạn. Người nước ngoài phải có thị thực lao động (LĐ) trước khi vào Việt Nam làm việc.",
+                    date: "16/04/2026",
+                    field: "Lao động",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 1414,
+                    question: "Trong hợp đồng xây dựng, bên A yêu cầu bên B phải có bảo lãnh thực hiện hợp đồng. Quy định về bảo lãnh này như thế nào? Giá trị bảo lãnh tối đa là bao nhiêu?",
+                    answer: "Bảo lãnh thực hiện hợp đồng: Bên bảo lãnh (thường là ngân hàng, tổ chức tín dụng) cam kết thực hiện nghĩa vụ tài chính thay for bên được bảo lãnh khi bên này vi phạm hợp đồng. Giá trị bảo lãnh: Thường từ 5-10% giá trị hợp đồng, có thể lên đến 15% tùy tính chất công trình (theo Luật Xây dựng 2014). Phí bảo lãnh: 1-3%/năm tùy mức độ rủi ro của dự án. Thời hạn bảo lãnh: Theo thỏa thuận, thường đến khi hoàn thành nghĩa vụ hợp đồng. Bên nhận bảo lãnh có quyền yêu cầu bên bảo lãnh thanh toán khi bên được bảo lãnh vi phạm, kèm theo chứng from vi phạm (biên bản, quyết định...). Bảo lãnh phải được lập thành văn bản và có chữ ký của ba bên: bên bảo lãnh, bên được bảo lãnh, bên nhận bảo lãnh.",
+                    date: "15/04/2026",
+                    field: "Hợp đồng",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 1415,
+                    question: "Công ty tôi vừa ký hợp đồng lao động with 10 nhân viên mới. Thủ tục đăng ký hợp đồng lao động with cơ quan BHXH như thế nào? Thời hạn đăng ký là bao lâu?",
+                    answer: "Thủ tục đăng ký hợp đồng lao động: Người sử dụng lao động phải đăng ký with cơ quan BHXH trong vòng 30 ngày kể from ngày ký kết hợp đồng lao động, theo Luật BHXH 2014. Hồ sơ: (1) Tờ khai tham gia BHXH (mẫu TK1-TS); (2) Danh sách người lao động tham gia BHXH (mẫu D02-TS); (3) Bản sao hợp đồng lao động; (4) Bản sao CMND/CCCD của người lao động. Nộp tại: Cơ quan BHXH quận/huyện nơi doanh nghiệp đặt trụ sở chính. Có thể nộp trực tiếp, qua bưu điện or trực tuyến qua Cổng dịch vụ công quốc gia. Nếu không đăng ký: Phạt từ 12-75 triệu đồng tùy số người và thời gian chậm đăng ký, theo Nghị định 12/2022/NĐ-CP. Ngoài ra còn bị truy thu BHXH, BHYT, BHTN và lãi chậm đóng.",
+                    date: "14/04/2026",
+                    field: "Bảo hiểm",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 1416,
+                    question: "Công ty tôi kinh doanh thương mại điện tử. Thuế suất thuế giá trị gia tăng áp dụng for dịch vụ này là bao nhiêu? Từ 01/7/2026 có thay đổi gì về thuế suất không?",
+                    answer: "Thuế suất thuế GTGT theo Luật Thuế GTGT 2008 (sửa đổi 2016): (1) 0%: Áp dụng for hàng hóa, dịch vụ xuất khẩu; (2) 5%: Hàng hóa, dịch vụ thiết yếu (nước sạch, phân bón, thuốc phòng bệnh, giáo dục, y tế...); (3) 8%: Một số mặt hàng from 01/7/2026 theo Nghị định 94/2025/NĐ-CP (xăng dầu, ô tô dưới 9 chỗ, dịch vụ lưu trú...); (4) 10%: Mức phổ thông áp dụng for các hàng hóa, dịch vụ còn lại. Đối with thương mại điện tử: Áp dụng mức 10% (trừ một số dịch vụ đặc thù như cung cấp nội dung số, phần mềm... có thể thuộc diện 5%). Hóa đơn xuất ra phải có chữ ký số, mã cơ quan thuế và được khởi tạo from hệ thống hóa đơn điện tử được chứng nhận.",
+                    date: "13/04/2026",
+                    field: "Thương mại",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 1417,
+                    question: "Công ty tôi muốn chấm dứt hợp đồng lao động with một nhân viên do tái cơ cấu. Quy định về chấm dứt hợp đồng lao động như thế nào? Cần báo before bao nhiêu ngày?",
+                    answer: "Chấm dứt hợp đồng lao động theo Điều 34, 36 Bộ luật Lao động 2019: (1) Hợp đồng không xác định thời hạn: Báo trước 45 ngày; (2) Hợp đồng xác định thời hạn: Báo trước 30 ngày; (3) Hợp đồng theo mùa vụ: Báo before 3 ngày làm việc. Trợ cấp thôi việc: 0,5 tháng lương for mỗi năm làm việc (đối with hợp đồng chấm dứt from 12 tháng trở lên). Điều kiện nhận trợ cấp: Người lao động đã làm việc thường xuyên from 12 tháng trở lên. Ngoài ra, người sử dụng lao động phải thanh toán đầy đủ lương, BHXH, phép năm chưa nghỉ hết trong vòng 14 ngày kể from ngày chấm dứt. Trường hợp chấm dứt do tái cơ cấu, doanh nghiệp phải xây dựng phương án sử dụng lao động và thông báo with công đoàn cơ sở.",
+                    date: "12/04/2026",
+                    field: "Lao động",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 1418,
+                    question: "Tôi vừa thành lập doanh nghiệp và cần đăng ký mã số thuế. Thủ tục đăng ký mã số thuế như thế nào? Cần nộp hồ sơ ở đâu và thời gian cấp là bao lâu?",
+                    answer: "Thủ tục đăng ký mã số thuế: Nộp hồ sơ tại Chi cục thuế nơi doanh nghiệp đặt trụ sở chính (có thể nộp trực tuyến qua Cổng thông tin điện tử của Tổng cục Thuế). Hồ sơ gồm: (1) Giấy đề nghị đăng ký thuế (mẫu 01-ĐK-TCT); (2) Bản sao Giấy chứng nhận đăng ký doanh nghiệp; (3) Bản sao CMND/CCCD/hộ chiếu của người đại diện pháp luật; (4) Giấy ủy quyền (nếu có). Thời gian cấp mã số thuế: 03 ngày làm việc kể from ngày nộp hồ sơ hợp lệ. Lệ phí: Miễn phí. Mã số thuế cũng chính là mã số doanh nghiệp (trên Giấy chứng nhận đăng ký doanh nghiệp). Sau khi có MST, doanh nghiệp phải kê khai và nộp thuế theo quy định, dù chưa phát sinh doanh thu.",
+                    date: "11/04/2026",
+                    field: "Thuế",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 1419,
+                    question: "Công ty tôi muốn mở rộng hoạt động sang tỉnh khác. Điều kiện thành lập văn phòng đại diện là gì? Hồ sơ cần những gì? Văn phòng đại diện có được ký hợp đồng không?",
+                    answer: "Điều kiện thành lập văn phòng đại diện: (1) Có quyết định thành lập VPĐD của doanh nghiệp; (2) Có người đứng đầu VPĐD (trưởng VPĐD) do doanh nghiệp bổ nhiệm; (3) Có trụ sở rõ ràng, hợp pháp (có hợp đồng thuê hoặc giấy sở hữu); (4) Đăng ký tại Sở KH&ĐT nơi đặt VPĐD. Hồ sơ: Thông báo thành lập VPĐD (mẫu tại Thông tư 01/2021/TT-BKHĐT), Quyết định thành lập, Giấy ủy quyền for trưởng VPĐD, Giấy tờ chứng minh trụ sở. Thời gian: 03 ngày làm việc. Lưu ý quan trọng: VPĐD chỉ được thực hiện chức năng đại diện, xúc tiến thương mại, tìm kiếm đối tác, không được ký hợp đồng kinh doanh, không được xuất hóa đơn, không được mở tài khoản ngân hàng độc lập. Mọi hợp đồng phải do trụ sở chính ký.",
+                    date: "10/04/2026",
+                    field: "Doanh nghiệp",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                },
+                {
+                    id: 1420,
+                    question: "Công ty tôi đang rà soát lại chính sách tiền lương. Quy định về tiền lương tối thiểu vùng from 01/7/2026 như thế nào? Tiền lương tối thiểu có bao gồm các khoản phụ cấp không?",
+                    answer: "Tiền lương tối thiểu vùng from 01/7/2026 theo Nghị định 38/2026/NĐ-CP: Vùng I (quận nội thành Hà Nội, TP.HCM): 4.960.000đ/tháng; Vùng II (quận ngoại thành, thị xã): 4.410.000đ/tháng; Vùng III (thành phố trực thuộc tỉnh): 3.860.000đ/tháng; Vùng IV (khu vực còn lại): 3.450.000đ/tháng. Tiền lương tối thiểu là mức lương thấp nhất trả for người lao động làm công việc giản đơn nhất trong điều kiện lao động bình thường, KHÔNG bao gồm: tiền thưởng, tiền ăn giữa ca, các khoản phụ cấp (xăng xe, điện thoại, nhà ở, đi lại, nuôi con, chăm sóc người thân...). Doanh nghiệp trả lương thấp hơn mức tối thiểu sẽ bị: Phạt from 5-10 triệu đồng/người vi phạm; Buộc thanh toán chênh lệch; Buộc nộp BHXH, BHYT, BHTN trên phần chênh lệch; Có thể bị truy cứu trách nhiệm hình sự nếu vi phạm nhiều lần.",
+                    date: "09/04/2026",
+                    field: "Lao động",
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "hoi-dap-phap-luat"
+                }
+            ];
+
+            const tuVanChuyenSauData = [
+                {
+                    id: 1501,
+                    title: "Tư vấn cơ cấu lại doanh nghiệp nhà nước theo Luật Doanh nghiệp 2025",
+                    content: "Quy trình cơ cấu lại doanh nghiệp nhà nước bao gồm: (1) Xây dựng phương án cơ cấu lại trình cơ quan có thẩm quyền phê duyệt; (2) Thực hiện kiểm kê, đánh giá lại tài sản; (3) Xử lý tài chính, lao động; (4) Chuyển đổi mô hình công ty (nếu có); (5) Công bố thông tin và đăng ký thay đổi. Lưu ý về xử lý lao động: Người lao động được đào tạo lại, bố trí việc làm mới hoặc nhận trợ cấp mất việc làm (1-2 tháng lương cho mỗi năm làm việc).",
+                    date: "28/04/2026",
+                    field: "Doanh nghiệp",
+                    advisor: "LS. Nguyễn Văn Minh",
+                    advisorComment: "Doanh nghiệp nên xây dựng phương án cơ cấu lại chi tiết trước khi trình cấp có thẩm quyền, đồng thời phối hợp với cơ quan lao động để xử lý chế độ cho người lao động.",
+                    attachments: [{ name: "Quy_trinh_co_cau_lai_DNNN.pdf", size: "2.4 MB" }],                    menuKey: "tu-van-phap-luat",
+                    subKey: "tu-van-chuyen-sau"
+                },
+                {
+                    id: 1502,
+                    title: "Hướng dẫn áp dụng ưu đãi thuế TNDN cho dự án đầu tư công nghệ cao",
+                    content: "Dự án đầu tư công nghệ cao được hưởng: Thuế suất 10% trong 15 năm; Miễn thuế 4 năm, giảm 50% trong 9 năm tiếp theo. Điều kiện: (1) Sản phẩm thuộc Danh mục sản phẩm công nghệ cao do Thủ tướng ban hành; (2) Có quyết định chấp thuận chủ trương đầu tư; (3) Tỷ lệ doanh thu từ sản phẩm công nghệ cao đạt tối thiểu 70% tổng doanh thu. Hồ sơ đề nghị hưởng ưu đãi nộp cho cơ quan thuế quản lý trực tiếp kèm Quyết định công nhận công nghệ cao.",
+                    date: "26/04/2026",
+                    field: "Thuế",
+                    advisor: "LS. Trần Thị Lan",
+                    advisorComment: "Tư vấn chi tiết bởi LS. Trần Thị Lan.",
+                    attachments: [],
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "tu-van-chuyen-sau"
+                },
+                {
+                    id: 1503,
+                    title: "Giải quyết tranh chấp hợp đồng thương mại quốc tế - Kinh nghiệm thực tiễn",
+                    content: "Khi xảy ra tranh chấp hợp đồng thương mại quốc tế, doanh nghiệp cần: (1) Xem xét kỹ điều khoản giải quyết tranh chấp (tòa án hay trọng tài); (2) Thu thập chứng from (hợp đồng, hóa đơn, biên bản, email...); (3) Gửi thông báo vi phạm và yêu cầu khắc phục; (4) Thương lượng, hòa giải trước khi khởi kiện. Nếu chọn trọng tài: Nộp đơn tại VIAC hoặc trọng tài nước ngoài theo thỏa thuận. Phán quyết trọng tài có giá trị chung thẩm và được công nhận, cho thi hành tại Việt Nam theo Công ước New York 1958.",
+                    date: "24/04/2026",
+                    field: "Thương mại",
+                    advisor: "LS. Phạm Quốc Hưng",
+                    advisorComment: "Nên chọn trọng tài thương mại (VIAC) thay vì Tòa án vì phán quyết dễ được công nhận ở nước ngoài theo Công ước New York 1958.",
+                    attachments: [{ name: "Mau_don_trong_tai_VIAC.docx", size: "156 KB" }],                    menuKey: "tu-van-phap-luat",
+                    subKey: "tu-van-chuyen-sau"
+                },
+                {
+                    id: 1504,
+                    title: "Tuân thủ quy định về bảo vệ dữ liệu cá nhân theo Nghị định 13/2023/NĐ-CP",
+                    content: "Doanh nghiệp xử lý data cá nhân phải: (1) Có chính sách bảo vệ data; (2) Được chủ thể data đồng ý (trừ trường hợp pháp luật quy định); (3) Đánh giá tác động bảo vệ data (DPIA) before khi xử lý; (4) Thông báo với Bộ Công an về hoạt động xử lý data; (5) Áp dụng biện pháp bảo mật kỹ thuật, tổ chức. Vi phạm có thể bị phạt đến 500 triệu đồng, đình chỉ hoạt động, hoặc truy cứu trách nhiệm hình sự theo Điều 159 BLHS.",
+                    date: "22/04/2026",
+                    field: "Công nghệ thông tin",
+                    advisor: "LS. Lê Hoàng Anh",
+                    advisorComment: "Tư vấn chi tiết bởi LS. Lê Hoàng Anh.",
+                    attachments: [],
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "tu-van-chuyen-sau"
+                },
+                {
+                    id: 1505,
+                    title: "Thủ tục đăng ký sáng chế, giải pháp hữu ích tại Việt Nam",
+                    content: "Hồ sơ đăng ký sáng chế: (1) Tờ khai (02 bản) theo mẫu 01-SC; (2) Bản mô tả + yêu cầu bảo hộ (02 bản); (3) Chứng from nộp phí; (4) Giấy ủy quyền (nếu có tổ chức đại diện). Thời gian thẩm định: 18 tháng (có thể gia hạn). Lệ phí: 150.000đ (nộp đơn) + 180.000đ (công bố) + 600.000đ (thẩm định)/nhóm sáng chế. Sáng chế được bảo hộ 20 năm, giải pháp hữu ích 10 năm. Khuyến khích thuê tổ chức đại diện sở hữu trí tuệ để soạn thảo bản mô tả đảm bảo phạm vi bảo hộ rộng.",
+                    date: "20/04/2026",
+                    field: "Sở hữu trí tuệ",
+                    advisor: "LS. Đỗ Thị Mai",
+                    advisorComment: "Nên tra cứu sơ bộ sáng chế trước khi nộp đơn và thuê tổ chức đại diện sở hữu trí tuệ để có phạm vi bảo hộ rộng.",
+                    attachments: [{ name: "Mau_to_khai_01-SC.pdf", size: "89 KB" }],                    menuKey: "tu-van-phap-luat",
+                    subKey: "tu-van-chuyen-sau"
+                },
+                {
+                    id: 1506,
+                    title: "Tư vấn M&A: Thẩm định pháp lý (Due Diligence) doanh nghiệp mục tiêu",
+                    content: "Quy trình thẩm định pháp lý M&A bao gồm: (1) Rà soát tư cách pháp lý, giấy phép kinh doanh; (2) Kiểm tra tài sản, bất động sản (quyền sở hữu, thế chấp, tranh chấp); (3) Xem xét hợp đồng quan trọng (khách hàng, nhà cung cấp, tín dụng); (4) Đánh giá nghĩa vụ thuế, BHXH; (5) Kiểm tra lao động, tranh chấp; (6) Sở hữu trí tuệ; (7) Tuân thủ pháp luật chuyên ngành. Kết quả thẩm định giúp định giá lại doanh nghiệp, điều chỉnh điều khoản hợp đồng M&A, và phân bổ rủi ro giữa các bên.",
+                    date: "18/04/2026",
+                    field: "Doanh nghiệp",
+                    advisor: "LS. Vũ Quang Huy",
+                    advisorComment: "Lưu ý các khoản nợ tiềm tàng, tài sản thế chấp chưa bộc lộ, và tranh chấp đang diễn ra khi thẩm định M&A.",
+                    attachments: [{ name: "Checklist_tham_dinh_M&A.xlsx", size: "245 KB" }],                    menuKey: "tu-van-phap-luat",
+                    subKey: "tu-van-chuyen-sau"
+                },
+                {
+                    id: 1507,
+                    title: "Giải quyết khiếu nại quyết định xử phạt vi phạm hành chính về môi trường",
+                    content: "Khi nhận quyết định xử phạt vi phạm môi trường, doanh nghiệp có thể: (1) Khiếu nại đến người ra quyết định xử phạt trong 90 ngày; (2) Hoặc khởi kiện tại Tòa án theo Luật Tố tụng hành chính. Trong thời hạn giải quyết, quyết định xử phạt vẫn có hiệu lực (trừ khi có quyết định đình chỉ). Lưu ý: Doanh nghiệp nên chủ động khắc phục hậu quả (cải tạo môi trường, nộp phí xử phạt) để được xem xét giảm nhẹ. Nếu khiếu nại không được chấp nhận, có thể khiếu nại lần hai lên cấp trên hoặc khởi kiện ra Tòa.",
+                    date: "16/04/2026",
+                    field: "Môi trường",
+                    advisor: "LS. Hoàng Thị Ngọc",
+                    advisorComment: "Tư vấn chi tiết bởi LS. Hoàng Thị Ngọc.",
+                    attachments: [],
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "tu-van-chuyen-sau"
+                },
+                {
+                    id: 1508,
+                    title: "Tư vấn phát hành cổ phiếu riêng lẻ theo Luật Chứng khoán 2025",
+                    content: "Điều kiện phát hành cổ phiếu riêng lẻ: (1) Công ty cổ phần đã hoạt động tối thiểu 1 năm; (2) Có phương án sử dụng vốn khả thi; (3) Đại hội đồng cổ đông thông qua; (4) Không đang bị xử phạt vi phạm pháp luật về chứng khoán. Đối tượng: Tối đa 100 nhà đầu tư, không bao gồm nhà đầu tư chứng khoán chuyên nghiệp. Hạn chế chuyển nhượng: Cổ phiếu phát hành riêng lẻ bị hạn chế chuyển nhượng trong 1 năm (trừ chuyển cho cổ đông hiện hữu, người thừa kế, hoặc nhà đầu tư chuyên nghiệp). Hồ sơ đăng ký với UBCKNN trong 5 ngày trước khi chào bán.",
+                    date: "14/04/2026",
+                    field: "Tài chính - Chứng khoán",
+                    advisor: "LS. Phan Đình Tùng",
+                    advisorComment: "Tư vấn chi tiết bởi LS. Phan Đình Tùng.",
+                    attachments: [],
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "tu-van-chuyen-sau"
+                },
+                {
+                    id: 1509,
+                    title: "Tuân thủ quy định về phòng chống rửa tiền trong giao dịch bất động sản",
+                    content: "Doanh nghiệp bất động sản phải: (1) Nhận diện, đánh giá rủi ro rửa tiền; (2) Biết khách hàng (KYC) - xác minh danh tính, nguồn gốc tài sản; (3) Báo cáo giao dịch đáng ngờ cho Cục Phòng chống rửa tiền (ngân hàng nhà nước); (4) Lưu trữ hồ sơ tối thiểu 5 năm; (5) Đào tạo nhân viên về phòng chống rửa tiền. Giao dịch đáng ngờ: Thanh toán bằng tiền mặt lớn, giao dịch không phù hợp with năng lực tài chính, sử dụng nhiều tài khoản trung gian. Vi phạm có thể bị phạt đến 500 triệu đồng và đình chỉ hoạt động.",
+                    date: "12/04/2026",
+                    field: "Bất động sản",
+                    advisor: "LS. Nguyễn Thị Thu Hà",
+                    advisorComment: "Xây dựng quy trình KYC nội bộ, đánh giá rủi ro theo nhóm khách hàng, đào tạo nhân viên nhận diện giao dịch đáng ngờ.",
+                    attachments: [{ name: "Quy_trinh_KYC_BDS.pdf", size: "890 KB" }],                    menuKey: "tu-van-phap-luat",
+                    subKey: "tu-van-chuyen-sau"
+                },
+                {
+                    id: 1510,
+                    title: "Tư vấn thành lập quỹ đầu tư tư nhân theo Luật Chứng khoán 2025",
+                    content: "Điều kiện thành lập quỹ đầu tư tư nhân: (1) Vốn điều lệ tối thiểu 50 tỷ đồng; (2) Công ty quản lý quỹ có vốn 25 tỷ đồng, nhân sự có chứng chỉ hành nghề; (3) Ngân hàng giám sát độc lập; (4) Điều lệ quỹ phù hợp. Đối tượng đầu tư: Tối đa 30 nhà đầu tư chuyên nghiệp. Hạn chế đầu tư: Không quá 10% NAV vào một tổ chức phát hành, không đầu tư vào bất động sản, cho vay. Ưu đãi: Miễn thuế TNDN từ hoạt động đầu tư, nhà đầu tư được miễn thuế TNCN from cổ tức, chuyển nhượng. Hồ sơ đăng ký với UBCKNN trong 30 ngày.",
+                    date: "10/04/2026",
+                    field: "Tài chính - Chứng khoán",
+                    advisor: "LS. Đặng Minh Tuấn",
+                    advisorComment: "Tư vấn chi tiết bởi LS. Đặng Minh Tuấn.",
+                    attachments: [],
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "tu-van-chuyen-sau"
+                },
+                {
+                    id: 1511,
+                    title: "Giải quyết tranh chấp lao động tập thể về quyền và lợi ích",
+                    content: "Tranh chấp lao động tập thể: (1) Về quyền (vi phạm thỏa ước, nội quy, luật): Hòa giải viên lao động → Trọng tài lao động hoặc Tòa án; (2) Về lợi ích (đòi hỏi quyền lợi mới): Hòa giải viên → Hội đồng trọng tài lao động. Đình công chỉ được thực hiện sau khi hòa giải không thành, có biểu quyết của trên 50% người lao động, và phải thông báo before 5 ngày. Cấm đình công trong trường hợp: Cung cấp điện, nước, xử lý chất thải, y tế, an ninh. Người sử dụng lao động không được trả đũa, sa thải người tham gia đình công hợp pháp.",
+                    date: "08/04/2026",
+                    field: "Lao động",
+                    advisor: "LS. Bùi Thị Hồng",
+                    advisorComment: "Tư vấn chi tiết bởi LS. Bùi Thị Hồng.",
+                    attachments: [],
+                    menuKey: "tu-van-phap-luat",
+                    subKey: "tu-van-chuyen-sau"
+                },
+                {
+                    id: 1512,
+                    title: "Tư vấn đăng ký lưu hành mỹ phẩm nhập khẩu theo Nghị định 93/2016/NĐ-CP",
+                    content: "Hồ sơ công bố mỹ phẩm nhập khẩu: (1) Phiếu công bố (02 bản); (2) Giấy ủy quyền của nhà sản xuất; (3) Giấy chứng nhận GMP (nếu có); (4) Giấy chứng nhận lưu hành tự do (CFS) hợp pháp hóa lãnh sự; (5) Bản sao giấy phép kinh doanh. Nộp trực tuyến qua Cổng dịch vụ công của Cục Quản lý Dược. Thời gian: 05 ngày làm việc. Lưu ý: Mỹ phẩm phải đáp ứng quy chuẩn kỹ thuật ASEAN, nhãn phụ tiếng Việt, và không chứa chất cấm (hydroquinone, corticoid, thủy ngân...). Vi phạm có thể bị thu hồi, phạt đến 200 triệu đồng.",
+                    date: "06/04/2026",
+                    field: "Thương mại",
+                    advisor: "LS. Võ Thị Thanh Thảo",
+                    advisorComment: "Yêu cầu nhà sản xuất cung cấp CFS, GMP, gửi mẫu kiểm nghiệm và đối chiếu thành phần với danh mục chất cấm ASEAN.",
+                    attachments: [{ name: "Danh_muc_chat_cam.pdf", size: "450 KB" }],                    menuKey: "tu-van-phap-luat",
+                    subKey: "tu-van-chuyen-sau"
+                }
+            ];
+
+            const advisorsData = [
+                {
+                    id: 1,
+                    name: "Nguyễn Văn Minh",
+                    field: "Tất cả",
+                    org: "Đoàn Luật sư Hà Nội",
+                    exp: "15 năm",
+                    phone: "0904.123.456",
+                    email: "nguyenminh@lawfirm.vn",
+                    province: "Hà Nội",
+                    diaChiLamViec: "Tầng 5, Tòa nhà Luật khoa, 35 Nguyễn Huệ, Quận 1, Hà Nội",
+                    chucDanh: "Trưởng phòng Tư vấn",
+                    trinhDo: "Tiến sĩ Luật học, Đại học Quốc gia Hà Nội (2008)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2009), Chứng chỉ Trọng tài viên VIAC (2012), Chứng chỉ Tư vấn đầu tư nước ngoài (2015)",
+                    kinhNghiem: "• Luật sư thành viên Đoàn Luật sư Hà Nội (2009 - nay)\n• Trưởng nhóm Tư vấn Doanh nghiệp - Công ty Luật ABC (2012-2018)\n• Tư vấn chính cho 50+ dự án FDI tổng vốn 500 triệu USD\n• Đại diện pháp lý cho 20+ doanh nghiệp trong các vụ tranh chấp thương mại",
+                    thanhTuu: "• Top 10 Luật sư xuất sắc Việt Nam 2020 (Asian Legal Business)\n• Tác giả cuốn 'Pháp luật Doanh nghiệp Việt Nam' (NXB Hồng Đức, 2019)\n• Giảng viên thỉnh giảng Đại học Luật Hà Nội",
+                    ghiChu: "Nhận tư vấn các vụ việc phức tạp về doanh nghiệp, đầu tư, M&A. Ưu tiên đặt lịch trước ít nhất 3 ngày.",
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+                    degree: "Tiến sĩ Luật học, Đại học Quốc gia Hà Nội (2008)",
+                    certificates: "Chứng chỉ Luật sư (2009), Chứng chỉ Trọng tài viên VIAC (2012), Chứng chỉ Tư vấn đầu tư nước ngoài (2015)",
+                    experience: "• Luật sư thành viên Đoàn Luật sư Hà Nội (2009 - nay)\n• Trưởng nhóm Tư vấn Doanh nghiệp - Công ty Luật ABC (2012-2018)\n• Tư vấn chính cho 50+ dự án FDI tổng vốn 500 triệu USD\n• Đại diện pháp lý cho 20+ doanh nghiệp trong các vụ tranh chấp thương mại",
+                    achievements: "• Top 10 Luật sư xuất sắc Việt Nam 2020 (Asian Legal Business)\n• Tác giả cuốn 'Pháp luật Doanh nghiệp Việt Nam' (NXB Hồng Đức, 2019)\n• Giảng viên thỉnh giảng Đại học Luật Hà Nội",
+                    rating: 4.8,
+                    reviews: [
+                        { author: "Công ty TNHH MTV Thương mại ABC", rating: 5, comment: "Luật sư Minh tư vấn rất chuyên nghiệp, giúp công ty chúng tôi giải quyết vướng mắc về thủ tục đầu tư nhanh chóng.", date: "15/03/2026" },
+                        { author: "Doanh nghiệp tư nhân XYZ", rating: 5, comment: "Rất am hiểu pháp luật doanh nghiệp, nhiệt tình và trách nhiệm. Đã hợp tác 3 năm và rất hài lòng.", date: "02/02/2026" },
+                        { author: "Công ty Cổ phần Đầu tư DEF", rating: 4, comment: "Tư vấn chính xác, phản hồi nhanh. Giá dịch vụ hợp lý so với chất lượng.", date: "18/01/2026" }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "Trần Thị Hương",
+                    field: "Lao động & BHXH",
+                    org: "Công ty Luật TNHH ABC",
+                    exp: "12 năm",
+                    phone: "0912.345.678",
+                    email: "tranhuong@abclaw.vn",
+                    province: "Hà Nội",
+                    diaChiLamViec: "123 Nguyễn Huệ, Quận 1, Hà Nội",
+                    chucDanh: "Phó phòng Tư vấn",
+                    trinhDo: "Thạc sĩ Luật Lao động, Đại học Luật Hà Nội (2012)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2013), Chứng chỉ Hòa giải viên Lao động (2014), Chứng chỉ An toàn vệ sinh lao động (2018)",
+                    kinhNghiem: "• Luật sư Công ty Luật ABC (2013 - nay)\n• Tư vấn chính sách nhân sự cho 100+ doanh nghiệp\n• Đại diện doanh nghiệp trong 30+ vụ tranh chấp lao động\n• Đào tạo nội bộ về Luật Lao động cho các tập đoàn lớn",
+                    thanhTuu: "• Chuyên gia tư vấn chính sách lao động cho Bộ LĐ-TBXH (2018-2020)\n• Tác giả nhiều bài viết trên Tạp chí Luật sư\n• Chứng nhận 'Luật sư tiêu biểu vì người lao động' 2021",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
+                    degree: "Thạc sĩ Luật Lao động, Đại học Luật Hà Nội (2012)",
+                    certificates: "Chứng chỉ Luật sư (2013), Chứng chỉ Hòa giải viên Lao động (2014), Chứng chỉ An toàn vệ sinh lao động (2018)",
+                    experience: "• Luật sư Công ty Luật ABC (2013 - nay)\n• Tư vấn chính sách nhân sự cho 100+ doanh nghiệp\n• Đại diện doanh nghiệp trong 30+ vụ tranh chấp lao động\n• Đào tạo nội bộ về Luật Lao động cho các tập đoàn lớn",
+                    achievements: "• Chuyên gia tư vấn chính sách lao động cho Bộ LĐ-TBXH (2018-2020)\n• Tác giả nhiều bài viết trên Tạp chí Luật sư\n• Chứng nhận 'Luật sư tiêu biểu vì người lao động' 2021",
+                    rating: 4.7,
+                    reviews: [
+                        { author: "Công ty Dệt may Hà Nội", rating: 5, comment: "Luật sư Hương am hiểu sâu về luật lao động, giúp công ty xây dựng bộ quy chế nhân sự hoàn chỉnh.", date: "20/03/2026" },
+                        { author: "Doanh nghiệp GHI", rating: 4, comment: "Tư vấn nhiệt tình, giải đáp thỏa đáng các vướng mắc về BHXH.", date: "10/02/2026" }
+                    ]
+                },
+                {
+                    id: 3,
+                    name: "Lê Hoàng Nam",
+                    field: "Thuế & Kế toán",
+                    org: "Đoàn Luật sư TP.HCM",
+                    exp: "18 năm",
+                    phone: "0903.456.789",
+                    email: "lenam@taxlaw.vn",
+                    province: "TP. Hồ Chí Minh",
+                    diaChiLamViec: "Tầng 10, Tòa nhà Saigon Tower, 29 Lê Duẩn, Quận 1, TP. Hồ Chí Minh",
+                    chucDanh: "Luật sư cao cấp",
+                    trinhDo: "Cử nhân Luật, Đại học Kinh tế TP.HCM (2006); Chứng chỉ Kế toán trưởng (2008)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2007), Chứng chỉ Kiểm toán viên (2010), Chứng chỉ Tư vấn Thuế (2011)",
+                    kinhNghiem: "• Luật sư độc lập (2010 - nay)\n• Nguyên Kiểm toán viên cao cấp - Công ty Kiểm toán Big 4 (2008-2010)\n• Tư vấn thuế cho 200+ doanh nghiệp FDI và trong nước\n• Đại diện doanh nghiệp làm việc với cơ quan thuế trong 50+ cuộc thanh tra",
+                    thanhTuu: "• Thành viên Hiệp hội Tư vấn Thuế Việt Nam\n• Diễn giả thường xuyên tại các hội thảo về Thuế\n• Tác giả cuốn 'Hỏi đáp về Thuế GTGT và Thuế TNDN'",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80",
+                    degree: "Cử nhân Luật, Đại học Kinh tế TP.HCM (2006); Chứng chỉ Kế toán trưởng (2008)",
+                    certificates: "Chứng chỉ Luật sư (2007), Chứng chỉ Kiểm toán viên (2010), Chứng chỉ Tư vấn Thuế (2011)",
+                    experience: "• Luật sư độc lập (2010 - nay)\n• Nguyên Kiểm toán viên cao cấp - Công ty Kiểm toán Big 4 (2008-2010)\n• Tư vấn thuế cho 200+ doanh nghiệp FDI và trong nước\n• Đại diện doanh nghiệp làm việc với cơ quan thuế trong 50+ cuộc thanh tra",
+                    achievements: "• Thành viên Hiệp hội Tư vấn Thuế Việt Nam\n• Diễn giả thường xuyên tại các hội thảo về Thuế\n• Tác giả cuốn 'Hỏi đáp về Thuế GTGT và Thuế TNDN'",
+                    rating: 4.9,
+                    reviews: [
+                        { author: "Công ty TNHH MTV ABC", rating: 5, comment: "Luật sư Nam có kiến thức sâu về thuế, giúp công ty tối ưu nghĩa vụ thuế hợp pháp và tránh được rủi ro khi quyết toán.", date: "25/03/2026" },
+                        { author: "Tập đoàn XYZ", rating: 5, comment: "Chuyên môn cao, kinh nghiệm thực tế phong phú. Đã đồng hành cùng tập đoàn trong nhiều năm.", date: "12/02/2026" }
+                    ]
+                },
+                {
+                    id: 4,
+                    name: "Phạm Thị Mai",
+                    field: "Sở hữu trí tuệ",
+                    org: "Công ty Luật TNHH XYZ",
+                    exp: "10 năm",
+                    phone: "0913.567.890",
+                    email: "phammai@xyzlaw.vn",
+                    province: "TP. Hồ Chí Minh",
+                    diaChiLamViec: "Tầng 8, Tòa nhà Sunwah, 115 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh",
+                    chucDanh: "Trưởng nhóm Sở hữu trí tuệ",
+                    trinhDo: "Thạc sĩ Luật Sở hữu trí tuệ, Đại học Quốc gia TP.HCM (2014)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2015), Chứng chỉ Đại diện Sở hữu trí tuệ (2016), Chứng chỉ Trọng tài viên (2019)",
+                    kinhNghiem: "• Luật sư Công ty Luật XYZ (2015 - nay)\n• Đăng ký thành công 500+ nhãn hiệu, sáng chế, kiểu dáng\n• Tư vấn chiến lược bảo hộ IP cho các startup công nghệ\n• Đại diện khách hàng trong các vụ kiện xâm phạm quyền SHTT",
+                    thanhTuu: "• Thành viên Hiệp hội Sở hữu Trí tuệ Việt Nam\n• Đơn vị tư vấn được Cục SHTT đánh giá cao\n• Giải thưởng 'Công ty Luật xuất sắc về SHTT' 2022",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80",
+                    degree: "Thạc sĩ Luật Sở hữu trí tuệ, Đại học Quốc gia TP.HCM (2014)",
+                    certificates: "Chứng chỉ Luật sư (2015), Chứng chỉ Đại diện Sở hữu trí tuệ (2016), Chứng chỉ Trọng tài viên (2019)",
+                    experience: "• Luật sư Công ty Luật XYZ (2015 - nay)\n• Đăng ký thành công 500+ nhãn hiệu, sáng chế, kiểu dáng\n• Tư vấn chiến lược bảo hộ IP cho các startup công nghệ\n• Đại diện khách hàng trong các vụ kiện xâm phạm quyền SHTT",
+                    achievements: "• Thành viên Hiệp hội Sở hữu Trí tuệ Việt Nam\n• Đơn vị tư vấn được Cục SHTT đánh giá cao\n• Giải thưởng 'Công ty Luật xuất sắc về SHTT' 2022",
+                    rating: 4.6,
+                    reviews: [
+                        { author: "Công ty Công nghệ ABC", rating: 5, comment: "Luật sư Mai tư vấn rất tận tâm, giúp công ty đăng ký thành công nhãn hiệu ở nhiều quốc gia.", date: "18/03/2026" },
+                        { author: "Startup XYZ", rating: 4, comment: "Chuyên môn tốt, phản hồi nhanh. Giá cả hợp lý cho startup.", date: "05/02/2026" }
+                    ]
+                },
+                {
+                    id: 5,
+                    name: "Đỗ Tuấn Anh",
+                    field: "Xây dựng & BĐS",
+                    org: "Đoàn Luật sư Đà Nẵng",
+                    exp: "14 năm",
+                    phone: "0905.678.901",
+                    email: "doanh@constructionlaw.vn",
+                    province: "Đà Nẵng",
+                    diaChiLamViec: "Số 45 Trần Phú, Quận Hải Châu, Đà Nẵng",
+                    chucDanh: "Luật sư cao cấp",
+                    trinhDo: "Kỹ sư Xây dựng + Cử nhân Luật, Đại học Bách khoa & Đại học Luật (2008)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2009), Chứng chỉ Đấu thầu qua mạng (2017), Chứng chỉ Quản lý dự án (2018)",
+                    kinhNghiem: "• Luật sư Đoàn Luật sư Đà Nẵng (2009 - nay)\n• Tư vấn pháp lý cho 30+ dự án BĐS tổng vốn 2.000 tỷ\n• Soạn thảo, đàm phán 100+ hợp đồng xây dựng\n• Giải quyết tranh chấp hợp đồng EPC, hợp đồng thi công",
+                    thanhTuu: "• Tư vấn pháp lý cho dự án Khu đô thị ABC (50ha)\n• Thành viên Hiệp hội BĐS Việt Nam\n• Diễn giả tại Hội thảo Luật Xây dựng 2021",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
+                    degree: "Kỹ sư Xây dựng + Cử nhân Luật, Đại học Bách khoa & Đại học Luật (2008)",
+                    certificates: "Chứng chỉ Luật sư (2009), Chứng chỉ Đấu thầu qua mạng (2017), Chứng chỉ Quản lý dự án (2018)",
+                    experience: "• Luật sư Đoàn Luật sư Đà Nẵng (2009 - nay)\n• Tư vấn pháp lý cho 30+ dự án BĐS tổng vốn 2.000 tỷ\n• Soạn thảo, đàm phán 100+ hợp đồng xây dựng\n• Giải quyết tranh chấp hợp đồng EPC, hợp đồng thi công",
+                    achievements: "• Tư vấn pháp lý cho dự án Khu đô thị ABC (50ha)\n• Thành viên Hiệp hội BĐS Việt Nam\n• Diễn giả tại Hội thảo Luật Xây dựng 2021",
+                    rating: 4.5,
+                    reviews: [
+                        { author: "Công ty BĐS DEF", rating: 5, comment: "Luật sư Anh am hiểu cả kỹ thuật và pháp lý, tư vấn rất thực tế cho dự án của công ty.", date: "22/03/2026" },
+                        { author: "Nhà thầu GHI", rating: 4, comment: "Hỗ trợ tốt trong đàm phán hợp đồng, giúp bên mình tránh được nhiều rủi ro.", date: "08/02/2026" }
+                    ]
+                },
+                {
+                    id: 6,
+                    name: "Vũ Thị Lan",
+                    field: "Hôn nhân & Gia đình",
+                    org: "Công ty Luật TNHH DEF",
+                    exp: "11 năm",
+                    phone: "0914.789.012",
+                    email: "vulan@deflaw.vn",
+                    province: "Hà Nội",
+                    diaChiLamViec: "Tầng 3, Tòa nhà Detech, 8 Tôn Thất Thuyết, Hà Nội",
+                    chucDanh: "Phó phòng Tư vấn",
+                    trinhDo: "Cử nhân Luật, Đại học Luật Hà Nội (2013)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2014), Chứng chỉ Hòa giải viên (2015), Chứng chỉ Tư vấn tâm lý hôn nhân (2018)",
+                    kinhNghiem: "• Luật sư Công ty Luật DEF (2014 - nay)\n• Tư vấn, hòa giải 200+ vụ việc hôn nhân gia đình\n• Soạn thảo 100+ hợp đồng tiền hôn nhân, thỏa thuận ly hôn\n• Đại diện bảo vệ quyền lợi phụ nữ, trẻ em trong các vụ ly hôn",
+                    thanhTuu: "• Giải thưởng 'Luật sư vì cộng đồng' 2020\n• Tình nguyện viên tư vấn pháp lý miễn phí cho phụ nữ\n• Tác giả cuốn 'Hỏi đáp pháp luật Hôn nhân & Gia đình'",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
+                    degree: "Cử nhân Luật, Đại học Luật Hà Nội (2013)",
+                    certificates: "Chứng chỉ Luật sư (2014), Chứng chỉ Hòa giải viên (2015), Chứng chỉ Tư vấn tâm lý hôn nhân (2018)",
+                    experience: "• Luật sư Công ty Luật DEF (2014 - nay)\n• Tư vấn, hòa giải 200+ vụ việc hôn nhân gia đình\n• Soạn thảo 100+ hợp đồng tiền hôn nhân, thỏa thuận ly hôn\n• Đại diện bảo vệ quyền lợi phụ nữ, trẻ em trong các vụ ly hôn",
+                    achievements: "• Giải thưởng 'Luật sư vì cộng đồng' 2020\n• Tình nguyện viên tư vấn pháp lý miễn phí cho phụ nữ\n• Tác giả cuốn 'Hỏi đáp pháp luật Hôn nhân & Gia đình'",
+                    rating: 4.8,
+                    reviews: [
+                        { author: "Chị N.T.H (Hà Nội)", rating: 5, comment: "Luật sư Lan rất tâm lý, kiên nhẫn lắng nghe và tư vấn tận tình. Giúp tôi vượt qua giai đoạn khó khăn.", date: "28/03/2026" },
+                        { author: "Anh T.V.A (TP.HCM)", rating: 5, comment: "Chuyên môn vững, xử lý tình huống khéo léo. Cảm ơn luật sư rất nhiều.", date: "15/02/2026" }
+                    ]
+                },
+                {
+                    id: 7,
+                    name: "Hoàng Văn Đức",
+                    field: "Hình sự & Tố tụng",
+                    org: "Đoàn Luật sư Hà Nội",
+                    exp: "20 năm",
+                    phone: "0906.890.123",
+                    email: "hoangduc@criminallaw.vn",
+                    province: "Hà Nội",
+                    diaChiLamViec: "Tầng 7, Tòa nhà Sông Đà, 1067 Giải Phóng, Hà Nội",
+                    chucDanh: "Luật sư cao cấp",
+                    trinhDo: "Tiến sĩ Luật Hình sự, Học viện Khoa học Xã hội (2010)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2005), Chứng chỉ Bào chữa viên (2006), Chứng chỉ Trọng tài viên VIAC (2012)",
+                    kinhNghiem: "• Luật sư Đoàn Luật sư Hà Nội (2005 - nay)\n• Nguyên Kiểm sát viên (1998-2005)\n• Bào chữa cho 100+ vụ án hình sự các loại\n• Tư vấn phòng ngừa rủi ro pháp lý cho doanh nghiệp",
+                    thanhTuu: "• Luật sư uy tín nhất trong lĩnh vực Hình sự (Legal 500, 2021)\n• Tác giả 5 cuốn sách về Luật Hình sự\n• Giảng viên cao cấp Học viện Tư pháp",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80",
+                    degree: "Tiến sĩ Luật Hình sự, Học viện Khoa học Xã hội (2010)",
+                    certificates: "Chứng chỉ Luật sư (2005), Chứng chỉ Bào chữa viên (2006), Chứng chỉ Trọng tài viên VIAC (2012)",
+                    experience: "• Luật sư Đoàn Luật sư Hà Nội (2005 - nay)\n• Nguyên Kiểm sát viên (1998-2005)\n• Bào chữa cho 100+ vụ án hình sự các loại\n• Tư vấn phòng ngừa rủi ro pháp lý cho doanh nghiệp",
+                    achievements: "• Luật sư uy tín nhất trong lĩnh vực Hình sự (Legal 500, 2021)\n• Tác giả 5 cuốn sách về Luật Hình sự\n• Giảng viên cao cấp Học viện Tư pháp",
+                    rating: 4.9,
+                    reviews: [
+                        { author: "Doanh nghiệp ABC", rating: 5, comment: "Luật sư Đức có kinh nghiệm dày dặn, giúp công ty phòng ngừa được nhiều rủi ro pháp lý nghiêm trọng.", date: "30/03/2026" },
+                        { author: "Khách hàng T.", rating: 5, comment: "Rất cảm ơn luật sư đã bảo vệ quyền lợi tốt nhất cho tôi trong vụ án. Professional!", date: "18/02/2026" }
+                    ]
+                },
+                {
+                    id: 8,
+                    name: "Nguyễn Thị Hoa",
+                    field: "Thương mại & Xuất nhập khẩu",
+                    org: "Công ty Luật TNHH GHI",
+                    exp: "13 năm",
+                    phone: "0915.901.234",
+                    email: "nguyenhoa@ghilaw.vn",
+                    province: "TP. Hồ Chí Minh",
+                    diaChiLamViec: "Tầng 12, Tòa nhà Bitexco, 2 Hải Triều, Quận 1, TP. Hồ Chí Minh",
+                    chucDanh: "Trưởng phòng Thương mại",
+                    trinhDo: "Thạc sĩ Luật Thương mại Quốc tế, Đại học Ngoại thương (2011)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2012), Chứng chỉ Incoterms 2020, Chứng chỉ Thanh toán quốc tế (2015)",
+                    kinhNghiem: "• Luật sư Công ty Luật GHI (2012 - nay)\n• Tư vấn cho 150+ doanh nghiệp xuất nhập khẩu\n• Soạn thảo, đàm phán 200+ hợp đồng thương mại quốc tế\n• Giải quyết tranh chấp hợp đồng, khiếu nại với đối tác nước ngoài",
+                    thanhTuu: "• Thành viên Hiệp hội Luật sư Quốc tế (IBA)\n• Chuyên gia tư vấn FTA cho VCCI\n• Diễn giả tại các hội thảo về thương mại quốc tế",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+                    degree: "Thạc sĩ Luật Thương mại Quốc tế, Đại học Ngoại thương (2011)",
+                    certificates: "Chứng chỉ Luật sư (2012), Chứng chỉ Incoterms 2020, Chứng chỉ Thanh toán quốc tế (2015)",
+                    experience: "• Luật sư Công ty Luật GHI (2012 - nay)\n• Tư vấn cho 150+ doanh nghiệp xuất nhập khẩu\n• Soạn thảo, đàm phán 200+ hợp đồng thương mại quốc tế\n• Giải quyết tranh chấp hợp đồng, khiếu nại với đối tác nước ngoài",
+                    achievements: "• Thành viên Hiệp hội Luật sư Quốc tế (IBA)\n• Chuyên gia tư vấn FTA cho VCCI\n• Diễn giả tại các hội thảo về thương mại quốc tế",
+                    rating: 4.7,
+                    reviews: [
+                        { author: "Công ty Xuất nhập khẩu ABC", rating: 5, comment: "Luật sư Hoa am hiểu sâu về thương mại quốc tế, giúp công ty xử lý thành công vụ tranh chấp với đối tác Hàn Quốc.", date: "26/03/2026" },
+                        { author: "Doanh nghiệp XYZ", rating: 4, comment: "Tư vấn chính xác, nhiệt tình. Hỗ trợ tốt cho các doanh nghiệp vừa và nhỏ.", date: "12/02/2026" }
+                    ]
+                },
+                {
+                    id: 9,
+                    name: "Đinh Quang Huy",
+                    field: "Môi trường & Năng lượng",
+                    org: "Công ty Luật TNHH Môi Pháp",
+                    exp: "9 năm",
+                    phone: "0916.012.345",
+                    email: "dinhhuy@moitruonglaw.vn",
+                    province: "Hà Nội",
+                    diaChiLamViec: "Tầng 5, Tòa nhà Green Tower, 144 Lê Duẩn, Hà Nội",
+                    chucDanh: "Chuyên viên cao cấp",
+                    trinhDo: "Thạc sĩ Luật Môi trường, Đại học Quốc gia Hà Nội (2015)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2016), Chứng chỉ Đánh giá tác động môi trường (2017), Chứng chỉ Năng lượng tái tạo (2019)",
+                    kinhNghiem: "• Luật sư Công ty Luật Môi Pháp (2016 - nay)\n• Tư vấn ĐTM cho 80+ dự án công nghiệp\n• Đại diện pháp lý trong các vụ việc ô nhiễm môi trường\n• Tư vấn compliance môi trường cho doanh nghiệp FDI",
+                    thanhTuu: "• Thành viên Mạng lưới Luật sư Môi trường ASEAN\n• Tư vấn cho dự án điện gió Bạc Liêu (300MW)\n• Tác giả 'Cẩm nang pháp luật Môi trường cho doanh nghiệp'",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+                    degree: "Thạc sĩ Luật Môi trường, Đại học Quốc gia Hà Nội (2015)",
+                    certificates: "Chứng chỉ Luật sư (2016), Chứng chỉ Đánh giá tác động môi trường (2017), Chứng chỉ Năng lượng tái tạo (2019)",
+                    experience: "• Luật sư Công ty Luật Môi Pháp (2016 - nay)\n• Tư vấn ĐTM cho 80+ dự án công nghiệp\n• Đại diện pháp lý trong các vụ việc ô nhiễm môi trường\n• Tư vấn compliance môi trường cho doanh nghiệp FDI",
+                    achievements: "• Thành viên Mạng lưới Luật sư Môi trường ASEAN\n• Tư vấn cho dự án điện gió Bạc Liêu (300MW)\n• Tác giả 'Cẩm nang pháp luật Môi trường cho doanh nghiệp'",
+                    rating: 4.6,
+                    reviews: [
+                        { author: "Công ty Năng lượng Xanh", rating: 5, comment: "Luật sư Huy am hiểu sâu về pháp luật môi trường, giúp dự án của chúng tôi được phê duyệt nhanh chóng.", date: "10/03/2026" },
+                        { author: "Nhà máy Giấy ABC", rating: 4, comment: "Tư vấn tận tình, hỗ trợ tốt trong việc đáp ứng các yêu cầu về môi trường.", date: "22/01/2026" }
+                    ]
+                },
+                {
+                    id: 10,
+                    name: "Bùi Thị Hạnh",
+                    field: "Giáo dục & Đào tạo",
+                    org: "Đoàn Luật sư TP.HCM",
+                    exp: "8 năm",
+                    phone: "0917.123.456",
+                    email: "buoihanh@edulaw.vn",
+                    province: "TP. Hồ Chí Minh",
+                    diaChiLamViec: "Tầng 6, Tòa nhà Pearl Plaza, 561A Điện Biên Phủ, Quận Bình Thạnh, TP. Hồ Chí Minh",
+                    chucDanh: "Chuyên viên Tư vấn",
+                    trinhDo: "Cử nhân Luật + Cử nhân Sư phạm, Đại học Luật TP.HCM (2014)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2015), Chứng chỉ Quản lý giáo dục (2017), Chứng chỉ Tư vấn du học (2018)",
+                    kinhNghiem: "• Luật sư Đoàn Luật sư TP.HCM (2015 - nay)\n• Tư vấn thành lập 50+ cơ sở giáo dục\n• Soạn thảo hợp đồng liên kết đào tạo quốc tế\n• Giải quyết tranh chấp trong lĩnh vực giáo dục",
+                    thanhTuu: "• Tư vấn pháp lý cho 10+ trường quốc tế tại Việt Nam\n• Thành viên Hiệp hội Giáo dục Việt Nam\n• Diễn giả tại Hội thảo Luật Giáo dục 2019",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
+                    degree: "Cử nhân Luật + Cử nhân Sư phạm, Đại học Luật TP.HCM (2014)",
+                    certificates: "Chứng chỉ Luật sư (2015), Chứng chỉ Quản lý giáo dục (2017), Chứng chỉ Tư vấn du học (2018)",
+                    experience: "• Luật sư Đoàn Luật sư TP.HCM (2015 - nay)\n• Tư vấn thành lập 50+ cơ sở giáo dục\n• Soạn thảo hợp đồng liên kết đào tạo quốc tế\n• Giải quyết tranh chấp trong lĩnh vực giáo dục",
+                    achievements: "• Tư vấn pháp lý cho 10+ trường quốc tế tại Việt Nam\n• Thành viên Hiệp hội Giáo dục Việt Nam\n• Diễn giả tại Hội thảo Luật Giáo dục 2019",
+                    rating: 4.5,
+                    reviews: [
+                        { author: "Trường Quốc tế ABC", rating: 5, comment: "Luật sư Hạnh hỗ trợ rất tốt trong việc xin giấy phép hoạt động và tuyển sinh.", date: "05/03/2026" },
+                        { author: "Trung tâm Anh ngữ XYZ", rating: 4, comment: "Chuyên môn tốt, nhiệt tình. Giúp trung tâm hoàn thiện hồ sơ pháp lý đúng quy định.", date: "18/01/2026" }
+                    ]
+                },
+                {
+                    id: 11,
+                    name: "Cao Văn Khải",
+                    field: "Ngân hàng & Tài chính",
+                    org: "Công ty Luật TNHH FinanceLaw",
+                    exp: "16 năm",
+                    phone: "0918.234.567",
+                    email: "caokhai@financelaw.vn",
+                    province: "TP. Hồ Chí Minh",
+                    diaChiLamViec: "Tầng 18, Tòa nhà Vincom Center, 72 Lê Thánh Tôn, Quận 1, TP. Hồ Chí Minh",
+                    chucDanh: "Trưởng phòng Ngân hàng",
+                    trinhDo: "Thạc sĩ Luật Kinh tế, Đại học Kinh tế TP.HCM (2008); MBA (2012)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2009), Chứng chỉ Phân tích tín dụng (2011), Chứng chỉ Tuân thủ ngân hàng (2014)",
+                    kinhNghiem: "• Luật sư FinanceLaw (2012 - nay)\n• Nguyên Trưởng phòng Pháp chế Ngân hàng Vietcombank\n• Tư vấn cho 100+ giao dịch tín dụng, bảo lãnh\n• Đại diện ngân hàng trong các vụ kiện đòi nợ",
+                    thanhTuu: "• Thành viên Hiệp hội Ngân hàng Việt Nam (VNBA)\n• Tư vấn pháp lý cho thương vụ M&A ngân hàng trị giá 500 triệu USD\n• Giảng viên thỉnh giảng Đại học Kinh tế TP.HCM",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80",
+                    degree: "Thạc sĩ Luật Kinh tế, Đại học Kinh tế TP.HCM (2008); MBA (2012)",
+                    certificates: "Chứng chỉ Luật sư (2009), Chứng chỉ Phân tích tín dụng (2011), Chứng chỉ Tuân thủ ngân hàng (2014)",
+                    experience: "• Luật sư FinanceLaw (2012 - nay)\n• Nguyên Trưởng phòng Pháp chế Ngân hàng Vietcombank\n• Tư vấn cho 100+ giao dịch tín dụng, bảo lãnh\n• Đại diện ngân hàng trong các vụ kiện đòi nợ",
+                    achievements: "• Thành viên Hiệp hội Ngân hàng Việt Nam (VNBA)\n• Tư vấn pháp lý cho thương vụ M&A ngân hàng trị giá 500 triệu USD\n• Giảng viên thỉnh giảng Đại học Kinh tế TP.HCM",
+                    rating: 4.8,
+                    reviews: [
+                        { author: "Ngân hàng TMCP ABC", rating: 5, comment: "Luật sư Khải có kiến thức sâu về ngân hàng, hỗ trợ rất tốt trong các giao dịch phức tạp.", date: "28/03/2026" },
+                        { author: "Công ty Tài chính XYZ", rating: 5, comment: "Chuyên môn vững, kinh nghiệm thực tế cao. Đáng tin cậy.", date: "14/02/2026" }
+                    ]
+                },
+                {
+                    id: 12,
+                    name: "Đặng Thị Quỳnh",
+                    field: "Y tế & Dược",
+                    org: "Công ty Luật TNHH MedLaw",
+                    exp: "11 năm",
+                    phone: "0919.345.678",
+                    email: "dangquynh@medlaw.vn",
+                    province: "Hà Nội",
+                    diaChiLamViec: "Tầng 4, Tòa nhà MEDLATEC, 42-44 Nghĩa Dũng, Ba Đình, Hà Nội",
+                    chucDanh: "Chuyên viên Y tế",
+                    trinhDo: "Bác sĩ Đa khoa + Cử nhân Luật, Đại học Y Hà Nội (2010)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2014), Chứng chỉ Quản lý chất lượng bệnh viện (2016), Chứng chỉ Đạo đức y sinh (2018)",
+                    kinhNghiem: "• Luật sư MedLaw (2014 - nay)\n• Tư vấn thành lập 30+ cơ sở y tế\n• Giải quyết 50+ vụ việc sai sót y khoa\n• Tư vấn đăng ký lưu hành thuốc, thiết bị y tế",
+                    thanhTuu: "• Thành viên Hiệp hội Luật Y tế Việt Nam\n• Tư vấn pháp lý cho dự án bệnh viện quốc tế 200 giường\n• Tác giả 'Pháp luật trong hoạt động khám chữa bệnh'",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80",
+                    degree: "Bác sĩ Đa khoa + Cử nhân Luật, Đại học Y Hà Nội (2010)",
+                    certificates: "Chứng chỉ Luật sư (2014), Chứng chỉ Quản lý chất lượng bệnh viện (2016), Chứng chỉ Đạo đức y sinh (2018)",
+                    experience: "• Luật sư MedLaw (2014 - nay)\n• Tư vấn thành lập 30+ cơ sở y tế\n• Giải quyết 50+ vụ việc sai sót y khoa\n• Tư vấn đăng ký lưu hành thuốc, thiết bị y tế",
+                    achievements: "• Thành viên Hiệp hội Luật Y tế Việt Nam\n• Tư vấn pháp lý cho dự án bệnh viện quốc tế 200 giường\n• Tác giả 'Pháp luật trong hoạt động khám chữa bệnh'",
+                    rating: 4.7,
+                    reviews: [
+                        { author: "Bệnh viện Đa khoa ABC", rating: 5, comment: "Luật sư Quỳnh am hiểu cả y khoa và pháp luật, tư vấn rất chính xác và thực tế.", date: "22/03/2026" },
+                        { author: "Công ty Dược phẩm XYZ", rating: 4, comment: "Hỗ trợ tốt trong đăng ký lưu hành thuốc. Phản hồi nhanh, chuyên nghiệp.", date: "08/02/2026" }
+                    ]
+                },
+                {
+                    id: 13,
+                    name: "Trần Minh Tuấn",
+                    field: "Viễn thông & CNTT",
+                    org: "Đoàn Luật sư Đà Nẵng",
+                    exp: "10 năm",
+                    phone: "0920.456.789",
+                    email: "trantuan@techlaw.vn",
+                    province: "Đà Nẵng",
+                    diaChiLamViec: "Số 234 Nguyễn Văn Linh, Quận Thanh Khê, Đà Nẵng",
+                    chucDanh: "Chuyên viên CNTT",
+                    trinhDo: "Kỹ sư CNTT + Cử nhân Luật, Đại học Bách khoa Đà Nẵng (2012)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2014), Chứng chỉ An toàn thông tin (2017), Chứng chỉ Bảo vệ dữ liệu cá nhân (2020)",
+                    kinhNghiem: "• Luật sư Đoàn Luật sư Đà Nẵng (2014 - nay)\n• Tư vấn pháp lý cho 50+ startup công nghệ\n• Soạn thảo hợp đồng phần mềm, SaaS, outsourcing\n• Tư vấn tuân thủ GDPR, Luật An ninh mạng",
+                    thanhTuu: "• Thành viên Hiệp hội An toàn thông tin Việt Nam (VNISA)\n• Tư vấn cho các dự án chuyển đổi số chính quyền\n• Diễn giả tại Vietnam Cybersecurity Summit",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
+                    degree: "Kỹ sư CNTT + Cử nhân Luật, Đại học Bách khoa Đà Nẵng (2012)",
+                    certificates: "Chứng chỉ Luật sư (2014), Chứng chỉ An toàn thông tin (2017), Chứng chỉ Bảo vệ dữ liệu cá nhân (2020)",
+                    experience: "• Luật sư Đoàn Luật sư Đà Nẵng (2014 - nay)\n• Tư vấn pháp lý cho 50+ startup công nghệ\n• Soạn thảo hợp đồng phần mềm, SaaS, outsourcing\n• Tư vấn tuân thủ GDPR, Luật An ninh mạng",
+                    achievements: "• Thành viên Hiệp hội An toàn thông tin Việt Nam (VNISA)\n• Tư vấn cho các dự án chuyển đổi số chính quyền\n• Diễn giả tại Vietnam Cybersecurity Summit",
+                    rating: 4.6,
+                    reviews: [
+                        { author: "Công ty Phần mềm ABC", rating: 5, comment: "Luật sư Tuấn am hiểu cả kỹ thuật và pháp lý, hỗ trợ rất tốt cho các công ty công nghệ.", date: "15/03/2026" },
+                        { author: "Startup Công nghệ XYZ", rating: 5, comment: "Tư vấn rõ ràng, dễ hiểu. Giúp startup tránh được nhiều rủi ro pháp lý từ sớm.", date: "02/02/2026" }
+                    ]
+                },
+                {
+                    id: 14,
+                    name: "Phan Thị Ngọc",
+                    field: "Nông nghiệp & Thực phẩm",
+                    org: "Công ty Luật TNHH AgriLaw",
+                    exp: "12 năm",
+                    phone: "0921.567.890",
+                    email: "phanngoc@agrilaw.vn",
+                    province: "Cần Thơ",
+                    diaChiLamViec: "Số 89 Đường 3/2, Quận Ninh Kiều, Cần Thơ",
+                    chucDanh: "Chuyên viên Nông nghiệp",
+                    trinhDo: "Thạc sĩ Nông học + Cử nhân Luật, Đại học Cần Thơ (2011)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2013), Chứng chỉ An toàn thực phẩm (2015), Chứng chỉ VietGAP, GlobalGAP (2017)",
+                    kinhNghiem: "• Luật sư AgriLaw (2013 - nay)\n• Tư vấn cho 100+ hợp tác xã nông nghiệp\n• Đăng ký mã số vùng trồng, cơ sở đóng gói\n• Tư vấn xuất khẩu nông sản sang EU, Mỹ, Nhật",
+                    thanhTuu: "• Tư vấn cho dự án lúa gạo xuất khẩu ST25\n• Thành viên Hiệp hội Nông nghiệp Việt Nam\n• Diễn giả tại Hội thảo Nông nghiệp bền vững",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
+                    degree: "Thạc sĩ Nông học + Cử nhân Luật, Đại học Cần Thơ (2011)",
+                    certificates: "Chứng chỉ Luật sư (2013), Chứng chỉ An toàn thực phẩm (2015), Chứng chỉ VietGAP, GlobalGAP (2017)",
+                    experience: "• Luật sư AgriLaw (2013 - nay)\n• Tư vấn cho 100+ hợp tác xã nông nghiệp\n• Đăng ký mã số vùng trồng, cơ sở đóng gói\n• Tư vấn xuất khẩu nông sản sang EU, Mỹ, Nhật",
+                    achievements: "• Tư vấn cho dự án lúa gạo xuất khẩu ST25\n• Thành viên Hiệp hội Nông nghiệp Việt Nam\n• Diễn giả tại Hội thảo Nông nghiệp bền vững",
+                    rating: 4.5,
+                    reviews: [
+                        { author: "Hợp tác xã Nông nghiệp ABC", rating: 5, comment: "Luật sư Ngọc tư vấn rất thực tế, giúp hợp tác xã đạt chứng nhận VietGAP và xuất khẩu thành công.", date: "20/03/2026" },
+                        { author: "Doanh nghiệp Xuất khẩu XYZ", rating: 4, comment: "Am hiểu về quy định xuất khẩu nông sản, hỗ trợ tốt trong đàm phán hợp đồng.", date: "10/02/2026" }
+                    ]
+                },
+                {
+                    id: 15,
+                    name: "Võ Thành Long",
+                    field: "Du lịch & Khách sạn",
+                    org: "Đoàn Luật sư Khánh Hòa",
+                    exp: "14 năm",
+                    phone: "0922.678.901",
+                    email: "volong@tourismlaw.vn",
+                    province: "Khánh Hòa",
+                    diaChiLamViec: "Số 12 Trần Phú, Nha Trang, Khánh Hòa",
+                    chucDanh: "Trưởng nhóm Du lịch",
+                    trinhDo: "Cử nhân Quản trị Du lịch + Cử nhân Luật, Đại học Kinh tế Huế (2009)",
+                    chungChiBangCap: "Chứng chỉ Luật sư (2011), Chứng chỉ Quản lý khách sạn (2014), Chứng chỉ Hướng dẫn viên du lịch (2016)",
+                    kinhNghiem: "• Luật sư Đoàn Luật sư Khánh Hòa (2011 - nay)\n• Tư vấn thành lập 40+ doanh nghiệp du lịch\n• Soạn thảo hợp đồng lữ hành, đặt phòng, dịch vụ\n• Giải quyết tranh chấp giữa khách du lịch và doanh nghiệp",
+                    thanhTuu: "• Tư vấn pháp lý cho khu nghỉ dưỡng 5 sao tại Nha Trang\n• Thành viên Hiệp hội Du lịch Việt Nam (VITA)\n• Tác giả 'Pháp luật trong kinh doanh du lịch'",
+                    ghiChu: "-",
+                    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+                    degree: "Cử nhân Quản trị Du lịch + Cử nhân Luật, Đại học Kinh tế Huế (2009)",
+                    certificates: "Chứng chỉ Luật sư (2011), Chứng chỉ Quản lý khách sạn (2014), Chứng chỉ Hướng dẫn viên du lịch (2016)",
+                    experience: "• Luật sư Đoàn Luật sư Khánh Hòa (2011 - nay)\n• Tư vấn thành lập 40+ doanh nghiệp du lịch\n• Soạn thảo hợp đồng lữ hành, đặt phòng, dịch vụ\n• Giải quyết tranh chấp giữa khách du lịch và doanh nghiệp",
+                    achievements: "• Tư vấn pháp lý cho khu nghỉ dưỡng 5 sao tại Nha Trang\n• Thành viên Hiệp hội Du lịch Việt Nam (VITA)\n• Tác giả 'Pháp luật trong kinh doanh du lịch'",
+                    rating: 4.7,
+                    reviews: [
+                        { author: "Khu nghỉ dưỡng ABC", rating: 5, comment: "Luật sư Long am hiểu ngành du lịch, hỗ trợ tốt trong việc đáp ứng các quy định về kinh doanh lưu trú.", date: "25/03/2026" },
+                        { author: "Công ty Lữ hành XYZ", rating: 4, comment: "Tư vấn nhiệt tình, giải quyết nhanh các vướng mắc về hợp đồng và bảo hiểm du lịch.", date: "12/02/2026" }
+                    ]
+                }
+            ];
+
+            const orgData = [
+                {
+                    id: 1,
+                    name: "Công ty Luật TNHH ABC",
+                    field: "Doanh nghiệp, Đầu tư, M&A",
+                    address: "Tầng 12, Tòa nhà ABC, 123 Nguyễn Huệ, Quận 1, TP.HCM",
+                    phone: "028.3827.1234",
+                    email: "info@abclaw.vn",
+                    province: "TP. Hồ Chí Minh",
+                    logo: "https://placehold.co/120x80/2580f0/ffffff?text=ABC+Law",
+                    caNhanThuocToChuc: "<ul class='list-disc pl-5 space-y-1'><li>Luật sư Nguyễn Văn An - Chủ tịch HĐTV</li><li>Luật sư Trần Thị Mai - Phó Tổng Giám đốc</li><li>Luật sư Lê Hoàng Minh - Giám đốc Điều hành</li><li>15 luật sư và chuyên viên tư vấn</li></ul>",
+                    chungChiBangCap: "Giấy phép thành lập số 0123456789 do Sở KH&ĐT TP.HCM cấp ngày 15/06/2010. Chứng nhận Hiệp hội Luật sư Việt Nam. Thành viên Hiệp hội Luật sư Quốc tế (IBA).",
+                    kinhNghiem: "• Thành lập từ 2010, hơn 15 năm kinh nghiệm\n• Tư vấn cho 500+ doanh nghiệp trong và ngoài nước\n• Đại diện pháp lý trong 100+ vụ tranh chấp thương mại\n• Tư vấn M&A cho các thương vụ trị giá trên 1 tỷ USD\n• Đội ngũ 20+ luật sư giàu kinh nghiệm",
+                    ghiChu: "Chuyên tư vấn cho doanh nghiệp FDI, tập đoàn đa quốc gia. Văn phòng tại TP.HCM, Hà Nội và Đà Nẵng. Hỗ trợ 24/7 cho các trường hợp khẩn cấp."
+                },
+                {
+                    id: 2,
+                    name: "Công ty Luật TNHH XYZ",
+                    field: "Thuế, Kế toán, Tư vấn tài chính",
+                    address: "Tầng 8, Tòa nhà XYZ, 456 Trần Hưng Đạo, Hà Nội",
+                    phone: "024.3943.5678",
+                    email: "contact@xyzlaw.vn",
+                    province: "Hà Nội",
+                    logo: "https://placehold.co/120x80/1b2b49/ffffff?text=XYZ+Law",
+                    caNhanThuocToChuc: "<ul class='list-disc pl-5 space-y-1'><li>Luật sư Trần Thị Bình - Tổng Giám đốc</li><li>TS. Phạm Văn Tuấn - Trưởng bộ phận Thuế</li><li>ThS. Nguyễn Thị Lan - Trưởng bộ phận Kế toán</li><li>12 chuyên viên tư vấn thuế và kế toán</li></ul>",
+                    chungChiBangCap: "Giấy phép thành lập số 0234567890 do Sở KH&ĐT Hà Nội cấp ngày 20/03/2012. Chứng chỉ Tư vấn Thuế của Bộ Tài chính. Thành viên Hiệp hội Tư vấn Thuế Việt Nam.",
+                    kinhNghiem: "• Hoạt động từ 2012, chuyên sâu về thuế và kế toán\n• Tư vấn cho 300+ doanh nghiệp về tối ưu thuế\n• Đại diện doanh nghiệp trong 50+ cuộc thanh tra thuế\n• Tư vấn chuyển giá cho các tập đoàn đa quốc gia\n• Đào tạo thuế cho 1000+ kế toán viên",
+                    ghiChu: "Thế mạnh về tư vấn thuế, hoàn thuế GTGT, giải quyết tranh chấp với cơ quan thuế. Có đội ngũ chuyên gia từng làm việc tại Tổng cục Thuế."
+                },
+                {
+                    id: 3,
+                    name: "Văn phòng Luật sư DEF",
+                    field: "Lao động, BHXH, Đào tạo",
+                    address: "Số 789 Lê Lợi, Quận Hải Châu, Đà Nẵng",
+                    phone: "0236.3654.321",
+                    email: "info@deflaw.vn",
+                    province: "Đà Nẵng",
+                    logo: "https://placehold.co/120x80/4CAF50/ffffff?text=DEF+Law",
+                    caNhanThuocToChuc: "<ul class='list-disc pl-5 space-y-1'><li>Luật sư Lê Văn Cường - Trưởng Văn phòng</li><li>ThS. Võ Thị Hạnh - Chuyên gia Lao động & BHXH</li><li>8 luật sư và chuyên viên tư vấn</li></ul>",
+                    chungChiBangCap: "Giấy phép thành lập số 0345678901 do Sở Tư pháp Đà Nẵng cấp ngày 10/08/2014. Chứng chỉ Hòa giải viên Lao động. Chứng nhận cơ sở đào tạo lao động.",
+                    kinhNghiem: "• Thành lập từ 2014, chuyên sâu lao động và BHXH\n• Tư vấn cho 200+ doanh nghiệp về chính sách nhân sự\n• Đại diện trong 40+ vụ tranh chấp lao động\n• Đào tạo nội bộ cho 50+ doanh nghiệp lớn\n• Xây dựng 100+ bộ quy chế lao động",
+                    ghiChu: "Chuyên tư vấn xây dựng hệ thống quản trị nhân sự, quy chế lương thưởng, xử lý kỷ luật lao động. Có dịch vụ đào tạo pháp luật lao động cho doanh nghiệp."
+                },
+                {
+                    id: 4,
+                    name: "Công ty Luật TNHH GHI",
+                    field: "Xây dựng, BĐS, Hạ tầng",
+                    address: "Tầng 15, Tòa nhà GHI, 321 Pasteur, Quận 3, TP.HCM",
+                    phone: "028.3829.8765",
+                    email: "hello@ghilaw.vn",
+                    province: "TP. Hồ Chí Minh",
+                    logo: "https://placehold.co/120x80/FF5722/ffffff?text=GHI+Law",
+                    caNhanThuocToChuc: "<ul class='list-disc pl-5 space-y-1'><li>Luật sư Phạm Thị Dung - Chủ tịch HĐTV</li><li>KS. Nguyễn Văn Đạt - Chuyên gia BĐS</li><li>10 luật sư và kỹ sư tư vấn</li></ul>",
+                    chungChiBangCap: "Giấy phép thành lập số 0456789012 do Sở KH&ĐT TP.HCM cấp ngày 05/11/2016. Chứng nhận Hiệp hội BĐS Việt Nam. Thành viên Hiệp hội Luật sư Xây dựng.",
+                    kinhNghiem: "• Hoạt động từ 2016, chuyên BĐS và xây dựng\n• Tư vấn pháp lý cho 80+ dự án BĐS\n• Thẩm định hồ sơ pháp lý cho 200+ BĐS\n• Đại diện chủ đầu tư trong các thủ tục cấp phép\n• Tư vấn M&A các dự án BĐS trị giá 500+ triệu USD",
+                    ghiChu: "Thế mạnh về pháp lý dự án BĐS, thủ tục cấp phép xây dựng, chuyển nhượng dự án. Có đội ngũ kỹ sư xây dựng am hiểu chuyên môn."
+                },
+                {
+                    id: 5,
+                    name: "Văn phòng Luật sư JKL",
+                    field: "Sở hữu trí tuệ, Công nghệ",
+                    address: "Số 654 Nguyễn Văn Linh, Quận 7, TP.HCM",
+                    phone: "028.3775.4321",
+                    email: "info@jkllaw.vn",
+                    province: "TP. Hồ Chí Minh",
+                    logo: "https://placehold.co/120x80/9C27B0/ffffff?text=JKL+Law",
+                    caNhanThuocToChuc: "<ul class='list-disc pl-5 space-y-1'><li>Luật sư Hoàng Văn Em - Trưởng Văn phòng</li><li>TS. Đinh Thị Thảo - Chuyên gia SHTT</li><li>8 luật sư và chuyên viên SHTT</li></ul>",
+                    chungChiBangCap: "Giấy phép thành lập số 0567890123 do Sở Tư pháp TP.HCM cấp ngày 22/02/2018. Đại diện Sở hữu trí tuệ được công nhận. Thành viên INTA (Hiệp hội Nhãn hiệu Quốc tế).",
+                    kinhNghiem: "• Thành lập từ 2018, chuyên sâu SHTT\n• Đăng ký 500+ nhãn hiệu, sáng chế, kiểu dáng\n• Tư vấn chuyển giao công nghệ cho 50+ doanh nghiệp\n• Đại diện trong 30+ vụ tranh chấp SHTT\n• Tư vấn SHTT cho các startup công nghệ",
+                    ghiChu: "Chuyên đăng ký bảo hộ nhãn hiệu, sáng chế, phần mềm. Tư vấn licensing, franchise. Có mạng lưới đối tác đăng ký SHTT tại 50+ quốc gia."
+                },
+                {
+                    id: 6,
+                    name: "Công ty Luật TNHH MNO",
+                    field: "Thương mại, Xuất nhập khẩu, Logistics",
+                    address: "Tầng 5, Tòa nhà MNO, 987 Bà Triệu, Hà Nội",
+                    phone: "024.3976.5432",
+                    email: "contact@mnolaw.vn",
+                    province: "Hà Nội",
+                    logo: "https://placehold.co/120x80/00BCD4/ffffff?text=MNO+Law",
+                    caNhanThuocToChuc: "<ul class='list-disc pl-5 space-y-1'><li>Luật sư Vũ Thị Giang - Tổng Giám đốc</li><li>ThS. Bùi Văn Khải - Chuyên gia Xuất nhập khẩu</li><li>10 luật sư và chuyên viên thương mại</li></ul>",
+                    chungChiBangCap: "Giấy phép thành lập số 0678901234 do Sở KH&ĐT Hà Nội cấp ngày 18/07/2019. Thành viên VCCI. Chứng nhận Đại lý Hải quan.",
+                    kinhNghiem: "• Hoạt động từ 2019, chuyên thương mại quốc tế\n• Tư vấn cho 150+ doanh nghiệp xuất nhập khẩu\n• Giải quyết 30+ vụ tranh chấp hợp đồng quốc tế\n• Tư vấn thủ tục hải quan cho 100+ lô hàng\n• Đại diện doanh nghiệp tại VIAC và Tòa án",
+                    ghiChu: "Thế mạnh về hợp đồng thương mại quốc tế, thủ tục hải quan, C/O. Có văn phòng đại diện tại cảng Hải Phòng và TP.HCM."
+                },
+                {
+                    id: 7,
+                    name: "Công ty Luật TNHH PQR",
+                    field: "Ngân hàng, Tài chính, Chứng khoán",
+                    address: "Tầng 20, Tòa nhà Financial Tower, 25 Lê Duẩn, Hà Nội",
+                    phone: "024.3822.1234",
+                    email: "info@pqrlaw.vn",
+                    province: "Hà Nội",
+                    logo: "https://placehold.co/120x80/1976D2/ffffff?text=PQR+Law",
+                    caNhanThuocToChuc: "<ul class='list-disc pl-5 space-y-1'><li>TS. Nguyễn Đức Tuấn - Chủ tịch HĐQT</li><li>ThS. Trần Minh Hiếu - Chuyên gia Chứng khoán</li><li>15 luật sư và chuyên viên tài chính</li></ul>",
+                    chungChiBangCap: "Giấy phép thành lập số 0789012345 do Sở KH&ĐT Hà Nội cấp ngày 10/01/2015. Thành viên Hiệp hội Ngân hàng Việt Nam. Chứng nhận Tư vấn Chứng khoán của UBCKNN.",
+                    kinhNghiem: "• Thành lập từ 2015, chuyên sâu ngân hàng và chứng khoán\n• Tư vấn cho 50+ ngân hàng và tổ chức tài chính\n• Tư vấn IPO cho 20+ doanh nghiệp\n• Thẩm định pháp lý cho 100+ thương vụ tín dụng\n• Tư vấn tuân thủ cho các công ty đại chúng",
+                    ghiChu: "Chuyên tư vấn thành lập ngân hàng, tổ chức tín dụng. Tư vấn niêm yết, phát hành cổ phiếu, trái phiếu. Đội ngũ từng làm việc tại NHNN và UBCKNN."
+                },
+                {
+                    id: 8,
+                    name: "Văn phòng Luật sư STU",
+                    field: "Môi trường, Năng lượng, Khai khoáng",
+                    address: "Số 456 Bà Huyện Thanh Quan, Quận 3, TP.HCM",
+                    phone: "028.3930.5678",
+                    email: "contact@stulaw.vn",
+                    province: "TP. Hồ Chí Minh",
+                    logo: "https://placehold.co/120x80/388E3C/ffffff?text=STU+Law",
+                    caNhanThuocToChuc: "<ul class='list-disc pl-5 space-y-1'><li>Luật sư Đỗ Minh Tuấn - Trưởng Văn phòng</li><li>KS. Lê Thị Bích Hằng - Chuyên gia Môi trường</li><li>8 luật sư và kỹ sư tư vấn</li></ul>",
+                    chungChiBangCap: "Giấy phép thành lập số 0890123456 do Sở Tư pháp TP.HCM cấp ngày 15/05/2017. Chứng nhận Tư vấn Môi trường của Bộ TN&MT. Thành viên Hiệp hội Năng lượng Việt Nam.",
+                    kinhNghiem: "• Hoạt động từ 2017, chuyên môi trường và năng lượng\n• Tư vấn ĐTM cho 80+ dự án\n• Tư vấn thủ tục cấp phép xả thải, khí thải\n• Tư vấn dự án điện gió, điện mặt trời\n• Đại diện doanh nghiệp trong các vụ việc môi trường",
+                    ghiChu: "Thế mạnh về đánh giá tác động môi trường, giấy phép môi trường, dự án năng lượng tái tạo. Có đội ngũ kỹ sư môi trường và năng lượng."
+                },
+                {
+                    id: 9,
+                    name: "Công ty Luật TNHH VWX",
+                    field: "Viễn thông, CNTT, Dữ liệu",
+                    address: "Tầng 10, Tòa nhà Viettel, 168 Nguyễn Đình Chiểu, TP.HCM",
+                    phone: "028.3636.9876",
+                    email: "hello@vwxlaw.vn",
+                    province: "TP. Hồ Chí Minh",
+                    logo: "https://placehold.co/120x80/7B1FA2/ffffff?text=VWX+Law",
+                    caNhanThuocToChuc: "<ul class='list-disc pl-5 space-y-1'><li>TS. Phạm Quang Vinh - Tổng Giám đốc</li><li>ThS. Võ Thành Trung - Chuyên gia CNTT</li><li>10 luật sư và chuyên gia công nghệ</li></ul>",
+                    chungChiBangCap: "Giấy phép thành lập số 0901234567 do Sở KH&ĐT TP.HCM cấp ngày 20/08/2018. Chứng nhận Tư vấn An toàn thông tin. Thành viên Hiệp hội CNTT Việt Nam.",
+                    kinhNghiem: "• Thành lập từ 2018, chuyên CNTT và dữ liệu\n• Tư vấn tuân thủ GDPR, Luật An ninh mạng\n• Xây dựng chính sách bảo mật cho 50+ doanh nghiệp\n• Tư vấn hợp đồng SaaS, cloud computing\n• Tư vấn chuyển đổi số cho doanh nghiệp",
+                    ghiChu: "Chuyên tư vấn pháp lý cho startup công nghệ, sàn TMĐT, fintech. Tư vấn bảo vệ dữ liệu cá nhân theo Nghị định 13/2023/NĐ-CP."
+                },
+                {
+                    id: 10,
+                    name: "Văn phòng Luật sư YZA",
+                    field: "Giáo dục, Đào tạo, Du lịch",
+                    address: "Số 123 Hùng Vương, Quận Hồng Bàng, Hải Phòng",
+                    phone: "0225.3842.567",
+                    email: "info@yzalaw.vn",
+                    province: "Hải Phòng",
+                    logo: "https://placehold.co/120x80/E65100/ffffff?text=YZA+Law",
+                    caNhanThuocToChuc: "<ul class='list-disc pl-5 space-y-1'><li>Luật sư Đặng Thị Mai - Trưởng Văn phòng</li><li>TS. Nguyễn Văn Hùng - Chuyên gia Giáo dục</li><li>6 luật sư và chuyên viên tư vấn</li></ul>",
+                    chungChiBangCap: "Giấy phép thành lập số 1012345678 do Sở Tư pháp Hải Phòng cấp ngày 12/03/2019. Chứng nhận Tư vấn Giáo dục của Bộ GD&ĐT.",
+                    kinhNghiem: "• Hoạt động từ 2019, chuyên giáo dục và du lịch\n• Tư vấn thành lập 30+ trường học, trung tâm\n• Tư vấn thủ tục kiểm định chất lượng\n• Tư vấn dự án khu du lịch, resort\n• Đào tạo pháp luật cho 50+ cơ sở giáo dục",
+                    ghiChu: "Thế mạnh về thủ tục thành lập cơ sở giáo dục, trung tâm ngoại ngữ, du lịch. Tư vấn hợp tác với đối tác nước ngoài trong lĩnh vực giáo dục."
+                },
+                {
+                    id: 11,
+                    name: "Công ty Luật TNHH BCD",
+                    field: "Y tế, Dược, Thực phẩm",
+                    address: "Tầng 6, Tòa nhà Medical Center, 254 Trần Hưng Đạo, TP.HCM",
+                    phone: "028.3855.4321",
+                    email: "contact@bcdlaw.vn",
+                    province: "TP. Hồ Chí Minh",
+                    logo: "https://placehold.co/120x80/C62828/ffffff?text=BCD+Law",
+                    caNhanThuocToChuc: "<ul class='list-disc pl-5 space-y-1'><li>DS. Trần Văn Khải - Chủ tịch HĐQT</li><li>TS. Bác sĩ Lê Minh Phương - Chuyên gia Y tế</li><li>12 luật sư và dược sĩ tư vấn</li></ul>",
+                    chungChiBangCap: "Giấy phép thành lập số 1123456789 do Sở KH&ĐT TP.HCM cấp ngày 08/06/2016. Chứng nhận Tư vấn Dược của Bộ Y tế. Thành viên Hiệp hội Dược Việt Nam.",
+                    kinhNghiem: "• Thành lập từ 2016, chuyên y tế và dược\n• Tư vấn đăng ký lưu hành 200+ sản phẩm\n• Tư vấn GMP, GSP, GDP cho 50+ doanh nghiệp\n• Tư vấn thủ tục nhập khẩu thuốc, thiết bị y tế\n• Đại diện trong các vụ việc về an toàn thực phẩm",
+                    ghiChu: "Chuyên tư vấn đăng ký thuốc, mỹ phẩm, thực phẩm chức năng. Tư vấn nhà thuốc, phòng khám. Đội ngũ có dược sĩ và bác sĩ am hiểu chuyên môn."
+                },
+                {
+                    id: 12,
+                    name: "Văn phòng Luật sư EFG",
+                    field: "Tất cả",
+                    address: "Số 789 Lý Thường Kiệt, Quận Tân Bình, TP.HCM",
+                    phone: "028.3868.7890",
+                    email: "info@efglaw.vn",
+                    province: "TP. Hồ Chí Minh",
+                    logo: "https://placehold.co/120x80/2E7D32/ffffff?text=EFG+Law",
+                    caNhanThuocToChuc: "<ul class='list-disc pl-5 space-y-1'><li>KS. Võ Minh Trí - Trưởng Văn phòng</li><li>ThS. Nguyễn Thị Ngọc Lan - Chuyên gia Nông nghiệp</li><li>7 luật sư và kỹ sư nông nghiệp</li></ul>",
+                    chungChiBangCap: "Giấy phép thành lập số 1234567890 do Sở Tư pháp TP.HCM cấp ngày 25/09/2017. Chứng nhận Tư vấn Nông nghiệp của Bộ NN&PTNT.",
+                    kinhNghiem: "• Hoạt động từ 2017, chuyên nông nghiệp\n• Tư vấn dự án nông nghiệp công nghệ cao\n• Tư vấn chứng nhận GlobalGAP, VietGAP\n• Tư vấn xuất khẩu nông sản\n• Giải quyết tranh chấp trong chuỗi cung ứng",
+                    ghiChu: "Thế mạnh về dự án nông nghiệp, thủy sản, chứng nhận hữu cơ. Tư vấn mã số vùng trồng, cơ sở đóng gói xuất khẩu."
+                }
+            ];
+
+            const consultationHistoryData = [
+                {
+                    id: 1,
+                    date: "15/04/2026",
+                    time: "14:30",
+                    advisor: "Luật sư Nguyễn Văn Minh",
+                    field: "Doanh nghiệp & Đầu tư",
+                    method: "Trực tiếp",
+                    status: "completed",
+                    question: "Thủ tục chuyển đổi từ công ty TNHH 1 thành viên sang công ty cổ phần",
+                    answer: "Hồ sơ chuyển đổi bao gồm: Quyết định của chủ sở hữu, Nghị quyết ĐHCĐ, Điều lệ công ty cổ phần, Danh sách cổ đông sáng lập. Thời gian thực hiện: 05-07 ngày làm việc.",
+                    rating: 5
+                },
+                {
+                    id: 2,
+                    date: "12/04/2026",
+                    time: "09:15",
+                    advisor: "Luật sư Trần Thị Hương",
+                    field: "Lao động & BHXH",
+                    method: "Trực tuyến",
+                    status: "completed",
+                    question: "Chế độ BHXH cho người lao động nghỉ việc do tinh giảm biên chế",
+                    answer: "Người lao động được hưởng trợ cấp thôi việc 0.5 tháng lương/năm làm việc, cùng với BHXH một lần nếu đủ điều kiện theo quy định.",
+                    rating: 4
+                },
+                {
+                    id: 3,
+                    date: "10/04/2026",
+                    time: "16:00",
+                    advisor: "Luật sư Lê Hoàng Nam",
+                    field: "Thuế & Kế toán",
+                    method: "Qua điện thoại",
+                    status: "completed",
+                    question: "Ưu đãi thuế TNDN cho doanh nghiệp công nghệ cao",
+                    answer: "Doanh nghiệp công nghệ cao được hưởng thuế suất 10% trong 15 năm, miễn thuế 4 năm và giảm 50% trong 9 năm tiếp theo.",
+                    rating: 5
+                },
+                {
+                    id: 4,
+                    date: "08/04/2026",
+                    time: "10:45",
+                    advisor: "Luật sư Phạm Thị Mai",
+                    field: "Sở hữu trí tuệ",
+                    method: "Trực tuyến",
+                    status: "pending",
+                    question: "Đăng ký bảo hộ nhãn hiệu cho sản phẩm mới",
+                    answer: null,
+                    rating: null
+                },
+                {
+                    id: 5,
+                    date: "05/04/2026",
+                    time: "14:00",
+                    advisor: "Luật sư Đỗ Tuấn Anh",
+                    field: "Xây dựng & BĐS",
+                    method: "Trực tiếp",
+                    status: "completed",
+                    question: "Thủ tục cấp phép xây dựng nhà xưởng trong khu công nghiệp",
+                    answer: "Cần nộp hồ sơ tại Ban quản lý khu công nghiệp, bao gồm: Giấy phép đầu tư, Bản vẽ thiết kế, Giấy chứng nhận quyền sử dụng đất. Thời gian: 20 ngày làm việc.",
+                    rating: 4
+                }
+            ];
+
+            const vuViecDienHinhData = [
+                {
+                    id: 1,
+                    title: "Tranh chấp hợp đồng mua bán hàng hóa quốc tế",
+                    field: "Thương mại",
+                    date: "15/04/2026",
+                    views: 1250,
+                    content: "Tình huống: Công ty A (Việt Nam) ký hợp đồng xuất khẩu 5.000 tấn gạo cho công ty B (Philippines) với giá 500 USD/tấn, điều kiện giao hàng FOB. Sau khi giao hàng, công ty B từ chối thanh toán với lý do gạo bị ẩm mốc. Công ty A khẳng định hàng hóa đạt chất lượng và có chứng nhận kiểm dịch. Vấn đề pháp lý: (1) Áp dụng luật nào - luật Việt Nam hay Philippines? (2) Thẩm quyền giải quyết thuộc Tòa án hay Trọng tài? (3) Chứng cứ nào để chứng minh chất lượng hàng hóa?",
+                    resolution: "Giải pháp: (1) Kiểm tra hợp đồng về điều khoản luật áp dụng và giải quyết tranh chấp. (2) Thu thập chứng từ: Chứng nhận kiểm dịch, biên bản giao hàng, hình ảnh hàng hóa. (3) Gửi công văn đòi nợ chính thức. (4) Nếu không thành công, khởi kiện tại Trọng tài VIAC hoặc Tòa án tùy thỏa thuận.",
+                    outcome: "Kết quả: Sau 6 tháng, công ty A thắng kiện tại VIAC, được bồi thường toàn bộ giá trị hàng (2.5 triệu USD) cộng lãi suất và chi phí pháp lý.",
+                    attachments: [
+                        { name: "Mau_Don_Khoi_Kien_VIAC.pdf", url: "#", size: "245 KB" },
+                        { name: "Hop_Dong_Mua_Ban_Mau.pdf", url: "#", size: "1.2 MB" }
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Tranh chấp quyền sở hữu trí tuệ về nhãn hiệu hàng hóa",
+                    field: "Sở hữu trí tuệ",
+                    date: "10/04/2026",
+                    views: 980,
+                    shortAnswer: "Kiểm tra quyền ưu tiên đăng ký nhãn hiệu tại Cục Sở hữu trí tuệ. Khởi kiện yêu cầu chấm dứt hành vi xâm phạm và bồi thường thiệt hại.",
+                    summary: "Doanh nghiệp bị đơn vị khác làm giả và xâm phạm nhãn hiệu đã được bảo hộ.",
+                    content: "Tình huống: Công ty B sở hữu nhãn hiệu thời trang được cấp văn bằng bảo hộ năm 2024. Gần đây phát hiện một doanh nghiệp khác tại cùng địa bàn kinh doanh sản phẩm tương tự có gắn nhãn hiệu trùng lặp gần như hoàn toàn. Vấn đề pháp lý: Xác định yếu tố xâm phạm quyền sở hữu trí tuệ và biện pháp xử lý theo Luật Sở hữu trí tuệ.",
+                    resolution: "Giải pháp: Lập vi bằng ghi nhận hành vi vi phạm; Gửi thư khuyến cáo yêu cầu chấm dứt hành vi vi phạm; Đề nghị Quản lý thị trường xử lý hành chính hoặc khởi kiện ra Tòa án có thẩm quyền.",
+                    outcome: "Kết quả: Bên vi phạm cam kết tháo dỡ toàn bộ biển hiệu, tiêu hủy hàng hóa xâm phạm và bồi thường chi phí khắc phục.",
+                    attachments: [{ name: "Don_Yeu_Cau_Xu_Ly_Xam_Pham_SHTT.pdf", url: "#", size: "310 KB" }]
+                },
+                {
+                    id: 3,
+                    title: "Tranh chấp tiền lương và trợ cấp thôi việc cho người lao động",
+                    field: "Lao động",
+                    date: "08/04/2026",
+                    views: 1120,
+                    shortAnswer: "Doanh nghiệp phải chi trả đầy đủ tiền lương và trợ cấp thôi việc theo quy định của Bộ luật Lao động.",
+                    summary: "Tranh chấp về nghĩa vụ thanh toán trợ cấp thôi việc khi tái cơ cấu tổ chức.",
+                    content: "Tình huống: Công ty C tái cấu trúc bộ máy dẫn đến chấm dứt hợp đồng lao động với 15 nhân viên. Một số nhân sự khiếu nại về cách tính trợ cấp thôi việc và thời hạn thanh toán. Vấn đề pháp lý: Căn cứ tính trợ cấp thôi việc và thời hạn theo Bộ luật Lao động 2019.",
+                    resolution: "Giải pháp: Rà soát lại thời gian làm việc thực tế không đóng BHTN; Tính đúng mức bình quân tiền lương 06 tháng liền kề; Tổ chức đối thoại và thỏa thuận phương án chi trả.",
+                    outcome: "Kết quả: Doanh nghiệp và người lao động đạt được thỏa thuận chi trả trong 14 ngày, không xảy ra khiếu kiện kéo dài.",
+                    attachments: [{ name: "Mau_Thoa_Thuan_Cham_Dut_HDLD.docx", url: "#", size: "185 KB" }]
+                },
+                {
+                    id: 4,
+                    title: "Vướng mắc về thu hồi nợ khó đòi giữa các doanh nghiệp đối tác",
+                    field: "Thương mại",
+                    date: "06/04/2026",
+                    views: 870,
+                    shortAnswer: "Gửi văn bản đối chiếu công nợ, đàm phán phương án trả góp hoặc tiến hành thủ tục khởi kiện thu hồi nợ quá hạn.",
+                    summary: "Doanh nghiệp đối tác chây ì không thanh toán nợ hợp đồng thương mại dù đã quá hạn hơn 6 tháng.",
+                    content: "Tình huống: Công ty D cung cấp thiết bị trị giá 1.8 tỷ đồng cho Công ty E, hạn thanh toán là 30 ngày sau bàn giao. Quá thời hạn 6 tháng, bên mua vẫn không thanh toán dù đã nghiệm thu đầy đủ. Vấn đề pháp lý: Xác lập chứng cứ công nợ và phương thức đòi nợ hợp pháp.",
+                    resolution: "Giải pháp: Lập biên bản xác nhận công nợ; Gửi thông báo yêu cầu thực hiện nghĩa vụ có tính lãi chậm trả; Chuẩn bị hồ sơ khởi kiện tại Tòa án.",
+                    outcome: "Kết quả: Sau khi gửi hồ sơ khởi kiện, bên mua đã chủ động thương lượng thanh toán 70% ngay và 30% còn lại trong vòng 30 ngày.",
+                    attachments: [{ name: "Bien_Ban_Doi_Chieu_Cong_No.pdf", url: "#", size: "220 KB" }]
+                },
+                {
+                    id: 5,
+                    title: "Tranh chấp hợp đồng thuê kho bãi và bảo quản hàng hóa",
+                    field: "Dân sự",
+                    date: "04/04/2026",
+                    views: 650,
+                    shortAnswer: "Xác định trách nhiệm bồi thường thiệt hại do hư hỏng hàng hóa trong quá trình bảo quản kho bãi.",
+                    summary: "Hàng hóa bị ngập nước trong kho bên thuê dẫn đến tranh chấp nghĩa vụ bồi thường.",
+                    content: "Tình huống: Công ty F thuê kho bảo quản nông sản của Công ty G. Mưa lớn gây ngập kho làm hỏng 30% lượng hàng lưu trữ. Hai bên tranh chấp về nguyên nhân bất khả kháng hay lỗi bảo quản. Vấn đề pháp lý: Điều kiện miễn trừ trách nhiệm bất khả kháng theo Bộ luật Dân sự.",
+                    resolution: "Giải pháp: Thẩm định nguyên nhân ngập nước do hệ thống thoát nước kho không đạt chuẩn hay do thiên tai vượt mức dự báo; Đánh giá mức độ thiệt hại qua bên giám định độc lập.",
+                    outcome: "Kết quả: Bên cho thuê kho đồng ý giảm 50% tiền thuê trong 6 tháng và hỗ trợ 200 triệu đồng khắc phục thiệt hại.",
+                    attachments: [{ name: "Bien_Ban_Giam_Dinh_Thiet_Hai.pdf", url: "#", size: "410 KB" }]
+                },
+                {
+                    id: 6,
+                    title: "Tranh chấp giữa các thành viên góp vốn trong công ty TNHH",
+                    field: "Doanh nghiệp",
+                    date: "02/04/2026",
+                    views: 890,
+                    shortAnswer: "Hòa giải phân chia quyền lợi và chuyển nhượng phần vốn góp giữa các thành viên sáng lập.",
+                    summary: "Bất đồng quan điểm kinh doanh giữa 2 thành viên sáng lập dẫn đến bế tắc trong việc ra quyết định của Hội đồng thành viên.",
+                    content: "Tình huống: Ông X (70% vốn) và bà Y (30% vốn) có mâu thuẫn về chiến lược mở rộng. Bà Y không tham gia họp HĐTV khiến nhiều quyết định quan trọng không được thông qua. Vấn đề pháp lý: Thủ tục biểu quyết và phương án chuyển nhượng vốn góp theo Luật Doanh nghiệp 2020.",
+                    resolution: "Giải pháp: Tổ chức hòa giải nội bộ với sự tham gia của luật sư tư vấn; Đề xuất phương án mua lại vốn góp theo giá trị định giá thực tế.",
+                    outcome: "Kết quả: Sau khi hòa giải, ông X đồng ý mua lại toàn bộ 30% vốn của bà Y với giá 15 tỷ đồng. Công ty tiếp tục hoạt động với 1 thành viên.",
+                    attachments: [
+                        { name: "Mau_Bien_Ban_Hoa_Giai_Tranh_Chap.pdf", url: "#", size: "150 KB" }
+                    ]
+                },
+                {
+                    id: 7,
+                    title: "Vướng mắc về giấy phép môi trường cho dự án sản xuất",
+                    field: "Môi trường",
+                    date: "30/03/2026",
+                    views: 645,
+                    shortAnswer: "Dự án thuộc nhóm I. Nộp hồ sơ at Sở TN&MT gồm Đề án BVMT, kết quả quan trắc. Thời gian 45 ngày. Chủ động khắc phục will not bị phạt.",
+                    summary: "Doanh nghiệp đầu tư dây chuyền sản xuất mới nhưng chưa rõ về thủ tục xin giấy phép môi trường. Dự án đã đi vào hoạt động thử nghiệm nhưng chưa có giấy phép, lo ngại bị xử phạt. Cần tư vấn về trình tự, thời gian và điều kiện cấp phép.",
+                    content: "Tình huống: Công ty I đầu tư 100 tỷ đồng dây chuyền sản xuất bao bì nhựa tại KCN. Dự án đã hoàn thiện xây dựng, đang chạy thử nghiệm. Công ty chưa nộp hồ sơ xin giấy phép môi trường vì chưa rõ thủ tục. Thanh tra môi trường có thể kiểm tra bất cứ lúc nào. Vấn đề pháp lý: (1) Dự án thuộc đối tượng nào theo Luật BVMT 2020? (2) Thủ tục xin giấy phép môi trường? (3) Bị xử phạt nếu hoạt động không có giấy phép?",
+                    resolution: "Giải pháp: (1) Dự án thuộc nhóm I (có nguy cơ ô nhiễm cao) theo Nghị định 08/2022. (2) Nộp hồ sơ tại Sở TN&MT: Đề án BVMT chi tiết, kết quả quan trắc, cam kết BVMT. (3) Thời gian xem xét: 45 ngày. (4) Nếu bị thanh tra trước khi có giấy phép: Giải trình đang trong quá trình hoàn thiện, cam kết nộp hồ sơ ngay.",
+                    outcome: "Kết quả: Công ty nộp hồ sơ, được cấp giấy phép sau 40 ngày. Không bị xử phạt vì chủ động khắc phục.",
+                    attachments: []
+                },
+                {
+                    id: 8,
+                    title: "Khiếu nại quyết định xử phạt vi phạm hành chính về xây dựng",
+                    field: "Xây dựng",
+                    date: "28/03/2026",
+                    views: 534,
+                    shortAnswer: "Mức phạt in khung quy định. Có thể viện dẫn tình tiết giảm nhẹ để khiếu nại giảm mức phạt. Khiếu nại lên Chủ tịch UBND cấp tỉnh in 90 ngày.",
+                    summary: "Doanh nghiệp bị xử phạt 200 triệu đồng vì xây dựng nhà xưởng không phép trên đất thuê. Doanh nghiệp cho rằng mức phạt quá cao và có tình tiết giảm nhẹ (đã nộp phạt bổ sung, cam kết khắc phục). Cần tư vấn về thủ tục khiếu nại.",
+                    content: "Tình huống: Công ty J thuê 5.000m² đất trong KCN để xây nhà xưởng. Do急于 khởi công, công ty xây dựng trước khi có giấy phép xây dựng. Thanh tra xây dựng phát hiện, ra quyết định xử phạt 200 triệu đồng và yêu cầu ngừng thi công. Công ty cho rằng: (1) Đã nộp hồ sơ xin phép, chỉ là chậm phê duyệt. (2) Vi phạm lần đầu, có tình tiết giảm nhẹ. (3) Mức phạt 200 triệu là quá cao so with khả năng tài chính. Vấn đề pháp lý: (1) Có căn cứ để khiếu nại giảm mức phạt không? (2) Thủ tục khiếu nại?",
+                    resolution: "Giải pháp: (1) Theo Nghị định 121/2013, mức phạt xây dựng không phép từ 150-300 triệu đồng. Mức 200 triệu là trong khung. (2) Tuy nhiên, công ty có thể viện dẫn tình tiết giảm nhẹ: Vi phạm lần đầu, tự nguyện khắc phục, hợp tác với thanh tra. (3) Khiếu nại lên Chủ tịch UBND cấp tỉnh trong 90 ngày. (4) Đồng thời, khẩn trương hoàn thiện hồ sơ xin giấy phép.",
+                    outcome: "Kết quả: Chủ tịch UBND giảm mức phạt xuống 120 triệu đồng. Công ty được tiếp tục thi công sau khi nộp phạt và bổ sung giấy phép.",
+                    attachments: [
+                        { name: "Mau_Don_Khieu_Nai_Xu_Phat.pdf", url: "#", size: "165 KB" }
+                    ]
+                },
+                {
+                    id: 9,
+                    title: "Tư vấn về hợp đồng đại lý thương mại",
+                    field: "Thương mại",
+                    date: "25/03/2026",
+                    views: 489,
+                    shortAnswer: "Hợp đồng đại lý phải có các điều khoản: phạm vi đại lý, hoa hồng, thanh toán, chấm dứt. Bên đại lý không được nhân danh bên giao đại lý nếu vượt quá phạm vi.",
+                    summary: "Doanh nghiệp sản xuất muốn thiết lập hệ thống đại lý phân phối nhưng chưa rõ về quyền và nghĩa vụ của các bên trong hợp đồng đại lý thương mại. Cần tư vấn về các điều khoản bắt buộc và rủi ro pháp lý.",
+                    content: "Tình huống: Công ty K sản xuất thiết bị điện muốn ký hợp đồng đại lý với công ty L để phân phối sản phẩm tại miền Trung. Công ty L yêu cầu độc quyền khu vực và hoa hồng 15%. Công ty K lo ngại về việc kiểm soát giá bán và chất lượng dịch vụ sau bán hàng. Vấn đề pháp lý: (1) Các điều khoản bắt buộc trong hợp đồng đại lý? (2) Quyền đơn phương chấm dứt? (3) Trách nhiệm khi đại lý vi phạm?",
+                    resolution: "Giải pháp: (1) Hợp đồng đại lý phải có: Phạm vi đại lý, thời hạn, hoa hồng, phương thức thanh toán, quyền và nghĩa vụ các bên. (2) Bên giao đại lý có quyền đơn phương chấm dứt nếu bên đại lý vi phạm nghiêm trọng. (3) Quy định rõ cơ chế kiểm soát giá, chất lượng dịch vụ trong hợp đồng.",
+                    outcome: "Kết quả: Hai bên ký hợp đồng đại lý 2 năm, hoa hồng 12%, có điều khoản độc quyền khu vực với cam kết doanh số tối thiểu.",
+                    attachments: [
+                        { name: "Mau_Hop_Dong_Dai_Ly_Thuong_Mai.docx", url: "#", size: "320 KB" }
+                    ]
+                },
+                {
+                    id: 10,
+                    title: "Giải quyết tranh chấp hợp đồng thuê văn phòng",
+                    field: "Dân sự",
+                    date: "22/03/2026",
+                    views: 712,
+                    shortAnswer: "Bên thuê có quyền đơn phương chấm dứt nếu bên cho thuê không bảo đảm quyền sử dụng nhà thuê. Phải báo before 30 ngày and yêu cầu hoàn trả tiền cọc.",
+                    summary: "Doanh nghiệp thuê văn phòng nhưng chủ nhà yêu cầu tăng giá đột ngột và cắt điện nước khi doanh nghiệp không đồng ý. Doanh nghiệp cần tư vấn về quyền đơn phương chấm dứt hợp đồng và đòi lại tiền cọc.",
+                    content: "Tình huống: Công ty M ký hợp đồng thuê văn phòng 3 năm, cọc 3 tháng (45 triệu). Sau 1 năm, chủ nhà yêu cầu tăng giá 30%, công ty không đồng ý. Chủ nhà cắt điện nước, gây khó khăn cho hoạt động. Công ty muốn chuyển đi và đòi lại tiền cọc. Vấn đề pháp lý: (1) Hành vi của chủ nhà có phải là vi phạm hợp đồng không? (2) Công ty có quyền đơn phương chấm dứt không? (3) Có được đòi lại tiền cọc không?",
+                    resolution: "Giải pháp: (1) Hành vi cắt điện nước là vi phạm nghĩa vụ bên cho thuê theo Điều 477 BLDS 2015. (2) Công ty có quyền đơn phương chấm dứt do bên cho thuê vi phạm nghiêm trọng nghĩa vụ. (3) Gửi thông báo chấm dứt hợp đồng, yêu cầu hoàn trả cọc trong 30 ngày. (4) Nếu không được, khởi kiện tại Tòa án.",
+                    outcome: "Kết quả: Sau khi nhận được thông báo pháp lý, chủ nhà hoàn trả 45 triệu tiền cọc. Công ty chuyển văn phòng mới.",
+                    attachments: []
+                },
+                {
+                    id: 11,
+                    title: "Thủ tục đăng ký thay đổi ngành nghề kinh doanh",
+                    field: "Doanh nghiệp",
+                    date: "18/03/2026",
+                    views: 856,
+                    shortAnswer: "Nộp hồ sơ online tại Cổng DKKD quốc gia gồm: Thông báo thay đổi, Quyết định của HĐTV/ĐHĐCĐ, Bản sao Nghị quyết. Thời gian 3-5 ngày.",
+                    summary: "Doanh nghiệp muốn bổ sung ngành nghề kinh doanh mới (bán lẻ trực tuyến) nhưng chưa rõ về thủ tục, thời gian và chi phí đăng ký thay đổi. Cần tư vấn chi tiết các bước thực hiện.",
+                    content: "Tình huống: Công ty N có ngành nghề chính là bán buôn thiết bị điện tử. Nay muốn mở rộng sang bán lẻ trực tuyến (e-commerce). Công ty chưa rõ: (1) Cần bổ sung mã ngành nào? (2) Thủ tục đăng ký thay đổi? (3) Có cần giấy phép con không? (4) Thời gian và chi phí? Vấn đề pháp lý: Đăng ký thay đổi nội dung ĐKKD theo Luật Doanh nghiệp 2020.",
+                    resolution: "Giải pháp: (1) Bổ sung mã ngành 4791 - Bán lẻ theo phương thức internet. (2) Hồ sơ: Thông báo thay đổi (theo mẫu), Quyết định của HĐTV/ĐHĐCĐ, Bản sao Nghị quyết. (3) Nộp online tại dangkykinhdoanh.gov.vn. (4) Không cần giấy phép con trừ khi bán hàng đặc biệt (thuốc, vũ khí...).",
+                    outcome: "Kết quả: Công ty hoàn thành đăng ký sau 4 ngày làm việc, chi phí 50.000đ lệ phí nhà nước. Chính thức hoạt động bán lẻ trực tuyến.",
+                    attachments: [
+                        { name: "Danh_Muc_Ma_Nganh_Kinh_Doanh_2026.xlsx", url: "#", size: "1.8 MB" }
+                    ]
+                },
+                {
+                    id: 12,
+                    title: "Xử lý hóa đơn điện tử bị sai thông tin",
+                    field: "Thuế",
+                    date: "15/03/2026",
+                    views: 934,
+                    shortAnswer: "Hóa đơn sai phải hủy và lập hóa đơn mới. Không được tẩy xóa, sửa chữa. Thông báo với cơ quan thuế trước khi hủy.",
+                    summary: "Doanh nghiệp xuất hóa đơn điện tử cho khách hàng nhưng sau đó phát hiện sai thông tin (sai mã số thuế, sai số tiền). Kế toán lo ngại bị xử phạt và cần tư vấn về cách xử lý hóa đơn sai.",
+                    content: "Tình huống: Công ty O xuất hóa đơn 500 triệu cho khách, sau đó phát hiện sai mã số thuế (sai 1 số). Khách yêu cầu xuất lại để được khấu trừ thuế. Kế toán không rõ: (1) Có được sửa hóa đơn không? (2) Thủ tục hủy hóa đơn sai? (3) Có bị phạt không? Vấn đề pháp lý: Xử lý hóa đơn điện tử theo Nghị định 123/2020/NĐ-CP.",
+                    resolution: "Giải pháp: (1) Hóa đơn điện tử sai không được sửa, phải hủy và lập mới. (2) Gửi thông báo hủy hóa đơn lên cơ quan thuế qua cổng hóa đơn điện tử. (3) Lập hóa đơn mới với thông tin đúng. (4) Lưu biên bản hủy hóa đơn và thông báo thuế.",
+                    outcome: "Kết quả: Công ty hủy hóa đơn sai, xuất hóa đơn mới. Không bị phạt vì chủ động phát hiện và xử lý trước khi cơ quan thuế kiểm tra.",
+                    attachments: []
+                }
+            ];
+
+            const resources = ["Sổ tay hỗ trợ pháp lý cho doanh nghiệp nhỏ và vừa", "Bộ biểu mẫu thủ tục pháp lý cơ bản", "Cẩm nang thực hiện hợp đồng thương mại", "Hướng dẫn xử lý tình huống pháp lý thường gặp"];
+
+            const contactData = {
+                title: "LIÊN HỆ TRUNG TÂM HỖ TRỢ PHÁP LÝ DOANH NGHIỆP NHỎ VÀ VỪA",
+                date: "13/04/2026",
+                address: "58 - 60 Trần Phú - Ba Đình - Hà Nội",
+                phone: "024.6271.7579",
+                director: "Trần Minh Sơn",
+                email: "tthtpldn@moj.gov.vn",
+                attachments: [
+                    { name: "Danh_ba_dien_thoai_Trung_tam_2026.pdf", url: "#" },
+                    { name: "Quy_che_tiep_nhan_ho_tro.docx", url: "#" }
+                ]
+            };
+
+            const orgChartData = {
+                title: "CƠ CẤU TỔ CHỨC TRUNG TÂM HỖ TRỢ PHÁP LÝ CHO DOANH NGHIỆP NHỎ VÀ VỪA",
+                date: "13/04/2026",
+                attachments: [
+                    { name: "SoDo_CoCauToChuc_2026.pdf", url: "#" }
+                ],
+                nodes: {
+                    director: "GIÁM ĐỐC",
+                    viceDirectors: [
+                        "PHÓ GIÁM ĐỐC",
+                        "PHÓ GIÁM ĐỐC"
+                    ],
+                    departments: [
+                        "Bộ phận Hành chính - Tổng hợp",
+                        "Bộ phận Tư vấn pháp luật và hỗ trợ giải quyết tranh chấp",
+                        "Bộ phận hỗ trợ pháp lý liên ngành",
+                        "Bộ phận bồi dưỡng, tập huấn nghiệp vụ pháp luật"
+                    ]
+                }
+            };
+
+            const lienNganhData = {
+                title: "CHƯƠNG TRÌNH HỖ TRỢ PHÁP LÝ LIÊN NGÀNH",
+                publishDate: "13/04/2026",
+                updateFrequency: "Định kỳ hàng tháng",
+                intro: "Chương trình HTPL liên ngành là hoạt động phối hợp giữa Trung tâm HTPLDN với các cơ quan nhà nước nhằm cung cấp dịch vụ pháp lý toàn diện, miễn phí cho doanh nghiệp vừa và nhỏ.",
+                programs: [
+                    {
+                        icon: "🏢",
+                        title: "Tư vấn pháp lý",
+                        desc: "Cung cấp dịch vụ tư vấn pháp lý miễn phí cho doanh nghiệp.",
+                        details: ["Thời gian: <strong>Thứ 6 hàng tuần</strong>", "Địa điểm: <strong>Tại trụ sở Trung tâm</strong>"],
+                        ctaText: "Đăng ký ngay"
+                    },
+                    {
+                        icon: "📝",
+                        title: "Soạn thảo văn bản",
+                        desc: "Hỗ trợ doanh nghiệp trong việc thiết lập văn bản.",
+                        details: ["Hồ sơ thành lập DN", "Hợp đồng kinh doanh", "Văn bản pháp lý khác"],
+                        ctaText: "Đăng ký ngay"
+                    },
+                    {
+                        icon: "📚",
+                        title: "Đào tạo pháp lý",
+                        desc: "Nâng cao kiến thức và kỹ năng rủi ro pháp lý.",
+                        details: ["Tập huấn: <strong>Luật Doanh nghiệp 2020</strong>", "Workshop: <strong>Quản trị rủi ro pháp lý</strong>"],
+                        ctaText: "Xem lịch đào tạo"
+                    },
+                    {
+                        icon: "⚖️",
+                        title: "Hòa giải, trọng tài",
+                        desc: "Hỗ trợ giải quyết tranh chấp nhanh chóng, hiệu quả.",
+                        details: ["Hòa giải thương mại", "Trọng tài thương mại"],
+                        ctaText: "Đăng ký hòa giải"
+                    },
+                    {
+                        icon: "🤝",
+                        title: "Kết nối doanh nghiệp",
+                        desc: "Mạng lưới kết nối doanh nghiệp với các đối tác",
+                        details: [
+                            "Kết nối với các luật sư, công ty luật uy tín",
+                            "Kết nối với các đơn vị hỗ trợ khởi nghiệp khác",
+                            "Cung cấp cơ hội hợp tác kinh doanh và đầu tư"
+                        ],
+                        ctaText: "Tham gia mạng lưới",
+                        isFullWidth: true
+                    }
+                ],
+                attachments: [
+                    { name: "ChuongTrinhHTPL_LienNganh.pdf", url: "#", fileName: "ChuongTrinhHTPL_LienNganh.pdf" }
+                ]
+            };
+
+            const functionDutyData = {
+                title: "Chức năng nhiệm vụ",
+                date: "10/01/2026",
+                attachments: [
+                    { name: "Nghi_dinh_09_2026_ND_CP.pdf", url: "#" }
+                ],
+                content: {
+                    intro: "Nghị định số 09/2026/NĐ-CP ngày 10 tháng 01 năm 2026 của Chính phủ quy định chức năng, nhiệm vụ, quyền hạn và cơ cấu tổ chức của Bộ Tư pháp như sau:",
+                    sections: [
+                        {
+                            heading: "Vị trí và chức năng",
+                            text: "Bộ Tư pháp là cơ quan của Chính phủ, thực hiện chức năng quản lý nhà nước về: Xây dựng pháp luật; tổ chức thi hành pháp luật; thi hành án dân sự; hành chính tư pháp; bổ trợ tư pháp; công tác pháp chế; kiểm soát thủ tục hành chính; quản lý nhà nước các dịch vụ sự nghiệp công trong các lĩnh vực thuộc phạm vi quản lý nhà nước của bộ."
+                        },
+                        {
+                            heading: "Nhiệm vụ và quyền hạn",
+                            text: "Bộ Tư pháp thực hiện các nhiệm vụ, quyền hạn theo quy định của Luật Tổ chức Chính phủ, quy định của Chính phủ về chức năng, nhiệm vụ, quyền hạn và cơ cấu tổ chức của bộ, cơ quan ngang bộ và các nhiệm vụ, quyền hạn cụ thể sau đây:",
+                            list: [
+                                "1. Trình Chính phủ dự án luật, nghị quyết của Quốc hội, dự án pháp lệnh, nghị quyết của Ủy ban Thường vụ Quốc hội; dự thảo nghị định, nghị quyết của Chính phủ; dự thảo quyết định của Thủ tướng Chính phủ trong các lĩnh vực thuộc phạm vi quản lý theo chương trình, kế hoạch xây dựng pháp luật hàng năm đã được phê duyệt và các dự án, đề án khác theo sự phân công của Chính phủ, Thủ tướng Chính phủ."
+                            ]
+                        }
+                    ]
+                }
+            };
+
+            // Routing logic mappings
+            const contentBySubPage = {
+                "gioi-thieu-chung": [
+                    { id: 1, title: "Giới thiệu chung về chuyên trang hỗ trợ pháp lý doanh nghiệp", summary: "Khái quát mục tiêu, phạm vi cung cấp thông tin và vai trò của chuyên trang...", date: "06/04/2026", attachments: [{ name: "GioiThieuChung.pdf", url: "#" }] }
+                ],
+                "tin-tuc-noi-bat": newsData,
+                "thong-bao": thongBaoData,
+                "su-kien": suKienData,
+                "hoat-dong-phoi-hop": hoatDongPhoiHopData,
+                "multimedia": mediaData, // Ánh xạ dữ liệu Multimedia
+                "bai-giang-truc-tuyen": videoData, // Ánh xạ dữ liệu Video bài giảng
+                "bai-viet-chuyen-gia": nghienCuuData,
+                "phong-van": nghienCuuData,
+                "nghien-cuu-trao-doi-chi-tiet": nghienCuuData,
+                "kinh-nghiem-thuc-tien": nghienCuuData,
+                "tong-quan-chuong-trinh": tongQuanData,
+                "chuong-trinh-bo-nganh": boNganhData,
+                "chuong-trinh-dia-phuong": diaPhuongData,
+                "van-ban-moi-ban-hanh": vanBanChinhSachMoiData,
+                "van-ban-phap-luat": vanBanPhapLuatData,
+                "tai-lieu-boi-duong": bieuMauData,
+                "bieu-mau-hop-dong": bieuMauData,
+                "tai-lieu-htpl": taiLieuHTPLData,
+                "longform": mediaData,
+                "ke-hoach-dao-tao": keHoachDaoTaoData,
+                "khoa-hoc": khoaHocData,
+                "hoi-dap-phap-luat": hoiDapData,
+                "tu-van-chuyen-sau": tuVanChuyenSauData,
+                "mang-luoi-tu-van-vien": { advisors: advisorsData, organizations: orgData },
+                "vu-viec-dien-hinh": vuViecDienHinhData
+            };
+
+            const [activeMenu, setActiveMenu] = useState(null);
+            const prevMenuKeyRef = useRef("trang-chu");
+            const prevSubKeyRef = useRef(null);
+            const [route, setRoute] = useState({
+                page: "home",
+                menuKey: "trang-chu",
+                subKey: null,
+                articleId: null,
+                previewFileName: null
+            });
+            const [showAccountMenu, setShowAccountMenu] = useState(false);
+            const [showHistory, setShowHistory] = useState(false);
+            const [isLoggedIn, setIsLoggedIn] = useState(false);
+            const [userType, setUserType] = useState('doanh-nghiep'); // 'ca-nhan' or 'doanh-nghiep'
+            const [showLoginPopup, setShowLoginPopup] = useState(false);
+            const [pendingAction, setPendingAction] = useState(null); // { type: 'sendQuestion', menuKey, subKey }
+            const [registeredCourses, setRegisteredCourses] = useState(new Map([
+                [1301, { status: 'da-duyet', date: '12/04/2026' }],
+                [1302, { status: 'cho-duyet', date: '13/04/2026' }],
+                [1303, { status: 'tu-choi', date: '14/04/2026' }],
+                [1304, { status: 'cho-duyet', date: '15/04/2026' }],
+                [1305, { status: 'da-duyet', date: '16/04/2026' }],
+                [1306, { status: 'cho-duyet', date: '17/04/2026' }],
+                [1307, { status: 'tu-choi', date: '18/04/2026' }],
+                [1308, { status: 'da-duyet', date: '19/04/2026' }],
+                [1309, { status: 'cho-duyet', date: '20/04/2026' }],
+                [1310, { status: 'da-duyet', date: '21/04/2026' }],
+                [1311, { status: 'da-duyet', date: '22/04/2026' }],
+                [1312, { status: 'cho-duyet', date: '23/04/2026' }]
+            ]));
+            const [myCases, setMyCases] = useState([
+                {
+                    id: 1,
+                    title: "Tranh chấp hợp đồng mua bán hàng hóa quốc tế",
+                    legalField: "Thương mại",
+                    supportType: "Giải quyết tranh chấp",
+                    priority: "Cao",
+                    requestContent: "Doanh nghiệp Việt Nam ký hợp đồng xuất khẩu gạo với đối tác Philippines. Bên mua không thanh toán với lý do chất lượng hàng hóa. Doanh nghiệp cần tư vấn về thủ tục khởi kiện và đòi bồi thường.",
+                    obstacleDesc: "Chênh lệch múi giờ và khoảng cách địa lý khiến việc trao đổi gặp khó khăn.",
+                    priorityReason: "Thời hạn khiếu nại theo hợp đồng sắp hết.",
+                    notes: "Đã gửi văn bản yêu cầu thanh toán lần 2.",
+                    status: "da-hoan-thanh",
+                    receptionResult: "Cục Hỗ trợ pháp lý liên ngành đã tiếp nhận hồ sơ. Chuyên viên xử lý: Nguyễn Thị Mai. Thời gian xử lý dự kiến: 5 ngày làm việc kể từ ngày 15/04/2026.",
+                    resolutionResult: "Cục Hỗ trợ pháp lý liên ngành đã tư vấn, hướng dẫn quy trình khởi kiện tranh chấp thương mại quốc tế và hỗ trợ hòa giải thành công với đối tác Philippines.",
+                    resultFiles: [{ name: "BienBanHoaGiai_KinhTe.pdf", size: "2.4 MB" }, { name: "KetQuaGiaiQuyet_HS01.pdf", size: "1.8 MB" }],
+                    date: "15/04/2026",
+                    files: ["HopDongMuaBan.pdf", "ChungThuChatLuong.docx"]
+                },
+                {
+                    id: 2,
+                    title: "Vướng mắc về hoàn thuế GTGT dự án phần mềm",
+                    legalField: "Thuế / Hóa đơn điện tử",
+                    supportType: "Tư vấn pháp lý",
+                    priority: "Trung bình",
+                    requestContent: "Doanh nghiệp xuất khẩu phần mềm gặp khó khăn khi làm thủ tục hoàn thuế giá trị gia tăng đầu vào đối với các dịch vụ thuê ngoài phục vụ dự án.",
+                    obstacleDesc: "Quy định thuế đối với sản phẩm phần mềm xuất khẩu chưa rõ ràng ở địa phương.",
+                    priorityReason: "",
+                    notes: "",
+                    status: "dang-xu-ly",
+                    receptionResult: "Hồ sơ vụ việc của bạn đã được tiếp nhận và đang xử lý. Chúng tôi sẽ liên hệ lại với bạn sau 5-10 ngày làm việc!",
+                    date: "12/04/2026",
+                    files: ["BangKeHoaDon.xlsx"]
+                },
+                {
+                    id: 3,
+                    title: "Khiếu nại quyết định xử phạt vi phạm hành chính",
+                    legalField: "Hành chính",
+                    supportType: "Giải quyết tranh chấp",
+                    priority: "Rất cao",
+                    requestContent: "Doanh nghiệp nhận quyết định xử phạt vi phạm hành chính về phòng cháy chữa cháy quá mức quy định. Cần soạn thảo đơn khiếu nại khẩn cấp.",
+                    obstacleDesc: "Biên bản xử phạt ghi nhận thiếu khách quan hành vi khắc phục của doanh nghiệp.",
+                    priorityReason: "Thời hạn khiếu nại còn lại chỉ còn 3 ngày.",
+                    notes: "Cần mẫu đơn khiếu nại chuẩn và tư vấn thủ tục.",
+                    status: "cho-tiep-nhan",
+                    receptionResult: "Đang kiểm tra tính hợp lệ của hồ sơ và tài liệu đính kèm trước khi bàn giao cho bộ phận xử lý chuyên môn.",
+                    date: "16/04/2026",
+                    files: ["QuyetDinhXuPhat.pdf"]
+                },
+                {
+                    id: 4,
+                    title: "Tranh chấp quyền sở hữu công nghiệp nhãn hiệu trà sữa",
+                    legalField: "Sở hữu trí tuệ",
+                    supportType: "Giải quyết tranh chấp",
+                    priority: "Cao",
+                    requestContent: "Nhãn hiệu trà sữa của doanh nghiệp bị một đơn vị khác nhái lại kiểu dáng công nghiệp và logo gây nhầm lẫn cho khách hàng. Doanh nghiệp yêu cầu tư vấn các bước xử lý vi phạm sở hữu trí tuệ.",
+                    obstacleDesc: "Đơn vị vi phạm đăng ký địa chỉ kinh doanh ảo, khó xác định chủ thể.",
+                    priorityReason: "Ảnh hưởng nghiêm trọng đến doanh thu và uy tín thương hiệu.",
+                    notes: "Đã thu thập đầy đủ bằng chứng hình ảnh vi phạm.",
+                    status: "dang-xu-ly",
+                    receptionResult: "Hồ sơ vụ việc của bạn đã được tiếp nhận và đang xử lý. Chúng tôi sẽ liên hệ lại với bạn sau 5-10 ngày làm việc!",
+                    date: "14/04/2026",
+                    files: ["BangChungViPham.zip", "GiayChungNhanNhanHieu.pdf"]
+                },
+                {
+                    id: 5,
+                    title: "Vướng mắc về hợp đồng lao động không xác định thời hạn",
+                    legalField: "Lao động / BHXH",
+                    supportType: "Tư vấn pháp lý",
+                    priority: "Trung bình",
+                    requestContent: "Doanh nghiệp muốn đơn phương chấm dứt hợp đồng lao động không xác định thời hạn với nhân viên thường xuyên không hoàn thành nhiệm vụ nhưng lo ngại rủi ro pháp lý.",
+                    obstacleDesc: "Quy chế đánh giá hoàn thành công việc của doanh nghiệp chưa được ban hành đồng bộ.",
+                    priorityReason: "",
+                    notes: "Cần tư vấn trình tự các bước để tránh bị kiện ngược.",
+                    status: "cho-tiep-nhan",
+                    receptionResult: "",
+                    date: "13/04/2026",
+                    files: ["HopDongLaoDong_NV.docx"]
+                },
+                {
+                    id: 6,
+                    title: "Thủ tục xin cấp Giấy phép vệ sinh an toàn thực phẩm",
+                    legalField: "Hành chính",
+                    supportType: "Tư vấn pháp lý",
+                    priority: "Thấp",
+                    requestContent: "Doanh nghiệp chuẩn bị mở chuỗi nhà hàng ăn uống tại Hà Nội, cần hướng dẫn chi tiết về điều kiện và hồ sơ xin cấp giấy chứng nhận cơ sở đủ điều kiện an toàn thực phẩm.",
+                    obstacleDesc: "Mặt bằng kinh doanh có cấu trúc phức tạp, khó thiết kế bếp một chiều.",
+                    priorityReason: "",
+                    notes: "",
+                    status: "da-hoan-thanh",
+                    receptionResult: "Sở Y tế đã kiểm tra thực tế cơ sở và cấp giấy chứng nhận số 102/ATTP cho địa điểm đầu tiên.",
+                    resolutionResult: "Sở Y tế đã kiểm tra thực tế cơ sở và cấp giấy chứng nhận đủ điều kiện an toàn thực phẩm số 102/ATTP cho địa điểm nhà hàng.",
+                    resultFiles: [{ name: "GiayChungNhan_ATTP_102.pdf", size: "3.1 MB" }],
+                    date: "10/04/2026",
+                    files: ["BanVeMatBang.pdf"]
+                },
+                {
+                    id: 7,
+                    title: "Tư vấn pháp luật về phát hành trái phiếu doanh nghiệp riêng lẻ",
+                    legalField: "Tài chính - Chứng khoán",
+                    supportType: "Tư vấn pháp lý",
+                    priority: "Cao",
+                    requestContent: "Công ty cổ phần chưa đại chúng muốn phát hành trái phiếu riêng lẻ để bổ sung vốn lưu động. Cần tư vấn về điều kiện phát hành và đại lý đăng ký trái phiếu.",
+                    obstacleDesc: "Quy định mới về điều kiện phát hành trái phiếu có nhiều thay đổi thắt chặt.",
+                    priorityReason: "Kế hoạch kinh doanh yêu cầu giải ngân vốn trước Quý 3/2026.",
+                    notes: "Đã có báo cáo kiểm toán năm gần nhất.",
+                    status: "dang-xu-ly",
+                    receptionResult: "Hồ sơ vụ việc của bạn đã được tiếp nhận và đang xử lý. Chúng tôi sẽ liên hệ lại với bạn sau 5-10 ngày làm việc!",
+                    date: "08/04/2026",
+                    files: ["BaoCaoKiemToan.pdf", "NghiQuyetHDQT.docx"]
+                },
+                {
+                    id: 8,
+                    title: "Tranh chấp hợp đồng thuê mặt bằng kinh doanh siêu thị",
+                    legalField: "Bất động sản",
+                    supportType: "Giải quyết tranh chấp",
+                    priority: "Rất cao",
+                    requestContent: "Bên cho thuê mặt bằng bất ngờ thông báo tăng giá thuê lên 30% trái với thỏa thuận trong hợp đồng và đe dọa cắt điện nước nếu doanh nghiệp không đồng ý.",
+                    obstacleDesc: "Hợp đồng thuê cũ có điều khoản gia hạn chung chung chưa chặt chẽ.",
+                    priorityReason: "Bất đồng ảnh hưởng trực tiếp đến hoạt động kinh doanh hàng ngày.",
+                    notes: "Cần chuyên gia tư vấn biện pháp khẩn cấp tạm thời.",
+                    status: "cho-tiep-nhan",
+                    receptionResult: "Đang kiểm tra hồ sơ pháp lý về quyền sở hữu mặt bằng thuê trước khi mời các bên lên hòa giải.",
+                    date: "07/04/2026",
+                    files: ["HopDongThueMatBang.pdf", "ThongBaoTangGia.pdf"]
+                },
+                {
+                    id: 9,
+                    title: "Vướng mắc về ưu đãi thuế thu nhập doanh nghiệp công nghệ thông tin",
+                    legalField: "Thuế / Hóa đơn điện tử",
+                    supportType: "Tư vấn pháp lý",
+                    priority: "Trung bình",
+                    requestContent: "Doanh nghiệp hoạt động trong lĩnh vực sản xuất phần mềm muốn làm thủ tục hưởng mức thuế suất ưu đãi 10% nhưng bị cơ quan thuế địa phương từ chối do chưa rõ tiêu chí phân loại.",
+                    obstacleDesc: "Văn bản hướng dẫn của Bộ Thông tin & Truyền thông và Tổng cục Thuế chưa thống nhất.",
+                    priorityReason: "",
+                    notes: "Cần chuyên gia làm rõ khái niệm sản phẩm phần mềm tự sản xuất.",
+                    status: "tu-choi",
+                    receptionResult: "Hồ sơ của bạn đã bị từ chối!",
+                    date: "05/04/2026",
+                    files: ["GiayDangKyDoanhNghiep.pdf"]
+                },
+                {
+                    id: 10,
+                    title: "Thủ tục chuyển nhượng phần vốn góp trong công ty TNHH hai thành viên",
+                    legalField: "Doanh nghiệp",
+                    supportType: "Tư vấn pháp lý",
+                    priority: "Thấp",
+                    requestContent: "Một thành viên muốn chuyển nhượng toàn bộ phần vốn góp 30% của mình cho người ngoài công ty. Cần hướng dẫn quy trình thông báo và chào bán cho thành viên còn lại trước.",
+                    obstacleDesc: "Hai thành viên mâu thuẫn lớn, không chịu ký biên bản họp.",
+                    priorityReason: "",
+                    notes: "",
+                    status: "dang-xu-ly",
+                    receptionResult: "Hồ sơ vụ việc của bạn đã được tiếp nhận và đang xử lý. Chúng tôi sẽ liên hệ lại với bạn sau 5-10 ngày làm việc!",
+                    date: "04/04/2026",
+                    files: ["DieuLeCongTy.pdf"]
+                },
+                {
+                    id: 11,
+                    title: "Tranh chấp chấm dứt hợp đồng thương mại đơn phương",
+                    legalField: "Thương mại",
+                    supportType: "Giải quyết tranh chấp",
+                    priority: "Cao",
+                    requestContent: "Bên cung cấp dịch vụ logictics đơn phương chấm dứt hợp đồng trước hạn 6 tháng mà không báo trước 30 ngày theo thỏa thuận, gây đình trệ chuỗi cung ứng của doanh nghiệp.",
+                    obstacleDesc: "Thiệt hại thực tế khó đong đếm chính xác do biến động giá thị trường.",
+                    priorityReason: "Hàng hóa đang bị tồn kho tại cảng phát sinh chi phí lớn.",
+                    notes: "",
+                    status: "cho-tiep-nhan",
+                    receptionResult: "",
+                    date: "03/04/2026",
+                    files: ["HopDongDichVuLogistics.pdf"]
+                },
+                {
+                    id: 12,
+                    title: "Tư vấn đăng ký bảo hộ quyền tác giả cho phần mềm quản lý",
+                    legalField: "Sở hữu trí tuệ",
+                    supportType: "Tư vấn pháp lý",
+                    priority: "Trung bình",
+                    requestContent: "Doanh nghiệp vừa hoàn thiện phần mềm quản lý kho thông minh và muốn đăng ký bảo hộ quyền tác giả đối với mã nguồn và giao diện phần mềm.",
+                    obstacleDesc: "Chưa rõ cách thức nộp hồ sơ trực tuyến trên hệ thống mới của Cục Bản quyền tác giả.",
+                    priorityReason: "",
+                    notes: "",
+                    status: "da-hoan-thanh",
+                    receptionResult: "Đã cấp giấy chứng nhận bản quyền tác giả số 456/QTG ngày 01/04/2026.",
+                    resolutionResult: "Cục Bản quyền tác giả đã thẩm định hồ sơ hợp lệ và cấp Giấy chứng nhận đăng ký quyền tác giả số 456/QTG ngày 01/04/2026 cho phần mềm quản lý kho.",
+                    resultFiles: [{ name: "GiayChungNhan_QTG_456.pdf", size: "1.5 MB" }],
+                    date: "01/04/2026",
+                    files: ["MaNguon_GiaoDien.zip"]
+                },
+                {
+                    id: 13,
+                    title: "Vướng mắc về mức đóng BHXH cho lao động nước ngoài",
+                    legalField: "Lao động / BHXH",
+                    supportType: "Tư vấn pháp lý",
+                    priority: "Thấp",
+                    requestContent: "Doanh nghiệp tuyển dụng chuyên gia nước ngoài làm việc tại Việt Nam theo hình thức di chuyển nội bộ. Cần tư vấn các đối tượng này có thuộc diện đóng BHXH bắt buộc hay không.",
+                    obstacleDesc: "Các quy định tại Nghị định 143/2018/NĐ-CP còn nhiều điểm diễn giải khác nhau.",
+                    priorityReason: "",
+                    notes: "Cần câu trả lời bằng văn bản để làm việc với đoàn thanh tra BHXH sắp tới.",
+                    status: "dang-xu-ly",
+                    receptionResult: "Hồ sơ vụ việc của bạn đã được tiếp nhận và đang xử lý. Chúng tôi sẽ liên hệ lại với bạn sau 5-10 ngày làm việc!",
+                    date: "28/03/2026",
+                    files: ["QuyetDinhDieuDong.pdf", "GiayPhepLaoDong.pdf"]
+                },
+                {
+                    id: 14,
+                    title: "Thủ tục đăng ký thay đổi người đại diện theo pháp luật",
+                    legalField: "Doanh nghiệp",
+                    supportType: "Tư vấn pháp lý",
+                    priority: "Trung bình",
+                    requestContent: "Thay đổi Giám đốc kiêm người đại diện theo pháp luật từ người Việt Nam sang người nước ngoài. Hướng dẫn chuẩn bị hồ sơ nộp lên Sở Kế hoạch và Đầu tư.",
+                    obstacleDesc: "Hộ chiếu của người đại diện mới chưa được hợp pháp hóa lãnh sự.",
+                    priorityReason: "",
+                    notes: "",
+                    status: "da-hoan-thanh",
+                    receptionResult: "Phòng Đăng ký kinh doanh đã duyệt hồ sơ và cấp Giấy chứng nhận đăng ký doanh nghiệp thay đổi lần 3.",
+                    resolutionResult: "Phòng Đăng ký kinh doanh đã hoàn thành duyệt hồ sơ và cấp Giấy chứng nhận đăng ký doanh nghiệp thay đổi lần 3.",
+                    resultFiles: [{ name: "GiayDangKyDoanhNghiep_ThayDoiLan3.pdf", size: "2.1 MB" }],
+                    date: "25/03/2026",
+                    files: ["NghiQuyetDaiHoiCoDong.docx", "HoChieuNguoiDaiDien.pdf"]
+                },
+                {
+                    id: 15,
+                    title: "Tranh chấp chia tách doanh nghiệp và phân chia tài sản chung",
+                    legalField: "Doanh nghiệp",
+                    supportType: "Giải quyết tranh chấp",
+                    priority: "Rất cao",
+                    requestContent: "Các thành viên sáng lập quyết định chia tách công ty TNHH thành 2 công ty mới độc lập nhưng không thống nhất được tỷ lệ phân chia nợ phải trả và công nợ khách hàng.",
+                    obstacleDesc: "Có một số khoản nợ không rõ ràng về chứng từ gốc.",
+                    priorityReason: "Doanh nghiệp có nguy cơ bị ngân hàng phong tỏa tài khoản do nợ quá hạn.",
+                    notes: "Cần luật sư làm trung gian đàm phán giải quyết.",
+                    status: "cho-tiep-nhan",
+                    receptionResult: "",
+                    date: "22/03/2026",
+                    files: ["BaoCaoTaiChinh2025.xlsx", "NghiQuyetHoiDongThanhVien.pdf"]
+                }
+            ]);
+
+            const [proposals, setProposals] = useState([
+                { id: 1, field: 'Doanh nghiệp', content: 'Đề xuất khóa đào tạo pháp luật về quản trị rủi ro và tuân thủ dành cho doanh nghiệp khởi nghiệp quy mô nhỏ và vừa.', time: 'Quý 3/2026', location: 'Hà Nội', quantity: '40', status: 'da-gui', date: '10/04/2026' },
+                { id: 2, field: 'Thuế / Hóa đơn điện tử', content: 'Đào tạo và tập huấn thực hành khai quyết toán thuế thu nhập doanh nghiệp năm 2026.', time: 'Quý 2/2026', location: 'TP. Hồ Chí Minh', quantity: '50', status: 'da-tiep-nhan', date: '11/04/2026' },
+                { id: 3, field: 'Đầu tư', content: 'Tập huấn chuyên sâu Luật Đầu tư 2024 và các văn bản hướng dẫn thi hành mới nhất cho doanh nghiệp FDI.', time: 'Quý 4/2026', location: 'Đà Nẵng', quantity: '30', status: 'tu-choi', date: '12/04/2026' },
+                { id: 4, field: 'Sở hữu trí tuệ', content: 'Đề xuất khóa bồi dưỡng về bảo hộ tài sản trí tuệ và xử lý tranh chấp tên miền trên môi trường số.', time: 'Quý 2/2026', location: 'Trực tuyến', quantity: '100', status: 'da-gui', date: '13/04/2026' },
+                { id: 5, field: 'Lao động / BHXH', content: 'Đào tạo quy định mới về hợp đồng lao động, tiền lương và các chế độ bảo hiểm xã hội bắt buộc.', time: 'Quý 3/2026', location: 'Hải Phòng', quantity: '60', status: 'da-tiep-nhan', date: '14/04/2026' },
+                { id: 6, field: 'Hợp đồng thương mại', content: 'Kỹ năng đàm phán, soạn thảo và phòng ngừa rủi ro tranh chấp hợp đồng mua bán hàng hóa quốc tế.', time: 'Quý 4/2026', location: 'Cần Thơ', quantity: '45', status: 'tu-choi', date: '15/04/2026' },
+                { id: 7, field: 'Doanh nghiệp', content: 'Khóa bồi dưỡng pháp luật về quản trị nội bộ doanh nghiệp và trách nhiệm của người đại diện theo pháp luật.', time: 'Quý 3/2026', location: 'Hà Nội', quantity: '35', status: 'da-gui', date: '16/04/2026' },
+                { id: 8, field: 'Thuế / Hóa đơn điện tử', content: 'Chuyên đề hướng dẫn hóa đơn điện tử khởi tạo từ máy tính tiền và các sai sót thường gặp.', time: 'Quý 2/2026', location: 'TP. Hồ Chí Minh', quantity: '55', status: 'da-tiep-nhan', date: '17/04/2026' },
+                { id: 9, field: 'Đầu tư', content: 'Hội thảo phổ biến các quy định về ưu đãi đầu tư và thủ tục xin cấp giấy chứng nhận đăng ký đầu tư.', time: 'Quý 3/2026', location: 'Đà Nẵng', quantity: '40', status: 'da-gui', date: '18/04/2026' },
+                { id: 10, field: 'Sở hữu trí tuệ', content: 'Hướng dẫn đăng ký nhãn hiệu sản phẩm và bảo vệ quyền sở hữu công nghiệp cho doanh nghiệp vừa và nhỏ.', time: 'Quý 4/2026', location: 'Trực tuyến', quantity: '80', status: 'da-tiep-nhan', date: '19/04/2026' },
+                { id: 11, field: 'Lao động / BHXH', content: 'Kỹ năng giải quyết tranh chấp lao động và xây dựng nội quy lao động đúng chuẩn pháp luật.', time: 'Quý 3/2026', location: 'Hà Nội', quantity: '50', status: 'tu-choi', date: '20/04/2026' },
+                { id: 12, field: 'Hợp đồng thương mại', content: 'Chuyên đề pháp lý về hợp đồng điện tử và chữ ký số trong giao dịch thương mại hiện đại.', time: 'Quý 2/2026', location: 'TP. Hồ Chí Minh', quantity: '60', status: 'da-gui', date: '21/04/2026' }
+            ]);
+
+            // Update refs when route changes
+            useEffect(() => {
+                if (route.menuKey) prevMenuKeyRef.current = route.menuKey;
+                if (route.subKey) prevSubKeyRef.current = route.subKey;
+            }, [route.menuKey, route.subKey]);
+
+            const currentMenu = useMemo(() => navItems.find((item) => item.key === route.menuKey) || navItems[0], [route.menuKey]);
+            
+            const currentSubPage = useMemo(() => {
+                if (!currentMenu?.children?.length) {
+                    if (currentMenu && currentMenu.key !== "trang-chu") {
+                        return { key: currentMenu.key, label: currentMenu.label };
+                    }
+                    return null;
+                }
+                const found = currentMenu.children.find((child) => child.key === route.subKey);
+                if (found) return found;
+                // Nếu không tìm thấy subKey trong children, trả về object giả định thay vì fallback
+                if (route.subKey) return { 
+                    key: route.subKey, 
+                    label: route.subKey === "longform" ? "Longform" : 
+                           route.subKey === "khoa-hoc-da-dang-ky" ? "Khóa học đã đăng ký" : 
+                           route.subKey === "de-xuat-dao-tao" ? "Đề xuất đào tạo" : 
+                           route.subKey === "ket-qua-dao-tao" ? "Kết quả đào tạo" :
+                           route.subKey === "lich-su-hoi-dap-tu-van" ? "Lịch sử hỏi đáp/tư vấn" :
+                           route.subKey === "tra-cuu-lich-su-hoi-dap-tu-van" ? "Tra cứu lịch sử hỏi đáp/tư vấn" :
+                           route.subKey === "lich-su-ho-so-vu-viec" ? "Hồ sơ vụ việc của tôi" :
+                           route.subKey === "ho-so-phap-ly-dn" ? "Hồ sơ pháp lý doanh nghiệp" :
+                           route.subKey 
+                };
+                return currentMenu.children[0];
+            }, [currentMenu, route.subKey]);
+
+            const currentItems = useMemo(() => {
+                if (!currentSubPage) return [];
+                return contentBySubPage[currentSubPage.key] || [
+                    { id: 99, title: `Danh sách chuyên mục ${currentSubPage.label}`, summary: "Nội dung đang được cập nhật...", date: "06/04/2026", attachments: [{ name: `TaiLieu_${currentSubPage.key}.pdf`, url: "#"}] }
+                ];
+            }, [currentSubPage]);
+
+            // Tìm article chi tiết - tìm theo subKey của route, sau đó tìm trong tất cả
+            let currentArticle = null;
+            if (route.articleId) {
+                // Tìm trong tất cả các subpage, ưu tiên subKey trùng with route.subKey
+                const preferredKey = route.subKey;
+                // Tìm ở preferredKey trước
+                if (preferredKey && contentBySubPage[preferredKey]) {
+                    const found = contentBySubPage[preferredKey].find(item => item.id == route.articleId);
+                    if (found) {
+                        currentArticle = { ...found, _subKey: preferredKey };
+                    }
+                }
+                // Nếu không thấy, tìm ở các key khác
+                if (!currentArticle) {
+                    for (const [subKey, items] of Object.entries(contentBySubPage)) {
+                        const found = items.find(item => item.id == route.articleId);
+                        if (found) {
+                            currentArticle = { ...found, _subKey: subKey };
+                            break;
+                        }
+                    }
+                }
+                console.log('[DEBUG] route.articleId:', route.articleId, 'route.subKey:', route.subKey, 'currentArticle:', currentArticle);
+            }
+
+            const navigateHome = () => {
+                setRoute({ page: "home", menuKey: "trang-chu", subKey: null, articleId: null, previewFileName: null });
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            };
+            
+            const navigateToList = (menuKey, subKey) => {
+                const menu = navItems.find((item) => item.key === menuKey);
+                const fallbackSub = subKey || menu?.children?.[0]?.key || menuKey;
+                setRoute({ page: "list", menuKey, subKey: fallbackSub, articleId: null, previewFileName: null });
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            };
+
+            const navigateToDetail = (article) => {
+                // Tìm menuKey và subKey bằng cách search trong contentBySubPage
+                let foundMenuKey = article.menuKey;
+                let foundSubKey = article.subKey;
+                if (!foundMenuKey || !foundSubKey) {
+                    const menuSubMap = {
+                        "tin-tuc-noi-bat": { menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat" },
+                        "thong-bao": { menuKey: "hoat-dong-trung-tam", subKey: "thong-bao" },
+                        "su-kien": { menuKey: "hoat-dong-trung-tam", subKey: "su-kien" },
+                        "hoat-dong-phoi-hop": { menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop" },
+                        "multimedia": { menuKey: "hoat-dong-trung-tam", subKey: "multimedia" },
+                        "longform": { menuKey: "hoat-dong-trung-tam", subKey: "longform" },
+                        "van-ban-moi-ban-hanh": { menuKey: "van-ban-phap-luat", subKey: "van-ban-moi-ban-hanh" },
+                        "van-ban-phap-luat": { menuKey: "van-ban-phap-luat", subKey: "van-ban-phap-luat" },
+                        "bai-giang-truc-tuyen": { menuKey: "dao-tao", subKey: "bai-giang-truc-tuyen" },
+                        "tai-lieu-boi-duong": { menuKey: "dao-tao", subKey: "tai-lieu-boi-duong" },
+                        "ke-hoach-dao-tao": { menuKey: "dao-tao", subKey: "ke-hoach-dao-tao" },
+                        "khoa-hoc": { menuKey: "dao-tao", subKey: "khoa-hoc" },
+                        "hoi-dap-phap-luat": { menuKey: "tu-van-phap-luat", subKey: "hoi-dap-phap-luat" },
+                        "tu-van-chuyen-sau": { menuKey: "tu-van-phap-luat", subKey: "tu-van-chuyen-sau" },
+                        "bieu-mau-hop-dong": { menuKey: "tu-van-phap-luat", subKey: "bieu-mau-hop-dong" },
+                        "tai-lieu-htpl": { menuKey: "tu-van-phap-luat", subKey: "tai-lieu-htpl" },
+                        "vu-viec-dien-hinh": { menuKey: "tu-van-phap-luat", subKey: "vu-viec-dien-hinh" },
+                        "phong-van": { menuKey: "nghien-cuu-trao-doi", subKey: "phong-van" },
+                        "nghien-cuu-trao-doi-chi-tiet": { menuKey: "nghien-cuu-trao-doi", subKey: "nghien-cuu-trao-doi-chi-tiet" },
+                        "tong-quan-chuong-trinh": { menuKey: "chuong-trinh", subKey: "tong-quan-chuong-trinh" },
+                        "chuong-trinh-bo-nganh": { menuKey: "chuong-trinh", subKey: "chuong-trinh-bo-nganh" },
+                        "chuong-trinh-dia-phuong": { menuKey: "chuong-trinh", subKey: "chuong-trinh-dia-phuong" },
+                    };
+                    // Tìm subKey từ article's context hoặc dùng map
+                    for (const [subKey, mapping] of Object.entries(menuSubMap)) {
+                        const items = contentBySubPage[subKey];
+                        if (items && items.find(i => i.id === article.id)) {
+                            foundMenuKey = mapping.menuKey;
+                            foundSubKey = subKey;
+                            break;
+                        }
+                    }
+                }
+                setRoute({
+                    page: "detail",
+                    articleId: article.id || article,
+                    menuKey: foundMenuKey || prevMenuKeyRef.current,
+                    subKey: foundSubKey || prevSubKeyRef.current,
+                    previewFileName: null
+                });
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            };
+            
+            const navigateToPreview = (fileData) => {
+                setRoute((prev) => ({ 
+                    ...prev, 
+                    page: "preview", 
+                    previewFileName: fileData.name || fileData.fileName || fileData.title || "Tai_lieu.pdf"
+                }));
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            };
+
+            // Gắn vào window để các component cũ có thể truy cập được
+            useEffect(() => {
+                window.navigateToPreviewContext = navigateToPreview;
+                window.navigateToDetailContext = navigateToDetail;
+                return () => { 
+                    delete window.navigateToPreviewContext; 
+                    delete window.navigateToDetailContext;
+                };
+            }, []);
+
+            const backToList = () => {
+                setRoute((prev) => ({
+                    page: "list",
+                    menuKey: prev.menuKey,
+                    subKey: prev.subKey,
+                    articleId: null,
+                    previewFileName: null
+                }));
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            };
+
+            let newsFilterType = "field";
+            if (currentSubPage && currentSubPage.key === "thong-bao") newsFilterType = "none";
+
+            return (
+                <div className="min-h-screen bg-[#f4f6fa] font-sans text-[#2f3a4d] flex flex-col">
+                    <LoginPopup
+                        isOpen={showLoginPopup}
+                        onClose={() => setShowLoginPopup(false)}
+                        onLogin={(role) => {
+                            setIsLoggedIn(true);
+                            setUserType(role || 'doanh-nghiep');
+                            setShowLoginPopup(false);
+                            if (pendingAction?.type === 'dangKyKhoaHoc') {
+                                // Mở popup đăng ký khóa học sau khi login
+                                window._pendingRegisterCourse = pendingAction.item;
+                            } else if (!pendingAction) {
+                                setPendingAction({ type: 'sendQuestion', menuKey: route.menuKey, subKey: route.subKey });
+                            }
+                        }}
+                    />
+
+                    <main className="mx-auto max-w-[1520px] w-full px-4 py-6 lg:px-6 flex-1">
+                        <div className="flex flex-col lg:flex-row gap-6 items-start">
+                            {/* Cột trái: DANH MỤC MENU DỌC (Vertical Sidebar Navigation) */}
+                            <aside className="w-full lg:w-[280px] xl:w-[300px] shrink-0 lg:sticky lg:top-4 z-30">
+                                <VerticalSidebarNav
+                                    navItems={navItems}
+                                    route={route}
+                                    activeMenu={activeMenu}
+                                    setActiveMenu={setActiveMenu}
+                                    navigateHome={navigateHome}
+                                    navigateToList={navigateToList}
+                                />
+                            </aside>
+
+                            {/* Cột phải: Toàn bộ nội dung trang */}
+                            <div className="flex-1 min-w-0 w-full space-y-6">
+                                {route.page === "home" && <HeroBanner />}
+
+                        {route.page === "home" && (
+                            <div className="space-y-8">
+                                {/* Khối 1: Tin tức nổi bật (9 cols) + Thông báo mới (3 cols) */}
+                                <NewsSection 
+                                    newsList={newsData} 
+                                    notices={thongBaoData.slice(0, 5)} 
+                                    navigateToList={navigateToList} 
+                                    navigateToDetail={navigateToDetail}
+                                />
+                                
+                                {/* Khối 2: Văn bản chính sách mới (Trái) + Tài liệu HTPL doanh nghiệp (Phải) */}
+                                <HomeDocumentsSection 
+                                    vanBanChinhSachMoi={vanBanChinhSachMoiData} 
+                                    taiLieuHTPL={taiLieuHTPLData} 
+                                    navigateToList={navigateToList} 
+                                    navigateToDetail={navigateToDetail}
+                                />
+
+                                {/* Khối 3: Biểu mẫu, hợp đồng (Trái) + Hỏi đáp pháp lý (Phải) */}
+                                <HomeFormsAndFAQSection 
+                                    forms={bieuMauData} 
+                                    faqs={faqs} 
+                                    navigateToList={navigateToList} 
+                                    navigateToDetail={navigateToDetail} 
+                                />
+
+                                {/* Khối 4: MULTIMEDIA (Toàn bộ chiều ngang màn hình) */}
+                                <HomeMultimediaFullSection 
+                                    media={mediaData} 
+                                    navigateToList={navigateToList} 
+                                    navigateToDetail={navigateToDetail} 
+                                />
+                            </div>
+                        )}
+                        {route.page === "list" && currentMenu && currentSubPage && (
+                            currentSubPage.key === "lien-he" ? (
+                                <ContactPage 
+                                    menu={currentMenu} 
+                                    subPage={currentSubPage} 
+                                    data={contactData} 
+                                    onBack={navigateHome} 
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            ) : currentSubPage.key === "co-cau-to-chuc" ? (
+                                <OrgChartPage 
+                                    menu={currentMenu} 
+                                    subPage={currentSubPage} 
+                                    data={orgChartData} 
+                                    onBack={navigateHome} 
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            ) : currentSubPage.key === "chuc-nang-nhiem-vu" ? (
+                                <FunctionDutyPage 
+                                    menu={currentMenu} 
+                                    subPage={currentSubPage} 
+                                    data={functionDutyData} 
+                                />
+                            ) : currentSubPage.key === "chuong-trinh-lien-nganh-intro" ? (
+                                <LienNganhProgramPage 
+                                    menu={currentMenu} 
+                                    subPage={currentSubPage} 
+                                    data={lienNganhData} 
+                                    onBack={navigateHome} 
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            ) : currentSubPage.key === "bieu-mau-hop-dong" ? (
+                                <FormListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            ) : currentSubPage.key === "tai-lieu-htpl" ? (
+                                <TaiLieuHTPLListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            ) : currentSubPage.key === "van-ban-phap-luat" ? (
+                                <VanBanPhapLuatListPage 
+                                    menu={currentMenu} 
+                                    subPage={currentSubPage} 
+                                    items={currentItems} 
+                                    navigateToDetail={navigateToDetail} 
+                                />
+                            ) : currentSubPage.key === "multimedia" ? (
+                                <MultimediaListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    navigateToList={navigateToList}
+                                />
+                            ) : currentSubPage.key === "longform" ? (
+                                <LongformListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                />
+                            ) : currentSubPage.key === "bai-giang-truc-tuyen" ? (
+                                <VideoListPage 
+                                    menu={currentMenu} 
+                                    subPage={currentSubPage} 
+                                    items={currentItems} 
+                                    navigateToDetail={navigateToDetail} 
+                                />
+                            ) : currentSubPage.key === "tin-tuc-noi-bat" ? (
+                                <ProgramListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    filterOptions={{ label: 'Lĩnh vực', field: 'field' }}
+                                />
+                            ) : currentSubPage.key === "van-ban-moi-ban-hanh" ? (
+                                <ProgramListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    filterOptions={{ label: 'Lĩnh vực', field: 'field' }}
+                                />
+                            ) : currentSubPage.key === "nghien-cuu-trao-doi-chi-tiet" ? (
+                                <ProgramListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    filterOptions={{ label: 'Lĩnh vực', field: 'field' }}
+                                />
+                            ) : currentSubPage.key === "su-kien" ? (
+                                <ProgramListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    filterOptions={{ label: 'Lĩnh vực', field: 'field' }}
+                                />
+                            ) : currentSubPage.key === "hoat-dong-phoi-hop" ? (
+                                <ProgramListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    filterOptions={{ label: 'Lĩnh vực', field: 'field' }}
+                                />
+                            ) : currentSubPage.key === "thong-bao" ? (
+                                <NewsListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    filterType="none"
+                                    listCols={2}
+                                />
+                            ) : ["bai-viet-chuyen-gia", "phong-van", "kinh-nghiem-thuc-tien"].includes(currentSubPage.key) ? (
+                                <ProgramListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    filterOptions={{ label: 'Lĩnh vực', field: 'field' }}
+                                />
+                            ) : ["tong-quan-chuong-trinh", "chuong-trinh-bo-nganh", "chuong-trinh-dia-phuong"].includes(currentSubPage.key) ? (
+                                <ProgramListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    filterOptions={currentSubPage.key === "chuong-trinh-bo-nganh" ? { label: 'Bộ, ngành', field: 'field', values: ['Bộ Y tế', 'Bộ Kế hoạch và Đầu tư', 'Bộ Tài chính', 'Bộ Công Thương'] } : currentSubPage.key === "chuong-trinh-dia-phuong" ? { label: 'Tỉnh/thành phố', field: 'province', values: ['Hà Nội', 'TP. Hồ Chí Minh', 'Đà Nẵng', 'Hải Phòng', 'Cần Thơ'] } : undefined}
+                                />
+                            ) : currentSubPage.key === "ke-hoach-dao-tao" ? (
+                                <KeHoachDaoTaoListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    isLoggedIn={isLoggedIn}
+                                    setShowLoginPopup={setShowLoginPopup}
+                                    setPendingAction={setPendingAction}
+                                    pendingAction={pendingAction}
+                                    proposals={proposals}
+                                    setProposals={setProposals}
+                                />
+                            ) : currentSubPage.key === "khoa-hoc" ? (
+                                <KhoaHocListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    isLoggedIn={isLoggedIn}
+                                    setShowLoginPopup={setShowLoginPopup}
+                                    setPendingAction={setPendingAction}
+                                    pendingAction={pendingAction}
+                                    registeredCourses={registeredCourses}
+                                    setRegisteredCourses={setRegisteredCourses}
+                                />
+                            ) : currentSubPage.key === "khoa-hoc-da-dang-ky" ? (
+                                <KhoaHocDaDangKyPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    backToList={() => { setRoute({ page: "list", menuKey: "dao-tao", subKey: "khoa-hoc", articleId: null, previewFileName: null }); window.scrollTo({top: 0, behavior: 'smooth'}); }}
+                                    registeredCourses={registeredCourses}
+                                    setRegisteredCourses={setRegisteredCourses}
+                                    khoaHocData={khoaHocData}
+                                />
+                            ) : currentSubPage.key === "de-xuat-dao-tao" ? (
+                                <DeXuatDaoTaoPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    backToList={() => { setRoute({ page: "list", menuKey: "dao-tao", subKey: "ke-hoach-dao-tao", articleId: null, previewFileName: null }); window.scrollTo({top: 0, behavior: 'smooth'}); }}
+                                    proposals={proposals}
+                                    setProposals={setProposals}
+                                />
+                            ) : currentSubPage.key === "ket-qua-dao-tao" ? (
+                                <KetQuaDaoTaoPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    backToList={() => { setRoute({ page: "list", menuKey: "dao-tao", subKey: "khoa-hoc", articleId: null, previewFileName: null }); window.scrollTo({top: 0, behavior: 'smooth'}); }}
+                                />
+                            ) : currentSubPage.key === "hoi-dap-phap-luat" ? (
+                                <HoiDapPhapLuatListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    isLoggedIn={isLoggedIn}
+                                    onRequireLogin={() => setShowLoginPopup(true)}
+                                    onLoginSuccess={() => { setIsLoggedIn(true); setShowLoginPopup(false); setPendingAction({ type: 'sendQuestion', menuKey: route.menuKey, subKey: route.subKey }); }}
+                                    onLogout={() => setIsLoggedIn(false)}
+                                />
+                            ) : currentSubPage.key === "lich-su-hoi-dap-tu-van" ? (
+                                <LichSuHoiDapTuVanPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    backToList={backToList}
+                                />
+                            ) : currentSubPage.key === "ho-so-phap-ly-dn" ? (
+                                isLoggedIn ? (
+                                    <HoSoPhapLyDNPage
+                                        menu={currentMenu}
+                                        subPage={currentSubPage}
+                                        backToList={backToList}
+                                    />
+                                ) : (
+                                    <div className="rounded-[8px] border border-[#d8e1f2] bg-white p-12 text-center shadow-sm min-h-[400px] flex flex-col items-center justify-center">
+                                        <svg className="w-16 h-16 text-amber-500 mb-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                        <h3 className="text-xl font-bold text-gray-800 mb-2">Yêu cầu đăng nhập</h3>
+                                        <p className="text-gray-500 mb-6 max-w-md">Vui lòng đăng nhập để xem danh sách hồ sơ pháp lý doanh nghiệp của bạn.</p>
+                                        <button onClick={() => setShowLoginPopup(true)} className="px-6 py-2.5 bg-[#2580f0] hover:bg-[#1e63dc] text-white rounded-md font-semibold transition shadow">
+                                            Đăng nhập ngay
+                                        </button>
+                                    </div>
+                                )
+                            ) : currentSubPage.key === "lich-su-ho-so-vu-viec" ? (
+                                isLoggedIn ? (
+                                    <LichSuHoSoVuViecPage
+                                        menu={currentMenu}
+                                        subPage={currentSubPage}
+                                        backToList={backToList}
+                                        myCases={myCases}
+                                    />
+                                ) : (
+                                    <div className="rounded-[8px] border border-[#d8e1f2] bg-white p-12 text-center shadow-sm min-h-[400px] flex flex-col items-center justify-center">
+                                        <svg className="w-16 h-16 text-amber-500 mb-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                        <h3 className="text-xl font-bold text-gray-800 mb-2">Yêu cầu đăng nhập</h3>
+                                        <p className="text-gray-500 mb-6 max-w-md">Vui lòng đăng nhập để xem danh sách hồ sơ vụ việc của bạn.</p>
+                                        <button onClick={() => setShowLoginPopup(true)} className="px-6 py-2.5 bg-[#2580f0] hover:bg-[#1e63dc] text-white rounded-md font-semibold transition shadow">
+                                            Đăng nhập ngay
+                                        </button>
+                                    </div>
+                                )
+                            ) : currentSubPage.key === "tra-cuu-lich-su-hoi-dap-tu-van" ? (
+                                <TraCuuLichSuHoiDapTuVanPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    backToList={backToList}
+                                />
+                            ) : currentSubPage.key === "tu-van-chuyen-sau" ? (
+                                <TuVanChuyenSauListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    isLoggedIn={isLoggedIn}
+                                    onRequireLogin={() => setShowLoginPopup(true)}
+                                    onLoginSuccess={() => { setIsLoggedIn(true); setShowLoginPopup(false); setPendingAction({ type: 'sendRequest', menuKey: route.menuKey, subKey: route.subKey }); }}
+                                    onLogout={() => setIsLoggedIn(false)}
+                                />
+                            ) : currentSubPage.key === "mang-luoi-tu-van-vien" ? (
+                                <MangLuoiTuVanVienPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    data={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                />
+                            ) : currentSubPage.key === "vu-viec-dien-hinh" ? (
+                                <VuViecDienHinhListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    isLoggedIn={isLoggedIn}
+                                    userType={userType}
+                                    setShowLoginPopup={setShowLoginPopup}
+                                    setPendingAction={setPendingAction}
+                                    pendingAction={pendingAction}
+                                    setMyCases={setMyCases}
+                                />
+                            ) : (
+                                <CategoryListPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage}
+                                    items={currentItems}
+                                    navigateToDetail={navigateToDetail}
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            )
+                        )}
+                        {route.page === "detail" && currentArticle && (
+                            (currentArticle._subKey === "khoa-hoc") ? (
+                                <KhoaHocDetailPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage || { label: "Khóa học" }}
+                                    article={currentArticle}
+                                    backToList={backToList}
+                                    navigateToPreview={navigateToPreview}
+                                    isLoggedIn={isLoggedIn}
+                                    setShowLoginPopup={setShowLoginPopup}
+                                    setPendingAction={setPendingAction}
+                                    registeredCourses={registeredCourses}
+                                    setRegisteredCourses={setRegisteredCourses}
+                                />
+                            ) : (currentArticle._subKey === "ke-hoach-dao-tao") ? (
+                                <KeHoachDaoTaoDetailPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage || { label: "Kế hoạch đào tạo" }}
+                                    article={currentArticle}
+                                    backToList={backToList}
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            ) : (currentArticle._subKey === "bieu-mau-hop-dong" || currentArticle._subKey === "tai-lieu-boi-duong") ? (
+                                <FormDetailPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage || { label: "Biểu mẫu, hợp đồng" }}
+                                    article={currentArticle}
+                                    backToList={backToList}
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            ) : currentArticle._subKey === "van-ban-phap-luat" ? (
+                                <VanBanPhapLuatDetailPage
+                                    articleId={route.articleId}
+                                    items={currentItems}
+                                    backToList={backToList}
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            ) : currentArticle._subKey === "bai-giang-truc-tuyen" || currentArticle.type === 'video' ? (
+                                <VideoDetailPage
+                                    articleId={route.articleId}
+                                    items={currentItems}
+                                    backToList={backToList}
+                                    navigateToDetail={navigateToDetail}
+                                />
+                            ) : currentArticle.type === 'longform' ? (
+                                <LongformDetailPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage || { label: "Longform" }}
+                                    article={currentArticle}
+                                    backToList={backToList}
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            ) : currentArticle._subKey === "tu-van-chuyen-sau" ? (
+                                <TuVanChuyenSauDetailPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage || { label: "Tư vấn chuyên sâu" }}
+                                    article={currentArticle}
+                                    backToList={backToList}
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            ) : currentArticle._subKey === "vu-viec-dien-hinh" ? (
+                                <VuViecPhapLyDetailPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage || { label: "Vụ việc điển hình" }}
+                                    article={currentArticle}
+                                    backToList={backToList}
+                                />
+                            ) : currentArticle._subKey === "tai-lieu-htpl" ? (
+                                <TaiLieuHTPLDetailPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage || { label: "Tài liệu HTPL doanh nghiệp" }}
+                                    article={currentArticle}
+                                    backToList={backToList}
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            ) : currentArticle.isNews ? (
+                                <NewsDetailPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage || { label: "" }}
+                                    article={currentArticle}
+                                    backToList={backToList}
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            ) : (
+                                <CategoryDetailPage
+                                    menu={currentMenu}
+                                    subPage={currentSubPage || { label: "" }}
+                                    article={currentArticle}
+                                    backToList={backToList}
+                                    navigateToPreview={navigateToPreview}
+                                />
+                            )
+                        )}
+                        {route.page === "preview" && (
+                            <DocumentPreviewPage
+                                file={{ fileName: route.previewFileName }}
+                                onBack={backToList}
+                            />
+                        )}
+                    
+                            </div>
+                        </div>
+                    </main>
+                    <Footer />
+                    <ConsultationHistoryModal isOpen={showHistory} onClose={() => setShowHistory(false)} />
+                </div>
+            );
+        }
+
         function ConsultationHistoryModal({ isOpen, onClose, navigateToHistory }) {
             if (!isOpen) return null;
             React.useEffect(() => {
@@ -6174,6 +10818,984 @@ import {
                         <p className="text-gray-600">Đang chuyển đến trang lịch sử...</p>
                     </div>
                 </div>
+            );
+        }
+
+        function KhoaHocDaDangKyPage({ menu, subPage, backToList, registeredCourses, setRegisteredCourses, khoaHocData }) {
+            const [currentPage, setCurrentPage] = useState(1);
+            const [itemsPerPage] = useState(10);
+            const [showCancelPopup, setShowCancelPopup] = useState(false);
+            const [courseToCancel, setCourseToCancel] = useState(null);
+            const [showCancelSuccessPopup, setShowCancelSuccessPopup] = useState(false);
+
+            const formatDateRange = (dateStr) => {
+                if (!dateStr) return 'Chưa xác định';
+                if (dateStr.includes(' - ')) return dateStr;
+                const parts = dateStr.split('/');
+                if (parts.length === 3) {
+                    const month = parts[1];
+                    const year = parts[2];
+                    return `01/${month}/${year} - 30/${month}/${year}`;
+                }
+                return dateStr;
+            };
+
+            const handleCancelRegister = (e, item) => {
+                e.stopPropagation();
+                setCourseToCancel(item);
+                setShowCancelPopup(true);
+            };
+
+            const confirmCancelRegister = () => {
+                setRegisteredCourses(prev => {
+                    const next = new Map(prev);
+                    next.delete(courseToCancel.id);
+                    return next;
+                });
+                setShowCancelPopup(false);
+                setCourseToCancel(null);
+                setShowCancelSuccessPopup(true);
+                setTimeout(() => setShowCancelSuccessPopup(false), 3000);
+            };
+
+            // Get registered courses list
+            const courses = useMemo(() => {
+                const list = [];
+                for (const [id, regInfo] of registeredCourses.entries()) {
+                    const course = khoaHocData.find(c => c.id === id);
+                    if (course) {
+                        list.push({ ...course, regStatus: regInfo.status || regInfo, regDate: regInfo.date || 'Chưa cập nhật' });
+                    }
+                }
+                // Sort by registration date descending or id descending
+                return list.sort((a, b) => b.id - a.id);
+            }, [registeredCourses, khoaHocData]);
+
+            const totalItems = courses.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+            const currentItems = useMemo(() => {
+                return courses.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+            }, [courses, currentPage, itemsPerPage]);
+
+            const handlePageChange = (newPage) => {
+                if (newPage >= 1 && newPage <= totalPages) {
+                    setCurrentPage(newPage);
+                }
+            };
+
+            const getStatusBadge = (status) => {
+                switch(status) {
+                    case 'cho-duyet':
+                        return <span className="px-2.5 py-1 text-[12px] font-semibold text-amber-700 bg-amber-50 border border-amber-200 rounded-full flex items-center justify-center gap-1 w-fit mx-auto"><span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Chờ duyệt</span>;
+                    case 'da-duyet':
+                        return <span className="px-2.5 py-1 text-[12px] font-semibold text-green-700 bg-green-50 border border-green-200 rounded-full flex items-center justify-center gap-1 w-fit mx-auto"><span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>Đã duyệt</span>;
+                    case 'tu-choi':
+                        return <span className="px-2.5 py-1 text-[12px] font-semibold text-red-700 bg-red-50 border border-red-200 rounded-full flex items-center justify-center gap-1 w-fit mx-auto"><span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>Từ chối</span>;
+                    default:
+                        return null;
+                }
+            };
+
+            return (
+                <>
+                <section className="rounded-[8px] border border-[#d8e1f2] bg-white p-6 lg:p-10 shadow-sm min-h-[600px]">
+                    <div className="flex items-center justify-between mb-4">
+                        <p className="text-[13px] font-medium text-[#66738f]">Tài khoản / Khóa học đã đăng ký</p>
+                        <button id="btn-back-to-list" onClick={backToList} className="text-[#66738f] hover:text-[#2580f0] font-semibold text-[13px] flex items-center gap-1.5 transition">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            Quay lại
+                        </button>
+                    </div>
+                    <h2 className="text-[28px] font-bold text-[#1b2b49] mb-6 pb-4 border-b border-[#dbe5ff]">Khóa học đã đăng ký</h2>
+
+                    {currentItems.length > 0 ? (
+                        <>
+                            <div className="overflow-x-auto border border-gray-200 rounded-lg shadow-sm mb-6">
+                                <table className="w-full text-left border-collapse bg-white table-fixed">
+                                    <thead className="bg-gray-50 border-b border-gray-200 text-[#1b2b49] font-bold text-[14px]">
+                                        <tr>
+                                            <th className="px-4 py-4 w-[60px] text-center">STT</th>
+                                            <th className="px-6 py-4 w-auto min-w-[280px]">Tên khóa học</th>
+                                            <th className="px-6 py-4 w-[220px]">Thời gian học</th>
+                                            <th className="px-4 py-4 w-[110px] text-center">Hình thức</th>
+                                            <th className="px-6 py-4 w-[180px] text-center whitespace-nowrap">Thời gian đăng ký</th>
+                                            <th className="px-6 py-4 w-[150px] text-center whitespace-nowrap">Trạng thái</th>
+                                            <th className="px-6 py-4 w-[140px] text-center">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-100 text-[14px] text-gray-700">
+                                        {currentItems.map((course, idx) => (
+                                            <tr key={course.id} className="hover:bg-gray-50/50 transition">
+                                                <td className="px-4 py-4 text-center text-gray-500 font-medium w-[60px]">
+                                                    {(currentPage - 1) * itemsPerPage + idx + 1}
+                                                </td>
+                                                <td className="px-6 py-4 font-semibold text-[#1b2b49] break-words whitespace-normal w-auto min-w-[280px]">
+                                                    {course.title}
+                                                </td>
+                                                <td className="px-6 py-4 text-gray-500 w-[220px]">
+                                                    {formatDateRange(course.date)}
+                                                </td>
+                                                <td className="px-4 py-4 text-center w-[110px]">
+                                                    <span className="text-[12px] px-2 py-0.5 bg-gray-100 text-gray-600 rounded whitespace-nowrap">{course.hinhThuc}</span>
+                                                </td>
+                                                <td className="px-6 py-4 text-center text-gray-500 w-[180px]">
+                                                    {course.regDate}
+                                                </td>
+                                                <td className="px-6 py-4 text-center w-[150px]">
+                                                    {getStatusBadge(course.regStatus)}
+                                                </td>
+                                                <td className="px-6 py-4 text-center w-[140px]">
+                                                    {course.regStatus === 'cho-duyet' ? (
+                                                        <button
+                                                            onClick={(e) => handleCancelRegister(e, course)}
+                                                            className="px-3.5 py-1.5 text-[13px] font-semibold text-red-600 border border-red-200 hover:border-red-500 hover:bg-red-50 hover:text-red-700 rounded transition shadow-sm whitespace-nowrap"
+                                                        >
+                                                            Hủy đăng ký
+                                                        </button>
+                                                    ) : (
+                                                        <button
+                                                            disabled
+                                                            className="px-3.5 py-1.5 text-[13px] font-semibold text-gray-400 bg-gray-50 border border-gray-200 rounded cursor-not-allowed whitespace-nowrap"
+                                                        >
+                                                            Hủy đăng ký
+                                                        </button>
+                                                    )}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {totalPages > 1 && (
+                                <div className="flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-[#dbe5ff] pt-6 mt-6">
+                                    <div className="text-[14px] text-gray-600 font-medium">
+                                        Hiển thị <strong className="text-[#212121]">{(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, totalItems)}</strong> của <strong className="text-[#212121]">{totalItems}</strong> bản ghi
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className={`px-3 py-1.5 border rounded text-[14px] font-medium ${currentPage === 1 ? 'border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] shadow-sm bg-white'}`}>Trước</button>
+                                        <div className="flex items-center gap-1">
+                                            {[...Array(totalPages)].map((_, i) => (
+                                                <button key={i} onClick={() => handlePageChange(i + 1)} className={`w-8 h-8 flex items-center justify-center border rounded text-[14px] font-bold transition shadow-sm ${currentPage === i + 1 ? 'border-[#2580f0] bg-[#2580f0] text-white' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] bg-white'}`}>{i + 1}</button>
+                                            ))}
+                                        </div>
+                                        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className={`px-3 py-1.5 border rounded text-[14px] font-medium ${currentPage === totalPages ? 'border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] shadow-sm bg-white'}`}>Sau</button>
+                                    </div>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <div className="text-center py-16 text-gray-500 border border-dashed border-gray-200 rounded-lg bg-gray-50/30">
+                            <svg className="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            <p className="text-[16px] font-medium text-gray-600">Bạn chưa đăng ký khóa học nào</p>
+                            <p className="text-[13px] text-gray-400 mt-1">Các khóa học bạn đăng ký sẽ xuất hiện tại đây</p>
+                        </div>
+                    )}
+                </section>
+                {showCancelPopup && courseToCancel && (
+                    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowCancelPopup(false)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+                            <div className="p-6">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h3 className="text-lg font-bold text-[#1b2b49]">Xác nhận hủy đăng ký</h3>
+                                    <button onClick={() => setShowCancelPopup(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                                <div className="mb-6">
+                                    <p className="text-[14px] text-gray-600">Bạn có chắc chắn muốn hủy đăng ký khóa học này?</p>
+                                    <p className="text-[14px] font-semibold text-[#2580f0] mt-2 bg-[#f8f9fc] p-3 rounded border border-gray-100">{courseToCancel.title}</p>
+                                </div>
+                                <div className="flex justify-end gap-3">
+                                    <button
+                                        onClick={() => setShowCancelPopup(false)}
+                                        className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[13px]"
+                                    >
+                                        Hủy bỏ
+                                    </button>
+                                    <button
+                                        onClick={confirmCancelRegister}
+                                        className="px-4 py-2 bg-red-600 text-white rounded-md font-medium hover:bg-red-700 transition text-[13px]"
+                                    >
+                                        Xác nhận hủy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {showCancelSuccessPopup && (
+                    <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-white border border-[#fca5a5] rounded-lg shadow-lg px-6 py-4 flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                        </div>
+                        <div>
+                            <p className="text-[14px] font-semibold text-[#dc2626]">Đã hủy đăng ký!</p>
+                            <p className="text-[12px] text-gray-600">Bạn đã hủy đăng ký khóa học thành công.</p>
+                        </div>
+                    </div>
+                )}
+                </>
+            );
+        }
+
+        function DeXuatDaoTaoPage({ menu, subPage, backToList, proposals, setProposals }) {
+            const [currentPage, setCurrentPage] = useState(1);
+            const [itemsPerPage] = useState(10); // 10 items for pagination
+
+            // Modal states
+            const [selectedProposal, setSelectedProposal] = useState(null);
+            const [showDetailModal, setShowDetailModal] = useState(false);
+            const [showEditModal, setShowEditModal] = useState(false);
+            const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+            const [proposalToDelete, setProposalToDelete] = useState(null);
+
+            // Form states for Editing
+            const [editForm, setEditForm] = useState({
+                field: '',
+                content: '',
+                time: '',
+                location: '',
+                quantity: ''
+            });
+            const [editErrors, setEditErrors] = useState({});
+            const [editSuccess, setEditSuccess] = useState(false);
+            const [showEditConfirm, setShowEditConfirm] = useState(false);
+
+            // State for adding new proposal
+            const [showAddModal, setShowAddModal] = useState(false);
+            const [showAddConfirm, setShowAddConfirm] = useState(false);
+            const [addForm, setAddForm] = useState({
+                field: '',
+                content: '',
+                time: '',
+                location: '',
+                quantity: ''
+            });
+            const [addErrors, setAddErrors] = useState({});
+            const [addSuccess, setAddSuccess] = useState(false);
+
+            const handleOpenAdd = () => {
+                setAddForm({
+                    field: '',
+                    content: '',
+                    time: '',
+                    location: '',
+                    quantity: ''
+                });
+                setAddErrors({});
+                setAddSuccess(false);
+                setShowAddModal(true);
+            };
+
+            const validateAddForm = () => {
+                const errors = {};
+                if (!addForm.field) errors.field = 'Lĩnh vực không được để trống';
+                if (!addForm.content.trim()) errors.content = 'Nội dung đề xuất không được để trống';
+                return errors;
+            };
+
+            const handleAddSubmit = (e) => {
+                e.preventDefault();
+                const errors = validateAddForm();
+                if (Object.keys(errors).length > 0) {
+                    setAddErrors(errors);
+                    return;
+                }
+                setShowAddConfirm(true);
+            };
+
+            const handleConfirmAdd = () => {
+                const newProposal = {
+                    id: Date.now(),
+                    field: addForm.field,
+                    content: addForm.content,
+                    time: addForm.time,
+                    location: addForm.location,
+                    quantity: addForm.quantity,
+                    status: 'da-gui',
+                    date: new Date().toLocaleDateString('vi-VN')
+                };
+                setProposals(prev => [newProposal, ...prev]);
+                setAddSuccess(true);
+                setShowAddConfirm(false);
+                setTimeout(() => {
+                    setShowAddModal(false);
+                    setAddSuccess(false);
+                    showToast('Gửi đề xuất mới thành công!');
+                }, 2000);
+            };
+
+            const handleCloseAdd = () => {
+                setShowAddModal(false);
+                setAddForm({ field: '', content: '', time: '', location: '', quantity: '' });
+                setAddErrors({});
+                setAddSuccess(false);
+            };
+
+            // Toast feedback states
+            const [toastMessage, setToastMessage] = useState(null);
+            const [toastType, setToastType] = useState('success');
+
+            const showToast = (message, type = 'success') => {
+                setToastMessage(message);
+                setToastType(type);
+                setTimeout(() => {
+                    setToastMessage(null);
+                }, 3000);
+            };
+
+            const getStatusBadge = (status) => {
+                switch (status) {
+                    case 'da-tiep-nhan':
+                        return <span className="text-[12px] font-semibold px-2.5 py-1 bg-green-50 text-green-700 rounded-full border border-green-200 whitespace-nowrap">Đã tiếp nhận</span>;
+                    case 'tu-choi':
+                        return <span className="text-[12px] font-semibold px-2.5 py-1 bg-red-50 text-red-700 rounded-full border border-red-200 whitespace-nowrap">Từ chối</span>;
+                    case 'da-gui':
+                    default:
+                        return <span className="text-[12px] font-semibold px-2.5 py-1 bg-blue-50 text-blue-700 rounded-full border border-blue-200 whitespace-nowrap">Đã gửi</span>;
+                }
+            };
+
+            const totalItems = proposals.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+            const currentItems = proposals.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+            const handlePageChange = (newPage) => {
+                if (newPage >= 1 && newPage <= totalPages) {
+                    setCurrentPage(newPage);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            };
+
+            // View detail handler
+            const handleViewDetail = (proposal) => {
+                setSelectedProposal(proposal);
+                setShowDetailModal(true);
+            };
+
+            // Edit handlers
+            const handleOpenEdit = (proposal) => {
+                if (proposal.status !== 'da-gui') {
+                    showToast('Chỉ có thể chỉnh sửa đề xuất ở trạng thái "Đã gửi"', 'error');
+                    return;
+                }
+                setSelectedProposal(proposal);
+                setEditForm({
+                    field: proposal.field,
+                    content: proposal.content,
+                    time: proposal.time || '',
+                    location: proposal.location || '',
+                    quantity: proposal.quantity || ''
+                });
+                setEditErrors({});
+                setShowEditModal(true);
+            };
+
+            const validateEditForm = () => {
+                const errors = {};
+                if (!editForm.field) errors.field = 'Lĩnh vực không được để trống';
+                if (!editForm.content.trim()) errors.content = 'Nội dung đề xuất không được để trống';
+                return errors;
+            };
+
+            const handleEditSubmit = (e) => {
+                e.preventDefault();
+                const errors = validateEditForm();
+                if (Object.keys(errors).length > 0) {
+                    setEditErrors(errors);
+                    return;
+                }
+                setShowEditConfirm(true);
+            };
+
+            const handleConfirmEdit = () => {
+                setProposals(prev => prev.map(p => p.id === selectedProposal.id ? {
+                    ...p,
+                    field: editForm.field,
+                    content: editForm.content,
+                    time: editForm.time,
+                    location: editForm.location,
+                    quantity: editForm.quantity
+                } : p));
+                setEditSuccess(true);
+                setShowEditConfirm(false);
+                setTimeout(() => {
+                    setShowEditModal(false);
+                    setEditSuccess(false);
+                    showToast('Cập nhật đề xuất thành công!');
+                }, 2000);
+            };
+
+            // Delete handlers
+            const handleOpenDelete = (proposal) => {
+                if (proposal.status !== 'da-gui') {
+                    showToast('Chỉ có thể xóa đề xuất ở trạng thái "Đã gửi"', 'error');
+                    return;
+                }
+                setProposalToDelete(proposal);
+                setShowDeleteConfirm(true);
+            };
+
+            const handleConfirmDelete = () => {
+                setProposals(prev => prev.filter(p => p.id !== proposalToDelete.id));
+                setShowDeleteConfirm(false);
+                setProposalToDelete(null);
+                showToast('Xóa đề xuất thành công!');
+                // Adjust pagination if deleted last item on current page
+                if (currentItems.length === 1 && currentPage > 1) {
+                    setCurrentPage(prev => prev - 1);
+                }
+            };
+
+            return (
+                <>
+                <section className="rounded-[8px] border border-[#d8e1f2] bg-white p-6 lg:p-10 shadow-sm min-h-[600px]">
+                    <div className="flex items-center justify-between mb-4">
+                        <p className="text-[13px] font-medium text-[#66738f]">Tài khoản / Đề xuất đào tạo</p>
+                        <button id="btn-back-to-list-proposal" onClick={backToList} className="text-[#66738f] hover:text-[#2580f0] font-semibold text-[13px] flex items-center gap-1.5 transition font-medium">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            Quay lại
+                        </button>
+                    </div>
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-[#dbe5ff]">
+                        <h2 className="text-[28px] font-bold text-[#1b2b49] leading-tight">Đề xuất đào tạo của tôi</h2>
+                        <button onClick={handleOpenAdd} className="px-5 py-2.5 text-white bg-[#2580f0] rounded-md font-semibold hover:bg-[#1e63dc] transition shadow-sm flex items-center gap-2 shrink-0 text-[13px] sm:text-[14px]">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            Thêm mới
+                        </button>
+                    </div>
+
+                    {currentItems.length > 0 ? (
+                        <>
+                            <div className="overflow-x-auto border border-gray-200 rounded-lg shadow-sm mb-6">
+                                <table className="w-full text-left border-collapse bg-white table-fixed">
+                                    <thead className="bg-gray-50 border-b border-gray-200 text-[#1b2b49] font-bold text-[14px]">
+                                        <tr>
+                                            <th className="px-4 py-4 w-[60px] text-center">STT</th>
+                                            <th className="px-6 py-4 w-auto min-w-[280px]">Nội dung đề xuất</th>
+                                            <th className="px-6 py-4 w-[160px]">Lĩnh vực</th>
+                                            <th className="px-6 py-4 w-[120px] text-center">Thời gian</th>
+                                            <th className="px-6 py-4 w-[120px] text-center">Ngày gửi</th>
+                                            <th className="px-6 py-4 w-[140px] text-center">Trạng thái</th>
+                                            <th className="px-6 py-4 w-[260px] text-center">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-100 text-[14px] text-gray-700">
+                                        {currentItems.map((proposal, idx) => (
+                                            <tr key={proposal.id} className="hover:bg-gray-50/50 transition">
+                                                <td className="px-4 py-4 text-center text-gray-500 font-medium w-[60px]">
+                                                    {(currentPage - 1) * itemsPerPage + idx + 1}
+                                                </td>
+                                                <td className="px-6 py-4 w-auto min-w-[280px]">
+                                                    <button
+                                                        onClick={() => handleViewDetail(proposal)}
+                                                        className="text-[#2580f0] hover:underline cursor-pointer font-medium text-left truncate block w-full"
+                                                        title={proposal.content}
+                                                    >
+                                                        {proposal.content}
+                                                    </button>
+                                                </td>
+                                                <td className="px-6 py-4 text-[#1b2b49] truncate w-[160px]" title={proposal.field}>
+                                                    {proposal.field}
+                                                </td>
+                                                <td className="px-6 py-4 text-center text-gray-500 truncate w-[120px]" title={proposal.time}>
+                                                    {proposal.time || '-'}
+                                                </td>
+                                                <td className="px-6 py-4 text-center text-gray-500 w-[120px]">
+                                                    {proposal.date}
+                                                </td>
+                                                <td className="px-6 py-4 text-center w-[140px]">
+                                                    {getStatusBadge(proposal.status)}
+                                                </td>
+                                                <td className="px-6 py-4 text-center w-[260px]">
+                                                    <div className="flex items-center justify-center gap-2">
+                                                        <button
+                                                            onClick={() => handleViewDetail(proposal)}
+                                                            className="px-2.5 py-1 text-[13px] font-medium text-[#2580f0] border border-[#2580f0]/20 hover:bg-[#2580f0]/5 rounded transition"
+                                                        >
+                                                            Xem chi tiết
+                                                        </button>
+                                                        {proposal.status === 'da-gui' ? (
+                                                            <>
+                                                                <button
+                                                                    onClick={() => handleOpenEdit(proposal)}
+                                                                    className="px-2.5 py-1 text-[13px] font-medium text-[#eab308] border border-[#eab308]/20 hover:bg-[#eab308]/5 rounded transition"
+                                                                >
+                                                                    Sửa
+                                                                </button>
+                                                                <button
+                                                                    onClick={() => handleOpenDelete(proposal)}
+                                                                    className="px-2.5 py-1 text-[13px] font-medium text-red-600 border border-red-200 hover:bg-red-50 rounded transition"
+                                                                >
+                                                                    Xóa
+                                                                </button>
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <button
+                                                                    disabled
+                                                                    className="px-2.5 py-1 text-[13px] font-medium text-gray-400 bg-gray-50 border border-gray-200 rounded cursor-not-allowed"
+                                                                    title="Chỉ có thể sửa đề xuất chưa tiếp nhận"
+                                                                >
+                                                                    Sửa
+                                                                </button>
+                                                                <button
+                                                                    disabled
+                                                                    className="px-2.5 py-1 text-[13px] font-medium text-gray-400 bg-gray-50 border border-gray-200 rounded cursor-not-allowed"
+                                                                    title="Chỉ có thể xóa đề xuất chưa tiếp nhận"
+                                                                >
+                                                                    Xóa
+                                                                </button>
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            {totalPages > 1 && (
+                                <div className="flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-[#dbe5ff] pt-6 mt-6">
+                                    <div className="flex items-center gap-4">
+                                        <div className="text-[14px] text-gray-600 font-medium">
+                                            Hiển thị <strong className="text-[#212121]">{(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, totalItems)}</strong> của <strong className="text-[#212121]">{totalItems}</strong> bản ghi
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className={`px-3 py-1.5 border rounded text-[14px] font-medium ${currentPage === 1 ? 'border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] shadow-sm bg-white'}`}>Trước</button>
+                                        <div className="flex items-center gap-1">
+                                            {[...Array(totalPages)].map((_, i) => (
+                                                <button key={i} onClick={() => handlePageChange(i + 1)} className={`w-8 h-8 flex items-center justify-center border rounded text-[14px] font-bold transition shadow-sm ${currentPage === i + 1 ? 'border-[#2580f0] bg-[#2580f0] text-white' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] bg-white'}`}>{i + 1}</button>
+                                            ))}
+                                        </div>
+                                        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className={`px-3 py-1.5 border rounded text-[14px] font-medium ${currentPage === totalPages ? 'border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] shadow-sm bg-white'}`}>Sau</button>
+                                    </div>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <div className="text-center py-12 text-gray-500 border border-dashed border-gray-300 rounded-lg bg-gray-50/20">
+                            <svg className="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            <p className="text-[15px] font-medium">Bạn chưa gửi đề xuất đào tạo nào</p>
+                        </div>
+                    )}
+                </section>
+
+                {/* Detail Modal */}
+                {showDetailModal && selectedProposal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setShowDetailModal(false)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-xl w-full" onClick={e => e.stopPropagation()}>
+                            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                                <h3 className="text-[18px] font-bold text-[#1b2b49]">Chi tiết đề xuất đào tạo</h3>
+                                <button onClick={() => setShowDetailModal(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+                            <div className="p-6 space-y-4 text-[14px]">
+                                <div className="flex items-center gap-2">
+                                    <span className="font-semibold text-gray-500">Trạng thái: </span>
+                                    {getStatusBadge(selectedProposal.status)}
+                                </div>
+                                <div>
+                                    <span className="font-semibold text-gray-500 block mb-0.5">Lĩnh vực:</span>
+                                    <p className="text-gray-800 font-semibold">{selectedProposal.field}</p>
+                                </div>
+                                <div>
+                                    <span className="font-semibold text-gray-500 block mb-0.5">Nội dung đề xuất:</span>
+                                    <p className="text-gray-800 bg-gray-50 p-3 rounded border border-gray-100 whitespace-pre-wrap leading-relaxed">{selectedProposal.content}</p>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <span className="font-semibold text-gray-500 block mb-0.5">Thời gian mong muốn:</span>
+                                        <p className="text-gray-800 font-medium">{selectedProposal.time || 'Chưa cung cấp'}</p>
+                                    </div>
+                                    <div>
+                                        <span className="font-semibold text-gray-500 block mb-0.5">Địa điểm mong muốn:</span>
+                                        <p className="text-gray-800 font-medium">{selectedProposal.location || 'Chưa cung cấp'}</p>
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <span className="font-semibold text-gray-500 block mb-0.5">Số lượng dự kiến:</span>
+                                        <p className="text-gray-800 font-medium">{selectedProposal.quantity ? `${selectedProposal.quantity} học viên` : 'Chưa cung cấp'}</p>
+                                    </div>
+                                    <div>
+                                        <span className="font-semibold text-gray-500 block mb-0.5">Ngày gửi:</span>
+                                        <p className="text-gray-800 font-medium">{selectedProposal.date}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex justify-end px-6 py-4 border-t border-gray-100 bg-gray-50/50 rounded-b-lg">
+                                <button
+                                    onClick={() => setShowDetailModal(false)}
+                                    className="px-5 py-2 bg-[#2580f0] text-white rounded-md font-semibold hover:bg-[#1e63dc] transition text-[13px]"
+                                >
+                                    Đóng
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Add Modal */}
+                {showAddModal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={handleCloseAdd}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-xl w-full max-h-[95vh] flex flex-col" onClick={e => e.stopPropagation()}>
+                            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                                <h3 className="text-[18px] font-bold text-[#1b2b49]">Thêm mới đề xuất đào tạo</h3>
+                                <button onClick={handleCloseAdd} className="text-gray-400 hover:text-gray-600 transition">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+
+                            {addSuccess ? (
+                                <div className="text-center py-12 px-6">
+                                    <svg className="w-16 h-16 mx-auto mb-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <p className="text-lg font-semibold text-gray-800">Gửi đề xuất thành công!</p>
+                                    <p className="text-sm text-gray-500 mt-2">Đề xuất đào tạo mới của bạn đã được gửi.</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <form onSubmit={handleAddSubmit} className="p-6 overflow-y-auto space-y-4 text-[14px]">
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">
+                                                <span className="text-red-500 mr-0.5">*</span>Lĩnh vực
+                                            </label>
+                                            <select
+                                                name="field"
+                                                value={addForm.field}
+                                                onChange={(e) => {
+                                                    setAddForm(prev => ({ ...prev, field: e.target.value }));
+                                                    if (addErrors.field) setAddErrors(prev => ({ ...prev, field: '' }));
+                                                }}
+                                                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:border-[#2580f0] bg-white ${addErrors.field ? 'border-red-500' : 'border-gray-300'}`}
+                                            >
+                                                <option value="">Chọn lĩnh vực pháp luật</option>
+                                                <option value="Doanh nghiệp">Doanh nghiệp</option>
+                                                <option value="Đầu tư">Đầu tư</option>
+                                                <option value="Thuế / Hóa đơn điện tử">Thuế / Hóa đơn điện tử</option>
+                                                <option value="Lao động / BHXH">Lao động / BHXH</option>
+                                                <option value="Hợp đồng thương mại">Hợp đồng thương mại</option>
+                                                <option value="Sở hữu trí tuệ">Sở hữu trí tuệ</option>
+                                                <option value="Khác">Khác</option>
+                                            </select>
+                                            {addErrors.field && <p className="mt-1 text-xs text-red-500">{addErrors.field}</p>}
+                                        </div>
+
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">
+                                                <span className="text-red-500 mr-0.5">*</span>Nội dung đề xuất
+                                            </label>
+                                            <textarea
+                                                name="content"
+                                                maxLength={5000}
+                                                rows="4"
+                                                placeholder="Mô tả nội dung, chủ đề đào tạo mong muốn..."
+                                                value={addForm.content}
+                                                onChange={(e) => {
+                                                    setAddForm(prev => ({ ...prev, content: e.target.value }));
+                                                    if (addErrors.content) setAddErrors(prev => ({ ...prev, content: '' }));
+                                                }}
+                                                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:border-[#2580f0] resize-none ${addErrors.content ? 'border-red-500' : 'border-gray-300'}`}
+                                            />
+                                            <div className="flex justify-between mt-0.5">
+                                                {addErrors.content ? <p className="text-xs text-red-500">{addErrors.content}</p> : <span></span>}
+                                                <span className="text-[12px] text-gray-400">{addForm.content.length} / 5000</span>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">Thời gian mong muốn</label>
+                                            <input
+                                                type="text"
+                                                placeholder="VD: Quý 2/2026"
+                                                value={addForm.time}
+                                                onChange={(e) => setAddForm(prev => ({ ...prev, time: e.target.value }))}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0]"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">Địa điểm mong muốn</label>
+                                            <input
+                                                type="text"
+                                                placeholder="Nhập địa điểm mong muốn"
+                                                value={addForm.location}
+                                                onChange={(e) => setAddForm(prev => ({ ...prev, location: e.target.value }))}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0]"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">Số lượng dự kiến</label>
+                                            <input
+                                                type="text"
+                                                placeholder="Số học viên"
+                                                value={addForm.quantity}
+                                                onChange={(e) => setAddForm(prev => ({ ...prev, quantity: e.target.value }))}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0]"
+                                            />
+                                        </div>
+                                    </form>
+
+                                    <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-100 bg-gray-50/50 rounded-b-lg">
+                                        <button
+                                            onClick={handleCloseAdd}
+                                            className="px-5 py-2 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[13px]"
+                                        >
+                                            Hủy
+                                        </button>
+                                        <button
+                                            onClick={handleAddSubmit}
+                                            className="px-5 py-2 bg-[#2580f0] text-white rounded-md font-semibold hover:bg-[#1e63dc] transition text-[13px]"
+                                        >
+                                            Gửi đề xuất
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {/* Add Confirm Modal */}
+                {showAddConfirm && (
+                    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60" onClick={() => setShowAddConfirm(false)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-md w-full" onClick={e => e.stopPropagation()}>
+                            <div className="p-6">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h4 className="text-[16px] font-bold text-[#1b2b49]">Xác nhận gửi đề xuất</h4>
+                                    <button onClick={() => setShowAddConfirm(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                                <div className="mb-6">
+                                    <p className="text-[14px] text-gray-600">Bạn có chắc chắn muốn gửi đề xuất đào tạo này không?</p>
+                                </div>
+                                <div className="flex justify-end gap-3">
+                                    <button
+                                        onClick={() => setShowAddConfirm(false)}
+                                        className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[13px]"
+                                    >
+                                        Hủy bỏ
+                                    </button>
+                                    <button
+                                        onClick={handleConfirmAdd}
+                                        className="px-4 py-2 bg-[#2580f0] text-white rounded-md font-semibold hover:bg-[#1e63dc] transition text-[13px]"
+                                    >
+                                        Xác nhận
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Edit Modal */}
+                {showEditModal && selectedProposal && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setShowEditModal(false)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-xl w-full max-h-[95vh] flex flex-col" onClick={e => e.stopPropagation()}>
+                            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                                <h3 className="text-[18px] font-bold text-[#1b2b49]">Chỉnh sửa đề xuất đào tạo</h3>
+                                <button onClick={() => setShowEditModal(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+
+                            {editSuccess ? (
+                                <div className="text-center py-12 px-6">
+                                    <svg className="w-16 h-16 mx-auto mb-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <p className="text-lg font-semibold text-gray-800">Cập nhật đề xuất thành công!</p>
+                                    <p className="text-sm text-gray-500 mt-2">Đề xuất đã được cập nhật thành công.</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <form onSubmit={handleEditSubmit} className="p-6 overflow-y-auto space-y-4 text-[14px]">
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">
+                                                <span className="text-red-500 mr-0.5">*</span>Lĩnh vực
+                                            </label>
+                                            <select
+                                                name="field"
+                                                value={editForm.field}
+                                                onChange={(e) => {
+                                                    setEditForm(prev => ({ ...prev, field: e.target.value }));
+                                                    if (editErrors.field) setEditErrors(prev => ({ ...prev, field: '' }));
+                                                }}
+                                                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:border-[#2580f0] bg-white ${editErrors.field ? 'border-red-500' : 'border-gray-300'}`}
+                                            >
+                                                <option value="">Chọn lĩnh vực pháp luật</option>
+                                                <option value="Doanh nghiệp">Doanh nghiệp</option>
+                                                <option value="Đầu tư">Đầu tư</option>
+                                                <option value="Thuế / Hóa đơn điện tử">Thuế / Hóa đơn điện tử</option>
+                                                <option value="Lao động / BHXH">Lao động / BHXH</option>
+                                                <option value="Hợp đồng thương mại">Hợp đồng thương mại</option>
+                                                <option value="Sở hữu trí tuệ">Sở hữu trí tuệ</option>
+                                                <option value="Khác">Khác</option>
+                                            </select>
+                                            {editErrors.field && <p className="mt-1 text-xs text-red-500">{editErrors.field}</p>}
+                                        </div>
+
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">
+                                                <span className="text-red-500 mr-0.5">*</span>Nội dung đề xuất
+                                            </label>
+                                            <textarea
+                                                name="content"
+                                                maxLength={5000}
+                                                rows="4"
+                                                placeholder="Mô tả nội dung, chủ đề đào tạo mong muốn..."
+                                                value={editForm.content}
+                                                onChange={(e) => {
+                                                    setEditForm(prev => ({ ...prev, content: e.target.value }));
+                                                    if (editErrors.content) setEditErrors(prev => ({ ...prev, content: '' }));
+                                                }}
+                                                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:border-[#2580f0] resize-none ${editErrors.content ? 'border-red-500' : 'border-gray-300'}`}
+                                            />
+                                            <div className="flex justify-between mt-0.5">
+                                                {editErrors.content ? <p className="text-xs text-red-500">{editErrors.content}</p> : <span></span>}
+                                                <span className="text-[12px] text-gray-400">{editForm.content.length} / 5000</span>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">Thời gian mong muốn</label>
+                                            <input
+                                                type="text"
+                                                placeholder="VD: Quý 2/2026"
+                                                value={editForm.time}
+                                                onChange={(e) => setEditForm(prev => ({ ...prev, time: e.target.value }))}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0]"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">Địa điểm mong muốn</label>
+                                            <input
+                                                type="text"
+                                                placeholder="Nhập địa điểm mong muốn"
+                                                value={editForm.location}
+                                                onChange={(e) => setEditForm(prev => ({ ...prev, location: e.target.value }))}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0]"
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label className="block font-semibold text-gray-700 mb-1">Số lượng dự kiến</label>
+                                            <input
+                                                type="text"
+                                                placeholder="Số học viên"
+                                                value={editForm.quantity}
+                                                onChange={(e) => setEditForm(prev => ({ ...prev, quantity: e.target.value }))}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0]"
+                                            />
+                                        </div>
+                                    </form>
+
+                                    <div className="flex justify-end gap-3 px-6 py-4 border-t border-gray-100 bg-gray-50/50 rounded-b-lg">
+                                        <button
+                                            onClick={() => setShowEditModal(false)}
+                                            className="px-5 py-2 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[13px]"
+                                        >
+                                            Hủy
+                                        </button>
+                                        <button
+                                            onClick={handleEditSubmit}
+                                            className="px-5 py-2 bg-[#2580f0] text-white rounded-md font-semibold hover:bg-[#1e63dc] transition text-[13px]"
+                                        >
+                                            Lưu thay đổi
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {showEditConfirm && (
+                    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60" onClick={() => setShowEditConfirm(false)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-md w-full" onClick={e => e.stopPropagation()}>
+                            <div className="p-6">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h4 className="text-[16px] font-bold text-[#1b2b49]">Xác nhận cập nhật đề xuất</h4>
+                                    <button onClick={() => setShowEditConfirm(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                                <div className="mb-6">
+                                    <p className="text-[14px] text-gray-600">Bạn có chắc chắn muốn lưu các thay đổi này cho đề xuất đào tạo?</p>
+                                </div>
+                                <div className="flex justify-end gap-3">
+                                    <button
+                                        onClick={() => setShowEditConfirm(false)}
+                                        className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[13px]"
+                                    >
+                                        Hủy bỏ
+                                    </button>
+                                    <button
+                                        onClick={handleConfirmEdit}
+                                        className="px-4 py-2 bg-[#2580f0] text-white rounded-md font-semibold hover:bg-[#1e63dc] transition text-[13px]"
+                                    >
+                                        Cập nhật
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Delete Confirm Modal */}
+                {showDeleteConfirm && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setShowDeleteConfirm(false)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-md w-full" onClick={e => e.stopPropagation()}>
+                            <div className="p-6">
+                                <div className="flex items-center justify-between mb-4">
+                                    <h4 className="text-[16px] font-bold text-red-600">Xác nhận xóa đề xuất</h4>
+                                    <button onClick={() => setShowDeleteConfirm(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                                <div className="mb-6">
+                                    <p className="text-[14px] text-gray-600">Bạn có chắc chắn muốn xóa đề xuất đào tạo này? Thao tác này không thể hoàn tác.</p>
+                                </div>
+                                <div className="flex justify-end gap-3">
+                                    <button
+                                        onClick={() => setShowDeleteConfirm(false)}
+                                        className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-[13px]"
+                                    >
+                                        Hủy bỏ
+                                    </button>
+                                    <button
+                                        onClick={handleConfirmDelete}
+                                        className="px-4 py-2 bg-red-600 text-white rounded-md font-semibold hover:bg-red-700 transition text-[13px]"
+                                    >
+                                        Xóa đề xuất
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Success Toast */}
+                {toastMessage && (
+                    <div className={`fixed top-20 left-1/2 -translate-x-1/2 z-[100] border rounded-lg shadow-lg px-6 py-4 flex items-center gap-3 transition-opacity duration-300 bg-white ${toastType === 'error' ? 'border-[#fca5a5]' : 'border-green-200'}`}>
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${toastType === 'error' ? 'bg-red-50' : 'bg-green-50'}`}>
+                            {toastType === 'error' ? (
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                            ) : (
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            )}
+                        </div>
+                        <div>
+                            <p className={`text-[14px] font-semibold ${toastType === 'error' ? 'text-[#dc2626]' : 'text-green-700'}`}>{toastType === 'error' ? 'Thất bại!' : 'Thành công!'}</p>
+                            <p className="text-[12px] text-gray-600">{toastMessage}</p>
+                        </div>
+                    </div>
+                )}
+                </>
             );
         }
 
@@ -6193,6 +11815,42 @@ import {
             const [selectedDetail, setSelectedDetail] = useState(null);
             const [currentPage, setCurrentPage] = useState(1);
             const [itemsPerPage] = useState(10);
+
+            const [consultationReviews, setConsultationReviews] = useState({});
+            const [hoiDapReviews, setHoiDapReviews] = useState({});
+            const [reviewingItem, setReviewingItem] = useState(null);
+            const [reviewContent, setReviewContent] = useState('');
+            const [reviewRating, setReviewRating] = useState(5);
+            const [isHoiDapReview, setIsHoiDapReview] = useState(false);
+
+            const handleSubmitReview = (e) => {
+                e.preventDefault();
+                if (!reviewContent.trim()) {
+                    alert("Vui lòng nhập nội dung đánh giá!");
+                    return;
+                }
+                const confirmMsg = isHoiDapReview 
+                    ? "Gửi đánh giá hỏi đáp, sau khi gửi không thể hoàn tác. Bạn có chắc chắn gửi đánh giá này?"
+                    : "Gửi đánh giá tư vấn chuyên sâu với chuyên gia, sau khi gửi không thể hoàn tác. Bạn có chắc chắn gửi đánh giá này?";
+                const confirmSubmit = window.confirm(confirmMsg);
+                if (confirmSubmit) {
+                    if (isHoiDapReview) {
+                        setHoiDapReviews(prev => ({
+                            ...prev,
+                            [reviewingItem.id]: { content: reviewContent, rating: reviewRating }
+                        }));
+                    } else {
+                        setConsultationReviews(prev => ({
+                            ...prev,
+                            [reviewingItem.id]: reviewContent
+                        }));
+                    }
+                    setReviewingItem(null);
+                    setReviewContent('');
+                    setReviewRating(5);
+                    alert("Gửi đánh giá thành công!");
+                }
+            };
 
             const hoiDapData = [
                 { id: 1, title: "Thủ tục chuyển đổi từ công ty TNHH 1 thành viên sang công ty cổ phần", field: "Doanh nghiệp", date: "15/04/2026", status: "da-hoan-thanh", answer: "Hồ sơ chuyển đổi bao gồm: Quyết định của chủ sở hữu, Nghị quyết ĐHCĐ, Điều lệ công ty cổ phần, Danh sách cổ đông sáng lập. Thời gian thực hiện: 05-07 ngày làm việc." },
@@ -6392,7 +12050,7 @@ import {
 
             return (
                 <section className="rounded-[8px] border border-[#d8e1f2] bg-white p-6 lg:p-10 shadow-sm min-h-[600px]">
-                    <p className="text-[13px] font-medium text-[#66738f] mb-4">Trang chủ / {menu.label} / {subPage.label}</p>
+                    <p className="text-[13px] font-medium text-[#66738f] mb-4">Tài khoản / Lịch sử hỏi đáp/tư vấn</p>
 
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-[#dbe5ff]">
                         <h2 className="text-[28px] font-bold text-[#1b2b49]">Lịch sử hỏi đáp/tư vấn</h2>
@@ -6479,17 +12137,38 @@ import {
                     ) : activeTab === 'hoi-dap' ? (
                         <div className="space-y-4 mb-8">
                             {currentItems.map(item => (
-                                <div key={item.id} className="border border-gray-200 rounded-lg overflow-hidden hover:border-[#2580f0] hover:shadow-sm transition">
-                                    <div className="p-4 flex items-start gap-3 cursor-pointer" onClick={() => toggleExpand(item.id)}>
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={expandedId === item.id ? '#2580f0' : '#9ca3af'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 mt-0.5 transition-transform duration-200" style={{ transform: expandedId === item.id ? 'rotate(90deg)' : 'none' }}><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                        <div className="flex-1">
-                                            <h4 className="text-[15px] font-semibold text-[#1b2b49] hover:text-[#2580f0] transition">{item.title}</h4>
-                                            <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-gray-500">
-                                                <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${statusColorMap[item.status] || 'bg-gray-100 text-gray-600'}`}>{statusLabelMap[item.status]}</span>
-                                                <span className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-medium">{item.field}</span>
-                                                <span>{item.date}</span>
+                                <div key={item.id} className="border border-gray-200 rounded-lg overflow-hidden hover:border-[#2580f0] hover:shadow-sm transition bg-white">
+                                    <div className="p-4 flex items-center justify-between gap-3 cursor-pointer" onClick={() => toggleExpand(item.id)}>
+                                        <div className="flex items-start gap-3 flex-1 min-w-0">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={expandedId === item.id ? '#2580f0' : '#9ca3af'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 mt-0.5 transition-transform duration-200" style={{ transform: expandedId === item.id ? 'rotate(90deg)' : 'none' }}><polyline points="9 18 15 12 9 6"></polyline></svg>
+                                            <div className="flex-1 min-w-0">
+                                                <h4 className="text-[15px] font-semibold text-[#1b2b49] hover:text-[#2580f0] transition break-words">{item.title}</h4>
+                                                <div className="flex flex-wrap items-center gap-3 mt-2 text-xs text-gray-500">
+                                                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${statusColorMap[item.status] || 'bg-gray-100 text-gray-600'}`}>{statusLabelMap[item.status]}</span>
+                                                    <span className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-medium">{item.field}</span>
+                                                    <span>{item.date}</span>
+                                                </div>
                                             </div>
                                         </div>
+                                        {item.status === 'da-hoan-thanh' && (
+                                            <div className="shrink-0" onClick={(e) => e.stopPropagation()}>
+                                                {hoiDapReviews[item.id] !== undefined ? (
+                                                    <button
+                                                        onClick={() => { setReviewingItem(item); setReviewContent(hoiDapReviews[item.id].content); setReviewRating(hoiDapReviews[item.id].rating); setIsHoiDapReview(true); }}
+                                                        className="px-3.5 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-600 border border-gray-300 rounded-md text-[12px] font-bold transition shadow-sm"
+                                                    >
+                                                        Đã đánh giá
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        onClick={() => { setReviewingItem(item); setReviewContent(''); setReviewRating(5); setIsHoiDapReview(true); }}
+                                                        className="px-3.5 py-1.5 bg-[#2580f0] hover:bg-[#1e63dc] text-white rounded-md text-[12px] font-bold transition shadow-sm"
+                                                    >
+                                                        Đánh giá
+                                                    </button>
+                                                )}
+                                            </div>
+                                        )}
                                     </div>
                                     {expandedId === item.id && (
                                         <div className="px-4 pb-4 pl-9">
@@ -6519,10 +12198,10 @@ import {
                     ) : (
                         <div className="space-y-4 mb-8">
                             {currentItems.map(item => (
-                                <div key={item.id} className="border border-gray-200 rounded-lg p-4 hover:border-[#2580f0] hover:shadow-sm transition cursor-pointer" onClick={() => setSelectedDetail(item.id)}>
-                                    <div className="flex items-start justify-between gap-3">
-                                        <div className="flex-1">
-                                            <h4 className="text-[15px] font-semibold text-[#1b2b49] hover:text-[#2580f0] transition line-clamp-2">{item.title}</h4>
+                                <div key={item.id} className="border border-gray-200 rounded-lg p-4 hover:border-[#2580f0] hover:shadow-sm transition cursor-pointer bg-white" onClick={() => setSelectedDetail(item.id)}>
+                                    <div className="flex items-center justify-between gap-4">
+                                        <div className="flex-1 min-w-0">
+                                            <h4 className="text-[15px] font-semibold text-[#1b2b49] hover:text-[#2580f0] transition line-clamp-2 break-words">{item.title}</h4>
                                             {item.question && (
                                                 <p className="text-[13px] text-gray-600 mt-2 line-clamp-2">{item.question}</p>
                                             )}
@@ -6533,6 +12212,25 @@ import {
                                                 <span>{item.date}</span>
                                             </div>
                                         </div>
+                                        {item.status === 'da-hoan-thanh' && (
+                                            <div className="shrink-0" onClick={(e) => e.stopPropagation()}>
+                                                {consultationReviews[item.id] !== undefined ? (
+                                                    <button
+                                                        onClick={() => { setReviewingItem(item); setReviewContent(consultationReviews[item.id]); }}
+                                                        className="px-3.5 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-600 border border-gray-300 rounded-md text-[12px] font-bold transition shadow-sm"
+                                                    >
+                                                        Đã đánh giá
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        onClick={() => { setReviewingItem(item); setReviewContent(''); }}
+                                                        className="px-3.5 py-1.5 bg-[#2580f0] hover:bg-[#1e63dc] text-white rounded-md text-[12px] font-bold transition shadow-sm"
+                                                    >
+                                                        Đánh giá
+                                                    </button>
+                                                )}
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             ))}
@@ -6557,10 +12255,559 @@ import {
                             </div>
                         </div>
                     )}
+
+                    {/* Evaluation Modal */}
+                    {reviewingItem && (() => {
+                        const isReviewed = isHoiDapReview
+                            ? hoiDapReviews[reviewingItem.id] !== undefined
+                            : consultationReviews[reviewingItem.id] !== undefined;
+                        return (
+                            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setReviewingItem(null)}>
+                                <div className="bg-white rounded-lg shadow-xl max-w-lg w-full max-h-[85vh] flex flex-col" onClick={e => e.stopPropagation()}>
+                                    <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                                        <h3 className="text-[18px] font-bold text-[#1b2b49]">
+                                            {isHoiDapReview 
+                                                ? (isReviewed ? "Xem đánh giá chất lượng hỏi đáp" : "Đánh giá chất lượng giải đáp câu hỏi")
+                                                : (isReviewed ? "Xem đánh giá chất lượng tư vấn" : "Đánh giá chất lượng tư vấn chuyên sâu")}
+                                        </h3>
+                                        <button onClick={() => setReviewingItem(null)} className="text-gray-400 hover:text-gray-600 transition">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                        </button>
+                                    </div>
+                                    <form onSubmit={handleSubmitReview} className="p-6 flex flex-col gap-4 text-[14px]">
+                                        <div>
+                                            <label className="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">Tiêu đề</label>
+                                            <input 
+                                                type="text" 
+                                                readOnly 
+                                                value={reviewingItem.title} 
+                                                className="w-full bg-gray-50 border border-gray-200 rounded-md px-3 py-2 text-gray-700 font-semibold focus:outline-none"
+                                            />
+                                        </div>
+                                        {isHoiDapReview && (
+                                            <div>
+                                                <label className="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">
+                                                    Số sao đánh giá {!isReviewed && <span className="text-red-500">*</span>}
+                                                </label>
+                                                <div className="flex items-center gap-1.5 mt-1">
+                                                    {[1, 2, 3, 4, 5].map((star) => (
+                                                        <button
+                                                            key={star}
+                                                            type="button"
+                                                            disabled={isReviewed}
+                                                            onClick={() => setReviewRating(star)}
+                                                            className="focus:outline-none"
+                                                        >
+                                                            <svg
+                                                                className={`w-7 h-7 ${!isReviewed ? 'cursor-pointer hover:scale-110 transition-transform' : ''} ${
+                                                                    star <= reviewRating ? 'text-amber-400 fill-amber-400' : 'text-gray-300 fill-transparent'
+                                                                }`}
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                viewBox="0 0 24 24"
+                                                                stroke="currentColor"
+                                                                strokeWidth="2"
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                            >
+                                                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                                            </svg>
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                        <div>
+                                            <label className="block text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">
+                                                Nội dung đánh giá {!isReviewed && <span className="text-red-500">*</span>}
+                                            </label>
+                                            <textarea
+                                                required={!isReviewed}
+                                                readOnly={isReviewed}
+                                                rows="5"
+                                                placeholder={isReviewed ? "" : "Nhập nội dung đánh giá của bạn..."}
+                                                value={reviewContent}
+                                                onChange={(e) => setReviewContent(e.target.value)}
+                                                className={`w-full border rounded-md px-3 py-2 focus:outline-none transition text-gray-700 ${
+                                                    isReviewed 
+                                                        ? "bg-gray-50 border-gray-200 cursor-default" 
+                                                        : "border-gray-300 focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0]"
+                                                }`}
+                                            ></textarea>
+                                        </div>
+                                        <div className="flex justify-end gap-3 border-t border-gray-100 pt-4 mt-2">
+                                            {isReviewed ? (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setReviewingItem(null)}
+                                                    className="px-5 py-2.5 bg-gray-100 text-gray-700 rounded-md font-medium hover:bg-gray-200 transition"
+                                                >
+                                                    Đóng
+                                                </button>
+                                            ) : (
+                                                <>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setReviewingItem(null)}
+                                                        className="px-5 py-2.5 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition"
+                                                    >
+                                                        Hủy
+                                                    </button>
+                                                    <button
+                                                        type="submit"
+                                                        className="px-5 py-2.5 bg-[#2580f0] text-white rounded-md font-semibold hover:bg-[#1e63dc] transition shadow-sm"
+                                                    >
+                                                        Gửi đánh giá
+                                                    </button>
+                                                </>
+                                            )}
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        );
+                    })()}
                 </section>
             );
         }
 
+        function LichSuHoSoVuViecPage({ menu, subPage, backToList, myCases }) {
+            const [searchTerm, setSearchTerm] = useState('');
+            const [selectedDetail, setSelectedDetail] = useState(null);
+            const [selectedResult, setSelectedResult] = useState(null);
+            const [currentPage, setCurrentPage] = useState(1);
+            const [itemsPerPage] = useState(10);
+
+            useEffect(() => {
+                setCurrentPage(1);
+            }, [searchTerm]);
+
+            const statusLabelMap = {
+                'cho-tiep-nhan': 'Chờ tiếp nhận',
+                'dang-xu-ly': 'Đang xử lý',
+                'da-hoan-thanh': 'Đã hoàn thành',
+                'tu-choi': 'Từ chối'
+            };
+
+            const statusColorMap = {
+                'cho-tiep-nhan': 'bg-blue-50 text-blue-700 border border-blue-200',
+                'dang-xu-ly': 'bg-amber-50 text-amber-700 border border-amber-200',
+                'da-hoan-thanh': 'bg-emerald-50 text-emerald-700 border border-emerald-200',
+                'tu-choi': 'bg-rose-50 text-rose-700 border border-rose-200'
+            };
+
+            const filteredCases = useMemo(() => {
+                return myCases.filter(c => {
+                    const titleMatch = c.title.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd')
+                        .includes(searchTerm.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd'));
+                    return titleMatch;
+                });
+            }, [myCases, searchTerm]);
+
+            const totalItems = filteredCases.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+            const currentItems = useMemo(() => {
+                return filteredCases.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+            }, [filteredCases, currentPage, itemsPerPage]);
+
+            const handlePageChange = (newPage) => {
+                if (newPage >= 1 && newPage <= totalPages) {
+                    setCurrentPage(newPage);
+                }
+            };
+
+            const priorityBadge = (priority) => {
+                let classes = 'text-xs px-2.5 py-1 rounded-full font-medium border whitespace-nowrap ';
+                switch (priority) {
+                    case 'Rất cao':
+                        classes += 'bg-red-50 text-red-700 border-red-200';
+                        break;
+                    case 'Cao':
+                        classes += 'bg-orange-50 text-orange-700 border-orange-200';
+                        break;
+                    case 'Trung bình':
+                        classes += 'bg-blue-50 text-blue-700 border-blue-200';
+                        break;
+                    case 'Thấp':
+                        classes += 'bg-gray-50 text-gray-600 border-gray-200';
+                        break;
+                    case 'Rất thấp':
+                        classes += 'bg-slate-50 text-slate-500 border-slate-200';
+                        break;
+                    default:
+                        classes += 'bg-gray-50 text-gray-600 border-gray-200';
+                }
+                return <span className={classes}>{priority}</span>;
+            };
+
+            const statusBadge = (status) => {
+                const label = statusLabelMap[status] || status;
+                const classes = statusColorMap[status] || 'bg-gray-50 text-gray-600 border border-gray-200';
+                return <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${classes}`}>{label}</span>;
+            };
+
+            const getFileIcon = (fileName) => {
+                const ext = fileName ? fileName.split('.').pop().toLowerCase() : '';
+                if (['doc', 'docx'].includes(ext)) {
+                    return (
+                        <svg className="w-4 h-4 text-blue-600 inline mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    );
+                }
+                if (['xls', 'xlsx'].includes(ext)) {
+                    return (
+                        <svg className="w-4 h-4 text-green-600 inline mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    );
+                }
+                if (ext === 'pdf') {
+                    return (
+                        <svg className="w-4 h-4 text-red-600 inline mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                    );
+                }
+                if (['png', 'gif', 'jpg', 'jpeg'].includes(ext)) {
+                    return (
+                        <svg className="w-4 h-4 text-purple-600 inline mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    );
+                }
+                return (
+                    <svg className="w-4 h-4 text-gray-500 inline mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                );
+            };
+
+            return (
+                <>
+                <section className="rounded-[8px] border border-[#d8e1f2] bg-white p-6 lg:p-10 shadow-sm min-h-[600px] text-[14px]">
+                    <p className="text-[13px] font-medium text-[#66738f] mb-4">Tài khoản / {subPage.label}</p>
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-[#dbe5ff]">
+                        <h2 className="text-[28px] font-bold text-[#1b2b49]">{subPage.label}</h2>
+                    </div>
+
+                    {/* Filter Section */}
+                    <div className="mb-6 flex flex-col sm:flex-row gap-3">
+                        <div className="relative flex-1">
+                            <input
+                                type="text"
+                                placeholder="Tìm kiếm hồ sơ theo tiêu đề..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] transition shadow-sm"
+                            />
+                            <svg className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    {/* Table */}
+                    <div className="overflow-x-auto border border-[#d8e1f2] rounded-lg shadow-sm">
+                        <table className="w-full border-collapse text-left bg-white">
+                            <thead className="bg-[#f8f9fc] border-b border-[#d8e1f2] text-gray-700 font-bold text-[13px]">
+                                <tr>
+                                    <th className="px-4 py-3 text-center w-12">STT</th>
+                                    <th className="px-4 py-3 w-44 min-w-[130px]">Tiêu đề</th>
+                                    <th className="px-4 py-3 min-w-[140px]">Lĩnh vực pháp luật</th>
+                                    <th className="px-4 py-3 min-w-[140px]">Loại hình hỗ trợ</th>
+                                    <th className="px-4 py-3 text-center w-36 min-w-[130px]">Độ ưu tiên</th>
+                                    <th className="px-4 py-3 min-w-[220px]">Nội dung yêu cầu</th>
+                                    <th className="px-4 py-3 text-center w-32 min-w-[110px]">Trạng thái</th>
+                                    <th className="px-4 py-3 text-center w-[120px]">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-[#d8e1f2] text-gray-700 text-[13px]">
+                                {currentItems.length > 0 ? (
+                                    currentItems.map((c, index) => (
+                                        <tr key={c.id} className="hover:bg-gray-50/50 transition">
+                                            <td className="px-4 py-3.5 text-center text-gray-500 font-medium">{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                                            <td className="px-4 py-3.5 break-words">
+                                                <a 
+                                                    href="#" 
+                                                    onClick={(e) => { e.preventDefault(); setSelectedDetail(c); }} 
+                                                    className="text-[#2580f0] hover:text-[#1e63dc] hover:underline transition font-semibold"
+                                                >
+                                                    {c.title}
+                                                </a>
+                                            </td>
+                                            <td className="px-4 py-3.5 text-gray-600">{c.legalField}</td>
+                                            <td className="px-4 py-3.5 text-gray-600">{c.supportType}</td>
+                                            <td className="px-4 py-3.5 text-center">{priorityBadge(c.priority)}</td>
+                                            <td className="px-4 py-3.5">
+                                                <div style={{
+                                                    display: '-webkit-box',
+                                                    WebkitLineClamp: 2,
+                                                    WebkitBoxOrient: 'vertical',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                    wordBreak: 'break-word'
+                                                }} className="text-gray-500 leading-relaxed max-w-[320px]" title={c.requestContent}>
+                                                    {c.requestContent}
+                                                </div>
+                                            </td>
+                                            <td className="px-4 py-3.5 text-center whitespace-nowrap">{statusBadge(c.status)}</td>
+                                            <td className="px-4 py-3.5 text-center">
+                                                <div className="flex items-center justify-center gap-2">
+                                                    {/* Xem chi tiết */}
+                                                    <div className="relative group">
+                                                        <button
+                                                            onClick={() => setSelectedDetail(c)}
+                                                            className="p-2 text-[#2580f0] hover:bg-blue-50 border border-blue-200 rounded-md transition"
+                                                        >
+                                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                            </svg>
+                                                        </button>
+                                                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:flex flex-col items-center pointer-events-none z-30">
+                                                            <span className="relative z-10 p-1.5 text-[11px] leading-none text-white bg-gray-800 rounded shadow-lg whitespace-nowrap">Xem chi tiết</span>
+                                                            <div className="w-2 h-2 -mt-1 rotate-45 bg-gray-800"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Kết quả tiếp nhận */}
+                                                    {c.status !== 'cho-tiep-nhan' && (
+                                                        <div className="relative group">
+                                                            <button
+                                                                onClick={() => setSelectedResult(c)}
+                                                                className="p-2 text-emerald-600 hover:bg-emerald-50 border border-emerald-200 rounded-md transition"
+                                                            >
+                                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                                                                </svg>
+                                                            </button>
+                                                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:flex flex-col items-center pointer-events-none z-30">
+                                                                <span className="relative z-10 p-1.5 text-[11px] leading-none text-white bg-gray-800 rounded shadow-lg whitespace-nowrap">Kết quả tiếp nhận</span>
+                                                                <div className="w-2 h-2 -mt-1 rotate-45 bg-gray-800"></div>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="8" className="px-4 py-8 text-center text-gray-400 bg-gray-50/50">
+                                            Không có hồ sơ nào trùng khớp với tìm kiếm.
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-[#dbe5ff] pt-6 mt-6">
+                            <div className="flex items-center gap-4">
+                                <div className="text-[14px] text-gray-600 font-medium">
+                                    Hiển thị <strong className="text-[#212121]">{currentItems.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}</strong>-<strong className="text-[#212121]">{Math.min(currentPage * itemsPerPage, totalItems)}</strong> của <strong className="text-[#212121]">{totalItems}</strong> bản ghi
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} className={`px-3 py-1.5 border rounded text-[14px] font-medium ${currentPage === 1 ? 'border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] shadow-sm'}`}>Trước</button>
+                                <div className="flex items-center gap-1">
+                                    {[...Array(totalPages)].map((_, i) => (
+                                        <button key={i} onClick={() => handlePageChange(i + 1)} className={`w-8 h-8 flex items-center justify-center border rounded text-[14px] font-bold transition shadow-sm ${currentPage === i + 1 ? 'border-[#2580f0] bg-[#2580f0] text-white' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] bg-white'}`}>{i + 1}</button>
+                                    ))}
+                                </div>
+                                <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} className={`px-3 py-1.5 border rounded text-[14px] font-medium ${currentPage === totalPages ? 'border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] shadow-sm'}`}>Sau</button>
+                            </div>
+                        </div>
+                    )}
+                </section>
+
+                {/* Detail Popup */}
+                {selectedDetail && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setSelectedDetail(null)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[85vh] flex flex-col" onClick={e => e.stopPropagation()}>
+                            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                                <h3 className="text-[18px] font-bold text-[#1b2b49] truncate">Chi tiết hồ sơ vụ việc</h3>
+                                <button onClick={() => setSelectedDetail(null)} className="text-gray-400 hover:text-gray-600 transition">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+                            <div className="p-6 overflow-y-auto space-y-4 text-[14px]">
+                                <div>
+                                    <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Tiêu đề</span>
+                                    <h4 className="text-[16px] font-bold text-gray-800 leading-snug">{selectedDetail.title}</h4>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Lĩnh vực pháp luật</span>
+                                        <p className="font-semibold text-gray-700">{selectedDetail.legalField}</p>
+                                    </div>
+                                    <div>
+                                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Loại hình hỗ trợ</span>
+                                        <p className="font-semibold text-gray-700">{selectedDetail.supportType}</p>
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Độ ưu tiên</span>
+                                        <div>{priorityBadge(selectedDetail.priority)}</div>
+                                    </div>
+                                    <div>
+                                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Ngày gửi</span>
+                                        <p className="font-medium text-gray-600">{selectedDetail.date}</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Nội dung yêu cầu</span>
+                                    <p className="bg-gray-50 p-3 rounded border border-gray-100 text-gray-700 whitespace-pre-wrap leading-relaxed">{selectedDetail.requestContent}</p>
+                                </div>
+                                {selectedDetail.obstacleDesc && (
+                                    <div>
+                                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Mô tả vướng mắc</span>
+                                        <p className="bg-gray-50 p-3 rounded border border-gray-100 text-gray-700 whitespace-pre-wrap leading-relaxed">{selectedDetail.obstacleDesc}</p>
+                                    </div>
+                                )}
+                                {selectedDetail.priorityReason && (
+                                    <div>
+                                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Lý do ưu tiên</span>
+                                        <p className="bg-amber-50/50 p-3 rounded border border-amber-100 text-gray-700 whitespace-pre-wrap leading-relaxed">{selectedDetail.priorityReason}</p>
+                                    </div>
+                                )}
+                                {selectedDetail.notes && (
+                                    <div>
+                                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Ghi chú</span>
+                                        <p className="bg-gray-50 p-3 rounded border border-gray-100 text-gray-700 whitespace-pre-wrap leading-relaxed">{selectedDetail.notes}</p>
+                                    </div>
+                                )}
+                                {selectedDetail.files && selectedDetail.files.length > 0 && (
+                                    <div>
+                                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Tài liệu đính kèm</span>
+                                        <div className="space-y-2 mt-1">
+                                            {selectedDetail.files.map((file, idx) => (
+                                                <div key={idx} className="flex items-center gap-2 p-2 bg-gray-50 border border-gray-100 rounded">
+                                                    {getFileIcon(file)}
+                                                    <span className="text-xs text-gray-700 font-medium">{file}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="flex justify-end px-6 py-4 border-t border-gray-100 bg-gray-50/50 rounded-b-lg">
+                                <button
+                                    onClick={() => setSelectedDetail(null)}
+                                    className="px-5 py-2 bg-gray-100 text-gray-700 rounded-md font-medium hover:bg-gray-200 transition text-[13px]"
+                                >
+                                    Đóng
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Reception Result Popup */}
+                {selectedResult && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setSelectedResult(null)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-xl w-full max-h-[80vh] flex flex-col" onClick={e => e.stopPropagation()}>
+                            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                                <h3 className="text-[18px] font-bold text-[#1b2b49] truncate">Kết quả tiếp nhận hồ sơ</h3>
+                                <button onClick={() => setSelectedResult(null)} className="text-gray-400 hover:text-gray-600 transition">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+                            <div className="p-6 overflow-y-auto space-y-4 text-[14px]">
+                                <div>
+                                    <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Tiêu đề</span>
+                                    <h4 className="text-[15px] font-bold text-gray-800 leading-snug">{selectedResult.title}</h4>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Trạng thái</span>
+                                        <div>{statusBadge(selectedResult.status)}</div>
+                                    </div>
+                                    <div>
+                                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Ngày tiếp nhận</span>
+                                        <p className="font-semibold text-gray-700">{selectedResult.date}</p>
+                                    </div>
+                                </div>
+                                
+                                {selectedResult.status === 'tu-choi' ? (
+                                    <div>
+                                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Thông báo</span>
+                                        <div className="bg-red-50 text-red-900 p-4 rounded-lg border border-red-200 leading-relaxed shadow-sm">
+                                            <p className="font-medium text-[14px]">
+                                                {selectedResult.receptionResult || "Hồ sơ của bạn đã bị từ chối!"}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ) : selectedResult.status === 'da-hoan-thanh' ? (
+                                    <>
+                                        <div>
+                                            <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Kết quả giải quyết</span>
+                                            <div className="bg-emerald-50/40 text-emerald-900 p-4 rounded-lg border border-emerald-200 leading-relaxed shadow-sm">
+                                                <p className="font-medium text-[14px]">
+                                                    {selectedResult.resolutionResult || selectedResult.receptionResult || "Hồ sơ vụ việc đã được tiếp nhận, thẩm định và xử lý giải quyết hoàn tất thành công theo đúng quy định pháp luật."}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">File đính kèm kết quả</span>
+                                            <div className="space-y-2 mt-1">
+                                                {(selectedResult.resultFiles && selectedResult.resultFiles.length > 0
+                                                    ? selectedResult.resultFiles
+                                                    : [{ name: `KetQuaGiaiQuyet_${selectedResult.id || 'HoSo'}.pdf`, size: "2.4 MB" }]
+                                                ).map((file, idx) => {
+                                                    const fileName = typeof file === 'string' ? file : file.name;
+                                                    const fileSize = typeof file === 'object' && file.size ? file.size : null;
+                                                    return (
+                                                        <div key={idx} className="flex items-center justify-between p-2.5 bg-gray-50 border border-gray-200 rounded-md hover:bg-gray-100/80 transition">
+                                                            <div className="flex items-center gap-2 overflow-hidden">
+                                                                {getFileIcon(fileName)}
+                                                                <span className="text-xs text-gray-800 font-semibold truncate">{fileName}</span>
+                                                                {fileSize && <span className="text-[11px] text-gray-400 whitespace-nowrap">({fileSize})</span>}
+                                                            </div>
+                                                            <a
+                                                                href="#"
+                                                                onClick={(e) => { e.preventDefault(); alert(`Tải xuống file kết quả: ${fileName}`); }}
+                                                                className="text-xs text-[#2580f0] hover:text-[#1e63dc] font-medium flex items-center gap-1 shrink-0 ml-2"
+                                                            >
+                                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                                                </svg>
+                                                                Tải về
+                                                            </a>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div>
+                                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-1">Thông báo</span>
+                                        <div className="bg-amber-50/50 text-amber-900 p-4 rounded-lg border border-amber-200 leading-relaxed shadow-sm">
+                                            <p className="font-medium text-[14px]">
+                                                Hồ sơ vụ việc của bạn đã được tiếp nhận và đang xử lý. Chúng tôi sẽ liên hệ lại với bạn sau 5-10 ngày làm việc!
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="flex justify-end px-6 py-4 border-t border-gray-100 bg-gray-50/50 rounded-b-lg">
+                                <button
+                                    onClick={() => setSelectedResult(null)}
+                                    className="px-5 py-2 bg-gray-100 text-gray-700 rounded-md font-medium hover:bg-gray-200 transition text-[13px]"
+                                >
+                                    Đóng
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                </>
+            );
+        }
 
         function TraCuuLichSuHoiDapTuVanPage({ menu, subPage, backToList }) {
             const [draftSearch, setDraftSearch] = useState('');
@@ -6915,7 +13162,7 @@ import {
 
             return (
                 <section className="rounded-[8px] border border-[#d8e1f2] bg-white p-6 lg:p-10 shadow-sm min-h-[600px]">
-                    <p className="text-[13px] font-medium text-[#66738f] mb-4">Trang chủ / {menu.label} / {subPage.label}</p>
+                    <p className="text-[13px] font-medium text-[#66738f] mb-4">Tài khoản / Tra cứu lịch sử hỏi đáp/tư vấn</p>
 
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-[#dbe5ff]">
                         <h2 className="text-[28px] font-bold text-[#1b2b49]">Tra cứu lịch sử hỏi đáp/tư vấn</h2>
@@ -7136,7 +13383,981 @@ import {
             );
         }
 
+        function HoSoPhapLyDNPage({ menu, subPage, backToList }) {
+            const [profiles, setProfiles] = useState([
+                { id: 1, code: "HSPL-001", name: "Giấy chứng nhận đăng ký doanh nghiệp", type: "Giấy chứng nhận", sign: "0102345678", issueDateRaw: "2020-05-15", expiryDateRaw: null, issueDate: "15/05/2020", expiryDate: "Vô thời hạn", issuer: "Sở Kế hoạch và Đầu tư TP. Hà Nội", status: "Hiệu lực", notes: "Đăng ký thành lập mới" },
+                { id: 2, code: "HSPL-002", name: "Giấy phép hoạt động điện lực", type: "Giấy phép", sign: "45/GP-ĐL", issueDateRaw: "2021-08-20", expiryDateRaw: "2026-08-20", issueDate: "20/08/2021", expiryDate: "20/08/2026", issuer: "Cục Điều tiết điện lực", status: "Hiệu lực", notes: "Gia hạn lần thứ nhất" },
+                { id: 3, code: "HSPL-003", name: "Giấy chứng nhận đủ điều kiện phòng cháy và chữa cháy", type: "Giấy chứng nhận", sign: "123/TD-PCCC", issueDateRaw: "2022-03-10", expiryDateRaw: null, issueDate: "10/03/2022", expiryDate: "Vô thời hạn", issuer: "Phòng Cảnh sát PCCC & CNCH", status: "Hiệu lực", notes: "Kiểm tra định kỳ đạt yêu cầu" },
+                { id: 4, code: "HSPL-004", name: "Giấy phép xây dựng nhà xưởng sản xuất", type: "Giấy phép", sign: "88/GPXD", issueDateRaw: "2023-01-15", expiryDateRaw: "2024-01-15", issueDate: "15/01/2023", expiryDate: "15/01/2024", issuer: "Sở Xây dựng tỉnh Bình Dương", status: "Hết hiệu lực", notes: "Đã hoàn thành nghiệm thu công trình" },
+                { id: 5, code: "HSPL-005", name: "Giấy chứng nhận cơ sở đủ điều kiện an toàn thực phẩm", type: "Giấy chứng nhận", sign: "345/GCN-ATTP", issueDateRaw: "2023-06-25", expiryDateRaw: "2026-06-25", issueDate: "25/06/2023", expiryDate: "25/06/2026", issuer: "Chi cục An toàn vệ sinh thực phẩm", status: "Hiệu lực", notes: "Khu vực bếp ăn tập thể" },
+                { id: 6, code: "HSPL-006", name: "Quyết định phê duyệt báo cáo đánh giá tác động môi trường (ĐTM)", type: "Quyết định", sign: "789/QĐ-UBND", issueDateRaw: "2021-11-12", expiryDateRaw: null, issueDate: "12/11/2021", expiryDate: "Vô thời hạn", issuer: "Ủy ban nhân dân tỉnh Đồng Nai", status: "Hiệu lực", notes: "Phê duyệt dự án mở rộng nhà máy" },
+                { id: 7, code: "HSPL-007", name: "Giấy phép xả nước thải vào nguồn nước", type: "Giấy phép", sign: "56/GP-BTNMT", issueDateRaw: "2022-09-05", expiryDateRaw: "2027-09-05", issueDate: "05/09/2022", expiryDate: "05/09/2027", issuer: "Bộ Tài nguyên và Môi trường", status: "Hiệu lực", notes: "Thời hạn cấp phép 5 năm" },
+                { id: 8, code: "HSPL-008", name: "Giấy chứng nhận đăng ký nhãn hiệu độc quyền", type: "Giấy chứng nhận", sign: "402135/QĐ-SHTT", issueDateRaw: "2019-04-10", expiryDateRaw: "2029-04-10", issueDate: "10/04/2019", expiryDate: "10/04/2029", issuer: "Cục Sở hữu trí tuệ", status: "Hiệu lực", notes: "Logo thương hiệu chính" },
+                { id: 9, code: "HSPL-009", name: "Quyết định chấp thuận chủ trương đầu tư", type: "Quyết định", sign: "12/QĐ-UBND", issueDateRaw: "2020-02-28", expiryDateRaw: null, issueDate: "28/02/2020", expiryDate: "Vô thời hạn", issuer: "Ủy ban nhân dân tỉnh Long An", status: "Hiệu lực", notes: "Dự án cụm công nghiệp xanh" },
+                { id: 10, code: "HSPL-010", name: "Giấy phép hoạt động văn phòng đại diện", type: "Giấy phép", sign: "0102345678-001", issueDateRaw: "2022-07-20", expiryDateRaw: null, issueDate: "20/07/2022", expiryDate: "Vô thời hạn", issuer: "Sở Kế hoạch và Đầu tư TP. Hồ Chí Minh", status: "Hiệu lực", notes: "Văn phòng tại Quận 3" },
+                { id: 11, code: "HSPL-011", name: "Giấy chứng nhận mã số quan trắc môi trường", type: "Giấy chứng nhận", sign: "VIMCERTS-295", issueDateRaw: "2020-05-18", expiryDateRaw: null, issueDate: "18/05/2020", expiryDate: "Vô thời hạn", issuer: "Bộ Tài nguyên và Môi trường", status: "Hiệu lực", notes: "Đo đạc môi trường định kỳ" },
+                { id: 12, code: "HSPL-012", name: "Giấy chứng nhận xuất xứ hàng hóa (C/O Form D)", type: "Giấy chứng nhận", sign: "CO-2026-A12", issueDateRaw: "2026-03-01", expiryDateRaw: "2026-09-01", issueDate: "01/03/2026", expiryDate: "01/09/2026", issuer: "Phòng Thương mại và Công nghiệp Việt Nam", status: "Hiệu lực", notes: "Xuất khẩu đi Singapore" },
+                { id: 13, code: "HSPL-013", name: "Giấy phép nhập khẩu linh kiện điện tử", type: "Giấy phép", sign: "99/GP-BTTTT", issueDateRaw: "2025-10-15", expiryDateRaw: "2026-04-15", issueDate: "15/10/2025", expiryDate: "15/04/2026", issuer: "Bộ Thông tin và Truyền thông", status: "Hết hiệu lực", notes: "Lô hàng tháng 10" },
+                { id: 14, code: "HSPL-014", name: "Quyết định giao đất và cấp giấy chứng nhận quyền sử dụng đất", type: "Quyết định", sign: "456/QĐ-TNMT", issueDateRaw: "2018-12-01", expiryDateRaw: "2068-12-01", issueDate: "01/12/2018", expiryDate: "01/12/2068", issuer: "Sở Tài nguyên và Môi trường", status: "Hiệu lực", notes: "Đất sản xuất phi nông nghiệp" },
+                { id: 15, code: "HSPL-015", name: "Giấy chứng nhận đăng ký mẫu con dấu doanh nghiệp", type: "Giấy chứng nhận", sign: "1234/GCN-MD", issueDateRaw: "2020-05-20", expiryDateRaw: null, issueDate: "20/05/2020", expiryDate: "Vô thời hạn", issuer: "Công an Thành phố Hà Nội", status: "Hiệu lực", notes: "Sử dụng dấu cơ sở" }
+            ]);
+
+            const [showAddModal, setShowAddModal] = useState(false);
+            const [editingProfile, setEditingProfile] = useState(null);
+            
+            // Pagination state
+            const [currentPage, setCurrentPage] = useState(1);
+            const itemsPerPage = 10;
+            const totalItems = profiles.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const currentProfiles = profiles.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+            // Form states
+            const [code, setCode] = useState('');
+            const [name, setName] = useState('');
+            const [type, setType] = useState('Giấy chứng nhận');
+            const [sign, setSign] = useState('');
+            const [issueDate, setIssueDate] = useState('');
+            const [expiryDate, setExpiryDate] = useState('');
+            const [issuer, setIssuer] = useState('');
+            const [status, setStatus] = useState('Hiệu lực');
+            const [notes, setNotes] = useState('');
+
+            const formatDate = (dateStr) => {
+                if (!dateStr) return '';
+                const parts = dateStr.split('-');
+                if (parts.length === 3) {
+                    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+                }
+                return dateStr;
+            };
+
+            // Open Add Modal
+            const handleOpenAdd = () => {
+                setEditingProfile(null);
+                setCode('HSPL-' + String(profiles.length + 1).padStart(3, '0'));
+                setName('');
+                setType('Giấy chứng nhận');
+                setSign('');
+                setIssueDate('');
+                setExpiryDate('');
+                setIssuer('');
+                setStatus('Hiệu lực');
+                setNotes('');
+                setShowAddModal(true);
+            };
+
+            // Open Edit Modal
+            const handleEdit = (profile) => {
+                setEditingProfile(profile);
+                setCode(profile.code);
+                setName(profile.name);
+                setType(profile.type);
+                setSign(profile.sign || '');
+                setIssueDate(profile.issueDateRaw || '');
+                setExpiryDate(profile.expiryDateRaw || '');
+                setIssuer(profile.issuer || '');
+                setStatus(profile.status || 'Hiệu lực');
+                setNotes(profile.notes || '');
+                setShowAddModal(true);
+            };
+
+            // Handle delete
+            const handleDelete = (id) => {
+                if (window.confirm("Bạn có chắc chắn muốn xóa hồ sơ pháp lý này?")) {
+                    setProfiles(prev => {
+                        const newProfiles = prev.filter(p => p.id !== id);
+                        const newTotalPages = Math.ceil(newProfiles.length / itemsPerPage);
+                        if (currentPage > newTotalPages && newTotalPages > 0) {
+                            setCurrentPage(newTotalPages);
+                        }
+                        return newProfiles;
+                    });
+                }
+            };
+
+            // Handle submit
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                if (!name.trim()) {
+                    alert("Vui lòng nhập tên hồ sơ!");
+                    return;
+                }
+                if (!type.trim()) {
+                    alert("Vui lòng chọn loại hồ sơ!");
+                    return;
+                }
+
+                const payload = {
+                    id: editingProfile ? editingProfile.id : Date.now(),
+                    code,
+                    name,
+                    type,
+                    sign,
+                    issueDateRaw: issueDate || null,
+                    expiryDateRaw: expiryDate || null,
+                    issueDate: issueDate ? formatDate(issueDate) : '',
+                    expiryDate: expiryDate ? formatDate(expiryDate) : 'Vô thời hạn',
+                    issuer,
+                    status,
+                    notes
+                };
+
+                if (editingProfile) {
+                    setProfiles(prev => prev.map(p => p.id === editingProfile.id ? payload : p));
+                    alert("Cập nhật hồ sơ thành công!");
+                } else {
+                    setProfiles(prev => [...prev, payload]);
+                    
+                    alert("Thêm hồ sơ thành công!");
+                }
+                setShowAddModal(false);
+            };
+
+            return (
+                <section className="rounded-[8px] border border-[#d8e1f2] bg-white p-6 lg:p-10 shadow-sm min-h-[600px]">
+                    <p className="text-[13px] font-medium text-[#66738f] mb-4">Tài khoản / Hồ sơ pháp lý doanh nghiệp</p>
+
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-[#dbe5ff]">
+                        <h2 className="text-[28px] font-bold text-[#1b2b49]">Hồ sơ pháp lý doanh nghiệp</h2>
+                        <button 
+                            onClick={handleOpenAdd}
+                            className="px-5 py-2.5 bg-[#2580f0] text-white rounded-md text-sm font-semibold hover:bg-[#1e63dc] transition shadow-sm flex items-center gap-2"
+                        >
+                            Thêm mới
+                        </button>
+                    </div>
+
+                    <div className="overflow-x-auto rounded-lg border border-[#d8e1f2] bg-white shadow-sm">
+                        <table className="w-full text-left text-sm text-[#1b2b49]">
+                            <thead className="bg-[#f8f9fc] text-[#66738f] text-xs font-bold uppercase border-b border-[#d8e1f2]">
+                                <tr>
+                                    <th className="px-4 py-3">Mã hồ sơ</th>
+                                    <th className="px-4 py-3">Tên hồ sơ</th>
+                                    <th className="px-4 py-3">Loại</th>
+                                    <th className="px-4 py-3">Số/Ký hiệu</th>
+                                    <th className="px-4 py-3">Ngày cấp</th>
+                                    <th className="px-4 py-3">Ngày hết hạn</th>
+                                    <th className="px-4 py-3">Trạng thái</th>
+                                    <th className="px-4 py-3 text-center">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {currentProfiles.length === 0 ? (
+                                    <tr>
+                                        <td colSpan="8" className="px-4 py-16 text-center text-gray-500">
+                                            <div className="flex flex-col items-center justify-center gap-3">
+                                                {/* Empty icon */}
+                                                <div className="w-16 h-16 text-gray-300">
+                                                    <svg fill="none" stroke="currentColor" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                                    </svg>
+                                                </div>
+                                                <span className="text-[15px] font-medium text-gray-400">Trống</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ) : (
+                                    currentProfiles.map((profile) => (
+                                        <tr key={profile.id} className="border-b border-[#d8e1f2] hover:bg-gray-50/50 transition">
+                                            <td className="px-4 py-3.5 font-semibold text-gray-700">{profile.code}</td>
+                                            <td className="px-4 py-3.5 font-medium text-gray-900">{profile.name}</td>
+                                            <td className="px-4 py-3.5 text-gray-600">{profile.type}</td>
+                                            <td className="px-4 py-3.5 font-mono text-gray-600">{profile.sign || '-'}</td>
+                                            <td className="px-4 py-3.5 text-gray-600">{profile.issueDate || '-'}</td>
+                                            <td className="px-4 py-3.5 text-gray-600">{profile.expiryDate || 'Vô thời hạn'}</td>
+                                            <td className="px-4 py-3.5">
+                                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${
+                                                    profile.status === 'Hiệu lực' || profile.status === 'Còn hiệu lực' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
+                                                    profile.status === 'Hết hiệu lực' ? 'bg-rose-50 text-rose-700 border border-rose-200' :
+                                                    'bg-blue-50 text-blue-700 border border-blue-200'
+                                                }`}>
+                                                    {profile.status}
+                                                </span>
+                                            </td>
+                                            <td className="px-4 py-3.5 text-center">
+                                                <div className="flex items-center justify-center gap-2">
+                                                    <button 
+                                                        onClick={() => handleEdit(profile)}
+                                                        className="p-1 text-blue-600 hover:bg-blue-50 rounded transition" 
+                                                        title="Sửa"
+                                                    >
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => handleDelete(profile.id)}
+                                                        className="p-1 text-red-600 hover:bg-red-50 rounded transition" 
+                                                        title="Xóa"
+                                                    >
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {totalPages > 1 && (
+                        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-[#dbe5ff] pt-6 mt-6">
+                            <div className="flex items-center gap-4">
+                                <div className="text-[14px] text-gray-600 font-medium">
+                                    Hiển thị <strong className="text-[#212121]">{profiles.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}</strong>-<strong className="text-[#212121]">{Math.min(currentPage * itemsPerPage, totalItems)}</strong> của <strong className="text-[#212121]">{totalItems}</strong> bản ghi
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className={`px-3 py-1.5 border rounded text-[14px] font-medium ${currentPage === 1 ? 'border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] shadow-sm'}`}>Trước</button>
+                                <div className="flex items-center gap-1">
+                                    {[...Array(totalPages)].map((_, i) => (
+                                        <button key={i} onClick={() => setCurrentPage(i + 1)} className={`w-8 h-8 flex items-center justify-center border rounded text-[14px] font-bold transition shadow-sm ${currentPage === i + 1 ? 'border-[#2580f0] bg-[#2580f0] text-white' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] bg-white'}`}>{i + 1}</button>
+                                    ))}
+                                </div>
+                                <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages} className={`px-3 py-1.5 border rounded text-[14px] font-medium ${currentPage === totalPages ? 'border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] shadow-sm'}`}>Sau</button>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Add / Edit Profile Modal */}
+                    {showAddModal && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setShowAddModal(false)}>
+                            <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-[95vh] flex flex-col" onClick={e => e.stopPropagation()}>
+                                <div className="flex justify-between items-center px-6 py-4 border-b border-gray-150">
+                                    <h3 className="text-[18px] font-bold text-[#1b2b49]">
+                                        {editingProfile ? "Cập nhật hồ sơ pháp lý" : "Thêm hồ sơ pháp lý"}
+                                    </h3>
+                                    <button onClick={() => setShowAddModal(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                                <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-4 text-[14px] overflow-y-auto">
+                                    <div>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                                            <span className="text-red-500 mr-1">*</span>Tên hồ sơ
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            required
+                                            value={name} 
+                                            onChange={(e) => setName(e.target.value)}
+                                            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0]"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">
+                                            <span className="text-red-500 mr-1">*</span>Loại hồ sơ
+                                        </label>
+                                        <select 
+                                            value={type} 
+                                            onChange={(e) => setType(e.target.value)}
+                                            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-700 bg-white focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0]"
+                                        >
+                                            <option value="Giấy chứng nhận">Giấy chứng nhận</option>
+                                            <option value="Giấy phép">Giấy phép</option>
+                                            <option value="Quyết định">Quyết định</option>
+                                            <option value="Khác">Khác</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">Số/Ký hiệu</label>
+                                        <input 
+                                            type="text" 
+                                            value={sign} 
+                                            onChange={(e) => setSign(e.target.value)}
+                                            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0]"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">Ngày cấp</label>
+                                        <div className="relative">
+                                            <input 
+                                                type={issueDate ? "date" : "text"}
+                                                placeholder="Chọn thời điểm"
+                                                onFocus={(e) => e.target.type = 'date'}
+                                                onBlur={(e) => {
+                                                    if (!e.target.value) e.target.type = 'text';
+                                                }}
+                                                value={issueDate} 
+                                                onChange={(e) => setIssueDate(e.target.value)}
+                                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-700 focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] pr-10"
+                                            />
+                                            <div className="absolute right-3 top-2.5 pointer-events-none text-gray-400">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">Ngày hết hạn</label>
+                                        <div className="relative">
+                                            <input 
+                                                type={expiryDate ? "date" : "text"}
+                                                placeholder="Chọn thời điểm"
+                                                onFocus={(e) => e.target.type = 'date'}
+                                                onBlur={(e) => {
+                                                    if (!e.target.value) e.target.type = 'text';
+                                                }}
+                                                value={expiryDate} 
+                                                onChange={(e) => setExpiryDate(e.target.value)}
+                                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-700 focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] pr-10"
+                                            />
+                                            <div className="absolute right-3 top-2.5 pointer-events-none text-gray-400">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">Cơ quan cấp</label>
+                                        <input 
+                                            type="text" 
+                                            value={issuer} 
+                                            onChange={(e) => setIssuer(e.target.value)}
+                                            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0]"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">Trạng thái</label>
+                                        <select 
+                                            value={status} 
+                                            onChange={(e) => setStatus(e.target.value)}
+                                            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-700 bg-white focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0]"
+                                        >
+                                            <option value="Hiệu lực">Hiệu lực</option>
+                                            <option value="Hết hiệu lực">Hết hiệu lực</option>
+                                            <option value="Chờ duyệt">Chờ duyệt</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">Ghi chú</label>
+                                        <textarea 
+                                            rows="3" 
+                                            value={notes} 
+                                            onChange={(e) => setNotes(e.target.value)}
+                                            className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-700 focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] resize-none"
+                                        />
+                                    </div>
+
+                                    <div className="flex justify-end gap-3 border-t border-gray-100 pt-4 mt-2">
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowAddModal(false)}
+                                            className="px-6 py-2 border border-gray-300 text-gray-700 rounded-md font-semibold hover:bg-gray-50 transition text-sm"
+                                        >
+                                            Hủy
+                                        </button>
+                                        <button
+                                            type="submit"
+                                            className="px-6 py-2 bg-[#0c59cf] text-white rounded-md font-semibold hover:bg-[#094bb3] transition shadow-sm text-sm"
+                                        >
+                                            Đồng ý
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    )}
+                </section>
+            );
+        }
+
+        function KetQuaDaoTaoPage({ menu, subPage, backToList }) {
+            const [draftSearchTerm, setDraftSearchTerm] = useState('');
+            const [searchTerm, setSearchTerm] = useState('');
+            const [selectedStatuses, setSelectedStatuses] = useState(['dat', 'khong-dat']);
+            const [isStatusDropdownOpen, setIsStatusDropdownOpen] = useState(false);
+            const [selectedResult, setSelectedResult] = useState(null);
+            const [showDetailModal, setShowDetailModal] = useState(false);
+            const [currentPage, setCurrentPage] = useState(1);
+            const itemsPerPage = 10;
+
+            // Mock training results
+            const resultsData = [
+                {
+                    id: 1,
+                    courseName: "Bồi dưỡng chuyên sâu Kỹ năng đàm phán và soạn thảo Hợp đồng thương mại quốc tế",
+                    time: "15/02/2026 - 28/02/2026",
+                    attendance: "5/5 (100%)",
+                    sessions: [
+                        { name: "Buổi 1: Tổng quan về hợp đồng thương mại quốc tế", status: "Có mặt" },
+                        { name: "Buổi 2: Kỹ năng đàm phán hợp đồng", status: "Có mặt" },
+                        { name: "Buổi 3: Soạn thảo điều khoản thanh toán & giao hàng", status: "Có mặt" },
+                        { name: "Buổi 4: Giải quyết tranh chấp trong thương mại quốc tế", status: "Có mặt" },
+                        { name: "Buổi 5: Thực hành soạn thảo & ký kết", status: "Có mặt" }
+                    ],
+                    score: "9.2",
+                    detailScores: {
+                        midterm: "8.5",
+                        final: "9.5"
+                    },
+                    status: "dat",
+                    notes: "Hoàn thành xuất sắc, được khen thưởng chuyên đề.",
+                    certificateCode: "HTPLDN-2026-0042"
+                },
+                {
+                    id: 2,
+                    courseName: "Cập nhật các quy định mới về Thuế TNDN và Hóa đơn điện tử khởi tạo từ máy tính tiền",
+                    time: "05/03/2026 - 12/03/2026",
+                    attendance: "3/3 (100%)",
+                    sessions: [
+                        { name: "Buổi 1: Quy định mới về Thuế TNDN bổ sung", status: "Có mặt" },
+                        { name: "Buổi 2: Hóa đơn điện tử từ máy tính tiền", status: "Có mặt" },
+                        { name: "Buổi 3: Hướng dẫn xử lý sai sót & quyết toán", status: "Có mặt" }
+                    ],
+                    score: "8.5",
+                    detailScores: {
+                        midterm: "8.0",
+                        final: "9.0"
+                    },
+                    status: "dat",
+                    notes: "Hoàn thành tốt nội dung bồi dưỡng chuyên đề.",
+                    certificateCode: "HTPLDN-2026-0059"
+                },
+                {
+                    id: 3,
+                    courseName: "Kỹ năng quản trị rủi ro pháp lý trong hoạt động Đầu tư công và PPP",
+                    time: "18/03/2026 - 25/03/2026",
+                    attendance: "4/4 (100%)",
+                    sessions: [
+                        { name: "Buổi 1: Nhận diện rủi ro pháp lý đầu tư công", status: "Có mặt" },
+                        { name: "Buổi 2: Trình tự thủ tục dự án PPP mới nhất", status: "Có mặt" },
+                        { name: "Buổi 3: Phân chia rủi ro trong hợp đồng PPP", status: "Có mặt" },
+                        { name: "Buổi 4: Giải pháp phòng ngừa & giảm thiểu rủi ro", status: "Có mặt" }
+                    ],
+                    score: "4.5",
+                    detailScores: {
+                        midterm: "5.0",
+                        final: "4.2"
+                    },
+                    status: "khong-dat",
+                    notes: "Chưa đạt điểm bài kiểm tra cuối khóa. Cần đăng ký thi lại.",
+                    certificateCode: null
+                },
+                {
+                    id: 4,
+                    courseName: "Bảo hộ tài sản trí tuệ và chống xâm phạm quyền Sở hữu trí tuệ trên môi trường số",
+                    time: "02/04/2026 - 09/04/2026",
+                    attendance: "2/3 (66.7%)",
+                    sessions: [
+                        { name: "Buổi 1: Đăng ký bảo hộ tài sản trí tuệ số", status: "Có mặt" },
+                        { name: "Buổi 2: Nhận diện xâm phạm trên sàn TMĐT", status: "Vắng mặt (Có phép)" },
+                        { name: "Buổi 3: Quy trình xử lý xâm phạm quyền sở hữu", status: "Có mặt" }
+                    ],
+                    score: "7.8",
+                    detailScores: {
+                        midterm: "7.5",
+                        final: "8.0"
+                    },
+                    status: "dat",
+                    notes: "Hoàn thành khóa học bồi dưỡng chuyên đề.",
+                    certificateCode: "HTPLDN-2026-0091"
+                },
+                {
+                    id: 5,
+                    courseName: "Pháp luật Lao động mới và Kỹ năng giải quyết tranh chấp lao động tập thể tại doanh nghiệp",
+                    time: "20/04/2026 - 27/04/2026",
+                    attendance: "3/4 (75%)",
+                    sessions: [
+                        { name: "Buổi 1: Những điểm mới quan trọng của Bộ luật Lao động", status: "Có mặt" },
+                        { name: "Buổi 2: Hợp đồng lao động & Chế độ tiền lương mới", status: "Có mặt" },
+                        { name: "Buổi 3: Kỹ năng xử lý kỷ luật lao động đúng luật", status: "Vắng mặt (Không phép)" },
+                        { name: "Buổi 4: Giải quyết tranh chấp lao động thực tiễn", status: "Có mặt" }
+                    ],
+                    score: "3.5",
+                    detailScores: {
+                        midterm: "4.0",
+                        final: "3.0"
+                    },
+                    status: "khong-dat",
+                    notes: "Chưa đạt yêu cầu do vắng học không phép và điểm thi thấp.",
+                    certificateCode: null
+                },
+                {
+                    id: 6,
+                    courseName: "Pháp luật về Thương mại điện tử và Bảo vệ người tiêu dùng trong kỷ nguyên số",
+                    time: "05/05/2026 - 15/05/2026",
+                    attendance: "5/5 (100%)",
+                    sessions: [
+                        { name: "Buổi 1: Đăng ký sàn TMĐT & thủ tục liên quan", status: "Có mặt" },
+                        { name: "Buổi 2: Quy định bảo vệ thông tin người tiêu dùng", status: "Có mặt" },
+                        { name: "Buổi 3: Giải quyết khiếu nại trực tuyến", status: "Có mặt" },
+                        { name: "Buổi 4: Nghĩa vụ thuế đối với giao dịch TMĐT", status: "Có mặt" },
+                        { name: "Buổi 5: Thực hành xử lý tình huống tranh chấp", status: "Có mặt" }
+                    ],
+                    score: "9.0",
+                    detailScores: {
+                        midterm: "9.0",
+                        final: "9.0"
+                    },
+                    status: "dat",
+                    notes: "Hoàn thành tốt, tham gia đầy đủ các buổi học chuyên đề.",
+                    certificateCode: "HTPLDN-2026-0112"
+                },
+                {
+                    id: 7,
+                    courseName: "Bồi dưỡng kiến thức pháp luật về Doanh nghiệp xã hội và trách nhiệm xã hội ESG",
+                    time: "12/05/2026 - 19/05/2026",
+                    attendance: "4/4 (100%)",
+                    sessions: [
+                        { name: "Buổi 1: Khái niệm & Khung pháp lý Doanh nghiệp xã hội", status: "Có mặt" },
+                        { name: "Buổi 2: Các tiêu chí ESG trong hoạt động quản trị", status: "Có mặt" },
+                        { name: "Buổi 3: Báo cáo phát triển bền vững cho doanh nghiệp", status: "Có mặt" },
+                        { name: "Buổi 4: Thực tiễn áp dụng ESG tại Việt Nam", status: "Có mặt" }
+                    ],
+                    score: "8.0",
+                    detailScores: {
+                        midterm: "7.8",
+                        final: "8.2"
+                    },
+                    status: "dat",
+                    notes: "Tích cực thảo luận, đạt kết quả tốt.",
+                    certificateCode: "HTPLDN-2026-0125"
+                },
+                {
+                    id: 8,
+                    courseName: "Kỹ năng soạn thảo quy chế nội bộ doanh nghiệp và Thỏa ước lao động tập thể",
+                    time: "25/05/2026 - 02/06/2026",
+                    attendance: "4/5 (80%)",
+                    sessions: [
+                        { name: "Buổi 1: Quy trình xây dựng Nội quy lao động", status: "Có mặt" },
+                        { name: "Buổi 2: Kỹ năng đàm phán Thỏa ước lao động tập thể", status: "Có mặt" },
+                        { name: "Buổi 3: Xây dựng quy chế tuyển dụng & đào tạo", status: "Vắng mặt (Có phép)" },
+                        { name: "Buổi 4: Quy chế tiền lương & khen thưởng", status: "Có mặt" },
+                        { name: "Buổi 5: Đăng ký nội quy với cơ quan quản lý nhà nước", status: "Có mặt" }
+                    ],
+                    score: "4.0",
+                    detailScores: {
+                        midterm: "4.5",
+                        final: "3.8"
+                    },
+                    status: "khong-dat",
+                    notes: "Kết quả kiểm tra chưa đạt yêu cầu tối thiểu.",
+                    certificateCode: null
+                },
+                {
+                    id: 9,
+                    courseName: "Cập nhật Luật Đất đai mới nhất và các tác động pháp lý đến dự án bất động sản doanh nghiệp",
+                    time: "05/06/2026 - 15/06/2026",
+                    attendance: "6/6 (100%)",
+                    sessions: [
+                        { name: "Buổi 1: Những thay đổi cốt lõi của Luật Đất đai mới", status: "Có mặt" },
+                        { name: "Buổi 2: Phương pháp xác định giá đất & đền bù giải tỏa", status: "Có mặt" },
+                        { name: "Buổi 3: Quy hoạch & kế hoạch sử dụng đất dự án", status: "Có mặt" },
+                        { name: "Buổi 4: Giao đất, cho thuê đất & chuyển mục đích sử dụng", status: "Có mặt" },
+                        { name: "Buổi 5: Đăng ký quyền sử dụng đất & thủ tục cấp sổ", status: "Có mặt" },
+                        { name: "Buổi 6: Giải quyết tranh chấp đất đai dự án", status: "Có mặt" }
+                    ],
+                    score: "9.5",
+                    detailScores: {
+                        midterm: "9.0",
+                        final: "9.8"
+                    },
+                    status: "dat",
+                    notes: "Hoàn thành xuất sắc khóa học chuyên đề.",
+                    certificateCode: "HTPLDN-2026-0158"
+                },
+                {
+                    id: 10,
+                    courseName: "Pháp luật về Trọng tài thương mại và Kỹ năng giải quyết tranh chấp hợp đồng kinh tế",
+                    time: "18/06/2026 - 25/06/2026",
+                    attendance: "4/4 (100%)",
+                    sessions: [
+                        { name: "Buổi 1: Thỏa thuận trọng tài & hiệu lực pháp lý", status: "Có mặt" },
+                        { name: "Buổi 2: Trình tự, thủ tục giải quyết tại Trung tâm Trọng tài", status: "Có mặt" },
+                        { name: "Buổi 3: Thu thập chứng cứ & áp dụng biện pháp khẩn cấp tạm thời", status: "Có mặt" },
+                        { name: "Buổi 4: Thi hành phán quyết trọng tài thương mại", status: "Có mặt" }
+                    ],
+                    score: "8.2",
+                    detailScores: {
+                        midterm: "8.0",
+                        final: "8.3"
+                    },
+                    status: "dat",
+                    notes: "Nắm vững kiến thức chuyên môn và kỹ năng thực hành tốt.",
+                    certificateCode: "HTPLDN-2026-0172"
+                },
+                {
+                    id: 11,
+                    courseName: "Pháp luật Cạnh tranh và chống độc quyền trong hoạt động mua bán, sáp nhập doanh nghiệp (M&A)",
+                    time: "02/07/2026 - 09/07/2026",
+                    attendance: "3/4 (75%)",
+                    sessions: [
+                        { name: "Buổi 1: Luật Cạnh tranh & kiểm soát tập trung kinh tế", status: "Có mặt" },
+                        { name: "Buổi 2: Quy trình thẩm định hồ sơ M&A dưới góc độ cạnh tranh", status: "Có mặt" },
+                        { name: "Buổi 3: Các hành vi hạn chế cạnh tranh bị cấm", status: "Vắng mặt (Không phép)" },
+                        { name: "Buổi 4: Nghiên cứu tình huống sáp nhập thực tiễn", status: "Có mặt" }
+                    ],
+                    score: "4.8",
+                    detailScores: {
+                        midterm: "5.0",
+                        final: "4.7"
+                    },
+                    status: "khong-dat",
+                    notes: "Điểm bài thi cuối khóa chưa đạt điểm tối thiểu để hoàn thành.",
+                    certificateCode: null
+                },
+                {
+                    id: 12,
+                    courseName: "Kỹ năng phòng ngừa rủi ro pháp lý và giải quyết tranh chấp sở hữu trí tuệ quốc tế",
+                    time: "12/07/2026 - 19/07/2026",
+                    attendance: "4/4 (100%)",
+                    sessions: [
+                        { name: "Buổi 1: Đăng ký nhãn hiệu & kiểu dáng công nghiệp quốc tế", status: "Có mặt" },
+                        { name: "Buổi 2: Các tranh chấp SHTT quốc tế thường gặp", status: "Có mặt" },
+                        { name: "Buổi 3: Quy định SHTT trong các hiệp định EVFTA, CPTPP", status: "Có mặt" },
+                        { name: "Buổi 4: Chiến lược bảo vệ thương hiệu toàn cầu", status: "Có mặt" }
+                    ],
+                    score: "8.7",
+                    detailScores: {
+                        midterm: "8.5",
+                        final: "8.8"
+                    },
+                    status: "dat",
+                    notes: "Kết quả học tập tốt, kỹ năng giải quyết tình huống nhanh nhạy.",
+                    certificateCode: "HTPLDN-2026-0199"
+                }
+            ];
+
+            const toggleDropdown = (e) => {
+                e.stopPropagation();
+                setIsStatusDropdownOpen(!isStatusDropdownOpen);
+            };
+
+            const handleStatusToggle = (status) => {
+                setCurrentPage(1);
+                if (selectedStatuses.includes(status)) {
+                    setSelectedStatuses(selectedStatuses.filter(s => s !== status));
+                } else {
+                    setSelectedStatuses([...selectedStatuses, status]);
+                }
+            };
+
+            const handleSearch = () => {
+                setSearchTerm(draftSearchTerm);
+                setCurrentPage(1);
+            };
+
+            const handleClear = () => {
+                setDraftSearchTerm('');
+                setSearchTerm('');
+                setSelectedStatuses(['dat', 'khong-dat']);
+                setCurrentPage(1);
+            };
+
+            const filteredData = resultsData.filter(item => {
+                const matchesSearch = item.courseName.toLowerCase().includes(searchTerm.toLowerCase());
+                const matchesStatus = selectedStatuses.includes(item.status);
+                return matchesSearch && matchesStatus;
+            });
+
+            const totalItems = filteredData.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+            const currentItems = filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+            const handlePageChange = (newPage) => {
+                if (newPage >= 1 && newPage <= totalPages) {
+                    setCurrentPage(newPage);
+                }
+            };
+
+            const handleViewDetail = (item) => {
+                setSelectedResult(item);
+                setShowDetailModal(true);
+            };
+
+            return (
+                <>
+                <section className="rounded-[8px] border border-[#d8e1f2] bg-white p-6 lg:p-10 shadow-sm min-h-[600px]">
+                    <div className="flex items-center justify-between mb-4">
+                        <p className="text-[13px] font-medium text-[#66738f]">Tài khoản / Kết quả đào tạo</p>
+                        <button id="btn-back-to-list-result" onClick={backToList} className="text-[#66738f] hover:text-[#2580f0] font-semibold text-[13px] flex items-center gap-1.5 transition font-medium">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            Quay lại
+                        </button>
+                    </div>
+                    
+                    <h2 className="text-[28px] font-bold text-[#1b2b49] mb-6 pb-4 border-b border-[#dbe5ff]">Kết quả đào tạo của tôi</h2>
+
+                    {/* Filter and Search Bar Unified Style */}
+                    <div className="bg-white rounded-lg border border-[#d8e1f2] shadow-sm mb-8">
+                        <div className="p-4">
+                            <div className="flex flex-col sm:flex-row gap-3 items-center">
+                                <div className="relative flex-1 w-full">
+                                    <input
+                                        type="text"
+                                        maxLength={100}
+                                        placeholder="Nhập tên khóa học để tìm kiếm..."
+                                        value={draftSearchTerm}
+                                        onChange={(e) => setDraftSearchTerm(e.target.value)}
+                                        onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#2580f0] focus:ring-1 focus:ring-[#2580f0] shadow-sm transition text-[14px]"
+                                    />
+                                    <svg className="absolute left-3 top-2.5 text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                </div>
+                                <div className="relative w-full sm:w-[220px]">
+                                    <button
+                                        onClick={toggleDropdown}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white flex items-center justify-between text-left text-gray-700 focus:outline-none focus:border-[#2580f0] shadow-sm transition text-[14px]"
+                                    >
+                                        <span className="truncate">
+                                            {selectedStatuses.length === 0 ? 'Chưa chọn kết quả' : 
+                                             selectedStatuses.length === 2 ? 'Tất cả kết quả' : 
+                                             selectedStatuses.includes('dat') ? 'Đạt' : 'Không đạt'}
+                                        </span>
+                                        <span className="text-[10px] text-gray-400 ml-2">▼</span>
+                                    </button>
+                                    {isStatusDropdownOpen && (
+                                        <>
+                                            <div className="fixed inset-0 z-10" onClick={() => setIsStatusDropdownOpen(false)}></div>
+                                            <div className="absolute z-50 mt-1 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-64 overflow-hidden flex flex-col">
+                                                <div className="overflow-y-auto flex-1">
+                                                    <label className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 cursor-pointer">
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={selectedStatuses.includes('dat')}
+                                                            onChange={() => handleStatusToggle('dat')}
+                                                            className="w-4 h-4 text-[#2580f0] border-gray-300 rounded focus:ring-[#2580f0]"
+                                                        />
+                                                        <span className="text-[13px] text-gray-700">Đạt</span>
+                                                    </label>
+                                                    <label className="flex items-center gap-2 px-3 py-2 hover:bg-gray-50 cursor-pointer">
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={selectedStatuses.includes('khong-dat')}
+                                                            onChange={() => handleStatusToggle('khong-dat')}
+                                                            className="w-4 h-4 text-[#2580f0] border-gray-300 rounded focus:ring-[#2580f0]"
+                                                        />
+                                                        <span className="text-[13px] text-gray-700">Không đạt</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                                <div className="flex gap-2 shrink-0 w-full sm:w-auto">
+                                    <button
+                                        onClick={handleSearch}
+                                        className="px-5 py-2 text-white bg-[#2580f0] border border-[#2580f0] rounded-md font-semibold hover:bg-[#1e63dc] transition shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto"
+                                    >
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                        Tìm kiếm
+                                    </button>
+                                    <button
+                                        onClick={handleClear}
+                                        className="px-5 py-2 border border-gray-300 text-gray-600 hover:bg-gray-50 font-medium rounded-md transition shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto"
+                                    >
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                        Xóa
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Results Table */}
+                    {currentItems.length > 0 ? (
+                        <>
+                            <div className="overflow-x-auto border border-gray-200 rounded-lg shadow-sm mb-6">
+                                <table className="w-full text-left border-collapse bg-white table-fixed">
+                                    <thead className="bg-gray-50 border-b border-gray-200 text-[#1b2b49] font-bold text-[14px]">
+                                        <tr>
+                                            <th className="px-4 py-4 w-[60px] text-center">STT</th>
+                                            <th className="px-6 py-4 w-auto min-w-[320px]">Khóa học</th>
+                                            <th className="px-6 py-4 w-[230px] text-center">Thời gian học</th>
+                                            <th className="px-6 py-4 w-[140px] text-center">Chuyên cần</th>
+                                            <th className="px-6 py-4 w-[160px] text-center">Điểm kiểm tra</th>
+                                            <th className="px-6 py-4 w-[140px] text-center">Kết quả</th>
+                                            <th className="px-6 py-4 w-[200px]">Ghi chú</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-100 text-[14px] text-gray-700">
+                                        {currentItems.map((result, idx) => (
+                                            <tr key={result.id} className="hover:bg-gray-50/50 transition">
+                                                <td className="px-4 py-4 text-center text-gray-500 font-medium">
+                                                    {(currentPage - 1) * itemsPerPage + idx + 1}
+                                                </td>
+                                                <td className="px-6 py-4 font-medium text-[#1b2b49] truncate" title={result.courseName}>
+                                                    {result.courseName}
+                                                </td>
+                                                <td className="px-6 py-4 text-center text-gray-500 font-medium whitespace-nowrap">
+                                                    {result.time}
+                                                </td>
+                                                <td className="px-6 py-4 text-center font-medium text-gray-600">
+                                                    {result.attendance}
+                                                </td>
+                                                <td className="px-6 py-4 text-center font-semibold text-[#1b2b49]">
+                                                    {result.score}
+                                                </td>
+                                                <td className="px-6 py-4 text-center">
+                                                    {result.status === 'dat' ? (
+                                                        <span className="text-[12px] font-semibold px-3 py-1 bg-green-50 text-green-700 rounded-full border border-green-200">Đạt</span>
+                                                    ) : (
+                                                        <span className="text-[12px] font-semibold px-3 py-1 bg-red-50 text-red-700 rounded-full border border-red-200">Không đạt</span>
+                                                    )}
+                                                </td>
+                                                <td className="px-6 py-4 text-gray-500 truncate" title={result.notes}>
+                                                    {result.notes}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            {/* Pagination */}
+                            {totalPages > 1 && (
+                                <div className="flex items-center justify-between border-t border-gray-100 pt-6">
+                                    <div className="text-sm text-gray-500">
+                                        Hiển thị <span className="font-semibold text-gray-800">{(currentPage - 1) * itemsPerPage + 1}</span> đến <span className="font-semibold text-gray-800">{Math.min(currentPage * itemsPerPage, totalItems)}</span> trong tổng số <span className="font-semibold text-gray-800">{totalItems}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <button
+                                            onClick={() => handlePageChange(currentPage - 1)}
+                                            disabled={currentPage === 1}
+                                            className={`px-3 py-1.5 border rounded text-[14px] font-medium ${currentPage === 1 ? 'border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] shadow-sm'}`}
+                                        >
+                                            Trước
+                                        </button>
+                                        <div className="flex items-center gap-1">
+                                            {[...Array(totalPages)].map((_, i) => (
+                                                <button
+                                                    key={i}
+                                                    onClick={() => handlePageChange(i + 1)}
+                                                    className={`w-8 h-8 flex items-center justify-center border rounded text-[14px] font-bold transition shadow-sm ${currentPage === i + 1 ? 'border-[#2580f0] bg-[#2580f0] text-white' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] bg-white'}`}
+                                                >
+                                                    {i + 1}
+                                                </button>
+                                            ))}
+                                        </div>
+                                        <button
+                                            onClick={() => handlePageChange(currentPage + 1)}
+                                            disabled={currentPage === totalPages}
+                                            className={`px-3 py-1.5 border rounded text-[14px] font-medium ${currentPage === totalPages ? 'border-gray-200 text-gray-400 bg-gray-50 cursor-not-allowed' : 'border-[#d8e1f2] text-[#1b2b49] hover:bg-[#f8f9fc] shadow-sm'}`}
+                                        >
+                                            Sau
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <div className="text-center py-20 border border-dashed border-gray-200 rounded-lg">
+                            <svg className="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <p className="text-gray-500 font-medium">Không tìm thấy kết quả đào tạo phù hợp</p>
+                        </div>
+                    )}
+                </section>
+
+                {/* Detail Modal */}
+                {showDetailModal && selectedResult && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={() => setShowDetailModal(false)}>
+                        <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col" onClick={e => e.stopPropagation()}>
+                            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
+                                <h3 className="text-[18px] font-bold text-[#1b2b49]">Phiếu kết quả học tập</h3>
+                                <button onClick={() => setShowDetailModal(false)} className="text-gray-400 hover:text-gray-600 transition">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+
+                            <div className="p-6 overflow-y-auto space-y-6 text-[14px]">
+                                {/* Course Info */}
+                                <div>
+                                    <h4 className="text-[16px] font-bold text-[#2580f0] mb-2">{selectedResult.courseName}</h4>
+                                    <p className="text-gray-500"><span className="font-semibold text-gray-700">Thời gian bồi dưỡng:</span> {selectedResult.time}</p>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {/* Attendance Detail */}
+                                    <div className="border border-gray-100 rounded-lg p-4 bg-gray-50/50">
+                                        <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-200/60">
+                                            <span className="font-bold text-gray-800">Chuyên cần</span>
+                                            <span className="text-[#2580f0] font-bold">{selectedResult.attendance}</span>
+                                        </div>
+                                        <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1">
+                                            {selectedResult.sessions.map((s, idx) => (
+                                                <div key={idx} className="flex justify-between text-[13px]">
+                                                    <span className="text-gray-600 truncate max-w-[200px]" title={s.name}>{s.name}</span>
+                                                    <span className={`font-semibold shrink-0 ${s.status.includes('Vắng') ? (s.status.includes('Có phép') ? 'text-amber-600' : 'text-red-500') : 'text-green-600'}`}>{s.status}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Score Detail */}
+                                    <div className="border border-gray-100 rounded-lg p-4 bg-gray-50/50">
+                                        <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-200/60">
+                                            <span className="font-bold text-gray-800">Chi tiết điểm số</span>
+                                            <span className="text-[#1b2b49] font-bold text-[16px]">{selectedResult.score}</span>
+                                        </div>
+                                        <div className="space-y-3">
+                                            <div className="flex justify-between text-[13px]">
+                                                <span className="text-gray-600">Kiểm tra giữa kỳ (30%)</span>
+                                                <span className="font-semibold text-gray-800">{selectedResult.detailScores.midterm}</span>
+                                            </div>
+                                            <div className="flex justify-between text-[13px]">
+                                                <span className="text-gray-600">Đánh giá cuối khóa (70%)</span>
+                                                <span className="font-semibold text-gray-800">{selectedResult.detailScores.final}</span>
+                                            </div>
+                                            <div className="pt-2 border-t border-gray-200/60 flex justify-between text-[13px] items-center">
+                                                <span className="text-gray-700 font-semibold">Kết quả chung cuộc</span>
+                                                {selectedResult.status === 'dat' ? (
+                                                    <span className="text-[12px] font-bold px-2.5 py-0.5 bg-green-100 text-green-700 rounded-full border border-green-200">ĐẠT</span>
+                                                ) : (
+                                                    <span className="text-[12px] font-bold px-2.5 py-0.5 bg-red-100 text-red-700 rounded-full border border-red-200">CHƯA ĐẠT</span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Evaluation & Notes */}
+                                <div className="border border-gray-100 rounded-lg p-4 bg-gray-50/50">
+                                    <h5 className="font-bold text-gray-800 mb-2">Đánh giá chung / Ghi chú</h5>
+                                    <p className="text-gray-600 italic">"{selectedResult.notes}"</p>
+                                </div>
+
+                                {/* Mock Certificate */}
+                                {selectedResult.status === 'dat' && (
+                                    <div className="border border-amber-200 rounded-lg p-6 bg-gradient-to-r from-amber-50/60 to-yellow-50/20 text-center space-y-3 relative overflow-hidden shadow-inner">
+                                        <div className="absolute right-[-20px] bottom-[-20px] opacity-5 text-amber-900">
+                                            <svg width="150" height="150" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.25z"/></svg>
+                                        </div>
+                                        
+                                        <div className="flex justify-center text-amber-600">
+                                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M7 9.3v6c0 1.2 2.2 2.2 5 2.2s5-1 5-2.2v-6"></path><path d="M22 10v6"></path></svg>
+                                        </div>
+                                        <h5 className="text-[15px] font-bold text-amber-800 tracking-wide uppercase">Chứng nhận bồi dưỡng</h5>
+                                        <p className="text-[12px] text-gray-500">Hệ thống hỗ trợ pháp lý liên ngành xác nhận học viên đã hoàn thành xuất sắc chương trình</p>
+                                        <div className="text-[13px] font-semibold text-gray-700 bg-white/70 px-4 py-1.5 rounded-full inline-block border border-amber-100 shadow-sm">
+                                            Mã chứng nhận: <span className="font-mono text-amber-700">{selectedResult.certificateCode}</span>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="flex justify-end px-6 py-4 border-t border-gray-100 bg-gray-50/50 rounded-b-lg">
+                                <button
+                                    onClick={() => setShowDetailModal(false)}
+                                    className="px-5 py-2 bg-[#2580f0] text-white rounded-md font-semibold hover:bg-[#1e63dc] transition text-[13px]"
+                                >
+                                    Đóng
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                </>
+            );
+        }
+
         function LoginPopup({ isOpen, onClose, onLogin }) {
+            const [selectedRole, setSelectedRole] = useState('doanh-nghiep');
             if (!isOpen) return null;
             return (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={onClose}>
@@ -7146,542 +14367,36 @@ import {
                                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[#e2e8f0] flex items-center justify-center">
                                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2580f0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                 </div>
-                                <h3 className="text-xl font-bold text-[#1b2b49] mb-2">Yêu cầu đăng nhập</h3>
-                                <p className="text-gray-600">Vui lòng đăng nhập để tiếp tục</p>
+                                <h3 className="text-xl font-bold text-[#1b2b49] mb-1">Đăng nhập hệ thống</h3>
+                                <p className="text-gray-500 text-xs mb-4">Vui lòng chọn vai trò đăng nhập để tiếp tục</p>
+                                
+                                <div className="flex border border-gray-200 rounded-lg p-1 bg-gray-50 mb-6">
+                                    <button 
+                                        type="button"
+                                        onClick={() => setSelectedRole('doanh-nghiep')} 
+                                        className={`flex-1 py-2 text-xs font-bold rounded-md transition-all ${selectedRole === 'doanh-nghiep' ? 'bg-white text-[#2580f0] shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                                    >
+                                        Doanh nghiệp
+                                    </button>
+                                    <button 
+                                        type="button"
+                                        onClick={() => setSelectedRole('ca-nhan')} 
+                                        className={`flex-1 py-2 text-xs font-bold rounded-md transition-all ${selectedRole === 'ca-nhan' ? 'bg-white text-[#2580f0] shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
+                                    >
+                                        Cá nhân
+                                    </button>
+                                </div>
                             </div>
                             <div className="flex justify-center gap-3">
-                                <button onClick={onLogin} className="min-w-[120px] px-8 py-2.5 text-white bg-[#2580f0] rounded-md font-semibold hover:bg-[#1e63dc] transition shadow-sm text-center">
+                                <button onClick={() => onLogin(selectedRole)} className="min-w-[120px] px-6 py-2.5 text-white bg-[#2580f0] rounded-md font-semibold hover:bg-[#1e63dc] transition shadow-sm text-center text-sm">
                                     Đăng nhập
                                 </button>
-                                <button onClick={onClose} className="min-w-[120px] px-8 py-2.5 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-center">
+                                <button onClick={onClose} className="min-w-[120px] px-6 py-2.5 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition text-center text-sm">
                                     Hủy
                                 </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            );
-        }
-
-        // const root = ReactDOM.createRoot(document.getElementById("root"));
-        // root.render(<App />);
-
-// ==========================================
-// 3. MAIN PAGE WRAPPER COMPONENT
-// ==========================================
-export default function HoTroPhapLyDoanhNghiepPage() {
-    const navItems = NAV_ITEMS;
-    
-    // We inject the App render logic here
-            const [activeMenu, setActiveMenu] = useState(null);
-            const prevMenuKeyRef = useRef("trang-chu");
-            const prevSubKeyRef = useRef(null);
-            const [route, setRoute] = useState({
-                page: "home",
-                menuKey: "trang-chu",
-                subKey: null,
-                articleId: null,
-                previewFileName: null
-            });
-            const [showAccountMenu, setShowAccountMenu] = useState(false);
-            const [showHistory, setShowHistory] = useState(false);
-            const [isLoggedIn, setIsLoggedIn] = useState(false);
-            const [showLoginPopup, setShowLoginPopup] = useState(false);
-            const [pendingAction, setPendingAction] = useState(null); // { type: 'sendQuestion', menuKey, subKey }
-            const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
-            // Update refs when route changes
-            useEffect(() => {
-                if (route.menuKey) prevMenuKeyRef.current = route.menuKey;
-                if (route.subKey) prevSubKeyRef.current = route.subKey;
-            }, [route.menuKey, route.subKey]);
-
-            const currentMenu = useMemo(() => navItems.find((item) => item.key === route.menuKey) || navItems[0], [route.menuKey]);
-            
-            const currentSubPage = useMemo(() => {
-                if (!currentMenu?.children?.length) return null;
-                const found = currentMenu.children.find((child) => child.key === route.subKey);
-                if (found) return found;
-                // Nếu không tìm thấy subKey trong children, trả về object giả định thay vì fallback
-                if (route.subKey) return { key: route.subKey, label: route.subKey === "longform" ? "Longform" : route.subKey };
-                return currentMenu.children[0];
-            }, [currentMenu, route.subKey]);
-
-            const currentItems = useMemo(() => {
-                if (!currentSubPage) return [];
-                return contentBySubPage[currentSubPage.key] || [
-                    { id: 99, title: `Danh sách chuyên mục ${currentSubPage.label}`, summary: "Nội dung đang được cập nhật...", date: "06/04/2026", attachments: [{ name: `TaiLieu_${currentSubPage.key}.pdf`, url: "#"}] }
-                ];
-            }, [currentSubPage]);
-
-            // Tìm article chi tiết - tìm theo subKey của route, sau đó tìm trong tất cả
-            let currentArticle = null;
-            if (route.articleId) {
-                // Tìm trong tất cả các subpage, ưu tiên subKey trùng with route.subKey
-                const preferredKey = route.subKey;
-                // Tìm ở preferredKey trước
-                if (preferredKey && contentBySubPage[preferredKey]) {
-                    const found = contentBySubPage[preferredKey].find(item => item.id == route.articleId);
-                    if (found) {
-                        currentArticle = { ...found, _subKey: preferredKey };
-                    }
-                }
-                // Nếu không thấy, tìm ở các key khác
-                if (!currentArticle) {
-                    for (const [subKey, items] of Object.entries(contentBySubPage)) {
-                        const found = items.find(item => item.id == route.articleId);
-                        if (found) {
-                            currentArticle = { ...found, _subKey: subKey };
-                            break;
-                        }
-                    }
-                }
-                console.log('[DEBUG] route.articleId:', route.articleId, 'route.subKey:', route.subKey, 'currentArticle:', currentArticle);
-            }
-
-            const navigateHome = () => {
-                setRoute({ page: "home", menuKey: "trang-chu", subKey: null, articleId: null, previewFileName: null });
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            };
-            
-            const navigateToList = (menuKey, subKey) => {
-                const menu = navItems.find((item) => item.key === menuKey);
-                const fallbackSub = subKey || menu?.children?.[0]?.key || null;
-                setRoute({ page: "list", menuKey, subKey: fallbackSub, articleId: null, previewFileName: null });
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            };
-
-            const navigateToDetail = (article) => {
-                // Tìm menuKey và subKey bằng cách search trong contentBySubPage
-                let foundMenuKey = article.menuKey;
-                let foundSubKey = article.subKey;
-                if (!foundMenuKey || !foundSubKey) {
-                    const menuSubMap = {
-                        "tin-tuc-noi-bat": { menuKey: "hoat-dong-trung-tam", subKey: "tin-tuc-noi-bat" },
-                        "thong-bao": { menuKey: "hoat-dong-trung-tam", subKey: "thong-bao" },
-                        "su-kien": { menuKey: "hoat-dong-trung-tam", subKey: "su-kien" },
-                        "hoat-dong-phoi-hop": { menuKey: "hoat-dong-trung-tam", subKey: "hoat-dong-phoi-hop" },
-                        "multimedia": { menuKey: "hoat-dong-trung-tam", subKey: "multimedia" },
-                        "longform": { menuKey: "hoat-dong-trung-tam", subKey: "longform" },
-                        "van-ban-moi-ban-hanh": { menuKey: "van-ban-chinh-sach-moi", subKey: "van-ban-moi-ban-hanh" },
-                        "van-ban-phap-luat": { menuKey: "van-ban-chinh-sach-moi", subKey: "van-ban-phap-luat" },
-                        "bai-giang-truc-tuyen": { menuKey: "dao-tao", subKey: "bai-giang-truc-tuyen" },
-                        "tai-lieu-boi-duong": { menuKey: "dao-tao", subKey: "tai-lieu-boi-duong" },
-                        "ke-hoach-dao-tao": { menuKey: "dao-tao", subKey: "ke-hoach-dao-tao" },
-                        "khoa-hoc": { menuKey: "dao-tao", subKey: "khoa-hoc" },
-                        "hoi-dap-phap-luat": { menuKey: "tu-van-phap-luat", subKey: "hoi-dap-phap-luat" },
-                        "tu-van-chuyen-sau": { menuKey: "tu-van-phap-luat", subKey: "tu-van-chuyen-sau" },
-                        "bieu-mau-hop-dong": { menuKey: "tu-van-phap-luat", subKey: "bieu-mau-hop-dong" },
-                        "tai-lieu-htpl": { menuKey: "tu-van-phap-luat", subKey: "tai-lieu-htpl" },
-                        "vu-viec-dien-hinh": { menuKey: "tu-van-phap-luat", subKey: "vu-viec-dien-hinh" },
-                        "bai-viet-chuyen-gia": { menuKey: "hoat-dong-trung-tam", subKey: "bai-viet-chuyen-gia" },
-                        "phong-van": { menuKey: "hoat-dong-trung-tam", subKey: "phong-van" },
-                        "nghien-cuu-trao-doi-chi-tiet": { menuKey: "hoat-dong-trung-tam", subKey: "nghien-cuu-trao-doi-chi-tiet" },
-                        "kinh-nghiem-thuc-tien": { menuKey: "hoat-dong-trung-tam", subKey: "kinh-nghiem-thuc-tien" },
-                        "tong-quan-chuong-trinh": { menuKey: "chuong-trinh", subKey: "tong-quan-chuong-trinh" },
-                        "chuong-trinh-bo-nganh": { menuKey: "chuong-trinh", subKey: "chuong-trinh-bo-nganh" },
-                        "chuong-trinh-dia-phuong": { menuKey: "chuong-trinh", subKey: "chuong-trinh-dia-phuong" },
-                    };
-                    // Tìm subKey từ article's context hoặc dùng map
-                    for (const [subKey, mapping] of Object.entries(menuSubMap)) {
-                        const items = contentBySubPage[subKey];
-                        if (items && items.find(i => i.id === article.id)) {
-                            foundMenuKey = mapping.menuKey;
-                            foundSubKey = subKey;
-                            break;
-                        }
-                    }
-                }
-                setRoute({
-                    page: "detail",
-                    articleId: article.id || article,
-                    menuKey: foundMenuKey || prevMenuKeyRef.current,
-                    subKey: foundSubKey || prevSubKeyRef.current,
-                    previewFileName: null
-                });
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            };
-            
-            const navigateToPreview = (fileData) => {
-                setRoute((prev) => ({ 
-                    ...prev, 
-                    page: "preview", 
-                    previewFileName: fileData.name || fileData.fileName || fileData.title || "Tai_lieu.pdf"
-                }));
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            };
-
-            // Gắn vào window để các component cũ có thể truy cập được
-            useEffect(() => {
-                window.navigateToPreviewContext = navigateToPreview;
-                window.navigateToDetailContext = navigateToDetail;
-                return () => { 
-                    delete window.navigateToPreviewContext; 
-                    delete window.navigateToDetailContext;
-                };
-            }, []);
-
-            const backToList = () => {
-                setRoute((prev) => ({
-                    page: "list",
-                    menuKey: prev.menuKey,
-                    subKey: prev.subKey,
-                    articleId: null,
-                    previewFileName: null
-                }));
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            };
-
-            let newsFilterType = "field";
-            if (currentSubPage && currentSubPage.key === "thong-bao") newsFilterType = "none";
-
-            return (
-                <div className="min-h-screen bg-[#f4f6fa] font-sans text-[#2f3a4d] flex flex-col">
-                    <div className="flex-grow max-w-[1520px] w-full mx-auto px-4 lg:px-6 py-6 flex flex-col lg:flex-row gap-6">
-                        {/* Sidebar Menu */}
-                        <aside className={`shrink-0 transition-all duration-300 ease-in-out ${isSidebarOpen ? 'w-full lg:w-[280px]' : 'w-[72px] hidden lg:block'}`}>
-                            <VerticalMenuNav
-                                navItems={navItems}
-                                activeMenu={route.menuKey}
-                                setActiveMenu={setActiveMenu}
-                                navigateHome={navigateHome}
-                                navigateToList={navigateToList}
-                                activeSubMenu={route.subKey}
-                                isSidebarOpen={isSidebarOpen}
-                                setIsSidebarOpen={setIsSidebarOpen}
-                            />
-                        </aside>
-
-                        {/* Main Content Area */}
-                        <main className="flex-grow min-w-0 pb-10">
-                            <LoginPopup
-                                isOpen={showLoginPopup}
-                                onClose={() => setShowLoginPopup(false)}
-                                onLogin={() => { setIsLoggedIn(true); setShowLoginPopup(false); setPendingAction({ type: 'sendQuestion', menuKey: route.menuKey, subKey: route.subKey }); }}
-                            />
-
-                            {route.page === "home" && (
-                                <div className="mb-6 rounded-[8px] overflow-hidden shadow-sm">
-                                    <HeroBanner />
-                                </div>
-                            )}
-
-                        {route.page === "home" && (
-                            <div className="space-y-8">
-                                <NewsSection 
-                                    newsList={newsData} 
-                                    notices={thongBaoData.slice(0, 5)} 
-                                    taiLieuHTPL={taiLieuHTPLData}
-                                    navigateToList={navigateToList} 
-                                    navigateToDetail={navigateToDetail}
-                                />
-                                <HomeDocumentsSection 
-                                    policyDocs={policyDocs} 
-                                    faqs={faqs} 
-                                    resources={resources} 
-                                    navigateToList={navigateToList} 
-                                />
-                                <HomeMediaAndFormsSection 
-                                    forms={bieuMauData} 
-                                    media={mediaData} 
-                                    navigateToList={navigateToList} 
-                                />
-                            </div>
-                        )}
-                        {route.page === "list" && currentMenu && currentSubPage && (
-                            currentSubPage.key === "lien-he" ? (
-                                <ContactPage 
-                                    menu={currentMenu} 
-                                    subPage={currentSubPage} 
-                                    data={contactData} 
-                                    onBack={navigateHome} 
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : currentSubPage.key === "co-cau-to-chuc" ? (
-                                <OrgChartPage 
-                                    menu={currentMenu} 
-                                    subPage={currentSubPage} 
-                                    data={orgChartData} 
-                                    onBack={navigateHome} 
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : currentSubPage.key === "chuc-nang-nhiem-vu" ? (
-                                <FunctionDutyPage 
-                                    menu={currentMenu} 
-                                    subPage={currentSubPage} 
-                                    data={functionDutyData} 
-                                />
-                            ) : currentSubPage.key === "chuong-trinh-lien-nganh-intro" ? (
-                                <LienNganhProgramPage 
-                                    menu={currentMenu} 
-                                    subPage={currentSubPage} 
-                                    data={lienNganhData} 
-                                    onBack={navigateHome} 
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : currentSubPage.key === "bieu-mau-hop-dong" ? (
-                                <FormListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : currentSubPage.key === "tai-lieu-htpl" ? (
-                                <TaiLieuHTPLListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : currentSubPage.key === "van-ban-phap-luat" ? (
-                                <VanBanPhapLuatListPage 
-                                    menu={currentMenu} 
-                                    subPage={currentSubPage} 
-                                    items={currentItems} 
-                                    navigateToDetail={navigateToDetail} 
-                                />
-                            ) : currentSubPage.key === "multimedia" ? (
-                                <MultimediaListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                    navigateToList={navigateToList}
-                                />
-                            ) : currentSubPage.key === "longform" ? (
-                                <LongformListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                />
-                            ) : currentSubPage.key === "bai-giang-truc-tuyen" ? (
-                                <VideoListPage 
-                                    menu={currentMenu} 
-                                    subPage={currentSubPage} 
-                                    items={currentItems} 
-                                    navigateToDetail={navigateToDetail} 
-                                />
-                            ) : currentSubPage.key === "tin-tuc-noi-bat" ? (
-                                <ProgramListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                    filterOptions={{ label: 'Lĩnh vực', field: 'field' }}
-                                />
-                            ) : currentSubPage.key === "su-kien" ? (
-                                <ProgramListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                    filterOptions={{ label: 'Lĩnh vực', field: 'field' }}
-                                />
-                            ) : currentSubPage.key === "hoat-dong-phoi-hop" ? (
-                                <ProgramListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                    filterOptions={{ label: 'Lĩnh vực', field: 'field' }}
-                                />
-                            ) : currentSubPage.key === "thong-bao" ? (
-                                <NewsListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                    filterType="none"
-                                    listCols={2}
-                                />
-                            ) : ["van-ban-moi-ban-hanh", "bai-viet-chuyen-gia", "phong-van", "nghien-cuu-trao-doi-chi-tiet", "kinh-nghiem-thuc-tien"].includes(currentSubPage.key) ? (
-                                <NewsListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                    filterType={newsFilterType}
-                                />
-                            ) : ["tong-quan-chuong-trinh", "chuong-trinh-bo-nganh", "chuong-trinh-dia-phuong"].includes(currentSubPage.key) ? (
-                                <ProgramListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                    filterOptions={currentSubPage.key === "chuong-trinh-bo-nganh" ? { label: 'Bộ, ngành', field: 'field', values: ['Bộ Y tế', 'Bộ Kế hoạch và Đầu tư', 'Bộ Tài chính', 'Bộ Công Thương'] } : currentSubPage.key === "chuong-trinh-dia-phuong" ? { label: 'Tỉnh/thành phố', field: 'province', values: ['Hà Nội', 'TP. Hồ Chí Minh', 'Đà Nẵng', 'Hải Phòng', 'Cần Thơ'] } : undefined}
-                                />
-                            ) : currentSubPage.key === "ke-hoach-dao-tao" ? (
-                                <KeHoachDaoTaoListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                />
-                            ) : currentSubPage.key === "khoa-hoc" ? (
-                                <KhoaHocListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                />
-                            ) : currentSubPage.key === "hoi-dap-phap-luat" ? (
-                                <HoiDapPhapLuatListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                    isLoggedIn={isLoggedIn}
-                                    onRequireLogin={() => setShowLoginPopup(true)}
-                                    onLoginSuccess={() => { setIsLoggedIn(true); setShowLoginPopup(false); setPendingAction({ type: 'sendQuestion', menuKey: route.menuKey, subKey: route.subKey }); }}
-                                    onLogout={() => setIsLoggedIn(false)}
-                                />
-                            ) : currentSubPage.key === "lich-su-hoi-dap-tu-van" ? (
-                                <LichSuHoiDapTuVanPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    backToList={backToList}
-                                />
-                            ) : currentSubPage.key === "tra-cuu-lich-su-hoi-dap-tu-van" ? (
-                                <TraCuuLichSuHoiDapTuVanPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    backToList={backToList}
-                                />
-                            ) : currentSubPage.key === "tu-van-chuyen-sau" ? (
-                                <TuVanChuyenSauListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                    isLoggedIn={isLoggedIn}
-                                    onRequireLogin={() => setShowLoginPopup(true)}
-                                    onLoginSuccess={() => { setIsLoggedIn(true); setShowLoginPopup(false); setPendingAction({ type: 'sendRequest', menuKey: route.menuKey, subKey: route.subKey }); }}
-                                    onLogout={() => setIsLoggedIn(false)}
-                                />
-                            ) : currentSubPage.key === "mang-luoi-tu-van-vien" ? (
-                                <MangLuoiTuVanVienPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    data={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                />
-                            ) : currentSubPage.key === "vu-viec-dien-hinh" ? (
-                                <VuViecDienHinhListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                />
-                            ) : (
-                                <CategoryListPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage}
-                                    items={currentItems}
-                                    navigateToDetail={navigateToDetail}
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            )
-                        )}
-                        {route.page === "detail" && currentArticle && (
-                            (currentArticle._subKey === "khoa-hoc") ? (
-                                <KhoaHocDetailPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage || { label: "Khóa học" }}
-                                    article={currentArticle}
-                                    backToList={backToList}
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : (currentArticle._subKey === "ke-hoach-dao-tao") ? (
-                                <KeHoachDaoTaoDetailPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage || { label: "Kế hoạch đào tạo" }}
-                                    article={currentArticle}
-                                    backToList={backToList}
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : (currentArticle._subKey === "bieu-mau-hop-dong" || currentArticle._subKey === "tai-lieu-boi-duong") ? (
-                                <FormDetailPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage || { label: "Biểu mẫu, hợp đồng" }}
-                                    article={currentArticle}
-                                    backToList={backToList}
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : currentArticle._subKey === "van-ban-phap-luat" ? (
-                                <VanBanPhapLuatDetailPage
-                                    articleId={route.articleId}
-                                    items={currentItems}
-                                    backToList={backToList}
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : currentArticle._subKey === "bai-giang-truc-tuyen" || currentArticle.type === 'video' ? (
-                                <VideoDetailPage
-                                    articleId={route.articleId}
-                                    items={currentItems}
-                                    backToList={backToList}
-                                    navigateToDetail={navigateToDetail}
-                                />
-                            ) : currentArticle.type === 'longform' ? (
-                                <LongformDetailPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage || { label: "Longform" }}
-                                    article={currentArticle}
-                                    backToList={backToList}
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : currentArticle._subKey === "tu-van-chuyen-sau" ? (
-                                <TuVanChuyenSauDetailPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage || { label: "Tư vấn chuyên sâu" }}
-                                    article={currentArticle}
-                                    backToList={backToList}
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : currentArticle._subKey === "vu-viec-dien-hinh" ? (
-                                <VuViecPhapLyDetailPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage || { label: "Vụ việc điển hình" }}
-                                    article={currentArticle}
-                                    backToList={backToList}
-                                />
-                            ) : currentArticle._subKey === "tai-lieu-htpl" ? (
-                                <TaiLieuHTPLDetailPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage || { label: "Tài liệu HTPL doanh nghiệp" }}
-                                    article={currentArticle}
-                                    backToList={backToList}
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : currentArticle.isNews ? (
-                                <NewsDetailPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage || { label: "" }}
-                                    article={currentArticle}
-                                    backToList={backToList}
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            ) : (
-                                <CategoryDetailPage
-                                    menu={currentMenu}
-                                    subPage={currentSubPage || { label: "" }}
-                                    article={currentArticle}
-                                    backToList={backToList}
-                                    navigateToPreview={navigateToPreview}
-                                />
-                            )
-                        )}
-                        {route.page === "preview" && (
-                            <DocumentPreviewPage
-                                file={{ fileName: route.previewFileName }}
-                                onBack={backToList}
-                            />
-                        )}
-                    </main>
-                    </div>
-                    <ConsultationHistoryModal isOpen={showHistory} onClose={() => setShowHistory(false)} />
                 </div>
             );
         }

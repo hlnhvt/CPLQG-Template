@@ -22,8 +22,12 @@ const PhanAnhKienNghiGuidePage = () => {
 
     const faqs = [
         {
+            q: "Hệ thống tiếp nhận những loại phản ánh, kiến nghị nào?",
+            a: "Hệ thống chuyên trách tiếp nhận, xử lý các phản ánh, kiến nghị về văn bản quy phạm pháp luật (quy định chưa rõ ràng, mâu thuẫn, chồng chéo, bất cập hoặc không còn phù hợp với thực tiễn). Không tiếp nhận đơn thư khiếu nại, tố cáo hành chính cá nhân."
+        },
+        {
             q: "Ai có quyền gửi phản ánh, kiến nghị?",
-            a: "Tất cả công dân, doanh nghiệp, tổ chức đều có quyền gửi phản ánh, kiến nghị về các quy định hành chính, chính sách, pháp luật qua Cổng."
+            a: "Tất cả công dân, doanh nghiệp, cơ quan, tổ chức đều có quyền gửi phản ánh, kiến nghị về các quy định trong văn bản quy phạm pháp luật qua Cổng."
         },
         {
             q: "Thời gian xử lý phản ánh kiến nghị là bao lâu?",
@@ -36,8 +40,8 @@ const PhanAnhKienNghiGuidePage = () => {
     ];
 
     const forms = [
-        { name: "BM01 - Mẫu phiếu phản ánh, kiến nghị (Dành cho cá nhân)", ext: "DOCX", size: "24 KB" },
-        { name: "BM02 - Mẫu đề xuất sửa đổi văn bản (Dành cho tổ chức, doanh nghiệp)", ext: "DOCX", size: "30 KB" },
+        { name: "BM01 - Mẫu phiếu phản ánh, kiến nghị về VBQPPL (Dành cho cá nhân)", ext: "DOCX", size: "24 KB" },
+        { name: "BM02 - Mẫu đề xuất sửa đổi, bổ sung VBQPPL (Dành cho tổ chức, doanh nghiệp)", ext: "DOCX", size: "30 KB" },
         { name: "BM03 - Phụ lục đính kèm tài liệu", ext: "PDF", size: "150 KB" }
     ];
 
@@ -54,7 +58,7 @@ const PhanAnhKienNghiGuidePage = () => {
                     <div className="flex items-center text-sm text-gray-500">
                         <Link to="/" className="hover:text-[#0f4c81]">Trang chủ</Link>
                         <span className="mx-2">/</span>
-                        <Link to="/phan-anh-kien-nghi" className="hover:text-[#0f4c81]">Phản ánh kiến nghị</Link>
+                        <Link to="/phan-anh-kien-nghi" className="hover:text-[#0f4c81]">Phản ánh, kiến nghị về văn bản quy phạm pháp luật</Link>
                         <span className="mx-2">/</span>
                         <span className="text-gray-900 font-medium">Hướng dẫn</span>
                     </div>
@@ -64,10 +68,10 @@ const PhanAnhKienNghiGuidePage = () => {
             {/* Header Area */}
             <div className="bg-[#0f4c81] text-white py-12">
                 <div className="container mx-auto px-4 text-center max-w-4xl">
-                    <h1 className="text-3xl md:text-4xl font-bold mb-4 uppercase">Hướng dẫn phản ánh, kiến nghị</h1>
-                    <p className="text-blue-100 text-lg">
-                        Hướng dẫn người dân, doanh nghiệp gửi phản ánh, kiến nghị về chính sách,
-                        văn bản pháp luật tới cơ quan nhà nước có thẩm quyền.
+                    <h1 className="text-2xl md:text-3xl font-bold mb-4 uppercase">Hướng dẫn phản ánh, kiến nghị về văn bản quy phạm pháp luật</h1>
+                    <p className="text-blue-100 text-base md:text-lg">
+                        Hướng dẫn người dân, doanh nghiệp gửi phản ánh, kiến nghị về các quy định,
+                        vướng mắc trong văn bản quy phạm pháp luật tới cơ quan nhà nước có thẩm quyền.
                     </p>
                 </div>
             </div>

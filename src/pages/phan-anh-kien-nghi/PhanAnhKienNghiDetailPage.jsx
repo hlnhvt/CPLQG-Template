@@ -50,7 +50,7 @@ const PhanAnhKienNghiDetailPage = () => {
                     <div className="flex items-center text-sm text-gray-500">
                         <Link to="/" className="hover:text-[#0f4c81]">Trang chủ</Link>
                         <span className="mx-2">/</span>
-                        <Link to="/phan-anh-kien-nghi" className="hover:text-[#0f4c81]">Phản ánh kiến nghị</Link>
+                        <Link to="/phan-anh-kien-nghi" className="hover:text-[#0f4c81]">Phản ánh, kiến nghị về văn bản quy phạm pháp luật</Link>
                         <span className="mx-2">/</span>
                         <span className="text-gray-900 font-medium">Chi tiết phản ánh</span>
                     </div>
@@ -59,7 +59,7 @@ const PhanAnhKienNghiDetailPage = () => {
 
             <div className="bg-[#0f4c81] text-white py-10">
                 <div className="container mx-auto px-4 text-center">
-                    <h1 className="text-2xl md:text-3xl font-bold uppercase tracking-wide">Thông tin kiến nghị</h1>
+                    <h1 className="text-2xl md:text-3xl font-bold uppercase tracking-wide">Chi tiết phản ánh, kiến nghị về văn bản quy phạm pháp luật</h1>
                 </div>
             </div>
 

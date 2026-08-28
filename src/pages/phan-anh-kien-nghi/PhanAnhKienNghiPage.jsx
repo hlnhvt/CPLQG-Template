@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { BarChart3, Clock, Search, Send, ExternalLink, HelpCircle, FileText, CheckCircle2, RotateCw, Filter, RefreshCcw, ArrowRight, FileSpreadsheet, FileText as FilePdf } from 'lucide-react';
+import { BarChart3, Clock, Search, Send, ExternalLink, HelpCircle, FileText, CheckCircle2, RotateCw, Filter, RefreshCcw, ArrowRight, FileSpreadsheet, FileText as FilePdf, AlertCircle } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, PieChart, Pie, Cell, LabelList, Legend } from 'recharts';
 import * as XLSX from 'xlsx';
 
@@ -89,7 +89,7 @@ const PhanAnhKienNghiPage = () => {
                     <div className="flex items-center text-sm text-gray-500">
                         <Link to="/" className="hover:text-[#0f4c81]">Trang chủ</Link>
                         <span className="mx-2">/</span>
-                        <span className="text-gray-900 font-medium">Phản ánh kiến nghị</span>
+                        <span className="text-gray-900 font-medium">Phản ánh, kiến nghị về văn bản quy phạm pháp luật</span>
                     </div>
                 </div>
             </div>
@@ -98,12 +98,12 @@ const PhanAnhKienNghiPage = () => {
             <div className="bg-[#1a3b8b] py-6">
                 <div className="container mx-auto px-4 max-w-[1280px] flex flex-col md:flex-row justify-between items-center gap-6">
                     <div className="flex-1">
-                        <h1 className="text-[28px] font-bold text-white mb-2 relative inline-block">
-                            Phản ánh, kiến nghị
+                        <h1 className="text-[26px] sm:text-[28px] font-bold text-white mb-2 relative inline-block">
+                            Phản ánh, kiến nghị về văn bản quy phạm pháp luật
                             <div className="absolute -bottom-2 left-0 w-16 h-1 bg-[#fdb714]"></div>
                         </h1>
                         <p className="text-blue-100 text-[14px] mt-4 opacity-90 max-w-2xl">
-                            Thông tin thống kê, danh sách và tra cứu phản ánh, kiến nghị chính sách, văn bản pháp luật từ người dân, doanh nghiệp.
+                            Hệ thống tiếp nhận, xử lý, thống kê và tra cứu phản ánh, kiến nghị của người dân, doanh nghiệp về các quy định, vướng mắc, bất cập trong văn bản quy phạm pháp luật.
                         </p>
                     </div>
                     <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0 mt-4 md:mt-0">
@@ -118,7 +118,7 @@ const PhanAnhKienNghiPage = () => {
             </div>
 
             {/* Navigation Tab Cấp 2 */}
-            <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-20 mb-8">
+            <div className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-20 mb-6">
                 <div className="container mx-auto px-4 max-w-[1280px] flex gap-2 overflow-x-auto no-scrollbar">
                     <button
                         onClick={() => handleTabChange('statistics')}
@@ -145,6 +145,13 @@ const PhanAnhKienNghiPage = () => {
             </div>
 
             <div className="container mx-auto px-4 max-w-[1280px] pb-16">
+                {/* Scope Notice Banner */}
+                {/* <div className="bg-blue-50/80 border border-blue-200 rounded-xl p-4 mb-6 flex items-start gap-3 text-blue-900 text-sm shadow-xs">
+                    <AlertCircle size={20} className="text-[#1a3b8b] shrink-0 mt-0.5" />
+                    <div>
+                        <span className="font-bold text-[#1a3b8b]">Phạm vi tiếp nhận & xử lý:</span> Hệ thống tiếp nhận các phản ánh, kiến nghị liên quan trực tiếp đến nội dung quy định, sự bất cập, mâu thuẫn, chồng chéo hoặc khó khăn trong thực thi các <strong>Văn bản quy phạm pháp luật</strong> (Luật, Nghị định, Thông tư...).
+                    </div>
+                </div> */}
 
                 {/* Tab Contents */}
                 <div className="min-h-[500px]">
