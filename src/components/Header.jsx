@@ -214,23 +214,23 @@ const Header = () => {
             {/* Bottom Bar - Dark Blue Navigation (Desktop) */}
             <div className="hidden xl:block bg-[var(--bg-header-bottom)] text-[var(--text-on-blue)] transition-colors duration-200 relative z-[100]">
                 <div className="w-full max-w-[1350px] mx-auto px-4">
-                    <nav className="flex items-center justify-center h-[46px] text-[12.5px] xl:text-[12.5px] font-medium relative z-50 tracking-tight">
-                        <ul className="flex items-center min-w-max h-full -ml-[5px]">
+                    <nav className="flex items-center justify-center h-[46px] text-[12.5px] xl:text-[13px] font-medium relative z-50 tracking-tight">
+                        <ul className="flex items-center justify-center h-full">
                             <li className="h-full border-r border-white/10">
                                 <button
                                     onClick={() => setIsSidebarOpen(true)}
-                                    className="h-full flex items-center px-2.5 xl:px-[11px] hover:bg-white/10 transition-colors gap-2 text-cyan-400 font-bold"
+                                    className="h-full flex items-center px-3 xl:px-3.5 2xl:px-4 hover:bg-white/10 transition-colors gap-2 text-cyan-400 font-bold"
                                 >
                                     <Menu size={18} />
                                 </button>
                             </li>
                             <li className="h-full">
-                                <Link to="/" className="h-full flex items-center px-2.5 xl:px-[11px] hover:bg-white/10 transition-colors border-b-2 border-transparent">
+                                <Link to="/" className="h-full flex items-center px-3 xl:px-3.5 2xl:px-4 hover:bg-white/10 transition-colors border-b-2 border-transparent">
                                     Trang chủ
                                 </Link>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <a href="#" className="h-full flex items-center px-2.5 xl:px-3 gap-1 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
+                                <a href="#" className="h-full flex items-center px-3 xl:px-3.5 2xl:px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
                                     Tin tức <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
                                 <div className="absolute top-full left-0 mt-0 w-64 bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
@@ -254,31 +254,17 @@ const Header = () => {
                                 </div>
                             </li>
                             <li className="h-full">
-                                <Link to="/nghi-quyet-66?tab=ban-chi-dao" className="h-full flex items-center px-2.5 xl:px-[11px] hover:bg-white/10 transition-colors border-b-2 border-transparent">
+                                <Link to="/nghi-quyet-66?tab=ban-chi-dao" className="h-full flex items-center px-3 xl:px-3.5 2xl:px-4 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap">
                                     Nghị quyết 66 - Văn kiện
                                 </Link>
                             </li>
-                            <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <a href="#" className="h-full flex items-center px-2.5 xl:px-3 gap-1 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
-                                    Dự thảo, văn bản pháp luật <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
-                                </a>
-                                <div className="absolute top-full left-0 mt-0 w-64 bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-2 text-[13px] text-gray-200 font-normal">
-                                        <li>
-                                            <Link to="/van-ban" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>Văn bản pháp luật
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/du-thao" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0"></span>Dự thảo VBQPPL
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <li className="h-full">
+                                <Link to="/van-ban" className="h-full flex items-center px-3 xl:px-3.5 2xl:px-4 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap">
+                                    Văn bản pháp luật
+                                </Link>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <a href="#" className="h-full flex items-center px-2.5 xl:px-3 gap-1 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors">
+                                <a href="#" className="h-full flex items-center px-3 xl:px-3.5 2xl:px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
                                     Tiêu điểm chính sách <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
                                 <div className="absolute top-full left-0 mt-0 w-[420px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
@@ -290,44 +276,10 @@ const Header = () => {
                                     </ul>
                                 </div>
                             </li>
+
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <a href="#" className="h-full flex items-center px-2.5 xl:px-3 gap-1 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
-                                    Trợ giúp pháp lý <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
-                                </a>
-                                <div className="absolute top-full left-0 mt-0 w-[320px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
-                                    <ul className="py-2 text-[13px] text-gray-200 font-normal max-h-[70vh] overflow-y-auto custom-scrollbar">
-                                        {/* Giới thiệu */}
-                                        <li className="px-5 pt-2 pb-1 text-[11px] uppercase tracking-wider text-cyan-400/70 font-bold">Giới thiệu</li>
-                                        <li><Link to="/tro-giup-phap-ly" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>Giới thiệu chung</Link></li>
-                                        <li><Link to="/tro-giup-phap-ly/lich-su-phat-trien" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>Lịch sử hình thành và phát triển</Link></li>
-                                        <li><Link to="/tro-giup-phap-ly/chuc-nang-nhiem-vu" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>Chức năng, nhiệm vụ</Link></li>
-                                        <li><Link to="/tro-giup-phap-ly/co-cau-to-chuc" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>Cơ cấu tổ chức</Link></li>
-                                        {/* Tổ chức & Nhân sự */}
-                                        <li className="border-t border-white/10 mx-4 my-1"></li>
-                                        <li className="px-5 pt-2 pb-1 text-[11px] uppercase tracking-wider text-cyan-400/70 font-bold">Tổ chức & Nhân sự</li>
-                                        <li><Link to="/tro-giup-phap-ly/to-chuc" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></span>Tổ chức thực hiện TGPL</Link></li>
-                                        <li><Link to="/tro-giup-phap-ly/nguoi-thuc-hien" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></span>Người thực hiện TGPL</Link></li>
-                                        <li><Link to="/tro-giup-phap-ly/danh-ba" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0"></span>Danh bạ điện tử TGPL</Link></li>
-                                        {/* Hoạt động */}
-                                        <li className="border-t border-white/10 mx-4 my-1"></li>
-                                        <li className="px-5 pt-2 pb-1 text-[11px] uppercase tracking-wider text-cyan-400/70 font-bold">Hoạt động</li>
-                                        <li><Link to="/tro-giup-phap-ly/tin-tuc" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0"></span>Tin tức hoạt động TGPL</Link></li>
-                                        <li><Link to="/tro-giup-phap-ly/chi-dao-dieu-hanh" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0"></span>Chỉ đạo điều hành</Link></li>
-                                        <li><Link to="/tro-giup-phap-ly/vu-viec-dien-hinh" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0"></span>Vụ việc điển hình</Link></li>
-                                        <li><Link to="/tro-giup-phap-ly/bao-cao-cong-tac" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0"></span>Báo cáo công tác</Link></li>
-                                        {/* Chuyên môn & Tài nguyên */}
-                                        <li className="border-t border-white/10 mx-4 my-1"></li>
-                                        <li className="px-5 pt-2 pb-1 text-[11px] uppercase tracking-wider text-cyan-400/70 font-bold">Chuyên môn & Tài nguyên</li>
-                                        <li><Link to="/tro-giup-phap-ly/huong-dan-nghiep-vu" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-yellow-400 shrink-0"></span>Hướng dẫn nghiệp vụ</Link></li>
-                                        <li><Link to="/tro-giup-phap-ly/nghien-cuu-trao-doi" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-yellow-400 shrink-0"></span>Nghiên cứu trao đổi</Link></li>
-                                        <li><Link to="/tro-giup-phap-ly/video" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-yellow-400 shrink-0"></span>Video phóng sự</Link></li>
-                                        <li><Link to="/tro-giup-phap-ly/an-pham" className="flex items-center gap-3 px-5 py-2 hover:bg-white/5 hover:text-cyan-400 transition-colors"><span className="w-1.5 h-1.5 rounded-full bg-yellow-400 shrink-0"></span>Ấn phẩm TGPL</Link></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <a href="#" className="h-full flex items-center px-2.5 xl:px-3 gap-1 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
-                                    Diễn đàn, hỗ trợ pháp lý <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
+                                <a href="#" className="h-full flex items-center px-3 xl:px-3.5 2xl:px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
+                                    Diễn đàn <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
                                 <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
                                     <ul className="py-2 text-[13px] text-gray-200 font-normal">
@@ -346,17 +298,12 @@ const Header = () => {
                                                 <span className="w-2 h-2 rounded-full bg-green-400 shrink-0"></span>Buổi phát trực tuyến
                                             </Link>
                                         </li>
-                                        <li>
-                                            <Link to="/ho-tro-phap-ly-doanh-nghiep" className="flex items-center gap-3 px-5 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                <span className="w-2 h-2 rounded-full bg-yellow-400 shrink-0"></span>Hỗ trợ pháp lý doanh nghiệp
-                                            </Link>
-                                        </li>
                                     </ul>
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <a href="/phan-anh-kien-nghi" className="h-full flex items-center px-2.5 xl:px-3 gap-1 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
-                                    Phản ánh kiến nghị <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
+                                <a href="/phan-anh-kien-nghi" className="h-full flex items-center px-3 xl:px-3.5 2xl:px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
+                                    Phản ánh, kiến nghị <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </a>
                                 <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
                                     <ul className="py-2 text-[13px] text-gray-200 font-normal">
@@ -384,12 +331,12 @@ const Header = () => {
                                 </div>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <Link to="/hien-ke" className="h-full flex items-center px-2.5 xl:px-3 gap-1 hover:bg-white/10 transition-colors whitespace-nowrap">
+                                <Link to="/hien-ke" className="h-full flex items-center px-3 xl:px-3.5 2xl:px-4 gap-1 hover:bg-white/10 transition-colors whitespace-nowrap">
                                     Hiến kế
                                 </Link>
                             </li>
                             <li className="h-full relative group cursor-pointer border-b-2 border-transparent">
-                                <Link to="/cau-hoi-phap-luat" className="h-full flex items-center px-2.5 xl:px-3 gap-1 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
+                                <Link to="/cau-hoi-phap-luat" className="h-full flex items-center px-3 xl:px-3.5 2xl:px-4 gap-1.5 group-hover:bg-[#0a1e3f] group-hover:text-cyan-400 transition-colors whitespace-nowrap">
                                     Hỏi đáp <ChevronDown size={14} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
                                 </Link>
                                 <div className="absolute top-full left-0 mt-0 w-[260px] bg-[#0a1e3f] shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border-t-2 border-cyan-400">
@@ -418,28 +365,44 @@ const Header = () => {
             </div>
 
             {/* Secondary Sub-Navigation Bar */}
-            <div className="bg-gradient-to-r from-[#6c80a0] via-[#c2703b] to-[#618dd3] border-t border-white/20 border-b border-black/20 text-white shadow-md relative z-[90] transition-all duration-300">
+            <div className="bg-gradient-to-b from-[#19449c] to-[#1e3a8a] border-t border-[#365dab] border-b border-[#0f245c] text-white relative z-[90] transition-all duration-300">
                 <div className="w-full max-w-[1350px] mx-auto px-4">
-                    <div className="flex items-center justify-center gap-1 sm:gap-2.5 md:gap-3 py-1.5 text-[12.5px] sm:text-[13px] font-medium tracking-tight overflow-x-auto no-scrollbar">
+                    <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-7 py-2.5 text-[13px] sm:text-[13.5px] font-medium tracking-tight overflow-x-auto no-scrollbar">
+                        <Link
+                            to="/du-thao"
+                            className="whitespace-nowrap text-white hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
+                        >
+                            Dự thảo VBQPPL
+                        </Link>
                         <Link
                             to="/tro-giup-phap-ly"
-                            className="whitespace-nowrap text-blue-50 hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
+                            className="whitespace-nowrap text-white hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
                         >
                             Trợ giúp pháp lý
                         </Link>
-                        <span className="h-3 w-[1px] bg-white/25 inline-block shrink-0"></span>
                         <Link
                             to="/ho-tro-phap-ly-doanh-nghiep"
-                            className="whitespace-nowrap text-blue-50 hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
+                            className="whitespace-nowrap text-white hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
                         >
                             Hỗ trợ pháp lý doanh nghiệp
                         </Link>
-                        <span className="h-3 w-[1px] bg-white/25 inline-block shrink-0"></span>
                         <Link
                             to="/pho-bien-giao-duc"
-                            className="whitespace-nowrap text-blue-50 hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
+                            className="whitespace-nowrap text-white hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
                         >
                             Phổ biến giáo dục Pháp luật
+                        </Link>
+                        <Link
+                            to="/chu-de-khao-sat"
+                            className="whitespace-nowrap text-white hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
+                        >
+                            Khảo sát
+                        </Link>
+                        <Link
+                            to="/tong-ra-soat/ai/blegal"
+                            className="whitespace-nowrap text-white hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
+                        >
+                            AI pháp luật
                         </Link>
                     </div>
                 </div>

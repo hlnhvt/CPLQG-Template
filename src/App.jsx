@@ -24,6 +24,7 @@ import ThuNgoPage from './pages/gioi-thieu/ThuNgoPage';
 import UserManualArticlePage from './pages/huong-dan-su-dung/UserManualArticlePage';
 import UserManualDocListPage from './pages/huong-dan-su-dung/UserManualDocListPage';
 import NewsHighlightsPage from './pages/NewsHighlightsPage';
+import VanHoaThuongTonPhapLuatPage from './pages/VanHoaThuongTonPhapLuatPage';
 import ContactUsPage from './pages/ContactUsPage';
 import SurveyTopicsPage from './pages/SurveyTopicsPage';
 import SurveyGlobalPage from './pages/SurveyGlobalPage';
@@ -195,6 +196,8 @@ const AppLayout = () => {
                     <Route path="/huong-dan-su-dung" element={<UserManualDocListPage />} />
                     <Route path="/huong-dan-su-dung/bai-viet/:id" element={<UserManualArticlePage />} />
                     <Route path="/tin-tuc/noi-bat" element={<NewsHighlightsPage />} />
+                    <Route path="/tin-tuc/van-hoa-thuong-ton-phap-luat" element={<VanHoaThuongTonPhapLuatPage />} />
+                    <Route path="/tin-tuc/xay-dung-van-hoa-thuong-ton-phap-luat" element={<VanHoaThuongTonPhapLuatPage />} />
                     <Route path="/tin-tuc/nghien-cuu-trao-doi" element={<NghienCuuTraoDoiPage />} />
                     <Route path="/tin-tuc/nghien-cuu-trao-doi/:id" element={<NghienCuuTraoDoiDetailPage />} />
                     <Route path="/tin-tuc/toa-dam-su-kien" element={<ToaDamSuKienPage />} />
@@ -211,7 +214,7 @@ const AppLayout = () => {
                     {/* Login page / Onboarding - no Header/Footer */}
                     <Route path="/dang-nhap" element={<LoginPage />} />
                     <Route path="/onboarding" element={<OnboardingPage />} />
-                    
+
                     <Route path="/cau-chuyen-thanh-cong" element={<SuccessStoriesPage />} />
                     <Route path="/cau-chuyen-thanh-cong/:id" element={<SuccessStoryDetailPage />} />
                     <Route path="/anh" element={<PhotoGalleryPage />} />

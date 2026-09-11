@@ -2,11 +2,11 @@ import React, { useState, useRef } from 'react';
 import { Clock, PlayCircle, Star, Radio, Newspaper, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const NEWS_CATEGORIES = [
+export const NEWS_CATEGORIES = [
     { label: 'Tin hoạt động', path: '/tin-tuc/noi-bat' },
     { label: 'Đưa Nghị quyết Đại hội XIV của Đảng vào cuộc sống', path: '/tin-tuc/noi-bat' },
     { label: 'Chính sách mới', path: '/tin-tuc/noi-bat' },
-    { label: 'Thời sự pháp luật', path: '/tin-tuc/noi-bat' },
+    { label: 'Xây dựng Văn hóa thượng tôn pháp luật', path: '/tin-tuc/van-hoa-thuong-ton-phap-luat' },
     { label: 'Radio pháp luật', path: '/tin-tuc/noi-bat' },
     { label: 'Kỳ họp thứ 10, Quốc hội khóa XV', path: '/tin-tuc/noi-bat' },
     { label: 'Câu chuyện thành công', path: '/cau-chuyen-thanh-cong' },
@@ -14,7 +14,7 @@ const NEWS_CATEGORIES = [
     { label: 'Trung tâm trợ lý pháp luật', path: '/tin-tuc/noi-bat' },
 ];
 
-const SubNavigator = ({ activeLabel }) => {
+export const SubNavigator = ({ activeLabel }) => {
     const scrollRef = useRef(null);
     const [showArrow, setShowArrow] = useState(true);
     const handleScroll = () => {
@@ -308,7 +308,7 @@ const NewsHighlightsPage = () => {
                         <li className="hover:text-[#0f4c81] cursor-pointer whitespace-nowrap transition-colors">Tin hoạt động</li>
                         <li className="hover:text-[#0f4c81] cursor-pointer whitespace-nowrap transition-colors">Đưa Nghị quyết vào cuộc sống</li>
                         <li className="hover:text-[#0f4c81] cursor-pointer whitespace-nowrap transition-colors">Chính sách mới</li>
-                        <li className="hover:text-[#0f4c81] cursor-pointer whitespace-nowrap transition-colors">Thời sự pháp luật</li>
+                        <li><Link to="/tin-tuc/van-hoa-thuong-ton-phap-luat" className="hover:text-[#0f4c81] cursor-pointer whitespace-nowrap transition-colors">Xây dựng Văn hóa thượng tôn pháp luật</Link></li>
                         <li className="hover:text-[#0f4c81] cursor-pointer whitespace-nowrap transition-colors">Radio pháp luật</li>
                     </ul>
                 </div>
