@@ -22,7 +22,7 @@ const VanHoaThuongTonPhapLuatPage = () => {
             <div className="container mx-auto px-4 py-8 max-w-[1286px]">
 
                 {/* Tiểu mục: Xây dựng văn hóa thượng tôn pháp luật */}
-                <div className="mb-8">
+                <div className="mb-2">
                     <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-red-700 inline-block pb-2 pr-8 mb-6 uppercase tracking-wide">
                         Xây dựng văn hóa thượng tôn pháp luật
                     </h2>
@@ -119,10 +119,10 @@ const VanHoaThuongTonPhapLuatPage = () => {
                 </div>
 
                 {/* Đường gạch ngang phân cách */}
-                <div className="border-t border-gray-200 my-10" />
+                <div className="border-t border-gray-200 mt-4 mb-6" />
 
                 {/* 3. Tiểu mục 2: Góc nhìn (Dịch lên trên & Bỏ banner bên phải) */}
-                <div className="mb-10">
+                <div className="mb-2">
                     <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-red-700 inline-block pb-2 pr-8 mb-6 uppercase tracking-wide">
                         Góc nhìn
                     </h2>
@@ -187,10 +187,10 @@ const VanHoaThuongTonPhapLuatPage = () => {
                 </div>
 
                 {/* Đường gạch ngang phân cách */}
-                <div className="border-t border-gray-200 my-10" />
+                <div className="border-t border-gray-200 mt-4 mb-6" />
 
                 {/* 4. Tiểu mục 3: Gương sáng & Tiểu mục 4: Tư vấn pháp luật */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-2">
                     {/* Tiểu mục 3: Gương sáng */}
                     <div>
                         <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-red-700 inline-block pb-2 pr-8 mb-6 uppercase tracking-wide">
@@ -293,10 +293,10 @@ const VanHoaThuongTonPhapLuatPage = () => {
                 </div>
 
                 {/* Đường gạch ngang phân cách */}
-                <div className="border-t border-gray-200 my-10" />
+                <div className="border-t border-gray-200 mt-4 mb-6" />
 
                 {/* 5. Tiểu mục 5: Trao đổi - Kinh nghiệm (Thiết kế giống khối Góc nhìn) */}
-                <div className="mb-10">
+                <div className="mb-6">
                     <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-red-700 inline-block pb-2 pr-8 mb-6 uppercase tracking-wide">
                         Trao đổi - Kinh nghiệm
                     </h2>
