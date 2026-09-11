@@ -23,9 +23,11 @@ const VanHoaThuongTonPhapLuatPage = () => {
 
                 {/* Tiểu mục: Xây dựng văn hóa thượng tôn pháp luật */}
                 <div className="mb-2">
-                    <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-red-700 inline-block pb-2 pr-8 mb-6 uppercase tracking-wide">
-                        Xây dựng văn hóa thượng tôn pháp luật
-                    </h2>
+                    <Link to="/tin-tuc/van-hoa-thuong-ton-phap-luat/xay-dung-van-hoa" className="group inline-block mb-6">
+                        <h2 className="text-2xl font-bold text-[#0f4c81] group-hover:text-red-700 border-b-2 border-red-700 pb-2 pr-8 uppercase tracking-wide transition-colors">
+                            Xây dựng văn hóa thượng tôn pháp luật
+                        </h2>
+                    </Link>
 
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                         {/* Cột Trái (3 tin nhỏ) */}
@@ -123,9 +125,11 @@ const VanHoaThuongTonPhapLuatPage = () => {
 
                 {/* 3. Tiểu mục 2: Góc nhìn (Dịch lên trên & Bỏ banner bên phải) */}
                 <div className="mb-2">
-                    <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-red-700 inline-block pb-2 pr-8 mb-6 uppercase tracking-wide">
-                        Góc nhìn
-                    </h2>
+                    <Link to="/tin-tuc/van-hoa-thuong-ton-phap-luat/goc-nhin" className="group inline-block mb-6">
+                        <h2 className="text-2xl font-bold text-[#0f4c81] group-hover:text-red-700 border-b-2 border-red-700 pb-2 pr-8 uppercase tracking-wide transition-colors">
+                            Góc nhìn
+                        </h2>
+                    </Link>
 
                     <div className="flex flex-col">
                         {/* Tin lớn nằm ngang */}
@@ -193,9 +197,11 @@ const VanHoaThuongTonPhapLuatPage = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-2">
                     {/* Tiểu mục 3: Gương sáng */}
                     <div>
-                        <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-red-700 inline-block pb-2 pr-8 mb-6 uppercase tracking-wide">
-                            Gương sáng
-                        </h2>
+                        <Link to="/tin-tuc/van-hoa-thuong-ton-phap-luat/guong-sang" className="group inline-block mb-6">
+                            <h2 className="text-2xl font-bold text-[#0f4c81] group-hover:text-red-700 border-b-2 border-red-700 pb-2 pr-8 uppercase tracking-wide transition-colors">
+                                Gương sáng
+                            </h2>
+                        </Link>
                         <Link to="/news/401" className="flex items-start gap-4 group mb-6 border-b border-gray-100 pb-6">
                             <div className="w-[50%] shrink-0">
                                 <Image16x9 src="/thumb2.png" alt="Gương sáng" className="rounded" />
@@ -243,9 +249,11 @@ const VanHoaThuongTonPhapLuatPage = () => {
 
                     {/* Tiểu mục 4: Tư vấn pháp luật */}
                     <div>
-                        <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-red-700 inline-block pb-2 pr-8 mb-6 uppercase tracking-wide">
-                            Tư vấn pháp luật
-                        </h2>
+                        <Link to="/tin-tuc/van-hoa-thuong-ton-phap-luat/tu-van-phap-luat" className="group inline-block mb-6">
+                            <h2 className="text-2xl font-bold text-[#0f4c81] group-hover:text-red-700 border-b-2 border-red-700 pb-2 pr-8 uppercase tracking-wide transition-colors">
+                                Tư vấn pháp luật
+                            </h2>
+                        </Link>
                         <Link to="/news/501" className="flex items-start gap-4 group mb-6 border-b border-gray-100 pb-6">
                             <div className="w-[50%] shrink-0">
                                 <Image16x9 src="/thumb3.png" alt="Tư vấn pháp luật" className="rounded" />
@@ -297,9 +305,11 @@ const VanHoaThuongTonPhapLuatPage = () => {
 
                 {/* 5. Tiểu mục 5: Trao đổi - Kinh nghiệm (Thiết kế giống khối Góc nhìn) */}
                 <div className="mb-6">
-                    <h2 className="text-2xl font-bold text-[#0f4c81] border-b-2 border-red-700 inline-block pb-2 pr-8 mb-6 uppercase tracking-wide">
-                        Trao đổi - Kinh nghiệm
-                    </h2>
+                    <Link to="/tin-tuc/van-hoa-thuong-ton-phap-luat/trao-doi-kinh-nghiem" className="group inline-block mb-6">
+                        <h2 className="text-2xl font-bold text-[#0f4c81] group-hover:text-red-700 border-b-2 border-red-700 pb-2 pr-8 uppercase tracking-wide transition-colors">
+                            Trao đổi - Kinh nghiệm
+                        </h2>
+                    </Link>
 
                     <div className="flex flex-col">
                         {/* Tin lớn nằm ngang */}
