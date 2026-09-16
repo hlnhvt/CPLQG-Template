@@ -41,6 +41,7 @@ import VideoGalleryPage from './pages/VideoGalleryPage';
 import VideoDetailPage from './pages/VideoDetailPage';
 import InfographicPage from './pages/InfographicPage';
 import InfographicDetailPage from './pages/InfographicDetailPage';
+import LegalRadio from './components/LegalRadio';
 import VanBanHieuLucPage from './pages/VanBanHieuLucPage';
 import VanBanHetHieuLucPage from './pages/VanBanHetHieuLucPage';
 import VanBanMoiPage from './pages/VanBanMoiPage';
@@ -226,6 +227,7 @@ const AppLayout = () => {
                     <Route path="/video/:id" element={<VideoDetailPage />} />
                     <Route path="/infographic" element={<InfographicPage />} />
                     <Route path="/infographic/:slug" element={<InfographicDetailPage />} />
+                    <Route path="/radio" element={<LegalRadio />} />
                     <Route path="/van-ban/hieu-luc" element={<VanBanHieuLucPage />} />
                     <Route path="/van-ban/het-hieu-luc" element={<VanBanHetHieuLucPage />} />
                     <Route path="/van-ban/moi-ban-hanh" element={<VanBanMoiPage />} />
