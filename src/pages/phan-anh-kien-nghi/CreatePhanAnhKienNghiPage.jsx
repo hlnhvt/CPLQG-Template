@@ -100,6 +100,7 @@ const MOCK_LEGAL_DOCS_DATA = [
         id: '120/2026/TT-BTC',
         name: 'Thông tư 120/2026/TT-BTC',
         soHieu: '120/2026/TT-BTC',
+        level: 'Trung ương',
         tieuDe: '[Bộ Tài chính] Thông tư số 120/2026/TT-BTC Quy định nội dung, mức chi cho công tác xác minh, xác định, bảo vệ và hỗ trợ nạn nhân, người đang trong quá trình xác định là nạn nhân bị mua bán và người dưới 18 tuổi đi cùng quy định tại Nghị định số 162/2025/NĐ-CP ngày 29 tháng 6 năm 2025 của Chính phủ quy định chi tiết thi hành một số điều và biện pháp thi hành Luật Phòng, chống mua bán người',
         trichYeu: 'Thông tư số 120/2026/TT-BTC Quy định nội dung, mức chi cho công tác xác minh, xác định, bảo vệ và hỗ trợ nạn nhân, người đang trong quá trình xác định là nạn nhân bị mua bán và người dưới 18 tuổi đi cùng quy định tại Nghị định số 162/2025/NĐ-CP ngày 29 tháng 6 năm 2025 của Chính phủ quy định chi tiết thi hành một số điều và biện pháp thi hành Luật Phòng, chống mua bán người',
         ngayBanHanh: '17/8/2026',
@@ -143,6 +144,7 @@ const MOCK_LEGAL_DOCS_DATA = [
         id: '31/2024/QH15',
         name: 'Luật Đất đai 2024',
         soHieu: '31/2024/QH15',
+        level: 'Trung ương',
         tieuDe: 'Luật Đất đai số 31/2024/QH15 ngày 18 tháng 01 năm 2024 của Quốc hội',
         trichYeu: 'Quy định về chế độ sở hữu đất đai, quyền hạn và trách nhiệm của Nhà nước đại diện chủ sở hữu toàn dân về đất đai và thống nhất quản lý về đất đai, chế độ quản lý và sử dụng đất đai, quyền và nghĩa vụ của người sử dụng đất đối với đất đai thuộc lãnh thổ nước Cộng hòa xã hội chủ nghĩa Việt Nam.',
         ngayBanHanh: '18/01/2024',
@@ -186,6 +188,7 @@ const MOCK_LEGAL_DOCS_DATA = [
         id: '27/2023/QH15',
         name: 'Luật Nhà ở 2023',
         soHieu: '27/2023/QH15',
+        level: 'Trung ương',
         tieuDe: 'Luật Nhà ở số 27/2023/QH15 ngày 27 tháng 11 năm 2023 của Quốc hội',
         trichYeu: 'Quy định về sở hữu, phát triển, quản lý vận hành, giao dịch nhà ở; quản lý nhà nước về nhà ở tại Việt Nam.',
         ngayBanHanh: '27/11/2023',
@@ -222,6 +225,7 @@ const MOCK_LEGAL_DOCS_DATA = [
         id: '102/2024/NĐ-CP',
         name: 'Nghị định 102/2024/NĐ-CP',
         soHieu: '102/2024/NĐ-CP',
+        level: 'Trung ương',
         tieuDe: 'Nghị định số 102/2024/NĐ-CP ngày 30 tháng 07 năm 2024 của Chính phủ Quy định chi tiết thi hành một số điều của Luật Đất đai',
         trichYeu: 'Quy định chi tiết thi hành một số điều, khoản của Luật Đất đai số 31/2024/QH15 về quy hoạch, kế hoạch sử dụng đất, thu hồi đất, giao đất, cho thuê đất, chuyển mục đích sử dụng đất.',
         ngayBanHanh: '30/07/2024',
@@ -253,6 +257,7 @@ const MOCK_LEGAL_DOCS_DATA = [
         id: '04/2025/TT-BTC',
         name: 'Thông tư 04/2025/TT-BTC',
         soHieu: '04/2025/TT-BTC',
+        level: 'Trung ương',
         tieuDe: 'Thông tư số 04/2025/TT-BTC ngày 15 tháng 01 năm 2025 của Bộ Tài chính hướng dẫn quản lý thu ngân sách nhà nước',
         trichYeu: 'Hướng dẫn quy trình, thủ tục đối soát, tổng hợp và phân bổ nguồn thu ngân sách nhà nước qua hệ thống Kho bạc Nhà nước.',
         ngayBanHanh: '15/01/2025',
@@ -284,6 +289,7 @@ const MOCK_LEGAL_DOCS_DATA = [
         id: '41/2024/QH15',
         name: 'Luật Bảo hiểm xã hội 2024',
         soHieu: '41/2024/QH15',
+        level: 'Trung ương',
         tieuDe: 'Luật Bảo hiểm xã hội số 41/2024/QH15 ngày 29 tháng 06 năm 2024 của Quốc hội',
         trichYeu: 'Quy định quyền, trách nhiệm của cơ quan, tổ chức, cá nhân về bảo hiểm xã hội; trợ cấp hưu trí xã hội; chế độ bảo hiểm xã hội bắt buộc, bảo hiểm xã hội tự nguyện; quỹ bảo hiểm xã hội.',
         ngayBanHanh: '29/06/2024',
@@ -317,6 +323,7 @@ const MOCK_LEGAL_DOCS_DATA = [
         id: '23/2008/QH12',
         name: 'Luật Giao thông đường bộ 2008',
         soHieu: '23/2008/QH12',
+        level: 'Trung ương',
         tieuDe: 'Luật Giao thông đường bộ số 23/2008/QH12 ngày 13 tháng 11 năm 2008 của Quốc hội',
         trichYeu: 'Quy định về quy tắc giao thông đường bộ; kết cấu hạ tầng giao thông đường bộ; phương tiện tham gia giao thông đường bộ; người điều khiển phương tiện tham gia giao thông đường bộ; vận tải đường bộ và quản lý nhà nước về giao thông đường bộ.',
         ngayBanHanh: '13/11/2008',
@@ -342,6 +349,219 @@ const MOCK_LEGAL_DOCS_DATA = [
             '— Điều 1: Phạm vi điều chỉnh': `Điều 1. Phạm vi điều chỉnh\nLuật này quy định về quy tắc giao thông đường bộ; kết cấu hạ tầng giao thông đường bộ; phương tiện và người tham gia giao thông đường bộ; vận tải đường bộ và quản lý nhà nước về giao thông đường bộ.`,
             '— Điều 8: Các hành vi bị nghiêm cấm': `Điều 8. Các hành vi bị nghiêm cấm\n1. Phá hoại công trình đường bộ.\n2. Điều khiển phương tiện giao thông đường bộ mà trong cơ thể có chất ma túy.\n3. Điều khiển phương tiện giao thông đường bộ mà trong máu hoặc hơi thở có nồng độ cồn.`,
             'Chương II: Quy tắc giao thông đường bộ': `Chương II. QUY TẮC GIAO THÔNG ĐƯỜNG BỘ\nQuy định hệ thống báo hiệu đường bộ, tốc độ và khoảng cách giữa các xe, chuyển hướng xe và nhường đường tại nơi đường giao nhau.`
+        }
+    },
+    // Mock local documents
+    {
+        id: '61/2024/QĐ-UBND-HN',
+        name: 'Quyết định 61/2024/QĐ-UBND TP Hà Nội',
+        soHieu: '61/2024/QĐ-UBND',
+        level: 'Địa phương',
+        province: 'Thành phố Hà Nội',
+        coQuanBanHanh: 'Ủy ban nhân dân Thành phố Hà Nội',
+        tieuDe: 'Quyết định số 61/2024/QĐ-UBND ngày 27/09/2024 của UBND Thành phố Hà Nội quy định về bồi thường, hỗ trợ, tái định cư khi Nhà nước thu hồi đất',
+        trichYeu: 'Ban hành quy định chi tiết một số điều khoản thi hành Luật Đất đai 2024 về bồi thường, hỗ trợ, tái định cư khi Nhà nước thu hồi đất áp dụng trên địa bàn thành phố Hà Nội.',
+        ngayBanHanh: '27/09/2024',
+        ngayHieuLuc: '07/10/2024',
+        loaiVanBan: 'Quyết định',
+        nganh: 'Tài nguyên và Môi trường',
+        tinhTrangHieuLuc: 'Còn hiệu lực',
+        nguoiKy: 'Trần Sỹ Thanh',
+        chucDanh: 'Chủ tịch UBND',
+        files: [
+            { name: 'QD-61-2024-QD-UBND-HaNoi.docx', url: '#' },
+            { name: 'QD-61-2024-QD-UBND-HaNoi.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Quy định chung',
+            '— Điều 1: Phạm vi điều chỉnh',
+            '— Điều 2: Đối tượng áp dụng',
+            'Chương II: Bồi thường về đất và tài sản trên đất',
+            '— Điều 5: Bồi thường chi phí di chuyển tài sản',
+            '— Điều 8: Bồi thường thiệt hại đối với nhà, công trình xây dựng',
+            'Chương III: Chính sách hỗ trợ và tái định cư',
+            '— Điều 14: Hỗ trợ ổn định đời sống và sản xuất',
+            '— Điều 18: Bố trí nhà ở, đất ở tái định cư'
+        ],
+        mucLucDetails: {
+            'Chương I: Quy định chung': `Chương I. QUY ĐỊNH CHUNG\nQuy định phạm vi điều chỉnh, đối tượng áp dụng các chính sách bồi thường, hỗ trợ, tái định cư trên địa bàn thành phố Hà Nội.`,
+            '— Điều 1: Phạm vi điều chỉnh': `Điều 1. Phạm vi điều chỉnh\nQuy định này quy định chi tiết việc bồi thường, hỗ trợ, tái định cư khi Nhà nước thu hồi đất trên địa bàn thành phố Hà Nội theo quy định của Luật Đất đai năm 2024 và Nghị định số 88/2024/NĐ-CP.`,
+            '— Điều 2: Đối tượng áp dụng': `Điều 2. Đối tượng áp dụng\nCơ quan quản lý nhà nước về đất đai; đơn vị bồi thường, giải phóng mặt bằng; người có đất thu hồi và chủ sở hữu tài sản gắn liền với đất thu hồi trên địa bàn thành phố Hà Nội.`,
+            'Chương II: Bồi thường về đất và tài sản trên đất': `Chương II. BỒI THƯỜNG VỀ ĐẤT VÀ TÀI SẢN TRÊN ĐẤT\nQuy định cụ thể các khoản bồi thường chi phí di chuyển, thiệt hại về nhà ở, công trình xây dựng và cây trồng vật nuôi khi thu hồi đất.`,
+            '— Điều 5: Bồi thường chi phí di chuyển tài sản': `Điều 5. Bồi thường chi phí di chuyển tài sản\nKhi Nhà nước thu hồi đất mà phải di chuyển tài sản thì được Nhà nước bồi thường chi phí để tháo dỡ, di chuyển, lắp đặt theo định mức quy định của thành phố Hà Nội.`,
+            '— Điều 8: Bồi thường thiệt hại đối với nhà, công trình xây dựng': `Điều 8. Bồi thường thiệt hại đối với nhà, công trình xây dựng\nKhoản tiền bồi thường thiệt hại bằng tổng giá trị hiện có của nhà, công trình bị thiệt hại và khoản tiền tính bằng tỷ lệ phần trăm theo giá trị hiện có của nhà, công trình đó.`,
+            'Chương III: Chính sách hỗ trợ và tái định cư': `Chương III. CHÍNH SÁCH HỖ TRỢ VÀ TÁI ĐỊNH CƯ\nQuy định các cơ chế hỗ trợ ổn định đời sống, hỗ trợ đào tạo chuyển đổi nghề và phương án bố trí tái định cư.`,
+            '— Điều 14: Hỗ trợ ổn định đời sống và sản xuất': `Điều 14. Hỗ trợ ổn định đời sống và sản xuất\nHộ gia đình, cá nhân đang sử dụng đất nông nghiệp khi Nhà nước thu hồi đất được hỗ trợ tiền ăn, sinh hoạt phí và ổn định sản xuất trong thời gian từ 6 đến 24 tháng theo từng trường hợp cụ thể.`,
+            '— Điều 18: Bố trí nhà ở, đất ở tái định cư': `Điều 18. Bố trí nhà ở, đất ở tái định cư\nƯu tiên bố trí tái định cư tại chỗ cho người có đất thu hồi nếu tại khu vực thu hồi đất có dự án tái định cư hoặc có điều kiện về đất ở.`
+        }
+    },
+    {
+        id: '02/2020/QĐ-UBND-HCM',
+        name: 'Quyết định 02/2020/QĐ-UBND TP Hồ Chí Minh',
+        soHieu: '02/2020/QĐ-UBND',
+        level: 'Địa phương',
+        province: 'Thành phố Hồ Chí Minh',
+        coQuanBanHanh: 'Ủy ban nhân dân Thành phố Hồ Chí Minh',
+        tieuDe: 'Quyết định số 02/2020/QĐ-UBND ngày 16/01/2020 của UBND TP Hồ Chí Minh Ban hành Quy định về Bảng giá đất trên địa bàn Thành phố Hồ Chí Minh',
+        trichYeu: 'Quy định về Bảng giá các loại đất định kỳ trên địa bàn Thành phố Hồ Chí Minh áp dụng cho việc tính thuế, phí, lệ phí và các nghĩa vụ tài chính về đất đai.',
+        ngayBanHanh: '16/01/2020',
+        ngayHieuLuc: '26/01/2020',
+        loaiVanBan: 'Quyết định',
+        nganh: 'Tài nguyên và Môi trường',
+        tinhTrangHieuLuc: 'Còn hiệu lực',
+        nguoiKy: 'Nguyễn Thành Phong',
+        chucDanh: 'Chủ tịch UBND',
+        files: [
+            { name: 'QD-02-2020-QD-UBND-TPHCM.docx', url: '#' },
+            { name: 'QD-02-2020-QD-UBND-TPHCM.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Quy định chung',
+            '— Điều 1: Phạm vi áp dụng',
+            '— Điều 2: Đối tượng áp dụng',
+            'Chương II: Phân loại đô thị và vị trí đất',
+            '— Điều 3: Xác định vị trí đất ở',
+            '— Điều 4: Xác định vị trí đất thương mại, dịch vụ',
+            'Chương III: Bảng giá các loại đất',
+            '— Điều 7: Giá đất nông nghiệp',
+            '— Điều 8: Giá đất phi nông nghiệp'
+        ],
+        mucLucDetails: {
+            'Chương I: Quy định chung': `Chương I. QUY ĐỊNH CHUNG\nQuy định phạm vi và đối tượng áp dụng bảng giá đất trên địa bàn toàn thành phố Hồ Chí Minh.`,
+            '— Điều 1: Phạm vi áp dụng': `Điều 1. Phạm vi áp dụng\nBảng giá các loại đất ban hành kèm theo Quyết định này được sử dụng làm căn cứ tính tiền sử dụng đất, thuế thu nhập cá nhân từ chuyển nhượng bất động sản và các khoản phí, lệ phí theo quy định.`,
+            '— Điều 2: Đối tượng áp dụng': `Điều 2. Đối tượng áp dụng\nCơ quan thực hiện chức năng quản lý nhà nước về đất đai, người sử dụng đất và các tổ chức, cá nhân có nghĩa vụ tài chính về đất đai tại TP Hồ Chí Minh.`,
+            'Chương II: Phân loại đô thị và vị trí đất': `Chương II. PHÂN LOẠI ĐÔ THỊ VÀ VỊ TRÍ ĐẤT\nPhương pháp chia vị trí 1, 2, 3, 4 trên từng tuyến đường và các hẻm tiếp giáp.`,
+            '— Điều 3: Xác định vị trí đất ở': `Điều 3. Xác định vị trí đất ở\nVị trí 1 áp dụng đối với thửa đất tiếp giáp mặt tiền đường có tên trong Bảng giá đất. Các vị trí hẻm từ 1 đến 4 được tính theo tỷ lệ phần trăm tương ứng của vị trí 1.`,
+            'Chương III: Bảng giá các loại đất': `Chương III. BẢNG GIÁ CÁC LOẠI ĐẤT\nBảng chi tiết giá đất ở, đất nông nghiệp, đất sản xuất kinh doanh phi nông nghiệp của các quận, huyện và thành phố Thủ Đức.`
+        }
+    },
+    {
+        id: '326/2020/NQ-HĐND-ĐN',
+        name: 'Nghị quyết 326/2020/NQ-HĐND TP Đà Nẵng',
+        soHieu: '326/2020/NQ-HĐND',
+        level: 'Địa phương',
+        province: 'Thành phố Đà Nẵng',
+        coQuanBanHanh: 'Hội đồng nhân dân Thành phố Đà Nẵng',
+        tieuDe: 'Nghị quyết số 326/2020/NQ-HĐND ngày 09/12/2020 của HĐND TP Đà Nẵng về Quy định chính sách hỗ trợ phát triển hệ sinh thái khởi nghiệp đổi mới sáng tạo',
+        trichYeu: 'Chính sách hỗ trợ hệ sinh thái khởi nghiệp đổi mới sáng tạo trên địa bàn thành phố Đà Nẵng giai đoạn 2021-2025.',
+        ngayBanHanh: '09/12/2020',
+        ngayHieuLuc: '01/01/2021',
+        loaiVanBan: 'Nghị quyết',
+        nganh: 'Kế hoạch và Đầu tư',
+        tinhTrangHieuLuc: 'Còn hiệu lực',
+        nguoiKy: 'Lương Nguyễn Minh Triết',
+        chucDanh: 'Chủ tịch HĐND',
+        files: [
+            { name: 'NQ-326-2020-NQ-HDND-DaNang.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Quy định chung',
+            '— Điều 1: Phạm vi điều chỉnh và đối tượng áp dụng',
+            'Chương II: Các chính sách hỗ trợ',
+            '— Điều 4: Hỗ trợ kinh phí nghiên cứu và hoàn thiện công nghệ',
+            '— Điều 5: Hỗ trợ không gian làm việc chung'
+        ],
+        mucLucDetails: {
+            'Chương I: Quy định chung': `Chương I. QUY ĐỊNH CHUNG\nQuy định điều kiện và tiêu chí xét chọn doanh nghiệp, dự án khởi nghiệp sáng tạo trên địa bàn thành phố Đà Nẵng.`,
+            '— Điều 1: Phạm vi điều chỉnh và đối tượng áp dụng': `Điều 1. Phạm vi điều chỉnh và đối tượng áp dụng\nNghị quyết này quy định một số chính sách hỗ trợ phát triển hệ sinh thái khởi nghiệp đổi mới sáng tạo trên địa bàn thành phố Đà Nẵng.`,
+            'Chương II: Các chính sách hỗ trợ': `Chương II. CÁC CHÍNH SÁCH HỖ TRỢ\nĐịnh mức hỗ trợ kinh phí ươm tạo, đăng ký sở hữu trí tuệ, truyền thông và tiếp cận vốn đầu tư mạo hiểm.`
+        }
+    },
+    {
+        id: '18/2024/QĐ-UBND-QN',
+        name: 'Quyết định 18/2024/QĐ-UBND Tỉnh Quảng Ninh',
+        soHieu: '18/2024/QĐ-UBND',
+        level: 'Địa phương',
+        province: 'Tỉnh Quảng Ninh',
+        coQuanBanHanh: 'Ủy ban nhân dân Tỉnh Quảng Ninh',
+        tieuDe: 'Quyết định số 18/2024/QĐ-UBND ngày 15/05/2024 của UBND Tỉnh Quảng Ninh Ban hành Quy chế quản lý trật tự xây dựng trên địa bàn tỉnh',
+        trichYeu: 'Quy chế phân công trách nhiệm và phối hợp quản lý trật tự xây dựng giữa các cơ quan, đơn vị cấp tỉnh, cấp huyện và cấp xã trên địa bàn tỉnh Quảng Ninh.',
+        ngayBanHanh: '15/05/2024',
+        ngayHieuLuc: '01/06/2024',
+        loaiVanBan: 'Quyết định',
+        nganh: 'Xây dựng',
+        tinhTrangHieuLuc: 'Còn hiệu lực',
+        nguoiKy: 'Cao Tường Huy',
+        chucDanh: 'Chủ tịch UBND',
+        files: [
+            { name: 'QD-18-2024-QD-UBND-QuangNinh.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Những quy định chung',
+            '— Điều 1: Phạm vi điều chỉnh',
+            '— Điều 2: Đối tượng áp dụng',
+            'Chương II: Trách nhiệm quản lý trật tự xây dựng',
+            '— Điều 5: Trách nhiệm của UBND cấp huyện',
+            '— Điều 6: Trách nhiệm của UBND cấp xã'
+        ],
+        mucLucDetails: {
+            'Chương I: Những quy định chung': `Chương I. NHỮNG QUY ĐỊNH CHUNG\nQuy định nguyên tắc quản lý trật tự xây dựng, kiểm tra và ngăn chặn các hành vi xây dựng không phép, sai phép.`,
+            '— Điều 1: Phạm vi điều chỉnh': `Điều 1. Phạm vi điều chỉnh\nQuyết định này quy định về nguyên tắc, thẩm quyền và trách nhiệm phối hợp giữa Sở Xây dựng, Ban Quản lý Khu kinh tế, UBND cấp huyện và UBND cấp xã.`,
+            'Chương II: Trách nhiệm quản lý trật tự xây dựng': `Chương II. TRÁCH NHIỆM QUẢN LÝ TRẬT TỰ XÂY DỰNG\nPhân định rõ trách nhiệm của chính quyền địa phương các cấp trong việc phát hiện, đình chỉ và xử lý vi phạm xây dựng.`
+        }
+    },
+    {
+        id: '45/2024/QĐ-UBND-ĐN',
+        name: 'Quyết định 45/2024/QĐ-UBND Tỉnh Đồng Nai',
+        soHieu: '45/2024/QĐ-UBND',
+        level: 'Địa phương',
+        province: 'Tỉnh Đồng Nai',
+        coQuanBanHanh: 'Ủy ban nhân dân Tỉnh Đồng Nai',
+        tieuDe: 'Quyết định số 45/2024/QĐ-UBND ngày 20/08/2024 của UBND Tỉnh Đồng Nai Quy định về điều kiện, diện tích tối thiểu được phép tách thửa, hợp thửa đất',
+        trichYeu: 'Quy định chi tiết điều kiện tách thửa đất, hợp thửa đất đối với từng loại đất trên địa bàn tỉnh Đồng Nai theo quy định của Luật Đất đai 2024.',
+        ngayBanHanh: '20/08/2024',
+        ngayHieuLuc: '01/09/2024',
+        loaiVanBan: 'Quyết định',
+        nganh: 'Tài nguyên và Môi trường',
+        tinhTrangHieuLuc: 'Còn hiệu lực',
+        nguoiKy: 'Võ Tấn Đức',
+        chucDanh: 'Chủ tịch UBND',
+        files: [
+            { name: 'QD-45-2024-QD-UBND-DongNai.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Quy định chung',
+            '— Điều 1: Phạm vi điều chỉnh',
+            '— Điều 2: Đối tượng áp dụng',
+            'Chương II: Điều kiện và diện tích tối thiểu được tách thửa',
+            '— Điều 4: Diện tích tối thiểu tách thửa đất ở tại đô thị và nông thôn',
+            '— Điều 5: Diện tích tối thiểu tách thửa đất nông nghiệp'
+        ],
+        mucLucDetails: {
+            'Chương I: Quy định chung': `Chương I. QUY ĐỊNH CHUNG\nQuy định nguyên tắc chung về tách thửa, hợp thửa đất bảo đảm quy hoạch hạ tầng kỹ thuật.`,
+            '— Điều 1: Phạm vi điều chỉnh': `Điều 1. Phạm vi điều chỉnh\nQuy định điều kiện, diện tích, kích thước tối thiểu được phép tách thửa đất, hợp thửa đất đối với từng loại đất trên địa bàn tỉnh Đồng Nai.`,
+            'Chương II: Điều kiện và diện tích tối thiểu được tách thửa': `Chương II. ĐIỀU KIỆN VÀ DIỆN TÍCH TỐI THIỂU ĐƯỢC TÁCH THỬA\nQuy định kích thước mặt tiền, chiều sâu và diện tích tối thiểu cho đất ở nông thôn, đất ở đô thị và đất cây lâu năm.`
+        }
+    },
+    {
+        id: '25/2023/QĐ-UBND-BD',
+        name: 'Quyết định 25/2023/QĐ-UBND Tỉnh Bình Dương',
+        soHieu: '25/2023/QĐ-UBND',
+        level: 'Địa phương',
+        province: 'Tỉnh Bình Dương',
+        coQuanBanHanh: 'Ủy ban nhân dân Tỉnh Bình Dương',
+        tieuDe: 'Quyết định số 25/2023/QĐ-UBND ngày 12/09/2023 của UBND Tỉnh Bình Dương về đơn giá bồi thường tài sản cây trồng khi Nhà nước thu hồi đất',
+        trichYeu: 'Ban hành bảng đơn giá bồi thường thiệt hại thực tế về cây trồng, vật nuôi và chi phí di chuyển khi Nhà nước thu hồi đất trên địa bàn tỉnh Bình Dương.',
+        ngayBanHanh: '12/09/2023',
+        ngayHieuLuc: '25/09/2023',
+        loaiVanBan: 'Quyết định',
+        nganh: 'Tài chính - Nông nghiệp',
+        tinhTrangHieuLuc: 'Còn hiệu lực',
+        nguoiKy: 'Võ Văn Minh',
+        chucDanh: 'Chủ tịch UBND',
+        files: [
+            { name: 'QD-25-2023-QD-UBND-BinhDuong.pdf', url: '#' }
+        ],
+        mucLuc: [
+            'Chương I: Quy định chung',
+            '— Điều 1: Phạm vi điều chỉnh',
+            'Chương II: Nguyên tắc và đơn giá bồi thường',
+            '— Điều 3: Nguyên tắc xác định bồi thường cây trồng',
+            '— Điều 4: Đơn giá bồi thường đối với thủy sản nuôi trồng'
+        ],
+        mucLucDetails: {
+            'Chương I: Quy định chung': `Chương I. QUY ĐỊNH CHUNG\nQuy định phạm vi áp dụng đơn giá bồi thường tài sản gắn liền với đất thu hồi tại Bình Dương.`,
+            '— Điều 1: Phạm vi điều chỉnh': `Điều 1. Phạm vi điều chỉnh\nĐơn giá ban hành kèm Quyết định này áp dụng làm căn cứ tính bồi thường thiệt hại tài sản khi Nhà nước thu hồi đất vì mục đích quốc phòng, an ninh, phát triển kinh tế.`
         }
     }
 ];
@@ -388,8 +608,10 @@ const CreatePhanAnhKienNghiPage = () => {
                 setDocSearchQuery(matched.name);
                 setFormData(prev => ({
                     ...prev,
+                    level: matched.level || 'Trung ương',
+                    province: matched.province || prev.province,
                     legalDocs: matched.tieuDe,
-                    agency: prev.level === 'Trung ương' && matched.coQuanBanHanh ? matched.coQuanBanHanh : prev.agency
+                    agency: (matched.level || 'Trung ương') === 'Trung ương' && matched.coQuanBanHanh ? matched.coQuanBanHanh : prev.agency
                 }));
             }
         }
@@ -397,11 +619,28 @@ const CreatePhanAnhKienNghiPage = () => {
 
     if (!user) return null;
 
-    const filteredDocs = MOCK_LEGAL_DOCS_DATA.filter(doc =>
-        doc.name.toLowerCase().includes(docSearchQuery.toLowerCase()) ||
-        doc.soHieu.toLowerCase().includes(docSearchQuery.toLowerCase()) ||
-        doc.tieuDe.toLowerCase().includes(docSearchQuery.toLowerCase())
-    );
+    const filteredDocs = MOCK_LEGAL_DOCS_DATA.filter(doc => {
+        const docLevel = doc.level || 'Trung ương';
+        if (docLevel !== formData.level) return false;
+
+        // If Địa phương and a province is selected
+        if (formData.level === 'Địa phương' && formData.province) {
+            if (doc.province && doc.province !== formData.province) {
+                return false;
+            }
+        }
+
+        if (!docSearchQuery || !docSearchQuery.trim()) return true;
+
+        const q = docSearchQuery.toLowerCase().trim();
+        return (
+            (doc.name && doc.name.toLowerCase().includes(q)) ||
+            (doc.soHieu && doc.soHieu.toLowerCase().includes(q)) ||
+            (doc.tieuDe && doc.tieuDe.toLowerCase().includes(q)) ||
+            (doc.coQuanBanHanh && doc.coQuanBanHanh.toLowerCase().includes(q)) ||
+            (doc.province && doc.province.toLowerCase().includes(q))
+        );
+    });
 
     const handleLevelChange = (newLevel) => {
         if (newLevel === formData.level) return;
@@ -428,6 +667,7 @@ const CreatePhanAnhKienNghiPage = () => {
         setFormData(prev => ({
             ...prev,
             agency: prev.level === 'Trung ương' && agencyToSet ? agencyToSet : prev.agency,
+            province: prev.level === 'Địa phương' && doc.province ? doc.province : prev.province,
             legalDocs: doc.tieuDe || doc.name,
             tableOfContent: '',
             content: ''
@@ -437,7 +677,8 @@ const CreatePhanAnhKienNghiPage = () => {
         setErrors(prev => ({
             ...prev,
             legalDocs: null,
-            ...(prev.level === 'Trung ương' && agencyToSet ? { agency: null } : {})
+            ...(prev.level === 'Trung ương' && agencyToSet ? { agency: null } : {}),
+            ...(prev.level === 'Địa phương' && doc.province ? { province: null } : {})
         }));
     };
 
@@ -484,9 +725,7 @@ const CreatePhanAnhKienNghiPage = () => {
     const validate = () => {
         const newErrors = {};
         if (!formData.legalDocs) newErrors.legalDocs = 'Vui lòng chọn hoặc nhập văn bản pháp luật liên quan';
-        if (formData.level === 'Trung ương') {
-            if (!formData.agency) newErrors.agency = 'Vui lòng chọn cơ quan tiếp nhận';
-        } else {
+        if (formData.level === 'Địa phương') {
             if (!formData.province) newErrors.province = 'Vui lòng chọn địa phương';
         }
         if (!formData.content) newErrors.content = 'Vui lòng nhập nội dung chi tiết';
@@ -549,10 +788,12 @@ const CreatePhanAnhKienNghiPage = () => {
                             <span className="font-medium">{formData.level}</span>
                         </div>
                         {formData.level === 'Trung ương' ? (
-                            <div className="flex gap-2">
-                                <span className="text-gray-500 w-36">Cơ quan tiếp nhận:</span>
-                                <span className="font-medium">{formData.agency}</span>
-                            </div>
+                            formData.agency ? (
+                                <div className="flex gap-2">
+                                    <span className="text-gray-500 w-36">Cơ quan tiếp nhận:</span>
+                                    <span className="font-medium">{formData.agency}</span>
+                                </div>
+                            ) : null
                         ) : (
                             <div className="flex gap-2">
                                 <span className="text-gray-500 w-36">Địa phương:</span>
@@ -640,58 +881,60 @@ const CreatePhanAnhKienNghiPage = () => {
                                 Nội dung phản ánh, kiến nghị về văn bản quy phạm pháp luật
                             </h3>
 
-                            {/* Target selection */}
-                            {/* <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 space-y-4">
+                            {/* Cấp xử lý: Trung ương / Địa phương */}
+                            <div className="space-y-4 pt-1">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">Cấp xử lý <span className="text-red-500">*</span></label>
-                                    <div className="flex gap-4">
-                                        <label className="flex items-center gap-2 cursor-pointer">
+                                    <label className="block text-sm font-bold text-[#1e293b] mb-2.5">
+                                        Cấp xử lý
+                                    </label>
+                                    <div className="flex items-center gap-8">
+                                        <label className="inline-flex items-center gap-2.5 cursor-pointer select-none">
                                             <input
                                                 type="radio"
-                                                name="level"
+                                                name="processingLevel"
                                                 value="Trung ương"
                                                 checked={formData.level === 'Trung ương'}
                                                 onChange={() => handleLevelChange('Trung ương')}
-                                                className="w-4 h-4 text-[#0f4c81]"
+                                                className="w-4 h-4 text-[#0f4c81] border-gray-400 focus:ring-[#0f4c81] cursor-pointer"
                                             />
-                                            <span className="text-sm font-medium text-gray-700">Cấp trung ương</span>
+                                            <span className="text-sm font-semibold text-[#1e293b]">Trung ương</span>
                                         </label>
-                                        <label className="flex items-center gap-2 cursor-pointer">
+                                        <label className="inline-flex items-center gap-2.5 cursor-pointer select-none">
                                             <input
                                                 type="radio"
-                                                name="level"
+                                                name="processingLevel"
                                                 value="Địa phương"
                                                 checked={formData.level === 'Địa phương'}
                                                 onChange={() => handleLevelChange('Địa phương')}
-                                                className="w-4 h-4 text-[#0f4c81]"
+                                                className="w-4 h-4 text-[#0f4c81] border-gray-400 focus:ring-[#0f4c81] cursor-pointer"
                                             />
-                                            <span className="text-sm font-medium text-gray-700">Cấp địa phương</span>
+                                            <span className="text-sm font-semibold text-[#1e293b]">Địa phương</span>
                                         </label>
                                     </div>
                                 </div>
 
-                                {formData.level === 'Trung ương' ? (
+                                {/* Nếu là địa phương thì hiển thị thêm trường Địa phương */}
+                                {formData.level === 'Địa phương' && (
                                     <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Cơ quan tiếp nhận <span className="text-red-500">*</span></label>
-                                        <select
-                                            value={formData.agency}
-                                            onChange={e => { setFormData({ ...formData, agency: e.target.value }); setErrors({ ...errors, agency: null }); }}
-                                            className={`w-full border rounded-lg p-2.5 bg-white ${errors.agency ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
-                                        >
-                                            <option value="">-- Chọn cơ quan tiếp nhận --</option>
-                                            {CENTRAL_AGENCIES.map(agency => (
-                                                <option key={agency} value={agency}>{agency}</option>
-                                            ))}
-                                        </select>
-                                        {errors.agency && <p className="text-red-500 text-xs mt-1">{errors.agency}</p>}
-                                    </div>
-                                ) : (
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-700 mb-1">Địa phương <span className="text-red-500">*</span></label>
+                                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                                            Địa phương <span className="text-red-500">*</span>
+                                        </label>
                                         <select
                                             value={formData.province}
-                                            onChange={e => { setFormData({ ...formData, province: e.target.value }); setErrors({ ...errors, province: null }); }}
-                                            className={`w-full border rounded-lg p-2.5 bg-white ${errors.province ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
+                                            onChange={e => {
+                                                const val = e.target.value;
+                                                setFormData(prev => ({
+                                                    ...prev,
+                                                    province: val,
+                                                    ...(selectedDoc && selectedDoc.province && selectedDoc.province !== val ? { legalDocs: '', tableOfContent: '', content: '' } : {})
+                                                }));
+                                                if (selectedDoc && selectedDoc.province && selectedDoc.province !== val) {
+                                                    setSelectedDoc(null);
+                                                    setDocSearchQuery('');
+                                                }
+                                                setErrors(prev => ({ ...prev, province: null }));
+                                            }}
+                                            className={`w-full border rounded-lg p-2.5 bg-white text-sm ${errors.province ? 'border-red-500 bg-red-50' : 'border-gray-300 focus:ring-2 focus:ring-blue-200 focus:border-blue-500'}`}
                                         >
                                             <option value="">-- Chọn địa phương --</option>
                                             {PROVINCES.map(prov => (
@@ -701,7 +944,7 @@ const CreatePhanAnhKienNghiPage = () => {
                                         {errors.province && <p className="text-red-500 text-xs mt-1">{errors.province}</p>}
                                     </div>
                                 )}
-                            </div> */}
+                            </div>
 
                             {/* Legal Doc selection */}
                             <div className="relative z-10">
@@ -711,7 +954,13 @@ const CreatePhanAnhKienNghiPage = () => {
                                 <div className="relative">
                                     <input
                                         type="text"
-                                        placeholder="Tìm kiếm hoặc khai báo số hiệu, tên văn bản pháp luật..."
+                                        placeholder={
+                                            formData.level === 'Trung ương'
+                                                ? "Tìm kiếm hoặc khai báo số hiệu, tên văn bản cấp Trung ương..."
+                                                : (formData.province
+                                                    ? `Tìm kiếm hoặc khai báo văn bản của ${formData.province}...`
+                                                    : "Tìm kiếm hoặc khai báo số hiệu, tên văn bản cấp Địa phương...")
+                                        }
                                         value={docSearchQuery}
                                         onChange={e => {
                                             const val = e.target.value;
@@ -719,23 +968,25 @@ const CreatePhanAnhKienNghiPage = () => {
                                             setFormData(prev => ({ ...prev, legalDocs: val }));
                                             setShowDocDropdown(true);
                                             setErrors(prev => ({ ...prev, legalDocs: null }));
-                                            const matched = MOCK_LEGAL_DOCS_DATA.find(d =>
-                                                d.name.toLowerCase() === val.toLowerCase() ||
-                                                d.soHieu.toLowerCase() === val.toLowerCase() ||
-                                                d.tieuDe.toLowerCase() === val.toLowerCase()
-                                            );
+                                            const matched = MOCK_LEGAL_DOCS_DATA.find(d => {
+                                                const dLevel = d.level || 'Trung ương';
+                                                if (dLevel !== formData.level) return false;
+                                                return (
+                                                    d.name.toLowerCase() === val.toLowerCase() ||
+                                                    d.soHieu.toLowerCase() === val.toLowerCase() ||
+                                                    d.tieuDe.toLowerCase() === val.toLowerCase()
+                                                );
+                                            });
                                             setSelectedDoc(matched || null);
                                             if (matched) {
                                                 const agencyToSet = matched.coQuanBanHanh || '';
                                                 setFormData(prev => ({
                                                     ...prev,
                                                     agency: prev.level === 'Trung ương' && agencyToSet ? agencyToSet : prev.agency,
+                                                    province: prev.level === 'Địa phương' && matched.province ? matched.province : prev.province,
                                                     tableOfContent: '',
                                                     content: ''
                                                 }));
-                                                if (agencyToSet) {
-                                                    setErrors(prev => ({ ...prev, agency: null }));
-                                                }
                                             } else {
                                                 setFormData(prev => ({ ...prev, tableOfContent: '', content: '' }));
                                             }
@@ -749,19 +1000,37 @@ const CreatePhanAnhKienNghiPage = () => {
                                 {errors.legalDocs && <p className="text-red-500 text-xs mt-1">{errors.legalDocs}</p>}
 
                                 {/* Dropdown */}
-                                {showDocDropdown && docSearchQuery && filteredDocs.length > 0 && (
+                                {showDocDropdown && filteredDocs.length > 0 && (
                                     <ul className="absolute z-20 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto divide-y divide-gray-100">
                                         {filteredDocs.map((doc, idx) => (
                                             <li
                                                 key={idx}
                                                 className="px-4 py-2.5 hover:bg-blue-50 cursor-pointer text-sm transition-colors"
-                                                onClick={() => handleSelectDoc(doc)}
+                                                onMouseDown={() => handleSelectDoc(doc)}
                                             >
-                                                <div className="font-semibold text-gray-800">{doc.name}</div>
-                                                <div className="text-xs text-gray-500 line-clamp-1">{doc.tieuDe}</div>
+                                                <div className="flex items-center justify-between gap-2">
+                                                    <div className="font-semibold text-gray-800">{doc.name}</div>
+                                                    <span className={`text-[11px] px-2 py-0.5 rounded-full font-medium ${
+                                                        doc.level === 'Địa phương'
+                                                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                                                            : 'bg-blue-50 text-blue-700 border border-blue-200'
+                                                    }`}>
+                                                        {doc.province || doc.level || 'Trung ương'}
+                                                    </span>
+                                                </div>
+                                                <div className="text-xs text-gray-500 line-clamp-1 mt-0.5">{doc.tieuDe}</div>
+                                                {doc.coQuanBanHanh && (
+                                                    <div className="text-[11px] text-gray-400 mt-0.5">Cơ quan: {doc.coQuanBanHanh}</div>
+                                                )}
                                             </li>
                                         ))}
                                     </ul>
+                                )}
+
+                                {showDocDropdown && docSearchQuery && filteredDocs.length === 0 && (
+                                    <div className="absolute z-20 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg p-3 text-sm text-gray-500 text-center">
+                                        Không tìm thấy văn bản phù hợp trong danh mục {formData.level.toLowerCase()}{formData.level === 'Địa phương' && formData.province ? ` của ${formData.province}` : ''}. Bạn vẫn có thể nhập trực tiếp tên hoặc số hiệu văn bản vào ô này.
+                                    </div>
                                 )}
                             </div>
 
