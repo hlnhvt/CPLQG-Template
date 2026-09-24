@@ -130,7 +130,7 @@ export default function TinTucHoatDongList({ title, items, categories }) {
                     <ChevronRight size={14} />
                     <span>PBGDPL - {title}</span>
                 </div>
-                <h1 className="text-3xl font-extrabold text-[#1b2b49] tracking-tight">{title}</h1>
+                <h1 className="text-3xl font-bold text-[#1b2b49] tracking-tight">{title}</h1>
             </div>
 
             {/* Filter Box */}

@@ -209,7 +209,7 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                         <div className="bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-6 flex items-center gap-2 uppercase tracking-wide">
                             <Landmark size={14} /> Hệ thống PBGDPL Quốc gia
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-extrabold mb-6">
+                        <h1 className="text-4xl md:text-5xl font-bold mb-6">
                             Phổ biến Giáo dục Pháp luật
                         </h1>
                         <p className="text-blue-100 text-sm md:text-base max-w-xl mb-10">

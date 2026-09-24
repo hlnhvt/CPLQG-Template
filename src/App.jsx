@@ -166,11 +166,21 @@ import OfficerProfilePage from './pages/dashboard/OfficerProfilePage';
 import OfficerSettingsPage from './pages/dashboard/OfficerSettingsPage';
 import OfficerHienKePage from './pages/dashboard/OfficerHienKePage';
 import OfficerHienKeDetailPage from './pages/dashboard/OfficerHienKeDetailPage';
-
+import HanoiHomePage from './pages/hanoi/HanoiHomePage';
+import HanoiAboutPage from './pages/hanoi/HanoiAboutPage';
+import HanoiLegalDocsPage from './pages/hanoi/HanoiLegalDocsPage';
+import HanoiDraftDocsPage from './pages/hanoi/HanoiDraftDocsPage';
+import HanoiLawDisseminationPage from './pages/hanoi/HanoiLawDisseminationPage';
+import HanoiLegalAidPage from './pages/hanoi/HanoiLegalAidPage';
+import HanoiBusinessSupportPage from './pages/hanoi/HanoiBusinessSupportPage';
+import HanoiContactPage from './pages/hanoi/HanoiContactPage';
+import HanoiNewsPage from './pages/hanoi/HanoiNewsPage';
+import HanoiFAQPage from './pages/hanoi/HanoiFAQPage';
+import HanoiFAQDetailPage from './pages/hanoi/HanoiFAQDetailPage';
 
 const AppLayout = () => {
     const location = useLocation();
-    const hideHeaderFooter = ['/dang-nhap', '/onboarding'].includes(location.pathname);
+    const hideHeaderFooter = ['/dang-nhap', '/onboarding'].includes(location.pathname) || location.pathname.startsWith('/ha-noi');
 
     // Scroll to top on every route change
     useEffect(() => {
@@ -183,6 +193,17 @@ const AppLayout = () => {
             <main className="flex-grow">
                 <Routes>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/ha-noi" element={<HanoiHomePage />} />
+                    <Route path="/ha-noi/gioi-thieu" element={<HanoiAboutPage />} />
+                    <Route path="/ha-noi/tin-tuc" element={<HanoiNewsPage />} />
+                    <Route path="/ha-noi/van-ban" element={<HanoiLegalDocsPage />} />
+                    <Route path="/ha-noi/du-thao" element={<HanoiDraftDocsPage />} />
+                    <Route path="/ha-noi/pho-bien-giao-duc" element={<HanoiLawDisseminationPage />} />
+                    <Route path="/ha-noi/tro-giup-phap-ly" element={<HanoiLegalAidPage />} />
+                    <Route path="/ha-noi/ho-tro-phap-ly-doanh-nghiep" element={<HanoiBusinessSupportPage />} />
+                    <Route path="/ha-noi/hoi-dap" element={<HanoiFAQPage />} />
+                    <Route path="/ha-noi/hoi-dap/:id" element={<HanoiFAQDetailPage />} />
+                    <Route path="/ha-noi/lien-he" element={<HanoiContactPage />} />
                     <Route path="/trang-chu-v2" element={<HomePageV2 />} />
                     <Route path="/trang-chu-v3" element={<HomePageV3 />} />
                     <Route path="/ho-tro-phap-ly-doanh-nghiep/*" element={<HoTroPhapLyDoanhNghiepPage />} />

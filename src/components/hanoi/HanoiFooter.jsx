@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { MessageCircle, ArrowUp, ChevronUp } from 'lucide-react';
+import { MessageCircle, ArrowUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import LiveSupportChatbox from './hanoi/LiveSupportChatbox';
+import LiveSupportChatbox from './LiveSupportChatbox';
 
-const Footer = () => {
+const HanoiFooter = () => {
     const [isChatOpen, setIsChatOpen] = useState(false);
 
     // Scroll to top function
@@ -38,15 +38,17 @@ const Footer = () => {
                 </div>
 
                 {/* 2. Title */}
-                <h2 className="text-[18px] md:text-[22px] font-bold uppercase mb-2 drop-shadow-md tracking-wide">
-                    CỔNG PHÁP LUẬT QUỐC GIA
+                <h2 className="text-[18px] md:text-[22px] font-bold uppercase mb-2 drop-shadow-md tracking-normal">
+                    CỔNG PHÁP LUẬT THÀNH PHỐ HÀ NỘI
                 </h2>
 
                 {/* 3. Info lines */}
                 <div className="space-y-1 mb-4 text-[13px] md:text-[14px]">
-                    <p className="drop-shadow-sm">Đơn vị chủ quản: Bộ Tư pháp</p>
                     <p className="drop-shadow-sm">
-                        Địa chỉ: Số 60 Trần Phú, phường Ba Đình, TP Hà Nội | Điện thoại: 024.62739715
+                        Đơn vị chủ quản: Ủy ban nhân dân Thành phố Hà Nội | Đơn vị vận hành: Sở Tư pháp Thành phố Hà Nội
+                    </p>
+                    <p className="drop-shadow-sm">
+                        Địa chỉ: 221 Trần Phú, Phường Văn Quán, Quận Hà Đông, TP Hà Nội | Điện thoại: 024.33546163 | Email: sogddt@hanoi.gov.vn
                     </p>
                 </div>
 
@@ -55,18 +57,23 @@ const Footer = () => {
                     <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2">
                         <Link to="#" className="hover:text-yellow-300 transition-colors">Quy chế quản lý, vận hành, khai thác</Link>
                         <span className="hidden md:inline">|</span>
-                        <Link to="/chu-de-khao-sat" className="hover:text-yellow-300 transition-colors">Khảo sát đánh giá</Link>
+                        <Link to="/ha-noi/gioi-thieu" className="hover:text-yellow-300 transition-colors">Giới thiệu</Link>
                         <span className="hidden md:inline">|</span>
-                        <Link to="/lien-he" className="hover:text-yellow-300 transition-colors">Liên hệ</Link>
+                        <Link to="/ha-noi/van-ban" className="hover:text-yellow-300 transition-colors">Văn bản QPPL</Link>
                         <span className="hidden md:inline">|</span>
-                        <Link to="/ban-tin/dang-ky" className="hover:text-yellow-300 transition-colors">Đăng ký nhận bản tin</Link>
+                        <Link to="/ha-noi/pho-bien-giao-duc" className="hover:text-yellow-300 transition-colors">Phổ biến giáo dục pháp luật</Link>
+                        <span className="hidden md:inline">|</span>
+                        <Link to="/ha-noi/tro-giup-phap-ly" className="hover:text-yellow-300 transition-colors">Trợ giúp pháp lý</Link>
+                        <span className="hidden md:inline">|</span>
+                        <Link to="/ha-noi/ho-tro-phap-ly-doanh-nghiep" className="hover:text-yellow-300 transition-colors">Hỗ trợ pháp lý DN</Link>
+                        <span className="hidden md:inline">|</span>
+                        <Link to="/ha-noi/lien-he" className="hover:text-yellow-300 transition-colors">Liên hệ</Link>
                         <span className="hidden md:inline">|</span>
                     </div>
 
                     <div className="flex items-center gap-2">
-                        <span>Theo dõi Cổng Pháp luật quốc gia trên</span>
+                        <span>Theo dõi Cổng trên</span>
                         <a href="#" className="hover:opacity-80 transition-opacity drop-shadow-sm" title="Facebook">
-                            {/* Facebook SVG Logo - White circle with blue 'f' */}
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="12" cy="12" r="12" fill="white" />
                                 <path d="M14.9 12H13V19H10V12H8V9H10V7.5C10 5.2 11.2 4 14 4H16V7H14.5C13.5 7 13 7.5 13 8.5V9H16L14.9 12Z" fill="#0072ff" />
@@ -78,17 +85,17 @@ const Footer = () => {
                 {/* 5. Visitors count */}
                 <div className="mb-5 drop-shadow flex items-center justify-center gap-4 text-[13px] md:text-[14px]">
                     <div>
-                        Tổng lượt truy cập: <span className="text-yellow-400 font-bold ml-1">1.436.718</span>
+                        Tổng lượt truy cập: <span className="text-yellow-400 font-bold ml-1">685.240</span>
                     </div>
                     <div className="flex items-center gap-1.5">
                         <span className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.8)] animate-pulse"></span>
-                        Đang truy cập: <span className="text-yellow-400 font-bold ml-1">42</span>
+                        Đang truy cập: <span className="text-yellow-400 font-bold ml-1">28</span>
                     </div>
                 </div>
 
                 {/* 6. Copyright */}
                 <div className="text-[12px] md:text-[13px] font-light drop-shadow-sm opacity-90">
-                    © Bản quyền thuộc Cổng Pháp luật quốc gia
+                    © Bản quyền thuộc Cổng Pháp luật Thành phố Hà Nội - Kết nối liên thông Cổng Pháp luật quốc gia
                 </div>
             </div>
 
@@ -124,4 +131,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+export default HanoiFooter;
