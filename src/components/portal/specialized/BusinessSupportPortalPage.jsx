@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
     BookOpenText, Compass, Landmark, FileStack, MessageCircleQuestion, UserCheck, Send, Building2, Briefcase, Download,
     Target, Phone, Star, PlusCircle, X, CheckCircle2, Calendar, Eye, FileText, FileSpreadsheet, BookOpen, ClipboardCheck, Sparkles
@@ -20,7 +21,8 @@ const REQUEST_STEPS = [
 ];
 
 
-// Popup tạo câu hỏi mới (đồng bộ với popup của chuyên mục Hỏi đáp)
+// Popup tạo câu hỏi mới (đồng bộ với popup của chuyên mục Hỏi đáp).
+// Render qua portal ra document.body: phần tử cha có animation transform sẽ làm `fixed` bị neo theo cha, nền mờ không phủ toàn màn hình.
 const inputCls = 'w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600';
 const AskQuestionModal = ({ profile, fields, onClose }) => {
     const [form, setForm] = useState({ field: fields[0], title: '', content: '', company: '', name: '', phone: '' });
@@ -31,8 +33,16 @@ const AskQuestionModal = ({ profile, fields, onClose }) => {
         setDone(true);
         setTimeout(onClose, 2200);
     };
-    return (
-        <div className="fixed inset-0 z-[200] bg-black/60 backdrop-blur-xs flex items-center justify-center p-4" onClick={onClose}>
+    // Khóa cuộn trang nền và đóng bằng phím Esc khi popup mở
+    useEffect(() => {
+        const prev = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+        window.addEventListener('keydown', onKey);
+        return () => { document.body.style.overflow = prev; window.removeEventListener('keydown', onKey); };
+    }, [onClose]);
+    return createPortal(
+        <div className="fixed inset-0 z-[500] bg-black/60 backdrop-blur-xs flex items-center justify-center p-4" onClick={onClose}>
             <div className="bg-white rounded-2xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden spx-fade-up max-h-[92vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
                 <div className="bg-gradient-to-r from-[#4f56ca] via-[#2c1b92] to-[#4f56ca] text-white p-5 flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
@@ -87,7 +97,7 @@ const AskQuestionModal = ({ profile, fields, onClose }) => {
                 </div>
             </div>
         </div>
-    );
+    , document.body);
 };
 
 const BusinessSupportPortalPage = ({ profile, Header, Footer }) => {
