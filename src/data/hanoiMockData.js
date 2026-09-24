@@ -500,3 +500,45 @@ export const hanoiConnectedPortals = [
         status: "Trực tuyến"
     }
 ];
+
+// Danh bạ đường dây nóng (Hotline) - dữ liệu mẫu phục vụ giao diện
+export const hanoiHotlineSoTuPhap = [
+    { id: 1, name: "Đường dây nóng Sở Tư pháp TP. Hà Nội", unit: "Văn phòng Sở", phone: "024.3354.6163", time: "24/7", featured: true },
+    { id: 2, name: "Tổng đài tư vấn pháp luật Thủ đô", unit: "Sở Tư pháp", phone: "1900.1080", time: "07:30 - 21:00 hằng ngày", featured: true },
+    { id: 3, name: "Phản ánh, kiến nghị thủ tục hành chính tư pháp", unit: "Văn phòng Sở", phone: "024.3354.6170", time: "Giờ hành chính" },
+    { id: 4, name: "Phòng Hành chính tư pháp (Hộ tịch, Quốc tịch, Chứng thực)", unit: "Phòng HCTP", phone: "024.3354.6182", time: "Giờ hành chính" },
+    { id: 5, name: "Phòng Bổ trợ tư pháp (Luật sư, Công chứng, Đấu giá)", unit: "Phòng BTTP", phone: "024.3354.6185", time: "Giờ hành chính" },
+    { id: 6, name: "Phòng Phổ biến, giáo dục pháp luật", unit: "Phòng PBGDPL", phone: "024.3354.6188", time: "Giờ hành chính" },
+    { id: 7, name: "Thanh tra Sở - Tiếp công dân, khiếu nại, tố cáo", unit: "Thanh tra Sở", phone: "024.3354.6190", time: "Giờ hành chính" },
+    { id: 8, name: "Trung tâm Dịch vụ bán đấu giá tài sản Hà Nội", unit: "Đơn vị sự nghiệp", phone: "024.3824.1560", time: "Giờ hành chính" }
+];
+
+export const hanoiHotlineLawFirms = [
+    { id: 1, name: "Đoàn Luật sư Thành phố Hà Nội", unit: "Tổ chức xã hội - nghề nghiệp", address: "Số 1 Phó Đức Chính, Q. Ba Đình", phone: "024.3716.1618", featured: true },
+    { id: 2, name: "Công ty Luật TNHH Thủ Đô Legal", unit: "Công ty luật", address: "Số 25 Lý Thường Kiệt, Q. Hoàn Kiếm", phone: "024.3936.2211" },
+    { id: 3, name: "Văn phòng Luật sư Tràng An", unit: "Văn phòng luật sư", address: "Số 58 Trần Hưng Đạo, Q. Hoàn Kiếm", phone: "024.3942.7788" },
+    { id: 4, name: "Công ty Luật Hợp danh Hồng Hà", unit: "Công ty luật", address: "Số 102 Láng Hạ, Q. Đống Đa", phone: "024.3562.9090" },
+    { id: 5, name: "Văn phòng Luật sư Tây Hồ", unit: "Văn phòng luật sư", address: "Số 15 Xuân Diệu, Q. Tây Hồ", phone: "024.3718.4466" },
+    { id: 6, name: "Công ty Luật TNHH Cầu Giấy Partners", unit: "Công ty luật", address: "Số 88 Trần Duy Hưng, Q. Cầu Giấy", phone: "024.3795.3322" },
+    { id: 7, name: "Văn phòng Luật sư Long Biên", unit: "Văn phòng luật sư", address: "Số 210 Nguyễn Văn Cừ, Q. Long Biên", phone: "024.3872.5577" },
+    { id: 8, name: "Công ty Luật TNHH Hà Đông Justice", unit: "Công ty luật", address: "Số 36 Quang Trung, Q. Hà Đông", phone: "024.3355.8899" }
+];
+
+// Nhóm hotline dùng chung cho khối Hotline trang chủ và trang /ha-noi/hotline
+export const hanoiHotlineGroups = [
+    { key: 'so-tu-phap', label: 'Sở Tư pháp', items: hanoiHotlineSoTuPhap },
+    {
+        key: 'tro-giup-phap-ly',
+        label: 'Trung tâm Trợ giúp pháp lý',
+        items: hanoiLegalAidBranches.map((b) => ({
+            id: b.id,
+            name: b.name,
+            unit: b.id === 1 ? 'Trụ sở chính' : `Chi nhánh số ${b.id - 1}`,
+            address: b.address,
+            phone: b.phone,
+            time: b.phuTrach,
+            featured: b.id === 1
+        }))
+    },
+    { key: 'luat-su', label: 'Tổ chức hành nghề luật sư', items: hanoiHotlineLawFirms }
+];

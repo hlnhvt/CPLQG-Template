@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import NotificationDropdown from './NotificationDropdown';
 import AccessibilitySettings from './AccessibilitySettings';
+import { PORTALS } from '../data/portals';
 
 // --- Live Clock ---
 const LiveClock = () => {
@@ -263,7 +264,7 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                         to={`${homeUrl}/van-ban`} 
                                         className="h-full flex items-center px-2 xl:px-2.5 2xl:px-3 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap"
                                     >
-                                        Văn bản quy phạm pháp luật
+                                        Văn bản pháp luật
                                     </Link>
                                 </li>
                                 {!hideDraftNav && (
@@ -306,14 +307,6 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                         className="h-full flex items-center px-2 xl:px-2.5 2xl:px-3 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap"
                                     >
                                         Hỏi đáp
-                                    </Link>
-                                </li>
-                                <li className="h-full flex items-center">
-                                    <Link 
-                                        to={`${homeUrl}/lien-he`} 
-                                        className="h-full flex items-center px-2 xl:px-2.5 2xl:px-3 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap"
-                                    >
-                                        Liên hệ
                                     </Link>
                                 </li>
                             </ul>
@@ -642,7 +635,7 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                     onClick={() => setIsSidebarOpen(false)} 
                                     className="px-5 py-3.5 border-b border-white/5 font-medium hover:bg-white/5 transition-colors"
                                 >
-                                    Văn bản quy phạm pháp luật
+                                    Văn bản pháp luật
                                 </Link>
                                 {!hideDraftNav && (
                                     <Link 
@@ -680,13 +673,6 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                     className="px-5 py-3.5 border-b border-white/5 font-medium hover:bg-white/5 transition-colors"
                                 >
                                     Hỏi đáp
-                                </Link>
-                                <Link 
-                                    to={`${homeUrl}/lien-he`} 
-                                    onClick={() => setIsSidebarOpen(false)} 
-                                    className="px-5 py-3.5 border-b border-white/5 font-medium hover:bg-white/5 transition-colors"
-                                >
-                                    Liên hệ
                                 </Link>
                             </>
                         ) : (
@@ -865,6 +851,30 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                     placeholder="Tìm kiếm..."
                                     className="w-full py-2.5 pl-10 pr-4 bg-white/10 border border-white/20 rounded-full text-sm text-white placeholder-gray-400 outline-none focus:border-cyan-400 transition-colors"
                                 />
+                            </div>
+
+                            {/* Chọn Cổng truy cập */}
+                            <div className="pt-4 mt-2 border-t border-white/10">
+                                <label htmlFor="portal-switcher" className="flex items-center gap-2 text-xs uppercase tracking-wider text-gray-300 mb-2">
+                                    <Building2 size={15} /> Chọn Cổng truy cập
+                                </label>
+                                <div className="relative">
+                                    <select
+                                        id="portal-switcher"
+                                        value={PORTALS.find((p) => p.homeUrl === homeUrl)?.homeUrl ?? ''}
+                                        onChange={(e) => {
+                                            setIsSidebarOpen(false);
+                                            navigate(e.target.value);
+                                        }}
+                                        className="w-full appearance-none py-2.5 pl-4 pr-10 bg-white/10 border border-white/20 rounded-lg text-sm font-medium text-white outline-none focus:border-cyan-400 transition-colors cursor-pointer"
+                                    >
+                                        {!PORTALS.some((p) => p.homeUrl === homeUrl) && <option value="" disabled className="text-gray-900">-- Chọn Cổng --</option>}
+                                        {PORTALS.map((p) => (
+                                            <option key={p.id} value={p.homeUrl} className="text-gray-900">{p.label}</option>
+                                        ))}
+                                    </select>
+                                    <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 pointer-events-none" />
+                                </div>
                             </div>
                         </div>
                     </div>

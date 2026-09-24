@@ -15,9 +15,9 @@ import {
     Building2
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import HanoiHeader from '../../components/hanoi/HanoiHeader';
-import HanoiFooter from '../../components/hanoi/HanoiFooter';
-import { hanoiDraftDocs } from '../../data/hanoiMockData';
+import LaoCaiHeader from '../../components/laocai/LaoCaiHeader';
+import LaoCaiFooter from '../../components/laocai/LaoCaiFooter';
+import { laocaiDraftDocs } from '../../data/laocaiMockData';
 
 // Chuẩn hóa dự thảo từ mock data (coQuanSoanThao/hanGopY/...) về cùng cấu trúc với danh sách bên dưới
 const normalizeDraft = (d, i) => ({
@@ -33,22 +33,22 @@ const normalizeDraft = (d, i) => ({
 });
 
 const EXTENDED_DRAFTS = [
-    ...hanoiDraftDocs.map(normalizeDraft),
+    ...laocaiDraftDocs.map(normalizeDraft),
     {
-        id: 'hn-draft-03',
-        title: 'Dự thảo Nghị quyết quy định tiêu chí, điều kiện, trình tự, thủ tục xác định vùng phát thải thấp trên địa bàn Thủ đô',
-        agency: 'Sở Tài nguyên và Môi trường Hà Nội',
+        id: 'lc-draft-03',
+        title: 'Dự thảo Nghị quyết quy định chính sách hỗ trợ bảo vệ và phát triển rừng, chi trả dịch vụ môi trường rừng trên địa bàn tỉnh Lào Cai',
+        agency: 'Sở Nông nghiệp và Môi trường tỉnh Lào Cai',
         deadline: '15/04/2026',
         remainingDays: 22,
         feedbackCount: 312,
         views: 4580,
         status: 'Đang lấy ý kiến',
-        summary: 'Quy định các tiêu chí kỹ thuật và lộ trình hạn chế các phương tiện giao thông phát thải cao di chuyển vào khu vực vùng lõi đô thị lịch sử Hà Nội.'
+        summary: 'Quy định mức hỗ trợ khoán bảo vệ rừng cho hộ gia đình, cộng đồng dân cư thôn, bản và cơ chế sử dụng tiền dịch vụ môi trường rừng tại các xã vùng cao như Y Tý, Bản Lầu, Si Ma Cai.'
     },
     {
-        id: 'hn-draft-04',
-        title: 'Dự thảo Quyết định ban hành Quy chế phối hợp liên ngành trong công tác trợ giúp pháp lý cho người yếu thế tại 30 quận, huyện',
-        agency: 'Sở Tư pháp Thành phố Hà Nội',
+        id: 'lc-draft-04',
+        title: 'Dự thảo Quyết định ban hành Quy chế phối hợp liên ngành trong công tác trợ giúp pháp lý cho người yếu thế tại các xã, phường',
+        agency: 'Sở Tư pháp tỉnh Lào Cai',
         deadline: '30/04/2026',
         remainingDays: 37,
         feedbackCount: 154,
@@ -58,7 +58,7 @@ const EXTENDED_DRAFTS = [
     }
 ];
 
-const HanoiDraftDocsPage = () => {
+const LaoCaiDraftDocsPage = () => {
     const [searchKeyword, setSearchKeyword] = useState('');
     const [selectedAgency, setSelectedAgency] = useState('ALL');
     const [selectedDraftForFeedback, setSelectedDraftForFeedback] = useState(null);
@@ -73,7 +73,7 @@ const HanoiDraftDocsPage = () => {
     const [submittedSuccess, setSubmittedSuccess] = useState(false);
 
     useEffect(() => {
-        document.title = "Lấy ý kiến dự thảo - Cổng Pháp luật Thành phố Hà Nội";
+        document.title = "Lấy ý kiến dự thảo - Cổng Pháp luật tỉnh Lào Cai";
         window.scrollTo(0, 0);
     }, []);
 
@@ -100,26 +100,26 @@ const HanoiDraftDocsPage = () => {
 
     return (
         <div className="font-sans min-h-screen flex flex-col bg-[#f8f9fa]">
-            <HanoiHeader />
+            <LaoCaiHeader />
 
             {/* Breadcrumb */}
             <div className="bg-white border-b border-gray-200">
                 <div className="container mx-auto px-4 max-w-[1286px] py-3 text-xs sm:text-sm text-gray-500 flex items-center gap-2">
-                    <Link to="/ha-noi" className="hover:text-blue-700">Trang chủ Hà Nội</Link>
+                    <Link to="/lao-cai" className="hover:text-blue-700">Trang chủ Lào Cai</Link>
                     <ChevronRight size={14} />
                     <span className="text-gray-800 font-semibold">Lấy ý kiến dự thảo</span>
                 </div>
             </div>
 
-            {/* Page Header Banner - Đồng bộ màu sắc & phong cách Banner trang chủ Cổng Hà Nội */}
+            {/* Page Header Banner - Đồng bộ màu sắc & phong cách Banner trang chủ Cổng Lào Cai */}
             <div className="relative text-white py-8 sm:py-10 overflow-hidden bg-gradient-to-r from-[#4f56ca] via-[#2c1b92] to-[#4f56ca] border-b border-indigo-400/30">
                 {/* CSS Keyframes */}
                 <style>{`
-                    @keyframes hanoiRotateCW { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-                    @keyframes hanoiRotateCCW { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
-                    @keyframes hanoiPulseGlow { 0%, 100% { opacity: 0.15; transform: scale(0.95); } 50% { opacity: 0.38; transform: scale(1.12); } }
-                    @keyframes hanoiFloatDiamond { 0%, 100% { transform: translateY(0px) rotate(45deg); opacity: 0.3; filter: drop-shadow(0 0 2px #f59e0b); } 50% { transform: translateY(-8px) rotate(45deg); opacity: 0.65; filter: drop-shadow(0 0 5px #f59e0b); } }
-                    @keyframes hanoiSweepLight { 0% { transform: translateX(-160%) skewX(-25deg); opacity: 0; } 25% { opacity: 0.32; } 70% { opacity: 0.32; } 100% { transform: translateX(260%) skewX(-25deg); opacity: 0; } }
+                    @keyframes laocaiRotateCW { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+                    @keyframes laocaiRotateCCW { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+                    @keyframes laocaiPulseGlow { 0%, 100% { opacity: 0.15; transform: scale(0.95); } 50% { opacity: 0.38; transform: scale(1.12); } }
+                    @keyframes laocaiFloatDiamond { 0%, 100% { transform: translateY(0px) rotate(45deg); opacity: 0.3; filter: drop-shadow(0 0 2px #f59e0b); } 50% { transform: translateY(-8px) rotate(45deg); opacity: 0.65; filter: drop-shadow(0 0 5px #f59e0b); } }
+                    @keyframes laocaiSweepLight { 0% { transform: translateX(-160%) skewX(-25deg); opacity: 0; } 25% { opacity: 0.32; } 70% { opacity: 0.32; } 100% { transform: translateX(260%) skewX(-25deg); opacity: 0; } }
                 `}</style>
 
                 {/* 1. Lưới điểm chấm công nghệ chìm nhẹ */}
@@ -128,31 +128,31 @@ const HanoiDraftDocsPage = () => {
                 {/* 2. Dải quét sáng mềm mại chạy êm ái */}
                 <div
                     className="absolute inset-y-0 w-2/5 bg-gradient-to-r from-transparent via-amber-200/20 via-white/25 to-transparent pointer-events-none"
-                    style={{ animation: 'hanoiSweepLight 5s cubic-bezier(0.4, 0, 0.2, 1) infinite' }}
+                    style={{ animation: 'laocaiSweepLight 5s cubic-bezier(0.4, 0, 0.2, 1) infinite' }}
                 />
 
                 {/* 3. Quầng sáng công nghệ lan tỏa */}
-                <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-amber-300/30 blur-3xl pointer-events-none" style={{ animation: 'hanoiPulseGlow 4s ease-in-out infinite' }} />
-                <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-amber-400/30 blur-3xl pointer-events-none" style={{ animation: 'hanoiPulseGlow 4.5s ease-in-out infinite 1s' }} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[220px] bg-indigo-500/25 blur-[80px] pointer-events-none" style={{ animation: 'hanoiPulseGlow 5.5s ease-in-out infinite 0.5s' }} />
+                <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-amber-300/30 blur-3xl pointer-events-none" style={{ animation: 'laocaiPulseGlow 4s ease-in-out infinite' }} />
+                <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-amber-400/30 blur-3xl pointer-events-none" style={{ animation: 'laocaiPulseGlow 4.5s ease-in-out infinite 1s' }} />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[220px] bg-indigo-500/25 blur-[80px] pointer-events-none" style={{ animation: 'laocaiPulseGlow 5.5s ease-in-out infinite 0.5s' }} />
 
                 {/* 4. Vòng tròn quỹ đạo thanh mảnh xoay tròn */}
                 <div className="absolute -left-16 -top-16 w-64 h-64 rounded-full border border-amber-500/20 pointer-events-none" />
-                <div className="absolute -left-8 -top-8 w-48 h-48 rounded-full border border-amber-600/35 border-dashed pointer-events-none shadow-[0_0_12px_rgba(245,158,11,0.2)]" style={{ animation: 'hanoiRotateCW 16s linear infinite' }} />
+                <div className="absolute -left-8 -top-8 w-48 h-48 rounded-full border border-amber-600/35 border-dashed pointer-events-none shadow-[0_0_12px_rgba(245,158,11,0.2)]" style={{ animation: 'laocaiRotateCW 16s linear infinite' }} />
                 <div className="absolute -right-16 -bottom-16 w-72 h-72 rounded-full border border-amber-500/20 pointer-events-none" />
-                <div className="absolute -right-8 -bottom-8 w-56 h-56 rounded-full border border-amber-600/35 border-dashed pointer-events-none shadow-[0_0_12px_rgba(245,158,11,0.2)]" style={{ animation: 'hanoiRotateCCW 18s linear infinite' }} />
+                <div className="absolute -right-8 -bottom-8 w-56 h-56 rounded-full border border-amber-600/35 border-dashed pointer-events-none shadow-[0_0_12px_rgba(245,158,11,0.2)]" style={{ animation: 'laocaiRotateCCW 18s linear infinite' }} />
 
                 {/* 5. Điểm nhấn kim cương ánh kim */}
-                <div className="absolute top-6 left-[14%] w-3 h-3 bg-amber-400/40 border border-amber-200/60 rounded-sm pointer-events-none shadow-[0_0_6px_#f59e0b]" style={{ animation: 'hanoiFloatDiamond 3.2s ease-in-out infinite' }} />
-                <div className="absolute bottom-6 right-[14%] w-3 h-3 bg-amber-500/40 border border-amber-200/60 rounded-sm pointer-events-none shadow-[0_0_6px_#f59e0b]" style={{ animation: 'hanoiFloatDiamond 3.6s ease-in-out infinite 0.8s' }} />
+                <div className="absolute top-6 left-[14%] w-3 h-3 bg-amber-400/40 border border-amber-200/60 rounded-sm pointer-events-none shadow-[0_0_6px_#f59e0b]" style={{ animation: 'laocaiFloatDiamond 3.2s ease-in-out infinite' }} />
+                <div className="absolute bottom-6 right-[14%] w-3 h-3 bg-amber-500/40 border border-amber-200/60 rounded-sm pointer-events-none shadow-[0_0_6px_#f59e0b]" style={{ animation: 'laocaiFloatDiamond 3.6s ease-in-out infinite 0.8s' }} />
 
                 <div className="container mx-auto px-4 max-w-[1286px] relative z-10">
                     <h1 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white drop-shadow-md">
-                        Lấy ý kiến dự thảo văn bản QPPL Thành phố Hà Nội
+                        Lấy ý kiến dự thảo văn bản QPPL tỉnh Lào Cai
                     </h1>
                     <div className="w-20 sm:w-28 h-0.5 bg-gradient-to-r from-amber-400 to-transparent my-1.5 rounded-full" />
                     <p className="text-xs sm:text-sm text-amber-50/95 mt-1 max-w-3xl leading-relaxed drop-shadow-sm font-normal">
-                        Phát huy quyền làm chủ của nhân dân, chuyên gia và doanh nghiệp trong xây dựng thể chế Thủ đô
+                        Phát huy quyền làm chủ của nhân dân, chuyên gia và doanh nghiệp trong xây dựng chính sách của tỉnh Lào Cai
                     </p>
                 </div>
             </div>
@@ -178,9 +178,9 @@ const HanoiDraftDocsPage = () => {
                             className="w-full px-3 py-2.5 bg-gray-50 border border-gray-300 rounded-lg text-sm outline-none focus:border-blue-600"
                         >
                             <option value="ALL">Tất cả cơ quan soạn thảo</option>
-                            <option value="Sở Tư pháp Thành phố Hà Nội">Sở Tư pháp TP Hà Nội</option>
-                            <option value="Sở Quy hoạch - Kiến trúc Hà Nội">Sở Quy hoạch - Kiến trúc</option>
-                            <option value="Sở Tài nguyên và Môi trường Hà Nội">Sở Tài nguyên và Môi trường</option>
+                            <option value="Sở Tư pháp tỉnh Lào Cai">Sở Tư pháp tỉnh Lào Cai</option>
+                            <option value="Sở Xây dựng tỉnh Lào Cai">Sở Xây dựng</option>
+                            <option value="Sở Nông nghiệp và Môi trường tỉnh Lào Cai">Sở Nông nghiệp và Môi trường</option>
                         </select>
                     </div>
                 </div>
@@ -306,7 +306,7 @@ const HanoiDraftDocsPage = () => {
                                         type="text"
                                         value={feedbackForm.organization}
                                         onChange={(e) => setFeedbackForm({...feedbackForm, organization: e.target.value})}
-                                        placeholder="Tổ dân phố, doanh nghiệp..."
+                                        placeholder="Thôn, bản, tổ dân phố, doanh nghiệp..."
                                         className="w-full px-3 py-2 border border-gray-300 rounded-lg outline-none focus:border-blue-600"
                                     />
                                 </div>
@@ -347,9 +347,9 @@ const HanoiDraftDocsPage = () => {
                 </div>
             )}
 
-            <HanoiFooter />
+            <LaoCaiFooter />
         </div>
     );
 };
 
-export default HanoiDraftDocsPage;
+export default LaoCaiDraftDocsPage;

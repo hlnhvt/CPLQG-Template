@@ -16,18 +16,18 @@ import {
     Building2,
     RotateCcw
 } from 'lucide-react';
-import HanoiHeader from '../../components/hanoi/HanoiHeader';
-import HanoiFooter from '../../components/hanoi/HanoiFooter';
+import LaoCaiHeader from '../../components/laocai/LaoCaiHeader';
+import LaoCaiFooter from '../../components/laocai/LaoCaiFooter';
 
-// ── Mock Legal Documents Data for Hanoi ───────────────────────────────────────
+// ── Mock Legal Documents Data for LaoCai ───────────────────────────────────────
 const HINH_THUC = [
     'Nghị quyết', 'Quyết định', 'Luật', 'Chỉ thị', 'Văn bản hợp nhất',
     'Thông tư', 'Quy chế', 'Quy định', 'Kế hoạch', 'Thông báo', 'Công văn'
 ];
 
 const CO_QUAN = [
-    'HĐND TP Hà Nội', 'UBND TP Hà Nội', 'Chủ tịch UBND TP',
-    'Sở Tư pháp TP Hà Nội', 'Quốc hội', 'Chính phủ'
+    'HĐND tỉnh Lào Cai', 'UBND tỉnh Lào Cai', 'Chủ tịch UBND tỉnh',
+    'Sở Tư pháp tỉnh Lào Cai', 'Quốc hội', 'Chính phủ'
 ];
 
 const LINH_VUC = [
@@ -36,34 +36,34 @@ const LINH_VUC = [
     'Khoa học công nghệ & ĐMST', 'Y tế - Giáo dục'
 ];
 
-const HANOI_DISTRICTS = [
-    "Quận Ba Đình", "Quận Hoàn Kiếm", "Quận Tây Hồ", "Quận Long Biên",
-    "Quận Cầu Giấy", "Quận Đống Đa", "Quận Hai Bà Trưng", "Quận Hoàng Mai",
-    "Quận Thanh Xuân", "Quận Hà Đông", "Quận Bắc Từ Liêm", "Quận Nam Từ Liêm",
-    "Thị xã Sơn Tây", "Huyện Đông Anh", "Huyện Gia Lâm", "Huyện Sóc Sơn",
-    "Huyện Thanh Trì", "Huyện Mê Linh", "Huyện Đan Phượng", "Huyện Hoài Đức"
+const LAOCAI_DISTRICTS = [
+    "Phường Duyên Hải", "Phường Cốc Lếu", "Phường Sa Pa", "Xã Bảo Thắng",
+    "Phường Bắc Cường", "Phường Kim Tân", "Xã Mường Khương", "Xã Pom Hán",
+    "Xã Xuân Tăng", "Phường Cam Đường", "Xã Bắc Hà", "Xã Bảo Yên",
+    "Xã Bát Xát", "Xã Si Ma Cai", "Xã Văn Bàn", "Xã Mường Hum",
+    "Xã Phong Hải", "Xã Tằng Loỏng", "Xã Bản Lầu", "Xã Y Tý"
 ];
 
-const HANOI_DOCUMENTS = [
+const LAOCAI_DOCUMENTS = [
     {
         id: 1,
-        soHieu: '39/2024/QH15',
-        title: 'Luật Thủ đô số 39/2024/QH15 của Quốc hội khóa XV ban hành ngày 28/06/2024',
+        soHieu: '72/2025/QH15',
+        title: 'Luật Tổ chức chính quyền địa phương số 72/2025/QH15 của Quốc hội khóa XV ban hành ngày 16/06/2025',
         loai: 'Luật',
         linh_vuc: 'Tư pháp - Thể chế',
         co_quan: 'Quốc hội',
-        ngay_ban_hanh: '28/06/2024',
-        ngay_ap_dung: '01/01/2025',
+        ngay_ban_hanh: '16/06/2025',
+        ngay_ap_dung: '01/07/2025',
         status: 'active',
         nhom: 'phap_quy'
     },
     {
         id: 2,
         soHieu: '05/2026/NQ-HĐND',
-        title: 'Nghị quyết về cơ chế hỗ trợ tài chính và ưu đãi đầu tư đối với doanh nghiệp khởi nghiệp đổi mới sáng tạo trên địa bàn Thành phố Hà Nội giai đoạn 2026 - 2030',
+        title: 'Nghị quyết quy định chính sách khuyến khích đầu tư hạ tầng logistics, kho bãi và dịch vụ thương mại biên mậu tại Khu kinh tế cửa khẩu Lào Cai giai đoạn 2026 - 2030',
         loai: 'Nghị quyết',
-        linh_vuc: 'Khoa học công nghệ & ĐMST',
-        co_quan: 'HĐND TP Hà Nội',
+        linh_vuc: 'Tài chính - Ngân sách',
+        co_quan: 'HĐND tỉnh Lào Cai',
         ngay_ban_hanh: '15/02/2026',
         ngay_ap_dung: '01/03/2026',
         status: 'active',
@@ -72,10 +72,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 3,
         soHieu: '61/2024/QĐ-UBND',
-        title: 'Quyết định quy định về bồi thường, hỗ trợ, tái định cư khi Nhà nước thu hồi đất áp dụng trên địa bàn thành phố Hà Nội theo Luật Đất đai 2024',
+        title: 'Quyết định quy định về bồi thường, hỗ trợ, tái định cư khi Nhà nước thu hồi đất áp dụng trên địa bàn tỉnh Lào Cai theo Luật Đất đai 2024',
         loai: 'Quyết định',
         linh_vuc: 'Đất đai - Đô thị',
-        co_quan: 'UBND TP Hà Nội',
+        co_quan: 'UBND tỉnh Lào Cai',
         ngay_ban_hanh: '27/09/2024',
         ngay_ap_dung: '07/10/2024',
         status: 'active',
@@ -84,10 +84,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 4,
         soHieu: '16/2024/NQ-HĐND',
-        title: 'Nghị quyết quy định biện pháp yêu cầu ngừng cung cấp dịch vụ điện, nước đối với công trình vi phạm trật tự xây dựng trên địa bàn Hà Nội',
+        title: 'Nghị quyết quy định biện pháp yêu cầu ngừng cung cấp dịch vụ điện, nước đối với công trình vi phạm trật tự xây dựng trên địa bàn tỉnh Lào Cai',
         loai: 'Nghị quyết',
         linh_vuc: 'Quy hoạch - Xây dựng',
-        co_quan: 'HĐND TP Hà Nội',
+        co_quan: 'HĐND tỉnh Lào Cai',
         ngay_ban_hanh: '04/10/2024',
         ngay_ap_dung: '01/01/2025',
         status: 'active',
@@ -96,10 +96,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 5,
         soHieu: '18/2025/QĐ-UBND',
-        title: 'Quyết định ban hành Quy chế tiếp nhận, xử lý phản ánh kiến nghị của cá nhân, tổ chức trên nền tảng ứng dụng Công dân Thủ đô số (iHanoi)',
+        title: 'Quyết định ban hành Quy chế tiếp nhận, xử lý phản ánh, kiến nghị của cá nhân, tổ chức qua Cổng Dịch vụ công và Hệ thống thông tin giải quyết thủ tục hành chính tỉnh Lào Cai',
         loai: 'Quyết định',
         linh_vuc: 'Cải cách hành chính',
-        co_quan: 'UBND TP Hà Nội',
+        co_quan: 'UBND tỉnh Lào Cai',
         ngay_ban_hanh: '22/11/2025',
         ngay_ap_dung: '05/12/2025',
         status: 'active',
@@ -108,10 +108,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 6,
         soHieu: '12/2025/NQ-HĐND',
-        title: 'Nghị quyết quy định các tiêu chí phân vùng bảo vệ môi trường, lộ trình hạn chế khí thải phương tiện giao thông tại các quận vùng lõi lịch sử Thủ đô',
+        title: 'Nghị quyết quy định mức thu, chế độ thu, nộp, quản lý và sử dụng phí tham quan danh lam thắng cảnh tại khu du lịch quốc gia Sa Pa và các điểm du lịch trên địa bàn tỉnh Lào Cai',
         loai: 'Nghị quyết',
-        linh_vuc: 'Môi trường - Giao thông',
-        co_quan: 'HĐND TP Hà Nội',
+        linh_vuc: 'Tài chính - Ngân sách',
+        co_quan: 'HĐND tỉnh Lào Cai',
         ngay_ban_hanh: '10/07/2025',
         ngay_ap_dung: '01/08/2025',
         status: 'active',
@@ -120,10 +120,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 7,
         soHieu: '72/2024/QĐ-UBND',
-        title: 'Quyết định ban hành tiêu chuẩn, định mức sử dụng diện tích chuyên dùng phục vụ nhiệm vụ đặc thù của cơ quan, tổ chức Thủ đô',
+        title: 'Quyết định ban hành tiêu chuẩn, định mức sử dụng diện tích chuyên dùng phục vụ nhiệm vụ đặc thù của cơ quan, tổ chức thuộc tỉnh Lào Cai',
         loai: 'Quyết định',
         linh_vuc: 'Tài chính - Ngân sách',
-        co_quan: 'UBND TP Hà Nội',
+        co_quan: 'UBND tỉnh Lào Cai',
         ngay_ban_hanh: '15/11/2024',
         ngay_ap_dung: '01/01/2025',
         status: 'active',
@@ -132,10 +132,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 8,
         soHieu: '03/2026/CT-UBND',
-        title: 'Chỉ thị về việc tăng cường công tác phổ biến, giáo dục pháp luật và nâng cao ý thức chấp hành pháp luật của cán bộ, công chức, viên chức Thủ đô năm 2026',
+        title: 'Chỉ thị về việc tăng cường công tác phổ biến, giáo dục pháp luật và nâng cao ý thức chấp hành pháp luật của cán bộ, công chức, viên chức và nhân dân các dân tộc tỉnh Lào Cai năm 2026',
         loai: 'Chỉ thị',
         linh_vuc: 'Tư pháp - Thể chế',
-        co_quan: 'UBND TP Hà Nội',
+        co_quan: 'UBND tỉnh Lào Cai',
         ngay_ban_hanh: '18/01/2026',
         ngay_ap_dung: '18/01/2026',
         status: 'active',
@@ -144,10 +144,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 9,
         soHieu: '11/2024/NQ-HĐND',
-        title: 'Nghị quyết quy định chi tiết trình tự, thủ tục áp dụng biện pháp thử nghiệm có kiểm soát (Sandbox) theo Luật Thủ đô',
+        title: 'Nghị quyết quy định chính sách hỗ trợ đồng bào dân tộc thiểu số phát triển sinh kế bền vững tại các xã vùng cao, biên giới tỉnh Lào Cai',
         loai: 'Nghị quyết',
-        linh_vuc: 'Khoa học công nghệ & ĐMST',
-        co_quan: 'HĐND TP Hà Nội',
+        linh_vuc: 'Tài chính - Ngân sách',
+        co_quan: 'HĐND tỉnh Lào Cai',
         ngay_ban_hanh: '12/12/2024',
         ngay_ap_dung: '01/01/2025',
         status: 'active',
@@ -156,10 +156,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 10,
         soHieu: '15/2024/NQ-HĐND',
-        title: 'Nghị quyết về chính sách thu hút, trọng dụng nhân tài và phát triển nguồn nhân lực chất lượng cao của Thủ đô',
+        title: 'Nghị quyết về chính sách thu hút, đãi ngộ người có trình độ cao về công tác tại các xã vùng cao, biên giới của tỉnh Lào Cai',
         loai: 'Nghị quyết',
         linh_vuc: 'Tư pháp - Thể chế',
-        co_quan: 'HĐND TP Hà Nội',
+        co_quan: 'HĐND tỉnh Lào Cai',
         ngay_ban_hanh: '15/12/2024',
         ngay_ap_dung: '01/01/2025',
         status: 'active',
@@ -168,10 +168,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 11,
         soHieu: '08/2025/QĐ-UBND',
-        title: 'Quyết định ban hành Kế hoạch triển khai đồng bộ các chương trình thi hành Luật Thủ đô trên địa bàn 30 quận, huyện, thị xã',
+        title: 'Quyết định ban hành Quy chế phối hợp quản lý hoạt động xuất nhập khẩu, xuất nhập cảnh tại Khu kinh tế cửa khẩu Lào Cai',
         loai: 'Quyết định',
-        linh_vuc: 'Tư pháp - Thể chế',
-        co_quan: 'UBND TP Hà Nội',
+        linh_vuc: 'Cải cách hành chính',
+        co_quan: 'UBND tỉnh Lào Cai',
         ngay_ban_hanh: '10/01/2025',
         ngay_ap_dung: '25/01/2025',
         status: 'active',
@@ -180,10 +180,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 12,
         soHieu: '25/2023/NQ-HĐND',
-        title: 'Nghị quyết quy định mức thu học phí đối với các cơ sở giáo dục mầm non, giáo dục phổ thông công lập trên địa bàn thành phố Hà Nội',
+        title: 'Nghị quyết quy định mức thu học phí đối với các cơ sở giáo dục mầm non, giáo dục phổ thông công lập trên địa bàn tỉnh Lào Cai',
         loai: 'Nghị quyết',
         linh_vuc: 'Y tế - Giáo dục',
-        co_quan: 'HĐND TP Hà Nội',
+        co_quan: 'HĐND tỉnh Lào Cai',
         ngay_ban_hanh: '04/07/2023',
         ngay_ap_dung: '15/07/2023',
         status: 'expired',
@@ -192,10 +192,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 13,
         soHieu: '04/VBHN-UBND',
-        title: 'Văn bản hợp nhất Quyết định ban hành Quy định về quản lý và bảo vệ môi trường trên địa bàn thành phố Hà Nội',
+        title: 'Văn bản hợp nhất Quyết định ban hành Quy định về quản lý và bảo vệ môi trường trên địa bàn tỉnh Lào Cai',
         loai: 'Văn bản hợp nhất',
         linh_vuc: 'Môi trường - Giao thông',
-        co_quan: 'UBND TP Hà Nội',
+        co_quan: 'UBND tỉnh Lào Cai',
         ngay_ban_hanh: '14/04/2024',
         ngay_ap_dung: '01/05/2024',
         status: 'active',
@@ -204,10 +204,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 14,
         soHieu: '09/2025/NQ-HĐND',
-        title: 'Nghị quyết quy định chế độ hỗ trợ đặc thù đối với giám định viên tư pháp và người giám định tư pháp theo vụ việc tại Hà Nội',
+        title: 'Nghị quyết quy định chế độ hỗ trợ đặc thù đối với giám định viên tư pháp và người giám định tư pháp theo vụ việc trên địa bàn tỉnh Lào Cai',
         loai: 'Nghị quyết',
         linh_vuc: 'Tư pháp - Thể chế',
-        co_quan: 'HĐND TP Hà Nội',
+        co_quan: 'HĐND tỉnh Lào Cai',
         ngay_ban_hanh: '18/06/2025',
         ngay_ap_dung: '01/07/2025',
         status: 'active',
@@ -216,10 +216,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 15,
         soHieu: '32/2024/QĐ-UBND',
-        title: 'Quyết định quy định thẩm quyền, trình tự thành lập, tổ chức lại, giải thể đơn vị sự nghiệp công lập thuộc UBND thành phố Hà Nội',
+        title: 'Quyết định quy định thẩm quyền, trình tự thành lập, tổ chức lại, giải thể đơn vị sự nghiệp công lập thuộc UBND tỉnh Lào Cai',
         loai: 'Quyết định',
         linh_vuc: 'Cải cách hành chính',
-        co_quan: 'UBND TP Hà Nội',
+        co_quan: 'UBND tỉnh Lào Cai',
         ngay_ban_hanh: '12/05/2024',
         ngay_ap_dung: '25/05/2024',
         status: 'active',
@@ -228,10 +228,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 16,
         soHieu: '01/2026/QĐ-UBND',
-        title: 'Quyết định ban hành Bảng giá các loại đất trên địa bàn thành phố Hà Nội áp dụng cho giai đoạn 2026 - 2030',
+        title: 'Quyết định ban hành Bảng giá các loại đất trên địa bàn tỉnh Lào Cai áp dụng cho giai đoạn 2026 - 2030',
         loai: 'Quyết định',
         linh_vuc: 'Đất đai - Đô thị',
-        co_quan: 'UBND TP Hà Nội',
+        co_quan: 'UBND tỉnh Lào Cai',
         ngay_ban_hanh: '05/01/2026',
         ngay_ap_dung: '01/01/2027',
         status: 'pending',
@@ -240,10 +240,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 17,
         soHieu: '14/2024/QĐ-UBND',
-        title: 'Quyết định phân cấp quản lý nhà nước một số lĩnh vực hạ tầng, kinh tế - xã hội trên địa bàn thành phố Hà Nội',
+        title: 'Quyết định phân cấp quản lý nhà nước một số lĩnh vực hạ tầng, kinh tế - xã hội trên địa bàn tỉnh Lào Cai',
         loai: 'Quyết định',
         linh_vuc: 'Tư pháp - Thể chế',
-        co_quan: 'UBND TP Hà Nội',
+        co_quan: 'UBND tỉnh Lào Cai',
         ngay_ban_hanh: '19/02/2024',
         ngay_ap_dung: '01/03/2024',
         status: 'active',
@@ -252,10 +252,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 18,
         soHieu: '06/VBHN-UBND',
-        title: 'Văn bản hợp nhất Quy định về an toàn phòng cháy và chữa cháy đối với nhà ở hộ gia đình và nhà ở kết hợp sản xuất kinh doanh tại Hà Nội',
+        title: 'Văn bản hợp nhất Quy định về an toàn phòng cháy và chữa cháy đối với nhà ở hộ gia đình và nhà ở kết hợp sản xuất kinh doanh trên địa bàn tỉnh Lào Cai',
         loai: 'Văn bản hợp nhất',
         linh_vuc: 'Quy hoạch - Xây dựng',
-        co_quan: 'UBND TP Hà Nội',
+        co_quan: 'UBND tỉnh Lào Cai',
         ngay_ban_hanh: '08/08/2024',
         ngay_ap_dung: '20/08/2024',
         status: 'active',
@@ -264,10 +264,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 19,
         soHieu: '21/2025/NQ-HĐND',
-        title: 'Nghị quyết quy định chính sách hỗ trợ phát triển nông nghiệp công nghệ cao và bảo tồn làng nghề truyền thống Thủ đô',
+        title: 'Nghị quyết quy định chính sách hỗ trợ phát triển nông nghiệp hàng hóa tập trung, sản phẩm OCOP và dược liệu vùng cao tỉnh Lào Cai',
         loai: 'Nghị quyết',
         linh_vuc: 'Tài chính - Ngân sách',
-        co_quan: 'HĐND TP Hà Nội',
+        co_quan: 'HĐND tỉnh Lào Cai',
         ngay_ban_hanh: '09/12/2025',
         ngay_ap_dung: '01/01/2026',
         status: 'active',
@@ -279,7 +279,7 @@ const HANOI_DOCUMENTS = [
         title: 'Chỉ thị về việc siết chặt kỷ luật, kỷ cương hành chính, nâng cao trách nhiệm người đứng đầu trong giải quyết thủ tục hành chính',
         loai: 'Chỉ thị',
         linh_vuc: 'Cải cách hành chính',
-        co_quan: 'Chủ tịch UBND TP',
+        co_quan: 'Chủ tịch UBND tỉnh',
         ngay_ban_hanh: '15/01/2024',
         ngay_ap_dung: '15/01/2024',
         status: 'active',
@@ -288,10 +288,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 21,
         soHieu: '45/2024/QĐ-UBND',
-        title: 'Quyết định quy định quản lý, vận hành và khai thác hệ thống xe buýt điện, xe buýt năng lượng xanh trên địa bàn thành phố Hà Nội',
+        title: 'Quyết định quy định quản lý hoạt động vận tải khách du lịch bằng xe ô tô trên tuyến Lào Cai - Sa Pa và các điểm du lịch trên địa bàn tỉnh',
         loai: 'Quyết định',
         linh_vuc: 'Môi trường - Giao thông',
-        co_quan: 'UBND TP Hà Nội',
+        co_quan: 'UBND tỉnh Lào Cai',
         ngay_ban_hanh: '11/07/2024',
         ngay_ap_dung: '01/08/2024',
         status: 'active',
@@ -300,10 +300,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 22,
         soHieu: '07/2025/NQ-HĐND',
-        title: 'Nghị quyết phê chuẩn Đề án sắp xếp các đơn vị hành chính cấp xã giai đoạn 2023 - 2025 của thành phố Hà Nội',
+        title: 'Nghị quyết về việc thông qua Đề án sắp xếp đơn vị hành chính cấp xã của tỉnh Lào Cai năm 2025',
         loai: 'Nghị quyết',
         linh_vuc: 'Tư pháp - Thể chế',
-        co_quan: 'HĐND TP Hà Nội',
+        co_quan: 'HĐND tỉnh Lào Cai',
         ngay_ban_hanh: '15/05/2025',
         ngay_ap_dung: '01/07/2025',
         status: 'active',
@@ -312,10 +312,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 23,
         soHieu: '19/2023/QĐ-UBND',
-        title: 'Quyết định quy định thu giá dịch vụ thoát nước và xử lý nước thải sinh hoạt trên địa bàn thành phố Hà Nội',
+        title: 'Quyết định quy định thu giá dịch vụ thoát nước và xử lý nước thải sinh hoạt trên địa bàn tỉnh Lào Cai',
         loai: 'Quyết định',
         linh_vuc: 'Tài chính - Ngân sách',
-        co_quan: 'UBND TP Hà Nội',
+        co_quan: 'UBND tỉnh Lào Cai',
         ngay_ban_hanh: '18/08/2023',
         ngay_ap_dung: '01/09/2023',
         status: 'expired',
@@ -324,10 +324,10 @@ const HANOI_DOCUMENTS = [
     {
         id: 24,
         soHieu: '28/2025/QĐ-UBND',
-        title: 'Quyết định ban hành Quy chế phối hợp liên ngành trong công tác trợ giúp pháp lý và hòa giải cơ sở trên địa bàn thành phố Hà Nội',
+        title: 'Quyết định ban hành Quy chế phối hợp liên ngành trong công tác trợ giúp pháp lý và hòa giải cơ sở trên địa bàn tỉnh Lào Cai',
         loai: 'Quyết định',
         linh_vuc: 'Tư pháp - Thể chế',
-        co_quan: 'Sở Tư pháp TP Hà Nội',
+        co_quan: 'Sở Tư pháp tỉnh Lào Cai',
         ngay_ban_hanh: '05/09/2025',
         ngay_ap_dung: '20/09/2025',
         status: 'active',
@@ -500,7 +500,7 @@ const AdvancedSearch = ({
                     </select>
                 </div>
 
-                {/* Quận / Huyện / Thị xã Multiselect */}
+                {/* Xã / Phường Multiselect */}
                 <div className="md:col-span-1 lg:col-span-2 relative" ref={dropdownRef}>
                     <div
                         onClick={() => setIsDistrictOpen(!isDistrictOpen)}
@@ -508,7 +508,7 @@ const AdvancedSearch = ({
                     >
                         <div className="flex flex-wrap gap-1 items-center flex-1">
                             {selectedDistricts.length === 0 ? (
-                                <span className="text-gray-400 text-[14px] px-1">Quận, Huyện, Thị xã TP Hà Nội</span>
+                                <span className="text-gray-400 text-[14px] px-1">Xã, Phường tỉnh Lào Cai</span>
                             ) : (
                                 selectedDistricts.map(dist => (
                                     <div key={dist} className="bg-blue-50 text-blue-900 px-2 py-0.5 rounded border border-blue-200 text-[12px] flex items-center gap-1.5 my-0.5">
@@ -526,7 +526,7 @@ const AdvancedSearch = ({
 
                     {isDistrictOpen && (
                         <div className="absolute z-50 top-full left-0 mt-1 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-48 overflow-y-auto py-1">
-                            {HANOI_DISTRICTS.map(dist => (
+                            {LAOCAI_DISTRICTS.map(dist => (
                                 <label key={dist} className="flex items-center px-3 py-1.5 hover:bg-gray-50 cursor-pointer text-[13px] text-gray-700">
                                     <input
                                         type="checkbox"
@@ -541,12 +541,12 @@ const AdvancedSearch = ({
                     )}
                 </div>
 
-                {/* Xã / Phường / Thị trấn */}
+                {/* Xã / Phường */}
                 <div className="md:col-span-1 lg:col-span-2">
                     <select
                         className="w-full px-3 py-2 border border-gray-200 rounded-lg bg-white outline-none focus:border-blue-400 text-gray-400"
                     >
-                        <option value="">Xã / Phường / Thị trấn</option>
+                        <option value="">Xã / Phường</option>
                     </select>
                 </div>
             </div>
@@ -623,9 +623,9 @@ const Sidebar = ({
 );
 
 // ── Main Page Component ───────────────────────────────────────────────────────
-const HanoiLegalDocsPage = () => {
+const LaoCaiLegalDocsPage = () => {
     useEffect(() => {
-        document.title = "Văn bản QPPL - Cổng Pháp luật Thành phố Hà Nội";
+        document.title = "Văn bản QPPL - Cổng Pháp luật tỉnh Lào Cai";
         window.scrollTo(0, 0);
     }, []);
 
@@ -672,7 +672,7 @@ const HanoiLegalDocsPage = () => {
 
     // Filter computation
     const filteredDocs = useMemo(() => {
-        return HANOI_DOCUMENTS.filter(doc => {
+        return LAOCAI_DOCUMENTS.filter(doc => {
             const kw = keyword.trim().toLowerCase();
             let matchKw = true;
             if (kw) {
@@ -718,26 +718,26 @@ const HanoiLegalDocsPage = () => {
 
     return (
         <div className="font-sans min-h-screen flex flex-col bg-[#f4f7fb]">
-            <HanoiHeader />
+            <LaoCaiHeader />
 
             {/* Breadcrumb */}
             <div className="bg-white border-b border-gray-200">
                 <div className="container mx-auto px-4 max-w-[1286px] py-3 text-xs sm:text-sm text-gray-500 flex items-center gap-2">
-                    <Link to="/ha-noi" className="hover:text-blue-700">Trang chủ Hà Nội</Link>
+                    <Link to="/lao-cai" className="hover:text-blue-700">Trang chủ Lào Cai</Link>
                     <ChevronRight size={14} />
                     <span className="text-gray-800 font-semibold">Văn bản pháp luật</span>
                 </div>
             </div>
 
-            {/* Page Header Banner - GIỮ NGUYÊN KHỐI MÔ TẢ TRÊN CÙNG ĐỒNG BỘ PHONG CÁCH CỔNG HÀ NỘI */}
+            {/* Page Header Banner - GIỮ NGUYÊN KHỐI MÔ TẢ TRÊN CÙNG ĐỒNG BỘ PHONG CÁCH CỔNG LÀO CAI */}
             <div className="relative text-white py-8 sm:py-10 overflow-hidden bg-gradient-to-r from-[#4f56ca] via-[#2c1b92] to-[#4f56ca] border-b border-indigo-400/30">
                 {/* CSS Keyframes */}
                 <style>{`
-                    @keyframes hanoiRotateCW { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-                    @keyframes hanoiRotateCCW { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
-                    @keyframes hanoiPulseGlow { 0%, 100% { opacity: 0.15; transform: scale(0.95); } 50% { opacity: 0.38; transform: scale(1.12); } }
-                    @keyframes hanoiFloatDiamond { 0%, 100% { transform: translateY(0px) rotate(45deg); opacity: 0.3; filter: drop-shadow(0 0 2px #f59e0b); } 50% { transform: translateY(-8px) rotate(45deg); opacity: 0.65; filter: drop-shadow(0 0 5px #f59e0b); } }
-                    @keyframes hanoiSweepLight { 0% { transform: translateX(-160%) skewX(-25deg); opacity: 0; } 25% { opacity: 0.32; } 70% { opacity: 0.32; } 100% { transform: translateX(260%) skewX(-25deg); opacity: 0; } }
+                    @keyframes laocaiRotateCW { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+                    @keyframes laocaiRotateCCW { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+                    @keyframes laocaiPulseGlow { 0%, 100% { opacity: 0.15; transform: scale(0.95); } 50% { opacity: 0.38; transform: scale(1.12); } }
+                    @keyframes laocaiFloatDiamond { 0%, 100% { transform: translateY(0px) rotate(45deg); opacity: 0.3; filter: drop-shadow(0 0 2px #f59e0b); } 50% { transform: translateY(-8px) rotate(45deg); opacity: 0.65; filter: drop-shadow(0 0 5px #f59e0b); } }
+                    @keyframes laocaiSweepLight { 0% { transform: translateX(-160%) skewX(-25deg); opacity: 0; } 25% { opacity: 0.32; } 70% { opacity: 0.32; } 100% { transform: translateX(260%) skewX(-25deg); opacity: 0; } }
                 `}</style>
 
                 {/* 1. Lưới điểm chấm công nghệ chìm nhẹ */}
@@ -746,31 +746,31 @@ const HanoiLegalDocsPage = () => {
                 {/* 2. Dải quét sáng mềm mại chạy êm ái */}
                 <div
                     className="absolute inset-y-0 w-2/5 bg-gradient-to-r from-transparent via-amber-200/20 via-white/25 to-transparent pointer-events-none"
-                    style={{ animation: 'hanoiSweepLight 5s cubic-bezier(0.4, 0, 0.2, 1) infinite' }}
+                    style={{ animation: 'laocaiSweepLight 5s cubic-bezier(0.4, 0, 0.2, 1) infinite' }}
                 />
 
                 {/* 3. Quầng sáng công nghệ lan tỏa */}
-                <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-amber-300/30 blur-3xl pointer-events-none" style={{ animation: 'hanoiPulseGlow 4s ease-in-out infinite' }} />
-                <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-amber-400/30 blur-3xl pointer-events-none" style={{ animation: 'hanoiPulseGlow 4.5s ease-in-out infinite 1s' }} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[220px] bg-indigo-500/25 blur-[80px] pointer-events-none" style={{ animation: 'hanoiPulseGlow 5.5s ease-in-out infinite 0.5s' }} />
+                <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-amber-300/30 blur-3xl pointer-events-none" style={{ animation: 'laocaiPulseGlow 4s ease-in-out infinite' }} />
+                <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-amber-400/30 blur-3xl pointer-events-none" style={{ animation: 'laocaiPulseGlow 4.5s ease-in-out infinite 1s' }} />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[220px] bg-indigo-500/25 blur-[80px] pointer-events-none" style={{ animation: 'laocaiPulseGlow 5.5s ease-in-out infinite 0.5s' }} />
 
                 {/* 4. Vòng tròn quỹ đạo thanh mảnh xoay tròn */}
                 <div className="absolute -left-16 -top-16 w-64 h-64 rounded-full border border-amber-500/20 pointer-events-none" />
-                <div className="absolute -left-8 -top-8 w-48 h-48 rounded-full border border-amber-600/35 border-dashed pointer-events-none shadow-[0_0_12px_rgba(245,158,11,0.2)]" style={{ animation: 'hanoiRotateCW 16s linear infinite' }} />
+                <div className="absolute -left-8 -top-8 w-48 h-48 rounded-full border border-amber-600/35 border-dashed pointer-events-none shadow-[0_0_12px_rgba(245,158,11,0.2)]" style={{ animation: 'laocaiRotateCW 16s linear infinite' }} />
                 <div className="absolute -right-16 -bottom-16 w-72 h-72 rounded-full border border-amber-500/20 pointer-events-none" />
-                <div className="absolute -right-8 -bottom-8 w-56 h-56 rounded-full border border-amber-600/35 border-dashed pointer-events-none shadow-[0_0_12px_rgba(245,158,11,0.2)]" style={{ animation: 'hanoiRotateCCW 18s linear infinite' }} />
+                <div className="absolute -right-8 -bottom-8 w-56 h-56 rounded-full border border-amber-600/35 border-dashed pointer-events-none shadow-[0_0_12px_rgba(245,158,11,0.2)]" style={{ animation: 'laocaiRotateCCW 18s linear infinite' }} />
 
                 {/* 5. Điểm nhấn kim cương ánh kim */}
-                <div className="absolute top-6 left-[14%] w-3 h-3 bg-amber-400/40 border border-amber-200/60 rounded-sm pointer-events-none shadow-[0_0_6px_#f59e0b]" style={{ animation: 'hanoiFloatDiamond 3.2s ease-in-out infinite' }} />
-                <div className="absolute bottom-6 right-[14%] w-3 h-3 bg-amber-500/40 border border-amber-200/60 rounded-sm pointer-events-none shadow-[0_0_6px_#f59e0b]" style={{ animation: 'hanoiFloatDiamond 3.6s ease-in-out infinite 0.8s' }} />
+                <div className="absolute top-6 left-[14%] w-3 h-3 bg-amber-400/40 border border-amber-200/60 rounded-sm pointer-events-none shadow-[0_0_6px_#f59e0b]" style={{ animation: 'laocaiFloatDiamond 3.2s ease-in-out infinite' }} />
+                <div className="absolute bottom-6 right-[14%] w-3 h-3 bg-amber-500/40 border border-amber-200/60 rounded-sm pointer-events-none shadow-[0_0_6px_#f59e0b]" style={{ animation: 'laocaiFloatDiamond 3.6s ease-in-out infinite 0.8s' }} />
 
                 <div className="container mx-auto px-4 max-w-[1286px] relative z-10">
                     <h1 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white drop-shadow-md">
-                        Hệ thống Văn bản quy phạm pháp luật TP Hà Nội
+                        Hệ thống Văn bản quy phạm pháp luật tỉnh Lào Cai
                     </h1>
                     <div className="w-20 sm:w-28 h-0.5 bg-gradient-to-r from-amber-400 to-transparent my-1.5 rounded-full" />
                     <p className="text-xs sm:text-sm text-amber-50/95 mt-1 max-w-3xl leading-relaxed drop-shadow-sm font-normal">
-                        Tra cứu đầy đủ các Nghị quyết HĐND, Quyết định UBND Thành phố và văn bản hướng dẫn Luật Thủ Đô
+                        Tra cứu đầy đủ các Nghị quyết HĐND tỉnh, Quyết định UBND tỉnh và văn bản hướng dẫn thi hành trên địa bàn tỉnh Lào Cai
                     </p>
                 </div>
             </div>
@@ -792,7 +792,7 @@ const HanoiLegalDocsPage = () => {
                     {/* Search & Filter Card */}
                     <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 mb-4">
                         <h2 className="text-[20px] sm:text-[22px] font-bold text-[#0f4c81] mb-1">
-                            Danh sách Văn bản quy phạm pháp luật TP Hà Nội
+                            Danh sách Văn bản quy phạm pháp luật tỉnh Lào Cai
                         </h2>
 
                         {/* Search Bar */}
@@ -1007,7 +1007,7 @@ const HanoiLegalDocsPage = () => {
                                 <div>
                                     <h4 className="font-bold text-xs uppercase text-gray-700 mb-1.5">Tóm tắt văn bản</h4>
                                     <p className="text-xs text-gray-600 leading-relaxed text-justify bg-blue-50/40 p-3 rounded-lg border border-blue-100">
-                                        Văn bản quy phạm pháp luật của Thành phố Hà Nội hướng dẫn thi hành các quy định pháp luật và Luật Thủ Đô, áp dụng đối với các cơ quan, tổ chức, cá nhân trên địa bàn 30 quận, huyện, thị xã.
+                                        Văn bản quy phạm pháp luật của tỉnh Lào Cai hướng dẫn thi hành các quy định pháp luật và chính sách đặc thù của tỉnh, áp dụng đối với các cơ quan, tổ chức, cá nhân trên địa bàn các xã, phường.
                                     </p>
                                 </div>
                             </div>
@@ -1019,10 +1019,10 @@ const HanoiLegalDocsPage = () => {
                                 <p className="text-center italic text-gray-500">Số ký hiệu: {selectedDocForModal.soHieu}</p>
                                 <hr className="my-2 border-gray-200" />
                                 <p><strong>Điều 1. Phạm vi điều chỉnh và đối tượng áp dụng</strong></p>
-                                <p>1. Văn bản này quy định chi tiết các cơ chế, biện pháp triển khai thực thi các quy định pháp luật và cơ chế đặc thù áp dụng trên địa bàn Thành phố Hà Nội.</p>
-                                <p>2. Đối tượng áp dụng gồm các cơ quan hành chính nhà nước, tổ chức kinh tế, xã hội và công dân cư trú, hoạt động trên địa bàn Thủ đô.</p>
+                                <p>1. Văn bản này quy định chi tiết các cơ chế, biện pháp triển khai thực thi các quy định pháp luật và cơ chế đặc thù áp dụng trên địa bàn tỉnh Lào Cai.</p>
+                                <p>2. Đối tượng áp dụng gồm các cơ quan hành chính nhà nước, tổ chức kinh tế, xã hội và công dân cư trú, hoạt động trên địa bàn tỉnh Lào Cai.</p>
                                 <p><strong>Điều 2. Trách nhiệm thi hành</strong></p>
-                                <p>Giao Sở Tư pháp phối hợp cùng các Sở, Ban, Ngành và UBND 30 quận, huyện, thị xã tổ chức tuyên truyền, hướng dẫn và giám sát việc thực hiện.</p>
+                                <p>Giao Sở Tư pháp phối hợp cùng các Sở, Ban, Ngành và UBND các xã, phường tổ chức tuyên truyền, hướng dẫn và giám sát việc thực hiện.</p>
                             </div>
                         )}
 
@@ -1049,8 +1049,8 @@ const HanoiLegalDocsPage = () => {
                                 <div className="grid grid-cols-2 gap-2 bg-gray-50 p-3 rounded-lg text-gray-600">
                                     <div>Ngày ban hành: <strong>{selectedDocForModal.ngay_ban_hanh}</strong></div>
                                     <div>Ngày có hiệu lực: <strong>{selectedDocForModal.ngay_ap_dung}</strong></div>
-                                    <div>Phạm vi: <strong>Toàn thành phố Hà Nội</strong></div>
-                                    <div>Cơ quan thẩm tra: <strong>Sở Tư pháp Hà Nội</strong></div>
+                                    <div>Phạm vi: <strong>Toàn tỉnh Lào Cai</strong></div>
+                                    <div>Cơ quan thẩm định: <strong>Sở Tư pháp tỉnh Lào Cai</strong></div>
                                 </div>
                             </div>
                         )}
@@ -1073,9 +1073,9 @@ const HanoiLegalDocsPage = () => {
                 </div>
             )}
 
-            <HanoiFooter />
+            <LaoCaiFooter />
         </div>
     );
 };
 
-export default HanoiLegalDocsPage;
+export default LaoCaiLegalDocsPage;

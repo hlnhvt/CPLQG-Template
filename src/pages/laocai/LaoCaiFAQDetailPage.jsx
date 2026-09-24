@@ -26,11 +26,11 @@ import {
     ChevronDown,
     ArrowRight
 } from 'lucide-react';
-import HanoiHeader from '../../components/hanoi/HanoiHeader';
-import HanoiFooter from '../../components/hanoi/HanoiFooter';
-import { MOCK_QUESTIONS, DOMAINS } from './hanoiFAQData';
+import LaoCaiHeader from '../../components/laocai/LaoCaiHeader';
+import LaoCaiFooter from '../../components/laocai/LaoCaiFooter';
+import { MOCK_QUESTIONS, DOMAINS } from './laocaiFAQData';
 
-const HanoiFAQDetailPage = () => {
+const LaoCaiFAQDetailPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [liked, setLiked] = useState(false);
@@ -43,7 +43,7 @@ const HanoiFAQDetailPage = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = `${question.title} - Cổng Pháp luật Thành phố Hà Nội`;
+        document.title = `${question.title} - Cổng Pháp luật tỉnh Lào Cai`;
         setLikeCount(question.likes);
         setLiked(false);
     }, [questionId, question.title, question.likes]);
@@ -73,14 +73,14 @@ const HanoiFAQDetailPage = () => {
 
     return (
         <div className="font-sans min-h-screen flex flex-col bg-[#fcfcfb]">
-            <HanoiHeader />
+            <LaoCaiHeader />
 
             {/* Breadcrumb */}
             <div className="bg-white border-b border-gray-200">
                 <div className="container mx-auto px-4 max-w-[1286px] py-3 text-xs sm:text-sm text-gray-500 flex items-center gap-2 flex-wrap">
-                    <Link to="/ha-noi" className="hover:text-[#0f4c81] transition-colors">Trang chủ Hà Nội</Link>
+                    <Link to="/lao-cai" className="hover:text-[#0f4c81] transition-colors">Trang chủ Lào Cai</Link>
                     <ChevronRight size={14} />
-                    <Link to="/ha-noi/hoi-dap" className="hover:text-[#0f4c81] transition-colors">Hỏi đáp pháp luật</Link>
+                    <Link to="/lao-cai/hoi-dap" className="hover:text-[#0f4c81] transition-colors">Hỏi đáp pháp luật</Link>
                     <ChevronRight size={14} />
                     <span className="text-gray-800 font-medium line-clamp-1 max-w-[320px] sm:max-w-md">
                         {question.title}
@@ -92,11 +92,11 @@ const HanoiFAQDetailPage = () => {
             <div className="relative text-white py-8 sm:py-10 overflow-hidden bg-gradient-to-r from-[#4f56ca] via-[#2c1b92] to-[#4f56ca] border-b border-indigo-400/30">
                 {/* CSS Keyframes */}
                 <style>{`
-                    @keyframes hanoiRotateCW { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-                    @keyframes hanoiPulseGlow { 0%, 100% { opacity: 0.15; transform: scale(0.95); } 50% { opacity: 0.38; transform: scale(1.12); } }
+                    @keyframes laocaiRotateCW { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+                    @keyframes laocaiPulseGlow { 0%, 100% { opacity: 0.15; transform: scale(0.95); } 50% { opacity: 0.38; transform: scale(1.12); } }
                 `}</style>
                 <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.18)_1.1px,transparent_1.1px)] [background-size:20px_20px] pointer-events-none" />
-                <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-amber-300/30 blur-3xl pointer-events-none" style={{ animation: 'hanoiPulseGlow 4s ease-in-out infinite' }} />
+                <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-amber-300/30 blur-3xl pointer-events-none" style={{ animation: 'laocaiPulseGlow 4s ease-in-out infinite' }} />
                 <div className="absolute right-6 top-1/2 -translate-y-1/2 w-80 h-80 opacity-15 pointer-events-none hidden md:block">
                     <img src="/trong_dong_bg.png" alt="Trống đồng" className="w-full h-full object-contain filter brightness-200" />
                 </div>
@@ -104,7 +104,7 @@ const HanoiFAQDetailPage = () => {
                 <div className="container mx-auto px-4 max-w-[1286px] relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                     <div className="max-w-3xl">
                         <Link
-                            to="/ha-noi/hoi-dap"
+                            to="/lao-cai/hoi-dap"
                             className="inline-flex items-center gap-1.5 text-xs text-amber-200 hover:text-white transition font-medium mb-3"
                         >
                             <ArrowLeft size={14} /> Quay lại danh sách câu hỏi
@@ -128,7 +128,7 @@ const HanoiFAQDetailPage = () => {
 
                     <div className="w-full md:w-auto shrink-0 flex gap-2">
                         <button
-                            onClick={() => navigate('/ha-noi/hoi-dap')}
+                            onClick={() => navigate('/lao-cai/hoi-dap')}
                             className="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-2 text-xs sm:text-sm backdrop-blur-xs"
                         >
                             <ArrowLeft size={16} />
@@ -254,7 +254,7 @@ const HanoiFAQDetailPage = () => {
                                 </div>
 
                                 <Link
-                                    to="/ha-noi/hoi-dap"
+                                    to="/lao-cai/hoi-dap"
                                     className="text-xs font-semibold text-indigo-900 hover:text-indigo-700 hover:underline flex items-center gap-1.5"
                                 >
                                     <ArrowLeft size={14} /> Quay về danh sách tất cả câu hỏi
@@ -275,7 +275,7 @@ const HanoiFAQDetailPage = () => {
                                 {relatedQuestions.map(rel => (
                                     <Link
                                         key={rel.id}
-                                        to={`/ha-noi/hoi-dap/${rel.id}`}
+                                        to={`/lao-cai/hoi-dap/${rel.id}`}
                                         className="block p-4 rounded-xl border border-slate-100 hover:border-indigo-200 hover:bg-indigo-50/30 transition group"
                                     >
                                         <div className="flex items-start justify-between gap-3">
@@ -305,7 +305,7 @@ const HanoiFAQDetailPage = () => {
                             <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-100">
                                 <div className="w-1.5 h-5 bg-indigo-900 rounded-full" />
                                 <h3 className="font-bold text-base text-indigo-950">
-                                    Thống kê hỏi đáp Thủ đô
+                                    Thống kê hỏi đáp Lào Cai
                                 </h3>
                             </div>
                             <div className="space-y-3.5 text-xs sm:text-sm">
@@ -370,15 +370,15 @@ const HanoiFAQDetailPage = () => {
                             </div>
                             <div className="space-y-1.5 text-xs">
                                 {[
-                                    { label: "Luật Thủ Đô & Sandbox", count: "1,420" },
+                                    { label: "Cửa khẩu & Xuất nhập khẩu", count: "640" },
                                     { label: "Đất đai & Bồi thường", count: "1,180" },
-                                    { label: "Doanh nghiệp & Đầu tư", count: "950" },
+                                    { label: "Du lịch & Kinh doanh", count: "590" },
                                     { label: "Trợ giúp pháp lý", count: "780" },
                                     { label: "Hòa giải ở cơ sở", count: "520" }
                                 ].map((cat, idx) => (
                                     <Link
                                         key={idx}
-                                        to={`/ha-noi/hoi-dap?domain=${encodeURIComponent(cat.label)}`}
+                                        to={`/lao-cai/hoi-dap?domain=${encodeURIComponent(cat.label)}`}
                                         className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-indigo-50/70 text-slate-700 hover:text-indigo-950 transition group"
                                     >
                                         <span className="font-medium text-left group-hover:font-semibold">{cat.label}</span>
@@ -391,9 +391,9 @@ const HanoiFAQDetailPage = () => {
                 </div>
             </main>
 
-            <HanoiFooter />
+            <LaoCaiFooter />
         </div>
     );
 };
 
-export default HanoiFAQDetailPage;
+export default LaoCaiFAQDetailPage;

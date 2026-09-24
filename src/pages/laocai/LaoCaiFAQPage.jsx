@@ -30,11 +30,11 @@ import {
     Award
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import HanoiHeader from '../../components/hanoi/HanoiHeader';
-import HanoiFooter from '../../components/hanoi/HanoiFooter';
-import { MOCK_QUESTIONS, DOMAINS } from './hanoiFAQData';
+import LaoCaiHeader from '../../components/laocai/LaoCaiHeader';
+import LaoCaiFooter from '../../components/laocai/LaoCaiFooter';
+import { MOCK_QUESTIONS, DOMAINS } from './laocaiFAQData';
 
-const HanoiFAQPage = () => {
+const LaoCaiFAQPage = () => {
     // Tab active: popular (Câu hỏi nổi bật), latest (Mới nhất), search (Tìm kiếm câu hỏi)
     const [activeTab, setActiveTab] = useState('popular');
     const [selectedDomain, setSelectedDomain] = useState('Tất cả lĩnh vực');
@@ -55,7 +55,7 @@ const HanoiFAQPage = () => {
     const [isSuccessModal, setIsSuccessModal] = useState(false);
 
     useEffect(() => {
-        document.title = "Hỏi đáp pháp luật Thủ đô - Cổng Pháp luật Thành phố Hà Nội";
+        document.title = "Hỏi đáp pháp luật - Cổng Pháp luật tỉnh Lào Cai";
         window.scrollTo(0, 0);
     }, []);
 
@@ -102,12 +102,12 @@ const HanoiFAQPage = () => {
 
     return (
         <div className="font-sans min-h-screen flex flex-col bg-[#fcfcfb]">
-            <HanoiHeader />
+            <LaoCaiHeader />
 
             {/* Breadcrumb */}
             <div className="bg-white border-b border-gray-200">
                 <div className="container mx-auto px-4 max-w-[1286px] py-3 text-xs sm:text-sm text-gray-500 flex items-center gap-2">
-                    <Link to="/ha-noi" className="hover:text-[#0f4c81] transition-colors">Trang chủ Hà Nội</Link>
+                    <Link to="/lao-cai" className="hover:text-[#0f4c81] transition-colors">Trang chủ Lào Cai</Link>
                     <ChevronRight size={14} />
                     <span className="text-gray-800 font-medium">Hỏi đáp & Giải đáp Pháp luật</span>
                 </div>
@@ -117,11 +117,11 @@ const HanoiFAQPage = () => {
             <div className="relative text-white py-8 sm:py-10 overflow-hidden bg-gradient-to-r from-[#4f56ca] via-[#2c1b92] to-[#4f56ca] border-b border-indigo-400/30">
                 {/* CSS Keyframes */}
                 <style>{`
-                    @keyframes hanoiRotateCW { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-                    @keyframes hanoiRotateCCW { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
-                    @keyframes hanoiPulseGlow { 0%, 100% { opacity: 0.15; transform: scale(0.95); } 50% { opacity: 0.38; transform: scale(1.12); } }
-                    @keyframes hanoiFloatDiamond { 0%, 100% { transform: translateY(0px) rotate(45deg); opacity: 0.3; filter: drop-shadow(0 0 2px #f59e0b); } 50% { transform: translateY(-8px) rotate(45deg); opacity: 0.65; filter: drop-shadow(0 0 5px #f59e0b); } }
-                    @keyframes hanoiSweepLight { 0% { transform: translateX(-160%) skewX(-25deg); opacity: 0; } 25% { opacity: 0.32; } 70% { opacity: 0.32; } 100% { transform: translateX(260%) skewX(-25deg); opacity: 0; } }
+                    @keyframes laocaiRotateCW { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+                    @keyframes laocaiRotateCCW { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+                    @keyframes laocaiPulseGlow { 0%, 100% { opacity: 0.15; transform: scale(0.95); } 50% { opacity: 0.38; transform: scale(1.12); } }
+                    @keyframes laocaiFloatDiamond { 0%, 100% { transform: translateY(0px) rotate(45deg); opacity: 0.3; filter: drop-shadow(0 0 2px #f59e0b); } 50% { transform: translateY(-8px) rotate(45deg); opacity: 0.65; filter: drop-shadow(0 0 5px #f59e0b); } }
+                    @keyframes laocaiSweepLight { 0% { transform: translateX(-160%) skewX(-25deg); opacity: 0; } 25% { opacity: 0.32; } 70% { opacity: 0.32; } 100% { transform: translateX(260%) skewX(-25deg); opacity: 0; } }
                 `}</style>
 
                 {/* 1. Lưới điểm chấm công nghệ */}
@@ -130,23 +130,23 @@ const HanoiFAQPage = () => {
                 {/* 2. Dải quét sáng */}
                 <div
                     className="absolute inset-y-0 w-2/5 bg-gradient-to-r from-transparent via-amber-200/20 via-white/25 to-transparent pointer-events-none"
-                    style={{ animation: 'hanoiSweepLight 5s cubic-bezier(0.4, 0, 0.2, 1) infinite' }}
+                    style={{ animation: 'laocaiSweepLight 5s cubic-bezier(0.4, 0, 0.2, 1) infinite' }}
                 />
 
                 {/* 3. Quầng sáng công nghệ */}
-                <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-amber-300/30 blur-3xl pointer-events-none" style={{ animation: 'hanoiPulseGlow 4s ease-in-out infinite' }} />
-                <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-amber-400/30 blur-3xl pointer-events-none" style={{ animation: 'hanoiPulseGlow 4.5s ease-in-out infinite 1s' }} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[220px] bg-indigo-500/25 blur-[80px] pointer-events-none" style={{ animation: 'hanoiPulseGlow 5.5s ease-in-out infinite 0.5s' }} />
+                <div className="absolute -left-20 -top-20 w-80 h-80 rounded-full bg-amber-300/30 blur-3xl pointer-events-none" style={{ animation: 'laocaiPulseGlow 4s ease-in-out infinite' }} />
+                <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-amber-400/30 blur-3xl pointer-events-none" style={{ animation: 'laocaiPulseGlow 4.5s ease-in-out infinite 1s' }} />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[220px] bg-indigo-500/25 blur-[80px] pointer-events-none" style={{ animation: 'laocaiPulseGlow 5.5s ease-in-out infinite 0.5s' }} />
 
                 {/* 4. Vòng tròn quỹ đạo thanh mảnh xoay tròn */}
                 <div className="absolute -left-16 -top-16 w-64 h-64 rounded-full border border-amber-500/20 pointer-events-none" />
-                <div className="absolute -left-8 -top-8 w-48 h-48 rounded-full border border-amber-600/35 border-dashed pointer-events-none shadow-[0_0_12px_rgba(245,158,11,0.2)]" style={{ animation: 'hanoiRotateCW 16s linear infinite' }} />
+                <div className="absolute -left-8 -top-8 w-48 h-48 rounded-full border border-amber-600/35 border-dashed pointer-events-none shadow-[0_0_12px_rgba(245,158,11,0.2)]" style={{ animation: 'laocaiRotateCW 16s linear infinite' }} />
                 <div className="absolute -right-16 -bottom-16 w-72 h-72 rounded-full border border-amber-500/20 pointer-events-none" />
-                <div className="absolute -right-8 -bottom-8 w-56 h-56 rounded-full border border-amber-600/35 border-dashed pointer-events-none shadow-[0_0_12px_rgba(245,158,11,0.2)]" style={{ animation: 'hanoiRotateCCW 18s linear infinite' }} />
+                <div className="absolute -right-8 -bottom-8 w-56 h-56 rounded-full border border-amber-600/35 border-dashed pointer-events-none shadow-[0_0_12px_rgba(245,158,11,0.2)]" style={{ animation: 'laocaiRotateCCW 18s linear infinite' }} />
 
                 {/* 5. Điểm nhấn kim cương ánh kim */}
-                <div className="absolute top-6 left-[14%] w-3 h-3 bg-amber-400/40 border border-amber-200/60 rounded-sm pointer-events-none shadow-[0_0_6px_#f59e0b]" style={{ animation: 'hanoiFloatDiamond 3.2s ease-in-out infinite' }} />
-                <div className="absolute bottom-6 right-[14%] w-3 h-3 bg-amber-500/40 border border-amber-200/60 rounded-sm pointer-events-none shadow-[0_0_6px_#f59e0b]" style={{ animation: 'hanoiFloatDiamond 3.6s ease-in-out infinite 0.8s' }} />
+                <div className="absolute top-6 left-[14%] w-3 h-3 bg-amber-400/40 border border-amber-200/60 rounded-sm pointer-events-none shadow-[0_0_6px_#f59e0b]" style={{ animation: 'laocaiFloatDiamond 3.2s ease-in-out infinite' }} />
+                <div className="absolute bottom-6 right-[14%] w-3 h-3 bg-amber-500/40 border border-amber-200/60 rounded-sm pointer-events-none shadow-[0_0_6px_#f59e0b]" style={{ animation: 'laocaiFloatDiamond 3.6s ease-in-out infinite 0.8s' }} />
 
                 {/* 6. Họa tiết Trống đồng mờ thanh lịch bên phải */}
                 <div className="absolute right-6 top-1/2 -translate-y-1/2 w-80 h-80 opacity-15 pointer-events-none hidden md:block">
@@ -160,11 +160,11 @@ const HanoiFAQPage = () => {
                 <div className="container mx-auto px-4 max-w-[1286px] relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                     <div className="max-w-3xl">
                         <h1 className="text-2xl sm:text-3xl font-bold uppercase tracking-tight text-white drop-shadow-md">
-                            Hỏi đáp pháp luật Thủ đô
+                            Hỏi đáp pháp luật tỉnh Lào Cai
                         </h1>
                         <div className="w-20 sm:w-28 h-0.5 bg-gradient-to-r from-amber-400 to-transparent my-1.5 rounded-full" />
                         <p className="text-xs sm:text-sm text-amber-50/95 mt-1 leading-relaxed drop-shadow-sm font-normal">
-                            Hệ thống tiếp nhận, tra cứu và giải đáp các thắc mắc pháp lý, cơ chế đặc thù theo Luật Thủ Đô từ cơ quan quản lý nhà nước và đội ngũ luật sư, chuyên gia đầu ngành
+                            Hệ thống tiếp nhận, tra cứu và giải đáp các thắc mắc pháp lý, chính sách đặc thù của tỉnh Lào Cai từ cơ quan quản lý nhà nước và đội ngũ luật sư, chuyên gia đầu ngành
                         </p>
                     </div>
 
@@ -294,7 +294,7 @@ const HanoiFAQPage = () => {
                                                                     <span>Đơn vị giải đáp: {item.agency}</span>
                                                                 </div>
                                                                 <Link
-                                                                    to={`/ha-noi/hoi-dap/${item.id}`}
+                                                                    to={`/lao-cai/hoi-dap/${item.id}`}
                                                                     className="text-indigo-900 font-bold hover:underline normal-case flex items-center gap-1"
                                                                 >
                                                                     <span>Xem trang chi tiết</span>
@@ -343,7 +343,7 @@ const HanoiFAQPage = () => {
 
                                                         {/* Nút Chi tiết điều hướng sang trang chi tiết câu hỏi */}
                                                         <Link
-                                                            to={`/ha-noi/hoi-dap/${item.id}`}
+                                                            to={`/lao-cai/hoi-dap/${item.id}`}
                                                             className="inline-flex items-center gap-1.5 font-bold text-xs text-indigo-900 hover:text-white bg-indigo-50 hover:bg-indigo-900 px-3 py-1.5 rounded-lg border border-indigo-100 hover:border-indigo-900 transition shadow-2xs"
                                                             title="Xem toàn văn câu hỏi và hướng dẫn chi tiết"
                                                         >
@@ -372,14 +372,14 @@ const HanoiFAQPage = () => {
                             </div>
                         </div>
 
-                        {/* Cột phải (1/4): Sidebar Widgets đồng bộ phong cách Hà Nội */}
+                        {/* Cột phải (1/4): Sidebar Widgets đồng bộ phong cách Lào Cai */}
                         <div className="lg:w-1/4 flex flex-col gap-6 text-gray-800">
-                            {/* Widget 1: Thống kê hỏi đáp Thủ đô */}
+                            {/* Widget 1: Thống kê hỏi đáp Lào Cai */}
                             <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6">
                                 <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-100">
                                     <div className="w-1.5 h-5 bg-indigo-900 rounded-full" />
                                     <h3 className="font-bold text-base text-indigo-950">
-                                        Thống kê hỏi đáp Thủ đô
+                                        Thống kê hỏi đáp Lào Cai
                                     </h3>
                                 </div>
                                 <div className="space-y-3.5 text-xs sm:text-sm">
@@ -452,9 +452,9 @@ const HanoiFAQPage = () => {
                                 </div>
                                 <div className="space-y-1.5 text-xs">
                                     {[
-                                        { label: "Luật Thủ Đô & Sandbox", count: "1,420" },
+                                        { label: "Cửa khẩu & Xuất nhập khẩu", count: "640" },
                                         { label: "Đất đai & Bồi thường", count: "1,180" },
-                                        { label: "Doanh nghiệp & Đầu tư", count: "950" },
+                                        { label: "Du lịch & Kinh doanh", count: "590" },
                                         { label: "Trợ giúp pháp lý", count: "780" },
                                         { label: "Hòa giải ở cơ sở", count: "520" }
                                     ].map((cat, idx) => (
@@ -490,7 +490,7 @@ const HanoiFAQPage = () => {
                                     <Search size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                                     <input
                                         type="text"
-                                        placeholder="Nhập từ khóa cần tìm (Sandbox, bồi thường, ưu đãi thuế, thừa kế...)"
+                                        placeholder="Nhập từ khóa cần tìm (cửa khẩu, bồi thường, homestay, thừa kế...)"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                         className="w-full pl-10 pr-4 py-2.5 text-xs sm:text-sm rounded-xl border border-slate-300 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600 bg-slate-50 focus:bg-white"
@@ -570,7 +570,7 @@ const HanoiFAQPage = () => {
                                                                 <span>Đơn vị giải đáp: {item.agency}</span>
                                                             </div>
                                                             <Link
-                                                                to={`/ha-noi/hoi-dap/${item.id}`}
+                                                                to={`/lao-cai/hoi-dap/${item.id}`}
                                                                 className="text-indigo-900 font-bold hover:underline normal-case flex items-center gap-1"
                                                             >
                                                                 <span>Xem trang chi tiết</span>
@@ -609,7 +609,7 @@ const HanoiFAQPage = () => {
                                                         </span>
                                                     </div>
                                                     <Link
-                                                        to={`/ha-noi/hoi-dap/${item.id}`}
+                                                        to={`/lao-cai/hoi-dap/${item.id}`}
                                                         className="font-bold text-xs text-indigo-900 hover:text-white bg-indigo-50 hover:bg-indigo-900 px-3 py-1.5 rounded-lg border border-indigo-100 hover:border-indigo-900 transition flex items-center gap-1.5 shadow-2xs"
                                                     >
                                                         <span>Chi tiết</span>
@@ -658,7 +658,7 @@ const HanoiFAQPage = () => {
                                     <CheckCircle2 size={42} className="mx-auto text-emerald-600" />
                                     <h4 className="font-bold text-base">Gửi câu hỏi thành công!</h4>
                                     <p className="text-xs text-emerald-700 leading-relaxed">
-                                        Hệ thống Cổng Pháp luật Thành phố Hà Nội đã tiếp nhận câu hỏi của bạn. Đội ngũ chuyên môn và cơ quan có thẩm quyền sẽ xem xét và phản hồi trong thời gian sớm nhất.
+                                        Hệ thống Cổng Pháp luật tỉnh Lào Cai đã tiếp nhận câu hỏi của bạn. Đội ngũ chuyên môn và cơ quan có thẩm quyền sẽ xem xét và phản hồi trong thời gian sớm nhất.
                                     </p>
                                 </div>
                             ) : (
@@ -670,7 +670,7 @@ const HanoiFAQPage = () => {
                                             onChange={e => setFormData({ ...formData, domain: e.target.value })}
                                             className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
                                         >
-                                            <option value="luat-thu-do">Luật Thủ Đô & Cơ chế Sandbox</option>
+                                            <option value="cua-khau">Cửa khẩu, Xuất nhập khẩu & Kinh tế biên mậu</option>
                                             <option value="dat-dai">Đất đai, Giải phóng mặt bằng & Bồi thường</option>
                                             <option value="doanh-nghiep">Doanh nghiệp, Đầu tư & Thuế</option>
                                             <option value="tro-giup">Trợ giúp pháp lý miễn phí</option>
@@ -683,7 +683,7 @@ const HanoiFAQPage = () => {
                                         <input
                                             type="text"
                                             required
-                                            placeholder="Ví dụ: Quy trình nộp đề án thử nghiệm có kiểm soát Sandbox..."
+                                            placeholder="Ví dụ: Thủ tục đăng ký kinh doanh homestay tại Sa Pa..."
                                             value={formData.title}
                                             onChange={e => setFormData({ ...formData, title: e.target.value })}
                                             className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600"
@@ -749,9 +749,9 @@ const HanoiFAQPage = () => {
                 </div>
             )}
 
-            <HanoiFooter />
+            <LaoCaiFooter />
         </div>
     );
 };
 
-export default HanoiFAQPage;
+export default LaoCaiFAQPage;

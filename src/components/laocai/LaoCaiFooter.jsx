@@ -3,7 +3,7 @@ import { MessageCircle, ArrowUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import LiveSupportChatbox from './LiveSupportChatbox';
 
-const HanoiFooter = () => {
+const LaoCaiFooter = () => {
     const [isChatOpen, setIsChatOpen] = useState(false);
 
     // Scroll to top function
@@ -39,16 +39,16 @@ const HanoiFooter = () => {
 
                 {/* 2. Title */}
                 <h2 className="text-[18px] md:text-[22px] font-bold uppercase mb-2 drop-shadow-md tracking-normal">
-                    CỔNG PHÁP LUẬT THÀNH PHỐ HÀ NỘI
+                    CỔNG PHÁP LUẬT TỈNH LÀO CAI
                 </h2>
 
                 {/* 3. Info lines */}
                 <div className="space-y-1 mb-4 text-[13px] md:text-[14px]">
                     <p className="drop-shadow-sm">
-                        Đơn vị chủ quản: Ủy ban nhân dân Thành phố Hà Nội | Đơn vị vận hành: Sở Tư pháp Thành phố Hà Nội
+                        Đơn vị chủ quản: Ủy ban nhân dân tỉnh Lào Cai | Đơn vị vận hành: Sở Tư pháp tỉnh Lào Cai
                     </p>
                     <p className="drop-shadow-sm">
-                        Địa chỉ: 221 Trần Phú, Phường Văn Quán, Quận Hà Đông, TP Hà Nội | Điện thoại: 024.33546163 | Email: sogddt@hanoi.gov.vn
+                        Địa chỉ: Số 1B Hoàng Liên, Phường Nam Cường, tỉnh Lào Cai | Điện thoại: 0214.3824.163 | Email: sotp@laocai.gov.vn
                     </p>
                 </div>
 
@@ -57,17 +57,17 @@ const HanoiFooter = () => {
                     <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2">
                         <Link to="#" className="hover:text-yellow-300 transition-colors">Quy chế quản lý, vận hành, khai thác</Link>
                         <span className="hidden md:inline">|</span>
-                        <Link to="/ha-noi/gioi-thieu" className="hover:text-yellow-300 transition-colors">Giới thiệu</Link>
+                        <Link to="/lao-cai/gioi-thieu" className="hover:text-yellow-300 transition-colors">Giới thiệu</Link>
                         <span className="hidden md:inline">|</span>
-                        <Link to="/ha-noi/van-ban" className="hover:text-yellow-300 transition-colors">Văn bản pháp luật</Link>
+                        <Link to="/lao-cai/van-ban" className="hover:text-yellow-300 transition-colors">Văn bản pháp luật</Link>
                         <span className="hidden md:inline">|</span>
-                        <Link to="/ha-noi/pho-bien-giao-duc" className="hover:text-yellow-300 transition-colors">Phổ biến giáo dục pháp luật</Link>
+                        <Link to="/lao-cai/pho-bien-giao-duc" className="hover:text-yellow-300 transition-colors">Phổ biến giáo dục pháp luật</Link>
                         <span className="hidden md:inline">|</span>
-                        <Link to="/ha-noi/tro-giup-phap-ly" className="hover:text-yellow-300 transition-colors">Trợ giúp pháp lý</Link>
+                        <Link to="/lao-cai/tro-giup-phap-ly" className="hover:text-yellow-300 transition-colors">Trợ giúp pháp lý</Link>
                         <span className="hidden md:inline">|</span>
-                        <Link to="/ha-noi/ho-tro-phap-ly-doanh-nghiep" className="hover:text-yellow-300 transition-colors">Hỗ trợ pháp lý DN</Link>
+                        <Link to="/lao-cai/ho-tro-phap-ly-doanh-nghiep" className="hover:text-yellow-300 transition-colors">Hỗ trợ pháp lý DN</Link>
                         <span className="hidden md:inline">|</span>
-                        <Link to="/ha-noi/lien-he" className="hover:text-yellow-300 transition-colors">Liên hệ</Link>
+                        <Link to="/lao-cai/lien-he" className="hover:text-yellow-300 transition-colors">Liên hệ</Link>
                         <span className="hidden md:inline">|</span>
                     </div>
 
@@ -95,7 +95,7 @@ const HanoiFooter = () => {
 
                 {/* 6. Copyright */}
                 <div className="text-[12px] md:text-[13px] font-light drop-shadow-sm opacity-90">
-                    © Bản quyền thuộc Cổng Pháp luật Thành phố Hà Nội - Kết nối liên thông Cổng Pháp luật quốc gia
+                    © Bản quyền thuộc Cổng Pháp luật tỉnh Lào Cai - Kết nối liên thông Cổng Pháp luật quốc gia
                 </div>
             </div>
 
@@ -131,4 +131,4 @@ const HanoiFooter = () => {
     );
 };
 
-export default HanoiFooter;
+export default LaoCaiFooter;

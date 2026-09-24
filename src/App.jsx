@@ -173,14 +173,31 @@ import HanoiDraftDocsPage from './pages/hanoi/HanoiDraftDocsPage';
 import HanoiLawDisseminationPage from './pages/hanoi/HanoiLawDisseminationPage';
 import HanoiLegalAidPage from './pages/hanoi/HanoiLegalAidPage';
 import HanoiBusinessSupportPage from './pages/hanoi/HanoiBusinessSupportPage';
+import HanoiBusinessFAQDetailPage from './pages/hanoi/HanoiBusinessFAQDetailPage';
 import HanoiContactPage from './pages/hanoi/HanoiContactPage';
 import HanoiNewsPage from './pages/hanoi/HanoiNewsPage';
 import HanoiFAQPage from './pages/hanoi/HanoiFAQPage';
 import HanoiFAQDetailPage from './pages/hanoi/HanoiFAQDetailPage';
+import HanoiNewsCategoryPage from './pages/hanoi/HanoiNewsCategoryPage';
+import HanoiHotlinePage from './pages/hanoi/HanoiHotlinePage';
+import LaoCaiHomePage from './pages/laocai/LaoCaiHomePage';
+import LaoCaiAboutPage from './pages/laocai/LaoCaiAboutPage';
+import LaoCaiLegalDocsPage from './pages/laocai/LaoCaiLegalDocsPage';
+import LaoCaiDraftDocsPage from './pages/laocai/LaoCaiDraftDocsPage';
+import LaoCaiLawDisseminationPage from './pages/laocai/LaoCaiLawDisseminationPage';
+import LaoCaiLegalAidPage from './pages/laocai/LaoCaiLegalAidPage';
+import LaoCaiBusinessSupportPage from './pages/laocai/LaoCaiBusinessSupportPage';
+import LaoCaiBusinessFAQDetailPage from './pages/laocai/LaoCaiBusinessFAQDetailPage';
+import LaoCaiContactPage from './pages/laocai/LaoCaiContactPage';
+import LaoCaiNewsPage from './pages/laocai/LaoCaiNewsPage';
+import LaoCaiFAQPage from './pages/laocai/LaoCaiFAQPage';
+import LaoCaiFAQDetailPage from './pages/laocai/LaoCaiFAQDetailPage';
+import LaoCaiNewsCategoryPage from './pages/laocai/LaoCaiNewsCategoryPage';
+import LaoCaiHotlinePage from './pages/laocai/LaoCaiHotlinePage';
 
 const AppLayout = () => {
     const location = useLocation();
-    const hideHeaderFooter = ['/dang-nhap', '/onboarding'].includes(location.pathname) || location.pathname.startsWith('/ha-noi');
+    const hideHeaderFooter = ['/dang-nhap', '/onboarding'].includes(location.pathname) || location.pathname.startsWith('/ha-noi') || location.pathname.startsWith('/lao-cai');
 
     // Scroll to top on every route change
     useEffect(() => {
@@ -196,14 +213,32 @@ const AppLayout = () => {
                     <Route path="/ha-noi" element={<HanoiHomePage />} />
                     <Route path="/ha-noi/gioi-thieu" element={<HanoiAboutPage />} />
                     <Route path="/ha-noi/tin-tuc" element={<HanoiNewsPage />} />
+                    <Route path="/ha-noi/tin-tuc/:categorySlug" element={<HanoiNewsCategoryPage />} />
                     <Route path="/ha-noi/van-ban" element={<HanoiLegalDocsPage />} />
                     <Route path="/ha-noi/du-thao" element={<HanoiDraftDocsPage />} />
                     <Route path="/ha-noi/pho-bien-giao-duc" element={<HanoiLawDisseminationPage />} />
                     <Route path="/ha-noi/tro-giup-phap-ly" element={<HanoiLegalAidPage />} />
                     <Route path="/ha-noi/ho-tro-phap-ly-doanh-nghiep" element={<HanoiBusinessSupportPage />} />
+                    <Route path="/ha-noi/ho-tro-phap-ly-doanh-nghiep/hoi-dap/:id" element={<HanoiBusinessFAQDetailPage />} />
                     <Route path="/ha-noi/hoi-dap" element={<HanoiFAQPage />} />
                     <Route path="/ha-noi/hoi-dap/:id" element={<HanoiFAQDetailPage />} />
                     <Route path="/ha-noi/lien-he" element={<HanoiContactPage />} />
+                    <Route path="/ha-noi/hotline" element={<HanoiHotlinePage />} />
+
+                    <Route path="/lao-cai" element={<LaoCaiHomePage />} />
+                    <Route path="/lao-cai/gioi-thieu" element={<LaoCaiAboutPage />} />
+                    <Route path="/lao-cai/tin-tuc" element={<LaoCaiNewsPage />} />
+                    <Route path="/lao-cai/tin-tuc/:categorySlug" element={<LaoCaiNewsCategoryPage />} />
+                    <Route path="/lao-cai/van-ban" element={<LaoCaiLegalDocsPage />} />
+                    <Route path="/lao-cai/du-thao" element={<LaoCaiDraftDocsPage />} />
+                    <Route path="/lao-cai/pho-bien-giao-duc" element={<LaoCaiLawDisseminationPage />} />
+                    <Route path="/lao-cai/tro-giup-phap-ly" element={<LaoCaiLegalAidPage />} />
+                    <Route path="/lao-cai/ho-tro-phap-ly-doanh-nghiep" element={<LaoCaiBusinessSupportPage />} />
+                    <Route path="/lao-cai/ho-tro-phap-ly-doanh-nghiep/hoi-dap/:id" element={<LaoCaiBusinessFAQDetailPage />} />
+                    <Route path="/lao-cai/hoi-dap" element={<LaoCaiFAQPage />} />
+                    <Route path="/lao-cai/hoi-dap/:id" element={<LaoCaiFAQDetailPage />} />
+                    <Route path="/lao-cai/lien-he" element={<LaoCaiContactPage />} />
+                    <Route path="/lao-cai/hotline" element={<LaoCaiHotlinePage />} />
                     <Route path="/trang-chu-v2" element={<HomePageV2 />} />
                     <Route path="/trang-chu-v3" element={<HomePageV3 />} />
                     <Route path="/ho-tro-phap-ly-doanh-nghiep/*" element={<HoTroPhapLyDoanhNghiepPage />} />
