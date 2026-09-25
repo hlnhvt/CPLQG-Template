@@ -264,7 +264,7 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                         {/* Multimedia: dropdown giống Cổng Pháp luật quốc gia */}
                                         <li className="h-full flex items-center relative group">
                                             <Link
-                                                to={`${homeUrl}/multimedia`}
+                                                to={`${homeUrl}/video`}
                                                 className="h-full flex items-center gap-1 px-2 xl:px-2.5 2xl:px-3 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap"
                                             >
                                                 Multimedia
@@ -273,13 +273,13 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                             <div className="absolute top-full left-1/2 -translate-x-1/2 pt-1 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[110]">
                                                 <div className="bg-[#0a1e3f] shadow-2xl rounded-lg py-1.5 border border-cyan-500/30 overflow-hidden">
                                                     {[
-                                                        { tab: 'video', label: 'Video', dot: 'bg-cyan-400' },
-                                                        { tab: 'anh', label: 'Ảnh', dot: 'bg-blue-400' },
-                                                        { tab: 'infographic', label: 'Infographic', dot: 'bg-green-400' }
+                                                        { path: 'video', label: 'Video', dot: 'bg-cyan-400' },
+                                                        { path: 'anh', label: 'Ảnh', dot: 'bg-blue-400' },
+                                                        { path: 'infographic', label: 'Infographic', dot: 'bg-green-400' }
                                                     ].map((m) => (
                                                         <Link
-                                                            key={m.tab}
-                                                            to={`${homeUrl}/multimedia?tab=${m.tab}`}
+                                                            key={m.path}
+                                                            to={`${homeUrl}/${m.path}`}
                                                             className="flex items-center gap-2.5 px-4 py-2 text-[13px] text-gray-200 hover:bg-white/10 hover:text-cyan-400 transition-colors"
                                                         >
                                                             <span className={`w-1.5 h-1.5 rounded-full ${m.dot}`}></span>
@@ -665,7 +665,7 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                 {showMultimedia && (
                                     <>
                                         <Link
-                                            to={`${homeUrl}/multimedia`}
+                                            to={`${homeUrl}/video`}
                                             onClick={() => setIsSidebarOpen(false)}
                                             className="px-5 py-3.5 border-b border-white/5 font-semibold hover:bg-white/5 transition-colors"
                                         >
