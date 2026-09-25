@@ -102,7 +102,7 @@ const TongRaSoatNewsDetailPage = () => {
                                         "Xây dựng dự thảo luật theo tinh thần kiến tạo, bám sát thực tiễn",
                                         "Kịp thời bổ sung các chính sách pháp luật theo nghị quyết mới",
                                         "Bộ Tư pháp tổ chức hội nghị triển khai công tác cải cách",
-                                        "Công tác phổ biến giáo dục pháp luật cần được chú trọng"
+                                        "Công tác phổ biến, giáo dục pháp luật cần được chú trọng"
                                     ].map((title, i) => (
                                         <div key={i} className="flex gap-3 items-start cursor-pointer group pb-4 border-b last:border-0 last:pb-0">
                                             <div className="w-16 h-12 bg-gray-200 rounded shrink-0 overflow-hidden">

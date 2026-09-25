@@ -7,7 +7,7 @@ const images = ["/thumb1.png", "/thumb2.png", "/thumb3.png"];
 const baseTopics = [
     { title: "Khảo sát về chất lượng dịch vụ hành chính công", desc: "Đánh giá mức độ hài lòng của người dân đối với các dịch vụ công trực tuyến mức độ 3, 4 trên toàn quốc." },
     { title: "Lấy ý kiến Dự thảo Luật Đất đai (sửa đổi)", desc: "Thu thập ý kiến đóng góp của nhân dân, chuyên gia về các quy định mới trong Dự thảo Luật Đất đai đang được trình Quốc hội." },
-    { title: "Đánh giá hiệu quả phổ biến giáo dục pháp luật", desc: "Khảo sát mức độ hiểu biết và tiếp cận thông tin pháp luật của người dân tại các vùng nông thôn, vùng sâu vùng xa." },
+    { title: "Đánh giá hiệu quả phổ biến, giáo dục pháp luật", desc: "Khảo sát mức độ hiểu biết và tiếp cận thông tin pháp luật của người dân tại các vùng nông thôn, vùng sâu vùng xa." },
     { title: "Khảo sát nhu cầu hỗ trợ pháp lý cho doanh nghiệp nhỏ và vừa", desc: "Tìm hiểu những khó khăn, vướng mắc về mặt pháp lý mà các DNNVV đang gặp phải trong quá trình hoạt động sản xuất kinh doanh." },
     { title: "Ý kiến về các quy định xử phạt vi phạm hành chính giao thông", desc: "Ghi nhận ý kiến người dân về mức phạt, hình thức xử phạt và tính răn đe của Luật Giao thông đường bộ hiện hành." },
     { title: "Đánh giá ứng dụng VNeID trong thủ tục hành chính", desc: "Khảo sát trải nghiệm, sự thuận tiện và các lỗi phát sinh khi người dân sử dụng ứng dụng định danh điện tử VNeID." },

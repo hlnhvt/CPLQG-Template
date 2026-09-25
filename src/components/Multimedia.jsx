@@ -77,7 +77,7 @@ const Multimedia = () => {
             image: '/thumb1.png',
             to: '/video/4',
             date: '14/05/2026',
-            summary: 'Chương trình truyền hình phổ biến giáo dục pháp luật học đường, tăng cường nhận thức pháp lý và kỹ năng phòng ngừa tệ nạn xã hội.'
+            summary: 'Chương trình truyền hình phổ biến, giáo dục pháp luật học đường, tăng cường nhận thức pháp lý và kỹ năng phòng ngừa tệ nạn xã hội.'
         },
         {
             id: 5,

@@ -97,7 +97,7 @@ const TinTucHoatDongTGPLPage = () => {
                                             <label className="text-[13px] font-medium text-gray-700">Loại hình hoạt động</label>
                                             <select className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-[14px] outline-none focus:border-blue-400 text-black bg-white appearance-none">
                                                 <option>-- Tất cả --</option>
-                                                <option>Phổ biến giáo dục pháp luật</option>
+                                                <option>Phổ biến, giáo dục pháp luật</option>
                                                 <option>Tư vấn pháp luật</option>
                                                 <option>Đại diện ngoài tố tụng</option>
                                             </select>

@@ -35,7 +35,7 @@ const PoliciesAndLife = () => {
         },
         {
             id: 5,
-            title: 'Tăng cường ứng dụng công nghệ thông tin trong phổ biến giáo dục pháp luật',
+            title: 'Tăng cường ứng dụng công nghệ thông tin trong phổ biến, giáo dục pháp luật',
             description: 'Đẩy mạnh chuyển đổi số đem lại hiệu quả cao trong công tác tuyên truyền, đưa pháp luật vào đời sống sinh hoạt của người dân.',
             date: 'Ngày 24/10/2025 | 16:20',
             image: '/thumb2.png'

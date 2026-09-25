@@ -2,5 +2,5 @@
 export const PORTALS = [
     { id: 'quoc-gia', label: 'Cổng Pháp luật quốc gia', homeUrl: '/' },
     { id: 'ha-noi', label: 'Cổng Pháp luật Thành phố Hà Nội', homeUrl: '/ha-noi' },
-    { id: 'lao-cai', label: 'Cổng Pháp luật tỉnh Lào Cai', homeUrl: '/lao-cai' },
+    { id: 'lao-cai-v2', label: 'Cổng Pháp luật tỉnh Lào Cai', homeUrl: '/lao-cai-v2' },
 ];

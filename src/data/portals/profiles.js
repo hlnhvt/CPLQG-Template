@@ -88,3 +88,10 @@ export const laocaiProfile = {
         { code: 'Công văn số 205/STP-PBGDPL', title: 'Biên soạn tài liệu tuyên truyền song ngữ tiếng Việt - tiếng Mông, tiếng Dao về phòng, chống tảo hôn', agency: 'Sở Tư pháp tỉnh Lào Cai', type: 'Công văn' }
     ]
 };
+
+// Bản clone của Cổng Lào Cai (route /lao-cai-v2), dùng chung nội dung với laocaiProfile
+export const laocaiV2Profile = {
+    ...laocaiProfile,
+    key: 'lao-cai-v2',
+    homeUrl: '/lao-cai-v2'
+};

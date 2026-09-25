@@ -168,7 +168,7 @@ const HANOI_ACTIVITY_NEWS = {
             id: "ACT-03",
             title: "Hội đồng PBGDPL Thành phố phát động chiến dịch truyền thông số về chính sách pháp luật Thủ đô",
             date: "20/03/2026",
-            badge: "Phổ biến giáo dục",
+            badge: "Phổ biến, giáo dục",
             image: "/thumb3.png",
             link: "/ha-noi/pho-bien-giao-duc"
         },
@@ -585,7 +585,7 @@ const HanoiHomePage = () => {
 
                     {/* Slogan tóm tắt cân đối chính xác trong 2 dòng */}
                     {/* <p className="text-xs sm:text-sm md:text-[14.5px] text-blue-100/90 leading-relaxed max-w-2xl text-center font-normal drop-shadow-sm">
-                        Nền tảng số thống nhất phục vụ tra cứu văn bản quy phạm pháp luật, phổ biến giáo dục pháp luật,
+                        Nền tảng số thống nhất phục vụ tra cứu văn bản quy phạm pháp luật, phổ biến, giáo dục pháp luật,
                         <br className="hidden md:inline" />
                         {' '}trợ giúp pháp lý và đồng hành cùng người dân, doanh nghiệp Thủ đô.
                     </p> */}
@@ -1189,11 +1189,11 @@ const HanoiHomePage = () => {
                     </div>
                 </section>
 
-                {/* 5. CHUYÊN MỤC: PHỔ BIẾN GIÁO DỤC PHÁP LUẬT & ĐỜI SỐNG THƯỢNG TÔN PHÁP LUẬT */}
+                {/* 5. CHUYÊN MỤC: PHỔ BIẾN, GIÁO DỤC PHÁP LUẬT & ĐỜI SỐNG THƯỢNG TÔN PHÁP LUẬT */}
                 <section id="pho-bien-giao-duc" className="py-1 hanoi-animate-fade-up" style={{ animationDelay: '0.28s' }}>
                     <div className="container mx-auto px-4 max-w-[1504px]">
                         <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/80 shadow-sm">
-                            {/* Header Khối Phổ biến giáo dục pháp luật phong cách đồng bộ Banner Cổng Hà Nội (#4f56ca -> #2c1b92 -> #4f56ca) */}
+                            {/* Header Khối Phổ biến, giáo dục pháp luật phong cách đồng bộ Banner Cổng Hà Nội (#4f56ca -> #2c1b92 -> #4f56ca) */}
                             <div className="relative overflow-hidden rounded-xl bg-gradient-to-r from-[#4f56ca] via-[#2c1b92] to-[#4f56ca] p-3.5 sm:p-4 mb-4 text-white shadow-md border-b-2 border-amber-400">
                                 <div className="absolute inset-0 bg-[radial-gradient(#ffffff22_1.2px,transparent_1.2px)] [background-size:16px_16px] pointer-events-none" />
                                 <div className="absolute -right-8 -top-8 w-28 h-28 rounded-full bg-amber-400/25 blur-xl pointer-events-none" />
@@ -1202,7 +1202,7 @@ const HanoiHomePage = () => {
                                 <div className="relative z-10 flex justify-between items-center">
                                     <div>
                                         <h2 className="text-lg sm:text-xl md:text-[21px] font-bold text-white uppercase drop-shadow-sm">
-                                            Phổ biến giáo dục pháp luật Thủ đô
+                                            Phổ biến, giáo dục pháp luật Thủ đô
                                         </h2>
                                         <div className="w-20 h-0.5 bg-gradient-to-r from-amber-400 to-transparent mt-0.5" />
                                     </div>

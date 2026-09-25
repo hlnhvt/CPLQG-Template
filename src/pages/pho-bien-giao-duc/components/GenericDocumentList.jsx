@@ -6,7 +6,7 @@ export default function GenericDocumentList({ title, items }) {
     const mockItems = items || Array.from({ length: 10 }).map((_, i) => ({
         id: i,
         number: `${100 + i}/QĐ-BTP`,
-        title: `Quyết định về việc ban hành Kế hoạch phổ biến giáo dục pháp luật năm 2026 số ${i + 1}`,
+        title: `Quyết định về việc ban hành Kế hoạch phổ biến, giáo dục pháp luật năm 2026 số ${i + 1}`,
         agency: 'Bộ Tư pháp',
         date: `0${(i % 9) + 1}/06/2026`,
         type: 'Quyết định'

@@ -6,7 +6,7 @@ export default function GenericArticleList({ title, items }) {
     // Generate some mock items if none provided
     const mockItems = items || Array.from({ length: 6 }).map((_, i) => ({
         id: i,
-        title: `Tiêu đề bài viết mẫu số ${i + 1} về phổ biến giáo dục pháp luật`,
+        title: `Tiêu đề bài viết mẫu số ${i + 1} về phổ biến, giáo dục pháp luật`,
         description: 'Đây là đoạn mô tả ngắn gọn cho bài viết. Nội dung mô tả cung cấp cái nhìn tổng quan về các chính sách mới, các hoạt động đã diễn ra...',
         date: `0${(i % 9) + 1}/06/2026`,
         category: 'Tin tức'

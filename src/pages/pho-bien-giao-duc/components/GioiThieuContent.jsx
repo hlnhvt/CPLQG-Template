@@ -4,11 +4,11 @@ import { Building2, Users, Target, CheckCircle } from 'lucide-react';
 export default function GioiThieuContent() {
     return (
         <div className="bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-gray-100 min-h-[600px] font-sans">
-            <h2 className="text-3xl font-bold text-[#1b2b49] mb-8 text-center">Giới thiệu Hệ thống Phổ biến Giáo dục Pháp luật</h2>
+            <h2 className="text-3xl font-bold text-[#1b2b49] mb-8 text-center">Giới thiệu Hệ thống Phổ biến, Giáo dục Pháp luật</h2>
             
             <div className="prose max-w-none text-gray-600 leading-relaxed space-y-6">
                 <p className="text-lg text-gray-700 font-medium">
-                    Hệ thống Phổ biến Giáo dục Pháp luật (PBGDPL) là nền tảng trực tuyến quốc gia được xây dựng nhằm mục đích cung cấp thông tin, kiến thức pháp luật một cách nhanh chóng, chính xác và tiện lợi nhất cho mọi tầng lớp nhân dân và cộng đồng doanh nghiệp.
+                    Hệ thống Phổ biến, Giáo dục Pháp luật (PBGDPL) là nền tảng trực tuyến quốc gia được xây dựng nhằm mục đích cung cấp thông tin, kiến thức pháp luật một cách nhanh chóng, chính xác và tiện lợi nhất cho mọi tầng lớp nhân dân và cộng đồng doanh nghiệp.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">

@@ -215,7 +215,7 @@ const HanoiAboutPage = () => {
                             <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4">
                                 <BookOpen size={24} />
                             </div>
-                            <h3 className="font-bold text-base text-gray-900 mb-2">Phổ biến giáo dục pháp luật</h3>
+                            <h3 className="font-bold text-base text-gray-900 mb-2">Phổ biến, giáo dục pháp luật</h3>
                             <p className="text-xs text-gray-600 leading-relaxed">
                                 Đổi mới tuyên truyền số, hội đồng PBGDPL thành phố phối hợp đưa chính sách pháp luật và Luật Thủ đô đến từng tổ dân phố.
                             </p>

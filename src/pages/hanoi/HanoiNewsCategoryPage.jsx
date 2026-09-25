@@ -13,7 +13,7 @@ import HanoiFooter from '../../components/hanoi/HanoiFooter';
 export const HANOI_NEWS_CATEGORIES = [
     { id: 'tin-hoat-dong',  label: 'Tin hoạt động' },
     { id: 'chinh-sach',     label: 'Chính sách Thủ đô' },
-    { id: 'pbgdpl',         label: 'Phổ biến giáo dục pháp luật' },
+    { id: 'pbgdpl',         label: 'Phổ biến, giáo dục pháp luật' },
     { id: 'doanh-nghiep',   label: 'Hỗ trợ doanh nghiệp' },
     { id: 'tro-giup',       label: 'Trợ giúp pháp lý' },
     { id: 'tu-phap',        label: 'Hoạt động Tư pháp' },

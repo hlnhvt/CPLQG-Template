@@ -61,7 +61,7 @@ const LaoCaiFooter = () => {
                         <span className="hidden md:inline">|</span>
                         <Link to="/lao-cai/van-ban" className="hover:text-yellow-300 transition-colors">Văn bản pháp luật</Link>
                         <span className="hidden md:inline">|</span>
-                        <Link to="/lao-cai/pho-bien-giao-duc" className="hover:text-yellow-300 transition-colors">Phổ biến giáo dục pháp luật</Link>
+                        <Link to="/lao-cai/pho-bien-giao-duc" className="hover:text-yellow-300 transition-colors">Phổ biến, giáo dục pháp luật</Link>
                         <span className="hidden md:inline">|</span>
                         <Link to="/lao-cai/tro-giup-phap-ly" className="hover:text-yellow-300 transition-colors">Trợ giúp pháp lý</Link>
                         <span className="hidden md:inline">|</span>

@@ -61,7 +61,7 @@ const HanoiFooter = () => {
                         <span className="hidden md:inline">|</span>
                         <Link to="/ha-noi/van-ban" className="hover:text-yellow-300 transition-colors">Văn bản pháp luật</Link>
                         <span className="hidden md:inline">|</span>
-                        <Link to="/ha-noi/pho-bien-giao-duc" className="hover:text-yellow-300 transition-colors">Phổ biến giáo dục pháp luật</Link>
+                        <Link to="/ha-noi/pho-bien-giao-duc" className="hover:text-yellow-300 transition-colors">Phổ biến, giáo dục pháp luật</Link>
                         <span className="hidden md:inline">|</span>
                         <Link to="/ha-noi/tro-giup-phap-ly" className="hover:text-yellow-300 transition-colors">Trợ giúp pháp lý</Link>
                         <span className="hidden md:inline">|</span>

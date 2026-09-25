@@ -27,7 +27,7 @@ export default function TuSachPhapLuat() {
     const data2 = [
         generateNewsItem(1, 'Sổ tay nghiệp vụ hòa giải ở cơ sở năm 2024', '25/11/2023 15:30', 'Hướng dẫn chi tiết các bước tiến hành hòa giải và biểu mẫu nghiệp vụ dành cho hòa giải viên.', validImages[4]),
         generateNewsItem(2, 'Tài liệu hướng dẫn nghiệp vụ chuẩn tiếp cận pháp luật', '18/11/2023 09:00', 'Bộ tiêu chí và quy trình đánh giá, công nhận cấp xã đạt chuẩn tiếp cận pháp luật.', validImages[5]),
-        generateNewsItem(3, 'Cẩm nang nghiệp vụ phổ biến giáo dục pháp luật', '10/11/2023 14:00', 'Tổng hợp kỹ năng, phương pháp truyền đạt kiến thức pháp luật hiệu quả.', validImages[0]),
+        generateNewsItem(3, 'Cẩm nang nghiệp vụ phổ biến, giáo dục pháp luật', '10/11/2023 14:00', 'Tổng hợp kỹ năng, phương pháp truyền đạt kiến thức pháp luật hiệu quả.', validImages[0]),
         generateNewsItem(4, 'Sổ tay hướng dẫn công tác báo cáo viên pháp luật', '01/11/2023 08:30', 'Tài liệu dành cho báo cáo viên, tuyên truyền viên pháp luật cấp huyện và cấp xã.', validImages[1]),
     ];
 
@@ -124,7 +124,7 @@ export default function TuSachPhapLuat() {
                 <div className="flex items-center gap-2 text-sm text-gray-500 mb-4 font-medium">
                     <span className="text-blue-600 cursor-pointer hover:underline">Trang chủ</span>
                     <ChevronRight size={14} />
-                    <span className="text-blue-600 cursor-pointer hover:underline">Phổ biến giáo dục pháp luật</span>
+                    <span className="text-blue-600 cursor-pointer hover:underline">Phổ biến, giáo dục pháp luật</span>
                     <ChevronRight size={14} />
                     <span>{title}</span>
                 </div>

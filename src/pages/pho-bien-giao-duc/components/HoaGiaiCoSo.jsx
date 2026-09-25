@@ -82,7 +82,7 @@ export default function HoaGiaiCoSo() {
                 <div className="flex items-center gap-2 text-sm text-gray-500 mb-4 font-medium">
                     <span className="text-blue-600 cursor-pointer hover:underline">Trang chủ</span>
                     <ChevronRight size={14} />
-                    <span className="text-blue-600 cursor-pointer hover:underline">Phổ biến giáo dục pháp luật</span>
+                    <span className="text-blue-600 cursor-pointer hover:underline">Phổ biến, giáo dục pháp luật</span>
                     <ChevronRight size={14} />
                     <span>{title}</span>
                 </div>

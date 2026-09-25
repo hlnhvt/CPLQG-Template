@@ -49,8 +49,8 @@ export default function TinTucHoatDongList({ title, items, categories }) {
                 },
                 {
                     id: 4,
-                    title: 'Quyết định phê duyệt Đề án Nâng cao năng lực phổ biến giáo dục pháp luật 2026-2030',
-                    description: 'Thủ tướng Chính phủ ban hành Quyết định triển khai chiến lược đổi mới công tác phổ biến giáo dục pháp luật, ứng dụng trí tuệ nhân tạo và các nền tảng truyền thông hiện đại...',
+                    title: 'Quyết định phê duyệt Đề án Nâng cao năng lực phổ biến, giáo dục pháp luật 2026-2030',
+                    description: 'Thủ tướng Chính phủ ban hành Quyết định triển khai chiến lược đổi mới công tác phổ biến, giáo dục pháp luật, ứng dụng trí tuệ nhân tạo và các nền tảng truyền thông hiện đại...',
                     date: '29/06/2026',
                     category: 'Nghị định / Quyết định',
                     image: 'https://images.unsplash.com/photo-1575505586569-646b2ca898fc?auto=format&fit=crop&q=80&w=400&h=300'
@@ -70,7 +70,7 @@ export default function TinTucHoatDongList({ title, items, categories }) {
             {
                 id: 1,
                 title: 'Hội nghị trực tuyến toàn quốc triển khai công tác tư pháp năm 2026',
-                description: 'Sáng nay, Bộ Tư pháp tổ chức Hội nghị trực tuyến toàn quốc triển khai công tác tư pháp năm 2026. Hội nghị tập trung thảo luận về các giải pháp nâng cao hiệu quả công tác phổ biến giáo dục pháp luật...',
+                description: 'Sáng nay, Bộ Tư pháp tổ chức Hội nghị trực tuyến toàn quốc triển khai công tác tư pháp năm 2026. Hội nghị tập trung thảo luận về các giải pháp nâng cao hiệu quả công tác phổ biến, giáo dục pháp luật...',
                 date: '15/07/2026',
                 category: 'Hoạt động PBGDPL ở Trung ương',
                 image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=400&h=300'

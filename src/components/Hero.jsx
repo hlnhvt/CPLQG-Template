@@ -36,7 +36,7 @@ const highlightSlides = [
     {
         id: 6,
         title: "Tăng cường ứng dụng công nghệ thông tin trong phổ biến pháp luật",
-        summary: "Chính phủ phê duyệt đề án phát triển Cổng thông tin phổ biến giáo dục pháp luật quốc gia đến năm 2030.",
+        summary: "Chính phủ phê duyệt đề án phát triển Cổng thông tin phổ biến, giáo dục pháp luật quốc gia đến năm 2030.",
         image: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=400&q=80"
     }
 ];

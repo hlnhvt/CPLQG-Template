@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
@@ -194,6 +194,47 @@ import LaoCaiFAQPage from './pages/laocai/LaoCaiFAQPage';
 import LaoCaiFAQDetailPage from './pages/laocai/LaoCaiFAQDetailPage';
 import LaoCaiNewsCategoryPage from './pages/laocai/LaoCaiNewsCategoryPage';
 import LaoCaiHotlinePage from './pages/laocai/LaoCaiHotlinePage';
+import LaoCaiV2HomePage from './pages/laocaiV2/LaoCaiV2HomePage';
+import LaoCaiV2AboutPage from './pages/laocaiV2/LaoCaiV2AboutPage';
+import LaoCaiV2LegalDocsPage from './pages/laocaiV2/LaoCaiV2LegalDocsPage';
+import LaoCaiV2DraftDocsPage from './pages/laocaiV2/LaoCaiV2DraftDocsPage';
+import LaoCaiV2ContactPage from './pages/laocaiV2/LaoCaiV2ContactPage';
+import LaoCaiV2NewsPage from './pages/laocaiV2/LaoCaiV2NewsPage';
+import LaoCaiV2FAQPage from './pages/laocaiV2/LaoCaiV2FAQPage';
+import LaoCaiV2FAQDetailPage from './pages/laocaiV2/LaoCaiV2FAQDetailPage';
+import LaoCaiV2NewsCategoryPage from './pages/laocaiV2/LaoCaiV2NewsCategoryPage';
+import LaoCaiV2HotlinePage from './pages/laocaiV2/LaoCaiV2HotlinePage';
+import LaoCaiV2SpecializedLayout from './components/laocaiV2/LaoCaiV2SpecializedLayout';
+import LaoCaiV2LegalLibraryPage from './pages/laocaiV2/LaoCaiV2LegalLibraryPage';
+import LaoCaiV2MultimediaPage from './pages/laocaiV2/LaoCaiV2MultimediaPage';
+import LaoCaiV2PhoBienGiaoDucPage from './pages/laocaiV2/pho-bien-giao-duc/PhoBienGiaoDucPhapLuatPage';
+import LaoCaiV2PBGDPLNewsDetailPage from './pages/laocaiV2/pho-bien-giao-duc/PBGDPLNewsDetailPage';
+import LaoCaiV2HoTroPhapLyDoanhNghiepPage from './pages/laocaiV2/ho-tro-phap-ly-doanh-nghiep/HoTroPhapLyDoanhNghiepPage';
+import LaoCaiV2_LichSuPhatTrienTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/LichSuPhatTrienTGPLPage';
+import LaoCaiV2_ChucNangNhiemVuTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/ChucNangNhiemVuTGPLPage';
+import LaoCaiV2_CoCauToChucTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/CoCauToChucTGPLPage';
+import LaoCaiV2_CoCauToChucTGPLDetailPage from './pages/laocaiV2/tro-giup-phap-ly/CoCauToChucTGPLDetailPage';
+import LaoCaiV2_DanhBaDienTuTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/DanhBaDienTuTGPLPage';
+import LaoCaiV2_VideoPhongSuTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/VideoPhongSuTGPLPage';
+import LaoCaiV2_TinTucHoatDongTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/TinTucHoatDongTGPLPage';
+import LaoCaiV2_AnPhamTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/AnPhamTGPLPage';
+import LaoCaiV2_ThongTinDieuHanhTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/ThongTinDieuHanhTGPLPage';
+import LaoCaiV2_HuongDanNghiepVuTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/HuongDanNghiepVuTGPLPage';
+import LaoCaiV2_NghienCuuTraoDoiTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/NghienCuuTraoDoiTGPLPage';
+import LaoCaiV2_DanhSachToChucTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/DanhSachToChucTGPLPage';
+import LaoCaiV2_ToChucTGPLDetailPage from './pages/laocaiV2/tro-giup-phap-ly/ToChucTGPLDetailPage';
+import LaoCaiV2_DanhSachNguoiThucHienTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/DanhSachNguoiThucHienTGPLPage';
+import LaoCaiV2_NguoiThucHienTGPLDetailPage from './pages/laocaiV2/tro-giup-phap-ly/NguoiThucHienTGPLDetailPage';
+import LaoCaiV2_BaoCaoCongTacTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/BaoCaoCongTacTGPLPage';
+import LaoCaiV2_BanVaTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/BanVaTGPLPage';
+import LaoCaiV2_HopTacQuocTeTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/HopTacQuocTeTGPLPage';
+import LaoCaiV2_KinhNghiemQuocTeTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/KinhNghiemQuocTeTGPLPage';
+import LaoCaiV2_AlbumAnhTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/AlbumAnhTGPLPage';
+import LaoCaiV2_AlbumAnhTGPLDetailPage from './pages/laocaiV2/tro-giup-phap-ly/AlbumAnhTGPLDetailPage';
+import LaoCaiV2_VideoTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/VideoTGPLPage';
+import LaoCaiV2_VideoTGPLDetailPage from './pages/laocaiV2/tro-giup-phap-ly/VideoTGPLDetailPage';
+import LaoCaiV2_VuViecDienHinhTGPLPage from './pages/laocaiV2/tro-giup-phap-ly/VuViecDienHinhTGPLPage';
+import LaoCaiV2_VuViecDienHinhDetailPage from './pages/laocaiV2/tro-giup-phap-ly/VuViecDienHinhDetailPage';
 
 const AppLayout = () => {
     const location = useLocation();
@@ -239,6 +280,51 @@ const AppLayout = () => {
                     <Route path="/lao-cai/hoi-dap/:id" element={<LaoCaiFAQDetailPage />} />
                     <Route path="/lao-cai/lien-he" element={<LaoCaiContactPage />} />
                     <Route path="/lao-cai/hotline" element={<LaoCaiHotlinePage />} />
+
+                    <Route path="/lao-cai-v2" element={<LaoCaiV2HomePage />} />
+                    <Route path="/lao-cai-v2/gioi-thieu" element={<LaoCaiV2AboutPage />} />
+                    <Route path="/lao-cai-v2/tin-tuc" element={<LaoCaiV2NewsPage />} />
+                    <Route path="/lao-cai-v2/thu-vien-phap-luat" element={<LaoCaiV2LegalLibraryPage />} />
+                    <Route path="/lao-cai-v2/multimedia" element={<LaoCaiV2MultimediaPage />} />
+                    <Route path="/lao-cai-v2/tin-tuc/:categorySlug" element={<LaoCaiV2NewsCategoryPage />} />
+                    <Route path="/lao-cai-v2/van-ban" element={<LaoCaiV2LegalDocsPage />} />
+                    <Route path="/lao-cai-v2/du-thao" element={<LaoCaiV2DraftDocsPage />} />
+                    {/* 3 chuyên trang của Cổng Lào Cai mới: clone nguyên thiết kế 3 chuyên trang Cổng Pháp luật quốc gia */}
+                    <Route element={<LaoCaiV2SpecializedLayout />}>
+                        <Route path="/lao-cai-v2/pho-bien-giao-duc" element={<LaoCaiV2PhoBienGiaoDucPage />} />
+                        <Route path="/lao-cai-v2/pho-bien-giao-duc/tin-tuc/:id" element={<LaoCaiV2PBGDPLNewsDetailPage />} />
+                        <Route path="/lao-cai-v2/ho-tro-phap-ly-doanh-nghiep/*" element={<LaoCaiV2HoTroPhapLyDoanhNghiepPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly" element={<Navigate to="/lao-cai-v2/tro-giup-phap-ly/chuc-nang-nhiem-vu" replace />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/lich-su-phat-trien" element={<LaoCaiV2_LichSuPhatTrienTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/chuc-nang-nhiem-vu" element={<LaoCaiV2_ChucNangNhiemVuTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/co-cau-to-chuc" element={<LaoCaiV2_CoCauToChucTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/co-cau-to-chuc/:id" element={<LaoCaiV2_CoCauToChucTGPLDetailPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/danh-ba" element={<LaoCaiV2_DanhBaDienTuTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/video" element={<LaoCaiV2_VideoPhongSuTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/tin-tuc" element={<LaoCaiV2_TinTucHoatDongTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/an-pham" element={<LaoCaiV2_AnPhamTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/chi-dao-dieu-hanh" element={<LaoCaiV2_ThongTinDieuHanhTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/huong-dan-nghiep-vu" element={<LaoCaiV2_HuongDanNghiepVuTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/nghien-cuu-trao-doi" element={<LaoCaiV2_NghienCuuTraoDoiTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/to-chuc" element={<LaoCaiV2_DanhSachToChucTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/to-chuc/:id" element={<LaoCaiV2_ToChucTGPLDetailPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/nguoi-thuc-hien" element={<LaoCaiV2_DanhSachNguoiThucHienTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/nguoi-thuc-hien/:id" element={<LaoCaiV2_NguoiThucHienTGPLDetailPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/bao-cao-cong-tac" element={<LaoCaiV2_BaoCaoCongTacTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/ban-va-tgpl" element={<LaoCaiV2_BanVaTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/hop-tac-quoc-te" element={<LaoCaiV2_HopTacQuocTeTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/kinh-nghiem-quoc-te" element={<LaoCaiV2_KinhNghiemQuocTeTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/album-anh" element={<LaoCaiV2_AlbumAnhTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/album-anh/:id" element={<LaoCaiV2_AlbumAnhTGPLDetailPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/video" element={<LaoCaiV2_VideoTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/video/:id" element={<LaoCaiV2_VideoTGPLDetailPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/vu-viec-dien-hinh" element={<LaoCaiV2_VuViecDienHinhTGPLPage />} />
+                        <Route path="/lao-cai-v2/tro-giup-phap-ly/vu-viec-dien-hinh/:id" element={<LaoCaiV2_VuViecDienHinhDetailPage />} />
+                    </Route>
+                    <Route path="/lao-cai-v2/hoi-dap" element={<LaoCaiV2FAQPage />} />
+                    <Route path="/lao-cai-v2/hoi-dap/:id" element={<LaoCaiV2FAQDetailPage />} />
+                    <Route path="/lao-cai-v2/lien-he" element={<LaoCaiV2ContactPage />} />
+                    <Route path="/lao-cai-v2/hotline" element={<LaoCaiV2HotlinePage />} />
                     <Route path="/trang-chu-v2" element={<HomePageV2 />} />
                     <Route path="/trang-chu-v3" element={<HomePageV3 />} />
                     <Route path="/ho-tro-phap-ly-doanh-nghiep/*" element={<HoTroPhapLyDoanhNghiepPage />} />

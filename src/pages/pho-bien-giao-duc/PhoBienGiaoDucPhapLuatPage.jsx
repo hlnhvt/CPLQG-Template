@@ -210,7 +210,7 @@ const PhoBienGiaoDucPhapLuatPage = () => {
                             <Landmark size={14} /> Hệ thống PBGDPL Quốc gia
                         </div>
                         <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                            Phổ biến Giáo dục Pháp luật
+                            Phổ biến, Giáo dục Pháp luật
                         </h1>
                         <p className="text-blue-100 text-sm md:text-base max-w-xl mb-10">
                             Nền tảng thông tin pháp luật hàng đầu dành cho người dân và doanh nghiệp. Tiếp cận tri thức pháp luật mọi lúc, mọi nơi.

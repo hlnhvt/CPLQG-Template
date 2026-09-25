@@ -22,7 +22,7 @@ const LAW_FIELDS = [
 ];
 
 const CATEGORIES = [
-    'Tin tức pháp luật', 'Phân tích - Bình luận pháp lý', 'Phổ biến giáo dục pháp luật',
+    'Tin tức pháp luật', 'Phân tích - Bình luận pháp lý', 'Phổ biến, giáo dục pháp luật',
     'Nghiên cứu - Trao đổi', 'Tư vấn pháp lý', 'Bài giảng - Tài liệu học tập'
 ];
 

@@ -10,7 +10,7 @@ const CATEGORIES = [
     'Phân tích & Bình luận',
     'Tư vấn pháp luật',
     'Nghiên cứu khoa học',
-    'Phổ biến giáo dục pháp luật'
+    'Phổ biến, giáo dục pháp luật'
 ];
 
 // Mock data fetching based on ID

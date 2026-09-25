@@ -29,7 +29,7 @@ const getInitials = (name) => {
     return parts[parts.length - 1].charAt(0).toUpperCase();
 };
 
-const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSubSite = false, hideDraftNav = false }) => {
+const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSubSite = false, hideDraftNav = false, showMultimedia = false }) => {
     const { user, logout } = useAuth();
     const displayUser = user;
 
@@ -215,9 +215,9 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
             {/* Bottom Bar - Dark Blue Navigation (Desktop) */}
             <div className="hidden xl:block bg-[var(--bg-header-bottom)] text-[var(--text-on-blue)] transition-colors duration-200 relative z-[100]">
                 <div className="w-full max-w-[1350px] mx-auto px-4">
-                    <nav className={`w-full flex items-center ${isSubSite ? 'justify-start' : 'justify-between'} h-[46px] text-[12.5px] xl:text-[13px] font-medium relative z-50 tracking-tight`}>
+                    <nav className={`w-full flex items-center ${isSubSite ? 'justify-start' : 'justify-between'} h-[46px] ${showMultimedia ? 'text-[12px] 2xl:text-[13px]' : 'text-[12.5px] xl:text-[13px]'} font-medium relative z-50 tracking-tight`}>
                         {isSubSite ? (
-                            <ul className="flex items-center justify-start gap-0.5 sm:gap-1 xl:gap-1.5 h-full">
+                            <ul className={`flex items-center justify-start h-full ${showMultimedia ? 'gap-0 2xl:gap-1.5 [&>li>a]:!px-[7px] 2xl:[&>li>a]:!px-3' : 'gap-0.5 sm:gap-1 xl:gap-1.5'}`}>
                                 <li className="h-full border-r border-white/10 flex items-center pr-1 mr-0.5">
                                     <button
                                         onClick={() => setIsSidebarOpen(true)}
@@ -252,13 +252,45 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                     </Link>
                                 </li>
                                 <li className="h-full flex items-center">
-                                    <Link 
-                                        to={`${homeUrl}/tin-tuc`} 
+                                    <Link
+                                        to={`${homeUrl}/tin-tuc`}
                                         className="h-full flex items-center px-2 xl:px-2.5 2xl:px-3 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap"
                                     >
                                         Tin tức
                                     </Link>
                                 </li>
+                                {showMultimedia && (
+                                    <>
+                                        {/* Multimedia: dropdown giống Cổng Pháp luật quốc gia */}
+                                        <li className="h-full flex items-center relative group">
+                                            <Link
+                                                to={`${homeUrl}/multimedia`}
+                                                className="h-full flex items-center gap-1 px-2 xl:px-2.5 2xl:px-3 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap"
+                                            >
+                                                Multimedia
+                                                <ChevronDown size={13} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />
+                                            </Link>
+                                            <div className="absolute top-full left-1/2 -translate-x-1/2 pt-1 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[110]">
+                                                <div className="bg-[#0a1e3f] shadow-2xl rounded-lg py-1.5 border border-cyan-500/30 overflow-hidden">
+                                                    {[
+                                                        { tab: 'video', label: 'Video', dot: 'bg-cyan-400' },
+                                                        { tab: 'anh', label: 'Ảnh', dot: 'bg-blue-400' },
+                                                        { tab: 'infographic', label: 'Infographic', dot: 'bg-green-400' }
+                                                    ].map((m) => (
+                                                        <Link
+                                                            key={m.tab}
+                                                            to={`${homeUrl}/multimedia?tab=${m.tab}`}
+                                                            className="flex items-center gap-2.5 px-4 py-2 text-[13px] text-gray-200 hover:bg-white/10 hover:text-cyan-400 transition-colors"
+                                                        >
+                                                            <span className={`w-1.5 h-1.5 rounded-full ${m.dot}`}></span>
+                                                            {m.label}
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </>
+                                )}
                                 <li className="h-full flex items-center">
                                     <Link 
                                         to={`${homeUrl}/van-ban`} 
@@ -282,7 +314,7 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                         to={`${homeUrl}/pho-bien-giao-duc`} 
                                         className="h-full flex items-center px-2 xl:px-2.5 2xl:px-3 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap"
                                     >
-                                        Phổ biến giáo dục pháp luật
+                                        Phổ biến, giáo dục pháp luật
                                     </Link>
                                 </li>
                                 <li className="h-full flex items-center">
@@ -343,7 +375,7 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                             </li>
                                             <li>
                                                 <Link to="/pho-bien-giao-duc" className="flex items-center gap-3 px-6 py-2.5 hover:bg-white/5 hover:text-cyan-400 transition-colors">
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>Phổ biến giáo dục pháp luật
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>Phổ biến, giáo dục pháp luật
                                                 </Link>
                                             </li>
                                         </ul>
@@ -532,7 +564,7 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                 to="/pho-bien-giao-duc"
                                 className="whitespace-nowrap text-white hover:text-yellow-300 hover:bg-white/10 px-3 py-1 rounded-md transition-all duration-200"
                             >
-                                Phổ biến giáo dục Pháp luật
+                                Phổ biến, giáo dục Pháp luật
                             </Link>
 
                             {/* Khảo sát Dropdown (2 mục con như menu dọc) */}
@@ -623,13 +655,24 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                 >
                                     Giới thiệu
                                 </Link>
-                                <Link 
-                                    to={`${homeUrl}/tin-tuc`} 
-                                    onClick={() => setIsSidebarOpen(false)} 
+                                <Link
+                                    to={`${homeUrl}/tin-tuc`}
+                                    onClick={() => setIsSidebarOpen(false)}
                                     className="px-5 py-3.5 border-b border-white/5 font-semibold hover:bg-white/5 transition-colors"
                                 >
                                     Tin tức
                                 </Link>
+                                {showMultimedia && (
+                                    <>
+                                        <Link
+                                            to={`${homeUrl}/multimedia`}
+                                            onClick={() => setIsSidebarOpen(false)}
+                                            className="px-5 py-3.5 border-b border-white/5 font-semibold hover:bg-white/5 transition-colors"
+                                        >
+                                            Multimedia
+                                        </Link>
+                                    </>
+                                )}
                                 <Link 
                                     to={`${homeUrl}/van-ban`} 
                                     onClick={() => setIsSidebarOpen(false)} 
@@ -651,7 +694,7 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                     onClick={() => setIsSidebarOpen(false)} 
                                     className="px-5 py-3.5 border-b border-white/5 font-medium hover:bg-white/5 transition-colors"
                                 >
-                                    Phổ biến giáo dục pháp luật
+                                    Phổ biến, giáo dục pháp luật
                                 </Link>
                                 <Link 
                                     to={`${homeUrl}/tro-giup-phap-ly`} 
@@ -701,7 +744,7 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                     <div className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${mobileNavExpanded.tienIch ? 'max-h-96' : 'max-h-0'}`}>
                                         <Link to="/tin-tuc/noi-bat" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tin tức nổi bật</Link>
                                         <Link to="/tin-tuc/toa-dam-su-kien" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Tọa đàm - Sự kiện</Link>
-                                        <Link to="/pho-bien-giao-duc" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Phổ biến giáo dục pháp luật</Link>
+                                        <Link to="/pho-bien-giao-duc" onClick={() => setIsSidebarOpen(false)} className="block px-8 py-3 text-sm text-gray-300 hover:text-white hover:bg-white/5">Phổ biến, giáo dục pháp luật</Link>
                                     </div>
                                 </div>
 

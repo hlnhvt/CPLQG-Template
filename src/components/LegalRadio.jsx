@@ -17,7 +17,7 @@ const LegalRadio = () => {
         },
         {
             img: '/thumb1.png',
-            title: 'Sáng kiến Hội đồng phối hợp phổ biến giáo dục pháp luật năm 2025',
+            title: 'Sáng kiến Hội đồng phối hợp phổ biến, giáo dục pháp luật năm 2025',
             desc: 'Hội đồng phối hợp phổ biến, giáo dục pháp luật trung ương vừa ban hành kế hoạch triển khai các mô hình mới...',
             date: 'Thứ Ba, 26/08/2025'
         }

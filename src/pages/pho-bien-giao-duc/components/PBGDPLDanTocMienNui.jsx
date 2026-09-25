@@ -15,7 +15,7 @@ export default function PBGDPLDanTocMienNui() {
     const generateNewsItem = (id, title, date, excerpt, image) => ({ id, title, date, excerpt, image });
 
     const statsData = [
-        generateNewsItem(1, 'Thống kê kết quả phổ biến giáo dục pháp luật quý III năm 2023', '20/10/2023 14:00', 'Báo cáo chi tiết về số lượng các đợt tuyên truyền, người tham gia tại các địa bàn vùng sâu vùng xa.', img1),
+        generateNewsItem(1, 'Thống kê kết quả phổ biến, giáo dục pháp luật quý III năm 2023', '20/10/2023 14:00', 'Báo cáo chi tiết về số lượng các đợt tuyên truyền, người tham gia tại các địa bàn vùng sâu vùng xa.', img1),
         generateNewsItem(2, 'Tỷ lệ xã, phường đạt chuẩn tiếp cận pháp luật tại khu vực miền núi', '15/09/2023 09:30', 'Phân tích số liệu và xu hướng biến động số lượng cấp xã đạt chuẩn tiếp cận pháp luật qua các năm.', img2),
         generateNewsItem(3, 'Báo cáo hiệu quả các mô hình hòa giải ở cơ sở vùng đồng bào DTTS', '10/08/2023 15:15', 'Tổng kết số liệu các vụ việc được hòa giải thành công thông qua vai trò của già làng, trưởng bản.', img3),
         generateNewsItem(4, 'Tình hình cấp phát tài liệu pháp luật miễn phí cho người dân nông thôn', '05/07/2023 10:45', 'Số liệu thống kê lượng tài liệu, tờ rơi, sách pháp luật được đưa đến tay đồng bào các dân tộc.', img4),
@@ -23,7 +23,7 @@ export default function PBGDPLDanTocMienNui() {
 
     const vanBanData = [
         generateNewsItem(1, 'Thông tư hướng dẫn công tác PBGDPL vùng đồng bào dân tộc thiểu số', '20/10/2023 09:30', 'Quy định chi tiết các biện pháp, hình thức PBGDPL phù hợp với phong tục tập quán.', img1),
-        generateNewsItem(2, 'Kế hoạch triển khai Đề án PBGDPL cho người dân nông thôn và đồng bào DTTS', '15/08/2023 14:15', 'Tập trung nguồn lực đẩy mạnh công tác phổ biến giáo dục pháp luật tại các xã đặc biệt khó khăn.', img2),
+        generateNewsItem(2, 'Kế hoạch triển khai Đề án PBGDPL cho người dân nông thôn và đồng bào DTTS', '15/08/2023 14:15', 'Tập trung nguồn lực đẩy mạnh công tác phổ biến, giáo dục pháp luật tại các xã đặc biệt khó khăn.', img2),
         generateNewsItem(3, 'Quyết định phê duyệt Chương trình mục tiêu quốc gia phát triển KTXH vùng DTTS', '10/05/2023 08:00', 'Tạo đà phát triển kinh tế, đi đôi với nâng cao ý thức chấp hành pháp luật cho bà con.', img3),
         generateNewsItem(4, 'Nghị quyết về đẩy mạnh phát triển nguồn nhân lực các dân tộc thiểu số', '05/04/2023 10:45', 'Đẩy mạnh tuyên truyền pháp luật và đào tạo kỹ năng cho cán bộ làm công tác phổ biến pháp luật cơ sở.', img4),
     ];
@@ -126,7 +126,7 @@ export default function PBGDPLDanTocMienNui() {
                 <div className="flex items-center gap-2 text-sm text-gray-500 mb-4 font-medium">
                     <span className="text-blue-600 cursor-pointer">Trang chủ</span>
                     <ChevronRight size={14} />
-                    <span className="text-blue-600 cursor-pointer">Phổ biến giáo dục pháp luật</span>
+                    <span className="text-blue-600 cursor-pointer">Phổ biến, giáo dục pháp luật</span>
                     <ChevronRight size={14} />
                     <span>{title}</span>
                 </div>
