@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ChevronRight, Calendar, ArrowRight, ArrowLeft } from 'lucide-react';
+import LaoCaiV2SearchSortBar, { filterSortItems } from '../../../../components/laocaiV2/LaoCaiV2SearchSortBar';
 
-export default function HoaGiaiCoSoList({ category, onBack }) {
+export default function HoaGiaiCoSoList({ category, onBack, hideParentCrumb = false }) {
     const images = [
         'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=600&h=400',
         'https://images.unsplash.com/photo-1555848962-6e79363ec58f?auto=format&fit=crop&q=80&w=600&h=400',
@@ -21,16 +22,23 @@ export default function HoaGiaiCoSoList({ category, onBack }) {
 
     const mockItems = Array.from({ length: 6 }, (_, i) => generateNewsItem(i + 1));
     const [currentPage, setCurrentPage] = useState(1);
+    const [query, setQuery] = useState('');
+    const [sort, setSort] = useState('newest');
+    const shownItems = filterSortItems(mockItems, query, sort);
 
     return (
         <div className="flex flex-col gap-6 font-sans">
             {/* Header / Breadcrumbs */}
             <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-2">
                 <div className="flex items-center gap-2 text-sm text-gray-500 mb-4 font-medium flex-wrap">
-                    <span className="text-blue-600 cursor-pointer hover:underline">Trang chủ</span>
-                    <ChevronRight size={14} />
-                    <span className="text-blue-600 cursor-pointer hover:underline">Phổ biến, giáo dục pháp luật</span>
-                    <ChevronRight size={14} />
+                    {!hideParentCrumb && (
+                        <>
+                        <span className="text-blue-600 cursor-pointer hover:underline">Trang chủ</span>
+                        <ChevronRight size={14} />
+                        <span className="text-blue-600 cursor-pointer hover:underline">Phổ biến, giáo dục pháp luật</span>
+                        <ChevronRight size={14} />
+                        </>
+                    )}
                     <span 
                         className="text-blue-600 cursor-pointer hover:underline"
                         onClick={onBack}
@@ -48,13 +56,28 @@ export default function HoaGiaiCoSoList({ category, onBack }) {
                     >
                         <ArrowLeft size={20} />
                     </button>
-                    <h1 className="text-2xl md:text-3xl font-extrabold text-[#1b2b49] tracking-tight">{category}</h1>
+                    <h1 className="text-2xl md:text-3xl font-bold text-[#1b2b49] tracking-tight">{category}</h1>
                 </div>
             </div>
 
+            {/* Tìm kiếm + sắp xếp */}
+            <LaoCaiV2SearchSortBar
+                query={query}
+                onQueryChange={setQuery}
+                sort={sort}
+                onSortChange={setSort}
+                placeholder="Tìm vụ việc hòa giải theo tên, nội dung..."
+                resultCount={shownItems.length}
+            />
+
             {/* List Articles */}
             <div className="flex flex-col gap-5">
-                {mockItems.map((item) => (
+                {shownItems.length === 0 && (
+                    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-10 text-center text-sm text-gray-400 italic">
+                        Không có kết quả phù hợp với từ khóa tìm kiếm.
+                    </div>
+                )}
+                {shownItems.map((item) => (
                     <div key={item.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col md:flex-row h-auto md:h-[240px] group cursor-pointer hover:shadow-md transition-shadow">
                         <div className="md:w-[320px] shrink-0 overflow-hidden relative border-r border-gray-100">
                             <img 

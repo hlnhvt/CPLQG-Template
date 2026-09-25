@@ -11,6 +11,14 @@ export const LAOCAI_V2_NEWS_CATEGORIES = [
     { id: 'tu-phap', label: 'Hoạt động Tư pháp' },
     { id: 'van-ban', label: 'Văn bản & Chính sách mới' },
     { id: 'nghien-cuu', label: 'Nghiên cứu & Trao đổi' },
+    // Các chuyên mục chuyển từ trang PBGDPL cũ (pbgdpl.laocai.gov.vn)
+    { id: 'de-an-pbgdpl', label: 'Đề án PBGDPL' },
+    { id: 'ngay-phap-luat', label: 'Ngày Pháp luật (09/11)' },
+    { id: 'chuan-tiep-can', label: 'Chuẩn tiếp cận pháp luật' },
+    { id: 'huong-dan-nghiep-vu', label: 'Hướng dẫn nghiệp vụ' },
+    { id: 'bao-cao-vien', label: 'Báo cáo viên, tuyên truyền viên' },
+    { id: 'cuoc-thi', label: 'Cuộc thi, hội thi' },
+    { id: 'an-toan-giao-thong', label: 'An toàn giao thông' },
 ];
 
 // Thanh chuyên mục tin tức: nổi khối nhẹ bằng đổ bóng, không dính (sticky) để không che nội dung khi đọc

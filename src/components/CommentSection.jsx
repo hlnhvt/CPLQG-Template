@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { User, Mail, Phone, UploadCloud, MessageSquare, Flag, Edit3, Trash2 } from 'lucide-react';
 
-const CommentSection = () => {
-    const [comments, setComments] = useState([
+const CommentSection = ({ initialComments } = {}) => {
+    const [comments, setComments] = useState(initialComments || [
         {
             id: 1,
             author: "Trần Văn A",

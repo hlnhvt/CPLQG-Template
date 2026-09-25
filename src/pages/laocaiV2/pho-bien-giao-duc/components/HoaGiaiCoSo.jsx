@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ChevronRight, Newspaper, BarChart2, Calendar, ArrowRight, Search, X } from 'lucide-react';
 import HoaGiaiCoSoList from './HoaGiaiCoSoList';
 
-export default function HoaGiaiCoSo() {
+export default function HoaGiaiCoSo({ hideHeader = false } = {}) {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const title = "Hòa giải ở Cơ sở";
 
@@ -71,13 +71,15 @@ export default function HoaGiaiCoSo() {
             <HoaGiaiCoSoList 
                 category={selectedCategory} 
                 onBack={() => setSelectedCategory(null)} 
+                hideParentCrumb={hideHeader}
             />
         );
     }
 
     return (
         <div className="flex flex-col gap-6 font-sans">
-            {/* Header / Breadcrumbs */}
+            {/* Header / Breadcrumbs (ẩn khi dùng làm trang riêng trên nav, đã có khối mô tả đầu trang) */}
+            {!hideHeader && (
             <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-2">
                 <div className="flex items-center gap-2 text-sm text-gray-500 mb-4 font-medium">
                     <span className="text-blue-600 cursor-pointer hover:underline">Trang chủ</span>
@@ -86,8 +88,10 @@ export default function HoaGiaiCoSo() {
                     <ChevronRight size={14} />
                     <span>{title}</span>
                 </div>
-                <h1 className="text-2xl md:text-3xl font-extrabold text-[#1b2b49] tracking-tight">{title}</h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-[#1b2b49] tracking-tight">{title}</h1>
             </div>
+            )}
+
 
             {/* 1. Vụ việc hòa giải điển hình */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">

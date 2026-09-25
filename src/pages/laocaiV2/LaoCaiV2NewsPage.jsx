@@ -186,7 +186,7 @@ const NewsSection = ({ label, data }) => {
                     {left.map((item) => (
                         <Link
                             key={item.id}
-                            to={`/news/${item.id}`}
+                            to={`/lao-cai-v2/tin-tuc/chi-tiet/${item.id}`}
                             className="flex items-start gap-3 group border-b border-gray-100 pb-4 last:border-0 last:pb-0"
                         >
                             <div className="w-1/3 shrink-0">
@@ -205,7 +205,7 @@ const NewsSection = ({ label, data }) => {
                 </div>
 
                 {/* Center: featured big */}
-                <Link to={`/news/${featured.id}`} className="lg:col-span-2 group flex flex-col">
+                <Link to={`/lao-cai-v2/tin-tuc/chi-tiet/${featured.id}`} className="lg:col-span-2 group flex flex-col">
                     <div className="w-full mb-4 shrink-0">
                         <Image16x9
                             src={featured.thumb}
@@ -231,7 +231,7 @@ const NewsSection = ({ label, data }) => {
                     {right.map((item) => (
                         <Link
                             key={item.id}
-                            to={`/news/${item.id}`}
+                            to={`/lao-cai-v2/tin-tuc/chi-tiet/${item.id}`}
                             className="group flex flex-col border-b border-gray-100 pb-4 last:border-0 last:pb-0"
                         >
                             <div className="w-full mb-3 shrink-0">
@@ -267,7 +267,7 @@ const FeaturedGridBlock = ({ label, data }) => {
     return (
         <section className="mb-12">
             <BlockHeading label={label} />
-            <Link to={`/news/${featured.id}`} className="flex flex-col md:flex-row items-start gap-6 group border-b border-gray-100 pb-8 mb-8">
+            <Link to={`/lao-cai-v2/tin-tuc/chi-tiet/${featured.id}`} className="flex flex-col md:flex-row items-start gap-6 group border-b border-gray-100 pb-8 mb-8">
                 <div className="w-full md:w-[50%] shrink-0">
                     <Image16x9 src={featured.thumb} alt={featured.title} className="rounded-lg shadow-sm border border-gray-100" />
                 </div>
@@ -286,7 +286,7 @@ const FeaturedGridBlock = ({ label, data }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {subs.map((item) => (
-                    <Link key={item.id} to={`/news/${item.id}`} className="group flex flex-col">
+                    <Link key={item.id} to={`/lao-cai-v2/tin-tuc/chi-tiet/${item.id}`} className="group flex flex-col">
                         <div className="w-full shrink-0 mb-3">
                             <Image16x9 src={item.thumb} alt={item.title} className="rounded-lg" />
                         </div>
@@ -311,7 +311,7 @@ const CompactListColumn = ({ label, data }) => {
     return (
         <div>
             <BlockHeading label={label} />
-            <Link to={`/news/${featured.id}`} className="flex items-start gap-4 group mb-6 border-b border-gray-100 pb-6">
+            <Link to={`/lao-cai-v2/tin-tuc/chi-tiet/${featured.id}`} className="flex items-start gap-4 group mb-6 border-b border-gray-100 pb-6">
                 <div className="w-[50%] shrink-0">
                     <Image16x9 src={featured.thumb} alt={featured.title} className="rounded" />
                 </div>
@@ -326,7 +326,7 @@ const CompactListColumn = ({ label, data }) => {
             </Link>
             <div className="space-y-4">
                 {left.slice(0, 2).map((item) => (
-                    <Link key={item.id} to={`/news/${item.id}`} className="flex items-start gap-4 group border-b border-gray-100 pb-4 last:border-0 last:pb-0">
+                    <Link key={item.id} to={`/lao-cai-v2/tin-tuc/chi-tiet/${item.id}`} className="flex items-start gap-4 group border-b border-gray-100 pb-4 last:border-0 last:pb-0">
                         <div className="w-1/3 shrink-0">
                             <Image16x9 src={item.thumb} alt={item.title} className="rounded" />
                         </div>

@@ -23,7 +23,11 @@ export default function GenericArticleList({ title, items }) {
                     <Link to={`/lao-cai-v2/pho-bien-giao-duc/tin-tuc/${item.id || 1}`} key={idx} className="group flex flex-col border border-gray-100 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300 bg-white hover:-translate-y-1">
                         {/* Image Placeholder */}
                         <div className="h-48 bg-slate-100 flex items-center justify-center text-slate-300 group-hover:bg-blue-50 transition-colors relative overflow-hidden">
-                            <ImageIcon size={48} className="opacity-50 group-hover:scale-110 transition-transform duration-500" />
+                            {item.image ? (
+                                <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                            ) : (
+                                <ImageIcon size={48} className="opacity-50 group-hover:scale-110 transition-transform duration-500" />
+                            )}
                             <div className="absolute top-3 left-3 bg-blue-500 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">
                                 {item.category}
                             </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ChevronRight, Calendar, ArrowRight, Book, BookOpen, Bookmark, Library, FileText } from 'lucide-react';
 import TuSachPhapLuatList from './TuSachPhapLuatList';
 
-export default function TuSachPhapLuat() {
+export default function TuSachPhapLuat({ hideHeader = false } = {}) {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const title = "Tủ sách pháp luật";
 
@@ -113,13 +113,15 @@ export default function TuSachPhapLuat() {
             <TuSachPhapLuatList
                 category={selectedCategory}
                 onBack={() => setSelectedCategory(null)}
+                hideParentCrumb={hideHeader}
             />
         );
     }
 
     return (
         <div className="flex flex-col gap-6 font-sans">
-            {/* Header / Breadcrumbs */}
+            {/* Header / Breadcrumbs (ẩn khi dùng làm trang riêng trên nav, đã có khối mô tả đầu trang) */}
+            {!hideHeader && (
             <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-2">
                 <div className="flex items-center gap-2 text-sm text-gray-500 mb-4 font-medium">
                     <span className="text-blue-600 cursor-pointer hover:underline">Trang chủ</span>
@@ -128,8 +130,10 @@ export default function TuSachPhapLuat() {
                     <ChevronRight size={14} />
                     <span>{title}</span>
                 </div>
-                <h1 className="text-2xl md:text-3xl font-extrabold text-[#1b2b49] tracking-tight">{title}</h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-[#1b2b49] tracking-tight">{title}</h1>
             </div>
+            )}
+
 
             {/* 1. Tài liệu, đề cương */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">

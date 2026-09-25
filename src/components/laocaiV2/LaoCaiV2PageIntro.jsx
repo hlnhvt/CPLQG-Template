@@ -10,12 +10,14 @@ const LaoCaiV2PageIntro = ({ crumbs = [], title, subtitle }) => (
         <div className="bg-white border-b border-gray-200">
             <div className="container mx-auto px-4 max-w-[1286px] py-3 text-xs sm:text-sm text-gray-500 flex items-center gap-2 flex-wrap">
                 <Link to="/lao-cai-v2" className="hover:text-blue-700">Trang chủ Lào Cai</Link>
-                {crumbs.map((c) => (
+                {crumbs.map((c, i) => (
                     <React.Fragment key={c.label}>
                         <ChevronRight size={14} />
                         {c.to
                             ? <Link to={c.to} className="hover:text-blue-700">{c.label}</Link>
-                            : <span className="text-gray-800 font-semibold">{c.label}</span>}
+                            : i === crumbs.length - 1
+                                ? <span className="text-gray-800 font-semibold">{c.label}</span>
+                                : <span>{c.label}</span>}
                     </React.Fragment>
                 ))}
             </div>

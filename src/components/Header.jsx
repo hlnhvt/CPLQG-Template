@@ -29,7 +29,7 @@ const getInitials = (name) => {
     return parts[parts.length - 1].charAt(0).toUpperCase();
 };
 
-const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSubSite = false, hideDraftNav = false, showMultimedia = false }) => {
+const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSubSite = false, hideDraftNav = false, showMultimedia = false, specialNav = null }) => {
     const { user, logout } = useAuth();
     const displayUser = user;
 
@@ -215,9 +215,9 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
             {/* Bottom Bar - Dark Blue Navigation (Desktop) */}
             <div className="hidden xl:block bg-[var(--bg-header-bottom)] text-[var(--text-on-blue)] transition-colors duration-200 relative z-[100]">
                 <div className="w-full max-w-[1350px] mx-auto px-4">
-                    <nav className={`w-full flex items-center ${isSubSite ? 'justify-start' : 'justify-between'} h-[46px] ${showMultimedia ? 'text-[12px] 2xl:text-[13px]' : 'text-[12.5px] xl:text-[13px]'} font-medium relative z-50 tracking-tight`}>
+                    <nav className={`w-full flex items-center ${isSubSite ? 'justify-start' : 'justify-between'} h-[46px] ${showMultimedia && !specialNav ? 'text-[12px] 2xl:text-[13px]' : specialNav ? 'text-[13px] 2xl:text-[13.5px]' : 'text-[12.5px] xl:text-[13px]'} font-medium relative z-50 tracking-tight`}>
                         {isSubSite ? (
-                            <ul className={`flex items-center justify-start h-full ${showMultimedia ? 'gap-0 2xl:gap-1.5 [&>li>a]:!px-[7px] 2xl:[&>li>a]:!px-3' : 'gap-0.5 sm:gap-1 xl:gap-1.5'}`}>
+                            <ul className={`flex items-center h-full ${specialNav ? 'w-full justify-between [&>li>a]:!px-2.5 2xl:[&>li>a]:!px-3' : showMultimedia ? 'justify-start gap-0 2xl:gap-1.5 [&>li>a]:!px-[7px] 2xl:[&>li>a]:!px-3' : 'justify-start gap-0.5 sm:gap-1 xl:gap-1.5'}`}>
                                 <li className="h-full border-r border-white/10 flex items-center pr-1 mr-0.5">
                                     <button
                                         onClick={() => setIsSidebarOpen(true)}
@@ -309,6 +309,41 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                         </Link>
                                     </li>
                                 )}
+                                {specialNav ? specialNav.map((item) => (
+                                    <li key={item.path || item.label} className={`h-full flex items-center ${item.children ? 'relative group' : ''}`}>
+                                        {item.path ? (
+                                            <Link
+                                                to={`${homeUrl}/${item.path}`}
+                                                className={`h-full flex items-center ${item.children ? 'gap-1' : ''} px-2 xl:px-2.5 2xl:px-3 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap`}
+                                            >
+                                                {item.label}
+                                                {item.children && <ChevronDown size={13} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />}
+                                            </Link>
+                                        ) : (
+                                            <span className="h-full flex items-center gap-1 px-2.5 2xl:px-3 hover:bg-white/10 transition-colors border-b-2 border-transparent whitespace-nowrap cursor-default">
+                                                {item.label}
+                                                {item.children && <ChevronDown size={13} className="opacity-80 group-hover:rotate-180 transition-transform duration-200" />}
+                                            </span>
+                                        )}
+                                        {item.children && (
+                                            <div className="absolute top-full left-1/2 -translate-x-1/2 pt-1 w-[300px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[110]">
+                                                <div className="bg-[#0a1e3f] shadow-2xl rounded-lg py-1.5 border border-cyan-500/30 overflow-hidden">
+                                                    {item.children.map((c) => (
+                                                        <Link
+                                                            key={c.path}
+                                                            to={`${homeUrl}/${c.path}`}
+                                                            className="flex items-center gap-2.5 px-4 py-2 text-[13px] text-gray-200 hover:bg-white/10 hover:text-cyan-400 transition-colors"
+                                                        >
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"></span>
+                                                            {c.label}
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </li>
+                                )) : (
+                                <>
                                 <li className="h-full flex items-center">
                                     <Link 
                                         to={`${homeUrl}/pho-bien-giao-duc`} 
@@ -333,6 +368,8 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                         Hỗ trợ pháp lý doanh nghiệp
                                     </Link>
                                 </li>
+                                </>
+                                )}
                                 <li className="h-full flex items-center">
                                     <Link 
                                         to={`${homeUrl}/hoi-dap`} 
@@ -689,6 +726,32 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                         Lấy ý kiến dự thảo
                                     </Link>
                                 )}
+                                {specialNav ? specialNav.map((item) => (
+                                    <React.Fragment key={item.path || item.label}>
+                                        {item.path ? (
+                                            <Link
+                                                to={`${homeUrl}/${item.path}`}
+                                                onClick={() => setIsSidebarOpen(false)}
+                                                className="px-5 py-3.5 border-b border-white/5 font-medium hover:bg-white/5 transition-colors"
+                                            >
+                                                {item.label}
+                                            </Link>
+                                        ) : (
+                                            <div className="px-5 py-3.5 border-b border-white/5 font-medium text-gray-300">{item.label}</div>
+                                        )}
+                                        {item.children && item.children.map((c) => (
+                                            <Link
+                                                key={c.path}
+                                                to={`${homeUrl}/${c.path}`}
+                                                onClick={() => setIsSidebarOpen(false)}
+                                                className="block px-8 py-2.5 text-sm text-gray-300 border-b border-white/5 hover:text-white hover:bg-white/5"
+                                            >
+                                                {c.label}
+                                            </Link>
+                                        ))}
+                                    </React.Fragment>
+                                )) : (
+                                <>
                                 <Link 
                                     to={`${homeUrl}/pho-bien-giao-duc`} 
                                     onClick={() => setIsSidebarOpen(false)} 
@@ -710,6 +773,8 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                 >
                                     Hỗ trợ pháp lý doanh nghiệp
                                 </Link>
+                                </>
+                                )}
                                 <Link 
                                     to={`${homeUrl}/hoi-dap`} 
                                     onClick={() => setIsSidebarOpen(false)} 

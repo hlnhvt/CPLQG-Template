@@ -6,26 +6,17 @@ import {
 } from 'lucide-react';
 import LaoCaiV2Header from '../../components/laocaiV2/LaoCaiV2Header';
 import LaoCaiV2Footer from '../../components/laocaiV2/LaoCaiV2Footer';
-import LaoCaiV2NewsSubNav from '../../components/laocaiV2/LaoCaiV2NewsSubNav';
+import LaoCaiV2NewsSubNav, { LAOCAI_V2_NEWS_CATEGORIES } from '../../components/laocaiV2/LaoCaiV2NewsSubNav';
 
 /* ------------------------------------------------------------------ */
 /*  Category config                                                       */
 /* ------------------------------------------------------------------ */
-export const LAOCAI_NEWS_CATEGORIES = [
-    { id: 'tin-hoat-dong',  label: 'Tin hoạt động' },
-    { id: 'chinh-sach',     label: 'Chính sách Lào Cai' },
-    { id: 'pbgdpl',         label: 'Phổ biến, giáo dục pháp luật' },
-    { id: 'doanh-nghiep',   label: 'Hỗ trợ doanh nghiệp' },
-    { id: 'tro-giup',       label: 'Trợ giúp pháp lý' },
-    { id: 'tu-phap',        label: 'Hoạt động Tư pháp' },
-    { id: 'van-ban',        label: 'Văn bản & Chính sách mới' },
-    { id: 'nghien-cuu',     label: 'Nghiên cứu & Trao đổi' },
-];
+export const LAOCAI_NEWS_CATEGORIES = LAOCAI_V2_NEWS_CATEGORIES;
 
 /* ------------------------------------------------------------------ */
 /*  Mock articles per category                                           */
 /* ------------------------------------------------------------------ */
-const CATEGORY_ARTICLES = {
+export const CATEGORY_ARTICLES = {
     'tin-hoat-dong': [
         { id: 101, title: 'UBND tỉnh Lào Cai tổ chức Hội nghị tổng kết công tác tư pháp năm 2025, triển khai nhiệm vụ 2026', summary: 'UBND tỉnh Lào Cai vừa tổ chức hội nghị tổng kết đánh giá kết quả đạt được và đề ra phương hướng trọng tâm cho năm 2026 nhằm tiếp tục nâng cao chất lượng dịch vụ công và cải cách hành chính tư pháp.', date: '23/03/2026', views: 2450, image: '/thumb1.png', tag: 'Hội nghị' },
         { id: 102, title: 'Sở Tư pháp tỉnh Lào Cai ký kết quy chế phối hợp với Đoàn Luật sư tỉnh về dịch vụ pháp lý công', summary: 'Biên bản hợp tác được ký kết nhằm nâng cao chất lượng cung cấp dịch vụ pháp lý miễn phí cho người dân, hỗ trợ doanh nghiệp và bảo vệ quyền lợi hợp pháp của người yếu thế.', date: '22/03/2026', views: 1820, image: '/thumb2.png', tag: 'Hợp tác' },
@@ -89,6 +80,49 @@ const CATEGORY_ARTICLES = {
         { id: 805, title: 'Trao đổi về kỹ năng lập luận pháp lý trong giải quyết tranh chấp hành chính tại tòa án', summary: 'Bài viết chia sẻ kinh nghiệm thực tiễn và phương pháp tiếp cận hiệu quả trong việc xây dựng lập luận pháp lý, thu thập chứng cứ và bảo vệ quyền lợi khách hàng trong các vụ án hành chính.', date: '13/03/2026', views: 1650, image: '/thumb1.png', tag: 'Kỹ năng' },
         { id: 806, title: 'Hành lang kinh tế Lào Cai – Hải Phòng: Cơ chế liên kết vùng cho tỉnh cửa ngõ biên giới', summary: 'Đề xuất khung pháp lý và cơ chế điều phối liên vùng cho vùng trung du và miền núi phía Bắc, nhằm tối ưu hóa phân bổ nguồn lực và thúc đẩy phát triển kinh tế toàn vùng.', date: '12/03/2026', views: 1340, image: '/thumb2.png', tag: 'Liên vùng' },
     ],
+    // Chuyên mục chuyển từ trang PBGDPL cũ (dữ liệu mẫu)
+    'de-an-pbgdpl': [
+        { id: 901, title: 'Lào Cai triển khai các đề án phổ biến, giáo dục pháp luật giai đoạn 2026 – 2030', summary: 'UBND tỉnh ban hành kế hoạch triển khai các đề án PBGDPL, phân công nhiệm vụ cho các sở, ngành và UBND các xã, phường trên địa bàn tỉnh.', date: '15/03/2026', views: 1200, image: '/thumb1.png', tag: 'Kế hoạch' },
+        { id: 902, title: 'Sơ kết thực hiện đề án tăng cường PBGDPL cho đồng bào dân tộc thiểu số vùng cao', summary: 'Hội nghị đánh giá kết quả, khó khăn trong triển khai tại các xã vùng cao, biên giới và đề xuất giải pháp cho giai đoạn tiếp theo.', date: '14/03/2026', views: 1337, image: '/thumb2.png', tag: 'Sơ kết' },
+        { id: 903, title: 'Hướng dẫn xây dựng mô hình điểm về PBGDPL tại thôn, bản theo đề án của tỉnh', summary: 'Sở Tư pháp hướng dẫn các xã lựa chọn thôn, bản làm điểm, xây dựng nội dung tuyên truyền phù hợp phong tục, tập quán địa phương.', date: '13/03/2026', views: 1474, image: '/thumb3.png', tag: 'Hướng dẫn' },
+        { id: 904, title: 'Tập huấn triển khai đề án PBGDPL cho cán bộ tư pháp cấp xã sau sắp xếp', summary: 'Lớp tập huấn giúp cán bộ tư pháp cấp xã nắm vững mục tiêu, nhiệm vụ của các đề án PBGDPL và cách tổ chức thực hiện tại cơ sở.', date: '12/03/2026', views: 1611, image: '/thumb1.png', tag: 'Tập huấn' },
+    ],
+    'ngay-phap-luat': [
+        { id: 1001, title: 'Lào Cai hưởng ứng Ngày Pháp luật nước Cộng hòa xã hội chủ nghĩa Việt Nam 09/11', summary: 'UBND tỉnh ban hành kế hoạch tổ chức các hoạt động hưởng ứng Ngày Pháp luật với nhiều hình thức phong phú, hướng về cơ sở.', date: '15/03/2026', views: 2159, image: '/thumb2.png', tag: 'Kế hoạch' },
+        { id: 1002, title: 'Mít tinh hưởng ứng Ngày Pháp luật tại Trung tâm Hội nghị tỉnh Lào Cai', summary: 'Buổi mít tinh có sự tham gia của lãnh đạo tỉnh, các sở, ngành, đoàn thể và đông đảo cán bộ, nhân dân trên địa bàn.', date: '14/03/2026', views: 2296, image: '/thumb3.png', tag: 'Sự kiện' },
+        { id: 1003, title: 'Các xã vùng cao tổ chức "Ngày Pháp luật" gắn với sinh hoạt cộng đồng thôn, bản', summary: 'Nhiều xã lồng ghép tuyên truyền pháp luật vào các buổi họp thôn, bản, phiên chợ vùng cao, giúp người dân tiếp cận pháp luật gần gũi.', date: '13/03/2026', views: 2433, image: '/thumb1.png', tag: 'Cơ sở' },
+        { id: 1004, title: 'Hướng dẫn tổ chức Ngày Pháp luật tại cơ quan, đơn vị trên địa bàn tỉnh', summary: 'Sở Tư pháp hướng dẫn nội dung, hình thức tổ chức Ngày Pháp luật phù hợp với chức năng, nhiệm vụ của từng cơ quan, đơn vị.', date: '12/03/2026', views: 2570, image: '/thumb2.png', tag: 'Hướng dẫn' },
+    ],
+    'chuan-tiep-can': [
+        { id: 1101, title: 'Hướng dẫn đánh giá, công nhận xã, phường đạt chuẩn tiếp cận pháp luật năm 2026', summary: 'Sở Tư pháp hướng dẫn quy trình, hồ sơ đánh giá, công nhận xã, phường đạt chuẩn tiếp cận pháp luật theo quy định hiện hành.', date: '15/03/2026', views: 3118, image: '/thumb3.png', tag: 'Hướng dẫn' },
+        { id: 1102, title: 'Lào Cai kiện toàn Hội đồng đánh giá chuẩn tiếp cận pháp luật cấp tỉnh', summary: 'UBND tỉnh quyết định kiện toàn Hội đồng đánh giá chuẩn tiếp cận pháp luật phù hợp với mô hình chính quyền địa phương hai cấp.', date: '14/03/2026', views: 3255, image: '/thumb1.png', tag: 'Kiện toàn' },
+        { id: 1103, title: 'Tháo gỡ khó khăn trong xây dựng xã đạt chuẩn tiếp cận pháp luật tại vùng cao', summary: 'Hội nghị trao đổi các vướng mắc về tiêu chí, chấm điểm và giải pháp hỗ trợ các xã vùng cao, biên giới.', date: '13/03/2026', views: 3392, image: '/thumb2.png', tag: 'Trao đổi' },
+        { id: 1104, title: 'Gắn xây dựng xã đạt chuẩn tiếp cận pháp luật với chương trình nông thôn mới', summary: 'Các địa phương lồng ghép tiêu chí tiếp cận pháp luật vào kế hoạch xây dựng nông thôn mới, nâng cao hiệu quả quản lý bằng pháp luật tại cơ sở.', date: '12/03/2026', views: 3529, image: '/thumb3.png', tag: 'Lồng ghép' },
+    ],
+    'huong-dan-nghiep-vu': [
+        { id: 1201, title: 'Hướng dẫn nghiệp vụ phổ biến, giáo dục pháp luật năm 2026 cho các xã, phường', summary: 'Văn bản hướng dẫn nội dung trọng tâm, hình thức PBGDPL và chế độ báo cáo định kỳ đối với UBND các xã, phường.', date: '15/03/2026', views: 4077, image: '/thumb1.png', tag: 'Hướng dẫn' },
+        { id: 1202, title: 'Hướng dẫn nghiệp vụ hòa giải ở cơ sở sau sắp xếp đơn vị hành chính', summary: 'Sở Tư pháp hướng dẫn kiện toàn tổ hòa giải, bầu hòa giải viên và quản lý hoạt động hòa giải ở thôn, bản, tổ dân phố.', date: '14/03/2026', views: 4214, image: '/thumb2.png', tag: 'Hòa giải' },
+        { id: 1203, title: 'Hướng dẫn xây dựng, quản lý và khai thác Tủ sách pháp luật tại cơ sở', summary: 'Hướng dẫn việc bổ sung tài liệu, số hóa Tủ sách pháp luật và tổ chức cho người dân khai thác thuận tiện.', date: '13/03/2026', views: 4351, image: '/thumb3.png', tag: 'Tủ sách' },
+        { id: 1204, title: 'Hướng dẫn thống kê, báo cáo công tác PBGDPL theo biểu mẫu mới', summary: 'Sở Tư pháp hướng dẫn các cơ quan, đơn vị thực hiện thống kê, báo cáo công tác PBGDPL đúng biểu mẫu và thời hạn.', date: '12/03/2026', views: 4488, image: '/thumb1.png', tag: 'Báo cáo' },
+    ],
+    'bao-cao-vien': [
+        { id: 1301, title: 'Kiện toàn đội ngũ báo cáo viên pháp luật tỉnh Lào Cai năm 2026', summary: 'UBND tỉnh quyết định công nhận, miễn nhiệm báo cáo viên pháp luật cấp tỉnh, bảo đảm cơ cấu hợp lý giữa các lĩnh vực.', date: '15/03/2026', views: 5036, image: '/thumb2.png', tag: 'Kiện toàn' },
+        { id: 1302, title: 'Bồi dưỡng kỹ năng truyền đạt cho tuyên truyền viên pháp luật thôn, bản', summary: 'Lớp bồi dưỡng tập trung kỹ năng nói trước đám đông, sử dụng tài liệu trực quan và tuyên truyền bằng tiếng dân tộc.', date: '14/03/2026', views: 5173, image: '/thumb3.png', tag: 'Bồi dưỡng' },
+        { id: 1303, title: 'Danh sách báo cáo viên pháp luật cấp tỉnh theo lĩnh vực', summary: 'Công khai danh sách báo cáo viên pháp luật cấp tỉnh để các cơ quan, đơn vị, địa phương mời tham gia hoạt động PBGDPL.', date: '13/03/2026', views: 5310, image: '/thumb1.png', tag: 'Danh sách' },
+        { id: 1304, title: 'Phát huy vai trò tuyên truyền viên pháp luật là người có uy tín trong đồng bào dân tộc', summary: 'Nhiều địa phương mời già làng, trưởng bản, người có uy tín làm tuyên truyền viên, giúp pháp luật đến gần hơn với đồng bào.', date: '12/03/2026', views: 5447, image: '/thumb2.png', tag: 'Mô hình' },
+    ],
+    'cuoc-thi': [
+        { id: 1401, title: 'Phát động Cuộc thi tìm hiểu pháp luật trực tuyến tỉnh Lào Cai năm 2026', summary: 'Cuộc thi dành cho cán bộ, công chức, viên chức, người lao động và nhân dân trên địa bàn tỉnh, tổ chức trên Cổng Pháp luật tỉnh.', date: '15/03/2026', views: 5995, image: '/thumb3.png', tag: 'Cuộc thi' },
+        { id: 1402, title: 'Hội thi Hòa giải viên giỏi tỉnh Lào Cai năm 2026', summary: 'Hội thi nhằm nâng cao kỹ năng, nghiệp vụ cho hòa giải viên ở cơ sở và tuyên truyền pháp luật đến người dân.', date: '14/03/2026', views: 6132, image: '/thumb1.png', tag: 'Hội thi' },
+        { id: 1403, title: 'Thể lệ Cuộc thi sáng tác video, infographic tuyên truyền pháp luật', summary: 'Ban Tổ chức công bố thể lệ, thời gian nhận bài và tiêu chí chấm điểm các tác phẩm video, infographic tuyên truyền pháp luật.', date: '13/03/2026', views: 6269, image: '/thumb2.png', tag: 'Thể lệ' },
+        { id: 1404, title: 'Tổng kết, trao giải Cuộc thi tìm hiểu pháp luật dành cho học sinh', summary: 'Lễ tổng kết trao giải cho các tập thể, cá nhân có thành tích xuất sắc trong cuộc thi tìm hiểu pháp luật khối trường học.', date: '12/03/2026', views: 6406, image: '/thumb3.png', tag: 'Trao giải' },
+    ],
+    'an-toan-giao-thong': [
+        { id: 1501, title: 'Tuyên truyền pháp luật về trật tự, an toàn giao thông trên các tuyến đường vùng cao', summary: 'Các lực lượng chức năng phối hợp tuyên truyền quy định về trật tự, an toàn giao thông cho người dân, đặc biệt trên các tuyến đường đèo dốc.', date: '15/03/2026', views: 6954, image: '/thumb1.png', tag: 'Tuyên truyền' },
+        { id: 1502, title: 'Tăng cường phổ biến quy định về nồng độ cồn khi tham gia giao thông', summary: 'Tài liệu hỏi – đáp, infographic về quy định xử lý vi phạm nồng độ cồn được phát hành tới các xã, phường, trường học.', date: '14/03/2026', views: 7091, image: '/thumb2.png', tag: 'Phổ biến' },
+        { id: 1503, title: 'An toàn giao thông cho học sinh trước thềm năm học mới', summary: 'Các trường học phối hợp tổ chức ký cam kết, tuyên truyền kiến thức an toàn giao thông cho học sinh và phụ huynh.', date: '13/03/2026', views: 7228, image: '/thumb3.png', tag: 'Trường học' },
+        { id: 1504, title: 'Tuyên truyền an toàn giao thông cho du khách tại khu du lịch Sa Pa', summary: 'Nội dung tuyên truyền bằng nhiều ngôn ngữ được bố trí tại điểm du lịch, bến xe, giúp du khách nắm rõ quy định khi tham gia giao thông.', date: '12/03/2026', views: 7365, image: '/thumb1.png', tag: 'Du lịch' },
+    ],
 };
 
 const ITEMS_PER_PAGE = 5;
@@ -132,6 +166,9 @@ const LaoCaiV2NewsCategoryPage = () => {
         <div className="font-sans min-h-screen flex flex-col bg-[#f4f7fb]">
             <LaoCaiV2Header />
 
+            {/* Sub Nav: cùng vị trí với trang Tin tức (ngay dưới header) */}
+            <LaoCaiV2NewsSubNav activeId={category.id} />
+
             {/* Breadcrumb */}
             <div className="bg-white border-b border-gray-200">
                 <div className="container mx-auto px-4 max-w-[1286px] py-3 text-xs sm:text-sm text-gray-500 flex items-center gap-2">
@@ -166,8 +203,6 @@ const LaoCaiV2NewsCategoryPage = () => {
                 </div>
             </div>
 
-            {/* Sub Nav */}
-            <LaoCaiV2NewsSubNav activeId={category.id} />
 
             {/* Main */}
             <main className="flex-grow">
@@ -180,7 +215,7 @@ const LaoCaiV2NewsCategoryPage = () => {
                             {/* Featured block */}
                             {featuredMain && (
                                 <div className="mb-10">
-                                    <Link to={`/news/${featuredMain.id}`} className="block group mb-5">
+                                    <Link to={`/lao-cai-v2/tin-tuc/chi-tiet/${featuredMain.id}`} className="block group mb-5">
                                         <div className="relative rounded-xl overflow-hidden aspect-[16/9] bg-gray-200 shadow-md">
                                             <img src={featuredMain.image} alt={featuredMain.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                             <div className="absolute inset-0 bg-gradient-to-t from-[#0d1440] via-black/40 to-transparent" />
@@ -198,7 +233,7 @@ const LaoCaiV2NewsCategoryPage = () => {
                                     </Link>
                                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                                         {featuredSub.map((item) => (
-                                            <Link key={item.id} to={`/news/${item.id}`} className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-100 flex flex-col">
+                                            <Link key={item.id} to={`/lao-cai-v2/tin-tuc/chi-tiet/${item.id}`} className="group bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-100 flex flex-col">
                                                 <div className="aspect-[16/9] overflow-hidden bg-gray-100 relative">
                                                     <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                                     <span className="absolute top-2 left-2 bg-[#2c1b92]/80 backdrop-blur-md text-white text-[10px] uppercase font-bold px-2 py-0.5 rounded">{item.tag}</span>
@@ -224,7 +259,7 @@ const LaoCaiV2NewsCategoryPage = () => {
                                         <p className="text-lg font-medium text-gray-600 mb-1">Chưa có tin tức trong chuyên mục này</p>
                                     </div>
                                 ) : currentArticles.map((article) => (
-                                    <Link key={article.id} to={`/news/${article.id}`}
+                                    <Link key={article.id} to={`/lao-cai-v2/tin-tuc/chi-tiet/${article.id}`}
                                         className="group flex flex-col md:flex-row gap-5 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg p-4 md:p-5 transition-all duration-300 hover:-translate-y-0.5">
                                         <div className="w-full md:w-56 aspect-[16/9] rounded-lg overflow-hidden bg-gray-100 shrink-0 relative">
                                             <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -276,7 +311,7 @@ const LaoCaiV2NewsCategoryPage = () => {
                                 </div>
                                 <div className="divide-y divide-gray-50">
                                     {allArticles.slice(0, 5).map((item) => (
-                                        <Link key={item.id} to={`/news/${item.id}`} className="flex gap-4 p-4 hover:bg-gray-50 transition-colors group">
+                                        <Link key={item.id} to={`/lao-cai-v2/tin-tuc/chi-tiet/${item.id}`} className="flex gap-4 p-4 hover:bg-gray-50 transition-colors group">
                                             <div className="w-20 h-14 rounded-md overflow-hidden bg-gray-100 shrink-0">
                                                 <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                                             </div>

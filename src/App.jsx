@@ -202,6 +202,15 @@ import LaoCaiV2ContactPage from './pages/laocaiV2/LaoCaiV2ContactPage';
 import LaoCaiV2NewsPage from './pages/laocaiV2/LaoCaiV2NewsPage';
 import LaoCaiV2FAQPage from './pages/laocaiV2/LaoCaiV2FAQPage';
 import LaoCaiV2FAQDetailPage from './pages/laocaiV2/LaoCaiV2FAQDetailPage';
+import LaoCaiV2NewsDetailPage from './pages/laocaiV2/LaoCaiV2NewsDetailPage';
+import LaoCaiV2ChiDaoDieuHanhPage from './pages/laocaiV2/pbgdpl-sections/ChiDaoDieuHanhPage';
+import LaoCaiV2HoaGiaiCoSoPage from './pages/laocaiV2/pbgdpl-sections/HoaGiaiCoSoPage';
+import LaoCaiV2TuSachPhapLuatPage from './pages/laocaiV2/pbgdpl-sections/TuSachPhapLuatPage';
+import LaoCaiV2HoiDongPhoiHopPage from './pages/laocaiV2/pbgdpl-sections/HoiDongPhoiHopPage';
+import LaoCaiV2HoiDongPhoiHopDetailPage from './pages/laocaiV2/pbgdpl-sections/HoiDongPhoiHopDetailPage';
+import LaoCaiV2TuyenTruyenVienPage from './pages/laocaiV2/pbgdpl-sections/TuyenTruyenVienPage';
+import LaoCaiV2BaoCaoVienPage from './pages/laocaiV2/pbgdpl-sections/BaoCaoVienPage';
+import LaoCaiV2BaiGiangTrucTuyenPage from './pages/laocaiV2/pbgdpl-sections/BaiGiangTrucTuyenPage';
 import LaoCaiV2NewsCategoryPage from './pages/laocaiV2/LaoCaiV2NewsCategoryPage';
 import LaoCaiV2HotlinePage from './pages/laocaiV2/LaoCaiV2HotlinePage';
 import LaoCaiV2SpecializedLayout from './components/laocaiV2/LaoCaiV2SpecializedLayout';
@@ -296,6 +305,15 @@ const AppLayout = () => {
                     <Route path="/lao-cai-v2/du-thao" element={<LaoCaiV2DraftDocsPage />} />
                     {/* 3 chuyên trang của Cổng Lào Cai mới: clone nguyên thiết kế 3 chuyên trang Cổng Pháp luật quốc gia */}
                     <Route element={<LaoCaiV2SpecializedLayout />}>
+                        <Route path="/lao-cai-v2/tin-tuc/chi-tiet/:id" element={<LaoCaiV2NewsDetailPage />} />
+                        <Route path="/lao-cai-v2/chi-dao-dieu-hanh" element={<LaoCaiV2ChiDaoDieuHanhPage />} />
+                        <Route path="/lao-cai-v2/hoa-giai-co-so" element={<LaoCaiV2HoaGiaiCoSoPage />} />
+                        <Route path="/lao-cai-v2/tu-sach-phap-luat" element={<LaoCaiV2TuSachPhapLuatPage />} />
+                        <Route path="/lao-cai-v2/hoi-dong-phoi-hop" element={<LaoCaiV2HoiDongPhoiHopPage />} />
+                        <Route path="/lao-cai-v2/hoi-dong-phoi-hop/:id" element={<LaoCaiV2HoiDongPhoiHopDetailPage />} />
+                        <Route path="/lao-cai-v2/tuyen-truyen-vien" element={<LaoCaiV2TuyenTruyenVienPage />} />
+                        <Route path="/lao-cai-v2/bao-cao-vien" element={<LaoCaiV2BaoCaoVienPage />} />
+                        <Route path="/lao-cai-v2/bai-giang-truc-tuyen" element={<LaoCaiV2BaiGiangTrucTuyenPage />} />
                         {/* Multimedia: mỗi mục con là một trang riêng (clone từ Cổng Pháp luật quốc gia) */}
                         <Route path="/lao-cai-v2/video" element={<LaoCaiV2VideoGalleryPage />} />
                         <Route path="/lao-cai-v2/video/:id" element={<LaoCaiV2VideoDetailPage />} />
