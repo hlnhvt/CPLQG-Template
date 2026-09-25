@@ -217,7 +217,7 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                 <div className="w-full max-w-[1350px] mx-auto px-4">
                     <nav className={`w-full flex items-center ${isSubSite ? 'justify-start' : 'justify-between'} h-[46px] ${showMultimedia && !specialNav ? 'text-[12px] 2xl:text-[13px]' : specialNav ? 'text-[13px] 2xl:text-[13.5px]' : 'text-[12.5px] xl:text-[13px]'} font-medium relative z-50 tracking-tight`}>
                         {isSubSite ? (
-                            <ul className={`flex items-center h-full ${specialNav ? 'w-full justify-between [&>li>a]:!px-2.5 2xl:[&>li>a]:!px-3' : showMultimedia ? 'justify-start gap-0 2xl:gap-1.5 [&>li>a]:!px-[7px] 2xl:[&>li>a]:!px-3' : 'justify-start gap-0.5 sm:gap-1 xl:gap-1.5'}`}>
+                            <ul className={`flex items-center h-full ${specialNav ? 'justify-start gap-1 [&>li>a]:!px-4 [&>li>span]:!px-4 2xl:[&>li>a]:!px-5 2xl:[&>li>span]:!px-5' : showMultimedia ? 'justify-start gap-0 2xl:gap-1.5 [&>li>a]:!px-[7px] 2xl:[&>li>a]:!px-3' : 'justify-start gap-0.5 sm:gap-1 xl:gap-1.5'}`}>
                                 <li className="h-full border-r border-white/10 flex items-center pr-1 mr-0.5">
                                     <button
                                         onClick={() => setIsSidebarOpen(true)}
