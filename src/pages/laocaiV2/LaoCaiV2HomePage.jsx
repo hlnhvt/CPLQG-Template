@@ -46,8 +46,10 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import LaoCaiV2Header from '../../components/laocaiV2/LaoCaiV2Header';
+import LaoCaiV2HorizontalTicker from '../../components/laocaiV2/LaoCaiV2HorizontalTicker';
 import LaoCaiV2Footer from '../../components/laocaiV2/LaoCaiV2Footer';
 import LaoCaiV2NewlyIssuedDocs from '../../components/laocaiV2/LaoCaiV2NewlyIssuedDocs';
+import FixedBottomCarousel, { LAOCAI_V2_CAROUSEL_ITEMS } from '../../components/FixedBottomCarousel';
 import {
     laocaiV2SiteConfig,
     luatThuDo2024Data,
@@ -347,6 +349,7 @@ const Image16x9 = ({ src, alt, className = "" }) => (
 
 const LaoCaiV2HomePage = () => {
     const [mediaTab, setMediaTab] = useState('video');
+    const [isAnnouncePaused, setIsAnnouncePaused] = useState(false);
 
     useEffect(() => {
         document.title = "Cổng Pháp luật tỉnh Lào Cai";
@@ -359,9 +362,12 @@ const LaoCaiV2HomePage = () => {
         <div className="bg-[#f8fafc] min-h-screen font-sans flex flex-col selection:bg-blue-600 selection:text-white">
             <LaoCaiV2Header />
 
+            {/* THANH TIN TỨC TRÔI NGANG BACKGROUND TRẮNG DƯỚI NAV HEADER */}
+            <LaoCaiV2HorizontalTicker />
+
             {/* BANNER GIỚI THIỆU: MÀU GRADIENT INDIGO HOÀNG GIA (#4f56ca -> #2c1b92 -> #4f56ca) */}
             {/* Banner rộng tối đa 1472px, bo góc, có khoảng cách với mép màn hình */}
-            <div className="px-4 pt-4 sm:pt-5">
+            <div className="px-4 pt-4 sm:pt-5 laocaiV2-animate-fade-down">
             <div className="w-full max-w-[1472px] mx-auto rounded-2xl relative overflow-hidden bg-gradient-to-r from-[#4f56ca] via-[#2c1b92] to-[#4f56ca] text-white py-5 sm:py-6 md:py-6.5 border border-indigo-400/30 shadow-lg shadow-indigo-900/20">
                 {/* CSS Keyframes riêng biệt tạo hiệu ứng động mượt mà, dịu mắt và có chiều sâu */}
                 <style>{`
@@ -459,11 +465,25 @@ const LaoCaiV2HomePage = () => {
                         0%, 100% { opacity: 0.95; transform: scale(1); }
                         50% { opacity: 1; transform: scale(1.06); filter: drop-shadow(0 0 5px rgba(220, 38, 38, 0.65)); }
                     }
+                    @keyframes laocaiV2SlideFromLeft {
+                        from { opacity: 0; transform: translateX(-24px); }
+                        to { opacity: 1; transform: translateX(0); }
+                    }
+                    @keyframes laocaiV2SlideFromRight {
+                        from { opacity: 0; transform: translateX(24px); }
+                        to { opacity: 1; transform: translateX(0); }
+                    }
                     .laocaiV2-animate-fade-up {
                         animation: laocaiV2EntranceFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
                     }
                     .laocaiV2-animate-fade-down {
                         animation: laocaiV2EntranceFadeDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+                    }
+                    .laocaiV2-animate-from-left {
+                        animation: laocaiV2SlideFromLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+                    }
+                    .laocaiV2-animate-from-right {
+                        animation: laocaiV2SlideFromRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
                     }
                     .laocaiV2-animate-zoom-in {
                         animation: laocaiV2EntranceZoomIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -513,74 +533,160 @@ const LaoCaiV2HomePage = () => {
 
                     {/* Vạch trang trí hoàng kim tinh tế */}
                     <div className="w-20 sm:w-28 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent my-1.5 sm:my-2 rounded-full" />
-
-                    {/* Slogan tóm tắt cân đối chính xác trong 2 dòng */}
-                    {/* <p className="text-xs sm:text-sm md:text-[14.5px] text-blue-100/90 leading-relaxed max-w-2xl text-center font-normal drop-shadow-sm">
-                        Nền tảng số thống nhất phục vụ tra cứu văn bản quy phạm pháp luật, phổ biến, giáo dục pháp luật,
-                        <br className="hidden md:inline" />
-                        {' '}trợ giúp pháp lý và đồng hành cùng người dân, doanh nghiệp Lào Cai.
-                    </p> */}
                 </div>
             </div>
             </div>
 
             <main className="flex-1 pb-16 space-y-4 sm:space-y-5">
                 {/* 1. KHỐI TIN TIÊU ĐIỂM CHÍNH SÁCH - TRÀN TOÀN BỘ CHIỀU NGANG + SLIDE 10S */}
-                <section id="tin-tuc-noi-bat" className="w-full relative bg-white border-b border-gray-200 py-8 sm:py-10">
+                <section id="tin-tuc-noi-bat" className="w-full relative bg-white border-b border-gray-200 py-6 sm:py-8 laocaiV2-animate-fade-up" style={{ animationDelay: '0.15s' }}>
                     <div className="container mx-auto px-4 max-w-[1504px] relative z-10">
-                        {/* Phần trên: Slide tin tiêu điểm với mũi tên điều hướng ở hai bên ngoài ảnh */}
-                        <div className="relative group px-3 sm:px-6 lg:px-8">
-                            {/* Khung chứa các slide trượt chậm dãi mượt mà từ trái qua phải */}
-                            <div className="relative overflow-hidden w-full rounded-2xl">
-                                <div className="grid grid-cols-1 grid-rows-1 w-full items-stretch">
-                                    {[LAOCAI_FEATURED_SLIDES[0]].map((slide) => {
-                                        return (
-                                            <div key={slide.id} className="col-start-1 row-start-1 w-full">
-                                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-                                                    {/* Cột trái: Ảnh minh họa (Không có nút điều hướng bên trong ảnh) */}
-                                                    <div className="lg:col-span-5 relative overflow-hidden rounded-xl shadow-md border border-amber-300/50 bg-white flex flex-col justify-center">
-                                                        <div className="aspect-[16/10] w-full h-full relative overflow-hidden bg-gray-100">
-                                                            <img
-                                                                src={slide.image}
-                                                                alt={slide.title}
-                                                                className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
-                                                            />
-                                                        </div>
-                                                    </div>
+                        {/* Hàng trên: Slide tin tiêu điểm (70%) + Khối Thông báo (30%) - Chiều cao nguyên bản lg:h-[485px] */}
+                        <div className="grid grid-cols-1 lg:grid-cols-10 gap-6 lg:gap-7 items-stretch">
+                            {/* CỘT TRÁI (70%): Slide tin tiêu điểm (Chiều cao chuẩn 485px) */}
+                            <div className="lg:col-span-7 bg-white rounded-2xl p-5 sm:p-6 border border-gray-200/80 shadow-sm flex flex-col justify-between relative overflow-hidden group laocaiV2-animate-from-left lg:h-[485px]" style={{ animationDelay: '0.2s' }}>
+                                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 lg:gap-6 items-stretch h-full">
+                                    {/* Cột trái: Ảnh minh họa */}
+                                    <div className="md:col-span-5 relative overflow-hidden rounded-xl shadow-xs border border-amber-300/50 bg-white flex flex-col justify-center h-full">
+                                        <div className="w-full h-full min-h-[220px] relative overflow-hidden bg-gray-100">
+                                            <img
+                                                src={LAOCAI_FEATURED_SLIDES[0].image}
+                                                alt={LAOCAI_FEATURED_SLIDES[0].title}
+                                                className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
+                                            />
+                                        </div>
+                                    </div>
 
-                                                    {/* Cột phải: Dàn đều nội dung theo chiều cao của ảnh thumbnail */}
-                                                    <div className="lg:col-span-7 flex flex-col justify-between py-0.5 lg:py-1">
-                                                        <div className="flex flex-col space-y-3 lg:space-y-3.5 pt-0">
-                                                            {/* Thời gian */}
-                                                            <div className="flex items-center gap-2 text-sm sm:text-[14.5px] text-amber-950 font-semibold">
-                                                                <Clock size={16} className="text-amber-700" />
-                                                                <span>{slide.date}</span>
-                                                            </div>
+                                    {/* Cột phải: Dàn đều nội dung */}
+                                    <div className="md:col-span-7 flex flex-col justify-between py-1 h-full">
+                                        <div className="flex flex-col space-y-3">
+                                            {/* Thời gian */}
+                                            <div className="flex items-center gap-2 text-xs sm:text-[13.5px] text-amber-950 font-semibold">
+                                                <Clock size={16} className="text-amber-700" />
+                                                <span>{LAOCAI_FEATURED_SLIDES[0].date}</span>
+                                                <span className="text-gray-300">•</span>
+                                                <span className="text-gray-600 truncate font-normal">{LAOCAI_FEATURED_SLIDES[0].agency}</span>
+                                            </div>
 
-                                                            {/* Tiêu đề đỏ mận đậm */}
-                                                            <Link to={slide.link} className="block group/title">
-                                                                <h3 className="text-xl sm:text-2xl lg:text-[27px] font-bold text-black transition-colors leading-[1.35] uppercase tracking-tight">
-                                                                    {slide.title}
-                                                                </h3>
-                                                            </Link>
+                                            {/* Tiêu đề */}
+                                            <Link to={LAOCAI_FEATURED_SLIDES[0].link} className="block group/title">
+                                                <h3 className="text-lg sm:text-xl lg:text-[23px] font-bold text-black group-hover/title:text-[#991b1b] transition-colors leading-[1.35] uppercase tracking-tight">
+                                                    {LAOCAI_FEATURED_SLIDES[0].title}
+                                                </h3>
+                                            </Link>
 
-                                                            {/* Tóm tắt */}
-                                                            <p className="text-gray-700 text-sm sm:text-base lg:text-[16px] font-normal leading-relaxed line-clamp-4 pt-2 sm:pt-2.5">
-                                                                {slide.summary}
-                                                            </p>
-                                                        </div>
+                                            {/* Tóm tắt */}
+                                            <p className="text-gray-700 text-sm sm:text-base leading-relaxed line-clamp-4 pt-1 font-normal">
+                                                {LAOCAI_FEATURED_SLIDES[0].summary}
+                                            </p>
+                                        </div>
 
+                                        <div className="pt-3 mt-3 border-t border-gray-100 flex items-center justify-between">
+                                            <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-1 rounded">
+                                                {LAOCAI_FEATURED_SLIDES[0].subBadge}
+                                            </span>
+                                            <Link
+                                                to={LAOCAI_FEATURED_SLIDES[0].link}
+                                                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#0f4c81] hover:text-[#991b1b] transition"
+                                            >
+                                                <span>Xem chi tiết</span>
+                                                <ArrowRight size={14} />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* CỘT PHẢI (30%): BẢNG DANH SÁCH THÔNG BÁO (TỰ ĐỘNG TRÔI TIN GIỐNG V1 - Chiều cao chuẩn lg:h-[485px]) */}
+                            <div 
+                                className="lg:col-span-3 bg-white rounded-2xl p-4 sm:p-5 border border-amber-200/90 shadow-sm relative overflow-hidden flex flex-col justify-between laocaiV2-animate-from-right lg:h-[485px]" 
+                                style={{ animationDelay: '0.25s' }}
+                                onMouseEnter={() => setIsAnnouncePaused(true)}
+                                onMouseLeave={() => setIsAnnouncePaused(false)}
+                            >
+                                {/* Viền đỉnh màu vàng gold sang trọng */}
+                                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" />
+
+                                {/* Header Bảng Thông Báo */}
+                                <div className="flex justify-between items-center gap-2 mb-2 pb-2 border-b border-gray-200 shrink-0">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
+                                        <h2 className="text-base sm:text-lg md:text-[19px] font-bold text-[#0f4c81]">
+                                            Thông Báo
+                                        </h2>
+                                    </div>
+                                    <div className="flex items-center gap-2 shrink-0">
+                                        {/* Nút Tạm Dừng / Tiếp Tục Tự Động Trôi */}
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsAnnouncePaused(!isAnnouncePaused)}
+                                            className="w-7 h-7 rounded-lg bg-gray-100 hover:bg-amber-100 text-gray-600 hover:text-[#991b1b] flex items-center justify-center transition-colors shadow-2xs"
+                                            title={isAnnouncePaused ? "Tiếp tục trôi tin" : "Tạm dừng trôi tin"}
+                                        >
+                                            {isAnnouncePaused ? <Play size={12} fill="currentColor" /> : <Pause size={12} fill="currentColor" />}
+                                        </button>
+                                        <Link
+                                            to="/lao-cai-v2/van-ban"
+                                            className="group/btn inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#0f4c81] hover:text-[#4f56ca] transition-colors shrink-0"
+                                        >
+                                            <span>Xem tất cả</span>
+                                            <ChevronRight size={14} className="group-hover/btn:translate-x-0.5 transition-transform" />
+                                        </Link>
+                                    </div>
+                                </div>
+
+                                {/* Container trôi tin thông báo tự động liên tục lấp đầy chiều cao còn lại */}
+                                <div className="relative flex-1 min-h-0 overflow-hidden">
+                                    {/* Mặt nạ gradient làm mờ đầu và cuối giúp tin cuộn mượt mà */}
+                                    <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none" />
+                                    <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none" />
+
+                                    <div 
+                                        className="divide-y divide-gray-100"
+                                        style={{
+                                            animation: 'laocaiV2VerticalTicker 24s linear infinite',
+                                            animationPlayState: isAnnouncePaused ? 'paused' : 'running',
+                                        }}
+                                    >
+                                        {[...LAOCAI_ANNOUNCEMENTS, ...LAOCAI_ANNOUNCEMENTS].map((item, idx) => (
+                                            <Link
+                                                key={`${item.id}-${idx}`}
+                                                to={item.link}
+                                                className="group flex items-start gap-2.5 py-2.5 hover:bg-amber-50/60 px-1.5 rounded-lg transition-colors"
+                                            >
+                                                {/* Block Ngày Tháng */}
+                                                <div className="w-9 h-10 rounded-lg bg-gradient-to-b from-amber-50 to-orange-50 border border-amber-200/90 flex flex-col items-center justify-center shrink-0 shadow-2xs">
+                                                    <span className="text-[13px] font-bold text-[#991b1b] leading-none">
+                                                        {item.day}
+                                                    </span>
+                                                    <span className="text-[9px] font-semibold text-gray-500 uppercase leading-tight mt-0.5">
+                                                        {item.month}
+                                                    </span>
+                                                </div>
+
+                                                {/* Chi tiết thông báo */}
+                                                <div className="flex-1 min-w-0">
+                                                    <h4 className="text-[12px] sm:text-[12.5px] font-semibold text-gray-900 group-hover:text-[#991b1b] leading-snug line-clamp-2 transition-colors">
+                                                        {item.title}
+                                                    </h4>
+                                                    <div className="flex items-center gap-1.5 mt-1 text-[11px] text-gray-500">
+                                                        <span className="truncate">{item.agency}</span>
+                                                        {item.isHot && (
+                                                            <span className="bg-red-500 text-white text-[8.5px] font-bold px-1.5 py-0.2 rounded uppercase shrink-0 laocaiV2-badge-pulse">
+                                                                Mới
+                                                            </span>
+                                                        )}
                                                     </div>
                                                 </div>
-                                            </div>
-                                        );
-                                    })}
+                                            </Link>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         {/* Phần dưới: 3 Thẻ tin tức nổi khối 3D màu vàng nhạt nhẹ nhàng hơn background */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 mt-6 pt-6 border-t border-amber-400/60">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 mt-6 pt-6 border-t border-amber-400/60 laocaiV2-animate-fade-up" style={{ animationDelay: '0.35s' }}>
                             {LAOCAI_BOTTOM_FEATURE_CARDS.map((card) => (
                                 <Link
                                     key={card.id}
@@ -624,18 +730,25 @@ const LaoCaiV2HomePage = () => {
                 <section
                     id="tin-hoat-dong-thong-bao"
                     className="w-full max-w-[1504px] mx-auto px-4 laocaiV2-animate-fade-up"
-                    style={{ animationDelay: '0.15s' }}
+                    style={{ animationDelay: '0.4s' }}
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-10 gap-6 lg:gap-7 items-stretch">
                         {/* CỘT TRÁI (70%): KHỐI TIN HOẠT ĐỘNG */}
-                        <div className="lg:col-span-7 bg-white rounded-2xl p-4 sm:p-5 border border-gray-200/80 shadow-sm flex flex-col justify-between lg:h-[485px]">
-                            {/* Header Khối Tin Hoạt Động: tiêu đề chữ đơn giản, không nền màu */}
+                        <div className="lg:col-span-7 bg-white rounded-2xl p-4 sm:p-5 border border-gray-200/80 shadow-sm flex flex-col justify-between lg:h-[485px] laocaiV2-animate-from-left" style={{ animationDelay: '0.45s' }}>
+                            {/* Header Khối Tin Hoạt Động: tiêu đề liên kết trực tiếp sang chuyên mục trên sub nav */}
                             <div className="flex justify-between items-center gap-2 mb-3 pb-2.5 border-b border-gray-200 shrink-0">
-                                <h2 className="text-base sm:text-lg md:text-[20px] font-bold text-[#0f4c81]">
-                                    Tin Hoạt Động
-                                </h2>
                                 <Link
-                                    to="/lao-cai-v2/pho-bien-giao-duc"
+                                    to="/lao-cai-v2/tin-tuc/tin-hoat-dong"
+                                    className="group/heading inline-flex items-center gap-2"
+                                    title="Xem chuyên mục Tin hoạt động"
+                                >
+                                    <h2 className="text-base sm:text-lg md:text-[20px] font-bold text-[#0f4c81] group-hover/heading:text-[#991b1b] transition-colors">
+                                        Tin hoạt động
+                                    </h2>
+                                    <ChevronRight size={18} className="text-[#0f4c81] group-hover/heading:text-[#991b1b] group-hover/heading:translate-x-0.5 transition-all" />
+                                </Link>
+                                <Link
+                                    to="/lao-cai-v2/tin-tuc/tin-hoat-dong"
                                     className="group/btn inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#0f4c81] hover:text-[#4f56ca] transition-colors shrink-0"
                                 >
                                     <span>Xem tất cả</span>
@@ -701,80 +814,50 @@ const LaoCaiV2HomePage = () => {
                             </div>
                         </div>
 
-                        {/* CỘT PHẢI (30%): BẢNG DANH SÁCH THÔNG BÁO (HIỆU ỨNG TRÔI TIN TỪ TỪ - KHÔNG TRỐNG ĐOẠN DƯỚI) */}
-                        <div className="lg:col-span-3 bg-white rounded-2xl p-4 sm:p-5 border border-amber-200/90 shadow-sm relative overflow-hidden flex flex-col lg:h-[485px]">
-                            {/* Viền đỉnh màu vàng gold sang trọng */}
-                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" />
+                        {/* CỘT PHẢI (30%): BANNER TUYÊN TRUYỀN THAY THẾ VỊ TRÍ CŨ CỦA KHỐI THÔNG BÁO (THUẦN BANNER HÌNH ẢNH) */}
+                        <div className="lg:col-span-3 rounded-2xl overflow-hidden shadow-sm border border-gray-200/80 bg-white lg:h-[485px] relative group laocaiV2-card-interactive laocaiV2-animate-from-right" style={{ animationDelay: '0.5s' }}>
+                            {/* Dải viền đỉnh vàng gold sang trọng */}
+                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400 z-10" />
 
-                            {/* Header Bảng Thông Báo: tiêu đề chữ đơn giản, không nền màu */}
-                            <div className="flex justify-between items-center gap-2 mb-2.5 pb-2.5 border-b border-gray-200 shrink-0">
-                                <h2 className="text-base sm:text-lg md:text-[19px] font-bold text-[#0f4c81]">
-                                    Thông Báo
-                                </h2>
-                                <Link
-                                    to="/lao-cai-v2/van-ban"
-                                    className="group/btn inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#0f4c81] hover:text-[#4f56ca] transition-colors shrink-0"
-                                >
-                                    <span>Xem tất cả</span>
-                                    <ChevronRight size={14} className="group-hover/btn:translate-x-0.5 transition-transform" />
-                                </Link>
-                            </div>
-
-                            {/* Danh sách thông báo tĩnh, cuộn dọc bằng thanh scroll thay vì hiệu ứng trôi tự động */}
-                            <div className="relative flex-1 min-h-0 overflow-y-auto custom-scrollbar-light pr-1">
-                                <div className="divide-y divide-gray-100">
-                                    {LAOCAI_ANNOUNCEMENTS.map((item) => (
-                                        <Link
-                                            key={item.id}
-                                            to={item.link}
-                                            className="group flex items-start gap-2.5 py-2.5 hover:bg-amber-50/60 px-1.5 rounded-lg transition-colors"
-                                        >
-                                            {/* Block Ngày Tháng */}
-                                            <div className="w-9 h-10 rounded-lg bg-gradient-to-b from-amber-50 to-orange-50 border border-amber-200/90 flex flex-col items-center justify-center shrink-0 shadow-2xs">
-                                                <span className="text-[13.5px] font-bold text-[#991b1b] leading-none">
-                                                    {item.day}
-                                                </span>
-                                                <span className="text-[9px] font-semibold text-gray-500 uppercase leading-tight mt-0.5">
-                                                    {item.month}
-                                                </span>
-                                            </div>
-
-                                            {/* Chi tiết thông báo - Bỏ badge phân loại, chữ to rõ ràng */}
-                                            <div className="flex-1 min-w-0">
-                                                <h4 className="text-[12.5px] sm:text-[13px] font-semibold text-gray-900 group-hover:text-[#991b1b] leading-snug line-clamp-2 transition-colors">
-                                                    {item.title}
-                                                </h4>
-                                                <div className="flex items-center gap-1.5 mt-1 text-[11px] text-gray-500">
-                                                    <span className="truncate">{item.agency}</span>
-                                                    {item.isHot && (
-                                                        <span className="bg-red-500 text-white text-[8.5px] font-bold px-1.5 py-0.2 rounded uppercase shrink-0 laocaiV2-badge-pulse">
-                                                            Mới
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    ))}
-                                </div>
-                            </div>
+                            <Link
+                                to="/lao-cai-v2/pho-bien-giao-duc"
+                                className="block w-full h-full relative overflow-hidden"
+                                title="Đưa Nghị quyết Đại hội Đảng và chính sách đặc thù vào cuộc sống"
+                            >
+                                <img
+                                    src="/images/800-800-dua-nghi-quyet-dai-hoi-xiv-cua-dang-vao-cuoc-song.jpg"
+                                    alt="Đưa Nghị quyết Đại hội Đảng và chính sách đặc thù vào cuộc sống"
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                            </Link>
                         </div>
                     </div>
                 </section>
 
                 {/* 2. KHỐI VĂN BẢN MỚI BAN HÀNH & DỰ THẢO VBQPPL (GIỐNG HỆT CỔNG QUỐC GIA) */}
-                <LaoCaiV2NewlyIssuedDocs />
+                <div className="laocaiV2-animate-fade-up" style={{ animationDelay: '0.55s' }}>
+                    <LaoCaiV2NewlyIssuedDocs />
+                </div>
 
                 {/* 3. CHUYÊN MỤC TIN TỨC: THỜI SỰ TƯ PHÁP & CHỈ ĐẠO ĐIỀU HÀNH LÀO CAI (LAYOUT 4 CỘT CHUẨN CỔNG QUỐC GIA) */}
                 <section id="thoi-su-tu-phap" className="py-1 laocaiV2-animate-fade-up" style={{ animationDelay: '0.2s' }}>
                     <div className="container mx-auto px-4 max-w-[1504px]">
                         <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/80 shadow-sm">
-                            {/* Header Khối Thời sự Tư pháp: tiêu đề chữ đơn giản, không nền màu */}
+                            {/* Header Khối Hoạt động Tư pháp: tiêu đề khớp với chuyên mục trên sub nav tin tức */}
                             <div className="flex justify-between items-center gap-2 mb-4 pb-3 border-b border-gray-200">
-                                <h2 className="text-lg sm:text-xl md:text-[21px] font-bold text-[#0f4c81]">
-                                    Thời sự Tư pháp & Chỉ đạo điều hành
-                                </h2>
                                 <Link
-                                    to="/lao-cai-v2/pho-bien-giao-duc"
+                                    to="/lao-cai-v2/tin-tuc/tu-phap"
+                                    className="group/heading inline-flex items-center gap-2"
+                                    title="Xem chuyên mục Hoạt động Tư pháp"
+                                >
+                                    <h2 className="text-lg sm:text-xl md:text-[21px] font-bold text-[#0f4c81] group-hover/heading:text-[#991b1b] transition-colors">
+                                        Hoạt động Tư pháp
+                                    </h2>
+                                    <ChevronRight size={19} className="text-[#0f4c81] group-hover/heading:text-[#991b1b] group-hover/heading:translate-x-0.5 transition-all" />
+                                </Link>
+                                <Link
+                                    to="/lao-cai-v2/tin-tuc/tu-phap"
                                     className="group/btn inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#0f4c81] hover:text-[#4f56ca] transition-colors shrink-0"
                                 >
                                     <span>Xem tất cả</span>
@@ -882,14 +965,25 @@ const LaoCaiV2HomePage = () => {
                 <section id="chinh-sach-cuoc-song" className="py-1 laocaiV2-animate-fade-up" style={{ animationDelay: '0.22s' }}>
                     <div className="container mx-auto px-4 max-w-[1504px]">
                         <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/80 shadow-sm">
-                            {/* Header Khối Chính sách & Cuộc sống: tiêu đề chữ đơn giản, không nền màu */}
+                            {/* Header Khối Chính sách Lào Cai: tiêu đề khớp với chuyên mục trên sub nav tin tức */}
                             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1.5 mb-4 pb-3 border-b border-gray-200">
-                                <h2 className="text-lg sm:text-xl md:text-[21px] font-bold text-[#0f4c81]">
-                                    Chính sách & Cuộc sống Lào Cai
-                                </h2>
-                                <span className="text-xs text-gray-500 font-medium">
-                                    Đưa pháp luật vào đời sống sinh hoạt của nhân dân Lào Cai
-                                </span>
+                                <Link
+                                    to="/lao-cai-v2/tin-tuc/chinh-sach"
+                                    className="group/heading inline-flex items-center gap-2"
+                                    title="Xem chuyên mục Chính sách Lào Cai"
+                                >
+                                    <h2 className="text-lg sm:text-xl md:text-[21px] font-bold text-[#0f4c81] group-hover/heading:text-[#991b1b] transition-colors">
+                                        Chính sách Lào Cai
+                                    </h2>
+                                    <ChevronRight size={19} className="text-[#0f4c81] group-hover/heading:text-[#991b1b] group-hover/heading:translate-x-0.5 transition-all" />
+                                </Link>
+                                <Link
+                                    to="/lao-cai-v2/tin-tuc/chinh-sach"
+                                    className="group/btn inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#0f4c81] hover:text-[#4f56ca] transition-colors shrink-0"
+                                >
+                                    <span>Xem tất cả</span>
+                                    <ArrowRight size={13} className="group-hover/btn:translate-x-0.5 transition-transform" />
+                                </Link>
                             </div>
 
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -964,16 +1058,23 @@ const LaoCaiV2HomePage = () => {
                 <section id="pho-bien-giao-duc" className="py-1 laocaiV2-animate-fade-up" style={{ animationDelay: '0.28s' }}>
                     <div className="container mx-auto px-4 max-w-[1504px]">
                         <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200/80 shadow-sm">
-                            {/* Header Khối Phổ biến, giáo dục pháp luật: tiêu đề chữ đơn giản, không nền màu */}
+                            {/* Header Khối Phổ biến, giáo dục pháp luật: tiêu đề khớp với chuyên mục trên sub nav tin tức */}
                             <div className="flex justify-between items-center gap-2 mb-4 pb-3 border-b border-gray-200">
-                                <h2 className="text-lg sm:text-xl md:text-[21px] font-bold text-[#0f4c81]">
-                                    Phổ biến, giáo dục pháp luật Lào Cai
-                                </h2>
                                 <Link
-                                    to="/lao-cai-v2/pho-bien-giao-duc"
+                                    to="/lao-cai-v2/tin-tuc/pbgdpl"
+                                    className="group/heading inline-flex items-center gap-2"
+                                    title="Xem chuyên mục Phổ biến, giáo dục pháp luật"
+                                >
+                                    <h2 className="text-lg sm:text-xl md:text-[21px] font-bold text-[#0f4c81] group-hover/heading:text-[#991b1b] transition-colors">
+                                        Phổ biến, giáo dục pháp luật
+                                    </h2>
+                                    <ChevronRight size={19} className="text-[#0f4c81] group-hover/heading:text-[#991b1b] group-hover/heading:translate-x-0.5 transition-all" />
+                                </Link>
+                                <Link
+                                    to="/lao-cai-v2/tin-tuc/pbgdpl"
                                     className="group/btn inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#0f4c81] hover:text-[#4f56ca] transition-colors shrink-0"
                                 >
-                                    <span>Khám phá chuyên trang</span>
+                                    <span>Xem tất cả</span>
                                     <ArrowRight size={13} className="group-hover/btn:translate-x-0.5 transition-transform" />
                                 </Link>
                             </div>
@@ -1137,8 +1238,9 @@ const LaoCaiV2HomePage = () => {
                             Thông tin liên kết
                         </h2>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10 max-w-[1450px] mx-auto px-4 md:px-0">
-                            {laocaiV2ConnectedPortals.map((portal) => {
+                        {/* Bố cục dạng 4-4-2: 2 dòng 4 bản ghi và 1 dòng 2 bản ghi ở dưới */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8 max-w-[1450px] mx-auto px-4 md:px-0">
+                            {laocaiV2ConnectedPortals.map((portal, index) => {
                                 const Icon = PORTAL_LINK_ICONS[portal.id] || Landmark;
                                 return (
                                     <a
@@ -1146,7 +1248,7 @@ const LaoCaiV2HomePage = () => {
                                         href={`https://${portal.domain}`}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="flex items-center gap-4 group transition"
+                                        className={`flex items-center gap-4 group transition ${index === 8 ? 'lg:col-start-2' : ''}`}
                                     >
                                         <div className="bg-[#f0f5f9] text-[#0f4c81] p-3.5 rounded-xl group-hover:bg-[#0f4c81] group-hover:text-white transition-colors duration-300">
                                             <Icon size={20} strokeWidth={2} />
@@ -1163,6 +1265,13 @@ const LaoCaiV2HomePage = () => {
             </main>
 
             <LaoCaiV2Footer />
+
+            {/* Đảo slide ở phía dưới cùng trang chủ giống cổng quốc gia */}
+            <FixedBottomCarousel
+                title="Cổng Pháp Luật Tỉnh Lào Cai"
+                items={LAOCAI_V2_CAROUSEL_ITEMS}
+                defaultVisible={true}
+            />
         </div>
     );
 };

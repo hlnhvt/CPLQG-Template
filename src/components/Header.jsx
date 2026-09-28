@@ -726,31 +726,57 @@ const Header = ({ title = "CỔNG PHÁP LUẬT QUỐC GIA", homeUrl = "/", isSub
                                         Lấy ý kiến dự thảo
                                     </Link>
                                 )}
-                                {specialNav ? specialNav.map((item) => (
-                                    <React.Fragment key={item.path || item.label}>
-                                        {item.path ? (
-                                            <Link
-                                                to={`${homeUrl}/${item.path}`}
-                                                onClick={() => setIsSidebarOpen(false)}
-                                                className="px-5 py-3.5 border-b border-white/5 font-medium hover:bg-white/5 transition-colors"
-                                            >
-                                                {item.label}
-                                            </Link>
-                                        ) : (
-                                            <div className="px-5 py-3.5 border-b border-white/5 font-medium text-gray-300">{item.label}</div>
-                                        )}
-                                        {item.children && item.children.map((c) => (
-                                            <Link
-                                                key={c.path}
-                                                to={`${homeUrl}/${c.path}`}
-                                                onClick={() => setIsSidebarOpen(false)}
-                                                className="block px-8 py-2.5 text-sm text-gray-300 border-b border-white/5 hover:text-white hover:bg-white/5"
-                                            >
-                                                {c.label}
-                                            </Link>
-                                        ))}
-                                    </React.Fragment>
-                                )) : (
+                                {specialNav ? specialNav.map((item, idx) => {
+                                    const groupKey = `special_nav_${item.path || item.label || idx}`;
+                                    const hasChildren = item.children && item.children.length > 0;
+                                    const isExpanded = !!mobileNavExpanded[groupKey];
+
+                                    if (hasChildren) {
+                                        return (
+                                            <div className="border-b border-white/5" key={groupKey}>
+                                                <button
+                                                    onClick={() => toggleMobileNavGroup(groupKey)}
+                                                    className="w-full flex items-center justify-between px-5 py-3.5 font-bold hover:bg-white/5 transition-colors text-left text-white"
+                                                >
+                                                    <span>{item.label}</span>
+                                                    <ChevronDown
+                                                        size={16}
+                                                        className={`transition-transform duration-300 text-gray-400 ${
+                                                            isExpanded ? 'rotate-180' : ''
+                                                        }`}
+                                                    />
+                                                </button>
+                                                <div
+                                                    className={`overflow-hidden transition-all duration-300 bg-[#0f2350] ${
+                                                        isExpanded ? 'max-h-[500px]' : 'max-h-0'
+                                                    }`}
+                                                >
+                                                    {item.children.map((c) => (
+                                                        <Link
+                                                            key={c.path}
+                                                            to={`${homeUrl}/${c.path}`}
+                                                            onClick={() => setIsSidebarOpen(false)}
+                                                            className="block px-8 py-2.5 text-sm text-gray-300 border-b border-white/5 last:border-b-0 hover:text-white hover:bg-white/5 transition-colors"
+                                                        >
+                                                            {c.label}
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+
+                                    return (
+                                        <Link
+                                            key={groupKey}
+                                            to={`${homeUrl}/${item.path}`}
+                                            onClick={() => setIsSidebarOpen(false)}
+                                            className="px-5 py-3.5 border-b border-white/5 font-medium hover:bg-white/5 transition-colors block text-white"
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    );
+                                }) : (
                                 <>
                                 <Link 
                                     to={`${homeUrl}/pho-bien-giao-duc`} 

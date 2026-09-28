@@ -96,42 +96,141 @@ const CAROUSEL_ITEMS = [
     }
 ];
 
-const FixedBottomCarousel = () => {
+export const LAOCAI_V2_CAROUSEL_ITEMS = [
+    {
+        id: 'lc-1',
+        type: 'image',
+        src: '/BO NHAN DIEN TONG RA SOAT/800x150.Banner chay.modern.jpg?v=1',
+        alt: 'Tổng rà soát hệ thống văn bản quy phạm pháp luật tỉnh Lào Cai',
+        link: '/lao-cai-v2/van-ban',
+    },
+    {
+        id: 'lc-2',
+        type: 'html',
+        link: '/lao-cai-v2/tin-tuc/chi-tiet/1',
+        content: (
+            <div className="w-full h-full bg-gradient-to-r from-[#2c1b92] via-[#4f56ca] to-[#0ea5e9] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] border border-white/60 p-3 sm:p-5 flex gap-4 overflow-hidden relative">
+                <div className="w-[45%] h-full rounded-lg overflow-hidden shrink-0 bg-white shadow-sm border border-white/20">
+                    <img src="/thumb1.png" alt="Chuyển đổi số" className="w-full h-full object-cover" />
+                </div>
+                <div className="w-[55%] flex flex-col justify-center pl-4 pr-2 relative text-white">
+                    <div className="absolute top-1 right-1 bg-red-600 text-[10px] sm:text-[11px] px-2.5 py-1 rounded shadow-sm font-bold uppercase tracking-wide whitespace-nowrap z-10">
+                        CHUYỂN ĐỔI SỐ
+                    </div>
+                    <p className="text-sm sm:text-base lg:text-lg font-bold leading-snug line-clamp-3 mt-5 drop-shadow-sm">
+                        Lào Cai hoàn thành số hóa 100% văn bản QPPL tích hợp tra cứu thông minh AI
+                    </p>
+                </div>
+            </div>
+        )
+    },
+    {
+        id: 'lc-3',
+        type: 'html',
+        link: '/lao-cai-v2/tin-tuc',
+        content: (
+            <div className="w-full h-full bg-gradient-to-r from-[#1e3a8a] via-[#3b82f6] to-[#06b6d4] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] border border-white/60 p-3 sm:p-5 flex gap-4 overflow-hidden relative">
+                <div className="w-[45%] h-full rounded-lg overflow-hidden shrink-0 bg-white shadow-sm border border-white/20">
+                    <img src="/thumb2.png" alt="Kinh tế cửa khẩu" className="w-full h-full object-cover" />
+                </div>
+                <div className="w-[55%] flex flex-col justify-center pl-4 pr-2 relative text-white">
+                    <div className="absolute top-1 right-1 bg-amber-500 text-[10px] sm:text-[11px] px-2.5 py-1 rounded shadow-sm font-bold uppercase tracking-wide whitespace-nowrap z-10">
+                        KINH TẾ BIÊN MẬU
+                    </div>
+                    <p className="text-sm sm:text-base lg:text-lg font-bold leading-snug line-clamp-3 mt-5 drop-shadow-sm">
+                        Quy chế phối hợp quản lý hoạt động xuất nhập khẩu tại Khu kinh tế cửa khẩu Lào Cai
+                    </p>
+                </div>
+            </div>
+        )
+    },
+    {
+        id: 'lc-4',
+        type: 'html',
+        link: '/lao-cai-v2/tro-giup-phap-ly',
+        content: (
+            <div className="w-full h-full bg-gradient-to-r from-[#065f46] via-[#059669] to-[#10b981] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] border border-white/60 p-3 sm:p-5 flex gap-4 overflow-hidden relative">
+                <div className="w-[45%] h-full rounded-lg overflow-hidden shrink-0 bg-white shadow-sm border border-white/20">
+                    <img src="/thumb3.png" alt="Trợ giúp pháp lý" className="w-full h-full object-cover" />
+                </div>
+                <div className="w-[55%] flex flex-col justify-center pl-4 pr-2 relative text-white">
+                    <div className="absolute top-1 right-1 bg-red-600 text-[10px] sm:text-[11px] px-2.5 py-1 rounded shadow-sm font-bold uppercase tracking-wide whitespace-nowrap z-10">
+                        TRỢ GIÚP PHÁP LÝ
+                    </div>
+                    <p className="text-sm sm:text-base lg:text-lg font-bold leading-snug line-clamp-3 mt-5 drop-shadow-sm">
+                        Đẩy mạnh truyền thông và trợ giúp pháp lý lưu động cho đồng bào dân tộc thiểu số tại các thôn bản
+                    </p>
+                </div>
+            </div>
+        )
+    },
+    {
+        id: 'lc-5',
+        type: 'html',
+        link: '/lao-cai-v2/pho-bien-giao-duc',
+        content: (
+            <div className="w-full h-full bg-gradient-to-r from-[#312e81] via-[#4338ca] to-[#6366f1] rounded-xl shadow-[inset_0_0_15px_rgba(0,0,0,0.1)] border border-white/60 p-3 sm:p-5 flex gap-4 overflow-hidden relative">
+                <div className="w-[45%] h-full rounded-lg overflow-hidden shrink-0 bg-white shadow-sm border border-white/20">
+                    <img src="https://picsum.photos/400/250?random=14" alt="Hội đồng PBGDPL" className="w-full h-full object-cover" />
+                </div>
+                <div className="w-[55%] flex flex-col justify-center pl-4 pr-2 relative text-white">
+                    <div className="absolute top-1 right-1 bg-orange-600 text-[10px] sm:text-[11px] px-2.5 py-1 rounded shadow-sm font-bold uppercase tracking-wide whitespace-nowrap z-10">
+                        PBGDPL TỈNH
+                    </div>
+                    <p className="text-sm sm:text-base lg:text-lg font-bold leading-snug line-clamp-3 mt-5 drop-shadow-sm">
+                        Nâng cao hiệu quả hoạt động của Hội đồng phối hợp PBGDPL và mạng lưới tuyên truyền viên cơ sở
+                    </p>
+                </div>
+            </div>
+        )
+    }
+];
+
+export { CAROUSEL_ITEMS };
+
+const FixedBottomCarousel = ({ title = "Cổng Pháp Luật Quốc Gia", items = CAROUSEL_ITEMS, defaultVisible = false }) => {
     const navigate = useNavigate();
-    const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(defaultVisible);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => setIsLoaded(true), 1200);
+        const timer = setTimeout(() => {
+            setIsLoaded(true);
+        }, 300);
         return () => clearTimeout(timer);
     }, []);
 
     // Auto-advance every 5s if visible
     useEffect(() => {
-        if (!isVisible) return;
+        if (!isVisible || !items || items.length === 0) return;
         const timer = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % CAROUSEL_ITEMS.length);
+            setCurrentIndex((prev) => (prev + 1) % items.length);
         }, 5000);
         return () => clearInterval(timer);
-    }, [isVisible]);
+    }, [isVisible, items]);
 
     const handleNext = () => {
-        setCurrentIndex((prev) => (prev + 1) % CAROUSEL_ITEMS.length);
+        if (!items || items.length === 0) return;
+        setCurrentIndex((prev) => (prev + 1) % items.length);
     };
 
     const handlePrev = () => {
-        setCurrentIndex((prev) => (prev - 1 + CAROUSEL_ITEMS.length) % CAROUSEL_ITEMS.length);
+        if (!items || items.length === 0) return;
+        setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
     };
 
     if (!isVisible) {
         return (
-            <div className={`fixed bottom-0 left-1/2 -translate-x-1/2 z-[100] transition-all duration-1000 ease-out ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+            <div 
+                className={`fixed bottom-0 left-1/2 -translate-x-1/2 z-[100] ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+                style={{ transition: 'transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 1s cubic-bezier(0.16, 1, 0.3, 1)' }}
+            >
                 <button 
                     onClick={() => setIsVisible(true)}
-                    className="bg-[#1a3673] hover:bg-[#0f2350] text-white w-[300px] h-8 rounded-t-xl shadow-[0_-5px_15px_rgba(0,0,0,0.2)] flex items-center justify-center gap-2 transition-colors border border-cyan-400 border-b-0 cursor-pointer"
+                    className="bg-[#1a3673] hover:bg-[#0f2350] text-white min-w-[280px] px-6 h-8 rounded-t-xl shadow-[0_-5px_15px_rgba(0,0,0,0.2)] flex items-center justify-center gap-2 transition-colors border border-cyan-400 border-b-0 cursor-pointer"
                 >
-                    <span className="text-xs font-bold uppercase tracking-wide">Cổng Pháp Luật Quốc Gia</span>
+                    <span className="text-xs font-bold uppercase tracking-wide">{title}</span>
                     <ChevronUp size={16} className="animate-bounce" />
                 </button>
             </div>
@@ -146,7 +245,10 @@ const FixedBottomCarousel = () => {
     };
 
     return (
-        <div className={`fixed bottom-0 left-0 right-0 bg-[#2585f9]/30 backdrop-blur-md border-t border-cyan-400/50 z-[100] shadow-[0_-8px_30px_rgba(0,0,0,0.15)] py-2 transition-all duration-[1200ms] ease-out flex flex-col items-center transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-[120%] opacity-0'}`}>
+        <div 
+            className={`fixed bottom-0 left-0 right-0 bg-[#2585f9]/30 backdrop-blur-md border-t border-cyan-400/50 z-[100] shadow-[0_-8px_30px_rgba(0,0,0,0.15)] py-2 flex flex-col items-center transform ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-[120%] opacity-0'}`}
+            style={{ transition: 'transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1)' }}
+        >
             {/* Toggle Button Container */}
             <div className="absolute -top-8 left-1/2 -translate-x-1/2">
                 <button 
@@ -170,10 +272,10 @@ const FixedBottomCarousel = () => {
 
                 {/* Carousel Tracks - 3D Effect Mapping */}
                 <div className="relative w-full h-full flex justify-center items-center">
-                    {CAROUSEL_ITEMS.map((item, index) => {
-                        let offset = (index - currentIndex) % CAROUSEL_ITEMS.length;
-                        if (offset < 0) offset += CAROUSEL_ITEMS.length;
-                        if (offset > CAROUSEL_ITEMS.length / 2) offset -= CAROUSEL_ITEMS.length;
+                    {items && items.map((item, index) => {
+                        let offset = (index - currentIndex) % items.length;
+                        if (offset < 0) offset += items.length;
+                        if (offset > items.length / 2) offset -= items.length;
 
                         let style = { 
                             transition: 'all 0.6s cubic-bezier(0.25, 1, 0.5, 1)',
