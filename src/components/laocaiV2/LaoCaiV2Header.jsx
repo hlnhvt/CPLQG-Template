@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 
-// Ẩn 3 chuyên trang trên nav; "Phổ biến, giáo dục pháp luật" chỉ là menu thả xuống (không dẫn tới chuyên trang)
+// "Phổ biến, giáo dục pháp luật" chỉ là menu thả xuống (không dẫn tới chuyên trang); TGPL & HTPL doanh nghiệp là link trực tiếp
 export const LAOCAI_V2_SPECIAL_NAV = [
     {
         label: 'Phổ biến, giáo dục pháp luật',
@@ -15,6 +15,9 @@ export const LAOCAI_V2_SPECIAL_NAV = [
             { path: 'bai-giang-truc-tuyen', label: 'Bài giảng trực tuyến' },
         ],
     },
+    // 2 chuyên trang hiển thị trên nav giống Cổng Pháp luật Hà Nội
+    { path: 'tro-giup-phap-ly', label: 'Trợ giúp pháp lý' },
+    { path: 'ho-tro-phap-ly-doanh-nghiep', label: 'Hỗ trợ pháp lý doanh nghiệp' },
 ];
 
 const LaoCaiV2Header = () => {

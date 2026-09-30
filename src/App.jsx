@@ -299,6 +299,9 @@ const AppLayout = () => {
                     <Route path="/lao-cai-v2" element={<LaoCaiV2HomePage />} />
                     <Route path="/lao-cai-v3" element={<LaoCaiV3HomePage />} />
                     <Route path="/lao-cao-v3" element={<Navigate to="/lao-cai-v3" replace />} />
+                    {/* Bản 3 chưa có chuyên trang riêng: dùng chung chuyên trang TGPL & HTPL doanh nghiệp của bản 2 */}
+                    <Route path="/lao-cai-v3/tro-giup-phap-ly/*" element={<Navigate to="/lao-cai-v2/tro-giup-phap-ly" replace />} />
+                    <Route path="/lao-cai-v3/ho-tro-phap-ly-doanh-nghiep/*" element={<Navigate to="/lao-cai-v2/ho-tro-phap-ly-doanh-nghiep" replace />} />
                     <Route path="/lao-cao" element={<Navigate to="/lao-cai" replace />} />
                     <Route path="/lao-cai-v2/gioi-thieu" element={<LaoCaiV2AboutPage />} />
                     <Route path="/lao-cai-v2/tin-tuc" element={<LaoCaiV2NewsPage />} />
