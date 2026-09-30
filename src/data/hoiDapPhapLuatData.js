@@ -1,0 +1,91 @@
+// Dữ liệu mẫu trang Hỏi đáp pháp luật (Cổng Pháp luật quốc gia).
+// Nội dung câu hỏi/trả lời là dữ liệu minh họa phục vụ thiết kế giao diện.
+
+export const HDPL_FIELDS = [
+    { id: 'thuong-mai', label: 'Thương mại' },
+    { id: 'doanh-nghiep', label: 'Doanh nghiệp' },
+    { id: 'dan-su', label: 'Dân sự' },
+    { id: 'hanh-chinh', label: 'Hành chính' },
+    { id: 'dat-dai', label: 'Đất đai' },
+    { id: 'chinh-sach', label: 'Chính sách' },
+    { id: 'giao-duc', label: 'Giáo dục' }
+];
+
+// [lĩnh vực, ngày (dd/mm/yyyy), câu hỏi, câu trả lời]
+const RAW = [
+    ['hanh-chinh', '28/07/2025',
+        'Tại khoản 1 Điều 5 Quyết định số 25/2021/QĐ-TTg ngày 22/7/2021 của Thủ tướng Chính phủ quy định về xã, phường, thị trấn đạt chuẩn tiếp cận pháp luật: “Việc đánh giá công nhận xã, phường, thị trấn đạt chuẩn tiếp cận pháp luật được thực hiện hằng năm tính từ ngày 01/01 đến ngày 31/12 của năm đánh giá và thời gian thực hiện quy trình đánh giá, công nhận tiếp cận pháp luật vào đầu năm sau, chậm nhất ngày 10/02 của năm liền kề năm đánh giá”. Tại khoản 1 Điều 4 Nghị định số 86/2023/NĐ-CP ngày 07/12/2023 của Chính phủ quy định về khung tiêu chuẩn và trình tự, thủ tục, hồ sơ xét tặng danh hiệu “Gia đình văn hóa”, “Thôn, tổ dân phố văn hóa”, “Xã, phường, thị trấn tiêu biểu” quy định việc bình xét “xã, phường, thị trấn tiêu biểu” được thực hiện hằng năm và hoàn thành trước ngày 25/11. Như vậy thời điểm có kết quả đánh giá, công nhận cấp xã hằng năm (trước ngày 10/02 của năm sau liền kề) muộn hơn so với thời điểm hoàn thành việc xét tặng danh hiệu “xã, phường, thị trấn tiêu biểu”. Tiêu chí đạt chuẩn tiếp cận pháp luật được xác định là một trong những chỉ tiêu, tiêu chí trong các bộ tiêu chuẩn, tiêu chí đánh giá chính quyền cấp xã.',
+        'Đây là một trong những bất cập tại Quyết định số 25/2021/QĐ-TTg mà Bộ Tư pháp đã nhận diện trong quá trình sơ kết, rà soát đánh giá các quy định của Quyết định số 25/2021/QĐ-TTg. Để giải quyết vướng mắc này, ngày 30/6/2025 Bộ Tư pháp đã trình Thủ tướng Chính phủ dự thảo Quyết định quy định xã, phường, đặc khu đạt chuẩn tiếp cận pháp luật. Trong đó Điều 6 dự thảo Quyết định đã quy định về thời gian đánh giá như sau:\n“1. Việc đánh giá, công nhận cấp xã đạt chuẩn tiếp cận pháp luật được thực hiện hằng năm.\n2. Ủy ban nhân dân cấp xã tổ chức họp, đánh giá kết quả thực hiện và mức độ đạt của từng tiêu chí tiếp cận pháp luật; niêm yết hoặc đăng tải công khai kết quả tự đánh giá trong ít nhất là 10 ngày để lấy ý kiến của cơ quan, tổ chức, cá nhân trên địa bàn; gửi hồ sơ đề nghị công nhận cấp xã đạt chuẩn tiếp cận pháp luật đến Sở Tư pháp trước ngày 25 tháng 11 của năm đánh giá”.\nQuy định này nhằm tạo sự tương thích giữa thời gian đánh giá cấp xã đạt chuẩn TCPL và thời gian bình xét xã, phường, đặc khu tiêu biểu để có thể sử dụng kết quả đánh giá cấp xã đạt chuẩn TCPL để xét tặng danh hiệu xã, phường, đặc khu tiêu biểu.'],
+    ['hanh-chinh', '25/07/2025',
+        'Sau khi sắp xếp đơn vị hành chính, thẩm quyền đăng ký một số việc hộ tịch trước đây thuộc cấp huyện được chuyển cho cấp nào thực hiện?',
+        'Theo các văn bản phân định thẩm quyền khi tổ chức chính quyền địa phương hai cấp, nhiều nhiệm vụ trước đây thuộc cấp huyện trong lĩnh vực tư pháp được chuyển giao cho Ủy ban nhân dân cấp xã hoặc cấp tỉnh. Người dân tra cứu thủ tục cụ thể trên Cổng Dịch vụ công để xác định cơ quan tiếp nhận.'],
+    ['chinh-sach', '20/07/2025',
+        'Hồ sơ dự thảo nghị quyết của Hội đồng nhân dân cấp tỉnh gửi thẩm định gồm những tài liệu nào?',
+        'Hồ sơ gửi thẩm định thực hiện theo quy định của Luật Ban hành văn bản quy phạm pháp luật và văn bản hướng dẫn, gồm tờ trình, dự thảo, báo cáo tổng hợp ý kiến và các tài liệu liên quan theo yêu cầu của cơ quan thẩm định.'],
+    ['chinh-sach', '15/07/2025',
+        'Việc theo dõi tình hình thi hành pháp luật hằng năm được thực hiện theo những nội dung nào?',
+        'Nội dung theo dõi gồm tình hình ban hành văn bản quy định chi tiết, bảo đảm điều kiện cho thi hành pháp luật và tình hình tuân thủ pháp luật của cơ quan, tổ chức, cá nhân.'],
+    ['chinh-sach', '10/07/2025',
+        'Kinh phí bảo đảm cho công tác phổ biến, giáo dục pháp luật ở cấp xã được bố trí từ nguồn nào?',
+        'Kinh phí được bố trí trong dự toán ngân sách nhà nước hằng năm theo phân cấp ngân sách hiện hành và các nguồn hợp pháp khác theo quy định.'],
+    ['hanh-chinh', '05/07/2025',
+        'Khi phát hiện văn bản quy phạm pháp luật có nội dung trái pháp luật, cơ quan kiểm tra xử lý như thế nào?',
+        'Cơ quan kiểm tra thông báo cho cơ quan đã ban hành văn bản để tự kiểm tra, xử lý; trường hợp cơ quan ban hành không xử lý thì cơ quan có thẩm quyền xử lý theo quy định.'],
+    ['hanh-chinh', '30/06/2025',
+        'Công chức tư pháp - hộ tịch cấp xã cần đáp ứng tiêu chuẩn gì về trình độ chuyên môn?',
+        'Tiêu chuẩn cụ thể của công chức cấp xã thực hiện theo quy định của pháp luật về cán bộ, công chức và văn bản hướng dẫn của Bộ Nội vụ, Bộ Tư pháp.'],
+    ['dan-su', '25/06/2025',
+        'Người bị thiệt hại do hành vi trái pháp luật của người thi hành công vụ gửi yêu cầu bồi thường đến cơ quan nào?',
+        'Người bị thiệt hại gửi văn bản yêu cầu bồi thường đến cơ quan trực tiếp quản lý người thi hành công vụ gây thiệt hại (cơ quan giải quyết bồi thường) theo Luật Trách nhiệm bồi thường của Nhà nước.'],
+    ['dan-su', '20/06/2025',
+        'Hòa giải viên ở cơ sở có được hưởng thù lao khi thực hiện hòa giải không?',
+        'Hòa giải viên được hưởng thù lao theo vụ, việc khi thực hiện hòa giải theo mức chi do Hội đồng nhân dân cấp tỉnh quy định, trên cơ sở quy định của Luật Hòa giải ở cơ sở và văn bản hướng dẫn.'],
+    ['dan-su', '15/06/2025',
+        'Có thể đăng ký khai sinh trực tuyến cho con khi cha mẹ chưa đăng ký kết hôn không?',
+        'Người dân có thể thực hiện thủ tục đăng ký khai sinh trực tuyến trên Cổng Dịch vụ công; nội dung phần khai về cha trong giấy khai sinh được thực hiện theo quy định của pháp luật về hộ tịch.'],
+    ['hanh-chinh', '10/06/2025',
+        'Phiếu lý lịch tư pháp có thể nhận qua ứng dụng VNeID không?',
+        'Người dân có thể nộp yêu cầu cấp Phiếu lý lịch tư pháp trực tuyến và lựa chọn hình thức nhận kết quả theo hướng dẫn trên hệ thống tiếp nhận.'],
+    ['dan-su', '05/06/2025',
+        'Người cao tuổi có hoàn cảnh khó khăn có thuộc diện được trợ giúp pháp lý không?',
+        'Người cao tuổi có khó khăn về tài chính thuộc diện được trợ giúp pháp lý theo Luật Trợ giúp pháp lý; điều kiện khó khăn về tài chính thực hiện theo quy định của Chính phủ.'],
+    ['dan-su', '30/05/2025',
+        'Văn phòng công chứng có được chứng thực bản sao từ bản chính không?',
+        'Công chứng viên của tổ chức hành nghề công chứng được thực hiện chứng thực bản sao từ bản chính theo quy định của pháp luật về chứng thực.'],
+    ['dan-su', '25/05/2025',
+        'Người được thi hành án có quyền yêu cầu cơ quan thi hành án xác minh điều kiện thi hành án của người phải thi hành án không?',
+        'Người được thi hành án có quyền cung cấp thông tin và yêu cầu Chấp hành viên xác minh điều kiện thi hành án theo quy định của Luật Thi hành án dân sự.'],
+    ['chinh-sach', '20/05/2025',
+        'Dự thảo văn bản quy phạm pháp luật phải được đăng tải lấy ý kiến trong thời gian tối thiểu bao lâu?',
+        'Thời gian lấy ý kiến thực hiện theo Luật Ban hành văn bản quy phạm pháp luật hiện hành đối với từng loại văn bản; cơ quan chủ trì soạn thảo đăng tải dự thảo trên cổng thông tin điện tử theo quy định.'],
+    ['giao-duc', '15/05/2025',
+        'Báo cáo viên pháp luật cấp tỉnh do cơ quan nào ra quyết định công nhận?',
+        'Chủ tịch Ủy ban nhân dân cấp tỉnh quyết định công nhận báo cáo viên pháp luật cấp tỉnh theo đề nghị của Giám đốc Sở Tư pháp.'],
+    ['thuong-mai', '12/05/2025',
+        'Thương nhân kinh doanh trên sàn thương mại điện tử có phải công khai thông tin về người bán không?',
+        'Thương nhân, tổ chức, cá nhân bán hàng trên sàn giao dịch thương mại điện tử có trách nhiệm cung cấp đầy đủ, chính xác thông tin theo quy định của pháp luật về thương mại điện tử và theo yêu cầu của đơn vị vận hành sàn.'],
+    ['thuong-mai', '08/05/2025',
+        'Hợp đồng mua bán hàng hóa giữa hai doanh nghiệp có bắt buộc phải lập thành văn bản không?',
+        'Theo Luật Thương mại, hợp đồng mua bán hàng hóa có thể được thể hiện bằng lời nói, bằng văn bản hoặc được xác lập bằng hành vi cụ thể, trừ trường hợp pháp luật quy định phải lập thành văn bản.'],
+    ['doanh-nghiep', '05/05/2025',
+        'Doanh nghiệp thay đổi địa chỉ trụ sở chính trong cùng tỉnh cần thực hiện thủ tục gì?',
+        'Doanh nghiệp thực hiện thủ tục đăng ký thay đổi nội dung đăng ký doanh nghiệp với cơ quan đăng ký kinh doanh; có thể nộp hồ sơ trực tuyến qua Cổng thông tin quốc gia về đăng ký doanh nghiệp.'],
+    ['doanh-nghiep', '28/04/2025',
+        'Doanh nghiệp nhỏ và vừa được hỗ trợ tư vấn pháp lý miễn phí trong những trường hợp nào?',
+        'Doanh nghiệp nhỏ và vừa được hưởng các chương trình hỗ trợ pháp lý theo Luật Hỗ trợ doanh nghiệp nhỏ và vừa và các văn bản hướng dẫn; nội dung, mức hỗ trợ cụ thể tùy từng chương trình của bộ, ngành và địa phương.'],
+    ['dat-dai', '22/04/2025',
+        'Hộ gia đình sử dụng đất ổn định nhưng chưa có giấy tờ có được cấp Giấy chứng nhận quyền sử dụng đất không?',
+        'Việc cấp Giấy chứng nhận cho trường hợp sử dụng đất không có giấy tờ về quyền sử dụng đất được thực hiện theo các điều kiện quy định tại Luật Đất đai năm 2024 và văn bản hướng dẫn, trong đó có xác nhận của Ủy ban nhân dân cấp xã về tình trạng sử dụng đất.'],
+    ['dat-dai', '15/04/2025',
+        'Khi Nhà nước thu hồi đất ở, người dân được bồi thường bằng hình thức nào?',
+        'Người có đất ở bị thu hồi đủ điều kiện được bồi thường thì được bồi thường bằng đất ở, bằng nhà ở, bằng tiền hoặc bằng đất có mục đích sử dụng khác theo quy định của Luật Đất đai năm 2024 và phương án bồi thường được phê duyệt.'],
+    ['giao-duc', '10/04/2025',
+        'Nội dung giáo dục pháp luật trong nhà trường được thực hiện qua những hình thức nào?',
+        'Giáo dục pháp luật trong nhà trường được thực hiện thông qua môn học, hoạt động ngoại khóa, sinh hoạt chuyên đề và các hình thức phù hợp khác theo quy định của Luật Phổ biến, giáo dục pháp luật và hướng dẫn của ngành giáo dục.']
+];
+
+const toISO = (d) => { const [dd, mm, yyyy] = d.split('/'); return `${yyyy}-${mm}-${dd}`; };
+
+export const hoiDapPhapLuatItems = RAW.map(([field, date, question, answer], idx) => ({
+    id: idx + 1, field, date, dateISO: toISO(date), question, answer
+}));

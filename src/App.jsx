@@ -97,6 +97,7 @@ import ChuyenGiaListPage from './pages/cau-hoi-phap-luat/ChuyenGiaListPage';
 import ChuyenGiaDetailPage from './pages/cau-hoi-phap-luat/ChuyenGiaDetailPage';
 import DatLichTuVanPage from './pages/cau-hoi-phap-luat/DatLichTuVanPage';
 import ChuDeHoiDapPage from './pages/cau-hoi-phap-luat/ChuDeHoiDapPage';
+import HoiDapPhapLuatPage from './pages/cau-hoi-phap-luat/HoiDapPhapLuatPage';
 
 // Legal Questions Dashboard imports
 import DanhSachCauHoiCaNhanPage from './pages/dashboard/DanhSachCauHoiCaNhanPage';
@@ -196,6 +197,12 @@ import LaoCaiNewsCategoryPage from './pages/laocai/LaoCaiNewsCategoryPage';
 import LaoCaiHotlinePage from './pages/laocai/LaoCaiHotlinePage';
 import LaoCaiV2HomePage from './pages/laocaiV2/LaoCaiV2HomePage';
 import LaoCaiV3HomePage from './pages/laocaiV3/LaoCaiV3HomePage';
+import TuyenQuangHomePage from './pages/tuyenquang/TuyenQuangHomePage';
+import TuyenQuangCategoryPage from './pages/tuyenquang/TuyenQuangCategoryPage';
+import TuyenQuangArticlePage from './pages/tuyenquang/TuyenQuangArticlePage';
+import TuyenQuangDocsPage from './pages/tuyenquang/TuyenQuangDocsPage';
+import TuyenQuangFAQPage from './pages/tuyenquang/TuyenQuangFAQPage';
+import { TuyenQuangAboutPage, TuyenQuangContactPage, TuyenQuangMediaPage } from './pages/tuyenquang/TuyenQuangInfoPages';
 import LaoCaiV2AboutPage from './pages/laocaiV2/LaoCaiV2AboutPage';
 import LaoCaiV2LegalDocsPage from './pages/laocaiV2/LaoCaiV2LegalDocsPage';
 import LaoCaiV2DraftDocsPage from './pages/laocaiV2/LaoCaiV2DraftDocsPage';
@@ -253,7 +260,7 @@ import LaoCaiV2_VuViecDienHinhDetailPage from './pages/laocaiV2/tro-giup-phap-ly
 
 const AppLayout = () => {
     const location = useLocation();
-    const hideHeaderFooter = ['/dang-nhap', '/onboarding'].includes(location.pathname) || location.pathname.startsWith('/ha-noi') || location.pathname.startsWith('/lao-cai');
+    const hideHeaderFooter = ['/dang-nhap', '/onboarding'].includes(location.pathname) || location.pathname.startsWith('/ha-noi') || location.pathname.startsWith('/lao-cai') || location.pathname.startsWith('/tuyen-quang');
 
     // Scroll to top on every route change
     useEffect(() => {
@@ -392,6 +399,22 @@ const AppLayout = () => {
                     <Route path="/lao-cai-v2/hoi-dap/:id" element={<LaoCaiV2FAQDetailPage />} />
                     <Route path="/lao-cai-v2/lien-he" element={<LaoCaiV2ContactPage />} />
                     <Route path="/lao-cai-v2/hotline" element={<LaoCaiV2HotlinePage />} />
+
+                    {/* Cổng Pháp luật tỉnh Tuyên Quang */}
+                    <Route path="/tuyen-quang" element={<TuyenQuangHomePage />} />
+                    <Route path="/tuyen-quang/gioi-thieu" element={<TuyenQuangAboutPage />} />
+                    <Route path="/tuyen-quang/tin-tuc" element={<TuyenQuangCategoryPage />} />
+                    <Route path="/tuyen-quang/tin-tuc/chi-tiet/:id" element={<TuyenQuangArticlePage />} />
+                    <Route path="/tuyen-quang/tin-tuc/:slug" element={<TuyenQuangCategoryPage />} />
+                    <Route path="/tuyen-quang/chuyen-muc/:slug" element={<TuyenQuangCategoryPage />} />
+                    <Route path="/tuyen-quang/tro-giup-phap-ly" element={<TuyenQuangCategoryPage slug="tro-giup-phap-ly" />} />
+                    <Route path="/tuyen-quang/ho-tro-phap-ly-doanh-nghiep" element={<TuyenQuangCategoryPage slug="ho-tro-phap-ly-doanh-nghiep" />} />
+                    <Route path="/tuyen-quang/van-ban" element={<TuyenQuangDocsPage />} />
+                    <Route path="/tuyen-quang/hoi-dap" element={<TuyenQuangFAQPage />} />
+                    <Route path="/tuyen-quang/video" element={<TuyenQuangMediaPage type="video" />} />
+                    <Route path="/tuyen-quang/anh" element={<TuyenQuangMediaPage type="anh" />} />
+                    <Route path="/tuyen-quang/infographic" element={<TuyenQuangMediaPage type="infographic" />} />
+                    <Route path="/tuyen-quang/lien-he" element={<TuyenQuangContactPage />} />
                     <Route path="/trang-chu-v2" element={<HomePageV2 />} />
                     <Route path="/trang-chu-v3" element={<HomePageV3 />} />
                     <Route path="/ho-tro-phap-ly-doanh-nghiep/*" element={<HoTroPhapLyDoanhNghiepPage />} />
@@ -515,6 +538,7 @@ const AppLayout = () => {
                     {/* Legal Questions Routes */}
                     <Route path="/cau-hoi-phap-luat" element={<DanhSachCauHoiPage />} />
                     <Route path="/cau-hoi-phap-luat/chu-de" element={<ChuDeHoiDapPage />} />
+                    <Route path="/cau-hoi-phap-luat/hoi-dap-phap-luat" element={<HoiDapPhapLuatPage />} />
                     <Route path="/cau-hoi-phap-luat/:id" element={<CauHoiDetailPage />} />
                     <Route path="/cau-hoi-phap-luat/chuyen-gia" element={<ChuyenGiaListPage />} />
                     <Route path="/cau-hoi-phap-luat/chuyen-gia/:id" element={<ChuyenGiaDetailPage />} />
