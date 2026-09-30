@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
     Clock, PlayCircle, ChevronLeft, ChevronRight, ArrowRight, Search, Sparkles, Newspaper, FileText,
-    HelpCircle, BookOpen, Download, Eye, ChevronDown, Send, Users, Mic, Landmark
+    HelpCircle, BookOpen, Download, Eye, ChevronDown, Users, Mic, Landmark
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import TuyenQuangHeader from '../../components/tuyenquang/TuyenQuangHeader';
@@ -10,7 +10,7 @@ import { Reveal, CountUp, ScrollProgressBar, LaoCaiV3Styles } from '../../compon
 import {
     TQ_HOME, TQ_CATEGORIES, TQ_HOME_CATEGORY_SLUGS, TQ_DOC_GROUPS, TQ_FAQ_GROUPS,
     tuyenquangSiteConfig, tuyenquangArticles, tuyenquangDocs, tuyenquangFAQs, tuyenquangVideos,
-    tuyenquangInfographics, tuyenquangLinks, tqArticlesOf, tqArticleUrl, tqCategoryUrl
+    tuyenquangInfographics, tuyenquangLinks, tqArticlesOf, tqArticleUrl, tqCategoryUrl, tqVideoUrl, TQ_DIRECTIVE_DOCS_URL, tqDirectiveDocUrl
 } from '../../data/tuyenquangMockData';
 
 const HERO_INTERVAL = 7000;
@@ -21,10 +21,25 @@ const HERO_SLIDES = ['1', '2', '6', '15'].map(byId);
 const BOTTOM_SLIDES = [['3', '11', '21'], ['24', '29', '35'], ['38', '40', '42']].map((g) => g.map(byId));
 
 const QUICK_LINKS = [
-    { label: 'Văn bản chỉ đạo điều hành', desc: 'VB Trung ương, tỉnh, HĐPH', icon: FileText, to: `${TQ_HOME}/van-ban` },
+    { label: 'Văn bản chỉ đạo điều hành', desc: 'VB Trung ương, tỉnh, HĐPH', icon: FileText, to: TQ_DIRECTIVE_DOCS_URL },
     { label: 'Hỏi đáp, tư vấn pháp luật', desc: 'Gửi câu hỏi, tra cứu giải đáp', icon: HelpCircle, to: `${TQ_HOME}/hoi-dap` },
     { label: 'Tài liệu PBGDPL', desc: 'Tờ gấp, đề cương, sách hỏi đáp', icon: BookOpen, to: tqCategoryUrl('tai-lieu-pbgdpl') }
 ];
+// Nhãn ngắn cho tab loại tài liệu ở khối Tài liệu PBGDPL (tab kiểu khối Hỏi đáp)
+const DOC_TAB_LABELS = {
+    'vbqppl-tw': 'VBQPPL Trung ương', 'vbqppl-tinh': 'VBQPPL tỉnh', 'de-cuong': 'Đề cương', 'to-gap': 'Tờ gấp',
+    'sach-hoi-dap': 'Sách hỏi - đáp', 'tinh-huong': 'Tình huống', 'cau-chuyen': 'Câu chuyện', 'pano': 'Pano, âm thanh'
+};
+const CONTEST_ARTICLE = tuyenquangArticles.find((a) => a.category === 'cuoc-thi' && a.title.includes('Công dân số hiểu luật'));
+const CONTEST_BANNER_LINK = CONTEST_ARTICLE ? tqArticleUrl(CONTEST_ARTICLE.id) : tqCategoryUrl('cuoc-thi');
+
+// Mô tả ngắn cho 3 lựa chọn ở khối Báo cáo viên, tuyên truyền viên
+const BCV_NOTES = {
+    'cap-tinh': 'Danh sách, quyết định công nhận báo cáo viên cấp tỉnh',
+    'cap-xa': 'Đội ngũ báo cáo viên pháp luật tại các xã, phường',
+    'tuyen-truyen-vien': 'Tuyên truyền viên ở thôn, bản, tổ dân phố'
+};
+
 const HOT_KEYWORDS = ['Luật Đất đai 2024', 'Ngày Pháp luật', 'Hòa giải cơ sở', 'Chuẩn tiếp cận pháp luật'];
 
 // Chuyên trang quảng bá ở cột phải khối Tin tức sự kiện (theo trang PBGDPL Tuyên Quang)
@@ -126,9 +141,9 @@ const TuyenQuangHomePage = () => {
 
     const slide = HERO_SLIDES[activeSlide];
     const eventNews = tqArticlesOf('tin-tuc-su-kien');
-    const docsInTab = useMemo(() => tuyenquangDocs.filter((d) => d.group === docTab), [docTab]);
+    const docsInTab = useMemo(() => tuyenquangDocs.filter((d) => d.group === docTab).slice(0, 5), [docTab]);
     const faqsInTab = tuyenquangFAQs.filter((f) => f.group === faqTab);
-    const libSubs = [{ slug: 'all', label: 'Tất cả tài liệu' }, ...TQ_CATEGORIES['tai-lieu-pbgdpl'].subs];
+    const libTabs = [{ id: 'all', label: 'Tất cả' }, ...TQ_CATEGORIES['tai-lieu-pbgdpl'].subs.map((s) => ({ id: s.slug, label: DOC_TAB_LABELS[s.slug] || s.label }))];
     const libItems = tqArticlesOf('tai-lieu-pbgdpl', docLibTab === 'all' ? null : docLibTab).slice(0, 6);
     const activeVideo = tuyenquangVideos[activeVideoIdx];
 
@@ -181,18 +196,18 @@ const TuyenQuangHomePage = () => {
                                 <div className="absolute inset-0 bg-gradient-to-b from-[#eef0ff] via-white to-[#e8f4ff] pointer-events-none" />
                                 <div className="absolute inset-0 bg-[radial-gradient(rgba(79,86,202,0.10)_1px,transparent_1px)] [background-size:14px_14px] pointer-events-none" />
                                 <div className="absolute -right-12 -bottom-12 w-40 h-40 rounded-full bg-sky-200/40 blur-2xl pointer-events-none" />
-                                <ul className="relative flex-1 min-h-0 overflow-y-auto lc3-thin-scroll px-2.5 py-2">
+                                <ul className="relative flex-1 min-h-0 overflow-y-auto lc3-thin-scroll px-2.5 py-2 space-y-1">
                                     {TQ_HOME_CATEGORY_SLUGS.map((slug, idx) => {
                                         const cat = TQ_CATEGORIES[slug];
                                         const Icon = TQ_ICONS[cat.icon] || Newspaper;
                                         return (
                                             <li key={slug} className="lc3-stagger" style={{ animationDelay: `${150 + idx * 40}ms` }}>
-                                                <Link to={tqCategoryUrl(slug)} title={cat.title} className="group relative flex items-center gap-2.5 pl-2.5 pr-1.5 py-[3px] rounded-xl hover:bg-white hover:shadow-[0_4px_14px_-6px_rgba(15,76,129,0.35)] hover:ring-1 hover:ring-indigo-100 transition-all duration-300">
-                                                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 rounded-full bg-gradient-to-b from-amber-400 to-[#991b1b] group-hover:h-5 transition-all duration-300" />
-                                                    <span className="w-7 h-7 shrink-0 rounded-lg bg-white text-[#2c1b92] ring-1 ring-indigo-100 shadow-sm flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-[#4f56ca] group-hover:to-[#2c1b92] group-hover:text-white group-hover:ring-0 transition-all duration-300">
-                                                        <Icon size={15} />
+                                                <Link to={tqCategoryUrl(slug)} title={cat.title} className="group relative flex items-center gap-3 pl-3 pr-2 py-1.5 rounded-xl hover:bg-white hover:shadow-[0_4px_14px_-6px_rgba(15,76,129,0.35)] hover:ring-1 hover:ring-indigo-100 transition-all duration-300">
+                                                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 rounded-full bg-gradient-to-b from-amber-400 to-[#991b1b] group-hover:h-6 transition-all duration-300" />
+                                                    <span className="w-8 h-8 shrink-0 rounded-lg bg-white text-[#2c1b92] ring-1 ring-indigo-100 shadow-sm flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-[#4f56ca] group-hover:to-[#2c1b92] group-hover:text-white group-hover:ring-0 transition-all duration-300">
+                                                        <Icon size={16} />
                                                     </span>
-                                                    <span className="flex-1 min-w-0 truncate pr-3 text-[14.5px] font-semibold text-[#1e2a4a] group-hover:text-[#2c1b92] group-hover:translate-x-0.5 transition-all">{cat.title}</span>
+                                                    <span className="flex-1 min-w-0 truncate pr-3 text-[16px] font-semibold text-[#1e2a4a] group-hover:text-[#2c1b92] group-hover:translate-x-0.5 transition-all">{cat.title}</span>
                                                     <ChevronRight size={14} className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[#991b1b] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                                                 </Link>
                                             </li>
@@ -396,12 +411,30 @@ const TuyenQuangHomePage = () => {
                     </div>
                 </section>
 
+                {/* BANNER CUỘC THI TRỰC TUYẾN "CÔNG DÂN SỐ HIỂU LUẬT" */}
+                <section id="banner-cuoc-thi" className="w-full max-w-[1504px] mx-auto px-4">
+                    <Reveal variant="zoom">
+                        <Link
+                            to={CONTEST_BANNER_LINK}
+                            className="group relative block rounded-2xl overflow-hidden shadow-lg shadow-blue-900/15 ring-1 ring-sky-200/60 lc3-shine"
+                            title="Cuộc thi trực tuyến “Công dân số hiểu luật”"
+                        >
+                            <img
+                                src="/bnct.jpg"
+                                alt="Cuộc thi trực tuyến Công dân số hiểu luật - Sống an toàn, trách nhiệm trên không gian mạng"
+                                loading="lazy"
+                                className="w-full h-auto block group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                            />
+                        </Link>
+                    </Reveal>
+                </section>
+
                 {/* ============================================================== */}
                 {/* 4. THÔNG TIN VĂN BẢN CHỈ ĐẠO ĐIỀU HÀNH (4 NHÓM) + HĐPH PBGDPL TỈNH */}
                 {/* ============================================================== */}
                 <section id="van-ban-chi-dao" className="w-full max-w-[1504px] mx-auto px-4">
                     <Reveal className="bg-white rounded-2xl p-5 sm:p-6 border border-gray-200/80 shadow-sm">
-                        <SectionHeading title="Thông tin văn bản chỉ đạo điều hành" to={`${TQ_HOME}/van-ban`}>
+                        <SectionHeading title="Thông tin văn bản chỉ đạo điều hành" to={TQ_DIRECTIVE_DOCS_URL}>
                             <TabPills tabs={TQ_DOC_GROUPS} active={docTab} onChange={setDocTab} />
                         </SectionHeading>
                         <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
@@ -410,18 +443,14 @@ const TuyenQuangHomePage = () => {
                                     <div className="absolute inset-0 bg-[radial-gradient(#ffffff22_1.2px,transparent_1.2px)] [background-size:16px_16px] pointer-events-none" />
                                     <div className="relative w-[120px] shrink-0">Ngày ban hành</div>
                                     <div className="relative flex-1">Nội dung văn bản</div>
-                                    <div className="relative w-10 shrink-0 text-right hidden sm:block">Tải</div>
                                 </div>
                                 <ul key={docTab} className="divide-y divide-gray-100 lc3-text-in">
                                     {docsInTab.map((d) => (
                                         <li key={d.id} className="flex items-center gap-4 lg:gap-0 px-5 py-3.5 hover:bg-blue-50/50 transition-colors group">
                                             <div className="w-[120px] shrink-0 font-semibold text-gray-800 text-[13.5px]">{d.ngay}</div>
-                                            <Link to={`${TQ_HOME}/van-ban?nhom=${d.group}`} className="flex-1 min-w-0 text-[13.5px] text-gray-600 group-hover:text-[#0f4c81] leading-relaxed font-medium line-clamp-2">
+                                            <Link to={tqDirectiveDocUrl(d.id)} className="flex-1 min-w-0 text-[13.5px] text-gray-600 group-hover:text-[#0f4c81] leading-relaxed font-medium line-clamp-2">
                                                 <span className="font-bold text-[#0f4c81]">{d.soHieu}</span> ({d.coQuan}) - {d.trichYeu}
                                             </Link>
-                                            <button type="button" className="w-10 shrink-0 hidden sm:flex justify-end text-gray-400 hover:text-[#991b1b] transition-colors" title="Tải văn bản" aria-label={`Tải văn bản ${d.soHieu}`}>
-                                                <Download size={16} />
-                                            </button>
                                         </li>
                                     ))}
                                 </ul>
@@ -432,7 +461,7 @@ const TuyenQuangHomePage = () => {
                                     <h3 className="font-bold text-[15px] text-[#0f4c81] flex items-center gap-2"><Users size={16} className="text-[#991b1b]" /> Hội đồng phối hợp PBGDPL tỉnh</h3>
                                 </div>
                                 <div className="flex flex-col divide-y divide-amber-100/70">
-                                    {tqArticlesOf('hoi-dong-phoi-hop').map((a) => <div key={a.id} className="py-1.5"><ArticleRow article={a} showImage={false} /></div>)}
+                                    {tqArticlesOf('hoi-dong-phoi-hop').slice(0, 3).map((a) => <div key={a.id} className="py-1.5"><ArticleRow article={a} showImage={false} /></div>)}
                                 </div>
                                 <Link to={tqCategoryUrl('hoi-dong-phoi-hop')} className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-[#0f4c81] hover:text-[#991b1b]">
                                     Xem chuyên mục <ArrowRight size={13} />
@@ -451,16 +480,17 @@ const TuyenQuangHomePage = () => {
                         <div className="absolute -right-10 -bottom-10 w-56 h-56 rounded-full border border-amber-600/35 border-dashed pointer-events-none lc3-rotate-cw" />
                         <div className="relative z-10">
                             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6">
-                                <div>
-                                    <h2 className="text-lg sm:text-xl font-bold uppercase tracking-tight">Phổ biến, giáo dục pháp luật trong số liệu</h2>
+                                {/* Bấm tiêu đề để sang chuyên mục Thống kê, báo cáo về PBGDPL */}
+                                <Link to={tqCategoryUrl('thong-ke-bao-cao')} className="group/heading inline-block" title="Xem Thống kê, báo cáo về PBGDPL">
+                                    <h2 className="text-lg sm:text-xl font-bold uppercase tracking-tight inline-flex items-center gap-2 group-hover/heading:text-amber-200 transition-colors">
+                                        Số liệu phổ biến, giáo dục pháp luật địa phương
+                                        <ChevronRight size={20} className="group-hover/heading:translate-x-1 transition-transform" />
+                                    </h2>
                                     <div className="w-20 h-1 bg-gradient-to-r from-amber-400 to-transparent mt-2 rounded-full" />
-                                </div>
-                                <Link to={tqCategoryUrl('thong-ke-bao-cao')} className="group/btn inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-amber-200 hover:text-white">
-                                    Thống kê, báo cáo về PBGDPL <ArrowRight size={13} className="group-hover/btn:translate-x-1 transition-transform" />
                                 </Link>
                             </div>
-                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                                {tuyenquangSiteConfig.stats.map((s) => (
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                                {tuyenquangSiteConfig.stats.filter((s) => s.key !== 'hoinghi').map((s) => (
                                     <div key={s.key} className="rounded-xl bg-white/10 border border-white/15 hover:bg-white/15 hover:border-amber-300/50 p-4 transition-colors">
                                         <div className="text-2xl sm:text-[28px] font-bold leading-none"><CountUp end={s.value} /></div>
                                         <div className="text-[12px] text-blue-100/90 mt-1.5 leading-snug">{s.label}</div>
@@ -505,9 +535,6 @@ const TuyenQuangHomePage = () => {
                                     );
                                 })}
                             </div>
-                            <Link to={`${TQ_HOME}/hoi-dap#gui-cau-hoi`} className="mt-4 inline-flex items-center gap-2 bg-[#0f4c81] hover:bg-[#991b1b] text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors lc3-shine relative">
-                                <Send size={15} /> Gửi câu hỏi pháp luật
-                            </Link>
                         </Reveal>
 
                         <Reveal variant="right" delay={120} className="lg:col-span-3 bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden">
@@ -515,17 +542,17 @@ const TuyenQuangHomePage = () => {
                                 <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.16)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
                                 <h3 className="relative font-bold text-[15px] uppercase tracking-wide flex items-center gap-2"><Mic size={16} className="text-amber-300" /> Báo cáo viên, tuyên truyền viên</h3>
                             </div>
-                            <div className="p-4 space-y-2">
+                            <div className="p-4 space-y-3">
                                 {TQ_CATEGORIES['bao-cao-vien'].subs.map((s) => (
-                                    <Link key={s.slug} to={tqCategoryUrl('bao-cao-vien', s.slug)} className="group flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/40 transition-colors">
-                                        <span className="w-9 h-9 shrink-0 rounded-xl bg-[#f0f5f9] text-[#0f4c81] group-hover:bg-[#0f4c81] group-hover:text-white flex items-center justify-center transition-colors"><Users size={16} /></span>
-                                        <span className="flex-1 font-semibold text-[13.5px] text-gray-800 group-hover:text-[#0f4c81]">{s.label}</span>
+                                    <Link key={s.slug} to={tqCategoryUrl('bao-cao-vien', s.slug)} className="group flex items-center gap-3.5 p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/40 hover:shadow-sm transition-all">
+                                        <span className="w-11 h-11 shrink-0 rounded-xl bg-[#f0f5f9] text-[#0f4c81] group-hover:bg-[#0f4c81] group-hover:text-white flex items-center justify-center transition-colors"><Users size={19} /></span>
+                                        <span className="flex-1 min-w-0">
+                                            <span className="block font-bold text-[14.5px] text-gray-800 group-hover:text-[#0f4c81] leading-snug">{s.label}</span>
+                                            <span className="block text-[12px] text-gray-500 mt-0.5 leading-snug">{BCV_NOTES[s.slug]}</span>
+                                        </span>
                                         <ChevronRight size={15} className="text-gray-300 group-hover:text-[#991b1b] group-hover:translate-x-0.5 transition-all" />
                                     </Link>
                                 ))}
-                                <div className="pt-2 border-t border-gray-100">
-                                    {tqArticlesOf('bao-cao-vien').slice(0, 2).map((a) => <ArticleRow key={a.id} article={a} showImage={false} />)}
-                                </div>
                             </div>
                         </Reveal>
                     </div>
@@ -536,15 +563,9 @@ const TuyenQuangHomePage = () => {
                 {/* ============================================================== */}
                 <section id="tai-lieu" className="w-full max-w-[1504px] mx-auto px-4">
                     <Reveal className="bg-white rounded-2xl p-5 sm:p-6 border border-gray-200/80 shadow-sm">
-                        <SectionHeading title="Tài liệu phổ biến, giáo dục pháp luật" to={tqCategoryUrl('tai-lieu-pbgdpl')} />
-                        <div className="flex gap-2 overflow-x-auto pb-2 mb-4 lc3-thin-scroll" role="tablist">
-                            {libSubs.map((s) => (
-                                <button key={s.slug} type="button" role="tab" aria-selected={docLibTab === s.slug} onClick={() => setDocLibTab(s.slug)}
-                                    className={`shrink-0 text-[12.5px] font-semibold px-3.5 py-1.5 rounded-full border transition-colors ${docLibTab === s.slug ? 'bg-[#0f4c81] border-[#0f4c81] text-white' : 'bg-white border-gray-200 text-gray-700 hover:border-[#0f4c81] hover:text-[#0f4c81]'}`}>
-                                    {s.label}
-                                </button>
-                            ))}
-                        </div>
+                        <SectionHeading title="Tài liệu phổ biến, giáo dục pháp luật" to={tqCategoryUrl('tai-lieu-pbgdpl')}>
+                            <TabPills tabs={libTabs} active={docLibTab} onChange={setDocLibTab} />
+                        </SectionHeading>
                         <div key={docLibTab} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lc3-text-in">
                             {libItems.length ? libItems.map((a) => (
                                 <Link key={a.id} to={tqArticleUrl(a.id)} className="group flex gap-4 p-4 rounded-xl border border-gray-200 hover:border-blue-300 bg-gradient-to-br from-white to-slate-50 lc3-card">
@@ -599,12 +620,12 @@ const TuyenQuangHomePage = () => {
                 {/* ============================================================== */}
                 <section id="da-phuong-tien" className="w-full bg-white border-y border-gray-200 py-8 sm:py-10">
                     <Reveal className="container mx-auto px-4 max-w-[1504px]">
-                        <SectionHeading title="Thư viện video - clip & Multimedia" to={mediaTab === 'video' ? `${TQ_HOME}/video` : `${TQ_HOME}/infographic`}>
+                        <SectionHeading title="Multimedia" to={mediaTab === 'video' ? `${TQ_HOME}/video` : `${TQ_HOME}/infographic`}>
                             <TabPills tabs={[{ id: 'video', label: 'Video - clip' }, { id: 'infographic', label: 'Pano, áp phích, infographic' }]} active={mediaTab} onChange={setMediaTab} />
                         </SectionHeading>
                         {mediaTab === 'video' ? (
                             <div key="v" className="bg-white rounded-2xl overflow-hidden border border-gray-200 grid grid-cols-1 lg:grid-cols-3 shadow-sm lc3-text-in">
-                                <Link to={`${TQ_HOME}/video`} className="lg:col-span-2 relative group aspect-video bg-black overflow-hidden block">
+                                <Link to={tqVideoUrl(activeVideo.id)} className="lg:col-span-2 relative group aspect-video bg-black overflow-hidden block" title={`Xem video: ${activeVideo.title}`}>
                                     <img key={activeVideo.id} src={activeVideo.thumb} alt={activeVideo.title} className="w-full h-full object-cover opacity-85 group-hover:opacity-100 transition-opacity lc3-kenburns" />
                                     <div className="absolute inset-0 flex items-center justify-center">
                                         <span className="relative flex items-center justify-center">
@@ -624,7 +645,7 @@ const TuyenQuangHomePage = () => {
                                         {tuyenquangVideos.map((v, idx) => {
                                             const isActive = idx === activeVideoIdx;
                                             return (
-                                                <button key={v.id} type="button" onClick={() => setActiveVideoIdx(idx)} aria-pressed={isActive}
+                                                <Link key={v.id} to={tqVideoUrl(v.id)} onMouseEnter={() => setActiveVideoIdx(idx)} onFocus={() => setActiveVideoIdx(idx)}
                                                     className={`w-full text-left flex items-start gap-3 p-2 rounded-xl transition-colors group border ${isActive ? 'bg-blue-50/70 border-blue-200' : 'border-transparent hover:bg-gray-50'}`}>
                                                     <div className="w-[110px] shrink-0 relative aspect-video overflow-hidden rounded-lg bg-gray-200">
                                                         <img src={v.thumb} alt={v.title} loading="lazy" className="w-full h-full object-cover" />
@@ -634,10 +655,10 @@ const TuyenQuangHomePage = () => {
                                                     <div className="flex-1 min-w-0">
                                                         <h5 className={`font-semibold text-[13px] line-clamp-2 leading-snug ${isActive ? 'text-[#0f4c81]' : 'text-gray-800 group-hover:text-[#0f4c81]'}`}>{v.title}</h5>
                                                         <div className="text-[11px] text-gray-500 mt-1">
-                                                            {isActive ? <span className="inline-flex items-center gap-1 font-semibold text-[#991b1b]"><span className="w-1.5 h-1.5 rounded-full bg-[#991b1b] animate-pulse" /> Đang chọn</span> : v.date}
+                                                            {isActive ? <span className="inline-flex items-center gap-1 font-semibold text-[#991b1b]"><span className="w-1.5 h-1.5 rounded-full bg-[#991b1b] animate-pulse" /> Đang hiển thị</span> : v.date}
                                                         </div>
                                                     </div>
-                                                </button>
+                                                </Link>
                                             );
                                         })}
                                     </div>

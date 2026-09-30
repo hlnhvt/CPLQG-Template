@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { MapPin, Phone, Printer, Mail, Send, CheckCircle2, PlayCircle, Clock, Eye, Image as ImageIcon } from 'lucide-react';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { MapPin, Phone, Printer, Mail, Send, CheckCircle2, PlayCircle, Clock, Eye, Image as ImageIcon, Share2, Timer, Info } from 'lucide-react';
 import { TuyenQuangPageShell } from '../../components/tuyenquang/TuyenQuangShared';
 import {
-    TQ_HOME, tuyenquangSiteConfig, tuyenquangVideos, tuyenquangPhotos, tuyenquangInfographics
+    TQ_HOME, tuyenquangSiteConfig, tuyenquangVideos, tuyenquangPhotos, tuyenquangInfographics, tqVideoUrl
 } from '../../data/tuyenquangMockData';
 
 const useTitle = (title) => {
@@ -71,6 +71,9 @@ export const TuyenQuangAboutPage = () => {
 // ---------------------------------------------------------------------------
 // LIÊN HỆ BAN BIÊN TẬP
 // ---------------------------------------------------------------------------
+// Địa điểm hiển thị trên bản đồ (tra theo tên cơ quan + địa chỉ ở chân trang)
+const MAP_QUERY = encodeURIComponent('Sở Tư pháp tỉnh Tuyên Quang, Đường 17/8, Phan Thiết, Tuyên Quang');
+
 export const TuyenQuangContactPage = () => {
     useTitle('Liên hệ Ban Biên tập');
     const s = tuyenquangSiteConfig;
@@ -94,6 +97,26 @@ export const TuyenQuangContactPage = () => {
                             </span>
                         </div>
                     ))}
+
+                    {/* Bản đồ vị trí cơ quan thường trực */}
+                    <div className="sm:col-span-2 bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden">
+                        <div className="flex items-center justify-between gap-3 px-5 py-3 border-b border-gray-100">
+                            <span className="flex items-center gap-2 font-bold text-[14px] text-[#0f4c81]"><MapPin size={16} className="text-[#991b1b]" /> Bản đồ</span>
+                            <a href={`https://www.google.com/maps/search/?api=1&query=${MAP_QUERY}`} target="_blank" rel="noreferrer" className="text-xs font-semibold text-[#0f4c81] hover:text-[#991b1b]">
+                                Mở trong Google Maps ↗
+                            </a>
+                        </div>
+                        <div className="relative h-[320px] bg-gray-100">
+                            <iframe
+                                src={`https://www.google.com/maps?q=${MAP_QUERY}&output=embed`}
+                                className="absolute inset-0 w-full h-full border-0"
+                                allowFullScreen
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                title={`Bản đồ ${s.operatingBody}`}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className="bg-white rounded-2xl border border-gray-200/80 shadow-sm p-6">
                     {sent ? (
@@ -120,6 +143,12 @@ export const TuyenQuangContactPage = () => {
 // ---------------------------------------------------------------------------
 // ĐA PHƯƠNG TIỆN: video / ảnh / infographic
 // ---------------------------------------------------------------------------
+// Thẻ đa phương tiện: có `to` thì bấm để mở trang chi tiết (video)
+const MediaCard = ({ to, children }) => {
+    const cls = 'group block bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300';
+    return to ? <Link to={to} className={cls}>{children}</Link> : <div className={cls}>{children}</div>;
+};
+
 const MEDIA_TABS = [
     { type: 'video', label: 'Video - clip', path: 'video' },
     { type: 'anh', label: 'Ảnh', path: 'anh' },
@@ -143,7 +172,7 @@ export const TuyenQuangMediaPage = ({ type = 'video' }) => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {items.map((m) => (
-                    <div key={m.id} className="group bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                    <MediaCard key={m.id} to={type === 'video' ? tqVideoUrl(m.id) : null}>
                         <div className="relative aspect-video overflow-hidden bg-gray-100">
                             <img src={m.thumb} alt={m.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                             {type === 'video' && (
@@ -163,8 +192,87 @@ export const TuyenQuangMediaPage = ({ type = 'video' }) => {
                                 {m.views && <span className="flex items-center gap-1"><Eye size={11} /> {m.views.toLocaleString('vi-VN')}</span>}
                             </div>
                         </div>
-                    </div>
+                    </MediaCard>
                 ))}
+            </div>
+        </TuyenQuangPageShell>
+    );
+};
+
+// ---------------------------------------------------------------------------
+// CHI TIẾT VIDEO
+// ---------------------------------------------------------------------------
+export const TuyenQuangVideoDetailPage = () => {
+    const { id } = useParams();
+    const video = tuyenquangVideos.find((v) => v.id === id);
+    const [showNotice, setShowNotice] = useState(false);
+    useTitle(video ? video.title : 'Không tìm thấy video');
+    useEffect(() => { setShowNotice(false); }, [id]);
+
+    if (!video) {
+        return (
+            <TuyenQuangPageShell crumbs={[{ label: 'Multimedia' }, { label: 'Video - clip', to: `${TQ_HOME}/video` }, { label: 'Không tìm thấy' }]} title="Không tìm thấy video">
+                <p className="text-gray-600">Video không tồn tại hoặc đã được gỡ. <Link to={`${TQ_HOME}/video`} className="text-[#0f4c81] font-semibold">Xem thư viện video</Link></p>
+            </TuyenQuangPageShell>
+        );
+    }
+
+    const others = tuyenquangVideos.filter((v) => v.id !== video.id);
+
+    return (
+        <TuyenQuangPageShell crumbs={[{ label: 'Multimedia' }, { label: 'Video - clip', to: `${TQ_HOME}/video` }, { label: 'Chi tiết' }]} title="Thư viện video - clip">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 items-start">
+                <div className="lg:col-span-8 space-y-5">
+                    <button
+                        type="button"
+                        onClick={() => setShowNotice(true)}
+                        className="relative block w-full aspect-video rounded-2xl overflow-hidden bg-black shadow-lg group"
+                        aria-label={`Phát video: ${video.title}`}
+                    >
+                        <img src={video.thumb} alt={video.title} className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
+                        <span className="absolute inset-0 flex items-center justify-center bg-black/25 group-hover:bg-black/10 transition-colors">
+                            <span className="w-20 h-20 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform"><PlayCircle size={44} /></span>
+                        </span>
+                        <span className="absolute bottom-3 right-3 bg-black/75 text-white text-xs font-semibold px-2 py-1 rounded">{video.duration}</span>
+                        {showNotice && (
+                            <span className="absolute inset-x-4 top-4 flex items-center gap-2 bg-white/95 text-gray-800 text-sm font-medium px-4 py-2.5 rounded-xl shadow text-left">
+                                <Info size={16} className="text-[#0f4c81] shrink-0" /> Video minh họa, tệp phát sẽ được Ban Biên tập cập nhật khi vận hành.
+                            </span>
+                        )}
+                    </button>
+
+                    <article className="bg-white rounded-2xl border border-gray-200/80 shadow-sm p-5 sm:p-6">
+                        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 leading-snug">{video.title}</h1>
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500 mt-3 pb-4 border-b border-gray-100">
+                            <span className="flex items-center gap-1"><Clock size={13} /> {video.date}</span>
+                            <span className="flex items-center gap-1"><Timer size={13} /> Thời lượng {video.duration}</span>
+                            <button type="button" onClick={() => navigator.clipboard?.writeText(window.location.href)} className="ml-auto inline-flex items-center gap-1.5 text-[#0f4c81] hover:text-[#991b1b] font-semibold" title="Sao chép liên kết">
+                                <Share2 size={14} /> Chia sẻ
+                            </button>
+                        </div>
+                        <p className="text-[15px] text-gray-700 leading-relaxed mt-4">{video.desc}</p>
+                    </article>
+                </div>
+
+                <aside className="lg:col-span-4 bg-white rounded-2xl border border-gray-200/80 shadow-sm p-4 lg:sticky lg:top-4">
+                    <h2 className="font-bold text-[15px] text-[#0f4c81] pb-2 mb-2 border-b border-gray-100">Video khác</h2>
+                    <div className="space-y-2">
+                        {others.map((v) => (
+                            <Link key={v.id} to={tqVideoUrl(v.id)} className="group flex gap-3 p-2 -mx-2 rounded-xl hover:bg-gray-50 transition-colors">
+                                <span className="relative w-28 shrink-0 aspect-video rounded-lg overflow-hidden bg-gray-200">
+                                    <img src={v.thumb} alt={v.title} loading="lazy" className="w-full h-full object-cover" />
+                                    <span className="absolute inset-0 flex items-center justify-center bg-black/25"><PlayCircle size={20} className="text-white" /></span>
+                                    <span className="absolute bottom-1 right-1 bg-black/70 text-white text-[10px] px-1 rounded">{v.duration}</span>
+                                </span>
+                                <span className="min-w-0">
+                                    <span className="block text-[13px] font-semibold text-gray-800 group-hover:text-[#0f4c81] leading-snug line-clamp-2">{v.title}</span>
+                                    <span className="block text-[11px] text-gray-400 mt-1">{v.date}</span>
+                                </span>
+                            </Link>
+                        ))}
+                    </div>
+                    <Link to={`${TQ_HOME}/video`} className="mt-3 inline-flex text-xs font-bold text-[#0f4c81] hover:text-[#991b1b]">Thư viện video →</Link>
+                </aside>
             </div>
         </TuyenQuangPageShell>
     );

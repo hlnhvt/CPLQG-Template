@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
-import { Clock, Eye, Search, ChevronRight, ChevronLeft, Newspaper, TrendingUp, X } from 'lucide-react';
-import { TuyenQuangPageShell, TQ_ICONS } from '../../components/tuyenquang/TuyenQuangShared';
+import { Clock, Eye, Search, ChevronRight, ChevronLeft, X } from 'lucide-react';
+import { TuyenQuangPageShell, TuyenQuangCategorySidebar } from '../../components/tuyenquang/TuyenQuangShared';
 import { Reveal, LaoCaiV3Styles } from '../../components/laocaiV3/LaoCaiV3Motion';
 import {
     TQ_CATEGORIES, tuyenquangArticles, tqArticlesOf, tqArticleUrl, tqCategoryUrl
@@ -23,6 +23,7 @@ const TuyenQuangCategoryPage = ({ slug: slugProp }) => {
     const [sortDraft, setSortDraft] = useState(SORT_OPTIONS[0]);
     const [keyword, setKeyword] = useState('');
     const [sortBy, setSortBy] = useState(SORT_OPTIONS[0]);
+    const [subDraft, setSubDraft] = useState(sub || '');
     const [page, setPage] = useState(1);
 
     const cat = slug ? TQ_CATEGORIES[slug] : null;
@@ -34,17 +35,26 @@ const TuyenQuangCategoryPage = ({ slug: slugProp }) => {
         setPage(1);
         setKeyword(''); setKeywordDraft('');
         setSortBy(SORT_OPTIONS[0]); setSortDraft(SORT_OPTIONS[0]);
-    }, [slug, sub, title]);
+    }, [slug, title]);
+
+    // Mục con lấy từ URL (?muc=), để liên kết từ trang chủ mở đúng mục
+    useEffect(() => {
+        setSubDraft(sub || '');
+        setPage(1);
+    }, [sub]);
 
     const applyFilter = (e) => {
         e?.preventDefault();
         setKeyword(keywordDraft);
         setSortBy(sortDraft);
+        if ((sub || '') !== subDraft) setSearchParams(subDraft ? { muc: subDraft } : {});
         setPage(1);
     };
     const resetFilter = () => {
         setKeywordDraft(''); setSortDraft(SORT_OPTIONS[0]);
         setKeyword(''); setSortBy(SORT_OPTIONS[0]);
+        setSubDraft('');
+        if (sub) setSearchParams({});
         setPage(1);
     };
 
@@ -63,11 +73,6 @@ const TuyenQuangCategoryPage = ({ slug: slugProp }) => {
     const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
     const pageItems = items.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
     const [featured, ...rest] = pageItems;
-    const mostViewed = [...tuyenquangArticles].sort((a, b) => b.views - a.views).slice(0, 5);
-    const groups = Object.entries(TQ_CATEGORIES).reduce((acc, [s, c]) => {
-        (acc[c.group] = acc[c.group] || []).push([s, c]);
-        return acc;
-    }, {});
 
     if (slug && !cat) {
         return (
@@ -84,27 +89,12 @@ const TuyenQuangCategoryPage = ({ slug: slugProp }) => {
             subtitle={cat ? cat.desc : 'Tin tức, sự kiện, chính sách pháp luật mới và thông cáo báo chí của tỉnh Tuyên Quang.'}
         >
             <LaoCaiV3Styles />
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-7">
-                <div className="lg:col-span-8 space-y-5">
-                    {/* Mục con của chuyên mục */}
-                    {cat?.subs && (
-                        <div className="flex gap-2 overflow-x-auto lc3-thin-scroll" role="tablist">
-                            {[{ slug: null, label: 'Tất cả' }, ...cat.subs].map((s) => {
-                                const active = (sub || null) === s.slug;
-                                return (
-                                    <button key={s.label} type="button" role="tab" aria-selected={active}
-                                        onClick={() => setSearchParams(s.slug ? { muc: s.slug } : {})}
-                                        className={`shrink-0 text-[12.5px] font-semibold px-3.5 py-1.5 rounded-full border transition-colors ${active ? 'bg-[#0f4c81] border-[#0f4c81] text-white' : 'bg-white border-gray-200 text-gray-700 hover:border-[#0f4c81] hover:text-[#0f4c81]'}`}>
-                                        {s.label}
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    )}
-
+            {/* Cột phải thu gọn 15% so với trước (từ ~33% xuống ~28% chiều rộng) */}
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_28%] gap-7">
+                <div className="min-w-0 space-y-5">
                     {/* Khung lọc: đồng bộ trang Thông báo chuyên trang PBGDPL Cổng Pháp luật quốc gia */}
                     <form onSubmit={applyFilter} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 flex flex-col lg:flex-row lg:items-end gap-4" role="search">
-                        <div className="flex-1">
+                        <div className="flex-1 min-w-0">
                             <label htmlFor="tq-cat-search" className="block text-sm font-semibold text-gray-700 mb-1.5">Tìm kiếm</label>
                             <div className="relative">
                                 <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -118,7 +108,21 @@ const TuyenQuangCategoryPage = ({ slug: slugProp }) => {
                                 />
                             </div>
                         </div>
-                        <div className="w-full lg:w-48">
+                        {cat?.subs && (
+                            <div className="w-full lg:w-48 shrink-0">
+                                <label htmlFor="tq-cat-sub" className="block text-sm font-semibold text-gray-700 mb-1.5">Mục</label>
+                                <select
+                                    id="tq-cat-sub"
+                                    value={subDraft}
+                                    onChange={(e) => setSubDraft(e.target.value)}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 bg-white cursor-pointer text-gray-700"
+                                >
+                                    <option value="">Tất cả</option>
+                                    {cat.subs.map((s) => <option key={s.slug} value={s.slug}>{s.label}</option>)}
+                                </select>
+                            </div>
+                        )}
+                        <div className="w-full lg:w-36 shrink-0">
                             <label htmlFor="tq-cat-sort" className="block text-sm font-semibold text-gray-700 mb-1.5">Sắp xếp</label>
                             <select
                                 id="tq-cat-sort"
@@ -129,11 +133,11 @@ const TuyenQuangCategoryPage = ({ slug: slugProp }) => {
                                 {SORT_OPTIONS.map((o) => <option key={o}>{o}</option>)}
                             </select>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <button type="submit" className="bg-[#2580f0] hover:bg-[#1a66c2] text-white font-semibold px-6 py-2 rounded-lg text-sm transition-colors shadow-sm">
+                        <div className="flex items-center gap-2 shrink-0">
+                            <button type="submit" className="whitespace-nowrap bg-[#2580f0] hover:bg-[#1a66c2] text-white font-semibold px-6 py-2 rounded-lg text-sm transition-colors shadow-sm">
                                 Áp dụng
                             </button>
-                            <button type="button" onClick={resetFilter} className="bg-white hover:bg-gray-50 text-gray-600 border border-gray-300 font-semibold px-4 py-2 rounded-lg text-sm transition-colors flex items-center gap-1.5">
+                            <button type="button" onClick={resetFilter} className="whitespace-nowrap bg-white hover:bg-gray-50 text-gray-600 border border-gray-300 font-semibold px-4 py-2 rounded-lg text-sm transition-colors flex items-center gap-1.5">
                                 <X size={14} /> Đặt lại
                             </button>
                         </div>
@@ -193,45 +197,7 @@ const TuyenQuangCategoryPage = ({ slug: slugProp }) => {
                     )}
                 </div>
 
-                {/* Sidebar: danh mục chuyên mục + đọc nhiều */}
-                <aside className="lg:col-span-4 space-y-5">
-                    <div className="bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden">
-                        <div className="bg-gradient-to-r from-[#4f56ca] via-[#2c1b92] to-[#4f56ca] text-white px-4 py-3 font-bold text-[14px] uppercase tracking-wide flex items-center gap-2">
-                            <Newspaper size={16} className="text-amber-300" /> Chuyên mục
-                        </div>
-                        <div className="p-2">
-                            {Object.entries(groups).map(([group, list]) => (
-                                <div key={group} className="py-1">
-                                    <div className="px-3 pt-2 pb-1 text-[11px] font-bold uppercase tracking-wider text-[#991b1b]">{group}</div>
-                                    {list.map(([s, c]) => {
-                                        const Icon = TQ_ICONS[c.icon] || Newspaper;
-                                        const active = s === slug;
-                                        return (
-                                            <Link key={s} to={tqCategoryUrl(s)} aria-current={active ? 'page' : undefined}
-                                                className={`group flex items-center gap-3 px-3 py-1.5 rounded-lg transition-colors ${active ? 'bg-blue-50 text-[#0f4c81]' : 'hover:bg-gray-50 text-gray-800'}`}>
-                                                <span className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 ${active ? 'bg-[#0f4c81] text-white' : 'bg-[#f0f5f9] text-[#0f4c81] group-hover:bg-[#0f4c81] group-hover:text-white'} transition-colors`}><Icon size={13} /></span>
-                                                <span className="flex-1 text-[13px] font-semibold truncate">{c.title}</span>
-                                            </Link>
-                                        );
-                                    })}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="bg-white rounded-2xl border border-gray-200/80 shadow-sm p-4">
-                        <h3 className="font-bold text-[15px] text-[#0f4c81] flex items-center gap-2 pb-2 mb-2 border-b border-gray-100"><TrendingUp size={16} className="text-[#991b1b]" /> Đọc nhiều</h3>
-                        <ol className="space-y-2.5">
-                            {mostViewed.map((a, i) => (
-                                <li key={a.id}>
-                                    <Link to={tqArticleUrl(a.id)} className="group flex gap-3">
-                                        <span className="w-6 h-6 shrink-0 rounded-md bg-amber-50 border border-amber-200 text-[#991b1b] text-xs font-bold flex items-center justify-center">{i + 1}</span>
-                                        <span className="text-[13px] font-medium text-gray-800 group-hover:text-[#991b1b] leading-snug line-clamp-2">{a.title}</span>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ol>
-                    </div>
-                </aside>
+                <TuyenQuangCategorySidebar activeSlug={slug} />
             </div>
         </TuyenQuangPageShell>
     );

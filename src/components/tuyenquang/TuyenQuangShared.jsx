@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import {
     Newspaper, Sparkles, Megaphone, Activity, Users, Mic, BookOpen, FilePen, Bookmark, BarChart3,
     Handshake, BadgeCheck, Trophy, Scale, Briefcase, Building2, Landmark, MonitorSmartphone, FileText,
-    ChevronRight, ArrowUp
+    ChevronRight, ArrowUp, TrendingUp
 } from 'lucide-react';
 import TuyenQuangHeader from './TuyenQuangHeader';
 import LaoCaiV2BannerDecor, { BANNER_BG_CLASS } from '../laocaiV2/LaoCaiV2BannerDecor';
-import { tuyenquangSiteConfig, tuyenquangTicker, TQ_HOME } from '../../data/tuyenquangMockData';
+import { tuyenquangSiteConfig, tuyenquangTicker, TQ_HOME, TQ_CATEGORIES, tuyenquangArticles, tqCategoryUrl, tqArticleUrl } from '../../data/tuyenquangMockData';
 
 // Icon theo khóa khai báo trong dữ liệu chuyên mục / liên kết
 export const TQ_ICONS = {
@@ -89,7 +89,7 @@ export const TuyenQuangFooter = () => {
     const links = [
         { to: `${TQ_HOME}/gioi-thieu`, label: 'Giới thiệu' },
         { to: `${TQ_HOME}/gioi-thieu?tab=quy-che`, label: 'Quy chế hoạt động' },
-        { to: `${TQ_HOME}/van-ban`, label: 'Văn bản chỉ đạo điều hành' },
+        { to: `${TQ_HOME}/van-ban-chi-dao-dieu-hanh`, label: 'Văn bản chỉ đạo điều hành' },
         { to: `${TQ_HOME}/chuyen-muc/tai-lieu-pbgdpl`, label: 'Tài liệu PBGDPL' },
         { to: `${TQ_HOME}/hoi-dap`, label: 'Hỏi đáp, tư vấn' },
         { to: `${TQ_HOME}/lien-he`, label: 'Liên hệ Ban Biên tập' }
@@ -144,3 +144,52 @@ export const TuyenQuangPageShell = ({ crumbs, title, subtitle, children }) => (
     </div>
 );
 
+
+// Cột phải dùng chung cho trang chuyên mục và trang văn bản: danh sách chuyên mục + đọc nhiều
+export const TuyenQuangCategorySidebar = ({ activeSlug }) => {
+    const mostViewed = [...tuyenquangArticles].sort((a, b) => b.views - a.views).slice(0, 5);
+    const groups = Object.entries(TQ_CATEGORIES).reduce((acc, [s, c]) => {
+        (acc[c.group] = acc[c.group] || []).push([s, c]);
+        return acc;
+    }, {});
+    return (
+        <aside className="min-w-0 space-y-5">
+            <div className="bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden">
+                <div className="bg-gradient-to-r from-[#4f56ca] via-[#2c1b92] to-[#4f56ca] text-white px-4 py-3 font-bold text-[14px] uppercase tracking-wide flex items-center gap-2">
+                    <Newspaper size={16} className="text-amber-300" /> Chuyên mục
+                </div>
+                <div className="p-2">
+                    {Object.entries(groups).map(([group, list]) => (
+                        <div key={group} className="py-1">
+                            <div className="px-3 pt-2 pb-1 text-[11px] font-bold uppercase tracking-wider text-[#991b1b]">{group}</div>
+                            {list.map(([s, c]) => {
+                                const Icon = TQ_ICONS[c.icon] || Newspaper;
+                                const active = s === activeSlug;
+                                return (
+                                    <Link key={s} to={tqCategoryUrl(s)} aria-current={active ? 'page' : undefined}
+                                        className={`group flex items-center gap-3 px-3 py-1.5 rounded-lg transition-colors ${active ? 'bg-blue-50 text-[#0f4c81]' : 'hover:bg-gray-50 text-gray-800'}`}>
+                                        <span className={`w-6 h-6 rounded-md flex items-center justify-center shrink-0 ${active ? 'bg-[#0f4c81] text-white' : 'bg-[#f0f5f9] text-[#0f4c81] group-hover:bg-[#0f4c81] group-hover:text-white'} transition-colors`}><Icon size={13} /></span>
+                                        <span className="flex-1 text-[13px] font-semibold truncate">{c.title}</span>
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div className="bg-white rounded-2xl border border-gray-200/80 shadow-sm p-4">
+                <h3 className="font-bold text-[15px] text-[#0f4c81] flex items-center gap-2 pb-2 mb-2 border-b border-gray-100"><TrendingUp size={16} className="text-[#991b1b]" /> Đọc nhiều</h3>
+                <ol className="space-y-2.5">
+                    {mostViewed.map((a, i) => (
+                        <li key={a.id}>
+                            <Link to={tqArticleUrl(a.id)} className="group flex gap-3">
+                                <span className="w-6 h-6 shrink-0 rounded-md bg-amber-50 border border-amber-200 text-[#991b1b] text-xs font-bold flex items-center justify-center">{i + 1}</span>
+                                <span className="text-[13px] font-medium text-gray-800 group-hover:text-[#991b1b] leading-snug line-clamp-2">{a.title}</span>
+                            </Link>
+                        </li>
+                    ))}
+                </ol>
+            </div>
+        </aside>
+    );
+};

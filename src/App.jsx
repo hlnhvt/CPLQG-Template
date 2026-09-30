@@ -201,8 +201,10 @@ import TuyenQuangHomePage from './pages/tuyenquang/TuyenQuangHomePage';
 import TuyenQuangCategoryPage from './pages/tuyenquang/TuyenQuangCategoryPage';
 import TuyenQuangArticlePage from './pages/tuyenquang/TuyenQuangArticlePage';
 import TuyenQuangDocsPage from './pages/tuyenquang/TuyenQuangDocsPage';
+import TuyenQuangLegalDocsPage from './pages/tuyenquang/TuyenQuangLegalDocsPage';
+import TuyenQuangDirectiveDocDetailPage from './pages/tuyenquang/TuyenQuangDirectiveDocDetailPage';
 import TuyenQuangFAQPage from './pages/tuyenquang/TuyenQuangFAQPage';
-import { TuyenQuangAboutPage, TuyenQuangContactPage, TuyenQuangMediaPage } from './pages/tuyenquang/TuyenQuangInfoPages';
+import { TuyenQuangAboutPage, TuyenQuangContactPage, TuyenQuangMediaPage, TuyenQuangVideoDetailPage } from './pages/tuyenquang/TuyenQuangInfoPages';
 import LaoCaiV2AboutPage from './pages/laocaiV2/LaoCaiV2AboutPage';
 import LaoCaiV2LegalDocsPage from './pages/laocaiV2/LaoCaiV2LegalDocsPage';
 import LaoCaiV2DraftDocsPage from './pages/laocaiV2/LaoCaiV2DraftDocsPage';
@@ -409,9 +411,12 @@ const AppLayout = () => {
                     <Route path="/tuyen-quang/chuyen-muc/:slug" element={<TuyenQuangCategoryPage />} />
                     <Route path="/tuyen-quang/tro-giup-phap-ly" element={<TuyenQuangCategoryPage slug="tro-giup-phap-ly" />} />
                     <Route path="/tuyen-quang/ho-tro-phap-ly-doanh-nghiep" element={<TuyenQuangCategoryPage slug="ho-tro-phap-ly-doanh-nghiep" />} />
-                    <Route path="/tuyen-quang/van-ban" element={<TuyenQuangDocsPage />} />
+                    <Route path="/tuyen-quang/van-ban" element={<TuyenQuangLegalDocsPage />} />
+                    <Route path="/tuyen-quang/van-ban-chi-dao-dieu-hanh" element={<TuyenQuangDocsPage />} />
+                    <Route path="/tuyen-quang/van-ban-chi-dao-dieu-hanh/:id" element={<TuyenQuangDirectiveDocDetailPage />} />
                     <Route path="/tuyen-quang/hoi-dap" element={<TuyenQuangFAQPage />} />
                     <Route path="/tuyen-quang/video" element={<TuyenQuangMediaPage type="video" />} />
+                    <Route path="/tuyen-quang/video/:id" element={<TuyenQuangVideoDetailPage />} />
                     <Route path="/tuyen-quang/anh" element={<TuyenQuangMediaPage type="anh" />} />
                     <Route path="/tuyen-quang/infographic" element={<TuyenQuangMediaPage type="infographic" />} />
                     <Route path="/tuyen-quang/lien-he" element={<TuyenQuangContactPage />} />

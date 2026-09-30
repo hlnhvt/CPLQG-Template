@@ -71,9 +71,8 @@ export const TQ_CATEGORIES = {
 
 // Chuyên mục hiển thị ở khối "Chuyên mục tin tức" trang chủ (thứ tự hiển thị)
 export const TQ_HOME_CATEGORY_SLUGS = [
-    'tin-tuc-su-kien', 'chinh-sach-phap-luat-moi', 'hoat-dong-pbgdpl', 'hoi-dong-phoi-hop', 'bao-cao-vien',
-    'tai-lieu-pbgdpl', 'truyen-thong-du-thao', 'thong-cao-bao-chi', 'hoa-giai-co-so', 'chuan-tiep-can',
-    'cuoc-thi', 'huong-dan-nghiep-vu', 'thong-ke-bao-cao'
+    'tin-tuc-su-kien', 'hoat-dong-pbgdpl', 'hoi-dong-phoi-hop', 'tai-lieu-pbgdpl', 'thong-cao-bao-chi',
+    'hoa-giai-co-so', 'chuan-tiep-can', 'cuoc-thi', 'huong-dan-nghiep-vu'
 ];
 
 // Menu PBGDPL trên thanh nav header (theo menu trang PBGDPL Tuyên Quang)
@@ -158,6 +157,202 @@ const RAW_ARTICLES = [
     ['ho-tro-phap-ly-doanh-nghiep', null, '06/09/2026', 'Bồi dưỡng kiến thức pháp luật cho hợp tác xã nông nghiệp', 'Nội dung tập trung vào hợp đồng tiêu thụ nông sản, sở hữu trí tuệ và chỉ dẫn địa lý.']
 ];
 
+// Bài bổ sung cho từng chuyên mục (dữ liệu minh họa, ngày cũ hơn các bài ở trên).
+// Chuyên mục có mục con: bài được chia lần lượt cho các mục con.
+const EXTRA_TITLES = {
+    'tin-tuc-su-kien': [
+        'Sở Tư pháp làm việc với UBND các xã về công tác tư pháp 6 tháng cuối năm',
+        'Tuyên Quang sơ kết công tác phổ biến, giáo dục pháp luật 6 tháng đầu năm 2026',
+        'Tổ chức hội nghị trực tuyến quán triệt các luật mới được Quốc hội thông qua',
+        'Sở Tư pháp ký kết chương trình phối hợp tuyên truyền pháp luật với Đài Phát thanh - Truyền hình tỉnh',
+        'Đoàn công tác liên ngành kiểm tra công tác hòa giải ở cơ sở tại các xã vùng cao',
+        'Hội nghị giao ban công tác tư pháp quý II/2026',
+        'Ra mắt trang thông tin pháp luật song ngữ Việt - Tày trên nền tảng số',
+        'Tập huấn kỹ năng số cho cán bộ tư pháp - hộ tịch cấp xã',
+        'Tuyên Quang triển khai Ngày Pháp luật tại các trường học đầu năm học mới',
+        'Tổng kết mô hình “Thôn, bản tuân thủ pháp luật” giai đoạn 2021 - 2026'
+    ],
+    'chinh-sach-phap-luat-moi': [
+        'Quy định mới về hỗ trợ phát triển sản xuất nông nghiệp hàng hóa trên địa bàn tỉnh',
+        'Chính sách hỗ trợ học sinh, sinh viên dân tộc thiểu số năm học 2026 - 2027',
+        'Điểm mới về cấp Giấy chứng nhận quyền sử dụng đất theo Luật Đất đai năm 2024',
+        'Quy định mức thu phí, lệ phí mới trên địa bàn tỉnh từ tháng 8/2026',
+        'Chính sách hỗ trợ đào tạo nghề cho lao động nông thôn giai đoạn 2026 - 2030',
+        'Quy định về quản lý, sử dụng nhà văn hóa thôn, tổ dân phố',
+        'Những điểm mới của Luật Phòng, chống ma túy sửa đổi',
+        'Quy định về bảo vệ và phát triển rừng đặc dụng trên địa bàn tỉnh',
+        'Chính sách hỗ trợ nhà ở cho hộ nghèo, hộ cận nghèo',
+        'Hướng dẫn thực hiện chế độ trợ cấp xã hội hằng tháng'
+    ],
+    'thong-cao-bao-chi': [
+        'Thông cáo báo chí văn bản quy phạm pháp luật do HĐND, UBND tỉnh ban hành tháng 7/2026',
+        'Thông cáo báo chí văn bản quy phạm pháp luật do HĐND, UBND tỉnh ban hành tháng 6/2026',
+        'Thông cáo báo chí văn bản quy phạm pháp luật do HĐND, UBND tỉnh ban hành tháng 5/2026',
+        'Thông cáo báo chí văn bản quy phạm pháp luật do HĐND, UBND tỉnh ban hành tháng 4/2026',
+        'Thông cáo báo chí kỳ họp thường lệ giữa năm 2026 của HĐND tỉnh',
+        'Thông cáo báo chí văn bản quy phạm pháp luật do HĐND, UBND tỉnh ban hành tháng 3/2026',
+        'Thông cáo báo chí văn bản quy phạm pháp luật do HĐND, UBND tỉnh ban hành tháng 2/2026',
+        'Thông cáo báo chí văn bản quy phạm pháp luật do HĐND, UBND tỉnh ban hành tháng 1/2026',
+        'Thông cáo báo chí kết quả kỳ họp chuyên đề của HĐND tỉnh',
+        'Thông cáo báo chí về các quyết định quy phạm pháp luật mới của UBND tỉnh'
+    ],
+    'hoat-dong-pbgdpl': [
+        'Bộ Tư pháp tổ chức tọa đàm về đổi mới công tác PBGDPL trong kỷ nguyên số',
+        'Tuyên truyền Luật Giao thông đường bộ cho người dân các xã miền núi',
+        'Hội nghị phổ biến pháp luật về phòng, chống bạo lực gia đình',
+        'Phổ biến pháp luật cho phạm nhân, trại viên tại cơ sở giam giữ',
+        'Cục Phổ biến, giáo dục pháp luật hướng dẫn triển khai Đề án PBGDPL giai đoạn mới',
+        'Tuyên truyền pháp luật về bảo vệ môi trường tại các làng nghề',
+        'Hội nghị trực tuyến toàn quốc về chuyển đổi số trong PBGDPL',
+        'Phổ biến pháp luật về hôn nhân và gia đình, phòng chống tảo hôn',
+        'Tổng kết Đề án tuyên truyền pháp luật cho đồng bào dân tộc thiểu số',
+        'Sân khấu hóa tuyên truyền pháp luật tại các chợ phiên vùng cao'
+    ],
+    'hoi-dong-phoi-hop': [
+        'Công văn định hướng tuyên truyền tháng 8 năm 2026',
+        'Họp Hội đồng phối hợp PBGDPL cấp xã quý III/2026',
+        'Công văn định hướng tuyên truyền tháng 7 năm 2026',
+        'Kế hoạch kiểm tra hoạt động của Hội đồng phối hợp PBGDPL cấp xã',
+        'Quy chế hoạt động của Hội đồng phối hợp PBGDPL tỉnh (sửa đổi)',
+        'Hội đồng phối hợp PBGDPL cấp xã triển khai nhiệm vụ trọng tâm năm 2026',
+        'Công văn định hướng tuyên truyền tháng 6 năm 2026',
+        'Phân công nhiệm vụ thành viên Hội đồng phối hợp PBGDPL cấp xã',
+        'Báo cáo kết quả hoạt động của Hội đồng phối hợp PBGDPL tỉnh quý II/2026',
+        'Tập huấn nghiệp vụ cho thành viên Hội đồng phối hợp PBGDPL cấp xã'
+    ],
+    'bao-cao-vien': [
+        'Quyết định công nhận bổ sung báo cáo viên pháp luật tỉnh đợt 2 năm 2026',
+        'Quyết định công nhận báo cáo viên pháp luật cấp xã tại các xã phía Bắc tỉnh',
+        'Danh sách tuyên truyền viên pháp luật các xã khu vực Na Hang, Hàm Yên',
+        'Quyết định miễn nhiệm báo cáo viên pháp luật tỉnh năm 2026',
+        'Hội thi báo cáo viên pháp luật giỏi cấp xã năm 2026',
+        'Danh sách tuyên truyền viên pháp luật các tổ dân phố',
+        'Bồi dưỡng kiến thức pháp luật mới cho báo cáo viên pháp luật tỉnh',
+        'Báo cáo viên cấp xã tham gia tuyên truyền tại các buổi sinh hoạt cộng đồng',
+        'Tuyên truyền viên pháp luật với công tác vận động người dân chấp hành pháp luật',
+        'Kế hoạch sử dụng đội ngũ báo cáo viên pháp luật năm 2026'
+    ],
+    'tai-lieu-pbgdpl': [
+        'Tài liệu giới thiệu Luật Phòng cháy, chữa cháy và cứu nạn, cứu hộ',
+        'Tài liệu giới thiệu Nghị quyết của HĐND tỉnh về chính sách hỗ trợ giáo dục',
+        'Đề cương giới thiệu Luật Đất đai năm 2024',
+        'Tờ gấp: Phòng, chống lừa đảo trên không gian mạng',
+        'Hỏi - đáp pháp luật về an toàn giao thông đường bộ',
+        'Tình huống pháp luật về tranh chấp hợp đồng mua bán nông sản',
+        'Câu chuyện pháp luật: Chuyện ở bản Pác Ngòi',
+        'File âm thanh tuyên truyền phòng, chống ma túy bằng tiếng dân tộc',
+        'Tài liệu giới thiệu Luật Thanh niên',
+        'Tờ gấp: Quyền và nghĩa vụ của người lao động'
+    ],
+    'truyen-thong-du-thao': [
+        'Dự thảo Nghị quyết quy định mức hỗ trợ cán bộ không chuyên trách cấp xã',
+        'Dự thảo Quyết định ban hành quy chế quản lý cụm công nghiệp',
+        'Dự thảo Nghị quyết về chính sách thu hút đầu tư vào nông nghiệp',
+        'Dự thảo Quyết định quy định giá dịch vụ thu gom rác thải sinh hoạt',
+        'Dự thảo Nghị quyết hỗ trợ bảo tồn văn hóa truyền thống các dân tộc',
+        'Dự thảo Quyết định quy định về quản lý hoạt động khai thác cát, sỏi',
+        'Dự thảo Nghị quyết quy định mức chi cho công tác hòa giải ở cơ sở',
+        'Dự thảo Quyết định ban hành quy định về quản lý nghĩa trang',
+        'Dự thảo Nghị quyết về chính sách hỗ trợ chuyển đổi số cấp xã',
+        'Dự thảo Quyết định quy định tiêu chí xét công nhận làng nghề'
+    ],
+    'huong-dan-nghiep-vu': [
+        'Hướng dẫn xây dựng kế hoạch PBGDPL năm 2027',
+        'Hướng dẫn quản lý, khai thác tủ sách pháp luật',
+        'Hướng dẫn tổ chức Ngày Pháp luật tại cơ quan, đơn vị',
+        'Hướng dẫn nghiệp vụ theo dõi thi hành pháp luật cấp xã',
+        'Hướng dẫn thống kê số liệu PBGDPL, hòa giải ở cơ sở',
+        'Hướng dẫn biên soạn tài liệu tuyên truyền pháp luật',
+        'Hướng dẫn tổ chức cuộc thi tìm hiểu pháp luật trực tuyến',
+        'Hướng dẫn thanh, quyết toán kinh phí hòa giải ở cơ sở',
+        'Hướng dẫn nghiệp vụ tuyên truyền pháp luật qua hệ thống loa truyền thanh cơ sở',
+        'Hướng dẫn đánh giá hiệu quả công tác PBGDPL'
+    ],
+    'thong-ke-bao-cao': [
+        'Báo cáo kết quả công tác PBGDPL quý II/2026',
+        'Thống kê số lượng tổ hòa giải, hòa giải viên năm 2026',
+        'Báo cáo kết quả đánh giá chuẩn tiếp cận pháp luật năm 2025',
+        'Thống kê số liệu hội nghị PBGDPL 6 tháng đầu năm 2026',
+        'Báo cáo tổng kết công tác PBGDPL năm 2025',
+        'Thống kê tài liệu PBGDPL phát hành năm 2025',
+        'Báo cáo kết quả thực hiện Đề án PBGDPL cho người dân tộc thiểu số',
+        'Báo cáo kết quả hoạt động của đội ngũ báo cáo viên năm 2025',
+        'Thống kê kết quả hòa giải ở cơ sở năm 2025',
+        'Báo cáo kết quả Ngày Pháp luật năm 2025'
+    ],
+    'hoa-giai-co-so': [
+        'Tổ hòa giải xã Minh Quang giải quyết thành công tranh chấp đất rừng',
+        'Kinh nghiệm hòa giải các vụ việc hôn nhân, gia đình ở thôn bản',
+        'Hội thi hòa giải viên giỏi cấp tỉnh năm 2026',
+        'Người có uy tín trong đồng bào dân tộc với công tác hòa giải',
+        'Kiện toàn tổ hòa giải ở cơ sở sau sắp xếp thôn, tổ dân phố',
+        'Mô hình “Tổ hòa giải - Điểm tựa bình yên” tại xã vùng cao',
+        'Hòa giải viên nữ và câu chuyện giữ gìn hạnh phúc gia đình',
+        'Tập huấn kỹ năng hòa giải tranh chấp lối đi chung',
+        'Biểu dương hòa giải viên tiêu biểu năm 2026',
+        'Công tác hòa giải góp phần giữ vững an ninh trật tự ở cơ sở'
+    ],
+    'chuan-tiep-can': [
+        'Kết quả đánh giá cấp xã đạt chuẩn tiếp cận pháp luật năm 2025',
+        'Hội đồng đánh giá chuẩn tiếp cận pháp luật tỉnh họp xét công nhận',
+        'Giải pháp nâng cao chỉ tiêu tiếp cận thông tin ở cấp xã',
+        'Các xã vùng cao nỗ lực đạt chuẩn tiếp cận pháp luật',
+        'Kiện toàn Hội đồng đánh giá chuẩn tiếp cận pháp luật tỉnh',
+        'Tiêu chí tiếp cận pháp luật trong xây dựng nông thôn mới',
+        'Tập huấn nghiệp vụ đánh giá chuẩn tiếp cận pháp luật',
+        'Kinh nghiệm xây dựng xã đạt chuẩn tiếp cận pháp luật',
+        'Kế hoạch đánh giá chuẩn tiếp cận pháp luật năm 2026',
+        'Công khai kết quả tự đánh giá chuẩn tiếp cận pháp luật cấp xã'
+    ],
+    'cuoc-thi': [
+        'Kết quả cuộc thi trực tuyến tìm hiểu pháp luật tuần 1',
+        'Trao giải cuộc thi tìm hiểu Luật Đất đai năm 2024',
+        'Phát động cuộc thi viết về gương người tốt, việc tốt trong chấp hành pháp luật',
+        'Hội thi “Hòa giải viên giỏi” cấp tỉnh',
+        'Cuộc thi tìm hiểu pháp luật về phòng, chống ma túy dành cho học sinh',
+        'Kết quả cuộc thi trực tuyến tìm hiểu pháp luật tuần 2',
+        'Thể lệ cuộc thi “Tuổi trẻ với pháp luật” năm 2026',
+        'Trao giải hội thi báo cáo viên pháp luật giỏi',
+        'Cuộc thi sáng tác tiểu phẩm tuyên truyền pháp luật',
+        'Tổng kết cuộc thi trực tuyến tìm hiểu Hiến pháp'
+    ],
+    'tro-giup-phap-ly': [
+        'Trợ giúp pháp lý trong các vụ án hình sự có người dưới 18 tuổi',
+        'Trợ giúp pháp lý lưu động tại xã Thượng Lâm',
+        'Hướng dẫn thủ tục yêu cầu trợ giúp pháp lý',
+        'Vụ việc trợ giúp pháp lý điển hình về tranh chấp đất đai',
+        'Tập huấn kỹ năng cho người thực hiện trợ giúp pháp lý',
+        'Đặt bảng thông tin trợ giúp pháp lý tại trụ sở UBND cấp xã',
+        'Trợ giúp pháp lý cho người khuyết tật',
+        'Phối hợp liên ngành trong hoạt động trợ giúp pháp lý tố tụng',
+        'Kết quả công tác trợ giúp pháp lý 6 tháng đầu năm 2026',
+        'Trợ giúp pháp lý cho nạn nhân bạo lực gia đình'
+    ],
+    'ho-tro-phap-ly-doanh-nghiep': [
+        'Tập huấn pháp luật về thuế cho hộ kinh doanh chuyển đổi lên doanh nghiệp',
+        'Giải đáp vướng mắc pháp lý về hợp đồng lao động cho doanh nghiệp',
+        'Hỗ trợ doanh nghiệp đăng ký nhãn hiệu cho sản phẩm OCOP',
+        'Hội nghị phổ biến pháp luật về phòng cháy chữa cháy cho doanh nghiệp',
+        'Mạng lưới tư vấn viên pháp luật hỗ trợ doanh nghiệp nhỏ và vừa',
+        'Pháp luật về bảo vệ môi trường đối với cơ sở sản xuất',
+        'Hỗ trợ pháp lý cho doanh nghiệp khởi nghiệp sáng tạo',
+        'Tọa đàm về pháp luật đầu tư theo phương thức đối tác công tư',
+        'Hướng dẫn doanh nghiệp thực hiện thủ tục đầu tư trên địa bàn tỉnh',
+        'Giải đáp vướng mắc về bảo hiểm xã hội cho người lao động'
+    ]
+};
+
+const extraSummary = (cat) => `Bài viết thuộc chuyên mục ${TQ_CATEGORIES[cat].title}. ${TQ_CATEGORIES[cat].desc}`;
+
+Object.entries(EXTRA_TITLES).forEach(([cat, titles]) => {
+    const subs = TQ_CATEGORIES[cat].subs;
+    titles.forEach((title, i) => {
+        const day = String(28 - ((i * 3) % 27)).padStart(2, '0');
+        const month = String(6 - Math.floor(i / 2)).padStart(2, '0');
+        RAW_ARTICLES.push([cat, subs ? subs[i % subs.length].slug : null, `${day}/${month}/2026`, title, extraSummary(cat)]);
+    });
+});
+
 export const tuyenquangArticles = RAW_ARTICLES.map(([category, sub, date, title, summary], idx) => ({
     id: String(idx + 1),
     category,
@@ -174,6 +369,10 @@ export const tqArticlesOf = (category, sub) =>
     tuyenquangArticles.filter((a) => a.category === category && (!sub || a.sub === sub));
 
 export const tqArticleUrl = (id) => `${TQ_HOME}/tin-tuc/chi-tiet/${id}`;
+export const tqVideoUrl = (id) => `${TQ_HOME}/video/${id}`;
+// Trang riêng Thông tin văn bản chỉ đạo điều hành (liên kết từ khối trên trang chủ)
+export const TQ_DIRECTIVE_DOCS_URL = `${TQ_HOME}/van-ban-chi-dao-dieu-hanh`;
+export const tqDirectiveDocUrl = (id) => `${TQ_DIRECTIVE_DOCS_URL}/${id}`;
 
 // ---------------------------------------------------------------------------
 // VĂN BẢN CHỈ ĐẠO ĐIỀU HÀNH (4 nhóm như trang PBGDPL Tuyên Quang)
@@ -197,7 +396,17 @@ export const tuyenquangDocs = [
     { id: 'd9', group: 'co-quan', soHieu: '215/KH-CAT', coQuan: 'Công an tỉnh', loai: 'Kế hoạch', ngay: '10/07/2026', trichYeu: 'Tuyên truyền pháp luật về phòng, chống ma túy trong trường học năm học 2026 - 2027' },
     { id: 'd10', group: 'tinh', soHieu: '31-KH/TU', coQuan: 'Tỉnh ủy', loai: 'Kế hoạch', ngay: '02/07/2026', trichYeu: 'Thực hiện Chỉ thị của Ban Bí thư về tăng cường sự lãnh đạo của Đảng đối với công tác PBGDPL' },
     { id: 'd11', group: 'tw', soHieu: '88/2026/NĐ-CP', coQuan: 'Chính phủ', loai: 'Nghị định', ngay: '25/06/2026', trichYeu: 'Quy định chi tiết một số điều của Luật Phổ biến, giáo dục pháp luật' },
-    { id: 'd12', group: 'co-quan', soHieu: '96/KH-SGDĐT', coQuan: 'Sở Giáo dục và Đào tạo', loai: 'Kế hoạch', ngay: '15/06/2026', trichYeu: 'Giáo dục pháp luật trong nhà trường năm học 2026 - 2027' }
+    { id: 'd12', group: 'co-quan', soHieu: '96/KH-SGDĐT', coQuan: 'Sở Giáo dục và Đào tạo', loai: 'Kế hoạch', ngay: '15/06/2026', trichYeu: 'Giáo dục pháp luật trong nhà trường năm học 2026 - 2027' },
+    { id: 'd13', group: 'tw', soHieu: '1045/QĐ-TTg', coQuan: 'Thủ tướng Chính phủ', loai: 'Quyết định', ngay: '10/06/2026', trichYeu: 'Phê duyệt Đề án tăng cường ứng dụng công nghệ số trong phổ biến, giáo dục pháp luật' },
+    { id: 'd14', group: 'tinh', soHieu: '87/KH-UBND', coQuan: 'UBND tỉnh', loai: 'Kế hoạch', ngay: '02/06/2026', trichYeu: 'Triển khai công tác phổ biến, giáo dục pháp luật, hòa giải ở cơ sở năm 2026' },
+    { id: 'd15', group: 'hdph', soHieu: '12/HĐPB', coQuan: 'HĐPH PBGDPL tỉnh', loai: 'Công văn', ngay: '28/05/2026', trichYeu: 'Định hướng tuyên truyền tháng 6 năm 2026' },
+    { id: 'd16', group: 'co-quan', soHieu: '512/STP-PBGDPL', coQuan: 'Sở Tư pháp', loai: 'Công văn', ngay: '20/05/2026', trichYeu: 'Hướng dẫn tổ chức hội nghị phổ biến pháp luật trực tuyến tại cấp xã' },
+    { id: 'd17', group: 'tw', soHieu: '1210/BTP-PBGDPL', coQuan: 'Bộ Tư pháp', loai: 'Công văn', ngay: '12/05/2026', trichYeu: 'Hướng dẫn đánh giá hiệu quả công tác phổ biến, giáo dục pháp luật' },
+    { id: 'd18', group: 'tinh', soHieu: '05/CT-UBND', coQuan: 'UBND tỉnh', loai: 'Chỉ thị', ngay: '05/05/2026', trichYeu: 'Tăng cường công tác hòa giải ở cơ sở trên địa bàn tỉnh' },
+    { id: 'd19', group: 'hdph', soHieu: '09/KH-HĐPH', coQuan: 'HĐPH PBGDPL tỉnh', loai: 'Kế hoạch', ngay: '25/04/2026', trichYeu: 'Kiểm tra công tác phổ biến, giáo dục pháp luật tại một số sở, ngành và cấp xã năm 2026' },
+    { id: 'd20', group: 'co-quan', soHieu: '188/KH-TĐTN', coQuan: 'Tỉnh đoàn', loai: 'Kế hoạch', ngay: '18/04/2026', trichYeu: 'Tuyên truyền pháp luật cho đoàn viên, thanh niên năm 2026' },
+    { id: 'd21', group: 'tinh', soHieu: '08/NQ-HĐND', coQuan: 'HĐND tỉnh', loai: 'Nghị quyết', ngay: '10/04/2026', trichYeu: 'Quy định mức chi bảo đảm cho công tác phổ biến, giáo dục pháp luật và chuẩn tiếp cận pháp luật' },
+    { id: 'd22', group: 'co-quan', soHieu: '76/KH-HLHPN', coQuan: 'Hội Liên hiệp Phụ nữ tỉnh', loai: 'Kế hoạch', ngay: '02/04/2026', trichYeu: 'Tuyên truyền pháp luật về phòng, chống bạo lực gia đình cho hội viên phụ nữ' }
 ];
 
 // ---------------------------------------------------------------------------
