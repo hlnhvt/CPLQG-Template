@@ -41,7 +41,7 @@ export const TQ_CATEGORIES = {
         subs: [{ slug: 'cap-tinh', label: 'Hội đồng phối hợp PBGDPL tỉnh' }, { slug: 'cap-xa', label: 'Hội đồng phối hợp PBGDPL cấp xã' }]
     },
     'bao-cao-vien': {
-        title: 'Báo cáo viên, tuyên truyền viên PL', group: 'Phổ biến, giáo dục pháp luật', icon: 'mic',
+        title: 'Báo cáo viên, tuyên truyền viên Pháp luật', group: 'Phổ biến, giáo dục pháp luật', icon: 'mic',
         desc: 'Danh sách, quyết định công nhận và hoạt động của đội ngũ báo cáo viên, tuyên truyền viên pháp luật.',
         subs: [{ slug: 'cap-tinh', label: 'Báo cáo viên pháp luật cấp tỉnh' }, { slug: 'cap-xa', label: 'Báo cáo viên pháp luật cấp xã' }, { slug: 'tuyen-truyen-vien', label: 'Tuyên truyền viên pháp luật' }]
     },
@@ -83,7 +83,7 @@ export const TUYENQUANG_SPECIAL_NAV = [
         children: [
             { path: 'chuyen-muc/hoat-dong-pbgdpl', label: 'Hoạt động PBGDPL' },
             { path: 'chuyen-muc/hoi-dong-phoi-hop', label: 'Hội đồng phối hợp PBGDPL' },
-            { path: 'chuyen-muc/bao-cao-vien', label: 'Báo cáo viên, tuyên truyền viên PL' },
+            { path: 'chuyen-muc/bao-cao-vien', label: 'Báo cáo viên, tuyên truyền viên Pháp luật' },
             { path: 'chuyen-muc/tai-lieu-pbgdpl', label: 'Tài liệu PBGDPL' },
             { path: 'chuyen-muc/truyen-thong-du-thao', label: 'Truyền thông dự thảo chính sách' },
             { path: 'chuyen-muc/hoa-giai-co-so', label: 'Hòa giải ở cơ sở' },

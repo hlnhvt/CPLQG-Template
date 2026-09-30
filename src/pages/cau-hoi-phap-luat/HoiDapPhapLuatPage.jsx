@@ -1,16 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, RotateCcw, ChevronUp, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
-import { HDPL_FIELDS, hoiDapPhapLuatItems } from '../../data/hoiDapPhapLuatData';
+import { hoiDapPhapLuatItems } from '../../data/hoiDapPhapLuatData';
 
-const FIELD_LABEL = Object.fromEntries(HDPL_FIELDS.map((f) => [f.id, f.label]));
 const PAGE_SIZES = [10, 20, 50];
 const normalize = (s) => s.toLowerCase().normalize('NFC');
 
-// Trang Hỏi đáp pháp luật: lọc theo lĩnh vực (trái) + tìm kiếm, tìm kiếm nâng cao, danh sách hỏi - đáp (phải)
+// Trang Hỏi đáp pháp luật: tìm kiếm, tìm kiếm nâng cao và danh sách hỏi - đáp
 const HoiDapPhapLuatPage = () => {
-    const [fieldQuery, setFieldQuery] = useState('');
-    const [field, setField] = useState(null);
     const [keywordInput, setKeywordInput] = useState('');
     const [keyword, setKeyword] = useState('');
     const [matchMode, setMatchMode] = useState('contains'); // contains | exact
@@ -28,15 +25,12 @@ const HoiDapPhapLuatPage = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    useEffect(() => { setPage(1); }, [field, keyword, matchMode, inQuestion, inAnswer, fromDate, toDate, pageSize]);
-
-    const visibleFields = HDPL_FIELDS.filter((f) => normalize(f.label).includes(normalize(fieldQuery.trim())));
+    useEffect(() => { setPage(1); }, [keyword, matchMode, inQuestion, inAnswer, fromDate, toDate, pageSize]);
 
     const results = useMemo(() => {
         const k = normalize(keyword.trim());
         const words = k.split(/\s+/).filter(Boolean);
         return hoiDapPhapLuatItems.filter((it) => {
-            if (field && it.field !== field) return false;
             if (fromDate && it.dateISO < fromDate) return false;
             if (toDate && it.dateISO > toDate) return false;
             if (!k) return true;
@@ -45,7 +39,7 @@ const HoiDapPhapLuatPage = () => {
             // "So sánh có chứa": chứa đủ các từ; "Cụm từ chính xác": chứa nguyên cụm
             return matchMode === 'exact' ? text.includes(k) : words.every((w) => text.includes(w));
         });
-    }, [field, keyword, matchMode, inQuestion, inAnswer, fromDate, toDate]);
+    }, [keyword, matchMode, inQuestion, inAnswer, fromDate, toDate]);
 
     const totalPages = Math.max(1, Math.ceil(results.length / pageSize));
     const pageItems = results.slice((page - 1) * pageSize, page * pageSize);
@@ -58,7 +52,7 @@ const HoiDapPhapLuatPage = () => {
 
     const resetAll = () => {
         setKeywordInput(''); setKeyword(''); setMatchMode('contains'); setInQuestion(true); setInAnswer(false);
-        setFromDate(''); setToDate(''); setField(null); setFieldQuery(''); setPageSize(10);
+        setFromDate(''); setToDate(''); setPageSize(10);
     };
     const clearAdvanced = () => { setFromDate(''); setToDate(''); setPageSize(10); };
 
@@ -89,47 +83,9 @@ const HoiDapPhapLuatPage = () => {
             </div>
 
             <div className="container mx-auto px-4 max-w-[1280px] py-8 pb-16">
-                <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6 items-start">
-                    {/* ===== CỘT TRÁI: LỌC THEO LĨNH VỰC ===== */}
-                    <aside className="bg-white rounded-xl border border-gray-200 p-4 lg:sticky lg:top-4">
-                        <div className="flex items-center justify-between mb-3">
-                            <h2 className="text-[16px] font-bold text-gray-900">Lọc theo lĩnh vực</h2>
-                            <button type="button" onClick={() => setField(null)} className="text-[13px] text-[#1d5fd6] underline underline-offset-2 hover:text-[#1a3b8b]">
-                                Bỏ chọn
-                            </button>
-                        </div>
-                        <div className="border border-gray-200 rounded-lg">
-                            <div className="p-3 border-b border-gray-100">
-                                <input
-                                    type="search"
-                                    value={fieldQuery}
-                                    onChange={(e) => setFieldQuery(e.target.value)}
-                                    placeholder="Tìm kiếm..."
-                                    aria-label="Tìm lĩnh vực"
-                                    className="w-full text-[13px] px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#1d5fd6] focus:ring-2 focus:ring-blue-100"
-                                />
-                            </div>
-                            <ul className="max-h-[300px] overflow-y-auto py-1" role="radiogroup" aria-label="Lĩnh vực">
-                                {visibleFields.map((f) => (
-                                    <li key={f.id}>
-                                        <label className="flex items-start gap-2.5 px-3 py-2 cursor-pointer hover:bg-gray-50 text-[13px] text-gray-800 leading-snug">
-                                            <input
-                                                type="radio"
-                                                name="hdpl-field"
-                                                checked={field === f.id}
-                                                onChange={() => setField(f.id)}
-                                                className="mt-0.5 w-4 h-4 accent-[#1d5fd6] shrink-0"
-                                            />
-                                            <span className={field === f.id ? 'text-[#1d5fd6] font-semibold' : ''}>{f.label}</span>
-                                        </label>
-                                    </li>
-                                ))}
-                                {!visibleFields.length && <li className="px-3 py-4 text-[13px] text-gray-500 text-center">Không có lĩnh vực phù hợp</li>}
-                            </ul>
-                        </div>
-                    </aside>
+                <div>
 
-                    {/* ===== CỘT PHẢI: TÌM KIẾM + KẾT QUẢ ===== */}
+                    {/* ===== TÌM KIẾM + KẾT QUẢ ===== */}
                     <section className="min-w-0">
                         <form onSubmit={(e) => { e.preventDefault(); setKeyword(keywordInput); }} className="flex items-center gap-2" role="search">
                             <input
@@ -206,7 +162,6 @@ const HoiDapPhapLuatPage = () => {
                                                 {String((page - 1) * pageSize + idx + 1).padStart(2, '0')}
                                             </span>
                                             <div className="flex-1 min-w-0">
-                                                <p className="text-[13px] font-semibold text-gray-900 mb-2">{FIELD_LABEL[it.field]}</p>
                                                 <p className="text-[14.5px] font-semibold text-gray-800 leading-relaxed">{it.question}</p>
 
                                                 {isOpen && (

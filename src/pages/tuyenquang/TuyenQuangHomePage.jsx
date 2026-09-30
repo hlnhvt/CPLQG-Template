@@ -41,19 +41,14 @@ const Image16x9 = ({ src, alt, className = '' }) => (
     </div>
 );
 
-const SectionHeading = ({ title, to, children, moreLabel = 'Xem tất cả' }) => (
+// Tiêu đề khối: bấm vào tiêu đề để sang chuyên mục (không dùng nút "Xem tất cả")
+const SectionHeading = ({ title, to, children }) => (
     <div className="relative flex flex-wrap justify-between items-center gap-3 mb-5 pb-3 border-b border-gray-200">
         <Link to={to} className="group/heading inline-flex items-center gap-2" title={`Xem chuyên mục ${title}`}>
             <h2 className="text-lg sm:text-xl md:text-[21px] font-bold text-[#0f4c81] group-hover/heading:text-[#991b1b] transition-colors">{title}</h2>
             <ChevronRight size={19} className="text-[#0f4c81] group-hover/heading:text-[#991b1b] group-hover/heading:translate-x-0.5 transition-all" />
         </Link>
-        <div className="flex flex-wrap items-center gap-3 ml-auto">
-            {children}
-            <Link to={to} className="group/btn inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-[#0f4c81] hover:text-[#991b1b] transition-colors shrink-0">
-                <span>{moreLabel}</span>
-                <ArrowRight size={13} className="group-hover/btn:translate-x-1 transition-transform" />
-            </Link>
-        </div>
+        {children && <div className="flex flex-wrap items-center gap-3 ml-auto">{children}</div>}
         <span className="lc3-heading-bar absolute -bottom-px left-0 h-[3px] rounded-full bg-gradient-to-r from-amber-400 to-[#991b1b]" />
     </div>
 );
@@ -109,6 +104,13 @@ const TuyenQuangHomePage = () => {
         document.title = 'Cổng Pháp luật tỉnh Tuyên Quang';
         window.scrollTo(0, 0);
     }, []);
+
+    // Tự chuyển tin nổi bật sau HERO_INTERVAL; dừng khi rê chuột, bỏ qua nếu người dùng bật giảm chuyển động
+    useEffect(() => {
+        if (isHeroPaused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+        const timer = setTimeout(() => setActiveSlide((p) => (p + 1) % HERO_SLIDES.length), HERO_INTERVAL);
+        return () => clearTimeout(timer);
+    }, [activeSlide, isHeroPaused]);
 
     useEffect(() => {
         if (isBottomSlidePaused) return;
@@ -173,9 +175,6 @@ const TuyenQuangHomePage = () => {
                                         </span>
                                         <h2 className="font-bold text-[14px] uppercase whitespace-nowrap">Chuyên mục tin tức</h2>
                                     </div>
-                                    <Link to={`${TQ_HOME}/tin-tuc`} className="relative shrink-0 whitespace-nowrap text-xs font-semibold text-amber-200 hover:text-white inline-flex items-center gap-0.5 transition-colors">
-                                        Tất cả <ChevronRight size={14} />
-                                    </Link>
                                 </div>
                                 {/* Nền danh sách: gradient indigo - xanh nhạt + lưới chấm mờ */}
                                 <div className="relative flex-1 min-h-0 flex flex-col overflow-hidden">
@@ -211,8 +210,8 @@ const TuyenQuangHomePage = () => {
                                 onMouseLeave={() => setIsHeroPaused(false)}
                             >
                                 <img key={`hero-img-${slide.id}`} src={slide.image} alt={slide.title} className="absolute inset-0 w-full h-full object-cover brightness-[1.06] saturate-[1.08] lc3-kenburns" />
-                                <div className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t from-[#0b1b3a]/90 via-[#0b1b3a]/45 to-transparent" />
-                                <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/25 to-transparent" />
+                                <div className="absolute inset-x-0 bottom-0 h-[70%] bg-gradient-to-t from-[#0b3d91]/85 via-[#1565c0]/40 to-transparent" />
+                                <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#0b3d91]/30 to-transparent" />
 
                                 <div className="absolute top-4 left-4 right-4 sm:top-5 sm:left-6 sm:right-6 flex items-start justify-between gap-3 z-10">
                                     <div className="flex flex-wrap items-center gap-2">
@@ -235,41 +234,35 @@ const TuyenQuangHomePage = () => {
                                 </div>
 
                                 <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7 z-10">
-                                    <div key={`hero-text-${slide.id}`} className="lc3-text-in max-w-3xl">
+                                    <div key={`hero-text-${slide.id}`} className="lc3-text-in max-w-3xl [text-shadow:0_1px_3px_rgba(11,61,145,0.55)]">
                                         <div className="flex items-center gap-2 text-xs sm:text-[13px] text-amber-200 font-semibold mb-2">
                                             <Clock size={14} className="shrink-0" />
                                             <span>{slide.date}</span>
-                                            <span className="text-white/40">•</span>
-                                            <span className="text-white/75 truncate font-normal">SỞ TƯ PHÁP TỈNH TUYÊN QUANG</span>
                                         </div>
                                         <Link to={tqArticleUrl(slide.id)} className="block">
                                             <h3 className="text-lg sm:text-2xl lg:text-[26px] font-bold text-white hover:text-amber-200 transition-colors leading-[1.3] uppercase tracking-tight line-clamp-3 drop-shadow">{slide.title}</h3>
                                         </Link>
                                         <p className="hidden sm:block text-white/80 text-sm leading-relaxed line-clamp-2 mt-2.5">{slide.summary}</p>
-                                        <Link to={tqArticleUrl(slide.id)} className="group/more mt-4 inline-flex items-center gap-2 bg-white text-[#0f4c81] hover:bg-amber-400 hover:text-gray-950 text-xs sm:text-sm font-bold pl-4 pr-3 py-2 rounded-full shadow transition-colors">
-                                            <span>Xem chi tiết</span>
-                                            <ArrowRight size={14} className="group-hover/more:translate-x-1 transition-transform" />
-                                        </Link>
                                     </div>
-                                    <div className="grid grid-cols-4 gap-2 sm:gap-3 mt-5">
-                                        {HERO_SLIDES.map((s, idx) => (
-                                            <button key={`hero-dot-${s.id}`} type="button" onClick={() => goToSlide(idx)} className="group/dot text-left focus:outline-none" aria-label={`Xem tin ${idx + 1}`} aria-current={idx === activeSlide}>
-                                                <span className="relative block h-1 rounded-full bg-white/25 overflow-hidden">
-                                                    {idx < activeSlide && <span className="absolute inset-0 bg-white/60" />}
-                                                    {idx === activeSlide && (
-                                                        <span
-                                                            key={`hero-progress-${activeSlide}`}
-                                                            className="lc3-progress absolute inset-0 origin-left bg-amber-400"
-                                                            style={{ animation: `lc3Progress ${HERO_INTERVAL}ms linear both`, animationPlayState: isHeroPaused ? 'paused' : 'running' }}
-                                                            onAnimationEnd={() => goToSlide(activeSlide + 1)}
-                                                        />
-                                                    )}
-                                                </span>
-                                                <span className={`hidden md:block mt-1.5 text-[11.5px] leading-snug line-clamp-1 transition-colors ${idx === activeSlide ? 'text-white font-semibold' : 'text-white/55 group-hover/dot:text-white/85'}`}>
-                                                    {TQ_CATEGORIES[s.category].title}
-                                                </span>
-                                            </button>
-                                        ))}
+                                    {/* Chấm tròn đại diện cho từng tin */}
+                                    <div className="flex items-center gap-2.5 mt-5" role="tablist" aria-label="Chọn tin nổi bật">
+                                        {HERO_SLIDES.map((s, idx) => {
+                                            const isActive = idx === activeSlide;
+                                            return (
+                                                <button
+                                                    key={`hero-dot-${s.id}`}
+                                                    type="button"
+                                                    role="tab"
+                                                    onClick={() => goToSlide(idx)}
+                                                    aria-label={`Xem tin ${idx + 1}`}
+                                                    aria-selected={isActive}
+                                                    title={s.title}
+                                                    className="p-1 -m-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300 rounded-full"
+                                                >
+                                                    <span className={`block rounded-full transition-all duration-300 ${isActive ? 'w-3 h-3 bg-amber-400 ring-4 ring-white/25' : 'w-2.5 h-2.5 bg-white/55 hover:bg-white hover:scale-125'}`} />
+                                                </button>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             </Reveal>
@@ -324,12 +317,10 @@ const TuyenQuangHomePage = () => {
                     <div className="absolute right-[10%] top-1/2 -translate-y-1/2 w-52 h-52 rounded-full border border-white/15 border-dashed pointer-events-none lc3-rotate-ccw hidden md:block" />
 
                     <Reveal className="relative z-10 container mx-auto px-4 max-w-[860px] flex flex-col items-center text-center">
-                        <span className="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 text-[11.5px] font-semibold text-sky-100 px-3 py-1 rounded-full mb-3">
-                            <Sparkles size={13} className="text-amber-300" /> Văn bản, tài liệu phổ biến pháp luật tỉnh Tuyên Quang
-                        </span>
+                        
                         <h2 className="text-xl sm:text-2xl md:text-[30px] font-bold tracking-tight leading-tight">Tra cứu nhanh văn bản pháp luật</h2>
                         <div className="w-24 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent my-3 rounded-full" />
-                        <p className="text-sm text-sky-100/90 mb-6 max-w-xl">Nhập số hiệu, trích yếu hoặc từ khóa để tìm văn bản chỉ đạo điều hành và tài liệu PBGDPL</p>
+                        <p className="text-sm text-sky-100/90 mb-6 max-w-xl">Nhập số hiệu, trích yếu hoặc từ khóa để tìm văn bản quy phạm pháp luật</p>
                         <form onSubmit={(e) => { e.preventDefault(); goToSearch(searchQuery); }} className="w-full relative group/search" role="search">
                             <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-sky-300/40 via-white/30 to-amber-300/40 blur-md opacity-0 group-focus-within/search:opacity-100 transition-opacity duration-500 pointer-events-none" />
                             <div className="relative flex items-center bg-white rounded-full shadow-xl shadow-blue-950/25 p-1.5 pl-5">
@@ -342,12 +333,7 @@ const TuyenQuangHomePage = () => {
                                 </button>
                             </div>
                         </form>
-                        <div className="flex flex-wrap items-center justify-center gap-2 mt-4 text-[12px]">
-                            <span className="text-sky-100/80">Từ khóa nổi bật:</span>
-                            {HOT_KEYWORDS.map((tag) => (
-                                <button key={tag} type="button" onClick={() => goToSearch(tag)} className="px-3 py-1 rounded-full bg-white/10 border border-white/20 hover:bg-white hover:text-[#0b3d91] transition-colors font-medium">{tag}</button>
-                            ))}
-                        </div>
+                        
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full mt-7">
                             {QUICK_LINKS.map(({ label, desc, icon: Icon, to }) => (
                                 <Link key={label} to={to} className="group flex items-center gap-3 text-left bg-white/10 hover:bg-white border border-white/20 hover:border-white rounded-2xl px-4 py-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-950/20">
@@ -591,7 +577,7 @@ const TuyenQuangHomePage = () => {
                             const Icon = TQ_ICONS[TQ_CATEGORIES[slug].icon];
                             return (
                                 <Reveal key={slug} delay={idx * 110} className="bg-white rounded-2xl p-5 border border-gray-200/80 shadow-sm flex flex-col">
-                                    <SectionHeading title={TQ_CATEGORIES[slug].title} to={tqCategoryUrl(slug)} moreLabel="Xem" />
+                                    <SectionHeading title={TQ_CATEGORIES[slug].title} to={tqCategoryUrl(slug)} />
                                     <Link to={tqArticleUrl(items[0].id)} className="group block mb-3">
                                         <div className="rounded-xl overflow-hidden relative">
                                             <Image16x9 src={items[0].image} alt={items[0].title} />

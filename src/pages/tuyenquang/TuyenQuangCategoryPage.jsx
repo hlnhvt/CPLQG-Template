@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
-import { Clock, Eye, Search, ChevronRight, ChevronLeft, Newspaper, TrendingUp } from 'lucide-react';
+import { Clock, Eye, Search, ChevronRight, ChevronLeft, Newspaper, TrendingUp, X } from 'lucide-react';
 import { TuyenQuangPageShell, TQ_ICONS } from '../../components/tuyenquang/TuyenQuangShared';
 import { Reveal, LaoCaiV3Styles } from '../../components/laocaiV3/LaoCaiV3Motion';
 import {
@@ -8,6 +8,8 @@ import {
 } from '../../data/tuyenquangMockData';
 
 const PAGE_SIZE = 6;
+const SORT_OPTIONS = ['Mới nhất', 'Cũ nhất', 'Xem nhiều nhất'];
+const dateKey = (d) => d.split('/').reverse().join('');
 
 // Trang chuyên mục dùng chung. `slug` lấy từ prop (chuyên trang cố định) hoặc từ URL;
 // không có slug = trang "Tin tức" tổng hợp các chuyên mục nhóm Tin tức.
@@ -16,7 +18,11 @@ const TuyenQuangCategoryPage = ({ slug: slugProp }) => {
     const slug = slugProp || params.slug;
     const [searchParams, setSearchParams] = useSearchParams();
     const sub = searchParams.get('muc');
+    // Giá trị đang nhập (draft) chỉ áp dụng khi bấm "Áp dụng" / Enter, giống trang Thông báo PBGDPL Cổng quốc gia
+    const [keywordDraft, setKeywordDraft] = useState('');
+    const [sortDraft, setSortDraft] = useState(SORT_OPTIONS[0]);
     const [keyword, setKeyword] = useState('');
+    const [sortBy, setSortBy] = useState(SORT_OPTIONS[0]);
     const [page, setPage] = useState(1);
 
     const cat = slug ? TQ_CATEGORIES[slug] : null;
@@ -26,16 +32,33 @@ const TuyenQuangCategoryPage = ({ slug: slugProp }) => {
         document.title = `${title} - Cổng Pháp luật tỉnh Tuyên Quang`;
         window.scrollTo(0, 0);
         setPage(1);
-        setKeyword('');
+        setKeyword(''); setKeywordDraft('');
+        setSortBy(SORT_OPTIONS[0]); setSortDraft(SORT_OPTIONS[0]);
     }, [slug, sub, title]);
+
+    const applyFilter = (e) => {
+        e?.preventDefault();
+        setKeyword(keywordDraft);
+        setSortBy(sortDraft);
+        setPage(1);
+    };
+    const resetFilter = () => {
+        setKeywordDraft(''); setSortDraft(SORT_OPTIONS[0]);
+        setKeyword(''); setSortBy(SORT_OPTIONS[0]);
+        setPage(1);
+    };
 
     const items = useMemo(() => {
         const base = cat
             ? tqArticlesOf(slug, sub)
             : tuyenquangArticles.filter((a) => TQ_CATEGORIES[a.category].group === 'Tin tức');
         const k = keyword.trim().toLowerCase();
-        return k ? base.filter((a) => `${a.title} ${a.summary}`.toLowerCase().includes(k)) : base;
-    }, [cat, slug, sub, keyword]);
+        const filtered = k ? base.filter((a) => `${a.title} ${a.summary}`.toLowerCase().includes(k)) : base;
+        const sorted = [...filtered];
+        if (sortBy === 'Xem nhiều nhất') sorted.sort((a, b) => b.views - a.views);
+        else sorted.sort((a, b) => (sortBy === 'Cũ nhất' ? 1 : -1) * dateKey(a.date).localeCompare(dateKey(b.date)));
+        return sorted;
+    }, [cat, slug, sub, keyword, sortBy]);
 
     const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
     const pageItems = items.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -63,33 +86,67 @@ const TuyenQuangCategoryPage = ({ slug: slugProp }) => {
             <LaoCaiV3Styles />
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-7">
                 <div className="lg:col-span-8 space-y-5">
-                    {/* Mục con + tìm kiếm */}
-                    <div className="bg-white rounded-2xl border border-gray-200/80 shadow-sm p-4 flex flex-col md:flex-row md:items-center gap-3">
-                        {cat?.subs ? (
-                            <div className="flex gap-2 overflow-x-auto lc3-thin-scroll flex-1" role="tablist">
-                                {[{ slug: null, label: 'Tất cả' }, ...cat.subs].map((s) => {
-                                    const active = (sub || null) === s.slug;
-                                    return (
-                                        <button key={s.label} type="button" role="tab" aria-selected={active}
-                                            onClick={() => setSearchParams(s.slug ? { muc: s.slug } : {})}
-                                            className={`shrink-0 text-[12.5px] font-semibold px-3.5 py-1.5 rounded-full border transition-colors ${active ? 'bg-[#0f4c81] border-[#0f4c81] text-white' : 'border-gray-200 text-gray-700 hover:border-[#0f4c81] hover:text-[#0f4c81]'}`}>
-                                            {s.label}
-                                        </button>
-                                    );
-                                })}
-                            </div>
-                        ) : <div className="flex-1 text-sm text-gray-500">{items.length} bài viết</div>}
-                        <div className="relative md:w-72 shrink-0">
-                            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-                            <input type="search" value={keyword} onChange={(e) => { setKeyword(e.target.value); setPage(1); }} placeholder="Tìm trong chuyên mục..." aria-label="Tìm trong chuyên mục"
-                                className="w-full bg-gray-50 border border-gray-200 text-sm pl-9 pr-3 py-2 rounded-xl focus:outline-none focus:bg-white focus:border-[#0f4c81] focus:ring-4 focus:ring-blue-100 transition" />
+                    {/* Mục con của chuyên mục */}
+                    {cat?.subs && (
+                        <div className="flex gap-2 overflow-x-auto lc3-thin-scroll" role="tablist">
+                            {[{ slug: null, label: 'Tất cả' }, ...cat.subs].map((s) => {
+                                const active = (sub || null) === s.slug;
+                                return (
+                                    <button key={s.label} type="button" role="tab" aria-selected={active}
+                                        onClick={() => setSearchParams(s.slug ? { muc: s.slug } : {})}
+                                        className={`shrink-0 text-[12.5px] font-semibold px-3.5 py-1.5 rounded-full border transition-colors ${active ? 'bg-[#0f4c81] border-[#0f4c81] text-white' : 'bg-white border-gray-200 text-gray-700 hover:border-[#0f4c81] hover:text-[#0f4c81]'}`}>
+                                        {s.label}
+                                    </button>
+                                );
+                            })}
                         </div>
-                    </div>
+                    )}
+
+                    {/* Khung lọc: đồng bộ trang Thông báo chuyên trang PBGDPL Cổng Pháp luật quốc gia */}
+                    <form onSubmit={applyFilter} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 flex flex-col lg:flex-row lg:items-end gap-4" role="search">
+                        <div className="flex-1">
+                            <label htmlFor="tq-cat-search" className="block text-sm font-semibold text-gray-700 mb-1.5">Tìm kiếm</label>
+                            <div className="relative">
+                                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                                <input
+                                    id="tq-cat-search"
+                                    type="text"
+                                    placeholder="Nhập từ khóa..."
+                                    value={keywordDraft}
+                                    onChange={(e) => setKeywordDraft(e.target.value)}
+                                    className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-colors placeholder:text-gray-400"
+                                />
+                            </div>
+                        </div>
+                        <div className="w-full lg:w-48">
+                            <label htmlFor="tq-cat-sort" className="block text-sm font-semibold text-gray-700 mb-1.5">Sắp xếp</label>
+                            <select
+                                id="tq-cat-sort"
+                                value={sortDraft}
+                                onChange={(e) => setSortDraft(e.target.value)}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 bg-white cursor-pointer text-gray-700"
+                            >
+                                {SORT_OPTIONS.map((o) => <option key={o}>{o}</option>)}
+                            </select>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button type="submit" className="bg-[#2580f0] hover:bg-[#1a66c2] text-white font-semibold px-6 py-2 rounded-lg text-sm transition-colors shadow-sm">
+                                Áp dụng
+                            </button>
+                            <button type="button" onClick={resetFilter} className="bg-white hover:bg-gray-50 text-gray-600 border border-gray-300 font-semibold px-4 py-2 rounded-lg text-sm transition-colors flex items-center gap-1.5">
+                                <X size={14} /> Đặt lại
+                            </button>
+                        </div>
+                    </form>
+
+                    <p className="text-gray-600 text-sm font-medium">
+                        Tìm thấy <strong className="text-black text-base">{items.length}</strong> bài viết
+                    </p>
 
                     {!featured && <div className="bg-white rounded-2xl border border-gray-200/80 p-10 text-center text-gray-500">Chưa có bài viết phù hợp.</div>}
 
                     {featured && (
-                        <Reveal key={`${slug}-${sub}-${page}-${keyword}`}>
+                        <Reveal key={`${slug}-${sub}-${page}-${keyword}-${sortBy}`}>
                             <Link to={tqArticleUrl(featured.id)} className="group grid grid-cols-1 md:grid-cols-2 gap-5 bg-white rounded-2xl border border-gray-200/80 shadow-sm p-4 lc3-card">
                                 <div className="rounded-xl overflow-hidden aspect-video relative bg-gray-100">
                                     <img src={featured.image} alt={featured.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
