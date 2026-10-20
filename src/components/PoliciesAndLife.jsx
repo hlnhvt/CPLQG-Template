@@ -1,120 +1,100 @@
 import React from 'react';
-import { Clock } from 'lucide-react';
+import { Calendar, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const PoliciesAndLife = () => {
-    const featured = {
-        id: 1,
-        title: 'Tổ chức Diễn đàn Thưởng đỉnh về Pháp luật và Phát triển nhân dịp Kỷ niệm Ngày Pháp luật Việt Nam',
-        description: 'Diễn đàn nhằm thảo luận các giải pháp hoàn thiện hệ thống pháp luật, tạo điều kiện thuận lợi cho sự phát triển kinh tế - xã hội, phát huy tinh thần thượng tôn pháp luật.',
-        date: 'Ngày 28/10/2025 | 10:30',
-        image: '/thumb1.png'
-    };
+// Hai khối cạnh nhau như trang chủ uat.phapluat.gov.vn:
+// "Chính sách & Cuộc sống" và "Xây dựng văn hoá thượng tôn pháp luật"
+const COLUMNS = [
+    {
+        title: 'Chính sách & Cuộc sống',
+        to: '/tin-tuc',
+        items: [
+            {
+                id: 1,
+                title: 'Hướng dẫn thi đua, khen thưởng trong Quân đội nhân dân',
+                summary: 'Bộ trưởng Bộ Quốc phòng ban hành Thông tư số 155/2026/TT-BQP ngày 01/10/2026 quy định và hướng dẫn công tác thi đua, khen thưởng trong Quân đội nhân dân.',
+                date: '09/10/2026',
+                time: '06:41',
+                image: '/thumb2.png'
+            },
+            {
+                id: 2,
+                title: 'Sửa đổi một số quy định về Cơ chế thử nghiệm có kiểm soát trong lĩnh vực ngân hàng',
+                summary: 'Thay mặt Chính phủ, Phó Thủ tướng Nguyễn Văn Thắng ký ban hành Nghị định số 382/2026/NĐ-CP ngày 6/10/2026 sửa đổi một số quy định về cơ chế thử nghiệm có kiểm soát.',
+                date: '09/10/2026',
+                time: '06:39',
+                image: '/thumbnails/currency_bank_illustration.png'
+            }
+        ]
+    },
+    {
+        title: 'Xây dựng văn hoá thượng tôn pháp luật',
+        to: '/tin-tuc',
+        items: [
+            {
+                id: 3,
+                title: 'Đưa pháp luật đến gần hơn người dân từ những Tổ công nghệ số cộng đồng',
+                summary: '(Cổng PLQG) - Không chỉ hỗ trợ người dân tiếp cận công nghệ, phát triển sinh kế, các Tổ công nghệ số cộng đồng tại cơ sở còn là cầu nối đưa pháp luật đến với người dân.',
+                date: '08/10/2026',
+                time: '08:11',
+                image: '/thumb3.png'
+            },
+            {
+                id: 4,
+                title: 'Thượng tôn pháp luật để sáng tạo điện ảnh trên không gian mạng phát triển lành mạnh',
+                summary: '(Cổng PLQG) - Sự phát triển của các nền tảng số mở ra nhiều cơ hội sáng tạo và phổ biến phim, song cũng đặt ra yêu cầu tuân thủ pháp luật.',
+                date: '08/10/2026',
+                time: '08:07',
+                image: '/thumb1.png'
+            }
+        ]
+    }
+];
 
-    const list = [
-        {
-            id: 2,
-            title: 'Hội nghị phổ biến, quán triệt các đạo luật do Bộ Công an tham mưu xây dựng',
-            description: 'Quán triệt sâu rộng các nội dung mới, quan trọng của các đạo luật đến toàn thể cán bộ, chiến sĩ theo định hướng mới.',
-            date: 'Ngày 27/10/2025 | 08:00',
-            image: '/thumb2.png'
-        },
-        {
-            id: 3,
-            title: 'Sửa luật Đất đai: Đẩy nhanh quá trình phục hồi của thị trường bất động sản',
-            description: 'Những điểm mới trong Luật Đất đai sửa đổi được kỳ vọng sẽ gỡ khó và thúc đẩy thị trường bất động sản phát triển an toàn, lành mạnh.',
-            date: 'Ngày 26/10/2025 | 14:15',
-            image: '/thumb3.png'
-        },
-        {
-            id: 4,
-            title: 'Hoàn thiện thể chế xử lý tài sản kê biên, tài sản bảo đảm trong các vụ án',
-            description: 'Tập trung giải quyết những vướng mắc, bất cập trong thực tiễn xử lý tài sản trong các vụ án kinh tế, tham nhũng trọng điểm.',
-            date: 'Ngày 25/10/2025 | 09:30',
-            image: '/thumb1.png'
-        },
-        {
-            id: 5,
-            title: 'Tăng cường ứng dụng công nghệ thông tin trong phổ biến, giáo dục pháp luật',
-            description: 'Đẩy mạnh chuyển đổi số đem lại hiệu quả cao trong công tác tuyên truyền, đưa pháp luật vào đời sống sinh hoạt của người dân.',
-            date: 'Ngày 24/10/2025 | 16:20',
-            image: '/thumb2.png'
-        }
-    ];
-
-    return (
-        <section className="py-8 bg-white border-t border-gray-100">
-            <div className="container mx-auto px-4 max-w-[1504px]">
-                {/* Header Row */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-gray-200 pb-4">
-                    <div className="flex items-center">
-                        <h2 className="text-xl md:text-2xl font-bold text-[#0f4c81]">
-                            Chính sách & Cuộc sống
-                        </h2>
-                    </div>
-                </div>
-
-                {/* Content Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-                    {/* Featured Item (Left) */}
-                    <div className="bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm transition hover:shadow-md h-full flex flex-col">
-                        <div className="relative w-full aspect-video overflow-hidden shrink-0 group">
-                            <img
-                                src={featured.image}
-                                alt={featured.title}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                            />
-                        </div>
-                        <div className="p-4 md:p-5 flex flex-col flex-grow bg-white z-10 border-t border-gray-100 shadow-[0_-4px_15px_-5px_rgba(0,0,0,0.05)]">
-                            <Link to={`/news/${featured.id}`}>
-                                <h3 className="font-bold text-[#0f4c81] text-lg md:text-xl line-clamp-2 leading-tight mb-3 hover:text-blue-700 transition">
-                                    {featured.title}
-                                </h3>
-                            </Link>
-                            <p className="text-gray-600 text-[13px] md:text-[14px] line-clamp-2 md:line-clamp-3 leading-relaxed mb-4">
-                                {featured.description}
-                            </p>
-                            <div className="flex items-center gap-4 text-[11px] md:text-[12px] text-gray-500 mt-auto pt-2">
-                                <div className="flex items-center gap-2 bg-gray-50 border border-gray-100 rounded-md px-3 py-1.5">
-                                    <Clock size={14} className="text-[#0f4c81]" /> <span className="font-medium">{featured.date}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* List Items (Right) */}
-                    <div className="flex flex-col gap-3 h-full">
-                        {list.map((item) => (
-                            <div key={item.id} className="bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm transition hover:shadow-md flex flex-row p-2.5 items-center gap-3.5 group flex-1">
-                                <div className="w-[160px] md:w-[175px] shrink-0 relative aspect-video overflow-hidden rounded shadow-sm">
-                                    <img
-                                        src={item.image}
-                                        alt={item.title}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                </div>
-                                <div className="flex flex-col min-w-0 flex-grow py-0.5">
-                                    <Link to={`/news/${item.id}`}>
-                                        <h4 className="font-bold text-[#0f4c81] text-[13px] md:text-[14px] line-clamp-2 leading-snug mb-1.5 hover:text-blue-700 transition">
-                                            {item.title}
-                                        </h4>
-                                    </Link>
-                                    <p className="text-gray-600 text-[11px] md:text-[12px] line-clamp-1 md:line-clamp-2 leading-relaxed mb-2">
-                                        {item.description}
-                                    </p>
-                                    <div className="flex items-center gap-4 text-[10px] md:text-[11px] text-gray-500 mt-auto rounded">
-                                        <div className="flex items-center gap-1.5 bg-gray-50 border border-gray-100 rounded px-2 py-0.5">
-                                            <Clock size={11} /> <span>{item.date}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+const NewsRow = ({ item }) => (
+    <Link to={`/news/${item.id}`} className="group flex gap-4 items-start">
+        <div className="w-[38%] max-w-[262px] shrink-0 aspect-[16/9] rounded-lg overflow-hidden bg-gray-100">
+            <img
+                src={item.image}
+                alt={item.title}
+                loading="lazy"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+        </div>
+        <div className="flex-1 min-w-0">
+            <h3 className="font-bold text-[#111827] text-[16px] md:text-[18px] leading-snug line-clamp-2 group-hover:text-[#1e3a8a] transition-colors">
+                {item.title}
+            </h3>
+            <p className="text-gray-500 text-[13px] md:text-[14px] leading-relaxed line-clamp-2 mt-1">
+                {item.summary}
+            </p>
+            <div className="flex items-center gap-3 text-[12.5px] text-gray-500 mt-1.5">
+                <span className="flex items-center gap-1.5"><Calendar size={14} /> {item.date}</span>
+                <span className="flex items-center gap-1.5"><Clock size={14} /> {item.time}</span>
             </div>
-        </section>
-    );
-};
+        </div>
+    </Link>
+);
+
+const PoliciesAndLife = () => (
+    <section className="pt-7 pb-8 bg-white">
+        <div className="container mx-auto px-4 max-w-[1504px]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10">
+                {COLUMNS.map((col) => (
+                    <div key={col.title}>
+                        <Link to={col.to} className="inline-block mb-6">
+                            <h2 className="text-[22px] md:text-[28px] font-bold text-[#1e3a8a] hover:text-blue-700 transition-colors">
+                                {col.title}
+                            </h2>
+                        </Link>
+                        <div className="flex flex-col gap-8">
+                            {col.items.map((item) => <NewsRow key={item.id} item={item} />)}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+);
 
 export default PoliciesAndLife;

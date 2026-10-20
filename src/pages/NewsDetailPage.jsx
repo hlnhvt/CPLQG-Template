@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ChevronRight, Printer, Share2, Facebook, MessageCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { findNaNews, NA_LIST_URL } from '../data/nationalAssemblyNews';
 import CommentSection from './../components/CommentSection';
 
 const NewsDetailPage = () => {
+    const { id } = useParams();
+    // Tin của khối Quốc hội khóa XVI có dữ liệu riêng; các id khác giữ nội dung mẫu cũ
+    const naNews = findNaNews(id);
+
+    useEffect(() => { window.scrollTo(0, 0); }, [id]);
+
     return (
         <div className="bg-white min-h-screen">
             <div className="container mx-auto px-4 py-6">
                 {/* Breadcrumbs */}
                 <nav className="flex items-center text-sm text-gray-500 mb-6">
 
-                    <a href="#" className="hover:text-[#0f4c81]">Nghị quyết số 06-NQ/TW</a>
-                    <ChevronRight size={14} className="mx-2" />
-                    <a href="#" className="hover:text-[#0f4c81]">Tin tức hoạt động</a>
+                    {naNews ? (
+                        <>
+                            <Link to="/" className="hover:text-[#0f4c81]">Trang chủ</Link>
+                            <ChevronRight size={14} className="mx-2" />
+                            <Link to={NA_LIST_URL} className="hover:text-[#0f4c81]">Quốc hội khóa XVI - Kỳ họp thứ hai</Link>
+                        </>
+                    ) : (
+                        <>
+                            <a href="#" className="hover:text-[#0f4c81]">Nghị quyết số 06-NQ/TW</a>
+                            <ChevronRight size={14} className="mx-2" />
+                            <a href="#" className="hover:text-[#0f4c81]">Tin tức hoạt động</a>
+                        </>
+                    )}
                     <ChevronRight size={14} className="mx-2" />
                     <span className="text-gray-800">Chi tiết</span>
                 </nav>
@@ -21,12 +38,12 @@ const NewsDetailPage = () => {
                     {/* Main Content Area */}
                     <div className="lg:col-span-3">
                         <h1 className="text-2xl md:text-3xl font-bold text-[#0f4c81] leading-tight mb-4">
-                            Thủ tướng: Khẩn trương thí điểm đánh giá, chấm điểm về công tác xây dựng pháp luật
+                            {naNews ? naNews.title : 'Thủ tướng: Khẩn trương thí điểm đánh giá, chấm điểm về công tác xây dựng pháp luật'}
                         </h1>
 
                         {/* Meta & Actions */}
                         <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-3 border-y border-gray-100 mb-6 text-sm text-gray-500 gap-4">
-                            <span>10/05/2025 21:03</span>
+                            <span>{naNews ? `${naNews.date} ${naNews.time}` : '10/05/2025 21:03'}</span>
                             <div className="flex items-center gap-3">
                                 <div className="flex items-center gap-2 bg-gray-50 px-3 py-1 rounded-full border">
                                     <button className="hover:text-[#0f4c81] font-bold text-lg leading-none">-</button>
@@ -40,6 +57,18 @@ const NewsDetailPage = () => {
                         </div>
 
                         {/* Article Content */}
+                        {naNews ? (
+                            <div className="prose max-w-none text-gray-800 text-base leading-relaxed">
+                                <p className="font-bold mb-4">{naNews.summary}</p>
+                                <div className="my-6">
+                                    <img src={naNews.image} alt={naNews.title} className="w-full rounded-lg mb-2" />
+                                    <p className="text-sm text-center italic text-gray-500">{naNews.title}</p>
+                                </div>
+                                <p className="mb-4">
+                                    Nội dung chi tiết của bài viết thuộc chuyên đề Quốc hội khóa XVI - Kỳ họp thứ hai. Đây là dữ liệu minh họa phục vụ thiết kế giao diện; nội dung chính thức sẽ được Ban Biên tập cập nhật khi vận hành.
+                                </p>
+                            </div>
+                        ) : (
                         <div className="prose max-w-none text-gray-800 text-base leading-relaxed">
                             <p className="font-bold mb-4">
                                 Sáng 10/5, tại trụ sở Chính phủ, Thủ tướng Phạm Minh Chính chủ trì cuộc họp của Thường trực Chính phủ cho ý kiến vào dự thảo Đề án thí điểm thực hiện đánh giá, chấm điểm (KPI) về công tác xây dựng pháp luật và một số nội dung quan trọng khác.
@@ -79,6 +108,7 @@ const NewsDetailPage = () => {
                                 Kết luận về nội dung này, Thủ tướng Phạm Minh Chính ghi nhận, biểu dương nỗ lực của các bộ, ngành, cơ quan trong công tác xây dựng pháp luật và chương trình công tác, kết quả đạt được về ban hành các luật, nghị quyết thời gian qua.
                             </p>
                         </div>
+                        )}
 
                         {/* Tags / Related block (Optional) */}
                         <div className="mt-8 pt-6 border-t font-semibold text-right text-sm">

@@ -8,7 +8,7 @@ import LinkedPortals from '../components/LinkedPortals';
 import RecommendedForYou from '../components/RecommendedForYou';
 import FixedBottomCarousel from '../components/FixedBottomCarousel';
 import NewsHighlightsHome from '../components/NewsHighlightsHome';
-import TotalReviewSection from '../components/TotalReviewSection';
+import NationalAssemblySection from '../components/NationalAssemblySection';
 import { useAuth } from '../contexts/AuthContext';
 
 function HomePage() {
@@ -23,9 +23,9 @@ function HomePage() {
                 {/* {(user && hasConfiguredPrefs) && <RecommendedForYou />} */}
                 <NewlyIssuedDocs />
                 <NewsHighlightsHome />
+                <NationalAssemblySection />
                 <PoliciesAndLife />
                 <Multimedia />
-                <TotalReviewSection />
                 {/* <EventsActivities /> */}
                 <LinkedPortals />
             </div>

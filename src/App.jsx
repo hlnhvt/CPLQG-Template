@@ -64,6 +64,7 @@ import CollaboratorArticlesPage from './pages/collaborator/CollaboratorArticlesP
 import CollaboratorArticleEditor from './pages/collaborator/CollaboratorArticleEditor';
 import RecommendedPage from './pages/RecommendedPage';
 import NghienCuuTraoDoiPage from './pages/tin-tuc/NghienCuuTraoDoiPage';
+import QuocHoiKhoaXVIPage from './pages/tin-tuc/QuocHoiKhoaXVIPage';
 import NghienCuuTraoDoiDetailPage from './pages/tin-tuc/NghienCuuTraoDoiDetailPage';
 import ToaDamSuKienPage from './pages/tin-tuc/ToaDamSuKienPage';
 import ToaDamSuKienDetailPage from './pages/tin-tuc/ToaDamSuKienDetailPage';
@@ -440,6 +441,7 @@ const AppLayout = () => {
                     <Route path="/tin-tuc/xay-dung-van-hoa-thuong-ton-phap-luat" element={<VanHoaThuongTonPhapLuatPage />} />
                     <Route path="/tin-tuc/xay-dung-van-hoa-thuong-ton-phap-luat/:categorySlug" element={<VanHoaSubCategoryPage />} />
                     <Route path="/tin-tuc/nghien-cuu-trao-doi" element={<NghienCuuTraoDoiPage />} />
+                    <Route path="/tin-tuc/quoc-hoi-khoa-xvi" element={<QuocHoiKhoaXVIPage />} />
                     <Route path="/tin-tuc/nghien-cuu-trao-doi/:id" element={<NghienCuuTraoDoiDetailPage />} />
                     <Route path="/tin-tuc/toa-dam-su-kien" element={<ToaDamSuKienPage />} />
                     <Route path="/tin-tuc/toa-dam-su-kien/:id" element={<ToaDamSuKienDetailPage />} />
